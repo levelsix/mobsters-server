@@ -60,6 +60,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
     String description = reqProto.getDescription();
     int clanIconId = reqProto.getClanIconId();
+    int gemsSpent = reqProto.getGemsSpent();
+    int cashChange = reqProto.getCashChange();
     
     CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -80,7 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		description = "Welcome to " + clanName + "!";
       	}
       	
-        clanId = InsertUtils.get().insertClan(clanName, user.getId(), createTime, description,
+        clanId = InsertUtils.get().insertClan(clanName, createTime, description,
             tag, requestToJoinRequired);
         if (clanId <= 0) {
           legitCreate = false;

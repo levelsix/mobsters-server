@@ -17,6 +17,13 @@ message CreateClanRequestProto {
 	optional bool requestToJoinClanRequired = 4;
 	optional string description = 5;
 	optional int32 clanIconId = 6;
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 7;
+	
+	//positive means refund, negative means charge user
+	optional sint32 cashChange = 8;
 }
 
 message CreateClanResponseProto {

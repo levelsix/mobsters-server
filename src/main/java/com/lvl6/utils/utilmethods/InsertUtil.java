@@ -76,7 +76,7 @@ public interface InsertUtil {
 
 //	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
-	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean requestToJoinRequired);
+	public abstract int insertClan(String name, Timestamp createTime, String description, String tag, boolean requestToJoinRequired);
 
 	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
 

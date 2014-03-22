@@ -480,8 +480,8 @@ public class UpdateUtils implements UpdateUtil {
 		conditionParams.put(DBConstants.CLANS__ID, clanId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (ownerId > 0)
-			absoluteParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
+//		if (ownerId > 0)
+//			absoluteParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
 		if (description != null)
 			absoluteParams.put(DBConstants.CLANS__DESCRIPTION, description);
 

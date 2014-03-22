@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
-import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -19,15 +18,13 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
-import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class TransferClanOwnershipController extends EventController {
 
@@ -139,9 +136,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
+  //TODO: FIX THIS
   private void writeChangesToDB(User user, User newClanOwner) {
-    if (!UpdateUtils.get().updateClanOwnerDescriptionForClan(user.getClanId(), newClanOwner.getId(), null)) {
-      log.error("problem with changing clan owner for clan with id " + user.getClanId() + " from user " + user + " to new owner " + newClanOwner);
-    }
+//    if (!UpdateUtils.get().updateClanOwnerDescriptionForClan(user.getClanId(), newClanOwner.getId(), null)) {
+//      log.error("problem with changing clan owner for clan with id " + user.getClanId() + " from user " + user + " to new owner " + newClanOwner);
+//    }
   }
 }
