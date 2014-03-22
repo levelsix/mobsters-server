@@ -21,6 +21,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_CLAN_ICON = "clan_icon";
 	public static final String TABLE_CLAN_RAID = "clan_raid";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER = "clan_raid_stage_monster";
