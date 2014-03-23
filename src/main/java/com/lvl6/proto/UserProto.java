@@ -34,6 +34,10 @@ public final class UserProto {
     // optional bool requestToJoinRequired = 7;
     boolean hasRequestToJoinRequired();
     boolean getRequestToJoinRequired();
+    
+    // optional int32 clanIconId = 8;
+    boolean hasClanIconId();
+    int getClanIconId();
   }
   public static final class MinimumClanProto extends
       com.google.protobuf.GeneratedMessage
@@ -190,6 +194,16 @@ public final class UserProto {
       return requestToJoinRequired_;
     }
     
+    // optional int32 clanIconId = 8;
+    public static final int CLANICONID_FIELD_NUMBER = 8;
+    private int clanIconId_;
+    public boolean hasClanIconId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getClanIconId() {
+      return clanIconId_;
+    }
+    
     private void initFields() {
       clanId_ = 0;
       name_ = "";
@@ -197,6 +211,7 @@ public final class UserProto {
       description_ = "";
       tag_ = "";
       requestToJoinRequired_ = false;
+      clanIconId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -227,6 +242,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(7, requestToJoinRequired_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, clanIconId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -260,6 +278,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, requestToJoinRequired_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, clanIconId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -397,6 +419,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         requestToJoinRequired_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
+        clanIconId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -459,6 +483,10 @@ public final class UserProto {
           to_bitField0_ |= 0x00000020;
         }
         result.requestToJoinRequired_ = requestToJoinRequired_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.clanIconId_ = clanIconId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -492,6 +520,9 @@ public final class UserProto {
         }
         if (other.hasRequestToJoinRequired()) {
           setRequestToJoinRequired(other.getRequestToJoinRequired());
+        }
+        if (other.hasClanIconId()) {
+          setClanIconId(other.getClanIconId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -552,6 +583,11 @@ public final class UserProto {
             case 56: {
               bitField0_ |= 0x00000020;
               requestToJoinRequired_ = input.readBool();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              clanIconId_ = input.readInt32();
               break;
             }
           }
@@ -727,6 +763,27 @@ public final class UserProto {
       public Builder clearRequestToJoinRequired() {
         bitField0_ = (bitField0_ & ~0x00000020);
         requestToJoinRequired_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 clanIconId = 8;
+      private int clanIconId_ ;
+      public boolean hasClanIconId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getClanIconId() {
+        return clanIconId_;
+      }
+      public Builder setClanIconId(int value) {
+        bitField0_ |= 0x00000040;
+        clanIconId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanIconId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        clanIconId_ = 0;
         onChanged();
         return this;
       }
@@ -7428,56 +7485,57 @@ public final class UserProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nUser.proto\022\016com.lvl6.proto\"\205\001\n\020Minimum" +
+      "\n\nUser.proto\022\016com.lvl6.proto\"\231\001\n\020Minimum" +
       "ClanProto\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022" +
       "\022\n\ncreateTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t" +
       "\022\013\n\003tag\030\006 \001(\t\022\035\n\025requestToJoinRequired\030\007" +
-      " \001(\010\"`\n\020MinimumUserProto\022\016\n\006userId\030\001 \001(\005" +
-      "\022\014\n\004name\030\002 \001(\t\022.\n\004clan\030\003 \001(\0132 .com.lvl6." +
-      "proto.MinimumClanProto\"b\n\031MinimumUserPro" +
-      "toWithLevel\0226\n\014minUserProto\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022\r\n\005level\030\002 \001" +
-      "(\005\"l\n\036MinimumUserProtoWithFacebookId\0226\n\014",
-      "minUserProto\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\022\n\nfacebookId\030\002 \001(\t\"{\n Mini" +
-      "mumUserProtoWithMaxResources\0226\n\014minUserP" +
-      "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\017\n\007maxCash\030\002 \001(\005\022\016\n\006maxOil\030\003 \001(\005\"\375\001" +
-      "\n\036UserFacebookInviteForSlotProto\022\020\n\010invi" +
-      "teId\030\001 \001(\005\022?\n\007inviter\030\002 \001(\0132..com.lvl6.p" +
-      "roto.MinimumUserProtoWithFacebookId\022\033\n\023r" +
-      "ecipientFacebookId\030\003 \001(\t\022\024\n\014timeOfInvite" +
-      "\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022\024\n\014userStru",
-      "ctId\030\006 \001(\005\022\023\n\013structFbLvl\030\007 \001(\005\022\024\n\014redee" +
-      "medTime\030\010 \001(\003\"\231\010\n\rFullUserProto\022\016\n\006userI" +
-      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004" +
-      "gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\013\n\003oil\030* \001(\005\022\022\n" +
-      "\nexperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(" +
-      "\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t \001" +
-      "(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t\022" +
-      "\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016" +
-      " \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023" +
-      " \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetriev",
-      "edFromStructs\030\027 \001(\005\022\"\n\032numOilRetrievedFr" +
-      "omStructs\030+ \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6" +
-      ".proto.MinimumClanProto\022\033\n\023hasReceivedfb" +
-      "Reward\030\034 \001(\010\022!\n\031numBeginnerSalesPurchase" +
-      "d\030\036 \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshie" +
-      "ldEndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001" +
-      "(\t\022\022\n\nattacksWon\030$ \001(\005\022\023\n\013defensesWon\030% " +
-      "\001(\005\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defensesLost" +
-      "\030\' \001(\005\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCenter" +
-      "Id\030- \001(\t\022\037\n\027lastObstacleSpawnedTime\030/ \001(",
-      "\003\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013deviceToken" +
-      "\030\020 \001(\t\022\"\n\032lastBattleNotificationTime\030\021 \001" +
-      "(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(" +
-      "\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutiveDa" +
-      "ysPlayed\030\030 \001(\005\022$\n\034lastWallPostNotificati" +
-      "onTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\035\n\025inBat" +
-      "tleShieldEndTime\030# \001(\003\022\033\n\023fbIdSetOnUserC" +
-      "reate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030StaticUserL" +
-      "evelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022required" +
-      "Experience\030\002 \001(\005B\013B\tUserProto"
+      " \001(\010\022\022\n\nclanIconId\030\010 \001(\005\"`\n\020MinimumUserP" +
+      "roto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022.\n\004cl" +
+      "an\030\003 \001(\0132 .com.lvl6.proto.MinimumClanPro" +
+      "to\"b\n\031MinimumUserProtoWithLevel\0226\n\014minUs" +
+      "erProto\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\r\n\005level\030\002 \001(\005\"l\n\036MinimumUserPro",
+      "toWithFacebookId\0226\n\014minUserProto\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\022\n\nface" +
+      "bookId\030\002 \001(\t\"{\n MinimumUserProtoWithMaxR" +
+      "esources\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\017\n\007maxCash\030\002 \001(" +
+      "\005\022\016\n\006maxOil\030\003 \001(\005\"\375\001\n\036UserFacebookInvite" +
+      "ForSlotProto\022\020\n\010inviteId\030\001 \001(\005\022?\n\007invite" +
+      "r\030\002 \001(\0132..com.lvl6.proto.MinimumUserProt" +
+      "oWithFacebookId\022\033\n\023recipientFacebookId\030\003" +
+      " \001(\t\022\024\n\014timeOfInvite\030\004 \001(\003\022\024\n\014timeAccept",
+      "ed\030\005 \001(\003\022\024\n\014userStructId\030\006 \001(\005\022\023\n\013struct" +
+      "FbLvl\030\007 \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\231\010\n\rFu" +
+      "llUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(" +
+      "\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005" +
+      " \001(\005\022\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n" +
+      "\016tasksCompleted\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(" +
+      "\005\022\023\n\013battlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n" +
+      "\014referralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014 \001(" +
+      "\005\022\025\n\rlastLoginTime\030\016 \001(\003\022\026\n\016lastLogoutTi" +
+      "me\030\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(",
+      "\010\022$\n\034numCoinsRetrievedFromStructs\030\027 \001(\005\022" +
+      "\"\n\032numOilRetrievedFromStructs\030+ \001(\005\022.\n\004c" +
+      "lan\030\031 \001(\0132 .com.lvl6.proto.MinimumClanPr" +
+      "oto\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022!\n\031numB" +
+      "eginnerSalesPurchased\030\036 \001(\005\022\027\n\017hasActive" +
+      "Shield\030\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n\003e" +
+      "lo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\022\n\nattacksWon\030$ \001" +
+      "(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030&" +
+      " \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\022\n\nfacebookId" +
+      "\030( \001(\t\022\024\n\014gameCenterId\030- \001(\t\022\037\n\027lastObst",
+      "acleSpawnedTime\030/ \001(\003\022\026\n\016udidForHistory\030" +
+      ". \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattle" +
+      "NotificationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(" +
+      "\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005" +
+      "\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034la" +
+      "stWallPostNotificationTime\030\032 \001(\003\022\021\n\tkaba" +
+      "mNaid\030\033 \001(\t\022\035\n\025inBattleShieldEndTime\030# \001" +
+      "(\003\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid\030" +
+      "\r \001(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005lev" +
+      "el\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005B\013B\t",
+      "UserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7489,7 +7547,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumClanProto_descriptor,
-              new java.lang.String[] { "ClanId", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", },
+              new java.lang.String[] { "ClanId", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", "ClanIconId", },
               com.lvl6.proto.UserProto.MinimumClanProto.class,
               com.lvl6.proto.UserProto.MinimumClanProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProto_descriptor =
