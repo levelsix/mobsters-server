@@ -99,6 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (success) {
+      	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
       	MinimumUserProto requestMup = CreateInfoProtoUtils
       			.createMinimumUserProtoFromUser(requester);
       	resBuilder.setRequester(requestMup);
