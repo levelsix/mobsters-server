@@ -116,8 +116,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
       if (successful) {
-        resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
-        resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
+      	setResponseBuilderStuff(resBuilder, clanId, clan);
         sendClanRaidStuff(resBuilder, clan, user);
       }
       RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
@@ -297,6 +296,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 //    
 //    server.writeAPNSNotificationOrEvent(aNotification);
+  }
+  
+  private void setResponseBuilderStuff(Builder resBuilder, int clanId, Clan clan) {
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	clanIdList.add(clanId);
+  	List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+    
+    int size = clanIdToSize.get(clanId);
+    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
   
   private void sendClanRaidStuff(Builder resBuilder, Clan clan, User user) {

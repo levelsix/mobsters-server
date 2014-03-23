@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +27,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLANS;
-
   
+  
+  //CONTROLLER LOGIC******************************************************************
+  public static List<Integer> getClanIdsFromClans(Collection<Clan> clanList) {
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	
+  	for (Clan clan : clanList) {
+  		int clanId = clan.getId();
+  		clanIdList.add(clanId);
+  	}
+  	return clanIdList;
+  }
+	
+	//RETRIEVE QUERIES*********************************************************************
   //@Cacheable(value="clanWithId", key="#clanId")
   public static Clan getClanWithId(int clanId) {
     log.debug("retrieving clan with id " + clanId);

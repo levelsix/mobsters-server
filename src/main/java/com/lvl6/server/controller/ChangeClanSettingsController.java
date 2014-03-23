@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -106,8 +107,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//clan will be modified
         writeChangesToDB(resBuilder, clanId, clan, isChangeDescription, description,
         		isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId);
-        resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
-        resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
+        setResponseBuilderStuff(resBuilder, clanId, clan);
       }
       
       ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserId());
@@ -213,4 +213,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	log.info("numUpdated (should be 1)=" + numUpdated);
   }
+  
+  private void setResponseBuilderStuff(Builder resBuilder, int clanId, Clan clan) {
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	clanIdList.add(clanId);
+  	
+  	List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+
+    int size = clanIdToSize.get(clanId);
+    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
+  }
+  
 }

@@ -634,22 +634,10 @@ public class CreateInfoProtoUtils {
     return fucpb.build();
   }
   
-  public static FullClanProtoWithClanSize createFullClanProtoWithClanSize(Clan c) {
+  public static FullClanProtoWithClanSize createFullClanProtoWithClanSize(Clan c,
+  		int size) {
   	FullClanProto clan = createFullClanProtoFromClan(c);
-  	int clanId = c.getId();
   	
-  	List<Integer> statuses = new ArrayList<Integer>();
-  	statuses.add(UserClanStatus.LEADER_VALUE);
-  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
-  	statuses.add(UserClanStatus.MEMBER_VALUE);
-  	
-  	List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
-  			.getUserIdsWithStatuses(clanId, statuses);
-  	int size = 0;
-  	if (null != userIds) {
-  		size = userIds.size();
-  	}
   	return FullClanProtoWithClanSize.newBuilder().setClan(clan).setClanSize(size).build();
   }
 
@@ -1238,6 +1226,17 @@ public class CreateInfoProtoUtils {
     ueipb.setEnhancingCost(mefu.getEnhancingCost());
 
     return ueipb.build();
+  }
+  
+  public static UserCurrentMonsterTeamProto createUserCurrentMonsterTeamProto(int userId,
+  		List<MonsterForUser> curTeam) {
+  	UserCurrentMonsterTeamProto.Builder ucmtp = UserCurrentMonsterTeamProto.newBuilder();
+  	ucmtp.setUserId(userId);
+  	
+  	List<FullUserMonsterProto> currentTeam = createFullUserMonsterProtoList(curTeam);
+  	ucmtp.addAllCurrentTeam(currentTeam);
+  	
+  	return ucmtp.build();
   }
 
   public static UserMonsterEvolutionProto createUserEvolutionProtoFromEvolution(

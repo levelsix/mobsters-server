@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -92,14 +93,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       boolean success = false;
       if (legitDecision) {
-        Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
-        resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
-        resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
-      	success = writeChangesToDB(user, requester, accept);
+        success = writeChangesToDB(user, requester, accept);
       }
       
       if (success) {
       	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
+      	setResponseBuilderStuff(resBuilder, clanId);
       	MinimumUserProto requestMup = CreateInfoProtoUtils
       			.createMinimumUserProtoFromUser(requester);
       	resBuilder.setRequester(requestMup);
@@ -139,27 +138,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (0 != clanId) {
       	getLocker().unlockClan(clanId);
       }
-    }
-  }
-
-  private boolean writeChangesToDB(User user, User requester, boolean accept) {
-    if (accept) {
-      if (!requester.updateRelativeCoinsAbsoluteClan(0, user.getClanId())) {
-        log.error("problem with change requester " + requester + " clan id to " + user.getClanId());
-        return false;
-      }
-      if (!UpdateUtils.get().updateUserClanStatus(requester.getId(), user.getClanId(), UserClanStatus.MEMBER)) {
-        log.error("problem with updating user clan status to member for requester " + requester + " and clan id "+ user.getClanId());
-        return false;
-      }
-      DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(requester.getId(), user.getClanId());
-      return true;
-    } else {
-      if (!DeleteUtils.get().deleteUserClan(requester.getId(), user.getClanId())) {
-        log.error("problem with deleting user clan info for requester with id " + requester.getId() + " and clan id " + user.getClanId()); 
-        return false;
-      }
-      return true;
     }
   }
 
@@ -223,6 +201,46 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;      
     }
     return true;
+  }
+  
+  private boolean writeChangesToDB(User user, User requester, boolean accept) {
+  	if (accept) {
+  		if (!requester.updateRelativeCoinsAbsoluteClan(0, user.getClanId())) {
+  			log.error("problem with change requester " + requester + " clan id to " + user.getClanId());
+  			return false;
+  		}
+  		if (!UpdateUtils.get().updateUserClanStatus(requester.getId(), user.getClanId(), UserClanStatus.MEMBER)) {
+  			log.error("problem with updating user clan status to member for requester " + requester + " and clan id "+ user.getClanId());
+  			return false;
+  		}
+  		DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(requester.getId(), user.getClanId());
+  		return true;
+  	} else {
+  		if (!DeleteUtils.get().deleteUserClan(requester.getId(), user.getClanId())) {
+  			log.error("problem with deleting user clan info for requester with id " + requester.getId() + " and clan id " + user.getClanId()); 
+  			return false;
+  		}
+  		return true;
+  	}
+  }
+  
+  private void setResponseBuilderStuff(Builder resBuilder, int clanId) {
+  	Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	clanIdList.add(clanId);
+  	
+  	List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+
+    int size = clanIdToSize.get(clanId);
+    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
   
 }

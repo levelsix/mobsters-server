@@ -96,11 +96,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	statuses.add(UserClanStatus.JUNIOR_LEADER);
       	statuses.add(UserClanStatus.LEADER);
         writeChangesToDB(clanId, userIds, statuses);
-        Clan newClan = ClanRetrieveUtils.getClanWithId(clanId);
-        resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
-        resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(newClan));
-        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(newClanOwner);
-        resBuilder.setClanOwnerNew(mup);
+        setResponseBuilderStuff(resBuilder, clanId, newClanOwner);
       }
       
       if (!legitTransfer) {
@@ -186,4 +182,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	log.error("num clan_for_user updated=" + numUpdated + " userIdList=" + userIdList +
   			" statuses=" + statuses);
   }
+  
+  private void setResponseBuilderStuff(Builder resBuilder, int clanId, User newClanOwner) {
+  	Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	clanIdList.add(clanId);
+  	
+  	List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+
+    int size = clanIdToSize.get(clanId);
+    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
+    
+    MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(newClanOwner);
+    resBuilder.setClanOwnerNew(mup);
+  }
+  
 }
