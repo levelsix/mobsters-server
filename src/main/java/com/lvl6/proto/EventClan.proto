@@ -392,6 +392,7 @@ message PromoteDemoteClanMemberResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional MinimumUserProto victim = 2;
 	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
+	optional UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
 	
 	optional PromoteDemoteClanMemberStatus status = 4;
 	

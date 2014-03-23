@@ -93,6 +93,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitRequest) { 
       	User victim = users.get(victimId);
       	UserClan oldInfo = userClans.get(victimId);
+      	resBuilder.setPrevUserClanStatus(oldInfo.getStatus());
       	
       	success = writeChangesToDB(victim, victimId, clanId, oldInfo, newUserClanStatus);
       }
