@@ -64,6 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
+    log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -141,11 +142,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("user is null");
       return false;      
     }
-    if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
-      resBuilder.setStatus(CreateClanStatus.FAIL_NOT_ENOUGH_CASH);
-      log.error("user only has " + user.getCash() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
-      return false;
-    }
+//    if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
+//      resBuilder.setStatus(CreateClanStatus.FAIL_NOT_ENOUGH_CASH);
+//      log.error("user only has " + user.getCash() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
+//      return false;
+//    }
     if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
       resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
       log.error("clan name " + clanName + " is more than " + ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME + " characters");
@@ -178,8 +179,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     
     //CHECK MONEY
-    if (!hasEnoughCash(resBuilder, user, cashChange)) {
+    if (0 == gemsSpent) {
+    	if (!hasEnoughCash(resBuilder, user, cashChange)) {
     		return false;
+    	}
     }
     
     if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
