@@ -179,7 +179,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//update clan for user table
   	
   	int numUpdated = UpdateUtils.get().updateUserClanStatuses(clanId, userIdList, statuses); 
-  	log.error("num clan_for_user updated=" + numUpdated + " userIdList=" + userIdList +
+  	log.info("num clan_for_user updated=" + numUpdated + " userIdList=" + userIdList +
   			" statuses=" + statuses);
   }
   
