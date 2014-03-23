@@ -234,7 +234,7 @@ import com.lvl6.utils.DBConnection;
     querySb.append(TABLE_NAME);
     querySb.append(" WHERE ");
     querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
-    querySb.append("in (");
+    querySb.append(" in (");
     int numQuestionMarks = clanIds.size();
     List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
     String questionMarkStr = StringUtils.csvList(questionMarks);
