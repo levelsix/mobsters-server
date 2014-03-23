@@ -35,12 +35,6 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      //if user is starting up app and the app is not a background process
      optional bool isFreshRestart = 8;
      
-     //used to force logout all devices logged onto one account
-     //usage: client generates time, sends to server. All clients on
-     // a user account will get ForceLogout event. If ForceLogout's
-     // loginTime is same as value client generated, don't logout
-     optional int64 clientTime = 9;
-     
 }
 
 message StartupResponseProto {
@@ -258,9 +252,11 @@ message StartupResponseProto {
 
 //------------------------------------------------------------------------------------------
 //to prevent multiple of the same account being online
+//sent on udid, userId, and facebook id amqp queue
 message ForceLogoutResponseProto {
-	optional int64 loginTime = 1; //the time the server logs the user in on startup
-	optional int64 previousLoginTime = 2; //last time server logged the user in on startup
+	//time server logged the user in on startup, which is before the start up that triggered this
+	optional int64 previousLoginTime = 1; 
 	
-	optional int64 timeClientSent =3 ;
+	//the device's udid (whoever sent startup event and triggered this)
+	optional string udid = 2; 
 }
