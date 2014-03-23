@@ -33,6 +33,7 @@ import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
+import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
@@ -90,7 +91,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	lockedClan = getLocker().lockClan(clanId);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
       boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, user, clan);
@@ -131,6 +132,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.writeEvent(resEvent);
       
       if (successful) {
+      	List<Integer> userIds = new ArrayList<Integer>();
+      	userIds.add(userId);
+      	//get user's current monster team
+      	Map<Integer, List<MonsterForUser>> userIdToTeam = RetrieveUtils
+      			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds); 
+      	UserCurrentMonsterTeamProto curTeamProto = CreateInfoProtoUtils
+      			.createUserCurrentMonsterTeamProto(userId, userIdToTeam.get(userId));
+      	resBuilder.setRequesterMonsters(curTeamProto);
+      	
+      	
       	resBuilder.clearEventDetails(); //could just get rid of this line
       	resBuilder.clearClanUsersDetails(); //could just get rid of this line
       	resEvent.setRequestJoinClanResponseProto(resBuilder.build());

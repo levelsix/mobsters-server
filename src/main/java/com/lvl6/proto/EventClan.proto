@@ -83,6 +83,8 @@ message RequestJoinClanResponseProto {
 	optional PersistentClanEventClanInfoProto eventDetails = 7;
 	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
+	optional UserCurrentMonsterTeamProto requesterMonsters = 9;
+	
 	enum RequestJoinClanStatus {
 		SUCCESS_REQUEST = 1;
 		SUCCESS_JOIN = 2;
