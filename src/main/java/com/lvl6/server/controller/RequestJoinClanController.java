@@ -182,10 +182,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("user is " + user + ", clan is " + clan);
       return false;      
     }
-    int clanId = user.getClanId();
+    int clanId = clan.getId();
     if (clanId > 0) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
-      log.error("user is already in clan with id " + user.getClanId());
+      log.error("user is already in clan with id " + clanId);
       return false;      
     }
 //    if (clan.isGood() != MiscMethods.checkIfGoodSide(user.getType())) {
