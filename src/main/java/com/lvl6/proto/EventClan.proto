@@ -138,6 +138,7 @@ message ApproveOrRejectRequestToJoinClanResponseProto {
 		FAIL_NOT_AUTHORIZED = 3;
 		FAIL_NOT_A_REQUESTER = 4;
 		FAIL_ALREADY_IN_A_CLAN = 5;
+		FAIL_CLAN_IS_FULL = 6;
 	}	
 }
 

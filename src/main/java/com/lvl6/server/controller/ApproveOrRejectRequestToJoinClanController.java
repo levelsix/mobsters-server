@@ -208,7 +208,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int size = clanIdToSize.get(clanId);
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
     if (size >= maxSize && accept) {
-      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_CLAN_IS_FULL);
       log.warn("user error: trying to add user into already full clan with id " + user.getClanId());
       return false;      
     }
