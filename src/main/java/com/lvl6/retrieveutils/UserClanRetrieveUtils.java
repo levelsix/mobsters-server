@@ -251,7 +251,7 @@ import com.lvl6.utils.DBConnection;
     querySb.append(");");
     
     List<Object> values = new ArrayList<Object>();
-    values.add(clanIds);
+    values.addAll(clanIds);
     values.addAll(statuses);
     
     String query = querySb.toString();
