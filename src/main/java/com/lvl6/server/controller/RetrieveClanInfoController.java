@@ -175,7 +175,8 @@ import com.lvl6.utils.RetrieveUtils;
           	clanList = ClanRetrieveUtils.getMostRecentClansBeforeClanId(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP, beforeClanId);
             resBuilder.setBeforeThisClanId(reqProto.getBeforeThisClanId());
           }
-
+          
+          log.info("clanList=" + clanList);
           setClanProtosWithSize(resBuilder, clanList);
         }
       }

@@ -3175,6 +3175,10 @@ public final class EventStartupProto {
         // optional int32 maxCharLengthForClanTag = 4;
         boolean hasMaxCharLengthForClanTag();
         int getMaxCharLengthForClanTag();
+        
+        // optional int32 maxClanSize = 5;
+        boolean hasMaxClanSize();
+        int getMaxClanSize();
       }
       public static final class ClanConstants extends
           com.google.protobuf.GeneratedMessage
@@ -3245,11 +3249,22 @@ public final class EventStartupProto {
           return maxCharLengthForClanTag_;
         }
         
+        // optional int32 maxClanSize = 5;
+        public static final int MAXCLANSIZE_FIELD_NUMBER = 5;
+        private int maxClanSize_;
+        public boolean hasMaxClanSize() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        public int getMaxClanSize() {
+          return maxClanSize_;
+        }
+        
         private void initFields() {
           coinPriceToCreateClan_ = 0;
           maxCharLengthForClanName_ = 0;
           maxCharLengthForClanDescription_ = 0;
           maxCharLengthForClanTag_ = 0;
+          maxClanSize_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -3275,6 +3290,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             output.writeInt32(4, maxCharLengthForClanTag_);
           }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeInt32(5, maxClanSize_);
+          }
           getUnknownFields().writeTo(output);
         }
         
@@ -3299,6 +3317,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(4, maxCharLengthForClanTag_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(5, maxClanSize_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -3432,6 +3454,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000004);
             maxCharLengthForClanTag_ = 0;
             bitField0_ = (bitField0_ & ~0x00000008);
+            maxClanSize_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000010);
             return this;
           }
           
@@ -3486,6 +3510,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000008;
             }
             result.maxCharLengthForClanTag_ = maxCharLengthForClanTag_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.maxClanSize_ = maxClanSize_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -3513,6 +3541,9 @@ public final class EventStartupProto {
             }
             if (other.hasMaxCharLengthForClanTag()) {
               setMaxCharLengthForClanTag(other.getMaxCharLengthForClanTag());
+            }
+            if (other.hasMaxClanSize()) {
+              setMaxClanSize(other.getMaxClanSize());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -3563,6 +3594,11 @@ public final class EventStartupProto {
                 case 32: {
                   bitField0_ |= 0x00000008;
                   maxCharLengthForClanTag_ = input.readInt32();
+                  break;
+                }
+                case 40: {
+                  bitField0_ |= 0x00000010;
+                  maxClanSize_ = input.readInt32();
                   break;
                 }
               }
@@ -3651,6 +3687,27 @@ public final class EventStartupProto {
           public Builder clearMaxCharLengthForClanTag() {
             bitField0_ = (bitField0_ & ~0x00000008);
             maxCharLengthForClanTag_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 maxClanSize = 5;
+          private int maxClanSize_ ;
+          public boolean hasMaxClanSize() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          public int getMaxClanSize() {
+            return maxClanSize_;
+          }
+          public Builder setMaxClanSize(int value) {
+            bitField0_ |= 0x00000010;
+            maxClanSize_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMaxClanSize() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            maxClanSize_ = 0;
             onChanged();
             return this;
           }
@@ -17809,7 +17866,7 @@ public final class EventStartupProto {
       "\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t" +
       "\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutoria" +
       "l\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart\030",
-      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\230)\n\024StartupRes" +
+      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\255)\n\024StartupRes" +
       "ponseProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-\n\006" +
       "sender\030\002 \001(\0132\035.com.lvl6.proto.FullUserPr" +
       "oto\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6.pr" +
@@ -17867,7 +17924,7 @@ public final class EventStartupProto {
       "otificationProto\0222\n\010referred\030\001 \001(\0132 .com" +
       ".lvl6.proto.MinimumUserProto\022\023\n\013recruitT" +
       "ime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032" +
-      "\243\022\n\020StartupConstants\022H\n\025inAppPurchasePac" +
+      "\270\022\n\020StartupConstants\022H\n\025inAppPurchasePac" +
       "kages\030\001 \003(\0132).com.lvl6.proto.InAppPurcha",
       "sePackageProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022" +
       "\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025animate" +
@@ -17903,48 +17960,48 @@ public final class EventStartupProto {
       "acles\030\031 \001(\005\022\032\n\022minutesPerObstacle\030\032 \001(\005\032" +
       "_\n\031AnimatedSpriteOffsetProto\022\021\n\timageNam" +
       "e\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto" +
-      ".CoordinateProto\032\232\001\n\rClanConstants\022\035\n\025co" +
+      ".CoordinateProto\032\257\001\n\rClanConstants\022\035\n\025co" +
       "inPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLeng" +
       "thForClanName\030\002 \001(\005\022\'\n\037maxCharLengthForC" +
       "lanDescription\030\003 \001(\005\022\037\n\027maxCharLengthFor" +
-      "ClanTag\030\004 \001(\005\032c\n\030DownloadableNibConstant" +
-      "s\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNibNam",
-      "e\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023To" +
-      "urnamentConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n" +
-      "\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005" +
-      "\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005\032R\n" +
-      "\024UserMonsterConstants\022\027\n\017maxNumTeamSlots" +
-      "\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001(" +
-      "\005\032\211\001\n\020MonsterConstants\022\032\n\022cashPerHealthP" +
-      "oint\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoin" +
-      "t\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021el" +
-      "ementalWeakness\030\004 \001(\002\032\225\002\n\025MiniTutorialCo",
-      "nstants\022!\n\031matchThreeTutorialAssetId\030\001 \001" +
-      "(\005\022\033\n\023firstPowerUpAssetId\030\002 \001(\005\022\036\n\026rainb" +
-      "owTutorialAssetId\030\003 \001(\005\022#\n\033powerUpComboT" +
-      "utorialAssetId\030\004 \001(\005\022\"\n\032monsterDropTutor" +
-      "ialAssetId\030\005 \001(\005\022\036\n\026elementTutorialAsset" +
-      "Id\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForCo" +
-      "mbiningPowerUps\030\010 \001(\005\032\351\003\n\021TutorialConsta" +
-      "nts\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016enemyM" +
-      "onsterId\030\002 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001" +
-      "(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialSt",
-      "ructures\030\003 \003(\0132#.com.lvl6.proto.Tutorial" +
-      "StructProto\022\036\n\026structureIdsToBeBuillt\030\004 " +
-      "\003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006" +
-      " \003(\0132 .com.lvl6.proto.CityElementProto\022$" +
-      "\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n\035" +
-      "cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010c" +
-      "ashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsIn" +
-      "it\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.co" +
-      "m.lvl6.proto.MinimumObstacleProto\"A\n\014Upd" +
-      "ateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE",
-      "\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n" +
-      "\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SER" +
-      "VER_IN_MAINTENANCE\020\003\"`\n\030ForceLogoutRespo" +
-      "nseProto\022\021\n\tloginTime\030\001 \001(\003\022\031\n\021previousL" +
-      "oginTime\030\002 \001(\003\022\026\n\016timeClientSent\030\003 \001(\003B\023" +
-      "B\021EventStartupProto"
+      "ClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n\030Do" +
+      "wnloadableNibConstants\022\022\n\nmapNibName\030\001 \001",
+      "(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShop" +
+      "peNibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022" +
+      "\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005" +
+      "\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowA" +
+      "fterEventEnd\030\004 \001(\005\032R\n\024UserMonsterConstan" +
+      "ts\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMa" +
+      "xNumMonsterLimit\030\002 \001(\005\032\211\001\n\020MonsterConsta" +
+      "nts\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secon" +
+      "dsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementa" +
+      "lStrength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001",
+      "(\002\032\225\002\n\025MiniTutorialConstants\022!\n\031matchThr" +
+      "eeTutorialAssetId\030\001 \001(\005\022\033\n\023firstPowerUpA" +
+      "ssetId\030\002 \001(\005\022\036\n\026rainbowTutorialAssetId\030\003" +
+      " \001(\005\022#\n\033powerUpComboTutorialAssetId\030\004 \001(" +
+      "\005\022\"\n\032monsterDropTutorialAssetId\030\005 \001(\005\022\036\n" +
+      "\026elementTutorialAssetId\030\006 \001(\005\022\016\n\006cityId\030" +
+      "\007 \001(\005\022#\n\033questIdForCombiningPowerUps\030\010 \001" +
+      "(\005\032\351\003\n\021TutorialConstants\022\031\n\021startingMons" +
+      "terId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032\n\022e" +
+      "nemyBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterI",
+      "d\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.co" +
+      "m.lvl6.proto.TutorialStructProto\022\036\n\026stru" +
+      "ctureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005" +
+      "\0229\n\017cityOneElements\030\006 \003(\0132 .com.lvl6.pro" +
+      "to.CityElementProto\022$\n\034cityElementIdForF" +
+      "irstDungeon\030\007 \001(\005\022%\n\035cityElementIdForSec" +
+      "ondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oi" +
+      "lInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutoria" +
+      "lObstacles\030\016 \003(\0132$.com.lvl6.proto.Minimu" +
+      "mObstacleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPD",
+      "ATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020" +
+      "\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016US" +
+      "ER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020" +
+      "\003\"`\n\030ForceLogoutResponseProto\022\021\n\tloginTi" +
+      "me\030\001 \001(\003\022\031\n\021previousLoginTime\030\002 \001(\003\022\026\n\016t" +
+      "imeClientSent\030\003 \001(\003B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18004,7 +18061,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
-              new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", },
+              new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", "MaxClanSize", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =

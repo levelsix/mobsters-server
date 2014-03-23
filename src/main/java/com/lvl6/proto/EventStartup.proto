@@ -168,6 +168,7 @@ message StartupResponseProto {
 			optional int32 maxCharLengthForClanName = 2;
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;
+			optional int32 maxClanSize = 5;
 		}
 		message DownloadableNibConstants {
 			optional string mapNibName = 1;

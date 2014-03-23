@@ -16,6 +16,9 @@ public class ControllerConstants {
 	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
 
+	//clan
+	public static final int CLAN__MAX_NUM_MEMBERS = 3;
+	
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
@@ -363,7 +366,7 @@ public class ControllerConstants {
   public static final int CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 967 : 92;
   public static final int CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 958 : 148;
   public static final int CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB = 50;
-  public static final int CLAN__MAX_NUM_MEMBERS = 25;
+  
   
   //LOCK BOXES
   public static final int LOCK_BOXES__GOLD_COST_TO_PICK = 10;

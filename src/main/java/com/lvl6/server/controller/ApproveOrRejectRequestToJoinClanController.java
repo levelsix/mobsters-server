@@ -193,9 +193,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
       return true;
     }
-    List<UserClan> ucs = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId);
+    
+    //check out the size of the clan
+    List<Integer> clanIdList = new ArrayList<Integer>();
+    clanIdList.add(clanId);
+    statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+  	int size = clanIdToSize.get(clanId);
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
-    if (ucs.size() >= maxSize && accept) {
+    if (size >= maxSize && accept) {
       resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
       log.warn("user error: trying to add user into already full clan with id " + user.getClanId());
       return false;      
