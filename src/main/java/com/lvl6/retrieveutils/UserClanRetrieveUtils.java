@@ -248,7 +248,7 @@ import com.lvl6.utils.DBConnection;
     questionMarks = Collections.nCopies(numQuestionMarks, "?");
     questionMarkStr = StringUtils.csvList(questionMarks);
     querySb.append(questionMarkStr);
-    querySb.append(") and ");
+    querySb.append(");");
     
     List<Object> values = new ArrayList<Object>();
     values.add(clanIds);
