@@ -27,6 +27,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -35,6 +36,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+  
   @Autowired
   protected ClanIconRetrieveUtils clanIconRetrieveUtils;
   public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
@@ -81,17 +91,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
     	clanId = senderProto.getClan().getClanId();
     }
-    
+    boolean lockedClan = false;
     if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	lockedClan = getLocker().lockClan(clanId);
     }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
       
-      boolean legitChange = checkLegitChange(resBuilder, userId, user, clanId, clan);
+      boolean legitChange = checkLegitChange(resBuilder, lockedClan, userId, user,
+      		clanId, clan);
 
       if (legitChange) {
       	//clan will be modified
@@ -104,13 +113,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setChangeClanSettingsResponseProto(resBuilder.build());  
-      server.writeClanEvent(resEvent, clan.getId());
+      
+      //if not successful only write to user
+      if (!ChangeClanSettingsStatus.SUCCESS.equals(resBuilder.getStatus())) {
+      	server.writeEvent(resEvent);
+      	
+      } else {
+      	//only write to clan if successful 
+      	server.writeClanEvent(resEvent, clan.getId());
+      }
 
-//      if (legitChange) {
-//        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-//        resEventUpdate.setTag(event.getTag());
-//        server.writeEvent(resEventUpdate);
-//      }
     } catch (Exception e) {
       log.error("exception in ChangeClanSettings processEvent", e);
       try {
@@ -124,15 +136,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     } finally {
     	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		getLocker().unlockClan(clanId);
     	}
     }
   }
   
-  private boolean checkLegitChange(Builder resBuilder, int userId, User user,
-  		int clanId, Clan clan) {
+  private boolean checkLegitChange(Builder resBuilder, boolean lockedClan, int userId,
+  		User user, int clanId, Clan clan) {
+
+  	if (!lockedClan) {
+  		log.error("couldn't obtain clan lock");
+  		return false;
+  	}
     if (user == null || clan == null) {
       resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
       log.error("userId is " + userId + ", user is " + user + "\t clanId is " + clanId +

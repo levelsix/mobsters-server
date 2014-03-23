@@ -14,11 +14,9 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
@@ -92,22 +90,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legitDecision = checkLegitDecision(resBuilder, lockedClan, user, requester,
       		accept);
       
+      boolean success = false;
       if (legitDecision) {
-        Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
+        Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
         resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
         resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
+      	success = writeChangesToDB(user, requester, accept);
       }
-
-      ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(senderProto.getUserId());
-      resEvent.setTag(event.getTag());
-      resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder.build());  
-
-      if (legitDecision) {
+      
+      if (success) {
       	MinimumUserProto requestMup = CreateInfoProtoUtils
       			.createMinimumUserProtoFromUser(requester);
       	resBuilder.setRequester(requestMup);
-        server.writeClanEvent(resEvent, user.getClanId());
-
+      }
+      
+      ApproveOrRejectRequestToJoinClanResponseEvent resEvent =
+      		new ApproveOrRejectRequestToJoinClanResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder.build());  
+      
+      //if fail only to sender
+      if (!success) {
+      	server.writeEvent(resEvent);
+      } else {
+      	//if success to clan and the requester
+      	server.writeClanEvent(resEvent, clanId);
         // Send message to the new guy
         ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 =
         		new ApproveOrRejectRequestToJoinClanResponseEvent(requesterId);
@@ -115,14 +122,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         //in case user is not online write an apns
         server.writeAPNSNotificationOrEvent(resEvent2);
         //server.writeEvent(resEvent2);
-
-        writeChangesToDB(user, requester, accept);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-        
-      } else {
-        server.writeEvent(resEvent);
       }
     } catch (Exception e) {
       log.error("exception in ApproveOrRejectRequestToJoinClan processEvent", e);
@@ -142,19 +141,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private void writeChangesToDB(User user, User requester, boolean accept) {
+  private boolean writeChangesToDB(User user, User requester, boolean accept) {
     if (accept) {
       if (!requester.updateRelativeCoinsAbsoluteClan(0, user.getClanId())) {
         log.error("problem with change requester " + requester + " clan id to " + user.getClanId());
+        return false;
       }
       if (!UpdateUtils.get().updateUserClanStatus(requester.getId(), user.getClanId(), UserClanStatus.MEMBER)) {
         log.error("problem with updating user clan status to member for requester " + requester + " and clan id "+ user.getClanId());
+        return false;
       }
       DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(requester.getId(), user.getClanId());
+      return true;
     } else {
       if (!DeleteUtils.get().deleteUserClan(requester.getId(), user.getClanId())) {
         log.error("problem with deleting user clan info for requester with id " + requester.getId() + " and clan id " + user.getClanId()); 
+        return false;
       }
+      return true;
     }
   }
 
@@ -217,7 +221,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.warn("user error: trying to add user into already full clan with id " + user.getClanId());
       return false;      
     }
-    resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
     return true;
   }
   

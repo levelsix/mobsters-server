@@ -80,11 +80,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     boolean lockedClan = false;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
-    } /*else {
-    //MAYBE SHOULD ALSO LOCK THE playerToBootId
-    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	server.lockPlayers(userId, victimId, this.getClass().getSimpleName());
-    }*/
+    }
     try {
     	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
     	Map<Integer, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
@@ -99,31 +95,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	UserClan oldInfo = userClans.get(victimId);
       	
       	success = writeChangesToDB(victim, victimId, clanId, oldInfo, newUserClanStatus);
-//        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-//        server.writeEvent(resEventUpdate);
       }
       
-      if (success) {
-        resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
-        User victim = users.get(victimId);
-        
-        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(victim);
-        resBuilder.setVictim(mup);
-      }
-
-      //write to promoter
       PromoteDemoteClanMemberResponseEvent resEvent =
       		new PromoteDemoteClanMemberResponseEvent(userId);
       resEvent.setTag(event.getTag());
-      resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build()); 
-      server.writeEvent(resEvent);
-      
-      if (success) {
-      	//write to victim
-      	PromoteDemoteClanMemberResponseEvent resEvent2 =
-      			new PromoteDemoteClanMemberResponseEvent(victimId);
-      	resEvent2.setPromoteDemoteClanMemberResponseProto(resBuilder.build()); //I think this is supposed to be resEvent2 not resEvent
-      	server.writeEvent(resEvent2);
+      //only write to user if failed
+      if (!success) {
+      	resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build()); 
+      	server.writeEvent(resEvent);
+      	
+      } else {
+      	//only write to clan if success
+        resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
+        User victim = users.get(victimId);
+        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(victim);
+        resBuilder.setVictim(mup);
+        
+      	resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
+      	server.writeClanEvent(resEvent, clanId);
       }
 
     } catch (Exception e) {
@@ -140,9 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } finally {
     	if (0 != clanId) {
     		getLocker().unlockClan(clanId);
-    	} /*else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	}*/
+    	}
     }
   }
 

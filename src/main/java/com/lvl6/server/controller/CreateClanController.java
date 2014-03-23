@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -35,6 +37,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @Component @DependsOn("gameServer") public class CreateClanController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
   public CreateClanController() {
     numAllocatedThreads = 4;
@@ -55,6 +66,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     String clanName = reqProto.getName();
     String tag = reqProto.getTag();
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
@@ -67,7 +79,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Timestamp createTime = new Timestamp(new Date().getTime());
@@ -108,8 +120,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
     } catch (Exception e) {
       log.error("exception in CreateClan processEvent", e);
+      try {
+    	  resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+    	  CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setCreateClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in CreateClan processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
     }
   }
 

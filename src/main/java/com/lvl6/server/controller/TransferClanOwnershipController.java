@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
@@ -105,15 +103,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         resBuilder.setClanOwnerNew(mup);
       }
       
-      TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserId());
-      resEvent.setTag(event.getTag());
-      resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());  
-      server.writeClanEvent(resEvent, clanId);
+      if (!legitTransfer) {
+      	//if not successful write to guy
+    	  TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);      
+      }
       
       if (legitTransfer) {
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
+      	TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserId());
+      	resEvent.setTag(event.getTag());
+      	resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());  
+      	server.writeClanEvent(resEvent, clanId);
+      
       }
 
     } catch (Exception e) {
@@ -136,6 +139,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitTransfer(Builder resBuilder, boolean lockedClan, int userId,
   		User user, int newClanOwnerId, User newClanOwner, Map<Integer, UserClan> userClans) {
+
+  	if (!lockedClan) {
+  		log.error("couldn't obtain clan lock");
+  		return false;
+  	}
+  	
     if (user == null || newClanOwner == null) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
       log.error("user is " + user + ", new clan owner is " + newClanOwner);
@@ -169,7 +178,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  //TODO: FIX THIS
   private void writeChangesToDB(int clanId, List<Integer> userIdList,
   		List<UserClanStatus> statuses) {
   	//update clan for user table

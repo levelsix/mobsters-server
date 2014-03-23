@@ -15,9 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto;
@@ -81,9 +79,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     }
-    //MAYBE SHOULD LOCK THE playerToBootId INSTEAD OF userId
-    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-//    server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
     try {
     	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
       User user = users.get(userId);
@@ -106,16 +101,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       resEvent.setBootPlayerFromClanResponseProto(resBuilder.build()); 
 
       if (success) {
-      	server.writeClanEvent(resEvent, user.getClanId());
-        BootPlayerFromClanResponseEvent resEvent2 = new BootPlayerFromClanResponseEvent(playerToBootId);
-        resEvent2.setBootPlayerFromClanResponseProto(resBuilder.build()); //I think this is supposed to be resEvent2 not resEvent
-        server.writeEvent(resEvent2);
-
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-
+      	//if successful write to clan
+      	server.writeClanEvent(resEvent, clanId);
       } else {
+      	//write to user if fail
         server.writeEvent(resEvent);
       }
     } catch (Exception e) {
@@ -133,7 +122,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     	if (0 != clanId) {
     		getLocker().unlockClan(clanId);
     	}
-//    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
