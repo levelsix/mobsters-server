@@ -109,8 +109,9 @@ import com.lvl6.utils.RetrieveUtils;
 
           }
           if (grabType == ClanInfoGrabType.ALL || grabType == ClanInfoGrabType.MEMBERS) {
+          	log.info("getUserClansRelatedToClan clanId=" + clanId);
             List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToClan(clanId);
-            
+            log.info("user clans related to clanId:" + clanId + "\t " + userClans);
             Set<Integer> userIds = new HashSet<Integer>();
             //this is because clan with 1k+ users overflows buffer when sending to client and need to 
             //include clan owner
