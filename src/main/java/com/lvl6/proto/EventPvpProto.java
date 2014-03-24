@@ -1512,6 +1512,14 @@ public final class EventPvpProto {
     boolean hasEnemy();
     com.lvl6.proto.BattleProto.PvpProto getEnemy();
     com.lvl6.proto.BattleProto.PvpProtoOrBuilder getEnemyOrBuilder();
+    
+    // optional bool exactingRevenge = 5;
+    boolean hasExactingRevenge();
+    boolean getExactingRevenge();
+    
+    // optional int64 previousBattleEndTime = 6;
+    boolean hasPreviousBattleEndTime();
+    long getPreviousBattleEndTime();
   }
   public static final class BeginPvpBattleRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -1588,11 +1596,33 @@ public final class EventPvpProto {
       return enemy_;
     }
     
+    // optional bool exactingRevenge = 5;
+    public static final int EXACTINGREVENGE_FIELD_NUMBER = 5;
+    private boolean exactingRevenge_;
+    public boolean hasExactingRevenge() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public boolean getExactingRevenge() {
+      return exactingRevenge_;
+    }
+    
+    // optional int64 previousBattleEndTime = 6;
+    public static final int PREVIOUSBATTLEENDTIME_FIELD_NUMBER = 6;
+    private long previousBattleEndTime_;
+    public boolean hasPreviousBattleEndTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public long getPreviousBattleEndTime() {
+      return previousBattleEndTime_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       senderElo_ = 0;
       attackStartTime_ = 0L;
       enemy_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
+      exactingRevenge_ = false;
+      previousBattleEndTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1618,6 +1648,12 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, enemy_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, exactingRevenge_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, previousBattleEndTime_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -1642,6 +1678,14 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, enemy_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, exactingRevenge_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, previousBattleEndTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1785,6 +1829,10 @@ public final class EventPvpProto {
           enemyBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
+        exactingRevenge_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        previousBattleEndTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -1847,6 +1895,14 @@ public final class EventPvpProto {
         } else {
           result.enemy_ = enemyBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.exactingRevenge_ = exactingRevenge_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.previousBattleEndTime_ = previousBattleEndTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1874,6 +1930,12 @@ public final class EventPvpProto {
         }
         if (other.hasEnemy()) {
           mergeEnemy(other.getEnemy());
+        }
+        if (other.hasExactingRevenge()) {
+          setExactingRevenge(other.getExactingRevenge());
+        }
+        if (other.hasPreviousBattleEndTime()) {
+          setPreviousBattleEndTime(other.getPreviousBattleEndTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1932,6 +1994,16 @@ public final class EventPvpProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setEnemy(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              exactingRevenge_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              previousBattleEndTime_ = input.readInt64();
               break;
             }
           }
@@ -2160,6 +2232,48 @@ public final class EventPvpProto {
           enemy_ = null;
         }
         return enemyBuilder_;
+      }
+      
+      // optional bool exactingRevenge = 5;
+      private boolean exactingRevenge_ ;
+      public boolean hasExactingRevenge() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public boolean getExactingRevenge() {
+        return exactingRevenge_;
+      }
+      public Builder setExactingRevenge(boolean value) {
+        bitField0_ |= 0x00000010;
+        exactingRevenge_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearExactingRevenge() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        exactingRevenge_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 previousBattleEndTime = 6;
+      private long previousBattleEndTime_ ;
+      public boolean hasPreviousBattleEndTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public long getPreviousBattleEndTime() {
+        return previousBattleEndTime_;
+      }
+      public Builder setPreviousBattleEndTime(long value) {
+        bitField0_ |= 0x00000020;
+        previousBattleEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPreviousBattleEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        previousBattleEndTime_ = 0L;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginPvpBattleRequestProto)
@@ -4285,31 +4399,32 @@ public final class EventPvpProto {
       "ueueUpResponseProto.QueueUpStatus\"`\n\rQue",
       "ueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOU" +
       "GH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_GEMS\020\004\"\243\001\n\032BeginPvpBattleRequestPro" +
+      "OUGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestPro" +
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
       "mumUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017attac" +
       "kStartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com.lv" +
-      "l6.proto.PvpProto\"\362\001\n\033BeginPvpBattleResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022P\n\006status\030\002 \001(\0162@.co" +
-      "m.lvl6.proto.BeginPvpBattleResponseProto",
-      ".BeginPvpBattleStatus\"O\n\024BeginPvpBattleS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAIL" +
-      "ABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\322\001\n\030EndPvpBattleR" +
-      "equestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.p" +
-      "roto.MinimumUserProtoWithMaxResources\022\022\n" +
-      "\ndefenderId\030\002 \001(\005\022\024\n\014userAttacked\030\003 \001(\010\022" +
-      "\017\n\007userWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\t" +
-      "oilChange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\"\300\002\n\031" +
-      "EndPvpBattleResponseProto\022@\n\006sender\030\001 \001(" +
-      "\01320.com.lvl6.proto.MinimumUserProtoWithM",
-      "axResources\022\022\n\ndefenderId\030\002 \001(\005\022\030\n\020attac" +
-      "kerAttacked\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001(\010\022L" +
-      "\n\006status\030\t \001(\0162<.com.lvl6.proto.EndPvpBa" +
-      "ttleResponseProto.EndPvpBattleStatus\"P\n\022" +
-      "EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG\020\003B\017" +
-      "B\rEventPvpProto"
+      "l6.proto.PvpProto\022\027\n\017exactingRevenge\030\005 \001" +
+      "(\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033Be" +
+      "ginPvpBattleResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022P\n\006s",
+      "tatus\030\002 \001(\0162@.com.lvl6.proto.BeginPvpBat" +
+      "tleResponseProto.BeginPvpBattleStatus\"O\n" +
+      "\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
+      "IL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\322" +
+      "\001\n\030EndPvpBattleRequestProto\022@\n\006sender\030\001 " +
+      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
+      "hMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\024\n\014use" +
+      "rAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\nclie" +
+      "ntTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncashC" +
+      "hange\030\007 \001(\005\"\300\002\n\031EndPvpBattleResponseProt",
+      "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
+      "umUserProtoWithMaxResources\022\022\n\ndefenderI" +
+      "d\030\002 \001(\005\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013att" +
+      "ackerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl" +
+      "6.proto.EndPvpBattleResponseProto.EndPvp" +
+      "BattleStatus\"P\n\022EndPvpBattleStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_T" +
+      "OOK_TOO_LONG\020\003B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4337,7 +4452,7 @@ public final class EventPvpProto {
           internal_static_com_lvl6_proto_BeginPvpBattleRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginPvpBattleRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "SenderElo", "AttackStartTime", "Enemy", },
+              new java.lang.String[] { "Sender", "SenderElo", "AttackStartTime", "Enemy", "ExactingRevenge", "PreviousBattleEndTime", },
               com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto.class,
               com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto.Builder.class);
           internal_static_com_lvl6_proto_BeginPvpBattleResponseProto_descriptor =

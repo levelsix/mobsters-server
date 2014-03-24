@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,18 +54,21 @@ import com.lvl6.utils.DBConnection;
   	return null;
   	
   }
-
-  public static Map<Integer, QuestMonsterItem> getItemsForQuestId(int questId) {
-    log.debug("retrieve quest_monster_item data for questId " + questId);
-    if (questIdsToMonsterIdsToItems == null) {
-      setStaticQuestIdsToMonsterIdsToItems();      
-    }
-    return questIdsToMonsterIdsToItems.get(questId);
-  }
+  
+  //quest will have at most one row in quest_monster_item table.
+  //quest only has one static id table, so only one item.
+//  public static Map<Integer, QuestMonsterItem> getItemsForQuestId(int questId) {
+//    log.debug("retrieve quest_monster_item data for questId " + questId);
+//    if (questIdsToMonsterIdsToItems == null) {
+//      setStaticQuestIdsToMonsterIdsToItems();      
+//    }
+//    return questIdsToMonsterIdsToItems.get(questId);
+//  }
 
 
   private static void setStaticQuestIdsToMonsterIdsToItems() {
     log.debug("setting static map of quest ids to monster ids to items");
+    Random rand = new Random();
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -84,6 +88,8 @@ import com.lvl6.utils.DBConnection;
 			        if (qmi == null) {
 			          continue;
 			        }
+			        qmi.setRand(rand);
+			        
 			        
 			        int questId = qmi.getQuestId();
 			        //base case, no key with quest id exists, so create map with

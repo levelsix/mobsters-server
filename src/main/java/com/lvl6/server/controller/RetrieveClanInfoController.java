@@ -24,6 +24,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
@@ -94,26 +95,23 @@ import com.lvl6.utils.RetrieveUtils;
       if (legitCreate) {
         if (reqProto.hasClanName() || reqProto.hasClanId()) {
           if (grabType == ClanInfoGrabType.ALL || grabType == ClanInfoGrabType.CLAN_INFO) {
-            List<Clan> clans = null;
+            List<Clan> clanList = null;
             if (reqProto.hasClanName()) {
               // Can search for clan name or tag name
-              clans = ClanRetrieveUtils.getClansWithSimilarNameOrTag(clanName, clanName);
+            	clanList = ClanRetrieveUtils.getClansWithSimilarNameOrTag(clanName, clanName);
               resBuilder.setIsForSearch(true);
             } else if (reqProto.hasClanId()) {
               Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
-              clans = new ArrayList<Clan>();
-              clans.add(clan);
+              clanList = new ArrayList<Clan>();
+              clanList.add(clan);
             }
+            setClanProtosWithSize(resBuilder, clanList);
 
-            if (clans != null && clans.size() > 0) {
-              for (Clan c : clans) {
-                resBuilder.addClanInfo(CreateInfoProtoUtils.createFullClanProtoWithClanSize(c));
-              }
-            }
           }
           if (grabType == ClanInfoGrabType.ALL || grabType == ClanInfoGrabType.MEMBERS) {
+          	log.info("getUserClansRelatedToClan clanId=" + clanId);
             List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToClan(clanId);
-            
+            log.info("user clans related to clanId:" + clanId + "\t " + userClans);
             Set<Integer> userIds = new HashSet<Integer>();
             //this is because clan with 1k+ users overflows buffer when sending to client and need to 
             //include clan owner
@@ -170,17 +168,16 @@ import com.lvl6.utils.RetrieveUtils;
             
           }
         } else {
-          List<Clan> clans = null;
+          List<Clan> clanList = null;
           if (beforeClanId <= 0) {
-            clans = ClanRetrieveUtils.getMostRecentClans(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP);
+          	clanList = ClanRetrieveUtils.getMostRecentClans(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP);
           } else {
-            clans = ClanRetrieveUtils.getMostRecentClansBeforeClanId(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP, beforeClanId);
+          	clanList = ClanRetrieveUtils.getMostRecentClansBeforeClanId(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP, beforeClanId);
             resBuilder.setBeforeThisClanId(reqProto.getBeforeThisClanId());
           }
-
-          for (Clan clan : clans) {
-            resBuilder.addClanInfo(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
-          }
+          
+          log.info("clanList=" + clanList);
+          setClanProtosWithSize(resBuilder, clanList);
         }
       }
 
@@ -201,6 +198,29 @@ import com.lvl6.utils.RetrieveUtils;
     }
     resBuilder.setStatus(RetrieveClanInfoStatus.SUCCESS);
     return true;
+  }
+  
+  private  void setClanProtosWithSize(Builder resBuilder, List<Clan> clanList) {
+
+    if (null == clanList || clanList.isEmpty()) {
+    	return;
+    }
+    List<Integer> clanIds = ClanRetrieveUtils.getClanIdsFromClans(clanList);
+    
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+    statuses.add(UserClanStatus.CAPTAIN_VALUE);
+    statuses.add(UserClanStatus.MEMBER_VALUE);
+
+    Map<Integer, Integer> clanIdsToSizes = RetrieveUtils.userClanRetrieveUtils()
+    		.getClanSizeForClanIdsAndStatuses(clanIds, statuses);
+
+    for (Clan c : clanList) {
+    	int clanId = c.getId();
+    	int size = clanIdsToSizes.get(clanId);
+    	resBuilder.addClanInfo(CreateInfoProtoUtils.createFullClanProtoWithClanSize(c, size));
+    }
   }
   
   //clan raid contribution is calculated through summing all the clanCrDmg

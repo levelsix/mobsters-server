@@ -76,3 +76,11 @@ message FullUserQuestProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message ItemProto {
+	optional int32 itemId = 1;
+	optional string name = 2;
+	optional string imgName = 3;
+}
+
+//------------------------------------------------------------------------------------------

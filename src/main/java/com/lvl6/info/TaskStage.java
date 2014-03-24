@@ -8,14 +8,12 @@ public class TaskStage implements Serializable {
 	private int id;
 	private int taskId;
 	private int stageNum;
-	private float equipDropRate;
-
-	public TaskStage(int id, int taskId, int stageNum, float equipDropRate) {
+	
+	public TaskStage(int id, int taskId, int stageNum) {
 		super();
 		this.id = id;
 		this.taskId = taskId;
 		this.stageNum = stageNum;
-		this.equipDropRate = equipDropRate;
 	}
 
 	public int getId() {
@@ -42,18 +40,10 @@ public class TaskStage implements Serializable {
 		this.stageNum = stageNum;
 	}
 
-	public float getEquipDropRate() {
-		return equipDropRate;
-	}
-
-	public void setEquipDropRate(float equipDropRate) {
-		this.equipDropRate = equipDropRate;
-	}
-
 	@Override
 	public String toString() {
 		return "TaskStage [id=" + id + ", taskId=" + taskId + ", stageNum="
-				+ stageNum + ", equipDropRate=" + equipDropRate + "]";
+				+ stageNum + "]";
 	}
 
 }

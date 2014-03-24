@@ -6,8 +6,9 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
-
-	private static final long serialVersionUID = 8257261936373290005L;
+	
+	private static final long serialVersionUID = -2146666734261390147L;
+	
 	private int id;
 	private String name;
 	private String monsterGroup;
@@ -29,6 +30,11 @@ public class Monster implements Serializable {
 	private String description;
 	private int evolutionCost; //oil not cash
 	private String animationType;
+	private int verticalPixelOffset;
+	private String atkSoundFile;
+	private int atkSoundAnimationFrame;
+	private int atkAnimationRepeatedFramesStart;
+	private int atkAnimationRepeatedFramesEnd;
 	
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
@@ -37,7 +43,9 @@ public class Monster implements Serializable {
 			int evolutionCatalystMonsterId, int minutesToEvolve,
 			int numCatalystsRequired, String carrotRecruited, String carrotDefeated,
 			String carrotEvolved, String description, int evolutionCost,
-			String animationType) {
+			String animationType, int verticalPixelOffset, String atkSoundFile,
+			int atkSoundAnimationFrame, int atkAnimationRepeatedFramesStart,
+			int atkAnimationRepeatedFramesEnd) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,6 +68,11 @@ public class Monster implements Serializable {
 		this.description = description;
 		this.evolutionCost = evolutionCost;
 		this.animationType = animationType;
+		this.verticalPixelOffset = verticalPixelOffset;
+		this.atkSoundFile = atkSoundFile;
+		this.atkSoundAnimationFrame = atkSoundAnimationFrame;
+		this.atkAnimationRepeatedFramesStart = atkAnimationRepeatedFramesStart;
+		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
 	}
 
 	public int getId() {
@@ -230,6 +243,47 @@ public class Monster implements Serializable {
 		this.animationType = animationType;
 	}
 
+	public int getVerticalPixelOffset() {
+		return verticalPixelOffset;
+	}
+
+	public void setVerticalPixelOffset(int verticalPixelOffset) {
+		this.verticalPixelOffset = verticalPixelOffset;
+	}
+
+	public String getAtkSoundFile() {
+		return atkSoundFile;
+	}
+
+	public void setAtkSoundFile(String atkSoundFile) {
+		this.atkSoundFile = atkSoundFile;
+	}
+
+	public int getAtkSoundAnimationFrame() {
+		return atkSoundAnimationFrame;
+	}
+
+	public void setAtkSoundAnimationFrame(int atkSoundAnimationFrame) {
+		this.atkSoundAnimationFrame = atkSoundAnimationFrame;
+	}
+
+	public int getAtkAnimationRepeatedFramesStart() {
+		return atkAnimationRepeatedFramesStart;
+	}
+
+	public void setAtkAnimationRepeatedFramesStart(
+			int atkAnimationRepeatedFramesStart) {
+		this.atkAnimationRepeatedFramesStart = atkAnimationRepeatedFramesStart;
+	}
+
+	public int getAtkAnimationRepeatedFramesEnd() {
+		return atkAnimationRepeatedFramesEnd;
+	}
+
+	public void setAtkAnimationRepeatedFramesEnd(int atkAnimationRepeatedFramesEnd) {
+		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
@@ -244,7 +298,12 @@ public class Monster implements Serializable {
 				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
 				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
 				+ carrotEvolved + ", description=" + description + ", evolutionCost="
-				+ evolutionCost + ", animationType=" + animationType + "]";
+				+ evolutionCost + ", animationType=" + animationType
+				+ ", verticalPixelOffset=" + verticalPixelOffset + ", atkSoundFile="
+				+ atkSoundFile + ", atkSoundAnimationFrame=" + atkSoundAnimationFrame
+				+ ", atkAnimationRepeatedFramesStart="
+				+ atkAnimationRepeatedFramesStart + ", atkAnimationRepeatedFramesEnd="
+				+ atkAnimationRepeatedFramesEnd + "]";
 	}
 	
 }

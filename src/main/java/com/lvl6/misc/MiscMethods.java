@@ -29,15 +29,17 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
-import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
+import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.Obstacle;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -60,6 +62,7 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
+import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
@@ -75,11 +78,13 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
-import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MinimumObstacleProto;
+import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -98,6 +103,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -105,10 +111,12 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -146,6 +154,57 @@ public class MiscMethods {
   public static final String OIL = "OIL";
   public static final String MONSTER = "MONSTER";
 
+  
+  public static int calculateCashRewardFromPvpUser(User queuedOpponent) {
+		int cash = queuedOpponent.getCash();
+		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
+		
+		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
+		
+		return cashLost;
+	}
+  
+  //given bunch of users, calculate how much can be stolen from each user
+  public static Map<Integer, Integer> calculateCashRewardFromPvpUsers(
+  		Map<Integer, User> userIdsToUsers) {
+  	
+  	Map<Integer, Integer> userIdToCashReward = new HashMap<Integer, Integer>();
+  	
+  	for (Integer userId : userIdsToUsers.keySet()) {
+  		User user = userIdsToUsers.get(userId);
+  		int cashReward = calculateCashRewardFromPvpUser(user);
+  		
+  		userIdToCashReward.put(userId, cashReward);
+  	}
+  	
+  	return userIdToCashReward;
+  }
+  
+  
+  public static int calculateOilRewardFromPvpUser(User queuedOpponent) {
+		int oil = queuedOpponent.getOil();
+		int oilLost = (int) (ControllerConstants.PVP__PERCENT_OIL_LOST * oil);
+		
+		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
+		
+		return oilLost;
+	}
+  
+  //given bunch of users, calculate how much can be stolen from each user
+  public static Map<Integer, Integer> calculateOilRewardFromPvpUsers(
+  		Map<Integer, User> userIdsToUsers) {
+  	
+  	Map<Integer, Integer> userIdToOilReward = new HashMap<Integer, Integer>();
+  	
+  	for (Integer userId : userIdsToUsers.keySet()) {
+  		User user = userIdsToUsers.get(userId);
+  		int cashReward = calculateOilRewardFromPvpUser(user);
+  		
+  		userIdToOilReward.put(userId, cashReward);
+  	}
+  	
+  	return userIdToOilReward;
+  }
 
 
   public static Dialogue createDialogue(String dialogueBlob) {
@@ -294,7 +353,7 @@ public class MiscMethods {
       float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
       float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
 
-      TutorialStructProto tsp = createTutorialStructProto(structId, posX, posY);
+      TutorialStructProto tsp = CreateInfoProtoUtils.createTutorialStructProto(structId, posX, posY);
       tcb.addTutorialStructures(tsp);
     }
 
@@ -321,19 +380,24 @@ public class MiscMethods {
     tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
     tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
     tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+    
+    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
+    
+    int orientation = 1;
+    for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
+    	int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
+    	float posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
+    	float posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
+    	
+    	MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
+    			obstacleId, posX, posY, orientation);
+    	tcb.addTutorialObstacles(mopb);
+    	log.info("mopb=" + mopb);
+    }
+    
     return tcb.build();
   }
 
-  public static TutorialStructProto createTutorialStructProto(int structId, float posX,
-      float posY) {
-    TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
-
-    tspb.setStructId(structId);
-    CoordinatePair cp = new CoordinatePair(posX, posY);
-    CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
-    tspb.setCoordinate(cpp);
-    return tspb.build();
-  }
 
   public static StartupConstants createStartupConstantsProto(Globals globals) {
     StartupConstants.Builder cb = StartupConstants.newBuilder();
@@ -372,6 +436,7 @@ public class MiscMethods {
     clanConstantsBuilder.setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME);
     clanConstantsBuilder.setCoinPriceToCreateClan(ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
     clanConstantsBuilder.setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG);
+    clanConstantsBuilder.setMaxClanSize(ControllerConstants.CLAN__MAX_NUM_MEMBERS);
     cb.setClanConstants(clanConstantsBuilder.build());
 
 
@@ -421,6 +486,9 @@ public class MiscMethods {
     
     MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
     cb.setMiniTuts(miniTuts);
+    
+    cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
+    cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -610,6 +678,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
+    ClanIconRetrieveUtils.reload();
     ClanEventPersistentRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
     ClanRaidStageRetrieveUtils.reload();
@@ -618,12 +687,13 @@ public class MiscMethods {
     EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
+    ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
-    //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
-    //    getMonsterForPvpRetrieveUtils().reload();
+//    MonsterForPvpRetrieveUtils.staticReload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
+    ObstacleRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     QuestMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
@@ -1312,6 +1382,9 @@ public class MiscMethods {
     setEvents(sdpb);
     setMonsterDialogue(sdpb);
     setClanRaidStuff(sdpb);
+    setItemStuff(sdpb);
+    setObstacleStuff(sdpb);
+    setClanIconStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1599,5 +1672,38 @@ public class MiscMethods {
     }
     sdpb.addAllPersistentClanEvents(clanEventProtos);
   }
+  
+  private static void setItemStuff(Builder sdpb) {
+  	Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
+  	
+  	for (Item i : itemIdsToItems.values()) {
+  		ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
+  		sdpb.addItems(itemProto);
+  	}
+  	
+  }
 
+  private static void setObstacleStuff(Builder sdpb) {
+  	Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
+  			.getObstacleIdsToObstacles();
+  	
+  	for (Obstacle o : idsToObstacles.values()) {
+  		ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
+  		sdpb.addObstacles(op);
+  	}
+  }
+  
+  private static void setClanIconStuff(Builder sdpb) {
+  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
+  	
+  	if (null == clanIconIdsToClanIcons) {
+  		return;
+  	}
+  	
+  	for (ClanIcon ci : clanIconIdsToClanIcons.values()) {
+  		ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
+  		sdpb.addClanIcons(cip);
+  	}
+  	
+  }
 }

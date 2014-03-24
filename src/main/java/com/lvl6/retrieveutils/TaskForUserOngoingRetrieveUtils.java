@@ -81,6 +81,7 @@ import com.lvl6.utils.DBConnection;
     
     int expGained = rs.getInt(i++);
     int cashGained = rs.getInt(i++);
+    int oilGained = rs.getInt(i++);
     int numRevives = rs.getInt(i++);
     
     Date startDate = null;
@@ -94,6 +95,6 @@ import com.lvl6.utils.DBConnection;
     }
     
     return new TaskForUserOngoing(id, userId, taskId, expGained, cashGained,
-    		numRevives, startDate);
+    		oilGained, numRevives, startDate);
   }
 }

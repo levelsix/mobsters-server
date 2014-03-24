@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = -2028245139354358493L;
+	private static final long serialVersionUID = -8159939137604127481L;
+	
 	private long id;
 	private long userTaskId;
 	private int stageNum;
@@ -12,12 +13,14 @@ public class TaskStageForUser implements Serializable {
 	private String monsterType;
 	private int expGained;
 	private int cashGained;
+	private int oilGained;
 	private boolean monsterPieceDropped;
 	private int itemIdDropped;
 	
 	public TaskStageForUser(long id, long userTaskId, int stageNum,
 			int taskStageMonsterId, String monsterType, int expGained,
-			int cashGained, boolean monsterPieceDropped, int itemIdDropped) {
+			int cashGained, int oilGained, boolean monsterPieceDropped,
+			int itemIdDropped) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
@@ -26,6 +29,7 @@ public class TaskStageForUser implements Serializable {
 		this.monsterType = monsterType;
 		this.expGained = expGained;
 		this.cashGained = cashGained;
+		this.oilGained = oilGained;
 		this.monsterPieceDropped = monsterPieceDropped;
 		this.itemIdDropped = itemIdDropped;
 	}
@@ -86,6 +90,14 @@ public class TaskStageForUser implements Serializable {
 		this.cashGained = cashGained;
 	}
 
+	public int getOilGained() {
+		return oilGained;
+	}
+
+	public void setOilGained(int oilGained) {
+		this.oilGained = oilGained;
+	}
+
 	public boolean isMonsterPieceDropped() {
 		return monsterPieceDropped;
 	}
@@ -107,8 +119,9 @@ public class TaskStageForUser implements Serializable {
 		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
 				+ ", stageNum=" + stageNum + ", taskStageMonsterId="
 				+ taskStageMonsterId + ", monsterType=" + monsterType + ", expGained="
-				+ expGained + ", cashGained=" + cashGained + ", monsterPieceDropped="
-				+ monsterPieceDropped + ", itemIdDropped=" + itemIdDropped + "]";
+				+ expGained + ", cashGained=" + cashGained + ", oilGained=" + oilGained
+				+ ", monsterPieceDropped=" + monsterPieceDropped + ", itemIdDropped="
+				+ itemIdDropped + "]";
 	}
 	
 }

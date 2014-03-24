@@ -13,6 +13,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 
@@ -68,14 +69,14 @@ public interface InsertUtil {
 	// returns -1 if error
 	public abstract int insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
-			boolean activateShield, Timestamp createTime, String rank, String facebookId,
-			Timestamp shieldEndTime);
+			Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 
 //	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
-	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean requestToJoinRequired);
+	public abstract int insertClan(String name, Timestamp createTime, String description,
+			String tag, boolean requestToJoinRequired, int clanIconId);
 
 	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
 
@@ -108,10 +109,10 @@ public interface InsertUtil {
 			List<Date> timeOfPosts);
 
 	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
-			int expGained, int silverGained, Timestamp startTime); 
+			int expGained, int cashGained, int oilGained, Timestamp startTime); 
 
 	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
-			int taskId, int expGained, int silverGained, int numRevives,
+			int taskId, int expGained, int cashGained, int oilGained,int numRevives,
 			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
 	
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
@@ -122,13 +123,14 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
-			Map<Integer, List<Integer>> taskStageMonsterIdToItemId);
+			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			Map<Integer, Integer> taskStageMonsterIdToItemId);
 	
 	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> monsterIds,
-			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
-			List<Boolean> monsterPiecesDropped, List<Integer> itemIdDropped);
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
+			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> itemIdDropped);
 	
 	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);
@@ -175,5 +177,13 @@ public interface InsertUtil {
 	
 	public abstract List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
 			Timestamp crsEndTime, int clanEventId, List<ClanEventPersistentUserReward> userRewards);
+
+	public abstract int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
+			int defenderEloChange, int attackerOilChange, int defenderOilChange,
+			int attackerCashChange, int defenderCashChange, boolean attackerWon,
+			boolean cancelled, boolean gotRevenge, boolean displayToDefender);
 	
+	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+			List<ObstacleForUser> ofuList);
 }

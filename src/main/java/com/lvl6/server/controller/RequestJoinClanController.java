@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -32,11 +33,13 @@ import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
+import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -46,6 +49,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @Component @DependsOn("gameServer") public class RequestJoinClanController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
   public RequestJoinClanController() {
     numAllocatedThreads = 4;
@@ -67,21 +79,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     MinimumUserProto senderProto = reqProto.getSender();
     int clanId = reqProto.getClanId();
+    int userId = senderProto.getUserId();
 
     RequestJoinClanResponseProto.Builder resBuilder = RequestJoinClanResponseProto.newBuilder();
+    resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     resBuilder.setClanId(clanId);
 
+    boolean lockedClan = false;
     if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	lockedClan = getLocker().lockClan(clanId);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
-      boolean legitRequest = checkLegitRequest(resBuilder, user, clan);
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, user, clan);
       
       boolean requestToJoinRequired = clan.isRequestToJoinRequired();
       
@@ -89,10 +102,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (legitRequest) {
         //setting minimum user proto for clans based on clan join type
         if (requestToJoinRequired) {
+        	//clan raid contribution stuff
           MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
               user, UserClanStatus.REQUESTING, 0F);
           resBuilder.setRequester(mupfc);
         } else {
+        	//clan raid contribution stuff
           MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
               user, UserClanStatus.MEMBER, 0F);
           resBuilder.setRequester(mupfc);
@@ -101,8 +116,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
       if (successful) {
-        resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
-        resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
+      	setResponseBuilderStuff(resBuilder, clanId, clan);
         sendClanRaidStuff(resBuilder, clan, user);
       }
       RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
@@ -117,6 +131,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.writeEvent(resEvent);
       
       if (successful) {
+      	List<Integer> userIds = new ArrayList<Integer>();
+      	userIds.add(userId);
+      	//get user's current monster team
+      	Map<Integer, List<MonsterForUser>> userIdToTeam = RetrieveUtils
+      			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds); 
+      	UserCurrentMonsterTeamProto curTeamProto = CreateInfoProtoUtils
+      			.createUserCurrentMonsterTeamProto(userId, userIdToTeam.get(userId));
+      	resBuilder.setRequesterMonsters(curTeamProto);
+      	
+      	
       	resBuilder.clearEventDetails(); //could just get rid of this line
       	resBuilder.clearClanUsersDetails(); //could just get rid of this line
       	resEvent.setRequestJoinClanResponseProto(resBuilder.build());
@@ -129,28 +153,44 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
       }
     } catch (Exception e) {
-      log.error("exception in RequestJoinClan processEvent", e);
+    	log.error("exception in RequestJoinClan processEvent", e);
+      try {
+    	  resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+    	  RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in RequestJoinClan processEvent", e);
+    	}
     } finally {
     	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		getLocker().unlockClan(clanId);
     	}
     }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, User user, Clan clan) {
-    int clanId = clan.getId();
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, User user,
+  		Clan clan) {
+  	
+  	if (!lockedClan) {
+  		log.error("couldn't obtain clan lock");
+  		return false;
+  	}
     if (user == null || clan == null) {
-      resBuilder.setStatus(RequestJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", clan is " + clan);
       return false;      
     }
-    if (user.getClanId() > 0) {
-      resBuilder.setStatus(RequestJoinClanStatus.ALREADY_IN_CLAN);
-      log.error("user is already in clan with id " + user.getClanId());
+    int clanId = user.getClanId();
+    if (clanId > 0) {
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
+      log.error("user is already in clan with id " + clanId);
       return false;      
     }
+    
+    //user does not have clan id, so use the clan's id
+    clanId = clan.getId();
 //    if (clan.isGood() != MiscMethods.checkIfGoodSide(user.getType())) {
 //      resBuilder.setStatus(RequestJoinClanStatus.WRONG_SIDE);
 //      log.error("user is good " + user.getType() + ", user type is good " + user.getType());
@@ -158,7 +198,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    }
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clanId);
     if (uc != null) {
-      resBuilder.setStatus(RequestJoinClanStatus.REQUEST_ALREADY_FILED);
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_REQUEST_ALREADY_FILED);
       log.error("user clan already exists for this: " + uc);
       return false;      
     }
@@ -167,11 +207,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
       return true;
     }
-    List<UserClan> ucs = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId);
+    
+    //can request as much as desired
+    if (clan.isRequestToJoinRequired()) {
+    	return true;
+    }
+    
+    //check out the size of the clan since user can just join
+    
+    List<Integer> clanIdList = new ArrayList<Integer>();
+    clanIdList.add(clanId);
+    List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+  	int size = clanIdToSize.get(clanId);
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
-    if (ucs.size() >= maxSize) {
-      resBuilder.setStatus(RequestJoinClanStatus.CLAN_IS_FULL);
-      log.warn("user error: trying to join full clan with id " + clanId);
+    if (size >= maxSize) {
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_CLAN_IS_FULL);
+      log.warn("user error: trying to join full clan with id " + clanId +
+      		" cur size=" + maxSize);
       return false;      
     }
     //resBuilder.setStatus(RequestJoinClanStatus.SUCCESS);
@@ -186,15 +245,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     UserClanStatus userClanStatus;
     if (requestToJoinRequired) {
       userClanStatus = UserClanStatus.REQUESTING;
-      resBuilder.setStatus(RequestJoinClanStatus.REQUEST_SUCCESS);
+      resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_REQUEST);
     } else {
       userClanStatus = UserClanStatus.MEMBER;
-      resBuilder.setStatus(RequestJoinClanStatus.JOIN_SUCCESS);
+      resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_JOIN);
     }
     
     if (!InsertUtils.get().insertUserClan(userId, clanId, userClanStatus, new Timestamp(new Date().getTime()))) {
       log.error("unexpected error: problem with inserting user clan data for user " + user + ", and clan id " + clanId);
-      resBuilder.setStatus(RequestJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
       return false;
     } 
     
@@ -220,7 +279,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (!DeleteUtils.get().deleteUserClan(userId, clanId)){
         log.error("unexpected error: could not delete user clan inserted.");
       }
-      resBuilder.setStatus(RequestJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
       successful = false;
     }
     return successful;
@@ -261,8 +320,25 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    server.writeAPNSNotificationOrEvent(aNotification);
   }
   
+  private void setResponseBuilderStuff(Builder resBuilder, int clanId, Clan clan) {
+  	List<Integer> clanIdList = new ArrayList<Integer>();
+  	clanIdList.add(clanId);
+  	List<Integer> statuses = new ArrayList<Integer>();
+  	statuses.add(UserClanStatus.LEADER_VALUE);
+  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  	
+    resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
+    
+    int size = clanIdToSize.get(clanId);
+    resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
+  }
+  
   private void sendClanRaidStuff(Builder resBuilder, Clan clan, User user) {
-  	if (!RequestJoinClanStatus.JOIN_SUCCESS.equals(resBuilder.getStatus())) {
+  	if (!RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus())) {
   		return;
   	}
   	

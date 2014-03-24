@@ -24,6 +24,7 @@ message LoadPlayerCityResponseProto {
 	repeated FullUserStructureProto ownerNormStructs = 4;
 
 	repeated UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
+	repeated UserObstacleProto obstacles = 6;
      
     enum LoadPlayerCityStatus {
      	SUCCESS = 1;

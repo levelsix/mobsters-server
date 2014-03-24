@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -202,7 +203,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return user;
   }
 
-  public Map<Integer, User> getUsersByIds(List<Integer> userIds) {
+  public Map<Integer, User> getUsersByIds(Collection<Integer> userIds) {
     log.debug("retrieving users with userIds " + userIds);
     
     if (userIds == null || userIds.size() <= 0 ) {
@@ -256,7 +257,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   public List<User> getUsers(int numUsers, int playerLevel, int userId, boolean guaranteeNum, 
       boolean realPlayersOnly, boolean fakePlayersOnly, boolean offlinePlayersOnly,
-      boolean inactiveShield, List<Integer> forbiddenPlayerIds) {
+      boolean inactiveShield, Timestamp shieldEndTime, List<Integer> forbiddenPlayerIds) {
     log.debug("retrieving list of users for user " + userId + " with " + 
         numUsers + " users " + " around player level " + playerLevel + ", guaranteeNum="+guaranteeNum);
 
@@ -302,8 +303,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     } 
     
     if (inactiveShield) {
-      query += DBConstants.USER__HAS_ACTIVE_SHIELD + "=? and ";
-      values.add(false);
+      query += DBConstants.USER__SHIELD_END_TIME + " < ? and ";
+      values.add(shieldEndTime);
     }
 
     query += DBConstants.USER__LEVEL + ">=? and " + DBConstants.USER__LEVEL + "<=? ";
@@ -566,7 +567,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //trying to improve elo range calculation readability
     int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
     		
-    absoluteConditionParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
+//    absoluteConditionParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
     relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
     relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
     Timestamp timestamp = new Timestamp(clientTime.getTime());
@@ -707,14 +708,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
     
-    Date lastTimeQueued = null;
+    Date inBattleEndTime = null;
     try {
     	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
-    		lastTimeQueued = new Date(ts.getTime());
+    		inBattleEndTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("db error: last_time_queued not set. user_id=" + id);
+    	log.error("db error: in_battle_end_time not set. user_id=" + id);
     }
     
     int attacksWon = rs.getInt(i++);
@@ -726,6 +727,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
     String gameCenterId = rs.getString(i++);
     String udid = rs.getString(i++);
+    Date lastObstacleSpawnedTime = null;
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastObstacleSpawnedTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_obstacle_spawned_time");
+    }
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
@@ -734,9 +744,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		apsalarId, numCoinsRetrievedFromStructs, numOilRetrievedFromStructs,
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
     		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
-    		hasActiveShield, shieldEndTime, elo, rank, lastTimeQueued,
+    		hasActiveShield, shieldEndTime, elo, rank, inBattleEndTime,
     		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
-    		fbIdSetOnUserCreate, gameCenterId, udid);
+    		fbIdSetOnUserCreate, gameCenterId, udid, lastObstacleSpawnedTime);
     return user;
   }
  

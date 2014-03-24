@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.lvl6.utils.utilmethods.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -223,6 +224,56 @@ import com.lvl6.utils.DBConnection;
 		//should not be null and should be a list object
     return userIds;
   }
+  
+  public Map<Integer, Integer> getClanSizeForClanIdsAndStatuses(List<Integer> clanIds,
+  		List<Integer> statuses) {
+  	StringBuilder querySb = new StringBuilder();
+  	querySb.append("SELECT ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    querySb.append(", count(*) FROM ");
+    querySb.append(TABLE_NAME);
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    querySb.append(" in (");
+    int numQuestionMarks = clanIds.size();
+    List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+    String questionMarkStr = StringUtils.csvList(questionMarks);
+    querySb.append(questionMarkStr);
+    querySb.append(") and ");
+    
+    querySb.append(DBConstants.CLAN_FOR_USER__STATUS);
+    querySb.append(" in (");
+    
+    numQuestionMarks = statuses.size();
+    questionMarks = Collections.nCopies(numQuestionMarks, "?");
+    questionMarkStr = StringUtils.csvList(questionMarks);
+    querySb.append(questionMarkStr);
+    querySb.append(") group by ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    
+    List<Object> values = new ArrayList<Object>();
+    values.addAll(clanIds);
+    values.addAll(statuses);
+    
+    String query = querySb.toString();
+    log.info("user clan size query=" + query + "\t values=" + values);
+    
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, Integer> clanIdsToSize = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			clanIdsToSize = convertRSToClanIdToSize(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    	clanIdsToSize = new HashMap<Integer, Integer>();
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+		//should not be null and should be a list object
+    return clanIdsToSize;
+  }
 
   private UserClan grabUserClanFromRS(ResultSet rs) {
     if (rs != null) {
@@ -310,6 +361,28 @@ import com.lvl6.utils.DBConnection;
   		}
   	}
   	return userIdsToStatuses;
+  }
+  
+  private Map<Integer, Integer> convertRSToClanIdToSize(ResultSet rs) {
+  	Map<Integer, Integer> clanIdToSize = new HashMap<Integer, Integer>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			
+  			while(rs.next()) {
+  				int i = 1;
+  				int clanId = rs.getInt(i++);
+  				int size = rs.getInt(i++);
+  				clanIdToSize.put(clanId, size);
+  				
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+
+  		}
+  	}
+  	return clanIdToSize;
   }
 
   /*

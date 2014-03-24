@@ -21,6 +21,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_CLAN_ICON = "clan_icon";
 	public static final String TABLE_CLAN_RAID = "clan_raid";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER = "clan_raid_stage_monster";
@@ -49,8 +50,11 @@ public class DBConstants {
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
+  public static final String TABLE_OBSTACLE = "obstacle";
+  public static final String TABLE_OBSTACLE_FOR_USER = "obstacle_for_user";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
+  public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
@@ -116,12 +120,13 @@ public class DBConstants {
   
   /*CLANS*/
   public static final String CLANS__ID = "id";
-  public static final String CLANS__OWNER_ID = "owner_id";
+//  public static final String CLANS__OWNER_ID = "owner_id";
   public static final String CLANS__NAME = "name";
   public static final String CLANS__CREATE_TIME = "create_time";
   public static final String CLANS__DESCRIPTION = "description";
   public static final String CLANS__TAG = "tag";
   public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
+  public static final String CLANS__CLAN_ICON_ID = "clan_icon_id";  
   
   /*CLAN_CHAT_POSTS*/
   public static final String CLAN_CHAT_POST__ID = GENERIC__ID;
@@ -345,6 +350,15 @@ public class DBConstants {
   public static final String MONSTER_HEALING_HISTORY__QUEUED_TIME = "queued_time";
   public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
   public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
+  
+  /*OBSTACLE FOR USER */
+  public static final String OBSTACLE_FOR_USER__ID = GENERIC__ID;
+  public static final String OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String OBSTACLE_FOR_USER__OBSTACLE_ID = "obstacle_id";
+  public static final String OBSTACLE_FOR_USER__XCOORD = "xcoord";
+  public static final String OBSTACLE_FOR_USER__YCOORD = "ycoord";
+  public static final String OBSTACLE_FOR_USER__REMOVAL_TIME = "removal_time";
+  public static final String OBSTACLE_FOR_USER__ORIENTATION = "orientation";
 
   /*PVP BATTLE HISTORY*/
   public static final String PVP_BATTLE_FOR_USER__ATTACKER_ID = "attacker_id";
@@ -354,6 +368,22 @@ public class DBConstants {
   public static final String PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE = "attacker_lose_elo_change";
   public static final String PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE = "defender_win_elo_change";
   public static final String PVP_BATTLE_FOR_USER__BATTLE_START_TIME = "battle_start_time";
+
+  /*PVP BATTLE HISTORY*/
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ID = "defender_id";
+  public static final String PVP_BATTLE_HISTORY__BATTLE_END_TIME = "battle_end_time";
+  public static final String PVP_BATTLE_HISTORY__BATTLE_START_TIME = "battle_start_time";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE = "attacker_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE = "defender_elo_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE = "attacker_cash_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE = "defender_cash_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE = "attacker_oil_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE = "defender_oil_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
+  public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
+  public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
+  public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
@@ -386,7 +416,8 @@ public class DBConstants {
   public static final String TASK_FOR_USER_ONGOING__USER_ID = GENERIC__USER_ID;
   public static final String TASK_FOR_USER_ONGOING__TASK_ID = "task_id";
   public static final String TASK_FOR_USER_ONGOING__EXP_GAINED = "exp_gained";
-  public static final String TASK_FOR_USER_ONGOING__SILVER_GAINED = "silver_gained";
+  public static final String TASK_FOR_USER_ONGOING__CASH_GAINED = "cash_gained";
+  public static final String TASK_FOR_USER_ONGOING__OIL_GAINED = "oil_gained";
   public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
   public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 
@@ -400,7 +431,8 @@ public class DBConstants {
   public static final String TASK_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String TASK_HISTORY__TASK_ID = "task_id";
   public static final String TASK_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String TASK_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_HISTORY__CASH_GAINED = "cash_gained";
+  public static final String TASK_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_HISTORY__NUM_REVIVES = "num_revives";
   public static final String TASK_HISTORY__START_TIME = "start_time";
   public static final String TASK_HISTORY__END_TIME = "end_time";
@@ -411,10 +443,13 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;
   public static final String TASK_STAGE_FOR_USER__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_FOR_USER__STAGE_NUM = "stage_num";
+  //primary key in task stage monster table, if monster id then would be
+  //task stage monster monster id
   public static final String TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID = "task_stage_monster_id";
   public static final String TASK_STAGE_FOR_USER__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_FOR_USER__EXP_GAINED = "exp_gained";
-  public static final String TASK_STAGE_FOR_USER__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_FOR_USER__CASH_GAINED = "cash_gained";
+  public static final String TASK_STAGE_FOR_USER__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   
@@ -426,7 +461,8 @@ public class DBConstants {
   //not needed since task stage monster now has monster_type
   public static final String TASK_STAGE_HISTORY__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_HISTORY__CASH_GAINED = "cash_gained";
+  public static final String TASK_STAGE_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   
@@ -488,7 +524,6 @@ public class DBConstants {
   public static final String USER__HAS_RECEIVED_FB_REWARD = "has_received_fb_reward";
 //  public static final String USER__NUM_ADDITIONAL_MONSTER_SLOTS = "num_additional_monster_slots";
   public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
-  public static final String USER__HAS_ACTIVE_SHIELD = "has_active_shield";
   public static final String USER__SHIELD_END_TIME = "shield_end_time";
   public static final String USER__ELO = "elo";
   public static final String USER__RANK = "rank";
@@ -502,7 +537,7 @@ public class DBConstants {
   public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
   public static final String USER__GAME_CENTER_ID = "game_center_id";  
   public static final String USER__UDID = "udid";
-  
+  public static final String USER__LAST_OBSTACLE_SPAWNED_TIME = "last_obstacle_spawned_time";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

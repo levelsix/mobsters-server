@@ -10,6 +10,9 @@ option java_outer_classname = "EventPvpProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 
+///atm, the necessary non event protos for pvp are in Battle.proto
+
+
 
 // A real or a fake player will be returned by this event.
 // SOME BACKGROUND: 
@@ -63,6 +66,14 @@ message BeginPvpBattleRequestProto {
 	
 	//this is the enemy that the user wants to fight
 	optional PvpProto enemy = 4;
+	
+	//for exacting revenge, need to update a history table to prevent user from 
+	//exacting revenge again
+	optional bool exactingRevenge = 5;
+	
+	//the battle that allowed sender to start this revenge battle
+	//where sender was the defender and enemy was the attacker
+	optional int64 previousBattleEndTime = 6; 
 }
 
 message BeginPvpBattleResponseProto {
@@ -93,12 +104,11 @@ message EndPvpBattleRequestProto {
 	optional int64 clientTime = 5;
 	
 	//positive means reward attacker. don't forsee being negative 
-	//	however, the values will be negative for the defender,
-	//	attacker's oil will change by "oilChange" and
-	//	defender's oil will change by "-1*oilChange" same with cash
 	//If attacker loses, then these are 0
+	//THESE ARE THE RAW VALUES THAT THE DEFENDER LOSES
 	optional int32 oilChange = 6;
 	optional int32 cashChange = 7;
+	
 }
 
 message EndPvpBattleResponseProto {
@@ -125,4 +135,6 @@ message EndPvpBattleResponseProto {
 		FAIL_BATTLE_TOOK_TOO_LONG = 3;
 	}
 }
+
+///atm, the necessary non event protos for pvp are in Battle.proto
 

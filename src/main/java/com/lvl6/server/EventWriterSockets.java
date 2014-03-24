@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.Message;
 import org.springframework.integration.message.GenericMessage;
@@ -148,6 +149,16 @@ public class EventWriterSockets extends EventWriter implements HazelcastInstance
 			log.info("Sending response to clan: {}  member: {}", uc.getClanId(), uc.getUserId());
 			sendMessageToPlayer(e, buff.duplicate(), uc.getUserId());
 		}
+	}
+	
+	@Override
+	public void processPreDBFacebookEvent(ResponseEvent event, String facebookId) {
+		//log.info("writer received predb event=\n"+event.toString());
+//		ByteBuffer bytes = getBytes(event);
+//		MessageProperties msgProps = getProps();
+//		String routingKey = "client_facebookid_" + facebookId;
+//		log.debug("writing predb event with type=" + event.getEventType() + " to player with routingKey "+ routingKey + ", event=" + event);
+//		sendMessageToPlayer(buff, msgProps, routingKey);
 	}
 
 	public void processPreDBResponseEvent(ResponseEvent event, String udid) {

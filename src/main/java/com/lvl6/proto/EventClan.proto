@@ -16,22 +16,31 @@ message CreateClanRequestProto {
 	optional string tag = 3;
 	optional bool requestToJoinClanRequired = 4;
 	optional string description = 5;
+	optional int32 clanIconId = 6;
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 7;
+	
+	//positive means refund, negative means charge user
+	optional sint32 cashChange = 8;
 }
 
 message CreateClanResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional CreateClanStatus status = 2;
-	optional MinimumClanProto clanInfo = 3;
+	optional MinimumClanProto clanInfo = 3;	
 	
 	enum CreateClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_ENOUGH_COINS = 3;
-		NAME_TAKEN = 4;
-		ALREADY_IN_CLAN = 5;
-		INVALID_TAG_LENGTH = 6;
-		TAG_TAKEN = 7;
-	}	
+		FAIL_OTHER = 2;
+		FAIL_NOT_ENOUGH_CASH = 3;
+		FAIL_NAME_TAKEN = 4;
+		FAIL_ALREADY_IN_CLAN = 5;
+		FAIL_INVALID_TAG_LENGTH = 6;
+		FAIL_TAG_TAKEN = 7;
+		FAIL_INSUFFICIENT_FUNDS = 8;
+	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -74,13 +83,15 @@ message RequestJoinClanResponseProto {
 	optional PersistentClanEventClanInfoProto eventDetails = 7;
 	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
+	optional UserCurrentMonsterTeamProto requesterMonsters = 9;
+	
 	enum RequestJoinClanStatus {
-		REQUEST_SUCCESS = 1;
-		OTHER_FAIL = 2;
-		ALREADY_IN_CLAN = 3;
-		REQUEST_ALREADY_FILED = 4;
-		JOIN_SUCCESS = 5;
-		CLAN_IS_FULL = 6;
+		SUCCESS_REQUEST = 1;
+		SUCCESS_JOIN = 2;
+		FAIL_ALREADY_IN_CLAN = 3;
+		FAIL_REQUEST_ALREADY_FILED = 4;
+		FAIL_CLAN_IS_FULL = 5;
+		FAIL_OTHER = 6;
 	}	
 }
 
@@ -116,7 +127,7 @@ message ApproveOrRejectRequestToJoinClanRequestProto {
 message ApproveOrRejectRequestToJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional ApproveOrRejectRequestToJoinClanStatus status = 2;
-	optional int32 requesterId = 3;
+	optional MinimumUserProto requester = 3;
 	optional bool accept = 4;
 	optional MinimumClanProto minClan = 5;
 	optional FullClanProtoWithClanSize fullClan = 6;
@@ -127,6 +138,7 @@ message ApproveOrRejectRequestToJoinClanResponseProto {
 		FAIL_NOT_AUTHORIZED = 3;
 		FAIL_NOT_A_REQUESTER = 4;
 		FAIL_ALREADY_IN_A_CLAN = 5;
+		FAIL_CLAN_IS_FULL = 6;
 	}	
 }
 
@@ -170,7 +182,7 @@ message RetrieveClanInfoResponseProto {
 
 message TransferClanOwnershipRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 newClanOwnerId = 2;
+	optional int32 clanOwnerIdNew = 2;
 }
 
 message TransferClanOwnershipResponseProto {
@@ -179,34 +191,13 @@ message TransferClanOwnershipResponseProto {
 	optional MinimumClanProto minClan = 3;
 	optional FullClanProtoWithClanSize fullClan = 4;
 	
+	optional MinimumUserProto clanOwnerNew = 5;
+	
 	enum TransferClanOwnershipStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 		FAIL_NOT_AUTHORIZED = 3;
 		FAIL_NEW_OWNER_NOT_IN_CLAN = 4;
-	}	
-}
-
-//------------------------------------------------------------------------------------------
-
-message ChangeClanDescriptionRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional string description = 2;
-}
-
-message ChangeClanDescriptionResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional ChangeClanDescriptionStatus status = 2;
-	optional MinimumClanProto minClan = 3;
-	optional FullClanProtoWithClanSize fullClan = 4;
-	
-	
-	enum ChangeClanDescriptionStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_TOO_LONG = 3;
-		FAIL_NOT_IN_CLAN = 4;
-		FAIL_NOT_AUTHORIZED = 5;
 	}	
 }
 
@@ -219,7 +210,7 @@ message BootPlayerFromClanRequestProto {
 
 message BootPlayerFromClanResponseProto {
      optional MinimumUserProto sender = 1;
-	 optional int32 playerToBoot = 2;
+	 optional MinimumUserProto playerToBoot = 2;
 	 optional BootPlayerFromClanStatus status = 3;
      
      enum BootPlayerFromClanStatus {
@@ -230,26 +221,38 @@ message BootPlayerFromClanResponseProto {
      }
 }
 
-//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 
-message ChangeClanJoinTypeRequestProto {
-	//from an open (no request to join necessary) to request to join necessary
+//cramming change clan description and change clan join type and change clan icon
+//send to all clan members
+message ChangeClanSettingsRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional bool requestToJoinRequired = 2;
+	
+	optional bool isChangeDescription = 2;
+	optional string descriptionNow = 3;
+	
+	//from an open (no request to join necessary) to request to join necessary
+	optional bool isChangeJoinType = 4;
+	optional bool requestToJoinRequired = 5;
+	
+	optional bool isChangeIcon = 6;
+	optional int32 iconId = 7;
 }
 
-message ChangeClanJoinTypeResponseProto {
+message ChangeClanSettingsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ChangeClanJoinTypeStatus status = 2;
+	optional ChangeClanSettingsStatus status = 2;
+	
 	optional MinimumClanProto minClan = 3;
 	optional FullClanProtoWithClanSize fullClan = 4;
 	
-	enum ChangeClanJoinTypeStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
+	enum ChangeClanSettingsStatus {
+		SUCCESS = 1; //if all requested changes succeed 
+		FAIL_NOT_AUTHORIZED = 2;
 		FAIL_NOT_IN_CLAN = 3;
-		FAIL_NOT_OWNER = 4;
-	}
+		FAIL_OTHER = 4; //if one requested change fails, but server still process all of them
+	}	
+	
 }
 
 //------------------------------------------------------------------------------------------
@@ -388,8 +391,9 @@ message PromoteDemoteClanMemberRequestProto {
 
 message PromoteDemoteClanMemberResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 victimId = 2;
+	optional MinimumUserProto victim = 2;
 	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
+	optional UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
 	
 	optional PromoteDemoteClanMemberStatus status = 4;
 	

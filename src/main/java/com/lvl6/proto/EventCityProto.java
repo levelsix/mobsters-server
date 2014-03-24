@@ -525,6 +525,16 @@ public final class EventCityProto {
         getUserCityExpansionDataProtoListOrBuilderList();
     com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder getUserCityExpansionDataProtoListOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
+    java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> 
+        getObstaclesList();
+    com.lvl6.proto.StructureProto.UserObstacleProto getObstacles(int index);
+    int getObstaclesCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+        getObstaclesOrBuilderList();
+    com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getObstaclesOrBuilder(
+        int index);
   }
   public static final class LoadPlayerCityResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -705,12 +715,34 @@ public final class EventCityProto {
       return userCityExpansionDataProtoList_.get(index);
     }
     
+    // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
+    public static final int OBSTACLES_FIELD_NUMBER = 6;
+    private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> obstacles_;
+    public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> getObstaclesList() {
+      return obstacles_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+        getObstaclesOrBuilderList() {
+      return obstacles_;
+    }
+    public int getObstaclesCount() {
+      return obstacles_.size();
+    }
+    public com.lvl6.proto.StructureProto.UserObstacleProto getObstacles(int index) {
+      return obstacles_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getObstaclesOrBuilder(
+        int index) {
+      return obstacles_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       cityOwner_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
       ownerNormStructs_ = java.util.Collections.emptyList();
       userCityExpansionDataProtoList_ = java.util.Collections.emptyList();
+      obstacles_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -738,6 +770,9 @@ public final class EventCityProto {
       }
       for (int i = 0; i < userCityExpansionDataProtoList_.size(); i++) {
         output.writeMessage(5, userCityExpansionDataProtoList_.get(i));
+      }
+      for (int i = 0; i < obstacles_.size(); i++) {
+        output.writeMessage(6, obstacles_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -767,6 +802,10 @@ public final class EventCityProto {
       for (int i = 0; i < userCityExpansionDataProtoList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, userCityExpansionDataProtoList_.get(i));
+      }
+      for (int i = 0; i < obstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, obstacles_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -888,6 +927,7 @@ public final class EventCityProto {
           getCityOwnerFieldBuilder();
           getOwnerNormStructsFieldBuilder();
           getUserCityExpansionDataProtoListFieldBuilder();
+          getObstaclesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -921,6 +961,12 @@ public final class EventCityProto {
           bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           userCityExpansionDataProtoListBuilder_.clear();
+        }
+        if (obstaclesBuilder_ == null) {
+          obstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          obstaclesBuilder_.clear();
         }
         return this;
       }
@@ -997,6 +1043,15 @@ public final class EventCityProto {
           result.userCityExpansionDataProtoList_ = userCityExpansionDataProtoList_;
         } else {
           result.userCityExpansionDataProtoList_ = userCityExpansionDataProtoListBuilder_.build();
+        }
+        if (obstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.obstacles_ = obstacles_;
+        } else {
+          result.obstacles_ = obstaclesBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1075,6 +1130,32 @@ public final class EventCityProto {
             }
           }
         }
+        if (obstaclesBuilder_ == null) {
+          if (!other.obstacles_.isEmpty()) {
+            if (obstacles_.isEmpty()) {
+              obstacles_ = other.obstacles_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureObstaclesIsMutable();
+              obstacles_.addAll(other.obstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.obstacles_.isEmpty()) {
+            if (obstaclesBuilder_.isEmpty()) {
+              obstaclesBuilder_.dispose();
+              obstaclesBuilder_ = null;
+              obstacles_ = other.obstacles_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              obstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getObstaclesFieldBuilder() : null;
+            } else {
+              obstaclesBuilder_.addAllMessages(other.obstacles_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1145,6 +1226,12 @@ public final class EventCityProto {
               com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder subBuilder = com.lvl6.proto.CityProto.UserCityExpansionDataProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUserCityExpansionDataProtoList(subBuilder.buildPartial());
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.StructureProto.UserObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.UserObstacleProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addObstacles(subBuilder.buildPartial());
               break;
             }
           }
@@ -1727,6 +1814,192 @@ public final class EventCityProto {
           userCityExpansionDataProtoList_ = null;
         }
         return userCityExpansionDataProtoListBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.UserObstacleProto obstacles = 6;
+      private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> obstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserObstacleProto>(obstacles_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> obstaclesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> getObstaclesList() {
+        if (obstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(obstacles_);
+        } else {
+          return obstaclesBuilder_.getMessageList();
+        }
+      }
+      public int getObstaclesCount() {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.size();
+        } else {
+          return obstaclesBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto getObstacles(int index) {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.get(index);
+        } else {
+          return obstaclesBuilder_.getMessage(index);
+        }
+      }
+      public Builder setObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.set(index, value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addObstacles(com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.add(value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.add(index, value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserObstacleProto> values) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          super.addAll(values, obstacles_);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearObstacles() {
+        if (obstaclesBuilder_ == null) {
+          obstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          obstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeObstacles(int index) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.remove(index);
+          onChanged();
+        } else {
+          obstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder getObstaclesBuilder(
+          int index) {
+        return getObstaclesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getObstaclesOrBuilder(
+          int index) {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.get(index);  } else {
+          return obstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+           getObstaclesOrBuilderList() {
+        if (obstaclesBuilder_ != null) {
+          return obstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(obstacles_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder addObstaclesBuilder() {
+        return getObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.UserObstacleProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder addObstaclesBuilder(
+          int index) {
+        return getObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.UserObstacleProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto.Builder> 
+           getObstaclesBuilderList() {
+        return getObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+          getObstaclesFieldBuilder() {
+        if (obstaclesBuilder_ == null) {
+          obstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder>(
+                  obstacles_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          obstacles_ = null;
+        }
+        return obstaclesBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LoadPlayerCityResponseProto)
@@ -4735,7 +5008,7 @@ public final class EventCityProto {
       "proto\032\013Quest.proto\032\017Structure.proto\032\nUse" +
       "r.proto\"c\n\032LoadPlayerCityRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\023\n\013cityOwnerId\030\002 \001(\005\"\272\003\n\033LoadPla" +
+      "erProto\022\023\n\013cityOwnerId\030\002 \001(\005\"\360\003\n\033LoadPla" +
       "yerCityResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\0223\n\tcityOw" +
       "ner\030\002 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
@@ -4744,35 +5017,36 @@ public final class EventCityProto {
       "tatus\022@\n\020ownerNormStructs\030\004 \003(\0132&.com.lv" +
       "l6.proto.FullUserStructureProto\022R\n\036userC" +
       "ityExpansionDataProtoList\030\005 \003(\0132*.com.lv" +
-      "l6.proto.UserCityExpansionDataProto\"L\n\024L" +
-      "oadPlayerCityStatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL" +
-      "_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_OTHER\020\003\"\223\001\n!Pu" +
-      "rchaseCityExpansionRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021\022" +
-      "\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseCity",
-      "ExpansionResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022^\n\006stat" +
-      "us\030\002 \001(\0162N.com.lvl6.proto.PurchaseCityEx" +
-      "pansionResponseProto.PurchaseCityExpansi" +
-      "onStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto" +
-      ".UserCityExpansionDataProto\"\216\001\n\033Purchase" +
-      "CityExpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020NOT_" +
-      "ENOUGH_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003\022\016\n" +
-      "\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_S" +
-      "ERVER_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n\006",
+      "l6.proto.UserCityExpansionDataProto\0224\n\to" +
+      "bstacles\030\006 \003(\0132!.com.lvl6.proto.UserObst" +
+      "acleProto\"L\n\024LoadPlayerCityStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\027\n\023FAIL_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_" +
+      "OTHER\020\003\"\223\001\n!PurchaseCityExpansionRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyP",
+      "osition\030\003 \001(\021\022\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003" +
+      "\n\"PurchaseCityExpansionResponseProto\0220\n\006" +
       "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\016\n\006cityId\030\002 \001(\005\"\355\002\n\025LoadCityRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022D\n\006status\030\002 \001(\01624.com" +
-      ".lvl6.proto.LoadCityResponseProto.LoadCi" +
-      "tyStatus\0226\n\014cityElements\030\003 \003(\0132 .com.lvl" +
-      "6.proto.CityElementProto\022\016\n\006cityId\030\004 \001(\005" +
-      "\022I\n\035inProgressUserQuestDataInCity\030\005 \003(\0132" +
-      "\".com.lvl6.proto.FullUserQuestProto\"I\n\016L" +
-      "oadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_ACCESS",
-      "IBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016EventC" +
-      "ityProto"
+      "rProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto." +
+      "PurchaseCityExpansionResponseProto.Purch" +
+      "aseCityExpansionStatus\0229\n\005ucedp\030\003 \001(\0132*." +
+      "com.lvl6.proto.UserCityExpansionDataProt" +
+      "o\"\216\001\n\033PurchaseCityExpansionStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\024\n\020NOT_ENOUGH_COINS\020\002\022\025\n\021ALREADY_" +
+      "EXPANDING\020\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TO",
+      "O_APART_FROM_SERVER_TIME\020\005\"X\n\024LoadCityRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022\016\n\006cityId\030\002 \001(\005\"\355\002\n" +
+      "\025LoadCityResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022D\n\006stat" +
+      "us\030\002 \001(\01624.com.lvl6.proto.LoadCityRespon" +
+      "seProto.LoadCityStatus\0226\n\014cityElements\030\003" +
+      " \003(\0132 .com.lvl6.proto.CityElementProto\022\016" +
+      "\n\006cityId\030\004 \001(\005\022I\n\035inProgressUserQuestDat" +
+      "aInCity\030\005 \003(\0132\".com.lvl6.proto.FullUserQ",
+      "uestProto\"I\n\016LoadCityStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\032\n\026NOT_ACCESSIBLE_TO_USER\020\002\022\016\n\nOTHER_FA" +
+      "IL\020\003B\020B\016EventCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4792,7 +5066,7 @@ public final class EventCityProto {
           internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_LoadPlayerCityResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "CityOwner", "Status", "OwnerNormStructs", "UserCityExpansionDataProtoList", },
+              new java.lang.String[] { "Sender", "CityOwner", "Status", "OwnerNormStructs", "UserCityExpansionDataProtoList", "Obstacles", },
               com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.class,
               com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.Builder.class);
           internal_static_com_lvl6_proto_PurchaseCityExpansionRequestProto_descriptor =

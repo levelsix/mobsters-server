@@ -27,9 +27,14 @@ message StructureInfoProto {
 	
 	optional string imgName = 14;
 	optional float imgVerticalPixelOffset = 15;
+	optional float imgHorizontalPixelOffset = 18;
 	optional string description = 16; //text field in db 
 	optional string shortDescription = 17;  
 	
+	//optional float imgHorizontalPixelOffset = 18; //defined above
+	optional string shadowImgName = 19;
+	optional float shadowVerticalOffset = 20;
+	optional float shadowHorizontalOfffset = 21;
 	
 	enum StructType {
 		RESOURCE_GENERATOR = 1;
@@ -175,4 +180,40 @@ message TutorialStructProto {
 	optional int32 structId = 1;
 	optional CoordinateProto coordinate = 2;
 }
+
+//------------------------------------------------------------------------------------------
+//same as CoC's gem generators
+message ObstacleProto {
+	optional int32 obstacleId = 1;
+	optional string name = 2;
+	optional ResourceType removalCostType = 3; //costs cash, oil, or other to remove
+	optional int32 cost = 4;
+	optional int32 secondsToRemove = 5;
+	optional int32 width = 6;
+	optional int32 height = 7;
+	optional string imgName = 8;
+	optional float imgVerticalPixelOffset = 9;
+	optional string description = 10;
+	optional float chanceToAppear = 11;
+	optional string shadowImgName = 12;
+	optional float shadowVerticalOffset = 13;
+	optional float shadowHorizontalOfffset = 14;
+}
+
+message MinimumObstacleProto {
+	optional int32 obstacleId = 1;
+	optional CoordinateProto coordinate = 2;
+	optional StructOrientation orientation = 5;
+}
+
+message UserObstacleProto {
+	optional int32 userObstacleId = 1;
+	optional int32 userId = 2;
+	optional int32 obstacleId = 3;
+	optional CoordinateProto coordinates = 4;
+	optional StructOrientation orientation = 5;
+	optional int64 removalStartTime = 6;
+}
+
+//------------------------------------------------------------------------------------------
 

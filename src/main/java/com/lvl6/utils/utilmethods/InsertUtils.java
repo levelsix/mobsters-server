@@ -18,6 +18,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -447,8 +448,8 @@ public class InsertUtils implements InsertUtil{
    */
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
-  		int oil, int gems, boolean isFake,  String deviceToken, boolean activateShield,
-  		Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime) {
+  		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
+  		String rank, String facebookId, Timestamp shieldEndTime) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -464,7 +465,6 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
-    insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
     insertParams.put(DBConstants.USER__SHIELD_END_TIME, shieldEndTime);
     insertParams.put(DBConstants.USER__IN_BATTLE_END_TIME, shieldEndTime);
     insertParams.put(DBConstants.USER__RANK, rank);
@@ -477,6 +477,8 @@ public class InsertUtils implements InsertUtil{
     	insertParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, false);
     }
     
+    insertParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, createTime);
+    
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
     return userId;
@@ -484,15 +486,16 @@ public class InsertUtils implements InsertUtil{
 
 
   @Override
-  public int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag,
-      boolean requestToJoinRequired) {
+  public int insertClan(String name, Timestamp createTime, String description, String tag,
+      boolean requestToJoinRequired, int clanIconId) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLANS__NAME, name);
-    insertParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
+//    insertParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
     insertParams.put(DBConstants.CLANS__CREATE_TIME, createTime);
     insertParams.put(DBConstants.CLANS__DESCRIPTION, description);
     insertParams.put(DBConstants.CLANS__TAG, tag);
     insertParams.put(DBConstants.CLANS__REQUEST_TO_JOIN_REQUIRED, requestToJoinRequired);
+    insertParams.put(DBConstants.CLANS__CLAN_ICON_ID, clanIconId);
 
     int clanId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_CLANS, insertParams);
@@ -718,7 +721,7 @@ public class InsertUtils implements InsertUtil{
   
   //returns the id
   public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
-  		int silverGained, Timestamp startTime) {
+  		int cashGained, int oilGained, Timestamp startTime) {
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
 	  //for recording what-dropped in which-stage
@@ -726,7 +729,8 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__USER_ID, userId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_ID, taskId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__EXP_GAINED, expGained);
-	  row.put(DBConstants.TASK_FOR_USER_ONGOING__SILVER_GAINED, silverGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__CASH_GAINED, cashGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__OIL_GAINED, oilGained);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
 	  newRows.add(row);
@@ -741,8 +745,9 @@ public class InsertUtils implements InsertUtil{
 	  return userTaskId;
   }
   
+  @Override
   public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
-		  int expGained, int silverGained, int numRevives, Timestamp startTime,
+		  int expGained, int cashGained, int oilGained, int numRevives, Timestamp startTime,
 		  Timestamp endTime, boolean userWon, boolean cancelled) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
@@ -750,7 +755,8 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_ID, userId);
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_ID, taskId);
 	  insertParams.put(DBConstants.TASK_HISTORY__EXP_GAINED, expGained);
-	  insertParams.put(DBConstants.TASK_HISTORY__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__CASH_GAINED, cashGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__OIL_GAINED, oilGained);
 	  insertParams.put(DBConstants.TASK_HISTORY__NUM_REVIVES, numRevives);
 	  insertParams.put(DBConstants.TASK_HISTORY__START_TIME, startTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
@@ -798,26 +804,26 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
-			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
-			Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+			List<Integer> tsmIds, List<String> monsterTypes, List<Integer> expsGained,
+			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			Map<Integer, Integer> tsmIdToItemId) {
 		//even if a taskStageMonsterId has multiple items, just choose the first one
 		List<Integer> itemIds = new ArrayList<Integer>();
 		
-		for (Integer tsmId : taskStageMonsterIds) {
+		for (Integer tsmId : tsmIds) {
 			
-			if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
-				//0 means no item dropped
+			if (!tsmIdToItemId.containsKey(tsmId)) {
+				//0 in db means no item dropped
 				itemIds.add(0);
 				continue;
 			}
 			
-			//task stage monster has an item drop associated with it. Just get first one.
-			List<Integer> tsmItemIds = taskStageMonsterIdToItemId.get(tsmId);
-			if (null != tsmItemIds) {
-				int itemId = tsmItemIds.get(0);
-				itemIds.add(itemId);
+			//task stage monster has an item drop associated with it.
+			int itemId = tsmIdToItemId.get(tsmId);
+			if (-1 == itemId) {
+				itemId = 0;
 			}
+			itemIds.add(itemId);
 			
 		}
 
@@ -827,10 +833,11 @@ public class InsertUtils implements InsertUtil{
 
 		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsmIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_TYPE, monsterTypes);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__CASH_GAINED, cashGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, oilGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, itemIds);
     
@@ -844,9 +851,10 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> taskStageMonsterIds,
-			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
-			List<Boolean> monsterPiecesDropped, List<Integer> itemIdDropped) {
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
+			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> itemIdDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNums.size();
 		
@@ -854,10 +862,11 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, tsmIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE, monsterTypes);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__CASH_GAINED, cashGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__OIL_GAINED, oilGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
     
@@ -1431,4 +1440,64 @@ public class InsertUtils implements InsertUtil{
 			return ids;                                                                      
 		}                                                                                          
 		
+		@Override
+		public int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
+				int defenderEloChange, int attackerOilChange, int defenderOilChange,
+				int attackerCashChange, int defenderCashChange, boolean attackerWon,
+				boolean cancelled, boolean gotRevenge, boolean displayToDefender) {
+			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			
+			Map <String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, attackerId);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE, attackerEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE, defenderEloChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
+
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+
+			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+			return numUpdated;
+		}
+		
+		@Override
+		public List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+				List<ObstacleForUser> ofuList) {
+			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;                  
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (ObstacleForUser ofu : ofuList) {                               
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				
+				int obstacleId = ofu.getObstacleId();                                           
+				int xcoord = ofu.getXcoord();
+				int ycoord = ofu.getYcoord();
+				int orientation = ofu.getOrientation();                                        
+
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__XCOORD, xcoord);      
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__YCOORD, ycoord);                                                                     
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__ORIENTATION, orientation);                                                                   
+				
+				newRows.add(newRow);
+			}                                                                                        
+			List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName,
+					newRows);                        
+
+			return ids;            
+		}
 }

@@ -108,14 +108,15 @@ import com.lvl6.utils.DBConnection;
     long id = rs.getLong(i++);
     long taskForUserId = rs.getLong(i++);
     int stageNum = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
+    int tsmId = rs.getInt(i++);
     String monsterType = rs.getString(i++);
     int expGained = rs.getInt(i++);
-    int silverGained = rs.getInt(i++);
+    int cashGained = rs.getInt(i++);
+    int oilGained = rs.getInt(i++);
     boolean monsterPieceDropped = rs.getBoolean(i++);
     int itemIdDropped = rs.getInt(i++);
     
-    return new TaskStageForUser(id, taskForUserId, stageNum, monsterId, monsterType,
-    		expGained, silverGained, monsterPieceDropped, itemIdDropped);
+    return new TaskStageForUser(id, taskForUserId, stageNum, tsmId, monsterType,
+    		expGained, cashGained, oilGained, monsterPieceDropped, itemIdDropped);
   }
 }

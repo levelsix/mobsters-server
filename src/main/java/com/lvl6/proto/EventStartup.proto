@@ -1,17 +1,18 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Battle.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
+import "MonsterStuff.proto";
 import "Quest.proto";
 import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";
-import "MonsterStuff.proto";
 
 package com.lvl6.proto;
 
@@ -33,12 +34,6 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      
      //if user is starting up app and the app is not a background process
      optional bool isFreshRestart = 8;
-     
-     //used to force logout all devices logged onto one account
-     //usage: client generates time, sends to server. All clients on
-     // a user account will get ForceLogout event. If ForceLogout's
-     // loginTime is same as value client generated, don't logout
-     optional int64 clientTime = 9;
      
 }
 
@@ -103,6 +98,10 @@ message StartupResponseProto {
 	
 	//optional TutorialConstants tutorialConstants = 34; //defined above, below #5
 
+	//the last n people that have attacked this user in pvp
+	repeated PvpHistoryProto recentNBattles = 35;
+	
+
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 
@@ -151,6 +150,8 @@ message StartupResponseProto {
 		optional bool addAllFbFriends = 23;
 		optional MiniTutorialConstants miniTuts = 24;
 		
+		optional int32 maxObstacles = 25;
+		optional int32 minutesPerObstacle = 26; //minutes it takes to spawn obstacles
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -161,6 +162,7 @@ message StartupResponseProto {
 			optional int32 maxCharLengthForClanName = 2;
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;
+			optional int32 maxClanSize = 5;
 		}
 		message DownloadableNibConstants {
 			optional string mapNibName = 1;
@@ -230,6 +232,8 @@ message StartupResponseProto {
 		optional int32 cashInit = 11;
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
+		
+		repeated MinimumObstacleProto tutorialObstacles = 14;
 		 	
 	}
 	
@@ -242,12 +246,17 @@ message StartupResponseProto {
 	enum StartupStatus {
 		USER_IN_DB = 1; 
 		USER_NOT_IN_DB = 2;
+		SERVER_IN_MAINTENANCE = 3;
 	}    
 }
 
 //------------------------------------------------------------------------------------------
 //to prevent multiple of the same account being online
+//sent on udid, userId, and facebook id amqp queue
 message ForceLogoutResponseProto {
-	optional int64 loginTime = 1; //the time the server logs the user in on startup
-	optional int64 previousLoginTime = 2; //last time server logged the user in on startup
+	//time server logged the user in on startup, which is before the start up that triggered this
+	optional int64 previousLoginTime = 1; 
+	
+	//the device's udid (whoever sent startup event and triggered this)
+	optional string udid = 2; 
 }

@@ -112,6 +112,10 @@ public final class ClanProto {
     // optional bool requestToJoinRequired = 7;
     boolean hasRequestToJoinRequired();
     boolean getRequestToJoinRequired();
+    
+    // optional int32 clanIconId = 8;
+    boolean hasClanIconId();
+    int getClanIconId();
   }
   public static final class FullClanProto extends
       com.google.protobuf.GeneratedMessage
@@ -268,6 +272,16 @@ public final class ClanProto {
       return requestToJoinRequired_;
     }
     
+    // optional int32 clanIconId = 8;
+    public static final int CLANICONID_FIELD_NUMBER = 8;
+    private int clanIconId_;
+    public boolean hasClanIconId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getClanIconId() {
+      return clanIconId_;
+    }
+    
     private void initFields() {
       clanId_ = 0;
       name_ = "";
@@ -275,6 +289,7 @@ public final class ClanProto {
       description_ = "";
       tag_ = "";
       requestToJoinRequired_ = false;
+      clanIconId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -305,6 +320,9 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(7, requestToJoinRequired_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, clanIconId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -338,6 +356,10 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, requestToJoinRequired_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, clanIconId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -475,6 +497,8 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         requestToJoinRequired_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
+        clanIconId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -537,6 +561,10 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000020;
         }
         result.requestToJoinRequired_ = requestToJoinRequired_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.clanIconId_ = clanIconId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -570,6 +598,9 @@ public final class ClanProto {
         }
         if (other.hasRequestToJoinRequired()) {
           setRequestToJoinRequired(other.getRequestToJoinRequired());
+        }
+        if (other.hasClanIconId()) {
+          setClanIconId(other.getClanIconId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -630,6 +661,11 @@ public final class ClanProto {
             case 56: {
               bitField0_ |= 0x00000020;
               requestToJoinRequired_ = input.readBool();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              clanIconId_ = input.readInt32();
               break;
             }
           }
@@ -805,6 +841,27 @@ public final class ClanProto {
       public Builder clearRequestToJoinRequired() {
         bitField0_ = (bitField0_ & ~0x00000020);
         requestToJoinRequired_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 clanIconId = 8;
+      private int clanIconId_ ;
+      public boolean hasClanIconId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getClanIconId() {
+        return clanIconId_;
+      }
+      public Builder setClanIconId(int value) {
+        bitField0_ |= 0x00000040;
+        clanIconId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanIconId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        clanIconId_ = 0;
         onChanged();
         return this;
       }
@@ -10125,6 +10182,495 @@ public final class ClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PersistentClanEventRaidHistoryProto)
   }
   
+  public interface ClanIconProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 clanIconId = 1;
+    boolean hasClanIconId();
+    int getClanIconId();
+    
+    // optional string imgName = 2;
+    boolean hasImgName();
+    String getImgName();
+    
+    // optional bool isAvailable = 3;
+    boolean hasIsAvailable();
+    boolean getIsAvailable();
+  }
+  public static final class ClanIconProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ClanIconProtoOrBuilder {
+    // Use ClanIconProto.newBuilder() to construct.
+    private ClanIconProto(Builder builder) {
+      super(builder);
+    }
+    private ClanIconProto(boolean noInit) {}
+    
+    private static final ClanIconProto defaultInstance;
+    public static ClanIconProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ClanIconProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanIconProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanIconProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 clanIconId = 1;
+    public static final int CLANICONID_FIELD_NUMBER = 1;
+    private int clanIconId_;
+    public boolean hasClanIconId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getClanIconId() {
+      return clanIconId_;
+    }
+    
+    // optional string imgName = 2;
+    public static final int IMGNAME_FIELD_NUMBER = 2;
+    private java.lang.Object imgName_;
+    public boolean hasImgName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getImgName() {
+      java.lang.Object ref = imgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          imgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getImgNameBytes() {
+      java.lang.Object ref = imgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        imgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional bool isAvailable = 3;
+    public static final int ISAVAILABLE_FIELD_NUMBER = 3;
+    private boolean isAvailable_;
+    public boolean hasIsAvailable() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public boolean getIsAvailable() {
+      return isAvailable_;
+    }
+    
+    private void initFields() {
+      clanIconId_ = 0;
+      imgName_ = "";
+      isAvailable_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, clanIconId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isAvailable_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, clanIconId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isAvailable_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanIconProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanIconProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanIconProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanIconProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.ClanProto.ClanIconProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        clanIconId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        imgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isAvailable_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ClanProto.ClanIconProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanIconProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanIconProto build() {
+        com.lvl6.proto.ClanProto.ClanIconProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.ClanProto.ClanIconProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.ClanProto.ClanIconProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanIconProto buildPartial() {
+        com.lvl6.proto.ClanProto.ClanIconProto result = new com.lvl6.proto.ClanProto.ClanIconProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clanIconId_ = clanIconId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.imgName_ = imgName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isAvailable_ = isAvailable_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ClanProto.ClanIconProto) {
+          return mergeFrom((com.lvl6.proto.ClanProto.ClanIconProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanIconProto other) {
+        if (other == com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance()) return this;
+        if (other.hasClanIconId()) {
+          setClanIconId(other.getClanIconId());
+        }
+        if (other.hasImgName()) {
+          setImgName(other.getImgName());
+        }
+        if (other.hasIsAvailable()) {
+          setIsAvailable(other.getIsAvailable());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              clanIconId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              imgName_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isAvailable_ = input.readBool();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 clanIconId = 1;
+      private int clanIconId_ ;
+      public boolean hasClanIconId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getClanIconId() {
+        return clanIconId_;
+      }
+      public Builder setClanIconId(int value) {
+        bitField0_ |= 0x00000001;
+        clanIconId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanIconId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanIconId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string imgName = 2;
+      private java.lang.Object imgName_ = "";
+      public boolean hasImgName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getImgName() {
+        java.lang.Object ref = imgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          imgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        imgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearImgName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        imgName_ = getDefaultInstance().getImgName();
+        onChanged();
+        return this;
+      }
+      void setImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        imgName_ = value;
+        onChanged();
+      }
+      
+      // optional bool isAvailable = 3;
+      private boolean isAvailable_ ;
+      public boolean hasIsAvailable() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getIsAvailable() {
+        return isAvailable_;
+      }
+      public Builder setIsAvailable(boolean value) {
+        bitField0_ |= 0x00000004;
+        isAvailable_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsAvailable() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isAvailable_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanIconProto)
+    }
+    
+    static {
+      defaultInstance = new ClanIconProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanIconProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullClanProto_descriptor;
   private static
@@ -10195,6 +10741,11 @@ public final class ClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PersistentClanEventRaidHistoryProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ClanIconProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ClanIconProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10206,72 +10757,74 @@ public final class ClanProto {
     java.lang.String[] descriptorData = {
       "\n\nClan.proto\022\016com.lvl6.proto\032\014Battle.pro" +
       "to\032\022MonsterStuff.proto\032\017Structure.proto\032" +
-      "\nTask.proto\032\nUser.proto\"\202\001\n\rFullClanProt" +
+      "\nTask.proto\032\nUser.proto\"\226\001\n\rFullClanProt" +
       "o\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\ncreat" +
       "eTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t\022\013\n\003tag\030" +
-      "\006 \001(\t\022\035\n\025requestToJoinRequired\030\007 \001(\010\"x\n\021" +
-      "FullUserClanProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006cla" +
-      "nId\030\002 \001(\005\022.\n\006status\030\003 \001(\0162\036.com.lvl6.pro" +
-      "to.UserClanStatus\022\023\n\013requestTime\030\004 \001(\003\"Z" +
-      "\n\031FullClanProtoWithClanSize\022+\n\004clan\030\001 \001(",
-      "\0132\035.com.lvl6.proto.FullClanProto\022\020\n\010clan" +
-      "Size\030\002 \001(\005\"\261\001\n\030MinimumUserProtoForClans\022" +
-      "G\n\014minUserProto\030\001 \001(\01321.com.lvl6.proto.M" +
-      "inimumUserProtoWithBattleHistory\0222\n\nclan" +
-      "Status\030\002 \001(\0162\036.com.lvl6.proto.UserClanSt" +
-      "atus\022\030\n\020raidContribution\030\003 \001(\002\"\275\002\n\rClanR" +
-      "aidProto\022\022\n\nclanRaidId\030\001 \001(\005\022\024\n\014clanRaid" +
-      "Name\030\002 \001(\t\022\032\n\022activeTitleImgName\030\003 \001(\t\022\037" +
-      "\n\027activeBackgroundImgName\030\004 \001(\t\022\031\n\021activ" +
-      "eDescription\030\005 \001(\t\022\036\n\026inactiveMonsterImg",
-      "Name\030\006 \001(\t\022\033\n\023inactiveDescription\030\007 \001(\t\022" +
-      "\024\n\014dialogueText\030\010 \001(\t\022\037\n\027spotlightMonste" +
-      "rImgName\030\t \001(\t\0226\n\nraidStages\030\n \003(\0132\".com" +
-      ".lvl6.proto.ClanRaidStageProto\"\372\001\n\022ClanR" +
-      "aidStageProto\022\027\n\017clanRaidStageId\030\001 \001(\005\022\022" +
-      "\n\nclanRaidId\030\002 \001(\005\022\027\n\017durationMinutes\030\003 " +
-      "\001(\005\022\020\n\010stageNum\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022;\n\010m" +
-      "onsters\030\013 \003(\0132).com.lvl6.proto.ClanRaidS" +
-      "tageMonsterProto\022A\n\017possibleRewards\030\014 \003(" +
-      "\0132(.com.lvl6.proto.ClanRaidStageRewardPr",
-      "oto\"q\n\031ClanRaidStageMonsterProto\022\016\n\006crsm" +
-      "Id\030\001 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tmonsterHp" +
-      "\030\004 \001(\005\022\016\n\006minDmg\030\005 \001(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227" +
-      "\001\n\030ClanRaidStageRewardProto\022\016\n\006crsrId\030\001 " +
-      "\001(\005\022\024\n\014minOilReward\030\003 \001(\005\022\024\n\014maxOilRewar" +
-      "d\030\004 \001(\005\022\025\n\rminCashReward\030\005 \001(\005\022\025\n\rmaxCas" +
-      "hReward\030\006 \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252\001\n\030Per" +
-      "sistentClanEventProto\022\023\n\013clanEventId\030\001 \001" +
-      "(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.proto.D" +
-      "ayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024e",
-      "ventDurationMinutes\030\004 \001(\005\022\022\n\nclanRaidId\030" +
-      "\005 \001(\005\"\273\001\n PersistentClanEventClanInfoPro" +
-      "to\022\016\n\006clanId\030\001 \001(\005\022\023\n\013clanEventId\030\002 \001(\005\022" +
-      "\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004" +
-      " \001(\005\022\026\n\016stageStartTime\030\005 \001(\003\022\016\n\006crsmId\030\006" +
-      " \001(\005\022\035\n\025stageMonsterStartTime\030\007 \001(\003\"\317\001\n " +
-      "PersistentClanEventUserInfoProto\022\016\n\006user" +
-      "Id\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022\021" +
-      "\n\tcrDmgDone\030\004 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n" +
-      "\013crsmDmgDone\030\010 \001(\005\022A\n\014userMonsters\030\t \001(\013",
-      "2+.com.lvl6.proto.UserCurrentMonsterTeam" +
-      "Proto\"\322\001\n\"PersistentClanEventUserRewardP" +
-      "roto\022\020\n\010rewardId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022" +
-      "\n\ncrsEndTime\030\004 \001(\003\0228\n\014resourceType\030\005 \001(\016" +
-      "2\034.com.lvl6.proto.ResourceType:\004CASH\022\024\n\014" +
-      "staticDataId\030\006 \001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n\014" +
-      "timeRedeemed\030\t \001(\003\"\346\001\n(PersistentClanEve" +
-      "ntRaidStageHistoryProto\022C\n\007rewards\030\001 \003(\013" +
-      "22.com.lvl6.proto.PersistentClanEventUse" +
-      "rRewardProto\022\017\n\007eventId\030\002 \001(\005\022\022\n\nclanRai",
-      "dId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\022\n\ncr" +
-      "sEndTime\030\005 \001(\003\022\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007st" +
-      "ageHp\030\007 \001(\005\"W\n#PersistentClanEventRaidHi" +
-      "storyProto\022\016\n\006userId\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(" +
-      "\005\022\021\n\tclanCrDmg\030\003 \001(\005*X\n\016UserClanStatus\022\n" +
-      "\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN" +
-      "\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanPr" +
-      "oto"
+      "\006 \001(\t\022\035\n\025requestToJoinRequired\030\007 \001(\010\022\022\n\n" +
+      "clanIconId\030\010 \001(\005\"x\n\021FullUserClanProto\022\016\n" +
+      "\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022.\n\006status\030" +
+      "\003 \001(\0162\036.com.lvl6.proto.UserClanStatus\022\023\n" +
+      "\013requestTime\030\004 \001(\003\"Z\n\031FullClanProtoWithC",
+      "lanSize\022+\n\004clan\030\001 \001(\0132\035.com.lvl6.proto.F" +
+      "ullClanProto\022\020\n\010clanSize\030\002 \001(\005\"\261\001\n\030Minim" +
+      "umUserProtoForClans\022G\n\014minUserProto\030\001 \001(" +
+      "\01321.com.lvl6.proto.MinimumUserProtoWithB" +
+      "attleHistory\0222\n\nclanStatus\030\002 \001(\0162\036.com.l" +
+      "vl6.proto.UserClanStatus\022\030\n\020raidContribu" +
+      "tion\030\003 \001(\002\"\275\002\n\rClanRaidProto\022\022\n\nclanRaid" +
+      "Id\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(\t\022\032\n\022active" +
+      "TitleImgName\030\003 \001(\t\022\037\n\027activeBackgroundIm" +
+      "gName\030\004 \001(\t\022\031\n\021activeDescription\030\005 \001(\t\022\036",
+      "\n\026inactiveMonsterImgName\030\006 \001(\t\022\033\n\023inacti" +
+      "veDescription\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001(" +
+      "\t\022\037\n\027spotlightMonsterImgName\030\t \001(\t\0226\n\nra" +
+      "idStages\030\n \003(\0132\".com.lvl6.proto.ClanRaid" +
+      "StageProto\"\372\001\n\022ClanRaidStageProto\022\027\n\017cla" +
+      "nRaidStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022\027" +
+      "\n\017durationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(" +
+      "\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com." +
+      "lvl6.proto.ClanRaidStageMonsterProto\022A\n\017" +
+      "possibleRewards\030\014 \003(\0132(.com.lvl6.proto.C",
+      "lanRaidStageRewardProto\"q\n\031ClanRaidStage" +
+      "MonsterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterI" +
+      "d\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 \001" +
+      "(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStageRewa" +
+      "rdProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilReward\030" +
+      "\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminCashRe" +
+      "ward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmon" +
+      "sterId\030\007 \001(\005\"\252\001\n\030PersistentClanEventProt" +
+      "o\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(" +
+      "\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\t",
+      "startHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030" +
+      "\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001\n Persistent" +
+      "ClanEventClanInfoProto\022\016\n\006clanId\030\001 \001(\005\022\023" +
+      "\n\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022" +
+      "\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartTi" +
+      "me\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonster" +
+      "StartTime\030\007 \001(\003\"\317\001\n PersistentClanEventU" +
+      "serInfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002" +
+      " \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\022\n" +
+      "\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022A",
+      "\n\014userMonsters\030\t \001(\0132+.com.lvl6.proto.Us" +
+      "erCurrentMonsterTeamProto\"\322\001\n\"Persistent" +
+      "ClanEventUserRewardProto\022\020\n\010rewardId\030\001 \001" +
+      "(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\ncrsEndTime\030\004 \001(\003\0228" +
+      "\n\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Re" +
+      "sourceType:\004CASH\022\024\n\014staticDataId\030\006 \001(\005\022\020" +
+      "\n\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030\t \001(\003\"\346" +
+      "\001\n(PersistentClanEventRaidStageHistoryPr" +
+      "oto\022C\n\007rewards\030\001 \003(\01322.com.lvl6.proto.Pe" +
+      "rsistentClanEventUserRewardProto\022\017\n\007even",
+      "tId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRai" +
+      "dStageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(\003\022\022\n\ncr" +
+      "sDmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"W\n#Persi" +
+      "stentClanEventRaidHistoryProto\022\016\n\006userId" +
+      "\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030\003 \001(\005" +
+      "\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001(\005\022\017\n" +
+      "\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010*X\n\016U" +
+      "serClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEAD" +
+      "ER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUEST" +
+      "ING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10283,7 +10836,7 @@ public final class ClanProto {
           internal_static_com_lvl6_proto_FullClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullClanProto_descriptor,
-              new java.lang.String[] { "ClanId", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", },
+              new java.lang.String[] { "ClanId", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", "ClanIconId", },
               com.lvl6.proto.ClanProto.FullClanProto.class,
               com.lvl6.proto.ClanProto.FullClanProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserClanProto_descriptor =
@@ -10390,6 +10943,14 @@ public final class ClanProto {
               new java.lang.String[] { "UserId", "CrDmg", "ClanCrDmg", },
               com.lvl6.proto.ClanProto.PersistentClanEventRaidHistoryProto.class,
               com.lvl6.proto.ClanProto.PersistentClanEventRaidHistoryProto.Builder.class);
+          internal_static_com_lvl6_proto_ClanIconProto_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_com_lvl6_proto_ClanIconProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClanIconProto_descriptor,
+              new java.lang.String[] { "ClanIconId", "ImgName", "IsAvailable", },
+              com.lvl6.proto.ClanProto.ClanIconProto.class,
+              com.lvl6.proto.ClanProto.ClanIconProto.Builder.class);
           return null;
         }
       };

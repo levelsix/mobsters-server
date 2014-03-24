@@ -22,7 +22,7 @@ import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
@@ -82,14 +82,15 @@ public class LogoutController extends EventController {
 			try {
 				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 				if (null != user) {
+					//for now don't do this
 					//if user has unfinished battle, reward defender and penalize attacker
-					List<Integer> eloChangeList = new ArrayList<Integer>();
-					pvpBattleStuff(user, userId, eloChangeList, lastLogout);
-					
+//					List<Integer> eloChangeList = new ArrayList<Integer>();
+//					pvpBattleStuff(user, userId, eloChangeList, lastLogout);
+//					
 					int eloChange = 0;
-					if (!eloChangeList.isEmpty()) {
-						eloChange = eloChangeList.get(0);
-					}
+//					if (!eloChangeList.isEmpty()) {
+//						eloChange = eloChangeList.get(0);
+//					}
 					if (!user.updateLastLogoutElo(lastLogout, eloChange)) {
 						log.error("problem with updating user's last logout time for user "	+ userId);
 					}
@@ -103,13 +104,14 @@ public class LogoutController extends EventController {
 			        isLogin, isNewUser);
 			    
 			    
-			    //put this user back into pool of people who can be attacked
+			    //put this user back into pool of people who can be attacked,
+			    //don't really need to, since will most likely still be there. eh might as well
 			    int elo = user.getElo();
 			    String userIdStr = String.valueOf(userId);
 			    Date shieldEndTime = user.getShieldEndTime();
 			    Date inBattleEndTime = user.getInBattleShieldEndTime();
-			    OfflinePvpUser userOpu = new OfflinePvpUser(userIdStr, elo, shieldEndTime, inBattleEndTime);
-			    getHazelcastPvpUtil().addOfflinePvpUser(userOpu);
+			    PvpUser userOpu = new PvpUser(userIdStr, elo, shieldEndTime, inBattleEndTime);
+			    getHazelcastPvpUtil().replacePvpUser(userOpu);
 			    
 				}
 				log.info("Player logged out: "+userId);
@@ -143,7 +145,7 @@ public class LogoutController extends EventController {
 		int eloDefenderWins = battle.getDefenderWinEloChange();
 		
 		User defender = null;
-		OfflinePvpUser defenderOpu = null;
+		PvpUser defenderOpu = null;
 		
 		//user has unfinished battle, reward defender and penalize attacker
   	//nested try catch's in order to prevent exception bubbling up, all because of
@@ -159,7 +161,7 @@ public class LogoutController extends EventController {
   		try {
   			if (0 != defenderId) {
   				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
-  				defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
+  				defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
   			}
   			
   			//update attacker
@@ -169,14 +171,21 @@ public class LogoutController extends EventController {
   			//attacked
   			if (null != defender) {
   				defender.updateEloInBattleEndTime(eloDefenderWins, now);
+  				int defenderElo = defender.getElo();                    
+  				defenderOpu = new PvpUser();
+  				defenderOpu.setElo(defenderElo);                        
+  				Date nowDate = new Date(now.getTime());                 
+  				defenderOpu.setInBattleEndTime(nowDate);                
+//  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+  				getHazelcastPvpUtil().replacePvpUser(defenderOpu);
   			}
-  			if (null != defenderOpu) { //update if exists
-  				int defenderElo = defender.getElo();
-  				defenderOpu.setElo(defenderElo);
-  				Date nowDate = new Date(now.getTime());
-  				defenderOpu.setInBattleEndTime(nowDate);
-  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
-  			}
+//  			if (null != defenderOpu) { //update if exists
+//  				int defenderElo = defender.getElo();
+//  				defenderOpu.setElo(defenderElo);
+//  				Date nowDate = new Date(now.getTime());
+//  				defenderOpu.setInBattleEndTime(nowDate);
+//  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+//  			}
   			
   			//delete that this battle occurred
   			DeleteUtils.get().deletePvpBattleForUser(userId);

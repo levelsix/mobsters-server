@@ -114,4 +114,14 @@ public class TimeUtils {
   	
   	return createdDate;
   }
+  
+  public Date createDateAddHours(Date curDate, int hoursAddend) {
+  	DateTime dt = new DateTime(curDate);
+  	
+  	MutableDateTime mdt = dt.toMutableDateTime();
+  	mdt.addHours(hoursAddend);
+  	Date createdDate = mdt.toDate();
+  	
+  	return createdDate;
+  }
 }

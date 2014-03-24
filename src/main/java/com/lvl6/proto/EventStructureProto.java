@@ -9879,6 +9879,4146 @@ public final class EventStructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExpansionWaitCompleteResponseProto)
   }
   
+  public interface SpawnObstacleRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
+    java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> 
+        getProspectiveObstaclesList();
+    com.lvl6.proto.StructureProto.MinimumObstacleProto getProspectiveObstacles(int index);
+    int getProspectiveObstaclesCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
+        getProspectiveObstaclesOrBuilderList();
+    com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getProspectiveObstaclesOrBuilder(
+        int index);
+    
+    // optional int64 curTime = 3;
+    boolean hasCurTime();
+    long getCurTime();
+  }
+  public static final class SpawnObstacleRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements SpawnObstacleRequestProtoOrBuilder {
+    // Use SpawnObstacleRequestProto.newBuilder() to construct.
+    private SpawnObstacleRequestProto(Builder builder) {
+      super(builder);
+    }
+    private SpawnObstacleRequestProto(boolean noInit) {}
+    
+    private static final SpawnObstacleRequestProto defaultInstance;
+    public static SpawnObstacleRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SpawnObstacleRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
+    public static final int PROSPECTIVEOBSTACLES_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> prospectiveObstacles_;
+    public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getProspectiveObstaclesList() {
+      return prospectiveObstacles_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
+        getProspectiveObstaclesOrBuilderList() {
+      return prospectiveObstacles_;
+    }
+    public int getProspectiveObstaclesCount() {
+      return prospectiveObstacles_.size();
+    }
+    public com.lvl6.proto.StructureProto.MinimumObstacleProto getProspectiveObstacles(int index) {
+      return prospectiveObstacles_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getProspectiveObstaclesOrBuilder(
+        int index) {
+      return prospectiveObstacles_.get(index);
+    }
+    
+    // optional int64 curTime = 3;
+    public static final int CURTIME_FIELD_NUMBER = 3;
+    private long curTime_;
+    public boolean hasCurTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getCurTime() {
+      return curTime_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      prospectiveObstacles_ = java.util.Collections.emptyList();
+      curTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < prospectiveObstacles_.size(); i++) {
+        output.writeMessage(2, prospectiveObstacles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(3, curTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < prospectiveObstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, prospectiveObstacles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, curTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getProspectiveObstaclesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (prospectiveObstaclesBuilder_ == null) {
+          prospectiveObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          prospectiveObstaclesBuilder_.clear();
+        }
+        curTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto build() {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto result = new com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (prospectiveObstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            prospectiveObstacles_ = java.util.Collections.unmodifiableList(prospectiveObstacles_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.prospectiveObstacles_ = prospectiveObstacles_;
+        } else {
+          result.prospectiveObstacles_ = prospectiveObstaclesBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.curTime_ = curTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (prospectiveObstaclesBuilder_ == null) {
+          if (!other.prospectiveObstacles_.isEmpty()) {
+            if (prospectiveObstacles_.isEmpty()) {
+              prospectiveObstacles_ = other.prospectiveObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureProspectiveObstaclesIsMutable();
+              prospectiveObstacles_.addAll(other.prospectiveObstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.prospectiveObstacles_.isEmpty()) {
+            if (prospectiveObstaclesBuilder_.isEmpty()) {
+              prospectiveObstaclesBuilder_.dispose();
+              prospectiveObstaclesBuilder_ = null;
+              prospectiveObstacles_ = other.prospectiveObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              prospectiveObstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getProspectiveObstaclesFieldBuilder() : null;
+            } else {
+              prospectiveObstaclesBuilder_.addAllMessages(other.prospectiveObstacles_);
+            }
+          }
+        }
+        if (other.hasCurTime()) {
+          setCurTime(other.getCurTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.MinimumObstacleProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addProspectiveObstacles(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              curTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.MinimumObstacleProto prospectiveObstacles = 2;
+      private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> prospectiveObstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureProspectiveObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          prospectiveObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>(prospectiveObstacles_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> prospectiveObstaclesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getProspectiveObstaclesList() {
+        if (prospectiveObstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(prospectiveObstacles_);
+        } else {
+          return prospectiveObstaclesBuilder_.getMessageList();
+        }
+      }
+      public int getProspectiveObstaclesCount() {
+        if (prospectiveObstaclesBuilder_ == null) {
+          return prospectiveObstacles_.size();
+        } else {
+          return prospectiveObstaclesBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto getProspectiveObstacles(int index) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          return prospectiveObstacles_.get(index);
+        } else {
+          return prospectiveObstaclesBuilder_.getMessage(index);
+        }
+      }
+      public Builder setProspectiveObstacles(
+          int index, com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.set(index, value);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setProspectiveObstacles(
+          int index, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addProspectiveObstacles(com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.add(value);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addProspectiveObstacles(
+          int index, com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.add(index, value);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addProspectiveObstacles(
+          com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addProspectiveObstacles(
+          int index, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllProspectiveObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MinimumObstacleProto> values) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          ensureProspectiveObstaclesIsMutable();
+          super.addAll(values, prospectiveObstacles_);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearProspectiveObstacles() {
+        if (prospectiveObstaclesBuilder_ == null) {
+          prospectiveObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeProspectiveObstacles(int index) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          ensureProspectiveObstaclesIsMutable();
+          prospectiveObstacles_.remove(index);
+          onChanged();
+        } else {
+          prospectiveObstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder getProspectiveObstaclesBuilder(
+          int index) {
+        return getProspectiveObstaclesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getProspectiveObstaclesOrBuilder(
+          int index) {
+        if (prospectiveObstaclesBuilder_ == null) {
+          return prospectiveObstacles_.get(index);  } else {
+          return prospectiveObstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
+           getProspectiveObstaclesOrBuilderList() {
+        if (prospectiveObstaclesBuilder_ != null) {
+          return prospectiveObstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(prospectiveObstacles_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addProspectiveObstaclesBuilder() {
+        return getProspectiveObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addProspectiveObstaclesBuilder(
+          int index) {
+        return getProspectiveObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder> 
+           getProspectiveObstaclesBuilderList() {
+        return getProspectiveObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
+          getProspectiveObstaclesFieldBuilder() {
+        if (prospectiveObstaclesBuilder_ == null) {
+          prospectiveObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder>(
+                  prospectiveObstacles_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          prospectiveObstacles_ = null;
+        }
+        return prospectiveObstaclesBuilder_;
+      }
+      
+      // optional int64 curTime = 3;
+      private long curTime_ ;
+      public boolean hasCurTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public long getCurTime() {
+        return curTime_;
+      }
+      public Builder setCurTime(long value) {
+        bitField0_ |= 0x00000004;
+        curTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        curTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SpawnObstacleRequestProto)
+    }
+    
+    static {
+      defaultInstance = new SpawnObstacleRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnObstacleRequestProto)
+  }
+  
+  public interface SpawnObstacleResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
+    java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> 
+        getSpawnedObstaclesList();
+    com.lvl6.proto.StructureProto.UserObstacleProto getSpawnedObstacles(int index);
+    int getSpawnedObstaclesCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+        getSpawnedObstaclesOrBuilderList();
+    com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getSpawnedObstaclesOrBuilder(
+        int index);
+    
+    // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
+    boolean hasStatus();
+    com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus();
+  }
+  public static final class SpawnObstacleResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements SpawnObstacleResponseProtoOrBuilder {
+    // Use SpawnObstacleResponseProto.newBuilder() to construct.
+    private SpawnObstacleResponseProto(Builder builder) {
+      super(builder);
+    }
+    private SpawnObstacleResponseProto(boolean noInit) {}
+    
+    private static final SpawnObstacleResponseProto defaultInstance;
+    public static SpawnObstacleResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SpawnObstacleResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable;
+    }
+    
+    public enum SpawnObstacleStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_OTHER(1, 2),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_OTHER_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static SpawnObstacleStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>() {
+              public SpawnObstacleStatus findValueByNumber(int number) {
+                return SpawnObstacleStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final SpawnObstacleStatus[] VALUES = {
+        SUCCESS, FAIL_OTHER, 
+      };
+      
+      public static SpawnObstacleStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private SpawnObstacleStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
+    public static final int SPAWNEDOBSTACLES_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> spawnedObstacles_;
+    public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> getSpawnedObstaclesList() {
+      return spawnedObstacles_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+        getSpawnedObstaclesOrBuilderList() {
+      return spawnedObstacles_;
+    }
+    public int getSpawnedObstaclesCount() {
+      return spawnedObstacles_.size();
+    }
+    public com.lvl6.proto.StructureProto.UserObstacleProto getSpawnedObstacles(int index) {
+      return spawnedObstacles_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getSpawnedObstaclesOrBuilder(
+        int index) {
+      return spawnedObstacles_.get(index);
+    }
+    
+    // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      spawnedObstacles_ = java.util.Collections.emptyList();
+      status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < spawnedObstacles_.size(); i++) {
+        output.writeMessage(2, spawnedObstacles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < spawnedObstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, spawnedObstacles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getSpawnedObstaclesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (spawnedObstaclesBuilder_ == null) {
+          spawnedObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          spawnedObstaclesBuilder_.clear();
+        }
+        status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto build() {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto result = new com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (spawnedObstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            spawnedObstacles_ = java.util.Collections.unmodifiableList(spawnedObstacles_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.spawnedObstacles_ = spawnedObstacles_;
+        } else {
+          result.spawnedObstacles_ = spawnedObstaclesBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (spawnedObstaclesBuilder_ == null) {
+          if (!other.spawnedObstacles_.isEmpty()) {
+            if (spawnedObstacles_.isEmpty()) {
+              spawnedObstacles_ = other.spawnedObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureSpawnedObstaclesIsMutable();
+              spawnedObstacles_.addAll(other.spawnedObstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.spawnedObstacles_.isEmpty()) {
+            if (spawnedObstaclesBuilder_.isEmpty()) {
+              spawnedObstaclesBuilder_.dispose();
+              spawnedObstaclesBuilder_ = null;
+              spawnedObstacles_ = other.spawnedObstacles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              spawnedObstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getSpawnedObstaclesFieldBuilder() : null;
+            } else {
+              spawnedObstaclesBuilder_.addAllMessages(other.spawnedObstacles_);
+            }
+          }
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.StructureProto.UserObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.UserObstacleProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addSpawnedObstacles(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus value = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.UserObstacleProto spawnedObstacles = 2;
+      private java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> spawnedObstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureSpawnedObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          spawnedObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.UserObstacleProto>(spawnedObstacles_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> spawnedObstaclesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto> getSpawnedObstaclesList() {
+        if (spawnedObstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(spawnedObstacles_);
+        } else {
+          return spawnedObstaclesBuilder_.getMessageList();
+        }
+      }
+      public int getSpawnedObstaclesCount() {
+        if (spawnedObstaclesBuilder_ == null) {
+          return spawnedObstacles_.size();
+        } else {
+          return spawnedObstaclesBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto getSpawnedObstacles(int index) {
+        if (spawnedObstaclesBuilder_ == null) {
+          return spawnedObstacles_.get(index);
+        } else {
+          return spawnedObstaclesBuilder_.getMessage(index);
+        }
+      }
+      public Builder setSpawnedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (spawnedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.set(index, value);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setSpawnedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (spawnedObstaclesBuilder_ == null) {
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addSpawnedObstacles(com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (spawnedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.add(value);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addSpawnedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto value) {
+        if (spawnedObstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.add(index, value);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addSpawnedObstacles(
+          com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (spawnedObstaclesBuilder_ == null) {
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addSpawnedObstacles(
+          int index, com.lvl6.proto.StructureProto.UserObstacleProto.Builder builderForValue) {
+        if (spawnedObstaclesBuilder_ == null) {
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllSpawnedObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.UserObstacleProto> values) {
+        if (spawnedObstaclesBuilder_ == null) {
+          ensureSpawnedObstaclesIsMutable();
+          super.addAll(values, spawnedObstacles_);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearSpawnedObstacles() {
+        if (spawnedObstaclesBuilder_ == null) {
+          spawnedObstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeSpawnedObstacles(int index) {
+        if (spawnedObstaclesBuilder_ == null) {
+          ensureSpawnedObstaclesIsMutable();
+          spawnedObstacles_.remove(index);
+          onChanged();
+        } else {
+          spawnedObstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder getSpawnedObstaclesBuilder(
+          int index) {
+        return getSpawnedObstaclesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder getSpawnedObstaclesOrBuilder(
+          int index) {
+        if (spawnedObstaclesBuilder_ == null) {
+          return spawnedObstacles_.get(index);  } else {
+          return spawnedObstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+           getSpawnedObstaclesOrBuilderList() {
+        if (spawnedObstaclesBuilder_ != null) {
+          return spawnedObstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(spawnedObstacles_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder addSpawnedObstaclesBuilder() {
+        return getSpawnedObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.UserObstacleProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.UserObstacleProto.Builder addSpawnedObstaclesBuilder(
+          int index) {
+        return getSpawnedObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.UserObstacleProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.UserObstacleProto.Builder> 
+           getSpawnedObstaclesBuilderList() {
+        return getSpawnedObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder> 
+          getSpawnedObstaclesFieldBuilder() {
+        if (spawnedObstaclesBuilder_ == null) {
+          spawnedObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.UserObstacleProto, com.lvl6.proto.StructureProto.UserObstacleProto.Builder, com.lvl6.proto.StructureProto.UserObstacleProtoOrBuilder>(
+                  spawnedObstacles_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          spawnedObstacles_ = null;
+        }
+        return spawnedObstaclesBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;
+      private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SpawnObstacleResponseProto)
+    }
+    
+    static {
+      defaultInstance = new SpawnObstacleResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SpawnObstacleResponseProto)
+  }
+  
+  public interface BeginObstacleRemovalRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional int64 curTime = 2;
+    boolean hasCurTime();
+    long getCurTime();
+    
+    // optional int32 gemsSpent = 3;
+    boolean hasGemsSpent();
+    int getGemsSpent();
+    
+    // optional sint32 resourceChange = 4;
+    boolean hasResourceChange();
+    int getResourceChange();
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
+    boolean hasResourceType();
+    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    
+    // optional int32 userObstacleId = 6;
+    boolean hasUserObstacleId();
+    int getUserObstacleId();
+  }
+  public static final class BeginObstacleRemovalRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements BeginObstacleRemovalRequestProtoOrBuilder {
+    // Use BeginObstacleRemovalRequestProto.newBuilder() to construct.
+    private BeginObstacleRemovalRequestProto(Builder builder) {
+      super(builder);
+    }
+    private BeginObstacleRemovalRequestProto(boolean noInit) {}
+    
+    private static final BeginObstacleRemovalRequestProto defaultInstance;
+    public static BeginObstacleRemovalRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public BeginObstacleRemovalRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional int64 curTime = 2;
+    public static final int CURTIME_FIELD_NUMBER = 2;
+    private long curTime_;
+    public boolean hasCurTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getCurTime() {
+      return curTime_;
+    }
+    
+    // optional int32 gemsSpent = 3;
+    public static final int GEMSSPENT_FIELD_NUMBER = 3;
+    private int gemsSpent_;
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+    
+    // optional sint32 resourceChange = 4;
+    public static final int RESOURCECHANGE_FIELD_NUMBER = 4;
+    private int resourceChange_;
+    public boolean hasResourceChange() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getResourceChange() {
+      return resourceChange_;
+    }
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
+    public static final int RESOURCETYPE_FIELD_NUMBER = 5;
+    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    public boolean hasResourceType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      return resourceType_;
+    }
+    
+    // optional int32 userObstacleId = 6;
+    public static final int USEROBSTACLEID_FIELD_NUMBER = 6;
+    private int userObstacleId_;
+    public boolean hasUserObstacleId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getUserObstacleId() {
+      return userObstacleId_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      curTime_ = 0L;
+      gemsSpent_ = 0;
+      resourceChange_ = 0;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      userObstacleId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeSInt32(4, resourceChange_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, userObstacleId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(4, resourceChange_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, userObstacleId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        curTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        resourceChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        userObstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto build() {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto result = new com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.curTime_ = curTime_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.resourceChange_ = resourceChange_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.resourceType_ = resourceType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.userObstacleId_ = userObstacleId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasCurTime()) {
+          setCurTime(other.getCurTime());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasResourceChange()) {
+          setResourceChange(other.getResourceChange());
+        }
+        if (other.hasResourceType()) {
+          setResourceType(other.getResourceType());
+        }
+        if (other.hasUserObstacleId()) {
+          setUserObstacleId(other.getUserObstacleId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              curTime_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              resourceChange_ = input.readSInt32();
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                resourceType_ = value;
+              }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              userObstacleId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional int64 curTime = 2;
+      private long curTime_ ;
+      public boolean hasCurTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getCurTime() {
+        return curTime_;
+      }
+      public Builder setCurTime(long value) {
+        bitField0_ |= 0x00000002;
+        curTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        curTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemsSpent = 3;
+      private int gemsSpent_ ;
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000004;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional sint32 resourceChange = 4;
+      private int resourceChange_ ;
+      public boolean hasResourceChange() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getResourceChange() {
+        return resourceChange_;
+      }
+      public Builder setResourceChange(int value) {
+        bitField0_ |= 0x00000008;
+        resourceChange_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceChange() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        resourceChange_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      public boolean hasResourceType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+        return resourceType_;
+      }
+      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        resourceType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 userObstacleId = 6;
+      private int userObstacleId_ ;
+      public boolean hasUserObstacleId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getUserObstacleId() {
+        return userObstacleId_;
+      }
+      public Builder setUserObstacleId(int value) {
+        bitField0_ |= 0x00000020;
+        userObstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        userObstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginObstacleRemovalRequestProto)
+    }
+    
+    static {
+      defaultInstance = new BeginObstacleRemovalRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginObstacleRemovalRequestProto)
+  }
+  
+  public interface BeginObstacleRemovalResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
+    boolean hasStatus();
+    com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus();
+  }
+  public static final class BeginObstacleRemovalResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements BeginObstacleRemovalResponseProtoOrBuilder {
+    // Use BeginObstacleRemovalResponseProto.newBuilder() to construct.
+    private BeginObstacleRemovalResponseProto(Builder builder) {
+      super(builder);
+    }
+    private BeginObstacleRemovalResponseProto(boolean noInit) {}
+    
+    private static final BeginObstacleRemovalResponseProto defaultInstance;
+    public static BeginObstacleRemovalResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public BeginObstacleRemovalResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable;
+    }
+    
+    public enum BeginObstacleRemovalStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_INSUFFICIENT_GEMS(1, 2),
+      FAIL_INSUFFICIENT_RESOURCE(2, 3),
+      FAIL_OTHER(3, 4),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_RESOURCE_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static BeginObstacleRemovalStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 3: return FAIL_INSUFFICIENT_RESOURCE;
+          case 4: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>() {
+              public BeginObstacleRemovalStatus findValueByNumber(int number) {
+                return BeginObstacleRemovalStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final BeginObstacleRemovalStatus[] VALUES = {
+        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_RESOURCE, FAIL_OTHER, 
+      };
+      
+      public static BeginObstacleRemovalStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private BeginObstacleRemovalStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto build() {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto result = new com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus value = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;
+      private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginObstacleRemovalResponseProto)
+    }
+    
+    static {
+      defaultInstance = new BeginObstacleRemovalResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginObstacleRemovalResponseProto)
+  }
+  
+  public interface ObstacleRemovalCompleteRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional int64 curTime = 2;
+    boolean hasCurTime();
+    long getCurTime();
+    
+    // optional bool speedUp = 3;
+    boolean hasSpeedUp();
+    boolean getSpeedUp();
+    
+    // optional int32 gemsSpent = 4;
+    boolean hasGemsSpent();
+    int getGemsSpent();
+    
+    // optional int32 userObstacleId = 5;
+    boolean hasUserObstacleId();
+    int getUserObstacleId();
+    
+    // optional bool atMaxObstacles = 6;
+    boolean hasAtMaxObstacles();
+    boolean getAtMaxObstacles();
+  }
+  public static final class ObstacleRemovalCompleteRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ObstacleRemovalCompleteRequestProtoOrBuilder {
+    // Use ObstacleRemovalCompleteRequestProto.newBuilder() to construct.
+    private ObstacleRemovalCompleteRequestProto(Builder builder) {
+      super(builder);
+    }
+    private ObstacleRemovalCompleteRequestProto(boolean noInit) {}
+    
+    private static final ObstacleRemovalCompleteRequestProto defaultInstance;
+    public static ObstacleRemovalCompleteRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ObstacleRemovalCompleteRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional int64 curTime = 2;
+    public static final int CURTIME_FIELD_NUMBER = 2;
+    private long curTime_;
+    public boolean hasCurTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getCurTime() {
+      return curTime_;
+    }
+    
+    // optional bool speedUp = 3;
+    public static final int SPEEDUP_FIELD_NUMBER = 3;
+    private boolean speedUp_;
+    public boolean hasSpeedUp() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public boolean getSpeedUp() {
+      return speedUp_;
+    }
+    
+    // optional int32 gemsSpent = 4;
+    public static final int GEMSSPENT_FIELD_NUMBER = 4;
+    private int gemsSpent_;
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+    
+    // optional int32 userObstacleId = 5;
+    public static final int USEROBSTACLEID_FIELD_NUMBER = 5;
+    private int userObstacleId_;
+    public boolean hasUserObstacleId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getUserObstacleId() {
+      return userObstacleId_;
+    }
+    
+    // optional bool atMaxObstacles = 6;
+    public static final int ATMAXOBSTACLES_FIELD_NUMBER = 6;
+    private boolean atMaxObstacles_;
+    public boolean hasAtMaxObstacles() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getAtMaxObstacles() {
+      return atMaxObstacles_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      curTime_ = 0L;
+      speedUp_ = false;
+      gemsSpent_ = 0;
+      userObstacleId_ = 0;
+      atMaxObstacles_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, speedUp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, userObstacleId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, atMaxObstacles_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, speedUp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, userObstacleId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, atMaxObstacles_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        curTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        speedUp_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userObstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        atMaxObstacles_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto build() {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto result = new com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.curTime_ = curTime_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.speedUp_ = speedUp_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.userObstacleId_ = userObstacleId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.atMaxObstacles_ = atMaxObstacles_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasCurTime()) {
+          setCurTime(other.getCurTime());
+        }
+        if (other.hasSpeedUp()) {
+          setSpeedUp(other.getSpeedUp());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasUserObstacleId()) {
+          setUserObstacleId(other.getUserObstacleId());
+        }
+        if (other.hasAtMaxObstacles()) {
+          setAtMaxObstacles(other.getAtMaxObstacles());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              curTime_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              speedUp_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              userObstacleId_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              atMaxObstacles_ = input.readBool();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional int64 curTime = 2;
+      private long curTime_ ;
+      public boolean hasCurTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getCurTime() {
+        return curTime_;
+      }
+      public Builder setCurTime(long value) {
+        bitField0_ |= 0x00000002;
+        curTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        curTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool speedUp = 3;
+      private boolean speedUp_ ;
+      public boolean hasSpeedUp() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getSpeedUp() {
+        return speedUp_;
+      }
+      public Builder setSpeedUp(boolean value) {
+        bitField0_ |= 0x00000004;
+        speedUp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSpeedUp() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        speedUp_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemsSpent = 4;
+      private int gemsSpent_ ;
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000008;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 userObstacleId = 5;
+      private int userObstacleId_ ;
+      public boolean hasUserObstacleId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getUserObstacleId() {
+        return userObstacleId_;
+      }
+      public Builder setUserObstacleId(int value) {
+        bitField0_ |= 0x00000010;
+        userObstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        userObstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool atMaxObstacles = 6;
+      private boolean atMaxObstacles_ ;
+      public boolean hasAtMaxObstacles() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getAtMaxObstacles() {
+        return atMaxObstacles_;
+      }
+      public Builder setAtMaxObstacles(boolean value) {
+        bitField0_ |= 0x00000020;
+        atMaxObstacles_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtMaxObstacles() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        atMaxObstacles_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
+    }
+    
+    static {
+      defaultInstance = new ObstacleRemovalCompleteRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleRemovalCompleteRequestProto)
+  }
+  
+  public interface ObstacleRemovalCompleteResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
+    boolean hasStatus();
+    com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus();
+  }
+  public static final class ObstacleRemovalCompleteResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ObstacleRemovalCompleteResponseProtoOrBuilder {
+    // Use ObstacleRemovalCompleteResponseProto.newBuilder() to construct.
+    private ObstacleRemovalCompleteResponseProto(Builder builder) {
+      super(builder);
+    }
+    private ObstacleRemovalCompleteResponseProto(boolean noInit) {}
+    
+    private static final ObstacleRemovalCompleteResponseProto defaultInstance;
+    public static ObstacleRemovalCompleteResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ObstacleRemovalCompleteResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable;
+    }
+    
+    public enum ObstacleRemovalCompleteStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_INSUFFICIENT_GEMS(1, 2),
+      FAIL_OTHER(2, 3),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static ObstacleRemovalCompleteStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 3: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>() {
+              public ObstacleRemovalCompleteStatus findValueByNumber(int number) {
+                return ObstacleRemovalCompleteStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final ObstacleRemovalCompleteStatus[] VALUES = {
+        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_OTHER, 
+      };
+      
+      public static ObstacleRemovalCompleteStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private ObstacleRemovalCompleteStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto build() {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto buildPartial() {
+        com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto result = new com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto other) {
+        if (other == com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus value = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;
+      private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
+    }
+    
+    static {
+      defaultInstance = new ObstacleRemovalCompleteResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleRemovalCompleteResponseProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor;
   private static
@@ -9954,6 +14094,36 @@ public final class EventStructureProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10066,7 +14236,43 @@ public final class EventStructureProto {
       "nsionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
       "FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DON" +
       "E_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nF" +
-      "AIL_OTHER\020\005B\025B\023EventStructureProto"
+      "AIL_OTHER\020\005\"\242\001\n\031SpawnObstacleRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022B\n\024prospectiveObstacles\030\002 \003(" +
+      "\0132$.com.lvl6.proto.MinimumObstacleProto\022" +
+      "\017\n\007curTime\030\003 \001(\003\"\217\002\n\032SpawnObstacleRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022;\n\020spawnedObstacles\030\002 ",
+      "\003(\0132!.com.lvl6.proto.UserObstacleProto\022N" +
+      "\n\006status\030\003 \001(\0162>.com.lvl6.proto.SpawnObs" +
+      "tacleResponseProto.SpawnObstacleStatus\"2" +
+      "\n\023SpawnObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
+      "IL_OTHER\020\002\"\342\001\n BeginObstacleRemovalReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tge" +
+      "msSpent\030\003 \001(\005\022\026\n\016resourceChange\030\004 \001(\021\0228\n" +
+      "\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Res" +
+      "ourceType:\004CASH\022\026\n\016userObstacleId\030\006 \001(\005\"",
+      "\252\002\n!BeginObstacleRemovalResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto" +
+      ".BeginObstacleRemovalResponseProto.Begin" +
+      "ObstacleRemovalStatus\"u\n\032BeginObstacleRe" +
+      "movalStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
+      "CIENT_GEMS\020\002\022\036\n\032FAIL_INSUFFICIENT_RESOUR" +
+      "CE\020\003\022\016\n\nFAIL_OTHER\020\004\"\274\001\n#ObstacleRemoval" +
+      "CompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\017\n\007curTim",
+      "e\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 " +
+      "\001(\005\022\026\n\016userObstacleId\030\005 \001(\005\022\026\n\016atMaxObst" +
+      "acles\030\006 \001(\010\"\226\002\n$ObstacleRemovalCompleteR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022b\n\006status\030\002 \001(\0162R" +
+      ".com.lvl6.proto.ObstacleRemovalCompleteR" +
+      "esponseProto.ObstacleRemovalCompleteStat" +
+      "us\"X\n\035ObstacleRemovalCompleteStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10193,6 +14399,54 @@ public final class EventStructureProto {
               new java.lang.String[] { "Sender", "Status", "Ucedp", },
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.class,
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_com_lvl6_proto_SpawnObstacleRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SpawnObstacleRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "ProspectiveObstacles", "CurTime", },
+              com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.class,
+              com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_com_lvl6_proto_SpawnObstacleResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_SpawnObstacleResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "SpawnedObstacles", "Status", },
+              com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.class,
+              com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(16);
+          internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleId", },
+              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.class,
+              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(17);
+          internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", },
+              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.class,
+              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(18);
+          internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleId", "AtMaxObstacles", },
+              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.class,
+              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(19);
+          internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", },
+              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.class,
+              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.Builder.class);
           return null;
         }
       };

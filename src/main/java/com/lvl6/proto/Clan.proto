@@ -20,7 +20,7 @@ message FullClanProto {
 	optional string description = 5;
 	optional string tag = 6;
 	optional bool requestToJoinRequired = 7;
-
+	optional int32 clanIconId = 8; 
 }
 
 //------------------------------------------------------------------------------------------
@@ -191,7 +191,11 @@ message PersistentClanEventRaidHistoryProto {
 
 //------------------------------------------------------------------------------------------
 
-
+message ClanIconProto {
+	optional int32 clanIconId = 1;
+	optional string imgName = 2;
+	optional bool isAvailable = 3;
+}
 
 //------------------------------------------------------------------------------------------
 

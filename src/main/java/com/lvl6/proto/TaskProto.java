@@ -1928,6 +1928,10 @@ public final class TaskProto {
     boolean hasCashReward();
     int getCashReward();
     
+    // optional int32 oilReward = 8;
+    boolean hasOilReward();
+    int getOilReward();
+    
     // optional bool puzzlePieceDropped = 5;
     boolean hasPuzzlePieceDropped();
     boolean getPuzzlePieceDropped();
@@ -2081,11 +2085,21 @@ public final class TaskProto {
       return cashReward_;
     }
     
+    // optional int32 oilReward = 8;
+    public static final int OILREWARD_FIELD_NUMBER = 8;
+    private int oilReward_;
+    public boolean hasOilReward() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getOilReward() {
+      return oilReward_;
+    }
+    
     // optional bool puzzlePieceDropped = 5;
     public static final int PUZZLEPIECEDROPPED_FIELD_NUMBER = 5;
     private boolean puzzlePieceDropped_;
     public boolean hasPuzzlePieceDropped() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public boolean getPuzzlePieceDropped() {
       return puzzlePieceDropped_;
@@ -2095,7 +2109,7 @@ public final class TaskProto {
     public static final int LEVEL_FIELD_NUMBER = 6;
     private int level_;
     public boolean hasLevel() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public int getLevel() {
       return level_;
@@ -2105,7 +2119,7 @@ public final class TaskProto {
     public static final int ITEMID_FIELD_NUMBER = 7;
     private int itemId_;
     public boolean hasItemId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public int getItemId() {
       return itemId_;
@@ -2116,6 +2130,7 @@ public final class TaskProto {
       monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
       expReward_ = 0;
       cashReward_ = 0;
+      oilReward_ = 0;
       puzzlePieceDropped_ = false;
       level_ = 0;
       itemId_ = 0;
@@ -2144,14 +2159,17 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, cashReward_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(5, puzzlePieceDropped_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(6, level_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(7, itemId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(8, oilReward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2178,17 +2196,21 @@ public final class TaskProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, cashReward_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, puzzlePieceDropped_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, level_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, itemId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, oilReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2322,12 +2344,14 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         cashReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        puzzlePieceDropped_ = false;
+        oilReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        level_ = 0;
+        puzzlePieceDropped_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
-        itemId_ = 0;
+        level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -2385,13 +2409,17 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.puzzlePieceDropped_ = puzzlePieceDropped_;
+        result.oilReward_ = oilReward_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.level_ = level_;
+        result.puzzlePieceDropped_ = puzzlePieceDropped_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
+        }
+        result.level_ = level_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.itemId_ = itemId_;
         result.bitField0_ = to_bitField0_;
@@ -2421,6 +2449,9 @@ public final class TaskProto {
         }
         if (other.hasCashReward()) {
           setCashReward(other.getCashReward());
+        }
+        if (other.hasOilReward()) {
+          setOilReward(other.getOilReward());
         }
         if (other.hasPuzzlePieceDropped()) {
           setPuzzlePieceDropped(other.getPuzzlePieceDropped());
@@ -2489,18 +2520,23 @@ public final class TaskProto {
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               puzzlePieceDropped_ = input.readBool();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               level_ = input.readInt32();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               itemId_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000010;
+              oilReward_ = input.readInt32();
               break;
             }
           }
@@ -2596,22 +2632,43 @@ public final class TaskProto {
         return this;
       }
       
+      // optional int32 oilReward = 8;
+      private int oilReward_ ;
+      public boolean hasOilReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getOilReward() {
+        return oilReward_;
+      }
+      public Builder setOilReward(int value) {
+        bitField0_ |= 0x00000010;
+        oilReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOilReward() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        oilReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // optional bool puzzlePieceDropped = 5;
       private boolean puzzlePieceDropped_ ;
       public boolean hasPuzzlePieceDropped() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public boolean getPuzzlePieceDropped() {
         return puzzlePieceDropped_;
       }
       public Builder setPuzzlePieceDropped(boolean value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         puzzlePieceDropped_ = value;
         onChanged();
         return this;
       }
       public Builder clearPuzzlePieceDropped() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         puzzlePieceDropped_ = false;
         onChanged();
         return this;
@@ -2620,19 +2677,19 @@ public final class TaskProto {
       // optional int32 level = 6;
       private int level_ ;
       public boolean hasLevel() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getLevel() {
         return level_;
       }
       public Builder setLevel(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         level_ = value;
         onChanged();
         return this;
       }
       public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         level_ = 0;
         onChanged();
         return this;
@@ -2641,19 +2698,19 @@ public final class TaskProto {
       // optional int32 itemId = 7;
       private int itemId_ ;
       public boolean hasItemId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getItemId() {
         return itemId_;
       }
       public Builder setItemId(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         itemId_ = value;
         onChanged();
         return this;
       }
       public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         itemId_ = 0;
         onChanged();
         return this;
@@ -4003,28 +4060,28 @@ public final class TaskProto {
       "umWithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId" +
       "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"M\n\024M" +
       "inimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006t" +
-      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\211\002\n\025T",
+      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\234\002\n\025T",
       "askStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022" +
       "F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.Ta" +
       "skStageMonsterProto.MonsterType\022\021\n\texpRe" +
-      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
-      "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006ite" +
-      "mId\030\007 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEve" +
-      "ntProto\022\017\n\007eventId\030\001 \001(\005\022,\n\tdayOfWeek\030\002 " +
-      "\001(\0162\031.com.lvl6.proto.DayOfWeek\022\021\n\tstartH" +
-      "our\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022",
-      "\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005" +
-      "\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Persiste" +
-      "ntEventProto.EventType\022C\n\016monsterElement" +
-      "\030\010 \001(\0162+.com.lvl6.proto.MonsterProto.Mon" +
-      "sterElement\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
-      "\tEVOLUTION\020\002\"V\n\030UserPersistentEventProto" +
-      "\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coo" +
-      "lDownStartTime\030\003 \001(\003*g\n\tDayOfWeek\022\n\n\006SUN" +
-      "DAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY\020\003\022\r\n\tWEDNES" +
-      "DAY\020\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDAY\020\006\022\014\n\010SATUR",
-      "DAY\020\007B\013B\tTaskProto"
+      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRew" +
+      "ard\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r\n" +
+      "\005level\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\"3\n\013MonsterT" +
+      "ype\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020" +
+      "\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventId\030\001 " +
+      "\001(\005\022,\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.proto." +
+      "DayOfWeek\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDur",
+      "ationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017co" +
+      "oldownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com." +
+      "lvl6.proto.PersistentEventProto.EventTyp" +
+      "e\022C\n\016monsterElement\030\010 \001(\0162+.com.lvl6.pro" +
+      "to.MonsterProto.MonsterElement\"\'\n\tEventT" +
+      "ype\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserP" +
+      "ersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007e" +
+      "ventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(\003*" +
+      "g\n\tDayOfWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007" +
+      "TUESDAY\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022\n",
+      "\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020\007B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4060,7 +4117,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "PuzzlePieceDropped", "Level", "ItemId", },
+              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "Level", "ItemId", },
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.class,
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_PersistentEventProto_descriptor =

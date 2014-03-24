@@ -76,6 +76,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     boolean firstTimeUserWonTask = reqProto.getFirstTimeUserWonTask();
     int maxCash = senderResourcesProto.getMaxCash();
+    int maxOil = senderResourcesProto.getMaxOil();
 
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
@@ -98,7 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if(legit) {
         previousCash = aUser.getCash();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime, money,
-    	  		protos, maxCash);
+    	  		protos, maxCash, maxOil);
     	  
     	  resBuilder.setTaskId(ut.getTaskId());
       }
@@ -110,6 +111,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	
       	//delete from task_stage_for_user and put into task_stage_history
       	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+      	//TODO: record 
+      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
       	recordStageHistory(tsfuList, monsterIdToNumPieces);
       	
       	
@@ -182,19 +185,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut, boolean userWon,
 		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos,
-		  int maxCash) {
+		  int maxCash, int maxOil) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
+	  int oilGained = ut.getOilGained();
 	  
 	  int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
 		int maxCashUserCanGain = maxCash - curCash;
 		cashGained = Math.min(cashGained, maxCashUserCanGain);
 		
+		int curOil = Math.min(u.getOil(), maxOil);
+		int maxOilUserCanGain = maxOil - curOil;
+		oilGained = Math.min(oilGained, maxOilUserCanGain);
+		
 	  log.info("user before currency change. " + u);
 	  if (userWon) {
 	  	log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
-		  if (!updateUser(u, cashGained, expGained, clientTime)) {
+		  if (!updateUser(u, expGained, cashGained, oilGained, clientTime)) {
 			  return false;
 		  } else {
 		  	if (0 != cashGained) {
@@ -213,11 +221,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  Timestamp startTime = new Timestamp(startMillis);
 	  boolean cancelled = false;
 	  int num = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
-			  expGained, cashGained, numRevives, startTime, clientTime, userWon, cancelled);
+			  expGained, cashGained, oilGained, numRevives, startTime, clientTime, userWon, cancelled);
 	  if (1 != num) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
 		  		"numInserted=" + num + " Attempting to undo shi");
-		  updateUser(u, -1* cashGained, -1 * expGained, clientTime);
+		  updateUser(u, -1 * expGained, -1 * cashGained,  -1 * oilGained, clientTime);
 		  return false;
 	  }
 	  
@@ -228,17 +236,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  private boolean updateUser(User u, int cashGained, int expGained,
+  private boolean updateUser(User u, int expGained, int cashGained, int oilGained,
 		  Timestamp clientTime) {
 	  int energyChange = 0;
-	  boolean simulateEnergyRefill = false;
-	  if (!u.updateRelativeCoinsExpTaskscompleted(cashGained,
-	  		expGained, 1, clientTime)) {
-		  log.error("problem with updating user stats post-task. cashGained="
-				  + cashGained + ", expGained=" + expGained + ", increased" +
+	  if (!u.updateRelativeCashOilExpTasksCompleted(expGained, cashGained, oilGained, 1,
+	  		clientTime)) {
+		  log.error("problem with updating user stats post-task. expGained=" + expGained +
+		  		", cashGained=" + cashGained + ", oilGained=" + oilGained + ", increased" +
 				  " tasks completed by 1, energyChange=" + energyChange +
-				  ", clientTime=" + clientTime + ", simulateEnergyRefill=" +
-				  simulateEnergyRefill + ", user=" + u);
+				  ", clientTime=" + clientTime + ", user=" + u);
 		  return false;
 	  }
 	  return true;
@@ -259,6 +265,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	List<String> monsterTypes = new ArrayList<String>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
+  	List<Integer> oilGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	
@@ -273,6 +280,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		monsterTypes.add(tsfu.getMonsterType());
   		expGained.add(tsfu.getExpGained());
   		cashGained.add(tsfu.getCashGained());
+  		oilGained.add(tsfu.getOilGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
@@ -298,7 +306,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, monsterPieceDropped, itemIdDropped);
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
   	
@@ -340,6 +348,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  }
   }
   
+  //not using this method because how many items the user has is kept track through
+  //quest progress
   private Map<Integer, ItemForUser> updateUserItems(List<TaskStageForUser> tsfuList,
   		int userId) {
   	Map<Integer, Integer> itemIdsToQuantities = getItemsDropped(tsfuList);

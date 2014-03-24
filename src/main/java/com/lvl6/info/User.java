@@ -13,7 +13,8 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 5859682564351287507L;
+	private static final long serialVersionUID = -8217671843800724634L;
+	
 	private int id;
 	private String name;
 	private int level;
@@ -60,6 +61,7 @@ public class User implements Serializable {
 	private boolean fbIdSetOnUserCreate;
 	private String gameCenterId;
 	private String udid;
+	private Date lastObstacleSpawnedTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
@@ -74,7 +76,8 @@ public class User implements Serializable {
 			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
 			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
 			int attacksLost, int defensesLost, String facebookId,
-			boolean fbIdSetOnUserCreate, String gameCenterId, String udid) {
+			boolean fbIdSetOnUserCreate, String gameCenterId, String udid,
+			Date lastObstacleSpawnedTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,6 +123,7 @@ public class User implements Serializable {
 		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
 		this.gameCenterId = gameCenterId;
 		this.udid = udid;
+		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -391,16 +395,16 @@ public class User implements Serializable {
 	 * used for tasks
 	 *        * user- coins/exp/tasks_completed increase
 	 */
-	public boolean updateRelativeCoinsExpTaskscompleted (
-			int coinChange, int expChange, int tasksCompletedChange,
-			Timestamp clientTime) {
+	public boolean updateRelativeCashOilExpTasksCompleted (int expChange, int cashChange,
+			int oilChange, int tasksCompletedChange, Timestamp clientTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
-		relativeParams.put(DBConstants.USER__CASH, coinChange);
 		relativeParams.put(DBConstants.USER__EXPERIENCE, expChange);
+		relativeParams.put(DBConstants.USER__CASH, cashChange);
+		relativeParams.put(DBConstants.USER__OIL, oilChange);
 		relativeParams.put(DBConstants.USER__TASKS_COMPLETED, tasksCompletedChange);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
@@ -411,8 +415,9 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.cash += coinChange;
 			this.experience += expChange;
+			this.cash += cashChange;
+			this.oil += oilChange;
 			this.tasksCompleted += tasksCompletedChange;
 			return true;
 		}
@@ -534,6 +539,36 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateGemsCashClan(int gemChange, int cashChange, int clanId) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		if (0 != gemChange) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__CLAN_ID, clanId);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		
+		if (1 == numUpdated) {
+			if (0 != cashChange) {
+				this.cash += cashChange;
+			}
+			if (0 != gemChange) {
+				this.gems += gemChange;
+			}
+			this.clanId = clanId;
+			return true;
+		}
+		return false;
+	}
 
 	public boolean updateRelativeCoinsOilRetrievedFromStructs (int coinChange,
 			int oilChange) {
@@ -610,7 +645,7 @@ public class User implements Serializable {
 
 	/*
 	 * used for battles
-	 */
+	 
 	public boolean updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
 			int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
 			Timestamp clientTime, boolean deactivateShield,
@@ -730,7 +765,7 @@ public class User implements Serializable {
 		} else if (activateShield) {
 			this.shieldEndTime = shieldEndTimeTemp;
 		}
-	}
+	} */
 
 	public boolean updateRelativeDiamondsForFree(int diamondChange, EarnFreeDiamondsType freeDiamondsType) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -850,6 +885,98 @@ public class User implements Serializable {
 		if (numUpdated == 1) {
 			this.elo += eloChange;
 			this.inBattleShieldEndTime = inBattleEndTime;
+			return true;
+		}
+		return false;
+	}
+	
+
+	public boolean updateEloOilCashShields(int userId, int eloChange, int oilChange,
+			int cashChange, Date shieldEndTime, Date inBattleEndTime) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != eloChange) {
+			relativeParams.put(DBConstants.USER__ELO, eloChange);
+		}
+		if (0 != oilChange) {
+			relativeParams.put(DBConstants.USER__OIL, oilChange);
+		}
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (shieldEndTime != getShieldEndTime()) {
+			Timestamp newShieldEndTime = new Timestamp(shieldEndTime.getTime());
+			absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, newShieldEndTime);
+		}
+		if (inBattleEndTime != getInBattleShieldEndTime()) {
+			Timestamp newShieldEndTime = new Timestamp(inBattleEndTime.getTime());
+			absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, newShieldEndTime);
+		}
+		
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
+				absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+//			this.elo = newElo;
+			if (0 != eloChange) {
+				this.elo += eloChange;
+			}
+			if (0 != oilChange) {
+				this.oil += oilChange;
+			}
+			if (0 != cashChange) {
+				this.cash += cashChange;
+			}
+			if (shieldEndTime != getShieldEndTime()) {
+				this.shieldEndTime = shieldEndTime;
+			}
+			if (inBattleEndTime != getInBattleShieldEndTime()) {
+				this.inBattleShieldEndTime = inBattleEndTime;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateLastObstacleSpawnedTime(Timestamp lastObstacleSpawnedTime) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
+				absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			this.lastObstacleSpawnedTime = new Date(lastObstacleSpawnedTime.getTime());
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean updateRelativeGemsAndObstacleTime(int gemChange,
+			Timestamp lastObstacleSpawnedTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (gemChange != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gems += gemChange;
 			return true;
 		}
 		return false;
@@ -1224,6 +1351,14 @@ public class User implements Serializable {
 		this.udid = udid;
 	}
 
+	public Date getLastObstacleSpawnedTime() {
+		return lastObstacleSpawnedTime;
+	}
+
+	public void setLastObstacleSpawnedTime(Date lastObstacleSpawnedTime) {
+		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1249,7 +1384,8 @@ public class User implements Serializable {
 				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
 				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
 				+ facebookId + ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid + "]";
+				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
+				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime + "]";
 	}
 
 }

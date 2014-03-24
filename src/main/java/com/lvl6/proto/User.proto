@@ -20,6 +20,7 @@ message MinimumClanProto {
 	optional string description = 5;
 	optional string tag = 6;
 	optional bool requestToJoinRequired = 7;
+	optional int32 clanIconId = 8; 
 }
 
 //------------------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ message MinimumUserProtoWithFacebookId {
 }
 
 //------------------------------------------------------------------------------------------
-
+//server does not create proto
 message MinimumUserProtoWithMaxResources {
 	optional MinimumUserProto minUserProto = 1;
 	optional int32 maxCash = 2;
@@ -121,6 +122,7 @@ message FullUserProto {
 	//optional bool fbIdSetOnUserCreate = 44; //defined below
 	optional string gameCenterId = 45;	
 	//optional string udid = 13; defined below, should be 46
+	optional int64 lastObstacleSpawnedTime = 47;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
