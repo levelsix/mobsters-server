@@ -9,6 +9,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.events.BroadcastResponseEvent;
 import com.lvl6.events.GameEvent;
@@ -18,6 +19,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils;
 import com.lvl6.utils.NIOUtils;
 
+@Component
 public class EventWriterAmqp extends EventWriter {
 
 	@Resource(name = "chatMessagesTemplate")
@@ -55,12 +57,24 @@ public class EventWriterAmqp extends EventWriter {
 
 	private static org.slf4j.Logger log = LoggerFactory.getLogger(EventWriterAmqp.class);
 
+	@Override
 	protected void processEvent(GameEvent event) {
 		if (event instanceof ResponseEvent)
 			processResponseEvent((ResponseEvent) event);
 
 	}
+	
+	@Override
+	public void processPreDBFacebookEvent(ResponseEvent event, String facebookId) {
+		//log.info("writer received predb fb event=\n"+event.toString());
+		byte[] buff = getByteArray(event);
+		MessageProperties msgProps = getProps();
+		String routingKey = "client_facebookid_" + facebookId;
+		log.debug("writing predb event with type=" + event.getEventType() + " to player with routingKey "+ routingKey + ", event=" + event);
+		sendMessageToPlayer(buff, msgProps, routingKey);
+	}
 
+	@Override
 	public void processPreDBResponseEvent(ResponseEvent event, String udid) {
 		//log.info("writer received predb event=\n"+event.toString());
 		byte[] buff = getByteArray(event);

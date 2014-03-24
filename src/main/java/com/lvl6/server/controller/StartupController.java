@@ -47,7 +47,6 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
@@ -83,7 +82,6 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
-import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
@@ -103,7 +101,6 @@ import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
@@ -232,7 +229,6 @@ public class StartupController extends EventController {
     String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
     String fbId = reqProto.getFbId();
     boolean freshRestart = reqProto.getIsFreshRestart();
-    long clientTime = reqProto.getClientTime();
 
     MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 
@@ -260,7 +256,8 @@ public class StartupController extends EventController {
     // Don't fill in other fields if it is a major update
     StartupStatus startupStatus = StartupStatus.USER_NOT_IN_DB;
 
-    Timestamp now = new Timestamp(new Date().getTime());
+    Date nowDate = new Date();
+    Timestamp now = new Timestamp(nowDate.getTime());
     boolean isLogin = true;
 
     int newNumConsecutiveDaysLoggedIn = 0;
@@ -276,13 +273,22 @@ public class StartupController extends EventController {
 			    try {
 			    	//force other devices on this account to logout
 			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
-			      logoutResponse.setLoginTime(now.getTime());
+			      //this is the value before it is overwritten with current time
 			      logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
-			      logoutResponse.setTimeClientSent(clientTime);
+			      logoutResponse.setUdid(udid);
 			      ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
 			      logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
-			      server.writePreDBEvent(logoutEvent, udid);
-
+			      //to take care of two devices using the same udid amqp queue (not very common)
+			      //only if a device is already on and then another one comes on and somehow
+			      //switches to the existing user account, no fbId though
+			      getEventWriter().processPreDBResponseEvent(logoutEvent, udid);
+			      //to take care of one device already logged on (lot more common than above)
+			      getEventWriter().handleEvent(logoutEvent);
+			      //to take care of both the above, but when user is logged in via facebook id
+			      if (null != fbId && !fbId.isEmpty()) {
+			      	getEventWriter().processPreDBFacebookEvent(logoutEvent, fbId);
+			      }
+			      
 			    	
 			      startupStatus = StartupStatus.USER_IN_DB;
 			      log.info("No major update... getting user info");
@@ -312,6 +318,9 @@ public class StartupController extends EventController {
 			      setAllies(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
 
+			      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
+			      user.setLastLogin(now);
+			      
 			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
 			      resBuilder.setSender(fup);
 
@@ -369,7 +378,7 @@ public class StartupController extends EventController {
     	  StartupResponseEvent resEvent = new StartupResponseEvent(udid);
     	  resEvent.setTag(event.getTag());
     	  resEvent.setStartupResponseProto(resBuilder.build());
-    	  server.writePreDBEvent(resEvent, udid);
+    	  getEventWriter().processPreDBResponseEvent(resEvent, udid);
       } catch (Exception e2) {
     	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
@@ -400,6 +409,7 @@ public class StartupController extends EventController {
     // if app is not in force tutorial execute this function,
     // regardless of whether the user is new or restarting from an account
     // reset
+    //UPDATE USER's LAST LOGIN
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
   }
 

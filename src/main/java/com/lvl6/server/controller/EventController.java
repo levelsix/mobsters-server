@@ -14,6 +14,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.Globals;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.server.EventWriter;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.Wrap;
@@ -42,16 +43,27 @@ public abstract class EventController extends Wrap {
 		this.transactionManager = transactionManager;
 	}
 
+	//SHOULD REALLY PHASE THIS OUT---------------------------------------------------------
 	@Autowired
 	protected GameServer server;
-
 	public GameServer getServer() {
 		return server;
 	}
-
 	public void setServer(GameServer server) {
 		this.server = server;
 	}
+	//------------------------------------------------------------------------------------
+	@Autowired
+	private EventWriter eventWriter;
+
+	public EventWriter getEventWriter() {
+		return eventWriter;
+	}
+
+	public void setEventWriter(EventWriter eventWriter) {
+		this.eventWriter = eventWriter;
+	}
+	
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {}.getClass().getEnclosingClass());
 
