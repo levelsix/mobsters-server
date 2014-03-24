@@ -1089,7 +1089,7 @@ public class StartupController extends EventController {
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
-  	log.info("historyProtoList=" + historyProtoList);
+//  	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
   }
   
