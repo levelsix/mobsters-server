@@ -282,7 +282,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  int playerExp = 10;
 	  
 	  //newbie protection
-	  boolean activateShield = true;
 	  String rank = ControllerConstants.TUTORIAL__INIT_RANK;
 	  
 	  Date createDate = new Date(createTime.getTime());
@@ -291,8 +290,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Timestamp shieldEndTime = new Timestamp(shieldEndDate.getTime());
 	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
-	      gems, false, deviceToken, activateShield, createTime, rank, facebookId,
-	      shieldEndTime);
+	      gems, false, deviceToken, createTime, rank, facebookId, shieldEndTime);
 	        
 	  if (userId > 0) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*/

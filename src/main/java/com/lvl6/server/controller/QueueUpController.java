@@ -33,9 +33,10 @@ import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -57,6 +58,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	@Autowired
 	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
 	
+	@Autowired
+	protected TimeUtils timeUtils;
 	
 //	@Autowired
 //	protected PvpUtil pvpUtil;
@@ -125,8 +128,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				setProspectivePvpMatches(resBuilder, attacker, uniqSeenUserIds, clientDate,
 						attackerElo);
 				
-				//update the user
-				success = writeChangesToDB(attacker, clientTime, currencyChange);
+				//update the user, and his shield
+				success = writeChangesToDB(attackerId, attacker, clientTime, currencyChange);
 						//gemsSpent, cashChange, clientTime,
 			}				
 
@@ -363,7 +366,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //		int offset = 0;
 //		int limit = ControllerConstants.PVP__NUM_ENEMIES_LIMIT;
 //		
-//		Set<Tuple> prospectiveDefenders = getPvpUtil().getOfflineEloTopN(minElo, maxElo,
+//		Set<Tuple> prospectiveDefenders = getPvpUtil().getEloTopN(minElo, maxElo,
 //				offset, limit);
 //		
 //		//go through them and select the one that has not been seen yet
@@ -380,8 +383,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //		}
 		//use hazelcast distributed map to get the defenders  (size of this must be humongous
 		//since it contains every valid offline user between min and max elo...)
-		Set<OfflinePvpUser> prospectiveDefenders = getHazelcastPvpUtil()
-				.retrieveOfflinePvpUsers(minElo, maxElo, clientDate); 
+		Set<PvpUser> prospectiveDefenders = getHazelcastPvpUtil()
+				.retrievePvpUsers(minElo, maxElo, clientDate); 
 		
 		//this is so as to randomly pick people
 		float numDefendersLeft = prospectiveDefenders.size();
@@ -390,7 +393,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		log.info("users returned from hazelcast pvp util. users=" + prospectiveDefenders);
 		
 		//go through them and select the one that has not been seen yet
-		for (OfflinePvpUser pvpUser : prospectiveDefenders) {
+		for (PvpUser pvpUser : prospectiveDefenders) {
 			int userId = Integer.valueOf(pvpUser.getUserId());
 			numDefendersLeft -= 1;
 			
@@ -651,7 +654,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	
 	// change user silver value and remove his shield if he has one, since he is
 	// going to attack some one
-	private boolean writeChangesToDB(User attacker, //int gemsSpent, int cashChange, 
+	private boolean writeChangesToDB(int attackerId, User attacker, //int gemsSpent, int cashChange, 
 			Timestamp queueTime, Map<String, Integer> money) {
 		
 //		//CHARGE THE USER
@@ -672,6 +675,29 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //				money.put(MiscMethods.gems, gemChange);
 //			}
 //		}
+		//update the user who queued things
+
+		//turn off user's shield if he has one active
+		Date curShieldEndTime = attacker.getShieldEndTime();
+		Date queueDate = new Date(queueTime.getTime());
+		if (getTimeUtils().isFirstEarlierThanSecond(queueDate, curShieldEndTime)) {
+			log.info("user shield end time is now being reset since he's attacking with a shield");
+			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("user before shield change=" + attacker);
+			Date login = attacker.getLastLogin();
+			attacker.updateEloOilCashShields(attackerId, 0, 0,0, login, login);
+			
+			int attackerElo = attacker.getElo();                    
+			PvpUser attackerOpu = new PvpUser();
+			attackerOpu.setElo(attackerElo);                        
+			attackerOpu.setShieldEndTime(attacker.getLastLogin());
+			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
+			getHazelcastPvpUtil().replacePvpUser(attackerOpu);
+			log.info("user after shield change=" + attacker);
+			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("3cur pvpuser=" + attackerOpu);
+		}
+		
 		return true;
 	}
 
@@ -706,6 +732,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	public void setMonsterForPvpRetrieveUtils(
 			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
 		this.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
+	}
+
+	public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
+
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
 	}
 
 }

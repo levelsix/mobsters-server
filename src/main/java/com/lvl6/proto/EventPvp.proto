@@ -70,7 +70,9 @@ message BeginPvpBattleRequestProto {
 	//for exacting revenge, need to update a history table to prevent user from 
 	//exacting revenge again
 	optional bool exactingRevenge = 5;
-	//the battle that allowed sender to start this revenge battle 
+	
+	//the battle that allowed sender to start this revenge battle
+	//where sender was the defender and enemy was the attacker
 	optional int64 previousBattleEndTime = 6; 
 }
 

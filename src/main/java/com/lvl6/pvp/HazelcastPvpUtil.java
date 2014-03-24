@@ -43,13 +43,13 @@ public class HazelcastPvpUtil implements InitializingBean {
 		//need to put this in spring-hazelcast.xml
 		//distributed map that is seen across all our servers
 		@javax.annotation.Resource(name = "offlinePvpUserMap")
-		protected IMap<String, OfflinePvpUser> offlinePvpUserMap;
+		protected IMap<String, PvpUser> offlinePvpUserMap;
 
-		public IMap<String, OfflinePvpUser> getOfflinePvpUserMap() {
+		public IMap<String, PvpUser> getPvpUserMap() {
 			return offlinePvpUserMap;
 		}
 
-		public void setOfflinePvpUserMap(IMap<String, OfflinePvpUser> offlinePvpUserMap) {
+		public void setPvpUserMap(IMap<String, PvpUser> offlinePvpUserMap) {
 			this.offlinePvpUserMap = offlinePvpUserMap;
 		}
 		
@@ -64,7 +64,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		
 		//Used to get offline people that can be attacked in pvp
 		@Autowired
-		protected OfflinePvpUserRetrieveUtils offlinePvpUserRetrieveUtils;
+		protected PvpUserRetrieveUtils offlinePvpUserRetrieveUtils;
 		
 		//properties used to create random names, related: textFileResourceLoaderAware
 	  private static int syllablesInName1 = 2;
@@ -74,9 +74,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	  private List<String> randomNames; //should this be a distributed collection?
 	  private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
     
-    //TODO: move to OfflinePvpUserRetrieveUtils
+    //TODO: move to PvpUserRetrieveUtils
     //METHOD TO ACTUALLY USE IMAP, distributed map
-    public Set<OfflinePvpUser> retrieveOfflinePvpUsers(int minElo, int maxElo, 
+    public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, 
     		Date now) {
     	log.info("querying for people to attack. shieldEndTime should be before now=" +
     		now + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
@@ -91,7 +91,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     			.and(e.get(inBattleShieldEndTime).lessThan(now))
     			.and(e.get(elo).between(minElo, maxElo));
     	
-    	Set<OfflinePvpUser> users = (Set<OfflinePvpUser>) offlinePvpUserMap.values(predicate);
+    	Set<PvpUser> users = (Set<PvpUser>) offlinePvpUserMap.values(predicate);
     	log.info("users:" + users);
     	
     	return users;
@@ -99,15 +99,15 @@ public class HazelcastPvpUtil implements InitializingBean {
     
     
     //METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
-    public OfflinePvpUser getOfflinePvpUser(int userId) {
+    public PvpUser getPvpUser(int userId) {
     	String userIdStr = String.valueOf(userId);
     	if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
-    		log.info("OfflinePvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
+    		log.info("PvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
     	}
 
     	if (!offlinePvpUserMap.containsKey(userIdStr)) {
     		if (0 != userId) {
-    			log.warn("trying to access nonexistent OfflinePvpUser with id: " + userIdStr +
+    			log.warn("trying to access nonexistent PvpUser with id: " + userIdStr +
     					" PROBABLY because the user is online");
     		}
     		return null;
@@ -116,33 +116,34 @@ public class HazelcastPvpUtil implements InitializingBean {
     	}
     }
 
-    public void addOfflinePvpUser(OfflinePvpUser userOpu) {
+    public void replacePvpUser(PvpUser userOpu) {
     	String userIdStr = userOpu.getUserId();
     	offlinePvpUserMap.put(userIdStr, userOpu);
     	
     }
     
-    //if the OfflinePvpUser doesn't exist, then don't save it because
-    //the OfflinePvpUser is probably online now. Otherwise, store the user.
-    public void updateOfflinePvpUser(OfflinePvpUser enemy) {
-    	String userIdStr = enemy.getUserId();
-
-    	if (!offlinePvpUserMap.containsKey(userIdStr)) {
-    		log.warn("trying to update nonexistent OfflinePvpUser with id: " + userIdStr +
-    				" PROBABLY because the user is online, so not saving");
-    	} else {
-    		OfflinePvpUser existing = offlinePvpUserMap.get(userIdStr);
-    		offlinePvpUserMap.put(userIdStr, enemy);
-    		log.info("updated offlinePvpUser: " + userIdStr + "\t old=" + existing +
-    				"\t new=" + enemy);
-    	}
-
-    	if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
-    		log.info("OfflinePvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
-    	}
-    }
+    //can attack people who are online
+//    //if the PvpUser doesn't exist, then don't save it because
+//    //the PvpUser is probably online now. Otherwise, store the user.
+//    public void updatePvpUser(PvpUser enemy) {
+//    	String userIdStr = enemy.getUserId();
+//
+//    	if (!offlinePvpUserMap.containsKey(userIdStr)) {
+//    		log.warn("trying to update nonexistent PvpUser with id: " + userIdStr +
+//    				" PROBABLY because the user is online, so not saving");
+//    	} else {
+//    		PvpUser existing = offlinePvpUserMap.get(userIdStr);
+//    		offlinePvpUserMap.put(userIdStr, enemy);
+//    		log.info("updated offlinePvpUser: " + userIdStr + "\t old=" + existing +
+//    				"\t new=" + enemy);
+//    	}
+//
+//    	if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
+//    		log.info("PvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
+//    	}
+//    }
     
-    public void removeOfflinePvpUser(int userId) {
+    public void removePvpUser(int userId) {
     	String userIdStr = String.valueOf(userId);
     	
     	if (offlinePvpUserMap.containsKey(userIdStr)) {
@@ -168,7 +169,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		@Override
     public void afterPropertiesSet() throws Exception {
     	createRandomNames();
-    	setupOfflinePvpUserMap();
+    	setupPvpUserMap();
     }
 		
 		//creates the random names for fake users
@@ -212,7 +213,7 @@ public class HazelcastPvpUtil implements InitializingBean {
       
     }
 
-    protected void setupOfflinePvpUserMap() {
+    protected void setupPvpUserMap() {
 
     	//in mvn clean test, error was
       //Index can only be added before adding entries! Add indexes first and only once then put entries.
@@ -221,22 +222,22 @@ public class HazelcastPvpUtil implements InitializingBean {
     		//    	log.info("!!!!!!!!!!!!!!!!!!!!!!!clearing offlinePvpUserMap!!!!!!!!!!!!!!!!!!!!!!!");
     		//    	offlinePvpUserMap.clear();
     		log.info("adding indexes to HazelcastPvpUtil.offlinePvpUserMap");
-    		addOfflinePvpUserIndexes();
+    		addPvpUserIndexes();
     	}
     	
-    	//now we have almost all offline users, put them into the userIdToOfflinePvpUser IMap
-    	Collection<OfflinePvpUser> validUsers = getOfflinePvpUserRetrieveUtils().getPvpValidUsers();
+    	//now we have almost all offline users, put them into the userIdToPvpUser IMap
+    	Collection<PvpUser> validUsers = getPvpUserRetrieveUtils().getPvpValidUsers();
     	if (null != validUsers && !validUsers.isEmpty()) {
     		log.info("populating the IMap with users that can be attacked in pvp. numUsers="
     				+ validUsers.size());
-    		populateOfflinePvpUserMap(validUsers);
+    		populatePvpUserMap(validUsers);
     	} else {
     		log.error("no available users that can be attacked in pvp.");
     	}
     	
     }
 
-    protected void addOfflinePvpUserIndexes() {
+    protected void addPvpUserIndexes() {
     	//when specifying what property the index will be on, look at PvpConstants for the
     	//property name
     	
@@ -246,10 +247,10 @@ public class HazelcastPvpUtil implements InitializingBean {
     	offlinePvpUserMap.addIndex(PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME, true);
     }
     
-    protected void populateOfflinePvpUserMap(Collection<OfflinePvpUser> validUsers) {
+    protected void populatePvpUserMap(Collection<PvpUser> validUsers) {
     	//go through all the valid users that can be attacked, and store them into
     	//the hazelcast distributed map
-    	for (OfflinePvpUser user : validUsers) {
+    	for (PvpUser user : validUsers) {
     		String userId = user.getUserId();
     		
     		offlinePvpUserMap.put(userId, user);
@@ -276,12 +277,12 @@ public class HazelcastPvpUtil implements InitializingBean {
 			this.textFileResourceLoaderAware = textFileResourceLoaderAware;
 		}
 
-		public OfflinePvpUserRetrieveUtils getOfflinePvpUserRetrieveUtils() {
+		public PvpUserRetrieveUtils getPvpUserRetrieveUtils() {
 			return offlinePvpUserRetrieveUtils;
 		}
 
-		public void setOfflinePvpUserRetrieveUtils(
-				OfflinePvpUserRetrieveUtils offlinePvpUserRetrieveUtils) {
+		public void setPvpUserRetrieveUtils(
+				PvpUserRetrieveUtils offlinePvpUserRetrieveUtils) {
 			this.offlinePvpUserRetrieveUtils = offlinePvpUserRetrieveUtils;
 		}
 

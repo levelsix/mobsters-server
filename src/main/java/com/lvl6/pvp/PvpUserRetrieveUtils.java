@@ -16,15 +16,15 @@ import org.springframework.stereotype.Component;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component /*@DependsOn("gameServer")*/
-public class OfflinePvpUserRetrieveUtils {
+@Component
+public class PvpUserRetrieveUtils {
 
 	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 
 	//search entire user table for users who do not have active shields,
 	//also, only select certain columns
-	protected Collection<OfflinePvpUser> getPvpValidUsers() {
+	protected Collection<PvpUser> getPvpValidUsers() {
 		Timestamp now = new Timestamp((new Date()).getTime());
 
 		StringBuffer sb = new StringBuffer();
@@ -39,8 +39,6 @@ public class OfflinePvpUserRetrieveUtils {
 		sb.append(" FROM ");
 		sb.append(DBConstants.TABLE_USER);
 		sb.append(" WHERE ");
-		sb.append(DBConstants.USER__HAS_ACTIVE_SHIELD);
-		sb.append(" =? AND ");
 		sb.append(DBConstants.USER__SHIELD_END_TIME);
 		sb.append(" < ?;");
 		String query = sb.toString();
@@ -54,11 +52,11 @@ public class OfflinePvpUserRetrieveUtils {
 
 		Connection conn = null;
 		ResultSet rs = null;
-		List<OfflinePvpUser> validUsers = new ArrayList<OfflinePvpUser>();
+		List<PvpUser> validUsers = new ArrayList<PvpUser>();
 		try {
 			conn = DBConnection.get().getConnection();
 			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-			validUsers = convertRSToOfflinePvpUser(rs);
+			validUsers = convertRSToPvpUser(rs);
 		} catch (Exception e) {
 			log.error("user retrieve db error, in order to populate PvpUsers map.", e);
 		} finally {
@@ -67,14 +65,14 @@ public class OfflinePvpUserRetrieveUtils {
 		return validUsers;
 	}
 
-	protected List<OfflinePvpUser> convertRSToOfflinePvpUser(ResultSet rs) {
+	protected List<PvpUser> convertRSToPvpUser(ResultSet rs) {
 		if (null != rs) {
 			try {
 				rs.last();
 				rs.beforeFirst();
-				List<OfflinePvpUser> users = new ArrayList<OfflinePvpUser>();
+				List<PvpUser> users = new ArrayList<PvpUser>();
 				while (rs.next()) {
-					users.add(convertRSRowToOfflinePvpUser(rs));
+					users.add(convertRSRowToPvpUser(rs));
 				}
 				return users;
 			} catch (SQLException e) {
@@ -84,7 +82,7 @@ public class OfflinePvpUserRetrieveUtils {
 		return null;
 	}
 
-	protected OfflinePvpUser convertRSRowToOfflinePvpUser(ResultSet rs) throws SQLException {
+	protected PvpUser convertRSRowToPvpUser(ResultSet rs) throws SQLException {
 		int i = 1;
 
 		String userId = Integer.toString((rs.getInt(i++)));
@@ -110,7 +108,7 @@ public class OfflinePvpUserRetrieveUtils {
 			log.error("db error: in_battle_shield_end_time not set. user_id=" + userId);
 		}
 
-		return new OfflinePvpUser(userId, elo, shieldEndTime, inBattleShieldEndTime);
+		return new PvpUser(userId, elo, shieldEndTime, inBattleShieldEndTime);
 	}
 
 }

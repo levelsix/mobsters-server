@@ -24,8 +24,9 @@ import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -40,6 +41,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected Locker locker;
   
+  @Autowired TimeUtils timeUtils;
 
   public BeginPvpBattleController() {
     numAllocatedThreads = 7;
@@ -63,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int senderElo = reqProto.getSenderElo();
-    int userId = senderProto.getUserId();
+    int attackerId = senderProto.getUserId();
     Timestamp curTime = new Timestamp(reqProto.getAttackStartTime());
     Date curDate = new Date(curTime.getTime());
     PvpProto enemyProto = reqProto.getEnemy();
@@ -80,7 +82,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     BeginPvpBattleResponseProto.Builder resBuilder = BeginPvpBattleResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER); //default
-    BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(userId);
+    BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(attackerId);
     resEvent.setTag(event.getTag());
 
     //lock the user that client is going to attack, in order to prevent others from
@@ -89,12 +91,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	getLocker().lockPlayer(enemyUserId, this.getClass().getSimpleName());
     }
     try {
-    	OfflinePvpUser enemy = getHazelcastPvpUtil().getOfflinePvpUser(enemyUserId);
+    	User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId); 
+    	PvpUser enemy = getHazelcastPvpUtil().getPvpUser(enemyUserId);
     	boolean legit = checkLegit(resBuilder, enemy, enemyUserId, enemyProto, curDate);
 
     	boolean successful = false;
     	if(legit) {
-    		//since enemy exists, update the OfflinePvpUser's inBattleShieldEndTime
+    		//since enemy exists, update the PvpUser's inBattleShieldEndTime
     		//record that the attacker is attacking the user
     		//calculateEloChange() will populate attackerEloChange and defenderEloChange
     		//the first values in both lists will be when attacker wins
@@ -104,7 +107,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		calculateEloChange(senderElo, enemyProto, attackerEloChange, defenderEloChange);
 
     		//if user exacting revenge update the history to say he can't exact revenge anymore
-    		successful = writeChangesToDb(userId, enemyUserId, enemyProto, enemy,
+    		//also turn off sender's shield if it's on
+    		successful = writeChangesToDb(attacker, attackerId, enemyUserId, enemyProto, enemy,
     				attackerEloChange, defenderEloChange, curTime, exactingRevenge, previousBattleEndTime);
     	}
 
@@ -137,7 +141,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, OfflinePvpUser enemy, int enemyUserId,
+  private boolean checkLegit(Builder resBuilder, PvpUser enemy, int enemyUserId,
   		PvpProto enemyProto, Date curDate) {
   	
   	if (0 == enemyUserId) {
@@ -193,10 +197,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //the first values in both lists will be when attacker wins
 	//second values will be when attacker loses
-  private boolean writeChangesToDb(int attackerId, int defenderId, PvpProto enemyProto,
-		  OfflinePvpUser enemy, List<Integer> attackerEloChange,
-		  List<Integer> defenderEloChange, Timestamp clientTime, boolean exactingRevenge,
-		  Timestamp previousBattleEndTime) {
+  private boolean writeChangesToDb(User attacker, int attackerId, int defenderId,
+  		PvpProto enemyProto, PvpUser enemy, List<Integer> attackerEloChange,
+  		List<Integer> defenderEloChange, Timestamp clientTime, boolean exactingRevenge,
+  		Timestamp previousBattleEndTime) {
 	  
 	  //record that attacker is attacking defender
   	int attackerWinEloChange = attackerEloChange.get(0);
@@ -225,23 +229,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//ACCOUNTING FOR FAKE DEFENDERS!
   	if (0 != defenderId) {
   		//assume that the longest a battle can go for is one hour from now
-  		//so other users can't attack this person for one hour
+  		//so other users can't attack this person (who is under attack atm) for one hour
   		long nowMillis = clientTime.getTime();
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
   		enemy.setInBattleEndTime(newInBattleEndTime);
-  		getHazelcastPvpUtil().updateOfflinePvpUser(enemy);
+  		getHazelcastPvpUtil().replacePvpUser(enemy);
   		
   		User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
   		defender.updateInBattleEndTime(newInBattleEndTime);
   		
-  		exactRevenge(attackerId, defenderId, previousBattleEndTime, exactingRevenge);
+  		//turn off attacker's shield if it's on, attacker can't revenge fake person
+  		exactRevenge(attacker, attackerId, defenderId, clientTime, previousBattleEndTime,
+  				exactingRevenge);
   	}
   	
 	  return true;
   }
   
-  private void exactRevenge(int attackerId, int defenderId, Timestamp prevBattleEndTime,
-  		boolean exactingRevenge) {
+  private void exactRevenge(User attacker, int attackerId, int defenderId,
+  		Timestamp clientTime, Timestamp prevBattleEndTime, boolean exactingRevenge) {
   	if (!exactingRevenge) {
   		log.info("not exacting revenge");
   		return;
@@ -256,6 +262,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int numUpdated = UpdateUtils.get().updatePvpBattleHistoryExactRevenge(
   			historyAttackerId, historyDefenderId, prevBattleEndTime);
   	log.info("recorded that user exacted revenge. numUpdated (should be 1)=" + numUpdated);
+  	
+  	Date curShieldEndTime = attacker.getShieldEndTime();
+		Date nowDate = new Date(clientTime.getTime());
+		if (getTimeUtils().isFirstEarlierThanSecond(nowDate, curShieldEndTime)) {
+			log.info("user shield end time is now being reset since he's attacking with a shield");
+			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("user before shield change=" + attacker);
+			Date login = attacker.getLastLogin();
+			attacker.updateEloOilCashShields(attackerId, 0, 0,0, login, login);
+			
+			int attackerElo = attacker.getElo();                    
+			PvpUser attackerOpu = new PvpUser();
+			attackerOpu.setElo(attackerElo);                        
+			attackerOpu.setShieldEndTime(attacker.getLastLogin());
+			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
+			getHazelcastPvpUtil().replacePvpUser(attackerOpu);
+			log.info("user after shield change=" + attacker);
+			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("3cur pvpuser=" + attackerOpu);
+		}
   }
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
@@ -273,5 +299,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
-  
+
+	public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
+
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
+	}
+	
 }

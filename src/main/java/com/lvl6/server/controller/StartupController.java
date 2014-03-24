@@ -87,7 +87,7 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
@@ -978,7 +978,7 @@ public class StartupController extends EventController {
   	}
   	
   	//remove this user from the users available to be attacked in pvp
-  	//getHazelcastPvpUtil().removeOfflinePvpUser(userId); //online users can be attacked
+  	//getHazelcastPvpUtil().removePvpUser(userId); //online users can be attacked
   	
   	//if bool isFreshRestart is true, then deduct user's elo by amount specified in
   	//the table (pvp_battle_for_user), since user auto loses
@@ -1014,7 +1014,7 @@ public class StartupController extends EventController {
   			if (0 != defenderId) {
   				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
   			}
-  			OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
+  			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
   			
   			//update attacker
   			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
@@ -1026,7 +1026,7 @@ public class StartupController extends EventController {
   			if (null != defenderOpu) { //update if exists
   				int defenderElo = defender.getElo();
   				defenderOpu.setElo(defenderElo);
-  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+  				getHazelcastPvpUtil().replacePvpUser(defenderOpu);
   			}
   			boolean cancelled = true;
   			boolean displayToDefender = false;

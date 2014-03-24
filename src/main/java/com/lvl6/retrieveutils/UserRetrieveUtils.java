@@ -257,7 +257,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   public List<User> getUsers(int numUsers, int playerLevel, int userId, boolean guaranteeNum, 
       boolean realPlayersOnly, boolean fakePlayersOnly, boolean offlinePlayersOnly,
-      boolean inactiveShield, List<Integer> forbiddenPlayerIds) {
+      boolean inactiveShield, Timestamp shieldEndTime, List<Integer> forbiddenPlayerIds) {
     log.debug("retrieving list of users for user " + userId + " with " + 
         numUsers + " users " + " around player level " + playerLevel + ", guaranteeNum="+guaranteeNum);
 
@@ -303,8 +303,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     } 
     
     if (inactiveShield) {
-      query += DBConstants.USER__HAS_ACTIVE_SHIELD + "=? and ";
-      values.add(false);
+      query += DBConstants.USER__SHIELD_END_TIME + " < ? and ";
+      values.add(shieldEndTime);
     }
 
     query += DBConstants.USER__LEVEL + ">=? and " + DBConstants.USER__LEVEL + "<=? ";
@@ -567,7 +567,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //trying to improve elo range calculation readability
     int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
     		
-    absoluteConditionParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
+//    absoluteConditionParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
     relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
     relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
     Timestamp timestamp = new Timestamp(clientTime.getTime());
