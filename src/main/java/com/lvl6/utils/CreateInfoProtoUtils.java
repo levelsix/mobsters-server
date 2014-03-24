@@ -1924,6 +1924,7 @@ public class CreateInfoProtoUtils {
     mcp.setCreateTime(c.getCreateTime().getTime());
     mcp.setDescription(c.getDescription());
     mcp.setTag(c.getTag());
+    mcp.setClanIconId(c.getClanIconId());
     return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
 

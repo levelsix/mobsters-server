@@ -20,6 +20,7 @@ message MinimumClanProto {
 	optional string description = 5;
 	optional string tag = 6;
 	optional bool requestToJoinRequired = 7;
+	optional int32 clanIconId = 8; 
 }
 
 //------------------------------------------------------------------------------------------
