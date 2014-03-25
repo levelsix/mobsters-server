@@ -274,7 +274,7 @@ public class StartupController extends EventController {
 			    try {
 			    	//force other devices on this account to logout
 			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
-			      //this is the value before it is overwritten with current time
+			      //login value before it is overwritten with current time
 			      logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
 			      logoutResponse.setUdid(udid);
 			      ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
@@ -980,6 +980,7 @@ public class StartupController extends EventController {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
   		return;
   	}
+  	addUserToPvpMap(user, userId);
   	
   	//remove this user from the users available to be attacked in pvp
   	//getHazelcastPvpUtil().removePvpUser(userId); //online users can be attacked
@@ -1002,60 +1003,71 @@ public class StartupController extends EventController {
   	int defenderId = battle.getDefenderId();
   	int eloDefenderWins = battle.getDefenderLoseEloChange();
   	
-  	//user has unfinished battle, reward defender and penalize attacker
+  	//user has unfinished battle, reward defender and penalize attacker, maybe lock defender
   	//nested try catch's in order to prevent exception bubbling up, all because of
   	//some stinkin' elo XP
   	try {
-  		//NOTE: this lock ordering might result in a temp deadlock
-  		//doesn't reeeally matter if can't penalize defender...
-  		
-  		//only lock real users
-//  		if (0 != defenderId) {
-//  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
-//  		}
-  		try {
-  			User defender = null;
-  			if (0 != defenderId) {
-  				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
-  			}
-  			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
-  			
-  			//update attacker
-  			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
-  			
-  			//update defender if real, might need to cap defenderElo
-  			if (null != defender) {
-  				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
-  			}
-  			if (null != defenderOpu) { //update if exists
-  				int defenderElo = defender.getElo();
-  				defenderOpu.setElo(defenderElo);
-  				getHazelcastPvpUtil().replacePvpUser(defenderOpu);
-  			}
-  			boolean cancelled = true;
-  			boolean displayToDefender = false;
-  			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
-  					battleEndTime, battleStartTime, 0, 0, 0, 0, 0, 0, false, cancelled, false,
-  					displayToDefender);
-  			log.info("numInserted into battle history=" + numInserted);
-  			//delete that this battle occurred
-  			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
-  			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
-  					battle + "\t numDeleted=" + numDeleted);
-  			
-  		} catch (Exception e){
-  			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
-  					battle, e);
-  		} finally {
-//  			if (0 != defenderId) {
-//  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
-//  			}
-  		}
+  		penalizeUserForLeavingGameWhileInPvp(userId, user, defenderId, eloAttackerLoses,
+  				eloDefenderWins, battleEndTime, battleStartTime, battle);
   	} catch (Exception e2) {
   		log.error("could not successfully penalize and reward attacker, defender respectively." +
   				" battle=" + battle, e2);
   	}
+  }
+  
+  private void addUserToPvpMap(User user, int userId) {
   	
+  }
+  
+  
+  private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, int defenderId,
+  		int eloAttackerLoses, int eloDefenderWins, Timestamp battleEndTime,
+  		Timestamp battleStartTime, PvpBattleForUser battle) {
+  //NOTE: this lock ordering might result in a temp deadlock
+		//doesn't reeeally matter if can't penalize defender...
+		
+		//only lock real users
+//		if (0 != defenderId) {
+//			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
+//		}
+  	try {
+			User defender = null;
+			if (0 != defenderId) {
+				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+			}
+			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
+			
+			//update attacker
+			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
+			
+			//update defender if real, might need to cap defenderElo
+			if (null != defender) {
+				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
+			}
+			if (null != defenderOpu) { //update if exists
+				int defenderElo = defender.getElo();
+				defenderOpu.setElo(defenderElo);
+				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
+			}
+			boolean cancelled = true;
+			boolean displayToDefender = false;
+			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
+					battleEndTime, battleStartTime, 0, 0, 0, 0, 0, 0, false, cancelled, false,
+					displayToDefender);
+			log.info("numInserted into battle history=" + numInserted);
+			//delete that this battle occurred
+			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
+			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
+					battle + "\t numDeleted=" + numDeleted);
+			
+		} catch (Exception e){
+			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
+					battle, e);
+		} finally {
+//			if (0 != defenderId) {
+//				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
+//			}
+		}
   }
   
   private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {

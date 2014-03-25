@@ -30,10 +30,10 @@ public class Locker {
 		public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
 			return playersByPlayerId;
 		}
-
 		public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
 			this.playersByPlayerId = playersByPlayerId;
 		} 
+
 		
 		//Use this to lock, unlock things
 		@javax.annotation.Resource(name = "lockMap")
@@ -42,11 +42,11 @@ public class Locker {
 		public IMap<String, Date> getLockMap() {
 			return lockMap;
 		}
-
 		public void setLockMap(IMap<String, Date> lockMap) {
 			this.lockMap = lockMap;
 		}
 
+		
 		//this is kind of a history of locks, keeping track of which users are locked by
 		//which classes
 		@javax.annotation.Resource(name = "playersInAction")
@@ -55,12 +55,52 @@ public class Locker {
 		public PlayerSet getPlayersInAction() {
 			return playersInAction;
 		}
-
 		public void setPlayersInAction(PlayerSet playersInAction) {
 			this.playersInAction = playersInAction;
 		}
 		
-	//LOCKING THINGS. ALL COPIED FROM GameServer.java
+		
+		//LOCKING THINGS. 
+		protected String hzMapLockName(String mapToLock) {
+			return "HzMapLock: " + mapToLock;
+		}
+		public boolean lockHazelcastMap(String mapToLock) {
+			log.debug("Locking hazelcast map: " + mapToLock);
+  		if (lockMap.tryLock(hzMapLockName(mapToLock), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+  			log.debug("Got lock for hz map " + mapToLock);
+  			
+  			try {
+  				lockMap.put(hzMapLockName(mapToLock), new Date());
+  			} catch (Exception e) {
+  				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+  						e.getMessage(), e);
+  				return false;
+  			}
+  			return true;
+  		} else {
+  			log.warn("failed to aquire lock for " + hzMapLockName(mapToLock));
+  			return false;
+  			// throw new
+  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
+  		}
+		}
+		public void unlockHazelcastMap(String mapToLock) {
+  		log.debug("Unlocking hazelcast map: " + mapToLock);
+  		try {
+  			String lockName = hzMapLockName(mapToLock);
+  			if (lockMap.isLocked(lockName)) {
+  				lockMap.unlock(lockName);
+  			}
+  			log.debug("Unlocked hazelcast map: " + mapToLock);
+  			if (lockMap.containsKey(lockName)) {
+  				lockMap.remove(lockName);
+  			}
+  		} catch (Exception e) {
+  			log.error("Error unlocking hazelcast map " + mapToLock, e);
+  		}
+  	}
+		
+		//ALL COPIED FROM GameServer.java
     //either returns true or throws exception
     public boolean lockPlayer(int playerId, String lockedByClass) {
   		log.info("Locking player {} from class {}", playerId, lockedByClass);
@@ -206,13 +246,12 @@ public class Locker {
   		return "ClanLock: " + clanId;
   	}
 
-  	// TODO: refactor this into a lockmap wrapper class and make it work for any
-  	// lock
+  	// TODO: refactor this into a lockmap wrapper class and make it work for any lock
   	// also consider refactoring playerLocks to use it
   	@Scheduled(fixedDelay = LOCK_TIMEOUT)
   	public void clearOldLocks() {
   		long now = new Date().getTime();
-  		log.debug("Removing stale clan locks");
+  		log.debug("Removing stale clan or facebook id locks");
   		for (String key : lockMap.keySet()) {
   			try {
   				if (key != null && (key.contains("ClanLock") || key.contains("FbIdLock"))) {

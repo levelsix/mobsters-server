@@ -692,7 +692,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			attackerOpu.setElo(attackerElo);                        
 			attackerOpu.setShieldEndTime(attacker.getLastLogin());
 			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
-			getHazelcastPvpUtil().replacePvpUser(attackerOpu);
+			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
 			log.info("user after shield change=" + attacker);
 			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
 			log.info("3cur pvpuser=" + attackerOpu);

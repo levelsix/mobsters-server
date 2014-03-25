@@ -381,7 +381,7 @@ public class MiscMethods {
     tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
     tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
     
-    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
+//    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
     
     int orientation = 1;
     for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
@@ -392,7 +392,7 @@ public class MiscMethods {
     	MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
     			obstacleId, posX, posY, orientation);
     	tcb.addTutorialObstacles(mopb);
-    	log.info("mopb=" + mopb);
+//    	log.info("mopb=" + mopb);
     }
     
     return tcb.build();

@@ -197,7 +197,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //the first values in both lists will be when attacker wins
 	//second values will be when attacker loses
-  private boolean writeChangesToDb(User attacker, int attackerId, int defenderId,
+  private boolean writeChangesToDb(User attacker, int attackerId, int enemyId,
   		PvpProto enemyProto, PvpUser enemy, List<Integer> attackerEloChange,
   		List<Integer> defenderEloChange, Timestamp clientTime, boolean exactingRevenge,
   		Timestamp previousBattleEndTime) {
@@ -210,7 +210,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   	log.info("inserting into PvpBattleForUser");
   	int numInserted = InsertUtils.get().insertUpdatePvpBattleForUser(attackerId,
-  			defenderId, attackerWinEloChange, defenderLoseEloChange, attackerLoseEloChange,
+  			enemyId, attackerWinEloChange, defenderLoseEloChange, attackerLoseEloChange,
   			defenderWinEloChange, clientTime);
   			
   	log.info("numInserted (should be 1): " + numInserted); 
@@ -227,19 +227,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//2) attacker wins, in which case defender's shield is activated
 	  
   	//ACCOUNTING FOR FAKE DEFENDERS!
-  	if (0 != defenderId) {
+  	if (0 != enemyId) {
   		//assume that the longest a battle can go for is one hour from now
   		//so other users can't attack this person (who is under attack atm) for one hour
   		long nowMillis = clientTime.getTime();
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
   		enemy.setInBattleEndTime(newInBattleEndTime);
-  		getHazelcastPvpUtil().replacePvpUser(enemy);
+  		getHazelcastPvpUtil().replacePvpUser(enemy, enemyId);
   		
-  		User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+  		User defender = RetrieveUtils.userRetrieveUtils().getUserById(enemyId);
   		defender.updateInBattleEndTime(newInBattleEndTime);
   		
   		//turn off attacker's shield if it's on, attacker can't revenge fake person
-  		exactRevenge(attacker, attackerId, defenderId, clientTime, previousBattleEndTime,
+  		exactRevenge(attacker, attackerId, enemyId, clientTime, previousBattleEndTime,
   				exactingRevenge);
   	}
   	
@@ -277,7 +277,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			attackerOpu.setElo(attackerElo);                        
 			attackerOpu.setShieldEndTime(attacker.getLastLogin());
 			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
-			getHazelcastPvpUtil().replacePvpUser(attackerOpu);
+			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
 			log.info("user after shield change=" + attacker);
 			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
 			log.info("3cur pvpuser=" + attackerOpu);
