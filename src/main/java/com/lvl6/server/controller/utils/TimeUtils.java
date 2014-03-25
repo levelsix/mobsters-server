@@ -129,7 +129,7 @@ public class TimeUtils {
 	  DateTime dt = new DateTime(curDate);
 	  
 	  MutableDateTime mdt = dt.toMutableDateTime();
-	  mdt.setMillis(0);
+	  mdt.setMillisOfSecond(0);
 	  Date createdDate = mdt.toDate();
 	  
 	  return createdDate;
