@@ -124,4 +124,14 @@ public class TimeUtils {
   	
   	return createdDate;
   }
+  
+  public Date createDateTruncateMillis(Date curDate) {
+	  DateTime dt = new DateTime(curDate);
+	  
+	  MutableDateTime mdt = dt.toMutableDateTime();
+	  mdt.setMillis(0);
+	  Date createdDate = mdt.toDate();
+	  
+	  return createdDate;
+  }
 }

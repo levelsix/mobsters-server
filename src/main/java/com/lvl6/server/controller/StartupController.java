@@ -257,6 +257,7 @@ public class StartupController extends EventController {
     StartupStatus startupStatus = StartupStatus.USER_NOT_IN_DB;
 
     Date nowDate = new Date();
+    nowDate = getTimeUtils().createDateTruncateMillis(nowDate);
     Timestamp now = new Timestamp(nowDate.getTime());
     boolean isLogin = true;
 
