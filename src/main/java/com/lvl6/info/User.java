@@ -348,17 +348,28 @@ public class User implements Serializable {
 	}
 
 
-	public boolean updateLevel(int levelChange) {
+	public boolean updateLevel(int levelChange, boolean absoluteUpdate) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__LEVEL, levelChange);
+		Map<String, Object> relativeParams = null;
+		Map<String, Object> absoluteParams = null;
+		if (!absoluteUpdate) {
+			relativeParams = new HashMap<String, Object>();
+			relativeParams.put(DBConstants.USER__LEVEL, levelChange);
+		} else {
+			absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.USER__LEVEL, levelChange);
+		}
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
-			this.level += levelChange;
+			if (!absoluteUpdate) {
+				this.level += levelChange;
+			} else {
+				this.level = levelChange;
+			}
 			return true;
 		}
 		return false;

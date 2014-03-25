@@ -1687,6 +1687,10 @@ public final class EventUserProto {
     boolean hasSender();
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional int32 nextLevel = 2;
+    boolean hasNextLevel();
+    int getNextLevel();
   }
   public static final class LevelUpRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -1730,8 +1734,19 @@ public final class EventUserProto {
       return sender_;
     }
     
+    // optional int32 nextLevel = 2;
+    public static final int NEXTLEVEL_FIELD_NUMBER = 2;
+    private int nextLevel_;
+    public boolean hasNextLevel() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getNextLevel() {
+      return nextLevel_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      nextLevel_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1748,6 +1763,9 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, nextLevel_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -1760,6 +1778,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, nextLevel_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1892,6 +1914,8 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        nextLevel_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -1938,6 +1962,10 @@ public final class EventUserProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.nextLevel_ = nextLevel_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1956,6 +1984,9 @@ public final class EventUserProto {
         if (other == com.lvl6.proto.EventUserProto.LevelUpRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (other.hasNextLevel()) {
+          setNextLevel(other.getNextLevel());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1995,6 +2026,11 @@ public final class EventUserProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              nextLevel_ = input.readInt32();
               break;
             }
           }
@@ -2093,6 +2129,27 @@ public final class EventUserProto {
         return senderBuilder_;
       }
       
+      // optional int32 nextLevel = 2;
+      private int nextLevel_ ;
+      public boolean hasNextLevel() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getNextLevel() {
+        return nextLevel_;
+      }
+      public Builder setNextLevel(int value) {
+        bitField0_ |= 0x00000002;
+        nextLevel_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNextLevel() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nextLevel_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LevelUpRequestProto)
     }
     
@@ -2147,15 +2204,11 @@ public final class EventUserProto {
     public enum LevelUpStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NOT_ENOUGH_EXP_TO_NEXT_LEVEL(1, 2),
-      ALREADY_AT_MAX_LEVEL(2, 3),
-      OTHER_FAIL(3, 4),
+      FAIL_OTHER(1, 2),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NOT_ENOUGH_EXP_TO_NEXT_LEVEL_VALUE = 2;
-      public static final int ALREADY_AT_MAX_LEVEL_VALUE = 3;
-      public static final int OTHER_FAIL_VALUE = 4;
+      public static final int FAIL_OTHER_VALUE = 2;
       
       
       public final int getNumber() { return value; }
@@ -2163,9 +2216,7 @@ public final class EventUserProto {
       public static LevelUpStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NOT_ENOUGH_EXP_TO_NEXT_LEVEL;
-          case 3: return ALREADY_AT_MAX_LEVEL;
-          case 4: return OTHER_FAIL;
+          case 2: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -2196,7 +2247,7 @@ public final class EventUserProto {
       }
       
       private static final LevelUpStatus[] VALUES = {
-        SUCCESS, NOT_ENOUGH_EXP_TO_NEXT_LEVEL, ALREADY_AT_MAX_LEVEL, OTHER_FAIL, 
+        SUCCESS, FAIL_OTHER, 
       };
       
       public static LevelUpStatus valueOf(
@@ -9089,61 +9140,60 @@ public final class EventUserProto {
       "D_NAME\020\002\022&\n\"FAIL_USER_WITH_UDID_ALREADY_" +
       "EXISTS\020\003\022\033\n\027FAIL_INVALID_REFER_CODE\020\004\022%\n" +
       "!FAIL_USER_WITH_FACEBOOK_ID_EXISTS\020\005\022\016\n\n" +
-      "FAIL_OTHER\020\006\"G\n\023LevelUpRequestProto\0220\n\006s" +
+      "FAIL_OTHER\020\006\"Z\n\023LevelUpRequestProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\"\366\001\n\024LevelUpResponseProto\0220\n\006sender" +
+      "Proto\022\021\n\tnextLevel\030\002 \001(\005\"\272\001\n\024LevelUpResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022B\n\006status\030\002 \001(\01622.co",
+      "m.lvl6.proto.LevelUpResponseProto.LevelU" +
+      "pStatus\",\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\220\001\n#RetrieveUsersForUserId" +
+      "sRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022\030\n\020requestedUser" +
+      "Ids\030\002 \003(\005\022\035\n\025includeCurMonsterTeam\030\003 \001(\010" +
+      "\"\315\001\n$RetrieveUsersForUserIdsResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035.co" +
+      "m.lvl6.proto.FullUserProto\022<\n\007curTeam\030\003 ",
+      "\003(\0132+.com.lvl6.proto.UserCurrentMonsterT" +
+      "eamProto\"F\n\022LogoutRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022B\n\006status\030\002 \001(\01622.com.lvl6.proto.LevelU",
-      "pResponseProto.LevelUpStatus\"h\n\rLevelUpS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022 \n\034NOT_ENOUGH_EXP_TO_" +
-      "NEXT_LEVEL\020\002\022\030\n\024ALREADY_AT_MAX_LEVEL\020\003\022\016" +
-      "\n\nOTHER_FAIL\020\004\"\220\001\n#RetrieveUsersForUserI" +
-      "dsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\030\n\020requestedUse" +
-      "rIds\030\002 \003(\005\022\035\n\025includeCurMonsterTeam\030\003 \001(" +
-      "\010\"\315\001\n$RetrieveUsersForUserIdsResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035.c",
-      "om.lvl6.proto.FullUserProto\022<\n\007curTeam\030\003" +
-      " \003(\0132+.com.lvl6.proto.UserCurrentMonster" +
-      "TeamProto\"F\n\022LogoutRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\"h\n\035UpdateClientUserResponseProto\022-\n\006se" +
-      "nder\030\001 \001(\0132\035.com.lvl6.proto.FullUserProt" +
-      "o\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"q\n\031SetFacebo" +
-      "okIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\014\n\004fbId\030\002 \001(\t" +
-      "\022\024\n\014isUserCreate\030\003 \001(\010\"\276\002\n\032SetFacebookId",
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
-      ">.com.lvl6.proto.SetFacebookIdResponsePr" +
-      "oto.SetFacebookIdStatus\0222\n\010existing\030\003 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\"j\n\023S" +
-      "etFacebookIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\022\025\n\021FAIL_FB_ID_EXISTS\020\003\022\037\n\033FAIL_U" +
-      "SER_FB_ID_ALREADY_SET\020\004\"\277\001\n\036UpdateUserCu" +
-      "rrencyRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\021\n\tcashSpen",
-      "t\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tgemsSpent\030\004" +
-      " \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t" +
-      "\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUserCurrency" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162" +
-      "H.com.lvl6.proto.UpdateUserCurrencyRespo" +
-      "nseProto.UpdateUserCurrencyStatus\"\212\001\n\030Up" +
-      "dateUserCurrencyStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022" +
-      "\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026FAIL_INSUF",
-      "FICIENT_GEMS\020\005\"e\n\033SetGameCenterIdRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\"\360\001" +
-      "\n\034SetGameCenterIdResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022\024\n\014gameCenterId\030\002 \001(\t\022R\n\006status\030\003 \001(\0162B" +
-      ".com.lvl6.proto.SetGameCenterIdResponseP" +
-      "roto.SetGameCenterIdStatus\"4\n\025SetGameCen" +
-      "terIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
-      "B\020B\016EventUserProto"
+      "\"h\n\035UpdateClientUserResponseProto\022-\n\006sen" +
+      "der\030\001 \001(\0132\035.com.lvl6.proto.FullUserProto" +
+      "\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"q\n\031SetFaceboo" +
+      "kIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\014\n\004fbId\030\002 \001(\t\022" +
+      "\024\n\014isUserCreate\030\003 \001(\010\"\276\002\n\032SetFacebookIdR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.",
+      "proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162>" +
+      ".com.lvl6.proto.SetFacebookIdResponsePro" +
+      "to.SetFacebookIdStatus\0222\n\010existing\030\003 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\"j\n\023Se" +
+      "tFacebookIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002\022\025\n\021FAIL_FB_ID_EXISTS\020\003\022\037\n\033FAIL_US" +
+      "ER_FB_ID_ALREADY_SET\020\004\"\277\001\n\036UpdateUserCur" +
+      "rencyRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022\021\n\tcashSpent" +
+      "\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tgemsSpent\030\004 ",
+      "\001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t\022" +
+      "\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUserCurrencyR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162H" +
+      ".com.lvl6.proto.UpdateUserCurrencyRespon" +
+      "seProto.UpdateUserCurrencyStatus\"\212\001\n\030Upd" +
+      "ateUserCurrencyStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
+      "IL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\031" +
+      "\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026FAIL_INSUFF" +
+      "ICIENT_GEMS\020\005\"e\n\033SetGameCenterIdRequestP",
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\"\360\001\n" +
+      "\034SetGameCenterIdResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\024\n\014gameCenterId\030\002 \001(\t\022R\n\006status\030\003 \001(\0162B." +
+      "com.lvl6.proto.SetGameCenterIdResponsePr" +
+      "oto.SetGameCenterIdStatus\"4\n\025SetGameCent" +
+      "erIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B" +
+      "\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9171,7 +9221,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_LevelUpRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_LevelUpRequestProto_descriptor,
-              new java.lang.String[] { "Sender", },
+              new java.lang.String[] { "Sender", "NextLevel", },
               com.lvl6.proto.EventUserProto.LevelUpRequestProto.class,
               com.lvl6.proto.EventUserProto.LevelUpRequestProto.Builder.class);
           internal_static_com_lvl6_proto_LevelUpResponseProto_descriptor =
