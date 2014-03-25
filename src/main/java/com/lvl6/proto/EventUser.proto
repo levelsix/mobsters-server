@@ -47,7 +47,7 @@ message UserCreateResponseProto {
 //server checks if user's exp is over the next, if so, increments user's level
 message LevelUpRequestProto {
 	optional MinimumUserProto sender = 1;
-	
+	optional nextLevel = 2;
 }
 
 message LevelUpResponseProto {
