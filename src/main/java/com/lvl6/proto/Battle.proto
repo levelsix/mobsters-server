@@ -33,6 +33,8 @@ message PvpProto {
 	repeated MinimumUserMonsterProto defenderMonsters = 3;
 	optional int32 prospectiveCashWinnings = 4;
 	optional int32 prospectiveOilWinnings = 5;
+	
+	optional UserPvpLeagueProto pvpLeagueStats = 6;
 }
 
 //------------------------------------------------------------------------------------------
@@ -53,7 +55,9 @@ message PvpHistoryProto {
 	optional int32 prospectiveCashWinnings = 7;
 	optional int32 prospectiveOilWinnings = 8;
 	
-	
+	//for the attacker/defender
+	//need the prev and cur rank 
+	//need the prev and cur league
 	//optional int64 battleEndTime = 9; //defined above
 }
 
@@ -69,5 +73,14 @@ message PvpLeagueProto {
 	optional int32 maxElo = 7;
 }
 
+//------------------------------------------------------------------------------------------
+
+//all the leaderboard information regarding user in pvp
+message UserPvpLeagueProto {
+	optional int32 userId = 1;
+	optional int32 leagueId = 2;
+	optional int32 rank = 3;
+	optional int32 elo = 4;
+}
 
 ///atm, this file is used by EventPvp.proto
