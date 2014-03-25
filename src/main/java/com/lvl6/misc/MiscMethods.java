@@ -40,6 +40,7 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
+import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -59,6 +60,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
@@ -118,6 +120,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -1385,6 +1388,7 @@ public class MiscMethods {
     setItemStuff(sdpb);
     setObstacleStuff(sdpb);
     setClanIconStuff(sdpb);
+    setPvpLeagueStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1676,6 +1680,11 @@ public class MiscMethods {
   private static void setItemStuff(Builder sdpb) {
   	Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
   	
+  	if (null == itemIdsToItems) {
+  		log.warn("no items");
+  		return;
+  	}
+  	
   	for (Item i : itemIdsToItems.values()) {
   		ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
   		sdpb.addItems(itemProto);
@@ -1686,6 +1695,10 @@ public class MiscMethods {
   private static void setObstacleStuff(Builder sdpb) {
   	Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
   			.getObstacleIdsToObstacles();
+  	if (null == idsToObstacles) {
+  		log.warn("no obstacles");
+  		return;
+  	}
   	
   	for (Obstacle o : idsToObstacles.values()) {
   		ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
@@ -1697,6 +1710,7 @@ public class MiscMethods {
   	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
   	
   	if (null == clanIconIdsToClanIcons) {
+  		log.warn("no clan_icons");
   		return;
   	}
   	
@@ -1704,6 +1718,20 @@ public class MiscMethods {
   		ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
   		sdpb.addClanIcons(cip);
   	}
-  	
+  }
+  
+  private static void setPvpLeagueStuff(Builder sdpb) {
+	  Map<Integer, PvpLeague> idToPvpLeague = PvpLeagueRetrieveUtils
+			  .getPvpLeagueIdsToPvpLeagues();
+	  
+	  if (null == idToPvpLeague) {
+		  log.warn("no pvp_leagues");
+		  return;
+	  }
+	  
+	  for (PvpLeague pl : idToPvpLeague.values()) {
+		  PvpLeagueProto plp = CreateInfoProtoUtils.createPvpLeagueProto(pl);
+		  sdpb.addLeagues(plp);
+	  }
   }
 }

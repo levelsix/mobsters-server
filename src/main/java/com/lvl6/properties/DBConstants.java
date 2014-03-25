@@ -55,6 +55,8 @@ public class DBConstants {
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
   public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
+  public static final String TABLE_PVP_LEAGUE = "pvp_league";
+  public static final String TABLE_PVP_LEAGUE_FOR_USER = "pvp_league_for_user";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";

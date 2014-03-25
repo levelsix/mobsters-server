@@ -51,6 +51,7 @@ import com.lvl6.info.Obstacle;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
+import com.lvl6.info.PvpLeague;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
@@ -73,6 +74,7 @@ import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -296,6 +298,34 @@ public class CreateInfoProtoUtils {
   		phpList.add(php);
   	}
   	return phpList;
+  }
+  
+  public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
+	  PvpLeagueProto.Builder plpb = PvpLeagueProto.newBuilder();
+	  
+	  plpb.setLeagueId(pl.getId());
+	  
+	  String aStr = pl.getLeagueName();
+	  if (null != aStr) {
+		  plpb.setLeagueName(aStr);
+	  }
+	  
+	  aStr = pl.getImgPrefix();
+	  if (null != aStr) {
+		  plpb.setImgPrefix(aStr);
+	  }
+	  
+	  plpb.setNumRanks(pl.getNumRanks());
+	  
+	  aStr = pl.getDescription();
+	  if (null != aStr) {
+		  plpb.setDescription(aStr);
+	  }
+	  
+	  plpb.setMinElo(pl.getMinElo());
+	  plpb.setMaxElo(pl.getMaxElo());
+	  
+	  return plpb.build();
   }
   
   

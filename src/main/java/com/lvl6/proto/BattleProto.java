@@ -2639,6 +2639,797 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpHistoryProto)
   }
   
+  public interface PvpLeagueProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 leagueId = 1;
+    boolean hasLeagueId();
+    int getLeagueId();
+    
+    // optional string leagueName = 2;
+    boolean hasLeagueName();
+    String getLeagueName();
+    
+    // optional string imgPrefix = 3;
+    boolean hasImgPrefix();
+    String getImgPrefix();
+    
+    // optional int32 numRanks = 4;
+    boolean hasNumRanks();
+    int getNumRanks();
+    
+    // optional string description = 5;
+    boolean hasDescription();
+    String getDescription();
+    
+    // optional int32 minElo = 6;
+    boolean hasMinElo();
+    int getMinElo();
+    
+    // optional int32 maxElo = 7;
+    boolean hasMaxElo();
+    int getMaxElo();
+  }
+  public static final class PvpLeagueProto extends
+      com.google.protobuf.GeneratedMessage
+      implements PvpLeagueProtoOrBuilder {
+    // Use PvpLeagueProto.newBuilder() to construct.
+    private PvpLeagueProto(Builder builder) {
+      super(builder);
+    }
+    private PvpLeagueProto(boolean noInit) {}
+    
+    private static final PvpLeagueProto defaultInstance;
+    public static PvpLeagueProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public PvpLeagueProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpLeagueProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 leagueId = 1;
+    public static final int LEAGUEID_FIELD_NUMBER = 1;
+    private int leagueId_;
+    public boolean hasLeagueId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getLeagueId() {
+      return leagueId_;
+    }
+    
+    // optional string leagueName = 2;
+    public static final int LEAGUENAME_FIELD_NUMBER = 2;
+    private java.lang.Object leagueName_;
+    public boolean hasLeagueName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getLeagueName() {
+      java.lang.Object ref = leagueName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          leagueName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getLeagueNameBytes() {
+      java.lang.Object ref = leagueName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        leagueName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string imgPrefix = 3;
+    public static final int IMGPREFIX_FIELD_NUMBER = 3;
+    private java.lang.Object imgPrefix_;
+    public boolean hasImgPrefix() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getImgPrefix() {
+      java.lang.Object ref = imgPrefix_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          imgPrefix_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getImgPrefixBytes() {
+      java.lang.Object ref = imgPrefix_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        imgPrefix_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 numRanks = 4;
+    public static final int NUMRANKS_FIELD_NUMBER = 4;
+    private int numRanks_;
+    public boolean hasNumRanks() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getNumRanks() {
+      return numRanks_;
+    }
+    
+    // optional string description = 5;
+    public static final int DESCRIPTION_FIELD_NUMBER = 5;
+    private java.lang.Object description_;
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 minElo = 6;
+    public static final int MINELO_FIELD_NUMBER = 6;
+    private int minElo_;
+    public boolean hasMinElo() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getMinElo() {
+      return minElo_;
+    }
+    
+    // optional int32 maxElo = 7;
+    public static final int MAXELO_FIELD_NUMBER = 7;
+    private int maxElo_;
+    public boolean hasMaxElo() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getMaxElo() {
+      return maxElo_;
+    }
+    
+    private void initFields() {
+      leagueId_ = 0;
+      leagueName_ = "";
+      imgPrefix_ = "";
+      numRanks_ = 0;
+      description_ = "";
+      minElo_ = 0;
+      maxElo_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, leagueId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getLeagueNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getImgPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, numRanks_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, minElo_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, maxElo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, leagueId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getLeagueNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getImgPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, numRanks_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, minElo_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, maxElo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpLeagueProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BattleProto.PvpLeagueProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpLeagueProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.BattleProto.PvpLeagueProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        leagueId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        leagueName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        imgPrefix_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numRanks_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        minElo_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        maxElo_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BattleProto.PvpLeagueProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpLeagueProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpLeagueProto build() {
+        com.lvl6.proto.BattleProto.PvpLeagueProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.BattleProto.PvpLeagueProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.BattleProto.PvpLeagueProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpLeagueProto buildPartial() {
+        com.lvl6.proto.BattleProto.PvpLeagueProto result = new com.lvl6.proto.BattleProto.PvpLeagueProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.leagueId_ = leagueId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.leagueName_ = leagueName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.imgPrefix_ = imgPrefix_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.numRanks_ = numRanks_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.description_ = description_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.minElo_ = minElo_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.maxElo_ = maxElo_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BattleProto.PvpLeagueProto) {
+          return mergeFrom((com.lvl6.proto.BattleProto.PvpLeagueProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.BattleProto.PvpLeagueProto other) {
+        if (other == com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance()) return this;
+        if (other.hasLeagueId()) {
+          setLeagueId(other.getLeagueId());
+        }
+        if (other.hasLeagueName()) {
+          setLeagueName(other.getLeagueName());
+        }
+        if (other.hasImgPrefix()) {
+          setImgPrefix(other.getImgPrefix());
+        }
+        if (other.hasNumRanks()) {
+          setNumRanks(other.getNumRanks());
+        }
+        if (other.hasDescription()) {
+          setDescription(other.getDescription());
+        }
+        if (other.hasMinElo()) {
+          setMinElo(other.getMinElo());
+        }
+        if (other.hasMaxElo()) {
+          setMaxElo(other.getMaxElo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              leagueId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              leagueName_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              imgPrefix_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              numRanks_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              description_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              minElo_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              maxElo_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 leagueId = 1;
+      private int leagueId_ ;
+      public boolean hasLeagueId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getLeagueId() {
+        return leagueId_;
+      }
+      public Builder setLeagueId(int value) {
+        bitField0_ |= 0x00000001;
+        leagueId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLeagueId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        leagueId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string leagueName = 2;
+      private java.lang.Object leagueName_ = "";
+      public boolean hasLeagueName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getLeagueName() {
+        java.lang.Object ref = leagueName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          leagueName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setLeagueName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        leagueName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLeagueName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        leagueName_ = getDefaultInstance().getLeagueName();
+        onChanged();
+        return this;
+      }
+      void setLeagueName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        leagueName_ = value;
+        onChanged();
+      }
+      
+      // optional string imgPrefix = 3;
+      private java.lang.Object imgPrefix_ = "";
+      public boolean hasImgPrefix() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getImgPrefix() {
+        java.lang.Object ref = imgPrefix_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          imgPrefix_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setImgPrefix(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        imgPrefix_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearImgPrefix() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        imgPrefix_ = getDefaultInstance().getImgPrefix();
+        onChanged();
+        return this;
+      }
+      void setImgPrefix(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        imgPrefix_ = value;
+        onChanged();
+      }
+      
+      // optional int32 numRanks = 4;
+      private int numRanks_ ;
+      public boolean hasNumRanks() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getNumRanks() {
+        return numRanks_;
+      }
+      public Builder setNumRanks(int value) {
+        bitField0_ |= 0x00000008;
+        numRanks_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumRanks() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        numRanks_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string description = 5;
+      private java.lang.Object description_ = "";
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      void setDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        description_ = value;
+        onChanged();
+      }
+      
+      // optional int32 minElo = 6;
+      private int minElo_ ;
+      public boolean hasMinElo() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getMinElo() {
+        return minElo_;
+      }
+      public Builder setMinElo(int value) {
+        bitField0_ |= 0x00000020;
+        minElo_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMinElo() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        minElo_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 maxElo = 7;
+      private int maxElo_ ;
+      public boolean hasMaxElo() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getMaxElo() {
+        return maxElo_;
+      }
+      public Builder setMaxElo(int value) {
+        bitField0_ |= 0x00000040;
+        maxElo_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMaxElo() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        maxElo_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpLeagueProto)
+    }
+    
+    static {
+      defaultInstance = new PvpLeagueProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpLeagueProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_descriptor;
   private static
@@ -2654,6 +3445,11 @@ public final class BattleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpLeagueProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2682,9 +3478,13 @@ public final class BattleProto {
       "\032\n\022defenderCashChange\030\004 \001(\021\022\031\n\021defenderO" +
       "ilChange\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001(\010\022\037" +
       "\n\027prospectiveCashWinnings\030\007 \001(\005\022\036\n\026prosp" +
-      "ectiveOilWinnings\030\010 \001(\005*E\n\014BattleResult\022",
-      "\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rA" +
-      "TTACKER_FLEE\020\003B\rB\013BattleProto"
+      "ectiveOilWinnings\030\010 \001(\005\"\220\001\n\016PvpLeaguePro",
+      "to\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t" +
+      "\022\021\n\timgPrefix\030\003 \001(\t\022\020\n\010numRanks\030\004 \001(\005\022\023\n" +
+      "\013description\030\005 \001(\t\022\016\n\006minElo\030\006 \001(\005\022\016\n\006ma" +
+      "xElo\030\007 \001(\005*E\n\014BattleResult\022\020\n\014ATTACKER_W" +
+      "IN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020" +
+      "\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2715,6 +3515,14 @@ public final class BattleProto {
               new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", },
               com.lvl6.proto.BattleProto.PvpHistoryProto.class,
               com.lvl6.proto.BattleProto.PvpHistoryProto.Builder.class);
+          internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpLeagueProto_descriptor,
+              new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "NumRanks", "Description", "MinElo", "MaxElo", },
+              com.lvl6.proto.BattleProto.PvpLeagueProto.class,
+              com.lvl6.proto.BattleProto.PvpLeagueProto.Builder.class);
           return null;
         }
       };

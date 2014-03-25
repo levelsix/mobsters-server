@@ -235,6 +235,16 @@ public final class StaticDataStuffProto {
         getClanIconsOrBuilderList();
     com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+    java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> 
+        getLeaguesList();
+    com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index);
+    int getLeaguesCount();
+    java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
+        getLeaguesOrBuilderList();
+    com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -740,6 +750,27 @@ public final class StaticDataStuffProto {
       return clanIcons_.get(index);
     }
     
+    // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+    public static final int LEAGUES_FIELD_NUMBER = 25;
+    private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_;
+    public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> getLeaguesList() {
+      return leagues_;
+    }
+    public java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
+        getLeaguesOrBuilderList() {
+      return leagues_;
+    }
+    public int getLeaguesCount() {
+      return leagues_.size();
+    }
+    public com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index) {
+      return leagues_.get(index);
+    }
+    public com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
+        int index) {
+      return leagues_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -764,6 +795,7 @@ public final class StaticDataStuffProto {
       items_ = java.util.Collections.emptyList();
       obstacles_ = java.util.Collections.emptyList();
       clanIcons_ = java.util.Collections.emptyList();
+      leagues_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -845,6 +877,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < clanIcons_.size(); i++) {
         output.writeMessage(24, clanIcons_.get(i));
+      }
+      for (int i = 0; i < leagues_.size(); i++) {
+        output.writeMessage(25, leagues_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -946,6 +981,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < clanIcons_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(24, clanIcons_.get(i));
+      }
+      for (int i = 0; i < leagues_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(25, leagues_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1086,6 +1125,7 @@ public final class StaticDataStuffProto {
           getItemsFieldBuilder();
           getObstaclesFieldBuilder();
           getClanIconsFieldBuilder();
+          getLeaguesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1231,6 +1271,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00400000);
         } else {
           clanIconsBuilder_.clear();
+        }
+        if (leaguesBuilder_ == null) {
+          leagues_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00800000);
+        } else {
+          leaguesBuilder_.clear();
         }
         return this;
       }
@@ -1475,6 +1521,15 @@ public final class StaticDataStuffProto {
           result.clanIcons_ = clanIcons_;
         } else {
           result.clanIcons_ = clanIconsBuilder_.build();
+        }
+        if (leaguesBuilder_ == null) {
+          if (((bitField0_ & 0x00800000) == 0x00800000)) {
+            leagues_ = java.util.Collections.unmodifiableList(leagues_);
+            bitField0_ = (bitField0_ & ~0x00800000);
+          }
+          result.leagues_ = leagues_;
+        } else {
+          result.leagues_ = leaguesBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2067,6 +2122,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (leaguesBuilder_ == null) {
+          if (!other.leagues_.isEmpty()) {
+            if (leagues_.isEmpty()) {
+              leagues_ = other.leagues_;
+              bitField0_ = (bitField0_ & ~0x00800000);
+            } else {
+              ensureLeaguesIsMutable();
+              leagues_.addAll(other.leagues_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.leagues_.isEmpty()) {
+            if (leaguesBuilder_.isEmpty()) {
+              leaguesBuilder_.dispose();
+              leaguesBuilder_ = null;
+              leagues_ = other.leagues_;
+              bitField0_ = (bitField0_ & ~0x00800000);
+              leaguesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getLeaguesFieldBuilder() : null;
+            } else {
+              leaguesBuilder_.addAllMessages(other.leagues_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2237,6 +2318,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.ClanProto.ClanIconProto.Builder subBuilder = com.lvl6.proto.ClanProto.ClanIconProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addClanIcons(subBuilder.buildPartial());
+              break;
+            }
+            case 202: {
+              com.lvl6.proto.BattleProto.PvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.PvpLeagueProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addLeagues(subBuilder.buildPartial());
               break;
             }
           }
@@ -6427,6 +6514,192 @@ public final class StaticDataStuffProto {
         return clanIconsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+      private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_ =
+        java.util.Collections.emptyList();
+      private void ensureLeaguesIsMutable() {
+        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
+          leagues_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpLeagueProto>(leagues_);
+          bitField0_ |= 0x00800000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> leaguesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> getLeaguesList() {
+        if (leaguesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(leagues_);
+        } else {
+          return leaguesBuilder_.getMessageList();
+        }
+      }
+      public int getLeaguesCount() {
+        if (leaguesBuilder_ == null) {
+          return leagues_.size();
+        } else {
+          return leaguesBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index) {
+        if (leaguesBuilder_ == null) {
+          return leagues_.get(index);
+        } else {
+          return leaguesBuilder_.getMessage(index);
+        }
+      }
+      public Builder setLeagues(
+          int index, com.lvl6.proto.BattleProto.PvpLeagueProto value) {
+        if (leaguesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLeaguesIsMutable();
+          leagues_.set(index, value);
+          onChanged();
+        } else {
+          leaguesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setLeagues(
+          int index, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
+        if (leaguesBuilder_ == null) {
+          ensureLeaguesIsMutable();
+          leagues_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          leaguesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addLeagues(com.lvl6.proto.BattleProto.PvpLeagueProto value) {
+        if (leaguesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLeaguesIsMutable();
+          leagues_.add(value);
+          onChanged();
+        } else {
+          leaguesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addLeagues(
+          int index, com.lvl6.proto.BattleProto.PvpLeagueProto value) {
+        if (leaguesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLeaguesIsMutable();
+          leagues_.add(index, value);
+          onChanged();
+        } else {
+          leaguesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addLeagues(
+          com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
+        if (leaguesBuilder_ == null) {
+          ensureLeaguesIsMutable();
+          leagues_.add(builderForValue.build());
+          onChanged();
+        } else {
+          leaguesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addLeagues(
+          int index, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
+        if (leaguesBuilder_ == null) {
+          ensureLeaguesIsMutable();
+          leagues_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          leaguesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllLeagues(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpLeagueProto> values) {
+        if (leaguesBuilder_ == null) {
+          ensureLeaguesIsMutable();
+          super.addAll(values, leagues_);
+          onChanged();
+        } else {
+          leaguesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearLeagues() {
+        if (leaguesBuilder_ == null) {
+          leagues_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00800000);
+          onChanged();
+        } else {
+          leaguesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeLeagues(int index) {
+        if (leaguesBuilder_ == null) {
+          ensureLeaguesIsMutable();
+          leagues_.remove(index);
+          onChanged();
+        } else {
+          leaguesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder getLeaguesBuilder(
+          int index) {
+        return getLeaguesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
+          int index) {
+        if (leaguesBuilder_ == null) {
+          return leagues_.get(index);  } else {
+          return leaguesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
+           getLeaguesOrBuilderList() {
+        if (leaguesBuilder_ != null) {
+          return leaguesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(leagues_);
+        }
+      }
+      public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder addLeaguesBuilder() {
+        return getLeaguesFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder addLeaguesBuilder(
+          int index) {
+        return getLeaguesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto.Builder> 
+           getLeaguesBuilderList() {
+        return getLeaguesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
+          getLeaguesFieldBuilder() {
+        if (leaguesBuilder_ == null) {
+          leaguesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder>(
+                  leagues_,
+                  ((bitField0_ & 0x00800000) == 0x00800000),
+                  getParentForChildren(),
+                  isClean());
+          leagues_ = null;
+        }
+        return leaguesBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -6452,43 +6725,44 @@ public final class StaticDataStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
-      "terPackStuff.proto\032\nCity.proto\032\nClan.pro" +
-      "to\032\022MonsterStuff.proto\032\013Quest.proto\032\017Str" +
-      "ucture.proto\032\nTask.proto\032\nUser.proto\"\372\t\n" +
-      "\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022>\n\016expansionC" +
-      "osts\030\002 \003(\0132&.com.lvl6.proto.CityExpansio" +
-      "nCostProto\0220\n\tallCities\030\003 \003(\0132\035.com.lvl6" +
-      ".proto.FullCityProto\022/\n\010allTasks\030\004 \003(\0132\035" +
-      ".com.lvl6.proto.FullTaskProto\0221\n\013allMons",
-      "ters\030\005 \003(\0132\034.com.lvl6.proto.MonsterProto" +
-      "\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto.StaticUs" +
-      "erLevelInfoProto\0228\n\020inProgressQuests\030\007 \003" +
-      "(\0132\036.com.lvl6.proto.FullQuestProto\0228\n\020un" +
-      "redeemedQuests\030\010 \003(\0132\036.com.lvl6.proto.Fu" +
-      "llQuestProto\0227\n\017availableQuests\030\t \003(\0132\036." +
-      "com.lvl6.proto.FullQuestProto\0226\n\014booster" +
-      "Packs\030\013 \003(\0132 .com.lvl6.proto.BoosterPack" +
-      "Proto\022=\n\rallGenerators\030\014 \003(\0132&.com.lvl6." +
-      "proto.ResourceGeneratorProto\0229\n\013allStora",
-      "ges\030\r \003(\0132$.com.lvl6.proto.ResourceStora" +
-      "geProto\0223\n\014allHospitals\030\016 \003(\0132\035.com.lvl6" +
-      ".proto.HospitalProto\0225\n\rallResidences\030\017 " +
-      "\003(\0132\036.com.lvl6.proto.ResidenceProto\022)\n\007a" +
-      "llLabs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\0223" +
-      "\n\014allTownHalls\030\020 \003(\0132\035.com.lvl6.proto.To" +
-      "wnHallProto\022>\n\020persistentEvents\030\022 \003(\0132$." +
-      "com.lvl6.proto.PersistentEventProto\0228\n\004m" +
-      "bds\030\023 \003(\0132*.com.lvl6.proto.MonsterBattle" +
-      "DialogueProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.",
-      "proto.ClanRaidProto\022F\n\024persistentClanEve" +
-      "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
-      "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr" +
-      "oto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.l" +
-      "vl6.proto.ObstacleProto\0220\n\tclanIcons\030\030 \003" +
-      "(\0132\035.com.lvl6.proto.ClanIconProtoB\026B\024Sta" +
-      "ticDataStuffProto"
+      "\n\020StaticData.proto\022\016com.lvl6.proto\032\014Batt" +
+      "le.proto\032\026BoosterPackStuff.proto\032\nCity.p" +
+      "roto\032\nClan.proto\032\022MonsterStuff.proto\032\013Qu" +
+      "est.proto\032\017Structure.proto\032\nTask.proto\032\n" +
+      "User.proto\"\253\n\n\017StaticDataProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022>\n\016expansionCosts\030\002 \003(\0132&.com.lvl6.prot" +
+      "o.CityExpansionCostProto\0220\n\tallCities\030\003 " +
+      "\003(\0132\035.com.lvl6.proto.FullCityProto\022/\n\010al" +
+      "lTasks\030\004 \003(\0132\035.com.lvl6.proto.FullTaskPr",
+      "oto\0221\n\013allMonsters\030\005 \003(\0132\034.com.lvl6.prot" +
+      "o.MonsterProto\0226\n\004slip\030\006 \003(\0132(.com.lvl6." +
+      "proto.StaticUserLevelInfoProto\0228\n\020inProg" +
+      "ressQuests\030\007 \003(\0132\036.com.lvl6.proto.FullQu" +
+      "estProto\0228\n\020unredeemedQuests\030\010 \003(\0132\036.com" +
+      ".lvl6.proto.FullQuestProto\0227\n\017availableQ" +
+      "uests\030\t \003(\0132\036.com.lvl6.proto.FullQuestPr" +
+      "oto\0226\n\014boosterPacks\030\013 \003(\0132 .com.lvl6.pro" +
+      "to.BoosterPackProto\022=\n\rallGenerators\030\014 \003" +
+      "(\0132&.com.lvl6.proto.ResourceGeneratorPro",
+      "to\0229\n\013allStorages\030\r \003(\0132$.com.lvl6.proto" +
+      ".ResourceStorageProto\0223\n\014allHospitals\030\016 " +
+      "\003(\0132\035.com.lvl6.proto.HospitalProto\0225\n\ral" +
+      "lResidences\030\017 \003(\0132\036.com.lvl6.proto.Resid" +
+      "enceProto\022)\n\007allLabs\030\021 \003(\0132\030.com.lvl6.pr" +
+      "oto.LabProto\0223\n\014allTownHalls\030\020 \003(\0132\035.com" +
+      ".lvl6.proto.TownHallProto\022>\n\020persistentE" +
+      "vents\030\022 \003(\0132$.com.lvl6.proto.PersistentE" +
+      "ventProto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6.proto" +
+      ".MonsterBattleDialogueProto\022,\n\005raids\030\024 \003",
+      "(\0132\035.com.lvl6.proto.ClanRaidProto\022F\n\024per" +
+      "sistentClanEvents\030\025 \003(\0132(.com.lvl6.proto" +
+      ".PersistentClanEventProto\022(\n\005items\030\026 \003(\013" +
+      "2\031.com.lvl6.proto.ItemProto\0220\n\tobstacles" +
+      "\030\027 \003(\0132\035.com.lvl6.proto.ObstacleProto\0220\n" +
+      "\tclanIcons\030\030 \003(\0132\035.com.lvl6.proto.ClanIc" +
+      "onProto\022/\n\007leagues\030\031 \003(\0132\036.com.lvl6.prot" +
+      "o.PvpLeagueProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6500,7 +6774,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;
@@ -6509,6 +6783,7 @@ public final class StaticDataStuffProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
           com.lvl6.proto.CityProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
