@@ -319,9 +319,11 @@ public class StartupController extends EventController {
 //          setAllBosses(resBuilder, user.getType());
 
 			      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
-			      user.setLastLogin(now);
-			      
+			      log.info("before last login change, user=" + user);
+			      user.setLastLogin(nowDate);
+			      log.info("after last login change, user=" + user);
 			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
+			      log.info("fup=" + fup);
 			      resBuilder.setSender(fup);
 
 			      boolean isNewUser = false;
@@ -411,6 +413,7 @@ public class StartupController extends EventController {
     // reset
     //UPDATE USER's LAST LOGIN
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+    log.info("user after change user login via db. user=" + user);
   }
 
   //priority of user returned is 
