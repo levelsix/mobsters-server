@@ -475,10 +475,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		displayToDefenderList.add(displayToDefender);
 		
 		//in common case, the user's elo will change, endtimes might or might not
-		updateHazelcastUser(defender);
+		updateHazelcastUser(defender, defenderId);
   }
   
-  private void updateHazelcastUser(User defender) {
+  private void updateHazelcastUser(User defender, int defenderId) {
 //  	//update the map if the defender exists/is offline
 //  	if (null != defenderOpu) {
 //  		int defenderElo = defender.getElo();
@@ -490,6 +490,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //  	}
   	int defenderElo = defender.getElo();                    
 		PvpUser pu = new PvpUser();
+		pu.setUserId(Integer.toString(defenderId));
 		pu.setElo(defenderElo);                        
 		pu.setShieldEndTime(defender.getShieldEndTime());               
 		pu.setInBattleEndTime(defender.getInBattleShieldEndTime());               
