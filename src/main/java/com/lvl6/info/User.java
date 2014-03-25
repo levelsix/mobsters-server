@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -8217671843800724634L;
+	private static final long serialVersionUID = 4332372450295064401L;
 	
 	private int id;
 	private String name;
@@ -47,7 +47,6 @@ public class User implements Serializable {
 	private boolean hasReceivedfbReward;
 //	private int numAdditionalMonsterSlots;
 	private int numBeginnerSalesPurchased;
-	private boolean hasActiveShield;
 	private Date shieldEndTime;
 	private int elo;
 	private String rank;
@@ -64,16 +63,16 @@ public class User implements Serializable {
 	private Date lastObstacleSpawnedTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
-			int experience, int tasksCompleted, int battlesWon, int battlesLost,
-			int flees, String referralCode, int numReferrals, String udidForHistory,
-			Date lastLogin, Date lastLogout, String deviceToken,
-			Date lastBattleNotificationTime, int numBadges, boolean isFake,
-			Date createTime, boolean isAdmin, String apsalarId,
+			int experience, int tasksCompleted, int battlesWon,
+			int battlesLost, int flees, String referralCode, int numReferrals,
+			String udidForHistory, Date lastLogin, Date lastLogout,
+			String deviceToken, Date lastBattleNotificationTime, int numBadges,
+			boolean isFake, Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
 			int numConsecutiveDaysPlayed, int clanId,
 			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
-			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
+			Date shieldEndTime, int elo, String rank,
 			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
 			int attacksLost, int defensesLost, String facebookId,
 			boolean fbIdSetOnUserCreate, String gameCenterId, String udid,
@@ -110,7 +109,6 @@ public class User implements Serializable {
 		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
-		this.hasActiveShield = hasActiveShield;
 		this.shieldEndTime = shieldEndTime;
 		this.elo = elo;
 		this.rank = rank;
@@ -1247,14 +1245,6 @@ public class User implements Serializable {
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 	}
 
-	public boolean isHasActiveShield() {
-		return hasActiveShield;
-	}
-
-	public void setHasActiveShield(boolean hasActiveShield) {
-		this.hasActiveShield = hasActiveShield;
-	}
-
 	public Date getShieldEndTime() {
 		return shieldEndTime;
 	}
@@ -1361,31 +1351,36 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
-				+ gems + ", cash=" + cash + ", oil=" + oil + ", experience="
-				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
-				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
-				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals
-				+ ", udidForHistory=" + udidForHistory + ", lastLogin=" + lastLogin
-				+ ", lastLogout=" + lastLogout + ", deviceToken=" + deviceToken
+		return "User [id=" + id + ", name=" + name + ", level=" + level
+				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
+				+ ", experience=" + experience + ", tasksCompleted="
+				+ tasksCompleted + ", battlesWon=" + battlesWon
+				+ ", battlesLost=" + battlesLost + ", flees=" + flees
+				+ ", referralCode=" + referralCode + ", numReferrals="
+				+ numReferrals + ", udidForHistory=" + udidForHistory
+				+ ", lastLogin=" + lastLogin + ", lastLogout=" + lastLogout
+				+ ", deviceToken=" + deviceToken
 				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
-				+ ", numBadges=" + numBadges + ", isFake=" + isFake + ", createTime="
-				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId=" + apsalarId
-				+ ", numCoinsRetrievedFromStructs=" + numCoinsRetrievedFromStructs
+				+ ", numBadges=" + numBadges + ", isFake=" + isFake
+				+ ", createTime=" + createTime + ", isAdmin=" + isAdmin
+				+ ", apsalarId=" + apsalarId
+				+ ", numCoinsRetrievedFromStructs="
+				+ numCoinsRetrievedFromStructs
 				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
 				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
 				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
-				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
-				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
-				+ ", inBattleShieldEndTime=" + inBattleShieldEndTime + ", attacksWon="
-				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
-				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
-				+ facebookId + ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
-				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime + "]";
+				+ ", shieldEndTime=" + shieldEndTime + ", elo=" + elo
+				+ ", rank=" + rank + ", inBattleShieldEndTime="
+				+ inBattleShieldEndTime + ", attacksWon=" + attacksWon
+				+ ", defensesWon=" + defensesWon + ", attacksLost="
+				+ attacksLost + ", defensesLost=" + defensesLost
+				+ ", facebookId=" + facebookId + ", fbIdSetOnUserCreate="
+				+ fbIdSetOnUserCreate + ", gameCenterId=" + gameCenterId
+				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
+				+ lastObstacleSpawnedTime + "]";
 	}
 
 }

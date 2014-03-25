@@ -633,8 +633,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 
     Date lastLogout = null;
-    ts = rs.getTimestamp(i++);
     try {
+    	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
     		lastLogout = new Date(ts.getTime());
     	}
@@ -645,8 +645,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String deviceToken = rs.getString(i++);
 
     Date lastBattleNotificationTime = null;
-    ts = rs.getTimestamp(i++);
     try {
+    	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
     		lastBattleNotificationTime = new Date(ts.getTime());
     	}
@@ -693,7 +693,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean hasReceivedfbReward = rs.getBoolean(i++);
 //    int numAdditionalMonsterSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
-    boolean hasActiveShield = rs.getBoolean(i++);
     
     Date shieldEndTime = null;
     try {
@@ -708,11 +707,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
     
-    Date inBattleEndTime = null;
+    Date inBattleShieldEndTime = null;
     try {
     	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
-    		inBattleEndTime = new Date(ts.getTime());
+    		inBattleShieldEndTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
     	log.error("db error: in_battle_end_time not set. user_id=" + id);
@@ -737,14 +736,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: last_obstacle_spawned_time");
     }
     
-    User user = new User(id, name, level, gems, cash, oil, experience,
-    		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
-    		numReferrals, udidForHistory, lastLogin, lastLogout, deviceToken,
-    		lastBattleNotificationTime, numBadges, isFake, createTime, isAdmin,
-    		apsalarId, numCoinsRetrievedFromStructs, numOilRetrievedFromStructs,
-    		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
-    		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
-    		hasActiveShield, shieldEndTime, elo, rank, inBattleEndTime,
+    User user = new User(id, name, level, gems, cash, oil, experience, tasksCompleted,
+    		battlesWon, battlesLost, flees, referralCode, numReferrals, udidForHistory,
+    		lastLogin, lastLogout, deviceToken, lastBattleNotificationTime, numBadges,
+    		isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs,
+    		numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
+    		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
+    		numBeginnerSalesPurchased, shieldEndTime, elo, rank, inBattleShieldEndTime,
     		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
     		fbIdSetOnUserCreate, gameCenterId, udid, lastObstacleSpawnedTime);
     return user;

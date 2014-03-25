@@ -2048,7 +2048,7 @@ public class CreateInfoProtoUtils {
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
     //    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
-    builder.setHasActiveShield(u.isHasActiveShield());
+//    builder.setHasActiveShield(u.isHasActiveShield());
     if(u.getShieldEndTime() != null) {
       builder.setShieldEndTime(u.getShieldEndTime().getTime());
     }

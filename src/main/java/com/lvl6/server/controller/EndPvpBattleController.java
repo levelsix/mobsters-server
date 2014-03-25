@@ -432,6 +432,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		defenderOilChangeList.add(0);
   		defenderCashChangeList.add(0);
   		displayToDefenderList.add(false);
+  		return;
   	}
   	
   	boolean defenderWon = !attackerWon;
