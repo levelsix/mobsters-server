@@ -44,7 +44,7 @@ public class PvpUserRetrieveUtils {
 		String query = sb.toString();
 
 		List<Object> values = new ArrayList<Object>();
-		values.add(false);
+//		values.add(false);
 		values.add(now);
 
 		log.info("query=" + query);
