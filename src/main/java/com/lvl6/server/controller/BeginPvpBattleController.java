@@ -178,7 +178,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//TODO: calculate the actual values! And account for fake users!
   	//case where attacker wins
   	int attackerWinEloChange = attackerElo + 10;
-  	int defenderElo = defenderProto.getCurElo();
+  	int defenderElo = 4;
   	int defenderLoseEloChange = Math.min(0, defenderElo - 10);
   	
   	

@@ -100,7 +100,7 @@ message StartupResponseProto {
 
 	//the last n people that have attacked this user in pvp
 	repeated PvpHistoryProto recentNBattles = 35;
-	optional UserPvpLeagueProto pvpLeagueStats = 36;
+	optional UserPvpLeagueProto pvpLeagueInfo = 36;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

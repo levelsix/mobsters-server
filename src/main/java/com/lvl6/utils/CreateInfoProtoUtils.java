@@ -164,6 +164,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
@@ -183,16 +184,15 @@ public class CreateInfoProtoUtils {
     return mupwbhb.build();
   }
 
-  public static PvpProto createPvpProtoFrom(User u, Collection<MonsterForUser> userMonsters,
-      int prospectiveCashWinnings, int prospectiveOilWinnings) {
+  public static PvpProto createPvpProtoFrom(User u, PvpLeagueForUser plfu,
+		  Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
+		  int prospectiveOilWinnings) {
     PvpProto.Builder ppb = PvpProto.newBuilder();
     MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
-    int curElo = u.getElo();
     Collection<MinimumUserMonsterProto> defenderMonsters = 
         createMinimumUserMonsterProtoList(userMonsters);
 
     ppb.setDefender(defender);
-    ppb.setCurElo(curElo);
     ppb.addAllDefenderMonsters(defenderMonsters);
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
@@ -218,29 +218,36 @@ public class CreateInfoProtoUtils {
     //THE ACTUAL PROTO
     PvpProto.Builder ppb = PvpProto.newBuilder();
     ppb.setDefender(mupwl);
-    ppb.setCurElo(elo);
+//    ppb.setCurElo(elo);
+    
     //set the defenderMonsters
     List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
     ppb.addAllDefenderMonsters(mumpList);
 
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+    
+    UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo, false);
+    ppb.setPvpLeagueStats(uplp);
 
     return ppb.build();
   }
 
   public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
-      Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
-      Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
+		  Map<Integer, PvpLeagueForUser> userIdToLeagueInfo,
+		  Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
+		  Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
     List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
+      PvpLeagueForUser plfu = userIdToLeagueInfo.get(userId);
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
       int prospectiveCashWinnings = userIdToCashReward.get(userId);
       int prospectiveOilWinnings = userIdToOilReward.get(userId);
 
-      PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
+      PvpProto pp = createPvpProtoFrom(u, plfu, userMonsters, prospectiveCashWinnings,
+    		  prospectiveOilWinnings);
       pvpProtoList.add(pp);
     }
     return pvpProtoList;
@@ -330,13 +337,29 @@ public class CreateInfoProtoUtils {
 	  return plpb.build();
   }
   
-  public static UserPvpLeagueProto createUserPvpLeagueProto(
-		  PvpLeagueForUser plfu) {
+  public static UserPvpLeagueProto createUserPvpLeagueProto(PvpLeagueForUser plfu,
+		  boolean setElo) {
 	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 	  uplpb.setUserId(plfu.getUserId());
 	  uplpb.setLeagueId(plfu.getPvpLeagueId());
 	  uplpb.setRank(plfu.getRank());
-	  uplpb.setElo(plfu.getElo());
+	  
+	  if (setElo) {
+		  uplpb.setElo(plfu.getElo());
+	  }
+	  
+	  return uplpb.build();
+  }
+  
+  public static UserPvpLeagueProto createFakeUserPvpLeagueProto(int userId, int elo,
+		  boolean setElo) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(userId);
+	  
+	  int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, true, 0);
+	  uplpb.setLeagueId(leagueId);
+	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
+	  uplpb.setRank(rank);
 	  
 	  return uplpb.build();
   }

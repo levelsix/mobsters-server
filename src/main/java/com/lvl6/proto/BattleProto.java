@@ -683,10 +683,6 @@ public final class BattleProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender();
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder();
     
-    // optional int32 curElo = 2;
-    boolean hasCurElo();
-    int getCurElo();
-    
     // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
     java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> 
         getDefenderMonstersList();
@@ -752,16 +748,6 @@ public final class BattleProto {
       return defender_;
     }
     
-    // optional int32 curElo = 2;
-    public static final int CURELO_FIELD_NUMBER = 2;
-    private int curElo_;
-    public boolean hasCurElo() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getCurElo() {
-      return curElo_;
-    }
-    
     // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
     public static final int DEFENDERMONSTERS_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> defenderMonsters_;
@@ -787,7 +773,7 @@ public final class BattleProto {
     public static final int PROSPECTIVECASHWINNINGS_FIELD_NUMBER = 4;
     private int prospectiveCashWinnings_;
     public boolean hasProspectiveCashWinnings() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     public int getProspectiveCashWinnings() {
       return prospectiveCashWinnings_;
@@ -797,7 +783,7 @@ public final class BattleProto {
     public static final int PROSPECTIVEOILWINNINGS_FIELD_NUMBER = 5;
     private int prospectiveOilWinnings_;
     public boolean hasProspectiveOilWinnings() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public int getProspectiveOilWinnings() {
       return prospectiveOilWinnings_;
@@ -807,7 +793,7 @@ public final class BattleProto {
     public static final int PVPLEAGUESTATS_FIELD_NUMBER = 6;
     private com.lvl6.proto.BattleProto.UserPvpLeagueProto pvpLeagueStats_;
     public boolean hasPvpLeagueStats() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public com.lvl6.proto.BattleProto.UserPvpLeagueProto getPvpLeagueStats() {
       return pvpLeagueStats_;
@@ -818,7 +804,6 @@ public final class BattleProto {
     
     private void initFields() {
       defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
-      curElo_ = 0;
       defenderMonsters_ = java.util.Collections.emptyList();
       prospectiveCashWinnings_ = 0;
       prospectiveOilWinnings_ = 0;
@@ -839,19 +824,16 @@ public final class BattleProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, defender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, curElo_);
-      }
       for (int i = 0; i < defenderMonsters_.size(); i++) {
         output.writeMessage(3, defenderMonsters_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(4, prospectiveCashWinnings_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(5, prospectiveOilWinnings_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(6, pvpLeagueStats_);
       }
       getUnknownFields().writeTo(output);
@@ -867,23 +849,19 @@ public final class BattleProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, defender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, curElo_);
-      }
       for (int i = 0; i < defenderMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, defenderMonsters_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, prospectiveCashWinnings_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, prospectiveOilWinnings_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, pvpLeagueStats_);
       }
@@ -1020,24 +998,22 @@ public final class BattleProto {
           defenderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        curElo_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         if (defenderMonstersBuilder_ == null) {
           defenderMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           defenderMonstersBuilder_.clear();
         }
         prospectiveCashWinnings_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         prospectiveOilWinnings_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (pvpLeagueStatsBuilder_ == null) {
           pvpLeagueStats_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
         } else {
           pvpLeagueStatsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -1084,29 +1060,25 @@ public final class BattleProto {
         } else {
           result.defender_ = defenderBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.curElo_ = curElo_;
         if (defenderMonstersBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             defenderMonsters_ = java.util.Collections.unmodifiableList(defenderMonsters_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.defenderMonsters_ = defenderMonsters_;
         } else {
           result.defenderMonsters_ = defenderMonstersBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.prospectiveCashWinnings_ = prospectiveCashWinnings_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.prospectiveCashWinnings_ = prospectiveCashWinnings_;
+        result.prospectiveOilWinnings_ = prospectiveOilWinnings_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
-        }
-        result.prospectiveOilWinnings_ = prospectiveOilWinnings_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000010;
         }
         if (pvpLeagueStatsBuilder_ == null) {
           result.pvpLeagueStats_ = pvpLeagueStats_;
@@ -1132,14 +1104,11 @@ public final class BattleProto {
         if (other.hasDefender()) {
           mergeDefender(other.getDefender());
         }
-        if (other.hasCurElo()) {
-          setCurElo(other.getCurElo());
-        }
         if (defenderMonstersBuilder_ == null) {
           if (!other.defenderMonsters_.isEmpty()) {
             if (defenderMonsters_.isEmpty()) {
               defenderMonsters_ = other.defenderMonsters_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureDefenderMonstersIsMutable();
               defenderMonsters_.addAll(other.defenderMonsters_);
@@ -1152,7 +1121,7 @@ public final class BattleProto {
               defenderMonstersBuilder_.dispose();
               defenderMonstersBuilder_ = null;
               defenderMonsters_ = other.defenderMonsters_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               defenderMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getDefenderMonstersFieldBuilder() : null;
@@ -1210,11 +1179,6 @@ public final class BattleProto {
               setDefender(subBuilder.buildPartial());
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              curElo_ = input.readInt32();
-              break;
-            }
             case 26: {
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
@@ -1222,12 +1186,12 @@ public final class BattleProto {
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               prospectiveCashWinnings_ = input.readInt32();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               prospectiveOilWinnings_ = input.readInt32();
               break;
             }
@@ -1336,34 +1300,13 @@ public final class BattleProto {
         return defenderBuilder_;
       }
       
-      // optional int32 curElo = 2;
-      private int curElo_ ;
-      public boolean hasCurElo() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public int getCurElo() {
-        return curElo_;
-      }
-      public Builder setCurElo(int value) {
-        bitField0_ |= 0x00000002;
-        curElo_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCurElo() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        curElo_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> defenderMonsters_ =
         java.util.Collections.emptyList();
       private void ensureDefenderMonstersIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           defenderMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto>(defenderMonsters_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       
@@ -1479,7 +1422,7 @@ public final class BattleProto {
       public Builder clearDefenderMonsters() {
         if (defenderMonstersBuilder_ == null) {
           defenderMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           defenderMonstersBuilder_.clear();
@@ -1535,7 +1478,7 @@ public final class BattleProto {
           defenderMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder>(
                   defenderMonsters_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           defenderMonsters_ = null;
@@ -1546,19 +1489,19 @@ public final class BattleProto {
       // optional int32 prospectiveCashWinnings = 4;
       private int prospectiveCashWinnings_ ;
       public boolean hasProspectiveCashWinnings() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getProspectiveCashWinnings() {
         return prospectiveCashWinnings_;
       }
       public Builder setProspectiveCashWinnings(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         prospectiveCashWinnings_ = value;
         onChanged();
         return this;
       }
       public Builder clearProspectiveCashWinnings() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         prospectiveCashWinnings_ = 0;
         onChanged();
         return this;
@@ -1567,19 +1510,19 @@ public final class BattleProto {
       // optional int32 prospectiveOilWinnings = 5;
       private int prospectiveOilWinnings_ ;
       public boolean hasProspectiveOilWinnings() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getProspectiveOilWinnings() {
         return prospectiveOilWinnings_;
       }
       public Builder setProspectiveOilWinnings(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         prospectiveOilWinnings_ = value;
         onChanged();
         return this;
       }
       public Builder clearProspectiveOilWinnings() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         prospectiveOilWinnings_ = 0;
         onChanged();
         return this;
@@ -1590,7 +1533,7 @@ public final class BattleProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> pvpLeagueStatsBuilder_;
       public boolean hasPvpLeagueStats() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public com.lvl6.proto.BattleProto.UserPvpLeagueProto getPvpLeagueStats() {
         if (pvpLeagueStatsBuilder_ == null) {
@@ -1609,7 +1552,7 @@ public final class BattleProto {
         } else {
           pvpLeagueStatsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder setPvpLeagueStats(
@@ -1620,12 +1563,12 @@ public final class BattleProto {
         } else {
           pvpLeagueStatsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder mergePvpLeagueStats(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
         if (pvpLeagueStatsBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               pvpLeagueStats_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
             pvpLeagueStats_ =
               com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(pvpLeagueStats_).mergeFrom(value).buildPartial();
@@ -1636,7 +1579,7 @@ public final class BattleProto {
         } else {
           pvpLeagueStatsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder clearPvpLeagueStats() {
@@ -1646,11 +1589,11 @@ public final class BattleProto {
         } else {
           pvpLeagueStatsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getPvpLeagueStatsBuilder() {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getPvpLeagueStatsFieldBuilder().getBuilder();
       }
@@ -1731,6 +1674,26 @@ public final class BattleProto {
     // optional int32 prospectiveOilWinnings = 8;
     boolean hasProspectiveOilWinnings();
     int getProspectiveOilWinnings();
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
+    boolean hasAttackerBefore();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerBefore();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerBeforeOrBuilder();
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
+    boolean hasAttackerAfter();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerAfter();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerAfterOrBuilder();
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
+    boolean hasDefenderBefore();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderBefore();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderBeforeOrBuilder();
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
+    boolean hasDefenderAfter();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderAfter();
+    com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderAfterOrBuilder();
   }
   public static final class PvpHistoryProto extends
       com.google.protobuf.GeneratedMessage
@@ -1865,6 +1828,58 @@ public final class BattleProto {
       return prospectiveOilWinnings_;
     }
     
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
+    public static final int ATTACKERBEFORE_FIELD_NUMBER = 10;
+    private com.lvl6.proto.BattleProto.UserPvpLeagueProto attackerBefore_;
+    public boolean hasAttackerBefore() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerBefore() {
+      return attackerBefore_;
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerBeforeOrBuilder() {
+      return attackerBefore_;
+    }
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
+    public static final int ATTACKERAFTER_FIELD_NUMBER = 11;
+    private com.lvl6.proto.BattleProto.UserPvpLeagueProto attackerAfter_;
+    public boolean hasAttackerAfter() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerAfter() {
+      return attackerAfter_;
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerAfterOrBuilder() {
+      return attackerAfter_;
+    }
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
+    public static final int DEFENDERBEFORE_FIELD_NUMBER = 12;
+    private com.lvl6.proto.BattleProto.UserPvpLeagueProto defenderBefore_;
+    public boolean hasDefenderBefore() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderBefore() {
+      return defenderBefore_;
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderBeforeOrBuilder() {
+      return defenderBefore_;
+    }
+    
+    // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
+    public static final int DEFENDERAFTER_FIELD_NUMBER = 13;
+    private com.lvl6.proto.BattleProto.UserPvpLeagueProto defenderAfter_;
+    public boolean hasDefenderAfter() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderAfter() {
+      return defenderAfter_;
+    }
+    public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderAfterOrBuilder() {
+      return defenderAfter_;
+    }
+    
     private void initFields() {
       battleEndTime_ = 0L;
       attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -1875,6 +1890,10 @@ public final class BattleProto {
       exactedRevenge_ = false;
       prospectiveCashWinnings_ = 0;
       prospectiveOilWinnings_ = 0;
+      attackerBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      attackerAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      defenderBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      defenderAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1914,6 +1933,18 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(9, battleEndTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(10, attackerBefore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(11, attackerAfter_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(12, defenderBefore_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeMessage(13, defenderAfter_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1959,6 +1990,22 @@ public final class BattleProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(9, battleEndTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, attackerBefore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, attackerAfter_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, defenderBefore_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, defenderAfter_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2078,6 +2125,10 @@ public final class BattleProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAttackerFieldBuilder();
           getAttackersMonstersFieldBuilder();
+          getAttackerBeforeFieldBuilder();
+          getAttackerAfterFieldBuilder();
+          getDefenderBeforeFieldBuilder();
+          getDefenderAfterFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2112,6 +2163,30 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         prospectiveOilWinnings_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        if (attackerBeforeBuilder_ == null) {
+          attackerBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          attackerBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        if (attackerAfterBuilder_ == null) {
+          attackerAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          attackerAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        if (defenderBeforeBuilder_ == null) {
+          defenderBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          defenderBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
+        if (defenderAfterBuilder_ == null) {
+          defenderAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+        } else {
+          defenderAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
       
@@ -2195,6 +2270,38 @@ public final class BattleProto {
           to_bitField0_ |= 0x00000080;
         }
         result.prospectiveOilWinnings_ = prospectiveOilWinnings_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (attackerBeforeBuilder_ == null) {
+          result.attackerBefore_ = attackerBefore_;
+        } else {
+          result.attackerBefore_ = attackerBeforeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (attackerAfterBuilder_ == null) {
+          result.attackerAfter_ = attackerAfter_;
+        } else {
+          result.attackerAfter_ = attackerAfterBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        if (defenderBeforeBuilder_ == null) {
+          result.defenderBefore_ = defenderBefore_;
+        } else {
+          result.defenderBefore_ = defenderBeforeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        if (defenderAfterBuilder_ == null) {
+          result.defenderAfter_ = defenderAfter_;
+        } else {
+          result.defenderAfter_ = defenderAfterBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2260,6 +2367,18 @@ public final class BattleProto {
         }
         if (other.hasProspectiveOilWinnings()) {
           setProspectiveOilWinnings(other.getProspectiveOilWinnings());
+        }
+        if (other.hasAttackerBefore()) {
+          mergeAttackerBefore(other.getAttackerBefore());
+        }
+        if (other.hasAttackerAfter()) {
+          mergeAttackerAfter(other.getAttackerAfter());
+        }
+        if (other.hasDefenderBefore()) {
+          mergeDefenderBefore(other.getDefenderBefore());
+        }
+        if (other.hasDefenderAfter()) {
+          mergeDefenderAfter(other.getDefenderAfter());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2340,6 +2459,42 @@ public final class BattleProto {
             case 72: {
               bitField0_ |= 0x00000001;
               battleEndTime_ = input.readInt64();
+              break;
+            }
+            case 82: {
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder();
+              if (hasAttackerBefore()) {
+                subBuilder.mergeFrom(getAttackerBefore());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setAttackerBefore(subBuilder.buildPartial());
+              break;
+            }
+            case 90: {
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder();
+              if (hasAttackerAfter()) {
+                subBuilder.mergeFrom(getAttackerAfter());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setAttackerAfter(subBuilder.buildPartial());
+              break;
+            }
+            case 98: {
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder();
+              if (hasDefenderBefore()) {
+                subBuilder.mergeFrom(getDefenderBefore());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setDefenderBefore(subBuilder.buildPartial());
+              break;
+            }
+            case 106: {
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder();
+              if (hasDefenderAfter()) {
+                subBuilder.mergeFrom(getDefenderAfter());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setDefenderAfter(subBuilder.buildPartial());
               break;
             }
           }
@@ -2769,6 +2924,366 @@ public final class BattleProto {
         prospectiveOilWinnings_ = 0;
         onChanged();
         return this;
+      }
+      
+      // optional .com.lvl6.proto.UserPvpLeagueProto attackerBefore = 10;
+      private com.lvl6.proto.BattleProto.UserPvpLeagueProto attackerBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> attackerBeforeBuilder_;
+      public boolean hasAttackerBefore() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerBefore() {
+        if (attackerBeforeBuilder_ == null) {
+          return attackerBefore_;
+        } else {
+          return attackerBeforeBuilder_.getMessage();
+        }
+      }
+      public Builder setAttackerBefore(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (attackerBeforeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          attackerBefore_ = value;
+          onChanged();
+        } else {
+          attackerBeforeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder setAttackerBefore(
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (attackerBeforeBuilder_ == null) {
+          attackerBefore_ = builderForValue.build();
+          onChanged();
+        } else {
+          attackerBeforeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder mergeAttackerBefore(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (attackerBeforeBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+              attackerBefore_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
+            attackerBefore_ =
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(attackerBefore_).mergeFrom(value).buildPartial();
+          } else {
+            attackerBefore_ = value;
+          }
+          onChanged();
+        } else {
+          attackerBeforeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder clearAttackerBefore() {
+        if (attackerBeforeBuilder_ == null) {
+          attackerBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          attackerBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getAttackerBeforeBuilder() {
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return getAttackerBeforeFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerBeforeOrBuilder() {
+        if (attackerBeforeBuilder_ != null) {
+          return attackerBeforeBuilder_.getMessageOrBuilder();
+        } else {
+          return attackerBefore_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> 
+          getAttackerBeforeFieldBuilder() {
+        if (attackerBeforeBuilder_ == null) {
+          attackerBeforeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder>(
+                  attackerBefore_,
+                  getParentForChildren(),
+                  isClean());
+          attackerBefore_ = null;
+        }
+        return attackerBeforeBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.UserPvpLeagueProto attackerAfter = 11;
+      private com.lvl6.proto.BattleProto.UserPvpLeagueProto attackerAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> attackerAfterBuilder_;
+      public boolean hasAttackerAfter() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto getAttackerAfter() {
+        if (attackerAfterBuilder_ == null) {
+          return attackerAfter_;
+        } else {
+          return attackerAfterBuilder_.getMessage();
+        }
+      }
+      public Builder setAttackerAfter(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (attackerAfterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          attackerAfter_ = value;
+          onChanged();
+        } else {
+          attackerAfterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder setAttackerAfter(
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (attackerAfterBuilder_ == null) {
+          attackerAfter_ = builderForValue.build();
+          onChanged();
+        } else {
+          attackerAfterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder mergeAttackerAfter(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (attackerAfterBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              attackerAfter_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
+            attackerAfter_ =
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(attackerAfter_).mergeFrom(value).buildPartial();
+          } else {
+            attackerAfter_ = value;
+          }
+          onChanged();
+        } else {
+          attackerAfterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder clearAttackerAfter() {
+        if (attackerAfterBuilder_ == null) {
+          attackerAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          attackerAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getAttackerAfterBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getAttackerAfterFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getAttackerAfterOrBuilder() {
+        if (attackerAfterBuilder_ != null) {
+          return attackerAfterBuilder_.getMessageOrBuilder();
+        } else {
+          return attackerAfter_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> 
+          getAttackerAfterFieldBuilder() {
+        if (attackerAfterBuilder_ == null) {
+          attackerAfterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder>(
+                  attackerAfter_,
+                  getParentForChildren(),
+                  isClean());
+          attackerAfter_ = null;
+        }
+        return attackerAfterBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.UserPvpLeagueProto defenderBefore = 12;
+      private com.lvl6.proto.BattleProto.UserPvpLeagueProto defenderBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> defenderBeforeBuilder_;
+      public boolean hasDefenderBefore() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderBefore() {
+        if (defenderBeforeBuilder_ == null) {
+          return defenderBefore_;
+        } else {
+          return defenderBeforeBuilder_.getMessage();
+        }
+      }
+      public Builder setDefenderBefore(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (defenderBeforeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defenderBefore_ = value;
+          onChanged();
+        } else {
+          defenderBeforeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      public Builder setDefenderBefore(
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (defenderBeforeBuilder_ == null) {
+          defenderBefore_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderBeforeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      public Builder mergeDefenderBefore(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (defenderBeforeBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800) &&
+              defenderBefore_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
+            defenderBefore_ =
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(defenderBefore_).mergeFrom(value).buildPartial();
+          } else {
+            defenderBefore_ = value;
+          }
+          onChanged();
+        } else {
+          defenderBeforeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000800;
+        return this;
+      }
+      public Builder clearDefenderBefore() {
+        if (defenderBeforeBuilder_ == null) {
+          defenderBefore_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderBeforeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000800);
+        return this;
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getDefenderBeforeBuilder() {
+        bitField0_ |= 0x00000800;
+        onChanged();
+        return getDefenderBeforeFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderBeforeOrBuilder() {
+        if (defenderBeforeBuilder_ != null) {
+          return defenderBeforeBuilder_.getMessageOrBuilder();
+        } else {
+          return defenderBefore_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> 
+          getDefenderBeforeFieldBuilder() {
+        if (defenderBeforeBuilder_ == null) {
+          defenderBeforeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder>(
+                  defenderBefore_,
+                  getParentForChildren(),
+                  isClean());
+          defenderBefore_ = null;
+        }
+        return defenderBeforeBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.UserPvpLeagueProto defenderAfter = 13;
+      private com.lvl6.proto.BattleProto.UserPvpLeagueProto defenderAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> defenderAfterBuilder_;
+      public boolean hasDefenderAfter() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto getDefenderAfter() {
+        if (defenderAfterBuilder_ == null) {
+          return defenderAfter_;
+        } else {
+          return defenderAfterBuilder_.getMessage();
+        }
+      }
+      public Builder setDefenderAfter(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (defenderAfterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defenderAfter_ = value;
+          onChanged();
+        } else {
+          defenderAfterBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      public Builder setDefenderAfter(
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder builderForValue) {
+        if (defenderAfterBuilder_ == null) {
+          defenderAfter_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderAfterBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      public Builder mergeDefenderAfter(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+        if (defenderAfterBuilder_ == null) {
+          if (((bitField0_ & 0x00001000) == 0x00001000) &&
+              defenderAfter_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
+            defenderAfter_ =
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(defenderAfter_).mergeFrom(value).buildPartial();
+          } else {
+            defenderAfter_ = value;
+          }
+          onChanged();
+        } else {
+          defenderAfterBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      public Builder clearDefenderAfter() {
+        if (defenderAfterBuilder_ == null) {
+          defenderAfter_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderAfterBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
+        return this;
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getDefenderAfterBuilder() {
+        bitField0_ |= 0x00001000;
+        onChanged();
+        return getDefenderAfterFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getDefenderAfterOrBuilder() {
+        if (defenderAfterBuilder_ != null) {
+          return defenderAfterBuilder_.getMessageOrBuilder();
+        } else {
+          return defenderAfter_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> 
+          getDefenderAfterFieldBuilder() {
+        if (defenderAfterBuilder_ == null) {
+          defenderAfterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder>(
+                  defenderAfter_,
+                  getParentForChildren(),
+                  isClean());
+          defenderAfter_ = null;
+        }
+        return defenderAfterBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpHistoryProto)
@@ -4121,30 +4636,36 @@ public final class BattleProto {
       "otoWithBattleHistory\022H\n\025minUserProtoWith" +
       "Level\030\001 \001(\0132).com.lvl6.proto.MinimumUser" +
       "ProtoWithLevel\022\022\n\nbattlesWon\030\002 \001(\005\022\023\n\013ba" +
-      "ttlesLost\030\003 \001(\005\022\023\n\013battlesFled\030\004 \001(\005\"\227\002\n" +
+      "ttlesLost\030\003 \001(\005\022\023\n\013battlesFled\030\004 \001(\005\"\207\002\n" +
       "\010PvpProto\022;\n\010defender\030\001 \001(\0132).com.lvl6.p" +
-      "roto.MinimumUserProtoWithLevel\022\016\n\006curElo" +
-      "\030\002 \001(\005\022A\n\020defenderMonsters\030\003 \003(\0132\'.com.l" +
-      "vl6.proto.MinimumUserMonsterProto\022\037\n\027pro",
-      "spectiveCashWinnings\030\004 \001(\005\022\036\n\026prospectiv" +
-      "eOilWinnings\030\005 \001(\005\022:\n\016pvpLeagueStats\030\006 \001" +
-      "(\0132\".com.lvl6.proto.UserPvpLeagueProto\"\302" +
-      "\002\n\017PvpHistoryProto\022\025\n\rbattleEndTime\030\t \001(" +
-      "\003\022/\n\010attacker\030\001 \001(\0132\035.com.lvl6.proto.Ful" +
-      "lUserProto\022B\n\021attackersMonsters\030\002 \003(\0132\'." +
-      "com.lvl6.proto.MinimumUserMonsterProto\022\023" +
-      "\n\013attackerWon\030\003 \001(\010\022\032\n\022defenderCashChang" +
-      "e\030\004 \001(\021\022\031\n\021defenderOilChange\030\005 \001(\021\022\026\n\016ex" +
-      "actedRevenge\030\006 \001(\010\022\037\n\027prospectiveCashWin",
-      "nings\030\007 \001(\005\022\036\n\026prospectiveOilWinnings\030\010 " +
-      "\001(\005\"\220\001\n\016PvpLeagueProto\022\020\n\010leagueId\030\001 \001(\005" +
-      "\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022" +
-      "\020\n\010numRanks\030\004 \001(\005\022\023\n\013description\030\005 \001(\t\022\016" +
-      "\n\006minElo\030\006 \001(\005\022\016\n\006maxElo\030\007 \001(\005\"Q\n\022UserPv" +
-      "pLeagueProto\022\016\n\006userId\030\001 \001(\005\022\020\n\010leagueId" +
-      "\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005*E\n\014Bat" +
-      "tleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_" +
-      "WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
+      "roto.MinimumUserProtoWithLevel\022A\n\020defend" +
+      "erMonsters\030\003 \003(\0132\'.com.lvl6.proto.Minimu" +
+      "mUserMonsterProto\022\037\n\027prospectiveCashWinn",
+      "ings\030\004 \001(\005\022\036\n\026prospectiveOilWinnings\030\005 \001" +
+      "(\005\022:\n\016pvpLeagueStats\030\006 \001(\0132\".com.lvl6.pr" +
+      "oto.UserPvpLeagueProto\"\260\004\n\017PvpHistoryPro" +
+      "to\022\025\n\rbattleEndTime\030\t \001(\003\022/\n\010attacker\030\001 " +
+      "\001(\0132\035.com.lvl6.proto.FullUserProto\022B\n\021at" +
+      "tackersMonsters\030\002 \003(\0132\'.com.lvl6.proto.M" +
+      "inimumUserMonsterProto\022\023\n\013attackerWon\030\003 " +
+      "\001(\010\022\032\n\022defenderCashChange\030\004 \001(\021\022\031\n\021defen" +
+      "derOilChange\030\005 \001(\021\022\026\n\016exactedRevenge\030\006 \001" +
+      "(\010\022\037\n\027prospectiveCashWinnings\030\007 \001(\005\022\036\n\026p",
+      "rospectiveOilWinnings\030\010 \001(\005\022:\n\016attackerB" +
+      "efore\030\n \001(\0132\".com.lvl6.proto.UserPvpLeag" +
+      "ueProto\0229\n\rattackerAfter\030\013 \001(\0132\".com.lvl" +
+      "6.proto.UserPvpLeagueProto\022:\n\016defenderBe" +
+      "fore\030\014 \001(\0132\".com.lvl6.proto.UserPvpLeagu" +
+      "eProto\0229\n\rdefenderAfter\030\r \001(\0132\".com.lvl6" +
+      ".proto.UserPvpLeagueProto\"\220\001\n\016PvpLeagueP" +
+      "roto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001" +
+      "(\t\022\021\n\timgPrefix\030\003 \001(\t\022\020\n\010numRanks\030\004 \001(\005\022" +
+      "\023\n\013description\030\005 \001(\t\022\016\n\006minElo\030\006 \001(\005\022\016\n\006",
+      "maxElo\030\007 \001(\005\"Q\n\022UserPvpLeagueProto\022\016\n\006us" +
+      "erId\030\001 \001(\005\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003 \001" +
+      "(\005\022\013\n\003elo\030\004 \001(\005*E\n\014BattleResult\022\020\n\014ATTAC" +
+      "KER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_" +
+      "FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4164,7 +4685,7 @@ public final class BattleProto {
           internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PvpProto_descriptor,
-              new java.lang.String[] { "Defender", "CurElo", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", },
+              new java.lang.String[] { "Defender", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "PvpLeagueStats", },
               com.lvl6.proto.BattleProto.PvpProto.class,
               com.lvl6.proto.BattleProto.PvpProto.Builder.class);
           internal_static_com_lvl6_proto_PvpHistoryProto_descriptor =
@@ -4172,7 +4693,7 @@ public final class BattleProto {
           internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-              new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", },
+              new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", },
               com.lvl6.proto.BattleProto.PvpHistoryProto.class,
               com.lvl6.proto.BattleProto.PvpHistoryProto.Builder.class);
           internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =

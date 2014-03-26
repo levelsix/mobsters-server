@@ -376,8 +376,27 @@ public class DBConstants {
   public static final String PVP_BATTLE_HISTORY__DEFENDER_ID = "defender_id";
   public static final String PVP_BATTLE_HISTORY__BATTLE_END_TIME = "battle_end_time";
   public static final String PVP_BATTLE_HISTORY__BATTLE_START_TIME = "battle_start_time";
+  
   public static final String PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE = "attacker_elo_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE = "attacker_elo_before";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER = "attacker_elo_after";
+  
   public static final String PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE = "defender_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE = "defender_elo_before";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER = "defender_elo_after";
+  
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE = "attacker_prev_league";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE = "attacker_cur_league";
+  
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE = "defender_prev_league";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE = "defender_cur_league";
+  
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK = "attacker_prev_rank";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK = "attacker_cur_rank";
+  
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK = "defender_prev_rank";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK = "defender_cur_rank";
+  
   public static final String PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE = "attacker_cash_change";
   public static final String PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE = "defender_cash_change";
   public static final String PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE = "attacker_oil_change";

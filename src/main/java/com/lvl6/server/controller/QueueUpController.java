@@ -22,6 +22,7 @@ import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -34,6 +35,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -60,6 +62,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
 	
 //	@Autowired
 //	protected PvpUtil pvpUtil;
@@ -242,7 +247,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		if (null == queuedOpponents || queuedOpponents.size() < numWanted) {
 			numWanted = numWanted - queuedOpponentIdsList.size();
 			
-			//TODO: GENERATE THE FAKE DEFENDER AND MONSTERS
+			//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
 			log.info("no valid users for attacker=" + attacker);
 			log.info("generating fake users.");
 			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
@@ -260,6 +265,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			log.info("there are people to attack!");
 			log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
 			log.info("queuedOpponents:" + queuedOpponents);
+			
+			Map<Integer, PvpLeagueForUser> userIdToPvpLeagueInfo = 
+					getPvpLeagueForUserRetrieveUtil()
+					.getUserPvpLeagueForUsers(queuedOpponentIdsList);
+			
 			//get the 3 monsters for each defender: ideally should be equipped, but 
 			//will randomly select if user doesn't have 3 equipped
 			Map<Integer, List<MonsterForUser>> userIdToUserMonsters = 
@@ -273,8 +283,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			
 			//create the protos for all this
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
-					queuedOpponents, userIdToUserMonsters, userIdToProspectiveCashReward,
-					userIdToProspectiveOilReward);
+					queuedOpponents, userIdToPvpLeagueInfo, userIdToUserMonsters,
+					userIdToProspectiveCashReward, userIdToProspectiveOilReward);
 			
 			pvpProtoList.addAll(pvpProtoListTemp);
 		}
@@ -740,6 +750,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
+	}
+
+	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+		return pvpLeagueForUserRetrieveUtil;
+	}
+
+	public void setPvpLeagueForUserRetrieveUtil(
+			PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
 
 }
