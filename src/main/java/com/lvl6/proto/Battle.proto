@@ -86,7 +86,7 @@ message UserPvpLeagueProto {
 	optional int32 userId = 1;
 	optional int32 leagueId = 2; //pvp league id
 	optional int32 rank = 3;
-	optional int32 elo = 4;
+	optional int32 elo = 4; //client doesn't really need it, so will not be set :P
 }
 
 ///atm, this file is used by EventPvp.proto

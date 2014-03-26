@@ -61,6 +61,8 @@ public class PvpBattleHistoryRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class PvpBattleHistoryForClientMapper implements RowMapper<PvpBattleHistory> {
+		
+		private static List<String> columnsSelected;
 
 		public PvpBattleHistory mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpBattleHistory history = new PvpBattleHistory();
@@ -68,15 +70,52 @@ public class PvpBattleHistoryRetrieveUtil {
 			history.setDefenderId(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID));
 			Timestamp time = rs.getTimestamp(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
 			history.setBattleEndTime(time);
-			time = rs.getTimestamp(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME);
-			history.setBattleStartTime(time);
-			history.setDefenderEloChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE));
+//			time = rs.getTimestamp(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME);
+//			history.setBattleStartTime(time);
+//			history.setDefenderEloChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE));
+			
+			history.setAttackerPrevLeague(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE));
+			history.setAttackerCurLeague(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE));
+			history.setDefenderPrevLeague(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE));
+			history.setDefenderCurLeague(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE));
+
+			history.setAttackerPrevRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK));
+			history.setAttackerCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK));
+			history.setDefenderPrevRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK));
+			history.setDefenderCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK));
+			
 			history.setDefenderCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE));
 			history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
 			history.setAttackerWon(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
 			return history;
-		}        
+		}
+
+		public static List<String> getColumnsSelected() {
+			if (null == columnsSelected) {
+				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
+				
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE);
+				
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK);
+				
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON);
+				columnsSelected.add(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE);
+			}
+			return columnsSelected;
+		}
+		
 	} 
 
 	//CONTROLLER LOGIC******************************************************************
@@ -94,6 +133,8 @@ public class PvpBattleHistoryRetrieveUtil {
 	public List<PvpBattleHistory> getRecentNBattlesForDefenderId(int defenderId, int n) {
 		List<PvpBattleHistory> recentNBattles = null;
 		try {
+			List<String> columnsToSelect = PvpBattleHistoryForClientMapper.getColumnsSelected();
+			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
 			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
@@ -107,8 +148,8 @@ public class PvpBattleHistoryRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					TABLE_NAME, equalityConditions, conditionDelimiter, values,
-					preparedStatement);
+					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
+					values, preparedStatement);
 
 			if (n >= 1) {
 				StringBuilder querySb = new StringBuilder();

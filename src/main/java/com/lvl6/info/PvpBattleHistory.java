@@ -3,9 +3,10 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
+//look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 	
-	private static final long serialVersionUID = -1545759446022034754L;
+	private static final long serialVersionUID = -2619239431555979083L;
 	
 	private int attackerId;
 	private int defenderId;
@@ -14,7 +15,7 @@ public class PvpBattleHistory implements Serializable {
 	
 	private int attackerEloChange;
 	private int attackerEloBefore;
-	private int attackerEloAFter;
+	private int attackerEloAfter;
 	
 	private int defenderEloChange;
 	private int defenderEloBefore;
@@ -22,13 +23,11 @@ public class PvpBattleHistory implements Serializable {
 	
 	private int attackerPrevLeague;
 	private int attackerCurLeague;
-	
 	private int defenderPrevLeague;
 	private int defenderCurLeague;
 	
 	private int attackerPrevRank;
 	private int attackerCurRank;
-	
 	private int defenderPrevRank;
 	private int defenderCurRank;
 	
@@ -46,7 +45,7 @@ public class PvpBattleHistory implements Serializable {
 
 	public PvpBattleHistory(int attackerId, int defenderId, Date battleEndTime,
 			Date battleStartTime, int attackerEloChange, int attackerEloBefore,
-			int attackerEloAFter, int defenderEloChange, int defenderEloBefore,
+			int attackerEloAfter, int defenderEloChange, int defenderEloBefore,
 			int defenderEloAfter, int attackerPrevLeague,
 			int attackerCurLeague, int defenderPrevLeague,
 			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
@@ -61,7 +60,7 @@ public class PvpBattleHistory implements Serializable {
 		this.battleStartTime = battleStartTime;
 		this.attackerEloChange = attackerEloChange;
 		this.attackerEloBefore = attackerEloBefore;
-		this.attackerEloAFter = attackerEloAFter;
+		this.attackerEloAfter = attackerEloAfter;
 		this.defenderEloChange = defenderEloChange;
 		this.defenderEloBefore = defenderEloBefore;
 		this.defenderEloAfter = defenderEloAfter;
@@ -130,12 +129,12 @@ public class PvpBattleHistory implements Serializable {
 		this.attackerEloBefore = attackerEloBefore;
 	}
 
-	public int getAttackerEloAFter() {
-		return attackerEloAFter;
+	public int getAttackerEloAfter() {
+		return attackerEloAfter;
 	}
 
-	public void setAttackerEloAFter(int attackerEloAFter) {
-		this.attackerEloAFter = attackerEloAFter;
+	public void setAttackerEloAfter(int attackerEloAfter) {
+		this.attackerEloAfter = attackerEloAfter;
 	}
 
 	public int getDefenderEloChange() {
@@ -289,7 +288,7 @@ public class PvpBattleHistory implements Serializable {
 				+ ", battleStartTime=" + battleStartTime
 				+ ", attackerEloChange=" + attackerEloChange
 				+ ", attackerEloBefore=" + attackerEloBefore
-				+ ", attackerEloAFter=" + attackerEloAFter
+				+ ", attackerEloAfter=" + attackerEloAfter
 				+ ", defenderEloChange=" + defenderEloChange
 				+ ", defenderEloBefore=" + defenderEloBefore
 				+ ", defenderEloAfter=" + defenderEloAfter

@@ -283,6 +283,25 @@ public class CreateInfoProtoUtils {
   	//endDate should not be null, it's the primary key
   	phpb.setBattleEndTime(endDate.getTime());
   	
+  	
+  	UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
+  			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
+  			info.getAttackerEloBefore(), false);
+  	phpb.setAttackerBefore(attackerBefore);
+  	UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
+  			info.getAttackerCurLeague(), info.getAttackerCurRank(),
+  			info.getAttackerEloAfter(), false);
+  	phpb.setAttackerBefore(attackerAfter);
+  	
+  	UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
+  			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
+  			info.getDefenderEloBefore(), false);
+  	phpb.setAttackerBefore(defenderBefore);
+  	UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
+  			info.getDefenderCurLeague(), info.getDefenderCurRank(),
+  			info.getDefenderEloAfter(), false);
+  	phpb.setAttackerBefore(defenderAfter);
+  	
   	return phpb.build();
   }
   
@@ -346,6 +365,20 @@ public class CreateInfoProtoUtils {
 	  
 	  if (setElo) {
 		  uplpb.setElo(plfu.getElo());
+	  }
+	  
+	  return uplpb.build();
+  }
+  
+  public static UserPvpLeagueProto createUserPvpLeagueProto(int userId, int pvpLeagueId,
+		  int rank, int elo, boolean setElo) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(userId);
+	  uplpb.setLeagueId(pvpLeagueId);
+	  uplpb.setRank(rank);
+	  
+	  if (setElo) {
+		  uplpb.setElo(elo);
 	  }
 	  
 	  return uplpb.build();

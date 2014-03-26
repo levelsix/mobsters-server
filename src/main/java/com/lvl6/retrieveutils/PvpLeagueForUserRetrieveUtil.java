@@ -3,6 +3,7 @@ package com.lvl6.retrieveutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,6 +60,8 @@ public class PvpLeagueForUserRetrieveUtil {
 	//says so (search for "private static final")
 	private static final class UserPvpLeagueForClientMapper implements RowMapper<PvpLeagueForUser> {
 
+		private static List<String> columnsSelected;
+
 		public PvpLeagueForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpLeagueForUser ofu = new PvpLeagueForUser();
 			ofu.setUserId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID));
@@ -67,6 +70,17 @@ public class PvpLeagueForUserRetrieveUtil {
 			ofu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));
 			return ofu;
 		}        
+		
+		public static List<String> getColumnsSelected() {
+			if (null == columnsSelected) {
+				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__RANK);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ELO);
+			}
+			return columnsSelected;
+		}
 	} 
 
 	//CONTROLLER LOGIC******************************************************************
@@ -75,6 +89,8 @@ public class PvpLeagueForUserRetrieveUtil {
 	public PvpLeagueForUser getUserPvpLeagueForId(int userId) {
 		PvpLeagueForUser plfu = null;
 		try {
+			List<String> columnsToSelect = UserPvpLeagueForClientMapper.getColumnsSelected();
+			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
@@ -86,8 +102,8 @@ public class PvpLeagueForUserRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					TABLE_NAME, equalityConditions, conditionDelimiter, values,
-					preparedStatement);
+					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
+					values, preparedStatement);
 
 			log.info("query=" + query);
 
@@ -102,6 +118,8 @@ public class PvpLeagueForUserRetrieveUtil {
 	public Map<Integer, PvpLeagueForUser> getUserPvpLeagueForUsers(List<Integer> userIdList) {
 		Map<Integer, PvpLeagueForUser> plfuMap = new HashMap<Integer, PvpLeagueForUser>();
 		try {
+			List<String> columnsToSelect = UserPvpLeagueForClientMapper.getColumnsSelected();
+			
 			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
 			inConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userIdList);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
@@ -113,7 +131,7 @@ public class PvpLeagueForUserRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil().selectRowsQueryInConditions(
-					TABLE_NAME, inConditions, conditionDelimiter, values,
+					columnsToSelect, TABLE_NAME, inConditions, conditionDelimiter, values,
 					preparedStatement);
 
 			log.info("query=" + query);

@@ -59,6 +59,8 @@ public class ObstacleForUserRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserObstacleForClientMapper implements RowMapper<ObstacleForUser> {
+		
+		private static List<String> columnsSelected;
 
 		public ObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ObstacleForUser ofu = new ObstacleForUser();
@@ -76,6 +78,20 @@ public class ObstacleForUserRetrieveUtil {
 			ofu.setOrientation(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
 			return ofu;
 		}        
+		
+		public static List<String> getColumnsSelected() {
+			if (null == columnsSelected) {
+				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__XCOORD);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__YCOORD);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
+			}
+			return columnsSelected;
+		}
 	} 
 
 	//CONTROLLER LOGIC******************************************************************
@@ -84,6 +100,8 @@ public class ObstacleForUserRetrieveUtil {
 	public ObstacleForUser getUserObstacleForId(int ofuId) {
 		ObstacleForUser ofu = null;
 		try {
+			List<String> columnsToSelected = UserObstacleForClientMapper.getColumnsSelected();
+			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
@@ -95,8 +113,8 @@ public class ObstacleForUserRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					TABLE_NAME, equalityConditions, conditionDelimiter, values,
-					preparedStatement);
+					columnsToSelected, TABLE_NAME, equalityConditions, conditionDelimiter,
+					values, preparedStatement);
 
 			log.info("query=" + query);
 
@@ -111,6 +129,8 @@ public class ObstacleForUserRetrieveUtil {
 	public List<ObstacleForUser> getUserObstacleForUser(int userId) {
 		List<ObstacleForUser> ofuList = null;
 		try {
+			List<String> columnsToSelected = UserObstacleForClientMapper.getColumnsSelected();
+			
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
@@ -122,8 +142,9 @@ public class ObstacleForUserRetrieveUtil {
 			boolean preparedStatement = false;
 
 			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					TABLE_NAME, equalityConditions, conditionDelimiter, values,
-					preparedStatement);
+					columnsToSelected, TABLE_NAME, equalityConditions, conditionDelimiter,
+					values, preparedStatement);
+
 
 			log.info("query=" + query);
 

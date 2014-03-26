@@ -21,6 +21,7 @@ public class QueryConstructionUtil {
 	private final String PERCENT = "%";
 	
 	private final String AND = " AND ";
+	private final String FROM = "from";
 	private final String NOTNULL = " NOT NULL ";
 	private final String NULLSTR = " NULL ";
 	private final String OR = " OR ";
@@ -30,21 +31,23 @@ public class QueryConstructionUtil {
 	private final String RPAREN = ")";
 	private final String LIKE = "LIKE";
 	private final String QUESTION = "?";
+	private final String SELECT = "select";
+	private final String SELECTSTAR = "select *";
 	private final String SPACE = " ";
+	private final String WHERE = " where ";
 	private final int SPACELENGTH = 1;
 
 	//at the moment, just EQUALITY conditions, GREATER THAN conditions,  "IN ()" and IS
 	//conditions. the argument "values" is another return value. It will contain
 	//the values to be set into the CqlPreparedStatement IN the proper order, but is not
 	//used at the moment
-	public String selectRowsQueryAllConditions(String tableName, Map<String, ?> equalityConditions,
-			String equalityCondDelim, Map<String, ?> greaterThanConditions,
-			String greaterThanCondDelim, Map<String, Collection<?>> inConditions,
-			String inCondDelim, Map<String, ?> isConditions, String isCondDelim,
-			String delimAcrossConditions, List<Object> values) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("select * from ");
-		sb.append(tableName);
+	public String selectRowsQueryAllConditions(List<String> columnsToSelect,
+			String tableName, Map<String, ?> equalityConditions, String equalityCondDelim,
+			Map<String, ?> greaterThanConditions, String greaterThanCondDelim,
+			Map<String, Collection<?>> inConditions, String inCondDelim,
+			Map<String, ?> isConditions, String isCondDelim, String delimAcrossConditions,
+			List<Object> values) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
 
 		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty()); 
 		boolean emptyGtConditions = (null == greaterThanConditions || greaterThanConditions.isEmpty());
@@ -58,7 +61,7 @@ public class QueryConstructionUtil {
 			log.info("no args provided. query=" + query);
 			return query;
 		}
-		sb.append(" where ");
+		sb.append(WHERE);
 
 		//EQUALITY CONDITIONS
 		String conjunction = "";
@@ -115,27 +118,25 @@ public class QueryConstructionUtil {
 	//generalized method to construct a query, the argument "values" IS another return
 	//value. It will contain the values to be set into the CqlPreparedStatement IN the
 	//proper order
-	public String selectRowsQueryEqualityConditions(String tableName,
-			Map<String, ?> equalityConditions, String conditionDelimiter,
+	public String selectRowsQueryEqualityConditions(List<String> columnsToSelect,
+			String tableName, Map<String, ?> equalityConditions, String condDelim,
 			List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("select * from ");
-		sb.append(tableName);
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
 
 		if (null == equalityConditions || equalityConditions.isEmpty()) {
 			//sb.append(";");
 			log.info("selectRowsQuery=" + sb.toString());
 			return sb.toString();
 		}
-		sb.append(" where ");
+		sb.append(WHERE);
 
 		if (preparedStatement) {
 			String preparedEqualityConditionsStr = createPreparedComparisonConditionsString(
-					equalityConditions, values, EQUALITY, conditionDelimiter);
+					equalityConditions, values, EQUALITY, condDelim);
 			sb.append(preparedEqualityConditionsStr);
 		} else {
 			String equalityConditionsStr = createComparisonConditionsString(
-					equalityConditions, EQUALITY, conditionDelimiter);
+					equalityConditions, EQUALITY, condDelim);
 			sb.append(equalityConditionsStr);
 		}
 
@@ -148,14 +149,12 @@ public class QueryConstructionUtil {
 	//generalized method to construct a query, the argument "values" is another return
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
 	//proper order, but not used at the moment
-	public String selectRowsQueryLikeConditions(String tableName, Map<String, ?> beginsWith,
-			String beginsWithCondDelim, Map<String, ?> beginsAndEndsWith,
-			String beginsAndEndsWithCondDelim, Map<String, ?> endsWith,
-			String endsWithCondDelim, String overallDelimiter, List<Object> values,
-			boolean preparedStatement) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("select * from ");
-		sb.append(tableName);
+	public String selectRowsQueryLikeConditions(List<String> columnsToSelect,
+			String tableName, Map<String, ?> beginsWith, String beginsWithCondDelim,
+			Map<String, ?> beginsAndEndsWith, String beginsAndEndsWithCondDelim,
+			Map<String, ?> endsWith, String endsWithCondDelim, String overallDelimiter,
+			List<Object> values, boolean preparedStatement) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
 		
 		boolean emptyBeginsWith = (null == beginsWith || beginsWith.isEmpty());
 		boolean emptyBeginsAndEndsWith = (null == beginsAndEndsWith || beginsAndEndsWith.isEmpty());
@@ -166,7 +165,7 @@ public class QueryConstructionUtil {
 			log.info("selectRowsQuery=" + sb.toString());
 			return sb.toString();
 		}
-		sb.append(" where ");
+		sb.append(WHERE);
 		
 		String conjunction = "";
 		//PERCENT SIGN AT THE END
@@ -210,19 +209,17 @@ public class QueryConstructionUtil {
 	//generalized method to construct a query, the argument "values" is another return
 	//value. It will contain the values to be set into the CqlPreparedStatement in the
 	//proper order, but not used at the moment
-	public String selectRowsQueryInConditions(String tableName,
+	public String selectRowsQueryInConditions(List<String> columnsToSelect, String tableName,
 			Map<String, Collection<?>> inConditions, String conditionDelimiter,
 			List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("select * from ");
-		sb.append(tableName);
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
 
 		if (null == inConditions || inConditions.isEmpty()) {
 			//sb.append(";");
 			log.info("selectRowsQuery=" + sb.toString());
 			return sb.toString();
 		}
-		sb.append(" where ");
+		sb.append(WHERE);
 
 		if (preparedStatement) {
 			List<String> allInConditions = new ArrayList<String>(); 
@@ -252,6 +249,23 @@ public class QueryConstructionUtil {
 	}
 	
 	
+	public StringBuilder createSelectColumnsFromTableString(List<String> columnsToSelect,
+			String tableName) {
+		StringBuilder sb = new StringBuilder();
+		if (null == columnsToSelect || columnsToSelect.isEmpty()) { 
+			sb.append(SELECTSTAR);
+		} else {
+			sb.append(SELECT);
+			sb.append(SPACE);
+			String columnsToSelectStr = implode(columnsToSelect, COMMA);
+			sb.append(columnsToSelectStr);
+		}
+		sb.append(SPACE);
+		sb.append(FROM);
+		sb.append(SPACE);
+		sb.append(tableName);
+		return sb;
+	}
 
 	//the argument "values" is another return value. It will contain the values
 	//to be set into the CqlPreparedStatement IN the proper order.
