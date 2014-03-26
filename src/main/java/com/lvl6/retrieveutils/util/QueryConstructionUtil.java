@@ -2,6 +2,7 @@ package com.lvl6.retrieveutils.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -25,6 +26,8 @@ public class QueryConstructionUtil {
 	private final String OR = " OR ";
 	private final String IN = "IN"; 
 	private final String IS = "IS"; 
+	private final String LPAREN = "(";
+	private final String RPAREN = ")";
 	private final String LIKE = "LIKE";
 	private final String QUESTION = "?";
 	private final String SPACE = " ";
@@ -79,15 +82,16 @@ public class QueryConstructionUtil {
 		}
 		// IN (VALUES) CONDITIONS
 		if (!emptyInConditions) {
+			List<String> allInConditions = new ArrayList<String>(); 
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
 				String inConditionsStr = createColInValuesString(column, inValues);
-
-				sb.append(inCondDelim);
-				sb.append(inConditionsStr);
-
+				
+				allInConditions.add(inConditionsStr);
 			}
+			sb.append(implode(allInConditions, inCondDelim));
 			conjunction = delimAcrossConditions;
+			
 		} else {
 			conjunction = "";
 		}
@@ -203,7 +207,49 @@ public class QueryConstructionUtil {
 	}
 	
 	
-	
+	//generalized method to construct a query, the argument "values" is another return
+	//value. It will contain the values to be set into the CqlPreparedStatement in the
+	//proper order, but not used at the moment
+	public String selectRowsQueryInConditions(String tableName,
+			Map<String, Collection<?>> inConditions, String conditionDelimiter,
+			List<Object> values, boolean preparedStatement) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from ");
+		sb.append(tableName);
+
+		if (null == inConditions || inConditions.isEmpty()) {
+			//sb.append(";");
+			log.info("selectRowsQuery=" + sb.toString());
+			return sb.toString();
+		}
+		sb.append(" where ");
+
+		if (preparedStatement) {
+			List<String> allInConditions = new ArrayList<String>(); 
+			for (String column : inConditions.keySet()) {
+				Collection<?> inValues = inConditions.get(column);
+				String inConditionsStr = createPreparedColInValuesString(column, inValues, values);
+				
+				allInConditions.add(inConditionsStr);
+			}
+			sb.append(implode(allInConditions, conditionDelimiter));
+			
+		} else {
+			List<String> allInConditions = new ArrayList<String>(); 
+			for (String column : inConditions.keySet()) {
+				Collection<?> inValues = inConditions.get(column);
+				String inConditionsStr = createColInValuesString(column, inValues);
+				
+				allInConditions.add(inConditionsStr);
+			}
+			sb.append(implode(allInConditions, conditionDelimiter));
+		}
+
+		//close the query
+		//sb.append(";");
+		log.info("(IN) selectRowsQuery=" + sb.toString() + "\t values=" + values);
+		return sb.toString();
+	}
 	
 	
 
@@ -264,7 +310,27 @@ public class QueryConstructionUtil {
 		return equalityConditionsStr;
 	}
 
-
+	public String createPreparedColInValuesString(String column, Collection<?> inValues,
+			List<Object> values) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(column);
+		sb.append(SPACE);
+		sb.append(IN);
+		sb.append(SPACE);
+		sb.append(LPAREN);
+		
+		int size = inValues.size();
+		List<String> questions = Collections.nCopies(size, QUESTION);
+		String valuesStr = implode(questions, COMMA);
+		sb.append(valuesStr);
+		
+		sb.append(RPAREN);
+		values.addAll(inValues);
+		
+		String result = sb.toString();
+		return result;
+	}
+	
 	public String createColInValuesString(String column, Collection<?> inValues) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(column);

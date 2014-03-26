@@ -52,6 +52,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeague;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
@@ -76,6 +77,7 @@ import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
+import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -328,6 +330,16 @@ public class CreateInfoProtoUtils {
 	  return plpb.build();
   }
   
+  public static UserPvpLeagueProto createUserPvpLeagueProto(
+		  PvpLeagueForUser plfu) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(plfu.getUserId());
+	  uplpb.setLeagueId(plfu.getPvpLeagueId());
+	  uplpb.setRank(plfu.getRank());
+	  uplpb.setElo(plfu.getElo());
+	  
+	  return uplpb.build();
+  }
   
   /**BoosterPackStuff.proto****************************************/
   //  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {

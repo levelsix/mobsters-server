@@ -2,9 +2,8 @@ package com.lvl6.retrieveutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,15 +19,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
 @Component 
-public class ObstacleForUserRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ObstacleForUserRetrieveUtil.class);
+public class PvpLeagueForUserRetrieveUtil {
+	private static Logger log = LoggerFactory.getLogger(PvpLeagueForUserRetrieveUtil.class);
 	
-	private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE_FOR_USER; 
+	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE_FOR_USER; 
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -55,25 +54,17 @@ public class ObstacleForUserRetrieveUtil {
 	}
 	
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
-	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
+	//mimics PvpHistoryProto in Battle.proto
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserObstacleForClientMapper implements RowMapper<ObstacleForUser> {
+	private static final class UserPvpLeagueForClientMapper implements RowMapper<PvpLeagueForUser> {
 
-		public ObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
-			ObstacleForUser ofu = new ObstacleForUser();
-			ofu.setId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ID));
-			ofu.setUserId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__USER_ID));
-			ofu.setObstacleId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID));
-			ofu.setXcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__XCOORD));
-			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
-			try {
-				Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
-				ofu.setRemovalTime(time);
-			} catch (Exception e) {
-				log.error("maybe obstacle removal time is invalid", e);
-			}
-			ofu.setOrientation(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
+		public PvpLeagueForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+			PvpLeagueForUser ofu = new PvpLeagueForUser();
+			ofu.setUserId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID));
+			ofu.setPvpLeagueId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID));
+			ofu.setRank(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__RANK));
+			ofu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));
 			return ofu;
 		}        
 	} 
@@ -81,11 +72,11 @@ public class ObstacleForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public ObstacleForUser getUserObstacleForId(int ofuId) {
-		ObstacleForUser ofu = null;
+	public PvpLeagueForUser getUserPvpLeagueForId(int userId) {
+		PvpLeagueForUser plfu = null;
 		try {
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
+			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
 			//query db, "values" is not used 
@@ -100,19 +91,19 @@ public class ObstacleForUserRetrieveUtil {
 
 			log.info("query=" + query);
 
-			ofu = this.jdbcTemplate.queryForObject(query, new UserObstacleForClientMapper());
+			plfu = this.jdbcTemplate.queryForObject(query, new UserPvpLeagueForClientMapper());
 		} catch (Exception e) {
-			log.error("could not retrieve user obstacle for id=" + ofuId, e);
+			log.error("could not retrieve user pvpLeague for userId=" + userId, e);
 		}
 		
-		return ofu;
+		return plfu;
 	}
 	
-	public List<ObstacleForUser> getUserObstacleForUser(int userId) {
-		List<ObstacleForUser> ofuList = null;
+	public Map<Integer, PvpLeagueForUser> getUserPvpLeagueForUsers(List<Integer> userIdList) {
+		Map<Integer, PvpLeagueForUser> plfuMap = new HashMap<Integer, PvpLeagueForUser>();
 		try {
-			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);
+			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
+			inConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userIdList);
 			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
 			//query db, "values" is not used 
@@ -121,19 +112,24 @@ public class ObstacleForUserRetrieveUtil {
 			List<Object> values = null;
 			boolean preparedStatement = false;
 
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					TABLE_NAME, equalityConditions, conditionDelimiter, values,
+			String query = getQueryConstructionUtil().selectRowsQueryInConditions(
+					TABLE_NAME, inConditions, conditionDelimiter, values,
 					preparedStatement);
 
 			log.info("query=" + query);
 
-			ofuList = this.jdbcTemplate.query(query, new UserObstacleForClientMapper());
+			List<PvpLeagueForUser> plfuList = this.jdbcTemplate
+					.query(query, new UserPvpLeagueForClientMapper());
+			
+			for (PvpLeagueForUser plfu : plfuList) {
+				int userId = plfu.getUserId();
+				plfuMap.put(userId, plfu);
+			}
 		} catch (Exception e) {
-			log.error("could not retrieve user obstacle for userId=" + userId, e);
-			ofuList = new ArrayList<ObstacleForUser>();
+			log.error("could not retrieve user pvpLeague for userIds=" + userIdList, e);
 		}
 		
-		return ofuList;
+		return plfuMap;
 	}
 	
 }

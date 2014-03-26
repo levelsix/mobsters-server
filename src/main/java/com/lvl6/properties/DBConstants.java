@@ -387,6 +387,13 @@ public class DBConstants {
   public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
   public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 
+  /*PVP LEAGUE FOR USER*/
+  public static final String PVP_LEAGUE_FOR_USER__USER_ID = "user_id";
+  public static final String PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID = "league_id";
+  public static final String PVP_LEAGUE_FOR_USER__RANK = "rank";
+  public static final String PVP_LEAGUE_FOR_USER__ELO = "elo";
+  
+  
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
   public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
