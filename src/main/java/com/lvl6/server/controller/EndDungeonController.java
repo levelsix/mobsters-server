@@ -17,7 +17,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.ItemForUser;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
@@ -32,7 +31,6 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -40,7 +38,6 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class EndDungeonController extends EventController {
 
@@ -112,7 +109,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//delete from task_stage_for_user and put into task_stage_history
       	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
       	//TODO: record 
-      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
+//      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
       	recordStageHistory(tsfuList, monsterIdToNumPieces);
       	
       	
@@ -350,7 +347,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //not using this method because how many items the user has is kept track through
   //quest progress
-  private Map<Integer, ItemForUser> updateUserItems(List<TaskStageForUser> tsfuList,
+  /*
+   private Map<Integer, ItemForUser> updateUserItems(List<TaskStageForUser> tsfuList,
   		int userId) {
   	Map<Integer, Integer> itemIdsToQuantities = getItemsDropped(tsfuList);
 		
@@ -391,7 +389,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return itemIdToUserItem;
   }
   
-  
   //go through list of task stage for user, aggregate all the item ids with non zero
   //quantities
   private Map<Integer, Integer> getItemsDropped(List<TaskStageForUser> tsfuList) {
@@ -419,6 +416,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	return itemIdsToQuantities;
   }
+  */
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
       int previousCash, long userTaskId, int taskId) {

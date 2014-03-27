@@ -14,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -138,8 +136,8 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public static float clientVersionNumber;
 
 	public static void main(String args[]) {
-		ApplicationContext context = new FileSystemXmlApplicationContext(
-				"target/utopia-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+//		ApplicationContext context = new FileSystemXmlApplicationContext(
+//				"target/utopia-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
 	}
 
 	public GameServer(String serverIP, int portNum) {
@@ -272,14 +270,18 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public boolean lockClanTowersTable() {
 	  log.debug("Locking all clan towers");
 	  String lockName = clanTowersTableLockName();
-	  if(lockMap.tryLock(lockName, LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-	    log.debug("Got lock for all clan towers.");
-	    lockMap.put(lockName, new Date(), 10, TimeUnit.SECONDS);
-	    return true;
-	  } else {
-	    log.warn("Failed to acquire lock for all clan towers");
+	  try {
+		if(lockMap.tryLock(lockName, LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+		    log.debug("Got lock for all clan towers.");
+		    lockMap.put(lockName, new Date(), 10, TimeUnit.SECONDS);
+		    return true;
+		  }
+	} catch (Exception e) {
+		log.warn("1Failed to acquire lock for all clan towers", e);
+	}
+	  
+	    log.warn("2Failed to acquire lock for all clan towers");
 	    return false;
-	  }
 	}
 	
 	//don't know if the try catch is needed...
@@ -306,16 +308,20 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	
 	public boolean lockClan(int clanId) {
 		log.debug("Locking clan: " + clanId);
-		if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-			log.debug("Got lock for clan " + clanId);
-			lockMap.put(clanLockName(clanId), new Date());
-			return true;
-		} else {
-			log.warn("failed to aquire lock for " + clanLockName(clanId));
+		try {
+			if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for clan " + clanId);
+				lockMap.put(clanLockName(clanId), new Date());
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("failed to aquire lock for " + clanLockName(clanId), e);
+		}
+		
+			log.warn("2failed to aquire lock for " + clanLockName(clanId));
 			return false;
 			// throw new
 			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
-		}
 	}
 
 	public void unlockClan(int clanId) {
@@ -367,18 +373,21 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public boolean lockPlayer(int playerId, String lockedByClass) {
 		log.info("Locking player {} from class {}", playerId, lockedByClass);
 		// Lock playerLock = hazel.getLock(playersInAction.lockName(playerId));
-		if (lockMap.tryLock(playersInAction.lockName(playerId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-			log.debug("Got lock for player " + playerId);
-			playersInAction.addPlayer(playerId, lockedByClass);
-			return true;
-		} else {
-			log.warn("failed to aquire lock for " + playersInAction.lockName(playerId)+" from class "+lockedByClass);
-			PlayerInAction playa = playersInAction.getPlayerInAction(playerId);
-			if(playa != null) {
-				log.warn("Player {} already locked by class: {}", playerId, playa.getLockedByClass());
+		try {
+			if (lockMap.tryLock(playersInAction.lockName(playerId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for player " + playerId);
+				playersInAction.addPlayer(playerId, lockedByClass);
+				return true;
 			}
-			throw new RuntimeException("Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
+		} catch (Exception e) {
+			log.warn("1Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds", e);
 		}
+		log.warn("failed to aquire lock for " + playersInAction.lockName(playerId)+" from class "+lockedByClass);
+		PlayerInAction playa = playersInAction.getPlayerInAction(playerId);
+		if(playa != null) {
+			log.warn("Player {} already locked by class: {}", playerId, playa.getLockedByClass());
+		}
+		throw new RuntimeException("Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
 	}
 
 	public boolean lockPlayers(int playerId1, int playerId2, String lockedByClass) {

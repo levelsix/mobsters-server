@@ -141,6 +141,7 @@ public class HealthCheckImpl implements HealthCheck {
 		try {
 			f = serverConnectionFactory.getClass().getDeclaredField("connections");
 			f.setAccessible(true);
+			@SuppressWarnings("unchecked")
 			Map<SocketChannel, TcpNioConnection> connections = (Map<SocketChannel, TcpNioConnection>) f.get(serverConnectionFactory);
 			if(connections != null && !connections.isEmpty()) {
 				log.info("ServerConnectionFactory.connections.size:  "+connections.size());

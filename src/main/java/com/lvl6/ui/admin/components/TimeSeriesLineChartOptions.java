@@ -16,6 +16,7 @@ public class TimeSeriesLineChartOptions extends Options {
 
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	public TimeSeriesLineChartOptions(String title, String yAxisTitle, List<RollupEntry> entries) {
 		super();
 		List<String> times = new ArrayList<String>();

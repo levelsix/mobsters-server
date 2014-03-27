@@ -2023,8 +2023,8 @@ public class StartupController extends EventController {
   //TODO: FIX THIS
   public void writeToUserCurrencyHistory(User aUser, String goldSilver, int previousMoney,
       Map<String, Integer> goldSilverChange) {
-    String cash = MiscMethods.cash;
-    String gems = MiscMethods.gems;
+    //String cash = MiscMethods.cash;
+    //String gems = MiscMethods.gems;
 
 //    Timestamp date = new Timestamp((new Date()).getTime());
 //    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();

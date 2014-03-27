@@ -108,7 +108,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     ClanEventPersistentForClan clanEvent = null;
     Map<Integer, ClanEventPersistentForUser> userIdToClanUserInfo = 
     		new HashMap<Integer, ClanEventPersistentForUser>();
-    boolean errorless = true;
+    //boolean errorless = true;
 //    if (0 != clanId) {
 //    	getLocker().lockClan(clanId);
 //    }
@@ -136,7 +136,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	server.writeClanEvent(resEvent, clanId);
       }
     } catch (Exception e) {
-    	errorless = false;
+    	//errorless = false;
     	try {
     	  resBuilder.setStatus(RecordClanRaidStatsStatus.FAIL_OTHER);
     	  RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
