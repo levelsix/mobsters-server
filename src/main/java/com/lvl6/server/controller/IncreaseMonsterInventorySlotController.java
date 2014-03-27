@@ -262,16 +262,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private int getMinNumInvitesFromStruct(StructureForUser sfu, int structId,
   		int userStructFbInviteLvl) {
-  	//get the structure
-  	Structure struct = StructureRetrieveUtils.getPredecessorStructForStructIdAndLvl(
-  			structId, userStructFbInviteLvl);
-  	String structType = struct.getStructType();
+	  //since userStructFbInviteLvl and structure level are one to one, essentially
+	  //they are one and the same
+	  //e.g. userStructFbInviteLvl = 1, also means 1 = structure level
+  	//get the structure with the struct lvl= userStructFbInviteLvl
+  	Structure structForFbInviteLvl = StructureRetrieveUtils
+  			.getPredecessorStructForStructIdAndLvl(structId, userStructFbInviteLvl);
+  	String structType = structForFbInviteLvl.getStructType();
+  	
+  	log.info("StructureForUser=" + sfu);
+  	log.info("structId=" + structForFbInviteLvl);
+  	log.info("userStructFbInviteLvl=" + userStructFbInviteLvl);
+  	log.info("resulting structure for structId and level: " + structForFbInviteLvl);
   	
   	int minNumInvites = -1;
   	//at the moment, invites are only for residences
   	if (StructType.valueOf(structType) == StructType.RESIDENCE) {
+  		int structIdForUserStructFbInviteLvl = structForFbInviteLvl.getId(); 
   		StructureResidence residence = StructureResidenceRetrieveUtils
-  				.getResidenceForStructId(structId);
+  				.getResidenceForStructId(structIdForUserStructFbInviteLvl);
   		minNumInvites = residence.getNumAcceptedFbInvites();
   	} else {
   		log.error("invalid struct type for increasing monster slots. structType=" + structType);
