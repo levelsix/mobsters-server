@@ -32,6 +32,7 @@ public class LogBackElasticSearchAppender extends UnsynchronizedAppenderBase<ILo
 		if(search == null) {
 			search = new LoggingElasticSearchIndexer(getElasticCluster(), getElasticHosts());
 		}
+		@SuppressWarnings("unchecked")
 		final Map<String, Object> mdccopy = MDC.getCopyOfContextMap();
 		if(search != null) {
 			UUID key = TimeUUIDUtils.getUniqueTimeUUIDinMillis();

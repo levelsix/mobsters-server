@@ -29,10 +29,12 @@ enum BattleResult {
 
 message PvpProto {
 	optional MinimumUserProtoWithLevel defender = 1;
-	optional int32 curElo = 2; //the defender's current elo
+	//optional int32 curElo = 2; //the defender's current elo
 	repeated MinimumUserMonsterProto defenderMonsters = 3;
 	optional int32 prospectiveCashWinnings = 4;
 	optional int32 prospectiveOilWinnings = 5;
+	
+	optional UserPvpLeagueProto pvpLeagueStats = 6; //defender info
 }
 
 //------------------------------------------------------------------------------------------
@@ -53,8 +55,38 @@ message PvpHistoryProto {
 	optional int32 prospectiveCashWinnings = 7;
 	optional int32 prospectiveOilWinnings = 8;
 	
-	
 	//optional int64 battleEndTime = 9; //defined above
+	
+	//for the attacker/defender
+	//need the prev and cur rank 
+	//need the prev and cur league
+	optional UserPvpLeagueProto attackerBefore = 10; //before the battle
+	optional UserPvpLeagueProto attackerAfter = 11; //after the battle
+	
+	optional UserPvpLeagueProto defenderBefore = 12; //before the battle
+	optional UserPvpLeagueProto defenderAfter = 13;  //after the battle
+}
+
+//------------------------------------------------------------------------------------------
+
+message PvpLeagueProto {
+	optional int32 leagueId = 1;
+	optional string leagueName = 2;
+	optional string imgPrefix = 3;
+	optional int32 numRanks = 4;
+	optional string description = 5;
+	optional int32 minElo = 6;
+	optional int32 maxElo = 7;
+}
+
+//------------------------------------------------------------------------------------------
+
+//all the leaderboard information regarding user in pvp
+message UserPvpLeagueProto {
+	optional int32 userId = 1;
+	optional int32 leagueId = 2; //pvp league id
+	optional int32 rank = 3;
+	optional int32 elo = 4; //client doesn't really need it, so will not be set :P
 }
 
 ///atm, this file is used by EventPvp.proto

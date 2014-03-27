@@ -3,16 +3,34 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
+//look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 	
-	private static final long serialVersionUID = 7761168981313051307L;
+	private static final long serialVersionUID = -2619239431555979083L;
 	
 	private int attackerId;
 	private int defenderId;
 	private Date battleEndTime;
 	private Date battleStartTime;
+	
 	private int attackerEloChange;
+	private int attackerEloBefore;
+	private int attackerEloAfter;
+	
 	private int defenderEloChange;
+	private int defenderEloBefore;
+	private int defenderEloAfter;
+	
+	private int attackerPrevLeague;
+	private int attackerCurLeague;
+	private int defenderPrevLeague;
+	private int defenderCurLeague;
+	
+	private int attackerPrevRank;
+	private int attackerCurRank;
+	private int defenderPrevRank;
+	private int defenderCurRank;
+	
 	private int attackerCashChange;
 	private int defenderCashChange;
 	private int attackerOilChange;
@@ -24,10 +42,15 @@ public class PvpBattleHistory implements Serializable {
 	public PvpBattleHistory() {
 		super();
 	}
-	
+
 	public PvpBattleHistory(int attackerId, int defenderId, Date battleEndTime,
-			Date battleStartTime, int attackerEloChange, int defenderEloChange,
-			int attackerCashChange, int defenderCashChange, int attackerOilChange,
+			Date battleStartTime, int attackerEloChange, int attackerEloBefore,
+			int attackerEloAfter, int defenderEloChange, int defenderEloBefore,
+			int defenderEloAfter, int attackerPrevLeague,
+			int attackerCurLeague, int defenderPrevLeague,
+			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+			int defenderPrevRank, int defenderCurRank, int attackerCashChange,
+			int defenderCashChange, int attackerOilChange,
 			int defenderOilChange, boolean attackerWon, boolean cancelled,
 			boolean exactedRevenge) {
 		super();
@@ -36,7 +59,19 @@ public class PvpBattleHistory implements Serializable {
 		this.battleEndTime = battleEndTime;
 		this.battleStartTime = battleStartTime;
 		this.attackerEloChange = attackerEloChange;
+		this.attackerEloBefore = attackerEloBefore;
+		this.attackerEloAfter = attackerEloAfter;
 		this.defenderEloChange = defenderEloChange;
+		this.defenderEloBefore = defenderEloBefore;
+		this.defenderEloAfter = defenderEloAfter;
+		this.attackerPrevLeague = attackerPrevLeague;
+		this.attackerCurLeague = attackerCurLeague;
+		this.defenderPrevLeague = defenderPrevLeague;
+		this.defenderCurLeague = defenderCurLeague;
+		this.attackerPrevRank = attackerPrevRank;
+		this.attackerCurRank = attackerCurRank;
+		this.defenderPrevRank = defenderPrevRank;
+		this.defenderCurRank = defenderCurRank;
 		this.attackerCashChange = attackerCashChange;
 		this.defenderCashChange = defenderCashChange;
 		this.attackerOilChange = attackerOilChange;
@@ -86,12 +121,108 @@ public class PvpBattleHistory implements Serializable {
 		this.attackerEloChange = attackerEloChange;
 	}
 
+	public int getAttackerEloBefore() {
+		return attackerEloBefore;
+	}
+
+	public void setAttackerEloBefore(int attackerEloBefore) {
+		this.attackerEloBefore = attackerEloBefore;
+	}
+
+	public int getAttackerEloAfter() {
+		return attackerEloAfter;
+	}
+
+	public void setAttackerEloAfter(int attackerEloAfter) {
+		this.attackerEloAfter = attackerEloAfter;
+	}
+
 	public int getDefenderEloChange() {
 		return defenderEloChange;
 	}
 
 	public void setDefenderEloChange(int defenderEloChange) {
 		this.defenderEloChange = defenderEloChange;
+	}
+
+	public int getDefenderEloBefore() {
+		return defenderEloBefore;
+	}
+
+	public void setDefenderEloBefore(int defenderEloBefore) {
+		this.defenderEloBefore = defenderEloBefore;
+	}
+
+	public int getDefenderEloAfter() {
+		return defenderEloAfter;
+	}
+
+	public void setDefenderEloAfter(int defenderEloAfter) {
+		this.defenderEloAfter = defenderEloAfter;
+	}
+
+	public int getAttackerPrevLeague() {
+		return attackerPrevLeague;
+	}
+
+	public void setAttackerPrevLeague(int attackerPrevLeague) {
+		this.attackerPrevLeague = attackerPrevLeague;
+	}
+
+	public int getAttackerCurLeague() {
+		return attackerCurLeague;
+	}
+
+	public void setAttackerCurLeague(int attackerCurLeague) {
+		this.attackerCurLeague = attackerCurLeague;
+	}
+
+	public int getDefenderPrevLeague() {
+		return defenderPrevLeague;
+	}
+
+	public void setDefenderPrevLeague(int defenderPrevLeague) {
+		this.defenderPrevLeague = defenderPrevLeague;
+	}
+
+	public int getDefenderCurLeague() {
+		return defenderCurLeague;
+	}
+
+	public void setDefenderCurLeague(int defenderCurLeague) {
+		this.defenderCurLeague = defenderCurLeague;
+	}
+
+	public int getAttackerPrevRank() {
+		return attackerPrevRank;
+	}
+
+	public void setAttackerPrevRank(int attackerPrevRank) {
+		this.attackerPrevRank = attackerPrevRank;
+	}
+
+	public int getAttackerCurRank() {
+		return attackerCurRank;
+	}
+
+	public void setAttackerCurRank(int attackerCurRank) {
+		this.attackerCurRank = attackerCurRank;
+	}
+
+	public int getDefenderPrevRank() {
+		return defenderPrevRank;
+	}
+
+	public void setDefenderPrevRank(int defenderPrevRank) {
+		this.defenderPrevRank = defenderPrevRank;
+	}
+
+	public int getDefenderCurRank() {
+		return defenderCurRank;
+	}
+
+	public void setDefenderCurRank(int defenderCurRank) {
+		this.defenderCurRank = defenderCurRank;
 	}
 
 	public int getAttackerCashChange() {
@@ -154,13 +285,26 @@ public class PvpBattleHistory implements Serializable {
 	public String toString() {
 		return "PvpBattleHistory [attackerId=" + attackerId + ", defenderId="
 				+ defenderId + ", battleEndTime=" + battleEndTime
-				+ ", battleStartTime=" + battleStartTime + ", attackerEloChange="
-				+ attackerEloChange + ", defenderEloChange=" + defenderEloChange
+				+ ", battleStartTime=" + battleStartTime
+				+ ", attackerEloChange=" + attackerEloChange
+				+ ", attackerEloBefore=" + attackerEloBefore
+				+ ", attackerEloAfter=" + attackerEloAfter
+				+ ", defenderEloChange=" + defenderEloChange
+				+ ", defenderEloBefore=" + defenderEloBefore
+				+ ", defenderEloAfter=" + defenderEloAfter
+				+ ", attackerPrevLeague=" + attackerPrevLeague
+				+ ", attackerCurLeague=" + attackerCurLeague
+				+ ", defenderPrevLeague=" + defenderPrevLeague
+				+ ", defenderCurLeague=" + defenderCurLeague
+				+ ", attackerPrevRank=" + attackerPrevRank
+				+ ", attackerCurRank=" + attackerCurRank
+				+ ", defenderPrevRank=" + defenderPrevRank
+				+ ", defenderCurRank=" + defenderCurRank
 				+ ", attackerCashChange=" + attackerCashChange
-				+ ", defenderCashChange=" + defenderCashChange + ", attackerOilChange="
-				+ attackerOilChange + ", defenderOilChange=" + defenderOilChange
-				+ ", attackerWon=" + attackerWon + ", cancelled=" + cancelled
+				+ ", defenderCashChange=" + defenderCashChange
+				+ ", attackerOilChange=" + attackerOilChange
+				+ ", defenderOilChange=" + defenderOilChange + ", attackerWon="
+				+ attackerWon + ", cancelled=" + cancelled
 				+ ", exactedRevenge=" + exactedRevenge + "]";
 	}
-	
 }

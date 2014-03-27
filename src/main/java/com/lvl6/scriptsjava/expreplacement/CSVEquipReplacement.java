@@ -16,7 +16,7 @@ public class CSVEquipReplacement {
   private static String csvFileName = "src/main/java/com/lvl6/scriptsjava/csvequipreplacement/weaponchanges.csv";
 
   public static void main(String[] args) {
-    ApplicationContext context = new FileSystemXmlApplicationContext("target/utopia-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+//    ApplicationContext context = new FileSystemXmlApplicationContext("target/utopia-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
     DBConnection.get().init();
     
     CSVReader reader;

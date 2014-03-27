@@ -227,7 +227,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			//since real player and battle end time is after now, change it to now
   			//so defender can be attackable again
   			defenderOpu.setInBattleEndTime(clientDate);
-  			getHazelcastPvpUtil().replacePvpUser(defenderOpu);
+  			getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
   		}
   		log.info("writing to pvp history that user cancelled battle");
   		writePvpBattleHistory(attackerId, defenderId, clientTime, pvpBattleInfo, 0, 0,
@@ -432,6 +432,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		defenderOilChangeList.add(0);
   		defenderCashChangeList.add(0);
   		displayToDefenderList.add(false);
+  		return;
   	}
   	
   	boolean defenderWon = !attackerWon;
@@ -474,26 +475,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		displayToDefenderList.add(displayToDefender);
 		
 		//in common case, the user's elo will change, endtimes might or might not
-		updateHazelcastUser(defender);
+		updateHazelcastUser(defender, defenderId);
   }
   
-  private void updateHazelcastUser(User defender) {
-//  	//update the map if the defender exists/is offline
-//  	if (null != defenderOpu) {
-//  		int defenderElo = defender.getElo();
-//  		defenderOpu.setElo(defenderElo);
-//  		getHazelcastPvpUtil().updatePvpUser(defenderOpu); 
+  private void updateHazelcastUser(User user, int userId) {
+//  	//update the map if the user exists/is offline
+//  	if (null != userOpu) {
+//  		int userElo = user.getElo();
+//  		userOpu.setElo(userElo);
+//  		getHazelcastPvpUtil().updatePvpUser(userOpu); 
 //  		
-//  		defenderOpu.setShieldEndTime(defender.getShieldEndTime());
-//  		defenderOpu.setInBattleEndTime(defender.getInBattleShieldEndTime());
+//  		userOpu.setShieldEndTime(user.getShieldEndTime());
+//  		userOpu.setInBattleEndTime(user.getInBattleShieldEndTime());
 //  	}
-  	int defenderElo = defender.getElo();                    
+  	int userElo = user.getElo();                    
 		PvpUser pu = new PvpUser();
-		pu.setElo(defenderElo);                        
-		pu.setShieldEndTime(defender.getShieldEndTime());               
-		pu.setInBattleEndTime(defender.getInBattleShieldEndTime());               
-//		getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
-		getHazelcastPvpUtil().replacePvpUser(pu);
+		pu.setUserId(Integer.toString(userId));
+		pu.setElo(userElo);                        
+		pu.setShieldEndTime(user.getShieldEndTime());               
+		pu.setInBattleEndTime(user.getInBattleShieldEndTime());               
+//		getHazelcastPvpUtil().updateOfflinePvpUser(userOpu);
+		getHazelcastPvpUtil().replacePvpUser(pu, userId);
   }
   
   private void writePvpBattleHistory(int attackerId, int defenderId, Timestamp endTime,

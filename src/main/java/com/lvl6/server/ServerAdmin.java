@@ -143,18 +143,26 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.writer = writer;
 	}
 
+	
+	
 	protected Integer instanceCountForDataReload = 0;
 	protected Integer instancesDoneReloadingCount = 0;
 	protected ILock instancesReloadingLock;
+	protected String registrationId;
 
 	public void reloadAllStaticData() {
 		instancesDoneReloadingCount = 0;
 		instanceCountForDataReload = getHazel().getCluster().getMembers().size();
 		log.info("Reloading all static data for cluster instances: " + instanceCountForDataReload);
-		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA);
+		//providing data type Object worked in hazelcast 2.6
+//		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA);
+		//need to provide string now since using hazelcast 3.2
+		instancesReloadingLock = hazel.getLock(ServerMessage.RELOAD_STATIC_DATA.name());
 		try {
 			instancesReloadingLock.tryLock(20, TimeUnit.SECONDS);
-			getStaticDataReloadDone().addMessageListener(this);
+			//adding message listener creates an id to reger to the listener just added
+			//so saving this so as to refer to it later
+			this.registrationId = getStaticDataReloadDone().addMessageListener(this);
 			serverEvents.publish(ServerMessage.RELOAD_STATIC_DATA);
 		} catch (InterruptedException e) {
 			log.error("Could not obtain lock for reloading instances", e);
@@ -230,7 +238,9 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			if (instancesDoneReloadingCount >= instanceCountForDataReload
 					|| instancesDoneReloadingCount >= getHazel().getCluster().getMembers().size()) {
 				log.info("All instances done reloading static data");
-				getStaticDataReloadDone().removeMessageListener(this);
+				//providing data type Object worked in hazelcast 2.6
+//				getStaticDataReloadDone().removeMessageListener(this);
+				getStaticDataReloadDone().removeMessageListener(registrationId);
 				sendPurgeStaticDataNotificationToAllClients();
 				instancesReloadingLock.forceUnlock();
 				instancesReloadingLock = null;

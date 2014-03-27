@@ -51,6 +51,8 @@ import com.lvl6.info.Obstacle;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
+import com.lvl6.info.PvpLeague;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
@@ -73,7 +75,9 @@ import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
+import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -160,6 +164,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
@@ -179,16 +184,15 @@ public class CreateInfoProtoUtils {
     return mupwbhb.build();
   }
 
-  public static PvpProto createPvpProtoFrom(User u, Collection<MonsterForUser> userMonsters,
-      int prospectiveCashWinnings, int prospectiveOilWinnings) {
+  public static PvpProto createPvpProtoFrom(User u, PvpLeagueForUser plfu,
+		  Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
+		  int prospectiveOilWinnings) {
     PvpProto.Builder ppb = PvpProto.newBuilder();
     MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
-    int curElo = u.getElo();
     Collection<MinimumUserMonsterProto> defenderMonsters = 
         createMinimumUserMonsterProtoList(userMonsters);
 
     ppb.setDefender(defender);
-    ppb.setCurElo(curElo);
     ppb.addAllDefenderMonsters(defenderMonsters);
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
@@ -214,29 +218,36 @@ public class CreateInfoProtoUtils {
     //THE ACTUAL PROTO
     PvpProto.Builder ppb = PvpProto.newBuilder();
     ppb.setDefender(mupwl);
-    ppb.setCurElo(elo);
+//    ppb.setCurElo(elo);
+    
     //set the defenderMonsters
     List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
     ppb.addAllDefenderMonsters(mumpList);
 
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+    
+    UserPvpLeagueProto uplp = createFakeUserPvpLeagueProto(userId, elo, false);
+    ppb.setPvpLeagueStats(uplp);
 
     return ppb.build();
   }
 
   public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
-      Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
-      Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
+		  Map<Integer, PvpLeagueForUser> userIdToLeagueInfo,
+		  Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
+		  Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
     List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
+      PvpLeagueForUser plfu = userIdToLeagueInfo.get(userId);
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
       int prospectiveCashWinnings = userIdToCashReward.get(userId);
       int prospectiveOilWinnings = userIdToOilReward.get(userId);
 
-      PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
+      PvpProto pp = createPvpProtoFrom(u, plfu, userMonsters, prospectiveCashWinnings,
+    		  prospectiveOilWinnings);
       pvpProtoList.add(pp);
     }
     return pvpProtoList;
@@ -272,6 +283,25 @@ public class CreateInfoProtoUtils {
   	//endDate should not be null, it's the primary key
   	phpb.setBattleEndTime(endDate.getTime());
   	
+  	
+  	UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
+  			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
+  			info.getAttackerEloBefore(), false);
+  	phpb.setAttackerBefore(attackerBefore);
+  	UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
+  			info.getAttackerCurLeague(), info.getAttackerCurRank(),
+  			info.getAttackerEloAfter(), false);
+  	phpb.setAttackerBefore(attackerAfter);
+  	
+  	UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
+  			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
+  			info.getDefenderEloBefore(), false);
+  	phpb.setAttackerBefore(defenderBefore);
+  	UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
+  			info.getDefenderCurLeague(), info.getDefenderCurRank(),
+  			info.getDefenderEloAfter(), false);
+  	phpb.setAttackerBefore(defenderAfter);
+  	
   	return phpb.build();
   }
   
@@ -298,6 +328,74 @@ public class CreateInfoProtoUtils {
   	return phpList;
   }
   
+  public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
+	  PvpLeagueProto.Builder plpb = PvpLeagueProto.newBuilder();
+	  
+	  plpb.setLeagueId(pl.getId());
+	  
+	  String aStr = pl.getLeagueName();
+	  if (null != aStr) {
+		  plpb.setLeagueName(aStr);
+	  }
+	  
+	  aStr = pl.getImgPrefix();
+	  if (null != aStr) {
+		  plpb.setImgPrefix(aStr);
+	  }
+	  
+	  plpb.setNumRanks(pl.getNumRanks());
+	  
+	  aStr = pl.getDescription();
+	  if (null != aStr) {
+		  plpb.setDescription(aStr);
+	  }
+	  
+	  plpb.setMinElo(pl.getMinElo());
+	  plpb.setMaxElo(pl.getMaxElo());
+	  
+	  return plpb.build();
+  }
+  
+  public static UserPvpLeagueProto createUserPvpLeagueProto(PvpLeagueForUser plfu,
+		  boolean setElo) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(plfu.getUserId());
+	  uplpb.setLeagueId(plfu.getPvpLeagueId());
+	  uplpb.setRank(plfu.getRank());
+	  
+	  if (setElo) {
+		  uplpb.setElo(plfu.getElo());
+	  }
+	  
+	  return uplpb.build();
+  }
+  
+  public static UserPvpLeagueProto createUserPvpLeagueProto(int userId, int pvpLeagueId,
+		  int rank, int elo, boolean setElo) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(userId);
+	  uplpb.setLeagueId(pvpLeagueId);
+	  uplpb.setRank(rank);
+	  
+	  if (setElo) {
+		  uplpb.setElo(elo);
+	  }
+	  
+	  return uplpb.build();
+  }
+  
+  public static UserPvpLeagueProto createFakeUserPvpLeagueProto(int userId, int elo,
+		  boolean setElo) {
+	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
+	  uplpb.setUserId(userId);
+	  
+	  int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, true, 0);
+	  uplpb.setLeagueId(leagueId);
+	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
+	  uplpb.setRank(rank);
+	  
+	  return uplpb.build();
+  }
   
   /**BoosterPackStuff.proto****************************************/
   //  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
@@ -2048,7 +2146,7 @@ public class CreateInfoProtoUtils {
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
     //    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
-    builder.setHasActiveShield(u.isHasActiveShield());
+//    builder.setHasActiveShield(u.isHasActiveShield());
     if(u.getShieldEndTime() != null) {
       builder.setShieldEndTime(u.getShieldEndTime().getTime());
     }

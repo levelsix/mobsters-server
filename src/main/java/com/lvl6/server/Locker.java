@@ -30,10 +30,10 @@ public class Locker {
 		public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
 			return playersByPlayerId;
 		}
-
 		public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
 			this.playersByPlayerId = playersByPlayerId;
 		} 
+
 		
 		//Use this to lock, unlock things
 		@javax.annotation.Resource(name = "lockMap")
@@ -42,11 +42,11 @@ public class Locker {
 		public IMap<String, Date> getLockMap() {
 			return lockMap;
 		}
-
 		public void setLockMap(IMap<String, Date> lockMap) {
 			this.lockMap = lockMap;
 		}
 
+		
 		//this is kind of a history of locks, keeping track of which users are locked by
 		//which classes
 		@javax.annotation.Resource(name = "playersInAction")
@@ -55,28 +55,76 @@ public class Locker {
 		public PlayerSet getPlayersInAction() {
 			return playersInAction;
 		}
-
 		public void setPlayersInAction(PlayerSet playersInAction) {
 			this.playersInAction = playersInAction;
 		}
 		
-	//LOCKING THINGS. ALL COPIED FROM GameServer.java
+		
+		//LOCKING THINGS. 
+		protected String hzMapLockName(String mapToLock) {
+			return "HzMapLock: " + mapToLock;
+		}
+		public boolean lockHazelcastMap(String mapToLock) {
+			log.debug("Locking hazelcast map: " + mapToLock);
+  		try {
+			if (lockMap.tryLock(hzMapLockName(mapToLock), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for hz map " + mapToLock);
+				
+				try {
+					lockMap.put(hzMapLockName(mapToLock), new Date());
+				} catch (Exception e) {
+					log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+							e.getMessage(), e);
+					return false;
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("1failed to aquire lock for " + hzMapLockName(mapToLock), e);
+		}
+  		log.warn("2failed to aquire lock for " + hzMapLockName(mapToLock));
+  		return false;
+  			// throw new
+  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
+		}
+		
+		public void unlockHazelcastMap(String mapToLock) {
+  		log.debug("Unlocking hazelcast map: " + mapToLock);
+  		try {
+  			String lockName = hzMapLockName(mapToLock);
+  			if (lockMap.isLocked(lockName)) {
+  				lockMap.unlock(lockName);
+  			}
+  			log.debug("Unlocked hazelcast map: " + mapToLock);
+  			if (lockMap.containsKey(lockName)) {
+  				lockMap.remove(lockName);
+  			}
+  		} catch (Exception e) {
+  			log.error("Error unlocking hazelcast map " + mapToLock, e);
+  		}
+  	}
+		
+		//ALL COPIED FROM GameServer.java
     //either returns true or throws exception
     public boolean lockPlayer(int playerId, String lockedByClass) {
   		log.info("Locking player {} from class {}", playerId, lockedByClass);
   		// Lock playerLock = hazel.getLock(playersInAction.lockName(playerId));
-  		if (lockMap.tryLock(playersInAction.lockName(playerId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-  			log.debug("Got lock for player " + playerId);
-  			playersInAction.addPlayer(playerId, lockedByClass);
-  			return true;
-  		} else {
-  			log.warn("failed to aquire lock for " + playersInAction.lockName(playerId)+" from class "+lockedByClass);
-  			PlayerInAction playa = playersInAction.getPlayerInAction(playerId);
-  			if(playa != null) {
-  				log.warn("Player {} already locked by class: {}", playerId, playa.getLockedByClass());
-  			}
-  			throw new RuntimeException("Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
+  		try {
+			if (lockMap.tryLock(playersInAction.lockName(playerId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for player " + playerId);
+				playersInAction.addPlayer(playerId, lockedByClass);
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("1Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds", e);
+		}
+
+  		log.warn("failed to aquire lock for " + playersInAction.lockName(playerId)+" from class "+lockedByClass);
+  		PlayerInAction playa = playersInAction.getPlayerInAction(playerId);
+  		if(playa != null) {
+  			log.warn("Player {} already locked by class: {}", playerId, playa.getLockedByClass());
   		}
+  		throw new RuntimeException("2Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
   	}
 
   	public boolean lockPlayers(int playerId1, int playerId2, String lockedByClass) {
@@ -126,23 +174,28 @@ public class Locker {
   	
   	public boolean lockFbId(String fbId) {
   		log.debug("Locking fbId: " + fbId);
-  		if (lockMap.tryLock(fbIdLockName(fbId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-  			log.debug("Got lock for fbId " + fbId);
-  			
-  			try {
-  				lockMap.put(fbIdLockName(fbId), new Date());
-  			} catch (Exception e) {
-  				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
-  						e.getMessage(), e);
-  				return false;
-  			}
-  			return true;
-  		} else {
-  			log.warn("failed to aquire lock for " + fbIdLockName(fbId));
-  			return false;
-  			// throw new
-  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
-  		}
+  		try {
+			if (lockMap.tryLock(fbIdLockName(fbId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for fbId " + fbId);
+				
+				try {
+					lockMap.put(fbIdLockName(fbId), new Date());
+				} catch (Exception e) {
+					log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+							e.getMessage(), e);
+					return false;
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("1failed to aquire lock for " + fbIdLockName(fbId), e);
+		}
+
+  		log.warn("2failed to aquire lock for " + fbIdLockName(fbId) + " after " +
+  				LOCK_WAIT_SECONDS+" seconds");
+  		return false;
+  		// throw new
+  		// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
   	}
   	
   	public void unlockFbId(String fbId) {
@@ -167,23 +220,28 @@ public class Locker {
   	
   	public boolean lockClan(int clanId) {
   		log.debug("Locking clan: " + clanId);
-  		if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-  			log.debug("Got lock for clan " + clanId);
-  			
-  			try {
-  				lockMap.put(clanLockName(clanId), new Date());
-  			} catch (Exception e) {
-  				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
-  						e.getMessage(), e);
-  				return false;
-  			}
-  			return true;
-  		} else {
-  			log.warn("failed to aquire lock for " + clanLockName(clanId));
-  			return false;
-  			// throw new
-  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
-  		}
+  		try {
+			if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+				log.debug("Got lock for clan " + clanId);
+				
+				try {
+					lockMap.put(clanLockName(clanId), new Date());
+				} catch (Exception e) {
+					log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+							e.getMessage(), e);
+					return false;
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("1failed to aquire lock for " + clanLockName(clanId), e);
+		}
+
+  		log.warn("2failed to aquire lock for " + clanLockName(clanId) + " after " + 
+  				LOCK_WAIT_SECONDS+" seconds");
+  		return false;
+  		// throw new
+  		// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
   	}
 
   	public void unlockClan(int clanId) {
@@ -206,13 +264,12 @@ public class Locker {
   		return "ClanLock: " + clanId;
   	}
 
-  	// TODO: refactor this into a lockmap wrapper class and make it work for any
-  	// lock
+  	// TODO: refactor this into a lockmap wrapper class and make it work for any lock
   	// also consider refactoring playerLocks to use it
   	@Scheduled(fixedDelay = LOCK_TIMEOUT)
   	public void clearOldLocks() {
   		long now = new Date().getTime();
-  		log.debug("Removing stale clan locks");
+  		log.debug("Removing stale clan or facebook id locks");
   		for (String key : lockMap.keySet()) {
   			try {
   				if (key != null && (key.contains("ClanLock") || key.contains("FbIdLock"))) {

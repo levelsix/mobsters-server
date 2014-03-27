@@ -1,24 +1,18 @@
 package com.lvl6.retrieveutils;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.UserClanBossContribution;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class UserClanBossContributionRetrieveUtils {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+//  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   /*
   private static final String TABLE_NAME = DBConstants.TABLE_USER_CLAN_BOSS_CONTRIBUTION;
 

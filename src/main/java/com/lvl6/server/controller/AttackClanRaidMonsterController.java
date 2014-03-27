@@ -154,7 +154,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ClanEventPersistentForClan clanEvent = null;
     Map<Integer, ClanEventPersistentForUser> userIdToCepfu = 
     		new HashMap<Integer, ClanEventPersistentForUser>();
-    boolean errorless = true;
+    //boolean errorless = true;
     //barring error or request failure (but not attacking dead monster), will always be set
     List<ClanEventPersistentForClan> clanEventList =
     		new ArrayList<ClanEventPersistentForClan>();
@@ -204,7 +204,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
     } catch (Exception e) {
     	log.error("exception in AttackClanRaidMonster processEvent", e);
-    	errorless = false;
+    	//errorless = false;
     	try {
     	  resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
     	  AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(userId);

@@ -93,13 +93,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+      boolean requestToJoinRequired = false; //to be set if request is legit
 
       boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, user, clan);
       
-      boolean requestToJoinRequired = clan.isRequestToJoinRequired();
       
       boolean successful = false;
       if (legitRequest) {
+    	  requestToJoinRequired = clan.isRequestToJoinRequired();
+    	  
         //setting minimum user proto for clans based on clan join type
         if (requestToJoinRequired) {
         	//clan raid contribution stuff

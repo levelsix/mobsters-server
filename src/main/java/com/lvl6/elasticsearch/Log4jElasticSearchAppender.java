@@ -83,7 +83,7 @@ public class Log4jElasticSearchAppender{// extends AppenderSkeleton {
 		executor.execute(new Runnable() {
 			@Override
 			public void run() {
-				String message = event.getMessage() + "";
+				/*String message = event.getMessage() + "";*/
 				if (startedUp ) {
 					try {
 						UUID key = TimeUUIDUtils.getUniqueTimeUUIDinMillis();

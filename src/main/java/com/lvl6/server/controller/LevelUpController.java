@@ -1,39 +1,42 @@
 package com.lvl6.server.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LevelUpRequestEvent;
 import com.lvl6.events.response.LevelUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.StaticUserLevelInfo;
-import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 
-  @Component @DependsOn("gameServer") public class LevelUpController extends EventController {
+  @Component
+  public class LevelUpController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
   public LevelUpController() {
-    numAllocatedThreads = 4;
+    numAllocatedThreads = 2;
   }
 
   @Override
@@ -48,133 +51,72 @@ import com.lvl6.utils.RetrieveUtils;
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    //fixed, possibly
-//    //the level up happens prematurely, so a bad inefficient stop gap solution:
-//    //make this thread sleep :O
-//    log.info("Sleeping for a second.");
-//    try {
-//      Thread.sleep(1000); //sleep for a second
-//    } catch (InterruptedException e) {
-//      //do nothing?
-//      log.info("LevelUpRequestEvent thread interrupted from sleep.");
-//    }
-//    log.info("Waking up after sleeping for one second.");
-    
     LevelUpRequestProto reqProto = ((LevelUpRequestEvent)event).getLevelUpRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
+    int newLevel = reqProto.getNextLevel();
 
     LevelUpResponseProto.Builder resBuilder = LevelUpResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+    
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       boolean legitLevelUp = checkLegitLevelUp(resBuilder, user);
-      List<Integer> newlyUnlockedCityIds = null;
-      
-//      int levelBeforeLeveling = ControllerConstants.NOT_SET;
-//      int levelAfterLeveling = ControllerConstants.NOT_SET;
+
+      boolean success = false;
       if (legitLevelUp) {
-        int newNextLevel = user.getLevel() + 2;
-        StaticUserLevelInfo sli = StaticUserLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(newNextLevel);
-        int expRequiredForNewNextLevel = sli.getRequiredExp();
-
-        int newLevel = user.getLevel() + 1;
-//        levelBeforeLeveling = user.getLevel();
-//        levelAfterLeveling = newLevel;
-
-//        List<City> availCities = MiscMethods.getCitiesAvailableForUserLevel(newLevel);
-//        for (City city : availCities) {
-//          if (city.getMinLevel() == newLevel) {
-//            resBuilder.addCitiesNewlyAvailableToUser(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-//            if (newlyUnlockedCityIds == null) newlyUnlockedCityIds = new ArrayList<Integer>();
-//            newlyUnlockedCityIds.add(city.getId());
-//          }
-//        }
-
-//        Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-//        if (equipIdToEquips != null) {
-//          for (Equipment e : equipIdToEquips.values()) {
-//            if (e != null && e.getMinLevel() == newLevel && 
-//                (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
-//              resBuilder.addNewlyEquippableEpicsAndLegendaries(CreateInfoProtoUtils.createFullEquipProtoFromEquip(e));
-//            }
-//          }
-//        }
-
-//        Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
-//        if (structIdsToStructs != null) {
-//          for (Structure struct : structIdsToStructs.values()) {
-//            if (struct != null && struct.getMinLevel() == newLevel) {
-//              resBuilder.addNewlyAvailableStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-//            } 
-//          }
-//        }
+        success = writeChangesToDB(user, newLevel);
       }
-
-      LevelUpResponseProto resProto = resBuilder.build();
+      
+      if (success) {
+    	  resBuilder.setStatus(LevelUpStatus.SUCCESS);
+      }
+      
       LevelUpResponseEvent resEvent = new LevelUpResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
+      LevelUpResponseProto resProto = resBuilder.build();
       resEvent.setLevelUpResponseProto(resProto);
-      server.writeEvent(resEvent);
-
-      if (legitLevelUp) {
-        writeChangesToDB(user, newlyUnlockedCityIds);
-      }
+      getEventWriter().handleEvent(resEvent);
       
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
-
+      if (success) {
+    	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+    	  resEventUpdate.setTag(event.getTag());
+    	  getEventWriter().handleEvent(resEventUpdate);
+      }
       
     } catch (Exception e) {
       log.error("exception in LevelUpController processEvent", e);
+      //don't let the client hang
+      try {
+    	  resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+    	  LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setLevelUpResponseProto(resBuilder.build());
+    	  getEventWriter().handleEvent(resEvent);
+      } catch (Exception e2) {
+    	  log.error("exception2 in LevelUpController processEvent", e);
+      }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
     }
   }
 
-  private void writeChangesToDB(User user, List<Integer> newlyUnlockedCityIds) {
-    if (!user.updateLevel(1)) {
+  private boolean writeChangesToDB(User user, int newLevel) {
+    if (!user.updateLevel(newLevel, true)) {
       log.error("problem in changing the user's level");
+      return false;
     }
-//    if (newlyUnlockedCityIds != null && newlyUnlockedCityIds.size() > 0) {
-//      for (Integer cityId : newlyUnlockedCityIds) {
-//        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
-//          log.error("problem with unlocking city for user");
-//        }
-//      }
-//    }
-//    if (!user.updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED, new Timestamp(new Date().getTime()))) {
-//      log.error("problem with restoring energy and stamina and awarding skill points");
-//    }
+    return true;
   }
 
   private boolean checkLegitLevelUp(Builder resBuilder, User user) {
-    if (user == null) {
-      resBuilder.setStatus(LevelUpStatus.OTHER_FAIL);
+    if (null == user) {
       log.error("user is null");
       return false;
     }
-    if (user.getLevel() == ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER) {
-      resBuilder.setStatus(LevelUpStatus.ALREADY_AT_MAX_LEVEL);
-      log.error("user is already at server's allowed max level: " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
-      return false;
-    }
-    StaticUserLevelInfo sli = StaticUserLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(user.getLevel() + 1);
-    Integer expRequiredForNextLevel = sli.getRequiredExp();
-    if (expRequiredForNextLevel == null) {
-      resBuilder.setStatus(LevelUpStatus.OTHER_FAIL);
-      log.error("no experience required inputted for level: " + user.getLevel() + 1);
-      return false;      
-    }
-    if (user.getExperience() < expRequiredForNextLevel) {
-      resBuilder.setStatus(LevelUpStatus.NOT_ENOUGH_EXP_TO_NEXT_LEVEL);
-      log.error("user only has " + user.getExperience() + " and needs " + expRequiredForNextLevel + " for next level");
-      return false;            
-    }
-    resBuilder.setStatus(LevelUpStatus.SUCCESS);
     return true;
   }
   

@@ -86,7 +86,7 @@ public class TimeUtils {
   	mdt.setHourOfDay(hour);
   	mdt.addMinutes(minutesAddend);
   	
-  	log.info("pstDate created: " + mdt.toDateTime());
+//  	log.info("pstDate created: " + mdt.toDateTime());
   	Date createdDate = mdt.toDate();
 //  	log.info("date with hour set: (Date form) " + createdDate);
   	return createdDate;
@@ -99,7 +99,7 @@ public class TimeUtils {
   	
   	MutableDateTime mdt = dt.toMutableDateTime();
   	mdt.addMinutes(minutesAddend);
-  	log.info("pstDate created2: " + mdt.toDateTime());
+//  	log.info("pstDate created2: " + mdt.toDateTime());
   	Date createdDate = mdt.toDate();
 //  	log.info("date advanced " + minutesAddend + " minutes. date=" + createdDate);
   	return createdDate;
@@ -123,5 +123,15 @@ public class TimeUtils {
   	Date createdDate = mdt.toDate();
   	
   	return createdDate;
+  }
+  
+  public Date createDateTruncateMillis(Date curDate) {
+	  DateTime dt = new DateTime(curDate);
+	  
+	  MutableDateTime mdt = dt.toMutableDateTime();
+	  mdt.setMillisOfSecond(0);
+	  Date createdDate = mdt.toDate();
+	  
+	  return createdDate;
   }
 }

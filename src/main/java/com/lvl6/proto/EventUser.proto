@@ -45,12 +45,11 @@ message UserCreateResponseProto {
 
 //client calls this whenever exp surpasses the next one
 //server checks if user's exp is over the next, if so, increments user's level
-																						//DONE
-
 message LevelUpRequestProto {
 	optional MinimumUserProto sender = 1;
+	optional int32 nextLevel = 2;
 }
-																						//DONE
+
 message LevelUpResponseProto {
      optional MinimumUserProto sender = 1;
      optional LevelUpStatus status = 2;
@@ -58,9 +57,7 @@ message LevelUpResponseProto {
 
 	enum LevelUpStatus {
      	SUCCESS = 1;
-     	NOT_ENOUGH_EXP_TO_NEXT_LEVEL = 2;
-     	ALREADY_AT_MAX_LEVEL = 3;
-     	OTHER_FAIL = 4;
+     	FAIL_OTHER = 2;
      }
 }
 

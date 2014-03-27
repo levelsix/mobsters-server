@@ -1,7 +1,6 @@
 package com.lvl6.tracking;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.utils.utilmethods.InsertUtils;
-
 public class AppODayUserTrackerServlet extends HttpServlet {
 
 	
@@ -23,6 +20,7 @@ public class AppODayUserTrackerServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		@SuppressWarnings("unchecked")
 		Map<String, String> params = req.getParameterMap();
 		Set<String> keys = params.keySet();
 		for(String key: keys) {

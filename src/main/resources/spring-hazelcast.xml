@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/aop 
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	http://www.hazelcast.com/schema/spring
-        http://www.hazelcast.com/schema/spring/hazelcast-spring-2.5.xsd
+        http://www.hazelcast.com/schema/spring/hazelcast-spring-3.2.xsd
 	">
 	
 	<import resource="classpath:spring-hazelcast-cluster-${hazelcast.config}.xml"/>
@@ -36,10 +36,13 @@
 	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks" instance-ref="hazel" />
  
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
+
 		
-	<hz:map id="offlinePvpUserMap" name="offlinePvpUserMap" instance-ref="hazel"/>
-	
+	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
+	<!-- need to prevent more than one initialization per cluster restart -->
+	<hz:map id="pvpUserMap" name="pvpUserMap" instance-ref="hazel"/>
 	<hz:map id="clanRaidMonsterDmgMap" name="clanRaidMonsterDmgMap" instance-ref="hazel"/>
+		
 		
 	<hz:topic id="serverEvents" name="serverEvents" instance-ref="hazel"/>
 	<hz:topic id="staticDataReloadDone" name="staticDataReloadDone" instance-ref="hazel"/>	
@@ -47,7 +50,7 @@
 	<bean id="playersInAction" class="com.lvl6.utils.PlayerSet" scope="singleton" >
 		<property name="players" ref="playersInActionSet" />
 	</bean>
-	
+	 
 	
 	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler" lazy-init="false" scope="singleton" />
 	

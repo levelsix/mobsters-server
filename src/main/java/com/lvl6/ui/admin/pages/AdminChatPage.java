@@ -7,8 +7,8 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.util.time.Duration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.lvl6.info.AdminChatPost;
@@ -19,7 +19,7 @@ import com.lvl6.utils.AdminChatUtil;
 public class AdminChatPage extends TemplatePage {
 
 	private static final long serialVersionUID = -1728365297134290240L;
-	private static Logger log = LoggerFactory.getLogger(AdminChatPage.class);
+	//private static Logger log = LoggerFactory.getLogger(AdminChatPage.class);
 	
 	protected Integer page = 0;
 	protected Integer itemsPerPage = 50;
@@ -36,7 +36,7 @@ public class AdminChatPage extends TemplatePage {
 	public AdminChatPage() {
 		super();
 		if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+			//String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			//log.info("Loading Admin Chat Page for: {}", user);
 		} else {
 			//log.info("Loading Admin Chat Page");

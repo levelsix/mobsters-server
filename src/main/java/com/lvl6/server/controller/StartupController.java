@@ -50,6 +50,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.User;
@@ -61,6 +62,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -104,6 +106,7 @@ import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -128,10 +131,18 @@ public class StartupController extends EventController {
   private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
 
-  public StartupController() {
-    numAllocatedThreads = 3;
+  private static final class GroupChatComparator implements Comparator<GroupChatMessageProto> {
+	  @Override
+	  public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
+		  if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
+			  return -1;
+		  } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
+			  return 1;
+		  } else {
+			  return 0;
+		  }
+	  }
   }
-
   @Resource(name = "goodEquipsRecievedFromBoosterPacks")
   protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
   public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
@@ -153,64 +164,28 @@ public class StartupController extends EventController {
   
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
-	public HazelcastPvpUtil getHazelcastPvpUtil() {
-		return hazelcastPvpUtil;
-	}
-	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
-		this.hazelcastPvpUtil = hazelcastPvpUtil;
-	}
-	
-	@Autowired
-	protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 
-	@Autowired
-	protected TimeUtils timeUtils;
-	public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-	
-	@Autowired
-	protected Globals globals;
-  public Globals getGlobals() {
-		return globals;
-	}
-	public void setGlobals(Globals globals) {
-		this.globals = globals;
-	}
+  @Autowired
+  protected Locker locker;
 
-	private static final class GroupChatComparator implements Comparator<GroupChatMessageProto> {
-    @Override
-    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-        return -1;
-      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
+  @Autowired
+  protected TimeUtils timeUtils;
+
+  @Autowired
+  protected Globals globals;
+  
+  @Autowired
+  protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+
+  @Autowired
+  protected PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
+
+
+  public StartupController() {
+	  numAllocatedThreads = 3;
   }
-	
-	@Autowired
-	protected PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
-	public PvpBattleHistoryRetrieveUtil getPvpBattleHistoryRetrieveUtil() {
-		return pvpBattleHistoryRetrieveUtil;
-	}
-	public void setPvpBattleHistoryRetrieveUtil(
-			PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil) {
-		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
-	}
-	
-	@Override
+
+  @Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
   }
@@ -257,6 +232,7 @@ public class StartupController extends EventController {
     StartupStatus startupStatus = StartupStatus.USER_NOT_IN_DB;
 
     Date nowDate = new Date();
+    nowDate = getTimeUtils().createDateTruncateMillis(nowDate);
     Timestamp now = new Timestamp(nowDate.getTime());
     boolean isLogin = true;
 
@@ -273,7 +249,7 @@ public class StartupController extends EventController {
 			    try {
 			    	//force other devices on this account to logout
 			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
-			      //this is the value before it is overwritten with current time
+			      //login value before it is overwritten with current time
 			      logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
 			      logoutResponse.setUdid(udid);
 			      ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
@@ -306,7 +282,7 @@ public class StartupController extends EventController {
 			      setAllStaticData(resBuilder, userId, true);
 			      setEventStuff(resBuilder, userId);
 			      //if server sees that the user is in a pvp battle, decrement user's elo
-			      pvpBattleStuff(user, userId, freshRestart, now); 
+			      pvpBattleStuff(resBuilder, user, userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
 			      
@@ -319,9 +295,11 @@ public class StartupController extends EventController {
 //          setAllBosses(resBuilder, user.getType());
 
 			      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
-			      user.setLastLogin(now);
-			      
+			      log.info("before last login change, user=" + user);
+			      user.setLastLogin(nowDate);
+			      log.info("after last login change, user=" + user);
 			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
+			      log.info("fup=" + fup);
 			      resBuilder.setSender(fup);
 
 			      boolean isNewUser = false;
@@ -411,6 +389,7 @@ public class StartupController extends EventController {
     // reset
     //UPDATE USER's LAST LOGIN
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+    log.info("user after change user login via db. user=" + user);
   }
 
   //priority of user returned is 
@@ -970,12 +949,16 @@ public class StartupController extends EventController {
   	
   }
   
-  private void pvpBattleStuff(User user, int userId, boolean isFreshRestart, Timestamp
-  		battleEndTime) {
+  private void pvpBattleStuff(Builder resBuilder, User user, int userId,
+		  boolean isFreshRestart, Timestamp battleEndTime) {
+	  
+	  setPvpLeagueInfo(resBuilder, userId);
+	  
   	if (!isFreshRestart) {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
   		return;
   	}
+  	addUserToPvpMap(user, userId);
   	
   	//remove this user from the users available to be attacked in pvp
   	//getHazelcastPvpUtil().removePvpUser(userId); //online users can be attacked
@@ -998,60 +981,82 @@ public class StartupController extends EventController {
   	int defenderId = battle.getDefenderId();
   	int eloDefenderWins = battle.getDefenderLoseEloChange();
   	
-  	//user has unfinished battle, reward defender and penalize attacker
+  	//user has unfinished battle, reward defender and penalize attacker, maybe lock defender
   	//nested try catch's in order to prevent exception bubbling up, all because of
   	//some stinkin' elo XP
   	try {
-  		//NOTE: this lock ordering might result in a temp deadlock
-  		//doesn't reeeally matter if can't penalize defender...
-  		
-  		//only lock real users
-//  		if (0 != defenderId) {
-//  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
-//  		}
-  		try {
-  			User defender = null;
-  			if (0 != defenderId) {
-  				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
-  			}
-  			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
-  			
-  			//update attacker
-  			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
-  			
-  			//update defender if real, might need to cap defenderElo
-  			if (null != defender) {
-  				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
-  			}
-  			if (null != defenderOpu) { //update if exists
-  				int defenderElo = defender.getElo();
-  				defenderOpu.setElo(defenderElo);
-  				getHazelcastPvpUtil().replacePvpUser(defenderOpu);
-  			}
-  			boolean cancelled = true;
-  			boolean displayToDefender = false;
-  			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
-  					battleEndTime, battleStartTime, 0, 0, 0, 0, 0, 0, false, cancelled, false,
-  					displayToDefender);
-  			log.info("numInserted into battle history=" + numInserted);
-  			//delete that this battle occurred
-  			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
-  			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
-  					battle + "\t numDeleted=" + numDeleted);
-  			
-  		} catch (Exception e){
-  			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
-  					battle, e);
-  		} finally {
-//  			if (0 != defenderId) {
-//  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
-//  			}
-  		}
+  		penalizeUserForLeavingGameWhileInPvp(userId, user, defenderId, eloAttackerLoses,
+  				eloDefenderWins, battleEndTime, battleStartTime, battle);
   	} catch (Exception e2) {
   		log.error("could not successfully penalize and reward attacker, defender respectively." +
   				" battle=" + battle, e2);
   	}
-  	
+  }
+  
+  private void setPvpLeagueInfo(Builder resBuilder, int userId) {
+	  PvpLeagueForUser info = getPvpLeagueForUserRetrieveUtil().getUserPvpLeagueForId(userId);
+	  if (null == info) {
+		  log.warn("f&#* this user doesn't have pvp league info");
+		  return;
+	  }
+	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(info, true);
+	  
+	  resBuilder.setPvpLeagueInfo(infoProto);
+  }
+  
+  private void addUserToPvpMap(User user, int userId) {
+  	//TODO: PUT THE USER INTO THE HAZELCAST PVP MAP
+  }
+  
+  
+  private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, int defenderId,
+  		int eloAttackerLoses, int eloDefenderWins, Timestamp battleEndTime,
+  		Timestamp battleStartTime, PvpBattleForUser battle) {
+  //NOTE: this lock ordering might result in a temp deadlock
+		//doesn't reeeally matter if can't penalize defender...
+		
+		//only lock real users
+//		if (0 != defenderId) {
+//			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
+//		}
+  	try {
+			User defender = null;
+			if (0 != defenderId) {
+				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+			}
+			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
+			
+			//update attacker
+			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
+			
+			//update defender if real, might need to cap defenderElo
+			if (null != defender) {
+				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
+			}
+			if (null != defenderOpu) { //update if exists
+				int defenderElo = defender.getElo();
+				defenderOpu.setElo(defenderElo);
+				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
+			}
+			boolean cancelled = true;
+			boolean displayToDefender = false;
+			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
+					battleEndTime, battleStartTime, 0, 0, 0, 0, 0, 0, false, cancelled, false,
+					displayToDefender);
+			log.info("numInserted into battle history=" + numInserted);
+			//delete that this battle occurred
+			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
+			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
+					battle + "\t numDeleted=" + numDeleted);
+			
+		} catch (Exception e){
+			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
+					battle, e);
+		} finally {
+//			if (0 != defenderId) {
+//				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
+//			}
+		}
   }
   
   private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
@@ -1089,7 +1094,7 @@ public class StartupController extends EventController {
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
-  	log.info("historyProtoList=" + historyProtoList);
+//  	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
   }
   
@@ -1855,20 +1860,6 @@ public class StartupController extends EventController {
 //    }
   }
 
-//  private int getNumTasksCompleteForUserCity(User user, City city,
-//      Map<Integer, Integer> taskIdToNumTimesActedInRank) {
-//    List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(city.getId());
-//    int numCompletedTasks = 0;
-//    if (tasks != null) {
-//      for (Task t : tasks) {
-//        if (taskIdToNumTimesActedInRank.containsKey(t.getId())
-//            && taskIdToNumTimesActedInRank.get(t.getId()) >= t.getNumForCompletion()) {
-//          numCompletedTasks++;
-//        }
-//      }
-//    }
-//    return numCompletedTasks;
-//  }
 
   private void setConstants(Builder startupBuilder, StartupStatus startupStatus) {
     startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto(globals));
@@ -2032,8 +2023,8 @@ public class StartupController extends EventController {
   //TODO: FIX THIS
   public void writeToUserCurrencyHistory(User aUser, String goldSilver, int previousMoney,
       Map<String, Integer> goldSilverChange) {
-    String cash = MiscMethods.cash;
-    String gems = MiscMethods.gems;
+    //String cash = MiscMethods.cash;
+    //String gems = MiscMethods.gems;
 
 //    Timestamp date = new Timestamp((new Date()).getTime());
 //    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
@@ -2052,4 +2043,50 @@ public class StartupController extends EventController {
 //        previousGoldSilver, reasonsForChanges);
   }
 
+  
+  //for the setter dependency injection or something****************************************************************
+  public HazelcastPvpUtil getHazelcastPvpUtil() {
+	  return hazelcastPvpUtil;
+  }
+  public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+	  this.hazelcastPvpUtil = hazelcastPvpUtil;
+  }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }  
+  
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+  
+  public Globals getGlobals() {
+	  return globals;
+  }
+  public void setGlobals(Globals globals) {
+	  this.globals = globals;
+  }
+  
+  public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+	  return pvpLeagueForUserRetrieveUtil;
+  }
+  public void setPvpLeagueForUserRetrieveUtil(
+		  PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+	  this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+  }
+  
+  public PvpBattleHistoryRetrieveUtil getPvpBattleHistoryRetrieveUtil() {
+	  return pvpBattleHistoryRetrieveUtil;
+  }
+  public void setPvpBattleHistoryRetrieveUtil(
+		  PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil) {
+	  this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
+  }  
+  
 }

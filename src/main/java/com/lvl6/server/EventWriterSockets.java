@@ -1,6 +1,7 @@
 package com.lvl6.server;
 
 import java.nio.ByteBuffer;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.Message;
 import org.springframework.integration.message.GenericMessage;
@@ -190,7 +190,7 @@ public class EventWriterSockets extends EventWriter implements HazelcastInstance
 		if (player.getServerHostName().equals(serverInstance.serverId())) {
 			log.debug("EventWriter.write... handling message on local server instance");
 			com.hazelcast.core.Message<Message<?>> playerMessage = new com.hazelcast.core.Message<Message<?>>(
-					serverInstance.serverId(), msg);
+					serverInstance.serverId(), msg, (new Date()).getTime(), serverInstance.hazel.getCluster().getLocalMember());
 			serverInstance.onMessage(playerMessage);
 		} else {
 			log.debug("EventWriter.write... sending message to hazel for processing");
@@ -218,7 +218,7 @@ public class EventWriterSockets extends EventWriter implements HazelcastInstance
 		// don't send to hazelcast topic if player is local to this machine
 		if (player.getServerHostName().equals(serverInstance.serverId())) {
 			com.hazelcast.core.Message<Message<?>> playerMessage = new com.hazelcast.core.Message<Message<?>>(
-					serverInstance.serverId(), msg);
+					serverInstance.serverId(), msg, (new Date()).getTime(), serverInstance.hazel.getCluster().getLocalMember());
 			serverInstance.onMessage(playerMessage);
 		} else {
 			ITopic<Message<?>> serverOutboundMessages = hazel.getTopic(ServerInstance
