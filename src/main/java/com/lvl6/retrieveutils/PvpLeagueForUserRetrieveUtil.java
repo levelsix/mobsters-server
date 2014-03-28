@@ -107,7 +107,10 @@ public class PvpLeagueForUserRetrieveUtil {
 
 			log.info("query=" + query);
 
-			plfu = this.jdbcTemplate.queryForObject(query, new UserPvpLeagueForClientMapper());
+			List<PvpLeagueForUser> plfuList = this.jdbcTemplate.query(query, new UserPvpLeagueForClientMapper());
+			if (null != plfuList && !plfuList.isEmpty()) {
+				plfu = plfuList.get(0); //guaranteed to only be one, primary key is user id
+			}
 		} catch (Exception e) {
 			log.error("could not retrieve user pvpLeague for userId=" + userId, e);
 		}

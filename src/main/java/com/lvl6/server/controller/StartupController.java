@@ -1029,7 +1029,7 @@ public class StartupController extends EventController {
 			//update attacker
 			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
 			
-			//update defender if real, might need to cap defenderElo
+			//update defender if real, TODO: might need to cap defenderElo
 			if (null != defender) {
 				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
 			}
