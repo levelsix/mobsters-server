@@ -2,6 +2,7 @@ package com.lvl6.server;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,10 @@ import com.lvl6.events.ResponseEvent;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
 import com.lvl6.properties.APNSProperties;
 import com.lvl6.properties.Globals;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -68,9 +69,9 @@ public class APNSWriter extends Wrap {
 
 	private static final int SOFT_MAX_NOTIFICATION_BADGES = 20;
 
-	private static final int MIN_MINUTES_BETWEEN_BATTLE_NOTIFICATIONS = 180; // 3
+//	private static final int MIN_MINUTES_BETWEEN_BATTLE_NOTIFICATIONS = 180; // 3
 																				// hours
-	private static final int MIN_MINUTES_BETWEEN_WALL_POST_NOTIFICATIONS = 0;//15;
+//	private static final int MIN_MINUTES_BETWEEN_WALL_POST_NOTIFICATIONS = 0;//15;
 
 	private static final int MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST = 120;
 
@@ -287,10 +288,17 @@ public class APNSWriter extends Wrap {
 	public void processClanResponseEvent(ResponseEvent event, int clanId) {
 		log.debug("apnsWriter received clan event=" + event);
 		ResponseEvent e = (ResponseEvent) event;
-		List<UserClan> playersInClan = userClanRetrieveUtil.getUserClanMembersInClan(clanId);
-		for (UserClan uc: playersInClan) {
-			log.info("Sending apns to clan: {} member: {}", uc.getClanId(), uc.getUserId());
-			sendApnsNotificationToPlayer(e, uc.getUserId());
+		List<String> statuses = new ArrayList<String>();
+	    statuses.add(UserClanStatus.LEADER.name());
+	    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+	    statuses.add(UserClanStatus.CAPTAIN.name());
+	    statuses.add(UserClanStatus.MEMBER.name());
+	    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+	    		.getUserIdsWithStatuses(clanId, statuses);
+		
+		for (Integer userId : userIds) {
+			log.info("Sending apns to clan: {} member: {}", clanId, userId);
+			sendApnsNotificationToPlayer(e, userId);
 		}
 	}
 	

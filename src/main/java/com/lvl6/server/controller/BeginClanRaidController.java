@@ -269,10 +269,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   //get all the members in a clan
   private Set<Integer> getAuthorizedUsers(int clanId) {
   	Set<Integer> authorizedUsers = new HashSet<Integer>();
-  	List<Integer> statuses = new ArrayList<Integer>();
-    statuses.add(UserClanStatus.LEADER_VALUE);
-    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-    statuses.add(UserClanStatus.CAPTAIN_VALUE);
+  	List<String> statuses = new ArrayList<String>();
+  	statuses.add(UserClanStatus.LEADER.name());
+    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+    statuses.add(UserClanStatus.CAPTAIN.name());
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     

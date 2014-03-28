@@ -140,9 +140,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
     
     int clanId = user.getClanId();
-    List<Integer> statuses = new ArrayList<Integer>();
-    statuses.add(UserClanStatus.LEADER_VALUE);
-    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+    List<String> statuses = new ArrayList<String>();
+    statuses.add(UserClanStatus.LEADER.name());
+    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     

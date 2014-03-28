@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +96,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
       boolean requestToJoinRequired = false; //to be set if request is legit
 
-      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, user, clan);
+      List<Integer> clanSizeList = new ArrayList<Integer>();
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, user, clan,
+    		  clanSizeList);
       
       
       boolean successful = false;
@@ -118,7 +121,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
       if (successful) {
-      	setResponseBuilderStuff(resBuilder, clanId, clan);
+      	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
         sendClanRaidStuff(resBuilder, clan, user);
       }
       RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
@@ -173,7 +176,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, User user,
-  		Clan clan) {
+  		Clan clan, List<Integer> clanSizeList) {
   	
   	if (!lockedClan) {
   		log.error("couldn't obtain clan lock");
@@ -217,13 +220,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     //check out the size of the clan since user can just join
     
-    List<Integer> clanIdList = new ArrayList<Integer>();
-    clanIdList.add(clanId);
-    List<Integer> statuses = new ArrayList<Integer>();
-  	statuses.add(UserClanStatus.LEADER_VALUE);
-  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
-  	statuses.add(UserClanStatus.MEMBER_VALUE);
+    List<Integer> clanIdList = Collections.singletonList(clanId);
+    List<String> statuses = new ArrayList<String>();
+  	statuses.add(UserClanStatus.LEADER.name());
+  	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+  	statuses.add(UserClanStatus.CAPTAIN.name());
+  	statuses.add(UserClanStatus.MEMBER.name());
   	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
   			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
   	
@@ -235,6 +237,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		" cur size=" + maxSize);
       return false;      
     }
+    clanSizeList.add(size);
     //resBuilder.setStatus(RequestJoinClanStatus.SUCCESS);
     return true;
   }
@@ -289,8 +292,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private void notifyClan(User aUser, Clan aClan, boolean requestToJoinRequired) {
   	int clanId = aUser.getClanId();
-    List<Integer> statuses = new ArrayList<Integer>();
-    statuses.add(UserClanStatus.LEADER_VALUE);
+    List<String> statuses = Collections.singletonList(UserClanStatus.LEADER.name());
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
@@ -322,20 +324,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    server.writeAPNSNotificationOrEvent(aNotification);
   }
   
-  private void setResponseBuilderStuff(Builder resBuilder, int clanId, Clan clan) {
-  	List<Integer> clanIdList = new ArrayList<Integer>();
-  	clanIdList.add(clanId);
-  	List<Integer> statuses = new ArrayList<Integer>();
-  	statuses.add(UserClanStatus.LEADER_VALUE);
-  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
-  	statuses.add(UserClanStatus.MEMBER_VALUE);
-  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
-  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+  private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
+		  List<Integer> clanSizeList) {
   	
     resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
-    
-    int size = clanIdToSize.get(clanId);
+    int size = clanSizeList.get(0);
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
   

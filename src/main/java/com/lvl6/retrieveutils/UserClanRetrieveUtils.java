@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {
@@ -69,7 +68,7 @@ import com.lvl6.utils.DBConnection;
 		//should not be null
     return userIdsToStatuses;
   }
-  
+  /*
   public List<UserClan> getUserClanMembersInClan(int clanId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
@@ -114,7 +113,7 @@ import com.lvl6.utils.DBConnection;
     }
     return userClans;
   }
-
+*/
   public List<UserClan> getUserClansRelatedToUser(int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
@@ -183,7 +182,7 @@ import com.lvl6.utils.DBConnection;
     return userClan;
   }
   
-  public List<Integer> getUserIdsWithStatuses(int clanId, List<Integer> statuses) {
+  public List<Integer> getUserIdsWithStatuses(int clanId, List<String> statuses) {
     StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT ");
     querySb.append(DBConstants.CLAN_FOR_USER__USER_ID);
@@ -226,7 +225,7 @@ import com.lvl6.utils.DBConnection;
   }
   
   public Map<Integer, Integer> getClanSizeForClanIdsAndStatuses(List<Integer> clanIds,
-  		List<Integer> statuses) {
+  		List<String> statuses) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT ");
     querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
