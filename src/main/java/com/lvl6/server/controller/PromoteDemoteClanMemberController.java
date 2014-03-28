@@ -93,7 +93,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitRequest) { 
       	User victim = users.get(victimId);
       	UserClan oldInfo = userClans.get(victimId);
-      	resBuilder.setPrevUserClanStatus(oldInfo.getStatus());
+      	try {
+      		UserClanStatus ucs = UserClanStatus.valueOf(oldInfo.getStatus());
+      		resBuilder.setPrevUserClanStatus(ucs);
+      	} catch (Exception e) {
+      		log.error("incorrect user clan status. userClan=" + oldInfo);
+      	}
       	
       	success = writeChangesToDB(victim, victimId, clanId, oldInfo, newUserClanStatus);
       }
@@ -170,8 +175,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     UserClan promoterDemoter = userIdsToUserClans.get(userId);
     UserClan victim = userIdsToUserClans.get(victimId);
     
-    UserClanStatus first = promoterDemoter.getStatus();
-    UserClanStatus second = victim.getStatus();
+    UserClanStatus first = UserClanStatus.valueOf(promoterDemoter.getStatus());
+    UserClanStatus second = UserClanStatus.valueOf(victim.getStatus());
     if (UserClanStatus.CAPTAIN.equals(first) || 
     		!ClanStuffUtils.firstUserClanStatusAboveSecond(first, second)) {
     	log.error("user not authorized to promote or demote otherUser. clanStatus of user=" +

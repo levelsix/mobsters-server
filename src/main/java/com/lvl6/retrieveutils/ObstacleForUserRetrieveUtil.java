@@ -75,7 +75,7 @@ public class ObstacleForUserRetrieveUtil {
 			} catch (Exception e) {
 				log.error("maybe obstacle removal time is invalid", e);
 			}
-			ofu.setOrientation(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
+			ofu.setOrientation(rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
 			return ofu;
 		}        
 		

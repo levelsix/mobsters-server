@@ -85,6 +85,7 @@ import com.lvl6.proto.ChatProto.ColorProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.CityProto.CityElementProto;
+import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
@@ -149,6 +150,7 @@ import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
+import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
@@ -484,9 +486,12 @@ public class CreateInfoProtoUtils {
     b.setIsMonster(bdi.isMonster());
     b.setIsComplete(bdi.isComplete());
 
-    MonsterQuality mq = bdi.getMonsterQuality();
-    if (null != mq) {
-      b.setQuality(mq);
+    String monsterQuality = bdi.getMonsterQuality();
+    try {
+    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	b.setQuality(mq);
+    } catch (Exception e){
+    	log.error("invalid monster quality. boosterDisplayItem=" + bdi);
     }
 
     b.setGemReward(bdi.getGemReward());
@@ -647,26 +652,36 @@ public class CreateInfoProtoUtils {
     return builder.build();
   }
 
-  public static CityElementProto createCityElementProtoFromCityElement(CityElement nce) {
+  public static CityElementProto createCityElementProtoFromCityElement(CityElement ce) {
     CityElementProto.Builder builder = CityElementProto.newBuilder();
-    builder.setCityId(nce.getCityId());
-    builder.setAssetId(nce.getAssetId());
+    builder.setCityId(ce.getCityId());
+    builder.setAssetId(ce.getAssetId());
     //    builder.setName(nce.getGoodName());
-    builder.setType(nce.getType());
-    builder.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
+    
+    try {
+    	CityElemType cet = CityElemType.valueOf(ce.getType());
+    	builder.setType(cet);
+    } catch (Exception e) {
+    	log.error("incorrect element type. cityElement=" + ce);
+    }
+    builder.setCoords(createCoordinateProtoFromCoordinatePair(ce.getCoords()));
 
-    if (nce.getxLength() > 0) {
-      builder.setXLength(nce.getxLength());
+    if (ce.getxLength() > 0) {
+      builder.setXLength(ce.getxLength());
     }
-    if (nce.getyLength() > 0) {
-      builder.setYLength(nce.getyLength());
+    if (ce.getyLength() > 0) {
+      builder.setYLength(ce.getyLength());
     }
-    builder.setImgId(nce.getImgGood());
-    if (nce.getOrientation() != null) {
-      builder.setOrientation(nce.getOrientation());
+    builder.setImgId(ce.getImgGood());
+    
+    try {
+    	StructOrientation so = StructOrientation.valueOf(ce.getOrientation()); 
+    	builder.setOrientation(so);
+    } catch (Exception e) {
+    	log.error("incorrect orientation. cityElement=" + ce);
     }
 
-    builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(nce.getSpriteCoords()));
+    builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(ce.getSpriteCoords()));
 
     return builder.build();
   }
@@ -722,7 +737,14 @@ public class CreateInfoProtoUtils {
   	FullUserClanProto.Builder fucpb = FullUserClanProto.newBuilder();
     fucpb.setClanId(uc.getClanId());
     fucpb.setUserId(uc.getUserId());
-    fucpb.setStatus(uc.getStatus());
+    String userClanStatus = uc.getStatus();
+    
+    try {
+    	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
+    	fucpb.setStatus(ucs);
+    } catch (Exception e) {
+    	log.error("incorrect user clan status. userClan=" + uc);
+    }
     
     Date aTime = uc.getRequestTime();
     if (null != aTime) {
@@ -740,17 +762,38 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-      UserClanStatus s, float clanRaidContribution) {
+      String userClanStatus, float clanRaidContribution) {
     MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
 
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
     mupfcb.setMinUserProto(mup);
-    mupfcb.setClanStatus(s);
+    
+    try {
+    	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
+    	mupfcb.setClanStatus(ucs);
+    } catch (Exception e) {
+    	log.error("incorrect userClanStatus. userClanStatus=" + userClanStatus +
+    			"\t user=" + u);
+    }
     mupfcb.setRaidContribution(clanRaidContribution);
     MinimumUserProtoForClans mupfc = mupfcb.build();
 
     return mupfc;
   }
+  
+  public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
+		  UserClanStatus userClanStatus, float clanRaidContribution) {
+	    MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
+
+	    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
+	    mupfcb.setMinUserProto(mup);
+	    
+	    mupfcb.setClanStatus(userClanStatus);
+	    mupfcb.setRaidContribution(clanRaidContribution);
+	    MinimumUserProtoForClans mupfc = mupfcb.build();
+
+	    return mupfc;
+	  }
 
   public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
     ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
@@ -1086,18 +1129,25 @@ public class CreateInfoProtoUtils {
     if (null != aStr) {
       mpb.setMonsterGroup(aStr);
     }
-    mpb.setQuality(aMonster.getQuality());
+    String monsterQuality = aMonster.getQuality(); 
+    try {
+    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	mpb.setQuality(mq);
+    } catch (Exception e) {
+    	log.error("invalid monster quality. monster=" + aMonster);
+    }
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     aStr = aMonster.getDisplayName(); 
     if (null != aStr) {
       mpb.setDisplayName(aStr);
     }
 
-    MonsterElement me = aMonster.getElement();
-    if (null != me) {
-      mpb.setMonsterElement(aMonster.getElement());
-    } else{
-      log.error("monster element is null!!!!!! monster=" + aMonster);
+    String monsterElement = aMonster.getElement();
+    try {
+    	MonsterElement me = MonsterElement.valueOf(monsterElement);
+    	mpb.setMonsterElement(me);
+    } catch (Exception e){
+      log.error("invalid monster element. monster=" + aMonster);
     }
     aStr = aMonster.getImagePrefix(); 
     if (null != aStr) {
@@ -1403,7 +1453,7 @@ public class CreateInfoProtoUtils {
       builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
     }
 
-    int qType = quest.getQuestType();
+    String qType = quest.getQuestType();
     try {
       QuestType qt = QuestType.valueOf(qType);
       builder.setQuestType(qt);
@@ -1682,7 +1732,14 @@ public class CreateInfoProtoUtils {
     builder.setFbInviteStructLvl(userStruct.getFbInviteStructLvl());
     builder.setIsComplete(userStruct.isComplete());
     builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
-    builder.setOrientation(userStruct.getOrientation());
+    String orientation = userStruct.getOrientation();
+    try {
+    	StructOrientation so = StructOrientation.valueOf(orientation);
+    	builder.setOrientation(so);
+    } catch (Exception e) {
+    	log.error("invalid StructureForUser orientation. structureForUser=" + userStruct);
+    }
+    
     if (userStruct.getPurchaseTime() != null) {
       builder.setPurchaseTime(userStruct.getPurchaseTime().getTime());
     }
@@ -1788,12 +1845,12 @@ public class CreateInfoProtoUtils {
   	CoordinateProto cproto = createCoordinateProtoFromCoordinatePair(cp);
   	uopb.setCoordinates(cproto);
   	
-  	int orientation = ofu.getOrientation();
+  	String orientation = ofu.getOrientation();
   	try {
   		StructOrientation so = StructOrientation.valueOf(orientation);
   		uopb.setOrientation(so);
   	} catch (Exception e) {
-  		log.error("incorrect struct orientation value=" + orientation);
+  		log.error("incorrect struct orientation=" + orientation + "\t ofu=" + ofu);
   	}
   	
   	Date removalStartTime = ofu.getRemovalTime();
@@ -1885,7 +1942,13 @@ public class CreateInfoProtoUtils {
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
     bldr.setMonsterId(tsmMonsterId);
-    bldr.setMonsterType(tsm.getMonsterType());
+    String tsmMonsterType = tsm.getMonsterType(); 
+    try {
+    	MonsterType mt = MonsterType.valueOf(tsmMonsterType);
+    	bldr.setMonsterType(mt);
+    } catch (Exception e) {
+    	log.error("monster type incorrect, tsm=" + tsm);
+    }
     bldr.setCashReward(cashReward);
     bldr.setOilReward(oilReward);
     bldr.setPuzzlePieceDropped(pieceDropped);

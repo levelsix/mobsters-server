@@ -392,7 +392,7 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int userId = rs.getInt(i++);
     int clanId = rs.getInt(i++);
-    UserClanStatus status = UserClanStatus.valueOf(rs.getInt(i++));
+    String status = rs.getString(i++);
 
     Date requestTime = null;
     try {

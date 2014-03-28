@@ -17,8 +17,6 @@ import com.lvl6.info.CityElement;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
-import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class CityElementsRetrieveUtils {
@@ -106,7 +104,7 @@ import com.lvl6.utils.DBConnection;
     int cityId = rs.getInt(i++);
     int assetId = rs.getInt(i++);
 //    String goodName = rs.getString(i++);
-    CityElemType type = CityElemType.valueOf(rs.getInt(i++));
+    String type = rs.getString(i++);
     CoordinatePair coords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
 
     float xLength = rs.getFloat(i++);
@@ -117,8 +115,7 @@ import com.lvl6.utils.DBConnection;
 
     String imgGood = rs.getString(i++);
 
-    int orientationNum = rs.getInt(i++);
-    StructOrientation orientation = (rs.wasNull()) ? null : StructOrientation.valueOf(orientationNum);
+    String orientation = rs.getString(i++);
     CoordinatePair spriteCoords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
     
     return new CityElement(cityId, assetId, type, coords,

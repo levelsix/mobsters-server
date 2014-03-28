@@ -159,7 +159,7 @@ import com.lvl6.utils.QuestGraph;
     String goodAcceptDialogueBlob = rs.getString(i++);
     Dialogue goodAcceptDialogue = MiscMethods.createDialogue(goodAcceptDialogueBlob);
 
-    int questType = rs.getInt(i++);
+    String questType = rs.getString(i++);
     String jobDescription = rs.getString(i++);
     int staticDataId = rs.getInt(i++);
     int quantity = rs.getInt(i++);

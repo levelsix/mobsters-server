@@ -184,7 +184,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(requester.getId(), clanId);
-    if (uc == null || uc.getStatus() != UserClanStatus.REQUESTING) {
+    if (uc == null || !UserClanStatus.REQUESTING.name().equals(uc.getStatus())) {
       resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_NOT_A_REQUESTER);
       log.error("requester has not requested for clan with id " + user.getClanId());
       return false;

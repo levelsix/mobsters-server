@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Quest implements Serializable {
 	
-	private static final long serialVersionUID = 1227799912592612183L;
+	private static final long serialVersionUID = -5399629457766847899L;
+	
 	private int id;
   private int cityId;
   private String goodName;
   private String goodDescription;
   private String goodDoneResponse;
   private Dialogue goodAcceptDialogue;
-  private int questType;
+  private String questType;
   private String jobDescription;
   private int staticDataId;
   private int quantity;
@@ -28,209 +29,210 @@ public class Quest implements Serializable {
   private boolean isAchievement;
 
   public Quest(int id, int cityId, String goodName, String goodDescription,
-			String goodDoneResponse, Dialogue goodAcceptDialogue, int questType,
-			String jobDescription, int staticDataId, int quantity, int coinReward,
-			int diamondReward, int expReward, int monsterIdReward,
-			boolean isCompleteMonster, List<Integer> questsRequiredForThis,
-			String goodQuestGiverImageSuffix, int priority, String carrotId,
-			boolean isAchievement) {
-		super();
-		this.id = id;
-		this.cityId = cityId;
-		this.goodName = goodName;
-		this.goodDescription = goodDescription;
-		this.goodDoneResponse = goodDoneResponse;
-		this.goodAcceptDialogue = goodAcceptDialogue;
-		this.questType = questType;
-		this.jobDescription = jobDescription;
-		this.staticDataId = staticDataId;
-		this.quantity = quantity;
-		this.coinReward = coinReward;
-		this.diamondReward = diamondReward;
-		this.expReward = expReward;
-		this.monsterIdReward = monsterIdReward;
-		this.isCompleteMonster = isCompleteMonster;
-		this.questsRequiredForThis = questsRequiredForThis;
-		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
-		this.priority = priority;
-		this.carrotId = carrotId;
-		this.isAchievement = isAchievement;
-	}
+		  String goodDoneResponse, Dialogue goodAcceptDialogue, String questType,
+		  String jobDescription, int staticDataId, int quantity, int coinReward,
+		  int diamondReward, int expReward, int monsterIdReward,
+		  boolean isCompleteMonster, List<Integer> questsRequiredForThis,
+		  String goodQuestGiverImageSuffix, int priority, String carrotId,
+		  boolean isAchievement) {
+	  super();
+	  this.id = id;
+	  this.cityId = cityId;
+	  this.goodName = goodName;
+	  this.goodDescription = goodDescription;
+	  this.goodDoneResponse = goodDoneResponse;
+	  this.goodAcceptDialogue = goodAcceptDialogue;
+	  this.questType = questType;
+	  this.jobDescription = jobDescription;
+	  this.staticDataId = staticDataId;
+	  this.quantity = quantity;
+	  this.coinReward = coinReward;
+	  this.diamondReward = diamondReward;
+	  this.expReward = expReward;
+	  this.monsterIdReward = monsterIdReward;
+	  this.isCompleteMonster = isCompleteMonster;
+	  this.questsRequiredForThis = questsRequiredForThis;
+	  this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
+	  this.priority = priority;
+	  this.carrotId = carrotId;
+	  this.isAchievement = isAchievement;
+  }
 
-	public int getId() {
-		return id;
-	}
+  public int getId() {
+	  return id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public void setId(int id) {
+	  this.id = id;
+  }
 
-	public int getCityId() {
-		return cityId;
-	}
+  public int getCityId() {
+	  return cityId;
+  }
 
-	public void setCityId(int cityId) {
-		this.cityId = cityId;
-	}
+  public void setCityId(int cityId) {
+	  this.cityId = cityId;
+  }
 
-	public String getGoodName() {
-		return goodName;
-	}
+  public String getGoodName() {
+	  return goodName;
+  }
 
-	public void setGoodName(String goodName) {
-		this.goodName = goodName;
-	}
+  public void setGoodName(String goodName) {
+	  this.goodName = goodName;
+  }
 
-	public String getGoodDescription() {
-		return goodDescription;
-	}
+  public String getGoodDescription() {
+	  return goodDescription;
+  }
 
-	public void setGoodDescription(String goodDescription) {
-		this.goodDescription = goodDescription;
-	}
+  public void setGoodDescription(String goodDescription) {
+	  this.goodDescription = goodDescription;
+  }
 
-	public String getGoodDoneResponse() {
-		return goodDoneResponse;
-	}
+  public String getGoodDoneResponse() {
+	  return goodDoneResponse;
+  }
 
-	public void setGoodDoneResponse(String goodDoneResponse) {
-		this.goodDoneResponse = goodDoneResponse;
-	}
+  public void setGoodDoneResponse(String goodDoneResponse) {
+	  this.goodDoneResponse = goodDoneResponse;
+  }
 
-	public Dialogue getGoodAcceptDialogue() {
-		return goodAcceptDialogue;
-	}
+  public Dialogue getGoodAcceptDialogue() {
+	  return goodAcceptDialogue;
+  }
 
-	public void setGoodAcceptDialogue(Dialogue goodAcceptDialogue) {
-		this.goodAcceptDialogue = goodAcceptDialogue;
-	}
+  public void setGoodAcceptDialogue(Dialogue goodAcceptDialogue) {
+	  this.goodAcceptDialogue = goodAcceptDialogue;
+  }
 
-	public int getQuestType() {
-		return questType;
-	}
+  public String getQuestType() {
+	  return questType;
+  }
 
-	public void setQuestType(int questType) {
-		this.questType = questType;
-	}
+  public void setQuestType(String questType) {
+	  this.questType = questType;
+  }
 
-	public String getJobDescription() {
-		return jobDescription;
-	}
+  public String getJobDescription() {
+	  return jobDescription;
+  }
 
-	public void setJobDescription(String jobDescription) {
-		this.jobDescription = jobDescription;
-	}
+  public void setJobDescription(String jobDescription) {
+	  this.jobDescription = jobDescription;
+  }
 
-	public int getStaticDataId() {
-		return staticDataId;
-	}
+  public int getStaticDataId() {
+	  return staticDataId;
+  }
 
-	public void setStaticDataId(int staticDataId) {
-		this.staticDataId = staticDataId;
-	}
+  public void setStaticDataId(int staticDataId) {
+	  this.staticDataId = staticDataId;
+  }
 
-	public int getQuantity() {
-		return quantity;
-	}
+  public int getQuantity() {
+	  return quantity;
+  }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+  public void setQuantity(int quantity) {
+	  this.quantity = quantity;
+  }
 
-	public int getCoinReward() {
-		return coinReward;
-	}
+  public int getCoinReward() {
+	  return coinReward;
+  }
 
-	public void setCoinReward(int coinReward) {
-		this.coinReward = coinReward;
-	}
+  public void setCoinReward(int coinReward) {
+	  this.coinReward = coinReward;
+  }
 
-	public int getDiamondReward() {
-		return diamondReward;
-	}
+  public int getDiamondReward() {
+	  return diamondReward;
+  }
 
-	public void setDiamondReward(int diamondReward) {
-		this.diamondReward = diamondReward;
-	}
+  public void setDiamondReward(int diamondReward) {
+	  this.diamondReward = diamondReward;
+  }
 
-	public int getExpReward() {
-		return expReward;
-	}
+  public int getExpReward() {
+	  return expReward;
+  }
 
-	public void setExpReward(int expReward) {
-		this.expReward = expReward;
-	}
+  public void setExpReward(int expReward) {
+	  this.expReward = expReward;
+  }
 
-	public int getMonsterIdReward() {
-		return monsterIdReward;
-	}
+  public int getMonsterIdReward() {
+	  return monsterIdReward;
+  }
 
-	public void setMonsterIdReward(int monsterIdReward) {
-		this.monsterIdReward = monsterIdReward;
-	}
+  public void setMonsterIdReward(int monsterIdReward) {
+	  this.monsterIdReward = monsterIdReward;
+  }
 
-	public boolean isCompleteMonster() {
-		return isCompleteMonster;
-	}
+  public boolean isCompleteMonster() {
+	  return isCompleteMonster;
+  }
 
-	public void setCompleteMonster(boolean isCompleteMonster) {
-		this.isCompleteMonster = isCompleteMonster;
-	}
+  public void setCompleteMonster(boolean isCompleteMonster) {
+	  this.isCompleteMonster = isCompleteMonster;
+  }
 
-	public List<Integer> getQuestsRequiredForThis() {
-		return questsRequiredForThis;
-	}
+  public List<Integer> getQuestsRequiredForThis() {
+	  return questsRequiredForThis;
+  }
 
-	public void setQuestsRequiredForThis(List<Integer> questsRequiredForThis) {
-		this.questsRequiredForThis = questsRequiredForThis;
-	}
+  public void setQuestsRequiredForThis(List<Integer> questsRequiredForThis) {
+	  this.questsRequiredForThis = questsRequiredForThis;
+  }
 
-	public String getGoodQuestGiverImageSuffix() {
-		return goodQuestGiverImageSuffix;
-	}
+  public String getGoodQuestGiverImageSuffix() {
+	  return goodQuestGiverImageSuffix;
+  }
 
-	public void setGoodQuestGiverImageSuffix(String goodQuestGiverImageSuffix) {
-		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
-	}
+  public void setGoodQuestGiverImageSuffix(String goodQuestGiverImageSuffix) {
+	  this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
+  }
 
-	public int getPriority() {
-		return priority;
-	}
+  public int getPriority() {
+	  return priority;
+  }
 
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
+  public void setPriority(int priority) {
+	  this.priority = priority;
+  }
 
-	public String getCarrotId() {
-		return carrotId;
-	}
+  public String getCarrotId() {
+	  return carrotId;
+  }
 
-	public void setCarrotId(String carrotId) {
-		this.carrotId = carrotId;
-	}
+  public void setCarrotId(String carrotId) {
+	  this.carrotId = carrotId;
+  }
 
-	public boolean isAchievement() {
-		return isAchievement;
-	}
+  public boolean isAchievement() {
+	  return isAchievement;
+  }
 
-	public void setAchievement(boolean isAchievement) {
-		this.isAchievement = isAchievement;
-	}
+  public void setAchievement(boolean isAchievement) {
+	  this.isAchievement = isAchievement;
+  }
 
-	@Override
-	public String toString() {
-		return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
-				+ ", goodDescription=" + goodDescription + ", goodDoneResponse="
-				+ goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
-				+ ", questType=" + questType + ", jobDescription=" + jobDescription
-				+ ", staticDataId=" + staticDataId + ", quantity=" + quantity
-				+ ", coinReward=" + coinReward + ", diamondReward=" + diamondReward
-				+ ", expReward=" + expReward + ", monsterIdReward=" + monsterIdReward
-				+ ", isCompleteMonster=" + isCompleteMonster
-				+ ", questsRequiredForThis=" + questsRequiredForThis
-				+ ", goodQuestGiverImageSuffix=" + goodQuestGiverImageSuffix
-				+ ", priority=" + priority + ", carrotId=" + carrotId
-				+ ", isAchievement=" + isAchievement + "]";
-	}
-  
+  @Override
+  public String toString() {
+	  return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
+			  + ", goodDescription=" + goodDescription + ", goodDoneResponse="
+			  + goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
+			  + ", questType=" + questType + ", jobDescription=" + jobDescription
+			  + ", staticDataId=" + staticDataId + ", quantity=" + quantity
+			  + ", coinReward=" + coinReward + ", diamondReward=" + diamondReward
+			  + ", expReward=" + expReward + ", monsterIdReward="
+			  + monsterIdReward + ", isCompleteMonster=" + isCompleteMonster
+			  + ", questsRequiredForThis=" + questsRequiredForThis
+			  + ", goodQuestGiverImageSuffix=" + goodQuestGiverImageSuffix
+			  + ", priority=" + priority + ", carrotId=" + carrotId
+			  + ", isAchievement=" + isAchievement + "]";
+  }
+
+
 }

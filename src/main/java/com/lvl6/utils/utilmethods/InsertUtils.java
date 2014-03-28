@@ -1485,7 +1485,7 @@ public class InsertUtils implements InsertUtil{
 				int obstacleId = ofu.getObstacleId();                                           
 				int xcoord = ofu.getXcoord();
 				int ycoord = ofu.getYcoord();
-				int orientation = ofu.getOrientation();                                        
+				String orientation = ofu.getOrientation();                                        
 
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   

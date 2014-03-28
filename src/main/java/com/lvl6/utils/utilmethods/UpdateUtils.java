@@ -204,7 +204,7 @@ public class UpdateUtils implements UpdateUtil {
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, xCoordinate);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, yCoordinate);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
-			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation().getNumber());
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation());
 //			newRow.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, userStruct.getUpgradeStartTime());
 			
 			newRows.add(newRow);
@@ -250,7 +250,7 @@ public class UpdateUtils implements UpdateUtil {
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, us.getPurchaseTime());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, us.isComplete());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation().getNumber());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation());
 
 			newRows.add(aRow);
 		}

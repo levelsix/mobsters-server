@@ -37,7 +37,6 @@ import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -430,7 +429,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	for (TaskStageMonster tsm : taskStageMonsters) {
   		
   		int monsterId = tsm.getMonsterId();
-  		MonsterElement mon = MonsterRetrieveUtils.getMonsterElementForMonsterId(monsterId);
+  		MonsterElement mon = MonsterStuffUtils.getMonsterElementForMonsterId(monsterId);
   		
   		if (!elem.equals(mon)) {
   			continue;
@@ -641,7 +640,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	List<String> monsterTypes = new ArrayList<String>();
 	  	for (TaskStageMonster tsm : taskStageMonsters) {
         tsmIds.add(tsm.getId());
-        monsterTypes.add(tsm.getMonsterType().name());
+        monsterTypes.add(tsm.getMonsterType());
       }
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds, repeatedStageNum,

@@ -11,6 +11,7 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
+import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
@@ -33,7 +34,7 @@ public class StructureStuffUtil {
 			int xcoord = (int) cProto.getX();
 			int ycoord = (int) cProto.getY();
 			
-			int orientation = mop.getOrientation().getNumber();
+			String orientation = mop.getOrientation().name();
 			
 			ObstacleForUser ofu = new ObstacleForUser(0, userId, obstacleId, xcoord, ycoord,
 					null, orientation);
@@ -55,7 +56,7 @@ public class StructureStuffUtil {
 	
 	public List<ObstacleForUser> createTutorialObstacleForUser(int userId) {
 		List<ObstacleForUser> ofuList = new ArrayList<ObstacleForUser>();
-		int orientation = 1;
+		String orientation = StructOrientation.POSITION_1.name();
     for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
     	int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
     	int posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];

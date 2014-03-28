@@ -143,7 +143,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     //if user wants to delete some monsters, make sure it's the right amount
     if (null != deleteUserMonsterIds && !deleteUserMonsterIds.isEmpty()) {
     	//user shouldn't delete user monsters when the quest isn't a donate quest
-    	if (quest.getQuestType() != QuestType.DONATE_MONSTER_VALUE) {
+    	if (!QuestType.DONATE_MONSTER.name().equals(quest.getQuestType())) {
     		log.error("user trying to delete user monsters for a non donate monster quest." +
     				" quest=" + quest + "\t deleteUserMonsterIds=" + deleteUserMonsterIds);
     		resBuilder.setStatus(QuestProgressStatus.FAIL_OTHER);

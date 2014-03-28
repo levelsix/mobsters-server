@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class BoosterDisplayItemRetrieveUtils {
@@ -155,7 +154,7 @@ import com.lvl6.utils.DBConnection;
     int boosterPackId = rs.getInt(i++);
     boolean isMonster = rs.getBoolean(i++);
     boolean isComplete = rs.getBoolean(i++);
-    MonsterQuality monsterQuality = MonsterQuality.valueOf(rs.getInt(i++));
+    String monsterQuality = rs.getString(i++);
     int gemReward = rs.getInt(i++);
     int quantity = rs.getInt(i++);
     
