@@ -1429,26 +1429,27 @@ public class CreateInfoProtoUtils {
 
   /**Quest.proto****************************************************/
   public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
-    String name = null;
-    String description = null;
-    String doneResponse = null;
-    Dialogue acceptDialogue = null;
-
-
-    String questGiverImageSuffix = null;
-    name = quest.getGoodName();
-    description = quest.getGoodDescription();
-    doneResponse = quest.getGoodDoneResponse();
-    acceptDialogue = quest.getGoodAcceptDialogue();
-    questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
-
     //SET THE BUILDER
     FullQuestProto.Builder builder = FullQuestProto.newBuilder();
     builder.setQuestId(quest.getId());
     builder.setCityId(quest.getCityId());
-    builder.setName(name);
-    builder.setDescription(description);
-    builder.setDoneResponse(doneResponse);
+    
+    String str = quest.getQuestName();
+    if (null != str) {
+    	builder.setName(str);
+    }
+
+    str = quest.getDescription();
+    if (null != str) {
+    	builder.setDescription(str);
+    }
+
+    str = quest.getDoneResponse();
+    if (null != str) {
+    	builder.setDoneResponse(str);
+    }
+    
+    Dialogue acceptDialogue = quest.getAcceptDialogue();
     if (acceptDialogue != null) {
       builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
     }
@@ -1461,31 +1462,45 @@ public class CreateInfoProtoUtils {
       log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
     }
     
-    String str = quest.getJobDescription();
-    
+    str = quest.getJobDescription();
     if (null != str && !str.isEmpty()) {
     	builder.setJobDescription(str);
     }
     
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
-    builder.setCoinReward(quest.getCoinReward());
-    builder.setDiamondReward(quest.getDiamondReward());
+    builder.setCashReward(quest.getCashReward());
+    builder.setOilReward(quest.getOilReward());
+    builder.setGemReward(quest.getGemReward());
     builder.setExpReward(quest.getExpReward());
     builder.setMonsterIdReward(quest.getMonsterIdReward());
     builder.setIsCompleteMonster(quest.isCompleteMonster());
     builder.addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis());
-    builder.setQuestGiverImageSuffix(questGiverImageSuffix);
+    
+    str = quest.getQuestGiverImagePrefix();
+    if (null != str) {
+    	builder.setQuestGiverImagePrefix(str);
+    }
+    
     if (quest.getPriority() > 0) {
       builder.setPriority(quest.getPriority());
     }
     
     str = quest.getCarrotId();
-    
     if (null != str && !str.isEmpty()) {
     	builder.setCarrotId(str);
     }
     builder.setIsAchievement(quest.isAchievement());
+    
+    str = quest.getMonsterElement();
+    if (null != str) {
+    try {
+    		MonsterElement me = MonsterElement.valueOf(str);
+    		builder.setMonsterElement(me);
+    } catch (Exception e) {
+    	log.error("invalid monsterElement. quest=" + quest);
+    }
+    }
 
     return builder.build();
   }

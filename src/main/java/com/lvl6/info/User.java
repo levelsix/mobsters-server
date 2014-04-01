@@ -378,16 +378,29 @@ public class User implements Serializable {
 	/*
 	 * used for purchasing and selling structures, redeeming quests
 	 */
-	public boolean updateRelativeGemsCashExperienceNaive (int gemChange, int cashChange, 
-			int experienceChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
+	public boolean updateRelativeGemsCashOilExperienceNaive (int gemChange,
+			int cashChange, int oilChange, int experienceChange) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
 
-		relativeParams.put(DBConstants.USER__GEMS, gemChange);
-		relativeParams.put(DBConstants.USER__CASH, cashChange);
-		relativeParams.put(DBConstants.USER__EXPERIENCE, experienceChange);
+		if (0 != gemChange) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		if (0 != oilChange) {
+			relativeParams.put(DBConstants.USER__OIL, oilChange);
+		}
+		if (0 != experienceChange) {
+			relativeParams.put(DBConstants.USER__EXPERIENCE, experienceChange);
+		}
+		
+		if (relativeParams.isEmpty()) {
+			return true;
+		}
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
