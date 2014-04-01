@@ -41,6 +41,7 @@ import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
 import com.lvl6.info.PvpLeague;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -307,11 +308,12 @@ public class MiscMethods {
     return availCities;
   }
 
-  public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(User user) {
+  public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
+		  User user, PvpLeagueForUser plfu) {
     try {
       if (!user.isFake()) {
         LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
-        leaderboard.updateLeaderboardForUser(user);
+        leaderboard.updateLeaderboardForUser(user, plfu);
       }
     } catch (Exception e) {
       log.error("Failed to update leaderboard.");
@@ -319,7 +321,7 @@ public class MiscMethods {
 
     UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(user.getId());
     UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto.newBuilder()
-        .setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user))
+        .setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu))
         .setTimeOfUserUpdate(new Date().getTime()).build();
     resEvent.setUpdateClientUserResponseProto(resProto);
     return resEvent;
@@ -1331,7 +1333,8 @@ public class MiscMethods {
     return sum;
   }
 
-  public static void calculateEloChangeAfterBattle(User attacker, User defender, boolean attackerWon) {
+  public static void calculateEloChangeAfterBattle(PvpLeagueForUser attacker,
+		  PvpLeagueForUser defender, boolean attackerWon) {
     double probabilityOfAttackerWin = 1/(1+Math.pow(10, (defender.getElo() - attacker.getElo())/400));
     double probabilityOfDefenderWin = 1 - probabilityOfAttackerWin;
     int kFactor = 0;

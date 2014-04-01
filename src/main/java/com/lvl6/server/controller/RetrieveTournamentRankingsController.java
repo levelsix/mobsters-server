@@ -93,7 +93,8 @@ public class RetrieveTournamentRankingsController extends EventController {
           for (User u : resultUsers) {
             UserRankScore urs = lurs.get(u.getId());
             resBuilder.addResultPlayers(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(u, urs.rank, urs.score));
-            resBuilder.addFullUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(u));
+            //null PvpLeagueFromUser means will pull from hazelcast instead
+            resBuilder.addFullUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(u, null));
           }
         }
       }

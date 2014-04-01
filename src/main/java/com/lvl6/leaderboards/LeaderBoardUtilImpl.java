@@ -17,6 +17,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 
@@ -335,17 +336,16 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 	}
 
 	@Override
-	public void updateLeaderboardForUser(User user) {
+	public void updateLeaderboardForUser(User user, PvpLeagueForUser plfu) {
 		if (user != null) {
 			long startTime = new Date().getTime();
 			try {
-				setBattlesWonForUser(user.getId(),
-						(double) user.getBattlesWon());
+				setBattlesWonForUser(user.getId(), (double) plfu.getBattlesWon());
 
-				if (user.getBattlesWon() + user.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
+				if (plfu.getBattlesWon() + plfu.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
 					setBattlesWonOverTotalBattlesRatioForUser(user.getId(),
-						 ((double) user.getBattlesWon() / (user
-									.getBattlesLost() + user.getBattlesWon())));
+						 ((double) plfu.getBattlesWon() /
+								 (plfu .getBattlesLost() + plfu.getBattlesWon())));
 				} else {
 					setBattlesWonOverTotalBattlesRatioForUser(user.getId(), 0.0);
 				}

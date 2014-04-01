@@ -120,7 +120,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
       
       if (legitRetrieval) {
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         

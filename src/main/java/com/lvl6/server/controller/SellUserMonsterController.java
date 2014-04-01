@@ -105,12 +105,14 @@ public class SellUserMonsterController extends EventController {
 			resEvent.setSellUserMonsterResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
 
-			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-			resEventUpdate.setTag(event.getTag());
-			server.writeEvent(resEventUpdate);
 
 			if (successful) {
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+				
 				writeChangesToHistory(userId, userMonsterIds,
 						userMonsterIdsToCashAmounts, idsToUserMonsters, deleteDate);
 				// WRITE TO USER CURRENCY HISTORY

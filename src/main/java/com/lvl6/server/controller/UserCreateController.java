@@ -36,7 +36,6 @@ import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
-import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.EventWriter;
@@ -155,15 +154,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			boolean legitUserCreate = checkLegitUserCreate(gotLock, resBuilder, udid,
 					facebookId, name);
 
-			User user = null;
 			int userId = ControllerConstants.NOT_SET;
 
 			if (legitUserCreate) {
 //			  String newReferCode = grabNewReferCode();
-//			  taskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
-//			  questTaskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
-
-			  user = writeChangeToDb(resBuilder, name, udid, cash, oil, gems, deviceToken,
+			  userId = writeChangeToDb(resBuilder, name, udid, cash, oil, gems, deviceToken,
 			  		createTime, facebookId);
 			}
 
@@ -174,9 +169,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			log.info("Writing event: " + resEvent);
 			server.writePreDBEvent(resEvent, udid);
 
-			if (user != null) {
+			if (userId > 0) {
 				//recording that player is online I guess
-				userId = user.getId();
 			  ConnectedPlayer player = server.getPlayerByUdId(udid);
 			  player.setPlayerId(userId);
 			  server.getPlayersByPlayerId().put(userId, player);
@@ -193,6 +187,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  	log.info("writing tasks");
 			    writeTaskCompleted(userId, createTime);
 			    writeMonsters(userId, createTime, facebookId);
+			    writePvpStuff(userId, createTime);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 //			    leaderboard.updateLeaderboardForUser(user);
 			    
@@ -205,9 +200,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			    server.unlockPlayer(userId, this.getClass().getSimpleName()); 
 			  }*/
 			}
-		} catch (Exception e) {
-			log.error("exception in UserCreateController processEvent", e);
-			try {
+    } catch (Exception e) {
+    	log.error("exception in UserCreateController processEvent", e);
+    	try {
     		resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
     		UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
     		resEvent.setTag(event.getTag());
@@ -216,7 +211,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	} catch (Exception e2) {
     		log.error("exception2 in UserCreateController processEvent", e);
     	}
-		}
+    } finally {
+    	if (gotLock) {
+    		getLocker().unlockFbId(fbId);
+    	}
+    }
   }
   
   private boolean checkLegitUserCreate(boolean gotLock, Builder resBuilder, String udid,
@@ -248,7 +247,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-//    resBuilder.setStatus(UserCreateStatus.SUCCESS);
     return true;
   }
   
@@ -274,33 +272,26 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return false;
   }
   
-  private User writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
+  private int writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
   		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId) {
-  	User user = null;
   	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
 	  int playerExp = 10;
 	  
 	  //newbie protection
-	  String rank = ControllerConstants.TUTORIAL__INIT_RANK;
-	  
-	  Date createDate = new Date(createTime.getTime());
-	  Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,
-	  		ControllerConstants.PVP__SHIELD_DURATION_DAYS);
-	  Timestamp shieldEndTime = new Timestamp(shieldEndDate.getTime());
 	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
-	      gems, false, deviceToken, createTime, rank, facebookId, shieldEndTime);
+	      gems, false, deviceToken, createTime, facebookId);
 	        
 	  if (userId > 0) {
-	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*/
+	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
 	    try {
 	      user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 	      FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
 	      resBuilder.setSender(userProto);
 	    } catch (Exception e) {
 	      log.error("exception in UserCreateController processEvent", e);
-	    } /*finally {
+	    }*/ /*finally {
 	      server.unlockPlayer(userId, this.getClass().getSimpleName()); 
 	    }*/
 	  } else {
@@ -310,9 +301,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	    		", cash=" + cash+ ", oil=" + oil + ", gems=" + gems); 
 	  }
 	  
-	  log.info("created new user=" + user);
+	  log.info("created new userId=" + userId);
 	  resBuilder.setStatus(UserCreateStatus.SUCCESS);
-	  return user;
+	  return userId;
   }
   
   
@@ -441,6 +432,35 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			userMonsters, sourceOfPieces, combineStartDate);
   	
   	log.info("monsters inserted for userId=" + userId + ", ids=" + ids);
+  }
+  
+  private void writePvpStuff(int userId, Timestamp createTime) {
+	  int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
+	  int rank = ControllerConstants.TUTORIAL__INIT_RANK;
+	  int elo = ControllerConstants.PVP__INITIAL_ELO;
+	  
+	  Date createDate = new Date(createTime.getTime());
+	  Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,
+	  		ControllerConstants.PVP__SHIELD_DURATION_DAYS);
+	  Timestamp shieldEndTime = new Timestamp(shieldEndDate.getTime());
+	  
+	  int numInsertedIntoPvp = InsertUtils.get().insertPvpLeagueForUser(userId,
+			  pvpLeagueId, rank, elo, shieldEndTime, shieldEndTime);
+	  log.info("numInsertedIntoPvp=" + numInsertedIntoPvp);
+	  
+	  /*
+	  PvpLeagueForUser plfu = new PvpLeagueForUser();
+	  plfu.setPvpLeagueId(pvpLeagueId);
+	  plfu.setRank(rank);
+	  plfu.setUserId(userId);
+	  plfu.setElo(elo);
+	  plfu.setShieldEndTime(shieldEndTime);
+	  plfu.setInBattleShieldEndTime(shieldEndTime);
+	  plfu.setAttacksWon(0);
+	  plfu.setDefensesWon(0);
+	  plfu.setAttacksLost(0);
+	  plfu.setDefensesLost(0);
+	  return plfu; */
   }
 
 

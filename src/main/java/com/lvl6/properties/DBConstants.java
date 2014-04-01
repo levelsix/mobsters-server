@@ -407,11 +407,16 @@ public class DBConstants {
   public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 
   /*PVP LEAGUE FOR USER*/
-  public static final String PVP_LEAGUE_FOR_USER__USER_ID = "user_id";
+  public static final String PVP_LEAGUE_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID = "league_id";
   public static final String PVP_LEAGUE_FOR_USER__RANK = "rank";
   public static final String PVP_LEAGUE_FOR_USER__ELO = "elo";
-  
+  public static final String PVP_LEAGUE_FOR_USER__SHIELD_END_TIME = "shield_end_time";
+  public static final String PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME = "in_battle_shield_end_time";
+  public static final String PVP_LEAGUE_FOR_USER__ATTACKS_WON = "attacks_won";
+  public static final String PVP_LEAGUE_FOR_USER__DEFENSES_WON = "defenses_won";
+  public static final String PVP_LEAGUE_FOR_USER__ATTACKS_LOST = "attacks_lost";
+  public static final String PVP_LEAGUE_FOR_USER__DEFENSES_LOST = "defenses_lost";
   
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
@@ -528,16 +533,16 @@ public class DBConstants {
   public static final String USER__OIL = "oil";
   public static final String USER__EXPERIENCE = "experience";
   public static final String USER__TASKS_COMPLETED = "tasks_completed";
-  public static final String USER__BATTLES_WON = "battles_won";
-  public static final String USER__BATTLES_LOST = "battles_lost";
-  public static final String USER__FLEES = "flees";
+  //public static final String USER__BATTLES_WON = "battles_won";
+  //public static final String USER__BATTLES_LOST = "battles_lost";
+  //public static final String USER__FLEES = "flees";
   public static final String USER__REFERRAL_CODE = "referral_code";
   public static final String USER__NUM_REFERRALS = "num_referrals";
   public static final String USER__UDID_FOR_HISTORY = "udid_for_history";
   public static final String USER__LAST_LOGIN = "last_login";
   public static final String USER__LAST_LOGOUT = "last_logout";
   public static final String USER__DEVICE_TOKEN = "device_token";
-  public static final String USER__LAST_BATTLE_NOTIFICATION_TIME = "last_battle_notification_time";
+  //public static final String USER__LAST_BATTLE_NOTIFICATION_TIME = "last_battle_notification_time";
   public static final String USER__NUM_BADGES = "num_badges";
   public static final String USER__IS_FAKE = "is_fake";
   public static final String USER__CREATE_TIME = "create_time";
@@ -552,14 +557,14 @@ public class DBConstants {
   public static final String USER__HAS_RECEIVED_FB_REWARD = "has_received_fb_reward";
 //  public static final String USER__NUM_ADDITIONAL_MONSTER_SLOTS = "num_additional_monster_slots";
   public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
-  public static final String USER__SHIELD_END_TIME = "shield_end_time";
-  public static final String USER__ELO = "elo";
-  public static final String USER__RANK = "rank";
-  public static final String USER__IN_BATTLE_END_TIME = "in_battle_end_time";
-  public static final String USER__ATTACKS_WON = "attacks_won";
-  public static final String USER__DEFENSES_WON = "defenses_won";
-  public static final String USER__ATTACKS_LOST = "attacks_lost";
-  public static final String USER__DEFENSES_LOST = "defenses_lost";
+  //public static final String USER__SHIELD_END_TIME = "shield_end_time";
+  //public static final String USER__ELO = "elo";
+  //public static final String USER__RANK = "rank";
+  //public static final String USER__IN_BATTLE_END_TIME = "in_battle_end_time";
+  //public static final String USER__ATTACKS_WON = "attacks_won";
+  //public static final String USER__DEFENSES_WON = "defenses_won";
+  //public static final String USER__ATTACKS_LOST = "attacks_lost";
+  //public static final String USER__DEFENSES_LOST = "defenses_lost";
   public static final String USER__FACEBOOK_ID = "facebook_id";
 //  public static final String USER__NTH_EXTRA_SLOTS_VIA_FB = "nth_extra_slots_via_fb";
   public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";

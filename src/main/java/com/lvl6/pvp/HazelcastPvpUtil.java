@@ -17,8 +17,10 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
+import com.hazelcast.query.PagingPredicate;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
+import com.hazelcast.util.IterationType;
 import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
@@ -79,7 +81,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//Used to get offline people that can be attacked in pvp
 	@Autowired
-	protected PvpUserRetrieveUtils pvpUserRetrieveUtils;
+	protected PvpUserRetrieveUtil pvpUserRetrieveUtils;
 
 	//properties used to create random names, related: textFileResourceLoaderAware
 	private static int syllablesInName1 = 2;
@@ -88,13 +90,41 @@ public class HazelcastPvpUtil implements InitializingBean {
 	private static Random rand;
 	private List<String> randomNames; //should this be a distributed collection?
 	private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
-
+	private boolean useDatabaseInstead = false;
+	
+	/**
+	 * 	In case hazelcast is giving trouble and the database should be
+	 *	used instead. Should be called before retrieving users.
+	 * @return
+	 */
+	public boolean isUseDatabaseInstead() {
+		return useDatabaseInstead;
+	}
+	public void setUseDatabaseInstead(boolean useDatabaseInstead) {
+		this.useDatabaseInstead = useDatabaseInstead;
+	}
+	
 	//TODO: move to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
-	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, 
-			Date now) {
+	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, Date now, int limit) {
+		if (isUseDatabaseInstead()) {
+			log.info("querying db instead of hazelcast");
+			return getPvpUserRetrieveUtils().retrievePvpUsers(minElo, maxElo,
+					now, limit);
+		} else {
+			log.info("retrieving from hazelcast instead of db");
+			return retrievePvpUsersViaHazelcast(minElo, maxElo, now, limit);
+		}
+
+	}
+	
+	//look here for examples on using PagingPredicate
+	//https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/test/java/com/hazelcast/map/SortLimitTest.java
+	protected Set<PvpUser> retrievePvpUsersViaHazelcast(int minElo, int maxElo,
+			Date now, int limit) {
 		log.info("querying for people to attack. shieldEndTime should be before now=" +
-				now + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
+				now + "\t elo should be between minElo=" + minElo + ", maxElo=" +
+				maxElo + "\t (page size aka) limit=" + limit);
 
 		String inBattleShieldEndTime = PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME;
 		String shieldEndTime = PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME;
@@ -105,10 +135,14 @@ public class HazelcastPvpUtil implements InitializingBean {
 		Predicate<?, ?> predicate = e.get(shieldEndTime).lessThan(now)
 				.and(e.get(inBattleShieldEndTime).lessThan(now))
 				.and(e.get(elo).between(minElo, maxElo));
+		PagingPredicate advPredicate = new PagingPredicate(predicate,
+				new PvpUserComparator(true, IterationType.VALUE), limit);
 
-		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(predicate);
+		
+		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(advPredicate);
 		log.info("users:" + users);
 
+		
 		return users;
 	}
 
@@ -283,8 +317,10 @@ public class HazelcastPvpUtil implements InitializingBean {
 			log.info("populating the IMap with users that can be attacked in pvp. numUsers="
 					+ validUsers.size());
 			populatePvpUserMap(validUsers);
+			useDatabaseInstead = false;
 		} else {
 			log.error("no available users that can be attacked in pvp.");
+			useDatabaseInstead = true;
 		}
 	}
 
@@ -309,16 +345,6 @@ public class HazelcastPvpUtil implements InitializingBean {
 	}
 
 
-	//    
-	//    
-	//    public HazelcastInstance getHazel() {
-	//    	return hazel;
-	//    }
-	//    
-	//    public void setHazel(HazelcastInstance hazel) {
-	//    	this.hazel = hazel;
-	//    }
-
 	public Locker getLocker() {
 		return locker;
 	}
@@ -334,11 +360,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 		this.textFileResourceLoaderAware = textFileResourceLoaderAware;
 	}
 
-	public PvpUserRetrieveUtils getPvpUserRetrieveUtils() {
+	public PvpUserRetrieveUtil getPvpUserRetrieveUtils() {
 		return pvpUserRetrieveUtils;
 	}
 	public void setPvpUserRetrieveUtils(
-			PvpUserRetrieveUtils pvpUserRetrieveUtils) {
+			PvpUserRetrieveUtil pvpUserRetrieveUtils) {
 		this.pvpUserRetrieveUtils = pvpUserRetrieveUtils;
 	}
 

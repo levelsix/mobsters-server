@@ -57,7 +57,9 @@ import com.lvl6.utils.RetrieveUtils;
     Map<Integer, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
-        resBuilder.addRequestedUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(user));
+    	  //TODO: consider getting from db
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+        resBuilder.addRequestedUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(user, null));
         
 //        if (includePotentialPoints) {
 //          int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(sender, user);

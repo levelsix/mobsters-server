@@ -69,7 +69,10 @@ public interface InsertUtil {
 	// returns -1 if error
 	public abstract int insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
-			Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime);
+			Timestamp createTime, String facebookId);
+	
+	public abstract int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 

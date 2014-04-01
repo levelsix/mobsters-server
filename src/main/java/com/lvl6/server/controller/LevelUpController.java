@@ -82,7 +82,9 @@ import com.lvl6.utils.RetrieveUtils;
       getEventWriter().handleEvent(resEvent);
       
       if (success) {
-    	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+    	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+    			  .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
     	  resEventUpdate.setTag(event.getTag());
     	  getEventWriter().handleEvent(resEventUpdate);
       }

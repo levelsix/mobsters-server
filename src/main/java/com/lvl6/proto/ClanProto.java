@@ -1879,10 +1879,10 @@ public final class ClanProto {
   public interface MinimumUserProtoForClansOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProtoWithBattleHistory minUserProto = 1;
-    boolean hasMinUserProto();
-    com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory getMinUserProto();
-    com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder getMinUserProtoOrBuilder();
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+    boolean hasMinUserProtoWithLevel();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getMinUserProtoWithLevel();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getMinUserProtoWithLevelOrBuilder();
     
     // optional .com.lvl6.proto.UserClanStatus clanStatus = 2;
     boolean hasClanStatus();
@@ -1921,17 +1921,17 @@ public final class ClanProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithBattleHistory minUserProto = 1;
-    public static final int MINUSERPROTO_FIELD_NUMBER = 1;
-    private com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory minUserProto_;
-    public boolean hasMinUserProto() {
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+    public static final int MINUSERPROTOWITHLEVEL_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel minUserProtoWithLevel_;
+    public boolean hasMinUserProtoWithLevel() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory getMinUserProto() {
-      return minUserProto_;
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getMinUserProtoWithLevel() {
+      return minUserProtoWithLevel_;
     }
-    public com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder getMinUserProtoOrBuilder() {
-      return minUserProto_;
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getMinUserProtoWithLevelOrBuilder() {
+      return minUserProtoWithLevel_;
     }
     
     // optional .com.lvl6.proto.UserClanStatus clanStatus = 2;
@@ -1955,7 +1955,7 @@ public final class ClanProto {
     }
     
     private void initFields() {
-      minUserProto_ = com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.getDefaultInstance();
+      minUserProtoWithLevel_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       clanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.LEADER;
       raidContribution_ = 0F;
     }
@@ -1972,7 +1972,7 @@ public final class ClanProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, minUserProto_);
+        output.writeMessage(1, minUserProtoWithLevel_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, clanStatus_.getNumber());
@@ -1991,7 +1991,7 @@ public final class ClanProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, minUserProto_);
+          .computeMessageSize(1, minUserProtoWithLevel_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2117,7 +2117,7 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMinUserProtoFieldBuilder();
+          getMinUserProtoWithLevelFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2126,10 +2126,10 @@ public final class ClanProto {
       
       public Builder clear() {
         super.clear();
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.getDefaultInstance();
+        if (minUserProtoWithLevelBuilder_ == null) {
+          minUserProtoWithLevel_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
         } else {
-          minUserProtoBuilder_.clear();
+          minUserProtoWithLevelBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         clanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.LEADER;
@@ -2177,10 +2177,10 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (minUserProtoBuilder_ == null) {
-          result.minUserProto_ = minUserProto_;
+        if (minUserProtoWithLevelBuilder_ == null) {
+          result.minUserProtoWithLevel_ = minUserProtoWithLevel_;
         } else {
-          result.minUserProto_ = minUserProtoBuilder_.build();
+          result.minUserProtoWithLevel_ = minUserProtoWithLevelBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
@@ -2206,8 +2206,8 @@ public final class ClanProto {
       
       public Builder mergeFrom(com.lvl6.proto.ClanProto.MinimumUserProtoForClans other) {
         if (other == com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance()) return this;
-        if (other.hasMinUserProto()) {
-          mergeMinUserProto(other.getMinUserProto());
+        if (other.hasMinUserProtoWithLevel()) {
+          mergeMinUserProtoWithLevel(other.getMinUserProtoWithLevel());
         }
         if (other.hasClanStatus()) {
           setClanStatus(other.getClanStatus());
@@ -2247,12 +2247,12 @@ public final class ClanProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder subBuilder = com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.newBuilder();
-              if (hasMinUserProto()) {
-                subBuilder.mergeFrom(getMinUserProto());
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder();
+              if (hasMinUserProtoWithLevel()) {
+                subBuilder.mergeFrom(getMinUserProtoWithLevel());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setMinUserProto(subBuilder.buildPartial());
+              setMinUserProtoWithLevel(subBuilder.buildPartial());
               break;
             }
             case 16: {
@@ -2277,94 +2277,94 @@ public final class ClanProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProtoWithBattleHistory minUserProto = 1;
-      private com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory minUserProto_ = com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel minUserProtoWithLevel_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder> minUserProtoBuilder_;
-      public boolean hasMinUserProto() {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> minUserProtoWithLevelBuilder_;
+      public boolean hasMinUserProtoWithLevel() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory getMinUserProto() {
-        if (minUserProtoBuilder_ == null) {
-          return minUserProto_;
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getMinUserProtoWithLevel() {
+        if (minUserProtoWithLevelBuilder_ == null) {
+          return minUserProtoWithLevel_;
         } else {
-          return minUserProtoBuilder_.getMessage();
+          return minUserProtoWithLevelBuilder_.getMessage();
         }
       }
-      public Builder setMinUserProto(com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory value) {
-        if (minUserProtoBuilder_ == null) {
+      public Builder setMinUserProtoWithLevel(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (minUserProtoWithLevelBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          minUserProto_ = value;
+          minUserProtoWithLevel_ = value;
           onChanged();
         } else {
-          minUserProtoBuilder_.setMessage(value);
+          minUserProtoWithLevelBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder setMinUserProto(
-          com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder builderForValue) {
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = builderForValue.build();
+      public Builder setMinUserProtoWithLevel(
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+        if (minUserProtoWithLevelBuilder_ == null) {
+          minUserProtoWithLevel_ = builderForValue.build();
           onChanged();
         } else {
-          minUserProtoBuilder_.setMessage(builderForValue.build());
+          minUserProtoWithLevelBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeMinUserProto(com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory value) {
-        if (minUserProtoBuilder_ == null) {
+      public Builder mergeMinUserProtoWithLevel(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (minUserProtoWithLevelBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              minUserProto_ != com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.getDefaultInstance()) {
-            minUserProto_ =
-              com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.newBuilder(minUserProto_).mergeFrom(value).buildPartial();
+              minUserProtoWithLevel_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+            minUserProtoWithLevel_ =
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(minUserProtoWithLevel_).mergeFrom(value).buildPartial();
           } else {
-            minUserProto_ = value;
+            minUserProtoWithLevel_ = value;
           }
           onChanged();
         } else {
-          minUserProtoBuilder_.mergeFrom(value);
+          minUserProtoWithLevelBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder clearMinUserProto() {
-        if (minUserProtoBuilder_ == null) {
-          minUserProto_ = com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.getDefaultInstance();
+      public Builder clearMinUserProtoWithLevel() {
+        if (minUserProtoWithLevelBuilder_ == null) {
+          minUserProtoWithLevel_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
           onChanged();
         } else {
-          minUserProtoBuilder_.clear();
+          minUserProtoWithLevelBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder getMinUserProtoBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getMinUserProtoWithLevelBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getMinUserProtoFieldBuilder().getBuilder();
+        return getMinUserProtoWithLevelFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder getMinUserProtoOrBuilder() {
-        if (minUserProtoBuilder_ != null) {
-          return minUserProtoBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getMinUserProtoWithLevelOrBuilder() {
+        if (minUserProtoWithLevelBuilder_ != null) {
+          return minUserProtoWithLevelBuilder_.getMessageOrBuilder();
         } else {
-          return minUserProto_;
+          return minUserProtoWithLevel_;
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder> 
-          getMinUserProtoFieldBuilder() {
-        if (minUserProtoBuilder_ == null) {
-          minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder, com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistoryOrBuilder>(
-                  minUserProto_,
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          getMinUserProtoWithLevelFieldBuilder() {
+        if (minUserProtoWithLevelBuilder_ == null) {
+          minUserProtoWithLevelBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+                  minUserProtoWithLevel_,
                   getParentForChildren(),
                   isClean());
-          minUserProto_ = null;
+          minUserProtoWithLevel_ = null;
         }
-        return minUserProtoBuilder_;
+        return minUserProtoWithLevelBuilder_;
       }
       
       // optional .com.lvl6.proto.UserClanStatus clanStatus = 2;
@@ -10766,65 +10766,65 @@ public final class ClanProto {
       "\003 \001(\0162\036.com.lvl6.proto.UserClanStatus\022\023\n" +
       "\013requestTime\030\004 \001(\003\"Z\n\031FullClanProtoWithC",
       "lanSize\022+\n\004clan\030\001 \001(\0132\035.com.lvl6.proto.F" +
-      "ullClanProto\022\020\n\010clanSize\030\002 \001(\005\"\261\001\n\030Minim" +
-      "umUserProtoForClans\022G\n\014minUserProto\030\001 \001(" +
-      "\01321.com.lvl6.proto.MinimumUserProtoWithB" +
-      "attleHistory\0222\n\nclanStatus\030\002 \001(\0162\036.com.l" +
-      "vl6.proto.UserClanStatus\022\030\n\020raidContribu" +
-      "tion\030\003 \001(\002\"\275\002\n\rClanRaidProto\022\022\n\nclanRaid" +
-      "Id\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(\t\022\032\n\022active" +
-      "TitleImgName\030\003 \001(\t\022\037\n\027activeBackgroundIm" +
-      "gName\030\004 \001(\t\022\031\n\021activeDescription\030\005 \001(\t\022\036",
-      "\n\026inactiveMonsterImgName\030\006 \001(\t\022\033\n\023inacti" +
-      "veDescription\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001(" +
-      "\t\022\037\n\027spotlightMonsterImgName\030\t \001(\t\0226\n\nra" +
-      "idStages\030\n \003(\0132\".com.lvl6.proto.ClanRaid" +
-      "StageProto\"\372\001\n\022ClanRaidStageProto\022\027\n\017cla" +
-      "nRaidStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022\027" +
-      "\n\017durationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(" +
-      "\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com." +
-      "lvl6.proto.ClanRaidStageMonsterProto\022A\n\017" +
-      "possibleRewards\030\014 \003(\0132(.com.lvl6.proto.C",
-      "lanRaidStageRewardProto\"q\n\031ClanRaidStage" +
-      "MonsterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterI" +
-      "d\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 \001" +
-      "(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStageRewa" +
-      "rdProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilReward\030" +
-      "\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminCashRe" +
-      "ward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmon" +
-      "sterId\030\007 \001(\005\"\252\001\n\030PersistentClanEventProt" +
-      "o\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(" +
-      "\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\t",
-      "startHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030" +
-      "\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001\n Persistent" +
-      "ClanEventClanInfoProto\022\016\n\006clanId\030\001 \001(\005\022\023" +
-      "\n\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022" +
-      "\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartTi" +
-      "me\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonster" +
-      "StartTime\030\007 \001(\003\"\317\001\n PersistentClanEventU" +
-      "serInfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002" +
-      " \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\022\n" +
-      "\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022A",
-      "\n\014userMonsters\030\t \001(\0132+.com.lvl6.proto.Us" +
-      "erCurrentMonsterTeamProto\"\322\001\n\"Persistent" +
-      "ClanEventUserRewardProto\022\020\n\010rewardId\030\001 \001" +
-      "(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\ncrsEndTime\030\004 \001(\003\0228" +
-      "\n\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Re" +
-      "sourceType:\004CASH\022\024\n\014staticDataId\030\006 \001(\005\022\020" +
-      "\n\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030\t \001(\003\"\346" +
-      "\001\n(PersistentClanEventRaidStageHistoryPr" +
-      "oto\022C\n\007rewards\030\001 \003(\01322.com.lvl6.proto.Pe" +
-      "rsistentClanEventUserRewardProto\022\017\n\007even",
-      "tId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRai" +
-      "dStageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(\003\022\022\n\ncr" +
-      "sDmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"W\n#Persi" +
-      "stentClanEventRaidHistoryProto\022\016\n\006userId" +
-      "\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030\003 \001(\005" +
-      "\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001(\005\022\017\n" +
-      "\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010*X\n\016U" +
-      "serClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEAD" +
-      "ER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUEST" +
-      "ING\020\nB\013B\tClanProto"
+      "ullClanProto\022\020\n\010clanSize\030\002 \001(\005\"\262\001\n\030Minim" +
+      "umUserProtoForClans\022H\n\025minUserProtoWithL" +
+      "evel\030\001 \001(\0132).com.lvl6.proto.MinimumUserP" +
+      "rotoWithLevel\0222\n\nclanStatus\030\002 \001(\0162\036.com." +
+      "lvl6.proto.UserClanStatus\022\030\n\020raidContrib" +
+      "ution\030\003 \001(\002\"\275\002\n\rClanRaidProto\022\022\n\nclanRai" +
+      "dId\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(\t\022\032\n\022activ" +
+      "eTitleImgName\030\003 \001(\t\022\037\n\027activeBackgroundI" +
+      "mgName\030\004 \001(\t\022\031\n\021activeDescription\030\005 \001(\t\022",
+      "\036\n\026inactiveMonsterImgName\030\006 \001(\t\022\033\n\023inact" +
+      "iveDescription\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001" +
+      "(\t\022\037\n\027spotlightMonsterImgName\030\t \001(\t\0226\n\nr" +
+      "aidStages\030\n \003(\0132\".com.lvl6.proto.ClanRai" +
+      "dStageProto\"\372\001\n\022ClanRaidStageProto\022\027\n\017cl" +
+      "anRaidStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022" +
+      "\027\n\017durationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001" +
+      "(\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com" +
+      ".lvl6.proto.ClanRaidStageMonsterProto\022A\n" +
+      "\017possibleRewards\030\014 \003(\0132(.com.lvl6.proto.",
+      "ClanRaidStageRewardProto\"q\n\031ClanRaidStag" +
+      "eMonsterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonster" +
+      "Id\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 " +
+      "\001(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStageRew" +
+      "ardProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilReward" +
+      "\030\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminCashR" +
+      "eward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmo" +
+      "nsterId\030\007 \001(\005\"\252\001\n\030PersistentClanEventPro" +
+      "to\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001" +
+      "(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n",
+      "\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinutes" +
+      "\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001\n Persisten" +
+      "tClanEventClanInfoProto\022\016\n\006clanId\030\001 \001(\005\022" +
+      "\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005" +
+      "\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartT" +
+      "ime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonste" +
+      "rStartTime\030\007 \001(\003\"\317\001\n PersistentClanEvent" +
+      "UserInfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030" +
+      "\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\022" +
+      "\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022",
+      "A\n\014userMonsters\030\t \001(\0132+.com.lvl6.proto.U" +
+      "serCurrentMonsterTeamProto\"\322\001\n\"Persisten" +
+      "tClanEventUserRewardProto\022\020\n\010rewardId\030\001 " +
+      "\001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\ncrsEndTime\030\004 \001(\003\022" +
+      "8\n\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.R" +
+      "esourceType:\004CASH\022\024\n\014staticDataId\030\006 \001(\005\022" +
+      "\020\n\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030\t \001(\003\"" +
+      "\346\001\n(PersistentClanEventRaidStageHistoryP" +
+      "roto\022C\n\007rewards\030\001 \003(\01322.com.lvl6.proto.P" +
+      "ersistentClanEventUserRewardProto\022\017\n\007eve",
+      "ntId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRa" +
+      "idStageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(\003\022\022\n\nc" +
+      "rsDmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"W\n#Pers" +
+      "istentClanEventRaidHistoryProto\022\016\n\006userI" +
+      "d\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030\003 \001(" +
+      "\005\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001(\005\022\017" +
+      "\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010*X\n\016" +
+      "UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEA" +
+      "DER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUES" +
+      "TING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10860,7 +10860,7 @@ public final class ClanProto {
           internal_static_com_lvl6_proto_MinimumUserProtoForClans_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProtoForClans_descriptor,
-              new java.lang.String[] { "MinUserProto", "ClanStatus", "RaidContribution", },
+              new java.lang.String[] { "MinUserProtoWithLevel", "ClanStatus", "RaidContribution", },
               com.lvl6.proto.ClanProto.MinimumUserProtoForClans.class,
               com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder.class);
           internal_static_com_lvl6_proto_ClanRaidProto_descriptor =

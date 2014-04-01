@@ -73,11 +73,9 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
-import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -162,6 +160,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
+import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -175,16 +174,19 @@ public class CreateInfoProtoUtils {
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
   /**Battle.proto***************************************************/
-  public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(User u) {
+  /*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(
+		  User u, PvpLeagueForUser plfu) {
     MinimumUserProtoWithLevel mup = createMinimumUserProtoWithLevelFromUser(u);
     MinimumUserProtoWithBattleHistory.Builder mupwbhb = MinimumUserProtoWithBattleHistory.newBuilder(); 
     mupwbhb.setMinUserProtoWithLevel(mup);
-    mupwbhb.setBattlesWon(u.getBattlesWon());
-    mupwbhb.setBattlesLost(u.getBattlesLost());
-    mupwbhb.setBattlesFled(u.getFlees());
+    
+    int battlesWon = plfu.getAttacksWon() + plfu.getDefensesWon();
+    mupwbhb.setBattlesWon(battlesWon);
+    int battlesLost = plfu.getAttacksLost() + plfu.getDefensesLost();
+    mupwbhb.setBattlesLost(battlesLost);
     
     return mupwbhb.build();
-  }
+  }*/
 
   public static PvpProto createPvpProtoFrom(User u, PvpLeagueForUser plfu,
 		  Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
@@ -260,7 +262,7 @@ public class CreateInfoProtoUtils {
   		int prospectiveOilWinnings) {
   	PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
   	//there is db call for clan...
-  	FullUserProto fup = createFullUserProtoFromUser(attacker);
+  	FullUserProto fup = createFullUserProtoFromUser(attacker, null);
   	phpb.setAttacker(fup);
   	
   	if (null != userMonsters && !userMonsters.isEmpty()) {
@@ -368,6 +370,7 @@ public class CreateInfoProtoUtils {
 	  if (setElo) {
 		  uplpb.setElo(plfu.getElo());
 	  }
+	  
 	  
 	  return uplpb.build();
   }
@@ -763,10 +766,10 @@ public class CreateInfoProtoUtils {
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
       String userClanStatus, float clanRaidContribution) {
-    MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
+	  MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
-    mupfcb.setMinUserProto(mup);
+    mupfcb.setMinUserProtoWithLevel(mupwl);
     
     try {
     	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
@@ -783,10 +786,10 @@ public class CreateInfoProtoUtils {
   
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
 		  UserClanStatus userClanStatus, float clanRaidContribution) {
-	    MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
+	  	MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
 	    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
-	    mupfcb.setMinUserProto(mup);
+	    mupfcb.setMinUserProtoWithLevel(mupwl);
 	    
 	    mupfcb.setClanStatus(userClanStatus);
 	    mupfcb.setRaidContribution(clanRaidContribution);
@@ -2194,7 +2197,8 @@ public class CreateInfoProtoUtils {
     return inviteProtoBuilder.build();
   }
 
-  public static FullUserProto createFullUserProtoFromUser(User u) {
+  public static FullUserProto createFullUserProtoFromUser(User u,
+		  PvpLeagueForUser plfu) {
     FullUserProto.Builder builder = FullUserProto.newBuilder();
     builder.setUserId(u.getId());
     builder.setName(u.getName());
@@ -2204,9 +2208,6 @@ public class CreateInfoProtoUtils {
     builder.setOil(u.getOil());
     builder.setExperience(u.getExperience());
     builder.setTasksCompleted(u.getTasksCompleted());
-    builder.setBattlesWon(u.getBattlesWon());
-    builder.setBattlesLost(u.getBattlesLost());
-    builder.setFlees(u.getFlees());
     if (u.getReferralCode() != null) {
       builder.setReferralCode(u.getReferralCode());
     }
@@ -2227,21 +2228,7 @@ public class CreateInfoProtoUtils {
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-    //    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
-//    builder.setHasActiveShield(u.isHasActiveShield());
-    if(u.getShieldEndTime() != null) {
-      builder.setShieldEndTime(u.getShieldEndTime().getTime());
-    }
-    builder.setElo(u.getElo());
-    builder.setRank(u.getRank());
-    if (null != u.getInBattleShieldEndTime()) {
-      builder.setInBattleShieldEndTime(u.getInBattleShieldEndTime().getTime());
-    }
-    builder.setAttacksWon(u.getAttacksWon());
-    builder.setDefensesWon(u.getAttacksWon());
-    builder.setAttacksLost(u.getAttacksLost());
-    builder.setDefensesLost(u.getDefensesLost());
 
     String facebookId = u.getFacebookId();
     if (null != facebookId) {
@@ -2257,9 +2244,14 @@ public class CreateInfoProtoUtils {
     if (null != lastObstacleSpawnedTime) {
     	builder.setLastObstacleSpawnedTime(lastObstacleSpawnedTime.getTime());
     }
-
+    
+    if (null != plfu) {
+    	//every user should have one, since pvp info created when user is created
+    	//but could be null if not important to have it
+    	UserPvpLeagueProto pvpLeagueInfo = createUserPvpLeagueProto(plfu, false);
+    	builder.setPvpLeagueInfo(pvpLeagueInfo);
+    }
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
-
 
     if (u.isFake()) {
 

@@ -145,14 +145,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     		//regardless of whether the attacker won, his elo will change
     		UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-    				.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
+    				.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker, null);
     		resEventUpdate.setTag(event.getTag());
     		server.writeEvent(resEventUpdate);
 
     		//defender's elo and resources changed only if attacker won, and defender is real
     		if (attackerWon && null != defender) {
     			UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
-    					.createUpdateClientUserResponseEventAndUpdateLeaderboard(defender);
+    					.createUpdateClientUserResponseEventAndUpdateLeaderboard(defender, null);
     			resEventUpdate.setTag(event.getTag());
     			server.writeEvent(resEventUpdateDefender);
     		}
@@ -246,9 +246,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilChange, attackerWon);
   		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashChange, attackerWon);
   		
+  		//TODO: FIX THIS
   		//update attacker's cash, oil, elo
-  		attacker.updateEloOilCash(attackerId, attackerEloChange, attackerOilChange,
-  				attackerCashChange);
+//  		attacker.updateEloOilCash(attackerId, attackerEloChange, attackerOilChange,
+//  				attackerCashChange);
   		
   		//need to take into account if defender (online and) spent some cash/oil before
   		//pvp battle ends, defender will not gain resources by winning
@@ -393,11 +394,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//don't cap fake player's elo
   		if (null != defender && pvpBattleInfo.getDefenderId() > 0) {
   			log.info("attacker fought real player. battleInfo=" + pvpBattleInfo);
+  			//TODO: FIX THIS
   			//make sure defender's elo doesn't go below 0
-  			int defenderElo = defender.getElo();
-  			if (defenderElo + defenderEloChange < 0) {
-  				defenderEloChange = -1 * defenderElo;
-  			}
+//  			int defenderElo = defender.getElo();
+//  			if (defenderElo + defenderEloChange < 0) {
+//  				defenderEloChange = -1 * defenderElo;
+//  			}
   		} else {
   			log.info("attacker fought fake player. battleInfo=" + pvpBattleInfo);
   		}
@@ -406,11 +408,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		attackerEloChange = pvpBattleInfo.getAttackerLoseEloChange(); //negative value
   		defenderEloChange = pvpBattleInfo.getDefenderWinEloChange(); // positive value
 
+  		//TODO: FIX THIS
   		//make sure attacker's elo doesn't go below 0
-  		int attackerElo = attacker.getElo();
-  		if (attackerElo + attackerEloChange < 0) {
-  			attackerEloChange = -1 * attackerElo;
-  		}
+//  		int attackerElo = attacker.getElo();
+//  		if (attackerElo + attackerEloChange < 0) {
+//  			attackerEloChange = -1 * attackerElo;
+//  		}
 
   	}
   	
@@ -442,32 +445,33 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				cashChange, defenderWon);
 		boolean displayToDefender = true;
 		
+		//TODO: FIX THIS
 		//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
 		//the history for this battle should have the display_to_defender set to false;
-		Date inBattleShieldEndTime = defender.getInBattleShieldEndTime();
-		Date shieldEndTime = defender.getShieldEndTime();
-		if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
-			log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
-					pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
-			defenderOilChange = 0;
-			defenderCashChange = 0;
-			defenderEloChange = 0;
-			displayToDefender = false;
-			
-		} else {
-			//NO ONE ELSE ATTACKING DEFENDER. update defender's cash, oil, elo and shields
-			log.info("attacker attacked unshielded defender. attacker=" + attacker +
-					"\t defender=" + defender + "\t battleInfo=" + pvpBattleInfo);
-			if (attackerWon) {
-				int hoursAddend = ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS;
-				shieldEndTime = getTimeUtils().createDateAddHours(clientDate, hoursAddend);
-				inBattleShieldEndTime = shieldEndTime;
-			} //else defender gains elo
-			
-			defender.updateEloOilCashShields(defenderId, defenderEloChange, defenderOilChange,
-					defenderCashChange, shieldEndTime, inBattleShieldEndTime);
-			log.info("defender after:" + defender);
-		}
+//		Date inBattleShieldEndTime = defender.getInBattleShieldEndTime();
+//		Date shieldEndTime = defender.getShieldEndTime();
+//		if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
+//			log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
+//					pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
+//			defenderOilChange = 0;
+//			defenderCashChange = 0;
+//			defenderEloChange = 0;
+//			displayToDefender = false;
+//			
+//		} else {
+//			//NO ONE ELSE ATTACKING DEFENDER. update defender's cash, oil, elo and shields
+//			log.info("attacker attacked unshielded defender. attacker=" + attacker +
+//					"\t defender=" + defender + "\t battleInfo=" + pvpBattleInfo);
+//			if (attackerWon) {
+//				int hoursAddend = ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS;
+//				shieldEndTime = getTimeUtils().createDateAddHours(clientDate, hoursAddend);
+//				inBattleShieldEndTime = shieldEndTime;
+//			} //else defender gains elo
+//			
+//			defender.updateEloOilCashShields(defenderId, defenderEloChange, defenderOilChange,
+//					defenderCashChange, shieldEndTime, inBattleShieldEndTime);
+//			log.info("defender after:" + defender);
+//		}
 		
 		defenderEloChangeList.add(defenderEloChange);
 		defenderOilChangeList.add(defenderOilChange);
@@ -488,14 +492,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //  		userOpu.setShieldEndTime(user.getShieldEndTime());
 //  		userOpu.setInBattleEndTime(user.getInBattleShieldEndTime());
 //  	}
-  	int userElo = user.getElo();                    
-		PvpUser pu = new PvpUser();
-		pu.setUserId(Integer.toString(userId));
-		pu.setElo(userElo);                        
-		pu.setShieldEndTime(user.getShieldEndTime());               
-		pu.setInBattleEndTime(user.getInBattleShieldEndTime());               
-//		getHazelcastPvpUtil().updateOfflinePvpUser(userOpu);
-		getHazelcastPvpUtil().replacePvpUser(pu, userId);
+	  //TODO: FIX THIS
+//  	int userElo = user.getElo();                    
+//		PvpUser pu = new PvpUser();
+//		pu.setUserId(Integer.toString(userId));
+//		pu.setElo(userElo);                        
+//		pu.setShieldEndTime(user.getShieldEndTime());               
+//		pu.setInBattleEndTime(user.getInBattleShieldEndTime());               
+//		getHazelcastPvpUtil().replacePvpUser(pu, userId);
   }
   
   private void writePvpBattleHistory(int attackerId, int defenderId, Timestamp endTime,

@@ -442,14 +442,13 @@ public class InsertUtils implements InsertUtil{
     return false;
   }
 
-  // returns -1 if error
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
-  		String rank, String facebookId, Timestamp shieldEndTime) {
+  		String facebookId) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -465,9 +464,6 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
-    insertParams.put(DBConstants.USER__SHIELD_END_TIME, shieldEndTime);
-    insertParams.put(DBConstants.USER__IN_BATTLE_END_TIME, shieldEndTime);
-    insertParams.put(DBConstants.USER__RANK, rank);
     
     if (null != facebookId && !facebookId.isEmpty()) {
     	insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
@@ -482,6 +478,24 @@ public class InsertUtils implements InsertUtil{
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
     return userId;
+  }
+  
+  @Override
+  public int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime) {
+	  String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
+	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID, pvpLeagueId);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__RANK, rank);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ELO, elo);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
+			  shieldEndTime);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+			  inBattleShieldEndTime);
+	  
+	  int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+	  return numInserted;
   }
 
 

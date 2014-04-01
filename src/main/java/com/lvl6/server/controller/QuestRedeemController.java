@@ -99,7 +99,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         Map<String, Integer> currencyChange = new HashMap<String, Integer>();
         writeChangesToDB(userQuest, quest, user, senderProto, maxCash, maxOil,
         		previousCurrency, currencyChange);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         

@@ -1182,8 +1182,8 @@ public final class EventStartupProto {
     
     // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 36;
     boolean hasPvpLeagueInfo();
-    com.lvl6.proto.BattleProto.UserPvpLeagueProto getPvpLeagueInfo();
-    com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder();
+    com.lvl6.proto.UserProto.UserPvpLeagueProto getPvpLeagueInfo();
+    com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder();
   }
   public static final class StartupResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -11496,14 +11496,14 @@ public final class EventStartupProto {
     
     // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 36;
     public static final int PVPLEAGUEINFO_FIELD_NUMBER = 36;
-    private com.lvl6.proto.BattleProto.UserPvpLeagueProto pvpLeagueInfo_;
+    private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueInfo_;
     public boolean hasPvpLeagueInfo() {
       return ((bitField0_ & 0x00008000) == 0x00008000);
     }
-    public com.lvl6.proto.BattleProto.UserPvpLeagueProto getPvpLeagueInfo() {
+    public com.lvl6.proto.UserProto.UserPvpLeagueProto getPvpLeagueInfo() {
       return pvpLeagueInfo_;
     }
-    public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder() {
+    public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder() {
       return pvpLeagueInfo_;
     }
     
@@ -11543,7 +11543,7 @@ public final class EventStartupProto {
       curRaidClanUserInfo_ = java.util.Collections.emptyList();
       raidStageHistory_ = java.util.Collections.emptyList();
       recentNBattles_ = java.util.Collections.emptyList();
-      pvpLeagueInfo_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12149,7 +12149,7 @@ public final class EventStartupProto {
           recentNBattlesBuilder_.clear();
         }
         if (pvpLeagueInfoBuilder_ == null) {
-          pvpLeagueInfo_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
         } else {
           pvpLeagueInfoBuilder_.clear();
         }
@@ -13264,7 +13264,7 @@ public final class EventStartupProto {
               break;
             }
             case 290: {
-              com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder();
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder subBuilder = com.lvl6.proto.UserProto.UserPvpLeagueProto.newBuilder();
               if (hasPvpLeagueInfo()) {
                 subBuilder.mergeFrom(getPvpLeagueInfo());
               }
@@ -17311,20 +17311,20 @@ public final class EventStartupProto {
       }
       
       // optional .com.lvl6.proto.UserPvpLeagueProto pvpLeagueInfo = 36;
-      private com.lvl6.proto.BattleProto.UserPvpLeagueProto pvpLeagueInfo_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+      private com.lvl6.proto.UserProto.UserPvpLeagueProto pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> pvpLeagueInfoBuilder_;
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> pvpLeagueInfoBuilder_;
       public boolean hasPvpLeagueInfo() {
         return ((bitField1_ & 0x00000008) == 0x00000008);
       }
-      public com.lvl6.proto.BattleProto.UserPvpLeagueProto getPvpLeagueInfo() {
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto getPvpLeagueInfo() {
         if (pvpLeagueInfoBuilder_ == null) {
           return pvpLeagueInfo_;
         } else {
           return pvpLeagueInfoBuilder_.getMessage();
         }
       }
-      public Builder setPvpLeagueInfo(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+      public Builder setPvpLeagueInfo(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
         if (pvpLeagueInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -17338,7 +17338,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder setPvpLeagueInfo(
-          com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder builderForValue) {
         if (pvpLeagueInfoBuilder_ == null) {
           pvpLeagueInfo_ = builderForValue.build();
           onChanged();
@@ -17348,12 +17348,12 @@ public final class EventStartupProto {
         bitField1_ |= 0x00000008;
         return this;
       }
-      public Builder mergePvpLeagueInfo(com.lvl6.proto.BattleProto.UserPvpLeagueProto value) {
+      public Builder mergePvpLeagueInfo(com.lvl6.proto.UserProto.UserPvpLeagueProto value) {
         if (pvpLeagueInfoBuilder_ == null) {
           if (((bitField1_ & 0x00000008) == 0x00000008) &&
-              pvpLeagueInfo_ != com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance()) {
+              pvpLeagueInfo_ != com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance()) {
             pvpLeagueInfo_ =
-              com.lvl6.proto.BattleProto.UserPvpLeagueProto.newBuilder(pvpLeagueInfo_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.UserPvpLeagueProto.newBuilder(pvpLeagueInfo_).mergeFrom(value).buildPartial();
           } else {
             pvpLeagueInfo_ = value;
           }
@@ -17366,7 +17366,7 @@ public final class EventStartupProto {
       }
       public Builder clearPvpLeagueInfo() {
         if (pvpLeagueInfoBuilder_ == null) {
-          pvpLeagueInfo_ = com.lvl6.proto.BattleProto.UserPvpLeagueProto.getDefaultInstance();
+          pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
           onChanged();
         } else {
           pvpLeagueInfoBuilder_.clear();
@@ -17374,12 +17374,12 @@ public final class EventStartupProto {
         bitField1_ = (bitField1_ & ~0x00000008);
         return this;
       }
-      public com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder getPvpLeagueInfoBuilder() {
+      public com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder getPvpLeagueInfoBuilder() {
         bitField1_ |= 0x00000008;
         onChanged();
         return getPvpLeagueInfoFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder() {
+      public com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder() {
         if (pvpLeagueInfoBuilder_ != null) {
           return pvpLeagueInfoBuilder_.getMessageOrBuilder();
         } else {
@@ -17387,11 +17387,11 @@ public final class EventStartupProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder> 
+          com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder> 
           getPvpLeagueInfoFieldBuilder() {
         if (pvpLeagueInfoBuilder_ == null) {
           pvpLeagueInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.BattleProto.UserPvpLeagueProto, com.lvl6.proto.BattleProto.UserPvpLeagueProto.Builder, com.lvl6.proto.BattleProto.UserPvpLeagueProtoOrBuilder>(
+              com.lvl6.proto.UserProto.UserPvpLeagueProto, com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder, com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder>(
                   pvpLeagueInfo_,
                   getParentForChildren(),
                   isClean());

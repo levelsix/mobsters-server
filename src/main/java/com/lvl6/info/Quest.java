@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Quest implements Serializable {
 	
-	private static final long serialVersionUID = -8638306338483613589L;
+	private static final long serialVersionUID = 5587200389057281309L;
 	
 	private int id;
   private int cityId;
@@ -13,7 +13,7 @@ public class Quest implements Serializable {
   private String description;
   private String doneResponse;
   private Dialogue acceptDialogue;
-  private int questType;
+  private String questType;
   private String jobDescription;
   private int staticDataId;
   private int quantity;
@@ -32,7 +32,7 @@ public class Quest implements Serializable {
   private String monsterElement;
 
   public Quest(int id, int cityId, String questName, String description,
-		  String doneResponse, Dialogue acceptDialogue, int questType,
+		  String doneResponse, Dialogue acceptDialogue, String questType,
 		  String jobDescription, int staticDataId, int quantity, int cashReward,
 		  int oilReward, int gemReward, int expReward, int monsterIdReward,
 		  boolean isCompleteMonster, List<Integer> questsRequiredForThis,
@@ -112,11 +112,11 @@ public class Quest implements Serializable {
 		this.acceptDialogue = acceptDialogue;
 	}
 
-	public int getQuestType() {
+	public String getQuestType() {
 		return questType;
 	}
 
-	public void setQuestType(int questType) {
+	public void setQuestType(String questType) {
 		this.questType = questType;
 	}
 

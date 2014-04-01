@@ -153,8 +153,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
 
       if (successful) {
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	//TODO: WRITE TO monster healing HISTORY

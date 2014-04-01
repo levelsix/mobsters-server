@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +27,16 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class UpgradeNormStructureController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected Locker locker;
 
   public UpgradeNormStructureController() {
     numAllocatedThreads = 4;
@@ -67,7 +72,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
 
 
-    server.lockPlayer(userId, this.getClass().getSimpleName());
+    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
     try {
     	User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	Structure currentStruct = null;
@@ -97,7 +102,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent, resourceChange, rt,
         		timeOfUpgrade, money);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
@@ -116,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in UpgradeNormStructure processEvent", e2);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());      
     }
   }
 
@@ -269,6 +276,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
     		previousCurrencies, currentCurrencies, reasonsForChanges, details);
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
 
 }

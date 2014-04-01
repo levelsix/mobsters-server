@@ -151,7 +151,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resEvent.setRequestJoinClanResponseProto(resBuilder.build());
         server.writeClanEvent(resEvent, clan.getId());
         
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         

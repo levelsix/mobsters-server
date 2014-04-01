@@ -62,7 +62,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
-import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
+import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -282,7 +282,8 @@ public class StartupController extends EventController {
 			      setAllStaticData(resBuilder, userId, true);
 			      setEventStuff(resBuilder, userId);
 			      //if server sees that the user is in a pvp battle, decrement user's elo
-			      pvpBattleStuff(resBuilder, user, userId, freshRestart, now); 
+			      PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user,
+			    		  userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
 			      
@@ -298,7 +299,9 @@ public class StartupController extends EventController {
 			      log.info("before last login change, user=" + user);
 			      user.setLastLogin(nowDate);
 			      log.info("after last login change, user=" + user);
-			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
+			      //TODO: get rid of this plfu property from event startup
+			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(
+			    		  user, plfu);
 			      log.info("fup=" + fup);
 			      resBuilder.setSender(fup);
 
@@ -949,14 +952,14 @@ public class StartupController extends EventController {
   	
   }
   
-  private void pvpBattleStuff(Builder resBuilder, User user, int userId,
+  private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, int userId,
 		  boolean isFreshRestart, Timestamp battleEndTime) {
 	  
-	  setPvpLeagueInfo(resBuilder, userId);
+	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
 	  
   	if (!isFreshRestart) {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
-  		return;
+  		return plfu;
   	}
   	addUserToPvpMap(user, userId);
   	
@@ -969,13 +972,13 @@ public class StartupController extends EventController {
   			.getPvpBattleForUserForAttacker(userId);
   	
   	if (null == battle) {
-  		return;
+  		return plfu;
   	}
   	Timestamp battleStartTime = new Timestamp(battle.getBattleStartTime().getTime());
   	//capping max elo attacker loses
   	int eloAttackerLoses = battle.getAttackerLoseEloChange();
-  	if (user.getElo() + eloAttackerLoses < 0) {
-  		eloAttackerLoses = -1 * user.getElo();
+  	if (plfu.getElo() + eloAttackerLoses < 0) {
+  		eloAttackerLoses = -1 * plfu.getElo();
   	}
   	
   	int defenderId = battle.getDefenderId();
@@ -991,17 +994,22 @@ public class StartupController extends EventController {
   		log.error("could not successfully penalize and reward attacker, defender respectively." +
   				" battle=" + battle, e2);
   	}
+  	return plfu;
   }
   
-  private void setPvpLeagueInfo(Builder resBuilder, int userId) {
-	  PvpLeagueForUser info = getPvpLeagueForUserRetrieveUtil().getUserPvpLeagueForId(userId);
+  //TODO: stick this into full user proto 
+  private PvpLeagueForUser setPvpLeagueInfo(Builder resBuilder, int userId) {
+	  PvpLeagueForUser info = getPvpLeagueForUserRetrieveUtil()
+			  .getUserPvpLeagueForId(userId);
 	  if (null == info) {
 		  log.warn("f&#* this user doesn't have pvp league info");
-		  return;
+		  return null;
 	  }
-	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(info, true);
+	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(
+			  info, true);
 	  
 	  resBuilder.setPvpLeagueInfo(infoProto);
+	  return info;
   }
   
   private void addUserToPvpMap(User user, int userId) {
@@ -1026,18 +1034,19 @@ public class StartupController extends EventController {
 			}
 			PvpUser defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
 			
-			//update attacker
-			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
-			
-			//update defender if real, TODO: might need to cap defenderElo
-			if (null != defender) {
-				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
-			}
-			if (null != defenderOpu) { //update if exists
-				int defenderElo = defender.getElo();
-				defenderOpu.setElo(defenderElo);
-				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
-			}
+			//TODO: FIX THIS
+//			//update attacker
+//			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
+//			
+//			//update defender if real, TODO: might need to cap defenderElo
+//			if (null != defender) {
+//				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
+//			}
+//			if (null != defenderOpu) { //update if exists
+//				int defenderElo = defender.getElo();
+//				defenderOpu.setElo(defenderElo);
+//				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
+//			}
 			boolean cancelled = true;
 			boolean displayToDefender = false;
 			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
@@ -1370,7 +1379,8 @@ public class StartupController extends EventController {
       syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now,
           newNumConsecutiveDaysLoggedIn);
       LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
-      leaderboard.updateLeaderboardForUser(user);
+      //null PvpLeagueFromUser means will pull from hazelcast instead
+      leaderboard.updateLeaderboardForUser(user, null);
     }
   }
 

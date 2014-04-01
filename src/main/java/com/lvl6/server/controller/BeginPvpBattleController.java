@@ -235,8 +235,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		enemy.setInBattleEndTime(newInBattleEndTime);
   		getHazelcastPvpUtil().replacePvpUser(enemy, enemyId);
   		
-  		User defender = RetrieveUtils.userRetrieveUtils().getUserById(enemyId);
-  		defender.updateInBattleEndTime(newInBattleEndTime);
+  		//TODO: FIX THIS
+//  		User defender = RetrieveUtils.userRetrieveUtils().getUserById(enemyId);
+//  		defender.updateInBattleEndTime(newInBattleEndTime);
   		
   		//turn off attacker's shield if it's on, attacker can't revenge fake person
   		exactRevenge(attacker, attackerId, enemyId, clientTime, previousBattleEndTime,
@@ -263,25 +264,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			historyAttackerId, historyDefenderId, prevBattleEndTime);
   	log.info("recorded that user exacted revenge. numUpdated (should be 1)=" + numUpdated);
   	
-  	Date curShieldEndTime = attacker.getShieldEndTime();
-		Date nowDate = new Date(clientTime.getTime());
-		if (getTimeUtils().isFirstEarlierThanSecond(nowDate, curShieldEndTime)) {
-			log.info("user shield end time is now being reset since he's attacking with a shield");
-			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
-			log.info("user before shield change=" + attacker);
-			Date login = attacker.getLastLogin();
-			attacker.updateEloOilCashShields(attackerId, 0, 0,0, login, login);
-			
-			int attackerElo = attacker.getElo();                    
-			PvpUser attackerOpu = new PvpUser();
-			attackerOpu.setElo(attackerElo);                        
-			attackerOpu.setShieldEndTime(attacker.getLastLogin());
-			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
-			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
-			log.info("user after shield change=" + attacker);
-			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
-			log.info("3cur pvpuser=" + attackerOpu);
-		}
+  	//TODO: FIX THIS
+//  	Date curShieldEndTime = attacker.getShieldEndTime();
+//		Date nowDate = new Date(clientTime.getTime());
+//		if (getTimeUtils().isFirstEarlierThanSecond(nowDate, curShieldEndTime)) {
+//			log.info("user shield end time is now being reset since he's attacking with a shield");
+//			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+//			log.info("user before shield change=" + attacker);
+//			Date login = attacker.getLastLogin();
+//			attacker.updateEloOilCashShields(attackerId, 0, 0,0, login, login);
+//			
+//			int attackerElo = attacker.getElo();                    
+//			PvpUser attackerOpu = new PvpUser();
+//			attackerOpu.setElo(attackerElo);                        
+//			attackerOpu.setShieldEndTime(attacker.getLastLogin());
+//			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
+//			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
+//			log.info("user after shield change=" + attacker);
+//			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+//			log.info("3cur pvpuser=" + attackerOpu);
+//		}
   }
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {

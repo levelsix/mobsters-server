@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 4332372450295064401L;
+	private static final long serialVersionUID = 1320377888722953983L;
 	
 	private int id;
 	private String name;
@@ -23,16 +23,12 @@ public class User implements Serializable {
 	private int oil;
 	private int experience;
 	private int tasksCompleted;
-	private int battlesWon;
-	private int battlesLost;
-	private int flees;
 	private String referralCode;
 	private int numReferrals;
 	private String udidForHistory;
 	private Date lastLogin;
 	private Date lastLogout;
 	private String deviceToken;
-	private Date lastBattleNotificationTime;
 	private int numBadges;
 	private boolean isFake;
 	private Date createTime;
@@ -45,38 +41,24 @@ public class User implements Serializable {
 	private Date lastWallPostNotificationTime;
 	private int kabamNaid;
 	private boolean hasReceivedfbReward;
-//	private int numAdditionalMonsterSlots;
 	private int numBeginnerSalesPurchased;
-	private Date shieldEndTime;
-	private int elo;
-	private String rank;
-	private Date inBattleShieldEndTime;
-	private int attacksWon;
-	private int defensesWon;
-	private int attacksLost;
-	private int defensesLost;
 	private String facebookId;
-//	private int nthExtraSlotsViaFb;
 	private boolean fbIdSetOnUserCreate;
 	private String gameCenterId;
 	private String udid;
 	private Date lastObstacleSpawnedTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
-			int experience, int tasksCompleted, int battlesWon,
-			int battlesLost, int flees, String referralCode, int numReferrals,
-			String udidForHistory, Date lastLogin, Date lastLogout,
-			String deviceToken, Date lastBattleNotificationTime, int numBadges,
-			boolean isFake, Date createTime, boolean isAdmin, String apsalarId,
+			int experience, int tasksCompleted, String referralCode,
+			int numReferrals, String udidForHistory, Date lastLogin,
+			Date lastLogout, String deviceToken, int numBadges, boolean isFake,
+			Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
 			int numConsecutiveDaysPlayed, int clanId,
 			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
-			Date shieldEndTime, int elo, String rank,
-			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
-			int attacksLost, int defensesLost, String facebookId,
-			boolean fbIdSetOnUserCreate, String gameCenterId, String udid,
-			Date lastObstacleSpawnedTime) {
+			String facebookId, boolean fbIdSetOnUserCreate,
+			String gameCenterId, String udid, Date lastObstacleSpawnedTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -86,16 +68,12 @@ public class User implements Serializable {
 		this.oil = oil;
 		this.experience = experience;
 		this.tasksCompleted = tasksCompleted;
-		this.battlesWon = battlesWon;
-		this.battlesLost = battlesLost;
-		this.flees = flees;
 		this.referralCode = referralCode;
 		this.numReferrals = numReferrals;
 		this.udidForHistory = udidForHistory;
 		this.lastLogin = lastLogin;
 		this.lastLogout = lastLogout;
 		this.deviceToken = deviceToken;
-		this.lastBattleNotificationTime = lastBattleNotificationTime;
 		this.numBadges = numBadges;
 		this.isFake = isFake;
 		this.createTime = createTime;
@@ -109,14 +87,6 @@ public class User implements Serializable {
 		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
-		this.shieldEndTime = shieldEndTime;
-		this.elo = elo;
-		this.rank = rank;
-		this.inBattleShieldEndTime = inBattleShieldEndTime;
-		this.attacksWon = attacksWon;
-		this.defensesWon = defensesWon;
-		this.attacksLost = attacksLost;
-		this.defensesLost = defensesLost;
 		this.facebookId = facebookId;
 		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
 		this.gameCenterId = gameCenterId;
@@ -312,7 +282,7 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public boolean updateLastLogoutElo(Timestamp lastLogout, int eloChange) {
+	public boolean updateLastLogoutElo(Timestamp lastLogout) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		
@@ -320,25 +290,18 @@ public class User implements Serializable {
 		if (null != lastLogout) {
 			absoluteParams.put(DBConstants.USER__LAST_LOGOUT, lastLogout);
 		}
-		
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (0 != eloChange) {
-			relativeParams.put(DBConstants.USER__ELO, eloChange);
-		}
-		
 		//don't update anything if empty
-		if (absoluteParams.isEmpty() || relativeParams.isEmpty()) {
+		if (absoluteParams.isEmpty()) {
 			return true;
 		}
 		
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
+		
+		Map<String, Object> relativeParams = null;
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, 
+				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			if (null != lastLogout) {
 				this.lastLogout = lastLogout;
-			}
-			if (0 != eloChange) {
-				this.elo += eloChange;
 			}
 			
 			return true;
@@ -840,14 +803,11 @@ public class User implements Serializable {
 //		return false;
 //	}
 
-	public boolean updateEloOilCash(int userId, int eloChange, int oilChange, int cashChange) {
+	public boolean updateEloOilCash(int oilChange, int cashChange) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (0 != eloChange) {
-			relativeParams.put(DBConstants.USER__ELO, eloChange);
-		}
 		if (0 != oilChange) {
 			relativeParams.put(DBConstants.USER__OIL, oilChange);
 		}
@@ -862,10 +822,6 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
 				absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
-//			this.elo = newElo;
-			if (0 != eloChange) {
-				this.elo += eloChange;
-			}
 			if (0 != oilChange) {
 				this.oil += oilChange;
 			}
@@ -876,7 +832,8 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-
+	
+	/*
 	public boolean updateInBattleEndTime(Date inBattleShieldEndTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -890,8 +847,8 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-	
-
+	*/
+	/*
 	public boolean updateEloInBattleEndTime(int eloChange, Date inBattleEndTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -911,7 +868,7 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-	
+	*/
 
 	public boolean updateEloOilCashShields(int userId, int eloChange, int oilChange,
 			int cashChange, Date shieldEndTime, Date inBattleEndTime) {
@@ -919,9 +876,6 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 		
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (0 != eloChange) {
-			relativeParams.put(DBConstants.USER__ELO, eloChange);
-		}
 		if (0 != oilChange) {
 			relativeParams.put(DBConstants.USER__OIL, oilChange);
 		}
@@ -929,35 +883,15 @@ public class User implements Serializable {
 			relativeParams.put(DBConstants.USER__CASH, cashChange);
 		}
 		
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		if (shieldEndTime != getShieldEndTime()) {
-			Timestamp newShieldEndTime = new Timestamp(shieldEndTime.getTime());
-			absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, newShieldEndTime);
-		}
-		if (inBattleEndTime != getInBattleShieldEndTime()) {
-			Timestamp newShieldEndTime = new Timestamp(inBattleEndTime.getTime());
-			absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, newShieldEndTime);
-		}
-		
-		
+		Map<String, Object> absoluteParams = null;
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
 				absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
-//			this.elo = newElo;
-			if (0 != eloChange) {
-				this.elo += eloChange;
-			}
 			if (0 != oilChange) {
 				this.oil += oilChange;
 			}
 			if (0 != cashChange) {
 				this.cash += cashChange;
-			}
-			if (shieldEndTime != getShieldEndTime()) {
-				this.shieldEndTime = shieldEndTime;
-			}
-			if (inBattleEndTime != getInBattleShieldEndTime()) {
-				this.inBattleShieldEndTime = inBattleEndTime;
 			}
 			return true;
 		}
@@ -1085,30 +1019,6 @@ public class User implements Serializable {
 		this.tasksCompleted = tasksCompleted;
 	}
 
-	public int getBattlesWon() {
-		return battlesWon;
-	}
-
-	public void setBattlesWon(int battlesWon) {
-		this.battlesWon = battlesWon;
-	}
-
-	public int getBattlesLost() {
-		return battlesLost;
-	}
-
-	public void setBattlesLost(int battlesLost) {
-		this.battlesLost = battlesLost;
-	}
-
-	public int getFlees() {
-		return flees;
-	}
-
-	public void setFlees(int flees) {
-		this.flees = flees;
-	}
-
 	public String getReferralCode() {
 		return referralCode;
 	}
@@ -1155,14 +1065,6 @@ public class User implements Serializable {
 
 	public void setDeviceToken(String deviceToken) {
 		this.deviceToken = deviceToken;
-	}
-
-	public Date getLastBattleNotificationTime() {
-		return lastBattleNotificationTime;
-	}
-
-	public void setLastBattleNotificationTime(Date lastBattleNotificationTime) {
-		this.lastBattleNotificationTime = lastBattleNotificationTime;
 	}
 
 	public int getNumBadges() {
@@ -1269,70 +1171,6 @@ public class User implements Serializable {
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 	}
 
-	public Date getShieldEndTime() {
-		return shieldEndTime;
-	}
-
-	public void setShieldEndTime(Date shieldEndTime) {
-		this.shieldEndTime = shieldEndTime;
-	}
-
-	public int getElo() {
-		return elo;
-	}
-
-	public void setElo(int elo) {
-		this.elo = elo;
-	}
-
-	public String getRank() {
-		return rank;
-	}
-
-	public void setRank(String rank) {
-		this.rank = rank;
-	}
-
-	public Date getInBattleShieldEndTime() {
-		return inBattleShieldEndTime;
-	}
-
-	public void setInBattleShieldEndTime(Date inBattleShieldEndTime) {
-		this.inBattleShieldEndTime = inBattleShieldEndTime;
-	}
-
-	public int getAttacksWon() {
-		return attacksWon;
-	}
-
-	public void setAttacksWon(int attacksWon) {
-		this.attacksWon = attacksWon;
-	}
-
-	public int getDefensesWon() {
-		return defensesWon;
-	}
-
-	public void setDefensesWon(int defensesWon) {
-		this.defensesWon = defensesWon;
-	}
-
-	public int getAttacksLost() {
-		return attacksLost;
-	}
-
-	public void setAttacksLost(int attacksLost) {
-		this.attacksLost = attacksLost;
-	}
-
-	public int getDefensesLost() {
-		return defensesLost;
-	}
-
-	public void setDefensesLost(int defensesLost) {
-		this.defensesLost = defensesLost;
-	}
-
 	public String getFacebookId() {
 		return facebookId;
 	}
@@ -1378,17 +1216,13 @@ public class User implements Serializable {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
 				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
 				+ ", experience=" + experience + ", tasksCompleted="
-				+ tasksCompleted + ", battlesWon=" + battlesWon
-				+ ", battlesLost=" + battlesLost + ", flees=" + flees
-				+ ", referralCode=" + referralCode + ", numReferrals="
-				+ numReferrals + ", udidForHistory=" + udidForHistory
-				+ ", lastLogin=" + lastLogin + ", lastLogout=" + lastLogout
-				+ ", deviceToken=" + deviceToken
-				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
-				+ ", numBadges=" + numBadges + ", isFake=" + isFake
-				+ ", createTime=" + createTime + ", isAdmin=" + isAdmin
-				+ ", apsalarId=" + apsalarId
-				+ ", numCoinsRetrievedFromStructs="
+				+ tasksCompleted + ", referralCode=" + referralCode
+				+ ", numReferrals=" + numReferrals + ", udidForHistory="
+				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
+				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
+				+ numBadges + ", isFake=" + isFake + ", createTime="
+				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
+				+ apsalarId + ", numCoinsRetrievedFromStructs="
 				+ numCoinsRetrievedFromStructs
 				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
 				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
@@ -1396,11 +1230,6 @@ public class User implements Serializable {
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
-				+ ", shieldEndTime=" + shieldEndTime + ", elo=" + elo
-				+ ", rank=" + rank + ", inBattleShieldEndTime="
-				+ inBattleShieldEndTime + ", attacksWon=" + attacksWon
-				+ ", defensesWon=" + defensesWon + ", attacksLost="
-				+ attacksLost + ", defensesLost=" + defensesLost
 				+ ", facebookId=" + facebookId + ", fbIdSetOnUserCreate="
 				+ fbIdSetOnUserCreate + ", gameCenterId=" + gameCenterId
 				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
