@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Quest implements Serializable {
 	
-	private static final long serialVersionUID = 4142033419502846221L;
+	private static final long serialVersionUID = -8638306338483613589L;
 	
 	private int id;
   private int cityId;
@@ -24,43 +24,45 @@ public class Quest implements Serializable {
   private int monsterIdReward;
   private boolean isCompleteMonster;
   private List<Integer> questsRequiredForThis;
+  private String questGiverName;
   private String questGiverImagePrefix;
   private int priority;
   private String carrotId;
   private boolean isAchievement;
   private String monsterElement;
 
-	public Quest(int id, int cityId, String questName, String description,
-		String doneResponse, Dialogue acceptDialogue, int questType,
-		String jobDescription, int staticDataId, int quantity, int cashReward,
-		int oilReward, int gemReward, int expReward, int monsterIdReward,
-		boolean isCompleteMonster, List<Integer> questsRequiredForThis,
-		String questGiverImagePrefix, int priority, String carrotId,
-		boolean isAchievement, String monsterElement) {
-	super();
-	this.id = id;
-	this.cityId = cityId;
-	this.questName = questName;
-	this.description = description;
-	this.doneResponse = doneResponse;
-	this.acceptDialogue = acceptDialogue;
-	this.questType = questType;
-	this.jobDescription = jobDescription;
-	this.staticDataId = staticDataId;
-	this.quantity = quantity;
-	this.cashReward = cashReward;
-	this.oilReward = oilReward;
-	this.gemReward = gemReward;
-	this.expReward = expReward;
-	this.monsterIdReward = monsterIdReward;
-	this.isCompleteMonster = isCompleteMonster;
-	this.questsRequiredForThis = questsRequiredForThis;
-	this.questGiverImagePrefix = questGiverImagePrefix;
-	this.priority = priority;
-	this.carrotId = carrotId;
-	this.isAchievement = isAchievement;
-	this.monsterElement = monsterElement;
-	}
+  public Quest(int id, int cityId, String questName, String description,
+		  String doneResponse, Dialogue acceptDialogue, int questType,
+		  String jobDescription, int staticDataId, int quantity, int cashReward,
+		  int oilReward, int gemReward, int expReward, int monsterIdReward,
+		  boolean isCompleteMonster, List<Integer> questsRequiredForThis,
+		  String questGiverName, String questGiverImagePrefix, int priority,
+		  String carrotId, boolean isAchievement, String monsterElement) {
+	  super();
+	  this.id = id;
+	  this.cityId = cityId;
+	  this.questName = questName;
+	  this.description = description;
+	  this.doneResponse = doneResponse;
+	  this.acceptDialogue = acceptDialogue;
+	  this.questType = questType;
+	  this.jobDescription = jobDescription;
+	  this.staticDataId = staticDataId;
+	  this.quantity = quantity;
+	  this.cashReward = cashReward;
+	  this.oilReward = oilReward;
+	  this.gemReward = gemReward;
+	  this.expReward = expReward;
+	  this.monsterIdReward = monsterIdReward;
+	  this.isCompleteMonster = isCompleteMonster;
+	  this.questsRequiredForThis = questsRequiredForThis;
+	  this.questGiverName = questGiverName;
+	  this.questGiverImagePrefix = questGiverImagePrefix;
+	  this.priority = priority;
+	  this.carrotId = carrotId;
+	  this.isAchievement = isAchievement;
+	  this.monsterElement = monsterElement;
+  }
 
 	public int getId() {
 		return id;
@@ -198,6 +200,14 @@ public class Quest implements Serializable {
 		this.questsRequiredForThis = questsRequiredForThis;
 	}
 
+	public String getQuestGiverName() {
+		return questGiverName;
+	}
+
+	public void setQuestGiverName(String questGiverName) {
+		this.questGiverName = questGiverName;
+	}
+
 	public String getQuestGiverImagePrefix() {
 		return questGiverImagePrefix;
 	}
@@ -250,6 +260,7 @@ public class Quest implements Serializable {
 				+ gemReward + ", expReward=" + expReward + ", monsterIdReward="
 				+ monsterIdReward + ", isCompleteMonster=" + isCompleteMonster
 				+ ", questsRequiredForThis=" + questsRequiredForThis
+				+ ", questGiverName=" + questGiverName
 				+ ", questGiverImagePrefix=" + questGiverImagePrefix
 				+ ", priority=" + priority + ", carrotId=" + carrotId
 				+ ", isAchievement=" + isAchievement + ", monsterElement="

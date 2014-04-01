@@ -1477,6 +1477,11 @@ public class CreateInfoProtoUtils {
     builder.setIsCompleteMonster(quest.isCompleteMonster());
     builder.addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis());
     
+    str = quest.getQuestGiverName();
+    if (null != str) {
+    	builder.setQuestGiverName(str);
+    }
+    
     str = quest.getQuestGiverImagePrefix();
     if (null != str) {
     	builder.setQuestGiverImagePrefix(str);

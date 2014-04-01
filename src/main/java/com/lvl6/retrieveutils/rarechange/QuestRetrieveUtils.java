@@ -177,6 +177,7 @@ import com.lvl6.utils.QuestGraph;
       		delimiter, questsRequiredForThis);
     }
 
+    String questGiverName = rs.getString(i++);
     String questGiverImagePrefix = rs.getString(i++);
     int priority = rs.getInt(i++);
     String carrotId = rs.getString(i++);
@@ -186,8 +187,9 @@ import com.lvl6.utils.QuestGraph;
     Quest quest = new Quest(id, cityId, questName, description, doneResponse,
     		acceptDialogue, questType, jobDescription, staticDataId, quantity,
     		cashReward, oilReward, gemReward, expReward, monsterIdReward,
-    		isCompleteMonster, questsRequiredForThis, questGiverImagePrefix,
-    		priority, carrotId, isAchievement, monsterElement);    
+    		isCompleteMonster, questsRequiredForThis, questGiverName,
+    		questGiverImagePrefix, priority, carrotId, isAchievement,
+    		monsterElement); 
     
     return quest;
   }
