@@ -96,7 +96,7 @@ public class PvpUserRetrieveUtil {
 	 * 		inBattleShieldEndTime < @param shieldEndTime 
 	 */
 	protected Set<PvpUser> retrievePvpUsers(int minElo, int maxElo,
-			Date shieldEndTime, int limit) {
+			Date shieldEndTime, int limit, Collection<String> excludeUserIds) {
 		try {
 			Timestamp endTime = new Timestamp(shieldEndTime.getTime());
 			List<String> columnsToSelect = PvpUserMapper.getColumnsSelected();
@@ -128,6 +128,17 @@ public class PvpUserRetrieveUtil {
 					greaterThanCondDelim, delimAcrossConditions, values,
 					preparedStatement, limit);
 			
+			if (null != excludeUserIds && !excludeUserIds.isEmpty()) {
+				String notInConditionStr = getQueryConstructionUtil()
+						.createColNotInValuesString(
+								DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, excludeUserIds);   
+				StringBuilder sb = new StringBuilder();
+				sb.append(query);
+				sb.append(" ");
+				sb.append(notInConditionStr);
+				query = sb.toString();
+			}
+
 			log.info("query=" + query);
 
 			List<PvpUser> puList = this.jdbcTemplate.query(

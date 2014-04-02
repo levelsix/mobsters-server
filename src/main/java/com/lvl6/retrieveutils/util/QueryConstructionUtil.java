@@ -26,6 +26,7 @@ public class QueryConstructionUtil {
 	private final String NOTNULL = " NOT NULL ";
 	private final String NULLSTR = " NULL ";
 	private final String OR = " OR ";
+	private final String NOTIN = "NOT IN";
 	private final String IN = "IN"; 
 	private final String IS = "IS"; 
 	private final String LPAREN = "(";
@@ -428,6 +429,20 @@ public class QueryConstructionUtil {
 		return result;
 	}
 	
+	public String createColNotInValuesString(String column, Collection<?> inValues) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(column);
+		sb.append(SPACE);
+		sb.append(NOTIN);
+		sb.append(SPACE);
+
+		String valuesStr = implode(inValues, COMMA);
+		sb.append(valuesStr);
+
+		String result = sb.toString();
+		return result;
+	}
+	
 	public String createIsConditionString(Map<String, ?> isConditions,
 			String conditionDelimiter) {
 		List<Object> clauses = new ArrayList<Object>();
@@ -514,6 +529,53 @@ public class QueryConstructionUtil {
 		return likeConditionsStr;
 	}
 
+	//atm only used by HazelcastPvpUtil
+	public String createWhereConditionString(Map<String, ?> lessThanConditions,
+			Map<String, ?> greaterThanConditions, boolean isNotIn,
+			Map<String, Collection<?>> inConditions) {
+		
+		StringBuilder whereConditionsSb = new StringBuilder();
+		
+		boolean emptyLtConditions = (null == lessThanConditions ||
+				lessThanConditions.isEmpty()); 
+		boolean emptyGtConditions = (null == greaterThanConditions ||
+				greaterThanConditions.isEmpty());
+		boolean emptyInConditions = (null == inConditions ||
+				inConditions.isEmpty());
+		
+		String conjunction = "";
+		if (!emptyLtConditions) {
+			String eqConditionsStr = createComparisonConditionsString(
+					lessThanConditions, EQUALITY, AND);
+			whereConditionsSb.append(eqConditionsStr);
+
+			conjunction = AND;
+		}
+		//GREATER THAN CONDITIONS
+		if (!emptyGtConditions) {
+			String gtConditionsStr = createComparisonConditionsString(
+					greaterThanConditions, GREATERTHAN, AND);
+			whereConditionsSb.append(conjunction);
+			whereConditionsSb.append(gtConditionsStr);
+
+			conjunction = AND;
+		} else {
+			conjunction = "";
+		}
+		// IN (SOME VALUES) CONDITIONS
+		if (!emptyInConditions) {
+			List<String> allInConditions = new ArrayList<String>(); 
+			for (String column : inConditions.keySet()) {
+				Collection<?> inValues = inConditions.get(column);
+				String inConditionsStr = createColNotInValuesString(column, inValues);
+				
+				allInConditions.add(inConditionsStr);
+			}
+			whereConditionsSb.append(implode(allInConditions, AND));
+		}
+		
+		return whereConditionsSb.toString();
+	}
 	
 	
 	

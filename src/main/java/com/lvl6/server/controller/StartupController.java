@@ -1006,7 +1006,7 @@ public class StartupController extends EventController {
 		  return null;
 	  }
 	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(
-			  info, true);
+			  userId, info, null, true);
 	  
 	  resBuilder.setPvpLeagueInfo(infoProto);
 	  return info;

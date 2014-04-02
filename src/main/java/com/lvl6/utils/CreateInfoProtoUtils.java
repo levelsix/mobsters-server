@@ -161,6 +161,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -188,9 +189,10 @@ public class CreateInfoProtoUtils {
     return mupwbhb.build();
   }*/
 
-  public static PvpProto createPvpProtoFrom(User u, PvpLeagueForUser plfu,
-		  Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
-		  int prospectiveOilWinnings) {
+  public static PvpProto createPvpProto(User u, PvpLeagueForUser plfu,
+		  PvpUser pu, Collection<MonsterForUser> userMonsters,
+		  int prospectiveCashWinnings, int prospectiveOilWinnings) {
+	  
     PvpProto.Builder ppb = PvpProto.newBuilder();
     MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
     Collection<MinimumUserMonsterProto> defenderMonsters = 
@@ -200,6 +202,10 @@ public class CreateInfoProtoUtils {
     ppb.addAllDefenderMonsters(defenderMonsters);
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+    
+    int userId = u.getId();
+    UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, false);
+    ppb.setPvpLeagueStats(uplp);
 
     return ppb.build();
   }
@@ -239,19 +245,28 @@ public class CreateInfoProtoUtils {
 
   public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
 		  Map<Integer, PvpLeagueForUser> userIdToLeagueInfo,
+		  Map<Integer, PvpUser> userIdToPvpUser,
 		  Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
 		  Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
     List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
-      PvpLeagueForUser plfu = userIdToLeagueInfo.get(userId);
+      PvpLeagueForUser plfu = null;
+      if (userIdToLeagueInfo.containsKey(userId)) {
+    	  plfu = userIdToLeagueInfo.get(userId);
+      }
+      
+      PvpUser pu = null;
+      if (userIdToPvpUser.containsKey(userId)) {
+    	  pu = userIdToPvpUser.get(userId);
+      }
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
       int prospectiveCashWinnings = userIdToCashReward.get(userId);
       int prospectiveOilWinnings = userIdToOilReward.get(userId);
 
-      PvpProto pp = createPvpProtoFrom(u, plfu, userMonsters, prospectiveCashWinnings,
-    		  prospectiveOilWinnings);
+      PvpProto pp = createPvpProto(u, plfu, pu, userMonsters,
+    		  prospectiveCashWinnings, prospectiveOilWinnings);
       pvpProtoList.add(pp);
     }
     return pvpProtoList;
@@ -360,15 +375,25 @@ public class CreateInfoProtoUtils {
 	  return plpb.build();
   }
   
-  public static UserPvpLeagueProto createUserPvpLeagueProto(PvpLeagueForUser plfu,
-		  boolean setElo) {
+  public static UserPvpLeagueProto createUserPvpLeagueProto(int userId,
+		  PvpLeagueForUser plfu, PvpUser pu, boolean setElo) {
 	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
-	  uplpb.setUserId(plfu.getUserId());
-	  uplpb.setLeagueId(plfu.getPvpLeagueId());
-	  uplpb.setRank(plfu.getRank());
+	  uplpb.setUserId(userId);
 	  
-	  if (setElo) {
-		  uplpb.setElo(plfu.getElo());
+	  if (null != plfu) {
+		  uplpb.setLeagueId(plfu.getPvpLeagueId());
+		  uplpb.setRank(plfu.getRank());
+
+		  if (setElo) {
+			  uplpb.setElo(plfu.getElo());
+		  }
+	  } else if (null != pu) {
+		  uplpb.setLeagueId(pu.getPvpLeagueId());
+		  uplpb.setRank(pu.getRank());
+		  
+		  if (setElo) {
+			  uplpb.setElo(pu.getElo());
+		  }
 	  }
 	  
 	  
@@ -2211,7 +2236,8 @@ public class CreateInfoProtoUtils {
   public static FullUserProto createFullUserProtoFromUser(User u,
 		  PvpLeagueForUser plfu) {
     FullUserProto.Builder builder = FullUserProto.newBuilder();
-    builder.setUserId(u.getId());
+    int userId = u.getId();
+    builder.setUserId(userId);
     builder.setName(u.getName());
     builder.setLevel(u.getLevel());
     builder.setGems(u.getGems());
@@ -2259,7 +2285,8 @@ public class CreateInfoProtoUtils {
     if (null != plfu) {
     	//every user should have one, since pvp info created when user is created
     	//but could be null if not important to have it
-    	UserPvpLeagueProto pvpLeagueInfo = createUserPvpLeagueProto(plfu, false);
+    	UserPvpLeagueProto pvpLeagueInfo = createUserPvpLeagueProto(userId,
+    			plfu, null, false);
     	builder.setPvpLeagueInfo(pvpLeagueInfo);
     }
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE

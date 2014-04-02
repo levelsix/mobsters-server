@@ -237,12 +237,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		int minElo = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_RANGE_SUBTRAHEND);
 		int maxElo = attackerElo + ControllerConstants.PVP__ELO_RANGE_ADDEND;
 		
-		//get the users that the attacker will fight
+		//ids are for convenience 
 		List<Integer> queuedOpponentIdsList = new ArrayList<Integer>();
-		List<User> queuedOpponents = getQueuedOpponent(attacker, attackerElo, minElo,
-				maxElo, uniqSeenUserIds, clientDate, queuedOpponentIdsList);
-		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
+		//if want up to date info comment this out and query from db instead 
+		Map<Integer, PvpUser> userIdToPvpUser = new HashMap<Integer, PvpUser>();
 		
+		//get the users that the attacker will fight
+		List<User> queuedOpponents = getQueuedOpponents(attacker, attackerElo, minElo,
+				maxElo, uniqSeenUserIds, clientDate, queuedOpponentIdsList,
+				userIdToPvpUser);
+		
+		int numWanted = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 		
 		if (null == queuedOpponents || queuedOpponents.size() < numWanted) {
@@ -267,9 +272,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
 			log.info("queuedOpponents:" + queuedOpponents);
 			
+			/*
 			Map<Integer, PvpLeagueForUser> userIdToPvpLeagueInfo = 
 					getPvpLeagueForUserRetrieveUtil()
-					.getUserPvpLeagueForUsers(queuedOpponentIdsList);
+					.getUserPvpLeagueForUsers(queuedOpponentIdsList);*/
 			
 			//get the 3 monsters for each defender: ideally should be equipped, but 
 			//will randomly select if user doesn't have 3 equipped
@@ -284,24 +290,35 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			
 			//create the protos for all this
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
-					queuedOpponents, userIdToPvpLeagueInfo, userIdToUserMonsters,
+					queuedOpponents, null, userIdToPvpUser, userIdToUserMonsters,
 					userIdToProspectiveCashReward, userIdToProspectiveOilReward);
 			
-			pvpProtoList.addAll(pvpProtoListTemp);
+			//user should see real people before fake ones
+			pvpProtoList.addAll(0, pvpProtoListTemp);
 		}
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
 		log.info("pvpProtoList=" + pvpProtoList);
 		
 	}
 	
-	private void getMinMaxElo(int attackerElo, List<Integer> minEloList, List<Integer> maxEloList) {
+	/*
+	//unused method. Purpose was user randomly gets users from an elo range
+	//out of six possible elo ranges.
+	private void getMinMaxElo(int attackerElo, List<Integer> minEloList,
+			List<Integer> maxEloList) {
 
-		int firstEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_THREE);
-		int secondEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_TWO);
-		int thirdEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_ONE);
-		int fourthEloBound = attackerElo + ControllerConstants.PVP__ELO_DISTANCE_ONE;
-		int fifthEloBound = attackerElo + ControllerConstants.PVP__ELO_DISTANCE_TWO;
-		int sixthEloBound = attackerElo + ControllerConstants.PVP__ELO_DISTANCE_THREE;
+		int firstEloBound = Math.max(0,
+				attackerElo - ControllerConstants.PVP__ELO_DISTANCE_THREE);
+		int secondEloBound = Math.max(0,
+				attackerElo - ControllerConstants.PVP__ELO_DISTANCE_TWO);
+		int thirdEloBound = Math.max(0,
+				attackerElo - ControllerConstants.PVP__ELO_DISTANCE_ONE);
+		int fourthEloBound = attackerElo +
+				ControllerConstants.PVP__ELO_DISTANCE_ONE;
+		int fifthEloBound = attackerElo +
+				ControllerConstants.PVP__ELO_DISTANCE_TWO;
+		int sixthEloBound = attackerElo +
+				ControllerConstants.PVP__ELO_DISTANCE_THREE;
 		
 		//get the min and max elo, initial values are dummy values
 		int minElo = 0;
@@ -309,28 +326,33 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		Random rand = new Random();
 
 		float randFloat = rand.nextFloat();
-		if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE) {
+		if(randFloat <
+				ControllerConstants.PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE) {
 			log.info("in first elo category");
 			minElo = firstEloBound;
 			maxElo = secondEloBound;
 			
-		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE) {
+		} else if(randFloat <
+				ControllerConstants.PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE) {
 			log.info("in second elo category");
 			minElo = secondEloBound;
 			maxElo = thirdEloBound;
 			
-		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE) {
+		} else if(randFloat <
+				ControllerConstants.PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE) {
 			log.info("in third elo category");
 			minElo = thirdEloBound;
 			maxElo = attackerElo;
 			
-		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_FOUR_PAIRING_CHANCE) {
+		} else if(randFloat <
+				ControllerConstants.PVP__ELO_CATEGORY_FOUR_PAIRING_CHANCE) {
 			log.info("in fourth elo category");
 			
 			minElo = attackerElo;
 			maxElo = fourthEloBound;
 			
-		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_FIVE_PAIRING_CHANCE) {
+		} else if(randFloat <
+				ControllerConstants.PVP__ELO_CATEGORY_FIVE_PAIRING_CHANCE) {
 			log.info("in fifth elo category");
 			minElo = fourthEloBound;
 			maxElo = fifthEloBound;
@@ -352,12 +374,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		
 		minEloList.add(minElo);
 		maxEloList.add(maxElo);
-	}
+	}*/
 
 	//purpose of userIdList is to prevent another iteration through the return list just
 	//to extract the user ids
-	private List<User> getQueuedOpponent(User attacker, int attackerElo, int minElo,
-			int maxElo, Set<Integer> seenUserIds, Date clientDate, List<Integer> userIdList) {
+	private List<User> getQueuedOpponents(User attacker, int attackerElo, int minElo,
+			int maxElo, Set<Integer> seenUserIds, Date clientDate,
+			List<Integer> userIdList, Map<Integer, PvpUser> userIdToPvpUser) {
 		//inefficient: 5 db calls
 //		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
 //				attacker, elo, seenUserIds, clientDate);
@@ -392,15 +415,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //		
 //		
 //		}
-		//use hazelcast distributed map to get the defenders  (size of this must be humongous
-		//since it contains every valid offline user between min and max elo...)
-		float numDefendersNeededSoFar = ControllerConstants.PVP__MAX_QUEUE_SIZE;
-		
+		//use hazelcast distributed map to get the defenders, limit the amount
+		int numNeeded = ControllerConstants.PVP__MAX_QUEUE_SIZE;
 		Set<PvpUser> prospectiveDefenders = getHazelcastPvpUtil()
-				.retrievePvpUsers(minElo, maxElo, clientDate,
-						(int) numDefendersNeededSoFar); 
+				.retrievePvpUsers(minElo, maxElo, clientDate, numNeeded,
+						seenUserIds); 
 		
 		//this is so as to randomly pick people
+		float numNeededSoFar = (float) numNeeded;
 		float numDefendersLeft = prospectiveDefenders.size();
 		Random rand = new Random();
 		log.info("users returned from hazelcast pvp util. users=" + prospectiveDefenders);
@@ -423,11 +445,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			
 			//randomly pick people
 			float randFloat = rand.nextFloat();
-			float probabilityToBeSelected = numDefendersLeft/numDefendersNeededSoFar;
+			float probabilityToBeSelected = numDefendersLeft/numNeededSoFar;
 			if (randFloat < probabilityToBeSelected) {
 				//we have a winner!
 				userIdList.add(userId);
-				numDefendersNeededSoFar -= 1;
+				userIdToPvpUser.put(userId, pvpUser);
+				numNeededSoFar -= 1;
 			}
 		}
 		

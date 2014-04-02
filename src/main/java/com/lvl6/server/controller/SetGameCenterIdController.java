@@ -102,7 +102,6 @@ import com.lvl6.utils.RetrieveUtils;
 			}
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("problem with updating user game center id. user=" + user +
 					"\t gameCenterId=" + gameCenterId);
 		}
