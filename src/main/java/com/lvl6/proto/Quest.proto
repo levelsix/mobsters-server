@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Chat.proto";
 import "MonsterStuff.proto";
 import "Structure.proto";
 
@@ -88,6 +89,9 @@ message ItemProto {
 	optional int32 itemId = 1;
 	optional string name = 2;
 	optional string imgName = 3;
+	optional string borderImgName = 4;
+	optional ColorProto color = 5; //for the border?
+	
 }
 
 //------------------------------------------------------------------------------------------

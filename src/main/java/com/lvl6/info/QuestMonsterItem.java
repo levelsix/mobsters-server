@@ -15,9 +15,11 @@ public class QuestMonsterItem implements Serializable {
 	//convenience object
 	private Random rand;
 	
-	//only one item exists for questId 
-	//maybe a monsterId can have multiple items associated with it
-	//questId should only appear in this table once
+	//only one item exists for questId and monsterId
+	//duple (questId, monsterId) should only appear in this table once, which
+	//has the following case in mind: when user needs to collect items
+	//the static data id would be that of an item and multiple monsters
+	//can drop said item
 	
 	public QuestMonsterItem(int questId, int monsterId, int itemId,
 			float itemDropRate) {

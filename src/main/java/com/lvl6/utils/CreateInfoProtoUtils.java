@@ -1567,6 +1567,17 @@ public class CreateInfoProtoUtils {
   		ipb.setImgName(str);
   	}
   	
+  	str = item.getBorderImgName();
+  	if (null != str) {
+  		ipb.setBorderImgName(str);
+  	}
+  	
+  	ColorProto.Builder clrB = ColorProto.newBuilder();
+  	clrB.setBlue(item.getBlue());
+  	clrB.setGreen(item.getGreen());
+  	clrB.setRed(item.getRed());
+  	ipb.setColor(clrB.build());
+  	
   	return ipb.build();
   }
 

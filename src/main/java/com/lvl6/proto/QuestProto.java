@@ -3995,6 +3995,15 @@ public final class QuestProto {
     // optional string imgName = 3;
     boolean hasImgName();
     String getImgName();
+    
+    // optional string borderImgName = 4;
+    boolean hasBorderImgName();
+    String getBorderImgName();
+    
+    // optional .com.lvl6.proto.ColorProto color = 5;
+    boolean hasColor();
+    com.lvl6.proto.ChatProto.ColorProto getColor();
+    com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder();
   }
   public static final class ItemProto extends
       com.google.protobuf.GeneratedMessage
@@ -4099,10 +4108,57 @@ public final class QuestProto {
       }
     }
     
+    // optional string borderImgName = 4;
+    public static final int BORDERIMGNAME_FIELD_NUMBER = 4;
+    private java.lang.Object borderImgName_;
+    public boolean hasBorderImgName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getBorderImgName() {
+      java.lang.Object ref = borderImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          borderImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getBorderImgNameBytes() {
+      java.lang.Object ref = borderImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        borderImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .com.lvl6.proto.ColorProto color = 5;
+    public static final int COLOR_FIELD_NUMBER = 5;
+    private com.lvl6.proto.ChatProto.ColorProto color_;
+    public boolean hasColor() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.ChatProto.ColorProto getColor() {
+      return color_;
+    }
+    public com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder() {
+      return color_;
+    }
+    
     private void initFields() {
       itemId_ = 0;
       name_ = "";
       imgName_ = "";
+      borderImgName_ = "";
+      color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4125,6 +4181,12 @@ public final class QuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getImgNameBytes());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getBorderImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, color_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -4145,6 +4207,14 @@ public final class QuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getBorderImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, color_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4262,6 +4332,7 @@ public final class QuestProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getColorFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4276,6 +4347,14 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        borderImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (colorBuilder_ == null) {
+          color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+        } else {
+          colorBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -4326,6 +4405,18 @@ public final class QuestProto {
           to_bitField0_ |= 0x00000004;
         }
         result.imgName_ = imgName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.borderImgName_ = borderImgName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (colorBuilder_ == null) {
+          result.color_ = color_;
+        } else {
+          result.color_ = colorBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4350,6 +4441,12 @@ public final class QuestProto {
         }
         if (other.hasImgName()) {
           setImgName(other.getImgName());
+        }
+        if (other.hasBorderImgName()) {
+          setBorderImgName(other.getBorderImgName());
+        }
+        if (other.hasColor()) {
+          mergeColor(other.getColor());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4395,6 +4492,20 @@ public final class QuestProto {
             case 26: {
               bitField0_ |= 0x00000004;
               imgName_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              borderImgName_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              com.lvl6.proto.ChatProto.ColorProto.Builder subBuilder = com.lvl6.proto.ChatProto.ColorProto.newBuilder();
+              if (hasColor()) {
+                subBuilder.mergeFrom(getColor());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setColor(subBuilder.buildPartial());
               break;
             }
           }
@@ -4496,6 +4607,132 @@ public final class QuestProto {
         onChanged();
       }
       
+      // optional string borderImgName = 4;
+      private java.lang.Object borderImgName_ = "";
+      public boolean hasBorderImgName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public String getBorderImgName() {
+        java.lang.Object ref = borderImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          borderImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setBorderImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        borderImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBorderImgName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        borderImgName_ = getDefaultInstance().getBorderImgName();
+        onChanged();
+        return this;
+      }
+      void setBorderImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
+        borderImgName_ = value;
+        onChanged();
+      }
+      
+      // optional .com.lvl6.proto.ColorProto color = 5;
+      private com.lvl6.proto.ChatProto.ColorProto color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> colorBuilder_;
+      public boolean hasColor() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public com.lvl6.proto.ChatProto.ColorProto getColor() {
+        if (colorBuilder_ == null) {
+          return color_;
+        } else {
+          return colorBuilder_.getMessage();
+        }
+      }
+      public Builder setColor(com.lvl6.proto.ChatProto.ColorProto value) {
+        if (colorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          color_ = value;
+          onChanged();
+        } else {
+          colorBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder setColor(
+          com.lvl6.proto.ChatProto.ColorProto.Builder builderForValue) {
+        if (colorBuilder_ == null) {
+          color_ = builderForValue.build();
+          onChanged();
+        } else {
+          colorBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder mergeColor(com.lvl6.proto.ChatProto.ColorProto value) {
+        if (colorBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              color_ != com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance()) {
+            color_ =
+              com.lvl6.proto.ChatProto.ColorProto.newBuilder(color_).mergeFrom(value).buildPartial();
+          } else {
+            color_ = value;
+          }
+          onChanged();
+        } else {
+          colorBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder clearColor() {
+        if (colorBuilder_ == null) {
+          color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+          onChanged();
+        } else {
+          colorBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      public com.lvl6.proto.ChatProto.ColorProto.Builder getColorBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getColorFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder() {
+        if (colorBuilder_ != null) {
+          return colorBuilder_.getMessageOrBuilder();
+        } else {
+          return color_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> 
+          getColorFieldBuilder() {
+        if (colorBuilder_ == null) {
+          colorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder>(
+                  color_,
+                  getParentForChildren(),
+                  isClean());
+          color_ = null;
+        }
+        return colorBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ItemProto)
     }
     
@@ -4541,40 +4778,42 @@ public final class QuestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Quest.proto\022\016com.lvl6.proto\032\022MonsterSt" +
-      "uff.proto\032\017Structure.proto\"\353\006\n\016FullQuest" +
-      "Proto\022\017\n\007questId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\014" +
-      "\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\024\n\014don" +
-      "eResponse\030\005 \001(\t\0225\n\016acceptDialogue\030\006 \001(\0132" +
-      "\035.com.lvl6.proto.DialogueProto\022;\n\tquestT" +
-      "ype\030\007 \001(\0162(.com.lvl6.proto.FullQuestProt" +
-      "o.QuestType\022\026\n\016jobDescription\030\010 \001(\t\022\024\n\014s" +
-      "taticDataId\030\t \001(\005\022\020\n\010quantity\030\n \001(\005\022\022\n\nc" +
-      "ashReward\030\013 \001(\005\022\021\n\toilReward\030\026 \001(\005\022\021\n\tge",
-      "mReward\030\014 \001(\005\022\021\n\texpReward\030\r \001(\005\022\027\n\017mons" +
-      "terIdReward\030\016 \001(\005\022\031\n\021isCompleteMonster\030\017" +
-      " \001(\010\022\035\n\025questsRequiredForThis\030\020 \003(\005\022\026\n\016q" +
-      "uestGiverName\030\030 \001(\t\022\035\n\025questGiverImagePr" +
-      "efix\030\021 \001(\t\022\020\n\010priority\030\022 \001(\005\022\020\n\010carrotId" +
-      "\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(\010\022<\n\023questGi" +
-      "verImgOffset\030\025 \001(\0132\037.com.lvl6.proto.Coor" +
-      "dinateProto\022C\n\016monsterElement\030\027 \001(\0162+.co" +
-      "m.lvl6.proto.MonsterProto.MonsterElement" +
-      "\"\265\001\n\tQuestType\022\020\n\014KILL_MONSTER\020\001\022\022\n\016DONA",
-      "TE_MONSTER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLE" +
-      "CT_COINS_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022" +
-      "\n\016UPGRADE_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030" +
-      "\n\024COLLECT_SPECIAL_ITEM\020\010\"\276\001\n\rDialoguePro" +
-      "to\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl6.pro" +
-      "to.DialogueProto.SpeechSegmentProto\032d\n\022S" +
-      "peechSegmentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014sp" +
-      "eakerImage\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n" +
-      "\nisLeftSide\030\004 \001(\010\"o\n\022FullUserQuestProto\022" +
-      "\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRe",
-      "deemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010prog" +
-      "ress\030\005 \001(\005\":\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022" +
-      "\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\tB\014B\nQuestP" +
-      "roto"
+      "\n\013Quest.proto\022\016com.lvl6.proto\032\nChat.prot" +
+      "o\032\022MonsterStuff.proto\032\017Structure.proto\"\353" +
+      "\006\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006ci" +
+      "tyId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030" +
+      "\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016acceptDia" +
+      "logue\030\006 \001(\0132\035.com.lvl6.proto.DialoguePro" +
+      "to\022;\n\tquestType\030\007 \001(\0162(.com.lvl6.proto.F" +
+      "ullQuestProto.QuestType\022\026\n\016jobDescriptio" +
+      "n\030\010 \001(\t\022\024\n\014staticDataId\030\t \001(\005\022\020\n\010quantit" +
+      "y\030\n \001(\005\022\022\n\ncashReward\030\013 \001(\005\022\021\n\toilReward",
+      "\030\026 \001(\005\022\021\n\tgemReward\030\014 \001(\005\022\021\n\texpReward\030\r" +
+      " \001(\005\022\027\n\017monsterIdReward\030\016 \001(\005\022\031\n\021isCompl" +
+      "eteMonster\030\017 \001(\010\022\035\n\025questsRequiredForThi" +
+      "s\030\020 \003(\005\022\026\n\016questGiverName\030\030 \001(\t\022\035\n\025quest" +
+      "GiverImagePrefix\030\021 \001(\t\022\020\n\010priority\030\022 \001(\005" +
+      "\022\020\n\010carrotId\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(" +
+      "\010\022<\n\023questGiverImgOffset\030\025 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\022C\n\016monsterElemen" +
+      "t\030\027 \001(\0162+.com.lvl6.proto.MonsterProto.Mo" +
+      "nsterElement\"\265\001\n\tQuestType\022\020\n\014KILL_MONST",
+      "ER\020\001\022\022\n\016DONATE_MONSTER\020\002\022\021\n\rCOMPLETE_TAS" +
+      "K\020\003\022\033\n\027COLLECT_COINS_FROM_HOME\020\004\022\020\n\014BUIL" +
+      "D_STRUCT\020\005\022\022\n\016UPGRADE_STRUCT\020\006\022\022\n\016MONSTE" +
+      "R_APPEAR\020\007\022\030\n\024COLLECT_SPECIAL_ITEM\020\010\"\276\001\n" +
+      "\rDialogueProto\022G\n\rspeechSegment\030\001 \003(\01320." +
+      "com.lvl6.proto.DialogueProto.SpeechSegme" +
+      "ntProto\032d\n\022SpeechSegmentProto\022\017\n\007speaker" +
+      "\030\001 \001(\t\022\024\n\014speakerImage\030\002 \001(\t\022\023\n\013speakerT" +
+      "ext\030\003 \001(\t\022\022\n\nisLeftSide\030\004 \001(\010\"o\n\022FullUse" +
+      "rQuestProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002",
+      " \001(\005\022\022\n\nisRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004" +
+      " \001(\010\022\020\n\010progress\030\005 \001(\005\"|\n\tItemProto\022\016\n\006i" +
+      "temId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001" +
+      "(\t\022\025\n\rborderImgName\030\004 \001(\t\022)\n\005color\030\005 \001(\013" +
+      "2\032.com.lvl6.proto.ColorProtoB\014B\nQuestPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4618,7 +4857,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ItemProto_descriptor,
-              new java.lang.String[] { "ItemId", "Name", "ImgName", },
+              new java.lang.String[] { "ItemId", "Name", "ImgName", "BorderImgName", "Color", },
               com.lvl6.proto.QuestProto.ItemProto.class,
               com.lvl6.proto.QuestProto.ItemProto.Builder.class);
           return null;
@@ -4627,6 +4866,7 @@ public final class QuestProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
