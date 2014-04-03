@@ -3,6 +3,8 @@ package com.lvl6.pvp;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.lvl6.info.PvpLeagueForUser;
+
 //almost the exact same as PvpLeagueForUser except the userId is a string and
 //last battle notification time is not present
 //reasons for using separate class instead of using PvpLeagueForUser object:
@@ -11,7 +13,7 @@ import java.util.Date;
 //storing in hazelcast
 public class PvpUser implements Serializable {
 	
-	private static final long serialVersionUID = 5152574619272997870L;
+	private static final long serialVersionUID = 825402547895885851L;
 	
 	private String userId;
 	private int pvpLeagueId;
@@ -27,6 +29,20 @@ public class PvpUser implements Serializable {
 	public PvpUser() {
 		super();
 		
+	}
+	public PvpUser(PvpLeagueForUser plfu) {
+		super();
+		String userId = Integer.toString(plfu.getUserId());
+		this.userId = userId;
+		this.pvpLeagueId = plfu.getPvpLeagueId();
+		this.rank = plfu.getRank();
+		this.elo = plfu.getElo();
+		this.shieldEndTime = plfu.getShieldEndTime();
+		this.inBattleEndTime = plfu.getInBattleShieldEndTime();
+		this.attacksWon = plfu.getAttacksWon();
+		this.defensesWon = plfu.getDefensesWon();
+		this.attacksLost = plfu.getAttacksLost();
+		this.defensesLost = plfu.getDefensesLost();
 	}
 
 	public PvpUser(String userId, int pvpLeagueId, int rank, int elo,

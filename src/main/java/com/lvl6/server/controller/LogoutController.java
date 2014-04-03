@@ -86,7 +86,7 @@ public class LogoutController extends EventController {
 			try {
 				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 				if (null != user) {
-					//for now don't do this
+					//FOR NOW DON'T DO THE FOLLOWING
 					//if user has unfinished battle, reward defender and penalize attacker
 //					List<Integer> eloChangeList = new ArrayList<Integer>();
 //					pvpBattleStuff(user, userId, eloChangeList, lastLogout);

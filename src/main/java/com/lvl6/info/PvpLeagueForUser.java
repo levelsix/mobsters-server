@@ -25,6 +25,24 @@ public class PvpLeagueForUser implements Serializable {
 		super();
 	}
 
+	public PvpLeagueForUser(PvpLeagueForUser plfu) {
+		super();
+		if (null == plfu) {
+			return;
+		}
+		this.userId = plfu.getUserId();
+		this.pvpLeagueId = plfu.getPvpLeagueId();
+		this.rank = plfu.getRank();
+		this.elo = plfu.getElo();
+		this.shieldEndTime = plfu.getShieldEndTime();
+		this.inBattleShieldEndTime = plfu.getInBattleShieldEndTime();
+		this.attacksWon = plfu.getAttacksWon();
+		this.defensesWon = plfu.getDefensesWon();
+		this.attacksLost = plfu.getAttacksLost();
+		this.defensesLost = plfu.getDefensesLost();
+		this.lastBattleNotificationTime = plfu.getLastBattleNotificationTime();
+	}
+	
 	public PvpLeagueForUser(int userId, int pvpLeagueId, int rank, int elo,
 			Date shieldEndTime, Date inBattleShieldEndTime, int attacksWon,
 			int defensesWon, int attacksLost, int defensesLost,

@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 1320377888722953983L;
+	private static final long serialVersionUID = 3380455615214449398L;
 	
 	private int id;
 	private String name;
@@ -265,24 +265,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateLastlogout(Timestamp lastLogout) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (lastLogout == null) {
-			return false;
-		}
-		absoluteParams.put(DBConstants.USER__LAST_LOGOUT, lastLogout);
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.lastLogout = lastLogout;
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean updateLastLogoutElo(Timestamp lastLogout) {
+	public boolean updateLastLogout(Timestamp lastLogout) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		
@@ -628,129 +611,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*
-	 * used for battles
-	 
-	public boolean updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
-			int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
-			Timestamp clientTime, boolean deactivateShield,
-			boolean activateShield, boolean recordWinLossFlee, int attacksWonDelta, 
-			int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
-		Date shieldEndTimeTemp = this.shieldEndTime; //for changing this obj if endTime changes
-		
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		if (experience != 0) relativeParams.put(DBConstants.USER__EXPERIENCE, experience);
-		if (coins != 0) relativeParams.put(DBConstants.USER__CASH, coins);
-		if (recordWinLossFlee) {
-			recordWinLossFlees(relativeParams, battlesWon, battlesLost, fleesChange,
-					attacksWonDelta, defensesWonDelta, attacksLostDelta, defensesLostDelta);
-		}
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		
-		//3 cases:deactivate a shield, activate a shield, do nothing
-		shieldEndTimeTemp = recordTurnOnOffShield(absoluteParams, deactivateShield,
-				clientTime, activateShield, shieldEndTimeTemp);
-		
-		if (absoluteParams.size() == 0) {
-			absoluteParams = null;
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-//			this.energy +=energy;
-			this.experience += experience;
-			this.cash += coins;
-			if (recordWinLossFlee) {
-				updateWinsLossFlees(battlesWon, battlesLost, fleesChange, attacksWonDelta,
-						defensesWonDelta, attacksLostDelta, defensesLostDelta);
-			}
-			turnOnOffShield(deactivateShield, activateShield, clientTime, shieldEndTimeTemp);
-			
-			return true;
-		}
-		return false;
-	}
-	
-	private void recordWinLossFlees(Map<String, Object> relativeParams,
-			int battlesWon, int battlesLost, int fleesChange, int attacksWonDelta,
-			int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
-		if (battlesWon != 0) {
-			relativeParams.put(DBConstants.USER__BATTLES_WON, battlesWon);
-		}
-		if (battlesLost != 0) {
-			relativeParams.put(DBConstants.USER__BATTLES_LOST, battlesLost);
-		}
-		if (fleesChange != 0) {
-			relativeParams.put(DBConstants.USER__FLEES, fleesChange);
-		}
-		if (0 != attacksWonDelta) {
-			relativeParams.put(DBConstants.USER__ATTACKS_WON, attacksWonDelta);
-		}
-		if (0 != defensesWonDelta) {
-			relativeParams.put(DBConstants.USER__DEFENSES_WON, defensesWonDelta);
-		}
-		if (0 != attacksLostDelta) {
-			relativeParams.put(DBConstants.USER__ATTACKS_WON, attacksLostDelta);
-		}
-		if (0 != defensesLostDelta) {
-			relativeParams.put(DBConstants.USER__DEFENSES_WON, defensesLostDelta);
-		}
-		//TODO: FINISH THIS
-	}
-	
-	//returns new shield end time if shield status changes
-	private Date recordTurnOnOffShield(Map<String, Object> absoluteParams, 
-			boolean deactivateShield, Timestamp clientTime, boolean activateShield,
-			Date shieldEndTimeTemp) {
-		//3 cases:deactivate a shield, activate a shield, do nothing
-		if (deactivateShield) {
-			if (hasActiveShield ) {
-				absoluteParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
-			}
-			if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
-				absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, null);
-			}
-		} else if (activateShield) {
-			if (shieldEndTime == null || shieldEndTime.getTime() < clientTime.getTime()) {
-				long time = clientTime.getTime()+43200000; //set shield end time to 12 hrs from now
-				Timestamp d = new Timestamp(time);
-				absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, d);
-				shieldEndTimeTemp = new Date(time);
-			}
-		}
-		return shieldEndTimeTemp;
-	}
-	
-	private void updateWinsLossFlees(int battlesWon, int battlesLost, int fleesChange,
-			int attacksWonDelta, int defensesWonDelta, int attacksLostDelta,
-			int defensesLostDelta) {
-		this.battlesWon += battlesWon;
-		this.battlesLost += battlesLost;
-		this.flees += fleesChange;
-		this.attacksWon += attacksWonDelta;
-		this.defensesWon += defensesWonDelta;
-		this.attacksLost += attacksLostDelta;
-		this.defensesLost += defensesLostDelta;
-	}
-	
-	private void turnOnOffShield(boolean deactivateShield, boolean activateShield,
-			Timestamp clientTime, Date shieldEndTimeTemp) {
-		if (deactivateShield) {
-			if (hasActiveShield) {
-				this.hasActiveShield = false;
-			}
-			if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
-				this.shieldEndTime = null;
-			}
-		} else if (activateShield) {
-			this.shieldEndTime = shieldEndTimeTemp;
-		}
-	} */
 
 	public boolean updateRelativeDiamondsForFree(int diamondChange, EarnFreeDiamondsType freeDiamondsType) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -803,101 +663,6 @@ public class User implements Serializable {
 //		return false;
 //	}
 
-	public boolean updateEloOilCash(int oilChange, int cashChange) {
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (0 != oilChange) {
-			relativeParams.put(DBConstants.USER__OIL, oilChange);
-		}
-		if (0 != cashChange) {
-			relativeParams.put(DBConstants.USER__CASH, cashChange);
-		}
-		
-		Map<String, Object> absoluteParams = null;//new HashMap<String, Object>();
-		//absoluteParams.put(DBConstants.USER__ELO, newElo);
-		
-		
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
-				absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			if (0 != oilChange) {
-				this.oil += oilChange;
-			}
-			if (0 != cashChange) {
-				this.cash += cashChange;
-			}
-			return true;
-		}
-		return false;
-	}
-	
-	/*
-	public boolean updateInBattleEndTime(Date inBattleShieldEndTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, inBattleShieldEndTime);
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.inBattleShieldEndTime = inBattleShieldEndTime;
-			return true;
-		}
-		return false;
-	}
-	*/
-	/*
-	public boolean updateEloInBattleEndTime(int eloChange, Date inBattleEndTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, inBattleEndTime);
-		
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__ELO, eloChange);
-		
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-				relativeParams, absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			this.elo += eloChange;
-			this.inBattleShieldEndTime = inBattleEndTime;
-			return true;
-		}
-		return false;
-	}
-	*/
-
-	public boolean updateEloOilCashShields(int userId, int eloChange, int oilChange,
-			int cashChange, Date shieldEndTime, Date inBattleEndTime) {
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (0 != oilChange) {
-			relativeParams.put(DBConstants.USER__OIL, oilChange);
-		}
-		if (0 != cashChange) {
-			relativeParams.put(DBConstants.USER__CASH, cashChange);
-		}
-		
-		Map<String, Object> absoluteParams = null;
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
-				absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			if (0 != oilChange) {
-				this.oil += oilChange;
-			}
-			if (0 != cashChange) {
-				this.cash += cashChange;
-			}
-			return true;
-		}
-		return false;
-	}
-
 	public boolean updateLastObstacleSpawnedTime(Timestamp lastObstacleSpawnedTime) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -937,23 +702,6 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-
-	/*public boolean updateNthExtraSlotsViaFb(int slotChange) {
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NTH_EXTRA_SLOTS_VIA_FB, slotChange);
-		
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-				relativeParams, null, conditionParams, "and");
-		
-		if (1 == numUpdated) {
-			this.nthExtraSlotsViaFb += slotChange;
-			return true;
-		} else {
-			return false;
-		}
-	}*/
 
 	public int getId() {
 		return id;

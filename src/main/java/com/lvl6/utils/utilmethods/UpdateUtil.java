@@ -144,4 +144,12 @@ public interface UpdateUtil {
   public abstract int updateClan(int clanId, boolean isChangeDescription,
   		String description, boolean isChangeJoinType, boolean requestToJoinRequired,
   		boolean isChangeIcon, int iconId);
+  
+  public abstract int updatePvpLeagueForUserShields(int userId, Timestamp shieldEndTime,
+		  Timestamp inBattleEndTime);
+  
+  public abstract int updatePvpLeagueForUser(int userId, int newPvpLeagueId, 
+		  int newRank, int eloChange, Timestamp shieldEndTime,
+		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
+		  int attacksLostDelta, int defensesLostDelta);
 }

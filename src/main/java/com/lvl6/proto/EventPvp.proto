@@ -105,7 +105,7 @@ message EndPvpBattleRequestProto {
 	
 	//positive means reward attacker. don't forsee being negative 
 	//If attacker loses, then these are 0
-	//THESE ARE THE RAW VALUES THAT THE DEFENDER LOSES
+	//THESE ARE THE RAW VALUES (UNCAPPED) THAT THE DEFENDER LOSES OR WINS
 	optional int32 oilChange = 6;
 	optional int32 cashChange = 7;
 	

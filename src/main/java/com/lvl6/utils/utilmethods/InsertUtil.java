@@ -183,9 +183,13 @@ public interface InsertUtil {
 
 	public abstract int insertIntoPvpBattleHistory(int attackerId, int defenderId,
 			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
-			int defenderEloChange, int attackerOilChange, int defenderOilChange,
-			int attackerCashChange, int defenderCashChange, boolean attackerWon,
-			boolean cancelled, boolean gotRevenge, boolean displayToDefender);
+			int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
+			int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
+			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+			int defenderPrevRank, int defenderCurRank, int attackerOilChange,
+			int defenderOilChange, int attackerCashChange, int defenderCashChange,
+			boolean attackerWon, boolean cancelled, boolean gotRevenge,
+			boolean displayToDefender);
 	
 	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
 			List<ObstacleForUser> ofuList);

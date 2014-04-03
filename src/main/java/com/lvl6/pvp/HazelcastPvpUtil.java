@@ -83,7 +83,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//Used to get offline people that can be attacked in pvp
 	@Autowired
-	protected PvpUserRetrieveUtil pvpUserRetrieveUtils;
+	protected PvpUserRetrieveUtil pvpUserRetrieveUtil;
 	
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
@@ -121,7 +121,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		
 		if (isUseDatabaseInstead()) {
 			log.info("querying db instead of hazelcast");
-			return getPvpUserRetrieveUtils().retrievePvpUsers(minElo, maxElo,
+			return getPvpUserRetrieveUtil().retrievePvpUsers(minElo, maxElo,
 					now, limit, excludeIdStrs);
 		} else {
 			log.info("retrieving from hazelcast instead of db");
@@ -213,15 +213,22 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
 	public PvpUser getPvpUser(int userId) {
 		String userIdStr = String.valueOf(userId);
-		if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
+		if (isUseDatabaseInstead()) {
+			log.info("getting a user from db instead of hazelcast");
+			return getPvpUserRetrieveUtil().getUserPvpLeagueForId(userIdStr);
+		} else {
+			log.info("getting a user from hazelcast instead of db");
+			return getPvpUserViaHazelcast(userIdStr);
+		}
+	}
+	
+	protected PvpUser getPvpUserViaHazelcast(String userIdStr) {
+		if (playersByPlayerId.containsKey(userIdStr)) {
 			log.info("PvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
 		}
 
 		if (!pvpUserMap.containsKey(userIdStr)) {
-			if (0 != userId) {
-				log.warn("trying to access nonexistent PvpUser with id: " + userIdStr +
-						" PROBABLY because the user is online");
-			}
+			log.warn("trying to access nonexistent PvpUser with id: " + userIdStr);
 			return null;
 		} else {
 			return pvpUserMap.get(userIdStr);
@@ -229,6 +236,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	}
 
 	public void replacePvpUser(PvpUser userOpu, int userId) {
+		if (isUseDatabaseInstead()) {
+			return;
+		}
 		String userIdStr = userOpu.getUserId();
 
 		//maybe not necessary to remove, but eh
@@ -259,6 +269,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//    }
 
 	public void removePvpUser(int userId) {
+		if (isUseDatabaseInstead()) {
+			return;
+		}
 		String userIdStr = String.valueOf(userId);
 
 		if (pvpUserMap.containsKey(userIdStr)) {
@@ -375,7 +388,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 
 		//now we have almost all users, put them into the userIdToPvpUser IMap
-		Collection<PvpUser> validUsers = getPvpUserRetrieveUtils().getPvpValidUsers();
+		Collection<PvpUser> validUsers = getPvpUserRetrieveUtil().getPvpValidUsers();
 		if (null != validUsers && !validUsers.isEmpty()) {
 			log.info("populating the IMap with users that can be attacked in pvp. numUsers="
 					+ validUsers.size());
@@ -423,12 +436,12 @@ public class HazelcastPvpUtil implements InitializingBean {
 		this.textFileResourceLoaderAware = textFileResourceLoaderAware;
 	}
 
-	public PvpUserRetrieveUtil getPvpUserRetrieveUtils() {
-		return pvpUserRetrieveUtils;
+	public PvpUserRetrieveUtil getPvpUserRetrieveUtil() {
+		return pvpUserRetrieveUtil;
 	}
-	public void setPvpUserRetrieveUtils(
-			PvpUserRetrieveUtil pvpUserRetrieveUtils) {
-		this.pvpUserRetrieveUtils = pvpUserRetrieveUtils;
+	public void setPvpUserRetrieveUtil(
+			PvpUserRetrieveUtil pvpUserRetrieveUtil) {
+		this.pvpUserRetrieveUtil = pvpUserRetrieveUtil;
 	}
 	
 	public QueryConstructionUtil getQueryConstructionUtil() {

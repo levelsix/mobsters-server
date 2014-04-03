@@ -1457,9 +1457,13 @@ public class InsertUtils implements InsertUtil{
 		@Override
 		public int insertIntoPvpBattleHistory(int attackerId, int defenderId,
 				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
-				int defenderEloChange, int attackerOilChange, int defenderOilChange,
-				int attackerCashChange, int defenderCashChange, boolean attackerWon,
-				boolean cancelled, boolean gotRevenge, boolean displayToDefender) {
+				int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
+				int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
+				int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+				int defenderPrevRank, int defenderCurRank, int attackerOilChange,
+				int defenderOilChange, int attackerCashChange, int defenderCashChange,
+				boolean attackerWon, boolean cancelled, boolean gotRevenge,
+				boolean displayToDefender) {
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			
 			Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -1468,8 +1472,37 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
 			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE, attackerEloChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE, defenderEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE,
+					attackerEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE,
+					attackerEloBefore);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER,
+					attackerEloBefore + attackerEloChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE,
+					defenderEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE,
+					defenderEloBefore);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER,
+					defenderEloBefore + defenderEloChange);
+
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE,
+					attackerPrevLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE,
+					attackerCurLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE,
+					defenderPrevLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE,
+					defenderCurLeague);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK,
+					attackerPrevRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK,
+					attackerCurRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK,
+					defenderPrevRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK,
+					defenderCurRank);
 			
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);

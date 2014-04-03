@@ -42,6 +42,7 @@ import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @Component @DependsOn("gameServer") public class QueueUpController extends EventController {
@@ -122,7 +123,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		try {
 			User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId);
-			
+			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
+					.getUserPvpLeagueForId(attackerId);
 			//check if user can search for a player to attack
 			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, clientDate);
 					//gemsSpent, cashChange);
@@ -134,7 +136,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 						attackerElo);
 				
 				//update the user, and his shield
-				success = writeChangesToDB(attackerId, attacker, clientTime, currencyChange);
+				success = writeChangesToDB(attackerId, attacker, clientTime, plfu,
+						currencyChange);
 						//gemsSpent, cashChange, clientTime,
 			}				
 
@@ -152,11 +155,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				//UPDATE CLIENT 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								attacker, plfu);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 //				
-//				//TODO: TRACKING USER CURRENCY CHANGE, AMONG OTHER THINGS
+//				//TODO: tracking user currency change, among other things, if charging
 //				
 			}
       
@@ -421,39 +425,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				.retrievePvpUsers(minElo, maxElo, clientDate, numNeeded,
 						seenUserIds); 
 		
-		//this is so as to randomly pick people
-		float numNeededSoFar = (float) numNeeded;
-		float numDefendersLeft = prospectiveDefenders.size();
-		Random rand = new Random();
+		int numDefenders = prospectiveDefenders.size();
 		log.info("users returned from hazelcast pvp util. users=" + prospectiveDefenders);
-		
-		//go through them and select the one that has not been seen yet
-		for (PvpUser pvpUser : prospectiveDefenders) {
-			int userId = Integer.valueOf(pvpUser.getUserId());
-			numDefendersLeft -= 1;
-			
-			if (userIdList.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
-				//don't want to send every eligible victim to user.
-				log.info("reached queue length of " + ControllerConstants.PVP__MAX_QUEUE_SIZE);
-				break;
-			}
 
-			if (seenUserIds.contains(userId)) {
-				log.info("seen userId=" + userId);
-				continue;
-			}
-			
-			//randomly pick people
-			float randFloat = rand.nextFloat();
-			float probabilityToBeSelected = numDefendersLeft/numNeededSoFar;
-			if (randFloat < probabilityToBeSelected) {
-				//we have a winner!
-				userIdList.add(userId);
-				userIdToPvpUser.put(userId, pvpUser);
-				numNeededSoFar -= 1;
-			}
-		}
-		
+		//choose users either randomly or all of them
+		selectUsers(numNeeded, numDefenders, prospectiveDefenders,
+				userIdList, userIdToPvpUser);
 		
 		List<User> selectedDefenders = new ArrayList<User>();
 		if (!prospectiveDefenders.isEmpty()) {
@@ -464,6 +441,55 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		
 		log.info("the lucky people who get to be attacked! defenders=" + selectedDefenders);
 		return selectedDefenders;
+	}
+	
+	private void selectUsers(int numNeeded, int numDefenders,
+			Set<PvpUser> prospectiveDefenders, List<Integer> userIdList,
+			Map<Integer, PvpUser> userIdToPvpUser) {
+		Random rand = new Random();
+		
+		float numNeededSoFar = numNeeded;
+		float numDefendersLeft = numDefenders;
+		//go through them and select the one that has not been seen yet
+		for (PvpUser pvpUser : prospectiveDefenders) {
+			//when prospectiveDefenders is out, loop breaks,
+			//regardless of numNeededSoFar
+			log.info("pvp opponents, numNeeded=" + numNeededSoFar);
+			log.info("pvp opponents, numAvailable=" + numDefendersLeft);
+			
+			int userId = Integer.valueOf(pvpUser.getUserId());
+			
+			if (userIdList.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
+				//don't want to send every eligible victim to user.
+				log.info("reached queue length of " + ControllerConstants.PVP__MAX_QUEUE_SIZE);
+				break;
+			}
+			
+			//if we whittle down the entire applicant pool to the minimum we want
+			//select all of them
+			if (numNeededSoFar >= numDefendersLeft) {
+				userIdList.add(userId);
+				userIdToPvpUser.put(userId, pvpUser);
+				numNeededSoFar -= 1;
+				numDefendersLeft -= 1;
+				continue;
+			}
+			
+			//randomly pick people
+			float randFloat = rand.nextFloat();
+			float probabilityToBeSelected = numNeededSoFar/numDefendersLeft;
+			log.info("randFloat=" + randFloat);
+			log.info("probabilityToBeSelected=" + probabilityToBeSelected);
+			if (randFloat < probabilityToBeSelected) {
+				//we have a winner!
+				userIdList.add(userId);
+				userIdToPvpUser.put(userId, pvpUser);
+				numNeededSoFar -= 1;
+			}
+			numDefendersLeft -= 1;
+		}
+		
+
 	}
 
 	//given users, get the 3 monsters for each user
@@ -688,10 +714,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 	
 	
-	// change user silver value and remove his shield if he has one, since he is
-	// going to attack some one
+	// remove his shield if he has one, since he is going to attack some one
 	private boolean writeChangesToDB(int attackerId, User attacker, //int gemsSpent, int cashChange, 
-			Timestamp queueTime, Map<String, Integer> money) {
+			Timestamp queueTime, PvpLeagueForUser plfu, Map<String, Integer> money) {
 		
 //		//CHARGE THE USER
 //		int oilChange = 0;
@@ -713,26 +738,25 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //		}
 		//update the user who queued things
 
-		//TODO: turn off user's shield if he has one active
-//		Date curShieldEndTime = attacker.getShieldEndTime();
-//		Date queueDate = new Date(queueTime.getTime());
-//		if (getTimeUtils().isFirstEarlierThanSecond(queueDate, curShieldEndTime)) {
-//			log.info("user shield end time is now being reset since he's attacking with a shield");
-//			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
-//			log.info("user before shield change=" + attacker);
-//			Date login = attacker.getLastLogin();
-//			attacker.updateEloOilCashShields(attackerId, 0, 0,0, login, login);
-//			
-//			int attackerElo = attacker.getElo();                    
-//			PvpUser attackerOpu = new PvpUser();
-//			attackerOpu.setElo(attackerElo);                        
-//			attackerOpu.setShieldEndTime(attacker.getLastLogin());
-//			attackerOpu.setInBattleEndTime(attacker.getLastLogin());               
-//			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
-//			log.info("user after shield change=" + attacker);
-//			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
-//			log.info("3cur pvpuser=" + attackerOpu);
-//		}
+		//TODO: this is the same logic in BeginPvpBattleController 
+		//turn off user's shield if he has one active
+		Date curShieldEndTime = plfu.getShieldEndTime();
+		Date queueDate = new Date(queueTime.getTime());
+		if (getTimeUtils().isFirstEarlierThanSecond(queueDate, curShieldEndTime)) {
+			log.info("shield end time is now being reset since he's attacking with a shield");
+			log.info("1cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			Date login = attacker.getLastLogin();
+			Timestamp loginTime = new Timestamp(login.getTime());
+			UpdateUtils.get().updatePvpLeagueForUserShields(attackerId,
+					loginTime, loginTime);
+			
+			PvpUser attackerOpu = new PvpUser(plfu);
+			attackerOpu.setShieldEndTime(login);
+			attackerOpu.setInBattleEndTime(login);               
+			getHazelcastPvpUtil().replacePvpUser(attackerOpu, attackerId);
+			log.info("2cur pvpuser=" + getHazelcastPvpUtil().getPvpUser(attackerId));
+			log.info("(should be same as 2cur pvpUser) 3cur pvpuser=" + attackerOpu);
+		}
 		
 		return true;
 	}
