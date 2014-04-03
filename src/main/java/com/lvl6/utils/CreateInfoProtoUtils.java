@@ -1244,6 +1244,10 @@ public class CreateInfoProtoUtils {
     int atkAnimationRepeatedFramesEnd = aMonster.getAtkAnimationRepeatedFramesEnd();
     mpb.setAtkAnimationRepeatedFramesEnd(atkAnimationRepeatedFramesEnd);
     
+    String shorterName = aMonster.getShorterName();
+    if (null != shorterName) {
+    	mpb.setShorterName(shorterName);
+    }
     return mpb.build();
   }
 

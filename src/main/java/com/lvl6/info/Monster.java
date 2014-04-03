@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Monster implements Serializable {
 	
-	private static final long serialVersionUID = 4263637436935876949L;
+	private static final long serialVersionUID = 2671875938930580866L;
 	
 	private int id;
 	private String name;
@@ -32,6 +32,7 @@ public class Monster implements Serializable {
 	private int atkSoundAnimationFrame;
 	private int atkAnimationRepeatedFramesStart;
 	private int atkAnimationRepeatedFramesEnd;
+	private String shorterName;
 	
 	public Monster(int id, String name, String monsterGroup, String quality,
 			int evolutionLevel, String displayName, String element,
@@ -43,7 +44,7 @@ public class Monster implements Serializable {
 			int evolutionCost, String animationType, int verticalPixelOffset,
 			String atkSoundFile, int atkSoundAnimationFrame,
 			int atkAnimationRepeatedFramesStart,
-			int atkAnimationRepeatedFramesEnd) {
+			int atkAnimationRepeatedFramesEnd, String shorterName) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,6 +72,7 @@ public class Monster implements Serializable {
 		this.atkSoundAnimationFrame = atkSoundAnimationFrame;
 		this.atkAnimationRepeatedFramesStart = atkAnimationRepeatedFramesStart;
 		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
+		this.shorterName = shorterName;
 	}
 
 	public int getId() {
@@ -282,26 +284,38 @@ public class Monster implements Serializable {
 		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
 	}
 
+	public String getShorterName() {
+		return shorterName;
+	}
+
+	public void setShorterName(String shorterName) {
+		this.shorterName = shorterName;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
 				+ monsterGroup + ", quality=" + quality + ", evolutionLevel="
-				+ evolutionLevel + ", displayName=" + displayName + ", element="
-				+ element + ", imagePrefix=" + imagePrefix + ", numPuzzlePieces="
-				+ numPuzzlePieces + ", minutesToCombinePieces="
-				+ minutesToCombinePieces + ", maxLevel=" + maxLevel
-				+ ", evolutionMonsterId=" + evolutionMonsterId
-				+ ", evolutionCatalystMonsterId=" + evolutionCatalystMonsterId
-				+ ", minutesToEvolve=" + minutesToEvolve + ", numCatalystsRequired="
+				+ evolutionLevel + ", displayName=" + displayName
+				+ ", element=" + element + ", imagePrefix=" + imagePrefix
+				+ ", numPuzzlePieces=" + numPuzzlePieces
+				+ ", minutesToCombinePieces=" + minutesToCombinePieces
+				+ ", maxLevel=" + maxLevel + ", evolutionMonsterId="
+				+ evolutionMonsterId + ", evolutionCatalystMonsterId="
+				+ evolutionCatalystMonsterId + ", minutesToEvolve="
+				+ minutesToEvolve + ", numCatalystsRequired="
 				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
 				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
-				+ carrotEvolved + ", description=" + description + ", evolutionCost="
-				+ evolutionCost + ", animationType=" + animationType
-				+ ", verticalPixelOffset=" + verticalPixelOffset + ", atkSoundFile="
-				+ atkSoundFile + ", atkSoundAnimationFrame=" + atkSoundAnimationFrame
+				+ carrotEvolved + ", description=" + description
+				+ ", evolutionCost=" + evolutionCost + ", animationType="
+				+ animationType + ", verticalPixelOffset="
+				+ verticalPixelOffset + ", atkSoundFile=" + atkSoundFile
+				+ ", atkSoundAnimationFrame=" + atkSoundAnimationFrame
 				+ ", atkAnimationRepeatedFramesStart="
-				+ atkAnimationRepeatedFramesStart + ", atkAnimationRepeatedFramesEnd="
-				+ atkAnimationRepeatedFramesEnd + "]";
+				+ atkAnimationRepeatedFramesStart
+				+ ", atkAnimationRepeatedFramesEnd="
+				+ atkAnimationRepeatedFramesEnd + ", shorterName="
+				+ shorterName + "]";
 	}
 	
 }
