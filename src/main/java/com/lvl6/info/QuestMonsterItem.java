@@ -17,9 +17,9 @@ public class QuestMonsterItem implements Serializable {
 	
 	//only one item exists for questId and monsterId
 	//duple (questId, monsterId) should only appear in this table once, which
-	//has the following case in mind: when user needs to collect items
-	//the static data id would be that of an item and multiple monsters
-	//can drop said item
+	//has the following case in mind: when user needs to collect items the
+	//static data id in quest would be that of an item and multiple monsters
+	//can drop said item, which is dictated here
 	
 	public QuestMonsterItem(int questId, int monsterId, int itemId,
 			float itemDropRate) {
@@ -39,14 +39,14 @@ public class QuestMonsterItem implements Serializable {
 	}
 	
 	public boolean didItemDrop() {
-    float randFloat = getRand().nextFloat();
-    
-    if (randFloat < getItemDropRate()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+		float randFloat = getRand().nextFloat();
+
+		if (randFloat < getItemDropRate()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 //end covenience methods--------------------------------------------------------
 	
