@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -37,14 +38,18 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class SubmitMonsterEnhancementController extends EventController {
-
+	
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected Locker locker;
 
 	public SubmitMonsterEnhancementController() {
 		numAllocatedThreads = 3;
@@ -94,7 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		getLocker().lockPlayer(userId, getClass().getSimpleName());
 		try {
 			int previousOil = 0;
 			int previousGems = 0;
@@ -137,7 +142,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			server.writeEvent(resEvent);
 
 			if (successful) {
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -148,7 +155,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(userId, getClass().getSimpleName());   
 		}
 	}
 
@@ -396,6 +403,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		reasonsForChanges.put(gems, reasonForChange.toString());
 		//TODO: FIX THIS
 //		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsCash, reasonsForChanges);
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

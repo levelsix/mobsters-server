@@ -128,7 +128,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       return false;      
     }
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clan.getId());
-    if (uc == null || uc.getStatus() != UserClanStatus.REQUESTING) {
+    if (uc == null || !UserClanStatus.REQUESTING.name().equals(uc.getStatus())) {
       resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_DID_NOT_REQUEST);
       log.error("user clan request has not been filed");
       return false;      

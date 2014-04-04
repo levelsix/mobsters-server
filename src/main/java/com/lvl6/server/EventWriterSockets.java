@@ -1,6 +1,7 @@
 package com.lvl6.server;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,12 @@ import com.lvl6.events.BroadcastResponseEvent;
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.events.ResponseEvent;
-import com.lvl6.info.UserClan;
 import com.lvl6.properties.Globals;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.NIOUtils;
+import com.lvl6.utils.RetrieveUtils;
 
 public class EventWriterSockets extends EventWriter implements HazelcastInstanceAware {
 
@@ -144,10 +146,17 @@ public class EventWriterSockets extends EventWriter implements HazelcastInstance
 		log.debug("writer received clan event=" + event);
 		ResponseEvent e = (ResponseEvent) event;
 		ByteBuffer buff = getBytes(e);
-		List<UserClan> playersInClan = userClanRetrieveUtil.getUserClanMembersInClan(clanId);
-		for (UserClan uc : playersInClan) {
-			log.info("Sending response to clan: {}  member: {}", uc.getClanId(), uc.getUserId());
-			sendMessageToPlayer(e, buff.duplicate(), uc.getUserId());
+		List<String> statuses = new ArrayList<String>();
+	    statuses.add(UserClanStatus.LEADER.name());
+	    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+	    statuses.add(UserClanStatus.CAPTAIN.name());
+	    statuses.add(UserClanStatus.MEMBER.name());
+	    List<Integer> userIdsInClan = RetrieveUtils.userClanRetrieveUtils()
+	    		.getUserIdsWithStatuses(clanId, statuses);
+	    
+		for (Integer userId : userIdsInClan) {
+			log.info("Sending response to clan: {}  member: {}", clanId, userId);
+			sendMessageToPlayer(e, buff.duplicate(), userId);
 		}
 	}
 	

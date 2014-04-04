@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TaskForUserOngoing implements Serializable {
-
-	private static final long serialVersionUID = 6634254865960374400L;
+	
+	private static final long serialVersionUID = 8030638296503679697L;
 	
 	private long id;
 	private int userId;
@@ -15,9 +15,11 @@ public class TaskForUserOngoing implements Serializable {
 	public int oilGained;
 	public int numRevives;
 	private Date startDate;
+	private int taskStageId;
 	
 	public TaskForUserOngoing(long id, int userId, int taskId, int expGained,
-			int cashGained, int oilGained, int numRevives, Date startDate) {
+			int cashGained, int oilGained, int numRevives, Date startDate,
+			int taskStageId) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -27,6 +29,7 @@ public class TaskForUserOngoing implements Serializable {
 		this.oilGained = oilGained;
 		this.numRevives = numRevives;
 		this.startDate = startDate;
+		this.taskStageId = taskStageId;
 	}
 
 	public long getId() {
@@ -93,12 +96,21 @@ public class TaskForUserOngoing implements Serializable {
 		this.startDate = startDate;
 	}
 
+	public int getTaskStageId() {
+		return taskStageId;
+	}
+
+	public void setTaskStageId(int taskStageId) {
+		this.taskStageId = taskStageId;
+	}
+
 	@Override
 	public String toString() {
-		return "TaskForUserOngoing [id=" + id + ", userId=" + userId + ", taskId="
-				+ taskId + ", expGained=" + expGained + ", cashGained=" + cashGained
-				+ ", oilGained=" + oilGained + ", numRevives=" + numRevives
-				+ ", startDate=" + startDate + "]";
+		return "TaskForUserOngoing [id=" + id + ", userId=" + userId
+				+ ", taskId=" + taskId + ", expGained=" + expGained
+				+ ", cashGained=" + cashGained + ", oilGained=" + oilGained
+				+ ", numRevives=" + numRevives + ", startDate=" + startDate
+				+ ", taskStageId=" + taskStageId + "]";
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +22,15 @@ import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public UpdateUserCurrencyController() {
     numAllocatedThreads = 4;
@@ -94,8 +98,9 @@ import com.lvl6.utils.RetrieveUtils;
       server.writeEvent(resEvent);
 
       if (successful) {
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
@@ -285,4 +290,13 @@ import com.lvl6.utils.RetrieveUtils;
         previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

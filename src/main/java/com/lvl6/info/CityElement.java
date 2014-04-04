@@ -2,26 +2,24 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
-import com.lvl6.proto.StructureProto.StructOrientation;
-
 public class CityElement implements Serializable {
 	
-	private static final long serialVersionUID = -449823837985027081L;
+	private static final long serialVersionUID = 4626120437231136146L;
+	
 	private int cityId;
 	private int assetId;
 //	private String goodName;
-	private CityElemType type;
+	private String type;
 	private CoordinatePair coords;
 	private float xLength;
 	private float yLength;
 	private String imgGood;
-	private StructOrientation orientation;
+	private String orientation;
 	private CoordinatePair spriteCoords;
 	
-	public CityElement(int cityId, int assetId, CityElemType type,
-			CoordinatePair coords, float xLength, float yLength, String imgGood,
-			StructOrientation orientation, CoordinatePair spriteCoords) {
+	public CityElement(int cityId, int assetId, String type,
+			CoordinatePair coords, float xLength, float yLength,
+			String imgGood, String orientation, CoordinatePair spriteCoords) {
 		super();
 		this.cityId = cityId;
 		this.assetId = assetId;
@@ -50,11 +48,11 @@ public class CityElement implements Serializable {
 		this.assetId = assetId;
 	}
 
-	public CityElemType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(CityElemType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -90,11 +88,11 @@ public class CityElement implements Serializable {
 		this.imgGood = imgGood;
 	}
 
-	public StructOrientation getOrientation() {
+	public String getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(StructOrientation orientation) {
+	public void setOrientation(String orientation) {
 		this.orientation = orientation;
 	}
 
@@ -108,10 +106,11 @@ public class CityElement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CityElement [cityId=" + cityId + ", assetId=" + assetId + ", type="
-				+ type + ", coords=" + coords + ", xLength=" + xLength + ", yLength="
-				+ yLength + ", imgGood=" + imgGood + ", orientation=" + orientation
-				+ ", spriteCoords=" + spriteCoords + "]";
+		return "CityElement [cityId=" + cityId + ", assetId=" + assetId
+				+ ", type=" + type + ", coords=" + coords + ", xLength="
+				+ xLength + ", yLength=" + yLength + ", imgGood=" + imgGood
+				+ ", orientation=" + orientation + ", spriteCoords="
+				+ spriteCoords + "]";
 	}
 	
 }

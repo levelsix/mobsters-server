@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class ObstacleForUser implements Serializable {
 	
-	private static final long serialVersionUID = -8692048607699945108L;
+	private static final long serialVersionUID = -4951893395081957418L;
 	
 	private int id;
 	private int userId;
@@ -13,14 +13,14 @@ public class ObstacleForUser implements Serializable {
 	private int xcoord;
 	private int ycoord;
 	private Date removalTime;
-	private int orientation;
+	private String orientation;
 	
 	public ObstacleForUser() {
 		super();
 	}
 
 	public ObstacleForUser(int id, int userId, int obstacleId, int xcoord,
-			int ycoord, Date removalTime, int orientation) {
+			int ycoord, Date removalTime, String orientation) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -79,19 +79,20 @@ public class ObstacleForUser implements Serializable {
 		this.removalTime = removalTime;
 	}
 
-	public int getOrientation() {
+	public String getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(int orientation) {
+	public void setOrientation(String orientation) {
 		this.orientation = orientation;
 	}
 
 	@Override
 	public String toString() {
-		return "ObstacleForUser [id=" + id + ", userId=" + userId + ", obstacleId="
-				+ obstacleId + ", xcoord=" + xcoord + ", ycoord=" + ycoord
-				+ ", removalTime=" + removalTime + ", orientation=" + orientation + "]";
+		return "ObstacleForUser [id=" + id + ", userId=" + userId
+				+ ", obstacleId=" + obstacleId + ", xcoord=" + xcoord
+				+ ", ycoord=" + ycoord + ", removalTime=" + removalTime
+				+ ", orientation=" + orientation + "]";
 	}
-	
+
 }

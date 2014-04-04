@@ -17,7 +17,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
@@ -29,11 +28,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   private final String TABLE_NAME = DBConstants.TABLE_USER;
 
-  private final int BATTLE_INITIAL_LEVEL_RANGE = 4;    //even number makes it more consistent. ie 6 would be +/- 3 levels from user level
-  private final int BATTLE_INITIAL_RANGE_INCREASE = 2;    //even number better again
-  private final int BATTLE_RANGE_INCREASE_MULTIPLE = 2;
-  private final int MAX_BATTLE_DB_HITS = 5;
-  private final int EXTREME_MAX_BATTLE_DB_HITS = 30;
+//  private final int BATTLE_INITIAL_LEVEL_RANGE = 4;    //even number makes it more consistent. ie 6 would be +/- 3 levels from user level
+//  private final int BATTLE_INITIAL_RANGE_INCREASE = 2;    //even number better again
+//  private final int BATTLE_RANGE_INCREASE_MULTIPLE = 2;
+//  private final int MAX_BATTLE_DB_HITS = 5;
+//  private final int EXTREME_MAX_BATTLE_DB_HITS = 30;
   
   
   public List<Integer> getUserIdsForFacebookIds(List<String> facebookIds) {
@@ -254,7 +253,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     return usersList;
   }
-
+/*
   public List<User> getUsers(int numUsers, int playerLevel, int userId, boolean guaranteeNum, 
       boolean realPlayersOnly, boolean fakePlayersOnly, boolean offlinePlayersOnly,
       boolean inactiveShield, Timestamp shieldEndTime, List<Integer> forbiddenPlayerIds) {
@@ -355,7 +354,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     DBConnection.get().close(rs, null, conn);
     return users;
   }
-
+*/
   public List<User> getUsersByReferralCodeOrName(String queryString) {
     log.debug("retrieving user with queryString " + queryString);
 
@@ -495,7 +494,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     return null;
   }
-  
+  /* replaced with PvpUserRetrieveUtil.java
   public List<User> retrieveCompleteQueueList(User attacker, int elo,
   		List<Integer> seenUserIds, Date clientTime) {
   	List<User> retVal = new ArrayList<User>();
@@ -549,6 +548,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  return qList;
   }
   
+  
   private List<User> retrieveUsersInEloRangeN(int elo, List<Integer> seenUserIds,
   		Date clientTime, int eloMin, int eloMax, int limit) {
   	Connection conn = DBConnection.get().getConnection();
@@ -600,7 +600,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     return queueList;
   }
-  
+  */
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
@@ -614,9 +614,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int oil = rs.getInt(i++);
     int experience = rs.getInt(i++);
     int tasksCompleted = rs.getInt(i++);
-    int battlesWon = rs.getInt(i++);
-    int battlesLost = rs.getInt(i++);
-    int flees = rs.getInt(i++);
     String referralCode = rs.getString(i++);
     int numReferrals = rs.getInt(i++);
     String udidForHistory = rs.getString(i++);
@@ -643,17 +640,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 
     String deviceToken = rs.getString(i++);
-
-    Date lastBattleNotificationTime = null;
-    try {
-    	ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		lastBattleNotificationTime = new Date(ts.getTime());
-    	}
-    } catch (Exception e) {
-    	log.error("db error: last_battle_notification_time not set. user_id=" + id);
-    }
-
     int numBadges = rs.getInt(i++);
     boolean isFake = rs.getBoolean(i++);
     
@@ -691,38 +677,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int kabamNaid = rs.getInt(i++);
 
     boolean hasReceivedfbReward = rs.getBoolean(i++);
-//    int numAdditionalMonsterSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
-    
-    Date shieldEndTime = null;
-    try {
-    	ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		shieldEndTime = new Date(ts.getTime());
-    	}
-    } catch (Exception e) {
-    	log.error("db error: shield_end_time not set. user_id=" + id);
-    }
-    
-    int elo = rs.getInt(i++);
-    String rank = rs.getString(i++);
-    
-    Date inBattleShieldEndTime = null;
-    try {
-    	ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		inBattleShieldEndTime = new Date(ts.getTime());
-    	}
-    } catch (Exception e) {
-    	log.error("db error: in_battle_end_time not set. user_id=" + id);
-    }
-    
-    int attacksWon = rs.getInt(i++);
-    int defensesWon = rs.getInt(i++);
-    int attacksLost = rs.getInt(i++);
-    int defensesLost = rs.getInt(i++);
     String facebookId = rs.getString(i++);
-//    int nthExtraSlotsViaFb = rs.getInt(i++);
     boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
     String gameCenterId = rs.getString(i++);
     String udid = rs.getString(i++);
@@ -736,15 +692,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: last_obstacle_spawned_time");
     }
     
-    User user = new User(id, name, level, gems, cash, oil, experience, tasksCompleted,
-    		battlesWon, battlesLost, flees, referralCode, numReferrals, udidForHistory,
-    		lastLogin, lastLogout, deviceToken, lastBattleNotificationTime, numBadges,
-    		isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs,
+    User user = new User(id, name, level, gems, cash, oil, experience,
+    		tasksCompleted, referralCode, numReferrals, udidForHistory,
+    		lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
+    		isAdmin, apsalarId, numCoinsRetrievedFromStructs,
     		numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
     		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
-    		numBeginnerSalesPurchased, shieldEndTime, elo, rank, inBattleShieldEndTime,
-    		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
-    		fbIdSetOnUserCreate, gameCenterId, udid, lastObstacleSpawnedTime);
+    		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
+    		gameCenterId, udid, lastObstacleSpawnedTime);
     return user;
   }
  

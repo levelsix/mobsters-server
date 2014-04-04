@@ -4,7 +4,9 @@ package com.lvl6.pvp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -17,8 +19,12 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
+import com.hazelcast.query.PagingPredicate;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
+import com.hazelcast.query.SqlPredicate;
+import com.hazelcast.util.IterationType;
+import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
@@ -79,7 +85,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	//Used to get offline people that can be attacked in pvp
 	@Autowired
-	protected PvpUserRetrieveUtils pvpUserRetrieveUtils;
+	protected PvpUserRetrieveUtil pvpUserRetrieveUtil;
+	
+	@Autowired
+	protected QueryConstructionUtil queryConstructionUtil;
+	
 
 	//properties used to create random names, related: textFileResourceLoaderAware
 	private static int syllablesInName1 = 2;
@@ -88,43 +98,164 @@ public class HazelcastPvpUtil implements InitializingBean {
 	private static Random rand;
 	private List<String> randomNames; //should this be a distributed collection?
 	private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
-
-	//TODO: move to PvpUserRetrieveUtils
+	private boolean useDatabaseInstead = false;
+	
+	/**
+	 * 	In case hazelcast is giving trouble and the database should be
+	 *	used instead. Should be called before retrieving users.
+	 * @return
+	 */
+	public boolean isUseDatabaseInstead() {
+		return useDatabaseInstead;
+	}
+	public void setUseDatabaseInstead(boolean useDatabaseInstead) {
+		this.useDatabaseInstead = useDatabaseInstead;
+	}
+	
+	//TODO: consider moving to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
-	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, 
-			Date now) {
+	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, Date now,
+			int limit, Collection<Integer> excludeIds) {
+		Collection<String> excludeIdStrs = new ArrayList<String>();
+		for (Integer i : excludeIds) {
+			excludeIdStrs.add(i.toString());
+		}
+		
+		if (isUseDatabaseInstead()) {
+			log.info("querying db instead of hazelcast");
+			return getPvpUserRetrieveUtil().retrievePvpUsers(minElo, maxElo,
+					now, limit, excludeIdStrs);
+		} else {
+			log.info("retrieving from hazelcast instead of db");
+			return retrievePvpUsersViaHazelcast(minElo, maxElo, now, limit,
+					excludeIdStrs);
+		}
+
+	}
+	
+	//look here for examples on using PagingPredicate
+	//https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/test/java/com/hazelcast/map/SortLimitTest.java
+	protected Set<PvpUser> retrievePvpUsersViaHazelcast(int minElo, int maxElo,
+			Date now, int limit, Collection<String> excludeIds) {
 		log.info("querying for people to attack. shieldEndTime should be before now=" +
-				now + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
+				now + "\t elo should be between minElo=" + minElo + ", maxElo=" +
+				maxElo + "\t (page size aka) limit=" + limit);
 
-		String inBattleShieldEndTime = PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME;
-		String shieldEndTime = PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME;
-		String elo = PvpConstants.OFFLINE_PVP_USER__ELO;
-		EntryObject e = new PredicateBuilder().getEntryObject();
-
-		//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
-		Predicate<?, ?> predicate = e.get(shieldEndTime).lessThan(now)
-				.and(e.get(inBattleShieldEndTime).lessThan(now))
-				.and(e.get(elo).between(minElo, maxElo));
-
-		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(predicate);
+		Predicate<?,?> pred = generatePredicate(minElo, maxElo, now, limit, excludeIds);
+		
+		Set<PvpUser> users = (Set<PvpUser>) pvpUserMap.values(pred);
 		log.info("users:" + users);
 
+		
 		return users;
+	}
+	
+	/*
+	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
+			int limit, Collection<String> excludeIds) {
+		String inBattleShieldEndTimeStr = PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
+		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
+		String eloStr = PvpConstants.PVP_USER__ELO;
+		EntryObject e = new PredicateBuilder().getEntryObject();
+		Predicate<?, ?> predicate = null;
+
+		if (null != excludeIds && !excludeIds.isEmpty()) {
+			String userIdStr = PvpConstants.PVP_USER__USER_ID;
+			//doesn't work >:[, list is not a Comparable data type
+//			Predicate<?, ?> pIn = Predicates.in(userIdStr, excludeIds);
+//			Predicate<?, ?> pNotIn = Predicates.not(pIn);
+			
+			Map<String, Object> lessThanConditions = null;
+			Map<String, Object> greaterThanConditions = null;
+			
+			boolean isNotIn = true;
+			Map<String, Collection<?>> inConditions =
+					new HashMap<String, Collection<?>>(); 
+			inConditions.put(userIdStr, excludeIds);
+			
+			String sql = getQueryConstructionUtil().createWhereConditionString(
+					lessThanConditions, greaterThanConditions, isNotIn, inConditions);
+			log.info("predicate used in querying hazelcast object: " + sql);
+			
+			Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
+			
+			
+			//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
+			predicate = e.get(shieldEndTimeStr).lessThan(now)
+					.and(e.get(inBattleShieldEndTimeStr).lessThan(now))
+					.and(e.get(eloStr).between(minElo, maxElo))
+					.and(sqlPredicate);
+			
+		} else {
+			predicate = e.get(shieldEndTimeStr).lessThan(now)
+					.and(e.get(inBattleShieldEndTimeStr).lessThan(now))
+					.and(e.get(eloStr).between(minElo, maxElo));
+		}
+		
+		PagingPredicate advPredicate = new PagingPredicate(predicate,
+				new PvpUserComparator(true, IterationType.VALUE), limit);
+		
+		return advPredicate;
+	}*/
+	
+	//doesn't matter if use java.util.Date or java.sql.Timestamp
+	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
+			int limit, Collection<String> excludeIds) {
+		String inBattleShieldEndTimeStr =
+				PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
+		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
+		String eloStr = PvpConstants.PVP_USER__ELO;
+		
+		String nowStr = "\"" + now + "\"";
+		Map<String, Object> lessThanConditions = new HashMap<String, Object>();
+		lessThanConditions.put(inBattleShieldEndTimeStr, nowStr);
+		lessThanConditions.put(shieldEndTimeStr, nowStr);
+		lessThanConditions.put(eloStr, maxElo);
+		
+		Map<String, Object> greaterThanConditions =
+				new HashMap<String, Object>();
+		greaterThanConditions.put(eloStr, minElo);
+		
+		boolean isNotIn = true;
+		Map<String, Collection<?>> inConditions = null;
+		if (null != excludeIds && !excludeIds.isEmpty()) {
+			String userIdStr = PvpConstants.PVP_USER__USER_ID;
+			inConditions = new HashMap<String, Collection<?>>(); 
+			inConditions.put(userIdStr, excludeIds);
+		}
+		
+		String sql = getQueryConstructionUtil().createWhereConditionString(
+				lessThanConditions, greaterThanConditions, isNotIn, inConditions);
+		log.info("predicate used in querying hazelcast object: " + sql);
+		
+		Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
+		
+		PagingPredicate advPredicate = new PagingPredicate(sqlPredicate,
+				new PvpUserComparator(true, IterationType.VALUE), limit);
+		
+		return advPredicate;
 	}
 
 
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
 	public PvpUser getPvpUser(int userId) {
 		String userIdStr = String.valueOf(userId);
-		if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
+		if (isUseDatabaseInstead()) {
+			log.info("getting a user from db instead of hazelcast");
+			return getPvpUserRetrieveUtil().getUserPvpLeagueForId(userIdStr);
+		} else {
+			log.info("getting a user from hazelcast instead of db");
+			return getPvpUserViaHazelcast(userIdStr);
+		}
+	}
+	
+	protected PvpUser getPvpUserViaHazelcast(String userIdStr) {
+		if (playersByPlayerId.containsKey(userIdStr)) {
 			log.info("PvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
 		}
 
 		if (!pvpUserMap.containsKey(userIdStr)) {
-			if (0 != userId) {
-				log.warn("trying to access nonexistent PvpUser with id: " + userIdStr +
-						" PROBABLY because the user is online");
-			}
+			log.warn("trying to access nonexistent PvpUser with id: " + userIdStr);
 			return null;
 		} else {
 			return pvpUserMap.get(userIdStr);
@@ -132,6 +263,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	}
 
 	public void replacePvpUser(PvpUser userOpu, int userId) {
+		if (isUseDatabaseInstead()) {
+			return;
+		}
 		String userIdStr = userOpu.getUserId();
 
 		//maybe not necessary to remove, but eh
@@ -162,6 +296,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//    }
 
 	public void removePvpUser(int userId) {
+		if (isUseDatabaseInstead()) {
+			return;
+		}
 		String userIdStr = String.valueOf(userId);
 
 		if (pvpUserMap.containsKey(userIdStr)) {
@@ -278,13 +415,15 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 
 		//now we have almost all users, put them into the userIdToPvpUser IMap
-		Collection<PvpUser> validUsers = getPvpUserRetrieveUtils().getPvpValidUsers();
+		Collection<PvpUser> validUsers = getPvpUserRetrieveUtil().getPvpValidUsers();
 		if (null != validUsers && !validUsers.isEmpty()) {
 			log.info("populating the IMap with users that can be attacked in pvp. numUsers="
 					+ validUsers.size());
 			populatePvpUserMap(validUsers);
+			useDatabaseInstead = false;
 		} else {
 			log.error("no available users that can be attacked in pvp.");
+			useDatabaseInstead = true;
 		}
 	}
 
@@ -293,9 +432,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 		//property name
 
 		//the true is for indicating that there will be ranged queries on this property
-		pvpUserMap.addIndex(PvpConstants.OFFLINE_PVP_USER__ELO, true);
-		pvpUserMap.addIndex(PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME, true);
-		pvpUserMap.addIndex(PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME, true);
+		pvpUserMap.addIndex(PvpConstants.PVP_USER__ELO, true);
+		pvpUserMap.addIndex(PvpConstants.PVP_USER__SHIELD_END_TIME, true);
+		pvpUserMap.addIndex(PvpConstants.PVP_USER__IN_BATTLE_END_TIME, true);
 	}
 
 	protected void populatePvpUserMap(Collection<PvpUser> validUsers) {
@@ -308,16 +447,6 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 	}
 
-
-	//    
-	//    
-	//    public HazelcastInstance getHazel() {
-	//    	return hazel;
-	//    }
-	//    
-	//    public void setHazel(HazelcastInstance hazel) {
-	//    	this.hazel = hazel;
-	//    }
 
 	public Locker getLocker() {
 		return locker;
@@ -334,12 +463,20 @@ public class HazelcastPvpUtil implements InitializingBean {
 		this.textFileResourceLoaderAware = textFileResourceLoaderAware;
 	}
 
-	public PvpUserRetrieveUtils getPvpUserRetrieveUtils() {
-		return pvpUserRetrieveUtils;
+	public PvpUserRetrieveUtil getPvpUserRetrieveUtil() {
+		return pvpUserRetrieveUtil;
 	}
-	public void setPvpUserRetrieveUtils(
-			PvpUserRetrieveUtils pvpUserRetrieveUtils) {
-		this.pvpUserRetrieveUtils = pvpUserRetrieveUtils;
+	public void setPvpUserRetrieveUtil(
+			PvpUserRetrieveUtil pvpUserRetrieveUtil) {
+		this.pvpUserRetrieveUtil = pvpUserRetrieveUtil;
+	}
+	
+	public QueryConstructionUtil getQueryConstructionUtil() {
+		return queryConstructionUtil;
+	}
+	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+		this.queryConstructionUtil = queryConstructionUtil;
 	}
 
+	
 }

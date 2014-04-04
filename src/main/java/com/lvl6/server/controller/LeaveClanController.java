@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,6 @@ import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
-import com.lvl6.info.UserClan;
-import com.lvl6.misc.MiscMethods;
-import com.lvl6.misc.Notification;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto;
@@ -147,8 +146,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
 
     int clanId = user.getClanId();
-    List<Integer> statuses = new ArrayList<Integer>();
-    statuses.add(UserClanStatus.LEADER_VALUE);
+    List<String> statuses = new ArrayList<String>();
+    statuses.add(UserClanStatus.LEADER.name());
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
@@ -158,8 +157,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
     
     if (clanOwnerId == user.getId()) {
-      List<UserClan> userClanMembersInClan = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clan.getId());
-      if (userClanMembersInClan.size() > 1) {
+    	List<Integer> clanIdList = Collections.singletonList(clanId);
+    	//add in the other "in clan" statuses with the existing leader status
+    	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+	    statuses.add(UserClanStatus.CAPTAIN.name());
+	    statuses.add(UserClanStatus.MEMBER.name());
+    	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+    			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+    	int userClanMembersInClan = clanIdToSize.get(clanId);
+      if (userClanMembersInClan > 1) {
         resBuilder.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
         log.error("user is owner and he's not alone in clan, can't leave without switching ownership. user clan members are " 
             + userClanMembersInClan);
@@ -202,7 +208,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       }
     }
   }
-  
+  /*
   private void notifyClan(User aUser, Clan aClan) {
     int clanId = aClan.getId();
     
@@ -212,5 +218,5 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     
     aNote.setAsUserLeftClan(level, deserter);
     MiscMethods.writeClanApnsNotification(aNote, server, clanId);
-  }
+  }*/
 }

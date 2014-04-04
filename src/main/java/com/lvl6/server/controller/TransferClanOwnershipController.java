@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -185,14 +186,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private void setResponseBuilderStuff(Builder resBuilder, int clanId, User newClanOwner) {
   	Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
-  	List<Integer> clanIdList = new ArrayList<Integer>();
-  	clanIdList.add(clanId);
+  	List<Integer> clanIdList = Collections.singletonList(clanId);
   	
-  	List<Integer> statuses = new ArrayList<Integer>();
-  	statuses.add(UserClanStatus.LEADER_VALUE);
-  	statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-  	statuses.add(UserClanStatus.CAPTAIN_VALUE);
-  	statuses.add(UserClanStatus.MEMBER_VALUE);
+  	List<String> statuses = new ArrayList<String>();
+  	statuses.add(UserClanStatus.LEADER.name());
+  	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+  	statuses.add(UserClanStatus.CAPTAIN.name());
+  	statuses.add(UserClanStatus.MEMBER.name());
   	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
   			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
   	

@@ -5,6 +5,7 @@ import java.util.Set;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 
 public interface LeaderBoardUtil {
@@ -60,7 +61,7 @@ public interface LeaderBoardUtil {
 
 	public abstract Set<Tuple> getExperienceTopN(Integer start, Integer stop);
 
-	public abstract void updateLeaderboardForUser(User user);
+	public abstract void updateLeaderboardForUser(User user, PvpLeagueForUser plfu);
 
 	public abstract void setScoreForEventAndUser(Integer eventId, Integer userId, Double score);
 	public abstract Double getScoreForEventAndUser(Integer eventId, Integer userId);

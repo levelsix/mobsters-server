@@ -94,7 +94,9 @@ import com.lvl6.utils.DBConnection;
     	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
+    int taskStageId = rs.getInt(i++);
+    
     return new TaskForUserOngoing(id, userId, taskId, expGained, cashGained,
-    		oilGained, numRevives, startDate);
+    		oilGained, numRevives, startDate, taskStageId);
   }
 }

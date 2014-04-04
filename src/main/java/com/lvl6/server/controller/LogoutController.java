@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LogoutRequestEvent;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -23,6 +24,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
@@ -57,6 +59,9 @@ public class LogoutController extends EventController {
 	@Autowired
 	protected Locker locker;
 	
+	@Autowired
+	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new LogoutRequestEvent();
@@ -81,7 +86,7 @@ public class LogoutController extends EventController {
 			try {
 				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 				if (null != user) {
-					//for now don't do this
+					//FOR NOW DON'T DO THE FOLLOWING
 					//if user has unfinished battle, reward defender and penalize attacker
 //					List<Integer> eloChangeList = new ArrayList<Integer>();
 //					pvpBattleStuff(user, userId, eloChangeList, lastLogout);
@@ -90,9 +95,10 @@ public class LogoutController extends EventController {
 //					if (!eloChangeList.isEmpty()) {
 //						eloChange = eloChangeList.get(0);
 //					}
-					if (!user.updateLastLogoutElo(lastLogout, eloChange)) {
-						log.error("problem with updating user's last logout time for user "	+ userId);
-					}
+					//TODO: figure out if still deducting elo from user after logging out
+//					if (!user.updateLastLogoutElo(lastLogout, eloChange)) {
+//						log.error("problem with updating user's last logout time for user "	+ userId);
+//					}
 			    if (!InsertUtils.get().insertLastLoginLastLogoutToUserSessions(user.getId(), null, lastLogout)) {
 			      log.error("problem with inserting last logout time for user " + user + ", logout=" + lastLogout);
 			    }
@@ -105,13 +111,13 @@ public class LogoutController extends EventController {
 			    
 			    //put this user back into pool of people who can be attacked,
 			    //don't really need to, since will most likely still be there. eh might as well
-			    int elo = user.getElo();
-			    String userIdStr = String.valueOf(userId);
-			    Date shieldEndTime = user.getShieldEndTime();
-			    Date inBattleEndTime = user.getInBattleShieldEndTime();
-			    PvpUser userOpu = new PvpUser(userIdStr, elo, shieldEndTime, inBattleEndTime);
-			    getHazelcastPvpUtil().replacePvpUser(userOpu, userId);
-			    
+//			    int elo = user.getElo();
+//			    String userIdStr = String.valueOf(userId);
+//			    Date shieldEndTime = user.getShieldEndTime();
+//			    Date inBattleEndTime = user.getInBattleShieldEndTime();
+//			    PvpUser userOpu = new PvpUser(userIdStr, elo, shieldEndTime, inBattleEndTime);
+//			    getHazelcastPvpUtil().replacePvpUser(userOpu, userId);
+//			    
 				}
 				log.info("Player logged out: "+userId);
 				playersByPlayerId.remove(userId);
@@ -135,10 +141,12 @@ public class LogoutController extends EventController {
 			return;
 		}
 
+		PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
+				.getUserPvpLeagueForId(userId);
 		//capping max elo attacker loses
 		int eloAttackerLoses = battle.getAttackerLoseEloChange();
-		if (user.getElo() + eloAttackerLoses < 0) {
-			eloAttackerLoses = -1 * user.getElo();
+		if (plfu.getElo() + eloAttackerLoses < 0) {
+			eloAttackerLoses = -1 * plfu.getElo();
 		}
 		int defenderId = battle.getDefenderId();
 		int eloDefenderWins = battle.getDefenderWinEloChange();
@@ -178,18 +186,18 @@ public class LogoutController extends EventController {
 			//update attacker
 			eloChange.add(eloAttackerLoses);
 			
+			//TODO: figure out if still doing any of this
 			//update defender if real, might need to cap defenderElo, defender can now be
 			//attacked
-			if (null != defender) {
-				defender.updateEloInBattleEndTime(eloDefenderWins, now);
-				int defenderElo = defender.getElo();                    
-				defenderOpu = new PvpUser();
-				defenderOpu.setElo(defenderElo);                        
-				Date nowDate = new Date(now.getTime());                 
-				defenderOpu.setInBattleEndTime(nowDate);                
-//				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
-				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
-			}
+//			if (null != defender) {
+//				defender.updateEloInBattleEndTime(eloDefenderWins, now);
+//				int defenderElo = defender.getElo();                    
+//				defenderOpu = new PvpUser();
+//				defenderOpu.setElo(defenderElo);                        
+//				Date nowDate = new Date(now.getTime());                 
+//				defenderOpu.setInBattleEndTime(nowDate);                
+//				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
+//			}
 //			if (null != defenderOpu) { //update if exists
 //				int defenderElo = defender.getElo();
 //				defenderOpu.setElo(defenderElo);
@@ -227,6 +235,15 @@ public class LogoutController extends EventController {
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+		return pvpLeagueForUserRetrieveUtil;
+	}
+
+	public void setPvpLeagueForUserRetrieveUtil(
+			PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
 	
 }

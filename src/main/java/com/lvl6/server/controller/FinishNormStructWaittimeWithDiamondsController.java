@@ -97,7 +97,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
       
       if (success) {
-      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
         writeToUserCurrencyHistory(user, userStruct, formerStruct, timeOfSpeedup, money, previousGems);

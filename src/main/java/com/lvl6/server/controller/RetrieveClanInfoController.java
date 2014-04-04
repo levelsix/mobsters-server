@@ -207,11 +207,11 @@ import com.lvl6.utils.RetrieveUtils;
     }
     List<Integer> clanIds = ClanRetrieveUtils.getClanIdsFromClans(clanList);
     
-    List<Integer> statuses = new ArrayList<Integer>();
-    statuses.add(UserClanStatus.LEADER_VALUE);
-    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
-    statuses.add(UserClanStatus.CAPTAIN_VALUE);
-    statuses.add(UserClanStatus.MEMBER_VALUE);
+    List<String> statuses = new ArrayList<String>();
+    statuses.add(UserClanStatus.LEADER.name());
+    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+    statuses.add(UserClanStatus.CAPTAIN.name());
+    statuses.add(UserClanStatus.MEMBER.name());
 
     Map<Integer, Integer> clanIdsToSizes = RetrieveUtils.userClanRetrieveUtils()
     		.getClanSizeForClanIdsAndStatuses(clanIds, statuses);

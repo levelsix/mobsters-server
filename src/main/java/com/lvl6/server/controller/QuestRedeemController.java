@@ -65,6 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Date currentDate = new Date();
     Timestamp now = new Timestamp(currentDate.getTime());
     int maxCash = senderResourcesProto.getMaxCash();
+    int maxOil = senderResourcesProto.getMaxOil();
     
     QuestRedeemResponseProto.Builder resBuilder = QuestRedeemResponseProto.newBuilder();
     resBuilder.setSender(senderResourcesProto);
@@ -93,16 +94,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (legitRedeem) {
         User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-        int previousSilver = user.getCash();
-        int previousGold = user.getGems();
         
-        Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(userQuest, quest, user, senderProto, money, maxCash);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+        Map<String, Integer> currencyChange = new HashMap<String, Integer>();
+        writeChangesToDB(userQuest, quest, user, senderProto, maxCash, maxOil,
+        		previousCurrency, currencyChange);
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        writeToUserCurrencyHistory(user, money, previousSilver, previousGold, now);
+        writeToUserCurrencyHistory(user, userId, questId, currencyChange,
+        		previousCurrency, now);
       }
     } catch (Exception e) {
       log.error("exception in QuestRedeem processEvent", e);
@@ -195,28 +199,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private void writeChangesToDB(QuestForUser userQuest, Quest quest, User user,
-  		MinimumUserProto senderProto, Map<String, Integer> money, int maxCash) {
+  		MinimumUserProto senderProto, int maxCash, int maxOil,
+  		Map<String, Integer> previousCurrency, Map<String, Integer> money) {
     if (!UpdateUtils.get().updateRedeemQuestForUser(userQuest.getUserId(), userQuest.getQuestId())) {
       log.error("problem with marking user quest as redeemed. questId=" + userQuest.getQuestId());
     }
+    
+    previousCurrency.put(MiscMethods.gems, user.getGems());
+    previousCurrency.put(MiscMethods.cash, user.getCash());
+    previousCurrency.put(MiscMethods.oil, user.getOil());
 
-    int cashGain = Math.max(0, quest.getCoinReward());
-    int gemsGained = Math.max(0, quest.getDiamondReward());
+    int cashGain = Math.max(0, quest.getCashReward());
+    int oilGain = Math.max(0, quest.getOilReward());
+    int gemsGained = Math.max(0, quest.getGemReward());
     int expGained = Math.max(0,  quest.getExpReward());
     
     int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
   	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
   	cashGain = Math.min(maxCashUserCanGain, cashGain);
+  	
+  	int curOil = Math.max(user.getOil(), maxOil);
+  	int maxOilUserCanGain = maxOil - curOil;
+  	oilGain = Math.min(maxOilUserCanGain, oilGain);
     
-  	if (0 == gemsGained && 0 == cashGain && 0 == expGained) {
+  	if (0 == gemsGained && 0 == cashGain && 0 == expGained && 0 == oilGain) {
   		log.info("user does not get any gems, cash, or exp from redeeming quest=" + quest +
   				" because user is maxed out on resources, and quest doesn't given exp nor gems.");
   		return;
   	}
   	
-    if (!user.updateRelativeGemsCashExperienceNaive(gemsGained, cashGain, expGained)) {
+    if (!user.updateRelativeGemsCashOilExperienceNaive(gemsGained, cashGain, oilGain,
+    		expGained)) {
       log.error("problem with giving user " + gemsGained + " diamonds, " + cashGain
-          + " cash, " + expGained + " exp");
+          + " cash, " + expGained + " exp, " + oilGain + " oilGain");
     } else {
       //things worked
       if (0 != gemsGained) {
@@ -225,26 +240,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (0 != cashGain) {
         money.put(MiscMethods.cash, cashGain);
       }
+      if (0 != oilGain) {
+    	  money.put(MiscMethods.oil, oilGain);
+      }
     }
   }
 
-  //TODO: FIX THIS
-  public void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
-      int previousSilver, int previousGold, Timestamp date) {
+  public void writeToUserCurrencyHistory(User aUser, int userId, int questId,
+		  Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency,
+		  Timestamp curTime) {
+	  
+	  Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> detailsMap = new HashMap<String, String>();
+	  String gems = MiscMethods.gems;
+	  String cash = MiscMethods.cash;
+	  String oil = MiscMethods.oil;
+	  
+	  String reason = ControllerConstants.UCHRFC__QUEST_REDEEM;
+	  StringBuilder detailsSb = new StringBuilder();
+	  detailsSb.append("quest redeemed=");
+	  detailsSb.append(questId);
+	  String details = detailsSb.toString();
 
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    String reasonForChange = ControllerConstants.UCHRFC__QUEST_REDEEM;
-//
-//    previousGoldSilver.put(gems, previousGold);
-//    previousGoldSilver.put(cash, previousSilver);
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash, reasonForChange);
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-//        previousGoldSilver, reasonsForChanges);
+	  currentCurrency.put(gems, aUser.getGems());
+	  currentCurrency.put(cash, aUser.getCash());
+	  currentCurrency.put(oil, aUser.getOil());
+	  reasonsForChanges.put(gems, reason);
+	  reasonsForChanges.put(cash, reason);
+	  reasonsForChanges.put(oil, reason);
+	  detailsMap.put(gems, details);
+	  detailsMap.put(cash, details);
+	  detailsMap.put(oil, details);
+
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
+			  previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
   }
 
 }

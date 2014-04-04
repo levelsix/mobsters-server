@@ -9,16 +9,14 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Monster;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class MonsterRetrieveUtils {
+@Component
+public class MonsterRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
@@ -26,16 +24,6 @@ import com.lvl6.utils.DBConnection;
 
   private static final String TABLE_NAME = DBConstants.TABLE_MONSTER;
 
-  public static MonsterElement getMonsterElementForMonsterId(int monsterId) {
-  	Monster mon = getMonsterForMonsterId(monsterId);
-  	
-  	if (null != mon) {
-  		return mon.getElement();
-  	} else {
-  		return null;
-  	}
-  }
-  
   public static Map<Integer, Monster> getMonsterIdsToMonsters() {
     log.debug("retrieving all monsteres data map");
     if (monsterIdsToMonsters == null) {
@@ -130,10 +118,10 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     String monsterGroup = rs.getString(i++);
-    MonsterQuality quality = MonsterQuality.valueOf(rs.getInt(i++));
+    String quality = rs.getString(i++);
     int evolutionLevel = rs.getInt(i++);
     String displayName = rs.getString(i++);
-    MonsterElement element = MonsterElement.valueOf(rs.getInt(i++));
+    String element = rs.getString(i++);
     String imagePrefix = rs.getString(i++);
     int numPuzzlePieces = rs.getInt(i++);
     int minutesToCombinePieces = rs.getInt(i++);
@@ -157,6 +145,7 @@ import com.lvl6.utils.DBConnection;
     int atkSoundAnimationFrame = rs.getInt(i++);
     int atkAnimationRepeatedFramesStart = rs.getInt(i++);
     int atkAnimationRepeatedFramesEnd = rs.getInt(i++);
+    String shorterName = rs.getString(i++);
     
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
@@ -164,7 +153,7 @@ import com.lvl6.utils.DBConnection;
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
     		description, evolutionCost, animationType, verticalPixelOffset, atkSoundFile,
     		atkSoundAnimationFrame, atkAnimationRepeatedFramesStart,
-    		atkAnimationRepeatedFramesEnd);
+    		atkAnimationRepeatedFramesEnd, shorterName);
     
     if (null != animationType) {
     	String newAnimationType = animationType.trim().toUpperCase();

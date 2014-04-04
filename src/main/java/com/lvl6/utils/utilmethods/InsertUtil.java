@@ -69,7 +69,10 @@ public interface InsertUtil {
 	// returns -1 if error
 	public abstract int insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
-			Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime);
+			Timestamp createTime, String facebookId);
+	
+	public abstract int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 
@@ -109,11 +112,13 @@ public interface InsertUtil {
 			List<Date> timeOfPosts);
 
 	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
-			int expGained, int cashGained, int oilGained, Timestamp startTime); 
+			int expGained, int cashGained, int oilGained, Timestamp startTime,
+			int taskStageId); 
 
 	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
-			int taskId, int expGained, int cashGained, int oilGained,int numRevives,
-			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
+			int taskId, int expGained, int cashGained, int oilGained,
+			int numRevives, Timestamp startTime, Timestamp endTime,
+			boolean userWon, boolean cancelled, int taskStageId);
 	
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
 			Timestamp timeOfEntry);
@@ -180,9 +185,13 @@ public interface InsertUtil {
 
 	public abstract int insertIntoPvpBattleHistory(int attackerId, int defenderId,
 			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
-			int defenderEloChange, int attackerOilChange, int defenderOilChange,
-			int attackerCashChange, int defenderCashChange, boolean attackerWon,
-			boolean cancelled, boolean gotRevenge, boolean displayToDefender);
+			int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
+			int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
+			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+			int defenderPrevRank, int defenderCurRank, int attackerOilChange,
+			int defenderOilChange, int attackerCashChange, int defenderCashChange,
+			boolean attackerWon, boolean cancelled, boolean gotRevenge,
+			boolean displayToDefender);
 	
 	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
 			List<ObstacleForUser> ofuList);

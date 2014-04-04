@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
 
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
@@ -19,7 +18,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 public class GenerateFakeUsersWithoutInput {
 
 	private static Resource nameFile;
-  private static String nameRulesFile = "src/main/java/com/lvl6/scriptsjava/generatefakeusers/namerulesElven.txt";
+//  private static String nameRulesFile = "src/main/java/com/lvl6/scriptsjava/generatefakeusers/namerulesElven.txt";
   private static int numEnemiesToCreatePerLevel = 300;
   private static int minLevel = 51;
   private static int maxLevel = 70;
@@ -72,9 +71,7 @@ public class GenerateFakeUsersWithoutInput {
     InsertUtil insertUtils = (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
     String facebookId = null;
     if (insertUtils.insertUser(name, null, level, 0, 0, 0, 0, true, null,
-    		new Timestamp((new Date()).getTime()),
-        ControllerConstants.TUTORIAL__INIT_RANK, facebookId,
-        new Timestamp((new Date()).getTime())) < 0) {
+    		new Timestamp((new Date()).getTime()), facebookId) < 0) {
       System.out.println("error in creating user");
     }
 

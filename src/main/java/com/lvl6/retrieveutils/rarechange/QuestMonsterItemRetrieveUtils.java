@@ -55,8 +55,7 @@ import com.lvl6.utils.DBConnection;
   	
   }
   
-  //quest will have at most one row in quest_monster_item table.
-  //quest only has one static id table, so only one item.
+  //duple (questId, monsterId) will have at most one row in quest_monster_item table.
 //  public static Map<Integer, QuestMonsterItem> getItemsForQuestId(int questId) {
 //    log.debug("retrieve quest_monster_item data for questId " + questId);
 //    if (questIdsToMonsterIdsToItems == null) {

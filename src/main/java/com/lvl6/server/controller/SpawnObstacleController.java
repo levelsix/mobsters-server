@@ -99,8 +99,9 @@ public class SpawnObstacleController extends EventController{
 			
 			if (success) {
 				//modified the user, the last obstacle removed time
+				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	

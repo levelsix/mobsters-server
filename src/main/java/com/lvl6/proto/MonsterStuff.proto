@@ -9,6 +9,7 @@ option java_outer_classname = "MonsterStuffProto";
 message MonsterProto {
 	optional int32 monsterId = 1;
 	optional string name = 2; //for grouping purposes
+	optional string shorterName = 28;
 	optional string monsterGroup = 3;
 	optional MonsterQuality quality = 4;
 	optional int32 evolutionLevel = 5;
@@ -43,6 +44,8 @@ message MonsterProto {
 	optional int32 atkAnimationRepeatedFramesStart = 26;
 	optional int32 atkAnimationRepeatedFramesEnd = 27;
 	
+	//optional string shorterName = 28; defined above
+	
 	enum MonsterQuality {
 		COMMON = 1;
 		RARE = 2;
@@ -58,8 +61,8 @@ message MonsterProto {
 		GRASS = 2; //beats water
 		WATER = 3; //beats fire
 		
-		LIGHTNING = 4; //beats darkness
-		DARKNESS = 5; //beats lightning
+		LIGHT = 4; //beats dark
+		DARK = 5; //beats light
 		
 		ROCK = 6; //damages everything
 	}

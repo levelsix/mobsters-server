@@ -96,8 +96,12 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     String imgName = rs.getString(i++);
+    String borderImgName = rs.getString(i++);
+    int blue = rs.getInt(i++);
+    int green = rs.getInt(i++);
+    int red = rs.getInt(i++);
     
-    Item item = new Item(id, name, imgName);
+    Item item = new Item(id, name, imgName, borderImgName, blue, green, red);
     return item;
   }
 }

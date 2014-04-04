@@ -3003,7 +3003,7 @@ public final class BoosterPackStuffProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
     boolean hasQuality();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality();
     
@@ -3074,7 +3074,7 @@ public final class BoosterPackStuffProto {
       return isComplete_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
     public static final int QUALITY_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_;
     public boolean hasQuality() {
@@ -3543,7 +3543,7 @@ public final class BoosterPackStuffProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
       private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
       public boolean hasQuality() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -3668,12 +3668,13 @@ public final class BoosterPackStuffProto {
       " \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001" +
       "(\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(" +
       "\010\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005" +
-      "\022\026\n\016chanceToAppear\030\t \001(\002\"\272\001\n\027BoosterDisp",
+      "\022\026\n\016chanceToAppear\030\t \001(\002\"\302\001\n\027BoosterDisp",
       "layItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\ti" +
-      "sMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\022<\n\007qu" +
+      "sMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\022D\n\007qu" +
       "ality\030\004 \001(\0162+.com.lvl6.proto.MonsterProt" +
-      "o.MonsterQuality\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010q" +
-      "uantity\030\006 \001(\005B\027B\025BoosterPackStuffProto"
+      "o.MonsterQuality:\006COMMON\022\021\n\tgemReward\030\005 " +
+      "\001(\005\022\020\n\010quantity\030\006 \001(\005B\027B\025BoosterPackStuf" +
+      "fProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

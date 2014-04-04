@@ -11,14 +11,17 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.pvp.HazelcastPvpUtil;
 
 public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 
@@ -62,6 +65,16 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 	public void setJedisPool(JedisPool jedis) {
 		this.jedisPool = jedis;
 	}
+	
+	@Autowired
+	protected HazelcastPvpUtil hazelcastPvpUtil;
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
+		return hazelcastPvpUtil;
+	}
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+	
 
 	@Override
 	public void setBattlesWonForUser(Integer userId, Double battlesWon) {
@@ -335,17 +348,24 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 	}
 
 	@Override
-	public void updateLeaderboardForUser(User user) {
+	public void updateLeaderboardForUser(User user, PvpLeagueForUser plfu) {
 		if (user != null) {
 			long startTime = new Date().getTime();
 			try {
-				setBattlesWonForUser(user.getId(),
-						(double) user.getBattlesWon());
+				int userId = user.getId();
+				//so if null plfu this means to access hazelcast to get it
+				//since maybe not so important to hit db to get it
+				if (null == plfu) {
+					plfu = new PvpLeagueForUser(getHazelcastPvpUtil()
+							.getPvpUser(userId));
+				}
+					
+				setBattlesWonForUser(user.getId(), (double) plfu.getBattlesWon());
 
-				if (user.getBattlesWon() + user.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
+				if (plfu.getBattlesWon() + plfu.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
 					setBattlesWonOverTotalBattlesRatioForUser(user.getId(),
-						 ((double) user.getBattlesWon() / (user
-									.getBattlesLost() + user.getBattlesWon())));
+						 ((double) plfu.getBattlesWon() /
+								 (plfu .getBattlesLost() + plfu.getBattlesWon())));
 				} else {
 					setBattlesWonOverTotalBattlesRatioForUser(user.getId(), 0.0);
 				}

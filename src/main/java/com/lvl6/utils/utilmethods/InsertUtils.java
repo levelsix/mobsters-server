@@ -442,14 +442,13 @@ public class InsertUtils implements InsertUtil{
     return false;
   }
 
-  // returns -1 if error
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
-  		String rank, String facebookId, Timestamp shieldEndTime) {
+  		String facebookId) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -465,9 +464,6 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
-    insertParams.put(DBConstants.USER__SHIELD_END_TIME, shieldEndTime);
-    insertParams.put(DBConstants.USER__IN_BATTLE_END_TIME, shieldEndTime);
-    insertParams.put(DBConstants.USER__RANK, rank);
     
     if (null != facebookId && !facebookId.isEmpty()) {
     	insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
@@ -482,6 +478,24 @@ public class InsertUtils implements InsertUtil{
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
     return userId;
+  }
+  
+  @Override
+  public int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime) {
+	  String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
+	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID, pvpLeagueId);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__RANK, rank);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ELO, elo);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
+			  shieldEndTime);
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+			  inBattleShieldEndTime);
+	  
+	  int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+	  return numInserted;
   }
 
 
@@ -721,7 +735,7 @@ public class InsertUtils implements InsertUtil{
   
   //returns the id
   public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
-  		int cashGained, int oilGained, Timestamp startTime) {
+  		int cashGained, int oilGained, Timestamp startTime, int taskStageId) {
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
 	  //for recording what-dropped in which-stage
@@ -733,6 +747,7 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__OIL_GAINED, oilGained);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID, taskStageId);
 	  newRows.add(row);
 	  
 	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
@@ -748,7 +763,7 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
 		  int expGained, int cashGained, int oilGained, int numRevives, Timestamp startTime,
-		  Timestamp endTime, boolean userWon, boolean cancelled) {
+		  Timestamp endTime, boolean userWon, boolean cancelled, int taskStageId) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
@@ -762,6 +777,7 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_WON, userWon);
 	  insertParams.put(DBConstants.TASK_HISTORY__CANCELLED, cancelled);
+	  insertParams.put(DBConstants.TASK_HISTORY__TASK_STAGE_ID, taskStageId);
 	  
 	  int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_HISTORY, insertParams);
@@ -1443,9 +1459,13 @@ public class InsertUtils implements InsertUtil{
 		@Override
 		public int insertIntoPvpBattleHistory(int attackerId, int defenderId,
 				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
-				int defenderEloChange, int attackerOilChange, int defenderOilChange,
-				int attackerCashChange, int defenderCashChange, boolean attackerWon,
-				boolean cancelled, boolean gotRevenge, boolean displayToDefender) {
+				int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
+				int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
+				int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+				int defenderPrevRank, int defenderCurRank, int attackerOilChange,
+				int defenderOilChange, int attackerCashChange, int defenderCashChange,
+				boolean attackerWon, boolean cancelled, boolean gotRevenge,
+				boolean displayToDefender) {
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			
 			Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -1454,8 +1474,37 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
 			
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE, attackerEloChange);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE, defenderEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE,
+					attackerEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_BEFORE,
+					attackerEloBefore);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_AFTER,
+					attackerEloBefore + attackerEloChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE,
+					defenderEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_BEFORE,
+					defenderEloBefore);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_AFTER,
+					defenderEloBefore + defenderEloChange);
+
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_LEAGUE,
+					attackerPrevLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_LEAGUE,
+					attackerCurLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_LEAGUE,
+					defenderPrevLeague);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_LEAGUE,
+					defenderCurLeague);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_PREV_RANK,
+					attackerPrevRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK,
+					attackerCurRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK,
+					defenderPrevRank);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK,
+					defenderCurRank);
 			
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);
@@ -1485,7 +1534,7 @@ public class InsertUtils implements InsertUtil{
 				int obstacleId = ofu.getObstacleId();                                           
 				int xcoord = ofu.getXcoord();
 				int ycoord = ofu.getYcoord();
-				int orientation = ofu.getOrientation();                                        
+				String orientation = ofu.getOrientation();                                        
 
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   

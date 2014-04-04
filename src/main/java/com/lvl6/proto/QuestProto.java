@@ -52,13 +52,17 @@ public final class QuestProto {
     boolean hasQuantity();
     int getQuantity();
     
-    // optional int32 coinReward = 11;
-    boolean hasCoinReward();
-    int getCoinReward();
+    // optional int32 cashReward = 11;
+    boolean hasCashReward();
+    int getCashReward();
     
-    // optional int32 diamondReward = 12;
-    boolean hasDiamondReward();
-    int getDiamondReward();
+    // optional int32 oilReward = 22;
+    boolean hasOilReward();
+    int getOilReward();
+    
+    // optional int32 gemReward = 12;
+    boolean hasGemReward();
+    int getGemReward();
     
     // optional int32 expReward = 13;
     boolean hasExpReward();
@@ -77,9 +81,13 @@ public final class QuestProto {
     int getQuestsRequiredForThisCount();
     int getQuestsRequiredForThis(int index);
     
-    // optional string questGiverImageSuffix = 17;
-    boolean hasQuestGiverImageSuffix();
-    String getQuestGiverImageSuffix();
+    // optional string questGiverName = 24;
+    boolean hasQuestGiverName();
+    String getQuestGiverName();
+    
+    // optional string questGiverImagePrefix = 17;
+    boolean hasQuestGiverImagePrefix();
+    String getQuestGiverImagePrefix();
     
     // optional int32 priority = 18;
     boolean hasPriority();
@@ -97,6 +105,10 @@ public final class QuestProto {
     boolean hasQuestGiverImgOffset();
     com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder();
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 23;
+    boolean hasMonsterElement();
+    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
   }
   public static final class FullQuestProto extends
       com.google.protobuf.GeneratedMessage
@@ -405,31 +417,41 @@ public final class QuestProto {
       return quantity_;
     }
     
-    // optional int32 coinReward = 11;
-    public static final int COINREWARD_FIELD_NUMBER = 11;
-    private int coinReward_;
-    public boolean hasCoinReward() {
+    // optional int32 cashReward = 11;
+    public static final int CASHREWARD_FIELD_NUMBER = 11;
+    private int cashReward_;
+    public boolean hasCashReward() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
-    public int getCoinReward() {
-      return coinReward_;
+    public int getCashReward() {
+      return cashReward_;
     }
     
-    // optional int32 diamondReward = 12;
-    public static final int DIAMONDREWARD_FIELD_NUMBER = 12;
-    private int diamondReward_;
-    public boolean hasDiamondReward() {
+    // optional int32 oilReward = 22;
+    public static final int OILREWARD_FIELD_NUMBER = 22;
+    private int oilReward_;
+    public boolean hasOilReward() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
-    public int getDiamondReward() {
-      return diamondReward_;
+    public int getOilReward() {
+      return oilReward_;
+    }
+    
+    // optional int32 gemReward = 12;
+    public static final int GEMREWARD_FIELD_NUMBER = 12;
+    private int gemReward_;
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    public int getGemReward() {
+      return gemReward_;
     }
     
     // optional int32 expReward = 13;
     public static final int EXPREWARD_FIELD_NUMBER = 13;
     private int expReward_;
     public boolean hasExpReward() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public int getExpReward() {
       return expReward_;
@@ -439,7 +461,7 @@ public final class QuestProto {
     public static final int MONSTERIDREWARD_FIELD_NUMBER = 14;
     private int monsterIdReward_;
     public boolean hasMonsterIdReward() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public int getMonsterIdReward() {
       return monsterIdReward_;
@@ -449,7 +471,7 @@ public final class QuestProto {
     public static final int ISCOMPLETEMONSTER_FIELD_NUMBER = 15;
     private boolean isCompleteMonster_;
     public boolean hasIsCompleteMonster() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     public boolean getIsCompleteMonster() {
       return isCompleteMonster_;
@@ -469,14 +491,14 @@ public final class QuestProto {
       return questsRequiredForThis_.get(index);
     }
     
-    // optional string questGiverImageSuffix = 17;
-    public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 17;
-    private java.lang.Object questGiverImageSuffix_;
-    public boolean hasQuestGiverImageSuffix() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+    // optional string questGiverName = 24;
+    public static final int QUESTGIVERNAME_FIELD_NUMBER = 24;
+    private java.lang.Object questGiverName_;
+    public boolean hasQuestGiverName() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
-    public String getQuestGiverImageSuffix() {
-      java.lang.Object ref = questGiverImageSuffix_;
+    public String getQuestGiverName() {
+      java.lang.Object ref = questGiverName_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
@@ -484,17 +506,49 @@ public final class QuestProto {
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          questGiverImageSuffix_ = s;
+          questGiverName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getQuestGiverImageSuffixBytes() {
-      java.lang.Object ref = questGiverImageSuffix_;
+    private com.google.protobuf.ByteString getQuestGiverNameBytes() {
+      java.lang.Object ref = questGiverName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        questGiverImageSuffix_ = b;
+        questGiverName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string questGiverImagePrefix = 17;
+    public static final int QUESTGIVERIMAGEPREFIX_FIELD_NUMBER = 17;
+    private java.lang.Object questGiverImagePrefix_;
+    public boolean hasQuestGiverImagePrefix() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    public String getQuestGiverImagePrefix() {
+      java.lang.Object ref = questGiverImagePrefix_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          questGiverImagePrefix_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getQuestGiverImagePrefixBytes() {
+      java.lang.Object ref = questGiverImagePrefix_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        questGiverImagePrefix_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -505,7 +559,7 @@ public final class QuestProto {
     public static final int PRIORITY_FIELD_NUMBER = 18;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     public int getPriority() {
       return priority_;
@@ -515,7 +569,7 @@ public final class QuestProto {
     public static final int CARROTID_FIELD_NUMBER = 19;
     private java.lang.Object carrotId_;
     public boolean hasCarrotId() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00080000) == 0x00080000);
     }
     public String getCarrotId() {
       java.lang.Object ref = carrotId_;
@@ -547,7 +601,7 @@ public final class QuestProto {
     public static final int ISACHIEVEMENT_FIELD_NUMBER = 20;
     private boolean isAchievement_;
     public boolean hasIsAchievement() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
+      return ((bitField0_ & 0x00100000) == 0x00100000);
     }
     public boolean getIsAchievement() {
       return isAchievement_;
@@ -557,13 +611,23 @@ public final class QuestProto {
     public static final int QUESTGIVERIMGOFFSET_FIELD_NUMBER = 21;
     private com.lvl6.proto.StructureProto.CoordinateProto questGiverImgOffset_;
     public boolean hasQuestGiverImgOffset() {
-      return ((bitField0_ & 0x00080000) == 0x00080000);
+      return ((bitField0_ & 0x00200000) == 0x00200000);
     }
     public com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset() {
       return questGiverImgOffset_;
     }
     public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder() {
       return questGiverImgOffset_;
+    }
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 23;
+    public static final int MONSTERELEMENT_FIELD_NUMBER = 23;
+    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_;
+    public boolean hasMonsterElement() {
+      return ((bitField0_ & 0x00400000) == 0x00400000);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+      return monsterElement_;
     }
     
     private void initFields() {
@@ -577,17 +641,20 @@ public final class QuestProto {
       jobDescription_ = "";
       staticDataId_ = 0;
       quantity_ = 0;
-      coinReward_ = 0;
-      diamondReward_ = 0;
+      cashReward_ = 0;
+      oilReward_ = 0;
+      gemReward_ = 0;
       expReward_ = 0;
       monsterIdReward_ = 0;
       isCompleteMonster_ = false;
       questsRequiredForThis_ = java.util.Collections.emptyList();;
-      questGiverImageSuffix_ = "";
+      questGiverName_ = "";
+      questGiverImagePrefix_ = "";
       priority_ = 0;
       carrotId_ = "";
       isAchievement_ = false;
       questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -632,37 +699,46 @@ public final class QuestProto {
         output.writeInt32(10, quantity_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, coinReward_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(12, diamondReward_);
+        output.writeInt32(11, cashReward_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(13, expReward_);
+        output.writeInt32(12, gemReward_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(14, monsterIdReward_);
+        output.writeInt32(13, expReward_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(14, monsterIdReward_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeBool(15, isCompleteMonster_);
       }
       for (int i = 0; i < questsRequiredForThis_.size(); i++) {
         output.writeInt32(16, questsRequiredForThis_.get(i));
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeBytes(17, getQuestGiverImageSuffixBytes());
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(18, priority_);
-      }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeBytes(19, getCarrotIdBytes());
+        output.writeBytes(17, getQuestGiverImagePrefixBytes());
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        output.writeBool(20, isAchievement_);
+        output.writeInt32(18, priority_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeBytes(19, getCarrotIdBytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeBool(20, isAchievement_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
         output.writeMessage(21, questGiverImgOffset_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(22, oilReward_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        output.writeEnum(23, monsterElement_.getNumber());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeBytes(24, getQuestGiverNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -715,21 +791,21 @@ public final class QuestProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, coinReward_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, diamondReward_);
+          .computeInt32Size(11, cashReward_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, expReward_);
+          .computeInt32Size(12, gemReward_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, monsterIdReward_);
+          .computeInt32Size(13, expReward_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(14, monsterIdReward_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(15, isCompleteMonster_);
       }
@@ -742,25 +818,37 @@ public final class QuestProto {
         size += dataSize;
         size += 2 * getQuestsRequiredForThisList().size();
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(17, getQuestGiverImageSuffixBytes());
-      }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(18, priority_);
-      }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(19, getCarrotIdBytes());
+          .computeBytesSize(17, getQuestGiverImagePrefixBytes());
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(20, isAchievement_);
+          .computeInt32Size(18, priority_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(19, getCarrotIdBytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(20, isAchievement_);
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(21, questGiverImgOffset_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, oilReward_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(23, monsterElement_.getNumber());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(24, getQuestGiverNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -912,32 +1000,38 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         quantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        coinReward_ = 0;
+        cashReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        diamondReward_ = 0;
+        oilReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        expReward_ = 0;
+        gemReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
-        monsterIdReward_ = 0;
+        expReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
-        isCompleteMonster_ = false;
+        monsterIdReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
-        questsRequiredForThis_ = java.util.Collections.emptyList();;
+        isCompleteMonster_ = false;
         bitField0_ = (bitField0_ & ~0x00008000);
-        questGiverImageSuffix_ = "";
+        questsRequiredForThis_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00010000);
-        priority_ = 0;
+        questGiverName_ = "";
         bitField0_ = (bitField0_ & ~0x00020000);
-        carrotId_ = "";
+        questGiverImagePrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00040000);
-        isAchievement_ = false;
+        priority_ = 0;
         bitField0_ = (bitField0_ & ~0x00080000);
+        carrotId_ = "";
+        bitField0_ = (bitField0_ & ~0x00100000);
+        isAchievement_ = false;
+        bitField0_ = (bitField0_ & ~0x00200000);
         if (questGiverImgOffsetBuilder_ == null) {
           questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
         } else {
           questGiverImgOffsetBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00400000);
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        bitField0_ = (bitField0_ & ~0x00800000);
         return this;
       }
       
@@ -1023,52 +1117,64 @@ public final class QuestProto {
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.coinReward_ = coinReward_;
+        result.cashReward_ = cashReward_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.diamondReward_ = diamondReward_;
+        result.oilReward_ = oilReward_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.expReward_ = expReward_;
+        result.gemReward_ = gemReward_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.monsterIdReward_ = monsterIdReward_;
+        result.expReward_ = expReward_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.isCompleteMonster_ = isCompleteMonster_;
-        if (((bitField0_ & 0x00008000) == 0x00008000)) {
-          questsRequiredForThis_ = java.util.Collections.unmodifiableList(questsRequiredForThis_);
-          bitField0_ = (bitField0_ & ~0x00008000);
-        }
-        result.questsRequiredForThis_ = questsRequiredForThis_;
-        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+        result.monsterIdReward_ = monsterIdReward_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.questGiverImageSuffix_ = questGiverImageSuffix_;
+        result.isCompleteMonster_ = isCompleteMonster_;
+        if (((bitField0_ & 0x00010000) == 0x00010000)) {
+          questsRequiredForThis_ = java.util.Collections.unmodifiableList(questsRequiredForThis_);
+          bitField0_ = (bitField0_ & ~0x00010000);
+        }
+        result.questsRequiredForThis_ = questsRequiredForThis_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.priority_ = priority_;
+        result.questGiverName_ = questGiverName_;
         if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.carrotId_ = carrotId_;
+        result.questGiverImagePrefix_ = questGiverImagePrefix_;
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00040000;
         }
-        result.isAchievement_ = isAchievement_;
+        result.priority_ = priority_;
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00080000;
+        }
+        result.carrotId_ = carrotId_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.isAchievement_ = isAchievement_;
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00200000;
         }
         if (questGiverImgOffsetBuilder_ == null) {
           result.questGiverImgOffset_ = questGiverImgOffset_;
         } else {
           result.questGiverImgOffset_ = questGiverImgOffsetBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00400000;
+        }
+        result.monsterElement_ = monsterElement_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1115,11 +1221,14 @@ public final class QuestProto {
         if (other.hasQuantity()) {
           setQuantity(other.getQuantity());
         }
-        if (other.hasCoinReward()) {
-          setCoinReward(other.getCoinReward());
+        if (other.hasCashReward()) {
+          setCashReward(other.getCashReward());
         }
-        if (other.hasDiamondReward()) {
-          setDiamondReward(other.getDiamondReward());
+        if (other.hasOilReward()) {
+          setOilReward(other.getOilReward());
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
         }
         if (other.hasExpReward()) {
           setExpReward(other.getExpReward());
@@ -1133,15 +1242,18 @@ public final class QuestProto {
         if (!other.questsRequiredForThis_.isEmpty()) {
           if (questsRequiredForThis_.isEmpty()) {
             questsRequiredForThis_ = other.questsRequiredForThis_;
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           } else {
             ensureQuestsRequiredForThisIsMutable();
             questsRequiredForThis_.addAll(other.questsRequiredForThis_);
           }
           onChanged();
         }
-        if (other.hasQuestGiverImageSuffix()) {
-          setQuestGiverImageSuffix(other.getQuestGiverImageSuffix());
+        if (other.hasQuestGiverName()) {
+          setQuestGiverName(other.getQuestGiverName());
+        }
+        if (other.hasQuestGiverImagePrefix()) {
+          setQuestGiverImagePrefix(other.getQuestGiverImagePrefix());
         }
         if (other.hasPriority()) {
           setPriority(other.getPriority());
@@ -1154,6 +1266,9 @@ public final class QuestProto {
         }
         if (other.hasQuestGiverImgOffset()) {
           mergeQuestGiverImgOffset(other.getQuestGiverImgOffset());
+        }
+        if (other.hasMonsterElement()) {
+          setMonsterElement(other.getMonsterElement());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1248,26 +1363,26 @@ public final class QuestProto {
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              coinReward_ = input.readInt32();
+              cashReward_ = input.readInt32();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000800;
-              diamondReward_ = input.readInt32();
+              bitField0_ |= 0x00001000;
+              gemReward_ = input.readInt32();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00002000;
               expReward_ = input.readInt32();
               break;
             }
             case 112: {
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00004000;
               monsterIdReward_ = input.readInt32();
               break;
             }
             case 120: {
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00008000;
               isCompleteMonster_ = input.readBool();
               break;
             }
@@ -1286,22 +1401,22 @@ public final class QuestProto {
               break;
             }
             case 138: {
-              bitField0_ |= 0x00010000;
-              questGiverImageSuffix_ = input.readBytes();
+              bitField0_ |= 0x00040000;
+              questGiverImagePrefix_ = input.readBytes();
               break;
             }
             case 144: {
-              bitField0_ |= 0x00020000;
+              bitField0_ |= 0x00080000;
               priority_ = input.readInt32();
               break;
             }
             case 154: {
-              bitField0_ |= 0x00040000;
+              bitField0_ |= 0x00100000;
               carrotId_ = input.readBytes();
               break;
             }
             case 160: {
-              bitField0_ |= 0x00080000;
+              bitField0_ |= 0x00200000;
               isAchievement_ = input.readBool();
               break;
             }
@@ -1312,6 +1427,27 @@ public final class QuestProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setQuestGiverImgOffset(subBuilder.buildPartial());
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00000800;
+              oilReward_ = input.readInt32();
+              break;
+            }
+            case 184: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(23, rawValue);
+              } else {
+                bitField0_ |= 0x00800000;
+                monsterElement_ = value;
+              }
+              break;
+            }
+            case 194: {
+              bitField0_ |= 0x00020000;
+              questGiverName_ = input.readBytes();
               break;
             }
           }
@@ -1662,44 +1798,65 @@ public final class QuestProto {
         return this;
       }
       
-      // optional int32 coinReward = 11;
-      private int coinReward_ ;
-      public boolean hasCoinReward() {
+      // optional int32 cashReward = 11;
+      private int cashReward_ ;
+      public boolean hasCashReward() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
-      public int getCoinReward() {
-        return coinReward_;
+      public int getCashReward() {
+        return cashReward_;
       }
-      public Builder setCoinReward(int value) {
+      public Builder setCashReward(int value) {
         bitField0_ |= 0x00000400;
-        coinReward_ = value;
+        cashReward_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCoinReward() {
+      public Builder clearCashReward() {
         bitField0_ = (bitField0_ & ~0x00000400);
-        coinReward_ = 0;
+        cashReward_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 diamondReward = 12;
-      private int diamondReward_ ;
-      public boolean hasDiamondReward() {
+      // optional int32 oilReward = 22;
+      private int oilReward_ ;
+      public boolean hasOilReward() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
-      public int getDiamondReward() {
-        return diamondReward_;
+      public int getOilReward() {
+        return oilReward_;
       }
-      public Builder setDiamondReward(int value) {
+      public Builder setOilReward(int value) {
         bitField0_ |= 0x00000800;
-        diamondReward_ = value;
+        oilReward_ = value;
         onChanged();
         return this;
       }
-      public Builder clearDiamondReward() {
+      public Builder clearOilReward() {
         bitField0_ = (bitField0_ & ~0x00000800);
-        diamondReward_ = 0;
+        oilReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemReward = 12;
+      private int gemReward_ ;
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      public int getGemReward() {
+        return gemReward_;
+      }
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00001000;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        gemReward_ = 0;
         onChanged();
         return this;
       }
@@ -1707,19 +1864,19 @@ public final class QuestProto {
       // optional int32 expReward = 13;
       private int expReward_ ;
       public boolean hasExpReward() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public int getExpReward() {
         return expReward_;
       }
       public Builder setExpReward(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         expReward_ = value;
         onChanged();
         return this;
       }
       public Builder clearExpReward() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         expReward_ = 0;
         onChanged();
         return this;
@@ -1728,19 +1885,19 @@ public final class QuestProto {
       // optional int32 monsterIdReward = 14;
       private int monsterIdReward_ ;
       public boolean hasMonsterIdReward() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public int getMonsterIdReward() {
         return monsterIdReward_;
       }
       public Builder setMonsterIdReward(int value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         monsterIdReward_ = value;
         onChanged();
         return this;
       }
       public Builder clearMonsterIdReward() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         monsterIdReward_ = 0;
         onChanged();
         return this;
@@ -1749,19 +1906,19 @@ public final class QuestProto {
       // optional bool isCompleteMonster = 15;
       private boolean isCompleteMonster_ ;
       public boolean hasIsCompleteMonster() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       public boolean getIsCompleteMonster() {
         return isCompleteMonster_;
       }
       public Builder setIsCompleteMonster(boolean value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         isCompleteMonster_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsCompleteMonster() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         isCompleteMonster_ = false;
         onChanged();
         return this;
@@ -1770,9 +1927,9 @@ public final class QuestProto {
       // repeated int32 questsRequiredForThis = 16;
       private java.util.List<java.lang.Integer> questsRequiredForThis_ = java.util.Collections.emptyList();;
       private void ensureQuestsRequiredForThisIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           questsRequiredForThis_ = new java.util.ArrayList<java.lang.Integer>(questsRequiredForThis_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -1807,63 +1964,99 @@ public final class QuestProto {
       }
       public Builder clearQuestsRequiredForThis() {
         questsRequiredForThis_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         onChanged();
         return this;
       }
       
-      // optional string questGiverImageSuffix = 17;
-      private java.lang.Object questGiverImageSuffix_ = "";
-      public boolean hasQuestGiverImageSuffix() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+      // optional string questGiverName = 24;
+      private java.lang.Object questGiverName_ = "";
+      public boolean hasQuestGiverName() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
-      public String getQuestGiverImageSuffix() {
-        java.lang.Object ref = questGiverImageSuffix_;
+      public String getQuestGiverName() {
+        java.lang.Object ref = questGiverName_;
         if (!(ref instanceof String)) {
           String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          questGiverImageSuffix_ = s;
+          questGiverName_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
-      public Builder setQuestGiverImageSuffix(String value) {
+      public Builder setQuestGiverName(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00010000;
-        questGiverImageSuffix_ = value;
+  bitField0_ |= 0x00020000;
+        questGiverName_ = value;
         onChanged();
         return this;
       }
-      public Builder clearQuestGiverImageSuffix() {
-        bitField0_ = (bitField0_ & ~0x00010000);
-        questGiverImageSuffix_ = getDefaultInstance().getQuestGiverImageSuffix();
+      public Builder clearQuestGiverName() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        questGiverName_ = getDefaultInstance().getQuestGiverName();
         onChanged();
         return this;
       }
-      void setQuestGiverImageSuffix(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00010000;
-        questGiverImageSuffix_ = value;
+      void setQuestGiverName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00020000;
+        questGiverName_ = value;
+        onChanged();
+      }
+      
+      // optional string questGiverImagePrefix = 17;
+      private java.lang.Object questGiverImagePrefix_ = "";
+      public boolean hasQuestGiverImagePrefix() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      public String getQuestGiverImagePrefix() {
+        java.lang.Object ref = questGiverImagePrefix_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          questGiverImagePrefix_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setQuestGiverImagePrefix(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00040000;
+        questGiverImagePrefix_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuestGiverImagePrefix() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        questGiverImagePrefix_ = getDefaultInstance().getQuestGiverImagePrefix();
+        onChanged();
+        return this;
+      }
+      void setQuestGiverImagePrefix(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00040000;
+        questGiverImagePrefix_ = value;
         onChanged();
       }
       
       // optional int32 priority = 18;
       private int priority_ ;
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       public int getPriority() {
         return priority_;
       }
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00080000;
         priority_ = value;
         onChanged();
         return this;
       }
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         priority_ = 0;
         onChanged();
         return this;
@@ -1872,7 +2065,7 @@ public final class QuestProto {
       // optional string carrotId = 19;
       private java.lang.Object carrotId_ = "";
       public boolean hasCarrotId() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
+        return ((bitField0_ & 0x00100000) == 0x00100000);
       }
       public String getCarrotId() {
         java.lang.Object ref = carrotId_;
@@ -1888,19 +2081,19 @@ public final class QuestProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00040000;
+  bitField0_ |= 0x00100000;
         carrotId_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotId() {
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         carrotId_ = getDefaultInstance().getCarrotId();
         onChanged();
         return this;
       }
       void setCarrotId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00100000;
         carrotId_ = value;
         onChanged();
       }
@@ -1908,19 +2101,19 @@ public final class QuestProto {
       // optional bool isAchievement = 20;
       private boolean isAchievement_ ;
       public boolean hasIsAchievement() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
+        return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       public boolean getIsAchievement() {
         return isAchievement_;
       }
       public Builder setIsAchievement(boolean value) {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00200000;
         isAchievement_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsAchievement() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         isAchievement_ = false;
         onChanged();
         return this;
@@ -1931,7 +2124,7 @@ public final class QuestProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> questGiverImgOffsetBuilder_;
       public boolean hasQuestGiverImgOffset() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       public com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset() {
         if (questGiverImgOffsetBuilder_ == null) {
@@ -1950,7 +2143,7 @@ public final class QuestProto {
         } else {
           questGiverImgOffsetBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00400000;
         return this;
       }
       public Builder setQuestGiverImgOffset(
@@ -1961,12 +2154,12 @@ public final class QuestProto {
         } else {
           questGiverImgOffsetBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00400000;
         return this;
       }
       public Builder mergeQuestGiverImgOffset(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (questGiverImgOffsetBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000) &&
+          if (((bitField0_ & 0x00400000) == 0x00400000) &&
               questGiverImgOffset_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
             questGiverImgOffset_ =
               com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(questGiverImgOffset_).mergeFrom(value).buildPartial();
@@ -1977,7 +2170,7 @@ public final class QuestProto {
         } else {
           questGiverImgOffsetBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00400000;
         return this;
       }
       public Builder clearQuestGiverImgOffset() {
@@ -1987,11 +2180,11 @@ public final class QuestProto {
         } else {
           questGiverImgOffsetBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
       public com.lvl6.proto.StructureProto.CoordinateProto.Builder getQuestGiverImgOffsetBuilder() {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00400000;
         onChanged();
         return getQuestGiverImgOffsetFieldBuilder().getBuilder();
       }
@@ -2014,6 +2207,30 @@ public final class QuestProto {
           questGiverImgOffset_ = null;
         }
         return questGiverImgOffsetBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 23;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      public boolean hasMonsterElement() {
+        return ((bitField0_ & 0x00800000) == 0x00800000);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+        return monsterElement_;
+      }
+      public Builder setMonsterElement(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00800000;
+        monsterElement_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterElement() {
+        bitField0_ = (bitField0_ & ~0x00800000);
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullQuestProto)
@@ -3778,6 +3995,15 @@ public final class QuestProto {
     // optional string imgName = 3;
     boolean hasImgName();
     String getImgName();
+    
+    // optional string borderImgName = 4;
+    boolean hasBorderImgName();
+    String getBorderImgName();
+    
+    // optional .com.lvl6.proto.ColorProto color = 5;
+    boolean hasColor();
+    com.lvl6.proto.ChatProto.ColorProto getColor();
+    com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder();
   }
   public static final class ItemProto extends
       com.google.protobuf.GeneratedMessage
@@ -3882,10 +4108,57 @@ public final class QuestProto {
       }
     }
     
+    // optional string borderImgName = 4;
+    public static final int BORDERIMGNAME_FIELD_NUMBER = 4;
+    private java.lang.Object borderImgName_;
+    public boolean hasBorderImgName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getBorderImgName() {
+      java.lang.Object ref = borderImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          borderImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getBorderImgNameBytes() {
+      java.lang.Object ref = borderImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        borderImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .com.lvl6.proto.ColorProto color = 5;
+    public static final int COLOR_FIELD_NUMBER = 5;
+    private com.lvl6.proto.ChatProto.ColorProto color_;
+    public boolean hasColor() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.ChatProto.ColorProto getColor() {
+      return color_;
+    }
+    public com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder() {
+      return color_;
+    }
+    
     private void initFields() {
       itemId_ = 0;
       name_ = "";
       imgName_ = "";
+      borderImgName_ = "";
+      color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3908,6 +4181,12 @@ public final class QuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getImgNameBytes());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getBorderImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, color_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3928,6 +4207,14 @@ public final class QuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getBorderImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, color_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4045,6 +4332,7 @@ public final class QuestProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getColorFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4059,6 +4347,14 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        borderImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (colorBuilder_ == null) {
+          color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+        } else {
+          colorBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -4109,6 +4405,18 @@ public final class QuestProto {
           to_bitField0_ |= 0x00000004;
         }
         result.imgName_ = imgName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.borderImgName_ = borderImgName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (colorBuilder_ == null) {
+          result.color_ = color_;
+        } else {
+          result.color_ = colorBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4133,6 +4441,12 @@ public final class QuestProto {
         }
         if (other.hasImgName()) {
           setImgName(other.getImgName());
+        }
+        if (other.hasBorderImgName()) {
+          setBorderImgName(other.getBorderImgName());
+        }
+        if (other.hasColor()) {
+          mergeColor(other.getColor());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4178,6 +4492,20 @@ public final class QuestProto {
             case 26: {
               bitField0_ |= 0x00000004;
               imgName_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              borderImgName_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              com.lvl6.proto.ChatProto.ColorProto.Builder subBuilder = com.lvl6.proto.ChatProto.ColorProto.newBuilder();
+              if (hasColor()) {
+                subBuilder.mergeFrom(getColor());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setColor(subBuilder.buildPartial());
               break;
             }
           }
@@ -4279,6 +4607,132 @@ public final class QuestProto {
         onChanged();
       }
       
+      // optional string borderImgName = 4;
+      private java.lang.Object borderImgName_ = "";
+      public boolean hasBorderImgName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public String getBorderImgName() {
+        java.lang.Object ref = borderImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          borderImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setBorderImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        borderImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBorderImgName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        borderImgName_ = getDefaultInstance().getBorderImgName();
+        onChanged();
+        return this;
+      }
+      void setBorderImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
+        borderImgName_ = value;
+        onChanged();
+      }
+      
+      // optional .com.lvl6.proto.ColorProto color = 5;
+      private com.lvl6.proto.ChatProto.ColorProto color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> colorBuilder_;
+      public boolean hasColor() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public com.lvl6.proto.ChatProto.ColorProto getColor() {
+        if (colorBuilder_ == null) {
+          return color_;
+        } else {
+          return colorBuilder_.getMessage();
+        }
+      }
+      public Builder setColor(com.lvl6.proto.ChatProto.ColorProto value) {
+        if (colorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          color_ = value;
+          onChanged();
+        } else {
+          colorBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder setColor(
+          com.lvl6.proto.ChatProto.ColorProto.Builder builderForValue) {
+        if (colorBuilder_ == null) {
+          color_ = builderForValue.build();
+          onChanged();
+        } else {
+          colorBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder mergeColor(com.lvl6.proto.ChatProto.ColorProto value) {
+        if (colorBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              color_ != com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance()) {
+            color_ =
+              com.lvl6.proto.ChatProto.ColorProto.newBuilder(color_).mergeFrom(value).buildPartial();
+          } else {
+            color_ = value;
+          }
+          onChanged();
+        } else {
+          colorBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder clearColor() {
+        if (colorBuilder_ == null) {
+          color_ = com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+          onChanged();
+        } else {
+          colorBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      public com.lvl6.proto.ChatProto.ColorProto.Builder getColorBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getColorFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ChatProto.ColorProtoOrBuilder getColorOrBuilder() {
+        if (colorBuilder_ != null) {
+          return colorBuilder_.getMessageOrBuilder();
+        } else {
+          return color_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder> 
+          getColorFieldBuilder() {
+        if (colorBuilder_ == null) {
+          colorBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ChatProto.ColorProto, com.lvl6.proto.ChatProto.ColorProto.Builder, com.lvl6.proto.ChatProto.ColorProtoOrBuilder>(
+                  color_,
+                  getParentForChildren(),
+                  isClean());
+          color_ = null;
+        }
+        return colorBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ItemProto)
     }
     
@@ -4324,36 +4778,42 @@ public final class QuestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Quest.proto\022\016com.lvl6.proto\032\017Structure" +
-      ".proto\"\377\005\n\016FullQuestProto\022\017\n\007questId\030\001 \001" +
-      "(\005\022\016\n\006cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013desc" +
-      "ription\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016a" +
-      "cceptDialogue\030\006 \001(\0132\035.com.lvl6.proto.Dia" +
-      "logueProto\022;\n\tquestType\030\007 \001(\0162(.com.lvl6" +
-      ".proto.FullQuestProto.QuestType\022\026\n\016jobDe" +
-      "scription\030\010 \001(\t\022\024\n\014staticDataId\030\t \001(\005\022\020\n" +
-      "\010quantity\030\n \001(\005\022\022\n\ncoinReward\030\013 \001(\005\022\025\n\rd" +
-      "iamondReward\030\014 \001(\005\022\021\n\texpReward\030\r \001(\005\022\027\n",
-      "\017monsterIdReward\030\016 \001(\005\022\031\n\021isCompleteMons" +
-      "ter\030\017 \001(\010\022\035\n\025questsRequiredForThis\030\020 \003(\005" +
-      "\022\035\n\025questGiverImageSuffix\030\021 \001(\t\022\020\n\010prior" +
-      "ity\030\022 \001(\005\022\020\n\010carrotId\030\023 \001(\t\022\025\n\risAchieve" +
-      "ment\030\024 \001(\010\022<\n\023questGiverImgOffset\030\025 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\"\265\001\n\tQue" +
-      "stType\022\020\n\014KILL_MONSTER\020\001\022\022\n\016DONATE_MONST" +
-      "ER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLECT_COINS" +
-      "_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022\n\016UPGRAD" +
-      "E_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030\n\024COLLEC",
-      "T_SPECIAL_ITEM\020\010\"\276\001\n\rDialogueProto\022G\n\rsp" +
-      "eechSegment\030\001 \003(\01320.com.lvl6.proto.Dialo" +
-      "gueProto.SpeechSegmentProto\032d\n\022SpeechSeg" +
-      "mentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014speakerIma" +
-      "ge\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\nisLeftS" +
-      "ide\030\004 \001(\010\"o\n\022FullUserQuestProto\022\016\n\006userI" +
-      "d\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed\030\003" +
-      " \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progress\030\005 \001" +
-      "(\005\":\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
-      "\002 \001(\t\022\017\n\007imgName\030\003 \001(\tB\014B\nQuestProto"
+      "\n\013Quest.proto\022\016com.lvl6.proto\032\nChat.prot" +
+      "o\032\022MonsterStuff.proto\032\017Structure.proto\"\353" +
+      "\006\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006ci" +
+      "tyId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030" +
+      "\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016acceptDia" +
+      "logue\030\006 \001(\0132\035.com.lvl6.proto.DialoguePro" +
+      "to\022;\n\tquestType\030\007 \001(\0162(.com.lvl6.proto.F" +
+      "ullQuestProto.QuestType\022\026\n\016jobDescriptio" +
+      "n\030\010 \001(\t\022\024\n\014staticDataId\030\t \001(\005\022\020\n\010quantit" +
+      "y\030\n \001(\005\022\022\n\ncashReward\030\013 \001(\005\022\021\n\toilReward",
+      "\030\026 \001(\005\022\021\n\tgemReward\030\014 \001(\005\022\021\n\texpReward\030\r" +
+      " \001(\005\022\027\n\017monsterIdReward\030\016 \001(\005\022\031\n\021isCompl" +
+      "eteMonster\030\017 \001(\010\022\035\n\025questsRequiredForThi" +
+      "s\030\020 \003(\005\022\026\n\016questGiverName\030\030 \001(\t\022\035\n\025quest" +
+      "GiverImagePrefix\030\021 \001(\t\022\020\n\010priority\030\022 \001(\005" +
+      "\022\020\n\010carrotId\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(" +
+      "\010\022<\n\023questGiverImgOffset\030\025 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\022C\n\016monsterElemen" +
+      "t\030\027 \001(\0162+.com.lvl6.proto.MonsterProto.Mo" +
+      "nsterElement\"\265\001\n\tQuestType\022\020\n\014KILL_MONST",
+      "ER\020\001\022\022\n\016DONATE_MONSTER\020\002\022\021\n\rCOMPLETE_TAS" +
+      "K\020\003\022\033\n\027COLLECT_COINS_FROM_HOME\020\004\022\020\n\014BUIL" +
+      "D_STRUCT\020\005\022\022\n\016UPGRADE_STRUCT\020\006\022\022\n\016MONSTE" +
+      "R_APPEAR\020\007\022\030\n\024COLLECT_SPECIAL_ITEM\020\010\"\276\001\n" +
+      "\rDialogueProto\022G\n\rspeechSegment\030\001 \003(\01320." +
+      "com.lvl6.proto.DialogueProto.SpeechSegme" +
+      "ntProto\032d\n\022SpeechSegmentProto\022\017\n\007speaker" +
+      "\030\001 \001(\t\022\024\n\014speakerImage\030\002 \001(\t\022\023\n\013speakerT" +
+      "ext\030\003 \001(\t\022\022\n\nisLeftSide\030\004 \001(\010\"o\n\022FullUse" +
+      "rQuestProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002",
+      " \001(\005\022\022\n\nisRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004" +
+      " \001(\010\022\020\n\010progress\030\005 \001(\005\"|\n\tItemProto\022\016\n\006i" +
+      "temId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001" +
+      "(\t\022\025\n\rborderImgName\030\004 \001(\t\022)\n\005color\030\005 \001(\013" +
+      "2\032.com.lvl6.proto.ColorProtoB\014B\nQuestPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4365,7 +4825,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullQuestProto_descriptor,
-              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "QuestType", "JobDescription", "StaticDataId", "Quantity", "CoinReward", "DiamondReward", "ExpReward", "MonsterIdReward", "IsCompleteMonster", "QuestsRequiredForThis", "QuestGiverImageSuffix", "Priority", "CarrotId", "IsAchievement", "QuestGiverImgOffset", },
+              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "QuestType", "JobDescription", "StaticDataId", "Quantity", "CashReward", "OilReward", "GemReward", "ExpReward", "MonsterIdReward", "IsCompleteMonster", "QuestsRequiredForThis", "QuestGiverName", "QuestGiverImagePrefix", "Priority", "CarrotId", "IsAchievement", "QuestGiverImgOffset", "MonsterElement", },
               com.lvl6.proto.QuestProto.FullQuestProto.class,
               com.lvl6.proto.QuestProto.FullQuestProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =
@@ -4397,7 +4857,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ItemProto_descriptor,
-              new java.lang.String[] { "ItemId", "Name", "ImgName", },
+              new java.lang.String[] { "ItemId", "Name", "ImgName", "BorderImgName", "Color", },
               com.lvl6.proto.QuestProto.ItemProto.class,
               com.lvl6.proto.QuestProto.ItemProto.Builder.class);
           return null;
@@ -4406,6 +4866,8 @@ public final class QuestProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.ChatProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
   }

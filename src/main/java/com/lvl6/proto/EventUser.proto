@@ -28,7 +28,8 @@ message UserCreateRequestProto {
 }
 
 message UserCreateResponseProto {
-	optional FullUserProto sender = 1;
+	//optional FullUserProto sender = 1;
+	//just need success, since client calls startup after this anyway
 	optional UserCreateStatus status = 2;
 	
     enum UserCreateStatus {

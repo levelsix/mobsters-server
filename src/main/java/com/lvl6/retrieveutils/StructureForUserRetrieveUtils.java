@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -215,7 +214,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Date purchaseTime = new Date(rs.getTimestamp(i++).getTime());
     
     boolean isComplete = rs.getBoolean(i++);
-    StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
+    String orientation = rs.getString(i++);
     int fbInviteStructLvl = rs.getInt(i++);
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,

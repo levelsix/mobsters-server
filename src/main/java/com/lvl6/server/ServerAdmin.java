@@ -188,7 +188,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 						try {
 							User usr = uru.getUserById(id);
 							log.info("Batch reloading leaderboard for user {}", usr.getId());
-							leaderboard.updateLeaderboardForUser(usr);
+							//null for pvpLeagueForUser, will pull it from hazelcast
+							leaderboard.updateLeaderboardForUser(usr, null);
 						} catch (Exception e) {
 							log.error("Error updating leaderboard for user: {}", id, e);
 						}

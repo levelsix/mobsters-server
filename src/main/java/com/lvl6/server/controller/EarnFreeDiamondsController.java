@@ -129,7 +129,9 @@ public class EarnFreeDiamondsController extends EventController {
         List<String> keys = new ArrayList<String>();
 //        writeChangesToDB(user, freeDiamondsType, kiipConfirmationReceipt, adColonyAmountEarned, adColonyRewardType, money, keys);
         writeChangesToDB(user, freeDiamondsType, money, keys);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
 

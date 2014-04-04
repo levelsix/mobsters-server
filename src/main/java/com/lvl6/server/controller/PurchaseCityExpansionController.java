@@ -114,7 +114,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 						numExpansions, cost, currencyChange);
 				
 				//modified user object, need to update the client to reflect this
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+				//null PvpLeagueFromUser means will pull from hazelcast instead
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
 				ExpansionPurchaseForUser uced = ExpansionPurchaseForUserRetrieveUtils.getSpecificUserCityExpansionDataForUserIdAndPosition(user.getId(), xPosition, yPosition);
 				resBuilder.setUcedp(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
 				resEventUpdate.setTag(event.getTag());

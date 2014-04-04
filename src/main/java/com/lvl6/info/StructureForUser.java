@@ -3,12 +3,12 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.lvl6.proto.StructureProto.StructOrientation;
 
 public class StructureForUser implements Serializable {
 	//any change in this class should also change the UpdateUtils.java method updateUserStructsLastretrieved()
 	
-	private static final long serialVersionUID = -5978986902991070169L;
+	private static final long serialVersionUID = -3430826000446530128L;
+	
 	private int id;
 	private int userId;
 	private int structId;
@@ -17,13 +17,12 @@ public class StructureForUser implements Serializable {
 //	private int level;
 	private Date purchaseTime;
 	private boolean isComplete;
-	private StructOrientation orientation;
+	private String orientation;
 	private int fbInviteStructLvl;
 	
-
-	public StructureForUser(int id, int userId, int structId, Date lastRetrieved,
-			CoordinatePair coordinates, Date purchaseTime, boolean isComplete,
-			StructOrientation orientation, int fbInviteStructLvl) {
+	public StructureForUser(int id, int userId, int structId,
+			Date lastRetrieved, CoordinatePair coordinates, Date purchaseTime,
+			boolean isComplete, String orientation, int fbInviteStructLvl) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -92,11 +91,11 @@ public class StructureForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public StructOrientation getOrientation() {
+	public String getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(StructOrientation orientation) {
+	public void setOrientation(String orientation) {
 		this.orientation = orientation;
 	}
 
@@ -107,14 +106,14 @@ public class StructureForUser implements Serializable {
 	public void setFbInviteStructLvl(int fbInviteStructLvl) {
 		this.fbInviteStructLvl = fbInviteStructLvl;
 	}
-	
 
 	@Override
 	public String toString() {
-		return "StructureForUser [id=" + id + ", userId=" + userId + ", structId="
-				+ structId + ", lastRetrieved=" + lastRetrieved + ", coordinates="
-				+ coordinates + ", purchaseTime=" + purchaseTime + ", isComplete="
-				+ isComplete + ", orientation=" + orientation + ", fbInviteStructLvl="
+		return "StructureForUser [id=" + id + ", userId=" + userId
+				+ ", structId=" + structId + ", lastRetrieved=" + lastRetrieved
+				+ ", coordinates=" + coordinates + ", purchaseTime="
+				+ purchaseTime + ", isComplete=" + isComplete
+				+ ", orientation=" + orientation + ", fbInviteStructLvl="
 				+ fbInviteStructLvl + "]";
 	}
 

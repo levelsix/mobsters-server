@@ -73,11 +73,9 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
-import com.lvl6.proto.BattleProto.UserPvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -85,6 +83,7 @@ import com.lvl6.proto.ChatProto.ColorProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.CityProto.CityElementProto;
+import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
@@ -149,6 +148,7 @@ import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
+import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
@@ -160,6 +160,8 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
+import com.lvl6.proto.UserProto.UserPvpLeagueProto;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -173,20 +175,24 @@ public class CreateInfoProtoUtils {
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
   /**Battle.proto***************************************************/
-  public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(User u) {
+  /*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(
+		  User u, PvpLeagueForUser plfu) {
     MinimumUserProtoWithLevel mup = createMinimumUserProtoWithLevelFromUser(u);
     MinimumUserProtoWithBattleHistory.Builder mupwbhb = MinimumUserProtoWithBattleHistory.newBuilder(); 
     mupwbhb.setMinUserProtoWithLevel(mup);
-    mupwbhb.setBattlesWon(u.getBattlesWon());
-    mupwbhb.setBattlesLost(u.getBattlesLost());
-    mupwbhb.setBattlesFled(u.getFlees());
+    
+    int battlesWon = plfu.getAttacksWon() + plfu.getDefensesWon();
+    mupwbhb.setBattlesWon(battlesWon);
+    int battlesLost = plfu.getAttacksLost() + plfu.getDefensesLost();
+    mupwbhb.setBattlesLost(battlesLost);
     
     return mupwbhb.build();
-  }
+  }*/
 
-  public static PvpProto createPvpProtoFrom(User u, PvpLeagueForUser plfu,
-		  Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
-		  int prospectiveOilWinnings) {
+  public static PvpProto createPvpProto(User u, PvpLeagueForUser plfu,
+		  PvpUser pu, Collection<MonsterForUser> userMonsters,
+		  int prospectiveCashWinnings, int prospectiveOilWinnings) {
+	  
     PvpProto.Builder ppb = PvpProto.newBuilder();
     MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
     Collection<MinimumUserMonsterProto> defenderMonsters = 
@@ -196,6 +202,10 @@ public class CreateInfoProtoUtils {
     ppb.addAllDefenderMonsters(defenderMonsters);
     ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+    
+    int userId = u.getId();
+    UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, false);
+    ppb.setPvpLeagueStats(uplp);
 
     return ppb.build();
   }
@@ -235,19 +245,28 @@ public class CreateInfoProtoUtils {
 
   public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
 		  Map<Integer, PvpLeagueForUser> userIdToLeagueInfo,
+		  Map<Integer, PvpUser> userIdToPvpUser,
 		  Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
 		  Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
     List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
-      PvpLeagueForUser plfu = userIdToLeagueInfo.get(userId);
+      PvpLeagueForUser plfu = null;
+      if (userIdToLeagueInfo.containsKey(userId)) {
+    	  plfu = userIdToLeagueInfo.get(userId);
+      }
+      
+      PvpUser pu = null;
+      if (userIdToPvpUser.containsKey(userId)) {
+    	  pu = userIdToPvpUser.get(userId);
+      }
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
       int prospectiveCashWinnings = userIdToCashReward.get(userId);
       int prospectiveOilWinnings = userIdToOilReward.get(userId);
 
-      PvpProto pp = createPvpProtoFrom(u, plfu, userMonsters, prospectiveCashWinnings,
-    		  prospectiveOilWinnings);
+      PvpProto pp = createPvpProto(u, plfu, pu, userMonsters,
+    		  prospectiveCashWinnings, prospectiveOilWinnings);
       pvpProtoList.add(pp);
     }
     return pvpProtoList;
@@ -258,7 +277,7 @@ public class CreateInfoProtoUtils {
   		int prospectiveOilWinnings) {
   	PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
   	//there is db call for clan...
-  	FullUserProto fup = createFullUserProtoFromUser(attacker);
+  	FullUserProto fup = createFullUserProtoFromUser(attacker, null);
   	phpb.setAttacker(fup);
   	
   	if (null != userMonsters && !userMonsters.isEmpty()) {
@@ -356,16 +375,38 @@ public class CreateInfoProtoUtils {
 	  return plpb.build();
   }
   
-  public static UserPvpLeagueProto createUserPvpLeagueProto(PvpLeagueForUser plfu,
-		  boolean setElo) {
+  public static UserPvpLeagueProto createUserPvpLeagueProto(int userId,
+		  PvpLeagueForUser plfu, PvpUser pu, boolean setElo) {
 	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
-	  uplpb.setUserId(plfu.getUserId());
-	  uplpb.setLeagueId(plfu.getPvpLeagueId());
-	  uplpb.setRank(plfu.getRank());
+	  uplpb.setUserId(userId);
 	  
-	  if (setElo) {
-		  uplpb.setElo(plfu.getElo());
+	  if (null != plfu) {
+		  uplpb.setLeagueId(plfu.getPvpLeagueId());
+		  uplpb.setRank(plfu.getRank());
+
+		  if (setElo) {
+			  uplpb.setElo(plfu.getElo());
+		  }
+		  Date shieldEndTime = plfu.getShieldEndTime();
+		  if (null != shieldEndTime) {
+			  long time = shieldEndTime.getTime();
+			  uplpb.setShieldEndTime(time);
+		  }
+		  
+	  } else if (null != pu) {
+		  uplpb.setLeagueId(pu.getPvpLeagueId());
+		  uplpb.setRank(pu.getRank());
+		  
+		  if (setElo) {
+			  uplpb.setElo(pu.getElo());
+		  }
+		  Date shieldEndTime = pu.getShieldEndTime();
+		  if (null != shieldEndTime) {
+			  long time = shieldEndTime.getTime();
+			  uplpb.setShieldEndTime(time);
+		  }
 	  }
+	  
 	  
 	  return uplpb.build();
   }
@@ -484,9 +525,12 @@ public class CreateInfoProtoUtils {
     b.setIsMonster(bdi.isMonster());
     b.setIsComplete(bdi.isComplete());
 
-    MonsterQuality mq = bdi.getMonsterQuality();
-    if (null != mq) {
-      b.setQuality(mq);
+    String monsterQuality = bdi.getMonsterQuality();
+    try {
+    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	b.setQuality(mq);
+    } catch (Exception e){
+    	log.error("invalid monster quality. boosterDisplayItem=" + bdi);
     }
 
     b.setGemReward(bdi.getGemReward());
@@ -647,26 +691,36 @@ public class CreateInfoProtoUtils {
     return builder.build();
   }
 
-  public static CityElementProto createCityElementProtoFromCityElement(CityElement nce) {
+  public static CityElementProto createCityElementProtoFromCityElement(CityElement ce) {
     CityElementProto.Builder builder = CityElementProto.newBuilder();
-    builder.setCityId(nce.getCityId());
-    builder.setAssetId(nce.getAssetId());
+    builder.setCityId(ce.getCityId());
+    builder.setAssetId(ce.getAssetId());
     //    builder.setName(nce.getGoodName());
-    builder.setType(nce.getType());
-    builder.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
+    
+    try {
+    	CityElemType cet = CityElemType.valueOf(ce.getType());
+    	builder.setType(cet);
+    } catch (Exception e) {
+    	log.error("incorrect element type. cityElement=" + ce);
+    }
+    builder.setCoords(createCoordinateProtoFromCoordinatePair(ce.getCoords()));
 
-    if (nce.getxLength() > 0) {
-      builder.setXLength(nce.getxLength());
+    if (ce.getxLength() > 0) {
+      builder.setXLength(ce.getxLength());
     }
-    if (nce.getyLength() > 0) {
-      builder.setYLength(nce.getyLength());
+    if (ce.getyLength() > 0) {
+      builder.setYLength(ce.getyLength());
     }
-    builder.setImgId(nce.getImgGood());
-    if (nce.getOrientation() != null) {
-      builder.setOrientation(nce.getOrientation());
+    builder.setImgId(ce.getImgGood());
+    
+    try {
+    	StructOrientation so = StructOrientation.valueOf(ce.getOrientation()); 
+    	builder.setOrientation(so);
+    } catch (Exception e) {
+    	log.error("incorrect orientation. cityElement=" + ce);
     }
 
-    builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(nce.getSpriteCoords()));
+    builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(ce.getSpriteCoords()));
 
     return builder.build();
   }
@@ -722,7 +776,14 @@ public class CreateInfoProtoUtils {
   	FullUserClanProto.Builder fucpb = FullUserClanProto.newBuilder();
     fucpb.setClanId(uc.getClanId());
     fucpb.setUserId(uc.getUserId());
-    fucpb.setStatus(uc.getStatus());
+    String userClanStatus = uc.getStatus();
+    
+    try {
+    	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
+    	fucpb.setStatus(ucs);
+    } catch (Exception e) {
+    	log.error("incorrect user clan status. userClan=" + uc);
+    }
     
     Date aTime = uc.getRequestTime();
     if (null != aTime) {
@@ -740,17 +801,38 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-      UserClanStatus s, float clanRaidContribution) {
-    MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
+      String userClanStatus, float clanRaidContribution) {
+	  MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
-    mupfcb.setMinUserProto(mup);
-    mupfcb.setClanStatus(s);
+    mupfcb.setMinUserProtoWithLevel(mupwl);
+    
+    try {
+    	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
+    	mupfcb.setClanStatus(ucs);
+    } catch (Exception e) {
+    	log.error("incorrect userClanStatus. userClanStatus=" + userClanStatus +
+    			"\t user=" + u);
+    }
     mupfcb.setRaidContribution(clanRaidContribution);
     MinimumUserProtoForClans mupfc = mupfcb.build();
 
     return mupfc;
   }
+  
+  public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
+		  UserClanStatus userClanStatus, float clanRaidContribution) {
+	  	MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
+
+	    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
+	    mupfcb.setMinUserProtoWithLevel(mupwl);
+	    
+	    mupfcb.setClanStatus(userClanStatus);
+	    mupfcb.setRaidContribution(clanRaidContribution);
+	    MinimumUserProtoForClans mupfc = mupfcb.build();
+
+	    return mupfc;
+	  }
 
   public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
     ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
@@ -1086,18 +1168,25 @@ public class CreateInfoProtoUtils {
     if (null != aStr) {
       mpb.setMonsterGroup(aStr);
     }
-    mpb.setQuality(aMonster.getQuality());
+    String monsterQuality = aMonster.getQuality(); 
+    try {
+    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	mpb.setQuality(mq);
+    } catch (Exception e) {
+    	log.error("invalid monster quality. monster=" + aMonster);
+    }
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     aStr = aMonster.getDisplayName(); 
     if (null != aStr) {
       mpb.setDisplayName(aStr);
     }
 
-    MonsterElement me = aMonster.getElement();
-    if (null != me) {
-      mpb.setMonsterElement(aMonster.getElement());
-    } else{
-      log.error("monster element is null!!!!!! monster=" + aMonster);
+    String monsterElement = aMonster.getElement();
+    try {
+    	MonsterElement me = MonsterElement.valueOf(monsterElement);
+    	mpb.setMonsterElement(me);
+    } catch (Exception e){
+      log.error("invalid monster element. monster=" + aMonster);
     }
     aStr = aMonster.getImagePrefix(); 
     if (null != aStr) {
@@ -1166,6 +1255,10 @@ public class CreateInfoProtoUtils {
     int atkAnimationRepeatedFramesEnd = aMonster.getAtkAnimationRepeatedFramesEnd();
     mpb.setAtkAnimationRepeatedFramesEnd(atkAnimationRepeatedFramesEnd);
     
+    String shorterName = aMonster.getShorterName();
+    if (null != shorterName) {
+    	mpb.setShorterName(shorterName);
+    }
     return mpb.build();
   }
 
@@ -1379,31 +1472,32 @@ public class CreateInfoProtoUtils {
 
   /**Quest.proto****************************************************/
   public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
-    String name = null;
-    String description = null;
-    String doneResponse = null;
-    Dialogue acceptDialogue = null;
-
-
-    String questGiverImageSuffix = null;
-    name = quest.getGoodName();
-    description = quest.getGoodDescription();
-    doneResponse = quest.getGoodDoneResponse();
-    acceptDialogue = quest.getGoodAcceptDialogue();
-    questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
-
     //SET THE BUILDER
     FullQuestProto.Builder builder = FullQuestProto.newBuilder();
     builder.setQuestId(quest.getId());
     builder.setCityId(quest.getCityId());
-    builder.setName(name);
-    builder.setDescription(description);
-    builder.setDoneResponse(doneResponse);
+    
+    String str = quest.getQuestName();
+    if (null != str) {
+    	builder.setName(str);
+    }
+
+    str = quest.getDescription();
+    if (null != str) {
+    	builder.setDescription(str);
+    }
+
+    str = quest.getDoneResponse();
+    if (null != str) {
+    	builder.setDoneResponse(str);
+    }
+    
+    Dialogue acceptDialogue = quest.getAcceptDialogue();
     if (acceptDialogue != null) {
       builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
     }
 
-    int qType = quest.getQuestType();
+    String qType = quest.getQuestType();
     try {
       QuestType qt = QuestType.valueOf(qType);
       builder.setQuestType(qt);
@@ -1411,31 +1505,50 @@ public class CreateInfoProtoUtils {
       log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
     }
     
-    String str = quest.getJobDescription();
-    
+    str = quest.getJobDescription();
     if (null != str && !str.isEmpty()) {
     	builder.setJobDescription(str);
     }
     
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
-    builder.setCoinReward(quest.getCoinReward());
-    builder.setDiamondReward(quest.getDiamondReward());
+    builder.setCashReward(quest.getCashReward());
+    builder.setOilReward(quest.getOilReward());
+    builder.setGemReward(quest.getGemReward());
     builder.setExpReward(quest.getExpReward());
     builder.setMonsterIdReward(quest.getMonsterIdReward());
     builder.setIsCompleteMonster(quest.isCompleteMonster());
     builder.addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis());
-    builder.setQuestGiverImageSuffix(questGiverImageSuffix);
+    
+    str = quest.getQuestGiverName();
+    if (null != str) {
+    	builder.setQuestGiverName(str);
+    }
+    
+    str = quest.getQuestGiverImagePrefix();
+    if (null != str) {
+    	builder.setQuestGiverImagePrefix(str);
+    }
+    
     if (quest.getPriority() > 0) {
       builder.setPriority(quest.getPriority());
     }
     
     str = quest.getCarrotId();
-    
     if (null != str && !str.isEmpty()) {
     	builder.setCarrotId(str);
     }
     builder.setIsAchievement(quest.isAchievement());
+    
+    str = quest.getMonsterElement();
+    if (null != str) {
+    try {
+    		MonsterElement me = MonsterElement.valueOf(str);
+    		builder.setMonsterElement(me);
+    } catch (Exception e) {
+    	log.error("invalid monsterElement. quest=" + quest);
+    }
+    }
 
     return builder.build();
   }
@@ -1493,6 +1606,17 @@ public class CreateInfoProtoUtils {
   	if (null != str) {
   		ipb.setImgName(str);
   	}
+  	
+  	str = item.getBorderImgName();
+  	if (null != str) {
+  		ipb.setBorderImgName(str);
+  	}
+  	
+  	ColorProto.Builder clrB = ColorProto.newBuilder();
+  	clrB.setBlue(item.getBlue());
+  	clrB.setGreen(item.getGreen());
+  	clrB.setRed(item.getRed());
+  	ipb.setColor(clrB.build());
   	
   	return ipb.build();
   }
@@ -1682,7 +1806,14 @@ public class CreateInfoProtoUtils {
     builder.setFbInviteStructLvl(userStruct.getFbInviteStructLvl());
     builder.setIsComplete(userStruct.isComplete());
     builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
-    builder.setOrientation(userStruct.getOrientation());
+    String orientation = userStruct.getOrientation();
+    try {
+    	StructOrientation so = StructOrientation.valueOf(orientation);
+    	builder.setOrientation(so);
+    } catch (Exception e) {
+    	log.error("invalid StructureForUser orientation. structureForUser=" + userStruct);
+    }
+    
     if (userStruct.getPurchaseTime() != null) {
       builder.setPurchaseTime(userStruct.getPurchaseTime().getTime());
     }
@@ -1788,12 +1919,12 @@ public class CreateInfoProtoUtils {
   	CoordinateProto cproto = createCoordinateProtoFromCoordinatePair(cp);
   	uopb.setCoordinates(cproto);
   	
-  	int orientation = ofu.getOrientation();
+  	String orientation = ofu.getOrientation();
   	try {
   		StructOrientation so = StructOrientation.valueOf(orientation);
   		uopb.setOrientation(so);
   	} catch (Exception e) {
-  		log.error("incorrect struct orientation value=" + orientation);
+  		log.error("incorrect struct orientation=" + orientation + "\t ofu=" + ofu);
   	}
   	
   	Date removalStartTime = ofu.getRemovalTime();
@@ -1885,7 +2016,13 @@ public class CreateInfoProtoUtils {
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
     bldr.setMonsterId(tsmMonsterId);
-    bldr.setMonsterType(tsm.getMonsterType());
+    String tsmMonsterType = tsm.getMonsterType(); 
+    try {
+    	MonsterType mt = MonsterType.valueOf(tsmMonsterType);
+    	bldr.setMonsterType(mt);
+    } catch (Exception e) {
+    	log.error("monster type incorrect, tsm=" + tsm);
+    }
     bldr.setCashReward(cashReward);
     bldr.setOilReward(oilReward);
     bldr.setPuzzlePieceDropped(pieceDropped);
@@ -2111,9 +2248,11 @@ public class CreateInfoProtoUtils {
     return inviteProtoBuilder.build();
   }
 
-  public static FullUserProto createFullUserProtoFromUser(User u) {
+  public static FullUserProto createFullUserProtoFromUser(User u,
+		  PvpLeagueForUser plfu) {
     FullUserProto.Builder builder = FullUserProto.newBuilder();
-    builder.setUserId(u.getId());
+    int userId = u.getId();
+    builder.setUserId(userId);
     builder.setName(u.getName());
     builder.setLevel(u.getLevel());
     builder.setGems(u.getGems());
@@ -2121,9 +2260,6 @@ public class CreateInfoProtoUtils {
     builder.setOil(u.getOil());
     builder.setExperience(u.getExperience());
     builder.setTasksCompleted(u.getTasksCompleted());
-    builder.setBattlesWon(u.getBattlesWon());
-    builder.setBattlesLost(u.getBattlesLost());
-    builder.setFlees(u.getFlees());
     if (u.getReferralCode() != null) {
       builder.setReferralCode(u.getReferralCode());
     }
@@ -2144,21 +2280,7 @@ public class CreateInfoProtoUtils {
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-    //    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
-//    builder.setHasActiveShield(u.isHasActiveShield());
-    if(u.getShieldEndTime() != null) {
-      builder.setShieldEndTime(u.getShieldEndTime().getTime());
-    }
-    builder.setElo(u.getElo());
-    builder.setRank(u.getRank());
-    if (null != u.getInBattleShieldEndTime()) {
-      builder.setInBattleShieldEndTime(u.getInBattleShieldEndTime().getTime());
-    }
-    builder.setAttacksWon(u.getAttacksWon());
-    builder.setDefensesWon(u.getAttacksWon());
-    builder.setAttacksLost(u.getAttacksLost());
-    builder.setDefensesLost(u.getDefensesLost());
 
     String facebookId = u.getFacebookId();
     if (null != facebookId) {
@@ -2174,9 +2296,15 @@ public class CreateInfoProtoUtils {
     if (null != lastObstacleSpawnedTime) {
     	builder.setLastObstacleSpawnedTime(lastObstacleSpawnedTime.getTime());
     }
-
+    
+    if (null != plfu) {
+    	//every user should have one, since pvp info created when user is created
+    	//but could be null if not important to have it
+    	UserPvpLeagueProto pvpLeagueInfo = createUserPvpLeagueProto(userId,
+    			plfu, null, false);
+    	builder.setPvpLeagueInfo(pvpLeagueInfo);
+    }
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
-
 
     if (u.isFake()) {
 

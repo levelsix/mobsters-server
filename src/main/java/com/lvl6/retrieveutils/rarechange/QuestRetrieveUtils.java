@@ -152,19 +152,20 @@ import com.lvl6.utils.QuestGraph;
     int i = 1;
     int id = rs.getInt(i++);
     int cityId = rs.getInt(i++);
-    String goodName = rs.getString(i++);
-    String goodDescription = rs.getString(i++);
-    String goodDoneResponse = rs.getString(i++);
+    String questName = rs.getString(i++);
+    String description = rs.getString(i++);
+    String doneResponse = rs.getString(i++);
 
-    String goodAcceptDialogueBlob = rs.getString(i++);
-    Dialogue goodAcceptDialogue = MiscMethods.createDialogue(goodAcceptDialogueBlob);
+    String acceptDialogueBlob = rs.getString(i++);
+    Dialogue acceptDialogue = MiscMethods.createDialogue(acceptDialogueBlob);
 
-    int questType = rs.getInt(i++);
+    String questType = rs.getString(i++);
     String jobDescription = rs.getString(i++);
     int staticDataId = rs.getInt(i++);
     int quantity = rs.getInt(i++);
-    int coinReward = rs.getInt(i++);
-    int diamondReward = rs.getInt(i++);
+    int cashReward = rs.getInt(i++);
+    int oilReward = rs.getInt(i++);
+    int gemReward = rs.getInt(i++);
     int expReward = rs.getInt(i++);
     int monsterIdReward = rs.getInt(i++);
     boolean isCompleteMonster = rs.getBoolean(i++);
@@ -176,16 +177,19 @@ import com.lvl6.utils.QuestGraph;
       		delimiter, questsRequiredForThis);
     }
 
-    String goodQuestGiverImageSuffix = rs.getString(i++);
+    String questGiverName = rs.getString(i++);
+    String questGiverImagePrefix = rs.getString(i++);
     int priority = rs.getInt(i++);
     String carrotId = rs.getString(i++);
     boolean isAchievement = rs.getBoolean(i++);
+    String monsterElement = rs.getString(i++);
     
-    Quest quest = new Quest(id, cityId, goodName, goodDescription,
-    		goodDoneResponse, goodAcceptDialogue, questType, jobDescription,
-    		staticDataId, quantity, coinReward, diamondReward, expReward,
-    		monsterIdReward, isCompleteMonster, questsRequiredForThis,
-    		goodQuestGiverImageSuffix, priority, carrotId, isAchievement);
+    Quest quest = new Quest(id, cityId, questName, description, doneResponse,
+    		acceptDialogue, questType, jobDescription, staticDataId, quantity,
+    		cashReward, oilReward, gemReward, expReward, monsterIdReward,
+    		isCompleteMonster, questsRequiredForThis, questGiverName,
+    		questGiverImagePrefix, priority, carrotId, isAchievement,
+    		monsterElement); 
     
     return quest;
   }

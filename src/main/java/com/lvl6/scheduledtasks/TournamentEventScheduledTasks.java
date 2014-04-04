@@ -198,7 +198,7 @@ public class TournamentEventScheduledTasks {
 		Map<Integer, User> userIdsToUsers = RetrieveUtils.userRetrieveUtils().getUsersByIds(allUserIds);
 		for (User user : userIdsToUsers.values()) {
 			UpdateClientUserResponseEvent e = MiscMethods
-					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
 			server.writeEvent(e);
 		}
 

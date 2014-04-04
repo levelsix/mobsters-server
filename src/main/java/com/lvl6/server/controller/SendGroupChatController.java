@@ -136,8 +136,9 @@ public class SendGroupChatController extends EventController {
         String censoredChatMessage = MiscMethods.censorUserInput(chatMessage);
         writeChangesToDB(user, scope, censoredChatMessage, timeOfPost);
 
+        //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto

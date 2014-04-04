@@ -12,15 +12,14 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class TaskStageMonsterRetrieveUtils {
+@Component
+public class TaskStageMonsterRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
@@ -120,7 +119,7 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     int stageId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
-    MonsterType monsterType = MonsterType.valueOf(rs.getInt(i++));
+    String monsterType = rs.getString(i++);
     int expReward = rs.getInt(i++);
     int minCashDrop = rs.getInt(i++);
     int maxCashDrop = rs.getInt(i++);
@@ -130,10 +129,21 @@ import com.lvl6.utils.DBConnection;
     int level = rs.getInt(i++);
     float chanceToAppear = rs.getFloat(i++);
     
+    if (null != monsterType) {
+    	String newMonsterType = monsterType.trim().toUpperCase();
+    	if (!monsterType.equals(newMonsterType)) {
+    		log.error("monster type incorrect: " + monsterType + "\t tsmId=" + id);
+    	}
+    }
+    
+    
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
     		puzzlePieceDropRate, level, chanceToAppear);
     
+    if (null == monsterType) {
+    	log.error("task stage monster, monster type incorrect, offending tsm=" + taskStageMonster);
+    }
         
     taskStageMonster.setRand(rand);
     return taskStageMonster;

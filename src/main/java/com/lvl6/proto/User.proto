@@ -82,16 +82,12 @@ message FullUserProto {
 	optional int32 oil = 42; 
 	optional int32 experience = 6;
 	optional int32 tasksCompleted = 7;
-	optional int32 battlesWon = 8;
-	optional int32 battlesLost = 9;
-	optional int32 flees = 10;
 	optional string referralCode = 11;
 	optional int32 numReferrals = 12;
-	//optional string udidForHistory = 46; defined below should be 13
+	//optional string udidForHistory = 46; //defined below
 	optional int64 lastLoginTime = 14;
 	optional int64 lastLogoutTime = 15;
 	//optional string deviceToken = 16; //defined below
-	//optional int64 lastBattleNotificationTime = 17; //defined below
 	//optional int32 numBadges = 18; //defined below
 	optional bool isFake = 19;
 	//optional int64 createTime = 20; //defined below
@@ -104,41 +100,29 @@ message FullUserProto {
 	//optional int64 lastWallPostNotificationTime lwpnt = 26;
 	//optional string kabamNaid = 27;
 	optional bool hasReceivedfbReward = 28;
-	//optional int32 numAdditionalMonsterSlots = 29; //get rid of this
 	optional int32 numBeginnerSalesPurchased = 30;
-	optional bool hasActiveShield = 31; 
-	optional int64 shieldEndTime = 32;
-	optional int32 elo = 33;
-	optional string rank = 34;
-	//optional int64 inBattleShieldEndTime = 35; //defined below 
-	optional int32 attacksWon = 36;
-	optional int32 defensesWon = 37;
-	optional int32 attacksLost = 38;
-	optional int32 defensesLost = 39;
 	optional string facebookId = 40;
-	//optional int32 nthExtraSlotsViaFb = 41; //defined below
 	//optional int32 oil = 42; //defined above
 	//optional int32 numOilRetrievedFromStructs = 43; //defined above
 	//optional bool fbIdSetOnUserCreate = 44; //defined below
 	optional string gameCenterId = 45;	
 	//optional string udid = 13; defined below, should be 46
 	optional int64 lastObstacleSpawnedTime = 47;
+	
+	optional UserPvpLeagueProto pvpLeagueInfo = 48; 
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
-	optional string udidForHistory = 46; //should be 13
+	optional string udidForHistory = 46;
 	optional string deviceToken = 16;
-	optional int64 lastBattleNotificationTime = 17;
 	optional int32 numBadges = 18;
 	optional int64 createTime = 20;
 	optional int32 apsalarId = 22;
 	optional int32 numConsecutiveDaysPlayed = 24;
 	optional int64 lastWallPostNotificationTime = 26;
 	optional string kabamNaid = 27;
-	optional int64 inBattleShieldEndTime = 35;
-	//optional int32 nthExtraSlotsViaFb = 41; //get rid of this
 	optional bool fbIdSetOnUserCreate = 44;
-	optional string udid = 13; //should be 46
+	optional string udid = 13;
 }
 
 //------------------------------------------------------------------------------------------
@@ -149,3 +133,14 @@ message StaticUserLevelInfoProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+//all the leaderboard information regarding user in pvp
+message UserPvpLeagueProto {
+	optional int32 userId = 1;
+	optional int32 leagueId = 2; //pvp league id
+	optional int32 rank = 3;
+	optional int32 elo = 4; //client doesn't really need it, so will not be set :P
+	optional int32 battlesWon = 5;
+	optional int32 battlesLost = 6;
+	optional int64 shieldEndTime = 7;
+}

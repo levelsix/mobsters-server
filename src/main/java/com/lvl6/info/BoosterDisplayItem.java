@@ -2,21 +2,20 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
-
 public class BoosterDisplayItem implements Serializable {
 	
-	private static final long serialVersionUID = -7551191433683892965L;
+	private static final long serialVersionUID = 7777555839471300259L;
+	
 	private int id;
 	private int boosterPackId;
 	private boolean isMonster;
 	private boolean isComplete;
-	private MonsterQuality monsterQuality;
+	private String monsterQuality;
   private int gemReward;
   private int quantity;
   
 	public BoosterDisplayItem(int id, int boosterPackId, boolean isMonster,
-			boolean isComplete, MonsterQuality monsterQuality, int gemReward,
+			boolean isComplete, String monsterQuality, int gemReward,
 			int quantity) {
 		super();
 		this.id = id;
@@ -60,11 +59,11 @@ public class BoosterDisplayItem implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public MonsterQuality getMonsterQuality() {
+	public String getMonsterQuality() {
 		return monsterQuality;
 	}
 
-	public void setMonsterQuality(MonsterQuality monsterQuality) {
+	public void setMonsterQuality(String monsterQuality) {
 		this.monsterQuality = monsterQuality;
 	}
 

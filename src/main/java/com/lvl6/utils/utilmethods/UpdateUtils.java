@@ -204,7 +204,7 @@ public class UpdateUtils implements UpdateUtil {
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, xCoordinate);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, yCoordinate);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
-			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation().getNumber());
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation());
 //			newRow.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, userStruct.getUpgradeStartTime());
 			
 			newRows.add(newRow);
@@ -250,7 +250,7 @@ public class UpdateUtils implements UpdateUtil {
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, us.getPurchaseTime());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, us.isComplete());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation().getNumber());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation());
 
 			newRows.add(aRow);
 		}
@@ -472,6 +472,24 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 				absoluteParams, conditionParams, "AND");
+		
+		return numUpdated;
+	}
+	
+	@Override
+	public int updateUserTaskTsId(long userTaskId, int nuTaskStageId) {
+		String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
+		
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID,
+				nuTaskStageId);
+		
+		int numUpdated = DBConnection.get().updateTableRows(tableName,
+				relativeParams, absoluteParams, conditionParams, "AND");
 		
 		return numUpdated;
 	}
@@ -1041,4 +1059,84 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 		
+		@Override
+		public int updatePvpLeagueForUserShields(int userId, Timestamp shieldEndTime,
+				Timestamp inBattleEndTime) {
+			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			if (null != shieldEndTime) {
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
+						shieldEndTime);
+			}
+			if (null != inBattleEndTime) {
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+						shieldEndTime);
+			}
+			
+			if (absoluteParams.isEmpty()) {
+				return 0;
+			}
+			
+			Map<String, Object> relativeParams = null;
+			int numUpdated = DBConnection.get().updateTableRows(tableName,
+					relativeParams, absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updatePvpLeagueForUser(int userId, int newPvpLeagueId,
+				int newRank, int eloChange, Timestamp shieldEndTime,
+				Timestamp inBattleEndTime, int attacksWonDelta,
+				int defensesWonDelta, int attacksLostDelta, int defensesLost) {
+			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
+
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+			
+			Map<String, Object> relativeParams = new HashMap<String, Object>();
+			if (0 != eloChange) {
+				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ELO, eloChange);
+			}
+			if (0 != attacksWonDelta) {
+				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON,
+						attacksWonDelta);
+			}
+			if (0 != attacksWonDelta) {
+				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON,
+						defensesWonDelta);
+			}
+			if (0 != attacksWonDelta) {
+				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST,
+						attacksLostDelta);
+			}
+			if (0 != attacksWonDelta) {
+				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST,
+						defensesLost);
+			}
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			if (null != shieldEndTime) {
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
+						shieldEndTime);
+			}
+			if (null != inBattleEndTime) {
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+						shieldEndTime);
+			}
+			
+			
+			if (relativeParams.isEmpty() && absoluteParams.isEmpty()) {
+				return 0;
+			}
+			
+			int numUpdated = DBConnection.get().updateTableRows(tableName,
+					relativeParams, absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
 }
