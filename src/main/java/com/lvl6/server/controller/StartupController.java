@@ -957,8 +957,12 @@ public class StartupController extends EventController {
 		  boolean isFreshRestart, Timestamp battleEndTime) {
 	  
 //	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
+	  //TODO: should I be doing this?
 	  PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 			  .getUserPvpLeagueForId(userId);
+	  
+	  PvpUser pu = new PvpUser(plfu);
+	  getHazelcastPvpUtil().replacePvpUser(pu, userId);
 	  
   	if (!isFreshRestart) {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
@@ -988,21 +992,6 @@ public class StartupController extends EventController {
   			eloAttackerLoses, eloDefenderWins, battleEndTime, battleStartTime, battle);
   	return plfu;
   }
-  
-  //TODO: stick this into full user proto 
-  /*private PvpLeagueForUser setPvpLeagueInfo(Builder resBuilder, int userId) {
-	  PvpLeagueForUser info = getPvpLeagueForUserRetrieveUtil()
-			  .getUserPvpLeagueForId(userId);
-	  if (null == info) {
-		  log.warn("f&#* this user doesn't have pvp league info");
-		  return null;
-	  }
-	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(
-			  userId, info, null, true);
-	  
-	  resBuilder.setPvpLeagueInfo(infoProto);
-	  return info;
-  }*/
   
   private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, 
 		  PvpLeagueForUser attackerPlfu, int defenderId,
