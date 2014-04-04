@@ -112,11 +112,13 @@ public interface InsertUtil {
 			List<Date> timeOfPosts);
 
 	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
-			int expGained, int cashGained, int oilGained, Timestamp startTime); 
+			int expGained, int cashGained, int oilGained, Timestamp startTime,
+			int taskStageId); 
 
 	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
-			int taskId, int expGained, int cashGained, int oilGained,int numRevives,
-			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
+			int taskId, int expGained, int cashGained, int oilGained,
+			int numRevives, Timestamp startTime, Timestamp endTime,
+			boolean userWon, boolean cancelled, int taskStageId);
 	
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
 			Timestamp timeOfEntry);

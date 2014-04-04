@@ -54,6 +54,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 
+    long userTaskId = reqProto.getUserTaskId();
+    boolean isUpdateTaskStageForUser = reqProto.getIsUpdateTaskStageForUser();
+    int nuTaskStageId = reqProto.getNuTaskStageId();
+
     //set some values to send to the client (the response proto)
     UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -68,7 +72,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       boolean successful = false;
       if(legit) {
-    	  successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth);
+    	  successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth,
+    			  userTaskId, isUpdateTaskStageForUser, nuTaskStageId);
       }
       
       if (successful) {
@@ -134,17 +139,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 
-  		Map<Long, Integer> userMonsterIdToExpectedHealth) {
-  	//replace existing health for these user monsters with new values 
-  	int numUpdated = UpdateUtils.get()
-  			.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-  	
-  	if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
-  		return true;
-  	}
-  	log.warn("unexpected error: not all user monsters were updated. " +
-  			"actual numUpdated=" + numUpdated + "expected: " +
-  			"userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
+  		Map<Long, Integer> userMonsterIdToExpectedHealth, long userTaskId,
+  		boolean isUpdateTaskStageForUser, int nuTaskStageId) {
+	  //replace existing health for these user monsters with new values 
+	  int numUpdated = UpdateUtils.get()
+			  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+
+	  if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
+		  return true;
+	  }
+	  log.warn("unexpected error: not all user monsters were updated. " +
+			  "actual numUpdated=" + numUpdated + "expected: " +
+			  "userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
+
+	  if (isUpdateTaskStageForUser) {
+		  numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId, nuTaskStageId);
+		  log.info("task stage for user numUpdated=" + numUpdated);
+	  }
+	  
 	  return true;
   }
   

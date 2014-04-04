@@ -735,7 +735,7 @@ public class InsertUtils implements InsertUtil{
   
   //returns the id
   public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
-  		int cashGained, int oilGained, Timestamp startTime) {
+  		int cashGained, int oilGained, Timestamp startTime, int taskStageId) {
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
 	  //for recording what-dropped in which-stage
@@ -747,6 +747,7 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__OIL_GAINED, oilGained);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID, taskStageId);
 	  newRows.add(row);
 	  
 	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
@@ -762,7 +763,7 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
 		  int expGained, int cashGained, int oilGained, int numRevives, Timestamp startTime,
-		  Timestamp endTime, boolean userWon, boolean cancelled) {
+		  Timestamp endTime, boolean userWon, boolean cancelled, int taskStageId) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
@@ -776,6 +777,7 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_WON, userWon);
 	  insertParams.put(DBConstants.TASK_HISTORY__CANCELLED, cancelled);
+	  insertParams.put(DBConstants.TASK_HISTORY__TASK_STAGE_ID, taskStageId);
 	  
 	  int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_HISTORY, insertParams);

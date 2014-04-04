@@ -218,8 +218,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
 	  boolean cancelled = false;
-	  int num = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
-			  expGained, cashGained, oilGained, numRevives, startTime, clientTime, userWon, cancelled);
+	  int tsId = ut.getTaskStageId(); 
+	  int num = InsertUtils.get().insertIntoTaskHistory(utId, uId, tId,
+			  expGained, cashGained, oilGained, numRevives, startTime,
+			  clientTime, userWon, cancelled, tsId);
 	  if (1 != num) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
 		  		"numInserted=" + num + " Attempting to undo shi");

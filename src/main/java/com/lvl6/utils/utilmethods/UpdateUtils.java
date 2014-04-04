@@ -476,6 +476,24 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
+	@Override
+	public int updateUserTaskTsId(long userTaskId, int nuTaskStageId) {
+		String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
+		
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID,
+				nuTaskStageId);
+		
+		int numUpdated = DBConnection.get().updateTableRows(tableName,
+				relativeParams, absoluteParams, conditionParams, "AND");
+		
+		return numUpdated;
+	}
+	
 	//if expectedHealths contains the exact same info as userMonsterIdsToHealths
 	//if map isn't set then list is used
 	@Override

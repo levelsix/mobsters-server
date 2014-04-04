@@ -453,6 +453,7 @@ public class DBConstants {
   public static final String TASK_FOR_USER_ONGOING__OIL_GAINED = "oil_gained";
   public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
   public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
+  public static final String TASK_FOR_USER_ONGOING__TASK_STAGE_ID = "task_stage_id";
 
   /*TASK FOR USER COMPLETED TABLE*/
   public static final String TASK_FOR_USER_COMPLETED__USER_ID = GENERIC__USER_ID;
@@ -471,6 +472,7 @@ public class DBConstants {
   public static final String TASK_HISTORY__END_TIME = "end_time";
   public static final String TASK_HISTORY__USER_WON = "user_won";
   public static final String TASK_HISTORY__CANCELLED = "cancelled";
+  public static final String TASK_HISTORY__TASK_STAGE_ID = "task_stage_id";
 
   /*TASK STAGE FOR USER TABLE*/
   public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;

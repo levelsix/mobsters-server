@@ -85,6 +85,8 @@ public interface UpdateUtil {
   
   public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta);
   
+  public abstract int updateUserTaskTsId(long userTaskId, int nuTaskStageId);
+  
   public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
   
 //  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);

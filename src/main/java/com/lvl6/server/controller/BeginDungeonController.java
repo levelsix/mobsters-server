@@ -182,7 +182,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     
     //TODO: if event, maybe somehow check if user has enough gems to reset event
-    //right now just relying on user
+    //right now just relying on client
 //    if (isEvent) {
 //    	if (eventId > 0) {
 //    		
@@ -215,13 +215,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	Timestamp endTime = null;
   	boolean userWon = false;
   	boolean cancelled = true;
+  	int taskStageId = aTaskForUser.getTaskStageId();
   	
   	int num = DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(taskForUserId);
   	log.warn("deleted existing task_for_user. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 
-    num = InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
-    		expGained, cashGained, oilGained, numRevives, startTime, endTime, userWon, cancelled);
+    num = InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId,
+    		taskId, expGained, cashGained, oilGained, numRevives, startTime,
+    		endTime, userWon, cancelled, taskStageId);
     log.warn("inserted into task_history. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numInserted=" + num);
   }
@@ -304,8 +306,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //	  }
 
 	  //record into user_task table	  
+	  int tsId = TaskStageRetrieveUtils.getFirstTaskStageIdForTaskId(tId);
 	  long userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId, tId,
-			  expGained, cashGained, oilGained, clientTime);
+			  expGained, cashGained, oilGained, clientTime, tsId);
 	  
 	  //record into user_task stage table
 	  recordStages(userTaskId, stageNumsToExps, stageNumsToCash, stageNumsToOil,
