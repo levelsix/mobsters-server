@@ -530,7 +530,7 @@ public class CreateInfoProtoUtils {
     	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
     	b.setQuality(mq);
     } catch (Exception e){
-    	log.error("invalid monster quality. boosterDisplayItem=" + bdi);
+    	log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
     }
 
     b.setGemReward(bdi.getGemReward());
@@ -801,7 +801,7 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-      String userClanStatus, float clanRaidContribution) {
+      String userClanStatus, float clanRaidContribution, int battlesWon) {
 	  MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
@@ -815,13 +815,15 @@ public class CreateInfoProtoUtils {
     			"\t user=" + u);
     }
     mupfcb.setRaidContribution(clanRaidContribution);
+    mupfcb.setBattlesWon(battlesWon);
     MinimumUserProtoForClans mupfc = mupfcb.build();
 
     return mupfc;
   }
   
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-		  UserClanStatus userClanStatus, float clanRaidContribution) {
+		  UserClanStatus userClanStatus, float clanRaidContribution,
+		  int battlesWon) {
 	  	MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
 	    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
@@ -829,6 +831,7 @@ public class CreateInfoProtoUtils {
 	    
 	    mupfcb.setClanStatus(userClanStatus);
 	    mupfcb.setRaidContribution(clanRaidContribution);
+	    mupfcb.setBattlesWon(battlesWon);
 	    MinimumUserProtoForClans mupfc = mupfcb.build();
 
 	    return mupfc;

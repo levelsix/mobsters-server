@@ -34,6 +34,8 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.CepfuRaidHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -47,13 +49,8 @@ import com.lvl6.utils.RetrieveUtils;
   @Autowired
   protected TimeUtils timeUtils;
   
-  public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
-
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
+  @Autowired
+  protected HazelcastPvpUtil hazelcastPvpUtil;
 
 	public RetrieveClanInfoController() {
     numAllocatedThreads = 8;
@@ -147,9 +144,14 @@ import com.lvl6.utils.RetrieveUtils;
             	if (userIdToClanRaidContribution.containsKey(userId)) {
             		clanRaidContribution = userIdToClanRaidContribution.get(userId);
             	}
-              MinimumUserProtoForClans minUser = CreateInfoProtoUtils
-              		.createMinimumUserProtoForClans(u, uc.getStatus(), clanRaidContribution);
-              resBuilder.addMembers(minUser);
+            	
+            	//might be better if just got all user's battle wons from db
+            	//instead of one by one from hazelcast 
+            	int battlesWon = getBattlesWonForUser(userId);
+            	MinimumUserProtoForClans minUser = CreateInfoProtoUtils
+            			.createMinimumUserProtoForClans(u, uc.getStatus(),
+            					clanRaidContribution, battlesWon);
+            	resBuilder.addMembers(minUser);
               
               //create the monster team for this user if possible
               if (userIdsToMonsterTeams.containsKey(userId)) {
@@ -288,4 +290,29 @@ import com.lvl6.utils.RetrieveUtils;
 		return clanCrDmg;
   }
   
+  private int getBattlesWonForUser(int userId) {
+	  PvpUser pu = getHazelcastPvpUtil().getPvpUser(userId);
+	  
+	  int battlesWon = 0;
+	  if (null != pu) {
+		battlesWon = pu.getBattlesWon();  
+	  }
+	  
+	  return battlesWon;
+  }
+
+
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+
+  public HazelcastPvpUtil getHazelcastPvpUtil() {
+	  return hazelcastPvpUtil;
+  }
+  public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+	  this.hazelcastPvpUtil = hazelcastPvpUtil;
+  }
 }
