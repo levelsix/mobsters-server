@@ -3,9 +3,11 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.lvl6.pvp.PvpUser;
+
 public class PvpLeagueForUser implements Serializable {
 	
-	private static final long serialVersionUID = 5691517447906517379L;
+	private static final long serialVersionUID = 7323773679114371729L;
 	
 	private int userId;
 	private int pvpLeagueId;
@@ -25,6 +27,20 @@ public class PvpLeagueForUser implements Serializable {
 		super();
 	}
 
+	public PvpLeagueForUser(PvpUser pu) {
+		super();
+		this.userId = Integer.parseInt(pu.getUserId());
+		this.pvpLeagueId = pu.getPvpLeagueId();
+		this.rank = pu.getRank();
+		this.elo = pu.getElo();
+		this.shieldEndTime = pu.getShieldEndTime();
+		this.inBattleShieldEndTime = pu.getInBattleEndTime();
+		this.attacksWon = pu.getAttacksWon();
+		this.defensesWon = pu.getDefensesWon();
+		this.attacksLost = pu.getAttacksLost();
+		this.defensesLost = pu.getDefensesLost();
+	}
+	
 	public PvpLeagueForUser(PvpLeagueForUser plfu) {
 		super();
 		if (null == plfu) {
