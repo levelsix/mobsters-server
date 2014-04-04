@@ -546,7 +546,7 @@ public class QueryConstructionUtil {
 		String conjunction = "";
 		if (!emptyLtConditions) {
 			String eqConditionsStr = createComparisonConditionsString(
-					lessThanConditions, EQUALITY, AND);
+					lessThanConditions, LESSTHAN, AND);
 			whereConditionsSb.append(eqConditionsStr);
 
 			conjunction = AND;
