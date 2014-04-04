@@ -206,9 +206,10 @@ public class HazelcastPvpUtil implements InitializingBean {
 		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
 		String eloStr = PvpConstants.PVP_USER__ELO;
 		
+		String nowStr = "\"" + now + "\"";
 		Map<String, Object> lessThanConditions = new HashMap<String, Object>();
-		lessThanConditions.put(inBattleShieldEndTimeStr, now);
-		lessThanConditions.put(shieldEndTimeStr, now);
+		lessThanConditions.put(inBattleShieldEndTimeStr, nowStr);
+		lessThanConditions.put(shieldEndTimeStr, nowStr);
 		lessThanConditions.put(eloStr, maxElo);
 		
 		Map<String, Object> greaterThanConditions =
