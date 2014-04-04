@@ -36,7 +36,7 @@ message FullQuestProto {
      optional CoordinateProto questGiverImgOffset = 21; //not used at the moment
      
      //optional int32 oilReward = 22; defined above
-     optional MonsterProto.MonsterElement monsterElement = 23;
+     optional MonsterProto.MonsterElement monsterElement = 23 [default = FIRE];
      //optional string questGiverName = 24; defined above
      
      enum QuestType {
