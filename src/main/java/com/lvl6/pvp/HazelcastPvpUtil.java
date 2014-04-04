@@ -150,6 +150,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		return users;
 	}
 	
+	/*
 	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
 		String inBattleShieldEndTimeStr = PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
@@ -174,8 +175,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 			
 			String sql = getQueryConstructionUtil().createWhereConditionString(
 					lessThanConditions, greaterThanConditions, isNotIn, inConditions);
-			Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
 			log.info("predicate used in querying hazelcast object: " + sql);
+			
+			Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
 			
 			
 			//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
@@ -194,9 +196,8 @@ public class HazelcastPvpUtil implements InitializingBean {
 				new PvpUserComparator(true, IterationType.VALUE), limit);
 		
 		return advPredicate;
-	}
+	}*/
 	
-	/*
 	//doesn't matter if use java.util.Date or java.sql.Timestamp
 	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
@@ -232,7 +233,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 				new PvpUserComparator(true, IterationType.VALUE), limit);
 		
 		return advPredicate;
-	} */
+	}
 
 
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE

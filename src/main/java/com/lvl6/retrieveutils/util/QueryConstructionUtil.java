@@ -421,10 +421,13 @@ public class QueryConstructionUtil {
 		sb.append(SPACE);
 		sb.append(IN);
 		sb.append(SPACE);
+		sb.append(LPAREN);
 
 		String valuesStr = implode(inValues, COMMA);
 		sb.append(valuesStr);
 
+		sb.append(RPAREN);
+		
 		String result = sb.toString();
 		return result;
 	}
@@ -435,10 +438,12 @@ public class QueryConstructionUtil {
 		sb.append(SPACE);
 		sb.append(NOTIN);
 		sb.append(SPACE);
+		sb.append(LPAREN);
 
 		String valuesStr = implode(inValues, COMMA);
 		sb.append(valuesStr);
 
+		sb.append(RPAREN);
 		String result = sb.toString();
 		return result;
 	}
