@@ -1,5 +1,7 @@
 package com.lvl6.test;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
@@ -7,8 +9,6 @@ import javax.annotation.Resource;
 
 import junit.framework.TestCase;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,7 +18,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
+import com.hazelcast.query.Predicate;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -52,9 +54,12 @@ public class ControllerTest extends TestCase {
 	@Autowired
 	UserRetrieveUtils userRetrieveUtils;
 	
-	
 	@Autowired
 	GameServer server;
+	
+	@Autowired
+	HazelcastPvpUtil hazelcastPvpUtil;
+	
 	
 	@Resource(name = "playersByPlayerId")
 	IMap<Integer, ConnectedPlayer> playersByPlayerId;
@@ -62,26 +67,6 @@ public class ControllerTest extends TestCase {
 	@Resource(name = "playersPreDatabaseByUDID")
 	IMap<String, ConnectedPlayer> playersPreDatabaseByUDID;
 
-	public IMap<String, ConnectedPlayer> getPlayersPreDatabaseByUDID() {
-		return playersPreDatabaseByUDID;
-	}
-
-	public void setPlayersPreDatabaseByUDID(
-			IMap<String, ConnectedPlayer> playersPreDatabaseByUDID) {
-		this.playersPreDatabaseByUDID = playersPreDatabaseByUDID;
-	}
-
-	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
-		return playersByPlayerId;
-	}
-
-	public void setPlayersByPlayerId(
-			IMap<Integer, ConnectedPlayer> playersByPlayerId) {
-		this.playersByPlayerId = playersByPlayerId;
-	}
-	
-	
-	
 
 //	public void createUser(String udid) {
 //		//need to add a new ConnectedPlayer
@@ -346,6 +331,28 @@ public class ControllerTest extends TestCase {
 		log.info(activeEvents + "");
 	}
 
+	@Test
+	public void testHazelcastPvpUtilQuery() {
+		log.info("CREATING HAZELCAST PVP QUERY");
+		
+		int minElo = 5;
+		int maxElo = 7;
+		Date now = new Date();
+		int limit = 5;
+		Collection<String> excludeIds = new ArrayList<String>();
+		excludeIds.add("1");
+		excludeIds.add("a");
+		
+		try {
+			Predicate<?, ?> predicate = getHazelcastPvpUtil().generatePredicate(minElo,
+					maxElo, now, limit, excludeIds);
+		} catch(Exception e) {
+			log.error("exception creating hazelcast pvp query.", e);
+		}
+	}
+	
+	
+	
 	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
 		return purchaseCityExpansionController;
 	}
@@ -393,6 +400,33 @@ public class ControllerTest extends TestCase {
 
 	public void setServer(GameServer server) {
 		this.server = server;
+	}
+	
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
+		return hazelcastPvpUtil;
+	}
+
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+
+
+	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+		return playersByPlayerId;
+	}
+
+	public void setPlayersByPlayerId(
+			IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+		this.playersByPlayerId = playersByPlayerId;
+	}
+	
+	public IMap<String, ConnectedPlayer> getPlayersPreDatabaseByUDID() {
+		return playersPreDatabaseByUDID;
+	}
+	
+	public void setPlayersPreDatabaseByUDID(
+			IMap<String, ConnectedPlayer> playersPreDatabaseByUDID) {
+		this.playersPreDatabaseByUDID = playersPreDatabaseByUDID;
 	}
 	
 }
