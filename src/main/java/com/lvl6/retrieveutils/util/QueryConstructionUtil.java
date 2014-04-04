@@ -571,6 +571,7 @@ public class QueryConstructionUtil {
 				
 				allInConditions.add(inConditionsStr);
 			}
+			whereConditionsSb.append(conjunction);
 			whereConditionsSb.append(implode(allInConditions, AND));
 		}
 		
