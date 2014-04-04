@@ -153,7 +153,7 @@ import com.lvl6.utils.DBConnection;
 	  
 	  if (!stageNums.isEmpty()) {
 		  int firstStageNum = stageNums.get(0);
-		  int firstTaskStageForTaskId = stageNums.get(firstStageNum);
+		  int firstTaskStageForTaskId = stageNumToStageId.get(firstStageNum);
 		  return firstTaskStageForTaskId;  
 	  }
 	  return 0;
