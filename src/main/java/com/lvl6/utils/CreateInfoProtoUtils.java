@@ -526,11 +526,13 @@ public class CreateInfoProtoUtils {
     b.setIsComplete(bdi.isComplete());
 
     String monsterQuality = bdi.getMonsterQuality();
-    try {
-    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
-    	b.setQuality(mq);
-    } catch (Exception e){
-    	log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
+    if (null != monsterQuality) {
+    	try {
+    		MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    		b.setQuality(mq);
+    	} catch (Exception e){
+    		log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
+    	}
     }
 
     b.setGemReward(bdi.getGemReward());
@@ -1972,6 +1974,8 @@ public class CreateInfoProtoUtils {
 
     return tspb.build();
   }
+  
+//  public static TaskStageProto createTaskStageProto()
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
     String name = task.getGoodName();
