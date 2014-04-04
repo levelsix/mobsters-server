@@ -6827,6 +6827,10 @@ public final class UserProto {
     // optional int32 battlesLost = 6;
     boolean hasBattlesLost();
     int getBattlesLost();
+    
+    // optional int64 shieldEndTime = 7;
+    boolean hasShieldEndTime();
+    long getShieldEndTime();
   }
   public static final class UserPvpLeagueProto extends
       com.google.protobuf.GeneratedMessage
@@ -6917,6 +6921,16 @@ public final class UserProto {
       return battlesLost_;
     }
     
+    // optional int64 shieldEndTime = 7;
+    public static final int SHIELDENDTIME_FIELD_NUMBER = 7;
+    private long shieldEndTime_;
+    public boolean hasShieldEndTime() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public long getShieldEndTime() {
+      return shieldEndTime_;
+    }
+    
     private void initFields() {
       userId_ = 0;
       leagueId_ = 0;
@@ -6924,6 +6938,7 @@ public final class UserProto {
       elo_ = 0;
       battlesWon_ = 0;
       battlesLost_ = 0;
+      shieldEndTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6954,6 +6969,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, battlesLost_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, shieldEndTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6987,6 +7005,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, battlesLost_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, shieldEndTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7124,6 +7146,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         battlesLost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        shieldEndTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -7186,6 +7210,10 @@ public final class UserProto {
           to_bitField0_ |= 0x00000020;
         }
         result.battlesLost_ = battlesLost_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.shieldEndTime_ = shieldEndTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7219,6 +7247,9 @@ public final class UserProto {
         }
         if (other.hasBattlesLost()) {
           setBattlesLost(other.getBattlesLost());
+        }
+        if (other.hasShieldEndTime()) {
+          setShieldEndTime(other.getShieldEndTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7279,6 +7310,11 @@ public final class UserProto {
             case 48: {
               bitField0_ |= 0x00000020;
               battlesLost_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              shieldEndTime_ = input.readInt64();
               break;
             }
           }
@@ -7413,6 +7449,27 @@ public final class UserProto {
         return this;
       }
       
+      // optional int64 shieldEndTime = 7;
+      private long shieldEndTime_ ;
+      public boolean hasShieldEndTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public long getShieldEndTime() {
+        return shieldEndTime_;
+      }
+      public Builder setShieldEndTime(long value) {
+        bitField0_ |= 0x00000040;
+        shieldEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShieldEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        shieldEndTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserPvpLeagueProto)
     }
     
@@ -7522,10 +7579,11 @@ public final class UserProto {
       "\022\021\n\tkabamNaid\030\033 \001(\t\022\033\n\023fbIdSetOnUserCrea" +
       "te\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030StaticUserLeve" +
       "lInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExp" +
-      "erience\030\002 \001(\005\"z\n\022UserPvpLeagueProto\022\016\n\006u" +
-      "serId\030\001 \001(\005\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003 " +
-      "\001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013" +
-      "battlesLost\030\006 \001(\005B\013B\tUserProto"
+      "erience\030\002 \001(\005\"\221\001\n\022UserPvpLeagueProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022\020\n\010leagueId\030\002 \001(\005\022\014\n\004rank\030\003" +
+      " \001(\005\022\013\n\003elo\030\004 \001(\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n" +
+      "\013battlesLost\030\006 \001(\005\022\025\n\rshieldEndTime\030\007 \001(" +
+      "\003B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7601,7 +7659,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_UserPvpLeagueProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor,
-              new java.lang.String[] { "UserId", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", },
+              new java.lang.String[] { "UserId", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", "ShieldEndTime", },
               com.lvl6.proto.UserProto.UserPvpLeagueProto.class,
               com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder.class);
           return null;

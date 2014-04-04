@@ -93,14 +93,13 @@ message StartupResponseProto {
 	//current clan raid stats
 	optional PersistentClanEventClanInfoProto curRaidClanInfo = 31;
 	repeated PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
-
 	repeated PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
 	
 	//optional TutorialConstants tutorialConstants = 34; //defined above, below #5
 
 	//the last n people that have attacked this user in pvp
 	repeated PvpHistoryProto recentNBattles = 35;
-	optional UserPvpLeagueProto pvpLeagueInfo = 36;
+
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

@@ -142,4 +142,5 @@ message UserPvpLeagueProto {
 	optional int32 elo = 4; //client doesn't really need it, so will not be set :P
 	optional int32 battlesWon = 5;
 	optional int32 battlesLost = 6;
+	optional int64 shieldEndTime = 7;
 }

@@ -387,12 +387,23 @@ public class CreateInfoProtoUtils {
 		  if (setElo) {
 			  uplpb.setElo(plfu.getElo());
 		  }
+		  Date shieldEndTime = plfu.getShieldEndTime();
+		  if (null != shieldEndTime) {
+			  long time = shieldEndTime.getTime();
+			  uplpb.setShieldEndTime(time);
+		  }
+		  
 	  } else if (null != pu) {
 		  uplpb.setLeagueId(pu.getPvpLeagueId());
 		  uplpb.setRank(pu.getRank());
 		  
 		  if (setElo) {
 			  uplpb.setElo(pu.getElo());
+		  }
+		  Date shieldEndTime = pu.getShieldEndTime();
+		  if (null != shieldEndTime) {
+			  long time = shieldEndTime.getTime();
+			  uplpb.setShieldEndTime(time);
 		  }
 	  }
 	  
