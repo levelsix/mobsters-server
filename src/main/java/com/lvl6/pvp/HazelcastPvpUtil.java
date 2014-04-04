@@ -18,8 +18,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
+import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.PagingPredicate;
 import com.hazelcast.query.Predicate;
+import com.hazelcast.query.PredicateBuilder;
 import com.hazelcast.query.SqlPredicate;
 import com.hazelcast.util.IterationType;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
@@ -148,30 +150,53 @@ public class HazelcastPvpUtil implements InitializingBean {
 		return users;
 	}
 	
-	/*
-	protected Predicate generatePredicate(int minElo, int maxElo, Date now,
+	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
 		String inBattleShieldEndTimeStr = PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
 		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
 		String eloStr = PvpConstants.PVP_USER__ELO;
 		EntryObject e = new PredicateBuilder().getEntryObject();
+		Predicate<?, ?> predicate = null;
 
-		//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
-		Predicate<?, ?> predicate = e.get(shieldEndTimeStr).lessThan(now)
-				.and(e.get(inBattleShieldEndTimeStr).lessThan(now))
-				.and(e.get(eloStr).between(minElo, maxElo));
-		
-		//doesn't work >:[, list is not a Comparable data type
 		if (null != excludeIds && !excludeIds.isEmpty()) {
 			String userIdStr = PvpConstants.PVP_USER__USER_ID;
-			Predicate<?, ?> pIn = Predicates.in(userIdStr, excludeIds);
-			Predicate<?, ?> pNotIn = Predicates.not(pIn);
+			//doesn't work >:[, list is not a Comparable data type
+//			Predicate<?, ?> pIn = Predicates.in(userIdStr, excludeIds);
+//			Predicate<?, ?> pNotIn = Predicates.not(pIn);
+			
+			Map<String, Object> lessThanConditions = null;
+			Map<String, Object> greaterThanConditions = null;
+			
+			boolean isNotIn = true;
+			Map<String, Collection<?>> inConditions =
+					new HashMap<String, Collection<?>>(); 
+			inConditions.put(userIdStr, excludeIds);
+			
+			String sql = getQueryConstructionUtil().createWhereConditionString(
+					lessThanConditions, greaterThanConditions, isNotIn, inConditions);
+			Predicate<?,?> sqlPredicate = new SqlPredicate(sql);
+			log.info("predicate used in querying hazelcast object: " + sql);
+			
+			
+			//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
+			predicate = e.get(shieldEndTimeStr).lessThan(now)
+					.and(e.get(inBattleShieldEndTimeStr).lessThan(now))
+					.and(e.get(eloStr).between(minElo, maxElo))
+					.and(sqlPredicate);
+			
+		} else {
+			predicate = e.get(shieldEndTimeStr).lessThan(now)
+					.and(e.get(inBattleShieldEndTimeStr).lessThan(now))
+					.and(e.get(eloStr).between(minElo, maxElo));
 		}
 		
 		PagingPredicate advPredicate = new PagingPredicate(predicate,
 				new PvpUserComparator(true, IterationType.VALUE), limit);
-	}*/
+		
+		return advPredicate;
+	}
 	
+	/*
 	//doesn't matter if use java.util.Date or java.sql.Timestamp
 	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
@@ -207,7 +232,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 				new PvpUserComparator(true, IterationType.VALUE), limit);
 		
 		return advPredicate;
-	}
+	} */
 
 
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
