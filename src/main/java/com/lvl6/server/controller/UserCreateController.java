@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
@@ -38,7 +37,7 @@ import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.server.EventWriter;
+import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -52,65 +51,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  @Resource
-  protected EventWriter eventWriter;
-
-  public EventWriter getEventWriter() {
-    return eventWriter;
-  }
-
-  public void setEventWriter(EventWriter eventWriter) {
-    this.eventWriter = eventWriter;
-  }
-  
   @Autowired
   protected LeaderBoardUtil leaderboard;
 
-  public LeaderBoardUtil getLeaderboard() {
-	return leaderboard;
-	}
-	
-	public void setLeaderboard(LeaderBoardUtil leaderboard) {
-		this.leaderboard = leaderboard;
-	}
-  
   @Autowired
   protected InsertUtil insertUtils;
 
-  public void setInsertUtils(InsertUtil insertUtils) {
-    this.insertUtils = insertUtils;
-  }
-
-
   @Autowired
   protected Locker locker;
-  
-  
-  protected Locker getLocker() {
-		return locker;
-	}
-
-	protected void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 	
 	@Autowired
 	protected TimeUtils timeUtils;
-  public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-	
+ 
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
-	public StructureStuffUtil getStructureStuffUtil() {
-		return structureStuffUtil;
-	}
-	public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
-		this.structureStuffUtil = structureStuffUtil;
-	}
 
 	public UserCreateController() {
     numAllocatedThreads = 3;
@@ -435,9 +389,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void writePvpStuff(int userId, Timestamp createTime) {
-	  int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
-	  int rank = ControllerConstants.TUTORIAL__INIT_RANK;
 	  int elo = ControllerConstants.PVP__INITIAL_ELO;
+	  int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
+	  List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils.getLeaguesForElo(elo);
+	  if (pvpLeagueList.size() > 1) {
+		  log.error("there are multiple leagues for initial elo: " + elo +
+				  "\t leagues=" + pvpLeagueList + "\t choosing first one.");
+	  } else if (pvpLeagueList.isEmpty()){
+		  log.error("no pvp league id for elo: " + elo);
+	  } else { //size is one
+		  pvpLeagueId = pvpLeagueList.get(0).getId();
+	  }
+	  
+	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, pvpLeagueId);
 	  
 	  Date createDate = new Date(createTime.getTime());
 	  Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,
@@ -447,20 +411,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  int numInsertedIntoPvp = InsertUtils.get().insertPvpLeagueForUser(userId,
 			  pvpLeagueId, rank, elo, shieldEndTime, shieldEndTime);
 	  log.info("numInsertedIntoPvp=" + numInsertedIntoPvp);
-	  
+
+	  //maybe should populate hazelcast with the pvp user now...
 	  /*
-	  PvpLeagueForUser plfu = new PvpLeagueForUser();
+	  PvpUser plfu = new PvpUser();
 	  plfu.setPvpLeagueId(pvpLeagueId);
 	  plfu.setRank(rank);
-	  plfu.setUserId(userId);
+	  plfu.setUserId(Integer.toString(userId));
 	  plfu.setElo(elo);
-	  plfu.setShieldEndTime(shieldEndTime);
-	  plfu.setInBattleShieldEndTime(shieldEndTime);
+	  plfu.setShieldEndTime(shieldEndDate);
+	  plfu.setInBattleEndTime(shieldEndDate);
 	  plfu.setAttacksWon(0);
 	  plfu.setDefensesWon(0);
 	  plfu.setAttacksLost(0);
 	  plfu.setDefensesLost(0);
-	  return plfu; */
+	  */
   }
 
 
@@ -555,5 +520,36 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 //        previousGoldSilver, reasonsForChanges);
   }
-  
+
+  public LeaderBoardUtil getLeaderboard() {
+	  return leaderboard;
+  }
+  public void setLeaderboard(LeaderBoardUtil leaderboard) {
+	  this.leaderboard = leaderboard;
+  }
+
+  public void setInsertUtils(InsertUtil insertUtils) {
+    this.insertUtils = insertUtils;
+  }
+
+  protected Locker getLocker() {
+	  return locker;
+  }
+  protected void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+
+  public StructureStuffUtil getStructureStuffUtil() {
+	  return structureStuffUtil;
+  }
+  public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
+	  this.structureStuffUtil = structureStuffUtil;
+  }
 }
