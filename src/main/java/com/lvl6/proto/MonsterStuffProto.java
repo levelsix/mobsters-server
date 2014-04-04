@@ -243,16 +243,16 @@ public final class MonsterStuffProto {
       FIRE(0, 1),
       GRASS(1, 2),
       WATER(2, 3),
-      LIGHTNING(3, 4),
-      DARKNESS(4, 5),
+      LIGHT(3, 4),
+      DARK(4, 5),
       ROCK(5, 6),
       ;
       
       public static final int FIRE_VALUE = 1;
       public static final int GRASS_VALUE = 2;
       public static final int WATER_VALUE = 3;
-      public static final int LIGHTNING_VALUE = 4;
-      public static final int DARKNESS_VALUE = 5;
+      public static final int LIGHT_VALUE = 4;
+      public static final int DARK_VALUE = 5;
       public static final int ROCK_VALUE = 6;
       
       
@@ -263,8 +263,8 @@ public final class MonsterStuffProto {
           case 1: return FIRE;
           case 2: return GRASS;
           case 3: return WATER;
-          case 4: return LIGHTNING;
-          case 5: return DARKNESS;
+          case 4: return LIGHT;
+          case 5: return DARK;
           case 6: return ROCK;
           default: return null;
         }
@@ -296,7 +296,7 @@ public final class MonsterStuffProto {
       }
       
       private static final MonsterElement[] VALUES = {
-        FIRE, GRASS, WATER, LIGHTNING, DARKNESS, ROCK, 
+        FIRE, GRASS, WATER, LIGHT, DARK, ROCK, 
       };
       
       public static MonsterElement valueOf(
@@ -9706,7 +9706,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\326\010\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\316\010\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\023\n\013shorterName\030\034 \001(\t\022\024\n\014monsterGr" +
       "oup\030\003 \001(\t\022<\n\007quality\030\004 \001(\0162+.com.lvl6.pr" +
@@ -9731,51 +9731,51 @@ public final class MonsterStuffProto {
       "ramesStart\030\032 \001(\005\022%\n\035atkAnimationRepeated" +
       "FramesEnd\030\033 \001(\005\"S\n\016MonsterQuality\022\n\n\006COM" +
       "MON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\t" +
-      "LEGENDARY\020\005\022\007\n\003EVO\020\006\"W\n\016MonsterElement\022\010" +
-      "\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTN" +
-      "ING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"&\n\rAnimati" +
-      "onType\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\336\001\n\025Monste" +
-      "rLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005",
-      "\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeederExp" +
-      "\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001(" +
-      "\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightningDmg\030\010 \001(" +
-      "\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n \001(\021\022" +
-      "\r\n\005speed\030\013 \001(\005\"\345\001\n\024FullUserMonsterProto\022" +
-      "\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021" +
-      "\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n" +
-      "\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005" +
-      "\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022" +
-      "\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSlotNum",
-      "\030\n \001(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmon" +
-      "sterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001\n\027Use" +
-      "rMonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\r" +
-      "userMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMillis\030" +
-      "\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priorit" +
-      "y\030\006 \001(\005\"M\n\035UserMonsterCurrentHealthProto" +
-      "\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHealth" +
-      "\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006userI" +
-      "d\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6." +
-      "proto.UserEnhancementItemProto\0229\n\007feeder",
-      "s\030\003 \003(\0132(.com.lvl6.proto.UserEnhancement" +
-      "ItemProto\"i\n\030UserEnhancementItemProto\022\025\n" +
-      "\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedStartTim" +
-      "eMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"f\n\032" +
-      "UserMonsterCurrentExpProto\022\025\n\ruserMonste" +
-      "rId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n" +
-      "\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumUserMonst" +
-      "erSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\nca" +
-      "shAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeam" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003",
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\"e\n\031UserMonsterEvolutionProto\022\035\n\025catalys" +
-      "tUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002" +
-      " \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\316\001\n\032MonsterBattl" +
-      "eDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dia" +
-      "logueType\030\003 \001(\01627.com.lvl6.proto.Monster" +
-      "BattleDialogueProto.DialogueType\022\020\n\010dial" +
-      "ogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001(\002\" " +
-      "\n\014DialogueType\022\020\n\014ENTER_BATTLE\020\001B\023B\021Mons" +
-      "terStuffProto"
+      "LEGENDARY\020\005\022\007\n\003EVO\020\006\"O\n\016MonsterElement\022\010" +
+      "\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\t\n\005LIGHT\020" +
+      "\004\022\010\n\004DARK\020\005\022\010\n\004ROCK\020\006\"&\n\rAnimationType\022\t" +
+      "\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\336\001\n\025MonsterLevelIn" +
+      "foProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\031\n\021curL",
+      "vlRequiredExp\030\003 \001(\005\022\021\n\tfeederExp\030\004 \001(\005\022\017" +
+      "\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001(\021\022\020\n\010wat" +
+      "erDmg\030\007 \001(\021\022\024\n\014lightningDmg\030\010 \001(\021\022\023\n\013dar" +
+      "knessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n \001(\021\022\r\n\005speed" +
+      "\030\013 \001(\005\"\345\001\n\024FullUserMonsterProto\022\025\n\ruserM" +
+      "onsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonste" +
+      "rId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrent" +
+      "Lvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumP" +
+      "ieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combi" +
+      "neStartTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"@",
+      "\n\027MinimumUserMonsterProto\022\021\n\tmonsterId\030\001" +
+      " \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001\n\027UserMonster" +
+      "HealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMons" +
+      "terId\030\002 \001(\003\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\026\n" +
+      "\016healthProgress\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"" +
+      "M\n\035UserMonsterCurrentHealthProto\022\025\n\ruser" +
+      "MonsterId\030\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240" +
+      "\001\n\024UserEnhancementProto\022\016\n\006userId\030\001 \001(\005\022" +
+      "=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.proto.Us" +
+      "erEnhancementItemProto\0229\n\007feeders\030\003 \003(\0132",
+      "(.com.lvl6.proto.UserEnhancementItemProt" +
+      "o\"i\n\030UserEnhancementItemProto\022\025\n\ruserMon" +
+      "sterId\030\001 \001(\003\022\037\n\027expectedStartTimeMillis\030" +
+      "\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"f\n\032UserMons" +
+      "terCurrentExpProto\022\025\n\ruserMonsterId\030\001 \001(" +
+      "\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpecte" +
+      "dLevel\030\003 \001(\005\"H\n\033MinimumUserMonsterSellPr" +
+      "oto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashAmount" +
+      "\030\002 \001(\005\"h\n\033UserCurrentMonsterTeamProto\022\016\n" +
+      "\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com",
+      ".lvl6.proto.FullUserMonsterProto\"e\n\031User" +
+      "MonsterEvolutionProto\022\035\n\025catalystUserMon" +
+      "sterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\t" +
+      "startTime\030\003 \001(\003\"\316\001\n\032MonsterBattleDialogu" +
+      "eProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueTyp" +
+      "e\030\003 \001(\01627.com.lvl6.proto.MonsterBattleDi" +
+      "alogueProto.DialogueType\022\020\n\010dialogue\030\002 \001" +
+      "(\t\022\032\n\022probabilityUttered\030\004 \001(\002\" \n\014Dialog" +
+      "ueType\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterStuff" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
