@@ -252,12 +252,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean requestToJoinRequired = clan.isRequestToJoinRequired();
     int userId = user.getId();
     int clanId = clan.getId(); //user.getClanId(); //this is null still...
-    UserClanStatus userClanStatus;
+    String userClanStatus;
     if (requestToJoinRequired) {
-      userClanStatus = UserClanStatus.REQUESTING;
+      userClanStatus = UserClanStatus.REQUESTING.name();
       resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_REQUEST);
     } else {
-      userClanStatus = UserClanStatus.MEMBER;
+      userClanStatus = UserClanStatus.MEMBER.name();
       resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_JOIN);
     }
     

@@ -22,7 +22,6 @@ import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -517,11 +516,11 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime) {
+  public boolean insertUserClan(int userId, int clanId, String status, Timestamp requestTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
-    insertParams.put(DBConstants.CLAN_FOR_USER__STATUS, status.getNumber());
+    insertParams.put(DBConstants.CLAN_FOR_USER__STATUS, status);
     insertParams.put(DBConstants.CLAN_FOR_USER__REQUEST_TIME, requestTime);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
