@@ -258,12 +258,12 @@ public class CreateInfoProtoUtils {
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
       PvpLeagueForUser plfu = null;
-      if (userIdToLeagueInfo.containsKey(userId)) {
+      if (null != userIdToLeagueInfo && userIdToLeagueInfo.containsKey(userId)) {
     	  plfu = userIdToLeagueInfo.get(userId);
       }
       
       PvpUser pu = null;
-      if (userIdToPvpUser.containsKey(userId)) {
+      if (null != userIdToPvpUser && userIdToPvpUser.containsKey(userId)) {
     	  pu = userIdToPvpUser.get(userId);
       }
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
