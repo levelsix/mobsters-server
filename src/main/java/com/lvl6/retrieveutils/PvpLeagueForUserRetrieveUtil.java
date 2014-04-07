@@ -165,15 +165,7 @@ public class PvpLeagueForUserRetrieveUtil {
 			ofu.setPvpLeagueId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID));
 			ofu.setRank(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__RANK));
 			ofu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));
-			
-			Date shieldEndTime = null;
-			try {
-				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
-				shieldEndTime = new Date(ts.getTime());
-				ofu.setShieldEndTime(shieldEndTime);
-			} catch (Exception e) {
-				log.error("incorrect shieldEndTime", e);
-			}
+
 			Date inBattleShieldEndTime = null;
 			try {
 				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME);
@@ -181,6 +173,14 @@ public class PvpLeagueForUserRetrieveUtil {
 				ofu.setInBattleShieldEndTime(inBattleShieldEndTime);
 			} catch (Exception e) {
 				log.error("incorrect inBattleShieldEndTime", e);
+			}
+			Date shieldEndTime = null;
+			try {
+				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
+				shieldEndTime = new Date(ts.getTime());
+				ofu.setShieldEndTime(shieldEndTime);
+			} catch (Exception e) {
+				log.error("incorrect shieldEndTime", e);
 			}
 			
 			ofu.setAttacksWon(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON));
