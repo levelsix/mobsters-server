@@ -262,7 +262,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	}
     }
     
-    if (!InsertUtils.get().insertUserClan(user.getId(), clanId, UserClanStatus.LEADER, createTime)) {
+    if (!InsertUtils.get().insertUserClan(user.getId(), clanId,
+    		UserClanStatus.LEADER.name(), createTime)) {
       log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
     }
     DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(user.getId(), clanId);
