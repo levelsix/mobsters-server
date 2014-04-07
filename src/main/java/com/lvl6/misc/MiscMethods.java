@@ -700,6 +700,7 @@ public class MiscMethods {
     MonsterRetrieveUtils.reload();
     ObstacleRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
+    PvpLeagueRetrieveUtils.reload();
     QuestMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
