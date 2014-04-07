@@ -412,7 +412,8 @@ public class DBConstants {
   public static final String PVP_LEAGUE_FOR_USER__RANK = "rank";
   public static final String PVP_LEAGUE_FOR_USER__ELO = "elo";
   public static final String PVP_LEAGUE_FOR_USER__SHIELD_END_TIME = "shield_end_time";
-  public static final String PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME = "in_battle_shield_end_time";
+  //public static final String PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME = "in_battle_shield_end_time";
+  public static final String PVP_LEAGUE_FOR_USER__BATTLE_END_TIME = "battle_end_time";
   public static final String PVP_LEAGUE_FOR_USER__ATTACKS_WON = "attacks_won";
   public static final String PVP_LEAGUE_FOR_USER__DEFENSES_WON = "defenses_won";
   public static final String PVP_LEAGUE_FOR_USER__ATTACKS_LOST = "attacks_lost";

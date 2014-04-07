@@ -168,7 +168,7 @@ public class PvpLeagueForUserRetrieveUtil {
 
 			Date inBattleShieldEndTime = null;
 			try {
-				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME);
+				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
 				inBattleShieldEndTime = new Date(ts.getTime());
 				ofu.setInBattleShieldEndTime(inBattleShieldEndTime);
 			} catch (Exception e) {
@@ -199,7 +199,7 @@ public class PvpLeagueForUserRetrieveUtil {
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__RANK);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ELO);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
-				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST);

@@ -490,7 +490,7 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ELO, elo);
 	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
 			  shieldEndTime);
-	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+	  insertParams.put(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME,
 			  inBattleShieldEndTime);
 	  
 	  int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);

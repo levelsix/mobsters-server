@@ -1073,7 +1073,7 @@ public class UpdateUtils implements UpdateUtil {
 						shieldEndTime);
 			}
 			if (null != inBattleEndTime) {
-				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME,
 						shieldEndTime);
 			}
 			
@@ -1130,7 +1130,7 @@ public class UpdateUtils implements UpdateUtil {
 						shieldEndTime);
 			}
 			if (null != inBattleEndTime) {
-				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME,
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME,
 						shieldEndTime);
 			}
 			
