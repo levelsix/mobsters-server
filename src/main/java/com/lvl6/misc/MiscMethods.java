@@ -163,7 +163,7 @@ public class MiscMethods {
 		int cash = queuedOpponent.getCash();
 		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
 		
-		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
+//		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
 		
 		return cashLost;
 	}
@@ -189,7 +189,7 @@ public class MiscMethods {
 		int oil = queuedOpponent.getOil();
 		int oilLost = (int) (ControllerConstants.PVP__PERCENT_OIL_LOST * oil);
 		
-		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
+//		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
 		
 		return oilLost;
 	}

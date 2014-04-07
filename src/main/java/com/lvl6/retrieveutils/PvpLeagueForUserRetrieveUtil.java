@@ -180,7 +180,7 @@ public class PvpLeagueForUserRetrieveUtil {
 				inBattleShieldEndTime = new Date(ts.getTime());
 				ofu.setInBattleShieldEndTime(inBattleShieldEndTime);
 			} catch (Exception e) {
-				log.error("incorrect shieldEndTime", e);
+				log.error("incorrect inBattleShieldEndTime", e);
 			}
 			
 			ofu.setAttacksWon(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON));
