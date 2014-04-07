@@ -213,7 +213,7 @@ public class PvpUserRetrieveUtil {
 				inBattleShieldEndTime = new Date(ts.getTime());
 				pu.setInBattleEndTime(inBattleShieldEndTime);
 			} catch (Exception e) {
-				log.error("incorrect shieldEndTime", e);
+				log.error("incorrect battleEndTime", e);
 			}
 			pu.setAttacksWon(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON));    
 			pu.setDefensesWon(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON));  
