@@ -30,18 +30,35 @@ public class TaskStageMonsterRetrieveUtils {
 
   public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
     log.debug("retrieving all task stage monster data map");
-    if (taskStageIdsToTaskStageMonsters == null) {
+    if (null != taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();
     }
     return taskStageIdsToTaskStageMonsters;
   }
+  
+  public static TaskStageMonster getTaskStageMonsterForId(int tsmId) {
+	  log.debug("retrieve task stage monster for id=" + tsmId);
+	  if (null == taskStageMonsterIdsToTaskStageMonsters) {
+		  setStaticTaskStageIdsToTaskStageMonster();      
+	  }
+	  if (!taskStageMonsterIdsToTaskStageMonsters.containsKey(tsmId)) {
+		  log.error("no task stage monsters for tsm id=" + tsmId);
+		  return null;
+	  }
 
-  //should rename to getMonstersForTaskStageId
+	  return taskStageMonsterIdsToTaskStageMonsters.get(tsmId);
+  }
+
   public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
-    log.debug("retrieve task stage data for stage " + taskStageId);
-    if (taskStageIdsToTaskStageMonsters == null) {
+    log.debug("retrieve task stage monster data for stage " + taskStageId);
+    if (null != taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();      
     }
+    if (!taskStageIdsToTaskStageMonsters.containsKey(taskStageId)) {
+    	log.error("no task stage monsters for task stage id=" + taskStageId);
+    	return new ArrayList<TaskStageMonster>();
+    }
+    
     return taskStageIdsToTaskStageMonsters.get(taskStageId);
   }
 

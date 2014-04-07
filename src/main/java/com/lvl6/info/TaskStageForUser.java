@@ -9,13 +9,14 @@ public class TaskStageForUser implements Serializable {
 	private long id;
 	private long userTaskId;
 	private int stageNum;
-	private int taskStageMonsterId;
+	private int taskStageMonsterId; //not task stage monster monster id
 	private String monsterType;
 	private int expGained;
 	private int cashGained;
 	private int oilGained;
 	private boolean monsterPieceDropped;
 	private int itemIdDropped;
+	//maybe should specify the (enhancement) level of monster dropped
 	
 	public TaskStageForUser(long id, long userTaskId, int stageNum,
 			int taskStageMonsterId, String monsterType, int expGained,

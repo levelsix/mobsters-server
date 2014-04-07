@@ -1468,9 +1468,9 @@ public final class TaskProto {
     boolean hasTaskId();
     int getTaskId();
     
-    // optional int32 numTimesActed = 3;
-    boolean hasNumTimesActed();
-    int getNumTimesActed();
+    // optional int32 curTaskStageId = 3;
+    boolean hasCurTaskStageId();
+    int getCurTaskStageId();
   }
   public static final class MinimumUserTaskProto extends
       com.google.protobuf.GeneratedMessage
@@ -1521,20 +1521,20 @@ public final class TaskProto {
       return taskId_;
     }
     
-    // optional int32 numTimesActed = 3;
-    public static final int NUMTIMESACTED_FIELD_NUMBER = 3;
-    private int numTimesActed_;
-    public boolean hasNumTimesActed() {
+    // optional int32 curTaskStageId = 3;
+    public static final int CURTASKSTAGEID_FIELD_NUMBER = 3;
+    private int curTaskStageId_;
+    public boolean hasCurTaskStageId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getNumTimesActed() {
-      return numTimesActed_;
+    public int getCurTaskStageId() {
+      return curTaskStageId_;
     }
     
     private void initFields() {
       userId_ = 0;
       taskId_ = 0;
-      numTimesActed_ = 0;
+      curTaskStageId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1555,7 +1555,7 @@ public final class TaskProto {
         output.writeInt32(2, taskId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, numTimesActed_);
+        output.writeInt32(3, curTaskStageId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1576,7 +1576,7 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, numTimesActed_);
+          .computeInt32Size(3, curTaskStageId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1706,7 +1706,7 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         taskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        numTimesActed_ = 0;
+        curTaskStageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -1757,7 +1757,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.numTimesActed_ = numTimesActed_;
+        result.curTaskStageId_ = curTaskStageId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1780,8 +1780,8 @@ public final class TaskProto {
         if (other.hasTaskId()) {
           setTaskId(other.getTaskId());
         }
-        if (other.hasNumTimesActed()) {
-          setNumTimesActed(other.getNumTimesActed());
+        if (other.hasCurTaskStageId()) {
+          setCurTaskStageId(other.getCurTaskStageId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1826,7 +1826,7 @@ public final class TaskProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              numTimesActed_ = input.readInt32();
+              curTaskStageId_ = input.readInt32();
               break;
             }
           }
@@ -1877,23 +1877,23 @@ public final class TaskProto {
         return this;
       }
       
-      // optional int32 numTimesActed = 3;
-      private int numTimesActed_ ;
-      public boolean hasNumTimesActed() {
+      // optional int32 curTaskStageId = 3;
+      private int curTaskStageId_ ;
+      public boolean hasCurTaskStageId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public int getNumTimesActed() {
-        return numTimesActed_;
+      public int getCurTaskStageId() {
+        return curTaskStageId_;
       }
-      public Builder setNumTimesActed(int value) {
+      public Builder setCurTaskStageId(int value) {
         bitField0_ |= 0x00000004;
-        numTimesActed_ = value;
+        curTaskStageId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearNumTimesActed() {
+      public Builder clearCurTaskStageId() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        numTimesActed_ = 0;
+        curTaskStageId_ = 0;
         onChanged();
         return this;
       }
@@ -4058,30 +4058,30 @@ public final class TaskProto {
       "oto\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013des" +
       "cription\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetN" +
       "umWithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId" +
-      "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"M\n\024M" +
+      "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"N\n\024M" +
       "inimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006t" +
-      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\234\002\n\025T",
-      "askStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022" +
-      "F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.Ta" +
-      "skStageMonsterProto.MonsterType\022\021\n\texpRe" +
-      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRew" +
-      "ard\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r\n" +
-      "\005level\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\"3\n\013MonsterT" +
-      "ype\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020" +
-      "\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventId\030\001 " +
-      "\001(\005\022,\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.proto." +
-      "DayOfWeek\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDur",
-      "ationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017co" +
-      "oldownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com." +
-      "lvl6.proto.PersistentEventProto.EventTyp" +
-      "e\022C\n\016monsterElement\030\010 \001(\0162+.com.lvl6.pro" +
-      "to.MonsterProto.MonsterElement\"\'\n\tEventT" +
-      "ype\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserP" +
-      "ersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007e" +
-      "ventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(\003*" +
-      "g\n\tDayOfWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007" +
-      "TUESDAY\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022\n",
-      "\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020\007B\013B\tTaskProto"
+      "askId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003 \001(\005\"\234\002\n\025",
+      "TaskStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005" +
+      "\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.T" +
+      "askStageMonsterProto.MonsterType\022\021\n\texpR" +
+      "eward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRe" +
+      "ward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r" +
+      "\n\005level\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\"3\n\013Monster" +
+      "Type\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS" +
+      "\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventId\030\001" +
+      " \001(\005\022,\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.proto" +
+      ".DayOfWeek\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDu",
+      "rationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017c" +
+      "ooldownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com" +
+      ".lvl6.proto.PersistentEventProto.EventTy" +
+      "pe\022C\n\016monsterElement\030\010 \001(\0162+.com.lvl6.pr" +
+      "oto.MonsterProto.MonsterElement\"\'\n\tEvent" +
+      "Type\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030User" +
+      "PersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007" +
+      "eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(\003" +
+      "*g\n\tDayOfWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n" +
+      "\007TUESDAY\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022",
+      "\n\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020\007B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4109,7 +4109,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
-              new java.lang.String[] { "UserId", "TaskId", "NumTimesActed", },
+              new java.lang.String[] { "UserId", "TaskId", "CurTaskStageId", },
               com.lvl6.proto.TaskProto.MinimumUserTaskProto.class,
               com.lvl6.proto.TaskProto.MinimumUserTaskProto.Builder.class);
           internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =

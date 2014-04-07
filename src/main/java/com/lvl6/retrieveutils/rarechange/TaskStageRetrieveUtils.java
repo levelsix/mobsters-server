@@ -32,9 +32,27 @@ import com.lvl6.utils.DBConnection;
   public static Map<Integer, Map<Integer, TaskStage>> gettaskIdsToTaskStageIdsToTaskStages() {
     log.debug("retrieving all task stage data map");
     if (null == taskIdsToTaskStageIdsToTaskStages) {
+    	setStatictaskIdsToTaskStageIdsToTaskStages();
+    }
+    return taskIdsToTaskStageIdsToTaskStages;
+  }
+  
+  //TODO: consider making another static map to hold this type of data
+  public static TaskStage getTaskStageForTaskStageId(int taskId,
+		  int taskStageNum) {
+	  if (null == taskIdsToTaskStageIdsToTaskStages) {
 		  setStatictaskIdsToTaskStageIdsToTaskStages();
 	  }
-    return taskIdsToTaskStageIdsToTaskStages;
+	  Map<Integer, TaskStage> taskStageIdToTaskStages = 
+			  taskIdsToTaskStageIdsToTaskStages.get(taskId);
+	  
+	  for (TaskStage ts : taskStageIdToTaskStages.values()) {
+		  if (ts.getStageNum() == taskStageNum) {
+			  return ts;
+		  }
+	  }
+	  
+	  return null;
   }
   
   public static TaskStage getTaskStageForTaskStageId(int taskStageId) {
