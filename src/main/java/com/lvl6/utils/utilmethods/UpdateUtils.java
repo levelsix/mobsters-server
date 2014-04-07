@@ -1092,11 +1092,12 @@ public class UpdateUtils implements UpdateUtil {
 		public int updatePvpLeagueForUser(int userId, int newPvpLeagueId,
 				int newRank, int eloChange, Timestamp shieldEndTime,
 				Timestamp inBattleEndTime, int attacksWonDelta,
-				int defensesWonDelta, int attacksLostDelta, int defensesLost) {
+				int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
 			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+			
 			
 			Map<String, Object> relativeParams = new HashMap<String, Object>();
 			if (0 != eloChange) {
@@ -1106,20 +1107,24 @@ public class UpdateUtils implements UpdateUtil {
 				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON,
 						attacksWonDelta);
 			}
-			if (0 != attacksWonDelta) {
+			if (0 != defensesWonDelta) {
 				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON,
 						defensesWonDelta);
 			}
-			if (0 != attacksWonDelta) {
+			if (0 != attacksLostDelta) {
 				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST,
 						attacksLostDelta);
 			}
-			if (0 != attacksWonDelta) {
+			if (0 != defensesLostDelta) {
 				relativeParams.put(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST,
-						defensesLost);
+						defensesLostDelta);
 			}
 			
+			
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID,
+					newPvpLeagueId);
+			absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__RANK, newRank);
 			if (null != shieldEndTime) {
 				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME,
 						shieldEndTime);
@@ -1129,10 +1134,6 @@ public class UpdateUtils implements UpdateUtil {
 						shieldEndTime);
 			}
 			
-			
-			if (relativeParams.isEmpty() && absoluteParams.isEmpty()) {
-				return 0;
-			}
 			
 			int numUpdated = DBConnection.get().updateTableRows(tableName,
 					relativeParams, absoluteParams, conditionParams, "and");
