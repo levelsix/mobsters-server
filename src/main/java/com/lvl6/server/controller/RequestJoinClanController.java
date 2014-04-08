@@ -40,6 +40,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -53,16 +54,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
-
+  
+  @Autowired
+  protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+  
   public RequestJoinClanController() {
-    numAllocatedThreads = 4;
+	  numAllocatedThreads = 4;
   }
+
 
   @Override
   public RequestEvent createRequestEvent() {
@@ -104,17 +103,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean successful = false;
       if (legitRequest) {
     	  requestToJoinRequired = clan.isRequestToJoinRequired();
+    	  int battlesWon = getPvpLeagueForUserRetrieveUtil()
+    			  .getPvpBattlesWonForUser(userId);
     	  
         //setting minimum user proto for clans based on clan join type
         if (requestToJoinRequired) {
         	//clan raid contribution stuff
-          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
-              user, UserClanStatus.REQUESTING, 0F);
+          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+        		  .createMinimumUserProtoForClans(user,
+        				  UserClanStatus.REQUESTING, 0F, battlesWon);
           resBuilder.setRequester(mupfc);
         } else {
         	//clan raid contribution stuff
-          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
-              user, UserClanStatus.MEMBER, 0F);
+          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+        		  .createMinimumUserProtoForClans(
+        				  user, UserClanStatus.MEMBER, 0F, battlesWon);
           resBuilder.setRequester(mupfc);
         }
         successful = writeChangesToDB(resBuilder, user, clan);
@@ -249,12 +252,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean requestToJoinRequired = clan.isRequestToJoinRequired();
     int userId = user.getId();
     int clanId = clan.getId(); //user.getClanId(); //this is null still...
-    UserClanStatus userClanStatus;
+    String userClanStatus;
     if (requestToJoinRequired) {
-      userClanStatus = UserClanStatus.REQUESTING;
+      userClanStatus = UserClanStatus.REQUESTING.name();
       resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_REQUEST);
     } else {
-      userClanStatus = UserClanStatus.MEMBER;
+      userClanStatus = UserClanStatus.MEMBER.name();
       resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_JOIN);
     }
     
@@ -369,6 +372,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	}
 
   	}
+  }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
+
+  public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+	  return pvpLeagueForUserRetrieveUtil;
+  }
+  public void setPvpLeagueForUserRetrieveUtil(
+		  PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+	  this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
   }
   
 }

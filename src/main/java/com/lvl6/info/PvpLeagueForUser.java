@@ -43,9 +43,6 @@ public class PvpLeagueForUser implements Serializable {
 	
 	public PvpLeagueForUser(PvpLeagueForUser plfu) {
 		super();
-		if (null == plfu) {
-			return;
-		}
 		this.userId = plfu.getUserId();
 		this.pvpLeagueId = plfu.getPvpLeagueId();
 		this.rank = plfu.getRank();

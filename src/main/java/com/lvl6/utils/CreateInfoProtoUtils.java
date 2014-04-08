@@ -65,7 +65,9 @@ import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
+import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
@@ -166,8 +168,11 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
 public class CreateInfoProtoUtils {
@@ -253,12 +258,12 @@ public class CreateInfoProtoUtils {
     for (User u : queuedOpponents) {
       Integer userId = u.getId();
       PvpLeagueForUser plfu = null;
-      if (userIdToLeagueInfo.containsKey(userId)) {
+      if (null != userIdToLeagueInfo && userIdToLeagueInfo.containsKey(userId)) {
     	  plfu = userIdToLeagueInfo.get(userId);
       }
       
       PvpUser pu = null;
-      if (userIdToPvpUser.containsKey(userId)) {
+      if (null != userIdToPvpUser && userIdToPvpUser.containsKey(userId)) {
     	  pu = userIdToPvpUser.get(userId);
       }
       List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
@@ -526,11 +531,13 @@ public class CreateInfoProtoUtils {
     b.setIsComplete(bdi.isComplete());
 
     String monsterQuality = bdi.getMonsterQuality();
-    try {
-    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
-    	b.setQuality(mq);
-    } catch (Exception e){
-    	log.error("invalid monster quality. boosterDisplayItem=" + bdi);
+    if (null != monsterQuality) {
+    	try {
+    		MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    		b.setQuality(mq);
+    	} catch (Exception e){
+    		log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
+    	}
     }
 
     b.setGemReward(bdi.getGemReward());
@@ -801,7 +808,7 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-      String userClanStatus, float clanRaidContribution) {
+      String userClanStatus, float clanRaidContribution, int battlesWon) {
 	  MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
@@ -815,13 +822,15 @@ public class CreateInfoProtoUtils {
     			"\t user=" + u);
     }
     mupfcb.setRaidContribution(clanRaidContribution);
+    mupfcb.setBattlesWon(battlesWon);
     MinimumUserProtoForClans mupfc = mupfcb.build();
 
     return mupfc;
   }
   
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-		  UserClanStatus userClanStatus, float clanRaidContribution) {
+		  UserClanStatus userClanStatus, float clanRaidContribution,
+		  int battlesWon) {
 	  	MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
 
 	    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
@@ -829,6 +838,7 @@ public class CreateInfoProtoUtils {
 	    
 	    mupfcb.setClanStatus(userClanStatus);
 	    mupfcb.setRaidContribution(clanRaidContribution);
+	    mupfcb.setBattlesWon(battlesWon);
 	    MinimumUserProtoForClans mupfc = mupfcb.build();
 
 	    return mupfc;
@@ -1969,6 +1979,25 @@ public class CreateInfoProtoUtils {
 
     return tspb.build();
   }
+  
+  //going by stage number instead of id, maybe because it's human friendly
+  //when looking at the db
+  public static TaskStageProto createTaskStageProto (int taskId, int stageNum,
+		  List<TaskStageForUser> monsters) {
+	  TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
+	  
+	  TaskStage ts = TaskStageRetrieveUtils.getTaskStageForTaskStageId(taskId,
+			  stageNum);
+	  int taskStageId = ts.getId();
+	  tspb.setStageId(taskStageId);
+	  
+	  for (TaskStageForUser tsfu : monsters) {
+		  TaskStageMonsterProto tsmp = createTaskStageMonsterProto(tsfu); 
+		  tspb.addStageMonsters(tsmp);
+	  }
+	  
+	  return tspb.build();
+  }
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
     String name = task.getGoodName();
@@ -2000,11 +2029,15 @@ public class CreateInfoProtoUtils {
     return builder.build();
   }
 
-  public static MinimumUserTaskProto createMinimumUserTaskProto(Integer userId, int taskId, Integer numTimesUserActed) {
+  public static MinimumUserTaskProto createMinimumUserTaskProto(int userId,
+		  TaskForUserOngoing aTaskForUser) {
   	MinimumUserTaskProto.Builder mutpb = MinimumUserTaskProto.newBuilder();
   	mutpb.setUserId(userId);
+  	
+  	int taskId = aTaskForUser.getTaskId();
   	mutpb.setTaskId(taskId);
-  	mutpb.setNumTimesActed(numTimesUserActed);
+  	int taskStageId = aTaskForUser.getTaskStageId();
+  	mutpb.setCurTaskStageId(taskStageId);
   	
   	return mutpb.build();
   }
@@ -2044,6 +2077,53 @@ public class CreateInfoProtoUtils {
     }
 
     return bldr.build();
+  }
+  
+  public static TaskStageMonsterProto createTaskStageMonsterProto (
+		  TaskStageForUser tsfu) {
+	  int tsmId = tsfu.getTaskStageMonsterId();
+	  TaskStageMonster tsm = TaskStageMonsterRetrieveUtils
+			  .getTaskStageMonsterForId(tsmId);
+
+	  int tsmMonsterId = tsm.getMonsterId();
+	  boolean didPieceDrop = tsfu.isMonsterPieceDropped();
+	  //check if monster id exists
+	  if (didPieceDrop) {
+		  Monster mon = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
+		  if (null == mon)  {
+			  throw new RuntimeException("Non existent monsterId for userTask=" +
+					  tsfu);
+		  }
+	  }
+
+	  TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+	  bldr.setMonsterId(tsmMonsterId);
+	  String tsmMonsterType = tsfu.getMonsterType(); 
+	  try {
+		  MonsterType mt = MonsterType.valueOf(tsmMonsterType);
+		  bldr.setMonsterType(mt);
+	  } catch (Exception e) {
+		  log.error("monster type incorrect, tsm=" + tsm);
+	  }
+	  bldr.setCashReward(tsfu.getCashGained());
+	  bldr.setOilReward(tsfu.getOilGained());
+	  bldr.setPuzzlePieceDropped(didPieceDrop);
+	  bldr.setExpReward(tsfu.getExpGained());
+	  
+	  bldr.setLevel(tsm.getLevel());
+
+	  int itemId = tsfu.getItemIdDropped();
+	  if (itemId > 0) {
+		  //check if item exists
+		  Item item = ItemRetrieveUtils.getItemForId(itemId);
+		  if (null == item) {
+			  throw new RuntimeException("nonexistent itemId for userTask=" +
+					  tsfu);
+		  }
+		  bldr.setItemId(itemId);
+	  }
+
+	  return bldr.build();
   }
 
   public static PersistentEventProto createPersistentEventProtoFromEvent(

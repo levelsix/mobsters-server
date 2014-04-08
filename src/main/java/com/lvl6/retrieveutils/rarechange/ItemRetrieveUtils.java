@@ -31,6 +31,18 @@ import com.lvl6.utils.DBConnection;
   	}
   	return itemIdsToItems;
   }
+  
+  public static Item getItemForId(int itemId) {
+	  if (null == itemIdsToItems) {
+		  setStaticItemIdsToItems();
+	  }
+	  
+	  if (!itemIdsToItems.containsKey(itemId)) {
+		  log.error("no item for id=" + itemId);
+		  return null;
+	  }
+	  return itemIdsToItems.get(itemId);
+  }
 
   public static Map<Integer, Item> getItemsForIds(Collection<Integer> ids) {
   	if (null == itemIdsToItems) {
@@ -39,7 +51,7 @@ import com.lvl6.utils.DBConnection;
   	Map<Integer, Item> returnMap = new HashMap<Integer, Item>();
   	
   	for (int id : ids) {
-  		Item tsm = itemIdsToItems.get(id);
+  		Item tsm = getItemForId(id);
   		returnMap.put(id, tsm);
   	}
   	return returnMap;

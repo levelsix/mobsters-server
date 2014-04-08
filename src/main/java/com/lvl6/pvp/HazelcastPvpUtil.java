@@ -199,14 +199,15 @@ public class HazelcastPvpUtil implements InitializingBean {
 	}*/
 	
 	//doesn't matter if use java.util.Date or java.sql.Timestamp
-	protected Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
+	public Predicate<?, ?> generatePredicate(int minElo, int maxElo, Date now,
 			int limit, Collection<String> excludeIds) {
 		String inBattleShieldEndTimeStr =
 				PvpConstants.PVP_USER__IN_BATTLE_END_TIME;
 		String shieldEndTimeStr = PvpConstants.PVP_USER__SHIELD_END_TIME;
 		String eloStr = PvpConstants.PVP_USER__ELO;
 		
-		String nowStr = "\"" + now + "\"";
+		//need to enclose whitespaces in a single quote
+		String nowStr = "'" + now + "'";
 		Map<String, Object> lessThanConditions = new HashMap<String, Object>();
 		lessThanConditions.put(inBattleShieldEndTimeStr, nowStr);
 		lessThanConditions.put(shieldEndTimeStr, nowStr);

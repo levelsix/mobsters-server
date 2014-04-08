@@ -91,7 +91,7 @@ public class ControllerConstants {
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
   public static final int PVP__SHIELD_DURATION_DAYS = 3; 
   public static final int PVP__LOST_BATTLE_SHIELD_DURATION_HOURS = 12;
-  public static final int PVP__INITIAL_LEAGUE_ID = 0;
+  public static final int PVP__INITIAL_LEAGUE_ID = 1;
   public static final int PVP__INITIAL_ELO = 0;
   
   //PVP BATTLE HISTORY

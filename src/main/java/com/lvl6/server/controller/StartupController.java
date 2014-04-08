@@ -53,6 +53,8 @@ import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.TaskForUserOngoing;
+import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
@@ -83,6 +85,8 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
+import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
@@ -107,6 +111,8 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -279,7 +285,7 @@ public class StartupController extends EventController {
 			      setUserMonsterStuff(resBuilder, userId);
 			      setBoosterPurchases(resBuilder);
 			      setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
-			      setCompletedTasks(resBuilder, userId);
+			      setTaskStuff(resBuilder, userId);
 			      setAllStaticData(resBuilder, userId, true);
 			      setEventStuff(resBuilder, userId);
 			      //if server sees that the user is in a pvp battle, decrement user's elo
@@ -297,13 +303,13 @@ public class StartupController extends EventController {
 //          setAllBosses(resBuilder, user.getType());
 
 			      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
-			      log.info("before last login change, user=" + user);
+			      //log.info("before last login change, user=" + user);
 			      user.setLastLogin(nowDate);
-			      log.info("after last login change, user=" + user);
-			      //TODO: get rid of this plfu property from event startup
+			      //log.info("after last login change, user=" + user);
+			      
 			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(
 			    		  user, plfu);
-			      log.info("fup=" + fup);
+			      //log.info("fup=" + fup);
 			      resBuilder.setSender(fup);
 
 			      boolean isNewUser = false;
@@ -393,7 +399,7 @@ public class StartupController extends EventController {
     // reset
     //UPDATE USER's LAST LOGIN
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
-    log.info("user after change user login via db. user=" + user);
+    //log.info("user after change user login via db. user=" + user);
   }
 
   //priority of user returned is 
@@ -930,10 +936,61 @@ public class StartupController extends EventController {
   }
   
   
-  private void setCompletedTasks(Builder resBuilder, int userId) {
+  private void setTaskStuff(Builder resBuilder, int userId) {
   	List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
   			.getAllTaskIdsForUser(userId);
   	resBuilder.addAllCompletedTaskIds(taskIds);
+  	
+  	TaskForUserOngoing aTaskForUser = TaskForUserOngoingRetrieveUtils
+  			.getUserTaskForUserId(userId);
+    if(null != aTaskForUser) {
+      log.warn("user has incompleted task userTask=" + aTaskForUser);
+      setOngoingTask(resBuilder, userId, aTaskForUser);
+    }
+  }
+  
+  private void setOngoingTask(Builder resBuilder, int userId,
+		  TaskForUserOngoing aTaskForUser) {
+	  try {
+		  MinimumUserTaskProto mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(
+				  userId, aTaskForUser);
+		  resBuilder.setCurTask(mutp);
+
+		  //create protos for stages
+		  long userTaskId = aTaskForUser.getId();
+		  int taskId = aTaskForUser.getTaskId();
+		  List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
+				  .getTaskStagesForUserWithTaskForUserId(userTaskId);
+		  
+		  //group task stage for users by stage nums because if there is more
+		  //than one taskStageForUser with the same stage num means this stage
+		  //has more than one monster
+		  Map<Integer, List<TaskStageForUser>> stageNumToTsfu =
+				  new HashMap<Integer, List<TaskStageForUser>>();
+		  for (TaskStageForUser tsfu : taskStages) {
+			  int stageNum = tsfu.getStageNum();
+			  
+			  if (!stageNumToTsfu.containsKey(stageNum)) {
+				  List<TaskStageForUser> a = new ArrayList<TaskStageForUser>(); 
+				  stageNumToTsfu.put(stageNum, a);
+			  }
+			  
+			  List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
+			  tsfuList.add(tsfu);
+		  }
+		  
+		  //now that we have grouped all the monsters in their corresponding
+		  //task stages, protofy them
+		  for (Integer stageNum : stageNumToTsfu.keySet()) {
+			  List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
+			  
+		  }
+		  
+		  
+	  } catch (Exception e) {
+		  log.error("could not create existing user task, letting it get" +
+		  		" deleted when user starts another task.", e);
+	  }
   }
   
   private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
@@ -957,8 +1014,12 @@ public class StartupController extends EventController {
 		  boolean isFreshRestart, Timestamp battleEndTime) {
 	  
 //	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
+	  //TODO: should I be doing this?
 	  PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 			  .getUserPvpLeagueForId(userId);
+	  
+	  PvpUser pu = new PvpUser(plfu);
+	  getHazelcastPvpUtil().replacePvpUser(pu, userId);
 	  
   	if (!isFreshRestart) {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
@@ -988,21 +1049,6 @@ public class StartupController extends EventController {
   			eloAttackerLoses, eloDefenderWins, battleEndTime, battleStartTime, battle);
   	return plfu;
   }
-  
-  //TODO: stick this into full user proto 
-  /*private PvpLeagueForUser setPvpLeagueInfo(Builder resBuilder, int userId) {
-	  PvpLeagueForUser info = getPvpLeagueForUserRetrieveUtil()
-			  .getUserPvpLeagueForId(userId);
-	  if (null == info) {
-		  log.warn("f&#* this user doesn't have pvp league info");
-		  return null;
-	  }
-	  UserPvpLeagueProto infoProto = CreateInfoProtoUtils.createUserPvpLeagueProto(
-			  userId, info, null, true);
-	  
-	  resBuilder.setPvpLeagueInfo(infoProto);
-	  return info;
-  }*/
   
   private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, 
 		  PvpLeagueForUser attackerPlfu, int defenderId,

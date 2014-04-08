@@ -546,7 +546,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		return itemId;
   	}
   	
-  	log.info("no quest ids");
+  	log.info("no quest ids sent by client. questIds=" + questIds);
   	//no item
   	return -1;
   }

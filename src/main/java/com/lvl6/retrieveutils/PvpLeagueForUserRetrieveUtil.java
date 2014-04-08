@@ -119,6 +119,35 @@ public class PvpLeagueForUserRetrieveUtil {
 		return plfuMap;
 	}
 	
+	public int getPvpBattlesWonForUser(int userId) {
+		int battlesWon = 0;
+		try {
+			List<String> columnsToSelect = BattlesWonMapper.getColumnsSelected();
+			
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
+					values, preparedStatement);
+
+			log.info("query=" + query);
+
+			battlesWon = this.jdbcTemplate.queryForObject(query,
+					new BattlesWonMapper());
+			
+		} catch (Exception e) {
+			log.error("could not retrieve user battlesWon for userId=" + userId, e);
+		}
+		return battlesWon;
+	}
 	
 	
 
@@ -136,20 +165,20 @@ public class PvpLeagueForUserRetrieveUtil {
 			ofu.setPvpLeagueId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID));
 			ofu.setRank(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__RANK));
 			ofu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));
-			
+
+			Date inBattleShieldEndTime = null;
+			try {
+				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
+				inBattleShieldEndTime = new Date(ts.getTime());
+				ofu.setInBattleShieldEndTime(inBattleShieldEndTime);
+			} catch (Exception e) {
+				log.error("incorrect inBattleShieldEndTime", e);
+			}
 			Date shieldEndTime = null;
 			try {
 				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
 				shieldEndTime = new Date(ts.getTime());
 				ofu.setShieldEndTime(shieldEndTime);
-			} catch (Exception e) {
-				log.error("incorrect shieldEndTime", e);
-			}
-			Date inBattleShieldEndTime = null;
-			try {
-				Timestamp ts = rs.getTimestamp(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME);
-				inBattleShieldEndTime = new Date(ts.getTime());
-				ofu.setInBattleShieldEndTime(inBattleShieldEndTime);
 			} catch (Exception e) {
 				log.error("incorrect shieldEndTime", e);
 			}
@@ -170,11 +199,33 @@ public class PvpLeagueForUserRetrieveUtil {
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__RANK);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ELO);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
-				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__IN_BATTLE_SHIELD_END_TIME);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST);
+			}
+			return columnsSelected;
+		}
+	}
+	
+	private static final class BattlesWonMapper implements RowMapper<Integer> {
+		
+		private static List<String> columnsSelected;
+		
+		public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+			int attacksWon = rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
+			int defensesWon = rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
+			
+			return attacksWon + defensesWon;
+		}
+		
+		//whatever columns are used in map row should appear here as well
+		public static List<String> getColumnsSelected() {
+			if (null == columnsSelected) {
+				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
 			}
 			return columnsSelected;
 		}

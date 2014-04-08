@@ -15,7 +15,6 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 
 public interface InsertUtil {
 
@@ -81,7 +80,7 @@ public interface InsertUtil {
 	public abstract int insertClan(String name, Timestamp createTime, String description,
 			String tag, boolean requestToJoinRequired, int clanIconId);
 
-	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
+	public abstract boolean insertUserClan(int userId, int clanId, String status, Timestamp requestTime);
 
 	public abstract int insertClanChatPost(int userId, int clanId, String content,
 			Timestamp timeOfPost);

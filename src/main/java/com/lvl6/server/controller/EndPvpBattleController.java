@@ -281,7 +281,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		List<Integer> defenderCashChangeList = new ArrayList<Integer>();
   		List<Boolean> displayToDefenderList = new ArrayList<Boolean>();
   		
-  		PvpLeagueForUser defenderPrevPlfu = new PvpLeagueForUser(defenderPlfu);
+  		//could have attacked a fake person
+  		PvpLeagueForUser defenderPrevPlfu = null;
+  		if (null != defenderPlfu) {
+  			new PvpLeagueForUser(defenderPlfu);
+  		}
   		//defender could be fake user, in which case no change is made to defender
   		//no change could still be made if the defender is already under attack by another
   		//and this attacker is the second guy attacking the defender
