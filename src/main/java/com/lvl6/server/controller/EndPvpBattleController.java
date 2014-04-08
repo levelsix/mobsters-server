@@ -84,8 +84,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int defenderId = reqProto.getDefenderId();
     boolean attackerAttacked = reqProto.getUserAttacked();
     boolean attackerWon = reqProto.getUserWon();
-    int oilChange = reqProto.getOilChange();
-    int cashChange = reqProto.getCashChange();
+    int oilStolen = reqProto.getOilStolen();
+    int cashStolen = reqProto.getCashStolen();
+    
+    if (!attackerWon && oilStolen != 0) {
+    	log.error("client should set oilStolen to be 0 since attacker lost!" +
+    			"\t client sent oilStolen=" + oilStolen);
+    	oilStolen = 0;
+    }
+    
+    if (!attackerWon && cashStolen != 0) {
+    	log.error("client should set cashStolen to be 0 since attacker lost!" +
+    			"\t client sent cashStolen=" + cashStolen);
+    	cashStolen = 0;
+    }
     
     int attackerMaxOil = senderProtoMaxResources.getMaxOil(); 
     int attackerMaxCash = senderProtoMaxResources.getMaxCash();
@@ -147,8 +159,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//it is possible that the defender has a shield, most likely via buying it,
     		//and less likely locks didn't work, regardless, the user can have a shield
     		successful = writeChangesToDb(attacker, attackerId, attackerPlfu,
-    				defender, defenderId, defenderPlfu, pvpBattleInfo, oilChange,
-    				cashChange, curTime, curDate, attackerAttacked, attackerWon,
+    				defender, defenderId, defenderPlfu, pvpBattleInfo, oilStolen,
+    				cashStolen, curTime, curDate, attackerAttacked, attackerWon,
     				attackerMaxOil, attackerMaxCash);
     	}
 
@@ -243,7 +255,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDb(User attacker, int attackerId, 
 		  PvpLeagueForUser attackerPlfu, User defender, int defenderId,
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
-		  int oilChange, int cashChange, Timestamp clientTime, Date clientDate,
+		  int oilStolen, int cashStolen, Timestamp clientTime, Date clientDate,
 		  boolean attackerAttacked, boolean attackerWon, int attackerMaxOil,
 		  int attackerMaxCash) {
   	
@@ -269,8 +281,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   		int attackerEloChange = attackerEloChangeList.get(0); //already pos or neg
   		int defenderEloChange = defenderEloChangeList.get(0); //already pos or neg
-  		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashChange, attackerWon);
-  		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilChange, attackerWon);
+  		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashStolen, attackerWon);
+  		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilStolen, attackerWon);
   		
   		PvpLeagueForUser attackerPrevPlfu = new PvpLeagueForUser(attackerPlfu);
   		//attackerPlfu will be updated
@@ -293,7 +305,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//no change could still be made if the defender is already under attack by another
   		//and this attacker is the second guy attacking the defender
   		updateDefender(attacker, defender, defenderId, defenderPlfu, pvpBattleInfo,
-  				defenderEloChange, cashChange, oilChange, clientDate, attackerWon,
+  				defenderEloChange, cashStolen, oilStolen, clientDate, attackerWon,
   				defenderEloChangeList, defenderOilChangeList, defenderCashChangeList,
   				displayToDefenderList);
   		
@@ -352,7 +364,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  false, false);
   }
   
-  //cashChange is positive number,
+  //cashChange is non negative number,
   //returns a signed number representing oilChange
   private int calculateMaxCashChange(User user, int maxCash, int cashChange, boolean userWon) {
   	if (null == user) {
@@ -371,23 +383,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (userWon) {
   		log.info("calculateMaxCashChange userWon!. user=" + user);
   		int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxOil.
-  		log.info("calculateAmountOverMaxCash curCash=" + curCash);
+  		log.info("calculateMaxCashChange curCash=" + curCash);
   		int maxCashUserCanGain = maxCash - curCash;
-  		log.info("calculateAmountOverMaxCash  maxCashUserCanGain=" +
+  		log.info("calculateMaxCashChange  maxCashUserCanGain=" +
   				maxCashUserCanGain);
   		int maxCashChange = Math.min(cashChange, maxCashUserCanGain);
-  		log.info("calculateAmountOverMaxCash maxCashChange=" + maxCashChange);
+  		log.info("calculateMaxCashChange maxCashChange=" + maxCashChange);
   		
   		//IF USER IS ABOVE maxCash, need to drag him down to maxCash
   		int actualCashChange = maxCashChange - amountOverMax; 
-  		log.info("calculateAmountOverMaxCash  actualCashChange=" +
+  		log.info("calculateMaxCashChange  actualCashChange=" +
   				actualCashChange);
   		return actualCashChange;
   		
   	} else {
-  		log.info("calculateAmountOverMaxCash userLost!. user=" + user);
-  		int actualCashChange = -1 * amountOverMax;
-  		log.info("calculateAmountOverMaxCash  actualCashChange=" +
+  		log.info("calculateMaxCashChange userLost!. user=" + user);
+  		
+  		int maxCashUserCanLose = Math.min(user.getCash(), maxCash);
+  		//always non negative number
+  		int maxCashChange = Math.min(cashChange, maxCashUserCanLose);
+  		
+  		int actualCashChange = -1 * (amountOverMax + maxCashChange);
+  		log.info("calculateMaxCashChange  actualCashChange=" +
   				actualCashChange);		
   		return actualCashChange;
   	}
@@ -428,7 +445,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  } else {
 		  log.info("calculateAmountOverMaxOil userLost!. user=" + user);
-		  int actualOilChange = -1 * amountOverMax;
+		  int maxOilUserCanLose = Math.min(user.getOil(), maxOil);
+		  //always a nonnegative number
+		  int maxOilChange = Math.min(oilChange, maxOilUserCanLose);
+		  
+		  int actualOilChange = -1 * (amountOverMax + maxOilChange);
 		  log.info("calculateAmountOverMaxOil  actualOilChange=" +
 				  actualOilChange);		
 		  return actualOilChange;
@@ -440,14 +461,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  log.info("calculateAmountOverMaxResource resource=" + resource);
 	  int resourceLoss = 0;
 	  if (userResource > maxResource) {
-		  if (u.isAdmin()) {
-			  log.info("alright for user to have more than maxResource." +
-					  " user is admin. user=" + u + "\t maxResource=" + maxResource);
-		  } else {
+//		  if (u.isAdmin()) {
+//			  log.info("alright for user to have more than maxResource." +
+//					  " user is admin. user=" + u + "\t maxResource=" + maxResource);
+//		  } else {
 			  log.info("wtf!!!!! user has more than max cash! user=" +
 					  u + "\t cutting him down to maxResource=" + maxResource);
 			  resourceLoss = userResource - maxResource;
-		  }
+//		  }
 	  }
 	  return resourceLoss;
   }
@@ -571,7 +592,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   //the elo, oil, cash, display lists are return values
   private void updateDefender(User attacker, User defender, int defenderId,
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
-		  int defenderEloChange, int oilChange, int cashChange, Date clientDate,
+		  int defenderEloChange, int oilStolen, int cashStolen, Date clientDate,
 		  boolean attackerWon, List<Integer> defenderEloChangeList,
 		  List<Integer> defenderOilChangeList, List<Integer> defenderCashChangeList,
 		  List<Boolean> displayToDefenderList) {
@@ -587,9 +608,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  boolean defenderWon = !attackerWon;
 	  int defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
-			  cashChange, defenderWon);
+			  cashStolen, defenderWon);
 	  int defenderOilChange = calculateMaxOilChange(defender, defender.getOil(),
-			  oilChange, defenderWon);
+			  oilStolen, defenderWon);
 	  boolean displayToDefender = true;
 
 	  //if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
@@ -606,7 +627,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  } else {
 		  log.info("penalizing/rewarding for losing/winning. defenderWon=" +
 				  defenderWon);
-		  updateRealDefender(attacker, defenderId, defender, defenderPlfu,
+		  updateUnshieldedDefender(attacker, defenderId, defender, defenderPlfu,
 				  shieldEndTime, pvpBattleInfo, clientDate, attackerWon,
 				  defenderEloChange, defenderCashChange, defenderOilChange);
 	  }
@@ -618,16 +639,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   }
   
-  private void updateRealDefender(User attacker, int defenderId, User defender,
+  private void updateUnshieldedDefender(User attacker, int defenderId, User defender,
 		  PvpLeagueForUser defenderPlfu, Date defenderShieldEndTime,
 		  PvpBattleForUser pvpBattleInfo, Date clientDate, boolean attackerWon,
 		  int defenderEloChange, int defenderCashChange, int defenderOilChange) {
 	  //NO ONE ELSE ATTACKING DEFENDER. update defender's cash, oil, elo and shields
 	  log.info("attacker attacked unshielded defender. attacker=" + attacker +
 			  "\t defender=" + defender + "\t battleInfo=" + pvpBattleInfo);
-	  log.info("defender PvpLeagueForUser before battle outcome:" +
-			  defenderPlfu);
-
+	  
 	  //old info before battle
 	  int prevElo = defenderPlfu.getElo();
 	  int prevPvpLeague = defenderPlfu.getPvpLeagueId();
@@ -639,11 +658,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int attacksLostDelta = 0;
 	  int defensesLostDelta = 0;
 
-	  //if attacker lost then defender money would not be updated
+	  //if attacker won then defender money would need to be updated
 	  if (attackerWon) {
+		  log.info("updateUnshieldedDefender  defender before currency update:" +
+				  defender);
 		  int numUpdated = defender.updateRelativeCashAndOilAndGems(
 				  defenderCashChange, defenderOilChange, 0);
-		  log.info("num updated when changing defender's currency=" + numUpdated);
+		  log.info("updateUnshieldedDefender num updated when changing defender's" +
+		  		" currency=" + numUpdated);
+		  log.info("updateUnshieldedDefender  defender after currency update:" +
+				  defender);
 
 		  int hoursAddend = ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS;
 		  defenderShieldEndTime = getTimeUtils().createDateAddHours(clientDate, hoursAddend);
@@ -651,10 +675,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  defensesLost += defensesLostDelta;
 
 	  } else {
-		  log.info("defender won!");
+		  log.info("updateUnshieldedDefender defender won!");
 		  defensesWonDelta = 1;
 		  defensesWon += defensesWonDelta;
 	  }
+	  log.info("updateUnshieldedDefender defender PvpLeagueForUser before battle outcome:" +
+			  defenderPlfu);
 
 	  //regardless if user won or lost, this is shield time
 	  Date inBattleShieldEndTime = defenderShieldEndTime;
