@@ -287,7 +287,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//could have attacked a fake person
   		PvpLeagueForUser defenderPrevPlfu = null;
   		if (null != defenderPlfu) {
-  			new PvpLeagueForUser(defenderPlfu);
+  			defenderPrevPlfu = new PvpLeagueForUser(defenderPlfu);
   		}
   		//defender could be fake user, in which case no change is made to defender
   		//no change could still be made if the defender is already under attack by another
