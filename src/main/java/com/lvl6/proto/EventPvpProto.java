@@ -2873,13 +2873,13 @@ public final class EventPvpProto {
     boolean hasClientTime();
     long getClientTime();
     
-    // optional int32 oilStolen = 6;
-    boolean hasOilStolen();
-    int getOilStolen();
+    // optional int32 oilChange = 6;
+    boolean hasOilChange();
+    int getOilChange();
     
-    // optional int32 cashStolen = 7;
-    boolean hasCashStolen();
-    int getCashStolen();
+    // optional int32 cashChange = 7;
+    boolean hasCashChange();
+    int getCashChange();
   }
   public static final class EndPvpBattleRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -2963,24 +2963,24 @@ public final class EventPvpProto {
       return clientTime_;
     }
     
-    // optional int32 oilStolen = 6;
-    public static final int OILSTOLEN_FIELD_NUMBER = 6;
-    private int oilStolen_;
-    public boolean hasOilStolen() {
+    // optional int32 oilChange = 6;
+    public static final int OILCHANGE_FIELD_NUMBER = 6;
+    private int oilChange_;
+    public boolean hasOilChange() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
-    public int getOilStolen() {
-      return oilStolen_;
+    public int getOilChange() {
+      return oilChange_;
     }
     
-    // optional int32 cashStolen = 7;
-    public static final int CASHSTOLEN_FIELD_NUMBER = 7;
-    private int cashStolen_;
-    public boolean hasCashStolen() {
+    // optional int32 cashChange = 7;
+    public static final int CASHCHANGE_FIELD_NUMBER = 7;
+    private int cashChange_;
+    public boolean hasCashChange() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public int getCashStolen() {
-      return cashStolen_;
+    public int getCashChange() {
+      return cashChange_;
     }
     
     private void initFields() {
@@ -2989,8 +2989,8 @@ public final class EventPvpProto {
       userAttacked_ = false;
       userWon_ = false;
       clientTime_ = 0L;
-      oilStolen_ = 0;
-      cashStolen_ = 0;
+      oilChange_ = 0;
+      cashChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3020,10 +3020,10 @@ public final class EventPvpProto {
         output.writeInt64(5, clientTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, oilStolen_);
+        output.writeInt32(6, oilChange_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, cashStolen_);
+        output.writeInt32(7, cashChange_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3056,11 +3056,11 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, oilStolen_);
+          .computeInt32Size(6, oilChange_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, cashStolen_);
+          .computeInt32Size(7, cashChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3201,9 +3201,9 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
-        oilStolen_ = 0;
+        oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        cashStolen_ = 0;
+        cashChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -3270,11 +3270,11 @@ public final class EventPvpProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.oilStolen_ = oilStolen_;
+        result.oilChange_ = oilChange_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.cashStolen_ = cashStolen_;
+        result.cashChange_ = cashChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3306,11 +3306,11 @@ public final class EventPvpProto {
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
         }
-        if (other.hasOilStolen()) {
-          setOilStolen(other.getOilStolen());
+        if (other.hasOilChange()) {
+          setOilChange(other.getOilChange());
         }
-        if (other.hasCashStolen()) {
-          setCashStolen(other.getCashStolen());
+        if (other.hasCashChange()) {
+          setCashChange(other.getCashChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3374,12 +3374,12 @@ public final class EventPvpProto {
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              oilStolen_ = input.readInt32();
+              oilChange_ = input.readInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              cashStolen_ = input.readInt32();
+              cashChange_ = input.readInt32();
               break;
             }
           }
@@ -3562,44 +3562,44 @@ public final class EventPvpProto {
         return this;
       }
       
-      // optional int32 oilStolen = 6;
-      private int oilStolen_ ;
-      public boolean hasOilStolen() {
+      // optional int32 oilChange = 6;
+      private int oilChange_ ;
+      public boolean hasOilChange() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      public int getOilStolen() {
-        return oilStolen_;
+      public int getOilChange() {
+        return oilChange_;
       }
-      public Builder setOilStolen(int value) {
+      public Builder setOilChange(int value) {
         bitField0_ |= 0x00000020;
-        oilStolen_ = value;
+        oilChange_ = value;
         onChanged();
         return this;
       }
-      public Builder clearOilStolen() {
+      public Builder clearOilChange() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        oilStolen_ = 0;
+        oilChange_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 cashStolen = 7;
-      private int cashStolen_ ;
-      public boolean hasCashStolen() {
+      // optional int32 cashChange = 7;
+      private int cashChange_ ;
+      public boolean hasCashChange() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public int getCashStolen() {
-        return cashStolen_;
+      public int getCashChange() {
+        return cashChange_;
       }
-      public Builder setCashStolen(int value) {
+      public Builder setCashChange(int value) {
         bitField0_ |= 0x00000040;
-        cashStolen_ = value;
+        cashChange_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCashStolen() {
+      public Builder clearCashChange() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        cashStolen_ = 0;
+        cashChange_ = 0;
         onChanged();
         return this;
       }
@@ -4415,8 +4415,8 @@ public final class EventPvpProto {
       "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
       "hMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\024\n\014use" +
       "rAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\nclie" +
-      "ntTime\030\005 \001(\003\022\021\n\toilStolen\030\006 \001(\005\022\022\n\ncashS" +
-      "tolen\030\007 \001(\005\"\300\002\n\031EndPvpBattleResponseProt",
+      "ntTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncashC" +
+      "hange\030\007 \001(\005\"\300\002\n\031EndPvpBattleResponseProt",
       "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
       "umUserProtoWithMaxResources\022\022\n\ndefenderI" +
       "d\030\002 \001(\005\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013att" +
@@ -4468,7 +4468,7 @@ public final class EventPvpProto {
           internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "DefenderId", "UserAttacked", "UserWon", "ClientTime", "OilStolen", "CashStolen", },
+              new java.lang.String[] { "Sender", "DefenderId", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", },
               com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.class,
               com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto.Builder.class);
           internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =

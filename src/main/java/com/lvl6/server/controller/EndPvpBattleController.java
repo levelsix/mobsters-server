@@ -84,8 +84,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int defenderId = reqProto.getDefenderId();
     boolean attackerAttacked = reqProto.getUserAttacked();
     boolean attackerWon = reqProto.getUserWon();
-    int oilStolen = reqProto.getOilStolen();
-    int cashStolen = reqProto.getCashStolen();
+    int oilStolen = reqProto.getOilChange(); //non negative
+    int cashStolen = reqProto.getCashChange(); // non negative
     
     if (!attackerWon && oilStolen != 0) {
     	log.error("client should set oilStolen to be 0 since attacker lost!" +
