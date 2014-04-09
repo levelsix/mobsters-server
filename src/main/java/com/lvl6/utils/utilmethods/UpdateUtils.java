@@ -1074,7 +1074,7 @@ public class UpdateUtils implements UpdateUtil {
 			}
 			if (null != inBattleEndTime) {
 				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME,
-						shieldEndTime);
+						inBattleEndTime);
 			}
 			
 			if (absoluteParams.isEmpty()) {
