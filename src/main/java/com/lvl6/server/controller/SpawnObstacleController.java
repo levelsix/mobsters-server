@@ -158,7 +158,7 @@ public class SpawnObstacleController extends EventController{
   	}
 
   	log.info("updating last obstacle spawned time:" + clientTime);
-  	if (!user.updateLastObstacleSpawnedTime(clientTime)) {
+  	if (!user.updateRelativeGemsObstacleTimeNumRemoved(0, clientTime, 0)) {
   		log.error("could not update last obstacle spawned time to " + clientTime);
   		return false;
   	}

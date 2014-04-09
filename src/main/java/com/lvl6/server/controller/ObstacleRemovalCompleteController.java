@@ -124,39 +124,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
 	}
-	private boolean writeChangesToDB(User user, int ofuId, boolean speedUp, 
-			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
-		int gemChange = -1 * gemCost;
-		if (speedUp && atMaxObstacles) {
-			if (!user.updateRelativeGemsAndObstacleTime(gemChange, clientTime)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
-		} else if (speedUp) {
-			if (!user.updateRelativeGemsNaive(gemChange)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
-		} else if (atMaxObstacles) {
-			if (!user.updateLastObstacleSpawnedTime(clientTime)) {
-	  		log.error("could not update last obstacle spawned time to " + clientTime);
-	  		return false;
-	  	}
-		}
-		
-		
-		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
-		log.info("(obstacles) numDeleted=" + numDeleted);
-		return true;
-	}
 
 	private boolean checkLegit(Builder resBuilder, int userId, User user,
 			int ofuId, ObstacleForUser ofu, boolean speedUp, int gemCostToSpeedup) {
@@ -177,6 +144,47 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.SUCCESS);
 		return true;  
+	}
+	
+	private boolean writeChangesToDB(User user, int ofuId, boolean speedUp, 
+			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
+		int gemChange = -1 * gemCost;
+		int obstaclesRemovedDelta = 1;
+		if (speedUp && atMaxObstacles) {
+			if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, clientTime,
+					obstaclesRemovedDelta)) {
+				log.error("problem updating user gems. gemChange=" + gemChange);
+				return false;
+			} else {
+				//everything went ok
+				money.put(MiscMethods.gems, gemChange);
+			}
+			
+		} else if (speedUp) {
+			//if (!user.updateRelativeGemsNaive(gemChange)) {
+			if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, null,
+					obstaclesRemovedDelta)) {
+				log.error("problem updating user gems. gemChange=" + gemChange);
+				return false;
+			} else {
+				//everything went ok
+				money.put(MiscMethods.gems, gemChange);
+			}
+			
+		} else if (atMaxObstacles) {
+			//if user at max obstacles and removes one, a new obstacle
+			//should spawn in the amount of time it takes to spawn one, not
+			//right when user clears obstacle
+			if (!user.updateRelativeGemsObstacleTimeNumRemoved(0, clientTime,
+					obstaclesRemovedDelta)) {
+	  		log.error("could not update last obstacle spawned time to " + clientTime);
+	  		return false;
+			}
+		}
+		
+		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
+		log.info("(obstacles) numDeleted=" + numDeleted);
+		return true;
 	}
 
 	private void writeToUserCurrencyHistory(int userId, User user, Timestamp curTime,

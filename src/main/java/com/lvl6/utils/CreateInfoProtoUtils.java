@@ -2384,7 +2384,11 @@ public class CreateInfoProtoUtils {
     			plfu, null, false);
     	builder.setPvpLeagueInfo(pvpLeagueInfo);
     }
-    //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
+    
+    int numObstaclesRemoved = u.getNumObstaclesRemoved();
+    builder.setNumObstaclesRemoved(numObstaclesRemoved);
+    
+    //add new columns above here, not below the if. if case for is fake
 
     if (u.isFake()) {
 
