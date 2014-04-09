@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PvpLeague;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.utils.DBConnection;
 
 @Component
