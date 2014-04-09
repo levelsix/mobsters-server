@@ -452,6 +452,10 @@ public class User implements Serializable {
 			relativeParams.put(DBConstants.USER__CASH, cashDelta);
 		}
 		
+		if (relativeParams.isEmpty()) {
+			return 0;
+		}
+		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
 				conditionParams, "and");
 		if (numUpdated == 1) {
