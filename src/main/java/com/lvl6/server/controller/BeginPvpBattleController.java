@@ -242,12 +242,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
   		enemy.setInBattleShieldEndTime(newInBattleEndTime);
   		
+  		
   		//replace hazelcast object
   		PvpUser nuEnemyPu = new PvpUser(enemy);
   		getHazelcastPvpUtil().replacePvpUser(nuEnemyPu, enemyId);
   		
   		//as well as update db
   		Timestamp nuInBattleEndTime = new Timestamp(newInBattleEndTime.getTime());
+  		log.info("now=" + clientTime);
+  		log.info("should be one hour later, battleEndTime=" + nuInBattleEndTime);
   		int numUpdated = UpdateUtils.get().updatePvpLeagueForUserShields(enemyId,
   				null, nuInBattleEndTime);
   		log.info("(defender shield) num updated=" + numUpdated);

@@ -52,7 +52,7 @@ public class PvpLeagueRetrieveUtils {
 	 * 		pvpLeagueId is one of the multiple leagues, return pvpLeagueId;
 	 * @return
 	 * 		If selectRandom is false, multiple leagues exist, pvpLeagueId is not one
-	 * 		of the multiple leagues, then return random league;
+	 * 		of the multiple leagues, then return league with lowest minElo;
 	 */
 	public static int getLeagueIdForElo(int elo, boolean selectRandom, int pvpLeagueId) {
 		List<PvpLeague> leagues = getLeaguesForElo(elo);
@@ -62,9 +62,13 @@ public class PvpLeagueRetrieveUtils {
 			log.error("no league for elo: " + elo + "\t selecting highest/lowest league");
 			
 			if (null != lowestLeague && elo < lowestLeague.getMinElo()) {
+				log.error("selecting lowest league=" + lowestLeague);
 				return lowestLeague.getId();
+				
 			} else if (null != highestLeague && elo > highestLeague.getMinElo()) {
+				log.error("selecting highest league=" + highestLeague);
 				return highestLeague.getId();
+				
 			} else {
 				log.error("there appears to be a gap between leagues. elo=" + elo +
 						"leagues=" + pvpLeagueIdsToPvpLeagues + "choosing lowest league");
@@ -89,7 +93,8 @@ public class PvpLeagueRetrieveUtils {
 		
 		for (PvpLeague pl : leagues) {
 			if (pl.getId() == pvpLeagueId) {
-				log.info("successfully chose pvpLeagueId=" + pvpLeagueId);
+				log.info("multiple leagues but still in current pvpLeagueId=" +
+						pvpLeagueId);
 				return pvpLeagueId;
 			}
 		}
@@ -98,8 +103,8 @@ public class PvpLeagueRetrieveUtils {
 		Collections.sort(leagues, new PvpLeagueComparator());
 		int firstIndex = 0;
 		PvpLeague pl = leagues.get(firstIndex); 
-		log.info("had to select league-with-lowest-minElo: " + pl +
-				"\t leagues=" + leagues + "\t for elo:" + elo);
+		log.info("multiple leagues. selecting league-with-lowest-minElo: " +
+				pl + "\t leagues=" + leagues + "\t for elo:" + elo);
 		return pl.getId();
 	}
 	
