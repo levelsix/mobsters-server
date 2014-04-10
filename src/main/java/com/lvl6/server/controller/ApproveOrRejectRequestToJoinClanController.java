@@ -40,18 +40,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 
   public ApproveOrRejectRequestToJoinClanController() {
     numAllocatedThreads = 4;
   }
   
-
   @Override
   public RequestEvent createRequestEvent() {
     return new ApproveOrRejectRequestToJoinClanRequestEvent();
@@ -137,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in ApproveOrRejectRequestToJoinClan processEvent", e);
     	}
     } finally {
-      if (0 != clanId) {
+      if (0 != clanId && lockedClan) {
       	getLocker().unlockClan(clanId);
       }
     }
@@ -246,4 +239,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
   
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +41,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.server.EventWriter;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -53,29 +54,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   public static int BOOSTER_PURCHASES_MAX_SIZE = 50;
 
-  @Resource
-  protected EventWriter eventWriter;
+  @Autowired
+  protected Locker locker;
 
-  public EventWriter getEventWriter() {
-    return eventWriter;
-  }
+  @Resource(name = "goodEquipsRecievedFromBoosterPacks")
+  protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 
-  public void setEventWriter(EventWriter eventWriter) {
-    this.eventWriter = eventWriter;
-  }
-
-  
-	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
-	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
-	public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
-		return goodEquipsRecievedFromBoosterPacks;
-	}
-
-	public void setGoodEquipsRecievedFromBoosterPacks(
-			IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks) {
-		this.goodEquipsRecievedFromBoosterPacks = goodEquipsRecievedFromBoosterPacks;
-	}
-  
   
   
   public PurchaseBoosterPackController() {
@@ -107,7 +91,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       int userId = senderProto.getUserId();
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -184,7 +168,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		log.error("exception2 in SellUserMonsterController processEvent", e);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
     }
   }
 
@@ -525,4 +509,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
   			"\t boosterItem=" + itemsUserReceives);
   }
   
+  public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
+	  return goodEquipsRecievedFromBoosterPacks;
+  }
+  
+  public void setGoodEquipsRecievedFromBoosterPacks(
+		  IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks) {
+	  this.goodEquipsRecievedFromBoosterPacks = goodEquipsRecievedFromBoosterPacks;
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

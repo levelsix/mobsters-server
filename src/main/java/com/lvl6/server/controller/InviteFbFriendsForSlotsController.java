@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -37,6 +39,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public InviteFbFriendsForSlotsController() {
     numAllocatedThreads = 4;
@@ -74,7 +78,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(userId, this.getClass().getSimpleName());
+    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       //get all the invites the user sent
@@ -149,7 +153,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in InviteFbFriendsForSlotsController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(userId, this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
     }
   }
   
@@ -261,6 +265,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	inviteIds.addAll(inviteIdsTemp);
   	return true;
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
   
 }

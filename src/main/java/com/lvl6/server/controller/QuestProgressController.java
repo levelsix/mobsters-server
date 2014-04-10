@@ -24,6 +24,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -32,8 +33,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  
-  
+  @Autowired
+  protected Locker locker;
+
   @Autowired
   protected InsertUtil insertUtils;
 
@@ -76,8 +78,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(QuestProgressStatus.FAIL_OTHER);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
     	//retrieve whatever is necessary from the db
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
@@ -110,7 +112,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     } catch (Exception e) {
       log.error("exception in QuestProgress processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
 
@@ -228,4 +230,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //  	
 //  	log.info("user monsters deleted for questId=" + questId + ". num=" + num);
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

@@ -30,12 +30,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 	
   public RetractRequestJoinClanController() {
     numAllocatedThreads = 4;
@@ -104,7 +98,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in RetractRequestJoinClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
+    	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	}
     }
@@ -143,4 +137,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
     return true;
   }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

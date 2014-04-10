@@ -63,43 +63,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
-  
-  
-  protected Locker getLocker() {
-		return locker;
-	}
 
-	protected void setLocker(Locker locker) {
-		this.locker = locker;
-	}
-	
-	@Autowired
-	protected TimeUtils timeUtils;
+  @Autowired
+  protected TimeUtils timeUtils;
 
-	public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
+  @Autowired
+  protected ClanEventUtil clanEventUtil;
 
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-	
-	@Autowired
-	protected ClanEventUtil clanEventUtil;
-	
-	public ClanEventUtil getClanEventUtil() {
-		return clanEventUtil;
-	}
-
-	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
-		this.clanEventUtil = clanEventUtil;
-	}
-
-	
-	
-	
-	public AttackClanRaidMonsterController() {
-    numAllocatedThreads = 4;
+  public AttackClanRaidMonsterController() {
+	  numAllocatedThreads = 4;
   }
 
   @Override
@@ -159,15 +131,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<ClanEventPersistentForClan> clanEventList =
     		new ArrayList<ClanEventPersistentForClan>();
     
+    boolean lockedClan = false;
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
-    	getLocker().lockClan(clanId);
+    	lockedClan = getLocker().lockClan(clanId);
     }
     try {
     	//so as to prevent another db read call to get the same information
     	
-      boolean legitRequest = checkLegitRequest(resBuilder, sender, userId, clanId,
-      		eventDetails, curDate, clanEventList);
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, sender,
+    		  userId, clanId, eventDetails, curDate, clanEventList);
 
 
 //      boolean success = false;
@@ -216,9 +189,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     } finally {
     	
-    	if (null != mcp && mcp.hasClanId()) {
-      	getLocker().unlockClan(clanId);
-      }
+    	if (null != mcp && mcp.hasClanId() && lockedClan) {
+    		getLocker().unlockClan(clanId);
+    	}
     	
     }
     
@@ -241,9 +214,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   //want to update user monster healths even if the monster is dead
-  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mup,
-  		int userId, int clanId, PersistentClanEventClanInfoProto eventDetails,  		
-  		Date curDate, List<ClanEventPersistentForClan> clanEventList) {
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
+		  MinimumUserProto mup, int userId, int clanId,
+		  PersistentClanEventClanInfoProto eventDetails, Date curDate,
+		  List<ClanEventPersistentForClan> clanEventList) {
+	  
+	  if (!lockedClan) {
+		  log.error("couldn't obtain clan lock");
+		  return false;
+	  }
+	  
   	//check if user is in clan
   	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
     if (null == uc) {
@@ -866,4 +846,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     server.writeClanEvent(resEvent, clanId);
   }
+  
+  protected Locker getLocker() {
+	  return locker;
+  }
+  
+  protected void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+  
+  public ClanEventUtil getClanEventUtil() {
+	  return clanEventUtil;
+  }
+  
+  public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+	  this.clanEventUtil = clanEventUtil;
+  }
+
 }

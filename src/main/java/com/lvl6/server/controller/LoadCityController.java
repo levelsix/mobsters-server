@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -25,12 +26,16 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class LoadCityController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected Locker locker;
 
   public LoadCityController() {
     numAllocatedThreads = 3;
@@ -60,8 +65,8 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setCityId(cityId);
 
     resBuilder.setStatus(LoadCityStatus.SUCCESS);
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
+//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 //      int currentCityRankForUser = RetrieveUtils.userCityRetrieveUtils().getCurrentCityRankForUser(senderProto.getUserId(), cityId);
@@ -116,7 +121,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in LoadCity processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
   
@@ -239,4 +244,13 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setStatus(LoadCityStatus.SUCCESS);
     return true;
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

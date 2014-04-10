@@ -45,6 +45,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPu
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -57,6 +58,9 @@ public class InAppPurchaseController extends EventController {
 
   private static final String SANDBOX_URL = "https://sandbox.itunes.apple.com/verifyReceipt";
   private static final String PRODUCTION_URL = "https://buy.itunes.apple.com/verifyReceipt";
+
+  @Autowired
+  protected Locker locker;
 
   @Autowired
   protected InsertUtil insertUtils;
@@ -97,7 +101,7 @@ public class InAppPurchaseController extends EventController {
     resBuilder.setReceipt(reqProto.getReceipt());
 
     // Lock this player's ID
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int previousSilver = user.getCash();
@@ -229,7 +233,7 @@ public class InAppPurchaseController extends EventController {
       log.error("exception in InAppPurchaseController processEvent", e);
     } finally {
       // Unlock this player
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -337,4 +341,13 @@ public class InAppPurchaseController extends EventController {
 //    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
 //        goldSilverChange, previousGoldSilver, reasonsForChanges);
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

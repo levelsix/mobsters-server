@@ -91,7 +91,7 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetGameCenterIdController processEvent", e);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
     }
   }
 

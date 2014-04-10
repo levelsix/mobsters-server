@@ -29,12 +29,16 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
   @Component @DependsOn("gameServer") public class PurchaseNormStructureController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected Locker locker;
 
   @Autowired
   protected InsertUtil insertUtils;
@@ -78,7 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
     	//get things from the db
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
@@ -138,7 +142,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     		log.error("exception2 in PurchaseNormStructure processEvent", e);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
 
@@ -285,4 +289,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     		currentCurrencyMap, reasonsForChanges, details);
     
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

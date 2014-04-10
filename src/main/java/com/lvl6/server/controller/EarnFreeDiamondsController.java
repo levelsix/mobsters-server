@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.Earn
 import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -34,6 +36,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 public class EarnFreeDiamondsController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected Locker locker;
 
 //  private static String LVL6_SHARED_SECRET = "mister8conrad3chan9is1a2very4great5man";
 //  private Mac hmacSHA1WithLVL6Secret = null;
@@ -87,7 +92,7 @@ public class EarnFreeDiamondsController extends EventController {
     EarnFreeDiamondsResponseProto.Builder resBuilder = EarnFreeDiamondsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
@@ -141,7 +146,7 @@ public class EarnFreeDiamondsController extends EventController {
     } catch (Exception e) {
       log.error("exception in earn free gold processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
 
@@ -462,4 +467,13 @@ public class EarnFreeDiamondsController extends EventController {
       log.error("Maybe table's not there or duplicate keys? ", e);
     }
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

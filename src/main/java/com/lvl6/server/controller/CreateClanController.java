@@ -40,12 +40,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 
   public CreateClanController() {
     numAllocatedThreads = 4;
@@ -310,4 +304,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
   }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

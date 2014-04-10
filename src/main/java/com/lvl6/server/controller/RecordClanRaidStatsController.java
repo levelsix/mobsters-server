@@ -37,42 +37,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
-  
-  protected HazelcastPvpUtil getHazelcastPvpUtil() {
-		return hazelcastPvpUtil;
-	}
-
-	protected void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
-		this.hazelcastPvpUtil = hazelcastPvpUtil;
-	}
-	
 
   @Autowired
   protected Locker locker;
-  
-	public Locker getLocker() {
-		return locker;
-	}
 
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
+  @Autowired
+  protected TimeUtils timeUtils;
 
 
-	@Autowired
-	protected TimeUtils timeUtils;
-
-	public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
-
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-
-	
-	public RecordClanRaidStatsController() {
-    numAllocatedThreads = 4;
+  public RecordClanRaidStatsController() {
+	  numAllocatedThreads = 4;
   }
 
   @Override
@@ -108,14 +82,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     ClanEventPersistentForClan clanEvent = null;
     Map<Integer, ClanEventPersistentForUser> userIdToClanUserInfo = 
     		new HashMap<Integer, ClanEventPersistentForUser>();
-    //boolean errorless = true;
-//    if (0 != clanId) {
-//    	getLocker().lockClan(clanId);
-//    }
+    boolean lockedClan = true;
+    if (0 != clanId) {
+    	lockedClan = getLocker().lockClan(clanId);
+    }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	clanEvent = ClanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
-      boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, senderProto, userId,
       		clanId, clanEvent);
 
       RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
@@ -148,9 +122,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
     } finally {
     	
-//    	if (0 != clanId) {
-//      	getLocker().unlockClan(clanId);
-//      }
+    	if (0 != clanId && lockedClan) {
+      	getLocker().unlockClan(clanId);
+      }
     	
     }
     
@@ -168,8 +142,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
-  		int userId, int clanId, ClanEventPersistentForClan clanEvent) {
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
+		  MinimumUserProto mupfc, int userId, int clanId,
+		  ClanEventPersistentForClan clanEvent) {
+	  if (!lockedClan) {
+		  log.error("couldn't obtain clan lock");
+		  return false;
+	  }
     if (0 == clanId || 0 == userId || null == clanEvent) {
       log.error("not in clan. user is " + mupfc + "\t or clanId invalid id=" + clanId +
       		"\t or clanEvent is null clanEvent=" + clanEvent);
@@ -225,6 +204,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		userIdToClanUserInfo.putAll(clanUserInfo);
   	}
   	return true;
+  }
+  
+  protected HazelcastPvpUtil getHazelcastPvpUtil() {
+	  return hazelcastPvpUtil;
+  }
+  
+  protected void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+	  this.hazelcastPvpUtil = hazelcastPvpUtil;
+  }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
   }
 
 }

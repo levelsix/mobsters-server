@@ -36,12 +36,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
   
   public TransferClanOwnershipController() {
     numAllocatedThreads = 2;
@@ -128,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in TransferClanOwnership processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
+    	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	}
     }
@@ -204,5 +198,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(newClanOwner);
     resBuilder.setClanOwnerNew(mup);
   }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }  
   
 }

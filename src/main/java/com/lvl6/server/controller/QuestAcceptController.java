@@ -22,6 +22,7 @@ import com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -31,7 +32,8 @@ import com.lvl6.utils.utilmethods.QuestUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  
+  @Autowired
+  protected Locker locker;
   
   @Autowired
   protected InsertUtil insertUtils;
@@ -67,8 +69,8 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(QuestAcceptStatus.FAIL_OTHER);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
@@ -90,7 +92,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     } catch (Exception e) {
       log.error("exception in QuestAccept processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
 
@@ -141,6 +143,14 @@ import com.lvl6.utils.utilmethods.QuestUtils;
   	
   	log.info("num quests inserted into user_quests: " + num + 
   			"\t quest inserted: " + quest);
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
   
 }

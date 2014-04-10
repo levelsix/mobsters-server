@@ -2,15 +2,14 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
@@ -34,7 +33,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.server.EventWriter;
-import com.lvl6.utils.ConnectedPlayer;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -48,49 +47,15 @@ public class SendGroupChatController extends EventController {
 
   public static int CHAT_MESSAGES_MAX_SIZE = 50;
 
-  @Resource(name = "outgoingGameEventsHandlerExecutor")
-  protected TaskExecutor executor;
-
-  public TaskExecutor getExecutor() {
-    return executor;
-  }
-
-  public void setExecutor(TaskExecutor executor) {
-    this.executor = executor;
-  }
-
-  @Resource(name = "playersByPlayerId")
-  protected Map<Integer, ConnectedPlayer> playersByPlayerId;
-
   @Resource(name = "globalChat")
   protected IList<GroupChatMessageProto> chatMessages;
-
-  public IList<GroupChatMessageProto> getChatMessages() {
-    return chatMessages;
-  }
-
-  public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
-    this.chatMessages = chatMessages;
-  }
-
-  public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
-    return playersByPlayerId;
-  }
-
-  public void setPlayersByPlayerId(Map<Integer, ConnectedPlayer> playersByPlayerId) {
-    this.playersByPlayerId = playersByPlayerId;
-  }
 
   @Resource
   protected EventWriter eventWriter;
 
-  public EventWriter getEventWriter() {
-    return eventWriter;
-  }
+  @Autowired
+  protected Locker locker;
 
-  public void setEventWriter(EventWriter eventWriter) {
-    this.eventWriter = eventWriter;
-  }
 
   public SendGroupChatController() {
     numAllocatedThreads = 4;
@@ -122,7 +87,7 @@ public class SendGroupChatController extends EventController {
     SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserId());
     resEvent.setTag(event.getTag());
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       final User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 
@@ -175,7 +140,7 @@ public class SendGroupChatController extends EventController {
     		log.error("exception2 in SendGroupChat processEvent", e);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -260,4 +225,30 @@ public class SendGroupChatController extends EventController {
     resBuilder.setStatus(SendGroupChatStatus.SUCCESS);
     return true;
   }
+  
+
+  public IList<GroupChatMessageProto> getChatMessages() {
+    return chatMessages;
+  }
+
+  public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
+    this.chatMessages = chatMessages;
+  }
+  
+  public EventWriter getEventWriter() {
+	  return eventWriter;
+  }
+  
+  public void setEventWriter(EventWriter eventWriter) {
+	  this.eventWriter = eventWriter;
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

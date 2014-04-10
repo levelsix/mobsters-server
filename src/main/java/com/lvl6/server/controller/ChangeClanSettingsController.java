@@ -40,25 +40,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
   
   @Autowired
   protected ClanIconRetrieveUtils clanIconRetrieveUtils;
-  public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
-		return clanIconRetrieveUtils;
-	}
-	public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {
-		this.clanIconRetrieveUtils = clanIconRetrieveUtils;
-	}
 	
-
-	public ChangeClanSettingsController() {
-    numAllocatedThreads = 4;
+  public ChangeClanSettingsController() {
+	  numAllocatedThreads = 4;
   }
 
   @Override
@@ -136,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in ChangeClanSettings processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
+    	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	}
     }
@@ -232,4 +219,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
   
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
+	  return clanIconRetrieveUtils;
+  }
+  public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {
+	  this.clanIconRetrieveUtils = clanIconRetrieveUtils;
+  }
+
 }

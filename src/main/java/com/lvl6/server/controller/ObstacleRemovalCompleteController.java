@@ -25,6 +25,7 @@ import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.O
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
@@ -33,20 +34,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+	@Autowired
+	protected Locker locker;
+
+	@Autowired
+	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+
 	public ObstacleRemovalCompleteController() {
 		numAllocatedThreads = 4;
 	}
-	
-	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
-		return obstacleForUserRetrieveUtil;
-	}
-	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
-		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-	}
-	
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -74,8 +70,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
@@ -121,7 +116,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       	log.error("exception2 in ObstacleRemovalCompleteController processEvent", e);
       }
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
 	}
 
@@ -214,5 +209,21 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
 	}
-}
+	
+	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+		return obstacleForUserRetrieveUtil;
+	}
+	public void setObstacleForUserRetrieveUtil(
+			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+	}
 
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	
+}

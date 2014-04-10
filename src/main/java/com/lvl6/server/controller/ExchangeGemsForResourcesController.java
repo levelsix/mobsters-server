@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +25,15 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class ExchangeGemsForResourcesController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected Locker locker;
 
   public ExchangeGemsForResourcesController() {
     numAllocatedThreads = 1;
@@ -61,7 +66,7 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
     
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 
@@ -101,7 +106,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in ExchangeGemsForResourcesController processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
     }
   }
 
@@ -212,4 +217,13 @@ import com.lvl6.utils.RetrieveUtils;
     MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
     		previousCurrency, currentCurrencies, reasonsForChanges, details);
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

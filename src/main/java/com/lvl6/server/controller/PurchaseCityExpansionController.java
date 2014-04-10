@@ -29,6 +29,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ExpansionPurchaseForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -40,6 +41,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @Component @DependsOn("gameServer") public class PurchaseCityExpansionController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected LeaderBoardUtil leaderboard;
@@ -82,7 +86,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 
 		//so someone doesn't steal user's silver during transaction
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
@@ -136,7 +140,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in BeginDungeonController processEvent", e);
       }
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
 	}
 
@@ -218,4 +222,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 //				previousGoldSilver, reasonsForChanges);
 	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	
 }
