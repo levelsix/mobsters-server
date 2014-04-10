@@ -35,6 +35,7 @@ message StructureInfoProto {
 	optional string shadowImgName = 19;
 	optional float shadowVerticalOffset = 20;
 	optional float shadowHorizontalOfffset = 21;
+	optional float shadowScale = 22;
 	
 	enum StructType {
 		RESOURCE_GENERATOR = 1;

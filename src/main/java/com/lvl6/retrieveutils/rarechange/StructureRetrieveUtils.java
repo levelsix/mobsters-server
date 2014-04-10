@@ -155,12 +155,13 @@ import com.lvl6.utils.DBConnection;
     String shadowImgName = rs.getString(i++);
     float shadowVerticalOffset = rs.getFloat(i++);
     float shadowHorizontalOffset = rs.getFloat(i++);
+    float shadowScale = rs.getFloat(i++);
     
     Structure s = new Structure(id, name, level, structType, buildResourceType,
     		buildCost, minutesToBuild, requiredTownHallLvl, width, height,
     		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
     		imgHorizontalPixelOffset, description, shortDescription, shadowImgName,
-    		shadowVerticalOffset, shadowHorizontalOffset);
+    		shadowVerticalOffset, shadowHorizontalOffset, shadowScale);
     
     if (null != structType) {
     	String newStructType = structType.trim();

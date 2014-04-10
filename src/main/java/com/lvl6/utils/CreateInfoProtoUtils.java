@@ -1677,6 +1677,7 @@ public class CreateInfoProtoUtils {
     }
 
     builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
+    builder.setImgHorizontalPixelOffset(s.getImgHorizontalPixelOffset());
 
     aStr = s.getDescription();
     if (null != aStr) {
@@ -1687,6 +1688,15 @@ public class CreateInfoProtoUtils {
     if (null != aStr) {
       builder.setShortDescription(aStr);
     }
+    
+    aStr = s.getShadowImgName();
+    if (null != aStr) {
+    	builder.setShadowImgName(aStr);
+    }
+    
+    builder.setShadowVerticalOffset(s.getShadowVerticalOffset());
+    builder.setShadowHorizontalOfffset(s.getShadowHorizontalOffset());
+    builder.setShadowScale(s.getShadowScale());
 
     return builder.build();
   }

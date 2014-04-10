@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = -4451649093963941337L;
+	private static final long serialVersionUID = -7838827750756218900L;
 	
 	private int id;
 	private String name;
@@ -26,14 +26,16 @@ public class Structure implements Serializable {
 	private String shadowImgName;
 	private float shadowVerticalOffset;
 	private float shadowHorizontalOffset;
+	private float shadowScale;
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
-			int requiredTownHallLvl, int width, int height, int predecessorStructId,
-			int successorStructId, String imgName, float imgVerticalPixelOffset,
-			float imgHorizontalPixelOffset, String description,
-			String shortDescription, String shadowImgName,
-			float shadowVerticalOffset, float shadowHorizontalOffset) {
+			int requiredTownHallLvl, int width, int height,
+			int predecessorStructId, int successorStructId, String imgName,
+			float imgVerticalPixelOffset, float imgHorizontalPixelOffset,
+			String description, String shortDescription, String shadowImgName,
+			float shadowVerticalOffset, float shadowHorizontalOffset,
+			float shadowScale) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,6 +57,7 @@ public class Structure implements Serializable {
 		this.shadowImgName = shadowImgName;
 		this.shadowVerticalOffset = shadowVerticalOffset;
 		this.shadowHorizontalOffset = shadowHorizontalOffset;
+		this.shadowScale = shadowScale;
 	}
 
 	public int getId() {
@@ -217,20 +220,31 @@ public class Structure implements Serializable {
 		this.shadowHorizontalOffset = shadowHorizontalOffset;
 	}
 
+	public float getShadowScale() {
+		return shadowScale;
+	}
+
+	public void setShadowScale(float shadowScale) {
+		this.shadowScale = shadowScale;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
 				+ ", structType=" + structType + ", buildResourceType="
-				+ buildResourceType + ", buildCost=" + buildCost + ", minutesToBuild="
-				+ minutesToBuild + ", requiredTownHallLvl=" + requiredTownHallLvl
-				+ ", width=" + width + ", height=" + height + ", predecessorStructId="
-				+ predecessorStructId + ", successorStructId=" + successorStructId
-				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
-				+ imgVerticalPixelOffset + ", imgHorizontalPixelOffset="
-				+ imgHorizontalPixelOffset + ", description=" + description
-				+ ", shortDescription=" + shortDescription + ", shadowImgName="
-				+ shadowImgName + ", shadowVerticalOffset=" + shadowVerticalOffset
-				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset + "]";
+				+ buildResourceType + ", buildCost=" + buildCost
+				+ ", minutesToBuild=" + minutesToBuild
+				+ ", requiredTownHallLvl=" + requiredTownHallLvl + ", width="
+				+ width + ", height=" + height + ", predecessorStructId="
+				+ predecessorStructId + ", successorStructId="
+				+ successorStructId + ", imgName=" + imgName
+				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
+				+ ", imgHorizontalPixelOffset=" + imgHorizontalPixelOffset
+				+ ", description=" + description + ", shortDescription="
+				+ shortDescription + ", shadowImgName=" + shadowImgName
+				+ ", shadowVerticalOffset=" + shadowVerticalOffset
+				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset
+				+ ", shadowScale=" + shadowScale + "]";
 	}
-	
+
 }
