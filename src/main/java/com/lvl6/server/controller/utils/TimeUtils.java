@@ -92,6 +92,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param minutesAddend Can be negative.
+   * @return
+   */
   public Date createPstDateAddMinutes(Date curDate, int minutesAddend) {
   	DateTime dt = new DateTime(curDate, PST);
 //  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt +
@@ -105,6 +111,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param daysAddend Can be negative.
+   * @return
+   */
   public Date createDateAddDays(Date curDate, int daysAddend) {
   	DateTime dt = new DateTime(curDate);
   	
@@ -115,6 +127,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param hoursAddend Can be negative.
+   * @return
+   */
   public Date createDateAddHours(Date curDate, int hoursAddend) {
   	DateTime dt = new DateTime(curDate);
   	

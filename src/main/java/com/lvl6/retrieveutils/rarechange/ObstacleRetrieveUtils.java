@@ -31,6 +31,19 @@ import com.lvl6.utils.DBConnection;
   	}
   	return obstacleIdsToObstacles;
   }
+  
+  public static Obstacle getObstacleForId(int obstacleId) {
+	  if (null == obstacleIdsToObstacles) {
+		  setStaticObstacleIdsToObstacles();
+	  }
+	  
+	  if (!obstacleIdsToObstacles.containsKey(obstacleId)) {
+		  log.error("no obstacle exists for id=" + obstacleId);
+		  return null;
+	  }
+	  
+	  return obstacleIdsToObstacles.get(obstacleId);
+  }
 
   public static Map<Integer, Obstacle> getObstaclesForIds(Collection<Integer> ids) {
   	if (null == obstacleIdsToObstacles) {
@@ -39,7 +52,7 @@ import com.lvl6.utils.DBConnection;
   	Map<Integer, Obstacle> returnMap = new HashMap<Integer, Obstacle>();
   	
   	for (int id : ids) {
-  		Obstacle tsm = obstacleIdsToObstacles.get(id);
+  		Obstacle tsm = getObstacleForId(id);
   		returnMap.put(id, tsm);
   	}
   	return returnMap;
