@@ -2038,6 +2038,8 @@ public class CreateInfoProtoUtils {
   	mutpb.setTaskId(taskId);
   	int taskStageId = aTaskForUser.getTaskStageId();
   	mutpb.setCurTaskStageId(taskStageId);
+  	long userTaskId = aTaskForUser.getId();
+  	mutpb.setUserTaskId(userTaskId);
   	
   	return mutpb.build();
   }
