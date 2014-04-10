@@ -19,12 +19,13 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto;
-import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus;
+import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -33,22 +34,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 public class BeginObstacleRemovalController extends EventController{
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
+	@Autowired
+	protected Locker locker;
 
+	@Autowired
+	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+	
 	public BeginObstacleRemovalController() {
 		numAllocatedThreads = 4;
 	}
 	
-	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
-		return obstacleForUserRetrieveUtil;
-	}
-	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
-		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-	}
-	
-
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new BeginObstacleRemovalRequestEvent();
@@ -76,7 +72,7 @@ public class BeginObstacleRemovalController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
@@ -124,7 +120,7 @@ public class BeginObstacleRemovalController extends EventController{
       	log.error("exception2 in BeginObstacleRemovalController processEvent", e);
       }
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
 	}
 
@@ -296,5 +292,19 @@ public class BeginObstacleRemovalController extends EventController{
         previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
 	}
+	
+	public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+		return obstacleForUserRetrieveUtil;
+	}
+	public void setObstacleForUserRetrieveUtil(
+			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+	}
+	
 }
-
