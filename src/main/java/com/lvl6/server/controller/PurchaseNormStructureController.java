@@ -64,6 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     PurchaseNormStructureRequestProto reqProto = ((PurchaseNormStructureRequestEvent)event).getPurchaseNormStructureRequestProto();
+    log.info("reqProto=" + reqProto);
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
@@ -86,6 +87,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     try {
     	//get things from the db
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      log.info("user=" + user);
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
       
       //currency history purposes

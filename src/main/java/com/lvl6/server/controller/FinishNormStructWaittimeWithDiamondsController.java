@@ -55,6 +55,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
 
     FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent)event).getFinishNormStructWaittimeWithDiamondsRequestProto();
+    log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -70,6 +71,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      log.info("user=" + user);
       int previousGems = 0;
       StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
