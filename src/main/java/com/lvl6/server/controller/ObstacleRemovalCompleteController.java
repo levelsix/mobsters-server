@@ -57,6 +57,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent)event).getObstacleRemovalCompleteRequestProto();
+		
+		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -145,35 +147,32 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
 		int gemChange = -1 * gemCost;
 		int obstaclesRemovedDelta = 1;
+		
 		if (speedUp && atMaxObstacles) {
-			if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, clientTime,
-					obstaclesRemovedDelta)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
+			log.info("isSpeedup and maxObstacles");
 		} else if (speedUp) {
-			//if (!user.updateRelativeGemsNaive(gemChange)) {
-			if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, null,
-					obstaclesRemovedDelta)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
+			log.info("isSpeedup");
+			clientTime = null;
 		} else if (atMaxObstacles) {
+			log.info("maxObstacles");
+			gemChange = 0;
 			//if user at max obstacles and removes one, a new obstacle
 			//should spawn in the amount of time it takes to spawn one, not
 			//right when user clears obstacle
-			if (!user.updateRelativeGemsObstacleTimeNumRemoved(0, clientTime,
-					obstaclesRemovedDelta)) {
-	  		log.error("could not update last obstacle spawned time to " + clientTime);
-	  		return false;
+		} else {
+			gemChange = 0;
+			clientTime = null;
+			log.info("not isSpeedup and not maxObstacles");
+		}
+		
+		if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, clientTime,
+				obstaclesRemovedDelta)) {
+			log.error("problem updating user gems. gemChange=" + gemChange);
+			return false;
+		} else {
+			//everything went ok
+			if (0 != gemChange) {
+				money.put(MiscMethods.gems, gemChange);
 			}
 		}
 		

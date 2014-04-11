@@ -160,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
 		  log.info("numUpdated=" + numUpdated);
 
-		  if (numUpdated <= userMonsterIdToExpectedHealth.size()) {
+		  if (numUpdated != userMonsterIdToExpectedHealth.size()) {
 			  log.warn("unexpected error: not all user monsters were updated. " +
 					  "actual numUpdated=" + numUpdated + "expected: " +
 					  "userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);

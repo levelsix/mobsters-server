@@ -31,4 +31,10 @@ public class ObstacleRemovalCompleteRequestEvent extends RequestEvent {
   public ObstacleRemovalCompleteRequestProto getObstacleRemovalCompleteRequestProto() {
     return obstacleRemovalCompleteRequestProto;
   }
+  //added for testing purposes
+  public void setObstacleRemovalCompleteRequestProto(
+		  ObstacleRemovalCompleteRequestProto obstacleRemovalCompleteRequestProto) {
+	  this.obstacleRemovalCompleteRequestProto = obstacleRemovalCompleteRequestProto;
+  }
+
 }

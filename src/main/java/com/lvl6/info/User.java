@@ -722,7 +722,8 @@ public class User implements Serializable {
 				this.gems += gemChange;
 			}
 			if (null != lastObstacleSpawnedTime) {
-				this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
+				this.lastObstacleSpawnedTime = new Date(
+						lastObstacleSpawnedTime.getTime());
 			}
 			if (0 != obstaclesRemovedDelta) {
 				this.numObstaclesRemoved += obstaclesRemovedDelta;

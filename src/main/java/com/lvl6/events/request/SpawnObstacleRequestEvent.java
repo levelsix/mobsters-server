@@ -31,4 +31,9 @@ public class SpawnObstacleRequestEvent extends RequestEvent {
   public SpawnObstacleRequestProto getSpawnObstacleRequestProto() {
     return spawnObstacleRequestProto;
   }
+  //added for testing purposes
+  public void setSpawnObstacleRequestProto(SpawnObstacleRequestProto sorp) {
+	  this.spawnObstacleRequestProto = sorp;
+  }
+  
 }

@@ -31,4 +31,10 @@ public class BeginObstacleRemovalRequestEvent extends RequestEvent {
   public BeginObstacleRemovalRequestProto getBeginObstacleRemovalRequestProto() {
     return beginObstacleRemovalRequestProto;
   }
+  //added for testing purposes
+  public void setBeginObstacleRemovalRequestProto(
+		  BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto) {
+	  this.beginObstacleRemovalRequestProto = beginObstacleRemovalRequestProto;
+  }
+
 }
