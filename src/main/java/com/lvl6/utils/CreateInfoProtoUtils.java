@@ -1301,6 +1301,11 @@ public class CreateInfoProtoUtils {
       mlipb.setDarknessDmg(info.getDarknessDmg());
       mlipb.setRockDmg(info.getRockDmg());
       mlipb.setSpeed(info.getSpeed());
+      mlipb.setHpExponentBase(info.getHpExponentBase());
+      mlipb.setDmgExponentBase(info.getDmgExponentBase());
+      mlipb.setExpLvlDivisor(info.getExpLvlDivisor());
+      mlipb.setExpLvlExponent(info.getExpLvlExponent());
+      
       lvlInfoProtos.add(mlipb.build());
     }
 
