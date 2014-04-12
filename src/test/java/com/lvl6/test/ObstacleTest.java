@@ -70,7 +70,14 @@ public class ObstacleTest extends TestCase {
 	public void testObstacleEvents() {
 		spawnObstacle();
 		beginRemoveObstacle();
-		beginCompletingObstacleRemoval();
+		beginCompletingObstacleRemovalNotMaxObstacles();
+	}
+	
+	@Test
+	public void testObstacleEventsAtMaxObstacles() {
+		spawnObstacle();
+		beginRemoveObstacle();
+		beginCompletingObstacleRemovalAtMaxObstacles();
 	}
 	
 	public void spawnObstacle() {
@@ -249,20 +256,24 @@ public class ObstacleTest extends TestCase {
 		  return tempOfuList.get(lastIndex);
 	}
 	
-	
-	
-	public void beginCompletingObstacleRemoval() {
+	public void beginCompletingObstacleRemovalNotMaxObstacles() {
 		log.info("begin completing removing obstacle");
 		
 		int userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		int numObstaclesRemoved = unitTester.getNumObstaclesRemoved();
+		Date oldLastObstacleSpawnedTime = unitTester
+				.getLastObstacleSpawnedTime();
 		
 		MinimumUserProto mup = CreateInfoProtoUtils
 				.createMinimumUserProtoFromUser(unitTester);
 		
-		//calculate when obstacle is done being removed 
+		//calculate when obstacle is done being removed ten minutes from now
     	Date nowDate = new Date();
+    	log.info("nowDate=" + nowDate);
+    	Date tenMinFromNow = getTimeUtils().createPstDateAddMinutes(nowDate, 10);
+    	log.info("tenMinFromNow=" + tenMinFromNow);
+    	Timestamp tenMinFromNowTimestamp = new Timestamp(tenMinFromNow.getTime());
     	
 		//check the user obstacle exists
 		List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
@@ -279,7 +290,7 @@ public class ObstacleTest extends TestCase {
 				ObstacleRemovalCompleteRequestProto.newBuilder();
 		orcrpb.setSender(mup);
 		orcrpb.setSpeedUp(false);
-		orcrpb.setCurTime(nowDate.getTime());
+		orcrpb.setCurTime(tenMinFromNowTimestamp.getTime());
 		orcrpb.setUserObstacleId(ofuId);
 		orcrpb.setAtMaxObstacles(false);
 		
@@ -307,8 +318,89 @@ public class ObstacleTest extends TestCase {
 				". Actual: " + newNumObstaclesRemoved,
 				expectedRemoved == newNumObstaclesRemoved);
 		
+		//check to make sure the last obstacle spawn time remains same
+		Date newLastObstacleSpawnedTime = newUnitTester
+				.getLastObstacleSpawnedTime();
+		assertTrue("Expected same obstacle spawn time. Actual times, old: " +
+				oldLastObstacleSpawnedTime + ", new: " +
+				newLastObstacleSpawnedTime,
+				oldLastObstacleSpawnedTime.equals(newLastObstacleSpawnedTime));
 		
 		log.info("ending completing removing obstacle");
+	}
+	
+	public void beginCompletingObstacleRemovalAtMaxObstacles() {
+		log.info("begin completing removing obstacle at max");
+		
+		int userId = getTestUserId();
+		User unitTester = getUserRetrieveUtils().getUserById(userId);
+		int numObstaclesRemoved = unitTester.getNumObstaclesRemoved();
+		Date oldLastObstacleSpawnedTime = unitTester
+				.getLastObstacleSpawnedTime();
+		
+		MinimumUserProto mup = CreateInfoProtoUtils
+				.createMinimumUserProtoFromUser(unitTester);
+		
+		//calculate when obstacle is done being removed ten minutes from now
+    	Date nowDate = new Date();
+    	log.info("nowDate=" + nowDate);
+    	Date tenMinFromNow = getTimeUtils().createPstDateAddMinutes(nowDate, 10);
+    	log.info("tenMinFromNow=" + tenMinFromNow);
+    	Timestamp tenMinFromNowTimestamp = new Timestamp(tenMinFromNow.getTime());
+    	
+		//check the user obstacle exists
+		List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
+				.getUserObstacleForUser(userId);
+		assertTrue("Expected obstacles: not null. Actual: " + ofuList,
+				null != ofuList);
+		int oldSize = ofuList.size();
+
+		ObstacleForUser ofu = getLastCreatedObstacle(ofuList);
+		int ofuId = ofu.getId();
+		
+		//create the event
+		ObstacleRemovalCompleteRequestProto.Builder orcrpb =
+				ObstacleRemovalCompleteRequestProto.newBuilder();
+		orcrpb.setSender(mup);
+		orcrpb.setSpeedUp(false);
+		orcrpb.setCurTime(tenMinFromNowTimestamp.getTime());
+		orcrpb.setUserObstacleId(ofuId);
+		orcrpb.setAtMaxObstacles(true);
+		
+		//send the event for processing
+		ObstacleRemovalCompleteRequestEvent orcre =
+				new ObstacleRemovalCompleteRequestEvent();
+		orcre.setTag(1);
+		orcre.setObstacleRemovalCompleteRequestProto(orcrpb.build());
+		getObstacleRemovalCompleteController().handleEvent(orcre);
+		
+		
+		//check to make sure the user has one less obstacle 
+		List<ObstacleForUser> newOfuList = getObstacleForUserRetrieveUtil()
+				.getUserObstacleForUser(userId);
+		int newSize = newOfuList.size();
+		int expectedSize = oldSize - 1;
+		assertTrue("Expected num obstacles: " + expectedSize + ". Actual: " +
+				newSize, expectedSize == newSize);
+		
+		//check to make sure the user's num obstacles removed is one more
+		User newUnitTester = getUserRetrieveUtils().getUserById(userId);
+		int newNumObstaclesRemoved = newUnitTester.getNumObstaclesRemoved();
+		int expectedRemoved = numObstaclesRemoved + 1;
+		assertTrue("Expected obstacles removed: " + expectedRemoved +
+				". Actual: " + newNumObstaclesRemoved,
+				expectedRemoved == newNumObstaclesRemoved);
+		
+		//check to make sure the last obstacle spawn time is diff
+		Date newLastObstacleSpawnedTime = newUnitTester
+				.getLastObstacleSpawnedTime();
+		int numMinDiff = getTimeUtils().numMinutesDifference(
+				oldLastObstacleSpawnedTime, newLastObstacleSpawnedTime);
+		assertTrue("Expected diff obstacle spawn time. Actual times, old: " +
+				oldLastObstacleSpawnedTime + ", new: " +
+				newLastObstacleSpawnedTime, 10 == numMinDiff);
+		
+		log.info("ending completing removing obstacle at max");
 	}
 	
 	
