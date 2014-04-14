@@ -160,10 +160,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
 		  log.info("numUpdated=" + numUpdated);
 
-		  if (numUpdated != userMonsterIdToExpectedHealth.size()) {
-			  log.warn("unexpected error: not all user monsters were updated. " +
-					  "actual numUpdated=" + numUpdated + "expected: " +
-					  "userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
+		  //number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
+		  //so returns 2 if one row was updated, 1 if inserted
+		  if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
+			  log.warn("unexpected error: more than user monsters were" +
+					  " updated. actual numUpdated=" + numUpdated +
+					  "expected: userMonsterIdToExpectedHealth=" +
+					  userMonsterIdToExpectedHealth);
 		  }
 	  }
 
