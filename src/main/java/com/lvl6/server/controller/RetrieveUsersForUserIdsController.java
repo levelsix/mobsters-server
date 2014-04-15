@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveUsersForUserIdsRequestEvent;
 import com.lvl6.events.response.RetrieveUsersForUserIdsResponseEvent;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
@@ -20,12 +22,17 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpUser;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveUsersForUserIdsController extends EventController{
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected HazelcastPvpUtil hazelcastPvpUtil;
 
   public RetrieveUsersForUserIdsController() {
     numAllocatedThreads = 4;
@@ -57,16 +64,19 @@ import com.lvl6.utils.RetrieveUtils;
     Map<Integer, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
+    	  
     	  //TODO: consider getting from db
-    	  //null PvpLeagueFromUser means will pull from hazelcast instead
-        resBuilder.addRequestedUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(user, null));
+    	  //pull from hazelcast for now
+    	  int userId = user.getId();
+    	  PvpUser pu = getHazelcastPvpUtil().getPvpUser(userId);
+    	  PvpLeagueForUser plfu = null;
+    	  
+    	  if (null != pu) {
+    		  plfu = new PvpLeagueForUser(pu);
+    	  }
+    	  resBuilder.addRequestedUsers(CreateInfoProtoUtils
+    			  .createFullUserProtoFromUser(user, plfu));
         
-//        if (includePotentialPoints) {
-//          int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(sender, user);
-//          int pointsLost = MiscMethods.pointsGainedForClanTowerUserBattle(user, sender);
-//          resBuilder.addPotentialPointsGained(pointsGained);
-//          resBuilder.addPotentialPointsLost(pointsLost);
-//        }
       }
       
       List<UserCurrentMonsterTeamProto> teams = null;
@@ -109,6 +119,14 @@ import com.lvl6.utils.RetrieveUtils;
   	}
   	
   	return retVal;
+  }
+
+  public HazelcastPvpUtil getHazelcastPvpUtil() {
+	  return hazelcastPvpUtil;
+  }
+
+  public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+	  this.hazelcastPvpUtil = hazelcastPvpUtil;
   }
 
 }
