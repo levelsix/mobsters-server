@@ -337,8 +337,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  utIdList.add(userTaskId);
 	  stageNumsToProtos.putAll(stageNumsToProtosTemp);
 	  
+	  success = true;
 	  log.info("stageNumsToProtosTemp=" + stageNumsToProtosTemp);
 	  log.info("stageNumsToProtos=" + stageNumsToProtos);
+	  
 	  
 	  //start the cool down timer if for event
 	  if (isEvent) {
