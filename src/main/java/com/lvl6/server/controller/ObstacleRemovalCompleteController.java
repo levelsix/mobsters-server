@@ -25,6 +25,7 @@ import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.O
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
@@ -33,20 +34,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+	@Autowired
+	protected Locker locker;
+
+	@Autowired
+	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+
 	public ObstacleRemovalCompleteController() {
 		numAllocatedThreads = 4;
 	}
-	
-	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
-		return obstacleForUserRetrieveUtil;
-	}
-	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
-		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-	}
-	
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -61,6 +57,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent)event).getObstacleRemovalCompleteRequestProto();
+		
+		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -74,8 +72,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
@@ -121,41 +118,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       	log.error("exception2 in ObstacleRemovalCompleteController processEvent", e);
       }
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
-	}
-	private boolean writeChangesToDB(User user, int ofuId, boolean speedUp, 
-			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
-		int gemChange = -1 * gemCost;
-		if (speedUp && atMaxObstacles) {
-			if (!user.updateRelativeGemsAndObstacleTime(gemChange, clientTime)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
-		} else if (speedUp) {
-			if (!user.updateRelativeGemsNaive(gemChange)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-			
-		} else if (atMaxObstacles) {
-			if (!user.updateLastObstacleSpawnedTime(clientTime)) {
-	  		log.error("could not update last obstacle spawned time to " + clientTime);
-	  		return false;
-	  	}
-		}
-		
-		
-		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
-		log.info("(obstacles) numDeleted=" + numDeleted);
-		return true;
 	}
 
 	private boolean checkLegit(Builder resBuilder, int userId, User user,
@@ -177,6 +141,44 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.SUCCESS);
 		return true;  
+	}
+	
+	private boolean writeChangesToDB(User user, int ofuId, boolean speedUp, 
+			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
+		int gemChange = -1 * gemCost;
+		int obstaclesRemovedDelta = 1;
+		
+		if (speedUp && atMaxObstacles) {
+			log.info("isSpeedup and maxObstacles");
+		} else if (speedUp) {
+			log.info("isSpeedup");
+			clientTime = null;
+		} else if (atMaxObstacles) {
+			log.info("maxObstacles");
+			gemChange = 0;
+			//if user at max obstacles and removes one, a new obstacle
+			//should spawn in the amount of time it takes to spawn one, not
+			//right when user clears obstacle
+		} else {
+			gemChange = 0;
+			clientTime = null;
+			log.info("not isSpeedup and not maxObstacles");
+		}
+		
+		if (!user.updateRelativeGemsObstacleTimeNumRemoved(gemChange, clientTime,
+				obstaclesRemovedDelta)) {
+			log.error("problem updating user gems. gemChange=" + gemChange);
+			return false;
+		} else {
+			//everything went ok
+			if (0 != gemChange) {
+				money.put(MiscMethods.gems, gemChange);
+			}
+		}
+		
+		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
+		log.info("(obstacles) numDeleted=" + numDeleted);
+		return true;
 	}
 
 	private void writeToUserCurrencyHistory(int userId, User user, Timestamp curTime,
@@ -206,5 +208,21 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
 	}
-}
+	
+	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+		return obstacleForUserRetrieveUtil;
+	}
+	public void setObstacleForUserRetrieveUtil(
+			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+	}
 
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	
+}

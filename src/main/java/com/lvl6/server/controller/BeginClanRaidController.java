@@ -55,52 +55,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
-  
-  
-  protected Locker getLocker() {
-		return locker;
-	}
 
-	protected void setLocker(Locker locker) {
-		this.locker = locker;
-	}
-	
-	@Autowired
-	protected TimeUtils timeUtils;
+  @Autowired
+  protected TimeUtils timeUtils;
 
-	public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
+  @Autowired
+  protected ClanEventUtil clanEventUtil;
 
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-	
-	@Autowired
-	protected ClanEventUtil clanEventUtil;
-	
-	public ClanEventUtil getClanEventUtil() {
-		return clanEventUtil;
-	}
-
-	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
-		this.clanEventUtil = clanEventUtil;
-	}
-	
-	
-
-	public BeginClanRaidController() {
-    numAllocatedThreads = 4;
+  public BeginClanRaidController() {
+	  numAllocatedThreads = 4;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new BeginClanRaidRequestEvent();
+	  return new BeginClanRaidRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_BEGIN_CLAN_RAID_EVENT;
+	  return EventProtocolRequest.C_BEGIN_CLAN_RAID_EVENT;
   }
 
   @Override
@@ -133,17 +106,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     // If different, replace it with a new one. Else, do nothing.
     
     //ONLY GET CLAN LOCK IF TRYING TO BEGIN A RAID
+    boolean lockedClan = false;
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
     	if (0 != clanId && !setMonsterTeamForRaid) {
-    		getLocker().lockClan(clanId);
-    		log.info("locked clanId=" + clanId);
+    		lockedClan = getLocker().lockClan(clanId);
+    		log.info("locking clanId=" + clanId);
     	}
     }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
-      boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, senderProto, userId,
       		clanId, uc, clanEventPersistentId, clanRaidId, curDate, curTime, 
       		setMonsterTeamForRaid, userMonsterIds, isFirstStage);
 
@@ -198,19 +172,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
     	if (null != mcp && mcp.hasClanId()) {
-    		if (0 != clanId && !setMonsterTeamForRaid) {
+    		if (0 != clanId && !setMonsterTeamForRaid && lockedClan) {
     			getLocker().unlockClan(clanId);
-      		log.info("unlocked clanId=" + clanId);
+    			log.info("unlocked clanId=" + clanId);
     		}
       }
     	
     }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
-  		int userId, int clanId, UserClan uc, int clanEventId, int clanRaidId, Date curDate,
-  		Timestamp curTime, boolean setMonsterTeamForRaid, List<Long> userMonsterIds,
-  		boolean isFirstStage) {
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
+		  MinimumUserProto mupfc, int userId, int clanId, UserClan uc,
+		  int clanEventId, int clanRaidId, Date curDate, Timestamp curTime,
+		  boolean setMonsterTeamForRaid, List<Long> userMonsterIds,
+		  boolean isFirstStage) {
+	  
+	  if (!lockedClan) {
+		  log.error("couldn't obtain clan lock");
+		  return false;
+	  }
     if (0 == clanId || 0 == clanRaidId || null == uc) {
       log.error("not in clan. user is " + mupfc + "\t or clanRaidId invalid id=" +
       		clanRaidId + "\t or no user clan exists. uc=" + uc);
@@ -458,4 +438,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			.createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
   	resBuilder.setUserDetails(userDetails);
   }
+  
+  protected Locker getLocker() {
+	  return locker;
+  }
+  
+  protected void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+  
+  public ClanEventUtil getClanEventUtil() {
+	  return clanEventUtil;
+  }
+  
+  public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+	  this.clanEventUtil = clanEventUtil;
+  }
+  
 }

@@ -40,22 +40,33 @@ message FullQuestProto {
      //optional string questGiverName = 24; defined above
      
      enum QuestType {
-     	KILL_MONSTER = 1;
-     	DONATE_MONSTER = 2;
-     	COMPLETE_TASK = 3;
-     	COLLECT_COINS_FROM_HOME = 4;
-     	BUILD_STRUCT = 5;
-     	UPGRADE_STRUCT = 6;
+     	//staticDataId is monster id, quantity is num to kill
+     	//if staticDataId is null or 0 then this means kill any monster
+     	KILL_SPECIFIC_MONSTER = 1; 
      	
-     	//AFTER USER FINISHES QUEST, SPECIAL MONSTER APPEARS, WHICH USER NEEDS TO KILL
-     	//DON'T KNOW WHY IT'S HERE, IGNORE THIS  //USED IN PERSISTENT EVENTS (DAILY DUNGEONS)
-     	MONSTER_APPEAR = 7;
+     	//staticDataId is city id, quantity is num of any monsters in city to kill
+     	KILL_MONSTER_IN_CITY = 2; 
+     	
+     	//staticDataId is monster id, quantity is num to donate
+     	DONATE_MONSTER = 3;
+     	
+     	//staticDataId is task id, quantity is number of times to complete the task
+     	COMPLETE_TASK = 4; 
+     	
+     	//staticDataId is a struct id, quantity is number of buildings of that struct id
+     	//struct id also encapsulates level
+     	//ex. staticDataId = struct id of level five cash generator
+     	// 	  quantity = 2
+     	//this means build 2 level five cash generators
+     	UPGRADE_STRUCT = 5;
+		
 
 		//MONSTERS SPECIFIED IN quest_monster_item_table drop the required item
 		//NOTE: a quest is tied to a city. So if a monster is listed in 
 		//quest_monster_item table then everywhere the aforementioned monster
 		//spawns in the city, the monster has a chance to drop said item.
-     	COLLECT_SPECIAL_ITEM = 8;
+		//staticDataId is item id, quantity is number of items to collect
+     	COLLECT_SPECIAL_ITEM = 6;
      	
      }
 }

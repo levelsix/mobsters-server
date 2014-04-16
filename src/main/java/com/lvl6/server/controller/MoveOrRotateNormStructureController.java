@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +18,16 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class MoveOrRotateNormStructureController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected Locker locker;
 
   public MoveOrRotateNormStructureController() {
     numAllocatedThreads = 3;
@@ -57,9 +62,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MoveOrRotateNormStructureResponseProto.Builder resBuilder = MoveOrRotateNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    //only locking so you cant moveOrRotate it hella times
 
+    //only locking so you cant moveOrRotate it hella times
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
@@ -101,7 +106,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } catch (Exception e) {
       log.error("exception in MoveOrRotateNormStructure processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

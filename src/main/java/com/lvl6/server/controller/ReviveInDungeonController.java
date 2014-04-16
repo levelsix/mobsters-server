@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDun
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -32,6 +34,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public ReviveInDungeonController() {
     numAllocatedThreads = 4;
@@ -65,7 +69,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 //      int previousGems = 0;
@@ -115,7 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in ReviveInDungeonController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -239,4 +243,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //        previousGoldSilver, reasonsForChanges);
 
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

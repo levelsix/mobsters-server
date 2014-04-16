@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 3380455615214449398L;
+	private static final long serialVersionUID = -3457856391646138824L;
 	
 	private int id;
 	private String name;
@@ -47,6 +47,7 @@ public class User implements Serializable {
 	private String gameCenterId;
 	private String udid;
 	private Date lastObstacleSpawnedTime;
+	private int numObstaclesRemoved;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
@@ -58,7 +59,8 @@ public class User implements Serializable {
 			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
-			String gameCenterId, String udid, Date lastObstacleSpawnedTime) {
+			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
+			int numObstaclesRemoved) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -92,6 +94,7 @@ public class User implements Serializable {
 		this.gameCenterId = gameCenterId;
 		this.udid = udid;
 		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
+		this.numObstaclesRemoved = numObstaclesRemoved;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -666,7 +669,8 @@ public class User implements Serializable {
 //		}
 //		return false;
 //	}
-
+	
+	/*  //replaced with updateRelativeGemsAndObstacleTime
 	public boolean updateLastObstacleSpawnedTime(Timestamp lastObstacleSpawnedTime) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -683,25 +687,48 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
-	public boolean updateRelativeGemsAndObstacleTime(int gemChange,
-			Timestamp lastObstacleSpawnedTime) {
+	//obstaclesRemovedDelta is always positive
+	public boolean updateRelativeGemsObstacleTimeNumRemoved(int gemChange,
+			Timestamp lastObstacleSpawnedTime, int obstaclesRemovedDelta) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (gemChange != 0) {
+		if (0 != gemChange) {
 			relativeParams.put(DBConstants.USER__GEMS, gemChange);
 		}
+		if (0 != obstaclesRemovedDelta) {
+			relativeParams.put(DBConstants.USER__NUM_OBSTACLES_REMOVED,
+					obstaclesRemovedDelta);
+		}
+		
 		
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
-
+		if (null != lastObstacleSpawnedTime) {
+			absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
+		}
+		
+		if (relativeParams.isEmpty() && absoluteParams.isEmpty()) {
+			//no need to write what is essentially nothing to db
+			return true;
+		}
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
+		
 		if (numUpdated == 1) {
-			this.gems += gemChange;
+			if (0 != gemChange) {
+				this.gems += gemChange;
+			}
+			if (null != lastObstacleSpawnedTime) {
+				this.lastObstacleSpawnedTime = new Date(
+						lastObstacleSpawnedTime.getTime());
+			}
+			if (0 != obstaclesRemovedDelta) {
+				this.numObstaclesRemoved += obstaclesRemovedDelta;
+			}
+			
 			return true;
 		}
 		return false;
@@ -963,6 +990,14 @@ public class User implements Serializable {
 		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
 	}
 
+	public int getNumObstaclesRemoved() {
+		return numObstaclesRemoved;
+	}
+
+	public void setNumObstaclesRemoved(int numObstaclesRemoved) {
+		this.numObstaclesRemoved = numObstaclesRemoved;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -985,7 +1020,8 @@ public class User implements Serializable {
 				+ ", facebookId=" + facebookId + ", fbIdSetOnUserCreate="
 				+ fbIdSetOnUserCreate + ", gameCenterId=" + gameCenterId
 				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
-				+ lastObstacleSpawnedTime + "]";
+				+ lastObstacleSpawnedTime + ", numObstaclesRemoved="
+				+ numObstaclesRemoved + "]";
 	}
 
 }

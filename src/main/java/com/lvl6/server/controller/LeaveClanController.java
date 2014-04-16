@@ -34,12 +34,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
 
   public LeaveClanController() {
     numAllocatedThreads = 4;
@@ -120,7 +114,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in LeaveClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
+    	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	}/* else {
     		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -219,4 +213,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     aNote.setAsUserLeftClan(level, deserter);
     MiscMethods.writeClanApnsNotification(aNote, server, clanId);
   }*/
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
 }

@@ -1301,6 +1301,11 @@ public class CreateInfoProtoUtils {
       mlipb.setDarknessDmg(info.getDarknessDmg());
       mlipb.setRockDmg(info.getRockDmg());
       mlipb.setSpeed(info.getSpeed());
+      mlipb.setHpExponentBase(info.getHpExponentBase());
+      mlipb.setDmgExponentBase(info.getDmgExponentBase());
+      mlipb.setExpLvlDivisor(info.getExpLvlDivisor());
+      mlipb.setExpLvlExponent(info.getExpLvlExponent());
+      
       lvlInfoProtos.add(mlipb.build());
     }
 
@@ -1677,6 +1682,7 @@ public class CreateInfoProtoUtils {
     }
 
     builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
+    builder.setImgHorizontalPixelOffset(s.getImgHorizontalPixelOffset());
 
     aStr = s.getDescription();
     if (null != aStr) {
@@ -1687,6 +1693,15 @@ public class CreateInfoProtoUtils {
     if (null != aStr) {
       builder.setShortDescription(aStr);
     }
+    
+    aStr = s.getShadowImgName();
+    if (null != aStr) {
+    	builder.setShadowImgName(aStr);
+    }
+    
+    builder.setShadowVerticalOffset(s.getShadowVerticalOffset());
+    builder.setShadowHorizontalOfffset(s.getShadowHorizontalOffset());
+    builder.setShadowScale(s.getShadowScale());
 
     return builder.build();
   }
@@ -2038,6 +2053,8 @@ public class CreateInfoProtoUtils {
   	mutpb.setTaskId(taskId);
   	int taskStageId = aTaskForUser.getTaskStageId();
   	mutpb.setCurTaskStageId(taskStageId);
+  	long userTaskId = aTaskForUser.getId();
+  	mutpb.setUserTaskId(userTaskId);
   	
   	return mutpb.build();
   }
@@ -2384,7 +2401,11 @@ public class CreateInfoProtoUtils {
     			plfu, null, false);
     	builder.setPvpLeagueInfo(pvpLeagueInfo);
     }
-    //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
+    
+    int numObstaclesRemoved = u.getNumObstaclesRemoved();
+    builder.setNumObstaclesRemoved(numObstaclesRemoved);
+    
+    //add new columns above here, not below the if. if case for is fake
 
     if (u.isFake()) {
 

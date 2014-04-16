@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateM
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -29,6 +31,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public UpdateMonsterHealthController() {
     numAllocatedThreads = 4;
@@ -47,6 +51,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent)event).getUpdateMonsterHealthRequestProto();
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -63,12 +68,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
     	Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     	
       boolean legit = checkLegit(resBuilder, userId, umchpList, 
-      		userMonsterIdToExpectedHealth);
+    		  isUpdateTaskStageForUser, userMonsterIdToExpectedHealth);
 
       boolean successful = false;
       if(legit) {
@@ -98,7 +103,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in UpdateMonsterHealthController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -109,29 +114,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Also, returns the expected health for the user monsters
    */
   private boolean checkLegit(Builder resBuilder, int userId,
-		  List<UserMonsterCurrentHealthProto> umchpList, 
+		  List<UserMonsterCurrentHealthProto> umchpList,
+		  boolean isUpdateTaskStageForUser,
 		  Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	
-  	if (null == umchpList || umchpList.isEmpty()) {
-  		log.error("client error: no user equips sent.");
+	  boolean isUmchpListEmpty = (null == umchpList || umchpList.isEmpty());  
+  	if (isUmchpListEmpty && !isUpdateTaskStageForUser) {
+  		log.error("client error: no user monsters sent. and is not updating" +
+  				" user's current task stage id");
   		return false;
+  	} else if (isUmchpListEmpty && isUpdateTaskStageForUser) {
+  		log.info("just updating user's current task stage id");
   	}
   	
-  	//extract the ids so it's easier to get userMonsters from db
-  	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
-  	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-  			.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
-  	
-  	if (null == userMonsters || userMonsters.isEmpty()) {
-  		log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);
-  		return false;
-  	}
+  	if (!isUmchpListEmpty) {
+  		//extract the ids so it's easier to get userMonsters from db
+  		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+  		Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+  				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 
-  	//see if the user has the equips
-  	if (userMonsters.size() != umchpList.size()) {
-  		log.error("unexpected error: mismatch between user equips client sent and " +
-  				"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
-  				userMonsters + "\t continuing the processing");
+  		if (null == userMonsters || userMonsters.isEmpty()) {
+  			log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);
+  			return false;
+  		}
+
+  		//see if the user has the equips
+  		if (userMonsters.size() != umchpList.size()) {
+  			log.error("unexpected error: mismatch between user equips client sent and " +
+  					"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
+  					userMonsters + "\t continuing the processing");
+  		}
   	}
   	
   	return true;
@@ -142,22 +154,37 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Map<Long, Integer> userMonsterIdToExpectedHealth, long userTaskId,
   		boolean isUpdateTaskStageForUser, int nuTaskStageId) {
 	  //replace existing health for these user monsters with new values 
-	  int numUpdated = UpdateUtils.get()
-			  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+	  if (!userMonsterIdToExpectedHealth.isEmpty()) {
+		  log.info("updating user's monsters' healths");
+		  int numUpdated = UpdateUtils.get()
+				  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+		  log.info("numUpdated=" + numUpdated);
 
-	  if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
-		  return true;
+		  //number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
+		  //so returns 2 if one row was updated, 1 if inserted
+		  if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
+			  log.warn("unexpected error: more than user monsters were" +
+					  " updated. actual numUpdated=" + numUpdated +
+					  "expected: userMonsterIdToExpectedHealth=" +
+					  userMonsterIdToExpectedHealth);
+		  }
 	  }
-	  log.warn("unexpected error: not all user monsters were updated. " +
-			  "actual numUpdated=" + numUpdated + "expected: " +
-			  "userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
 
 	  if (isUpdateTaskStageForUser) {
-		  numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId, nuTaskStageId);
+		  int numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId, nuTaskStageId);
 		  log.info("task stage for user numUpdated=" + numUpdated);
 	  }
 	  
 	  return true;
+  }
+  
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
   
 }

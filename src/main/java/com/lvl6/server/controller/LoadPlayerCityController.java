@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadPlayerCityRequestEvent;
 import com.lvl6.events.response.LoadPlayerCityResponseEvent;
-import com.lvl6.info.ObstacleForUser;
-import com.lvl6.info.User;
 import com.lvl6.info.ExpansionPurchaseForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
@@ -26,6 +26,7 @@ import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ExpansionPurchaseForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -33,17 +34,11 @@ import com.lvl6.utils.RetrieveUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
+  @Autowired
+  protected Locker locker;
 
-	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
-		return obstacleForUserRetrieveUtil;
-	}
-	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
-		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-	}
-	
+  @Autowired
+  protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
 
   public LoadPlayerCityController() {
     numAllocatedThreads = 10;
@@ -70,8 +65,10 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
 
     resBuilder.setStatus(LoadPlayerCityStatus.SUCCESS);
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
+    //I guess in case someone attacks this guy while loading the city, want
+    //both people to have one consistent view
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User owner = RetrieveUtils.userRetrieveUtils().getUserById(cityOwnerId);
 
@@ -102,7 +99,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in LoadPlayerCity processEvent", e);
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
   }
 
@@ -133,4 +130,20 @@ import com.lvl6.utils.RetrieveUtils;
   	
   }
 
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
+  public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+	  return obstacleForUserRetrieveUtil;
+  }
+  public void setObstacleForUserRetrieveUtil(
+		  ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+	  this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+  }
+  
 }

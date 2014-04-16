@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -42,6 +44,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @Component @DependsOn("gameServer") public class EvolutionFinishedController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+	@Autowired
+	protected Locker locker;
 
 	public EvolutionFinishedController() {
 		numAllocatedThreads = 3;
@@ -77,7 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
 		try {
 			int previousGems = 0;
 			//get whatever we need from the database
@@ -131,7 +136,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
 		}
 	}
 	
@@ -331,6 +336,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange, previousCurrencyMap,
 				currentCurrencyMap, changeReasonsMap, detailsMap);
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

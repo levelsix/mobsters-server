@@ -63,43 +63,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
-  
-  
-  protected Locker getLocker() {
-		return locker;
-	}
 
-	protected void setLocker(Locker locker) {
-		this.locker = locker;
-	}
-	
-	@Autowired
-	protected TimeUtils timeUtils;
+  @Autowired
+  protected TimeUtils timeUtils;
 
-	public TimeUtils getTimeUtils() {
-		return timeUtils;
-	}
+  @Autowired
+  protected ClanEventUtil clanEventUtil;
 
-	public void setTimeUtils(TimeUtils timeUtils) {
-		this.timeUtils = timeUtils;
-	}
-	
-	@Autowired
-	protected ClanEventUtil clanEventUtil;
-	
-	public ClanEventUtil getClanEventUtil() {
-		return clanEventUtil;
-	}
-
-	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
-		this.clanEventUtil = clanEventUtil;
-	}
-
-	
-	
-	
-	public AttackClanRaidMonsterController() {
-    numAllocatedThreads = 4;
+  public AttackClanRaidMonsterController() {
+	  numAllocatedThreads = 4;
   }
 
   @Override
@@ -114,7 +86,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    AttackClanRaidMonsterRequestProto reqProto = ((AttackClanRaidMonsterRequestEvent)event).getAttackClanRaidMonsterRequestProto();
+    AttackClanRaidMonsterRequestProto reqProto =
+    		((AttackClanRaidMonsterRequestEvent)event)
+    		.getAttackClanRaidMonsterRequestProto();
     log.info("reqProto=");
     log.info(reqProto +"");
 
@@ -129,14 +103,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int damageDealt = reqProto.getDamageDealt(); //remember take min of this with monsters's remaining hp
     
     //extract the new healths for the monster(s)
-    List<UserMonsterCurrentHealthProto> monsterHealthProtos = reqProto.getMonsterHealthsList();
-    Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
-    MonsterStuffUtils.getUserMonsterIds(monsterHealthProtos, userMonsterIdToExpectedHealth);
+    List<UserMonsterCurrentHealthProto> monsterHealthProtos =
+    		reqProto.getMonsterHealthsList();
+    Map<Long, Integer> userMonsterIdToExpectedHealth =
+    		new HashMap<Long, Integer>();
+    MonsterStuffUtils.getUserMonsterIds(monsterHealthProtos,
+    		userMonsterIdToExpectedHealth);
     
-    FullUserMonsterProto userMonsterThatAttacked = reqProto.getUserMonsterThatAttacked();
-    UserCurrentMonsterTeamProto userMonsterTeam = reqProto.getUserMonsterTeam();
+    FullUserMonsterProto userMonsterThatAttacked =
+    		reqProto.getUserMonsterThatAttacked();
+    UserCurrentMonsterTeamProto userMonsterTeam =
+    		reqProto.getUserMonsterTeam();
     
-    AttackClanRaidMonsterResponseProto.Builder resBuilder = AttackClanRaidMonsterResponseProto.newBuilder();
+    AttackClanRaidMonsterResponseProto.Builder resBuilder =
+    		AttackClanRaidMonsterResponseProto.newBuilder();
     resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
     resBuilder.setSender(sender);
     resBuilder.setUserMonsterThatAttacked(userMonsterThatAttacked);
@@ -159,15 +139,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<ClanEventPersistentForClan> clanEventList =
     		new ArrayList<ClanEventPersistentForClan>();
     
+    boolean lockedClan = false;
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
-    	getLocker().lockClan(clanId);
+    	lockedClan = getLocker().lockClan(clanId);
     }
     try {
     	//so as to prevent another db read call to get the same information
     	
-      boolean legitRequest = checkLegitRequest(resBuilder, sender, userId, clanId,
-      		eventDetails, curDate, clanEventList);
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, sender,
+    		  userId, clanId, eventDetails, curDate, clanEventList);
 
 
 //      boolean success = false;
@@ -216,9 +197,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     } finally {
     	
-    	if (null != mcp && mcp.hasClanId()) {
-      	getLocker().unlockClan(clanId);
-      }
+    	if (null != mcp && mcp.hasClanId() && lockedClan) {
+    		getLocker().unlockClan(clanId);
+    	}
     	
     }
     
@@ -241,9 +222,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   //want to update user monster healths even if the monster is dead
-  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mup,
-  		int userId, int clanId, PersistentClanEventClanInfoProto eventDetails,  		
-  		Date curDate, List<ClanEventPersistentForClan> clanEventList) {
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
+		  MinimumUserProto mup, int userId, int clanId,
+		  PersistentClanEventClanInfoProto eventDetails, Date curDate,
+		  List<ClanEventPersistentForClan> clanEventList) {
+	  
+	  if (!lockedClan) {
+		  log.error("couldn't obtain clan lock");
+		  return false;
+	  }
+	  
   	//check if user is in clan
   	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
     if (null == uc) {
@@ -760,17 +748,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	int userId = cepfu.getUserId();
   	int userCrsDmg = cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
-  	float userCrsContribution = (float) ((float) userCrsDmg / (float) stageHp);
+  	float userCrsContribution = (float) ((float) userCrsDmg) / ((float) stageHp);
   	
   	int staticDataId = 0;
   	//TODO: FIGURE OUT IF CURRENCY CALCULATION IS OK (right now just truncating the value) 
   	//create the userOilReward maybe
-  	int userOilReward = (int) (reward.getOilDrop() * userCrsContribution);
+  	int userOilReward = (int) (((float)reward.getOilDrop()) * userCrsContribution);
   	createClanEventPersistentUserReward(MiscMethods.OIL, userOilReward, staticDataId,
   			crsId, crsStartDate, crsEndDate, clanEventId, userId, userRewards);
   	
   	//create the userOilReward maybe  	
-  	int userCashReward = (int) (reward.getCashDrop() * userCrsContribution);
+  	int userCashReward = (int) (((float)reward.getCashDrop()) * userCrsContribution);
   	createClanEventPersistentUserReward(MiscMethods.CASH, userCashReward, staticDataId,
   			crsId, crsStartDate, crsEndDate, clanEventId, userId, userRewards);
 
@@ -781,7 +769,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//compute monster reward
-  	float monsterDropRate = userCrsContribution * reward.getExpectedMonsterRewardQuantity();
+  	float monsterDropRate = userCrsContribution * 
+  			((float)reward.getExpectedMonsterRewardQuantity());
   	Random rand = reward.getRand();
   	if (rand.nextFloat() < monsterDropRate) {
   		//user gets the monster reward
@@ -866,4 +855,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     server.writeClanEvent(resEvent, clanId);
   }
+  
+  protected Locker getLocker() {
+	  return locker;
+  }
+  
+  protected void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public TimeUtils getTimeUtils() {
+	  return timeUtils;
+  }
+  
+  public void setTimeUtils(TimeUtils timeUtils) {
+	  this.timeUtils = timeUtils;
+  }
+  
+  public ClanEventUtil getClanEventUtil() {
+	  return clanEventUtil;
+  }
+  
+  public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+	  this.clanEventUtil = clanEventUtil;
+  }
+
 }

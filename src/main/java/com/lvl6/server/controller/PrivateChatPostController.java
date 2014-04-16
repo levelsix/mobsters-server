@@ -44,21 +44,8 @@ public class PrivateChatPostController extends EventController {
 	@Autowired
 	protected AdminChatUtil adminChatUtil;
 
-	public AdminChatUtil getAdminChatUtil() {
-		return adminChatUtil;
-	}
-
-	public void setAdminChatUtil(AdminChatUtil adminChatUtil) {
-		this.adminChatUtil = adminChatUtil;
-	}
-
 	@Autowired
 	protected InsertUtil insertUtils;
-
-	public void setInsertUtils(InsertUtil insertUtils) {
-		this.insertUtils = insertUtils;
-	}
-
 	public PrivateChatPostController() {
 		numAllocatedThreads = 4;
 	}
@@ -91,58 +78,73 @@ public class PrivateChatPostController extends EventController {
 		List<Integer> userIds = new ArrayList<Integer>();
 		userIds.add(posterId);
 		userIds.add(recipientId);
-		Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-		boolean legitPost = checkLegitPost(resBuilder, posterId, recipientId, content, users);
+		
+		try {
+			Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+			boolean legitPost = checkLegitPost(resBuilder, posterId, recipientId, content, users);
 
-		PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(posterId);
-		resEvent.setTag(event.getTag());
+			PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(posterId);
+			resEvent.setTag(event.getTag());
 
-		if (legitPost) {
-			// record in db
-			Timestamp timeOfPost = new Timestamp(new Date().getTime());
-			String censoredContent = MiscMethods.censorUserInput(content);
-			int privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId,
-					censoredContent, timeOfPost);
-			if (privateChatPostId <= 0) {
-				legitPost = false;
-				resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
-				log.error("problem with inserting private chat post into db. posterId=" + posterId
-						+ ", recipientId=" + recipientId + ", content=" + content + ", censoredContent="
-						+ censoredContent + ", timeOfPost=" + timeOfPost);
-			} else {
-				
-				if(recipientId == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID) {
-					AdminChatPost acp = new AdminChatPost(privateChatPostId,posterId, recipientId,  new Date(),censoredContent);
-					acp.setUsername(users.get(posterId).getName());
-					adminChatUtil.sendAdminChatEmail(acp);
+			if (legitPost) {
+				// record in db
+				Timestamp timeOfPost = new Timestamp(new Date().getTime());
+				String censoredContent = MiscMethods.censorUserInput(content);
+				int privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId,
+						censoredContent, timeOfPost);
+				if (privateChatPostId <= 0) {
+					legitPost = false;
+					resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+					log.error("problem with inserting private chat post into db. posterId=" + posterId
+							+ ", recipientId=" + recipientId + ", content=" + content + ", censoredContent="
+							+ censoredContent + ", timeOfPost=" + timeOfPost);
+				} else {
+
+					if(recipientId == ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID) {
+						AdminChatPost acp = new AdminChatPost(privateChatPostId,posterId, recipientId,  new Date(),censoredContent);
+						acp.setUsername(users.get(posterId).getName());
+						adminChatUtil.sendAdminChatEmail(acp);
+					}
+					PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId, recipientId,
+							timeOfPost, censoredContent);
+					User poster = users.get(posterId);
+					User recipient = users.get(recipientId);
+					PrivateChatPostProto pcpp = CreateInfoProtoUtils
+							.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster, recipient);
+					resBuilder.setPost(pcpp);
+
+					// send to recipient of the private chat post
+					PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(recipientId);
+					resEvent2.setPrivateChatPostResponseProto(resBuilder.build());
+					server.writeAPNSNotificationOrEvent(resEvent2);
 				}
-				PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId, recipientId,
-						timeOfPost, censoredContent);
-				User poster = users.get(posterId);
-				User recipient = users.get(recipientId);
-				PrivateChatPostProto pcpp = CreateInfoProtoUtils
-						.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster, recipient);
-				resBuilder.setPost(pcpp);
+			}
+			// send to sender of the private chat post
+			resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
 
-				// send to recipient of the private chat post
-				PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(recipientId);
-				resEvent2.setPrivateChatPostResponseProto(resBuilder.build());
-				server.writeAPNSNotificationOrEvent(resEvent2);
+			// if (legitPost && recipientId != posterId) {
+			// User wallOwner = users.get(recipientId);
+			// User poster = users.get(posterId);
+			// if (MiscMethods.checkIfGoodSide(wallOwner.getType()) ==
+			// !MiscMethods.checkIfGoodSide(poster.getType())) {
+			// QuestUtils.checkAndSendQuestsCompleteBasic(server, posterId,
+			// senderProto, SpecialQuestAction.WRITE_ON_ENEMY_WALL, true);
+			// }
+			// }
+		} catch (Exception e) {
+			log.error("exception in PrivateChatPostController processEvent", e);
+			try {
+				resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+				PrivateChatPostResponseEvent resEvent =
+						new PrivateChatPostResponseEvent(posterId);
+				resEvent.setTag(event.getTag());
+				resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+				server.writeEvent(resEvent);
+			} catch (Exception e2) {
+				log.error("exception2 in PrivateChatPostController processEvent", e);
 			}
 		}
-		// send to sender of the private chat post
-		resEvent.setPrivateChatPostResponseProto(resBuilder.build());
-		server.writeEvent(resEvent);
-
-		// if (legitPost && recipientId != posterId) {
-		// User wallOwner = users.get(recipientId);
-		// User poster = users.get(posterId);
-		// if (MiscMethods.checkIfGoodSide(wallOwner.getType()) ==
-		// !MiscMethods.checkIfGoodSide(poster.getType())) {
-		// QuestUtils.checkAndSendQuestsCompleteBasic(server, posterId,
-		// senderProto, SpecialQuestAction.WRITE_ON_ENEMY_WALL, true);
-		// }
-		// }
 
 	}
 
@@ -188,4 +190,17 @@ public class PrivateChatPostController extends EventController {
 		resBuilder.setStatus(PrivateChatPostStatus.SUCCESS);
 		return true;
 	}
+	
+	public AdminChatUtil getAdminChatUtil() {
+		return adminChatUtil;
+	}
+	
+	public void setAdminChatUtil(AdminChatUtil adminChatUtil) {
+		this.adminChatUtil = adminChatUtil;
+	}
+	
+	public void setInsertUtils(InsertUtil insertUtils) {
+		this.insertUtils = insertUtils;
+	}
+	
 }

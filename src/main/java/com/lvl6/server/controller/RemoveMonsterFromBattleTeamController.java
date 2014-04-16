@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -22,6 +24,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public RemoveMonsterFromBattleTeamController() {
     numAllocatedThreads = 4;
@@ -51,7 +55,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
@@ -91,7 +95,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in RemoveMonsterFromBattleTeamController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -134,6 +138,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			"actual numUpdated=" + numUpdated + "expected: 1 " +
   			"monsterForUser=" + mfu);
 	  return true;
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
   
 }

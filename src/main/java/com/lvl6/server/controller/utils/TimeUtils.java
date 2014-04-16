@@ -41,11 +41,20 @@ public class TimeUtils {
   }
   
   public int numMinutesDifference(Date d1, Date d2) {
-    DateTime dOne = new DateTime(d1);
-    DateTime dTwo = new DateTime(d2);
-    Period interim = new Period(dOne, dTwo);
-    
-    return interim.getMinutes();
+//	  log.info("numMinutesDifference() d1=" + d1);
+//	  log.info("numMinutesDifference() d2=" + d2);
+	  
+	  MutableDateTime mdtOne = new DateTime(d1).toMutableDateTime();
+	  mdtOne.setSecondOfMinute(0);
+	  DateTime dOne = mdtOne.toDateTime();
+
+	  MutableDateTime mdtTwo = new DateTime(d2).toMutableDateTime();
+	  mdtTwo.setSecondOfMinute(0);
+	  DateTime dTwo = mdtTwo.toDateTime();
+
+	  Period interim = new Period(dOne, dTwo);
+
+	  return interim.getMinutes();
   }
   
   //not sure if DateTime works, as well.
@@ -92,6 +101,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param minutesAddend Can be negative.
+   * @return
+   */
   public Date createPstDateAddMinutes(Date curDate, int minutesAddend) {
   	DateTime dt = new DateTime(curDate, PST);
 //  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt +
@@ -105,6 +120,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param daysAddend Can be negative.
+   * @return
+   */
   public Date createDateAddDays(Date curDate, int daysAddend) {
   	DateTime dt = new DateTime(curDate);
   	
@@ -115,6 +136,12 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  /**
+   * 
+   * @param curDate
+   * @param hoursAddend Can be negative.
+   * @return
+   */
   public Date createDateAddHours(Date curDate, int hoursAddend) {
   	DateTime dt = new DateTime(curDate);
   	

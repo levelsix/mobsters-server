@@ -89,6 +89,10 @@ message MonsterLevelInfoProto {
 	optional sint32 darknessDmg = 9;
 	optional sint32 rockDmg = 10;
 	optional int32 speed = 11;
+	optional float hpExponentBase = 12;
+	optional float dmgExponentBase = 13;
+	optional float expLvlDivisor = 14;
+	optional float expLvlExponent = 15;
 }
 
 //------------------------------------------------------------------------------------------

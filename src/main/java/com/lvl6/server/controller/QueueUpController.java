@@ -36,24 +36,16 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @Component @DependsOn("gameServer") public class QueueUpController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-
-	@Autowired
-	protected InsertUtil insertUtils;
-
-	@Autowired
-	protected UserRetrieveUtils userRetrieveUtils;
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
@@ -759,22 +751,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 		
 		return true;
-	}
-
-	public UserRetrieveUtils getUserRetrieveUtils() {
-		return userRetrieveUtils;
-	}
-
-	public void setUserRetrieveUtils(UserRetrieveUtils userRetrieveUtils) {
-		this.userRetrieveUtils = userRetrieveUtils;
-	}
-	
-	public InsertUtil getInsertUtils() {
-		return insertUtils;
-	}
-
-	public void setInsertUtils(InsertUtil insertUtils) {
-		this.insertUtils = insertUtils;
 	}
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {

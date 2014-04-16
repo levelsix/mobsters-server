@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -37,6 +39,9 @@ public class SellUserMonsterController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+
+	@Autowired
+	protected Locker locker;
 
 	public SellUserMonsterController() {
 		numAllocatedThreads = 4;
@@ -76,7 +81,7 @@ public class SellUserMonsterController extends EventController {
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
 
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			int previousCash = 0;
 
@@ -133,7 +138,7 @@ public class SellUserMonsterController extends EventController {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass()
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -259,6 +264,14 @@ public class SellUserMonsterController extends EventController {
 //
 //		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
 //				gemCashChange, previousGemCash, reasonsForChanges);
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 
 }

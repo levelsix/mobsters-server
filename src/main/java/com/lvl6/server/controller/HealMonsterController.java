@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -46,6 +48,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public HealMonsterController() {
     numAllocatedThreads = 4;
@@ -99,7 +103,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       int previousCash = 0;
       int previousGems = 0;
@@ -175,7 +179,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in HealMonsterController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
   
@@ -472,4 +476,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		currentCurrencies, reasonsForChanges, details);
 
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

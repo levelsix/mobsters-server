@@ -28,6 +28,7 @@ import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponsePro
 import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -40,6 +41,9 @@ public class RetrieveTournamentRankingsController extends EventController {
 
   @Autowired
   public LeaderBoardUtilImpl leader;
+
+  @Autowired
+  protected Locker locker;
 
   public RetrieveTournamentRankingsController() {
     numAllocatedThreads = 5;
@@ -71,7 +75,7 @@ public class RetrieveTournamentRankingsController extends EventController {
     resBuilder.setEventId(eventId);
     resBuilder.setAfterThisRank(afterThisRank);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int userId = user.getId();
@@ -110,7 +114,7 @@ public class RetrieveTournamentRankingsController extends EventController {
           "exception in RetrieveTournamentController processEvent",
           e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
 
   }
@@ -163,6 +167,12 @@ public class RetrieveTournamentRankingsController extends EventController {
 
   }
 
+  public Locker getLocker() {
+	  return locker;
+  }
 
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
 
 }

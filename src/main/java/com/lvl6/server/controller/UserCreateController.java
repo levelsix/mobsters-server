@@ -443,7 +443,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private void rewardReferrer(User referrer, User user) {
     if (!referrer.isFake()) {
-      server.lockPlayer(referrer.getId(), this.getClass().getSimpleName());
+      getLocker().lockPlayer(referrer.getId(), this.getClass().getSimpleName());
       try {
         int previousSilver = referrer.getCash();
         
@@ -468,7 +468,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       } catch (Exception e) {
         log.error("exception in UserCreateController processEvent", e);
       } finally {
-        server.unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
+        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
       }
     }
   }

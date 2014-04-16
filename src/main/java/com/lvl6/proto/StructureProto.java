@@ -234,6 +234,10 @@ public final class StructureProto {
     // optional float shadowHorizontalOfffset = 21;
     boolean hasShadowHorizontalOfffset();
     float getShadowHorizontalOfffset();
+    
+    // optional float shadowScale = 22;
+    boolean hasShadowScale();
+    float getShadowScale();
   }
   public static final class StructureInfoProto extends
       com.google.protobuf.GeneratedMessage
@@ -658,6 +662,16 @@ public final class StructureProto {
       return shadowHorizontalOfffset_;
     }
     
+    // optional float shadowScale = 22;
+    public static final int SHADOWSCALE_FIELD_NUMBER = 22;
+    private float shadowScale_;
+    public boolean hasShadowScale() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    public float getShadowScale() {
+      return shadowScale_;
+    }
+    
     private void initFields() {
       structId_ = 0;
       name_ = "";
@@ -679,6 +693,7 @@ public final class StructureProto {
       shadowImgName_ = "";
       shadowVerticalOffset_ = 0F;
       shadowHorizontalOfffset_ = 0F;
+      shadowScale_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -751,6 +766,9 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         output.writeFloat(21, shadowHorizontalOfffset_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeFloat(22, shadowScale_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -840,6 +858,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(21, shadowHorizontalOfffset_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(22, shadowScale_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1005,6 +1027,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         shadowHorizontalOfffset_ = 0F;
         bitField0_ = (bitField0_ & ~0x00080000);
+        shadowScale_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
       
@@ -1123,6 +1147,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00080000;
         }
         result.shadowHorizontalOfffset_ = shadowHorizontalOfffset_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.shadowScale_ = shadowScale_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1198,6 +1226,9 @@ public final class StructureProto {
         }
         if (other.hasShadowHorizontalOfffset()) {
           setShadowHorizontalOfffset(other.getShadowHorizontalOfffset());
+        }
+        if (other.hasShadowScale()) {
+          setShadowScale(other.getShadowScale());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1340,6 +1371,11 @@ public final class StructureProto {
             case 173: {
               bitField0_ |= 0x00080000;
               shadowHorizontalOfffset_ = input.readFloat();
+              break;
+            }
+            case 181: {
+              bitField0_ |= 0x00100000;
+              shadowScale_ = input.readFloat();
               break;
             }
           }
@@ -1845,6 +1881,27 @@ public final class StructureProto {
       public Builder clearShadowHorizontalOfffset() {
         bitField0_ = (bitField0_ & ~0x00080000);
         shadowHorizontalOfffset_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // optional float shadowScale = 22;
+      private float shadowScale_ ;
+      public boolean hasShadowScale() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      public float getShadowScale() {
+        return shadowScale_;
+      }
+      public Builder setShadowScale(float value) {
+        bitField0_ |= 0x00100000;
+        shadowScale_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShadowScale() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        shadowScale_ = 0F;
         onChanged();
         return this;
       }
@@ -10167,7 +10224,7 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\264\005\n\022St" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\311\005\n\022St" +
       "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
       "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
@@ -10182,69 +10239,70 @@ public final class StructureProto {
       "cription\030\020 \001(\t\022\030\n\020shortDescription\030\021 \001(\t" +
       "\022\025\n\rshadowImgName\030\023 \001(\t\022\034\n\024shadowVertica" +
       "lOffset\030\024 \001(\002\022\037\n\027shadowHorizontalOfffset" +
-      "\030\025 \001(\002\"x\n\nStructType\022\026\n\022RESOURCE_GENERAT" +
-      "OR\020\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003" +
-      "\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022" +
-      "\007\n\003EVO\020\007\"\256\001\n\026ResourceGeneratorProto\0226\n\ns" +
-      "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu",
-      "reInfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com." +
-      "lvl6.proto.ResourceType\022\026\n\016productionRat" +
-      "e\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024ResourceSt" +
-      "orageProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
-      "6.proto.StructureInfoProto\0222\n\014resourceTy" +
-      "pe\030\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\020" +
-      "\n\010capacity\030\003 \001(\005\"s\n\rHospitalProto\0226\n\nstr" +
-      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
-      "InfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPe" +
-      "rSecond\030\003 \001(\002\"n\n\010LabProto\0226\n\nstructInfo\030",
-      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
-      "o\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030" +
-      "\003 \001(\002\"\316\001\n\016ResidenceProto\0226\n\nstructInfo\030\001" +
-      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMon" +
-      "sterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005" +
-      "\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupa" +
-      "tionName\030\006 \001(\t\"\326\002\n\rTownHallProto\0226\n\nstru" +
-      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
-      "nfoProto\022 \n\030numResourceOneGenerators\030\002 \001",
-      "(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030nu" +
-      "mResourceTwoGenerators\030\004 \001(\005\022\036\n\026numResou" +
-      "rceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001" +
-      "(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterS" +
-      "lots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueC" +
-      "ashCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\"" +
-      "\232\002\n\026FullUserStructureProto\022\024\n\014userStruct" +
-      "Id\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001" +
-      "(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTim" +
-      "e\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinat",
-      "es\030\007 \001(\0132\037.com.lvl6.proto.CoordinateProt" +
-      "o\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.proto." +
-      "StructOrientation\022\031\n\021fbInviteStructLvl\030\t" +
-      " \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030" +
-      "\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010structId" +
-      "\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\"\342\002\n\rObstacleProto\022\022\n" +
-      "\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017remov" +
-      "alCostType\030\003 \001(\0162\034.com.lvl6.proto.Resour" +
-      "ceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030",
-      "\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007" +
-      "imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030" +
-      "\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAp" +
-      "pear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024sha" +
-      "dowVerticalOffset\030\r \001(\002\022\037\n\027shadowHorizon" +
-      "talOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProt" +
-      "o\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(" +
-      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
-      "ientation\030\005 \001(\0162!.com.lvl6.proto.StructO" +
-      "rientation\"\327\001\n\021UserObstacleProto\022\026\n\016user",
-      "ObstacleId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobst" +
-      "acleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com." +
-      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
-      "n\030\005 \001(\0162!.com.lvl6.proto.StructOrientati" +
-      "on\022\030\n\020removalStartTime\030\006 \001(\003*8\n\014Resource" +
-      "Type\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MON" +
-      "STER\020\024*3\n\021StructOrientation\022\016\n\nPOSITION_" +
-      "1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"x\n\nStructTyp" +
+      "e\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_ST" +
+      "ORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\t" +
+      "TOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\"\256\001\n\026Resour" +
+      "ceGeneratorProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
+      "om.lvl6.proto.StructureInfoProto\0222\n\014reso" +
+      "urceType\030\002 \001(\0162\034.com.lvl6.proto.Resource" +
+      "Type\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010capacity" +
+      "\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstruc" +
+      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
+      "foProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6" +
+      ".proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"s\n" +
+      "\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
+      ".lvl6.proto.StructureInfoProto\022\021\n\tqueueS" +
+      "ize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(\002\"n\n\010La",
+      "bProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
+      "oto.StructureInfoProto\022\021\n\tqueueSize\030\002 \001(" +
+      "\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\316\001\n\016Residence" +
+      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
+      "to.StructureInfoProto\022\027\n\017numMonsterSlots" +
+      "\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017" +
+      "numGemsRequired\030\004 \001(\005\022\034\n\024numAcceptedFbIn" +
+      "vites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\"\326\002\n\r" +
+      "TownHallProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
+      "lvl6.proto.StructureInfoProto\022 \n\030numReso",
+      "urceOneGenerators\030\002 \001(\005\022\036\n\026numResourceOn" +
+      "eStorages\030\003 \001(\005\022 \n\030numResourceTwoGenerat" +
+      "ors\030\004 \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(" +
+      "\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResidences" +
+      "\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n\007numLa" +
+      "bs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005\022\030\n\020re" +
+      "sourceCapacity\030\013 \001(\005\"\232\002\n\026FullUserStructu" +
+      "reProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030" +
+      "\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved" +
+      "\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComple",
+      "te\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6" +
+      ".proto.CoordinateProto\0226\n\013orientation\030\010 " +
+      "\001(\0162!.com.lvl6.proto.StructOrientation\022\031" +
+      "\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017CoordinateP" +
+      "roto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialSt" +
+      "ructProto\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinat" +
+      "e\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProto" +
+      "\"\342\002\n\rObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\022\014" +
+      "\n\004name\030\002 \001(\t\0225\n\017removalCostType\030\003 \001(\0162\034." +
+      "com.lvl6.proto.ResourceType\022\014\n\004cost\030\004 \001(",
+      "\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(" +
+      "\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026im" +
+      "gVerticalPixelOffset\030\t \001(\002\022\023\n\013descriptio" +
+      "n\030\n \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshado" +
+      "wImgName\030\014 \001(\t\022\034\n\024shadowVerticalOffset\030\r" +
+      " \001(\002\022\037\n\027shadowHorizontalOfffset\030\016 \001(\002\"\227\001" +
+      "\n\024MinimumObstacleProto\022\022\n\nobstacleId\030\001 \001" +
+      "(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\0226\n\013orientation\030\005 \001(\0162!.c" +
+      "om.lvl6.proto.StructOrientation\"\327\001\n\021User",
+      "ObstacleProto\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n" +
+      "\006userId\030\002 \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coo" +
+      "rdinates\030\004 \001(\0132\037.com.lvl6.proto.Coordina" +
+      "teProto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6." +
+      "proto.StructOrientation\022\030\n\020removalStartT" +
+      "ime\030\006 \001(\003*8\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003O" +
+      "IL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n\021StructOri" +
+      "entation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002" +
+      "B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10256,7 +10314,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
-              new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", },
+              new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "ImgHorizontalPixelOffset", "Description", "ShortDescription", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", "ShadowScale", },
               com.lvl6.proto.StructureProto.StructureInfoProto.class,
               com.lvl6.proto.StructureProto.StructureInfoProto.Builder.class);
           internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =

@@ -13,7 +13,8 @@ message BeginDungeonRequestProto {
 	optional int64 clientTime = 2;
 	optional int32 taskId = 3; 
 	
-	//used for determining if boss spawned
+	//used for determining if boss spawned (NOT USED ATM)
+	//not really needed. server can calculate it 
 	optional bool userBeatAllCityTasks = 4;
 	
 	//used for PersistentEvent stuff

@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -39,6 +41,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public EnhancementWaitTimeCompleteController() {
     numAllocatedThreads = 4;
@@ -74,7 +78,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       int previousGems = 0;
       List<Long> userMonsterIds = new ArrayList<Long>();
@@ -133,7 +137,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in EnhancementWaitTimeCompleteController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
   
@@ -297,4 +301,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		currentCurrencies, reasonsForChanges, detailsMap);
 
   }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+
 }

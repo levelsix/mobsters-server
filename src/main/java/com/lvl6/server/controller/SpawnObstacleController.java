@@ -24,6 +24,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -34,18 +35,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 public class SpawnObstacleController extends EventController{
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-
-	public SpawnObstacleController() {
-		numAllocatedThreads = 4;
-	}
 	
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
-	public StructureStuffUtil getStructureStuffUtil() {
-		return structureStuffUtil;
-	}
-	public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
-		this.structureStuffUtil = structureStuffUtil;
+	
+	@Autowired
+	protected Locker locker;
+
+
+	public SpawnObstacleController() {
+		numAllocatedThreads = 4;
 	}
 
 	
@@ -72,7 +71,7 @@ public class SpawnObstacleController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
 
-		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 			
@@ -120,7 +119,7 @@ public class SpawnObstacleController extends EventController{
       	log.error("exception2 in SpawnObstacleController processEvent", e);
       }
 		} finally {
-			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
 	}
 
@@ -158,7 +157,7 @@ public class SpawnObstacleController extends EventController{
   	}
 
   	log.info("updating last obstacle spawned time:" + clientTime);
-  	if (!user.updateLastObstacleSpawnedTime(clientTime)) {
+  	if (!user.updateRelativeGemsObstacleTimeNumRemoved(0, clientTime, 0)) {
   		log.error("could not update last obstacle spawned time to " + clientTime);
   		return false;
   	}
@@ -168,5 +167,19 @@ public class SpawnObstacleController extends EventController{
   	ofuList.addAll(ofuListTemp);
   	return true;
   }
+  
+  public Locker getLocker() {
+	  return locker;
+  }
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
+  }
+  
+  public StructureStuffUtil getStructureStuffUtil() {
+	  return structureStuffUtil;
+  }
+  public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
+	  this.structureStuffUtil = structureStuffUtil;
+  }
+  
 }
-

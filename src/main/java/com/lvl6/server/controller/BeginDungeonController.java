@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,7 @@ import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -51,6 +53,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
 
   public BeginDungeonController() {
     numAllocatedThreads = 8;
@@ -98,7 +102,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setTaskId(taskId);
     resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
@@ -147,7 +151,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in BeginDungeonController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
@@ -671,6 +675,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  TaskStageProto tsp = stageNumsToProtos.get(i);
 		  resBuilder.addTsp(tsp);
 	  }
+  }
+
+  public Locker getLocker() {
+	  return locker;
+  }
+
+  public void setLocker(Locker locker) {
+	  this.locker = locker;
   }
   
 }

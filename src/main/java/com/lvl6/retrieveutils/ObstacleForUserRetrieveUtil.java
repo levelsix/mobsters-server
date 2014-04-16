@@ -40,60 +40,6 @@ public class ObstacleForUserRetrieveUtil {
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
 
-	public QueryConstructionUtil getQueryConstructionUtil() {
-		return queryConstructionUtil;
-	}
-	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
-		this.queryConstructionUtil = queryConstructionUtil;
-	}
-
-	//Date twenty4ago = new DateTime().minusDays(1).toDate();
-	protected String formatDateToString(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String formatted = format.format(date);
-		return formatted;
-	}
-	
-	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
-	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
-	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
-	//says so (search for "private static final")
-	private static final class UserObstacleForClientMapper implements RowMapper<ObstacleForUser> {
-		
-		private static List<String> columnsSelected;
-
-		public ObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
-			ObstacleForUser ofu = new ObstacleForUser();
-			ofu.setId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ID));
-			ofu.setUserId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__USER_ID));
-			ofu.setObstacleId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID));
-			ofu.setXcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__XCOORD));
-			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
-			try {
-				Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
-				ofu.setRemovalTime(time);
-			} catch (Exception e) {
-				log.error("maybe obstacle removal time is invalid", e);
-			}
-			ofu.setOrientation(rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
-			return ofu;
-		}        
-		
-		public static List<String> getColumnsSelected() {
-			if (null == columnsSelected) {
-				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ID);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__USER_ID);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__XCOORD);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__YCOORD);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
-				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
-			}
-			return columnsSelected;
-		}
-	} 
-
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
@@ -157,4 +103,57 @@ public class ObstacleForUserRetrieveUtil {
 		return ofuList;
 	}
 	
+	public QueryConstructionUtil getQueryConstructionUtil() {
+		return queryConstructionUtil;
+	}
+	public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
+		this.queryConstructionUtil = queryConstructionUtil;
+	}
+
+	//Date twenty4ago = new DateTime().minusDays(1).toDate();
+	protected String formatDateToString(Date date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String formatted = format.format(date);
+		return formatted;
+	}
+
+	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
+	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
+	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
+	//says so (search for "private static final")
+	private static final class UserObstacleForClientMapper implements RowMapper<ObstacleForUser> {
+
+		private static List<String> columnsSelected;
+
+		public ObstacleForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ObstacleForUser ofu = new ObstacleForUser();
+			ofu.setId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ID));
+			ofu.setUserId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__USER_ID));
+			ofu.setObstacleId(rs.getInt(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID));
+			ofu.setXcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__XCOORD));
+			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
+			try {
+				Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
+				ofu.setRemovalTime(time);
+			} catch (Exception e) {
+				log.error("maybe obstacle removal time is invalid", e);
+			}
+			ofu.setOrientation(rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
+			return ofu;
+		}        
+
+		public static List<String> getColumnsSelected() {
+			if (null == columnsSelected) {
+				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__XCOORD);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__YCOORD);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
+				columnsSelected.add(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
+			}
+			return columnsSelected;
+		}
+	} 	
 }

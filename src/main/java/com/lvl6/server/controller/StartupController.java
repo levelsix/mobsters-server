@@ -958,12 +958,11 @@ public class StartupController extends EventController {
 
 		  //create protos for stages
 		  long userTaskId = aTaskForUser.getId();
-		  int taskId = aTaskForUser.getTaskId();
 		  List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
 				  .getTaskStagesForUserWithTaskForUserId(userTaskId);
 		  
-		  //group task stage for users by stage nums because if there is more
-		  //than one taskStageForUser with the same stage num means this stage
+		  //group taskStageForUsers by stage nums because more than one
+		  //taskStageForUser with the same stage num means this stage
 		  //has more than one monster
 		  Map<Integer, List<TaskStageForUser>> stageNumToTsfu =
 				  new HashMap<Integer, List<TaskStageForUser>>();
@@ -981,9 +980,13 @@ public class StartupController extends EventController {
 		  
 		  //now that we have grouped all the monsters in their corresponding
 		  //task stages, protofy them
+		  int taskId = aTaskForUser.getTaskId();
 		  for (Integer stageNum : stageNumToTsfu.keySet()) {
 			  List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
 			  
+			  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+					  taskId, stageNum, monsters);
+			  resBuilder.addCurTaskStages(tsp);
 		  }
 		  
 		  

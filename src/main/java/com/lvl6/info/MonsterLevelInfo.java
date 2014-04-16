@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = -2163091734236174490L;
+	private static final long serialVersionUID = 5516157948001134283L;
 	
 	private int monsterId;
 	private int level;
@@ -18,10 +18,16 @@ public class MonsterLevelInfo implements Serializable {
 	private int darknessDmg;
 	private int rockDmg;
 	private int speed;
+	private float hpExponentBase;
+	private float dmgExponentBase;
+	private float expLvlDivisor;
+	private float expLvlExponent;
 	
 	public MonsterLevelInfo(int monsterId, int level, int hp,
 			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,
-			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg, int speed) {
+			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg,
+			int speed, float hpExponentBase, float dmgExponentBase,
+			float expLvlDivisor, float expLvlExponent) {
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -35,6 +41,10 @@ public class MonsterLevelInfo implements Serializable {
 		this.darknessDmg = darknessDmg;
 		this.rockDmg = rockDmg;
 		this.speed = speed;
+		this.hpExponentBase = hpExponentBase;
+		this.dmgExponentBase = dmgExponentBase;
+		this.expLvlDivisor = expLvlDivisor;
+		this.expLvlExponent = expLvlExponent;
 	}
 
 	public int getMonsterId() {
@@ -133,14 +143,49 @@ public class MonsterLevelInfo implements Serializable {
 		this.speed = speed;
 	}
 
+	public float getHpExponentBase() {
+		return hpExponentBase;
+	}
+
+	public void setHpExponentBase(float hpExponentBase) {
+		this.hpExponentBase = hpExponentBase;
+	}
+
+	public float getDmgExponentBase() {
+		return dmgExponentBase;
+	}
+
+	public void setDmgExponentBase(float dmgExponentBase) {
+		this.dmgExponentBase = dmgExponentBase;
+	}
+
+	public float getExpLvlDivisor() {
+		return expLvlDivisor;
+	}
+
+	public void setExpLvlDivisor(float expLvlDivisor) {
+		this.expLvlDivisor = expLvlDivisor;
+	}
+
+	public float getExpLvlExponent() {
+		return expLvlExponent;
+	}
+
+	public void setExpLvlExponent(float expLvlExponent) {
+		this.expLvlExponent = expLvlExponent;
+	}
+
 	@Override
 	public String toString() {
 		return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
 				+ ", hp=" + hp + ", curLvlRequiredExp=" + curLvlRequiredExp
-				+ ", feederExp=" + feederExp + ", fireDmg=" + fireDmg + ", grassDmg="
-				+ grassDmg + ", waterDmg=" + waterDmg + ", lightningDmg="
-				+ lightningDmg + ", darknessDmg=" + darknessDmg + ", rockDmg="
-				+ rockDmg + ", speed=" + speed + "]";
+				+ ", feederExp=" + feederExp + ", fireDmg=" + fireDmg
+				+ ", grassDmg=" + grassDmg + ", waterDmg=" + waterDmg
+				+ ", lightningDmg=" + lightningDmg + ", darknessDmg="
+				+ darknessDmg + ", rockDmg=" + rockDmg + ", speed=" + speed
+				+ ", hpExponentBase=" + hpExponentBase + ", dmgExponentBase="
+				+ dmgExponentBase + ", expLvlDivisor=" + expLvlDivisor
+				+ ", expLvlExponent=" + expLvlExponent + "]";
 	}
 
 }
