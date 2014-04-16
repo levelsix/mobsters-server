@@ -377,7 +377,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		MonsterLevelInfo mli = info.get(firstOne);
   		
   		
-  		MonsterForUser mfu = new MonsterForUser(0, userId, monsterId, mli.getCurLvlRequiredExp(),
+  		MonsterForUser mfu = new MonsterForUser(0, userId, monsterId, 0,//mli.getCurLvlRequiredExp(),
   				mli.getLevel(), mli.getHp(), monzter.getNumPuzzlePieces(), true, combineStartDate,
   				teamSlotNum, sourceOfPieces);
   		userMonsters.add(mfu);
