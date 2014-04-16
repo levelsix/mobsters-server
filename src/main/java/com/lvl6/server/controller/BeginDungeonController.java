@@ -337,6 +337,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  utIdList.add(userTaskId);
 	  stageNumsToProtos.putAll(stageNumsToProtosTemp);
 	  
+	  log.info("stageNumsToProtosTemp=" + stageNumsToProtosTemp);
+	  log.info("stageNumsToProtos=" + stageNumsToProtos);
+	  
 	  //start the cool down timer if for event
 	  if (isEvent) {
 	  	int numInserted = InsertUtils.get().insertIntoUpdateEventPersistentForUser(uId, eventId, clientTime);
