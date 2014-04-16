@@ -18,6 +18,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
@@ -72,7 +73,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-//      int previousGems = 0;
+      int previousGems = 0;
 
       //will be populated by checkLegit(...);
       Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
@@ -81,14 +82,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legit = checkLegit(resBuilder, aUser, userId, gemsSpent, userTaskId,
       		reviveMeProtoList, userMonsterIdToExpectedHealth);//, userTaskList);
 
-
+      Map<String, Integer> currencyChange =
+				new HashMap<String, Integer>();
       boolean successful = false;
       if(legit) {
 //    	  TaskForUserOngoing ut = userTaskList.get(0);
-//        previousGems = aUser.getGems();
-    	  successful = writeChangesToDb(aUser, userId, userTaskId, gemsSpent, curTime,
-    	  		userMonsterIdToExpectedHealth);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+    	  previousGems = aUser.getGems();
+    	  successful = writeChangesToDb(aUser, userId, userTaskId, gemsSpent,
+    			  curTime, userMonsterIdToExpectedHealth, currencyChange);
       }
       if (successful) {
     	  resBuilder.setStatus(ReviveInDungeonStatus.SUCCESS);
@@ -102,9 +103,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+      					aUser, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
+        writeToUserCurrencyHistory(userId, aUser, userTaskId, curTime,
+        		previousGems, currencyChange);
       }
     } catch (Exception e) {
       log.error("exception in ReviveInDungeonController processEvent", e);
@@ -175,18 +179,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, long userTaskId, int gemsSpent,
-  		Timestamp clientTime, Map<Long, Integer> userMonsterIdToExpectedHealth) {
+  private boolean writeChangesToDb(User u, int uId, long userTaskId,
+		  int gemsSpent, Timestamp clientTime,
+		  Map<Long, Integer> userMonsterIdToExpectedHealth,
+		  Map<String, Integer> currencyChange) {
 	  
 	  //update user diamonds
 	  int gemsChange = -1 * gemsSpent;
 	  if (!updateUser(u, gemsChange)) {
 		  log.error("unexpected error: could not decrement user's gold by " +
 				  gemsChange);
-		  //update num revives for user task
 		  return false;
+	  } else {
+		  if (0 != gemsChange) {
+			  currencyChange.put(MiscMethods.gems, gemsSpent);
+		  }
 	  }
 	  
+	  //update num revives for user task
 	  int numRevivesDelta = 1;
 	  int numUpdated = UpdateUtils.get().incrementUserTaskNumRevives(userTaskId, numRevivesDelta); 
 	  if (1 != numUpdated) {
@@ -198,6 +208,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  log.error("unexpected error: could not change back user's gems by " +
 					  -1 * gemsChange);
 		  }
+		  currencyChange.clear();
 		  return false;
 	  }
 	  
@@ -225,22 +236,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  //TODO: FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousSilver, int previousGold) {
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//
-//    previousGoldSilver.put(gems, previousGold);
-//    previousGoldSilver.put(cash, previousSilver);
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash, reasonForChange);
-//
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-//        previousGoldSilver, reasonsForChanges);
+  private void writeToUserCurrencyHistory(int userId, User aUser,
+		  long userTaskId, Timestamp curTime, int previousGems,
+		  Map<String, Integer> currencyChange) {
+	  
+	  if (currencyChange.isEmpty()) {
+		  return;
+	  }
+	  
+	  StringBuilder detailsSb = new StringBuilder();
+	  detailsSb.append("userTaskId=");
+	  detailsSb.append(userTaskId);
+	  
+	  Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+	  Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> detailsMap = new HashMap<String, String>();
+	  String reason = ControllerConstants.UCHRFC__REVIVE_IN_DUNGEON;
+	  String gems = MiscMethods.gems;
+
+	  previousCurrency.put(gems, previousGems);
+	  currentCurrency.put(gems, aUser.getGems());
+	  reasonsForChanges.put(gems, reason);
+	  detailsMap.put(gems, detailsSb.toString());
+
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 
   }
 

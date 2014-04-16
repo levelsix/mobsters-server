@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	server.writeEvent(resEventUpdate);
       	
       	writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
-      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems, umcep.getUserMonsterId());
+      	writeToUserCurrencyHistory(aUser, curTime, umcep.getUserMonsterId(), money, previousGems);
       }
     } catch (Exception e) {
       log.error("exception in EnhancementWaitTimeCompleteController processEvent", e);
@@ -283,22 +283,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
   }
   
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-  		int previousGems, long userMonsterId) {
-  	int userId = aUser.getId();
-  	String gems = MiscMethods.gems;
-  	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
-    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
-    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    Map<String, String> detailsMap = new HashMap<String, String>();
-    
-    previousCurrencies.put(gems, previousGems);
-    currentCurrencies.put(gems, aUser.getGems());
-    reasonsForChanges.put(gems, reasonForChange);
-    detailsMap.put(gems, " userMonsterId=" + userMonsterId); 
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money, previousCurrencies,
-    		currentCurrencies, reasonsForChanges, detailsMap);
+  private void writeToUserCurrencyHistory(User aUser, Timestamp curTime,
+		  long userMonsterId, Map<String, Integer> money, int previousGems) {
+	  if (money.isEmpty()) {
+		  return;
+	  }
+	  String gems = MiscMethods.gems;
+	  String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
+	  
+	  int userId = aUser.getId();
+	  Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+	  Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> detailsMap = new HashMap<String, String>();
+
+	  previousCurrencies.put(gems, previousGems);
+	  currentCurrencies.put(gems, aUser.getGems());
+	  reasonsForChanges.put(gems, reasonForChange);
+	  detailsMap.put(gems, " userMonsterId=" + userMonsterId); 
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money,
+			  previousCurrencies, currentCurrencies, reasonsForChanges,
+			  detailsMap);
 
   }
 

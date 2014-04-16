@@ -358,51 +358,61 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
-			Map<String, Integer> money, int previousOil, int previousGems,
+			Map<String, Integer> currencyChange, int previousOil, int previousGems,
 			Map<Long, UserEnhancementItemProto> protoDeleteMap,
 		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
 		  Map<Long, UserEnhancementItemProto> protoNewMap) {
 		
-		Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		StringBuilder reasonForChange = new StringBuilder();
-		reasonForChange.append(ControllerConstants.UCHRFC__ENHANCING);
-		
-		String oil = MiscMethods.oil;
-		String gems = MiscMethods.gems;
-		previousGemsCash.put(oil, previousOil);
-		previousGemsCash.put(gems, previousGems);
+		StringBuilder detailsSb = new StringBuilder();
 		
 		//maybe shouldn't keep track...oh well, more info hopefully is better than none
 		if (null != protoDeleteMap && !protoDeleteMap.isEmpty()) {
-			reasonForChange.append("deleteIds=");
+			detailsSb.append("deleteIds=");
 			for (UserEnhancementItemProto ueip : protoDeleteMap.values()) {
 				long id = ueip.getUserMonsterId();
-				reasonForChange.append(id);
-				reasonForChange.append(" ");
+				detailsSb.append(id);
+				detailsSb.append(" ");
 			}
 		}
 		if (null != protoUpdateMap && !protoUpdateMap.isEmpty()) {
-			reasonForChange.append("updateIds=");
+			detailsSb.append("updateIds=");
 			for (UserEnhancementItemProto ueip : protoUpdateMap.values()) {
 				long id = ueip.getUserMonsterId();
-				reasonForChange.append(id);
-				reasonForChange.append(" ");
+				detailsSb.append(id);
+				detailsSb.append(" ");
 			}
 		}
 		if (null != protoNewMap && !protoNewMap.isEmpty()) {
-			reasonForChange.append("newIds=");
+			detailsSb.append("newIds=");
 			for (UserEnhancementItemProto ueip : protoNewMap.values()) {
 				long id = ueip.getUserMonsterId();
-				reasonForChange.append(id);
-				reasonForChange.append(" ");
+				detailsSb.append(id);
+				detailsSb.append(" ");
 			}
 		}
 		
-		reasonsForChanges.put(oil, reasonForChange.toString());
-		reasonsForChanges.put(gems, reasonForChange.toString());
-		//TODO: FIX THIS
-//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsCash, reasonsForChanges);
+		int userId = aUser.getId();
+		Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+		Map<String, String> detailsMap = new HashMap<String, String>();
+		String reason = ControllerConstants.UCHRFC__ENHANCING;
+		String oil = MiscMethods.oil;
+		String gems = MiscMethods.gems;
+		
+		previousCurrency.put(oil, previousOil);
+		previousCurrency.put(gems, previousGems);
+		currentCurrency.put(oil, aUser.getOil());
+		currentCurrency.put(gems, aUser.getGems());
+		
+		reasonsForChanges.put(oil, reason);
+		reasonsForChanges.put(gems, reason);
+		detailsMap.put(oil, detailsSb.toString());
+		detailsMap.put(gems, detailsSb.toString());
+		
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 	}
 
 	public Locker getLocker() {

@@ -287,13 +287,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return returnMap;
   }
   
-  private boolean writeChangesToDb(User u, int uId, 
-  		int cashChange, int gemCost, Map<Long, UserMonsterHealingProto> protoDeleteMap,
+  private boolean writeChangesToDb(User u, int uId, int cashChange,
+		  int gemCost, Map<Long, UserMonsterHealingProto> protoDeleteMap,
 		  Map<Long, UserMonsterHealingProto> protoUpdateMap,
-		  Map<Long, UserMonsterHealingProto> protoNewMap, int gemCostForHealing,
-		  Map<String, Integer> money, List<Long> userMonsterIds, 
-		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
-		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap, int maxCash) {
+		  Map<Long, UserMonsterHealingProto> protoNewMap,
+		  int gemCostForHealing, Map<String, Integer> moneyForHealing,
+		  List<Long> userMonsterIds,
+		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup,
+		  int gemsForSpeedup, Map<String, Integer> moneyForSpeedup,
+		  Map<String, Integer> changeMap, int maxCash) {
 
   	log.info("cashChange=" + cashChange);
   	log.info("gemCost=" + gemCost);
@@ -332,11 +334,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		} else {
   			//things went ok
   			if (0 != cashChange) {
-  				money.put(MiscMethods.cash, cashChange);
+  				moneyForHealing.put(MiscMethods.cash, cashChange);
   				changeMap.put(MiscMethods.cash, cashChange);
   			}
   			if (0 != gemCostForHealing) {
-  				money.put(MiscMethods.gems, gemCostForHealing);
+  				moneyForHealing.put(MiscMethods.gems, gemCostForHealing);
   			}
   			if (0 != gemsForSpeedup) {
   				moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
@@ -406,11 +408,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> changeMap,
-  		Map<String, Integer> money, Timestamp curTime, int previousCash, int previousGems,
-  		Map<Long, UserMonsterHealingProto> deleteMap, 
-  		Map<Long, UserMonsterHealingProto> updateMap,
-  		Map<Long, UserMonsterHealingProto> newMap, Map<String, Integer> moneyForHealSpeedup) {
+  private void writeToUserCurrencyHistory(User aUser,
+		  Map<String, Integer> changeMap, Map<String, Integer> moneyForHealing,
+		  Timestamp curTime, int previousCash, int previousGems,
+		  Map<Long, UserMonsterHealingProto> deleteMap, 
+		  Map<Long, UserMonsterHealingProto> updateMap,
+		  Map<Long, UserMonsterHealingProto> newMap,
+		  Map<String, Integer> moneyForHealSpeedup) {
   	
   	int userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
@@ -424,17 +428,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String cash = MiscMethods.cash;
     
     StringBuilder detailSb = new StringBuilder();
-    if (!money.isEmpty()) {
+    if (!moneyForHealing.isEmpty()) {
     	detailSb.append("heal monster info: ");
     }
-    if (money.containsKey(gems)) {
+    if (moneyForHealing.containsKey(gems)) {
     	detailSb.append("gemChange=");
-    	detailSb.append(money.get(gems));
+    	detailSb.append(moneyForHealing.get(gems));
     	detailSb.append(" ");
     }
-    if (money.containsKey(cash)) {
+    if (moneyForHealing.containsKey(cash)) {
     	detailSb.append("cashChange=");
-    	detailSb.append(money.get(cash));
+    	detailSb.append(moneyForHealing.get(cash));
     	detailSb.append(" ");
     }
     //could just individually add in the ids or something else, but eh, lazy

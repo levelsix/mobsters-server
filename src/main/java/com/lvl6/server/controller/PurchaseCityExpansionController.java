@@ -21,6 +21,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.Builder;
@@ -110,7 +111,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 			if (legitExpansion) {
 				//update database tables
-//				int previousSilver = user.getCoins();
+				int previousCash = user.getCash();
 				int cost = cityExpansionCostList.get(0);
 				
 				Map<String, Integer> currencyChange = new HashMap<String, Integer>();
@@ -120,13 +121,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				//modified user object, need to update the client to reflect this
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
-				ExpansionPurchaseForUser uced = ExpansionPurchaseForUserRetrieveUtils.getSpecificUserCityExpansionDataForUserIdAndPosition(user.getId(), xPosition, yPosition);
-				resBuilder.setUcedp(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+								user, null);
+				ExpansionPurchaseForUser uced =
+						ExpansionPurchaseForUserRetrieveUtils
+						.getSpecificUserCityExpansionDataForUserIdAndPosition(
+								user.getId(), xPosition, yPosition);
+				resBuilder.setUcedp(CreateInfoProtoUtils
+						.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				//writeToUserCurrencyHistory(user, timeOfPurchase, xPosition, yPosition, currencyChange, previousSilver);
+				writeToUserCurrencyHistory(user, timeOfPurchase, xPosition,
+						yPosition, previousCash, currencyChange);
 			}
 		} catch (Exception e) {
 			log.error("exception in PurchaseCityExpansion processEvent", e);
@@ -208,19 +215,33 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		return cec.getExpansionCostCash();
 	}
 
-	//TODO: FIX THIS
-	public void writeToUserCurrencyHistory(User aUser, Timestamp date, int xPosition, int yPosition,
-			Map<String, Integer> goldSilverChange, int previousSilver) {
-//		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//		String silver = MiscMethods.cash;
-//		String reasonForChange = "Expanding xPosition: " + xPosition + ", yPosition: " + yPosition;
-//
-//		previousGoldSilver.put(silver, previousSilver);
-//		reasonsForChanges.put(silver, reasonForChange);
-//
-//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-//				previousGoldSilver, reasonsForChanges);
+	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
+			int xPosition, int yPosition, int previousCash,
+			Map<String, Integer> changeMap) {
+		
+		StringBuilder detailSb = new StringBuilder();
+		detailSb.append("Expanding xPosition: ");
+		detailSb.append(xPosition);
+		detailSb.append(", yPosition: ");
+		detailSb.append(yPosition);
+		
+		int userId = aUser.getId();
+	    Map<String, Integer> previousCurencyMap = new HashMap<String, Integer>();
+	    Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+	    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	    Map<String, String> details = new HashMap<String, String>();
+	    String cash = MiscMethods.cash;
+	    String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_CITY_EXPANSION;
+		
+
+	    previousCurencyMap.put(cash, previousCash);
+	    currentCurrencyMap.put(cash, aUser.getCash());
+		reasonsForChanges.put(cash, reasonForChange);
+		details.put(cash, detailSb.toString());
+
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, changeMap,
+				previousCurencyMap, currentCurrencyMap, reasonsForChanges,
+	    		details);
 	}
 
 	public Locker getLocker() {

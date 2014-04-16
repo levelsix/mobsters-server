@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -36,6 +37,7 @@ import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.KabamProperties;
@@ -104,11 +106,8 @@ public class InAppPurchaseController extends EventController {
     getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = user.getCash();
-      int previousGold = user.getGems();
-
+      
       JSONObject response;
-
       JSONObject jsonReceipt = new JSONObject();
       jsonReceipt.put(IAPValues.RECEIPT_DATA, receipt);
       log.info("Processing purchase: " + jsonReceipt.toString(4));
@@ -161,30 +160,42 @@ public class InAppPurchaseController extends EventController {
             String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
             int diamondChange = IAPValues.getDiamondsForPackageName(packageName);
             int coinChange = IAPValues.getCoinsForPackageName(packageName);
-            double cashCost = IAPValues.getCashSpentForPackageName(packageName);
+            double realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
             boolean isBeginnerSale = IAPValues.packageIsBeginnerSale(packageName);
 
+            Map<String, Integer> previousCurrency =
+            		new HashMap<String, Integer>();
+            Map<String, Integer> currencyChangeMap =
+            		new HashMap<String, Integer>();
             if (diamondChange > 0) {
-              resBuilder.setDiamondsGained(diamondChange);
-              user.updateRelativeDiamondsBeginnerSale(diamondChange, isBeginnerSale);
+            	previousCurrency.put(MiscMethods.gems, user.getGems());
+            	
+            	resBuilder.setDiamondsGained(diamondChange);
+            	user.updateRelativeDiamondsBeginnerSale(diamondChange, isBeginnerSale);
+            	currencyChangeMap.put(MiscMethods.gems, diamondChange);
             } else {
-              resBuilder.setCoinsGained(coinChange);
-              user.updateRelativeCoinsBeginnerSale(coinChange, isBeginnerSale);
+            	previousCurrency.put(MiscMethods.cash, user.getCash());
+            	
+            	resBuilder.setCoinsGained(coinChange);
+            	user.updateRelativeCoinsBeginnerSale(coinChange, isBeginnerSale);
+            	currencyChangeMap.put(MiscMethods.cash, coinChange);
             }
 
-            if (!insertUtils.insertIAPHistoryElem(receiptFromApple, diamondChange, coinChange, user, cashCost)) {
+            if (!insertUtils.insertIAPHistoryElem(receiptFromApple,
+            		diamondChange, coinChange, user, realLifeCashCost)) {
               log.error("problem with logging in-app purchase history for receipt:"
                   + receiptFromApple.toString(4) + " and user " + user);
             }
             resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
             resBuilder.setPackageName(receiptFromApple.getString(IAPValues.PRODUCT_ID));
 
-            resBuilder.setPackagePrice(cashCost);
+            resBuilder.setPackagePrice(realLifeCashCost);
             log.info("successful in-app purchase from user " + user.getId() + " for package "
                 + receiptFromApple.getString(IAPValues.PRODUCT_ID));
 
             Timestamp date = new Timestamp((new Date()).getTime());
-            writeToUserCurrencyHistory(user, date, diamondChange, coinChange, previousSilver, previousGold);
+            writeToUserCurrencyHistory(user, packageName, date,
+            		currencyChangeMap, previousCurrency);
           } catch (Exception e) {
             log.error("problem with in app purchase flow", e);
           }
@@ -317,29 +328,28 @@ public class InAppPurchaseController extends EventController {
     return sb.toString();
   }
 
-  //TODO: FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, Timestamp date,
-      int diamondChange, int coinChange, int previousSilver, int previousGold) {
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
-//
-//    if (0 < diamondChange) {
-//      goldSilverChange.put(gems, diamondChange);
-//      previousGoldSilver.put(gems, previousGold);
-//      reasonsForChanges.put(gems, reasonForChange + gems);
-//    } 
-//    if (0 < coinChange) {
-//      goldSilverChange.put(cash, coinChange);
-//      previousGoldSilver.put(cash, previousSilver);
-//      reasonsForChanges.put(cash, reasonForChange + cash);
-//    }
-//
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
-//        goldSilverChange, previousGoldSilver, reasonsForChanges);
+  private void writeToUserCurrencyHistory(User aUser, String packageName,
+		  Timestamp date, Map<String, Integer> currencyChangeMap,
+		  Map<String, Integer> previousCurrency) {
+	  
+	  int userId = aUser.getId();
+	  Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+	  Map<String, String> changeReasonsMap = new HashMap<String, String>();
+	  Map<String, String> detailsMap = new HashMap<String, String>();
+	  String gems = MiscMethods.gems;
+	  String cash = MiscMethods.cash;
+	  String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
+	  
+	  currentCurrencyMap.put(gems, aUser.getGems());
+	  currentCurrencyMap.put(cash, aUser.getCash());
+	  changeReasonsMap.put(gems, reasonForChange);
+	  changeReasonsMap.put(cash, reasonForChange);
+	  detailsMap.put(gems, packageName);
+	  detailsMap.put(cash, packageName);
+	  
+	  MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChangeMap,
+			  previousCurrency, currentCurrencyMap, changeReasonsMap,
+			  detailsMap);
   }
 
   public Locker getLocker() {

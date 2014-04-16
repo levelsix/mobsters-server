@@ -105,6 +105,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       int cashGain = 0;
       int oilGain = 0;
+      Map<String, Integer> currencyChange = new HashMap<String, Integer>();
       boolean successful = false;
       if (legitRetrieval) {
       	cashGain = resourcesGained.get(MiscMethods.cash);
@@ -112,8 +113,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         oilGain = resourcesGained.get(MiscMethods.oil);
         previousOil = user.getOil();
         
-        successful = writeChangesToDb(user, cashGain, oilGain, userStructIdsToUserStructs,
-        		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected, maxCash, maxOil);
+        successful = writeChangesToDb(user, cashGain, oilGain,
+        		userStructIdsToUserStructs, userStructIdsToTimesOfRetrieval,
+        		userStructIdsToAmountCollected, maxCash, maxOil,
+        		currencyChange);
       }
       if (successful) {
       	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
@@ -131,9 +134,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        writeToUserCurrencyHistory(user, previousCash, previousOil, resourcesGained,
+        writeToUserCurrencyHistory(user, previousCash, previousOil,
         		curTime, userStructIdsToUserStructs, userStructIdsToGenerators,
-        		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected);
+        		userStructIdsToTimesOfRetrieval,
+        		userStructIdsToAmountCollected, currencyChange);
       }
     } catch (Exception e) {
       log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
@@ -282,7 +286,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDb(User user, int cashGain, int oilGain,
   		Map<Integer, StructureForUser> userStructIdsToUserStructs,
   		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> userStructIdsToAmountCollected, int maxCash, int maxOil) {
+  		Map<Integer, Integer> userStructIdsToAmountCollected, int maxCash,
+  		int maxOil, Map<String, Integer> currencyChange) {
   	//capping how much the user can gain of a certain resource
   	int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
   	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
@@ -296,7 +301,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("problem with updating user stats after retrieving " + cashGain + " cash" +
       		"\t" + oilGain + " oil.");
       return false;
+      
+    } else {
+    	if (0 != oilGain) {
+    		currencyChange.put(MiscMethods.oil, oilGain);
+    	}
+    	if (0 != cashGain) {
+    		currencyChange.put(MiscMethods.cash, cashGain);
+    	}
     }
+  	
     if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
       log.error("problem with updating user structs last retrieved for userStructIds " 
           + userStructIdsToTimesOfRetrieval);
@@ -306,11 +320,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   public void writeToUserCurrencyHistory(User aUser, int previousCash,
-  		int previousOil, Map<String, Integer> resourcesGained, Timestamp curTime,
+  		int previousOil, Timestamp curTime,
   		Map<Integer, StructureForUser> userStructIdsToUserStructs,
   		Map<Integer, StructureResourceGenerator> userStructIdsToGenerators,
   		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> userStructIdsToAmountCollected) {
+  		Map<Integer, Integer> userStructIdsToAmountCollected,
+  		Map<String, Integer> currencyChange) {
 
   	int userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
@@ -362,7 +377,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     details.put(cash, cashDetailSb.toString());
     details.put(oil, oilDetailSb.toString());
     
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, resourcesGained,
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
     		previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
 

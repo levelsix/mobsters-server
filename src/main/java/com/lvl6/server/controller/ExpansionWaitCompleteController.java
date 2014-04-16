@@ -18,6 +18,7 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto;
@@ -102,7 +103,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			server.writeEvent(resEvent);
 			
 			if (success) {
-				writeToUserCurrencyHistory(user, clientTime, money, previousGems, xPosition, yPosition);
+				writeToUserCurrencyHistory(userId, user, xPosition, yPosition,
+						clientTime, money, previousGems);
 				UserCityExpansionDataProto ucedp = CreateInfoProtoUtils
 						.createUserCityExpansionDataProtoFromUserCityExpansionData(epfu); 
 				resBuilder.setUcedp(ucedp);
@@ -123,30 +125,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		} finally {
 			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
-	}
-
-	private boolean writeChangesToDB(User user, ExpansionPurchaseForUser epfu, boolean speedup, 
-			Map<String, Integer> money, Timestamp clientTime, int gemCost) {
-		if (speedup) {
-			int gemChange = -1 * gemCost;
-			if (!user.updateRelativeGemsNaive(gemChange)) {
-				log.error("problem updating user gems. gemChange=" + gemChange);
-				return false;
-			} else {
-				//everything went ok
-				money.put(MiscMethods.gems, gemChange);
-			}
-		}
-		
-		int xPosition = epfu.getxPosition();
-		int yPosition = epfu.getyPosition();
-		if (!UpdateUtils.get().updateUserCityExpansionData(user.getId(),
-				xPosition, yPosition, false, clientTime)) {
-			log.error("problem with resolving expansion. expansion=" + epfu +
-					"\t speedup=" + speedup + "\t user=" + user);
-			return false;
-		}
-		return true;
 	}
 
 	private ExpansionPurchaseForUser selectSpecificExpansion(int xPosition, int yPosition,
@@ -209,34 +187,61 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;  
 	}
 
-//	private int expansionGemCost(int nthExpansion, long expandStartMillis, Timestamp clientTime) {
-//		ExpansionCost ec = ExpansionCostRetrieveUtils.getCityExpansionCostById(nthExpansion);
-//		int gemCost = ec.getExpansionCostGems();
-//		
-//		long timePassedSeconds = (clientTime.getTime() - expandStartMillis)/1000;
-//		long numSecondsForExpansion = calculateMinutesForCurrentExpansion(nthExpansion)*60;
-//		long timeRemainingSeconds = numSecondsForExpansion - timePassedSeconds;
-//		
-//		double percentRemaining = timeRemainingSeconds/(double)(numSecondsForExpansion);
-//		
-//		gemCost = (int)Math.ceil(gemCost * percentRemaining);
-//		return gemCost;
-//	}
+	private boolean writeChangesToDB(User user, ExpansionPurchaseForUser epfu, boolean speedup, 
+			Map<String, Integer> money, Timestamp clientTime, int gemCost) {
+		if (speedup) {
+			int gemChange = -1 * gemCost;
+			if (!user.updateRelativeGemsNaive(gemChange)) {
+				log.error("problem updating user gems. gemChange=" + gemChange);
+				return false;
+			} else {
+				//everything went ok
+				money.put(MiscMethods.gems, gemChange);
+			}
+		}
+		
+		int xPosition = epfu.getxPosition();
+		int yPosition = epfu.getyPosition();
+		if (!UpdateUtils.get().updateUserCityExpansionData(user.getId(),
+				xPosition, yPosition, false, clientTime)) {
+			log.error("problem with resolving expansion. expansion=" + epfu +
+					"\t speedup=" + speedup + "\t user=" + user);
+			return false;
+		}
+		return true;
+	}
 
-	//TODO: IMPLEMENT THIS
-	private void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
-			int previousGems, int xPosition, int yPosition) {
-//		Map<String, Integer> previousGemsSilver = new HashMap<String, Integer>();
-//		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//		String gems = MiscMethods.gems;
-//
-//		previousGemsSilver.put(gems, previousGems);
-//
-//		String reasonForChange = ControllerConstants.UCHRFC__EXPANSION_WAIT_COMPLETE;
-//		reasonsForChanges.put(gems, reasonForChange + "xPosition: " + xPosition + " yPosition: " + yPosition);
-//		
-//
-//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsSilver, reasonsForChanges);
+	private void writeToUserCurrencyHistory(int userId, User aUser,
+			int xPosition, int yPosition, Timestamp date,
+			Map<String, Integer> currencyChange, int previousGems) {
+		if (currencyChange.isEmpty()) {
+			return;
+		}
+		String gems = MiscMethods.gems;
+		
+		String reason = ControllerConstants.UCHRFC__EXPANSION_WAIT_COMPLETE; 
+		StringBuilder detailsSb = new StringBuilder();
+		detailsSb.append("xPos=");
+		detailsSb.append(xPosition);
+		detailsSb.append(", yPos=");
+		detailsSb.append(yPosition);
+		String details = detailsSb.toString();
+		
+		Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+		Map<String, String> detailsMap = new HashMap<String, String>();
+
+//		if (currencyChange.containsKey(gems)) {
+		previousCurrency.put(gems, previousGems);
+		currentCurrency.put(gems, aUser.getGems());
+		reasonsForChanges.put(gems, reason);
+		detailsMap.put(gems, details);
+//		}
+		
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, currencyChange, 
+				previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+		
 	}
 
 	public Locker getLocker() {

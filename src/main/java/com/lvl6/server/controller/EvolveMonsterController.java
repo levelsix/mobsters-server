@@ -258,8 +258,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
-			log.warn("problem with updating user stats: gemChange=" + gemChange
+			log.error("problem with updating user stats: gemChange=" + gemChange
 					+ ", cashChange=" + oilChange + ", user is " + user);
+			return false;
+			
 		} else {
 			//everything went well
 			if (0 != oilChange) {
@@ -283,19 +285,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
 			Map<String, Integer> moneyChange, int previousOil, int previousGems,
 			long catalystUserMonsterId, List<Long> userMonsterIds) {
-		int userId = aUser.getId();
-		
-		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
-		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
-		Map<String, String> changeReasonsMap = new HashMap<String, String>();
-		Map<String, String> detailsMap = new HashMap<String, String>();
-		String reasonForChange = ControllerConstants.UCHRFC__EVOLVING;
-		StringBuilder detailSb = new StringBuilder();
-		detailSb.append("(catalystId, userMonsterId, userMonsterId");
-		
+		if (moneyChange.isEmpty()) {
+			return;
+		}
 		String oil = MiscMethods.oil;
 		String gems = MiscMethods.gems;
 		
+		String reasonForChange = ControllerConstants.UCHRFC__EVOLVING;
+		StringBuilder detailSb = new StringBuilder();
+		detailSb.append("(catalystId, userMonsterId1, userMonsterId2) ");
 		if (moneyChange.containsKey(gems)) {
 			reasonForChange = ControllerConstants.UCHRFC__SPED_UP_EVOLUTION;
 		}
@@ -307,16 +305,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		detailSb.append(one);
 		long two = userMonsterIds.get(1);
 		detailSb.append(two);
+		detailSb.append(")");
+		
+		
+		int userId = aUser.getId();
+		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+		Map<String, String> changeReasonsMap = new HashMap<String, String>();
+		Map<String, String> detailsMap = new HashMap<String, String>();
+		
 		
 		previousCurrencyMap.put(oil, previousOil);
 		previousCurrencyMap.put(gems, previousGems);
+		currentCurrencyMap.put(oil, aUser.getOil());
+		currentCurrencyMap.put(gems, aUser.getGems());
 		changeReasonsMap.put(oil, reasonForChange);
 		changeReasonsMap.put(gems, reasonForChange);
 		detailsMap.put(oil, detailSb.toString());
 		detailsMap.put(gems, detailSb.toString());
 		
-		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange, previousCurrencyMap,
-				currentCurrencyMap, changeReasonsMap, detailsMap);
+		MiscMethods.writeToUserCurrencyOneUser(userId, date, moneyChange,
+				previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
+				detailsMap);
 	}
 
 	public Locker getLocker() {

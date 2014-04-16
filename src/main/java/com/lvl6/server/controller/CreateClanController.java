@@ -278,7 +278,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private void writeToUserCurrencyHistory(User aUser, Clan clan, Timestamp createTime,
   		Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency) {
-  	int userId = aUser.getId();
+	  if (currencyChange.isEmpty()) {
+		  return;
+	  }
+	  
   	String reason = ControllerConstants.UCHRFC__CREATE_CLAN;
   	StringBuilder detailsSb = new StringBuilder();
   	detailsSb.append("clanId=");
@@ -287,6 +290,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	detailsSb.append(clan.getName());
   	String details = detailsSb.toString();
   	
+  	int userId = aUser.getId();
     Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();

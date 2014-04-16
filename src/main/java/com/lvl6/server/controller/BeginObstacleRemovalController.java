@@ -253,6 +253,10 @@ public class BeginObstacleRemovalController extends EventController{
 	private void writeToUserCurrencyHistory(int userId, User user, Timestamp curTime,
 			Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency,
 			ObstacleForUser ofu, ResourceType rt) {
+		if (currencyChange.isEmpty()) {
+			return;
+		}
+		
 		String reason = ControllerConstants.UCHRFC__REMOVE_OBSTACLE;
 		StringBuilder detailsSb = new StringBuilder();
 		detailsSb.append("obstacleId=");

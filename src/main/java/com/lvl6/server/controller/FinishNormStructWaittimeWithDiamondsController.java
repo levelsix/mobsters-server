@@ -160,7 +160,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
   		return false;
   	} else {
-  		money.put(MiscMethods.gems, gemChange);
+  		if (0 != gemChange) {
+  			money.put(MiscMethods.gems, gemChange);
+  		}
   	}
   	
   	//the last retrieved time has a value of timeOfSpeedup
@@ -180,21 +182,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
   		Structure formerStruct, Timestamp timeOfPurchase, Map<String, Integer> money,
   		int previousGems) {
-    int userId = aUser.getId();
+	  if (money.isEmpty()) {
+		  return;
+	  }
     int userStructId = userStruct.getId();
     int structId = userStruct.getStructId();
-    
     StringBuilder structDetails = new StringBuilder(); //   + structId;
     if (null == formerStruct) {
     	//no previous guy so user speeding up building first building
-    	structDetails.append(" construction ");
+    	structDetails.append("construction ");
     } else {
-    	structDetails.append(" upgrade ");
+    	structDetails.append("upgrade ");
     }
     structDetails.append("uStructId: ");
     structDetails.append(userStructId);
     structDetails.append(" structId: ");
     structDetails.append(structId);
+    
 
     if (null != formerStruct) {
     	int prevStructId = formerStruct.getId();
@@ -205,6 +209,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	structDetails.append(prevLevel);
     }
     
+    int userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
