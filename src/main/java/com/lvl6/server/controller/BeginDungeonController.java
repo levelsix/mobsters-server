@@ -129,6 +129,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
       }
+      log.info("successful=" + successful);
+      log.info("resBuilder=" + resBuilder);
+      log.info("resBuilder=" + resBuilder.build());
       
       BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(userId);
       resEvent.setTag(event.getTag());
