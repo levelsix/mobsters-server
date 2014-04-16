@@ -30,7 +30,7 @@ public class TaskStageMonsterRetrieveUtils {
 
   public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
     log.debug("retrieving all task stage monster data map");
-    if (null != taskStageIdsToTaskStageMonsters) {
+    if (null == taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();
     }
     return taskStageIdsToTaskStageMonsters;
@@ -51,7 +51,7 @@ public class TaskStageMonsterRetrieveUtils {
 
   public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
     log.debug("retrieve task stage monster data for stage " + taskStageId);
-    if (null != taskStageIdsToTaskStageMonsters) {
+    if (null == taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();      
     }
     if (!taskStageIdsToTaskStageMonsters.containsKey(taskStageId)) {
