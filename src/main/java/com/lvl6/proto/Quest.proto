@@ -107,11 +107,11 @@ message FullUserQuestProto {
      optional bool isRedeemed = 3;
      optional bool isComplete = 4;
      
-     repeated UserQuestJob userQuestJobs = 5;
+     repeated UserQuestJobProto userQuestJobs = 5;
 }
 
-message UserQuestJob {
-	optional int32 userQuestId = 1;
+message UserQuestJobProto {
+	optional int32 questId = 1;
 	optional int32 questJobId = 2;
 	optional bool isComplete = 3; 
     optional int32 progress = 4;
