@@ -316,16 +316,16 @@ public class CreateInfoProtoUtils {
   	UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
   			info.getAttackerCurLeague(), info.getAttackerCurRank(),
   			info.getAttackerEloAfter(), false);
-  	phpb.setAttackerBefore(attackerAfter);
+  	phpb.setAttackerAfter(attackerAfter);
   	
   	UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
   			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
   			info.getDefenderEloBefore(), false);
-  	phpb.setAttackerBefore(defenderBefore);
+  	phpb.setDefenderBefore(defenderBefore);
   	UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
   			info.getDefenderCurLeague(), info.getDefenderCurRank(),
   			info.getDefenderEloAfter(), false);
-  	phpb.setAttackerBefore(defenderAfter);
+  	phpb.setDefenderAfter(defenderAfter);
   	
   	return phpb.build();
   }
