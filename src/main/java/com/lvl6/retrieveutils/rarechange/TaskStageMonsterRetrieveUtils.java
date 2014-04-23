@@ -150,6 +150,7 @@ public class TaskStageMonsterRetrieveUtils {
     	String newMonsterType = monsterType.trim().toUpperCase();
     	if (!monsterType.equals(newMonsterType)) {
     		log.error("monster type incorrect: " + monsterType + "\t tsmId=" + id);
+    		monsterType = newMonsterType;
     	}
     }
     
