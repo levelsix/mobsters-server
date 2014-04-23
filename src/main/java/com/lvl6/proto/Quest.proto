@@ -30,7 +30,7 @@ message FullQuestProto {
      optional CoordinateProto questGiverImgOffset = 17; //not used at the moment
      
      //optional int32 oilReward = 18; defined above
-     optional MonsterProto.MonsterElement monsterElement = 19;
+     optional MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
      //optional string questGiverName = 20; defined above
      
      repeated QuestJobProto jobs = 21;
@@ -41,17 +41,18 @@ message QuestJobProto {
 	optional int32 questId = 2;
 	optional QuestJobType questJobType = 3;
 	optional string description = 4;
-	optional int32 quantity = 5;
+	optional int32 staticDataId = 5;
+	optional int32 quantity = 6;
 	
 	//how this quest job is ordered among other quest jobs
 	//with the same quest id
-	optional int32 priority = 6;
+	optional int32 priority = 7;
 	
 	//could be 0
-	optional int32 cityId = 7;
+	optional int32 cityId = 8;
 	
 	//could be 0
-	optional int32 cityAssetNum = 8;
+	optional int32 cityAssetNum = 9;
 	
 	enum QuestJobType {
      	//staticDataId is monster id, quantity is num to kill
