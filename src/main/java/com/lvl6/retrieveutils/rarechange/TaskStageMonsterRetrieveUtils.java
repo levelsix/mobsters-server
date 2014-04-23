@@ -153,13 +153,27 @@ public class TaskStageMonsterRetrieveUtils {
     	}
     }
     
+    if (puzzlePieceDropRate > 1F || puzzlePieceDropRate < 0F) {
+    	log.error("incorrect puzzlePieceDropRate: " + puzzlePieceDropRate +
+    			". Forcing it to be in [0,1] inclusive. id=" + id);
+    	puzzlePieceDropRate = Math.min(1F, puzzlePieceDropRate);
+    	puzzlePieceDropRate = Math.max(0F, puzzlePieceDropRate);
+    }
+    
+    if (chanceToAppear > 1F || chanceToAppear < 0F) {
+    	log.error("incorrect chanceToAppear: " + chanceToAppear +
+    			". Forcing it to be between 1 and 0. id=" + id);
+    	chanceToAppear = Math.min(1F, chanceToAppear);
+    	chanceToAppear = Math.max(0F, chanceToAppear);
+    }
     
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
     		puzzlePieceDropRate, level, chanceToAppear);
     
     if (null == monsterType) {
-    	log.error("task stage monster, monster type incorrect, offending tsm=" + taskStageMonster);
+    	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +
+    			taskStageMonster);
     }
         
     taskStageMonster.setRand(rand);

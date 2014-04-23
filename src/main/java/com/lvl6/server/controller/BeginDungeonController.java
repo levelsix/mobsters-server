@@ -20,7 +20,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.QuestMonsterItem;
+import com.lvl6.info.QuestJobMonsterItem;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
@@ -39,7 +39,8 @@ import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -315,13 +316,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //calculate the cash that the user could gain for this task
 	  int cashGained = MiscMethods.sumListsInMap(stageNumsToCash);
 	  int oilGained = MiscMethods.sumListsInMap(stageNumsToOil);
-	  //don't know why this is used
-//	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
-//		  log.error("problem with updating user stats post-task. cashGained="
-//				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-//				  ", clientTime=" + clientTime + ", user=" + u);
-//		  return false;
-//	  }
 
 	  //record into user_task table	  
 	  int tsId = TaskStageRetrieveUtils.getFirstTaskStageIdForTaskId(tId);
@@ -387,6 +381,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
+	  //quest monster items are dropped based on QUEST JOB IDS not quest ids
+	  List<Integer> questJobIds = QuestJobRetrieveUtils
+			  .getQuestJobIdsForQuestIds(questIds);
 	  //for each stage, calculate the monster(s) the user will face and
 	  //reward(s) that might be given if the user wins
 	  for (int tsId : tsMap.keySet()) {
@@ -414,9 +411,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  
 		  //if no questIds, then map returned is empty
 		  //task stage monster id (not task stage monster monster id) can only represent 1
-  		//monster, so no need to worry about dup monsters
+		  //monster, so no need to worry about dup monsters
 		  Map<Integer, Integer> tsmIdToItemId = new HashMap<Integer, Integer>();
-		  generateItems(spawnedTaskStageMonsters, questIds, tsmIdToItemId);
+		  generateItems(spawnedTaskStageMonsters, questJobIds, tsmIdToItemId);
 		  
 		  //randomly select a reward, IF ANY, that this monster can drop;
 		  //if an item drops puzzle piece does not drop.
@@ -515,10 +512,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   //if an item drops puzzle piece does not drop.
   private void generateItems(List<TaskStageMonster> taskStageMonsters,
-  		List<Integer> questIds, Map<Integer, Integer> tsmIdToItemId) {
+  		List<Integer> questJobIds, Map<Integer, Integer> tsmIdToItemId) {
   	
   	//no quest ids means no items (empty map)
-  	if (null == questIds || questIds.isEmpty()) {
+  	if (null == questJobIds || questJobIds.isEmpty()) {
   		return; 
   	}
   	
@@ -526,7 +523,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		TaskStageMonster tsm = taskStageMonsters.get(index);
   		
   		//determine the item that this monster drops, if any, (-1 means no item drop)
-  		int itemId = generateQuestMonsterItem(questIds, tsm);
+  		int itemId = generateQuestJobMonsterItem(questJobIds, tsm);
   		int tsmId = tsm.getId();
   		
   		//hacky way of accounting for multiple identical task stage monsters that
@@ -541,37 +538,39 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("generate items tsmIdToItemId=" + tsmIdToItemId);
   }
 
-  //see if quest id and monster id have an item. if yes, see if it drops. If it drops
-  //return the item id. 
+  //see if quest job id and monster id have an item. if yes, see if it drops.
+  //If it drops return the item id. 
   //default return -1
-  private int generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm) {
+  private int generateQuestJobMonsterItem(List<Integer> questJobIds,
+		  TaskStageMonster tsm) {
   	
   	int monsterId = tsm.getMonsterId();
-  	for (int questId : questIds) {
+  	for (int questJobId : questJobIds) {
   		
-  		QuestMonsterItem qmi = QuestMonsterItemRetrieveUtils
-  				.getItemForQuestAndMonsterId(questId, monsterId);
-  		log.info("quest monster item =" + qmi);
+  		QuestJobMonsterItem qjmi = QuestJobMonsterItemRetrieveUtils
+  				.getItemForQuestJobAndMonsterId(questJobId, monsterId);
+  		log.info("QuestJobMonsterItem =" + qjmi);
   		
-  		if (null == qmi) {
+  		if (null == qjmi) {
   			continue;
   		}
   		log.info("item might drop");
   		
-  	  //roll to see if item should drop
-  		if (!qmi.didItemDrop()) {
+  		//roll to see if item should drop
+  		if (!qjmi.didItemDrop()) {
   			log.info("task stage monster didn't drop item. tsm=" + tsm);
   			continue;
   		}
-  		//since quest and monster have item associated with it and the item "dropped"
-  		//return this
+  		//since quest job and monster have item associated with it and the
+  		//item "dropped"
+  		//return item dropped
   		
-  		int itemId = qmi.getItemId();
+  		int itemId = qjmi.getItemId();
   		log.info("item dropped=" + itemId);
   		return itemId;
   	}
   	
-  	log.info("no quest ids sent by client. questIds=" + questIds);
+  	log.info("no quest job ids sent by client. questJobIds=" + questJobIds);
   	//no item
   	return -1;
   }

@@ -34,8 +34,10 @@ public interface InsertUtil {
 //			Timestamp startTimeOfEnhancement);
 
 
-	public abstract int insertUpdateUnredeemedUserQuest(int userId, int questId,
-      int progress, boolean isComplete);
+	public abstract int insertUserQuest(int userId, int questId);
+	
+	public abstract int insertUserQuestJobs(int userId, int questId,
+			  List<Integer> questJobIds);
 	
 	public abstract boolean insertUserStructJustBuilt(int userId, int structId,
 			Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,

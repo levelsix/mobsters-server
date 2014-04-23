@@ -38,21 +38,6 @@ import com.lvl6.utils.QuestGraph;
     return questIdsToQuests;
   }
 
-//  public static List<Quest> getQuestsInCity(int cityId) {
-//    log.debug("retrieving all quest data");
-//    if (questIdsToQuests == null) {
-//      setStaticQuestIdsToQuests();
-//    }
-//    List <Quest> questsInCity = new ArrayList<Quest>();
-//    for (Integer questId : questIdsToQuests.keySet()) {
-//      Quest q = questIdsToQuests.get(questId);
-//      if (q.getCityId() == cityId) {
-//        questsInCity.add(q);
-//      }
-//    }
-//    return questsInCity;
-//  }
-
   public static Quest getQuestForQuestId(int questId) {
     log.debug("retrieving quest with questId " + questId);
     if (questIdsToQuests == null) {
@@ -151,7 +136,7 @@ import com.lvl6.utils.QuestGraph;
 
     int i = 1;
     int id = rs.getInt(i++);
-    int cityId = rs.getInt(i++);
+//    int cityId = rs.getInt(i++);
     String questName = rs.getString(i++);
     String description = rs.getString(i++);
     String doneResponse = rs.getString(i++);
@@ -159,10 +144,10 @@ import com.lvl6.utils.QuestGraph;
     String acceptDialogueBlob = rs.getString(i++);
     Dialogue acceptDialogue = MiscMethods.createDialogue(acceptDialogueBlob);
 
-    String questType = rs.getString(i++);
-    String jobDescription = rs.getString(i++);
-    int staticDataId = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
+//    String questType = rs.getString(i++);
+//    String jobDescription = rs.getString(i++);
+//    int staticDataId = rs.getInt(i++);
+//    int quantity = rs.getInt(i++);
     int cashReward = rs.getInt(i++);
     int oilReward = rs.getInt(i++);
     int gemReward = rs.getInt(i++);
@@ -181,14 +166,13 @@ import com.lvl6.utils.QuestGraph;
     String questGiverImagePrefix = rs.getString(i++);
     int priority = rs.getInt(i++);
     String carrotId = rs.getString(i++);
-    boolean isAchievement = rs.getBoolean(i++);
+//    boolean isAchievement = rs.getBoolean(i++);
     String monsterElement = rs.getString(i++);
     
-    Quest quest = new Quest(id, cityId, questName, description, doneResponse,
-    		acceptDialogue, questType, jobDescription, staticDataId, quantity,
-    		cashReward, oilReward, gemReward, expReward, monsterIdReward,
-    		isCompleteMonster, questsRequiredForThis, questGiverName,
-    		questGiverImagePrefix, priority, carrotId, isAchievement,
+    Quest quest = new Quest(id, questName, description, doneResponse,
+    		acceptDialogue, cashReward, oilReward, gemReward, expReward,
+    		monsterIdReward, isCompleteMonster, questsRequiredForThis,
+    		questGiverName, questGiverImagePrefix, priority, carrotId,
     		monsterElement); 
     
     return quest;

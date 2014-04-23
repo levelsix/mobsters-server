@@ -3,33 +3,28 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Random;
 
-public class QuestMonsterItem implements Serializable {
+public class QuestJobMonsterItem implements Serializable {
 
-	private static final long serialVersionUID = -9041249361685192938L;
-	private int questId;
+	private static final long serialVersionUID = 9159046998370704510L;
+	
+	private int questJobId;
 	private int monsterId;
 	private int itemId;
 	private float itemDropRate;
 	
-	
 	//convenience object
 	private Random rand;
-	
-	//only one item exists for questId and monsterId
-	//duple (questId, monsterId) should only appear in this table once, which
-	//has the following case in mind: when user needs to collect items the
-	//static data id in quest would be that of an item and multiple monsters
-	//can drop said item, which is dictated here
-	
-	public QuestMonsterItem(int questId, int monsterId, int itemId,
+
+	public QuestJobMonsterItem(int questJobId, int monsterId, int itemId,
 			float itemDropRate) {
 		super();
-		this.questId = questId;
+		this.questJobId = questJobId;
 		this.monsterId = monsterId;
 		this.itemId = itemId;
 		this.itemDropRate = itemDropRate;
 	}
-//covenience methods--------------------------------------------------------
+
+	//covenience methods--------------------------------------------------------
 	public Random getRand() {
 		return rand;
 	}
@@ -48,15 +43,14 @@ public class QuestMonsterItem implements Serializable {
 		}
 	}
 	
-//end covenience methods--------------------------------------------------------
+	//end covenience methods--------------------------------------------------------
 	
-	
-	public int getQuestId() {
-		return questId;
+	public int getQuestJobId() {
+		return questJobId;
 	}
 
-	public void setQuestId(int questId) {
-		this.questId = questId;
+	public void setQuestJobId(int questJobId) {
+		this.questJobId = questJobId;
 	}
 
 	public int getMonsterId() {
@@ -85,8 +79,9 @@ public class QuestMonsterItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "QuestMonsterItem [questId=" + questId + ", monsterId=" + monsterId
-				+ ", itemId=" + itemId + ", itemDropRate=" + itemDropRate + "]";
+		return "QuestJobMonsterItem [questJobId=" + questJobId + ", monsterId="
+				+ monsterId + ", itemId=" + itemId + ", itemDropRate="
+				+ itemDropRate + ", rand=" + rand + "]";
 	}
-
+	
 }

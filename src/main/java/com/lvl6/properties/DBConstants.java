@@ -59,7 +59,9 @@ public class DBConstants {
   public static final String TABLE_PVP_LEAGUE_FOR_USER = "pvp_league_for_user";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
-  public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
+  public static final String TABLE_QUEST_JOB = "quest_job";
+  public static final String TABLE_QUEST_JOB_FOR_USER = "quest_job_for_user";
+  public static final String TABLE_QUEST_JOB_MONSTER_ITEM = "quest_job_monster_item";
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
@@ -419,12 +421,18 @@ public class DBConstants {
   public static final String PVP_LEAGUE_FOR_USER__ATTACKS_LOST = "attacks_lost";
   public static final String PVP_LEAGUE_FOR_USER__DEFENSES_LOST = "defenses_lost";
   
-  /*USER QUESTS TABLE*/
-  public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
+  /*QUEST FOR USER TABLE*/
+  public static final String QUEST_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
   public static final String QUEST_FOR_USER__IS_REDEEMED = "is_redeemed"; 
   public static final String QUEST_FOR_USER__IS_COMPLETE = "is_complete";
-  public static final String QUEST_FOR_USER__PROGRESS = "progress"; 
+  
+  /*QUEST JOB FOR USER TABLE*/
+  public static final String QUEST_JOB_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String QUEST_JOB_FOR_USER__QUEST_ID = "quest_id";
+  public static final String QUEST_JOB_FOR_USER__QUEST_JOB_ID = "quest_job_id"; 
+  public static final String QUEST_JOB_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String QUEST_JOB_FOR_USER__PROGRESS = "progress"; 
 
   /*REFERRALS*/
   public static final String REFERRALS__REFERRER_ID = "referrer_id";
