@@ -18,6 +18,7 @@ import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.Quest;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
@@ -571,4 +572,20 @@ public class MonsterStuffUtils {
 	  	return null;
 	  }
   
+  public static boolean checkAllMonstersForUserComplete(Quest quest,
+		  List<Long> deleteUserMonsterIds,
+		  Map<Long, MonsterForUser> deletedUserMonsters) {
+	  //make sure the monsters are all complete
+	  for (long deleteId : deleteUserMonsterIds) {
+		  //this assumes all the deleted user monster ids are retrieved from db
+		  MonsterForUser mfu = deletedUserMonsters.get(deleteId);
+		  if (mfu.isComplete()) {
+			  continue;
+		  }
+		  
+		  log.info("monsterForUser incomplete: " + mfu);
+		  return false;
+	  }
+	  return true;
+  }
 }

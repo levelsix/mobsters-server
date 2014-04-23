@@ -29,7 +29,7 @@ import com.lvl6.utils.DBConnection;
     log.debug("retrieving unredeemed and incomplete user quests");
     
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, false);
     
@@ -52,7 +52,7 @@ import com.lvl6.utils.DBConnection;
   public List<QuestForUser> getUnredeemedUserQuestsForUser(int userId) {
     log.debug("retrieving unredeemed user quests for userId " + userId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
     Connection conn = null;
@@ -73,7 +73,7 @@ import com.lvl6.utils.DBConnection;
   public Map<Integer, QuestForUser> getQuestIdToUnredeemedUserQuests(int userId) {
   	log.debug("retrieving unredeemed user quests map for userId " + userId);
   	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
-  	paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+  	paramsToVals.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
   	paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
   	Connection conn = null;
@@ -113,7 +113,7 @@ import com.lvl6.utils.DBConnection;
   public QuestForUser getSpecificUnredeemedUserQuest(int userId, int questId) {
     log.debug("retrieving specific unredeemed user quest for userid " + userId + " and questId " + questId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
@@ -199,10 +199,9 @@ import com.lvl6.utils.DBConnection;
     int questId = rs.getInt(i++);
     boolean isRedeemed = rs.getBoolean(i++);
     boolean isComplete = rs.getBoolean(i++);
-    int progress = rs.getInt(i++);
     
     QuestForUser userQuest = new QuestForUser(userId, questId, isRedeemed,
-    		isComplete, progress);
+    		isComplete);
     return userQuest;
   }
   

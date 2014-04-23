@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import com.lvl6.events.request.QuestAcceptRequestEvent;
 import com.lvl6.events.response.QuestAcceptResponseEvent;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.QuestJob;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto;
 import com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto;
@@ -21,6 +23,7 @@ import com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.Builder;
 import com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
@@ -75,19 +78,23 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
 
-      boolean legitAccept = checkLegitAccept(resBuilder,
-      		user, userId, quest, questId);
+      boolean legitAccept = checkLegitAccept(resBuilder, user, userId,
+    		  quest, questId);
 
-      if (legitAccept) resBuilder.setCityIdOfAcceptedQuest(quest.getCityId());
+      boolean success = false;
+      if (legitAccept) {
+    	  success = writeChangesToDB(userId, questId, quest);
+      }
+      
+      if (success) {
+    	  resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
+      }
       
       QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setQuestAcceptResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
 
-      if (legitAccept) {
-        writeChangesToDB(userId, questId, quest);
-      }
 
     } catch (Exception e) {
       log.error("exception in QuestAccept processEvent", e);
@@ -131,18 +138,27 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     	return false;
     }
     
-    resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
     return true;
   }
 
-  private void writeChangesToDB(int userId, int questId, Quest quest) {
-  	int progress = 0;
-  	boolean isComplete = false;
-  	int num = InsertUtils.get().insertUpdateUnredeemedUserQuest(
-  			userId, questId, progress, isComplete);
-  	
-  	log.info("num quests inserted into user_quests: " + num + 
-  			"\t quest inserted: " + quest);
+  private boolean writeChangesToDB(int userId, int questId, Quest quest) {
+	  //insert the quest for the user
+	  int num = InsertUtils.get().insertUserQuest(userId, questId);
+
+	  log.info("num quests inserted into quest_for_user: " + num + 
+			  "\t quest inserted: " + quest);
+
+	  //insert the quest job for user
+	  Map<Integer, QuestJob> questJobIdsToJobs = QuestJobRetrieveUtils
+			  .getQuestJobsForQuestId(questId);
+	  List<Integer> questJobIds = new ArrayList<Integer>(
+			  questJobIdsToJobs.keySet());
+
+	  num = InsertUtils.get().insertUserQuestJobs(userId, questId,
+			  questJobIds);
+	  log.info("num quest jobs inserted into quest_job_for_user: " + num);
+
+	  return true;
   }
 
   public Locker getLocker() {

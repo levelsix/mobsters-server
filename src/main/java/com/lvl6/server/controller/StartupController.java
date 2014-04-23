@@ -53,6 +53,7 @@ import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -110,6 +111,7 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
@@ -180,6 +182,9 @@ public class StartupController extends EventController {
 
   @Autowired
   protected Globals globals;
+  
+  @Autowired
+  protected QuestJobForUserRetrieveUtil questJobForUserRetrieveUtil;
   
   @Autowired
   protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
@@ -441,6 +446,7 @@ public class StartupController extends EventController {
 //  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
   	  
   	  List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
+  	  Set<Integer> questIds = new HashSet<Integer>();
   	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	  
   	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
@@ -455,9 +461,15 @@ public class StartupController extends EventController {
   	    }
   	  }
   	  
+  	  //get the QuestJobForUser for ONLY the inProgressQuests
+  	  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs =
+  			  getQuestJobForUserRetrieveUtil()
+  			  .getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
+  	  
   	  //generate the user quests
   	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
-  	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
+  	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests,
+  	  			questIdToUserQuestJobs);
   	  resBuilder.addAllUserQuests(currentUserQuests);
   	  
   	  //generate the redeemed quest ids
@@ -2172,7 +2184,14 @@ public class StartupController extends EventController {
   public void setGlobals(Globals globals) {
 	  this.globals = globals;
   }
-  
+
+  public QuestJobForUserRetrieveUtil getQuestJobForUserRetrieveUtil() {
+	  return questJobForUserRetrieveUtil;
+  }
+  public void setQuestJobForUserRetrieveUtil(
+		  QuestJobForUserRetrieveUtil questJobForUserRetrieveUtil) {
+	  this.questJobForUserRetrieveUtil = questJobForUserRetrieveUtil;
+  }
   public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
 	  return pvpLeagueForUserRetrieveUtil;
   }

@@ -95,6 +95,7 @@ public class QueryConstructionUtil {
 				
 				allInConditions.add(inConditionsStr);
 			}
+			sb.append(conjunction);
 			sb.append(implode(allInConditions, inCondDelim));
 			conjunction = delimAcrossConditions;
 			
@@ -317,7 +318,77 @@ public class QueryConstructionUtil {
 		log.info("(IN) selectRowsQuery=" + sb.toString() + "\t values=" + values);
 		return sb.toString();
 	}
-	
+
+	//generalized method to construct a query, the argument "values" is another return
+	//value. It will contain the values to be set into the CqlPreparedStatement in the
+	//proper order. NOT USED ATM.
+	public String selectRowsQueryEqualityAndInConditions(List<String> columnsToSelect,
+			String tableName, Map<String, ?> equalityConditions, String eqDelim,
+			Map<String, Collection<?>> inConditions, String inDelim,
+			String overallDelim, List<Object> values, boolean preparedStatement) {
+		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+
+		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty());
+		boolean emptyInConditions = (null == inConditions || inConditions.isEmpty());
+		
+		sb.append(WHERE);
+
+		String conjunction = "";
+		if (preparedStatement) {
+			if (!emptyEqConditions) {
+				String preparedEqualityConditionsStr =
+						createPreparedComparisonConditionsString(
+								equalityConditions, values, EQUALITY, eqDelim);
+				sb.append(preparedEqualityConditionsStr);
+				
+				//this is so if inConditions are set, the conjunction is 
+				//used after setting these equality conditions
+				conjunction = overallDelim;
+			}
+			if (!emptyInConditions) {
+				List<String> allInConditions = new ArrayList<String>(); 
+				for (String column : inConditions.keySet()) {
+					Collection<?> inValues = inConditions.get(column);
+					String inConditionsStr = createPreparedColInValuesString(
+							column, inValues, values);
+					
+					allInConditions.add(inConditionsStr);
+				}
+				
+				sb.append(conjunction); //in case equality conditions are set
+				sb.append(implode(allInConditions, inDelim));
+			}
+		} else {
+			if (!emptyEqConditions) {
+				String equalityConditionsStr = createComparisonConditionsString(
+						equalityConditions, EQUALITY, eqDelim);
+				sb.append(equalityConditionsStr);
+				
+				//this is so if inConditions are set, the conjunction is 
+				//used after setting these equality conditions
+				conjunction = overallDelim;
+			}
+			if (!emptyInConditions) {
+				List<String> allInConditions = new ArrayList<String>(); 
+				for (String column : inConditions.keySet()) {
+					Collection<?> inValues = inConditions.get(column);
+					String inConditionsStr = createColInValuesString(column, inValues);
+					
+					allInConditions.add(inConditionsStr);
+				}
+				
+				sb.append(conjunction); //in case equality conditions are set
+				sb.append(implode(allInConditions, inDelim));
+				
+			}
+		}
+		
+		//close the query
+		//sb.append(";");
+		log.info("(Equality and IN) selectRowsQuery=" + sb.toString() +
+				"\t values=" + values);
+		return sb.toString();
+	}
 	
 	public StringBuilder createSelectColumnsFromTableString(List<String> columnsToSelect,
 			String tableName) {
