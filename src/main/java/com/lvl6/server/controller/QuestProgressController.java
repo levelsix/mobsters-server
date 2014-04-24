@@ -161,7 +161,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	  
 	  
 	  //check to make sure that the user has this quest job
-	  if (!questJobIdsToUserQuestJob.containsKey(questId)) {
+	  if (!questJobIdsToUserQuestJob.containsKey(questJobId)) {
+		  //expected to never go in here
 		  log.error("user trying to update progress for nonexisting" +
 				  " QuestJobForUser. progress=" + newProgress + "\t quest=" +
 				  quest + "\t questJob=" + qj + "\t userQuestJobs=" +
