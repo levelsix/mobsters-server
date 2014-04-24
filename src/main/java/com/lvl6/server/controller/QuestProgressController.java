@@ -171,7 +171,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	  }
 	  
 	  //check if already complete
-	  QuestJobForUser qjfu = questJobIdsToUserQuestJob.get(questId);
+	  QuestJobForUser qjfu = questJobIdsToUserQuestJob.get(questJobId);
 	  if (qjfu.isComplete()) {
 		  log.error("quest job for user already complete. qjfu=" + qjfu);
 		  return false;
