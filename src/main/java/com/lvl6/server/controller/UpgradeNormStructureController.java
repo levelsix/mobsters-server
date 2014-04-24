@@ -238,16 +238,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   }
   
-  private void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
-  		Structure curStruct, Structure upgradedStruct, Timestamp timeOfUpgrade,
-  		Map<String, Integer> money, int previousSilver, int previousOil, int previousGold) {
+  private void writeToUserCurrencyHistory(User aUser,
+		  StructureForUser userStruct, Structure curStruct,
+		  Structure upgradedStruct, Timestamp timeOfUpgrade,
+		  Map<String, Integer> money, int previousCash, int previousOil,
+		  int previousGems) {
     
   	int userId = aUser.getId();
     int userStructId = userStruct.getId();
     int prevStructId = curStruct.getId();
     int prevLevel = curStruct.getLevel();
-    String structDetails = "uStructId:" + userStructId + " preStructId:" + prevStructId
-        + " prevLevel:" + prevLevel;
+    StringBuilder structDetailsSb = new StringBuilder();
+    structDetailsSb.append("uStructId:");
+    structDetailsSb.append(userStructId);
+    structDetailsSb.append(" preStructId:");
+    structDetailsSb.append(prevStructId);
+    structDetailsSb.append(" prevLevel:");
+    structDetailsSb.append(prevLevel);
+    String structDetails = structDetailsSb.toString();
     
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
@@ -258,9 +266,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String oil = MiscMethods.oil;
     String cash = MiscMethods.cash;
     
-    previousCurrencies.put(cash, previousSilver);
+    previousCurrencies.put(cash, previousCash);
     previousCurrencies.put(oil, previousOil);
-    previousCurrencies.put(gems, previousGold);
+    previousCurrencies.put(gems, previousGems);
     
     currentCurrencies.put(cash, aUser.getCash());
     currentCurrencies.put(oil, aUser.getOil());

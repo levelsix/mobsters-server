@@ -89,6 +89,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousCash = 0;
+      int previousOil = 0;
 
       TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
       boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, ut);
@@ -99,6 +100,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
         previousCash = aUser.getCash();
+        previousOil = aUser.getOil();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime, money,
     	  		protos, maxCash, maxOil);
     	  
@@ -112,7 +114,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	
       	//delete from task_stage_for_user and put into task_stage_history
       	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-      	//TODO: record 
+      	//TODO: record  (items(?))
 //      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
       	recordStageHistory(tsfuList, monsterIdToNumPieces);
       	
@@ -144,7 +146,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	int taskId = ut.getTaskId();
-      	writeToUserCurrencyHistory(aUser, money, curTime, previousCash, userTaskId, taskId);
+      	writeToUserCurrencyHistory(aUser, curTime, userTaskId, taskId,
+      			previousCash, previousOil, money);
       	writeToTaskForUserCompleted(userId, taskId, userWon, firstTimeUserWonTask, curTime);
       }
       
@@ -185,8 +188,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut, boolean userWon,
-		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos,
+  private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut,
+		  boolean userWon, Timestamp clientTime, Map<String, Integer> money,
+		  List<FullUserMonsterProto> protos,
 		  int maxCash, int maxOil) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
@@ -209,6 +213,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  } else {
 		  	if (0 != cashGained) {
 		  		money.put(MiscMethods.cash, cashGained);
+		  	}
+		  	if (0 != oilGained) {
+		  		money.put(MiscMethods.oil, oilGained);
 		  	}
 		  }
 	  }
@@ -425,26 +432,41 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   */
   
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousCash, long userTaskId, int taskId) {
-  	int userId = aUser.getId();
+  private void writeToUserCurrencyHistory(User aUser, Timestamp curTime,
+		  long userTaskId, int taskId, int previousCash, int previousOil,
+		  Map<String, Integer> money) {
+	  if (money.isEmpty()) {
+		  return;
+	  }
+	  
   	StringBuffer sb = new StringBuffer();
   	sb.append("userTask=");
   	sb.append(userTaskId);
   	sb.append(" taskId=");
   	sb.append(taskId);
   	String cash = MiscMethods.cash;
+  	String oil = MiscMethods.oil;
   	String reasonForChange = ControllerConstants.UCHRFC__END_TASK;
   	
+  	int userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
 
-    previousCurrencies.put(cash, previousCash);
-    
+    if (money.containsKey(cash)) {
+    	previousCurrencies.put(cash, previousCash);
+    }
+    if (money.containsKey(oil)) {
+    	previousCurrencies.put(oil, previousOil);
+    }
+
+    currentCurrencies.put(cash, aUser.getCash());
+    currentCurrencies.put(oil, aUser.getOil());
     reasonsForChanges.put(cash, reasonForChange);
+    reasonsForChanges.put(oil, reasonForChange);
     detailsMap.put(cash, sb.toString());
+    detailsMap.put(oil, sb.toString());
     MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money, previousCurrencies,
     		currentCurrencies, reasonsForChanges, detailsMap);
 

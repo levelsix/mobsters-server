@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -153,15 +154,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	
     	boolean legit = checkLegit(resBuilder, attacker, defender, pvpBattleInfo, curDate);
-
+    	
+    	Map<Integer, Map<String, Integer>> changeMap =
+    			new HashMap<Integer, Map<String, Integer>>();
+    	Map<Integer, Map<String, Integer>> previousCurrencyMap =
+    			new HashMap<Integer, Map<String, Integer>>();
     	boolean successful = false;
     	if(legit) {
-    		//it is possible that the defender has a shield, most likely via buying it,
-    		//and less likely locks didn't work, regardless, the user can have a shield
+    		//it is possible that the defender has a shield, most likely via
+    		//buying it, and less likely locks didn't work, regardless, the
+    		//user can have a shield
     		successful = writeChangesToDb(attacker, attackerId, attackerPlfu,
-    				defender, defenderId, defenderPlfu, pvpBattleInfo, oilStolen,
-    				cashStolen, curTime, curDate, attackerAttacked, attackerWon,
-    				attackerMaxOil, attackerMaxCash);
+    				defender, defenderId, defenderPlfu, pvpBattleInfo,
+    				oilStolen, cashStolen, curTime, curDate, attackerAttacked,
+    				attackerWon, attackerMaxOil, attackerMaxCash, changeMap,
+    				previousCurrencyMap);
     	}
 
     	if (successful) {
@@ -195,7 +202,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			resEventUpdate.setTag(event.getTag());
     			server.writeEvent(resEventUpdateDefender);
     		}
-    		//TODO: TRACK CURRENCY HISTORY
+    		//TRACK CURRENCY HISTORY
+    		writeToUserCurrencyHistory(attackerId, attacker, defenderId,
+    				defender, attackerWon, curTime, changeMap,
+    				previousCurrencyMap);
     	}
 
     } catch (Exception e) {
@@ -257,7 +267,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
 		  int oilStolen, int cashStolen, Timestamp clientTime, Date clientDate,
 		  boolean attackerAttacked, boolean attackerWon, int attackerMaxOil,
-		  int attackerMaxCash) {
+		  int attackerMaxCash, Map<Integer, Map<String, Integer>> changeMap,
+		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
   	
 	  boolean cancelled = !attackerAttacked;
 	  
@@ -271,6 +282,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   	} else {
   		//user attacked so either he won or lost
+  		int previousCash = attacker.getCash();
+  		int previousOil = attacker.getOil();
   		
   		//TODO: WHEN MAX ELO IS FIGURED OUT, MAKE SURE ELO DOESN'T GO ABOVE THAT
   		//these elo change lists are populated by getEloChanges(...)
@@ -307,7 +320,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		updateDefender(attacker, defender, defenderId, defenderPlfu, pvpBattleInfo,
   				defenderEloChange, cashStolen, oilStolen, clientDate, attackerWon,
   				defenderEloChangeList, defenderOilChangeList, defenderCashChangeList,
-  				displayToDefenderList);
+  				displayToDefenderList, changeMap, previousCurrencyMap);
   		
   		writePvpBattleHistoryNotcancelled(attackerId, attackerPrevPlfu,
   				attackerPlfu, defenderId, defenderPrevPlfu,defenderPlfu,
@@ -315,6 +328,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				attackerOilChange, attackerEloChange, defenderEloChange,
   				defenderOilChangeList, defenderCashChangeList,
   				displayToDefenderList, cancelled);
+  		
+  		//user currency stuff
+  		Map<String, Integer> attackerChangeMap = new HashMap<String, Integer>();
+  		attackerChangeMap.put(MiscMethods.cash, attackerCashChange);
+  		attackerChangeMap.put(MiscMethods.oil, attackerOilChange);
+  		changeMap.put(attackerId, attackerChangeMap);
+  		
+  		Map<String, Integer> attackerPreviousCurrency =
+  				new HashMap<String, Integer>();
+  		attackerPreviousCurrency.put(MiscMethods.cash, previousCash);
+  		attackerPreviousCurrency.put(MiscMethods.oil, previousOil);
+  		previousCurrencyMap.put(attackerId, attackerPreviousCurrency);
   	}
   	
   	log.info("deleting from PvpBattleForUser");
@@ -597,7 +622,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int defenderEloChange, int oilStolen, int cashStolen, Date clientDate,
 		  boolean attackerWon, List<Integer> defenderEloChangeList,
 		  List<Integer> defenderOilChangeList, List<Integer> defenderCashChangeList,
-		  List<Boolean> displayToDefenderList) {
+		  List<Boolean> displayToDefenderList,
+		  Map<Integer, Map<String, Integer>> changeMap,
+		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
 	  if (null == defender) {
 		  log.info("attacker attacked fake defender. attacker=" + attacker);
 		  defenderEloChangeList.clear();
@@ -607,6 +634,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  displayToDefenderList.add(false);
 		  return;
 	  }
+	  //processing real user data
+	  int previousCash = defender.getCash();
+	  int previousOil = defender.getOil();
 
 	  boolean defenderWon = !attackerWon;
 	  int defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
@@ -639,6 +669,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  defenderOilChangeList.add(defenderOilChange);
 	  displayToDefenderList.add(displayToDefender);
 
+	  //user currency stuff
+	  Map<String, Integer> defenderChangeMap = new HashMap<String, Integer>();
+	  defenderChangeMap.put(MiscMethods.cash, defenderCashChange);
+	  defenderChangeMap.put(MiscMethods.oil, defenderOilChange);
+	  changeMap.put(defenderId, defenderChangeMap);
+	  
+	  Map<String, Integer> defenderPreviousCurrency =
+			  new HashMap<String, Integer>();
+	  defenderPreviousCurrency.put(MiscMethods.cash, previousCash);
+	  defenderPreviousCurrency.put(MiscMethods.oil, previousOil);
+	  previousCurrencyMap.put(defenderId, defenderPreviousCurrency);
   }
   
   private void updateUnshieldedDefender(User attacker, int defenderId, User defender,
@@ -797,6 +838,89 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  displayToDefender);
   }
 
+  private void writeToUserCurrencyHistory(int attackerId, User attacker,
+		  int defenderId, User defender, boolean attackerWon,
+		  Timestamp curTime, Map<Integer, Map<String, Integer>> changeMap,
+		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
+	  
+	  Map<Integer, Map<String, Integer>> currentCurrencyMap =
+			  new HashMap<Integer, Map<String, Integer>>();
+	  Map<Integer, Map<String, String>> changeReasonsMap =
+			  new HashMap<Integer, Map<String, String>>();
+	  Map<Integer, Map<String, String>> detailsMap =
+			  new HashMap<Integer, Map<String, String>>();
+	  String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
+	  String oil = MiscMethods.oil;
+	  String cash = MiscMethods.cash;
+	  
+	  //reasons
+	  Map<String, String> reasonMap = new HashMap<String, String>();
+	  reasonMap.put(cash, reasonForChange);
+	  reasonMap.put(oil, reasonForChange);
+	  changeReasonsMap.put(attackerId, reasonMap);
+	  changeReasonsMap.put(defenderId, reasonMap);
+	  
+	  //attacker stuff
+	  //current currency stuff
+	  int attackerCash = attacker.getCash();
+	  int attackerOil = attacker.getOil();
+	  Map<String, Integer> attackerCurrency = new HashMap<String, Integer>();
+	  attackerCurrency.put(cash, attackerCash);
+	  attackerCurrency.put(oil, attackerOil);
+	  //aggregate currency
+	  currentCurrencyMap.put(attackerId, attackerCurrency);
+	  
+	  //details
+	  StringBuilder attackerDetailsSb = new StringBuilder();
+	  if (attackerWon) {
+		  attackerDetailsSb.append("beat ");
+	  } else {
+		  attackerDetailsSb.append("lost to ");
+	  }
+	  attackerDetailsSb.append(defenderId);
+	  String attackerDetails = attackerDetailsSb.toString();
+	  Map<String, String> attackerDetailsMap = new HashMap<String, String>();
+	  attackerDetailsMap.put(cash, attackerDetails);
+	  attackerDetailsMap.put(oil, attackerDetails);
+	  //aggregate details
+	  detailsMap.put(attackerId, attackerDetailsMap);
+	  
+	  //defender stuff
+	  if (null != defender) {
+		  //current currency stuff
+		  int defenderCash = defender.getCash();
+		  int defenderOil = defender.getOil();
+		  Map<String, Integer> defenderCurrency = new HashMap<String, Integer>();
+		  defenderCurrency.put(cash, defenderCash);
+		  defenderCurrency.put(oil, defenderOil);
+		  //aggregate currency
+		  currentCurrencyMap.put(defenderId, defenderCurrency);  
+		  
+		  //details
+		  StringBuilder defenderDetailsSb = new StringBuilder();
+		  if (attackerWon) {
+			  defenderDetailsSb.append("lost to ");
+		  } else {
+			  defenderDetailsSb.append("beat ");
+		  }
+		  defenderDetailsSb.append(attackerId);
+		  String defenderDetails = defenderDetailsSb.toString();
+		  Map<String, String> defenderDetailsMap = new HashMap<String, String>();
+		  defenderDetailsMap.put(cash, defenderDetails);
+		  defenderDetailsMap.put(oil, defenderDetails);
+		  //aggregate details
+		  detailsMap.put(defenderId, defenderDetailsMap);
+		  
+	  }
+	  
+	  List<Integer> userIds = new ArrayList<Integer>();
+	  userIds.add(attackerId);
+	  userIds.add(defenderId);
+	  MiscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
+			  previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
+			  detailsMap);
+	  
+  }
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;

@@ -105,8 +105,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			List<MonsterForUser> evolvedUserMonster = new ArrayList<MonsterForUser>();
 			if (legitMonster) {
 				previousGems = aUser.getGems();
-				successful = writeChangesToDB(aUser, userId, now, gemsSpent, evolution, money,
-						existingUserMonsters, evolvedUserMonster);
+				successful = writeChangesToDB(aUser, userId, now, gemsSpent,
+						evolution, money, existingUserMonsters,
+						evolvedUserMonster);
 			}
 		
 			if (successful) {
@@ -301,8 +302,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		if (moneyChange.isEmpty()) {
 			return;
 		}
+		String gems = MiscMethods.gems;
 		
-		int userId = aUser.getId();
 		Timestamp date = new Timestamp((now.getTime()));
 		long catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
 		long one = evolution.getMonsterForUserIdOne();
@@ -310,15 +311,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		MonsterForUser evolved = evolvedUserMonsterList.get(0);
 		long evolvedId = evolved.getId();
 		
-		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
-		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
-		Map<String, String> changeReasonsMap = new HashMap<String, String>();
-		Map<String, String> detailsMap = new HashMap<String, String>();
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_EVOLUTION;
 		StringBuilder detailSb = new StringBuilder();
 		detailSb.append("(catalystId, userMonsterId, userMonsterId, evolvedMonsterId)");
-		
-		String gems = MiscMethods.gems;
 		//maybe shouldn't keep track...oh well, more info hopefully is better than none
 		detailSb.append("(");
 		detailSb.append(catalystUserMonsterId);
@@ -330,7 +325,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		detailSb.append(evolvedId);
 		detailSb.append(")");
 		
+		int userId = aUser.getId();
+		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+		Map<String, String> changeReasonsMap = new HashMap<String, String>();
+		Map<String, String> detailsMap = new HashMap<String, String>();
+		
 		previousCurrencyMap.put(gems, previousGems);
+		currentCurrencyMap.put(gems, aUser.getGems());
 		changeReasonsMap.put(gems, reasonForChange);
 		detailsMap.put(gems, detailSb.toString());
 		

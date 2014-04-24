@@ -71,10 +71,8 @@ message LoadCityResponseProto {
      optional MinimumUserProto sender = 1;
      optional LoadCityStatus status = 2;
 
-	     //client shouldnt show bars if already at max city level
      repeated CityElementProto cityElements = 3;
      optional int32 cityId = 4;
-     repeated FullUserQuestProto inProgressUserQuestDataInCity = 5;
      
      enum LoadCityStatus {
      	SUCCESS = 1;

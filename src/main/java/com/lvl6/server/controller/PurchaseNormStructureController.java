@@ -272,7 +272,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     String cash = MiscMethods.cash;
     String oil = MiscMethods.oil;
     String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT;
-    String detail = "structId=" + structId + " uStructId=" + uStructId;
+    StringBuilder detailSb = new StringBuilder();
+    detailSb.append("structId=");
+    detailSb.append(structId);
+    detailSb.append(" uStructId=");
+    detailSb.append(uStructId);
+    String detail =  detailSb.toString();
 
     previousCurencyMap.put(gems, previousGems);
     previousCurencyMap.put(cash, previousCash);
@@ -287,8 +292,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     details.put(cash, detail);
     details.put(oil, detail);
     
-    MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurencyMap,
-    		currentCurrencyMap, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, date, money,
+    		previousCurencyMap, currentCurrencyMap, reasonsForChanges,
+    		details);
     
   }
 

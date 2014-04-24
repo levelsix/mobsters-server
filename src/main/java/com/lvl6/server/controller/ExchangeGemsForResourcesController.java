@@ -188,34 +188,39 @@ import com.lvl6.utils.RetrieveUtils;
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> previousCurrency,
   		Map<String, Integer> currencyChange, Timestamp curTime, ResourceType resourceType,
   		int numResources, int numGems) {
-  	int userId = aUser.getId();
-  	Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    Map<String, String> details = new HashMap<String, String>();
-    String cash = MiscMethods.cash;
-    String oil = MiscMethods.oil;
-    String gems = MiscMethods.gems;
-    String reasonForChange = ControllerConstants.UCHRFC__CURRENCY_EXCHANGE;
-    StringBuilder detailsSb = new StringBuilder();
-    detailsSb.append(" exchanged ");
-    detailsSb.append(numGems);
-    detailsSb.append(" gems for ");
-    detailsSb.append(numResources);
-    detailsSb.append(" ");
-    detailsSb.append(resourceType.name());
-    
-    currentCurrencies.put(cash, aUser.getCash());
-    currentCurrencies.put(oil, aUser.getOil());
-    currentCurrencies.put(gems, aUser.getGems());
-    reasonsForChanges.put(cash, reasonForChange);
-    reasonsForChanges.put(oil, reasonForChange);
-    reasonsForChanges.put(gems, reasonForChange);
-    details.put(cash, detailsSb.toString());
-    details.put(oil, detailsSb.toString());
-    details.put(gems, detailsSb.toString());
-    
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
-    		previousCurrency, currentCurrencies, reasonsForChanges, details);
+	  if (currencyChange.isEmpty()) { 
+		  return;
+	  }
+	  String cash = MiscMethods.cash;
+	  String oil = MiscMethods.oil;
+	  String gems = MiscMethods.gems;
+	  
+	  String reasonForChange = ControllerConstants.UCHRFC__CURRENCY_EXCHANGE;
+	  StringBuilder detailsSb = new StringBuilder();
+	  detailsSb.append(" exchanged ");
+	  detailsSb.append(numGems);
+	  detailsSb.append(" gems for ");
+	  detailsSb.append(numResources);
+	  detailsSb.append(" ");
+	  detailsSb.append(resourceType.name());
+	  
+	  int userId = aUser.getId();
+	  Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> details = new HashMap<String, String>();
+
+	  currentCurrencies.put(cash, aUser.getCash());
+	  currentCurrencies.put(oil, aUser.getOil());
+	  currentCurrencies.put(gems, aUser.getGems());
+	  reasonsForChanges.put(cash, reasonForChange);
+	  reasonsForChanges.put(oil, reasonForChange);
+	  reasonsForChanges.put(gems, reasonForChange);
+	  details.put(cash, detailsSb.toString());
+	  details.put(oil, detailsSb.toString());
+	  details.put(gems, detailsSb.toString());
+
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange,
+			  previousCurrency, currentCurrencies, reasonsForChanges, details);
   }
 
   public Locker getLocker() {

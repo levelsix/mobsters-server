@@ -141,15 +141,20 @@ public class ControllerConstants {
 	public static final String UCHRFC__CREATE_CLAN = "created clan";
 	public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
 	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
+	public static final String UCHRFC__END_PERSISTENT_EVENT_COOLDOWN = "ended persistent event cooldown";
 	public static final String UCHRFC__END_TASK = "end task";
 	public static final String UCHRFC__ENHANCING = "enhancing user monsters";
 	public static final String UCHRFC__EVOLVING = "evolving user monsters";
+	public static final String UCHRFC__EXPANSION_WAIT_COMPLETE = "expansion wait complete: ";
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
 	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
+	public static final String UCHRFC__PURCHASE_CITY_EXPANSION = "expanded city";
+	public static final String UCHRFC__PVP_BATTLE = "pvp battle";
 	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
 	public static final String UCHRFC__REMOVE_OBSTACLE = "remove obstacle";
+	public static final String UCHRFC__REVIVE_IN_DUNGEON = "revive in dungeon";
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
 	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
@@ -417,7 +422,6 @@ public class ControllerConstants {
   public static final String UCHRFC__PLAY_THREE_CARD_MONTE = "played three card monte";
   //public static final String UCHRFC__SOLD_ITEM_ON_MARKETPLACE = "sold item on marketplace"; //user's currency change is 0
   public static final String UCHRFC__PURCHASED_FROM_MARKETPLACE = "purchased from marketplace";
-  public static final String UCHRFC__EXPANSION_WAIT_COMPLETE = "expansion wait complete: ";
   public static final String UCHRFC__SUBMIT_EQUIPS_TO_BLACKSMITH = "submit equips to blacksmith";
   public static final String UCHRFC__FINISH_FORGE_ATTEMPT_WAIT_TIME = "finish forge attempt wait time";
   public static final String UCHRFC__IN_APP_PURCHASE = "inapp purchase: ";
@@ -436,7 +440,6 @@ public class ControllerConstants {
   public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT = "retrieve currency from normal structures";
   public static final String UCHRFC__TASK_ACTION = "performed task with id ";
   public static final String UCHRFC__STARTUP_DAILY_BONUS = "startup daily bonus";
-  public static final String UCHRFC__PURCHASE_CITY_EXPANSION = "expanded city: ";
   public static final String UCHRFC__USER_CREATE_REFERRED_A_USER = "referred a user";
   public static final String UCHRFC__BATTLE_WON = "won battle";
   public static final String UCHRFC__BATTLE_LOST = "lost battle";

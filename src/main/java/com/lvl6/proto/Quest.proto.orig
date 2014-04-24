@@ -29,9 +29,15 @@ message FullQuestProto {
      optional string carrotId = 16;
      optional CoordinateProto questGiverImgOffset = 17; //not used at the moment
      
+<<<<<<< HEAD
+     //optional int32 oilReward = 22; defined above
+     optional MonsterProto.MonsterElement monsterElement = 23 [default = FIRE];
+     //optional string questGiverName = 24; defined above
+=======
      //optional int32 oilReward = 18; defined above
      optional MonsterProto.MonsterElement monsterElement = 19;
      //optional string questGiverName = 20; defined above
+>>>>>>> 56d52123b56180fabd97da480c8c26ca8277deef
      
      repeated QuestJobProto jobs = 21;
 }

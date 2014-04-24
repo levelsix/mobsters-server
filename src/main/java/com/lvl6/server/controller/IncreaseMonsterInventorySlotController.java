@@ -318,14 +318,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Map<String, Integer> changeMap) {
   	boolean success = false;
   	
-  	//increase the user structs fb invite lvl
-  	int userStructId = sfu.getId();
-  	int fbInviteLevelChange = 1;
-  	if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
-  		log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
-  		return false;
-  	}
-  	
   	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
   		int structId = sfu.getStructId();
     	int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
@@ -362,11 +354,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   		if (!success) {
   			log.error("problem with updating user monster inventory slots and diamonds");
+  			return false;
   		}
   		if (success && 0 != cost) {
   				changeMap.put(MiscMethods.gems, cost);
   		}
   	}
+  	
+  	//increase the user structs fb invite lvl
+  	int userStructId = sfu.getId();
+  	int fbInviteLevelChange = 1;
+  	if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
+  		log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
+  		return false;
+  	}
+  	
   	return success;
   }
   
@@ -422,12 +424,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   
-  //TODO:FIX THIS
   private void writeToUserCurrencyHistory(User aUser, StructureForUser sfu, 
   		IncreaseSlotType increaseType, Timestamp curTime, Map<String, Integer> changeMap,
   		int previousGems) {
+	  if (changeMap.isEmpty()) {
+		  return;
+	  }
+	  
   	int userId = aUser.getId();
-  	
   	Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
   	Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
     Map<String, String> changeReasonsMap = new HashMap<String, String>();
@@ -448,8 +452,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     detailsMap.put(gems, details);
     
     
-    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap, previousCurrencyMap,
-    		currentCurrencyMap, changeReasonsMap, detailsMap);
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap,
+    		previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
+    		detailsMap);
     
   }
   

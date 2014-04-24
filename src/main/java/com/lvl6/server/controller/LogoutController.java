@@ -86,6 +86,7 @@ public class LogoutController extends EventController {
 			try {
 				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 				if (null != user) {
+					//TODO: figure out if still deducting elo from user after logging out
 					//FOR NOW DON'T DO THE FOLLOWING
 					//if user has unfinished battle, reward defender and penalize attacker
 //					List<Integer> eloChangeList = new ArrayList<Integer>();
@@ -95,10 +96,9 @@ public class LogoutController extends EventController {
 //					if (!eloChangeList.isEmpty()) {
 //						eloChange = eloChangeList.get(0);
 //					}
-					//TODO: figure out if still deducting elo from user after logging out
-//					if (!user.updateLastLogoutElo(lastLogout, eloChange)) {
-//						log.error("problem with updating user's last logout time for user "	+ userId);
-//					}
+					if (!user.updateLastLogout(lastLogout)) {
+						log.error("problem with updating user's last logout time for user "	+ userId);
+					}
 			    if (!InsertUtils.get().insertLastLoginLastLogoutToUserSessions(user.getId(), null, lastLogout)) {
 			      log.error("problem with inserting last logout time for user " + user + ", logout=" + lastLogout);
 			    }

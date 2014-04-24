@@ -845,15 +845,130 @@ public class MiscMethods {
     }
     return s;
   }
+  
+  public static void writeToUserCurrencyUsers(List<Integer> userIds,
+		  Timestamp thyme, Map<Integer, Map<String, Integer>> changeMap,
+		  Map<Integer, Map<String, Integer>> previousCurrencyMap,
+		  Map<Integer, Map<String, Integer>> currentCurrencyMap,
+		  Map<Integer, Map<String, String>> changeReasonsMap,
+		  Map<Integer, Map<String, String>> detailsMap) {
+	  try {
+		  List<Integer> allUserIds = new ArrayList<Integer>();
+	      List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 
+	      List<String> allResourceTypes = new ArrayList<String>();
+	      List<Integer> allCurrencyChanges = new ArrayList<Integer>();
+	      List<Integer> allPreviousCurrencies = new ArrayList<Integer>();
+	      List<Integer> allCurrentCurrencies = new ArrayList<Integer>();
+	      List<String> allReasonsForChanges = new ArrayList<String>();
+	      List<String> allDetails = new ArrayList<String>();
+	      
+		  //for each user, accrue up the values to store to the db
+		  for (Integer userId : userIds) {
+			  Map<String, Integer> oneUserChangeMap = changeMap.get(userId);
+			  Map<String, Integer> oneUserPrevCurrency =
+					  previousCurrencyMap.get(userId);
+			  Map<String, Integer> oneUserCurCurrency =
+					  currentCurrencyMap.get(userId);
+			  Map<String, String> oneUserChangeReasons =
+					  changeReasonsMap.get(userId);
+			  Map<String, String> oneUserDetails = detailsMap.get(userId);
+			
+			  //aggregate all the data across all the users into db friendly
+			  //arguments
+			  writeToUserCurrencyUsersHelper(userId, thyme, oneUserChangeMap,
+					  oneUserPrevCurrency, oneUserCurCurrency,
+					  oneUserChangeReasons, oneUserDetails, allUserIds,
+					  allTimestamps, allResourceTypes, allCurrencyChanges,
+					  allPreviousCurrencies, allCurrentCurrencies,
+					  allReasonsForChanges, allDetails);
+		  }
+		  
+		  int numInserted = InsertUtils.get()
+				  .insertIntoUserCurrencyHistoryMultipleRows(
+						  allUserIds, allTimestamps, allResourceTypes,
+						  allCurrencyChanges, allPreviousCurrencies,
+						  allCurrentCurrencies, allReasonsForChanges,
+						  allDetails);
+
+		  log.info("numInserted into currency history: " + numInserted);
+		  
+	  } catch (Exception e) {
+		  log.error("error updating user_curency_history; reasonsForChanges=" +
+				  changeReasonsMap, e);
+	  }
+  }
+  
+  protected static void writeToUserCurrencyUsersHelper(Integer userId,
+		  Timestamp thyme, Map<String, Integer> changeMap,
+		  Map<String, Integer> previousCurrencyMap,
+		  Map<String, Integer> currentCurrencyMap,
+		  Map<String, String> changeReasonsMap, Map<String, String> detailsMap,
+		  List<Integer> userIds, List<Timestamp> timestamps,
+		  List<String> resourceTypes, List<Integer> currencyChanges,
+		  List<Integer> previousCurrencies, List<Integer> currentCurrencies,
+		  List<String> reasonsForChanges, List<String> details) {
+	  
+	  Map<String, Integer> changeMapTemp =
+			  new HashMap<String, Integer>(changeMap);
+	  Map<String, Integer> previousCurrencyMapTemp =
+			  new HashMap<String, Integer>(previousCurrencyMap);
+	  Map<String, Integer> currentCurrencyMapTemp =
+			  new HashMap<String, Integer>(currentCurrencyMap);
+	  Map<String, String> changeReasonsMapTemp =
+			  new HashMap<String, String>(changeReasonsMap);
+	  Map<String, String> detailsMapTemp =
+			  new HashMap<String, String>(detailsMap);
+	  
+	  //getting rid of changes that are 0
+	  Set<String> keys = new HashSet<String>(changeMapTemp.keySet());
+	  for (String key : keys) {
+		  Integer change = changeMap.get(key);
+		  if (0 == change) {
+			  changeMapTemp.remove(key);
+			  previousCurrencyMapTemp.remove(key);
+			  currentCurrencyMapTemp.remove(key);
+			  changeReasonsMapTemp.remove(key);
+			  detailsMapTemp.remove(key);
+		  }
+	  }
+	  
+	  int amount = changeMap.size();
+	  if (0 == amount) {
+		  return;
+	  }
+	  
+	  List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
+      List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
+      List<String> resourceTypesTemp =
+    		  new ArrayList<String>(changeMap.keySet());
+      List<Integer> currencyChangesTemp =
+    		  getValsInOrder(resourceTypes, changeMap);
+      List<Integer> previousCurrenciesTemp =
+    		  getValsInOrder(resourceTypes, previousCurrencyMap);
+      List<Integer> currentCurrenciesTemp =
+    		  getValsInOrder(resourceTypes, currentCurrencyMap);
+      List<String> reasonsForChangesTemp =
+    		  getValsInOrder(resourceTypes, changeReasonsMap);
+      List<String> detailsTemp = getValsInOrder(resourceTypes, detailsMap);
+      
+      userIds.addAll(userIdsTemp);
+      timestamps.addAll(timestampsTemp);
+      resourceTypes.addAll(resourceTypesTemp);
+      currencyChanges.addAll(currencyChangesTemp);
+      previousCurrencies.addAll(previousCurrenciesTemp);
+      currentCurrencies.addAll(currentCurrenciesTemp);
+      reasonsForChanges.addAll(reasonsForChangesTemp);
+      details.addAll(detailsTemp);
+  }
 
   //currencyChange should represent how much user's currency increased or decreased and
   //this should be called after the user is updated
+  //arguments are modified!!!
   public static void writeToUserCurrencyOneUser(int userId, Timestamp thyme,
       Map<String,Integer> changeMap, Map<String, Integer> previousCurrencyMap,
       Map<String, Integer> currentCurrencyMap, Map<String, String> changeReasonsMap,
       Map<String, String> detailsMap) {
     try {
-      int amount = changeMap.size();
 
       //getting rid of changes that are 0
       Set<String> keys = new HashSet<String>(changeMap.keySet());
@@ -867,6 +982,8 @@ public class MiscMethods {
           detailsMap.remove(key);
         }
       }
+      
+      int amount = changeMap.size();
 
       List<Integer> userIds = Collections.nCopies(amount, userId);
       List<Timestamp> timestamps = Collections.nCopies(amount, thyme); 
@@ -882,12 +999,16 @@ public class MiscMethods {
         return;
       }
 
-      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
-          resourceTypes, currencyChanges, previousCurrencies, currentCurrencies,
-          reasonsForChanges, details);
+      int numInserted = InsertUtils.get()
+    		  .insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
+    				  resourceTypes, currencyChanges, previousCurrencies,
+    				  currentCurrencies, reasonsForChanges, details);
+      log.info("(expected 1) numInserted into currency history: " +
+    		  numInserted);
 
     } catch(Exception e) {
-      log.error("error updating user_curency_history; reasonsForChanges=" + changeReasonsMap, e);
+      log.error("error updating user_curency_history; reasonsForChanges=" +
+    		  changeReasonsMap, e);
     }
   }
 

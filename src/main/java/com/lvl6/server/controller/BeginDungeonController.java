@@ -28,6 +28,7 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
@@ -113,30 +114,39 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
       List<Long> userTaskIdList = new ArrayList<Long>();
       Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
+      Map<String, Integer> currencyChange = new HashMap<String, Integer>();
+      Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
       boolean successful = false;
       if(legit) {
     	  
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
-    	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos, questIds,
-    			  elem, forceEnemyElem);
+    	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap,
+    			  curTime, isEvent, eventId, gemsSpent, userTaskIdList,
+    			  stageNumsToProtos, questIds, elem, forceEnemyElem,
+    			  currencyChange, previousCurrency);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
       }
+      log.info("successful=" + successful);
+      log.info("resBuilder=" + resBuilder);
+      log.info("resBuilder=" + resBuilder.build());
       
       BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setBeginDungeonResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-      if (0 != gemsSpent) {
+      if (successful && 0 != gemsSpent) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
+      	
+      	writeToUserCurrencyHistory(userId, aUser, eventId, taskId, curTime,
+      			currencyChange, previousCurrency);
       }
     } catch (Exception e) {
       log.error("exception in BeginDungeonController processEvent", e);
@@ -277,9 +287,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
-		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent, int eventId,
-		  int gemsSpent, List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos,
-		  List<Integer> questIds, MonsterElement elem, boolean forceEnemyElem) {
+		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent,
+		  int eventId, int gemsSpent, List<Long> utIdList,
+		  Map<Integer, TaskStageProto> stageNumsToProtos,
+		  List<Integer> questIds, MonsterElement elem,
+		  boolean forceEnemyElem, Map<String, Integer> currencyChange,
+		  Map<String, Integer> previousCurrency) {
+	  boolean success = false;
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
   	Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
@@ -323,21 +337,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  utIdList.add(userTaskId);
 	  stageNumsToProtos.putAll(stageNumsToProtosTemp);
 	  
+	  success = true;
+	  log.info("stageNumsToProtosTemp=" + stageNumsToProtosTemp);
+	  log.info("stageNumsToProtos=" + stageNumsToProtos);
+	  
+	  
 	  //start the cool down timer if for event
 	  if (isEvent) {
 	  	int numInserted = InsertUtils.get().insertIntoUpdateEventPersistentForUser(uId, eventId, clientTime);
 	  	log.info("started cool down timer for (eventId, userId): " + uId + "," + eventId +
 	  			"\t numInserted=" + numInserted);
-
+	  	previousCurrency.put(MiscMethods.gems, u.getGems());
 	  	if (0 != gemsSpent) {
 	  		int gemChange = -1 * gemsSpent;
-	  		boolean success = updateUser(u, gemChange);
+	  		success = updateUser(u, gemChange);
 	  		log.info("successfully upgraded user gems to reset event cool down timer? Answer:" + success);
 	  	}
-	  	
+	  	if (success) {
+	  		currencyChange.put(MiscMethods.gems, u.getGems());
+	  	}
 	  }
 	  
-	  return true;
+	  return success;
   }
   
   private boolean updateUser(User u, int gemChange) {
@@ -675,6 +696,36 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  TaskStageProto tsp = stageNumsToProtos.get(i);
 		  resBuilder.addTsp(tsp);
 	  }
+  }
+  
+  private void writeToUserCurrencyHistory(int userId, User user, int eventId,
+		  int taskId, Timestamp curTime, Map<String, Integer> currencyChange,
+		  Map<String, Integer> previousCurrency) {
+	  if (currencyChange.isEmpty()) {
+		  return;
+	  }
+	  
+	  String reason = ControllerConstants.UCHRFC__END_PERSISTENT_EVENT_COOLDOWN;
+	  StringBuilder detailsSb = new StringBuilder();
+	  detailsSb.append("eventId=");
+	  detailsSb.append(eventId);
+	  detailsSb.append(", taskId=");
+	  detailsSb.append(taskId);
+	  String details = detailsSb.toString();
+
+	  Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
+	  Map<String, String> detailsMap = new HashMap<String, String>();
+	  String gems = MiscMethods.gems;
+
+//	  if (currencyChange.containsKey(gems)) {
+	  currentCurrency.put(gems, user.getGems());
+	  reasonsForChanges.put(gems, reason);
+	  detailsMap.put(gems, details);
+//	  }
+
+	  MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
+			  previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
   }
 
   public Locker getLocker() {

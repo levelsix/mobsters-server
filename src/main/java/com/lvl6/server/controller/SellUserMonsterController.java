@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,6 +74,7 @@ public class SellUserMonsterController extends EventController {
 		Set<Long> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
 		List<Long> userMonsterIds = new ArrayList<Long>(userMonsterIdsSet);
 		Date deleteDate = new Date();
+		Timestamp deleteTime = new Timestamp(deleteDate.getTime());
 		
 		int maxCash = senderResourcesProto.getMaxCash();
 
@@ -93,11 +96,13 @@ public class SellUserMonsterController extends EventController {
 			boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
 					idsToUserMonsters);
 
+			Map<String, Integer> currencyChange =
+					new HashMap<String, Integer>();
 			boolean successful = false;
 			if (legit) {
 				previousCash = aUser.getCash();
-				successful = writeChangesToDb(aUser, userMonsterIds, userMonsterIdsToCashAmounts,
-						maxCash);
+				successful = writeChangesToDb(aUser, userMonsterIds,
+						userMonsterIdsToCashAmounts, maxCash, currencyChange);
 			}
 
 			if (successful) {
@@ -121,8 +126,9 @@ public class SellUserMonsterController extends EventController {
 				writeChangesToHistory(userId, userMonsterIds,
 						userMonsterIdsToCashAmounts, idsToUserMonsters, deleteDate);
 				// WRITE TO USER CURRENCY HISTORY
-				writeToUserCurrencyHistory(aUser, previousCash, deleteDate,
-						userMonsterIdsToCashAmounts, userMonsterIds);
+				writeToUserCurrencyHistory(userId, aUser, previousCash,
+						deleteTime, userMonsterIdsToCashAmounts,
+						userMonsterIds, currencyChange);
 			}
 		} catch (Exception e) {
 			log.error("exception in SellUserMonsterController processEvent", e);
@@ -182,7 +188,8 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts, int maxCash) {
+			Map<Long, Integer> userMonsterIdsToCashAmounts, int maxCash,
+			Map<String, Integer> currencyChange) {
 		boolean success = true;
 
 		// sum up the monies and give it to the user
@@ -197,6 +204,8 @@ public class SellUserMonsterController extends EventController {
 				log.error("error updating user coins by " + sum + " not deleting "
 						+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
 				return false;
+			} else {
+				currencyChange.put(MiscMethods.cash, sum);
 			}
 		}
 
@@ -228,7 +237,7 @@ public class SellUserMonsterController extends EventController {
 			userMonstersList.add(mfu);
 			deleteReasons.add(delReason + amount);
 		}
-		//TODO: FIX THIS
+		//TODO: FIX THIS RECORDING MONSTERS DELETED
 //
 //		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
 //				deleteReasons, userMonstersList, deleteDate);
@@ -238,32 +247,44 @@ public class SellUserMonsterController extends EventController {
 //				+ "\t idsToUserMonsters=" + idsToUserMonsters + "\t numDeleted=" + num);
 	}
 
-	//TODO: FIX THIS
 	// FOR CURRENCY HISTORY PURPOSES
-	public void writeToUserCurrencyHistory(User aUser, int previousCash,
-			Date aDate, Map<Long, Integer> userMonsterIdsToCashAmounts,
-			List<Long> userMonsterIds) {
+	public void writeToUserCurrencyHistory(int userId, User aUser,
+			int previousCash, Timestamp aDate,
+			Map<Long, Integer> userMonsterIdsToCashAmounts,
+			List<Long> userMonsterIds, Map<String, Integer> currencyChange) {
 
-//		// figure how much user gets. At the moment, if 0 then nothing is recorded
-//		// in db
-//		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
-//		Timestamp date = new Timestamp(aDate.getTime());
-//
-//		Map<String, Integer> gemCashChange = new HashMap<String, Integer>();
-//		Map<String, Integer> previousGemCash = new HashMap<String, Integer>();
-//		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//		String cash = MiscMethods.cash;
-//
-//		// record the user monster ids that contributed to changing user's currency
-//		String reasonForChange = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS
-//				+ StringUtils.csvList(userMonsterIds);
-//
-//		gemCashChange.put(cash, sum);
-//		previousGemCash.put(cash, previousCash);
-//		reasonsForChanges.put(cash, reasonForChange);
-//
-//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
-//				gemCashChange, previousGemCash, reasonsForChanges);
+		if (currencyChange.isEmpty()) {
+			return;
+		}
+		
+		// record the user monster ids that contributed to changing user's currency
+		StringBuilder detailsSb = new StringBuilder();
+		for (Long umId : userMonsterIdsToCashAmounts.keySet()) {
+			Integer cash = userMonsterIdsToCashAmounts.get(umId);
+			detailsSb.append("mfuId=");
+			detailsSb.append(umId);
+			detailsSb.append(", cash=");
+			detailsSb.append(cash);
+		}
+		
+		// figure how much user gets. At the moment, if 0 then nothing is recorded
+		// in db
+		
+		Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+		Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+		Map<String, String> detailsMap = new HashMap<String, String>();
+		String reason = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS;
+		String cash = MiscMethods.cash;
+
+		previousCurrency.put(cash, previousCash);
+		currentCurrency.put(cash, aUser.getCash());
+		reasonsForChanges.put(cash, reason);
+		detailsMap.put(cash, detailsSb.toString());
+
+		MiscMethods.writeToUserCurrencyOneUser(userId, aDate, currencyChange,
+				previousCurrency, currentCurrency, reasonsForChanges,
+				detailsMap);
 	}
 
 	public Locker getLocker() {
