@@ -82,7 +82,7 @@ public final class QuestProto {
     com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19;
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
     boolean hasMonsterElement();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
     
@@ -437,7 +437,7 @@ public final class QuestProto {
       return questGiverImgOffset_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19;
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
     public static final int MONSTERELEMENT_FIELD_NUMBER = 19;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_;
     public boolean hasMonsterElement() {
@@ -1821,7 +1821,7 @@ public final class QuestProto {
         return questGiverImgOffsetBuilder_;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19;
+      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
       private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
       public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00020000) == 0x00020000);
@@ -2061,19 +2061,23 @@ public final class QuestProto {
     boolean hasDescription();
     String getDescription();
     
-    // optional int32 quantity = 5;
+    // optional int32 staticDataId = 5;
+    boolean hasStaticDataId();
+    int getStaticDataId();
+    
+    // optional int32 quantity = 6;
     boolean hasQuantity();
     int getQuantity();
     
-    // optional int32 priority = 6;
+    // optional int32 priority = 7;
     boolean hasPriority();
     int getPriority();
     
-    // optional int32 cityId = 7;
+    // optional int32 cityId = 8;
     boolean hasCityId();
     int getCityId();
     
-    // optional int32 cityAssetNum = 8;
+    // optional int32 cityAssetNum = 9;
     boolean hasCityAssetNum();
     int getCityAssetNum();
   }
@@ -2249,41 +2253,51 @@ public final class QuestProto {
       }
     }
     
-    // optional int32 quantity = 5;
-    public static final int QUANTITY_FIELD_NUMBER = 5;
+    // optional int32 staticDataId = 5;
+    public static final int STATICDATAID_FIELD_NUMBER = 5;
+    private int staticDataId_;
+    public boolean hasStaticDataId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getStaticDataId() {
+      return staticDataId_;
+    }
+    
+    // optional int32 quantity = 6;
+    public static final int QUANTITY_FIELD_NUMBER = 6;
     private int quantity_;
     public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getQuantity() {
       return quantity_;
     }
     
-    // optional int32 priority = 6;
-    public static final int PRIORITY_FIELD_NUMBER = 6;
+    // optional int32 priority = 7;
+    public static final int PRIORITY_FIELD_NUMBER = 7;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public int getPriority() {
       return priority_;
     }
     
-    // optional int32 cityId = 7;
-    public static final int CITYID_FIELD_NUMBER = 7;
+    // optional int32 cityId = 8;
+    public static final int CITYID_FIELD_NUMBER = 8;
     private int cityId_;
     public boolean hasCityId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public int getCityId() {
       return cityId_;
     }
     
-    // optional int32 cityAssetNum = 8;
-    public static final int CITYASSETNUM_FIELD_NUMBER = 8;
+    // optional int32 cityAssetNum = 9;
+    public static final int CITYASSETNUM_FIELD_NUMBER = 9;
     private int cityAssetNum_;
     public boolean hasCityAssetNum() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getCityAssetNum() {
       return cityAssetNum_;
@@ -2294,6 +2308,7 @@ public final class QuestProto {
       questId_ = 0;
       questJobType_ = com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType.KILL_SPECIFIC_MONSTER;
       description_ = "";
+      staticDataId_ = 0;
       quantity_ = 0;
       priority_ = 0;
       cityId_ = 0;
@@ -2324,16 +2339,19 @@ public final class QuestProto {
         output.writeBytes(4, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, quantity_);
+        output.writeInt32(5, staticDataId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, priority_);
+        output.writeInt32(6, quantity_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, cityId_);
+        output.writeInt32(7, priority_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, cityAssetNum_);
+        output.writeInt32(8, cityId_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, cityAssetNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2362,19 +2380,23 @@ public final class QuestProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, quantity_);
+          .computeInt32Size(5, staticDataId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, priority_);
+          .computeInt32Size(6, quantity_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, cityId_);
+          .computeInt32Size(7, priority_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, cityAssetNum_);
+          .computeInt32Size(8, cityId_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, cityAssetNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2508,14 +2530,16 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         description_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        quantity_ = 0;
+        staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        priority_ = 0;
+        quantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        cityId_ = 0;
+        priority_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        cityAssetNum_ = 0;
+        cityId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
+        cityAssetNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -2573,17 +2597,21 @@ public final class QuestProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.quantity_ = quantity_;
+        result.staticDataId_ = staticDataId_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.priority_ = priority_;
+        result.quantity_ = quantity_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.cityId_ = cityId_;
+        result.priority_ = priority_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
+        }
+        result.cityId_ = cityId_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
         }
         result.cityAssetNum_ = cityAssetNum_;
         result.bitField0_ = to_bitField0_;
@@ -2613,6 +2641,9 @@ public final class QuestProto {
         }
         if (other.hasDescription()) {
           setDescription(other.getDescription());
+        }
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
         }
         if (other.hasQuantity()) {
           setQuantity(other.getQuantity());
@@ -2685,21 +2716,26 @@ public final class QuestProto {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              quantity_ = input.readInt32();
+              staticDataId_ = input.readInt32();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              priority_ = input.readInt32();
+              quantity_ = input.readInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              cityId_ = input.readInt32();
+              priority_ = input.readInt32();
               break;
             }
             case 64: {
               bitField0_ |= 0x00000080;
+              cityId_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
               cityAssetNum_ = input.readInt32();
               break;
             }
@@ -2811,85 +2847,106 @@ public final class QuestProto {
         onChanged();
       }
       
-      // optional int32 quantity = 5;
+      // optional int32 staticDataId = 5;
+      private int staticDataId_ ;
+      public boolean hasStaticDataId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getStaticDataId() {
+        return staticDataId_;
+      }
+      public Builder setStaticDataId(int value) {
+        bitField0_ |= 0x00000010;
+        staticDataId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStaticDataId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        staticDataId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 quantity = 6;
       private int quantity_ ;
       public boolean hasQuantity() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getQuantity() {
         return quantity_;
       }
       public Builder setQuantity(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         quantity_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         quantity_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 priority = 6;
+      // optional int32 priority = 7;
       private int priority_ ;
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getPriority() {
         return priority_;
       }
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         priority_ = value;
         onChanged();
         return this;
       }
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         priority_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 cityId = 7;
+      // optional int32 cityId = 8;
       private int cityId_ ;
       public boolean hasCityId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getCityId() {
         return cityId_;
       }
       public Builder setCityId(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         cityId_ = value;
         onChanged();
         return this;
       }
       public Builder clearCityId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         cityId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 cityAssetNum = 8;
+      // optional int32 cityAssetNum = 9;
       private int cityAssetNum_ ;
       public boolean hasCityAssetNum() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getCityAssetNum() {
         return cityAssetNum_;
       }
       public Builder setCityAssetNum(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         cityAssetNum_ = value;
         onChanged();
         return this;
       }
       public Builder clearCityAssetNum() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         cityAssetNum_ = 0;
         onChanged();
         return this;
@@ -6176,7 +6233,7 @@ public final class QuestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Quest.proto\022\016com.lvl6.proto\032\nChat.prot" +
-      "o\032\022MonsterStuff.proto\032\017Structure.proto\"\274" +
+      "o\032\022MonsterStuff.proto\032\017Structure.proto\"\302" +
       "\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\024\n\014doneRes" +
       "ponse\030\004 \001(\t\0225\n\016acceptDialogue\030\005 \001(\0132\035.co" +
@@ -6188,34 +6245,34 @@ public final class QuestProto {
       "Name\030\r \001(\t\022\035\n\025questGiverImagePrefix\030\016 \001(" +
       "\t\022\020\n\010priority\030\017 \001(\005\022\020\n\010carrotId\030\020 \001(\t\022<\n" +
       "\023questGiverImgOffset\030\021 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\022C\n\016monsterElement\030\023 " +
+      "oto.CoordinateProto\022I\n\016monsterElement\030\023 " +
       "\001(\0162+.com.lvl6.proto.MonsterProto.Monste" +
-      "rElement\022+\n\004jobs\030\025 \003(\0132\035.com.lvl6.proto." +
-      "QuestJobProto\"\360\002\n\rQuestJobProto\022\022\n\nquest" +
-      "JobId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022@\n\014questJob" +
-      "Type\030\003 \001(\0162*.com.lvl6.proto.QuestJobProt" +
-      "o.QuestJobType\022\023\n\013description\030\004 \001(\t\022\020\n\010q",
-      "uantity\030\005 \001(\005\022\020\n\010priority\030\006 \001(\005\022\016\n\006cityI" +
-      "d\030\007 \001(\005\022\024\n\014cityAssetNum\030\010 \001(\005\"\230\001\n\014QuestJ" +
-      "obType\022\031\n\025KILL_SPECIFIC_MONSTER\020\001\022\030\n\024KIL" +
-      "L_MONSTER_IN_CITY\020\002\022\022\n\016DONATE_MONSTER\020\003\022" +
-      "\021\n\rCOMPLETE_TASK\020\004\022\022\n\016UPGRADE_STRUCT\020\005\022\030" +
-      "\n\024COLLECT_SPECIAL_ITEM\020\006\"\276\001\n\rDialoguePro" +
-      "to\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl6.pro" +
-      "to.DialogueProto.SpeechSegmentProto\032d\n\022S" +
-      "peechSegmentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014sp" +
-      "eakerImage\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n",
-      "\nisLeftSide\030\004 \001(\010\"\227\001\n\022FullUserQuestProto" +
-      "\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisR" +
-      "edeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruse" +
-      "rQuestJobs\030\005 \003(\0132!.com.lvl6.proto.UserQu" +
-      "estJobProto\"^\n\021UserQuestJobProto\022\017\n\007ques" +
-      "tId\030\001 \001(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisCompl" +
-      "ete\030\003 \001(\010\022\020\n\010progress\030\004 \001(\005\"|\n\tItemProto" +
-      "\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgNam" +
-      "e\030\003 \001(\t\022\025\n\rborderImgName\030\004 \001(\t\022)\n\005color\030" +
-      "\005 \001(\0132\032.com.lvl6.proto.ColorProtoB\014B\nQue",
-      "stProto"
+      "rElement:\004FIRE\022+\n\004jobs\030\025 \003(\0132\035.com.lvl6." +
+      "proto.QuestJobProto\"\206\003\n\rQuestJobProto\022\022\n" +
+      "\nquestJobId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022@\n\014qu" +
+      "estJobType\030\003 \001(\0162*.com.lvl6.proto.QuestJ" +
+      "obProto.QuestJobType\022\023\n\013description\030\004 \001(",
+      "\t\022\024\n\014staticDataId\030\005 \001(\005\022\020\n\010quantity\030\006 \001(" +
+      "\005\022\020\n\010priority\030\007 \001(\005\022\016\n\006cityId\030\010 \001(\005\022\024\n\014c" +
+      "ityAssetNum\030\t \001(\005\"\230\001\n\014QuestJobType\022\031\n\025KI" +
+      "LL_SPECIFIC_MONSTER\020\001\022\030\n\024KILL_MONSTER_IN" +
+      "_CITY\020\002\022\022\n\016DONATE_MONSTER\020\003\022\021\n\rCOMPLETE_" +
+      "TASK\020\004\022\022\n\016UPGRADE_STRUCT\020\005\022\030\n\024COLLECT_SP" +
+      "ECIAL_ITEM\020\006\"\276\001\n\rDialogueProto\022G\n\rspeech" +
+      "Segment\030\001 \003(\01320.com.lvl6.proto.DialogueP" +
+      "roto.SpeechSegmentProto\032d\n\022SpeechSegment" +
+      "Proto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014speakerImage\030\002",
+      " \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\nisLeftSide\030" +
+      "\004 \001(\010\"\227\001\n\022FullUserQuestProto\022\016\n\006userId\030\001" +
+      " \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed\030\003 \001(" +
+      "\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruserQuestJobs\030\005" +
+      " \003(\0132!.com.lvl6.proto.UserQuestJobProto\"" +
+      "^\n\021UserQuestJobProto\022\017\n\007questId\030\001 \001(\005\022\022\n" +
+      "\nquestJobId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\022\020\n" +
+      "\010progress\030\004 \001(\005\"|\n\tItemProto\022\016\n\006itemId\030\001" +
+      " \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022\025\n\rb" +
+      "orderImgName\030\004 \001(\t\022)\n\005color\030\005 \001(\0132\032.com.",
+      "lvl6.proto.ColorProtoB\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6235,7 +6292,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_QuestJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestJobProto_descriptor,
-              new java.lang.String[] { "QuestJobId", "QuestId", "QuestJobType", "Description", "Quantity", "Priority", "CityId", "CityAssetNum", },
+              new java.lang.String[] { "QuestJobId", "QuestId", "QuestJobType", "Description", "StaticDataId", "Quantity", "Priority", "CityId", "CityAssetNum", },
               com.lvl6.proto.QuestProto.QuestJobProto.class,
               com.lvl6.proto.QuestProto.QuestJobProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =
