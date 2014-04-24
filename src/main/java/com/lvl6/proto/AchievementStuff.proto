@@ -32,7 +32,22 @@ message AchievementProto {
      optional int32 successorId = 14;
      
      enum AchievementType {
-     	COLLECT_RESOURCE = 1; //made up name, rename as desired
+     	COLLECT_RESOURCE = 1;
+		CREATE_GRENADE = 2;
+		CREATE_RAINBOW = 3;
+		CREATE_ROCKET = 4;
+		DEFEAT_MOBSTERS = 5;
+		DESTROY_ORBS = 6;
+		ENHANCE_POINTS = 7;
+		HEAL_HP = 8;
+		JOIN_LEAGUE = 9;
+		MAKE_COMBO = 10;
+		REMOVE_OBSTACLE = 11;
+		SELL_MONSTER = 12;
+		STEAL_RESOURCE = 13;
+		TAKE_DAMAGE = 14;
+		UPGRADE_BUILDING = 15;
+		WIN_PVP_BATTLE = 16;
      }
 }
 
