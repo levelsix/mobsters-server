@@ -151,7 +151,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	  Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
 	  QuestJob qj = QuestJobRetrieveUtils.getQuestJobForQuestJobId(questJobId);
 	  
-	  //make sure the quest, relating to the user_quest updated, exists
+	  //make sure the quest, relating to the user_quest being updated,
+	  //exists
 	  if (null == quest || null == qj) {
 		  log.error("parameter passed in is null. quest=" + quest +
 				  " or questJob=" + qj);
@@ -181,33 +182,36 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	  //if client says quest job is incomplete, then return true and exit
 	  if (!isQuestJobComplete) {
 		  //since only updating quest progress, if user is deleting
-		  //monsters then check out the monsters being deleted
+		  //monsters then validate the monsters being deleted
 		  //otherwise, would just return true
 		  return checkDeletingMonsters(resBuilder, quest, qj,
 				  deleteUserMonsterIds, deletedUserMonsters);
 	  }
 	  
-	  int questMaxProgress = qj.getQuantity();
-	  if (newProgress > questMaxProgress) {
-		  log.warn("client is trying to set user_quest past the max" +
-				  " progress. quest=" + quest + "\t ");
+	  //client is saying quest job is complete
+	  //now check if the quest job is actually complete
+	  int questJobMaxProgress = qj.getQuantity();
+	  if (newProgress > questJobMaxProgress) {
+		  log.warn("client is trying to set user_quest_job past the max" +
+				  " progress. questJob=" + qj + "\t newProgress=" +
+				  newProgress);
 	  }
 	  
-	  if (newProgress < questMaxProgress) {
+	  if (newProgress < questJobMaxProgress) {
 		  log.error("client says quest job is complete but it isn't. sent:" +
-				  newProgress + ". should be questJob:" + qj);
+				  newProgress + ". progress should be questJob:" + qj);
 		  return false;
 	  }
 	  
 	  //quest job is indeed complete
-	  //since quest job complete, check if isComplete is set,
-	  //if not then return true. otherwise, check if the other quest jobs
-	  //for this quest are complete
+	  //since quest job complete, check if quest isComplete is set,
+	  //if not then return true. otherwise, check to see that the other
+	  //quest jobs for this quest are complete
 	  if (!isQuestComplete) {
 		  return true;
 	  }
 	  
-	  if (!checkWholeQuestComplete(questId, Collections.singleton(questJobId),
+	  if (!checkEntireQuestComplete(questId, Collections.singleton(questJobId),
 			  questJobIdsToUserQuestJob)) {
 		  log.error("client says user's quest is complete, but it isn't. " +
 		  		"userQuestJobs: " + questJobIdsToUserQuestJob);
@@ -273,7 +277,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
   }
 
   //go through 
-  private boolean checkWholeQuestComplete(int questId, Set<Integer> blackList,
+  private boolean checkEntireQuestComplete(int questId, Set<Integer> blackList,
 		  Map<Integer, QuestJobForUser> questJobIdsToUserQuestJob) {
 	  
 	  //get all the quest's quest job ids
