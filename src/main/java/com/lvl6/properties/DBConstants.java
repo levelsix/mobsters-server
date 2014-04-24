@@ -3,6 +3,8 @@ package com.lvl6.properties;
 //SPECIFYING COLUMNS OF STATIC DATA TABLES UNNECESSARY
 public class DBConstants {
   /* TABLENAMES*/
+	public static final String TABLE_ACHIEVEMENT = "achievement";
+	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM = "booster_display_item";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
@@ -59,7 +61,9 @@ public class DBConstants {
   public static final String TABLE_PVP_LEAGUE_FOR_USER = "pvp_league_for_user";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
-  public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
+  public static final String TABLE_QUEST_JOB = "quest_job";
+  public static final String TABLE_QUEST_JOB_FOR_USER = "quest_job_for_user";
+  public static final String TABLE_QUEST_JOB_MONSTER_ITEM = "quest_job_monster_item";
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
@@ -95,6 +99,15 @@ public class DBConstants {
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
+  
+  /*ACHIEVEMENT FOR USER*/
+  public static final String ACHIEVEMENT_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID = "achievement_id";
+  public static final String ACHIEVEMENT_FOR_USER__PROGRESS = "progress";
+  public static final String ACHIEVEMENT_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String ACHIEVEMENT_FOR_USER__IS_REDEEMED = "is_redeemed";
+  public static final String ACHIEVEMENT_FOR_USER__TIME_COMPLETED = "time_completed";
+  public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "TIME_REDEEMED";
   
   /*ALERT ON STARTUP*/
   public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
@@ -419,12 +432,18 @@ public class DBConstants {
   public static final String PVP_LEAGUE_FOR_USER__ATTACKS_LOST = "attacks_lost";
   public static final String PVP_LEAGUE_FOR_USER__DEFENSES_LOST = "defenses_lost";
   
-  /*USER QUESTS TABLE*/
-  public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
+  /*QUEST FOR USER TABLE*/
+  public static final String QUEST_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
   public static final String QUEST_FOR_USER__IS_REDEEMED = "is_redeemed"; 
   public static final String QUEST_FOR_USER__IS_COMPLETE = "is_complete";
-  public static final String QUEST_FOR_USER__PROGRESS = "progress"; 
+  
+  /*QUEST JOB FOR USER TABLE*/
+  public static final String QUEST_JOB_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String QUEST_JOB_FOR_USER__QUEST_ID = "quest_id";
+  public static final String QUEST_JOB_FOR_USER__QUEST_JOB_ID = "quest_job_id"; 
+  public static final String QUEST_JOB_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String QUEST_JOB_FOR_USER__PROGRESS = "progress"; 
 
   /*REFERRALS*/
   public static final String REFERRALS__REFERRER_ID = "referrer_id";

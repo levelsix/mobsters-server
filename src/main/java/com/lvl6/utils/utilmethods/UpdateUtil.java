@@ -22,14 +22,14 @@ public interface UpdateUtil {
 
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
-  /*
-   * used for collecting a city expansion
-   */
   public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
   
   public abstract boolean updateUserQuestIscomplete(int userId, int questId);
 
   public abstract boolean updateRedeemQuestForUser(int userId, int questId);
+  
+  public abstract int updateUserQuestJob(int userId, int questJobId,
+		  int newProgress, boolean isComplete);
 
   /*
    * changin orientation

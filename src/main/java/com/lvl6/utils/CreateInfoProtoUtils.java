@@ -55,6 +55,8 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.QuestJob;
+import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
@@ -124,10 +126,12 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
+import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.FullQuestProto;
-import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
+import com.lvl6.proto.QuestProto.QuestJobProto;
+import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
@@ -171,6 +175,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -1490,7 +1495,7 @@ public class CreateInfoProtoUtils {
     //SET THE BUILDER
     FullQuestProto.Builder builder = FullQuestProto.newBuilder();
     builder.setQuestId(quest.getId());
-    builder.setCityId(quest.getCityId());
+//    builder.setCityId(quest.getCityId());
     
     String str = quest.getQuestName();
     if (null != str) {
@@ -1512,21 +1517,21 @@ public class CreateInfoProtoUtils {
       builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
     }
 
-    String qType = quest.getQuestType();
-    try {
-      QuestType qt = QuestType.valueOf(qType);
-      builder.setQuestType(qt);
-    } catch (Exception e) {
-      log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
-    }
+//    String qType = quest.getQuestType();
+//    try {
+//      QuestType qt = QuestType.valueOf(qType);
+//      builder.setQuestType(qt);
+//    } catch (Exception e) {
+//      log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
+//    }
     
-    str = quest.getJobDescription();
-    if (null != str && !str.isEmpty()) {
-    	builder.setJobDescription(str);
-    }
+//    str = quest.getJobDescription();
+//    if (null != str && !str.isEmpty()) {
+//    	builder.setJobDescription(str);
+//    }
     
-    builder.setStaticDataId(quest.getStaticDataId());
-    builder.setQuantity(quest.getQuantity());
+//    builder.setStaticDataId(quest.getStaticDataId());
+//    builder.setQuantity(quest.getQuantity());
     builder.setCashReward(quest.getCashReward());
     builder.setOilReward(quest.getOilReward());
     builder.setGemReward(quest.getGemReward());
@@ -1553,19 +1558,72 @@ public class CreateInfoProtoUtils {
     if (null != str && !str.isEmpty()) {
     	builder.setCarrotId(str);
     }
-    builder.setIsAchievement(quest.isAchievement());
+//    builder.setIsAchievement(quest.isAchievement());
     
     str = quest.getMonsterElement();
     if (null != str) {
-    try {
+    	try {
     		MonsterElement me = MonsterElement.valueOf(str);
     		builder.setMonsterElement(me);
-    } catch (Exception e) {
-    	log.error("invalid monsterElement. quest=" + quest);
+    	} catch (Exception e) {
+    		log.error("invalid monsterElement. quest=" + quest);
+    	}
     }
-    }
+    
+    List<QuestJobProto> jobsList = createQuestJobProto(quest.getId());
+    builder.addAllJobs(jobsList);
 
     return builder.build();
+  }
+  
+  public static List<QuestJobProto> createQuestJobProto(int questId) {
+	  Map<Integer, QuestJob> questJobIdsForQuestId = 
+			  QuestJobRetrieveUtils.getQuestJobsForQuestId(questId);
+	  if (null == questJobIdsForQuestId) {
+		  return new ArrayList<QuestJobProto>();
+	  }
+
+	  List<QuestJobProto> qjpList = new ArrayList<QuestJobProto>();
+	  
+	  for (Integer qjId : questJobIdsForQuestId.keySet()) {
+		  QuestJob qj = questJobIdsForQuestId.get(qjId);
+		  
+		  QuestJobProto qjp = createQuestJobProto(qj);
+		  qjpList.add(qjp);
+	  }
+	  
+	  return qjpList;
+  }
+  
+  public static QuestJobProto createQuestJobProto(QuestJob qj) {
+	  QuestJobProto.Builder qjpb = QuestJobProto.newBuilder();
+	  
+	  qjpb.setQuestJobId(qj.getId());
+	  qjpb.setQuestId(qj.getQuestId());
+	  
+	  String aStr = qj.getQuestJobType();
+	  if (null != aStr) {
+		  try {
+			  QuestJobType qjt = QuestJobType.valueOf(aStr);
+			  qjpb.setQuestJobType(qjt);
+		  } catch (Exception e) {
+			  log.error("incorrect QuestJobType: " + aStr +
+					  ". QuestJob=" + qj);
+		  }
+	  }
+	  
+	  aStr = qj.getDescription();
+	  if (null != aStr) {
+		  qjpb.setDescription(aStr);
+	  }
+	  
+	  qjpb.setStaticDataId(qj.getStaticDataId());
+	  qjpb.setQuantity(qj.getQuantity());
+	  qjpb.setPriority(qj.getPriority());
+	  qjpb.setCityId(qj.getCityId());
+	  qjpb.setCityAssetNum(qj.getCityAssetNum());
+	  
+	  return qjpb.build();	  
   }
 
   public static DialogueProto createDialogueProtoFromDialogue(Dialogue d) {
@@ -1585,26 +1643,61 @@ public class CreateInfoProtoUtils {
     return dp.build();
   }
 
-  public static List<FullUserQuestProto> createFullUserQuestDataLarges(List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests) {
-    List<FullUserQuestProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestProto>();
+  public static List<FullUserQuestProto> createFullUserQuestDataLarges(
+		  List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests,
+		  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs) {
+	  List<FullUserQuestProto> fullUserQuestDataLargeProtos =
+			  new ArrayList<FullUserQuestProto>();
 
-    for (QuestForUser userQuest : userQuests) {
-      Quest quest = questIdsToQuests.get(userQuest.getQuestId());
-      FullUserQuestProto.Builder builder = FullUserQuestProto.newBuilder();
+	  for (QuestForUser userQuest : userQuests) {
+		  int questId = userQuest.getQuestId();
+		  Quest quest = questIdsToQuests.get(questId);
+		  FullUserQuestProto.Builder builder = FullUserQuestProto.newBuilder();
 
-      if (quest != null) {
-        builder.setUserId(userQuest.getUserId());
-        builder.setQuestId(quest.getId());
-        builder.setIsRedeemed(userQuest.isRedeemed());
-        builder.setIsComplete(userQuest.isComplete());
-        builder.setProgress(userQuest.getProgress());
-        fullUserQuestDataLargeProtos.add(builder.build());
+		  if (null == quest) {
+			  log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
+		  }
+		  
+		  if (null != quest) {
+			  builder.setUserId(userQuest.getUserId());
+			  builder.setQuestId(quest.getId());
+			  builder.setIsRedeemed(userQuest.isRedeemed());
+			  builder.setIsComplete(userQuest.isComplete());
 
-      } else {
-        log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
-      }
-    }
-    return fullUserQuestDataLargeProtos;
+			  //protofy the userQuestJobs
+			  List<UserQuestJobProto> userQuestJobProtoList =
+					  createUserQuestJobProto(questId, questIdToUserQuestJobs);
+			  
+
+			  builder.addAllUserQuestJobs(userQuestJobProtoList);
+			  fullUserQuestDataLargeProtos.add(builder.build());
+
+		  }
+	  }
+	  return fullUserQuestDataLargeProtos;
+  }
+  
+  public static List<UserQuestJobProto> createUserQuestJobProto(int questId,
+		  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs) {
+	  List<UserQuestJobProto> userQuestJobProtoList =
+			  new ArrayList<UserQuestJobProto>();
+	  
+	  for (QuestJobForUser qjfu : questIdToUserQuestJobs.get(questId)) {
+		  UserQuestJobProto uqjp = createUserJobProto(qjfu);
+		  userQuestJobProtoList.add(uqjp);
+	  }
+	  return userQuestJobProtoList;
+  }
+  
+  public static UserQuestJobProto createUserJobProto(QuestJobForUser qjfu) {
+	  UserQuestJobProto.Builder uqjpb = UserQuestJobProto.newBuilder();
+	  
+	  uqjpb.setQuestId(qjfu.getQuestId());
+	  uqjpb.setQuestJobId(qjfu.getQuestJobId());
+	  uqjpb.setIsComplete(qjfu.isComplete());
+	  uqjpb.setProgress(qjfu.getProgress());
+	  
+	  return uqjpb.build();
   }
 
   public static ItemProto createItemProtoFromItem(Item item) {

@@ -269,26 +269,40 @@ public class InsertUtils implements InsertUtil{
 
   
   @Override
-  public int insertUpdateUnredeemedUserQuest(int userId, int questId,
-      int progress, boolean isComplete) {
+  public int insertUserQuest(int userId, int questId) {
   	String tablename = DBConstants.TABLE_QUEST_FOR_USER;
   	
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    insertParams.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
     
-    Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
-    Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
-    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
-    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__PROGRESS, progress);
-    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, isComplete);
-    
-
-    int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tablename,
-    		insertParams, relativeUpdates, absoluteUpdates);
+    int numInserted = DBConnection.get().insertIntoTableBasic(tablename,
+    		insertParams);
     return numInserted;
   }
 
+  @Override
+  public int insertUserQuestJobs(int userId, int questId,
+		  List<Integer> questJobIds) {
+	  String tableName = DBConstants.TABLE_QUEST_JOB_FOR_USER;
+	  
+	  int size = questJobIds.size();
+	  List<Integer> userIdList = Collections.nCopies(size, userId);
+	  List<Integer> questIdList = Collections.nCopies(size, questId);
+	  
+	  Map<String, List<?>> insertParams =
+			  new HashMap<String, List<?>>();
+	  
+	  insertParams.put(DBConstants.QUEST_JOB_FOR_USER__USER_ID, userIdList);
+	  insertParams.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_ID, questIdList);
+	  insertParams.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_JOB_ID,
+			  questJobIds);
+	  int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+			  tableName, insertParams, size);
+	  
+	  return numInserted;
+  }
+  
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserStructJustBuilt(int, int, java.sql.Timestamp, java.sql.Timestamp, com.lvl6.info.CoordinatePair)
    */

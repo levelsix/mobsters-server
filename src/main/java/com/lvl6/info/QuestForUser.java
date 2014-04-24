@@ -4,22 +4,20 @@ import java.io.Serializable;
 
 public class QuestForUser implements Serializable {
 
-	private static final long serialVersionUID = 7901389370805472521L;
+	private static final long serialVersionUID = 7369579561100973258L;
 	
 	private int userId;
 	private int questId;
 	private boolean isRedeemed;
 	private boolean isComplete;
-	private int progress;
 	
 	public QuestForUser(int userId, int questId, boolean isRedeemed,
-			boolean isComplete, int progress) {
+			boolean isComplete) {
 		super();
 		this.userId = userId;
 		this.questId = questId;
 		this.isRedeemed = isRedeemed;
 		this.isComplete = isComplete;
-		this.progress = progress;
 	}
 
 	public int getUserId() {
@@ -54,19 +52,11 @@ public class QuestForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public int getProgress() {
-		return progress;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
 	@Override
 	public String toString() {
 		return "QuestForUser [userId=" + userId + ", questId=" + questId
 				+ ", isRedeemed=" + isRedeemed + ", isComplete=" + isComplete
-				+ ", progress=" + progress + "]";
+				+ "]";
 	}
-
+	
 }

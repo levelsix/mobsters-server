@@ -500,10 +500,6 @@ public final class EventQuestProto {
     // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus getStatus();
-    
-    // optional int32 cityIdOfAcceptedQuest = 3;
-    boolean hasCityIdOfAcceptedQuest();
-    int getCityIdOfAcceptedQuest();
   }
   public static final class QuestAcceptResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -632,20 +628,9 @@ public final class EventQuestProto {
       return status_;
     }
     
-    // optional int32 cityIdOfAcceptedQuest = 3;
-    public static final int CITYIDOFACCEPTEDQUEST_FIELD_NUMBER = 3;
-    private int cityIdOfAcceptedQuest_;
-    public boolean hasCityIdOfAcceptedQuest() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getCityIdOfAcceptedQuest() {
-      return cityIdOfAcceptedQuest_;
-    }
-    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
-      cityIdOfAcceptedQuest_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -665,9 +650,6 @@ public final class EventQuestProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, cityIdOfAcceptedQuest_);
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -684,10 +666,6 @@ public final class EventQuestProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, cityIdOfAcceptedQuest_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -822,8 +800,6 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
-        cityIdOfAcceptedQuest_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -874,10 +850,6 @@ public final class EventQuestProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.cityIdOfAcceptedQuest_ = cityIdOfAcceptedQuest_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -899,9 +871,6 @@ public final class EventQuestProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
-        }
-        if (other.hasCityIdOfAcceptedQuest()) {
-          setCityIdOfAcceptedQuest(other.getCityIdOfAcceptedQuest());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -952,11 +921,6 @@ public final class EventQuestProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              cityIdOfAcceptedQuest_ = input.readInt32();
               break;
             }
           }
@@ -1079,27 +1043,6 @@ public final class EventQuestProto {
         return this;
       }
       
-      // optional int32 cityIdOfAcceptedQuest = 3;
-      private int cityIdOfAcceptedQuest_ ;
-      public boolean hasCityIdOfAcceptedQuest() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getCityIdOfAcceptedQuest() {
-        return cityIdOfAcceptedQuest_;
-      }
-      public Builder setCityIdOfAcceptedQuest(int value) {
-        bitField0_ |= 0x00000004;
-        cityIdOfAcceptedQuest_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCityIdOfAcceptedQuest() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        cityIdOfAcceptedQuest_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestAcceptResponseProto)
     }
     
@@ -1123,15 +1066,23 @@ public final class EventQuestProto {
     boolean hasQuestId();
     int getQuestId();
     
-    // optional int32 currentProgress = 3;
-    boolean hasCurrentProgress();
-    int getCurrentProgress();
-    
-    // optional bool isComplete = 4;
+    // optional bool isComplete = 3;
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // repeated int64 deleteUserMonsterIds = 5;
+    // optional int32 questJobId = 4;
+    boolean hasQuestJobId();
+    int getQuestJobId();
+    
+    // optional int32 currentProgress = 5;
+    boolean hasCurrentProgress();
+    int getCurrentProgress();
+    
+    // optional bool isQuestJobComplete = 6;
+    boolean hasIsQuestJobComplete();
+    boolean getIsQuestJobComplete();
+    
+    // repeated int64 deleteUserMonsterIds = 7;
     java.util.List<java.lang.Long> getDeleteUserMonsterIdsList();
     int getDeleteUserMonsterIdsCount();
     long getDeleteUserMonsterIds(int index);
@@ -1188,28 +1139,48 @@ public final class EventQuestProto {
       return questId_;
     }
     
-    // optional int32 currentProgress = 3;
-    public static final int CURRENTPROGRESS_FIELD_NUMBER = 3;
-    private int currentProgress_;
-    public boolean hasCurrentProgress() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getCurrentProgress() {
-      return currentProgress_;
-    }
-    
-    // optional bool isComplete = 4;
-    public static final int ISCOMPLETE_FIELD_NUMBER = 4;
+    // optional bool isComplete = 3;
+    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
     private boolean isComplete_;
     public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public boolean getIsComplete() {
       return isComplete_;
     }
     
-    // repeated int64 deleteUserMonsterIds = 5;
-    public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 5;
+    // optional int32 questJobId = 4;
+    public static final int QUESTJOBID_FIELD_NUMBER = 4;
+    private int questJobId_;
+    public boolean hasQuestJobId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getQuestJobId() {
+      return questJobId_;
+    }
+    
+    // optional int32 currentProgress = 5;
+    public static final int CURRENTPROGRESS_FIELD_NUMBER = 5;
+    private int currentProgress_;
+    public boolean hasCurrentProgress() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getCurrentProgress() {
+      return currentProgress_;
+    }
+    
+    // optional bool isQuestJobComplete = 6;
+    public static final int ISQUESTJOBCOMPLETE_FIELD_NUMBER = 6;
+    private boolean isQuestJobComplete_;
+    public boolean hasIsQuestJobComplete() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getIsQuestJobComplete() {
+      return isQuestJobComplete_;
+    }
+    
+    // repeated int64 deleteUserMonsterIds = 7;
+    public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 7;
     private java.util.List<java.lang.Long> deleteUserMonsterIds_;
     public java.util.List<java.lang.Long>
         getDeleteUserMonsterIdsList() {
@@ -1225,8 +1196,10 @@ public final class EventQuestProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       questId_ = 0;
-      currentProgress_ = 0;
       isComplete_ = false;
+      questJobId_ = 0;
+      currentProgress_ = 0;
+      isQuestJobComplete_ = false;
       deleteUserMonsterIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -1248,13 +1221,19 @@ public final class EventQuestProto {
         output.writeInt32(2, questId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, currentProgress_);
+        output.writeBool(3, isComplete_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBool(4, isComplete_);
+        output.writeInt32(4, questJobId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, currentProgress_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, isQuestJobComplete_);
       }
       for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
-        output.writeInt64(5, deleteUserMonsterIds_.get(i));
+        output.writeInt64(7, deleteUserMonsterIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1275,11 +1254,19 @@ public final class EventQuestProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, currentProgress_);
+          .computeBoolSize(3, isComplete_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, isComplete_);
+          .computeInt32Size(4, questJobId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, currentProgress_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, isQuestJobComplete_);
       }
       {
         int dataSize = 0;
@@ -1423,12 +1410,16 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         questId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        currentProgress_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         isComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        questJobId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+        currentProgress_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        isQuestJobComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -1482,14 +1473,22 @@ public final class EventQuestProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.currentProgress_ = currentProgress_;
+        result.isComplete_ = isComplete_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.isComplete_ = isComplete_;
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        result.questJobId_ = questJobId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.currentProgress_ = currentProgress_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.isQuestJobComplete_ = isQuestJobComplete_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           deleteUserMonsterIds_ = java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.deleteUserMonsterIds_ = deleteUserMonsterIds_;
         result.bitField0_ = to_bitField0_;
@@ -1514,16 +1513,22 @@ public final class EventQuestProto {
         if (other.hasQuestId()) {
           setQuestId(other.getQuestId());
         }
+        if (other.hasIsComplete()) {
+          setIsComplete(other.getIsComplete());
+        }
+        if (other.hasQuestJobId()) {
+          setQuestJobId(other.getQuestJobId());
+        }
         if (other.hasCurrentProgress()) {
           setCurrentProgress(other.getCurrentProgress());
         }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
+        if (other.hasIsQuestJobComplete()) {
+          setIsQuestJobComplete(other.getIsQuestJobComplete());
         }
         if (!other.deleteUserMonsterIds_.isEmpty()) {
           if (deleteUserMonsterIds_.isEmpty()) {
             deleteUserMonsterIds_ = other.deleteUserMonsterIds_;
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureDeleteUserMonsterIdsIsMutable();
             deleteUserMonsterIds_.addAll(other.deleteUserMonsterIds_);
@@ -1577,20 +1582,30 @@ public final class EventQuestProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              currentProgress_ = input.readInt32();
+              isComplete_ = input.readBool();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              isComplete_ = input.readBool();
+              questJobId_ = input.readInt32();
               break;
             }
             case 40: {
+              bitField0_ |= 0x00000010;
+              currentProgress_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              isQuestJobComplete_ = input.readBool();
+              break;
+            }
+            case 56: {
               ensureDeleteUserMonsterIdsIsMutable();
               deleteUserMonsterIds_.add(input.readInt64());
               break;
             }
-            case 42: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -1716,54 +1731,96 @@ public final class EventQuestProto {
         return this;
       }
       
-      // optional int32 currentProgress = 3;
-      private int currentProgress_ ;
-      public boolean hasCurrentProgress() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getCurrentProgress() {
-        return currentProgress_;
-      }
-      public Builder setCurrentProgress(int value) {
-        bitField0_ |= 0x00000004;
-        currentProgress_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCurrentProgress() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        currentProgress_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional bool isComplete = 4;
+      // optional bool isComplete = 3;
       private boolean isComplete_ ;
       public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public boolean getIsComplete() {
         return isComplete_;
       }
       public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         isComplete_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         isComplete_ = false;
         onChanged();
         return this;
       }
       
-      // repeated int64 deleteUserMonsterIds = 5;
+      // optional int32 questJobId = 4;
+      private int questJobId_ ;
+      public boolean hasQuestJobId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getQuestJobId() {
+        return questJobId_;
+      }
+      public Builder setQuestJobId(int value) {
+        bitField0_ |= 0x00000008;
+        questJobId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuestJobId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        questJobId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 currentProgress = 5;
+      private int currentProgress_ ;
+      public boolean hasCurrentProgress() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getCurrentProgress() {
+        return currentProgress_;
+      }
+      public Builder setCurrentProgress(int value) {
+        bitField0_ |= 0x00000010;
+        currentProgress_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurrentProgress() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currentProgress_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isQuestJobComplete = 6;
+      private boolean isQuestJobComplete_ ;
+      public boolean hasIsQuestJobComplete() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getIsQuestJobComplete() {
+        return isQuestJobComplete_;
+      }
+      public Builder setIsQuestJobComplete(boolean value) {
+        bitField0_ |= 0x00000020;
+        isQuestJobComplete_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsQuestJobComplete() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        isQuestJobComplete_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int64 deleteUserMonsterIds = 7;
       private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureDeleteUserMonsterIdsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>(deleteUserMonsterIds_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000040;
          }
       }
       public java.util.List<java.lang.Long>
@@ -1798,7 +1855,7 @@ public final class EventQuestProto {
       }
       public Builder clearDeleteUserMonsterIds() {
         deleteUserMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -1861,7 +1918,8 @@ public final class EventQuestProto {
       FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST(2, 3),
       FAIL_NONEXISTENT_USER_MONSTERS(3, 4),
       FAIL_INCOMPLETE_USER_MONSTERS(4, 5),
-      FAIL_OTHER(5, 6),
+      FAIL_QUEST_JOB_INCOMPLETE(5, 7),
+      FAIL_OTHER(6, 6),
       ;
       
       public static final int SUCCESS_VALUE = 1;
@@ -1869,6 +1927,7 @@ public final class EventQuestProto {
       public static final int FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST_VALUE = 3;
       public static final int FAIL_NONEXISTENT_USER_MONSTERS_VALUE = 4;
       public static final int FAIL_INCOMPLETE_USER_MONSTERS_VALUE = 5;
+      public static final int FAIL_QUEST_JOB_INCOMPLETE_VALUE = 7;
       public static final int FAIL_OTHER_VALUE = 6;
       
       
@@ -1881,6 +1940,7 @@ public final class EventQuestProto {
           case 3: return FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST;
           case 4: return FAIL_NONEXISTENT_USER_MONSTERS;
           case 5: return FAIL_INCOMPLETE_USER_MONSTERS;
+          case 7: return FAIL_QUEST_JOB_INCOMPLETE;
           case 6: return FAIL_OTHER;
           default: return null;
         }
@@ -1912,7 +1972,7 @@ public final class EventQuestProto {
       }
       
       private static final QuestProgressStatus[] VALUES = {
-        SUCCESS, FAIL_NO_QUEST_EXISTS, FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST, FAIL_NONEXISTENT_USER_MONSTERS, FAIL_INCOMPLETE_USER_MONSTERS, FAIL_OTHER, 
+        SUCCESS, FAIL_NO_QUEST_EXISTS, FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST, FAIL_NONEXISTENT_USER_MONSTERS, FAIL_INCOMPLETE_USER_MONSTERS, FAIL_QUEST_JOB_INCOMPLETE, FAIL_OTHER, 
       };
       
       public static QuestProgressStatus valueOf(
@@ -3944,40 +4004,41 @@ public final class EventQuestProto {
       ".proto\032\022MonsterStuff.proto\032\013Quest.proto\032" +
       "\nUser.proto\"\\\n\027QuestAcceptRequestProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\017\n\007questId\030\002 \001(\005\"\240\002\n\030QuestAccep" +
+      "serProto\022\017\n\007questId\030\002 \001(\005\"\201\002\n\030QuestAccep" +
       "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
       "6.proto.MinimumUserProto\022J\n\006status\030\002 \001(\016" +
       "2:.com.lvl6.proto.QuestAcceptResponsePro" +
-      "to.QuestAcceptStatus\022\035\n\025cityIdOfAccepted" +
-      "Quest\030\003 \001(\005\"g\n\021QuestAcceptStatus\022\013\n\007SUCC",
-      "ESS\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER\020\002\022\031\n\025FAI" +
-      "L_ALREADY_ACCEPTED\020\003\022\016\n\nFAIL_OTHER\020\004\"\251\001\n" +
-      "\031QuestProgressRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007" +
-      "questId\030\002 \001(\005\022\027\n\017currentProgress\030\003 \001(\005\022\022" +
-      "\n\nisComplete\030\004 \001(\010\022\034\n\024deleteUserMonsterI" +
-      "ds\030\005 \003(\003\"\341\002\n\032QuestProgressResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.pro" +
-      "to.QuestProgressResponseProto.QuestProgr",
-      "essStatus\"\300\001\n\023QuestProgressStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\030\n\024FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FAIL" +
-      "_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST\020\003\022\"\n" +
-      "\036FAIL_NONEXISTENT_USER_MONSTERS\020\004\022!\n\035FAI" +
-      "L_INCOMPLETE_USER_MONSTERS\020\005\022\016\n\nFAIL_OTH" +
-      "ER\020\006\"l\n\027QuestRedeemRequestProto\022@\n\006sende" +
+      "to.QuestAcceptStatus\"g\n\021QuestAcceptStatu" +
+      "s\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER",
+      "\020\002\022\031\n\025FAIL_ALREADY_ACCEPTED\020\003\022\016\n\nFAIL_OT" +
+      "HER\020\004\"\331\001\n\031QuestProgressRequestProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022\017\n\007questId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001" +
+      "(\010\022\022\n\nquestJobId\030\004 \001(\005\022\027\n\017currentProgres" +
+      "s\030\005 \001(\005\022\032\n\022isQuestJobComplete\030\006 \001(\010\022\034\n\024d" +
+      "eleteUserMonsterIds\030\007 \003(\003\"\200\003\n\032QuestProgr" +
+      "essResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022N\n\006status\030\002 \001" +
+      "(\0162>.com.lvl6.proto.QuestProgressRespons",
+      "eProto.QuestProgressStatus\"\337\001\n\023QuestProg" +
+      "ressStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NO_QUEST" +
+      "_EXISTS\020\002\022+\n\'FAIL_DELETE_AMOUNT_DOES_NOT" +
+      "_MATCH_QUEST\020\003\022\"\n\036FAIL_NONEXISTENT_USER_" +
+      "MONSTERS\020\004\022!\n\035FAIL_INCOMPLETE_USER_MONST" +
+      "ERS\020\005\022\035\n\031FAIL_QUEST_JOB_INCOMPLETE\020\007\022\016\n\n" +
+      "FAIL_OTHER\020\006\"l\n\027QuestRedeemRequestProto\022" +
+      "@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimum" +
+      "UserProtoWithMaxResources\022\017\n\007questId\030\002 \001" +
+      "(\005\"\364\002\n\030QuestRedeemResponseProto\022@\n\006sende",
       "r\030\001 \001(\01320.com.lvl6.proto.MinimumUserProt" +
-      "oWithMaxResources\022\017\n\007questId\030\002 \001(\005\"\364\002\n\030Q" +
-      "uestRedeemResponseProto\022@\n\006sender\030\001 \001(\0132" +
-      "0.com.lvl6.proto.MinimumUserProtoWithMax",
-      "Resources\022<\n\024newlyAvailableQuests\030\002 \003(\0132" +
-      "\036.com.lvl6.proto.FullQuestProto\022J\n\006statu" +
-      "s\030\003 \001(\0162:.com.lvl6.proto.QuestRedeemResp" +
-      "onseProto.QuestRedeemStatus\0222\n\004fump\030\004 \001(" +
-      "\0132$.com.lvl6.proto.FullUserMonsterProto\022" +
-      "\017\n\007questId\030\005 \001(\005\"G\n\021QuestRedeemStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\nFAI" +
-      "L_OTHER\020\003B\021B\017EventQuestProto"
+      "oWithMaxResources\022<\n\024newlyAvailableQuest" +
+      "s\030\002 \003(\0132\036.com.lvl6.proto.FullQuestProto\022" +
+      "J\n\006status\030\003 \001(\0162:.com.lvl6.proto.QuestRe" +
+      "deemResponseProto.QuestRedeemStatus\0222\n\004f" +
+      "ump\030\004 \001(\0132$.com.lvl6.proto.FullUserMonst" +
+      "erProto\022\017\n\007questId\030\005 \001(\005\"G\n\021QuestRedeemS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020" +
+      "\002\022\016\n\nFAIL_OTHER\020\003B\021B\017EventQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3997,7 +4058,7 @@ public final class EventQuestProto {
           internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "CityIdOfAcceptedQuest", },
+              new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.class,
               com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.Builder.class);
           internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor =
@@ -4005,7 +4066,7 @@ public final class EventQuestProto {
           internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", "CurrentProgress", "IsComplete", "DeleteUserMonsterIds", },
+              new java.lang.String[] { "Sender", "QuestId", "IsComplete", "QuestJobId", "CurrentProgress", "IsQuestJobComplete", "DeleteUserMonsterIds", },
               com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.class,
               com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.Builder.class);
           internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
