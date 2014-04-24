@@ -3,6 +3,8 @@ package com.lvl6.properties;
 //SPECIFYING COLUMNS OF STATIC DATA TABLES UNNECESSARY
 public class DBConstants {
   /* TABLENAMES*/
+	public static final String TABLE_ACHIEVEMENT = "achievement";
+	public static final String TABLE_ACHIEVEMENT_FOR_USER = "achievement_for_user";
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM = "booster_display_item";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
@@ -97,6 +99,15 @@ public class DBConstants {
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
+  
+  /*ACHIEVEMENT FOR USER*/
+  public static final String ACHIEVEMENT_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID = "achievement_id";
+  public static final String ACHIEVEMENT_FOR_USER__PROGRESS = "progress";
+  public static final String ACHIEVEMENT_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String ACHIEVEMENT_FOR_USER__IS_REDEEMED = "is_redeemed";
+  public static final String ACHIEVEMENT_FOR_USER__TIME_COMPLETED = "time_completed";
+  public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "TIME_REDEEMED";
   
   /*ALERT ON STARTUP*/
   public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
