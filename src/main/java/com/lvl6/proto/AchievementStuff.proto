@@ -1,0 +1,48 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "MonsterStuff.proto";
+import "Structure.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "AchievementStuffProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message AchievementProto {
+     optional int32 achievementId = 1;
+     optional string name = 2;
+     optional string description = 3;
+     optional int32 gemReward = 4;
+     optional int32 lvl = 5; //max most likely = 3
+     optional AchievementType achievementType = 6;
+     
+     //could be null
+     optional ResourceType resourceType = 7 [default = CASH];
+     //could be null
+     optional MonsterProto.MonsterElement element = 8 [default = FIRE];
+     //could be null
+     optional MonsterProto.MonsterQuality quality = 9 [default = COMMON];
+     //could be 0, as in not set
+     optional int32 staticDataId = 10;
+     
+     repeated int32 quantity = 11;
+     optional int32 priority = 12;
+     optional int32 prerequisiteId = 13;
+     optional int32 successorId = 14;
+     
+     enum AchievementType {
+     	COLLECT_RESOURCE = 1; //made up name, rename as desired
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+message UserAchievementProto {
+	optional int32 achievementId = 1;
+    optional int32 progress = 2;
+	optional bool isComplete = 3; 
+	optional bool isRedeemed = 4;
+}
+
+//------------------------------------------------------------------------------------------
