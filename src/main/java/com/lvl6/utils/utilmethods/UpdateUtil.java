@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
@@ -30,6 +31,9 @@ public interface UpdateUtil {
   
   public abstract int updateUserQuestJob(int userId, int questJobId,
 		  int newProgress, boolean isComplete);
+  
+  public abstract int updateUserAchievement(int userId, Timestamp completeTime,
+		  Map<Integer, AchievementForUser> achievementIdToAfu);
 
   /*
    * changin orientation

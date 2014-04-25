@@ -12,6 +12,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.Achievement;
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
@@ -77,6 +79,9 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.AchievementStuffProto.AchievementProto;
+import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
+import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -126,11 +131,11 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
-import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
+import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
@@ -183,6 +188,85 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 public class CreateInfoProtoUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  /**Achievement.proto***************************************************/
+  public static AchievementProto createAchievementProto(Achievement a) {
+	  AchievementProto.Builder ab = AchievementProto.newBuilder();
+	  
+	  ab.setAchievementId(a.getId());
+	  
+	  String str = a.getAchievementName();
+	  if (null != str) {
+		  ab.setName(str);
+	  }
+	  
+	  str = a.getDescription();
+	  if (null != str) {
+		  ab.setDescription(str);
+	  }
+	  
+	  ab.setGemReward(a.getGemReward());
+	  ab.setLvl(a.getLvl());
+	  
+	  str = a.getAchievementType();
+	  if (null != str) {
+		  try {
+			  AchievementType at = AchievementType.valueOf(str);
+			  ab.setAchievementType(at);
+		  } catch(Exception e) {
+			  log.error("invalid AchievementType. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getResourceType();
+	  if (null != str) {
+		  try {
+			  ResourceType rt = ResourceType.valueOf(str);
+			  ab.setResourceType(rt);
+		  } catch(Exception e) {
+			  log.error("invalid ResourceType. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getMonsterElement();
+	  if (null != str) {
+		  try {
+			  MonsterElement me = MonsterElement.valueOf(str);
+			  ab.setElement(me);
+		  } catch(Exception e) {
+			  log.error("invalid MonsterElement. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getMonsterQuality();
+	  if (null != str) {
+		  try {
+			  MonsterQuality mq = MonsterQuality.valueOf(str);
+			  ab.setQuality(mq);
+		  } catch(Exception e) {
+			  log.error("invalid MonsterQuality. achievement=" + a);
+		  }
+	  }
+	  
+	  ab.setStaticDataId(a.getStaticDataId());
+	  ab.setPriority(a.getPriority());
+	  ab.setPrerequisiteId(a.getPrerequisiteId());
+	  ab.setSuccessorId(a.getSuccessorId());
+	  
+	  return ab.build();
+  }
+  
+  public static UserAchievementProto createUserAchievementProto(
+		  AchievementForUser afu) {
+	  UserAchievementProto.Builder uapb = UserAchievementProto.newBuilder();
+	  
+	  uapb.setAchievementId(afu.getAchievementId());
+	  uapb.setProgress(afu.getProgress());
+	  uapb.setIsComplete(afu.isComplete());
+	  uapb.setIsRedeemed(afu.isRedeemed());
+	  
+	  return uapb.build();
+  }
   
   /**Battle.proto***************************************************/
   /*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(

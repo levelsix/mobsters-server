@@ -14,6 +14,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
@@ -136,6 +137,48 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
+	public int updateUserAchievement(int userId, Timestamp completeTime,
+			Map<Integer, AchievementForUser> achievementIdToAfu) {
+		
+		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer achievementId : achievementIdToAfu.keySet()) {
+			AchievementForUser afu = achievementIdToAfu.get(achievementId); 
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
+					achievementId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS,
+					afu.getProgress());
+			
+			boolean isComplete = afu.isComplete(); 
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE,
+					isComplete);
+			
+			Timestamp achievementCompleteTime = null;
+			if (isComplete) {
+				achievementCompleteTime = completeTime;
+			}
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__TIME_COMPLETED,
+					achievementCompleteTime);
+			
+			newRows.add(newRow);
+		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__TIME_COMPLETED);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		return numUpdated;
+	}
+	
 	/*
 	 * changin orientation
 	 */

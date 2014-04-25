@@ -12,7 +12,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.StructOrientation;
-import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
 public class StructureStuffUtil {
