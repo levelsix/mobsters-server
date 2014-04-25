@@ -62,6 +62,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent)event).getAchievementProgressRequestProto();
+		
+		log.info("reqProto=" + reqProto);
 
 		//get stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();

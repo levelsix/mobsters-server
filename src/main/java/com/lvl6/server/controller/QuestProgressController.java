@@ -65,6 +65,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     QuestProgressRequestProto reqProto = ((QuestProgressRequestEvent)event).getQuestProgressRequestProto();
+    
+    log.info("reqProto=" + reqProto);
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
@@ -165,9 +167,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	  if (!questJobIdsToUserQuestJob.containsKey(questJobId)) {
 		  //expected to never go in here
 		  log.error("user trying to update progress for nonexisting" +
-				  " QuestJobForUser. progress=" + newProgress + "\t quest=" +
-				  quest + "\t questJob=" + qj + "\t userQuestJobs=" +
-				  questJobIdsToUserQuestJob);
+				  " QuestJobForUser with questJobId=" + questJobId +
+				  "\t quest=" + quest + "\t questJob=" + qj +
+				  "\t userQuestJobs=" + questJobIdsToUserQuestJob);
 		  return false;
 	  }
 	  
