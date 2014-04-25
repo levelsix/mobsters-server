@@ -1766,6 +1766,14 @@ public class CreateInfoProtoUtils {
 	  List<UserQuestJobProto> userQuestJobProtoList =
 			  new ArrayList<UserQuestJobProto>();
 	  
+	  if (!questIdToUserQuestJobs.containsKey(questId)) {
+		  //should never go in here!
+		  log.error("user has quest but no quest_jobs for said quest." +
+		  		" questId=" + questId + "\t user's quest jobs are:" +
+				  questIdToUserQuestJobs);
+		  return userQuestJobProtoList;
+	  }
+	  
 	  for (QuestJobForUser qjfu : questIdToUserQuestJobs.get(questId)) {
 		  UserQuestJobProto uqjp = createUserJobProto(qjfu);
 		  userQuestJobProtoList.add(uqjp);
