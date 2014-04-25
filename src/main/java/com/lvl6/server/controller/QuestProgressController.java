@@ -76,7 +76,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
     
     int questJobId = reqProto.getQuestJobId();
     int newProgress = reqProto.getCurrentProgress();
-    boolean isQuestJobComplete = reqProto.hasIsQuestJobComplete(); 
+    boolean isQuestJobComplete = reqProto.getIsQuestJobComplete(); 
     
     //use this value when updating user quest, don't check this
     //at the moment used for donate monster quests
