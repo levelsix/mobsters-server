@@ -35,6 +35,9 @@ public interface UpdateUtil {
   public abstract int updateUserAchievement(int userId, Timestamp completeTime,
 		  Map<Integer, AchievementForUser> achievementIdToAfu);
 
+  public abstract int updateRedeemAchievementForUser(int userId,
+		  Collection<Integer> achievementIds, Timestamp completeTime);
+  
   /*
    * changin orientation
    */

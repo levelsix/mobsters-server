@@ -179,6 +179,37 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
+	@Override
+	public int updateRedeemAchievementForUser(int userId,
+			Collection<Integer> achievementIds, Timestamp redeemTime) {
+		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
+		
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer achievementId : achievementIds) {
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
+					achievementId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED, true);
+			
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__TIME_REDEEMED,
+					redeemTime);
+			
+			newRows.add(newRow);
+		}
+		
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__TIME_REDEEMED);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		return numUpdated;
+	}
+	
 	/*
 	 * changin orientation
 	 */

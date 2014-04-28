@@ -38,6 +38,7 @@ message StructureInfoProto {
 	optional float shadowScale = 22;
 	
 	enum StructType {
+		NO_STRUCT = 8;
 		RESOURCE_GENERATOR = 1;
 		RESOURCE_STORAGE = 2;
 		HOSPITAL = 3;
@@ -45,13 +46,18 @@ message StructureInfoProto {
 		TOWN_HALL = 5;
 		LAB = 6;
 		EVO = 7; //FOR EVOLUTION
+		
+		//NO_STRUCT = 8; defined above
 	}
 }
 
 enum ResourceType {
+	NO_RESOURCE = 4;
 	CASH = 1;
 	OIL = 2;
 	GEMS = 3;
+	
+	//NO_RESOURCE = 4; defined above
 	
 	MONSTER = 20;
 }
@@ -171,8 +177,11 @@ message CoordinateProto {
 //------------------------------------------------------------------------------------------
 
 enum StructOrientation {
+	NO_ORIENTATION = 3;
 	POSITION_1 = 1;
 	POSITION_2 = 2;
+	
+	//NO_ORIENTATION = 3;
 }
 
 //------------------------------------------------------------------------------------------

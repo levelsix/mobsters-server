@@ -10,7 +10,7 @@ option java_outer_classname = "EventAchievementProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 
-//event to update achievement status
+//event to update status of achievements
 message AchievementProgressRequestProto {
 	optional MinimumUserProto sender = 1;
 	
@@ -26,12 +26,12 @@ message AchievementProgressResponseProto {
      
      enum AchievementProgressStatus {
      	SUCCESS = 1;
-     	FAIL_OTHER = 6;
+     	FAIL_OTHER = 2;
      }
 }
 
 //------------------------------------------------------------------------------------------
-
+//event to redeem one achievement
 message AchievementRedeemRequestProto {                         
      optional MinimumUserProto sender = 1;
      optional int32 achievementId = 2;
@@ -41,12 +41,13 @@ message AchievementRedeemRequestProto {
 																						//DONE
 message AchievementRedeemResponseProto {
      optional MinimumUserProto sender = 1;
-     optional QuestRedeemStatus status = 3;    
+     optional AchievementRedeemStatus status = 2;    
      
-     enum QuestRedeemStatus {
+     enum AchievementRedeemStatus {
           SUCCESS = 1;
           FAIL_NOT_COMPLETE = 2;
           FAIL_OTHER = 3;
+          FAIL_ALREADY_REDEEMED = 4;
      }
 }
 

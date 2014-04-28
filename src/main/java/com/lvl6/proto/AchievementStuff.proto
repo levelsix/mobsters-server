@@ -18,11 +18,11 @@ message AchievementProto {
      optional AchievementType achievementType = 6;
      
      //could be null
-     optional ResourceType resourceType = 7 [default = CASH];
+     optional ResourceType resourceType = 7 [default = NO_RESOURCE];
      //could be null
-     optional MonsterProto.MonsterElement element = 8 [default = FIRE];
+     optional MonsterProto.MonsterElement element = 8 [default = NO_ELEMENT];
      //could be null
-     optional MonsterProto.MonsterQuality quality = 9 [default = COMMON];
+     optional MonsterProto.MonsterQuality quality = 9 [default = NO_QUALITY];
      //could be 0, as in not set
      optional int32 staticDataId = 10;
      
@@ -32,6 +32,9 @@ message AchievementProto {
      optional int32 successorId = 14;
      
      enum AchievementType {
+     //anything with static data id should have quantity value of at least 1
+     
+     	NO_ACHIEVEMENT = 17;
      	COLLECT_RESOURCE = 1;
 		CREATE_GRENADE = 2;
 		CREATE_RAINBOW = 3;
@@ -40,14 +43,16 @@ message AchievementProto {
 		DESTROY_ORBS = 6;
 		ENHANCE_POINTS = 7;
 		HEAL_HP = 8;
-		JOIN_LEAGUE = 9;
+		JOIN_LEAGUE = 9;		//quantity should be 1
 		MAKE_COMBO = 10;
 		REMOVE_OBSTACLE = 11;
 		SELL_MONSTER = 12;
 		STEAL_RESOURCE = 13;
 		TAKE_DAMAGE = 14;
-		UPGRADE_BUILDING = 15;
+		UPGRADE_BUILDING = 15; 	//quantity should be 1
 		WIN_PVP_BATTLE = 16;
+		
+		//NO_ACHIEVEMENT = 17;
      }
 }
 

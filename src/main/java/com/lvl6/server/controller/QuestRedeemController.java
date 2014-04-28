@@ -79,6 +79,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
+    	//retrieve whatever is necessary from the db
+    	
       QuestForUser userQuest = RetrieveUtils.questForUserRetrieveUtils().getSpecificUnredeemedUserQuest(userId, questId);
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
       boolean legitRedeem = checkLegitRedeem(resBuilder, userQuest, quest);
@@ -123,7 +125,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  resEvent.setQuestRedeemResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
       } catch (Exception e2) {
-    	  log.error("exception2 in BeginDungeonController processEvent", e);
+    	  log.error("exception2 in QuestRedeem processEvent", e);
       }
     } finally {
       getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      

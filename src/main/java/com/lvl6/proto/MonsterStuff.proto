@@ -47,6 +47,7 @@ message MonsterProto {
 	//optional string shorterName = 28; defined above
 	
 	enum MonsterQuality {
+		NO_QUALITY = 7;
 		COMMON = 1;
 		RARE = 2;
 		ULTRA = 3;
@@ -54,9 +55,11 @@ message MonsterProto {
 		LEGENDARY = 5;
 		
 		EVO = 6; //MONSTERS USED FOR EVOLVING
+		//NO_QUALITY = 7; defined above
 	}
 	
 	enum MonsterElement {
+		NO_ELEMENT = 7;
 		FIRE = 1; //beats grass
 		GRASS = 2; //beats water
 		WATER = 3; //beats fire
@@ -65,11 +68,15 @@ message MonsterProto {
 		DARK = 5; //beats light
 		
 		ROCK = 6; //damages everything
+		//NO_ELEMENT = 7; defined above
 	}
 	
 	enum AnimationType {
+		NO_ANIMATION = 3;
 		MELEE = 1;
 		RANGED = 2;
+		
+		//NO_ANIMATION = 3; defined above
 	}
 }
 
@@ -204,6 +211,9 @@ message MonsterBattleDialogueProto {
 	optional float probabilityUttered = 4; //chance the monster says it
 	
 	enum DialogueType {
+		NO_DIALOGUE = 2;
 		ENTER_BATTLE = 1;
+		
+		//NO_DIALOGUE = 2; defined above 
 	}
 }

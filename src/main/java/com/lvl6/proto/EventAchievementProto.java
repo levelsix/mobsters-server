@@ -805,11 +805,11 @@ public final class EventAchievementProto {
     public enum AchievementProgressStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      FAIL_OTHER(1, 6),
+      FAIL_OTHER(1, 2),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int FAIL_OTHER_VALUE = 6;
+      public static final int FAIL_OTHER_VALUE = 2;
       
       
       public final int getNumber() { return value; }
@@ -817,7 +817,7 @@ public final class EventAchievementProto {
       public static AchievementProgressStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 6: return FAIL_OTHER;
+          case 2: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -1867,9 +1867,9 @@ public final class EventAchievementProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.AchievementRedeemResponseProto.QuestRedeemStatus status = 3;
+    // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
     boolean hasStatus();
-    com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus getStatus();
+    com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus();
   }
   public static final class AchievementRedeemResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -1899,38 +1899,41 @@ public final class EventAchievementProto {
       return com.lvl6.proto.EventAchievementProto.internal_static_com_lvl6_proto_AchievementRedeemResponseProto_fieldAccessorTable;
     }
     
-    public enum QuestRedeemStatus
+    public enum AchievementRedeemStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_NOT_COMPLETE(1, 2),
       FAIL_OTHER(2, 3),
+      FAIL_ALREADY_REDEEMED(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_NOT_COMPLETE_VALUE = 2;
       public static final int FAIL_OTHER_VALUE = 3;
+      public static final int FAIL_ALREADY_REDEEMED_VALUE = 4;
       
       
       public final int getNumber() { return value; }
       
-      public static QuestRedeemStatus valueOf(int value) {
+      public static AchievementRedeemStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_NOT_COMPLETE;
           case 3: return FAIL_OTHER;
+          case 4: return FAIL_ALREADY_REDEEMED;
           default: return null;
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<QuestRedeemStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<QuestRedeemStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<QuestRedeemStatus>() {
-              public QuestRedeemStatus findValueByNumber(int number) {
-                return QuestRedeemStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>() {
+              public AchievementRedeemStatus findValueByNumber(int number) {
+                return AchievementRedeemStatus.valueOf(number);
               }
             };
       
@@ -1947,11 +1950,11 @@ public final class EventAchievementProto {
         return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final QuestRedeemStatus[] VALUES = {
-        SUCCESS, FAIL_NOT_COMPLETE, FAIL_OTHER, 
+      private static final AchievementRedeemStatus[] VALUES = {
+        SUCCESS, FAIL_NOT_COMPLETE, FAIL_OTHER, FAIL_ALREADY_REDEEMED, 
       };
       
-      public static QuestRedeemStatus valueOf(
+      public static AchievementRedeemStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -1963,12 +1966,12 @@ public final class EventAchievementProto {
       private final int index;
       private final int value;
       
-      private QuestRedeemStatus(int index, int value) {
+      private AchievementRedeemStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementRedeemResponseProto.QuestRedeemStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus)
     }
     
     private int bitField0_;
@@ -1985,19 +1988,19 @@ public final class EventAchievementProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.AchievementRedeemResponseProto.QuestRedeemStatus status = 3;
-    public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus status_;
+    // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus getStatus() {
+    public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2015,7 +2018,7 @@ public final class EventAchievementProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(3, status_.getNumber());
+        output.writeEnum(2, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2032,7 +2035,7 @@ public final class EventAchievementProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, status_.getNumber());
+          .computeEnumSize(2, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2165,7 +2168,7 @@ public final class EventAchievementProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -2279,11 +2282,11 @@ public final class EventAchievementProto {
               setSender(subBuilder.buildPartial());
               break;
             }
-            case 24: {
+            case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus value = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus.valueOf(rawValue);
+              com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(2, rawValue);
               } else {
                 bitField0_ |= 0x00000002;
                 status_ = value;
@@ -2386,15 +2389,15 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.AchievementRedeemResponseProto.QuestRedeemStatus status = 3;
-      private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus.SUCCESS;
+      // optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;
+      private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus getStatus() {
+      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2405,7 +2408,7 @@ public final class EventAchievementProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.QuestRedeemStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2461,17 +2464,18 @@ public final class EventAchievementProto {
       "roto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Ac" +
       "hievementProgressResponseProto.Achieveme",
       "ntProgressStatus\"8\n\031AchievementProgressS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\006\"|\n\035Ac" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"|\n\035Ac" +
       "hievementRedeemRequestProto\0220\n\006sender\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
       "\rachievementId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003" +
-      "\"\355\001\n\036AchievementRedeemResponseProto\0220\n\006s" +
+      "\"\224\002\n\036AchievementRedeemResponseProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022P\n\006status\030\003 \001(\0162@.com.lvl6.proto.A" +
-      "chievementRedeemResponseProto.QuestRedee" +
-      "mStatus\"G\n\021QuestRedeemStatus\022\013\n\007SUCCESS\020",
-      "\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003" +
-      "B\027B\025EventAchievementProto"
+      "Proto\022V\n\006status\030\002 \001(\0162F.com.lvl6.proto.A" +
+      "chievementRedeemResponseProto.Achievemen" +
+      "tRedeemStatus\"h\n\027AchievementRedeemStatus",
+      "\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003\022\031\n\025FAIL_ALREADY_REDEEMED\020\004B" +
+      "\027B\025EventAchievementProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

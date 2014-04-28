@@ -107,7 +107,7 @@ public class DBConstants {
   public static final String ACHIEVEMENT_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String ACHIEVEMENT_FOR_USER__IS_REDEEMED = "is_redeemed";
   public static final String ACHIEVEMENT_FOR_USER__TIME_COMPLETED = "time_completed";
-  public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "TIME_REDEEMED";
+  public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "time_redeemed";
   
   /*ALERT ON STARTUP*/
   public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;

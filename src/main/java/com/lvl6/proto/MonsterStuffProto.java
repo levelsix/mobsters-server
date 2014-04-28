@@ -159,14 +159,16 @@ public final class MonsterStuffProto {
     
     public enum MonsterQuality
         implements com.google.protobuf.ProtocolMessageEnum {
-      COMMON(0, 1),
-      RARE(1, 2),
-      ULTRA(2, 3),
-      EPIC(3, 4),
-      LEGENDARY(4, 5),
-      EVO(5, 6),
+      NO_QUALITY(0, 7),
+      COMMON(1, 1),
+      RARE(2, 2),
+      ULTRA(3, 3),
+      EPIC(4, 4),
+      LEGENDARY(5, 5),
+      EVO(6, 6),
       ;
       
+      public static final int NO_QUALITY_VALUE = 7;
       public static final int COMMON_VALUE = 1;
       public static final int RARE_VALUE = 2;
       public static final int ULTRA_VALUE = 3;
@@ -179,6 +181,7 @@ public final class MonsterStuffProto {
       
       public static MonsterQuality valueOf(int value) {
         switch (value) {
+          case 7: return NO_QUALITY;
           case 1: return COMMON;
           case 2: return RARE;
           case 3: return ULTRA;
@@ -215,7 +218,7 @@ public final class MonsterStuffProto {
       }
       
       private static final MonsterQuality[] VALUES = {
-        COMMON, RARE, ULTRA, EPIC, LEGENDARY, EVO, 
+        NO_QUALITY, COMMON, RARE, ULTRA, EPIC, LEGENDARY, EVO, 
       };
       
       public static MonsterQuality valueOf(
@@ -240,14 +243,16 @@ public final class MonsterStuffProto {
     
     public enum MonsterElement
         implements com.google.protobuf.ProtocolMessageEnum {
-      FIRE(0, 1),
-      GRASS(1, 2),
-      WATER(2, 3),
-      LIGHT(3, 4),
-      DARK(4, 5),
-      ROCK(5, 6),
+      NO_ELEMENT(0, 7),
+      FIRE(1, 1),
+      GRASS(2, 2),
+      WATER(3, 3),
+      LIGHT(4, 4),
+      DARK(5, 5),
+      ROCK(6, 6),
       ;
       
+      public static final int NO_ELEMENT_VALUE = 7;
       public static final int FIRE_VALUE = 1;
       public static final int GRASS_VALUE = 2;
       public static final int WATER_VALUE = 3;
@@ -260,6 +265,7 @@ public final class MonsterStuffProto {
       
       public static MonsterElement valueOf(int value) {
         switch (value) {
+          case 7: return NO_ELEMENT;
           case 1: return FIRE;
           case 2: return GRASS;
           case 3: return WATER;
@@ -296,7 +302,7 @@ public final class MonsterStuffProto {
       }
       
       private static final MonsterElement[] VALUES = {
-        FIRE, GRASS, WATER, LIGHT, DARK, ROCK, 
+        NO_ELEMENT, FIRE, GRASS, WATER, LIGHT, DARK, ROCK, 
       };
       
       public static MonsterElement valueOf(
@@ -321,10 +327,12 @@ public final class MonsterStuffProto {
     
     public enum AnimationType
         implements com.google.protobuf.ProtocolMessageEnum {
-      MELEE(0, 1),
-      RANGED(1, 2),
+      NO_ANIMATION(0, 3),
+      MELEE(1, 1),
+      RANGED(2, 2),
       ;
       
+      public static final int NO_ANIMATION_VALUE = 3;
       public static final int MELEE_VALUE = 1;
       public static final int RANGED_VALUE = 2;
       
@@ -333,6 +341,7 @@ public final class MonsterStuffProto {
       
       public static AnimationType valueOf(int value) {
         switch (value) {
+          case 3: return NO_ANIMATION;
           case 1: return MELEE;
           case 2: return RANGED;
           default: return null;
@@ -365,7 +374,7 @@ public final class MonsterStuffProto {
       }
       
       private static final AnimationType[] VALUES = {
-        MELEE, RANGED, 
+        NO_ANIMATION, MELEE, RANGED, 
       };
       
       public static AnimationType valueOf(
@@ -905,10 +914,10 @@ public final class MonsterStuffProto {
       name_ = "";
       shorterName_ = "";
       monsterGroup_ = "";
-      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
       evolutionLevel_ = 0;
       displayName_ = "";
-      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
       imagePrefix_ = "";
       numPuzzlePieces_ = 0;
       minutesToCombinePieces_ = 0;
@@ -923,7 +932,7 @@ public final class MonsterStuffProto {
       description_ = "";
       lvlInfo_ = java.util.Collections.emptyList();
       evolutionCost_ = 0;
-      attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.MELEE;
+      attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.NO_ANIMATION;
       verticalPixelOffset_ = 0;
       atkSoundFile_ = "";
       atkSoundAnimationFrame_ = 0;
@@ -1280,13 +1289,13 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         monsterGroup_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
         bitField0_ = (bitField0_ & ~0x00000010);
         evolutionLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
         displayName_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000080);
         imagePrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
@@ -1320,7 +1329,7 @@ public final class MonsterStuffProto {
         }
         evolutionCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00200000);
-        attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.MELEE;
+        attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.NO_ANIMATION;
         bitField0_ = (bitField0_ & ~0x00400000);
         verticalPixelOffset_ = 0;
         bitField0_ = (bitField0_ & ~0x00800000);
@@ -1936,7 +1945,7 @@ public final class MonsterStuffProto {
       }
       
       // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
       public boolean hasQuality() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
@@ -1954,7 +1963,7 @@ public final class MonsterStuffProto {
       }
       public Builder clearQuality() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -2017,7 +2026,7 @@ public final class MonsterStuffProto {
       }
       
       // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 7;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
       public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
@@ -2035,7 +2044,7 @@ public final class MonsterStuffProto {
       }
       public Builder clearMonsterElement() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         onChanged();
         return this;
       }
@@ -2575,7 +2584,7 @@ public final class MonsterStuffProto {
       }
       
       // optional .com.lvl6.proto.MonsterProto.AnimationType attackAnimationType = 22;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.MELEE;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.NO_ANIMATION;
       public boolean hasAttackAnimationType() {
         return ((bitField0_ & 0x00400000) == 0x00400000);
       }
@@ -2593,7 +2602,7 @@ public final class MonsterStuffProto {
       }
       public Builder clearAttackAnimationType() {
         bitField0_ = (bitField0_ & ~0x00400000);
-        attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.MELEE;
+        attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.NO_ANIMATION;
         onChanged();
         return this;
       }
@@ -9288,9 +9297,11 @@ public final class MonsterStuffProto {
     
     public enum DialogueType
         implements com.google.protobuf.ProtocolMessageEnum {
-      ENTER_BATTLE(0, 1),
+      NO_DIALOGUE(0, 2),
+      ENTER_BATTLE(1, 1),
       ;
       
+      public static final int NO_DIALOGUE_VALUE = 2;
       public static final int ENTER_BATTLE_VALUE = 1;
       
       
@@ -9298,6 +9309,7 @@ public final class MonsterStuffProto {
       
       public static DialogueType valueOf(int value) {
         switch (value) {
+          case 2: return NO_DIALOGUE;
           case 1: return ENTER_BATTLE;
           default: return null;
         }
@@ -9329,7 +9341,7 @@ public final class MonsterStuffProto {
       }
       
       private static final DialogueType[] VALUES = {
-        ENTER_BATTLE, 
+        NO_DIALOGUE, ENTER_BATTLE, 
       };
       
       public static DialogueType valueOf(
@@ -9417,7 +9429,7 @@ public final class MonsterStuffProto {
     
     private void initFields() {
       monsterId_ = 0;
-      dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+      dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.NO_DIALOGUE;
       dialogue_ = "";
       probabilityUttered_ = 0F;
     }
@@ -9596,7 +9608,7 @@ public final class MonsterStuffProto {
         super.clear();
         monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.NO_DIALOGUE;
         bitField0_ = (bitField0_ & ~0x00000002);
         dialogue_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9769,7 +9781,7 @@ public final class MonsterStuffProto {
       }
       
       // optional .com.lvl6.proto.MonsterBattleDialogueProto.DialogueType dialogueType = 3;
-      private com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+      private com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.NO_DIALOGUE;
       public boolean hasDialogueType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
@@ -9787,7 +9799,7 @@ public final class MonsterStuffProto {
       }
       public Builder clearDialogueType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.NO_DIALOGUE;
         onChanged();
         return this;
       }
@@ -9934,7 +9946,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\316\010\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\200\t\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\023\n\013shorterName\030\034 \001(\t\022\024\n\014monsterGr" +
       "oup\030\003 \001(\t\022<\n\007quality\030\004 \001(\0162+.com.lvl6.pr" +
@@ -9957,55 +9969,57 @@ public final class MonsterStuffProto {
       "\005\022\024\n\014atkSoundFile\030\030 \001(\t\022\036\n\026atkSoundAnima" +
       "tionFrame\030\031 \001(\005\022\'\n\037atkAnimationRepeatedF" +
       "ramesStart\030\032 \001(\005\022%\n\035atkAnimationRepeated" +
-      "FramesEnd\030\033 \001(\005\"S\n\016MonsterQuality\022\n\n\006COM" +
-      "MON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\t" +
-      "LEGENDARY\020\005\022\007\n\003EVO\020\006\"O\n\016MonsterElement\022\010" +
-      "\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\t\n\005LIGHT\020" +
-      "\004\022\010\n\004DARK\020\005\022\010\n\004ROCK\020\006\"&\n\rAnimationType\022\t" +
-      "\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\276\002\n\025MonsterLevelIn" +
-      "foProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\031\n\021curL",
-      "vlRequiredExp\030\003 \001(\005\022\021\n\tfeederExp\030\004 \001(\005\022\017" +
-      "\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001(\021\022\020\n\010wat" +
-      "erDmg\030\007 \001(\021\022\024\n\014lightningDmg\030\010 \001(\021\022\023\n\013dar" +
-      "knessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n \001(\021\022\r\n\005speed" +
-      "\030\013 \001(\005\022\026\n\016hpExponentBase\030\014 \001(\002\022\027\n\017dmgExp" +
-      "onentBase\030\r \001(\002\022\025\n\rexpLvlDivisor\030\016 \001(\002\022\026" +
-      "\n\016expLvlExponent\030\017 \001(\002\"\345\001\n\024FullUserMonst" +
-      "erProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId" +
-      "\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030" +
-      "\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHeal",
-      "th\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplet" +
-      "e\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013tea" +
-      "mSlotNum\030\n \001(\005\"@\n\027MinimumUserMonsterProt" +
-      "o\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005" +
-      "\"\204\001\n\027UserMonsterHealingProto\022\016\n\006userId\030\001" +
-      " \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTim" +
-      "eMillis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n" +
-      "\010priority\030\006 \001(\005\"M\n\035UserMonsterCurrentHea" +
-      "lthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurre" +
-      "ntHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022",
-      "\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.c" +
-      "om.lvl6.proto.UserEnhancementItemProto\0229" +
-      "\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserEnh" +
-      "ancementItemProto\"i\n\030UserEnhancementItem" +
-      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expected" +
-      "StartTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003" +
-      " \001(\005\"f\n\032UserMonsterCurrentExpProto\022\025\n\rus" +
-      "erMonsterId\030\001 \001(\003\022\032\n\022expectedExperience\030" +
-      "\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumU" +
-      "serMonsterSellProto\022\025\n\ruserMonsterId\030\001 \001",
-      "(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMon" +
-      "sterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013current" +
-      "Team\030\002 \003(\0132$.com.lvl6.proto.FullUserMons" +
-      "terProto\"e\n\031UserMonsterEvolutionProto\022\035\n" +
-      "\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016userMons" +
-      "terIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\316\001\n\032Mons" +
-      "terBattleDialogueProto\022\021\n\tmonsterId\030\001 \001(" +
-      "\005\022M\n\014dialogueType\030\003 \001(\01627.com.lvl6.proto" +
-      ".MonsterBattleDialogueProto.DialogueType" +
-      "\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabilityUttered",
-      "\030\004 \001(\002\" \n\014DialogueType\022\020\n\014ENTER_BATTLE\020\001" +
-      "B\023B\021MonsterStuffProto"
+      "FramesEnd\030\033 \001(\005\"c\n\016MonsterQuality\022\016\n\nNO_" +
+      "QUALITY\020\007\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA" +
+      "\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDARY\020\005\022\007\n\003EVO\020\006\"_\n\016" +
+      "MonsterElement\022\016\n\nNO_ELEMENT\020\007\022\010\n\004FIRE\020\001" +
+      "\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\t\n\005LIGHT\020\004\022\010\n\004DAR" +
+      "K\020\005\022\010\n\004ROCK\020\006\"8\n\rAnimationType\022\020\n\014NO_ANI" +
+      "MATION\020\003\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\276\002\n\025Mons",
+      "terLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001" +
+      "(\005\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeederE" +
+      "xp\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 " +
+      "\001(\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightningDmg\030\010 " +
+      "\001(\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n \001(" +
+      "\021\022\r\n\005speed\030\013 \001(\005\022\026\n\016hpExponentBase\030\014 \001(\002" +
+      "\022\027\n\017dmgExponentBase\030\r \001(\002\022\025\n\rexpLvlDivis" +
+      "or\030\016 \001(\002\022\026\n\016expLvlExponent\030\017 \001(\002\"\345\001\n\024Ful" +
+      "lUserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
+      "\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\nc",
+      "urrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rc" +
+      "urrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n" +
+      "\nisComplete\030\010 \001(\010\022\030\n\020combineStartTime\030\t " +
+      "\001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"@\n\027MinimumUserM" +
+      "onsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonste" +
+      "rLvl\030\002 \001(\005\"\204\001\n\027UserMonsterHealingProto\022\016" +
+      "\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n" +
+      "\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healthProgres" +
+      "s\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonster" +
+      "CurrentHealthProto\022\025\n\ruserMonsterId\030\001 \001(",
+      "\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhance" +
+      "mentProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster" +
+      "\030\002 \001(\0132(.com.lvl6.proto.UserEnhancementI" +
+      "temProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.pro" +
+      "to.UserEnhancementItemProto\"i\n\030UserEnhan" +
+      "cementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037" +
+      "\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renhan" +
+      "cingCost\030\003 \001(\005\"f\n\032UserMonsterCurrentExpP" +
+      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expectedE" +
+      "xperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H",
+      "\n\033MinimumUserMonsterSellProto\022\025\n\ruserMon" +
+      "sterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033User" +
+      "CurrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005\022" +
+      "9\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Fu" +
+      "llUserMonsterProto\"e\n\031UserMonsterEvoluti" +
+      "onProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022\026" +
+      "\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(" +
+      "\003\"\337\001\n\032MonsterBattleDialogueProto\022\021\n\tmons" +
+      "terId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com." +
+      "lvl6.proto.MonsterBattleDialogueProto.Di",
+      "alogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabil" +
+      "ityUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_D" +
+      "IALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterSt" +
+      "uffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

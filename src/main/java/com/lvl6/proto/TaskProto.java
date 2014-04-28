@@ -3005,7 +3005,7 @@ public final class TaskProto {
       taskId_ = 0;
       cooldownMinutes_ = 0;
       type_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
-      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3222,7 +3222,7 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         type_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
         bitField0_ = (bitField0_ & ~0x00000040);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -3583,7 +3583,7 @@ public final class TaskProto {
       }
       
       // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 8;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
       public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
@@ -3601,7 +3601,7 @@ public final class TaskProto {
       }
       public Builder clearMonsterElement() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         onChanged();
         return this;
       }

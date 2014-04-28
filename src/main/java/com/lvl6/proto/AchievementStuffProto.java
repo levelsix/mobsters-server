@@ -35,15 +35,15 @@ public final class AchievementStuffProto {
     boolean hasAchievementType();
     com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType();
     
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
     boolean hasResourceType();
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = FIRE];
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = NO_ELEMENT];
     boolean hasElement();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = COMMON];
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = NO_QUALITY];
     boolean hasQuality();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality();
     
@@ -97,24 +97,26 @@ public final class AchievementStuffProto {
     
     public enum AchievementType
         implements com.google.protobuf.ProtocolMessageEnum {
-      COLLECT_RESOURCE(0, 1),
-      CREATE_GRENADE(1, 2),
-      CREATE_RAINBOW(2, 3),
-      CREATE_ROCKET(3, 4),
-      DEFEAT_MOBSTERS(4, 5),
-      DESTROY_ORBS(5, 6),
-      ENHANCE_POINTS(6, 7),
-      HEAL_HP(7, 8),
-      JOIN_LEAGUE(8, 9),
-      MAKE_COMBO(9, 10),
-      REMOVE_OBSTACLE(10, 11),
-      SELL_MONSTER(11, 12),
-      STEAL_RESOURCE(12, 13),
-      TAKE_DAMAGE(13, 14),
-      UPGRADE_BUILDING(14, 15),
-      WIN_PVP_BATTLE(15, 16),
+      NO_ACHIEVEMENT(0, 17),
+      COLLECT_RESOURCE(1, 1),
+      CREATE_GRENADE(2, 2),
+      CREATE_RAINBOW(3, 3),
+      CREATE_ROCKET(4, 4),
+      DEFEAT_MOBSTERS(5, 5),
+      DESTROY_ORBS(6, 6),
+      ENHANCE_POINTS(7, 7),
+      HEAL_HP(8, 8),
+      JOIN_LEAGUE(9, 9),
+      MAKE_COMBO(10, 10),
+      REMOVE_OBSTACLE(11, 11),
+      SELL_MONSTER(12, 12),
+      STEAL_RESOURCE(13, 13),
+      TAKE_DAMAGE(14, 14),
+      UPGRADE_BUILDING(15, 15),
+      WIN_PVP_BATTLE(16, 16),
       ;
       
+      public static final int NO_ACHIEVEMENT_VALUE = 17;
       public static final int COLLECT_RESOURCE_VALUE = 1;
       public static final int CREATE_GRENADE_VALUE = 2;
       public static final int CREATE_RAINBOW_VALUE = 3;
@@ -137,6 +139,7 @@ public final class AchievementStuffProto {
       
       public static AchievementType valueOf(int value) {
         switch (value) {
+          case 17: return NO_ACHIEVEMENT;
           case 1: return COLLECT_RESOURCE;
           case 2: return CREATE_GRENADE;
           case 3: return CREATE_RAINBOW;
@@ -183,7 +186,7 @@ public final class AchievementStuffProto {
       }
       
       private static final AchievementType[] VALUES = {
-        COLLECT_RESOURCE, CREATE_GRENADE, CREATE_RAINBOW, CREATE_ROCKET, DEFEAT_MOBSTERS, DESTROY_ORBS, ENHANCE_POINTS, HEAL_HP, JOIN_LEAGUE, MAKE_COMBO, REMOVE_OBSTACLE, SELL_MONSTER, STEAL_RESOURCE, TAKE_DAMAGE, UPGRADE_BUILDING, WIN_PVP_BATTLE, 
+        NO_ACHIEVEMENT, COLLECT_RESOURCE, CREATE_GRENADE, CREATE_RAINBOW, CREATE_ROCKET, DEFEAT_MOBSTERS, DESTROY_ORBS, ENHANCE_POINTS, HEAL_HP, JOIN_LEAGUE, MAKE_COMBO, REMOVE_OBSTACLE, SELL_MONSTER, STEAL_RESOURCE, TAKE_DAMAGE, UPGRADE_BUILDING, WIN_PVP_BATTLE, 
       };
       
       public static AchievementType valueOf(
@@ -311,7 +314,7 @@ public final class AchievementStuffProto {
       return achievementType_;
     }
     
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.ResourceType resourceType_;
     public boolean hasResourceType() {
@@ -321,7 +324,7 @@ public final class AchievementStuffProto {
       return resourceType_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = FIRE];
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = NO_ELEMENT];
     public static final int ELEMENT_FIELD_NUMBER = 8;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_;
     public boolean hasElement() {
@@ -331,7 +334,7 @@ public final class AchievementStuffProto {
       return element_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = COMMON];
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = NO_QUALITY];
     public static final int QUALITY_FIELD_NUMBER = 9;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_;
     public boolean hasQuality() {
@@ -397,10 +400,10 @@ public final class AchievementStuffProto {
       description_ = "";
       gemReward_ = 0;
       lvl_ = 0;
-      achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.COLLECT_RESOURCE;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
-      element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
-      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
+      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
       staticDataId_ = 0;
       quantity_ = 0;
       priority_ = 0;
@@ -660,13 +663,13 @@ public final class AchievementStuffProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         lvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.COLLECT_RESOURCE;
+        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000040);
-        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000080);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
         bitField0_ = (bitField0_ & ~0x00000100);
         staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -1097,7 +1100,7 @@ public final class AchievementStuffProto {
       }
       
       // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
-      private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.COLLECT_RESOURCE;
+      private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
       public boolean hasAchievementType() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
@@ -1115,13 +1118,13 @@ public final class AchievementStuffProto {
       }
       public Builder clearAchievementType() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.COLLECT_RESOURCE;
+        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
         onChanged();
         return this;
       }
       
-      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       public boolean hasResourceType() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
@@ -1139,13 +1142,13 @@ public final class AchievementStuffProto {
       }
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = FIRE];
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 8 [default = NO_ELEMENT];
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
       public boolean hasElement() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
@@ -1163,13 +1166,13 @@ public final class AchievementStuffProto {
       }
       public Builder clearElement() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
         onChanged();
         return this;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = COMMON];
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 9 [default = NO_QUALITY];
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
       public boolean hasQuality() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
@@ -1187,7 +1190,7 @@ public final class AchievementStuffProto {
       }
       public Builder clearQuality() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -1837,31 +1840,32 @@ public final class AchievementStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026AchievementStuff.proto\022\016com.lvl6.proto" +
-      "\032\022MonsterStuff.proto\032\017Structure.proto\"\246\006" +
+      "\032\022MonsterStuff.proto\032\017Structure.proto\"\313\006" +
       "\n\020AchievementProto\022\025\n\rachievementId\030\001 \001(" +
       "\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\021\n\t" +
       "gemReward\030\004 \001(\005\022\013\n\003lvl\030\005 \001(\005\022I\n\017achievem" +
       "entType\030\006 \001(\01620.com.lvl6.proto.Achieveme" +
-      "ntProto.AchievementType\0228\n\014resourceType\030" +
-      "\007 \001(\0162\034.com.lvl6.proto.ResourceType:\004CAS" +
-      "H\022B\n\007element\030\010 \001(\0162+.com.lvl6.proto.Mons" +
-      "terProto.MonsterElement:\004FIRE\022D\n\007quality",
-      "\030\t \001(\0162+.com.lvl6.proto.MonsterProto.Mon" +
-      "sterQuality:\006COMMON\022\024\n\014staticDataId\030\n \001(" +
-      "\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010priority\030\014 \001(\005\022\026\n" +
-      "\016prerequisiteId\030\r \001(\005\022\023\n\013successorId\030\016 \001" +
-      "(\005\"\301\002\n\017AchievementType\022\024\n\020COLLECT_RESOUR" +
-      "CE\020\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAINB" +
-      "OW\020\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MOBSTE" +
-      "RS\020\005\022\020\n\014DESTROY_ORBS\020\006\022\022\n\016ENHANCE_POINTS" +
-      "\020\007\022\013\n\007HEAL_HP\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nMAKE" +
-      "_COMBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014SELL_MO",
-      "NSTER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TAKE_DAMA" +
-      "GE\020\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN_PVP_BA" +
-      "TTLE\020\020\"g\n\024UserAchievementProto\022\025\n\rachiev" +
-      "ementId\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022\n\nisCom" +
-      "plete\030\003 \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027B\025Achie" +
-      "vementStuffProto"
+      "ntProto.AchievementType\022?\n\014resourceType\030" +
+      "\007 \001(\0162\034.com.lvl6.proto.ResourceType:\013NO_" +
+      "RESOURCE\022H\n\007element\030\010 \001(\0162+.com.lvl6.pro" +
+      "to.MonsterProto.MonsterElement:\nNO_ELEME",
+      "NT\022H\n\007quality\030\t \001(\0162+.com.lvl6.proto.Mon" +
+      "sterProto.MonsterQuality:\nNO_QUALITY\022\024\n\014" +
+      "staticDataId\030\n \001(\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010" +
+      "priority\030\014 \001(\005\022\026\n\016prerequisiteId\030\r \001(\005\022\023" +
+      "\n\013successorId\030\016 \001(\005\"\325\002\n\017AchievementType\022" +
+      "\022\n\016NO_ACHIEVEMENT\020\021\022\024\n\020COLLECT_RESOURCE\020" +
+      "\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAINBOW\020" +
+      "\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MOBSTERS\020" +
+      "\005\022\020\n\014DESTROY_ORBS\020\006\022\022\n\016ENHANCE_POINTS\020\007\022" +
+      "\013\n\007HEAL_HP\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nMAKE_CO",
+      "MBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014SELL_MONST" +
+      "ER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TAKE_DAMAGE\020" +
+      "\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN_PVP_BATTL" +
+      "E\020\020\"g\n\024UserAchievementProto\022\025\n\rachieveme" +
+      "ntId\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022\n\nisComple" +
+      "te\030\003 \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027B\025Achievem" +
+      "entStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
