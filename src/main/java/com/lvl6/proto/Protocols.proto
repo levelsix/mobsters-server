@@ -6,6 +6,7 @@ import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
+import "EventAchievement.proto";
 import "EventApns.proto";
 import "EventBoosterPack.proto";
 import "EventChat.proto";
