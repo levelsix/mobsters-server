@@ -51,10 +51,9 @@ public final class AchievementStuffProto {
     boolean hasStaticDataId();
     int getStaticDataId();
     
-    // repeated int32 quantity = 11;
-    java.util.List<java.lang.Integer> getQuantityList();
-    int getQuantityCount();
-    int getQuantity(int index);
+    // optional int32 quantity = 11;
+    boolean hasQuantity();
+    int getQuantity();
     
     // optional int32 priority = 12;
     boolean hasPriority();
@@ -352,25 +351,21 @@ public final class AchievementStuffProto {
       return staticDataId_;
     }
     
-    // repeated int32 quantity = 11;
+    // optional int32 quantity = 11;
     public static final int QUANTITY_FIELD_NUMBER = 11;
-    private java.util.List<java.lang.Integer> quantity_;
-    public java.util.List<java.lang.Integer>
-        getQuantityList() {
+    private int quantity_;
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public int getQuantity() {
       return quantity_;
-    }
-    public int getQuantityCount() {
-      return quantity_.size();
-    }
-    public int getQuantity(int index) {
-      return quantity_.get(index);
     }
     
     // optional int32 priority = 12;
     public static final int PRIORITY_FIELD_NUMBER = 12;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     public int getPriority() {
       return priority_;
@@ -380,7 +375,7 @@ public final class AchievementStuffProto {
     public static final int PREREQUISITEID_FIELD_NUMBER = 13;
     private int prerequisiteId_;
     public boolean hasPrerequisiteId() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public int getPrerequisiteId() {
       return prerequisiteId_;
@@ -390,7 +385,7 @@ public final class AchievementStuffProto {
     public static final int SUCCESSORID_FIELD_NUMBER = 14;
     private int successorId_;
     public boolean hasSuccessorId() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public int getSuccessorId() {
       return successorId_;
@@ -407,7 +402,7 @@ public final class AchievementStuffProto {
       element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
       quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
       staticDataId_ = 0;
-      quantity_ = java.util.Collections.emptyList();;
+      quantity_ = 0;
       priority_ = 0;
       prerequisiteId_ = 0;
       successorId_ = 0;
@@ -454,16 +449,16 @@ public final class AchievementStuffProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(10, staticDataId_);
       }
-      for (int i = 0; i < quantity_.size(); i++) {
-        output.writeInt32(11, quantity_.get(i));
-      }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(12, priority_);
+        output.writeInt32(11, quantity_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(13, prerequisiteId_);
+        output.writeInt32(12, priority_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt32(13, prerequisiteId_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(14, successorId_);
       }
       getUnknownFields().writeTo(output);
@@ -515,24 +510,19 @@ public final class AchievementStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, staticDataId_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < quantity_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(quantity_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getQuantityList().size();
-      }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, priority_);
+          .computeInt32Size(11, quantity_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, prerequisiteId_);
+          .computeInt32Size(12, priority_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, prerequisiteId_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(14, successorId_);
       }
@@ -680,7 +670,7 @@ public final class AchievementStuffProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        quantity_ = java.util.Collections.emptyList();;
+        quantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
         priority_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
@@ -766,21 +756,20 @@ public final class AchievementStuffProto {
           to_bitField0_ |= 0x00000200;
         }
         result.staticDataId_ = staticDataId_;
-        if (((bitField0_ & 0x00000400) == 0x00000400)) {
-          quantity_ = java.util.Collections.unmodifiableList(quantity_);
-          bitField0_ = (bitField0_ & ~0x00000400);
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
         }
         result.quantity_ = quantity_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000400;
+          to_bitField0_ |= 0x00000800;
         }
         result.priority_ = priority_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00000800;
+          to_bitField0_ |= 0x00001000;
         }
         result.prerequisiteId_ = prerequisiteId_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
-          to_bitField0_ |= 0x00001000;
+          to_bitField0_ |= 0x00002000;
         }
         result.successorId_ = successorId_;
         result.bitField0_ = to_bitField0_;
@@ -829,15 +818,8 @@ public final class AchievementStuffProto {
         if (other.hasStaticDataId()) {
           setStaticDataId(other.getStaticDataId());
         }
-        if (!other.quantity_.isEmpty()) {
-          if (quantity_.isEmpty()) {
-            quantity_ = other.quantity_;
-            bitField0_ = (bitField0_ & ~0x00000400);
-          } else {
-            ensureQuantityIsMutable();
-            quantity_.addAll(other.quantity_);
-          }
-          onChanged();
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
         }
         if (other.hasPriority()) {
           setPriority(other.getPriority());
@@ -954,17 +936,8 @@ public final class AchievementStuffProto {
               break;
             }
             case 88: {
-              ensureQuantityIsMutable();
-              quantity_.add(input.readInt32());
-              break;
-            }
-            case 90: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addQuantity(input.readInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000400;
+              quantity_ = input.readInt32();
               break;
             }
             case 96: {
@@ -1240,47 +1213,23 @@ public final class AchievementStuffProto {
         return this;
       }
       
-      // repeated int32 quantity = 11;
-      private java.util.List<java.lang.Integer> quantity_ = java.util.Collections.emptyList();;
-      private void ensureQuantityIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
-          quantity_ = new java.util.ArrayList<java.lang.Integer>(quantity_);
-          bitField0_ |= 0x00000400;
-         }
+      // optional int32 quantity = 11;
+      private int quantity_ ;
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
-      public java.util.List<java.lang.Integer>
-          getQuantityList() {
-        return java.util.Collections.unmodifiableList(quantity_);
+      public int getQuantity() {
+        return quantity_;
       }
-      public int getQuantityCount() {
-        return quantity_.size();
-      }
-      public int getQuantity(int index) {
-        return quantity_.get(index);
-      }
-      public Builder setQuantity(
-          int index, int value) {
-        ensureQuantityIsMutable();
-        quantity_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addQuantity(int value) {
-        ensureQuantityIsMutable();
-        quantity_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllQuantity(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureQuantityIsMutable();
-        super.addAll(values, quantity_);
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000400;
+        quantity_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuantity() {
-        quantity_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000400);
+        quantity_ = 0;
         onChanged();
         return this;
       }
@@ -1899,7 +1848,7 @@ public final class AchievementStuffProto {
       "terProto.MonsterElement:\004FIRE\022D\n\007quality",
       "\030\t \001(\0162+.com.lvl6.proto.MonsterProto.Mon" +
       "sterQuality:\006COMMON\022\024\n\014staticDataId\030\n \001(" +
-      "\005\022\020\n\010quantity\030\013 \003(\005\022\020\n\010priority\030\014 \001(\005\022\026\n" +
+      "\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010priority\030\014 \001(\005\022\026\n" +
       "\016prerequisiteId\030\r \001(\005\022\023\n\013successorId\030\016 \001" +
       "(\005\"\301\002\n\017AchievementType\022\024\n\020COLLECT_RESOUR" +
       "CE\020\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAINB" +

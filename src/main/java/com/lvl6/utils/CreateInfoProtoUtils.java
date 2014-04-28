@@ -249,6 +249,7 @@ public class CreateInfoProtoUtils {
 	  }
 	  
 	  ab.setStaticDataId(a.getStaticDataId());
+	  ab.setQuantity(a.getQuantity());
 	  ab.setPriority(a.getPriority());
 	  ab.setPrerequisiteId(a.getPrerequisiteId());
 	  ab.setSuccessorId(a.getSuccessorId());

@@ -26,7 +26,7 @@ message AchievementProto {
      //could be 0, as in not set
      optional int32 staticDataId = 10;
      
-     repeated int32 quantity = 11;
+     optional int32 quantity = 11;
      optional int32 priority = 12;
      optional int32 prerequisiteId = 13;
      optional int32 successorId = 14;
