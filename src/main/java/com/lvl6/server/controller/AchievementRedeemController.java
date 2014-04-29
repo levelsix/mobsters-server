@@ -174,7 +174,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<String, Integer> currencyChange) {
 		int numUpdated = UpdateUtils.get().updateRedeemAchievementForUser(
 				userId, Collections.singletonList(achievementId), redeemTime); 
-		log.error("user achievements redeemed. numUpdated=" + numUpdated +
+		log.info("user achievements redeemed. numUpdated=" + numUpdated +
 				"\t achievementId=" + achievementId);
 
 		Achievement achievement = AchievementRetrieveUtils 
