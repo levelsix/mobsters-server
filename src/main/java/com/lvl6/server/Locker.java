@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
-import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.PlayerInAction;
 import com.lvl6.utils.PlayerSet;
@@ -21,7 +20,7 @@ public class Locker {
 	public static int LOCK_WAIT_SECONDS = 10;
 
 
-		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
+		private static final Logger log = LoggerFactory.getLogger(Locker.class);
 		
 		//these are the users that are online
 		@javax.annotation.Resource(name = "playersByPlayerId")
