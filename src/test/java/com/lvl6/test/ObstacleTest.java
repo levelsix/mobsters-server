@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -67,6 +68,7 @@ public class ObstacleTest extends TestCase {
 	
 
 	@Test
+//	@Rollback(true)
 	public void testObstacleEvents() {
 		spawnObstacle();
 		beginRemoveObstacle();
@@ -74,6 +76,7 @@ public class ObstacleTest extends TestCase {
 	}
 	
 	@Test
+//	@Rollback(true)
 	public void testObstacleEventsAtMaxObstacles() {
 		spawnObstacle();
 		beginRemoveObstacle();
@@ -398,7 +401,7 @@ public class ObstacleTest extends TestCase {
 				oldLastObstacleSpawnedTime, newLastObstacleSpawnedTime);
 		assertTrue("Expected diff obstacle spawn time. Actual times, old: " +
 				oldLastObstacleSpawnedTime + ", new: " +
-				newLastObstacleSpawnedTime, 10 == numMinDiff);
+				newLastObstacleSpawnedTime, numMinDiff >= 9 && numMinDiff <= 11);
 		
 		log.info("ending completing removing obstacle at max");
 	}

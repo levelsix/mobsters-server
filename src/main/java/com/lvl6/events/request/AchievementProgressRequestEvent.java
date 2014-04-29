@@ -29,6 +29,13 @@ public class AchievementProgressRequestEvent extends RequestEvent {
   }
 
   public AchievementProgressRequestProto getAchievementProgressRequestProto() {
-    return achievementProgressRequestProto;
+	  return achievementProgressRequestProto;
   }
+
+  public void setAchievementProgressRequestProto(
+		  AchievementProgressRequestProto achievementProgressRequestProto) {
+	  this.achievementProgressRequestProto = achievementProgressRequestProto;
+  }
+
+
 }

@@ -200,6 +200,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		Map<Integer, AchievementForUser> achievementIdToAfu =
 				getAchievementStuffUtil()
 				.javafyUserAchievementProto(achievementIdsToUap);
+		
+//		log.info("writeChangesToDB() achievementIdToAfu" +
+//				achievementIdToAfu);
 
 		int numUpdated = getUpdateUtil().updateUserAchievement(userId,
 				clientTime, achievementIdToAfu);
