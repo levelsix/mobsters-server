@@ -121,7 +121,7 @@ public class AchievementForUserRetrieveUtil {
 		public AchievementForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			AchievementForUser afu = new AchievementForUser();
 			afu.setAchievementId(rs.getInt(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID));
-			afu.setUserId(rs.getInt(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS));
+			afu.setProgress(rs.getInt(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS));
 			afu.setComplete(rs.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE));
 			afu.setRedeemed(rs.getBoolean(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED));
 			return afu;
