@@ -39,10 +39,10 @@ message AchievementProto {
 		CREATE_GRENADE = 2;
 		CREATE_RAINBOW = 3;
 		CREATE_ROCKET = 4;
-		DEFEAT_MOBSTERS = 5;
+		DEFEAT_MONSTERS = 5;
 		DESTROY_ORBS = 6;
 		ENHANCE_POINTS = 7;
-		HEAL_HP = 8;
+		HEAL_MONSTERS = 8;
 		JOIN_LEAGUE = 9;		//quantity should be 1
 		MAKE_COMBO = 10;
 		REMOVE_OBSTACLE = 11;

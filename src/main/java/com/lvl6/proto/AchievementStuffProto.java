@@ -102,10 +102,10 @@ public final class AchievementStuffProto {
       CREATE_GRENADE(2, 2),
       CREATE_RAINBOW(3, 3),
       CREATE_ROCKET(4, 4),
-      DEFEAT_MOBSTERS(5, 5),
+      DEFEAT_MONSTERS(5, 5),
       DESTROY_ORBS(6, 6),
       ENHANCE_POINTS(7, 7),
-      HEAL_HP(8, 8),
+      HEAL_MONSTERS(8, 8),
       JOIN_LEAGUE(9, 9),
       MAKE_COMBO(10, 10),
       REMOVE_OBSTACLE(11, 11),
@@ -121,10 +121,10 @@ public final class AchievementStuffProto {
       public static final int CREATE_GRENADE_VALUE = 2;
       public static final int CREATE_RAINBOW_VALUE = 3;
       public static final int CREATE_ROCKET_VALUE = 4;
-      public static final int DEFEAT_MOBSTERS_VALUE = 5;
+      public static final int DEFEAT_MONSTERS_VALUE = 5;
       public static final int DESTROY_ORBS_VALUE = 6;
       public static final int ENHANCE_POINTS_VALUE = 7;
-      public static final int HEAL_HP_VALUE = 8;
+      public static final int HEAL_MONSTERS_VALUE = 8;
       public static final int JOIN_LEAGUE_VALUE = 9;
       public static final int MAKE_COMBO_VALUE = 10;
       public static final int REMOVE_OBSTACLE_VALUE = 11;
@@ -144,10 +144,10 @@ public final class AchievementStuffProto {
           case 2: return CREATE_GRENADE;
           case 3: return CREATE_RAINBOW;
           case 4: return CREATE_ROCKET;
-          case 5: return DEFEAT_MOBSTERS;
+          case 5: return DEFEAT_MONSTERS;
           case 6: return DESTROY_ORBS;
           case 7: return ENHANCE_POINTS;
-          case 8: return HEAL_HP;
+          case 8: return HEAL_MONSTERS;
           case 9: return JOIN_LEAGUE;
           case 10: return MAKE_COMBO;
           case 11: return REMOVE_OBSTACLE;
@@ -186,7 +186,7 @@ public final class AchievementStuffProto {
       }
       
       private static final AchievementType[] VALUES = {
-        NO_ACHIEVEMENT, COLLECT_RESOURCE, CREATE_GRENADE, CREATE_RAINBOW, CREATE_ROCKET, DEFEAT_MOBSTERS, DESTROY_ORBS, ENHANCE_POINTS, HEAL_HP, JOIN_LEAGUE, MAKE_COMBO, REMOVE_OBSTACLE, SELL_MONSTER, STEAL_RESOURCE, TAKE_DAMAGE, UPGRADE_BUILDING, WIN_PVP_BATTLE, 
+        NO_ACHIEVEMENT, COLLECT_RESOURCE, CREATE_GRENADE, CREATE_RAINBOW, CREATE_ROCKET, DEFEAT_MONSTERS, DESTROY_ORBS, ENHANCE_POINTS, HEAL_MONSTERS, JOIN_LEAGUE, MAKE_COMBO, REMOVE_OBSTACLE, SELL_MONSTER, STEAL_RESOURCE, TAKE_DAMAGE, UPGRADE_BUILDING, WIN_PVP_BATTLE, 
       };
       
       public static AchievementType valueOf(
@@ -1840,7 +1840,7 @@ public final class AchievementStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026AchievementStuff.proto\022\016com.lvl6.proto" +
-      "\032\022MonsterStuff.proto\032\017Structure.proto\"\313\006" +
+      "\032\022MonsterStuff.proto\032\017Structure.proto\"\321\006" +
       "\n\020AchievementProto\022\025\n\rachievementId\030\001 \001(" +
       "\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\021\n\t" +
       "gemReward\030\004 \001(\005\022\013\n\003lvl\030\005 \001(\005\022I\n\017achievem" +
@@ -1853,19 +1853,19 @@ public final class AchievementStuffProto {
       "sterProto.MonsterQuality:\nNO_QUALITY\022\024\n\014" +
       "staticDataId\030\n \001(\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010" +
       "priority\030\014 \001(\005\022\026\n\016prerequisiteId\030\r \001(\005\022\023" +
-      "\n\013successorId\030\016 \001(\005\"\325\002\n\017AchievementType\022" +
+      "\n\013successorId\030\016 \001(\005\"\333\002\n\017AchievementType\022" +
       "\022\n\016NO_ACHIEVEMENT\020\021\022\024\n\020COLLECT_RESOURCE\020" +
       "\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAINBOW\020" +
-      "\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MOBSTERS\020" +
+      "\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MONSTERS\020" +
       "\005\022\020\n\014DESTROY_ORBS\020\006\022\022\n\016ENHANCE_POINTS\020\007\022" +
-      "\013\n\007HEAL_HP\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nMAKE_CO",
-      "MBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014SELL_MONST" +
-      "ER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TAKE_DAMAGE\020" +
-      "\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN_PVP_BATTL" +
-      "E\020\020\"g\n\024UserAchievementProto\022\025\n\rachieveme" +
-      "ntId\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022\n\nisComple" +
-      "te\030\003 \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027B\025Achievem" +
-      "entStuffProto"
+      "\021\n\rHEAL_MONSTERS\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nM",
+      "AKE_COMBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014SELL" +
+      "_MONSTER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TAKE_D" +
+      "AMAGE\020\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN_PVP" +
+      "_BATTLE\020\020\"g\n\024UserAchievementProto\022\025\n\rach" +
+      "ievementId\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022\n\nis" +
+      "Complete\030\003 \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027B\025Ac" +
+      "hievementStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
