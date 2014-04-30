@@ -251,7 +251,7 @@ public class MiscMethods {
 
   public static void explodeIntoInts(String stringToExplode, 
       String delimiter, List<Integer> returnValue) {
-    StringTokenizer st = new StringTokenizer(stringToExplode, ", ");
+    StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
     while (st.hasMoreTokens()) {
       returnValue.add(Integer.parseInt(st.nextToken()));
     }
@@ -678,6 +678,7 @@ public class MiscMethods {
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
+    AchievementRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
     BoosterDisplayItemRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
