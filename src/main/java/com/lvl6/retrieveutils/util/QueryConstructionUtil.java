@@ -680,6 +680,11 @@ public class QueryConstructionUtil {
 	public List<Integer> explodeIntoInts(String stringToExplode, 
 			String delimiter) {
 		List<Integer> returnValue = new ArrayList<Integer>();
+		
+		if (null == stringToExplode) {
+			return returnValue;
+		}
+		
 		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
 		while (st.hasMoreTokens()) {
 			returnValue.add(Integer.parseInt(st.nextToken()));

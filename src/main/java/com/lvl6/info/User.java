@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -3457856391646138824L;
+	private static final long serialVersionUID = -3522735385815495261L;
 	
 	private int id;
 	private String name;
@@ -48,6 +48,7 @@ public class User implements Serializable {
 	private String udid;
 	private Date lastObstacleSpawnedTime;
 	private int numObstaclesRemoved;
+	private Date lastMiniTaskGeneratedTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
@@ -60,7 +61,7 @@ public class User implements Serializable {
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
-			int numObstaclesRemoved) {
+			int numObstaclesRemoved, Date lastMiniTaskGeneratedTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -95,6 +96,7 @@ public class User implements Serializable {
 		this.udid = udid;
 		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
 		this.numObstaclesRemoved = numObstaclesRemoved;
+		this.lastMiniTaskGeneratedTime = lastMiniTaskGeneratedTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -998,6 +1000,14 @@ public class User implements Serializable {
 		this.numObstaclesRemoved = numObstaclesRemoved;
 	}
 
+	public Date getLastMiniTaskGeneratedTime() {
+		return lastMiniTaskGeneratedTime;
+	}
+
+	public void setLastMiniTaskGeneratedTime(Date lastMiniTaskGeneratedTime) {
+		this.lastMiniTaskGeneratedTime = lastMiniTaskGeneratedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -1021,7 +1031,8 @@ public class User implements Serializable {
 				+ fbIdSetOnUserCreate + ", gameCenterId=" + gameCenterId
 				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
 				+ lastObstacleSpawnedTime + ", numObstaclesRemoved="
-				+ numObstaclesRemoved + "]";
+				+ numObstaclesRemoved + ", lastMiniTaskGeneratedTime="
+				+ lastMiniTaskGeneratedTime + "]";
 	}
 
 }

@@ -134,7 +134,10 @@ public class ObstacleForUserRetrieveUtil {
 			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
 			try {
 				Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
-				ofu.setRemovalTime(time);
+				if (null != time && rs.wasNull()) {
+					Date date = new Date(time.getTime());
+					ofu.setRemovalTime(date);
+				}
 			} catch (Exception e) {
 				log.error("maybe obstacle removal time is invalid", e);
 			}

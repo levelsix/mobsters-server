@@ -475,10 +475,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastObstacleSpawnedTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("db error: last_obstacle_spawned_time");
+    	log.error("db error: last_obstacle_spawned_time" +
+    			" was null...?");
     }
     
     int numObstaclesRemoved = rs.getInt(i++);
+    
+    Date lastMiniTaskGeneratedTime = null;
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastMiniTaskGeneratedTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("lastMiniTaskGeneratedTime null...?", e);
+    }
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -487,7 +498,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
     		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
-    		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved);
+    		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
+    		lastMiniTaskGeneratedTime);
     return user;
   }
  

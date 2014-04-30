@@ -40,6 +40,9 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
+  public static final String TABLE_MINI_TASK = "mini_task";
+  public static final String TABLE_MINI_TASK_FOR_USER = "mini_task_for_user";
+  public static final String TABLE_MINI_TASK_FOR_USER_HISTORY = "mini_task_for_user_history";
   public static final String TABLE_MONSTER = "monster";
   public static final String TABLE_MONSTER_BATTLE_DIALOGUE = "monster_battle_dialogue";
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
@@ -72,6 +75,7 @@ public class DBConstants {
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
   public static final String TABLE_STRUCTURE_LAB = "structure_lab";
+  public static final String TABLE_STRUCTURE_MINI_TASK = "structure_mini_task";
   public static final String TABLE_STRUCTURE_RESIDENCE = "structure_residence";
   public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR = "structure_resource_generator";
   public static final String TABLE_STRUCTURE_RESOURCE_STORAGE = "structure_resource_storage";
@@ -231,7 +235,7 @@ public class DBConstants {
   public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY = "quantity";
   public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
   
-  /*USER CLANS*/
+  /*CLAN FOR USER*/
   public static final String CLAN_FOR_USER__USER_ID = "user_id";
   public static final String CLAN_FOR_USER__CLAN_ID = "clan_id";
   public static final String CLAN_FOR_USER__STATUS = "status";
@@ -284,6 +288,21 @@ public class DBConstants {
   public static final String LOGIN_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String LOGIN_HISTORY__DATE = "date";
   public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
+  
+  /*MINI TASK FOR USER*/
+  public static final String MINI_TASK_FOR_USER__USER_ID = "user_id";
+  public static final String MINI_TASK_FOR_USER__MINI_TASK_ID = "mini_task_id";
+  public static final String MINI_TASK_FOR_USER__BASE_DMG_RECEIVED = "base_dmg_received";
+  public static final String MINI_TASK_FOR_USER__TIME_STARTED = "time_started";
+  public static final String MINI_TASK_FOR_USER__USER_MONSTER_IDS = "user_monster_ids";
+  
+  /*MINI TASK FOR USER HISTORYS*/
+  public static final String MINI_TASK_FOR_USER_HISTORY__USER_ID = "user_id";
+  public static final String MINI_TASK_FOR_USER_HISTORY__MINI_TASK_ID = "mini_task_id";
+  public static final String MINI_TASK_FOR_USER_HISTORY__BASE_DMG_RECEIVED = "base_dmg_received";
+  public static final String MINI_TASK_FOR_USER_HISTORY__TIME_STARTED = "time_started";
+  public static final String MINI_TASK_FOR_USER_HISTORY__TIME_COMPLETED = "time_completed";
+  public static final String MINI_TASK_FOR_USER_HISTORY__USER_MONSTER_IDS = "user_monster_ids";
 
   /*MONSTER ENHANCING FOR USER*/
   public static final String MONSTER_ENHANCING_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -580,6 +599,7 @@ public class DBConstants {
   public static final String USER__UDID = "udid";
   public static final String USER__LAST_OBSTACLE_SPAWNED_TIME = "last_obstacle_spawned_time";
   public static final String USER__NUM_OBSTACLES_REMOVED = "num_obstacles_removed";
+  public static final String USER__LAST_MINI_TASK_GENERATED_TIME = "last_mini_task_generated_time";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
