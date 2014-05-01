@@ -14,6 +14,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -29,8 +30,8 @@ public interface UpdateUtil {
 
   public abstract boolean updateRedeemQuestForUser(int userId, int questId);
   
-  public abstract int updateUserQuestJob(int userId, int questJobId,
-		  int newProgress, boolean isComplete);
+  public abstract int updateUserQuestJobs(int userId,
+			Map<Integer, QuestJobForUser> questJobIdToQuestJob);
   
   public abstract int updateUserAchievement(int userId, Timestamp completeTime,
 		  Map<Integer, AchievementForUser> achievementIdToAfu);

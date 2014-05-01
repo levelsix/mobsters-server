@@ -41,7 +41,8 @@ message QuestProgressRequestProto {
 	//it, then the boolean above, isComplete, would also be set
 	repeated UserQuestJobProto userQuestJobs = 4;
 	
-	//if set, delete these user monster ids 
+	//if set, delete these user monster ids. Deleting monsters
+	//will be set for only one quest job
 	repeated int64 deleteUserMonsterIds = 5;
 }
 

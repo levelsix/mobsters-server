@@ -21,6 +21,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
@@ -101,21 +102,37 @@ public class UpdateUtils implements UpdateUtil {
 	}  
 
 	@Override
-	public int updateUserQuestJob(int userId, int questJobId, int newProgress,
-			boolean isComplete) {
+	public int updateUserQuestJobs(int userId,
+			Map<Integer, QuestJobForUser> questJobIdToQuestJob) {
 		String tableName = DBConstants.TABLE_QUEST_JOB_FOR_USER;
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.QUEST_JOB_FOR_USER__USER_ID, userId);
-		conditionParams.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_JOB_ID, questJobId);
 		
-		Map<String, Object> relativeParams = null;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer questJobId : questJobIdToQuestJob.keySet()) {
+			QuestJobForUser qjfu = questJobIdToQuestJob.get(questJobId); 
+			
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_ID,
+					qjfu.getQuestId());
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_JOB_ID,
+					questJobId);
+			
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__IS_COMPLETE,
+					qjfu.isComplete());
+			
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__PROGRESS,
+					qjfu.getProgress());
+			
+			newRows.add(newRow);
+		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.QUEST_JOB_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns.add(DBConstants.QUEST_JOB_FOR_USER__PROGRESS);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
 		
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, isComplete);
-		absoluteParams.put(DBConstants.QUEST_JOB_FOR_USER__PROGRESS, newProgress);
-		
-		int numUpdated = DBConnection.get().updateTableRows(tableName,
-				relativeParams, absoluteParams, conditionParams, "and");
 		return numUpdated;
 	}
 

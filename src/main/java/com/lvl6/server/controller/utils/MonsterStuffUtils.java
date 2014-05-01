@@ -572,7 +572,7 @@ public class MonsterStuffUtils {
 	  	return null;
 	  }
   
-  public static boolean checkAllMonstersForUserComplete(Quest quest,
+  public static boolean checkAllUserMonstersAreComplete(
 		  List<Long> deleteUserMonsterIds,
 		  Map<Long, MonsterForUser> deletedUserMonsters) {
 	  //make sure the monsters are all complete

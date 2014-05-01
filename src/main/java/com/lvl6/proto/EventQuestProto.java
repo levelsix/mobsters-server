@@ -1070,19 +1070,17 @@ public final class EventQuestProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // optional int32 questJobId = 4;
-    boolean hasQuestJobId();
-    int getQuestJobId();
+    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+    java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> 
+        getUserQuestJobsList();
+    com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index);
+    int getUserQuestJobsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
+        getUserQuestJobsOrBuilderList();
+    com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
+        int index);
     
-    // optional int32 currentProgress = 5;
-    boolean hasCurrentProgress();
-    int getCurrentProgress();
-    
-    // optional bool isQuestJobComplete = 6;
-    boolean hasIsQuestJobComplete();
-    boolean getIsQuestJobComplete();
-    
-    // repeated int64 deleteUserMonsterIds = 7;
+    // repeated int64 deleteUserMonsterIds = 5;
     java.util.List<java.lang.Long> getDeleteUserMonsterIdsList();
     int getDeleteUserMonsterIdsCount();
     long getDeleteUserMonsterIds(int index);
@@ -1149,38 +1147,29 @@ public final class EventQuestProto {
       return isComplete_;
     }
     
-    // optional int32 questJobId = 4;
-    public static final int QUESTJOBID_FIELD_NUMBER = 4;
-    private int questJobId_;
-    public boolean hasQuestJobId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+    public static final int USERQUESTJOBS_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_;
+    public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> getUserQuestJobsList() {
+      return userQuestJobs_;
     }
-    public int getQuestJobId() {
-      return questJobId_;
+    public java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
+        getUserQuestJobsOrBuilderList() {
+      return userQuestJobs_;
     }
-    
-    // optional int32 currentProgress = 5;
-    public static final int CURRENTPROGRESS_FIELD_NUMBER = 5;
-    private int currentProgress_;
-    public boolean hasCurrentProgress() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public int getUserQuestJobsCount() {
+      return userQuestJobs_.size();
     }
-    public int getCurrentProgress() {
-      return currentProgress_;
+    public com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index) {
+      return userQuestJobs_.get(index);
     }
-    
-    // optional bool isQuestJobComplete = 6;
-    public static final int ISQUESTJOBCOMPLETE_FIELD_NUMBER = 6;
-    private boolean isQuestJobComplete_;
-    public boolean hasIsQuestJobComplete() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public boolean getIsQuestJobComplete() {
-      return isQuestJobComplete_;
+    public com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
+        int index) {
+      return userQuestJobs_.get(index);
     }
     
-    // repeated int64 deleteUserMonsterIds = 7;
-    public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 7;
+    // repeated int64 deleteUserMonsterIds = 5;
+    public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Long> deleteUserMonsterIds_;
     public java.util.List<java.lang.Long>
         getDeleteUserMonsterIdsList() {
@@ -1197,9 +1186,7 @@ public final class EventQuestProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       questId_ = 0;
       isComplete_ = false;
-      questJobId_ = 0;
-      currentProgress_ = 0;
-      isQuestJobComplete_ = false;
+      userQuestJobs_ = java.util.Collections.emptyList();
       deleteUserMonsterIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -1223,17 +1210,11 @@ public final class EventQuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, isComplete_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, questJobId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, currentProgress_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBool(6, isQuestJobComplete_);
+      for (int i = 0; i < userQuestJobs_.size(); i++) {
+        output.writeMessage(4, userQuestJobs_.get(i));
       }
       for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
-        output.writeInt64(7, deleteUserMonsterIds_.get(i));
+        output.writeInt64(5, deleteUserMonsterIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1256,17 +1237,9 @@ public final class EventQuestProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, isComplete_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      for (int i = 0; i < userQuestJobs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, questJobId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, currentProgress_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isQuestJobComplete_);
+          .computeMessageSize(4, userQuestJobs_.get(i));
       }
       {
         int dataSize = 0;
@@ -1394,6 +1367,7 @@ public final class EventQuestProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getUserQuestJobsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1412,14 +1386,14 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
-        questJobId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        currentProgress_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        isQuestJobComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        if (userQuestJobsBuilder_ == null) {
+          userQuestJobs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          userQuestJobsBuilder_.clear();
+        }
         deleteUserMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -1474,21 +1448,18 @@ public final class EventQuestProto {
           to_bitField0_ |= 0x00000004;
         }
         result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
+        if (userQuestJobsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            userQuestJobs_ = java.util.Collections.unmodifiableList(userQuestJobs_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.userQuestJobs_ = userQuestJobs_;
+        } else {
+          result.userQuestJobs_ = userQuestJobsBuilder_.build();
         }
-        result.questJobId_ = questJobId_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.currentProgress_ = currentProgress_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.isQuestJobComplete_ = isQuestJobComplete_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           deleteUserMonsterIds_ = java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.deleteUserMonsterIds_ = deleteUserMonsterIds_;
         result.bitField0_ = to_bitField0_;
@@ -1516,19 +1487,36 @@ public final class EventQuestProto {
         if (other.hasIsComplete()) {
           setIsComplete(other.getIsComplete());
         }
-        if (other.hasQuestJobId()) {
-          setQuestJobId(other.getQuestJobId());
-        }
-        if (other.hasCurrentProgress()) {
-          setCurrentProgress(other.getCurrentProgress());
-        }
-        if (other.hasIsQuestJobComplete()) {
-          setIsQuestJobComplete(other.getIsQuestJobComplete());
+        if (userQuestJobsBuilder_ == null) {
+          if (!other.userQuestJobs_.isEmpty()) {
+            if (userQuestJobs_.isEmpty()) {
+              userQuestJobs_ = other.userQuestJobs_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureUserQuestJobsIsMutable();
+              userQuestJobs_.addAll(other.userQuestJobs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userQuestJobs_.isEmpty()) {
+            if (userQuestJobsBuilder_.isEmpty()) {
+              userQuestJobsBuilder_.dispose();
+              userQuestJobsBuilder_ = null;
+              userQuestJobs_ = other.userQuestJobs_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              userQuestJobsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserQuestJobsFieldBuilder() : null;
+            } else {
+              userQuestJobsBuilder_.addAllMessages(other.userQuestJobs_);
+            }
+          }
         }
         if (!other.deleteUserMonsterIds_.isEmpty()) {
           if (deleteUserMonsterIds_.isEmpty()) {
             deleteUserMonsterIds_ = other.deleteUserMonsterIds_;
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureDeleteUserMonsterIdsIsMutable();
             deleteUserMonsterIds_.addAll(other.deleteUserMonsterIds_);
@@ -1585,27 +1573,18 @@ public final class EventQuestProto {
               isComplete_ = input.readBool();
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              questJobId_ = input.readInt32();
+            case 34: {
+              com.lvl6.proto.QuestProto.UserQuestJobProto.Builder subBuilder = com.lvl6.proto.QuestProto.UserQuestJobProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addUserQuestJobs(subBuilder.buildPartial());
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
-              currentProgress_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              isQuestJobComplete_ = input.readBool();
-              break;
-            }
-            case 56: {
               ensureDeleteUserMonsterIdsIsMutable();
               deleteUserMonsterIds_.add(input.readInt64());
               break;
             }
-            case 58: {
+            case 42: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -1752,75 +1731,198 @@ public final class EventQuestProto {
         return this;
       }
       
-      // optional int32 questJobId = 4;
-      private int questJobId_ ;
-      public boolean hasQuestJobId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getQuestJobId() {
-        return questJobId_;
-      }
-      public Builder setQuestJobId(int value) {
-        bitField0_ |= 0x00000008;
-        questJobId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQuestJobId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        questJobId_ = 0;
-        onChanged();
-        return this;
+      // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+      private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_ =
+        java.util.Collections.emptyList();
+      private void ensureUserQuestJobsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          userQuestJobs_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.UserQuestJobProto>(userQuestJobs_);
+          bitField0_ |= 0x00000008;
+         }
       }
       
-      // optional int32 currentProgress = 5;
-      private int currentProgress_ ;
-      public boolean hasCurrentProgress() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.UserQuestJobProto, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder, com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> userQuestJobsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> getUserQuestJobsList() {
+        if (userQuestJobsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userQuestJobs_);
+        } else {
+          return userQuestJobsBuilder_.getMessageList();
+        }
       }
-      public int getCurrentProgress() {
-        return currentProgress_;
+      public int getUserQuestJobsCount() {
+        if (userQuestJobsBuilder_ == null) {
+          return userQuestJobs_.size();
+        } else {
+          return userQuestJobsBuilder_.getCount();
+        }
       }
-      public Builder setCurrentProgress(int value) {
-        bitField0_ |= 0x00000010;
-        currentProgress_ = value;
-        onChanged();
+      public com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index) {
+        if (userQuestJobsBuilder_ == null) {
+          return userQuestJobs_.get(index);
+        } else {
+          return userQuestJobsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setUserQuestJobs(
+          int index, com.lvl6.proto.QuestProto.UserQuestJobProto value) {
+        if (userQuestJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.set(index, value);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.setMessage(index, value);
+        }
         return this;
       }
-      public Builder clearCurrentProgress() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        currentProgress_ = 0;
-        onChanged();
+      public Builder setUserQuestJobs(
+          int index, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
+        if (userQuestJobsBuilder_ == null) {
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
+      }
+      public Builder addUserQuestJobs(com.lvl6.proto.QuestProto.UserQuestJobProto value) {
+        if (userQuestJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.add(value);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addUserQuestJobs(
+          int index, com.lvl6.proto.QuestProto.UserQuestJobProto value) {
+        if (userQuestJobsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.add(index, value);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addUserQuestJobs(
+          com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
+        if (userQuestJobsBuilder_ == null) {
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUserQuestJobs(
+          int index, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
+        if (userQuestJobsBuilder_ == null) {
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllUserQuestJobs(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.UserQuestJobProto> values) {
+        if (userQuestJobsBuilder_ == null) {
+          ensureUserQuestJobsIsMutable();
+          super.addAll(values, userQuestJobs_);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearUserQuestJobs() {
+        if (userQuestJobsBuilder_ == null) {
+          userQuestJobs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeUserQuestJobs(int index) {
+        if (userQuestJobsBuilder_ == null) {
+          ensureUserQuestJobsIsMutable();
+          userQuestJobs_.remove(index);
+          onChanged();
+        } else {
+          userQuestJobsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder getUserQuestJobsBuilder(
+          int index) {
+        return getUserQuestJobsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
+          int index) {
+        if (userQuestJobsBuilder_ == null) {
+          return userQuestJobs_.get(index);  } else {
+          return userQuestJobsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
+           getUserQuestJobsOrBuilderList() {
+        if (userQuestJobsBuilder_ != null) {
+          return userQuestJobsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userQuestJobs_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder addUserQuestJobsBuilder() {
+        return getUserQuestJobsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.UserQuestJobProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder addUserQuestJobsBuilder(
+          int index) {
+        return getUserQuestJobsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.UserQuestJobProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto.Builder> 
+           getUserQuestJobsBuilderList() {
+        return getUserQuestJobsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.UserQuestJobProto, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder, com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
+          getUserQuestJobsFieldBuilder() {
+        if (userQuestJobsBuilder_ == null) {
+          userQuestJobsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.UserQuestJobProto, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder, com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder>(
+                  userQuestJobs_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          userQuestJobs_ = null;
+        }
+        return userQuestJobsBuilder_;
       }
       
-      // optional bool isQuestJobComplete = 6;
-      private boolean isQuestJobComplete_ ;
-      public boolean hasIsQuestJobComplete() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public boolean getIsQuestJobComplete() {
-        return isQuestJobComplete_;
-      }
-      public Builder setIsQuestJobComplete(boolean value) {
-        bitField0_ |= 0x00000020;
-        isQuestJobComplete_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearIsQuestJobComplete() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        isQuestJobComplete_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // repeated int64 deleteUserMonsterIds = 7;
+      // repeated int64 deleteUserMonsterIds = 5;
       private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureDeleteUserMonsterIdsIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>(deleteUserMonsterIds_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000010;
          }
       }
       public java.util.List<java.lang.Long>
@@ -1855,7 +1957,7 @@ public final class EventQuestProto {
       }
       public Builder clearDeleteUserMonsterIds() {
         deleteUserMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -4011,34 +4113,34 @@ public final class EventQuestProto {
       "to.QuestAcceptStatus\"g\n\021QuestAcceptStatu" +
       "s\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER",
       "\020\002\022\031\n\025FAIL_ALREADY_ACCEPTED\020\003\022\016\n\nFAIL_OT" +
-      "HER\020\004\"\331\001\n\031QuestProgressRequestProto\0220\n\006s" +
+      "HER\020\004\"\312\001\n\031QuestProgressRequestProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
       "Proto\022\017\n\007questId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001" +
-      "(\010\022\022\n\nquestJobId\030\004 \001(\005\022\027\n\017currentProgres" +
-      "s\030\005 \001(\005\022\032\n\022isQuestJobComplete\030\006 \001(\010\022\034\n\024d" +
-      "eleteUserMonsterIds\030\007 \003(\003\"\200\003\n\032QuestProgr" +
-      "essResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022N\n\006status\030\002 \001" +
-      "(\0162>.com.lvl6.proto.QuestProgressRespons",
-      "eProto.QuestProgressStatus\"\337\001\n\023QuestProg" +
-      "ressStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NO_QUEST" +
-      "_EXISTS\020\002\022+\n\'FAIL_DELETE_AMOUNT_DOES_NOT" +
-      "_MATCH_QUEST\020\003\022\"\n\036FAIL_NONEXISTENT_USER_" +
-      "MONSTERS\020\004\022!\n\035FAIL_INCOMPLETE_USER_MONST" +
-      "ERS\020\005\022\035\n\031FAIL_QUEST_JOB_INCOMPLETE\020\007\022\016\n\n" +
-      "FAIL_OTHER\020\006\"l\n\027QuestRedeemRequestProto\022" +
-      "@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimum" +
-      "UserProtoWithMaxResources\022\017\n\007questId\030\002 \001" +
-      "(\005\"\364\002\n\030QuestRedeemResponseProto\022@\n\006sende",
-      "r\030\001 \001(\01320.com.lvl6.proto.MinimumUserProt" +
-      "oWithMaxResources\022<\n\024newlyAvailableQuest" +
-      "s\030\002 \003(\0132\036.com.lvl6.proto.FullQuestProto\022" +
-      "J\n\006status\030\003 \001(\0162:.com.lvl6.proto.QuestRe" +
-      "deemResponseProto.QuestRedeemStatus\0222\n\004f" +
-      "ump\030\004 \001(\0132$.com.lvl6.proto.FullUserMonst" +
-      "erProto\022\017\n\007questId\030\005 \001(\005\"G\n\021QuestRedeemS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020" +
-      "\002\022\016\n\nFAIL_OTHER\020\003B\021B\017EventQuestProto"
+      "(\010\0228\n\ruserQuestJobs\030\004 \003(\0132!.com.lvl6.pro" +
+      "to.UserQuestJobProto\022\034\n\024deleteUserMonste" +
+      "rIds\030\005 \003(\003\"\200\003\n\032QuestProgressResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.p" +
+      "roto.QuestProgressResponseProto.QuestPro",
+      "gressStatus\"\337\001\n\023QuestProgressStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\030\n\024FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FA" +
+      "IL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST\020\003\022" +
+      "\"\n\036FAIL_NONEXISTENT_USER_MONSTERS\020\004\022!\n\035F" +
+      "AIL_INCOMPLETE_USER_MONSTERS\020\005\022\035\n\031FAIL_Q" +
+      "UEST_JOB_INCOMPLETE\020\007\022\016\n\nFAIL_OTHER\020\006\"l\n" +
+      "\027QuestRedeemRequestProto\022@\n\006sender\030\001 \001(\013" +
+      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
+      "xResources\022\017\n\007questId\030\002 \001(\005\"\364\002\n\030QuestRed" +
+      "eemResponseProto\022@\n\006sender\030\001 \001(\01320.com.l",
+      "vl6.proto.MinimumUserProtoWithMaxResourc" +
+      "es\022<\n\024newlyAvailableQuests\030\002 \003(\0132\036.com.l" +
+      "vl6.proto.FullQuestProto\022J\n\006status\030\003 \001(\016" +
+      "2:.com.lvl6.proto.QuestRedeemResponsePro" +
+      "to.QuestRedeemStatus\0222\n\004fump\030\004 \001(\0132$.com" +
+      ".lvl6.proto.FullUserMonsterProto\022\017\n\007ques" +
+      "tId\030\005 \001(\005\"G\n\021QuestRedeemStatus\022\013\n\007SUCCES" +
+      "S\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003B\021B\017EventQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4066,7 +4168,7 @@ public final class EventQuestProto {
           internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", "IsComplete", "QuestJobId", "CurrentProgress", "IsQuestJobComplete", "DeleteUserMonsterIds", },
+              new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterIds", },
               com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.class,
               com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.Builder.class);
           internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
