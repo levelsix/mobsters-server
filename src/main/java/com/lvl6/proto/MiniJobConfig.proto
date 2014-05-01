@@ -7,11 +7,11 @@ import "Structure.proto";
 
 package com.lvl6.proto;
 
-option java_outer_classname = "MiniTaskConfigProto";
+option java_outer_classname = "MiniJobConfigProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
-message MiniTaskProto {
-     optional int32 achievementId = 1;
+message MiniJobProto {
+     optional int32 miniJobId = 1;
      optional int32 requiredStructId = 2;
      optional string name = 3;
      optional int32 cashReward = 4;
@@ -30,7 +30,7 @@ message MiniTaskProto {
 
 //------------------------------------------------------------------------------------------
 
-message UserMiniTaskProto {
+message UserMiniJobProto {
 	optional int32 miniTaskId = 1;
     optional int32 baseDmgReceived = 2;
 	optional int64 timeStarted = 3; 

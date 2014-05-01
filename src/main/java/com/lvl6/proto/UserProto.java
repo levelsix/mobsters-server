@@ -3872,9 +3872,9 @@ public final class UserProto {
     com.lvl6.proto.UserProto.UserPvpLeagueProto getPvpLeagueInfo();
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getPvpLeagueInfoOrBuilder();
     
-    // optional int64 lastMiniTaskSpawnedTime = 50;
-    boolean hasLastMiniTaskSpawnedTime();
-    long getLastMiniTaskSpawnedTime();
+    // optional int64 lastMiniJobSpawnedTime = 50;
+    boolean hasLastMiniJobSpawnedTime();
+    long getLastMiniJobSpawnedTime();
     
     // optional string udidForHistory = 46;
     boolean hasUdidForHistory();
@@ -4280,14 +4280,14 @@ public final class UserProto {
       return pvpLeagueInfo_;
     }
     
-    // optional int64 lastMiniTaskSpawnedTime = 50;
-    public static final int LASTMINITASKSPAWNEDTIME_FIELD_NUMBER = 50;
-    private long lastMiniTaskSpawnedTime_;
-    public boolean hasLastMiniTaskSpawnedTime() {
+    // optional int64 lastMiniJobSpawnedTime = 50;
+    public static final int LASTMINIJOBSPAWNEDTIME_FIELD_NUMBER = 50;
+    private long lastMiniJobSpawnedTime_;
+    public boolean hasLastMiniJobSpawnedTime() {
       return ((bitField0_ & 0x01000000) == 0x01000000);
     }
-    public long getLastMiniTaskSpawnedTime() {
-      return lastMiniTaskSpawnedTime_;
+    public long getLastMiniJobSpawnedTime() {
+      return lastMiniJobSpawnedTime_;
     }
     
     // optional string udidForHistory = 46;
@@ -4503,7 +4503,7 @@ public final class UserProto {
       lastObstacleSpawnedTime_ = 0L;
       numObstaclesRemoved_ = 0;
       pvpLeagueInfo_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
-      lastMiniTaskSpawnedTime_ = 0L;
+      lastMiniJobSpawnedTime_ = 0L;
       udidForHistory_ = "";
       deviceToken_ = "";
       numBadges_ = 0;
@@ -4630,7 +4630,7 @@ public final class UserProto {
         output.writeInt32(49, numObstaclesRemoved_);
       }
       if (((bitField0_ & 0x01000000) == 0x01000000)) {
-        output.writeInt64(50, lastMiniTaskSpawnedTime_);
+        output.writeInt64(50, lastMiniJobSpawnedTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4779,7 +4779,7 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x01000000) == 0x01000000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(50, lastMiniTaskSpawnedTime_);
+          .computeInt64Size(50, lastMiniJobSpawnedTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4963,7 +4963,7 @@ public final class UserProto {
           pvpLeagueInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00800000);
-        lastMiniTaskSpawnedTime_ = 0L;
+        lastMiniJobSpawnedTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x01000000);
         udidForHistory_ = "";
         bitField0_ = (bitField0_ & ~0x02000000);
@@ -5132,7 +5132,7 @@ public final class UserProto {
         if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
           to_bitField0_ |= 0x01000000;
         }
-        result.lastMiniTaskSpawnedTime_ = lastMiniTaskSpawnedTime_;
+        result.lastMiniJobSpawnedTime_ = lastMiniJobSpawnedTime_;
         if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
           to_bitField0_ |= 0x02000000;
         }
@@ -5262,8 +5262,8 @@ public final class UserProto {
         if (other.hasPvpLeagueInfo()) {
           mergePvpLeagueInfo(other.getPvpLeagueInfo());
         }
-        if (other.hasLastMiniTaskSpawnedTime()) {
-          setLastMiniTaskSpawnedTime(other.getLastMiniTaskSpawnedTime());
+        if (other.hasLastMiniJobSpawnedTime()) {
+          setLastMiniJobSpawnedTime(other.getLastMiniJobSpawnedTime());
         }
         if (other.hasUdidForHistory()) {
           setUdidForHistory(other.getUdidForHistory());
@@ -5506,7 +5506,7 @@ public final class UserProto {
             }
             case 400: {
               bitField0_ |= 0x01000000;
-              lastMiniTaskSpawnedTime_ = input.readInt64();
+              lastMiniJobSpawnedTime_ = input.readInt64();
               break;
             }
           }
@@ -6218,23 +6218,23 @@ public final class UserProto {
         return pvpLeagueInfoBuilder_;
       }
       
-      // optional int64 lastMiniTaskSpawnedTime = 50;
-      private long lastMiniTaskSpawnedTime_ ;
-      public boolean hasLastMiniTaskSpawnedTime() {
+      // optional int64 lastMiniJobSpawnedTime = 50;
+      private long lastMiniJobSpawnedTime_ ;
+      public boolean hasLastMiniJobSpawnedTime() {
         return ((bitField0_ & 0x01000000) == 0x01000000);
       }
-      public long getLastMiniTaskSpawnedTime() {
-        return lastMiniTaskSpawnedTime_;
+      public long getLastMiniJobSpawnedTime() {
+        return lastMiniJobSpawnedTime_;
       }
-      public Builder setLastMiniTaskSpawnedTime(long value) {
+      public Builder setLastMiniJobSpawnedTime(long value) {
         bitField0_ |= 0x01000000;
-        lastMiniTaskSpawnedTime_ = value;
+        lastMiniJobSpawnedTime_ = value;
         onChanged();
         return this;
       }
-      public Builder clearLastMiniTaskSpawnedTime() {
+      public Builder clearLastMiniJobSpawnedTime() {
         bitField0_ = (bitField0_ & ~0x01000000);
-        lastMiniTaskSpawnedTime_ = 0L;
+        lastMiniJobSpawnedTime_ = 0L;
         onChanged();
         return this;
       }
@@ -7670,7 +7670,7 @@ public final class UserProto {
       "oWithFacebookId\022\033\n\023recipientFacebookId\030\003" +
       " \001(\t\022\024\n\014timeOfInvite\030\004 \001(\003\022\024\n\014timeAccept",
       "ed\030\005 \001(\003\022\024\n\014userStructId\030\006 \001(\005\022\023\n\013struct" +
-      "FbLvl\030\007 \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\370\006\n\rFu" +
+      "FbLvl\030\007 \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\367\006\n\rFu" +
       "llUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(" +
       "\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005" +
       " \001(\005\022\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n" +
@@ -7686,19 +7686,19 @@ public final class UserProto {
       "enterId\030- \001(\t\022\037\n\027lastObstacleSpawnedTime" +
       "\030/ \001(\003\022\033\n\023numObstaclesRemoved\0301 \001(\005\0229\n\rp" +
       "vpLeagueInfo\0300 \001(\0132\".com.lvl6.proto.User" +
-      "PvpLeagueProto\022\037\n\027lastMiniTaskSpawnedTim" +
-      "e\0302 \001(\003\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013devic" +
-      "eToken\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreat",
-      "eTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numCon" +
-      "secutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPost" +
-      "NotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(" +
-      "\t\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid\030\r" +
-      " \001(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005leve" +
-      "l\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\221\001\n\022" +
-      "UserPvpLeagueProto\022\016\n\006userId\030\001 \001(\005\022\020\n\010le" +
-      "agueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022" +
-      "\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005" +
-      "\022\025\n\rshieldEndTime\030\007 \001(\003B\013B\tUserProto"
+      "PvpLeagueProto\022\036\n\026lastMiniJobSpawnedTime" +
+      "\0302 \001(\003\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013device" +
+      "Token\030\020 \001(\t\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreate",
+      "Time\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numCons" +
+      "ecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostN" +
+      "otificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t" +
+      "\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid\030\r " +
+      "\001(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005level" +
+      "\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\221\001\n\022U" +
+      "serPvpLeagueProto\022\016\n\006userId\030\001 \001(\005\022\020\n\010lea" +
+      "gueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(\005\022\022" +
+      "\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001(\005\022" +
+      "\025\n\rshieldEndTime\030\007 \001(\003B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7758,7 +7758,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "PvpLeagueInfo", "LastMiniTaskSpawnedTime", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", },
+              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "FacebookId", "GameCenterId", "LastObstacleSpawnedTime", "NumObstaclesRemoved", "PvpLeagueInfo", "LastMiniJobSpawnedTime", "UdidForHistory", "DeviceToken", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "FbIdSetOnUserCreate", "Udid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =

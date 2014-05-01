@@ -11,41 +11,41 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.MiniTask;
+import com.lvl6.info.MiniJob;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class MiniTaskRetrieveUtils {
+@Component @DependsOn("gameServer") public class MiniJobRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, MiniTask> miniTaskIdsToMiniTasks;
-  private static Map<Integer, Map<Integer, MiniTask>> structureIdToMiniTaskIdToMiniTask;
+  private static Map<Integer, MiniJob> miniJobIdsToMiniJobs;
+  private static Map<Integer, Map<Integer, MiniJob>> structureIdToMiniJobIdToMiniJob;
   
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MINI_TASK;
+  private static final String TABLE_NAME = DBConstants.TABLE_MINI_JOB;
 
   //CONTROLLER LOGIC******************************************************************
 
   //RETRIEVE QUERIES*********************************************************************
-  public static Map<Integer, MiniTask> getMiniTaskIdsToMiniTasks() {
-    log.debug("retrieving all miniTask data");
-    if (miniTaskIdsToMiniTasks == null) {
-      setStaticMiniTaskIdsToMiniTasks();
+  public static Map<Integer, MiniJob> getMiniJobIdsToMiniJobs() {
+    log.debug("retrieving all miniJob data");
+    if (miniJobIdsToMiniJobs == null) {
+      setStaticMiniJobIdsToMiniJobs();
     }
-    return miniTaskIdsToMiniTasks;
+    return miniJobIdsToMiniJobs;
   }
 
-  public static MiniTask getMiniTaskForMiniTaskId(int miniTaskId) {
-    log.debug("retrieving miniTask with miniTaskId " + miniTaskId);
-    if (null == miniTaskIdsToMiniTasks) {
-      setStaticMiniTaskIdsToMiniTasks();
+  public static MiniJob getMiniJobForMiniJobId(int miniJobId) {
+    log.debug("retrieving miniJob with miniJobId " + miniJobId);
+    if (null == miniJobIdsToMiniJobs) {
+      setStaticMiniJobIdsToMiniJobs();
     }
-    return miniTaskIdsToMiniTasks.get(miniTaskId);
+    return miniJobIdsToMiniJobs.get(miniJobId);
   }
 
-  private static void setStaticMiniTaskIdsToMiniTasks() {
-    log.debug("setting static map of miniTaskIds to miniTasks");
+  private static void setStaticMiniJobIdsToMiniJobs() {
+    log.debug("setting static map of miniJobIds to miniJobs");
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -56,32 +56,32 @@ import com.lvl6.utils.DBConnection;
 			    try {
 			      rs.last();
 			      rs.beforeFirst();
-			      Map<Integer, MiniTask> tmp = new HashMap<Integer, MiniTask>();
-			      Map<Integer, Map<Integer, MiniTask>> structIdToMiniTaskIdToMiniTask =
-			    		  new HashMap<Integer, Map<Integer, MiniTask>>();
+			      Map<Integer, MiniJob> tmp = new HashMap<Integer, MiniJob>();
+			      Map<Integer, Map<Integer, MiniJob>> structIdToMiniJobIdToMiniJob =
+			    		  new HashMap<Integer, Map<Integer, MiniJob>>();
 			      
 			      while(rs.next()) {
-			        MiniTask miniTask = convertRSRowToMiniTask(rs);
-			        if (null == miniTask) {
+			        MiniJob miniJob = convertRSRowToMiniJob(rs);
+			        if (null == miniJob) {
 			        	continue;
 			        }
 
-			        int structId = miniTask.getRequiredStructId();
-			        if (!structIdToMiniTaskIdToMiniTask.containsKey(structId)) {
-			        	structIdToMiniTaskIdToMiniTask.put(structId,
-			        			new HashMap<Integer, MiniTask>());
+			        int structId = miniJob.getRequiredStructId();
+			        if (!structIdToMiniJobIdToMiniJob.containsKey(structId)) {
+			        	structIdToMiniJobIdToMiniJob.put(structId,
+			        			new HashMap<Integer, MiniJob>());
 			        }
-			        int miniTaskId = miniTask.getId();
+			        int miniJobId = miniJob.getId();
 			        
-			        tmp.put(miniTaskId, miniTask);
+			        tmp.put(miniJobId, miniJob);
 			        
-			        Map<Integer, MiniTask> miniTaskIdToMiniTask =
-			        		structIdToMiniTaskIdToMiniTask.get(structId);
-			        miniTaskIdToMiniTask.put(miniTaskId, miniTask);
+			        Map<Integer, MiniJob> miniJobIdToMiniJob =
+			        		structIdToMiniJobIdToMiniJob.get(structId);
+			        miniJobIdToMiniJob.put(miniJobId, miniJob);
 			        
 			      }
-			      miniTaskIdsToMiniTasks = tmp;
-			      structureIdToMiniTaskIdToMiniTask = structIdToMiniTaskIdToMiniTask;
+			      miniJobIdsToMiniJobs = tmp;
+			      structureIdToMiniJobIdToMiniJob = structIdToMiniJobIdToMiniJob;
 			    } catch (SQLException e) {
 			      log.error("problem with database call.", e);
 			      
@@ -89,25 +89,25 @@ import com.lvl6.utils.DBConnection;
 			  }
 			}
 		} catch (Exception e) {
-    	log.error("miniTask retrieve db error.", e);
+    	log.error("miniJob retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }
   }
 
   public static void reload() {
-    setStaticMiniTaskIdsToMiniTasks();
+    setStaticMiniJobIdsToMiniJobs();
   }
 
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static MiniTask convertRSRowToMiniTask(ResultSet rs) throws SQLException {
+  private static MiniJob convertRSRowToMiniJob(ResultSet rs) throws SQLException {
 
     int i = 1;
     int id = rs.getInt(i++);
     int requiredStructId = rs.getInt(i++);
-    String miniTaskName = rs.getString(i++);
+    String miniJobName = rs.getString(i++);
     int cashReward = rs.getInt(i++);
     int oilReward = rs.getInt(i++);
     int gemReward = rs.getInt(i++);
@@ -128,12 +128,12 @@ import com.lvl6.utils.DBConnection;
     	}
     }
     
-    MiniTask miniTask = new MiniTask(id, requiredStructId, miniTaskName,
+    MiniJob miniJob = new MiniJob(id, requiredStructId, miniJobName,
     		cashReward, oilReward, gemReward, monsterIdReward, quality,
     		maxNumMonstersAllowed, chanceToAppear, hpRequired, atkRequired,
     		minDmgDealt, maxDmgDealt);
     
-    return miniTask;
+    return miniJob;
   }
 
 }

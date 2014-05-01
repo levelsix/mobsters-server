@@ -2,7 +2,7 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class MiniTask implements Serializable {
+public class MiniJob implements Serializable {
 
 	private static final long serialVersionUID = -809651011006346155L;
 	
@@ -21,7 +21,7 @@ public class MiniTask implements Serializable {
 	private int minDmgDealt;
 	private int maxDmgDealt;
 	
-	public MiniTask(int id, int requiredStructId, String name, int cashReward,
+	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward, String quality,
 			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
 			int atkRequired, int minDmgDealt, int maxDmgDealt) {

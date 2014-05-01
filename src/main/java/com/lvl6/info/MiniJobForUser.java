@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class MiniTaskForUser implements Serializable {
+public class MiniJobForUser implements Serializable {
 	
 	private static final long serialVersionUID = 8744099139117830254L;
 	
 	private int userId;
-	private int miniTaskId;
+	private int miniJobId;
 	private int baseDmgReceived;
 	private Date timeStarted;
 	private List<Integer> userMonsterIds;
 	
-	public MiniTaskForUser() {
+	public MiniJobForUser() {
 		super();
 	}
 	
-	public MiniTaskForUser(int userId, int miniTaskId, int baseDmgReceived,
+	public MiniJobForUser(int userId, int miniJobId, int baseDmgReceived,
 			Date timeStarted, List<Integer> userMonsterIds) {
 		super();
 		this.userId = userId;
-		this.miniTaskId = miniTaskId;
+		this.miniJobId = miniJobId;
 		this.baseDmgReceived = baseDmgReceived;
 		this.timeStarted = timeStarted;
 		this.userMonsterIds = userMonsterIds;
@@ -36,12 +36,12 @@ public class MiniTaskForUser implements Serializable {
 		this.userId = userId;
 	}
 
-	public int getMiniTaskId() {
-		return miniTaskId;
+	public int getMiniJobId() {
+		return miniJobId;
 	}
 
-	public void setMiniTaskId(int miniTaskId) {
-		this.miniTaskId = miniTaskId;
+	public void setMiniJobId(int miniJobId) {
+		this.miniJobId = miniJobId;
 	}
 
 	public int getBaseDmgReceived() {
@@ -70,8 +70,8 @@ public class MiniTaskForUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MiniTaskForUser [userId=" + userId + ", miniTaskId="
-				+ miniTaskId + ", baseDmgReceived=" + baseDmgReceived
+		return "MiniJobForUser [userId=" + userId + ", miniJobId="
+				+ miniJobId + ", baseDmgReceived=" + baseDmgReceived
 				+ ", timeStarted=" + timeStarted + ", userMonsterIds="
 				+ userMonsterIds + "]";
 	}

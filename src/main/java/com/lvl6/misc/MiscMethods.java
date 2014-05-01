@@ -119,7 +119,7 @@ import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MiniTaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -702,7 +702,7 @@ public class MiscMethods {
     ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
 //    MonsterForPvpRetrieveUtils.staticReload();
-    MiniTaskRetrieveUtils.reload();
+    MiniJobRetrieveUtils.reload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();

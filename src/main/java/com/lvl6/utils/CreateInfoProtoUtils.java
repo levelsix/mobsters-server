@@ -115,7 +115,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
-import com.lvl6.proto.MiniTaskConfigProto.MiniTaskProto;
+import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
@@ -1253,11 +1253,11 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
   
-  /**MiniTaskConfig.proto********************************************/
-  public static MiniTaskProto createMiniTaskProto(MiniTaskProto mtp) {
-	  MiniTaskProto.Builder mtpb = MiniTaskProto.newBuilder();
+  /**MiniJobConfig.proto********************************************/
+  public static MiniJobProto createMiniJobProto(MiniJobProto mtp) {
+	  MiniJobProto.Builder mtpb = MiniJobProto.newBuilder();
 	  
-	  mtpb.setAchievementId(mtp.getAchievementId());
+	  mtpb.setMiniJobId(mtp.getMiniJobId());
 	  mtpb.setRequiredStructId(mtp.getRequiredStructId());
 	  
 	  String str = mtp.getName();
@@ -2613,9 +2613,9 @@ public class CreateInfoProtoUtils {
     int numObstaclesRemoved = u.getNumObstaclesRemoved();
     builder.setNumObstaclesRemoved(numObstaclesRemoved);
     
-    Date lastMiniTaskSpawnedTime = u.getLastMiniTaskGeneratedTime();
-    if (null != lastMiniTaskSpawnedTime) {
-    	builder.setLastMiniTaskSpawnedTime(lastMiniTaskSpawnedTime.getTime());
+    Date lastMiniJobSpawnedTime = u.getLastMiniJobGeneratedTime();
+    if (null != lastMiniJobSpawnedTime) {
+    	builder.setLastMiniJobSpawnedTime(lastMiniJobSpawnedTime.getTime());
     }
     
     //add new columns above here, not below the if. if case for is fake
