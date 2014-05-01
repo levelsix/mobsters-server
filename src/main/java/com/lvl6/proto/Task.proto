@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 
 package com.lvl6.proto;
 
@@ -63,28 +64,18 @@ message TaskStageMonsterProto {
 
 message PersistentEventProto {
 	optional int32 eventId = 1;
-	optional DayOfWeek dayOfWeek = 2;
+	optional DayOfWeek dayOfWeek = 2 [default = MONDAY];
 	optional int32 startHour = 3;
 	optional int32 eventDurationMinutes = 4;
 	optional int32 taskId = 5;
 	optional int32 cooldownMinutes = 6;
 	optional EventType type = 7;
-	optional MonsterProto.MonsterElement monsterElement = 8;
+	optional Element monsterElement = 8 [default = NO_ELEMENT];
 	
 	enum EventType {
 		ENHANCE = 1;
 		EVOLUTION = 2;
 	}
-}
-
-enum DayOfWeek {
-	SUNDAY = 1;
-	MONDAY = 2;
-	TUESDAY = 3;
-	WEDNESDAY = 4;
-	THURSDAY = 5;
-	FRIDAY = 6;
-	SATURDAY = 7;
 }
 
 //------------------------------------------------------------------------------------------

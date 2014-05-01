@@ -2,6 +2,7 @@
 
 import "Battle.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";

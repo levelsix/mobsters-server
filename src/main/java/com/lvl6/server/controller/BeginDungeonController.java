@@ -33,8 +33,8 @@ import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
@@ -94,7 +94,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     //used for element tutorial, client sets what enemy monster element should appear
   	//and only that one guy should appear (quest tasks should have only one stage in db)	
-    MonsterElement elem = reqProto.getElem();
+    Element elem = reqProto.getElem();
     // if not set, then go select monsters at random
     boolean forceEnemyElem = reqProto.getForceEnemyElem();
     
@@ -291,7 +291,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent,
 		  int eventId, int gemsSpent, List<Long> utIdList,
 		  Map<Integer, TaskStageProto> stageNumsToProtos,
-		  List<Integer> questIds, MonsterElement elem,
+		  List<Integer> questIds, Element elem,
 		  boolean forceEnemyElem, Map<String, Integer> currencyChange,
 		  Map<String, Integer> previousCurrency) {
 	  boolean success = false;
@@ -375,9 +375,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, List<Integer>> stageNumsToCash,
   		Map<Integer, List<Integer>> stageNumsToOil,
   		Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
-		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
-		  Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId,
-		  MonsterElement elem, boolean forceEnemyElem) {
+  		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
+  		Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId,
+  		Element elem, boolean forceEnemyElem) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
@@ -450,12 +450,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void selectElementMonster(List<TaskStageMonster> taskStageMonsters,
-  		MonsterElement elem, List<TaskStageMonster> spawnedTaskStageMonsters) {
+  		Element elem, List<TaskStageMonster> spawnedTaskStageMonsters) {
   	
   	for (TaskStageMonster tsm : taskStageMonsters) {
   		
   		int monsterId = tsm.getMonsterId();
-  		MonsterElement mon = MonsterStuffUtils.getMonsterElementForMonsterId(monsterId);
+  		Element mon = MonsterStuffUtils.getMonsterElementForMonsterId(monsterId);
   		
   		if (!elem.equals(mon)) {
   			continue;

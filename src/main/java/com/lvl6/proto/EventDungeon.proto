@@ -1,6 +1,8 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -31,7 +33,7 @@ message BeginDungeonRequestProto {
 
 	//used for element tutorial, client sets what enemy monster element should appear
 	//and only that one guy should appear (quest tasks should have only one stage in db)	
-	optional MonsterProto.MonsterElement elem = 9 [default = FIRE];
+	optional Element elem = 9 [default = NO_ELEMENT];
 	
 	// if not set, then go select monsters at random
 	optional bool forceEnemyElem = 10;

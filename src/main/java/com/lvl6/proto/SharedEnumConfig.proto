@@ -1,0 +1,44 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+package com.lvl6.proto;
+
+option java_outer_classname = "SharedEnumConfigProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+enum DayOfWeek {
+	SUNDAY = 1;
+	MONDAY = 2;
+	TUESDAY = 3;
+	WEDNESDAY = 4;
+	THURSDAY = 5;
+	FRIDAY = 6;
+	SATURDAY = 7;
+	
+	NO_DAY_OF_WEEK = 8;
+}
+
+enum Element {
+	NO_ELEMENT = 1;
+	FIRE = 2;	//beats earth
+	EARTH = 3;	//beats water
+	WATER = 4;	//beats fire
+
+	LIGHT = 5;	//beats dark
+	DARK = 6;	//beats light
+
+	ROCK = 7;	//damages everything
+}
+
+
+enum Quality {
+	NO_QUALITY = 1;
+	COMMON = 2;
+	RARE = 3;
+	ULTRA = 4;
+	EPIC = 5;
+	LEGENDARY = 6;
+	
+	EVO = 7; //MONSTERS USED FOR EVOLVING
+}

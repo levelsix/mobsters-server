@@ -8,90 +8,6 @@ public final class TaskProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public enum DayOfWeek
-      implements com.google.protobuf.ProtocolMessageEnum {
-    SUNDAY(0, 1),
-    MONDAY(1, 2),
-    TUESDAY(2, 3),
-    WEDNESDAY(3, 4),
-    THURSDAY(4, 5),
-    FRIDAY(5, 6),
-    SATURDAY(6, 7),
-    ;
-    
-    public static final int SUNDAY_VALUE = 1;
-    public static final int MONDAY_VALUE = 2;
-    public static final int TUESDAY_VALUE = 3;
-    public static final int WEDNESDAY_VALUE = 4;
-    public static final int THURSDAY_VALUE = 5;
-    public static final int FRIDAY_VALUE = 6;
-    public static final int SATURDAY_VALUE = 7;
-    
-    
-    public final int getNumber() { return value; }
-    
-    public static DayOfWeek valueOf(int value) {
-      switch (value) {
-        case 1: return SUNDAY;
-        case 2: return MONDAY;
-        case 3: return TUESDAY;
-        case 4: return WEDNESDAY;
-        case 5: return THURSDAY;
-        case 6: return FRIDAY;
-        case 7: return SATURDAY;
-        default: return null;
-      }
-    }
-    
-    public static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>() {
-            public DayOfWeek findValueByNumber(int number) {
-              return DayOfWeek.valueOf(number);
-            }
-          };
-    
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.TaskProto.getDescriptor().getEnumTypes().get(0);
-    }
-    
-    private static final DayOfWeek[] VALUES = {
-      SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, 
-    };
-    
-    public static DayOfWeek valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-    
-    private final int index;
-    private final int value;
-    
-    private DayOfWeek(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-    
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DayOfWeek)
-  }
-  
   public interface TaskStageProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -2791,9 +2707,9 @@ public final class TaskProto {
     boolean hasEventId();
     int getEventId();
     
-    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     boolean hasDayOfWeek();
-    com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek();
+    com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek();
     
     // optional int32 startHour = 3;
     boolean hasStartHour();
@@ -2815,9 +2731,9 @@ public final class TaskProto {
     boolean hasType();
     com.lvl6.proto.TaskProto.PersistentEventProto.EventType getType();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 8;
+    // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
     boolean hasMonsterElement();
-    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
+    com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement();
   }
   public static final class PersistentEventProto extends
       com.google.protobuf.GeneratedMessage
@@ -2927,13 +2843,13 @@ public final class TaskProto {
       return eventId_;
     }
     
-    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     public static final int DAYOFWEEK_FIELD_NUMBER = 2;
-    private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_;
+    private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_;
     public boolean hasDayOfWeek() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
+    public com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek() {
       return dayOfWeek_;
     }
     
@@ -2987,25 +2903,25 @@ public final class TaskProto {
       return type_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 8;
+    // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
     public static final int MONSTERELEMENT_FIELD_NUMBER = 8;
-    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_;
+    private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_;
     public boolean hasMonsterElement() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
-    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+    public com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement() {
       return monsterElement_;
     }
     
     private void initFields() {
       eventId_ = 0;
-      dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
+      dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
       startHour_ = 0;
       eventDurationMinutes_ = 0;
       taskId_ = 0;
       cooldownMinutes_ = 0;
       type_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
-      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
+      monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3210,7 +3126,7 @@ public final class TaskProto {
         super.clear();
         eventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
+        dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
         bitField0_ = (bitField0_ & ~0x00000002);
         startHour_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3222,7 +3138,7 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         type_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
         bitField0_ = (bitField0_ & ~0x00000040);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
+        monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -3372,7 +3288,7 @@ public final class TaskProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.TaskProto.DayOfWeek value = com.lvl6.proto.TaskProto.DayOfWeek.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.DayOfWeek value = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3414,7 +3330,7 @@ public final class TaskProto {
             }
             case 64: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(8, rawValue);
               } else {
@@ -3450,15 +3366,15 @@ public final class TaskProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
-      private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
+      // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
+      private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
       public boolean hasDayOfWeek() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
+      public com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek() {
         return dayOfWeek_;
       }
-      public Builder setDayOfWeek(com.lvl6.proto.TaskProto.DayOfWeek value) {
+      public Builder setDayOfWeek(com.lvl6.proto.SharedEnumConfigProto.DayOfWeek value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3469,7 +3385,7 @@ public final class TaskProto {
       }
       public Builder clearDayOfWeek() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
+        dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
         onChanged();
         return this;
       }
@@ -3582,15 +3498,15 @@ public final class TaskProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 8;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
+      // optional .com.lvl6.proto.Element monsterElement = 8 [default = NO_ELEMENT];
+      private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
-      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+      public com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement() {
         return monsterElement_;
       }
-      public Builder setMonsterElement(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value) {
+      public Builder setMonsterElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3601,7 +3517,7 @@ public final class TaskProto {
       }
       public Builder clearMonsterElement() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.NO_ELEMENT;
+        monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         onChanged();
         return this;
       }
@@ -4109,37 +4025,35 @@ public final class TaskProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nTask.proto\022\016com.lvl6.proto\032\022MonsterStu" +
-      "ff.proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 " +
-      "\001(\005\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.pr" +
-      "oto.TaskStageMonsterProto\"\247\001\n\rFullTaskPr" +
-      "oto\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013des" +
-      "cription\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetN" +
-      "umWithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId" +
-      "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"b\n\024M" +
-      "inimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006t" +
-      "askId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003 \001(\005\022\022\n\nu",
-      "serTaskId\030\004 \001(\003\"\234\002\n\025TaskStageMonsterProt" +
-      "o\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001(" +
-      "\01621.com.lvl6.proto.TaskStageMonsterProto" +
-      ".MonsterType\022\021\n\texpReward\030\003 \001(\005\022\022\n\ncashR" +
-      "eward\030\004 \001(\005\022\021\n\toilReward\030\010 \001(\005\022\032\n\022puzzle" +
-      "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006ite" +
-      "mId\030\007 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEve" +
-      "ntProto\022\017\n\007eventId\030\001 \001(\005\022,\n\tdayOfWeek\030\002 " +
-      "\001(\0162\031.com.lvl6.proto.DayOfWeek\022\021\n\tstartH",
-      "our\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022" +
-      "\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005" +
-      "\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Persiste" +
-      "ntEventProto.EventType\022C\n\016monsterElement" +
-      "\030\010 \001(\0162+.com.lvl6.proto.MonsterProto.Mon" +
-      "sterElement\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
-      "\tEVOLUTION\020\002\"V\n\030UserPersistentEventProto" +
-      "\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coo" +
-      "lDownStartTime\030\003 \001(\003*g\n\tDayOfWeek\022\n\n\006SUN" +
-      "DAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY\020\003\022\r\n\tWEDNES",
-      "DAY\020\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDAY\020\006\022\014\n\010SATUR" +
-      "DAY\020\007B\013B\tTaskProto"
+      "ff.proto\032\026SharedEnumConfig.proto\"_\n\016Task" +
+      "StageProto\022\017\n\007stageId\030\001 \001(\005\022<\n\rstageMons" +
+      "ters\030\002 \003(\0132%.com.lvl6.proto.TaskStageMon" +
+      "sterProto\"\247\001\n\rFullTaskProto\022\016\n\006taskId\030\001 " +
+      "\001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\016" +
+      "\n\006cityId\030\004 \001(\005\022\032\n\022assetNumWithinCity\030\005 \001" +
+      "(\005\022\032\n\022prerequisiteTaskId\030\006 \001(\005\022\033\n\023prereq" +
+      "uisiteQuestId\030\007 \001(\005\"b\n\024MinimumUserTaskPr" +
+      "oto\022\016\n\006userId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016c",
+      "urTaskStageId\030\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003\"" +
+      "\234\002\n\025TaskStageMonsterProto\022\021\n\tmonsterId\030\001" +
+      " \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.pro" +
+      "to.TaskStageMonsterProto.MonsterType\022\021\n\t" +
+      "expReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\to" +
+      "ilReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001" +
+      "(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\"3\n\013Mon" +
+      "sterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004" +
+      "BOSS\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007event" +
+      "Id\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.p",
+      "roto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(" +
+      "\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\016\n\006taskI" +
+      "d\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005\022<\n\004type" +
+      "\030\007 \001(\0162..com.lvl6.proto.PersistentEventP" +
+      "roto.EventType\022;\n\016monsterElement\030\010 \001(\0162\027" +
+      ".com.lvl6.proto.Element:\nNO_ELEMENT\"\'\n\tE" +
+      "ventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030" +
+      "UserPersistentEventProto\022\016\n\006userId\030\001 \001(\005" +
+      "\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003" +
+      " \001(\003B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4201,6 +4115,7 @@ public final class TaskProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
   }
   

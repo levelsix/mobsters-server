@@ -115,6 +115,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.MiniTaskConfigProto.MiniTaskProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
@@ -122,8 +123,6 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -137,6 +136,9 @@ import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
+import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
@@ -153,7 +155,6 @@ import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
-import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
@@ -231,7 +232,7 @@ public class CreateInfoProtoUtils {
 	  str = a.getMonsterElement();
 	  if (null != str) {
 		  try {
-			  MonsterElement me = MonsterElement.valueOf(str);
+			  Element me = Element.valueOf(str);
 			  ab.setElement(me);
 		  } catch(Exception e) {
 			  log.error("invalid MonsterElement. achievement=" + a);
@@ -241,7 +242,7 @@ public class CreateInfoProtoUtils {
 	  str = a.getMonsterQuality();
 	  if (null != str) {
 		  try {
-			  MonsterQuality mq = MonsterQuality.valueOf(str);
+			  Quality mq = Quality.valueOf(str);
 			  ab.setQuality(mq);
 		  } catch(Exception e) {
 			  log.error("invalid MonsterQuality. achievement=" + a);
@@ -623,7 +624,7 @@ public class CreateInfoProtoUtils {
     String monsterQuality = bdi.getMonsterQuality();
     if (null != monsterQuality) {
     	try {
-    		MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    		Quality mq = Quality.valueOf(monsterQuality);
     		b.setQuality(mq);
     	} catch (Exception e){
     		log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
@@ -1252,6 +1253,27 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
   
+  /**MiniTaskConfig.proto********************************************/
+  public static MiniTaskProto createMiniTaskProto(MiniTaskProto mtp) {
+	  MiniTaskProto.Builder mtpb = MiniTaskProto.newBuilder();
+	  
+	  mtpb.setAchievementId(mtp.getAchievementId());
+	  mtpb.setRequiredStructId(mtp.getRequiredStructId());
+	  
+	  String str = mtp.getName();
+	  if (null != str) {
+		  mtpb.setName(str);
+	  }
+	  
+	  mtpb.setCashReward(mtp.getCashReward());
+	  mtpb.setOilReward(mtp.getOilReward());
+	  mtpb.setGemReward(mtp.getGemReward());
+	  mtpb.setMonsterIdReward(mtp.getMonsterIdReward());
+	  
+	  return mtpb.build();
+  }
+  
+  
   /**MonsterStuff.proto********************************************/
   public static MonsterProto createMonsterProto(Monster aMonster,
       Map<Integer, MonsterLevelInfo> levelToInfo) {
@@ -1270,7 +1292,7 @@ public class CreateInfoProtoUtils {
     }
     String monsterQuality = aMonster.getQuality(); 
     try {
-    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	Quality mq = Quality.valueOf(monsterQuality);
     	mpb.setQuality(mq);
     } catch (Exception e) {
     	log.error("invalid monster quality. monster=" + aMonster);
@@ -1283,7 +1305,7 @@ public class CreateInfoProtoUtils {
 
     String monsterElement = aMonster.getElement();
     try {
-    	MonsterElement me = MonsterElement.valueOf(monsterElement);
+    	Element me = Element.valueOf(monsterElement);
     	mpb.setMonsterElement(me);
     } catch (Exception e){
       log.error("invalid monster element. monster=" + aMonster);
@@ -1648,7 +1670,7 @@ public class CreateInfoProtoUtils {
     str = quest.getMonsterElement();
     if (null != str) {
     	try {
-    		MonsterElement me = MonsterElement.valueOf(str);
+    		Element me = Element.valueOf(str);
     		builder.setMonsterElement(me);
     	} catch (Exception e) {
     		log.error("invalid monsterElement. quest=" + quest);
@@ -2362,7 +2384,7 @@ public class CreateInfoProtoUtils {
       log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
     }
     try {
-      MonsterElement elem = MonsterElement.valueOf(monsterElem);
+      Element elem = Element.valueOf(monsterElem);
       pepb.setMonsterElement(elem);
     } catch (Exception e) {
       log.error("can't create enum type. monster elem=" + monsterElem + 
@@ -2590,6 +2612,11 @@ public class CreateInfoProtoUtils {
     
     int numObstaclesRemoved = u.getNumObstaclesRemoved();
     builder.setNumObstaclesRemoved(numObstaclesRemoved);
+    
+    Date lastMiniTaskSpawnedTime = u.getLastMiniTaskGeneratedTime();
+    if (null != lastMiniTaskSpawnedTime) {
+    	builder.setLastMiniTaskSpawnedTime(lastMiniTaskSpawnedTime.getTime());
+    }
     
     //add new columns above here, not below the if. if case for is fake
 

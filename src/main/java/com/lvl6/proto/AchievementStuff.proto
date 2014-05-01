@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 
 package com.lvl6.proto;
@@ -20,9 +21,9 @@ message AchievementProto {
      //could be null
      optional ResourceType resourceType = 7 [default = NO_RESOURCE];
      //could be null
-     optional MonsterProto.MonsterElement element = 8 [default = NO_ELEMENT];
+     optional Element element = 8 [default = NO_ELEMENT];
      //could be null
-     optional MonsterProto.MonsterQuality quality = 9 [default = NO_QUALITY];
+     optional Quality quality = 9 [default = NO_QUALITY];
      //could be 0, as in not set
      optional int32 staticDataId = 10;
      

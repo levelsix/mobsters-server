@@ -1,6 +1,8 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "SharedEnumConfig.proto";
+
 package com.lvl6.proto;
 
 option java_outer_classname = "MonsterStuffProto";
@@ -11,10 +13,10 @@ message MonsterProto {
 	optional string name = 2; //for grouping purposes
 	optional string shorterName = 28;
 	optional string monsterGroup = 3;
-	optional MonsterQuality quality = 4;
+	optional Quality quality = 4 [default = NO_QUALITY];
 	optional int32 evolutionLevel = 5;
 	optional string displayName = 6;
-	optional MonsterElement monsterElement = 7;
+	optional Element monsterElement = 7 [default = NO_ELEMENT];
 	optional string imagePrefix = 8;
 	optional int32 numPuzzlePieces = 9;
 	optional int32 minutesToCombinePieces = 10;
@@ -45,31 +47,6 @@ message MonsterProto {
 	optional int32 atkAnimationRepeatedFramesEnd = 27;
 	
 	//optional string shorterName = 28; defined above
-	
-	enum MonsterQuality {
-		NO_QUALITY = 7;
-		COMMON = 1;
-		RARE = 2;
-		ULTRA = 3;
-		EPIC = 4;
-		LEGENDARY = 5;
-		
-		EVO = 6; //MONSTERS USED FOR EVOLVING
-		//NO_QUALITY = 7; defined above
-	}
-	
-	enum MonsterElement {
-		NO_ELEMENT = 7;
-		FIRE = 1; //beats grass
-		GRASS = 2; //beats water
-		WATER = 3; //beats fire
-		
-		LIGHT = 4; //beats dark
-		DARK = 5; //beats light
-		
-		ROCK = 6; //damages everything
-		//NO_ELEMENT = 7; defined above
-	}
 	
 	enum AnimationType {
 		NO_ANIMATION = 3;

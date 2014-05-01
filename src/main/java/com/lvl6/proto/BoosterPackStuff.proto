@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -60,7 +61,7 @@ message BoosterDisplayItemProto {
 	//true means monster, false means gems
 	optional bool isMonster = 2;
 	optional bool isComplete = 3;
-	optional MonsterProto.MonsterQuality quality = 4 [default = COMMON];
+	optional Quality quality = 4 [default = NO_QUALITY];
 	optional int32 gemReward = 5;
 	optional int32 quantity = 6;
 }

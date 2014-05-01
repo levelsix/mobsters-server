@@ -112,6 +112,7 @@ message FullUserProto {
 	
 	optional UserPvpLeagueProto pvpLeagueInfo = 48; 
 	//optional int32 numObstaclesRemoved = 49; //defined above
+	optional int64 lastMiniTaskSpawnedTime = 50;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

@@ -18,14 +18,13 @@ import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
-import com.lvl6.info.Quest;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
+import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -557,13 +556,13 @@ public class MonsterStuffUtils {
   	return userMonsterIds;
   }
   
-  public static MonsterElement getMonsterElementForMonsterId(int monsterId) {
+  public static Element getMonsterElementForMonsterId(int monsterId) {
 	  	Monster mon = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 	  	
 	  	if (null != mon) {
-	  		MonsterElement me = null;
+	  		Element me = null;
 	  		try {
-	  			me = MonsterElement.valueOf(mon.getElement());
+	  			me = Element.valueOf(mon.getElement());
 	  			return me;
 	  		} catch (Exception e) {
 	  			log.error("invalid monsterElement. id=" + monsterId + " monster=" + mon);
