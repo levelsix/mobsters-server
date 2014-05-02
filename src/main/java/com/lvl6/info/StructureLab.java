@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 public class StructureLab implements Serializable {
 
-	private static final long serialVersionUID = 5038262297256522280L;
+	private static final long serialVersionUID = 1709205982691094635L;
+	
 	private int structId;
 	private int queueSize;
-	float pointsPerSecond;
+	private float pointsPerSecond;
 	
 	public StructureLab(int structId, int queueSize, float pointsPerSecond) {
 		super();
@@ -39,4 +40,11 @@ public class StructureLab implements Serializable {
 	public void setPointsPerSecond(float pointsPerSecond) {
 		this.pointsPerSecond = pointsPerSecond;
 	}
+
+	@Override
+	public String toString() {
+		return "StructureLab [structId=" + structId + ", queueSize="
+				+ queueSize + ", pointsPerSecond=" + pointsPerSecond + "]";
+	}
+	
 }

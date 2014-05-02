@@ -105,7 +105,9 @@ public class QuestJobForUserRetrieveUtil {
 				questJobIdToJobs.put(questJobId, qjfu);
 			}
 		} catch (Exception e) {
-			
+			log.error("getQuestJobIdsToJobs() could not retrieve" +
+					" UserQuestJobs for userId=" + userId + "questId=" +
+					questId);
 			questJobIdToJobs = new HashMap<Integer, QuestJobForUser>();
 		}
 		return questJobIdToJobs;
@@ -168,7 +170,7 @@ public class QuestJobForUserRetrieveUtil {
 			
 		} catch (Exception e) {
 			log.error("getQuestIdToQuestJobsForUserId() could not retrieve" +
-					" user obstacle for userId=" + userId, e);
+					" UserQuestJob for userId=" + userId, e);
 			questIdToQjfuList =
 					new HashMap<Integer, Collection<QuestJobForUser>>();
 		}

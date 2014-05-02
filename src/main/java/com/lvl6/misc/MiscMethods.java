@@ -22,6 +22,7 @@ import org.slf4j.MDC;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Achievement;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
@@ -61,6 +62,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityElementProto;
@@ -99,6 +101,7 @@ import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
+import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
@@ -116,19 +119,21 @@ import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMiniTaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -248,7 +253,7 @@ public class MiscMethods {
 
   public static void explodeIntoInts(String stringToExplode, 
       String delimiter, List<Integer> returnValue) {
-    StringTokenizer st = new StringTokenizer(stringToExplode, ", ");
+    StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
     while (st.hasMoreTokens()) {
       returnValue.add(Integer.parseInt(st.nextToken()));
     }
@@ -675,6 +680,7 @@ public class MiscMethods {
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
+    AchievementRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
     BoosterDisplayItemRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
@@ -696,6 +702,7 @@ public class MiscMethods {
     ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
 //    MonsterForPvpRetrieveUtils.staticReload();
+    MiniJobRetrieveUtils.reload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
@@ -709,6 +716,7 @@ public class MiscMethods {
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
+    StructureMiniTaskRetrieveUtils.reload();
     StructureResidenceRetrieveUtils.reload();
     StructureResourceGeneratorRetrieveUtils.reload();
     StructureResourceStorageRetrieveUtils.reload();
@@ -1516,6 +1524,7 @@ public class MiscMethods {
     setObstacleStuff(sdpb);
     setClanIconStuff(sdpb);
     setPvpLeagueStuff(sdpb);
+    setAchievementStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1807,7 +1816,7 @@ public class MiscMethods {
   private static void setItemStuff(Builder sdpb) {
   	Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
   	
-  	if (null == itemIdsToItems) {
+  	if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
   		log.warn("no items");
   		return;
   	}
@@ -1822,7 +1831,7 @@ public class MiscMethods {
   private static void setObstacleStuff(Builder sdpb) {
   	Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
   			.getObstacleIdsToObstacles();
-  	if (null == idsToObstacles) {
+  	if (null == idsToObstacles || idsToObstacles.isEmpty()) {
   		log.warn("no obstacles");
   		return;
   	}
@@ -1836,7 +1845,7 @@ public class MiscMethods {
   private static void setClanIconStuff(Builder sdpb) {
   	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
   	
-  	if (null == clanIconIdsToClanIcons) {
+  	if (null == clanIconIdsToClanIcons || clanIconIdsToClanIcons.isEmpty()) {
   		log.warn("no clan_icons");
   		return;
   	}
@@ -1851,7 +1860,7 @@ public class MiscMethods {
 	  Map<Integer, PvpLeague> idToPvpLeague = PvpLeagueRetrieveUtils
 			  .getPvpLeagueIdsToPvpLeagues();
 	  
-	  if (null == idToPvpLeague) {
+	  if (null == idToPvpLeague || idToPvpLeague.isEmpty()) {
 		  log.warn("no pvp_leagues");
 		  return;
 	  }
@@ -1861,4 +1870,19 @@ public class MiscMethods {
 		  sdpb.addLeagues(plp);
 	  }
   }
+  
+  private static void setAchievementStuff(Builder sdpb) {
+	  Map<Integer, Achievement> achievementIdsToAchievements =
+			  AchievementRetrieveUtils.getAchievementIdsToAchievements();
+	  if (null == achievementIdsToAchievements ||
+			  achievementIdsToAchievements.isEmpty()) {
+		  log.warn("setAchievementStuff() no achievements");
+		  return;
+	  }
+	  for (Achievement a : achievementIdsToAchievements.values()) {
+		  AchievementProto ap = CreateInfoProtoUtils.createAchievementProto(a);
+		  sdpb.addAchievements(ap);
+	  }
+  }
+  
 }

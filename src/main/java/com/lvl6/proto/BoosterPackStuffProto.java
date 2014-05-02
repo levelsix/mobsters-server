@@ -3003,9 +3003,9 @@ public final class BoosterPackStuffProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
+    // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
     boolean hasQuality();
-    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality();
+    com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
     
     // optional int32 gemReward = 5;
     boolean hasGemReward();
@@ -3074,13 +3074,13 @@ public final class BoosterPackStuffProto {
       return isComplete_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
+    // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
     public static final int QUALITY_FIELD_NUMBER = 4;
-    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
     public boolean hasQuality() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
       return quality_;
     }
     
@@ -3108,7 +3108,7 @@ public final class BoosterPackStuffProto {
       boosterPackId_ = 0;
       isMonster_ = false;
       isComplete_ = false;
-      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       gemReward_ = 0;
       quantity_ = 0;
     }
@@ -3305,7 +3305,7 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         bitField0_ = (bitField0_ & ~0x00000008);
         gemReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -3455,7 +3455,7 @@ public final class BoosterPackStuffProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -3543,15 +3543,15 @@ public final class BoosterPackStuffProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4 [default = COMMON];
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      // optional .com.lvl6.proto.Quality quality = 4 [default = NO_QUALITY];
+      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       public boolean hasQuality() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
         return quality_;
       }
-      public Builder setQuality(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality value) {
+      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3562,7 +3562,7 @@ public final class BoosterPackStuffProto {
       }
       public Builder clearQuality() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
         onChanged();
         return this;
       }
@@ -3650,31 +3650,31 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-      "\032\022MonsterStuff.proto\032\nUser.proto\"\250\001\n\030Rar" +
-      "eBoosterPurchaseProto\022.\n\004user\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\0221\n\007booster" +
-      "\030\002 \001(\0132 .com.lvl6.proto.BoosterPackProto" +
-      "\022\026\n\016timeOfPurchase\030\003 \001(\004\022\021\n\tmonsterId\030\004 " +
-      "\001(\005\"\313\002\n\020BoosterPackProto\022\025\n\rboosterPackI" +
-      "d\030\001 \001(\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010gemP" +
-      "rice\030\003 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .com.l" +
-      "vl6.proto.BoosterItemProto\022\035\n\025listBackgr",
-      "oundImgName\030\005 \001(\t\022\027\n\017listDescription\030\006 \001" +
-      "(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitleImg" +
-      "Name\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=\n\014di" +
-      "splayItems\030\n \003(\0132\'.com.lvl6.proto.Booste" +
-      "rDisplayItemProto\"\314\001\n\020BoosterItemProto\022\025" +
-      "\n\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002" +
-      " \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001" +
-      "(\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(" +
-      "\010\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005" +
-      "\022\026\n\016chanceToAppear\030\t \001(\002\"\302\001\n\027BoosterDisp",
-      "layItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\ti" +
-      "sMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\022D\n\007qu" +
-      "ality\030\004 \001(\0162+.com.lvl6.proto.MonsterProt" +
-      "o.MonsterQuality:\006COMMON\022\021\n\tgemReward\030\005 " +
-      "\001(\005\022\020\n\010quantity\030\006 \001(\005B\027B\025BoosterPackStuf" +
-      "fProto"
+      "\032\022MonsterStuff.proto\032\026SharedEnumConfig.p" +
+      "roto\032\nUser.proto\"\250\001\n\030RareBoosterPurchase" +
+      "Proto\022.\n\004user\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\0221\n\007booster\030\002 \001(\0132 .com.lvl" +
+      "6.proto.BoosterPackProto\022\026\n\016timeOfPurcha" +
+      "se\030\003 \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\313\002\n\020BoosterP" +
+      "ackProto\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boost" +
+      "erPackName\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\0226\n\014sp" +
+      "ecialItems\030\004 \003(\0132 .com.lvl6.proto.Booste",
+      "rItemProto\022\035\n\025listBackgroundImgName\030\005 \001(" +
+      "\t\022\027\n\017listDescription\030\006 \001(\t\022\025\n\rnavBarImgN" +
+      "ame\030\007 \001(\t\022\027\n\017navTitleImgName\030\010 \001(\t\022\026\n\016ma" +
+      "chineImgName\030\t \001(\t\022=\n\014displayItems\030\n \003(\013" +
+      "2\'.com.lvl6.proto.BoosterDisplayItemProt" +
+      "o\"\314\001\n\020BoosterItemProto\022\025\n\rboosterItemId\030" +
+      "\001 \001(\005\022\025\n\rboosterPackId\030\002 \001(\005\022\021\n\tmonsterI" +
+      "d\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(\005\022\022\n\nisComplete" +
+      "\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010\022\021\n\tgemReward\030\007" +
+      " \001(\005\022\022\n\ncashReward\030\010 \001(\005\022\026\n\016chanceToAppe",
+      "ar\030\t \001(\002\"\262\001\n\027BoosterDisplayItemProto\022\025\n\r" +
+      "boosterPackId\030\001 \001(\005\022\021\n\tisMonster\030\002 \001(\010\022\022" +
+      "\n\nisComplete\030\003 \001(\010\0224\n\007quality\030\004 \001(\0162\027.co" +
+      "m.lvl6.proto.Quality:\nNO_QUALITY\022\021\n\tgemR" +
+      "eward\030\005 \001(\005\022\020\n\010quantity\030\006 \001(\005B\027B\025Booster" +
+      "PackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3720,6 +3720,7 @@ public final class BoosterPackStuffProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }

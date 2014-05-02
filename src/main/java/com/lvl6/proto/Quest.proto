@@ -3,6 +3,7 @@
 
 import "Chat.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 
 package com.lvl6.proto;
@@ -30,7 +31,7 @@ message FullQuestProto {
      optional CoordinateProto questGiverImgOffset = 17; //not used at the moment
      
      //optional int32 oilReward = 18; defined above
-     optional MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
+     optional Element monsterElement = 19 [default = NO_ELEMENT];
      //optional string questGiverName = 20; defined above
      
      repeated QuestJobProto jobs = 21;

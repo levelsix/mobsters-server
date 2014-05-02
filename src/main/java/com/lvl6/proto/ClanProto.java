@@ -6190,7 +6190,7 @@ public final class ClanProto {
     
     // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     boolean hasDayOfWeek();
-    com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek();
+    com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek();
     
     // optional int32 startHour = 3;
     boolean hasStartHour();
@@ -6245,11 +6245,11 @@ public final class ClanProto {
     
     // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
     public static final int DAYOFWEEK_FIELD_NUMBER = 2;
-    private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_;
+    private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_;
     public boolean hasDayOfWeek() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
+    public com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek() {
       return dayOfWeek_;
     }
     
@@ -6285,7 +6285,7 @@ public final class ClanProto {
     
     private void initFields() {
       clanEventId_ = 0;
-      dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.MONDAY;
+      dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
       startHour_ = 0;
       eventDurationMinutes_ = 0;
       clanRaidId_ = 0;
@@ -6472,7 +6472,7 @@ public final class ClanProto {
         super.clear();
         clanEventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.MONDAY;
+        dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
         bitField0_ = (bitField0_ & ~0x00000002);
         startHour_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -6607,7 +6607,7 @@ public final class ClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.TaskProto.DayOfWeek value = com.lvl6.proto.TaskProto.DayOfWeek.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.DayOfWeek value = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -6659,14 +6659,14 @@ public final class ClanProto {
       }
       
       // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2 [default = MONDAY];
-      private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.MONDAY;
+      private com.lvl6.proto.SharedEnumConfigProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
       public boolean hasDayOfWeek() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
+      public com.lvl6.proto.SharedEnumConfigProto.DayOfWeek getDayOfWeek() {
         return dayOfWeek_;
       }
-      public Builder setDayOfWeek(com.lvl6.proto.TaskProto.DayOfWeek value) {
+      public Builder setDayOfWeek(com.lvl6.proto.SharedEnumConfigProto.DayOfWeek value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6677,7 +6677,7 @@ public final class ClanProto {
       }
       public Builder clearDayOfWeek() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.MONDAY;
+        dayOfWeek_ = com.lvl6.proto.SharedEnumConfigProto.DayOfWeek.MONDAY;
         onChanged();
         return this;
       }
@@ -10813,75 +10813,76 @@ public final class ClanProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nClan.proto\022\016com.lvl6.proto\032\014Battle.pro" +
-      "to\032\022MonsterStuff.proto\032\017Structure.proto\032" +
-      "\nTask.proto\032\nUser.proto\"\226\001\n\rFullClanProt" +
-      "o\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\ncreat" +
-      "eTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t\022\013\n\003tag\030" +
-      "\006 \001(\t\022\035\n\025requestToJoinRequired\030\007 \001(\010\022\022\n\n" +
-      "clanIconId\030\010 \001(\005\"x\n\021FullUserClanProto\022\016\n" +
-      "\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022.\n\006status\030" +
-      "\003 \001(\0162\036.com.lvl6.proto.UserClanStatus\022\023\n" +
-      "\013requestTime\030\004 \001(\003\"Z\n\031FullClanProtoWithC",
-      "lanSize\022+\n\004clan\030\001 \001(\0132\035.com.lvl6.proto.F" +
-      "ullClanProto\022\020\n\010clanSize\030\002 \001(\005\"\306\001\n\030Minim" +
-      "umUserProtoForClans\022H\n\025minUserProtoWithL" +
-      "evel\030\001 \001(\0132).com.lvl6.proto.MinimumUserP" +
-      "rotoWithLevel\0222\n\nclanStatus\030\002 \001(\0162\036.com." +
-      "lvl6.proto.UserClanStatus\022\030\n\020raidContrib" +
-      "ution\030\003 \001(\002\022\022\n\nbattlesWon\030\004 \001(\005\"\275\002\n\rClan" +
-      "RaidProto\022\022\n\nclanRaidId\030\001 \001(\005\022\024\n\014clanRai" +
-      "dName\030\002 \001(\t\022\032\n\022activeTitleImgName\030\003 \001(\t\022" +
-      "\037\n\027activeBackgroundImgName\030\004 \001(\t\022\031\n\021acti",
-      "veDescription\030\005 \001(\t\022\036\n\026inactiveMonsterIm" +
-      "gName\030\006 \001(\t\022\033\n\023inactiveDescription\030\007 \001(\t" +
-      "\022\024\n\014dialogueText\030\010 \001(\t\022\037\n\027spotlightMonst" +
-      "erImgName\030\t \001(\t\0226\n\nraidStages\030\n \003(\0132\".co" +
-      "m.lvl6.proto.ClanRaidStageProto\"\372\001\n\022Clan" +
-      "RaidStageProto\022\027\n\017clanRaidStageId\030\001 \001(\005\022" +
-      "\022\n\nclanRaidId\030\002 \001(\005\022\027\n\017durationMinutes\030\003" +
-      " \001(\005\022\020\n\010stageNum\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022;\n\010" +
-      "monsters\030\013 \003(\0132).com.lvl6.proto.ClanRaid" +
-      "StageMonsterProto\022A\n\017possibleRewards\030\014 \003",
-      "(\0132(.com.lvl6.proto.ClanRaidStageRewardP" +
-      "roto\"q\n\031ClanRaidStageMonsterProto\022\016\n\006crs" +
-      "mId\030\001 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tmonsterH" +
-      "p\030\004 \001(\005\022\016\n\006minDmg\030\005 \001(\005\022\016\n\006maxDmg\030\006 \001(\005\"" +
-      "\227\001\n\030ClanRaidStageRewardProto\022\016\n\006crsrId\030\001" +
-      " \001(\005\022\024\n\014minOilReward\030\003 \001(\005\022\024\n\014maxOilRewa" +
-      "rd\030\004 \001(\005\022\025\n\rminCashReward\030\005 \001(\005\022\025\n\rmaxCa" +
-      "shReward\030\006 \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252\001\n\030Pe" +
-      "rsistentClanEventProto\022\023\n\013clanEventId\030\001 " +
-      "\001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.proto.",
-      "DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024" +
-      "eventDurationMinutes\030\004 \001(\005\022\022\n\nclanRaidId" +
-      "\030\005 \001(\005\"\273\001\n PersistentClanEventClanInfoPr" +
-      "oto\022\016\n\006clanId\030\001 \001(\005\022\023\n\013clanEventId\030\002 \001(\005" +
-      "\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRaidStageId\030" +
-      "\004 \001(\005\022\026\n\016stageStartTime\030\005 \001(\003\022\016\n\006crsmId\030" +
-      "\006 \001(\005\022\035\n\025stageMonsterStartTime\030\007 \001(\003\"\317\001\n" +
-      " PersistentClanEventUserInfoProto\022\016\n\006use" +
-      "rId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022" +
-      "\021\n\tcrDmgDone\030\004 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023",
-      "\n\013crsmDmgDone\030\010 \001(\005\022A\n\014userMonsters\030\t \001(" +
-      "\0132+.com.lvl6.proto.UserCurrentMonsterTea" +
-      "mProto\"\322\001\n\"PersistentClanEventUserReward" +
-      "Proto\022\020\n\010rewardId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022" +
-      "\022\n\ncrsEndTime\030\004 \001(\003\0228\n\014resourceType\030\005 \001(" +
-      "\0162\034.com.lvl6.proto.ResourceType:\004CASH\022\024\n" +
-      "\014staticDataId\030\006 \001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n" +
-      "\014timeRedeemed\030\t \001(\003\"\346\001\n(PersistentClanEv" +
-      "entRaidStageHistoryProto\022C\n\007rewards\030\001 \003(" +
-      "\01322.com.lvl6.proto.PersistentClanEventUs",
-      "erRewardProto\022\017\n\007eventId\030\002 \001(\005\022\022\n\nclanRa" +
-      "idId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\022\n\nc" +
-      "rsEndTime\030\005 \001(\003\022\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007s" +
-      "tageHp\030\007 \001(\005\"W\n#PersistentClanEventRaidH" +
-      "istoryProto\022\016\n\006userId\030\001 \001(\005\022\r\n\005crDmg\030\002 \001" +
-      "(\005\022\021\n\tclanCrDmg\030\003 \001(\005\"I\n\rClanIconProto\022\022" +
-      "\n\nclanIconId\030\001 \001(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n\013i" +
-      "sAvailable\030\003 \001(\010*X\n\016UserClanStatus\022\n\n\006LE" +
-      "ADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n" +
-      "\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanProto"
+      "to\032\022MonsterStuff.proto\032\026SharedEnumConfig" +
+      ".proto\032\017Structure.proto\032\nTask.proto\032\nUse" +
+      "r.proto\"\226\001\n\rFullClanProto\022\016\n\006clanId\030\001 \001(" +
+      "\005\022\014\n\004name\030\002 \001(\t\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013d" +
+      "escription\030\005 \001(\t\022\013\n\003tag\030\006 \001(\t\022\035\n\025request" +
+      "ToJoinRequired\030\007 \001(\010\022\022\n\nclanIconId\030\010 \001(\005" +
+      "\"x\n\021FullUserClanProto\022\016\n\006userId\030\001 \001(\005\022\016\n" +
+      "\006clanId\030\002 \001(\005\022.\n\006status\030\003 \001(\0162\036.com.lvl6" +
+      ".proto.UserClanStatus\022\023\n\013requestTime\030\004 \001",
+      "(\003\"Z\n\031FullClanProtoWithClanSize\022+\n\004clan\030" +
+      "\001 \001(\0132\035.com.lvl6.proto.FullClanProto\022\020\n\010" +
+      "clanSize\030\002 \001(\005\"\306\001\n\030MinimumUserProtoForCl" +
+      "ans\022H\n\025minUserProtoWithLevel\030\001 \001(\0132).com" +
+      ".lvl6.proto.MinimumUserProtoWithLevel\0222\n" +
+      "\nclanStatus\030\002 \001(\0162\036.com.lvl6.proto.UserC" +
+      "lanStatus\022\030\n\020raidContribution\030\003 \001(\002\022\022\n\nb" +
+      "attlesWon\030\004 \001(\005\"\275\002\n\rClanRaidProto\022\022\n\ncla" +
+      "nRaidId\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(\t\022\032\n\022a" +
+      "ctiveTitleImgName\030\003 \001(\t\022\037\n\027activeBackgro",
+      "undImgName\030\004 \001(\t\022\031\n\021activeDescription\030\005 " +
+      "\001(\t\022\036\n\026inactiveMonsterImgName\030\006 \001(\t\022\033\n\023i" +
+      "nactiveDescription\030\007 \001(\t\022\024\n\014dialogueText" +
+      "\030\010 \001(\t\022\037\n\027spotlightMonsterImgName\030\t \001(\t\022" +
+      "6\n\nraidStages\030\n \003(\0132\".com.lvl6.proto.Cla" +
+      "nRaidStageProto\"\372\001\n\022ClanRaidStageProto\022\027" +
+      "\n\017clanRaidStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 " +
+      "\001(\005\022\027\n\017durationMinutes\030\003 \001(\005\022\020\n\010stageNum" +
+      "\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132)" +
+      ".com.lvl6.proto.ClanRaidStageMonsterProt",
+      "o\022A\n\017possibleRewards\030\014 \003(\0132(.com.lvl6.pr" +
+      "oto.ClanRaidStageRewardProto\"q\n\031ClanRaid" +
+      "StageMonsterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmon" +
+      "sterId\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDm" +
+      "g\030\005 \001(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStag" +
+      "eRewardProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilRe" +
+      "ward\030\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminC" +
+      "ashReward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021" +
+      "\n\tmonsterId\030\007 \001(\005\"\252\001\n\030PersistentClanEven" +
+      "tProto\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek",
+      "\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDA" +
+      "Y\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMin" +
+      "utes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001\n Persi" +
+      "stentClanEventClanInfoProto\022\016\n\006clanId\030\001 " +
+      "\001(\005\022\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003" +
+      " \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageSt" +
+      "artTime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMo" +
+      "nsterStartTime\030\007 \001(\003\"\317\001\n PersistentClanE" +
+      "ventUserInfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006cla" +
+      "nId\030\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001",
+      "(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 " +
+      "\001(\005\022A\n\014userMonsters\030\t \001(\0132+.com.lvl6.pro" +
+      "to.UserCurrentMonsterTeamProto\"\322\001\n\"Persi" +
+      "stentClanEventUserRewardProto\022\020\n\010rewardI" +
+      "d\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\ncrsEndTime\030\004 " +
+      "\001(\003\0228\n\014resourceType\030\005 \001(\0162\034.com.lvl6.pro" +
+      "to.ResourceType:\004CASH\022\024\n\014staticDataId\030\006 " +
+      "\001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030\t " +
+      "\001(\003\"\346\001\n(PersistentClanEventRaidStageHist" +
+      "oryProto\022C\n\007rewards\030\001 \003(\01322.com.lvl6.pro",
+      "to.PersistentClanEventUserRewardProto\022\017\n" +
+      "\007eventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017cl" +
+      "anRaidStageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(\003\022" +
+      "\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"W\n#" +
+      "PersistentClanEventRaidHistoryProto\022\016\n\006u" +
+      "serId\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030" +
+      "\003 \001(\005\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001" +
+      "(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010" +
+      "*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR" +
+      "_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nRE",
+      "QUESTING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11016,6 +11017,7 @@ public final class ClanProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),

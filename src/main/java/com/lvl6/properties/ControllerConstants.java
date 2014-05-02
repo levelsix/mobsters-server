@@ -138,6 +138,7 @@ public class ControllerConstants {
 	
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
+	public static final String UCHRFC__ACHIEVEMENT_REDEEM = "achievement redeemed";
 	public static final String UCHRFC__CREATE_CLAN = "created clan";
 	public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
 	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";

@@ -1,0 +1,54 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "AchievementStuff.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventAchievementProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//event to update status of achievements
+message AchievementProgressRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//the ones the user has made progress in or completed
+	repeated UserAchievementProto uapList = 2;
+	
+	optional int64 clientTime = 3;
+}
+																						//DONE
+message AchievementProgressResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional AchievementProgressStatus status = 2;
+     
+     enum AchievementProgressStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+//event to redeem one achievement
+message AchievementRedeemRequestProto {                         
+     optional MinimumUserProto sender = 1;
+     optional int32 achievementId = 2;
+     optional int64 clientTime = 3;
+}
+
+																						//DONE
+message AchievementRedeemResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional AchievementRedeemStatus status = 2;    
+     
+     enum AchievementRedeemStatus {
+          SUCCESS = 1;
+          FAIL_NOT_COMPLETE = 2;
+          FAIL_OTHER = 3;
+          FAIL_ALREADY_REDEEMED = 4;
+     }
+}
+
+//------------------------------------------------------------------------------------------

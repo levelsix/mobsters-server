@@ -14,12 +14,14 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
@@ -100,21 +102,37 @@ public class UpdateUtils implements UpdateUtil {
 	}  
 
 	@Override
-	public int updateUserQuestJob(int userId, int questJobId, int newProgress,
-			boolean isComplete) {
+	public int updateUserQuestJobs(int userId,
+			Map<Integer, QuestJobForUser> questJobIdToQuestJob) {
 		String tableName = DBConstants.TABLE_QUEST_JOB_FOR_USER;
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.QUEST_JOB_FOR_USER__USER_ID, userId);
-		conditionParams.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_JOB_ID, questJobId);
 		
-		Map<String, Object> relativeParams = null;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer questJobId : questJobIdToQuestJob.keySet()) {
+			QuestJobForUser qjfu = questJobIdToQuestJob.get(questJobId); 
+			
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_ID,
+					qjfu.getQuestId());
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__QUEST_JOB_ID,
+					questJobId);
+			
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__IS_COMPLETE,
+					qjfu.isComplete());
+			
+			newRow.put(DBConstants.QUEST_JOB_FOR_USER__PROGRESS,
+					qjfu.getProgress());
+			
+			newRows.add(newRow);
+		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.QUEST_JOB_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns.add(DBConstants.QUEST_JOB_FOR_USER__PROGRESS);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
 		
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, isComplete);
-		absoluteParams.put(DBConstants.QUEST_JOB_FOR_USER__PROGRESS, newProgress);
-		
-		int numUpdated = DBConnection.get().updateTableRows(tableName,
-				relativeParams, absoluteParams, conditionParams, "and");
 		return numUpdated;
 	}
 
@@ -136,6 +154,79 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
+	public int updateUserAchievement(int userId, Timestamp completeTime,
+			Map<Integer, AchievementForUser> achievementIdToAfu) {
+		
+		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
+
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer achievementId : achievementIdToAfu.keySet()) {
+			AchievementForUser afu = achievementIdToAfu.get(achievementId); 
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
+					achievementId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS,
+					afu.getProgress());
+			
+			boolean isComplete = afu.isComplete(); 
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE,
+					isComplete);
+			
+			Timestamp achievementCompleteTime = null;
+			if (isComplete) {
+				achievementCompleteTime = completeTime;
+			}
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__TIME_COMPLETED,
+					achievementCompleteTime);
+			
+			newRows.add(newRow);
+		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__PROGRESS);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_COMPLETE);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__TIME_COMPLETED);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		return numUpdated;
+	}
+	
+	@Override
+	public int updateRedeemAchievementForUser(int userId,
+			Collection<Integer> achievementIds, Timestamp redeemTime) {
+		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
+		
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (Integer achievementId : achievementIds) {
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__ACHIEVEMENT_ID,
+					achievementId);
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED, true);
+			
+			newRow.put(DBConstants.ACHIEVEMENT_FOR_USER__TIME_REDEEMED,
+					redeemTime);
+			
+			newRows.add(newRow);
+		}
+		
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__IS_REDEEMED);
+		replaceTheseColumns.add(DBConstants.ACHIEVEMENT_FOR_USER__TIME_REDEEMED);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		return numUpdated;
+	}
+	
 	/*
 	 * changin orientation
 	 */

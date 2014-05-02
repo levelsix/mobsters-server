@@ -39,12 +39,11 @@ message QuestProgressRequestProto {
 	
 	//if this quest job is the last one for the quest and the user finishes
 	//it, then the boolean above, isComplete, would also be set
-	optional int32 questJobId = 4;
-	optional int32 currentProgress = 5;
-	optional bool isQuestJobComplete = 6;
+	repeated UserQuestJobProto userQuestJobs = 4;
 	
-	//if set, delete these user monster ids 
-	repeated int64 deleteUserMonsterIds = 7;
+	//if set, delete these user monster ids. Deleting monsters
+	//will be set for only one quest job
+	repeated int64 deleteUserMonsterIds = 5;
 }
 
 																						//DONE

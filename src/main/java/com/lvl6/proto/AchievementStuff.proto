@@ -1,0 +1,69 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
+import "Structure.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "AchievementStuffProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message AchievementProto {
+     optional int32 achievementId = 1;
+     optional string name = 2;
+     optional string description = 3;
+     optional int32 gemReward = 4;
+     optional int32 lvl = 5; //max most likely = 3
+     optional AchievementType achievementType = 6;
+     
+     //could be null
+     optional ResourceType resourceType = 7 [default = NO_RESOURCE];
+     //could be null
+     optional Element element = 8 [default = NO_ELEMENT];
+     //could be null
+     optional Quality quality = 9 [default = NO_QUALITY];
+     //could be 0, as in not set
+     optional int32 staticDataId = 10;
+     
+     optional int32 quantity = 11;
+     optional int32 priority = 12;
+     optional int32 prerequisiteId = 13;
+     optional int32 successorId = 14;
+     
+     enum AchievementType {
+     //anything with static data id should have quantity value of at least 1
+     
+     	NO_ACHIEVEMENT = 17;
+     	COLLECT_RESOURCE = 1;
+		CREATE_GRENADE = 2;
+		CREATE_RAINBOW = 3;
+		CREATE_ROCKET = 4;
+		DEFEAT_MONSTERS = 5;
+		DESTROY_ORBS = 6;
+		ENHANCE_POINTS = 7;
+		HEAL_MONSTERS = 8;
+		JOIN_LEAGUE = 9;		//quantity should be 1
+		MAKE_COMBO = 10;
+		REMOVE_OBSTACLE = 11;
+		SELL_MONSTER = 12;
+		STEAL_RESOURCE = 13;
+		TAKE_DAMAGE = 14;
+		UPGRADE_BUILDING = 15; 	//quantity should be 1
+		WIN_PVP_BATTLE = 16;
+		
+		//NO_ACHIEVEMENT = 17;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+message UserAchievementProto {
+	optional int32 achievementId = 1;
+    optional int32 progress = 2;
+	optional bool isComplete = 3; 
+	optional bool isRedeemed = 4;
+}
+
+//------------------------------------------------------------------------------------------

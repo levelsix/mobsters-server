@@ -10,12 +10,14 @@ public final class StructureProto {
   }
   public enum ResourceType
       implements com.google.protobuf.ProtocolMessageEnum {
-    CASH(0, 1),
-    OIL(1, 2),
-    GEMS(2, 3),
-    MONSTER(3, 20),
+    NO_RESOURCE(0, 4),
+    CASH(1, 1),
+    OIL(2, 2),
+    GEMS(3, 3),
+    MONSTER(4, 20),
     ;
     
+    public static final int NO_RESOURCE_VALUE = 4;
     public static final int CASH_VALUE = 1;
     public static final int OIL_VALUE = 2;
     public static final int GEMS_VALUE = 3;
@@ -26,6 +28,7 @@ public final class StructureProto {
     
     public static ResourceType valueOf(int value) {
       switch (value) {
+        case 4: return NO_RESOURCE;
         case 1: return CASH;
         case 2: return OIL;
         case 3: return GEMS;
@@ -60,7 +63,7 @@ public final class StructureProto {
     }
     
     private static final ResourceType[] VALUES = {
-      CASH, OIL, GEMS, MONSTER, 
+      NO_RESOURCE, CASH, OIL, GEMS, MONSTER, 
     };
     
     public static ResourceType valueOf(
@@ -85,10 +88,12 @@ public final class StructureProto {
   
   public enum StructOrientation
       implements com.google.protobuf.ProtocolMessageEnum {
-    POSITION_1(0, 1),
-    POSITION_2(1, 2),
+    NO_ORIENTATION(0, 3),
+    POSITION_1(1, 1),
+    POSITION_2(2, 2),
     ;
     
+    public static final int NO_ORIENTATION_VALUE = 3;
     public static final int POSITION_1_VALUE = 1;
     public static final int POSITION_2_VALUE = 2;
     
@@ -97,6 +102,7 @@ public final class StructureProto {
     
     public static StructOrientation valueOf(int value) {
       switch (value) {
+        case 3: return NO_ORIENTATION;
         case 1: return POSITION_1;
         case 2: return POSITION_2;
         default: return null;
@@ -129,7 +135,7 @@ public final class StructureProto {
     }
     
     private static final StructOrientation[] VALUES = {
-      POSITION_1, POSITION_2, 
+      NO_ORIENTATION, POSITION_1, POSITION_2, 
     };
     
     public static StructOrientation valueOf(
@@ -269,15 +275,17 @@ public final class StructureProto {
     
     public enum StructType
         implements com.google.protobuf.ProtocolMessageEnum {
-      RESOURCE_GENERATOR(0, 1),
-      RESOURCE_STORAGE(1, 2),
-      HOSPITAL(2, 3),
-      RESIDENCE(3, 4),
-      TOWN_HALL(4, 5),
-      LAB(5, 6),
-      EVO(6, 7),
+      NO_STRUCT(0, 8),
+      RESOURCE_GENERATOR(1, 1),
+      RESOURCE_STORAGE(2, 2),
+      HOSPITAL(3, 3),
+      RESIDENCE(4, 4),
+      TOWN_HALL(5, 5),
+      LAB(6, 6),
+      EVO(7, 7),
       ;
       
+      public static final int NO_STRUCT_VALUE = 8;
       public static final int RESOURCE_GENERATOR_VALUE = 1;
       public static final int RESOURCE_STORAGE_VALUE = 2;
       public static final int HOSPITAL_VALUE = 3;
@@ -291,6 +299,7 @@ public final class StructureProto {
       
       public static StructType valueOf(int value) {
         switch (value) {
+          case 8: return NO_STRUCT;
           case 1: return RESOURCE_GENERATOR;
           case 2: return RESOURCE_STORAGE;
           case 3: return HOSPITAL;
@@ -328,7 +337,7 @@ public final class StructureProto {
       }
       
       private static final StructType[] VALUES = {
-        RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, EVO, 
+        NO_STRUCT, RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, EVO, 
       };
       
       public static StructType valueOf(
@@ -676,8 +685,8 @@ public final class StructureProto {
       structId_ = 0;
       name_ = "";
       level_ = 0;
-      structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
-      buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
+      buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       buildCost_ = 0;
       minutesToBuild_ = 0;
       prerequisiteTownHallLvl_ = 0;
@@ -993,9 +1002,9 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
+        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
         bitField0_ = (bitField0_ & ~0x00000008);
-        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000010);
         buildCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -1463,7 +1472,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
-      private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
+      private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
       public boolean hasStructType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
@@ -1481,13 +1490,13 @@ public final class StructureProto {
       }
       public Builder clearStructType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
+        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
         onChanged();
         return this;
       }
       
       // optional .com.lvl6.proto.ResourceType buildResourceType = 5;
-      private com.lvl6.proto.StructureProto.ResourceType buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.StructureProto.ResourceType buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       public boolean hasBuildResourceType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
@@ -1505,7 +1514,7 @@ public final class StructureProto {
       }
       public Builder clearBuildResourceType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -2011,7 +2020,7 @@ public final class StructureProto {
     
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       productionRate_ = 0F;
       capacity_ = 0;
     }
@@ -2195,7 +2204,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000002);
         productionRate_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2445,7 +2454,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.ResourceType resourceType = 2;
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       public boolean hasResourceType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
@@ -2463,7 +2472,7 @@ public final class StructureProto {
       }
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -2601,7 +2610,7 @@ public final class StructureProto {
     
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       capacity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -2777,7 +2786,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000002);
         capacity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3013,7 +3022,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.ResourceType resourceType = 2;
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       public boolean hasResourceType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
@@ -3031,7 +3040,7 @@ public final class StructureProto {
       }
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -6054,7 +6063,7 @@ public final class StructureProto {
       purchaseTime_ = 0L;
       isComplete_ = false;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       fbInviteStructLvl_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -6284,7 +6293,7 @@ public final class StructureProto {
           coordinatesBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         bitField0_ = (bitField0_ & ~0x00000080);
         fbInviteStructLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
@@ -6718,7 +6727,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.StructOrientation orientation = 8;
-      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       public boolean hasOrientation() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
@@ -6736,7 +6745,7 @@ public final class StructureProto {
       }
       public Builder clearOrientation() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         onChanged();
         return this;
       }
@@ -7968,7 +7977,7 @@ public final class StructureProto {
     private void initFields() {
       obstacleId_ = 0;
       name_ = "";
-      removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       cost_ = 0;
       secondsToRemove_ = 0;
       width_ = 0;
@@ -8228,7 +8237,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000004);
         cost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -8575,7 +8584,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.ResourceType removalCostType = 3;
-      private com.lvl6.proto.StructureProto.ResourceType removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.StructureProto.ResourceType removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
       public boolean hasRemovalCostType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
@@ -8593,7 +8602,7 @@ public final class StructureProto {
       }
       public Builder clearRemovalCostType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -8966,7 +8975,7 @@ public final class StructureProto {
     private void initFields() {
       obstacleId_ = 0;
       coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9143,7 +9152,7 @@ public final class StructureProto {
           coordinateBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -9398,7 +9407,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.StructOrientation orientation = 5;
-      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       public boolean hasOrientation() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
@@ -9416,7 +9425,7 @@ public final class StructureProto {
       }
       public Builder clearOrientation() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         onChanged();
         return this;
       }
@@ -9557,7 +9566,7 @@ public final class StructureProto {
       userId_ = 0;
       obstacleId_ = 0;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       removalStartTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -9760,7 +9769,7 @@ public final class StructureProto {
           coordinatesBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         bitField0_ = (bitField0_ & ~0x00000010);
         removalStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -10095,7 +10104,7 @@ public final class StructureProto {
       }
       
       // optional .com.lvl6.proto.StructOrientation orientation = 5;
-      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
       public boolean hasOrientation() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
@@ -10113,7 +10122,7 @@ public final class StructureProto {
       }
       public Builder clearOrientation() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
         onChanged();
         return this;
       }
@@ -10224,7 +10233,7 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\311\005\n\022St" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\331\005\n\022St" +
       "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
       "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
@@ -10239,70 +10248,71 @@ public final class StructureProto {
       "cription\030\020 \001(\t\022\030\n\020shortDescription\030\021 \001(\t" +
       "\022\025\n\rshadowImgName\030\023 \001(\t\022\034\n\024shadowVertica" +
       "lOffset\030\024 \001(\002\022\037\n\027shadowHorizontalOfffset" +
-      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"x\n\nStructTyp" +
-      "e\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_ST" +
-      "ORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\t" +
-      "TOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\"\256\001\n\026Resour" +
-      "ceGeneratorProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
-      "om.lvl6.proto.StructureInfoProto\0222\n\014reso" +
-      "urceType\030\002 \001(\0162\034.com.lvl6.proto.Resource" +
-      "Type\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010capacity" +
-      "\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstruc" +
-      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
-      "foProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6" +
-      ".proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"s\n" +
-      "\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
-      ".lvl6.proto.StructureInfoProto\022\021\n\tqueueS" +
-      "ize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(\002\"n\n\010La",
-      "bProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
-      "oto.StructureInfoProto\022\021\n\tqueueSize\030\002 \001(" +
-      "\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\316\001\n\016Residence" +
-      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
-      "to.StructureInfoProto\022\027\n\017numMonsterSlots" +
-      "\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005\022\027\n\017" +
-      "numGemsRequired\030\004 \001(\005\022\034\n\024numAcceptedFbIn" +
-      "vites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\"\326\002\n\r" +
-      "TownHallProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
-      "lvl6.proto.StructureInfoProto\022 \n\030numReso",
-      "urceOneGenerators\030\002 \001(\005\022\036\n\026numResourceOn" +
-      "eStorages\030\003 \001(\005\022 \n\030numResourceTwoGenerat" +
-      "ors\030\004 \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(" +
-      "\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResidences" +
-      "\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017\n\007numLa" +
-      "bs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(\005\022\030\n\020re" +
-      "sourceCapacity\030\013 \001(\005\"\232\002\n\026FullUserStructu" +
-      "reProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030" +
-      "\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved" +
-      "\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComple",
-      "te\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6" +
-      ".proto.CoordinateProto\0226\n\013orientation\030\010 " +
-      "\001(\0162!.com.lvl6.proto.StructOrientation\022\031" +
-      "\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017CoordinateP" +
-      "roto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialSt" +
-      "ructProto\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinat" +
-      "e\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProto" +
-      "\"\342\002\n\rObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\022\014" +
-      "\n\004name\030\002 \001(\t\0225\n\017removalCostType\030\003 \001(\0162\034." +
-      "com.lvl6.proto.ResourceType\022\014\n\004cost\030\004 \001(",
-      "\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(" +
-      "\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026im" +
-      "gVerticalPixelOffset\030\t \001(\002\022\023\n\013descriptio" +
-      "n\030\n \001(\t\022\026\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshado" +
-      "wImgName\030\014 \001(\t\022\034\n\024shadowVerticalOffset\030\r" +
-      " \001(\002\022\037\n\027shadowHorizontalOfffset\030\016 \001(\002\"\227\001" +
-      "\n\024MinimumObstacleProto\022\022\n\nobstacleId\030\001 \001" +
-      "(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\0226\n\013orientation\030\005 \001(\0162!.c" +
-      "om.lvl6.proto.StructOrientation\"\327\001\n\021User",
-      "ObstacleProto\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n" +
-      "\006userId\030\002 \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coo" +
-      "rdinates\030\004 \001(\0132\037.com.lvl6.proto.Coordina" +
-      "teProto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6." +
-      "proto.StructOrientation\022\030\n\020removalStartT" +
-      "ime\030\006 \001(\003*8\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003O" +
-      "IL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n\021StructOri" +
-      "entation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002" +
-      "B\020B\016StructureProto"
+      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"\207\001\n\nStructTy" +
+      "pe\022\r\n\tNO_STRUCT\020\010\022\026\n\022RESOURCE_GENERATOR\020" +
+      "\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n" +
+      "\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003" +
+      "EVO\020\007\"\256\001\n\026ResourceGeneratorProto\0226\n\nstru",
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl" +
+      "6.proto.ResourceType\022\026\n\016productionRate\030\003" +
+      " \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024ResourceStora" +
+      "geProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.p" +
+      "roto.StructureInfoProto\0222\n\014resourceType\030" +
+      "\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\020\n\010c" +
+      "apacity\030\003 \001(\005\"s\n\rHospitalProto\0226\n\nstruct" +
+      "Info\030\001 \001(\0132\".com.lvl6.proto.StructureInf" +
+      "oProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSe",
+      "cond\030\003 \001(\002\"n\n\010LabProto\0226\n\nstructInfo\030\001 \001" +
+      "(\0132\".com.lvl6.proto.StructureInfoProto\022\021" +
+      "\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001" +
+      "(\002\"\316\001\n\016ResidenceProto\0226\n\nstructInfo\030\001 \001(" +
+      "\0132\".com.lvl6.proto.StructureInfoProto\022\027\n" +
+      "\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMonste" +
+      "rSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n" +
+      "\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupatio" +
+      "nName\030\006 \001(\t\"\326\002\n\rTownHallProto\0226\n\nstructI" +
+      "nfo\030\001 \001(\0132\".com.lvl6.proto.StructureInfo",
+      "Proto\022 \n\030numResourceOneGenerators\030\002 \001(\005\022" +
+      "\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030numRe" +
+      "sourceTwoGenerators\030\004 \001(\005\022\036\n\026numResource" +
+      "TwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022" +
+      "\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterSlot" +
+      "s\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCash" +
+      "Cost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\"\232\002\n" +
+      "\026FullUserStructureProto\022\024\n\014userStructId\030" +
+      "\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022" +
+      "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005",
+      " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030" +
+      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str" +
+      "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
+      "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
+      "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
+      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
+      ".CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nob" +
+      "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
+      "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT",
+      "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001" +
+      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img" +
+      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001" +
+      "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
+      "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
+      "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
+      "Offfset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022" +
+      "\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
+      ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
+      "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie",
+      "ntation\"\327\001\n\021UserObstacleProto\022\026\n\016userObs" +
+      "tacleId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobstacl" +
+      "eId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\0226\n\013orientation\030\005" +
+      " \001(\0162!.com.lvl6.proto.StructOrientation\022" +
+      "\030\n\020removalStartTime\030\006 \001(\003*I\n\014ResourceTyp" +
+      "e\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n" +
+      "\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientatio" +
+      "n\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n" +
+      "\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

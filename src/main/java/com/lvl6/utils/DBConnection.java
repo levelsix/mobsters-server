@@ -761,6 +761,9 @@ public class DBConnection {
 		//append the "ON DUPLICATE KEY UPDATE" part
 		query = transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
 		
+		//log.info("insertOnDuplicateKeyUpdateColumnsAbsolute() query=" + query +
+		//		"\t valuesListCollection=" + valuesListCollection);
+		
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
 	}

@@ -132,7 +132,7 @@ import com.lvl6.utils.QuestGraph;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
-    String delimiter = ", ";
+    String delimiter = ",";
 
     int i = 1;
     int id = rs.getInt(i++);

@@ -82,9 +82,9 @@ public final class QuestProto {
     com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
+    // optional .com.lvl6.proto.Element monsterElement = 19 [default = NO_ELEMENT];
     boolean hasMonsterElement();
-    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
+    com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement();
     
     // repeated .com.lvl6.proto.QuestJobProto jobs = 21;
     java.util.List<com.lvl6.proto.QuestProto.QuestJobProto> 
@@ -437,13 +437,13 @@ public final class QuestProto {
       return questGiverImgOffset_;
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
+    // optional .com.lvl6.proto.Element monsterElement = 19 [default = NO_ELEMENT];
     public static final int MONSTERELEMENT_FIELD_NUMBER = 19;
-    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_;
+    private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_;
     public boolean hasMonsterElement() {
       return ((bitField0_ & 0x00010000) == 0x00010000);
     }
-    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+    public com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement() {
       return monsterElement_;
     }
     
@@ -486,7 +486,7 @@ public final class QuestProto {
       priority_ = 0;
       carrotId_ = "";
       questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       jobs_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -817,7 +817,7 @@ public final class QuestProto {
           questGiverImgOffsetBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00010000);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00020000);
         if (jobsBuilder_ == null) {
           jobs_ = java.util.Collections.emptyList();
@@ -1191,7 +1191,7 @@ public final class QuestProto {
             }
             case 152: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(19, rawValue);
               } else {
@@ -1821,15 +1821,15 @@ public final class QuestProto {
         return questGiverImgOffsetBuilder_;
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 19 [default = FIRE];
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      // optional .com.lvl6.proto.Element monsterElement = 19 [default = NO_ELEMENT];
+      private com.lvl6.proto.SharedEnumConfigProto.Element monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00020000) == 0x00020000);
       }
-      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+      public com.lvl6.proto.SharedEnumConfigProto.Element getMonsterElement() {
         return monsterElement_;
       }
-      public Builder setMonsterElement(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value) {
+      public Builder setMonsterElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1840,7 +1840,7 @@ public final class QuestProto {
       }
       public Builder clearMonsterElement() {
         bitField0_ = (bitField0_ & ~0x00020000);
-        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         onChanged();
         return this;
       }
@@ -6233,46 +6233,47 @@ public final class QuestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Quest.proto\022\016com.lvl6.proto\032\nChat.prot" +
-      "o\032\022MonsterStuff.proto\032\017Structure.proto\"\302" +
-      "\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\024\n\014doneRes" +
-      "ponse\030\004 \001(\t\0225\n\016acceptDialogue\030\005 \001(\0132\035.co" +
-      "m.lvl6.proto.DialogueProto\022\022\n\ncashReward" +
-      "\030\006 \001(\005\022\021\n\toilReward\030\007 \001(\005\022\021\n\tgemReward\030\010" +
-      " \001(\005\022\021\n\texpReward\030\t \001(\005\022\027\n\017monsterIdRewa" +
-      "rd\030\n \001(\005\022\031\n\021isCompleteMonster\030\013 \001(\010\022\035\n\025q" +
-      "uestsRequiredForThis\030\014 \003(\005\022\026\n\016questGiver",
-      "Name\030\r \001(\t\022\035\n\025questGiverImagePrefix\030\016 \001(" +
-      "\t\022\020\n\010priority\030\017 \001(\005\022\020\n\010carrotId\030\020 \001(\t\022<\n" +
-      "\023questGiverImgOffset\030\021 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\022I\n\016monsterElement\030\023 " +
-      "\001(\0162+.com.lvl6.proto.MonsterProto.Monste" +
-      "rElement:\004FIRE\022+\n\004jobs\030\025 \003(\0132\035.com.lvl6." +
-      "proto.QuestJobProto\"\206\003\n\rQuestJobProto\022\022\n" +
-      "\nquestJobId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022@\n\014qu" +
-      "estJobType\030\003 \001(\0162*.com.lvl6.proto.QuestJ" +
-      "obProto.QuestJobType\022\023\n\013description\030\004 \001(",
-      "\t\022\024\n\014staticDataId\030\005 \001(\005\022\020\n\010quantity\030\006 \001(" +
-      "\005\022\020\n\010priority\030\007 \001(\005\022\016\n\006cityId\030\010 \001(\005\022\024\n\014c" +
-      "ityAssetNum\030\t \001(\005\"\230\001\n\014QuestJobType\022\031\n\025KI" +
-      "LL_SPECIFIC_MONSTER\020\001\022\030\n\024KILL_MONSTER_IN" +
-      "_CITY\020\002\022\022\n\016DONATE_MONSTER\020\003\022\021\n\rCOMPLETE_" +
-      "TASK\020\004\022\022\n\016UPGRADE_STRUCT\020\005\022\030\n\024COLLECT_SP" +
-      "ECIAL_ITEM\020\006\"\276\001\n\rDialogueProto\022G\n\rspeech" +
-      "Segment\030\001 \003(\01320.com.lvl6.proto.DialogueP" +
-      "roto.SpeechSegmentProto\032d\n\022SpeechSegment" +
-      "Proto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014speakerImage\030\002",
-      " \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\nisLeftSide\030" +
-      "\004 \001(\010\"\227\001\n\022FullUserQuestProto\022\016\n\006userId\030\001" +
-      " \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed\030\003 \001(" +
-      "\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruserQuestJobs\030\005" +
-      " \003(\0132!.com.lvl6.proto.UserQuestJobProto\"" +
-      "^\n\021UserQuestJobProto\022\017\n\007questId\030\001 \001(\005\022\022\n" +
-      "\nquestJobId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\022\020\n" +
-      "\010progress\030\004 \001(\005\"|\n\tItemProto\022\016\n\006itemId\030\001" +
-      " \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022\025\n\rb" +
-      "orderImgName\030\004 \001(\t\022)\n\005color\030\005 \001(\0132\032.com.",
-      "lvl6.proto.ColorProtoB\014B\nQuestProto"
+      "o\032\022MonsterStuff.proto\032\026SharedEnumConfig." +
+      "proto\032\017Structure.proto\"\264\004\n\016FullQuestProt" +
+      "o\022\017\n\007questId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013desc" +
+      "ription\030\003 \001(\t\022\024\n\014doneResponse\030\004 \001(\t\0225\n\016a" +
+      "cceptDialogue\030\005 \001(\0132\035.com.lvl6.proto.Dia" +
+      "logueProto\022\022\n\ncashReward\030\006 \001(\005\022\021\n\toilRew" +
+      "ard\030\007 \001(\005\022\021\n\tgemReward\030\010 \001(\005\022\021\n\texpRewar" +
+      "d\030\t \001(\005\022\027\n\017monsterIdReward\030\n \001(\005\022\031\n\021isCo" +
+      "mpleteMonster\030\013 \001(\010\022\035\n\025questsRequiredFor",
+      "This\030\014 \003(\005\022\026\n\016questGiverName\030\r \001(\t\022\035\n\025qu" +
+      "estGiverImagePrefix\030\016 \001(\t\022\020\n\010priority\030\017 " +
+      "\001(\005\022\020\n\010carrotId\030\020 \001(\t\022<\n\023questGiverImgOf" +
+      "fset\030\021 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
+      "oto\022;\n\016monsterElement\030\023 \001(\0162\027.com.lvl6.p" +
+      "roto.Element:\nNO_ELEMENT\022+\n\004jobs\030\025 \003(\0132\035" +
+      ".com.lvl6.proto.QuestJobProto\"\206\003\n\rQuestJ" +
+      "obProto\022\022\n\nquestJobId\030\001 \001(\005\022\017\n\007questId\030\002" +
+      " \001(\005\022@\n\014questJobType\030\003 \001(\0162*.com.lvl6.pr" +
+      "oto.QuestJobProto.QuestJobType\022\023\n\013descri",
+      "ption\030\004 \001(\t\022\024\n\014staticDataId\030\005 \001(\005\022\020\n\010qua" +
+      "ntity\030\006 \001(\005\022\020\n\010priority\030\007 \001(\005\022\016\n\006cityId\030" +
+      "\010 \001(\005\022\024\n\014cityAssetNum\030\t \001(\005\"\230\001\n\014QuestJob" +
+      "Type\022\031\n\025KILL_SPECIFIC_MONSTER\020\001\022\030\n\024KILL_" +
+      "MONSTER_IN_CITY\020\002\022\022\n\016DONATE_MONSTER\020\003\022\021\n" +
+      "\rCOMPLETE_TASK\020\004\022\022\n\016UPGRADE_STRUCT\020\005\022\030\n\024" +
+      "COLLECT_SPECIAL_ITEM\020\006\"\276\001\n\rDialogueProto" +
+      "\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl6.proto" +
+      ".DialogueProto.SpeechSegmentProto\032d\n\022Spe" +
+      "echSegmentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014spea",
+      "kerImage\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\ni" +
+      "sLeftSide\030\004 \001(\010\"\227\001\n\022FullUserQuestProto\022\016" +
+      "\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRed" +
+      "eemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruserQ" +
+      "uestJobs\030\005 \003(\0132!.com.lvl6.proto.UserQues" +
+      "tJobProto\"^\n\021UserQuestJobProto\022\017\n\007questI" +
+      "d\030\001 \001(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisComplet" +
+      "e\030\003 \001(\010\022\020\n\010progress\030\004 \001(\005\"|\n\tItemProto\022\016" +
+      "\n\006itemId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030" +
+      "\003 \001(\t\022\025\n\rborderImgName\030\004 \001(\t\022)\n\005color\030\005 ",
+      "\001(\0132\032.com.lvl6.proto.ColorProtoB\014B\nQuest" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6343,6 +6344,7 @@ public final class QuestProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
   }

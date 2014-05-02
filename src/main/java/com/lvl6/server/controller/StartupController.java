@@ -35,6 +35,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.ForceLogoutResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
@@ -64,6 +65,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.KabamProperties;
+import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
@@ -94,6 +96,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
@@ -192,6 +195,8 @@ public class StartupController extends EventController {
   @Autowired
   protected PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
 
+  @Autowired
+  protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil; 
 
   public StartupController() {
 	  numAllocatedThreads = 3;
@@ -298,7 +303,7 @@ public class StartupController extends EventController {
 			    		  userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
-			      
+			      setAchievementStuff(resBuilder, userId);
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			      setUnhandledForgeAttempts(resBuilder, user);
@@ -1351,6 +1356,18 @@ public class StartupController extends EventController {
   }
 
   
+  private void setAchievementStuff(Builder resBuilder, int userId) {
+	  Map<Integer, AchievementForUser> achievementIdToUserAchievements =
+			  getAchievementForUserRetrieveUtil()
+			  .getSpecificOrAllAchievementIdToAchievementForUserId(
+					  userId, null);
+	  
+	  for (AchievementForUser afu : achievementIdToUserAchievements.values()) {
+		  UserAchievementProto uap = CreateInfoProtoUtils
+				  .createUserAchievementProto(afu);
+		  resBuilder.addUserAchievements(uap);
+	  }
+  }
   
   
   
@@ -2206,6 +2223,13 @@ public class StartupController extends EventController {
   public void setPvpBattleHistoryRetrieveUtil(
 		  PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil) {
 	  this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
+  }
+  public AchievementForUserRetrieveUtil getAchievementForUserRetrieveUtil() {
+	  return achievementForUserRetrieveUtil;
+  }
+  public void setAchievementForUserRetrieveUtil(
+		  AchievementForUserRetrieveUtil achievementForUserRetrieveUtil) {
+	  this.achievementForUserRetrieveUtil = achievementForUserRetrieveUtil;
   }  
   
 }

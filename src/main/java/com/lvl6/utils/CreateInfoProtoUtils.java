@@ -12,6 +12,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.Achievement;
+import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
@@ -77,6 +79,9 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.AchievementStuffProto.AchievementProto;
+import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
+import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -110,6 +115,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
@@ -117,8 +123,6 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -126,12 +130,15 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
-import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
+import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
+import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
@@ -148,7 +155,6 @@ import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
-import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
@@ -183,6 +189,86 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 public class CreateInfoProtoUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  /**Achievement.proto***************************************************/
+  public static AchievementProto createAchievementProto(Achievement a) {
+	  AchievementProto.Builder ab = AchievementProto.newBuilder();
+	  
+	  ab.setAchievementId(a.getId());
+	  
+	  String str = a.getAchievementName();
+	  if (null != str) {
+		  ab.setName(str);
+	  }
+	  
+	  str = a.getDescription();
+	  if (null != str) {
+		  ab.setDescription(str);
+	  }
+	  
+	  ab.setGemReward(a.getGemReward());
+	  ab.setLvl(a.getLvl());
+	  
+	  str = a.getAchievementType();
+	  if (null != str) {
+		  try {
+			  AchievementType at = AchievementType.valueOf(str);
+			  ab.setAchievementType(at);
+		  } catch(Exception e) {
+			  log.error("invalid AchievementType. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getResourceType();
+	  if (null != str) {
+		  try {
+			  ResourceType rt = ResourceType.valueOf(str);
+			  ab.setResourceType(rt);
+		  } catch(Exception e) {
+			  log.error("invalid ResourceType. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getMonsterElement();
+	  if (null != str) {
+		  try {
+			  Element me = Element.valueOf(str);
+			  ab.setElement(me);
+		  } catch(Exception e) {
+			  log.error("invalid MonsterElement. achievement=" + a);
+		  }
+	  }
+	  
+	  str = a.getMonsterQuality();
+	  if (null != str) {
+		  try {
+			  Quality mq = Quality.valueOf(str);
+			  ab.setQuality(mq);
+		  } catch(Exception e) {
+			  log.error("invalid MonsterQuality. achievement=" + a);
+		  }
+	  }
+	  
+	  ab.setStaticDataId(a.getStaticDataId());
+	  ab.setQuantity(a.getQuantity());
+	  ab.setPriority(a.getPriority());
+	  ab.setPrerequisiteId(a.getPrerequisiteId());
+	  ab.setSuccessorId(a.getSuccessorId());
+	  
+	  return ab.build();
+  }
+  
+  public static UserAchievementProto createUserAchievementProto(
+		  AchievementForUser afu) {
+	  UserAchievementProto.Builder uapb = UserAchievementProto.newBuilder();
+	  
+	  uapb.setAchievementId(afu.getAchievementId());
+	  uapb.setProgress(afu.getProgress());
+	  uapb.setIsComplete(afu.isComplete());
+	  uapb.setIsRedeemed(afu.isRedeemed());
+	  
+	  return uapb.build();
+  }
   
   /**Battle.proto***************************************************/
   /*public static MinimumUserProtoWithBattleHistory createMinimumUserProtoWithBattleHistory(
@@ -538,7 +624,7 @@ public class CreateInfoProtoUtils {
     String monsterQuality = bdi.getMonsterQuality();
     if (null != monsterQuality) {
     	try {
-    		MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    		Quality mq = Quality.valueOf(monsterQuality);
     		b.setQuality(mq);
     	} catch (Exception e){
     		log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
@@ -1167,6 +1253,27 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
   
+  /**MiniJobConfig.proto********************************************/
+  public static MiniJobProto createMiniJobProto(MiniJobProto mtp) {
+	  MiniJobProto.Builder mtpb = MiniJobProto.newBuilder();
+	  
+	  mtpb.setMiniJobId(mtp.getMiniJobId());
+	  mtpb.setRequiredStructId(mtp.getRequiredStructId());
+	  
+	  String str = mtp.getName();
+	  if (null != str) {
+		  mtpb.setName(str);
+	  }
+	  
+	  mtpb.setCashReward(mtp.getCashReward());
+	  mtpb.setOilReward(mtp.getOilReward());
+	  mtpb.setGemReward(mtp.getGemReward());
+	  mtpb.setMonsterIdReward(mtp.getMonsterIdReward());
+	  
+	  return mtpb.build();
+  }
+  
+  
   /**MonsterStuff.proto********************************************/
   public static MonsterProto createMonsterProto(Monster aMonster,
       Map<Integer, MonsterLevelInfo> levelToInfo) {
@@ -1185,7 +1292,7 @@ public class CreateInfoProtoUtils {
     }
     String monsterQuality = aMonster.getQuality(); 
     try {
-    	MonsterQuality mq = MonsterQuality.valueOf(monsterQuality);
+    	Quality mq = Quality.valueOf(monsterQuality);
     	mpb.setQuality(mq);
     } catch (Exception e) {
     	log.error("invalid monster quality. monster=" + aMonster);
@@ -1198,7 +1305,7 @@ public class CreateInfoProtoUtils {
 
     String monsterElement = aMonster.getElement();
     try {
-    	MonsterElement me = MonsterElement.valueOf(monsterElement);
+    	Element me = Element.valueOf(monsterElement);
     	mpb.setMonsterElement(me);
     } catch (Exception e){
       log.error("invalid monster element. monster=" + aMonster);
@@ -1563,7 +1670,7 @@ public class CreateInfoProtoUtils {
     str = quest.getMonsterElement();
     if (null != str) {
     	try {
-    		MonsterElement me = MonsterElement.valueOf(str);
+    		Element me = Element.valueOf(str);
     		builder.setMonsterElement(me);
     	} catch (Exception e) {
     		log.error("invalid monsterElement. quest=" + quest);
@@ -1681,6 +1788,14 @@ public class CreateInfoProtoUtils {
 		  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs) {
 	  List<UserQuestJobProto> userQuestJobProtoList =
 			  new ArrayList<UserQuestJobProto>();
+	  
+	  if (!questIdToUserQuestJobs.containsKey(questId)) {
+		  //should never go in here!
+		  log.error("user has quest but no quest_jobs for said quest." +
+		  		" questId=" + questId + "\t user's quest jobs are:" +
+				  questIdToUserQuestJobs);
+		  return userQuestJobProtoList;
+	  }
 	  
 	  for (QuestJobForUser qjfu : questIdToUserQuestJobs.get(questId)) {
 		  UserQuestJobProto uqjp = createUserJobProto(qjfu);
@@ -2269,7 +2384,7 @@ public class CreateInfoProtoUtils {
       log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
     }
     try {
-      MonsterElement elem = MonsterElement.valueOf(monsterElem);
+      Element elem = Element.valueOf(monsterElem);
       pepb.setMonsterElement(elem);
     } catch (Exception e) {
       log.error("can't create enum type. monster elem=" + monsterElem + 
@@ -2497,6 +2612,11 @@ public class CreateInfoProtoUtils {
     
     int numObstaclesRemoved = u.getNumObstaclesRemoved();
     builder.setNumObstaclesRemoved(numObstaclesRemoved);
+    
+    Date lastMiniJobSpawnedTime = u.getLastMiniJobGeneratedTime();
+    if (null != lastMiniJobSpawnedTime) {
+    	builder.setLastMiniJobSpawnedTime(lastMiniJobSpawnedTime.getTime());
+    }
     
     //add new columns above here, not below the if. if case for is fake
 

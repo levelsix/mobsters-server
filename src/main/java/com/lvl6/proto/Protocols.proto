@@ -1,10 +1,12 @@
 //NEED TO IMPORT EVERY *.PROTO FILE INTO HERE!!!!!!
 
+import "AchievementStuff.proto";
 import "Battle.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
+import "EventAchievement.proto";
 import "EventApns.proto";
 import "EventBoosterPack.proto";
 import "EventChat.proto";
@@ -22,8 +24,10 @@ import "EventStructure.proto";
 import "EventTournament.proto";
 import "EventUser.proto";
 import "InAppPurchase.proto";
+import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
@@ -80,6 +84,7 @@ enum EventProtocolRequest {
 	C_EVOLUTION_FINISHED_EVENT = 38;
 	
 	//C_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+	C_ACHIEVEMENT_PROGRESS_EVENT = 39;
 	
 	C_PRIVATE_CHAT_POST_EVENT = 40;
 	C_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;
@@ -90,7 +95,9 @@ enum EventProtocolRequest {
 	C_QUEUE_UP_EVENT = 46;
 	C_UPDATE_MONSTER_HEALTH_EVENT = 47;
 	C_HEAL_MONSTER_EVENT = 48;
+	
 	//C_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+	C_ACHIEVEMENT_REDEEM_EVENT = 49;
 	
 	C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;
 	C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;
@@ -100,6 +107,7 @@ enum EventProtocolRequest {
 	C_SELL_USER_MONSTER_EVENT = 55;
 	C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;
 	C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;
+	
 	//C_END_PERSISTENT_EVENT_COOL_DOWN_TIMER_EVENT = 58;
 	
 	C_UPDATE_USER_CURRENCY_EVENT = 59;
@@ -163,6 +171,7 @@ enum EventProtocolResponse {
 	S_EVOLUTION_FINISHED_EVENT = 38;
 	
 	//S_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+	S_ACHIEVEMENT_PROGRESS_EVENT = 39;
 	
 	S_PRIVATE_CHAT_POST_EVENT = 40;
 	S_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;
@@ -173,7 +182,9 @@ enum EventProtocolResponse {
 	S_QUEUE_UP_EVENT = 46;
 	S_UPDATE_MONSTER_HEALTH_EVENT = 47;
 	S_HEAL_MONSTER_EVENT = 48;
+	
 	//S_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+	S_ACHIEVEMENT_REDEEM_EVENT = 49;
 	
 	S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;
 	S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;
@@ -183,7 +194,9 @@ enum EventProtocolResponse {
 	S_SELL_USER_MONSTER_EVENT = 55;
 	S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;
 	S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;
+	
 	//S_END_PERSISTENT_EVENT_COOL_DOWN_TIMER_EVENT = 58;
+	
 	S_UPDATE_USER_CURRENCY_EVENT = 59;
 	S_BEGIN_PVP_BATTLE_EVENT = 60;
 	S_END_PVP_BATTLE_EVENT = 61;
