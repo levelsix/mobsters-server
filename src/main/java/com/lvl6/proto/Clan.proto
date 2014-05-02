@@ -25,7 +25,8 @@ message FullClanProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//before adding in numbers, ask Ashwin what new number should be
+//since he uses the actual numerical values
 enum UserClanStatus {
 	LEADER = 1;
 	JUNIOR_LEADER = 2; //is a leader but can't demote jr leaders or promote to jr leader

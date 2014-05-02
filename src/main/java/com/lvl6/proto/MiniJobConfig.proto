@@ -29,12 +29,14 @@ message MiniJobProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//user can have duplicate mini jobs
 message UserMiniJobProto {
 	optional int32 miniTaskId = 1;
     optional int32 baseDmgReceived = 2;
 	optional int64 timeStarted = 3; 
 	repeated int32 userMonsterIds = 4;
+	
+	optional MiniJobProto miniJob = 5;
 }
 
 //------------------------------------------------------------------------------------------

@@ -1,0 +1,100 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+import "MiniJobConfig.proto";
+import "MonsterStuff.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventMiniJobProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message SpawnMiniJobRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	optional int32 numToSpawn = 3;
+	
+	//id of structure (that user built) that controls mini jobs
+	optional int32 structId = 4;	
+	
+}
+																						//DONE
+message SpawnMiniJobResponseProto {
+     optional MinimumUserProto sender = 1;
+     
+     repeated UserMiniJobProto miniJobs = 2;
+     optional SpawnMiniJobStatus status = 3;
+     
+     enum SpawnMiniJobStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+//user can only be doing one minijob at a time
+message BeginMiniJobRequestProto {                         
+     optional MinimumUserProto sender = 1;
+     repeated int64 userMonsterIds = 2;
+     optional int64 userMiniJobId = 3; 
+}
+
+																						//DONE
+message BeginMiniJobResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional BeginMiniJobStatus status = 2;    
+     
+     enum BeginMiniJobStatus {
+          SUCCESS = 1;
+          FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+//user will always win the minijob, all monsters could die though
+message CompleteMiniJobRequestProto {                         
+     optional MinimumUserProto sender = 1;
+     optional int64 clientTime = 2;
+     optional int64 userMiniJobId = 3;
+     
+     //speeding up
+     optional bool isSpeedUp = 4;
+     optional int32 gemCost = 5;
+     
+	repeated UserMonsterCurrentHealthProto umchp = 6;
+}
+
+																						//DONE
+message CompleteMiniJobResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional CompleteMiniJobStatus status = 2;    
+     
+     enum CompleteMiniJobStatus {
+          SUCCESS = 1;
+          FAIL_OTHER = 2;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+message RedeemMiniJobRequestProto {                         
+     optional MinimumUserProtoWithMaxResources sender = 1;
+     optional int64 userMiniJobId = 2;
+     
+}
+
+																						//DONE
+message RedeemMiniJobResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional FullUserMonsterProto fump = 2; //this is if the mini job gives monster
+     
+     optional RedeemMiniJobStatus status = 3;    
+     
+     
+     enum RedeemMiniJobStatus {
+          SUCCESS = 1;
+          FAIL_OTHER = 2;
+     }
+}
