@@ -131,7 +131,8 @@ public class TaskStageMonsterRetrieveUtils {
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs, Random rand) throws SQLException {
+  private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs,
+		  Random rand) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     int stageId = rs.getInt(i++);
@@ -161,10 +162,9 @@ public class TaskStageMonsterRetrieveUtils {
     	puzzlePieceDropRate = Math.max(0F, puzzlePieceDropRate);
     }
     
-    if (chanceToAppear > 1F || chanceToAppear < 0F) {
+    if (chanceToAppear < 0F) {
     	log.error("incorrect chanceToAppear: " + chanceToAppear +
-    			". Forcing it to be between 1 and 0. id=" + id);
-    	chanceToAppear = Math.min(1F, chanceToAppear);
+    			". Forcing it to be above 0. id=" + id);
     	chanceToAppear = Math.max(0F, chanceToAppear);
     }
     
