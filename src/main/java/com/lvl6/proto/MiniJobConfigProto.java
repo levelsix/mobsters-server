@@ -1136,9 +1136,9 @@ public final class MiniJobConfigProto {
   public interface UserMiniJobProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 miniTaskId = 1;
-    boolean hasMiniTaskId();
-    int getMiniTaskId();
+    // optional int64 userMiniJobId = 1;
+    boolean hasUserMiniJobId();
+    long getUserMiniJobId();
     
     // optional int32 baseDmgReceived = 2;
     boolean hasBaseDmgReceived();
@@ -1148,10 +1148,19 @@ public final class MiniJobConfigProto {
     boolean hasTimeStarted();
     long getTimeStarted();
     
-    // repeated int32 userMonsterIds = 4;
-    java.util.List<java.lang.Integer> getUserMonsterIdsList();
+    // repeated int64 userMonsterIds = 4;
+    java.util.List<java.lang.Long> getUserMonsterIdsList();
     int getUserMonsterIdsCount();
-    int getUserMonsterIds(int index);
+    long getUserMonsterIds(int index);
+    
+    // optional int64 timeCompleted = 5;
+    boolean hasTimeCompleted();
+    long getTimeCompleted();
+    
+    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
+    boolean hasMiniJob();
+    com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob();
+    com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
   }
   public static final class UserMiniJobProto extends
       com.google.protobuf.GeneratedMessage
@@ -1182,14 +1191,14 @@ public final class MiniJobConfigProto {
     }
     
     private int bitField0_;
-    // optional int32 miniTaskId = 1;
-    public static final int MINITASKID_FIELD_NUMBER = 1;
-    private int miniTaskId_;
-    public boolean hasMiniTaskId() {
+    // optional int64 userMiniJobId = 1;
+    public static final int USERMINIJOBID_FIELD_NUMBER = 1;
+    private long userMiniJobId_;
+    public boolean hasUserMiniJobId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getMiniTaskId() {
-      return miniTaskId_;
+    public long getUserMiniJobId() {
+      return userMiniJobId_;
     }
     
     // optional int32 baseDmgReceived = 2;
@@ -1212,25 +1221,50 @@ public final class MiniJobConfigProto {
       return timeStarted_;
     }
     
-    // repeated int32 userMonsterIds = 4;
+    // repeated int64 userMonsterIds = 4;
     public static final int USERMONSTERIDS_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Integer> userMonsterIds_;
-    public java.util.List<java.lang.Integer>
+    private java.util.List<java.lang.Long> userMonsterIds_;
+    public java.util.List<java.lang.Long>
         getUserMonsterIdsList() {
       return userMonsterIds_;
     }
     public int getUserMonsterIdsCount() {
       return userMonsterIds_.size();
     }
-    public int getUserMonsterIds(int index) {
+    public long getUserMonsterIds(int index) {
       return userMonsterIds_.get(index);
     }
     
+    // optional int64 timeCompleted = 5;
+    public static final int TIMECOMPLETED_FIELD_NUMBER = 5;
+    private long timeCompleted_;
+    public boolean hasTimeCompleted() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public long getTimeCompleted() {
+      return timeCompleted_;
+    }
+    
+    // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
+    public static final int MINIJOB_FIELD_NUMBER = 6;
+    private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
+    public boolean hasMiniJob() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
+      return miniJob_;
+    }
+    public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
+      return miniJob_;
+    }
+    
     private void initFields() {
-      miniTaskId_ = 0;
+      userMiniJobId_ = 0L;
       baseDmgReceived_ = 0;
       timeStarted_ = 0L;
       userMonsterIds_ = java.util.Collections.emptyList();;
+      timeCompleted_ = 0L;
+      miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1245,7 +1279,7 @@ public final class MiniJobConfigProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, miniTaskId_);
+        output.writeInt64(1, userMiniJobId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, baseDmgReceived_);
@@ -1254,7 +1288,13 @@ public final class MiniJobConfigProto {
         output.writeInt64(3, timeStarted_);
       }
       for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt32(4, userMonsterIds_.get(i));
+        output.writeInt64(4, userMonsterIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(5, timeCompleted_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(6, miniJob_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1267,7 +1307,7 @@ public final class MiniJobConfigProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, miniTaskId_);
+          .computeInt64Size(1, userMiniJobId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1281,10 +1321,18 @@ public final class MiniJobConfigProto {
         int dataSize = 0;
         for (int i = 0; i < userMonsterIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(userMonsterIds_.get(i));
+            .computeInt64SizeNoTag(userMonsterIds_.get(i));
         }
         size += dataSize;
         size += 1 * getUserMonsterIdsList().size();
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, timeCompleted_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, miniJob_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1402,6 +1450,7 @@ public final class MiniJobConfigProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMiniJobFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1410,7 +1459,7 @@ public final class MiniJobConfigProto {
       
       public Builder clear() {
         super.clear();
-        miniTaskId_ = 0;
+        userMiniJobId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
         baseDmgReceived_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1418,6 +1467,14 @@ public final class MiniJobConfigProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         userMonsterIds_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000008);
+        timeCompleted_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        if (miniJobBuilder_ == null) {
+          miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
+        } else {
+          miniJobBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -1459,7 +1516,7 @@ public final class MiniJobConfigProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.miniTaskId_ = miniTaskId_;
+        result.userMiniJobId_ = userMiniJobId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1473,6 +1530,18 @@ public final class MiniJobConfigProto {
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.userMonsterIds_ = userMonsterIds_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.timeCompleted_ = timeCompleted_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (miniJobBuilder_ == null) {
+          result.miniJob_ = miniJob_;
+        } else {
+          result.miniJob_ = miniJobBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1489,8 +1558,8 @@ public final class MiniJobConfigProto {
       
       public Builder mergeFrom(com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto other) {
         if (other == com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.getDefaultInstance()) return this;
-        if (other.hasMiniTaskId()) {
-          setMiniTaskId(other.getMiniTaskId());
+        if (other.hasUserMiniJobId()) {
+          setUserMiniJobId(other.getUserMiniJobId());
         }
         if (other.hasBaseDmgReceived()) {
           setBaseDmgReceived(other.getBaseDmgReceived());
@@ -1507,6 +1576,12 @@ public final class MiniJobConfigProto {
             userMonsterIds_.addAll(other.userMonsterIds_);
           }
           onChanged();
+        }
+        if (other.hasTimeCompleted()) {
+          setTimeCompleted(other.getTimeCompleted());
+        }
+        if (other.hasMiniJob()) {
+          mergeMiniJob(other.getMiniJob());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1541,7 +1616,7 @@ public final class MiniJobConfigProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              miniTaskId_ = input.readInt32();
+              userMiniJobId_ = input.readInt64();
               break;
             }
             case 16: {
@@ -1556,16 +1631,30 @@ public final class MiniJobConfigProto {
             }
             case 32: {
               ensureUserMonsterIdsIsMutable();
-              userMonsterIds_.add(input.readInt32());
+              userMonsterIds_.add(input.readInt64());
               break;
             }
             case 34: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addUserMonsterIds(input.readInt32());
+                addUserMonsterIds(input.readInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              timeCompleted_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder subBuilder = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.newBuilder();
+              if (hasMiniJob()) {
+                subBuilder.mergeFrom(getMiniJob());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setMiniJob(subBuilder.buildPartial());
               break;
             }
           }
@@ -1574,23 +1663,23 @@ public final class MiniJobConfigProto {
       
       private int bitField0_;
       
-      // optional int32 miniTaskId = 1;
-      private int miniTaskId_ ;
-      public boolean hasMiniTaskId() {
+      // optional int64 userMiniJobId = 1;
+      private long userMiniJobId_ ;
+      public boolean hasUserMiniJobId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getMiniTaskId() {
-        return miniTaskId_;
+      public long getUserMiniJobId() {
+        return userMiniJobId_;
       }
-      public Builder setMiniTaskId(int value) {
+      public Builder setUserMiniJobId(long value) {
         bitField0_ |= 0x00000001;
-        miniTaskId_ = value;
+        userMiniJobId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearMiniTaskId() {
+      public Builder clearUserMiniJobId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        miniTaskId_ = 0;
+        userMiniJobId_ = 0L;
         onChanged();
         return this;
       }
@@ -1637,39 +1726,39 @@ public final class MiniJobConfigProto {
         return this;
       }
       
-      // repeated int32 userMonsterIds = 4;
-      private java.util.List<java.lang.Integer> userMonsterIds_ = java.util.Collections.emptyList();;
+      // repeated int64 userMonsterIds = 4;
+      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureUserMonsterIdsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Integer>(userMonsterIds_);
+          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
           bitField0_ |= 0x00000008;
          }
       }
-      public java.util.List<java.lang.Integer>
+      public java.util.List<java.lang.Long>
           getUserMonsterIdsList() {
         return java.util.Collections.unmodifiableList(userMonsterIds_);
       }
       public int getUserMonsterIdsCount() {
         return userMonsterIds_.size();
       }
-      public int getUserMonsterIds(int index) {
+      public long getUserMonsterIds(int index) {
         return userMonsterIds_.get(index);
       }
       public Builder setUserMonsterIds(
-          int index, int value) {
+          int index, long value) {
         ensureUserMonsterIdsIsMutable();
         userMonsterIds_.set(index, value);
         onChanged();
         return this;
       }
-      public Builder addUserMonsterIds(int value) {
+      public Builder addUserMonsterIds(long value) {
         ensureUserMonsterIdsIsMutable();
         userMonsterIds_.add(value);
         onChanged();
         return this;
       }
       public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Long> values) {
         ensureUserMonsterIdsIsMutable();
         super.addAll(values, userMonsterIds_);
         onChanged();
@@ -1680,6 +1769,117 @@ public final class MiniJobConfigProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
+      }
+      
+      // optional int64 timeCompleted = 5;
+      private long timeCompleted_ ;
+      public boolean hasTimeCompleted() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public long getTimeCompleted() {
+        return timeCompleted_;
+      }
+      public Builder setTimeCompleted(long value) {
+        bitField0_ |= 0x00000010;
+        timeCompleted_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimeCompleted() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        timeCompleted_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.MiniJobProto miniJob = 6;
+      private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
+      public boolean hasMiniJob() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
+        if (miniJobBuilder_ == null) {
+          return miniJob_;
+        } else {
+          return miniJobBuilder_.getMessage();
+        }
+      }
+      public Builder setMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
+        if (miniJobBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          miniJob_ = value;
+          onChanged();
+        } else {
+          miniJobBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder setMiniJob(
+          com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder builderForValue) {
+        if (miniJobBuilder_ == null) {
+          miniJob_ = builderForValue.build();
+          onChanged();
+        } else {
+          miniJobBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder mergeMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
+        if (miniJobBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              miniJob_ != com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance()) {
+            miniJob_ =
+              com.lvl6.proto.MiniJobConfigProto.MiniJobProto.newBuilder(miniJob_).mergeFrom(value).buildPartial();
+          } else {
+            miniJob_ = value;
+          }
+          onChanged();
+        } else {
+          miniJobBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder clearMiniJob() {
+        if (miniJobBuilder_ == null) {
+          miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
+          onChanged();
+        } else {
+          miniJobBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      public com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder getMiniJobBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getMiniJobFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
+        if (miniJobBuilder_ != null) {
+          return miniJobBuilder_.getMessageOrBuilder();
+        } else {
+          return miniJob_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> 
+          getMiniJobFieldBuilder() {
+        if (miniJobBuilder_ == null) {
+          miniJobBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder>(
+                  miniJob_,
+                  getParentForChildren(),
+                  isClean());
+          miniJob_ = null;
+        }
+        return miniJobBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniJobProto)
@@ -1723,10 +1923,12 @@ public final class MiniJobConfigProto {
       "mMonstersAllowed\030\t \001(\005\022\026\n\016chanceToAppear" +
       "\030\n \001(\002\022\022\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequire",
       "d\030\014 \001(\005\022\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDe" +
-      "alt\030\016 \001(\005\"l\n\020UserMiniJobProto\022\022\n\nminiTas" +
-      "kId\030\001 \001(\005\022\027\n\017baseDmgReceived\030\002 \001(\005\022\023\n\013ti" +
-      "meStarted\030\003 \001(\003\022\026\n\016userMonsterIds\030\004 \003(\005B" +
-      "\024B\022MiniJobConfigProto"
+      "alt\030\016 \001(\005\"\265\001\n\020UserMiniJobProto\022\025\n\ruserMi" +
+      "niJobId\030\001 \001(\003\022\027\n\017baseDmgReceived\030\002 \001(\005\022\023" +
+      "\n\013timeStarted\030\003 \001(\003\022\026\n\016userMonsterIds\030\004 " +
+      "\003(\003\022\025\n\rtimeCompleted\030\005 \001(\003\022-\n\007miniJob\030\006 " +
+      "\001(\0132\034.com.lvl6.proto.MiniJobProtoB\024B\022Min" +
+      "iJobConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1746,7 +1948,7 @@ public final class MiniJobConfigProto {
           internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
-              new java.lang.String[] { "MiniTaskId", "BaseDmgReceived", "TimeStarted", "UserMonsterIds", },
+              new java.lang.String[] { "UserMiniJobId", "BaseDmgReceived", "TimeStarted", "UserMonsterIds", "TimeCompleted", "MiniJob", },
               com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.class,
               com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto.Builder.class);
           return null;

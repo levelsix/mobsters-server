@@ -17,6 +17,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
@@ -1561,5 +1562,31 @@ public class InsertUtils implements InsertUtil{
 					newRows);                        
 
 			return ids;            
+		}
+		
+		@Override
+		public List<Long> insertIntoMiniJobForUserGetIds(int userId,
+				List<MiniJobForUser> mjfuList) {
+			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+			for (MiniJobForUser mjfu : mjfuList) {
+				Map<String, Object> newRow = new HashMap<String, Object>();
+
+
+				newRow.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);    
+				newRow.put(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID,
+						mjfu.getMiniJobId());                                                                   
+				newRow.put(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED,
+						mjfu.getBaseDmgReceived());      
+
+				newRows.add(newRow);
+			}                                                                                        
+			List<Long> ids = DBConnection.get()
+					.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
+
+			return ids;            
+
 		}
 }

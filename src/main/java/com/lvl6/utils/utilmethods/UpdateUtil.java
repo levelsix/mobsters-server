@@ -162,4 +162,10 @@ public interface UpdateUtil {
 		  int newRank, int eloChange, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
 		  int attacksLostDelta, int defensesLostDelta);
+  
+  public abstract int updateMiniJobForUser(int userId, long userMiniJobId,
+		  String userMonsterIdStr, Timestamp now);
+  
+  public abstract int updateMiniJobForUserCompleteTime(int userId,
+		  long userMiniJobId, Timestamp now);
 }

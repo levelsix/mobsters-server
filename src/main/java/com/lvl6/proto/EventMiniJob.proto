@@ -37,8 +37,9 @@ message SpawnMiniJobResponseProto {
 //user can only be doing one minijob at a time
 message BeginMiniJobRequestProto {                         
      optional MinimumUserProto sender = 1;
-     repeated int64 userMonsterIds = 2;
-     optional int64 userMiniJobId = 3; 
+     optional int64 clientTime = 2;
+     repeated int64 userMonsterIds = 3;
+     optional int64 userMiniJobId = 4; 
 }
 
 																						//DONE
@@ -49,6 +50,7 @@ message BeginMiniJobResponseProto {
      enum BeginMiniJobStatus {
           SUCCESS = 1;
           FAIL_OTHER = 2;
+          FAIL_NO_MINI_JOB_EXISTS = 3;
      }
 }
 
@@ -74,11 +76,13 @@ message CompleteMiniJobResponseProto {
      enum CompleteMiniJobStatus {
           SUCCESS = 1;
           FAIL_OTHER = 2;
+          FAIL_INSUFFICIENT_GEMS = 3;
+          FAIL_NO_MINI_JOB_EXISTS = 4;
      }
 }
 
 //------------------------------------------------------------------------------------------
-
+//MiniJobForUser is deleted here
 message RedeemMiniJobRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional int64 userMiniJobId = 2;

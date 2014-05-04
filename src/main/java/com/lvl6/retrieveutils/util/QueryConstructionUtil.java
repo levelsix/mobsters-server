@@ -692,6 +692,21 @@ public class QueryConstructionUtil {
 		return returnValue;
 	}
 
+	public List<Long> explodeIntoLongs(String stringToExplode, 
+			String delimiter) {
+		List<Long> returnValue = new ArrayList<Long>();
+		
+		if (null == stringToExplode) {
+			return returnValue;
+		}
+		
+		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
+		while (st.hasMoreTokens()) {
+			returnValue.add(Long.parseLong(st.nextToken()));
+		}
+		return returnValue;
+	}
+
 
 	public String getAnd() {
 		return AND;

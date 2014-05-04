@@ -125,7 +125,7 @@ public class MonsterStuffUtils {
   }
   
   /*
-   * selected monsters (the second argument) might be modified
+   * the second argument might be modified
    */
   public static void retainValidMonsterIds(Set<Long> existing, List<Long> ids) {
 //  	ids.add(123456789L);

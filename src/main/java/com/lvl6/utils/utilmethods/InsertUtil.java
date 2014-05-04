@@ -12,6 +12,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
@@ -196,4 +197,7 @@ public interface InsertUtil {
 	
 	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
 			List<ObstacleForUser> ofuList);
+	
+	public abstract List<Long> insertIntoMiniJobForUserGetIds(int userId,
+			List<MiniJobForUser> mjfuList); 
 }

@@ -1248,4 +1248,56 @@ public class UpdateUtils implements UpdateUtil {
 			
 			return numUpdated;
 		}
+		
+		@Override
+		public int updateMiniJobForUser(int userId, long userMiniJobId,
+				String userMonsterIdStr, Timestamp now) {
+			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID,
+					userMiniJobId);
+
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__ID,
+					userMonsterIdStr);
+			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED,
+					now);
+
+			if (absoluteParams.isEmpty()) {
+				return 0;
+			}
+
+			Map<String, Object> relativeParams = null;
+			int numUpdated = DBConnection.get().updateTableRows(tableName,
+					relativeParams, absoluteParams, conditionParams, "and");
+
+			return numUpdated;
+		}
+
+		@Override
+		public int updateMiniJobForUserCompleteTime(int userId,
+				  long userMiniJobId, Timestamp now) {
+			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID,
+					userMiniJobId);
+
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED,
+					now);
+
+			if (absoluteParams.isEmpty()) {
+				return 0;
+			}
+
+			Map<String, Object> relativeParams = null;
+			int numUpdated = DBConnection.get().updateTableRows(tableName,
+					relativeParams, absoluteParams, conditionParams, "and");
+
+			return numUpdated;
+		}
 }
