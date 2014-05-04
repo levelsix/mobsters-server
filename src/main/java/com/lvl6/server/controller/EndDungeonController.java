@@ -97,12 +97,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
       boolean successful = false;
       Map<String, Integer> money = new HashMap<String, Integer>();
-      List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
         previousCash = aUser.getCash();
         previousOil = aUser.getOil();
-    	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime, money,
-    	  		protos, maxCash, maxOil);
+    	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
+    			  money, maxCash, maxOil);
     	  
     	  resBuilder.setTaskId(ut.getTaskId());
       }
@@ -122,7 +121,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	if (userWon) {
       		log.info("user won dungeon, awarding the monsters and items");
       		//update user's monsters
-      		String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
+      		StringBuilder mfusopB = new StringBuilder();
+      		mfusopB.append(ControllerConstants.MFUSOP__END_DUNGEON);
+      		mfusopB.append(" ");
+      		mfusopB.append(taskForUserId);
+      		String mfusop = mfusopB.toString();
       		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
       				updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
       		setResponseBuilder(resBuilder, newOrUpdated);
@@ -190,7 +193,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut,
 		  boolean userWon, Timestamp clientTime, Map<String, Integer> money,
-		  List<FullUserMonsterProto> protos,
 		  int maxCash, int maxOil) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();

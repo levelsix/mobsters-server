@@ -85,13 +85,14 @@ message CompleteMiniJobResponseProto {
 //MiniJobForUser is deleted here
 message RedeemMiniJobRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
-     optional int64 userMiniJobId = 2;
+     optional int64 clientTime = 2;
+     optional int64 userMiniJobId = 3;
      
 }
 
 																						//DONE
 message RedeemMiniJobResponseProto {
-     optional MinimumUserProto sender = 1;
+     optional MinimumUserProtoWithMaxResources sender = 1;
      optional FullUserMonsterProto fump = 2; //this is if the mini job gives monster
      
      optional RedeemMiniJobStatus status = 3;    
@@ -100,5 +101,7 @@ message RedeemMiniJobResponseProto {
      enum RedeemMiniJobStatus {
           SUCCESS = 1;
           FAIL_OTHER = 2;
+          FAIL_NO_MINI_JOB_EXISTS = 3;
+          FAIL_MINI_JOB_INCOMPLETE = 4;
      }
 }
