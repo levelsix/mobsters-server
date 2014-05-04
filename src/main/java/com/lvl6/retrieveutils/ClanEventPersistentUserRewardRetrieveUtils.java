@@ -81,7 +81,7 @@ import com.lvl6.utils.DBConnection;
 		Date pastDate = timeUtils.createPstDate(curDate, -1* nDays, 0, 0);
 		Timestamp pastTime = new Timestamp(pastDate.getTime());
 		
-		StringBuffer querySb = new StringBuffer();
+		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME);
 		querySb.append(" WHERE ");

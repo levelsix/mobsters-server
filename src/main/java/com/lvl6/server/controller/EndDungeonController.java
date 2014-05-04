@@ -439,7 +439,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  return;
 	  }
 	  
-  	StringBuffer sb = new StringBuffer();
+  	StringBuilder sb = new StringBuilder();
   	sb.append("userTask=");
   	sb.append(userTaskId);
   	sb.append(" taskId=");
