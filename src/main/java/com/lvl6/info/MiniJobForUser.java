@@ -6,26 +6,42 @@ import java.util.List;
 
 public class MiniJobForUser implements Serializable {
 	
-	private static final long serialVersionUID = 8744099139117830254L;
+	private static final long serialVersionUID = 935935118122856378L;
 	
+	private long id;
 	private int userId;
 	private int miniJobId;
 	private int baseDmgReceived;
 	private Date timeStarted;
-	private List<Integer> userMonsterIds;
+	private List<Long> userMonsterIds;
+	private String userMonsterIdStr;
+	private Date timeCompleted;
 	
 	public MiniJobForUser() {
 		super();
 	}
-	
-	public MiniJobForUser(int userId, int miniJobId, int baseDmgReceived,
-			Date timeStarted, List<Integer> userMonsterIds) {
+
+	public MiniJobForUser(long id, int userId, int miniJobId,
+			int baseDmgReceived, Date timeStarted, List<Long> userMonsterIds,
+			String userMonsterIdStr, Date timeCompleted) {
 		super();
+		this.id = id;
 		this.userId = userId;
 		this.miniJobId = miniJobId;
 		this.baseDmgReceived = baseDmgReceived;
 		this.timeStarted = timeStarted;
 		this.userMonsterIds = userMonsterIds;
+		this.userMonsterIdStr = userMonsterIdStr;
+		this.timeCompleted = timeCompleted;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public int getUserId() {
@@ -60,20 +76,37 @@ public class MiniJobForUser implements Serializable {
 		this.timeStarted = timeStarted;
 	}
 
-	public List<Integer> getUserMonsterIds() {
+	public List<Long> getUserMonsterIds() {
 		return userMonsterIds;
 	}
 
-	public void setUserMonsterIds(List<Integer> userMonsterIds) {
+	public void setUserMonsterIds(List<Long> userMonsterIds) {
 		this.userMonsterIds = userMonsterIds;
+	}
+
+	public String getUserMonsterIdStr() {
+		return userMonsterIdStr;
+	}
+
+	public void setUserMonsterIdStr(String userMonsterIdStr) {
+		this.userMonsterIdStr = userMonsterIdStr;
+	}
+
+	public Date getTimeCompleted() {
+		return timeCompleted;
+	}
+
+	public void setTimeCompleted(Date timeCompleted) {
+		this.timeCompleted = timeCompleted;
 	}
 
 	@Override
 	public String toString() {
-		return "MiniJobForUser [userId=" + userId + ", miniJobId="
-				+ miniJobId + ", baseDmgReceived=" + baseDmgReceived
-				+ ", timeStarted=" + timeStarted + ", userMonsterIds="
-				+ userMonsterIds + "]";
+		return "MiniJobForUser [id=" + id + ", userId=" + userId
+				+ ", miniJobId=" + miniJobId + ", baseDmgReceived="
+				+ baseDmgReceived + ", timeStarted=" + timeStarted
+				+ ", userMonsterIds=" + userMonsterIds + ", userMonsterIdStr="
+				+ userMonsterIdStr + ", timeCompleted=" + timeCompleted + "]";
 	}
-	
+
 }

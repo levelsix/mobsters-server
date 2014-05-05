@@ -37,9 +37,10 @@ public class ControllerConstants {
 //	public static final int MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS = 3;
 	
 	//MFUSOP = monster_for_user_source_of_pieces
-	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
-	public static final String MFUSOP__QUEST = "questId "; 
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
+	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
+	public static final String MFUSOP__MINI_JOB = "miniJobId";
+	public static final String MFUSOP__QUEST = "questId"; 
 	public static final String MFUSOP__USER_CREATE = "user create";
 	
 	//MFUDR = monster_for_user_delete_reasons
@@ -158,6 +159,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__REVIVE_IN_DUNGEON = "revive in dungeon";
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
+	public static final String UCHRFC__SPED_UP_COMPLETE_MINI_JOB = "sped up complete mini job";
 	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";

@@ -182,6 +182,7 @@ public class ObstacleTest extends TestCase {
 		//check the user obstacle exists
 		List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
 				.getUserObstacleForUser(userId);
+		log.info("beginRemoveObstacle() ofuList=" + ofuList);
 		assertTrue("Expected obstacles: not null. Actual: " + ofuList,
 				null != ofuList);
 		
@@ -226,6 +227,8 @@ public class ObstacleTest extends TestCase {
 		ObstacleForUser doomedOfu = getObstacleForUserRetrieveUtil()
 				.getUserObstacleForId(ofuId);
 		Date newRemovalTime = doomedOfu.getRemovalTime();
+		log.info("beginRemoveObstacle() ofuToBeRemoved=" + doomedOfu); 
+		
 		assertTrue("Expected time: not null. Actual=" + removalTime,
 				null != newRemovalTime);
 		

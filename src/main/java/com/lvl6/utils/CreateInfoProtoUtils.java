@@ -41,6 +41,8 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
+import com.lvl6.info.MiniJob;
+import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -116,6 +118,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificatio
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
+import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
@@ -179,6 +182,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
@@ -1254,23 +1258,90 @@ public class CreateInfoProtoUtils {
   }
   
   /**MiniJobConfig.proto********************************************/
-  public static MiniJobProto createMiniJobProto(MiniJobProto mtp) {
-	  MiniJobProto.Builder mtpb = MiniJobProto.newBuilder();
+  public static MiniJobProto createMiniJobProto(MiniJob mj) {
+	  MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
 	  
-	  mtpb.setMiniJobId(mtp.getMiniJobId());
-	  mtpb.setRequiredStructId(mtp.getRequiredStructId());
+	  mjpb.setMiniJobId(mj.getId());
+	  mjpb.setRequiredStructId(mj.getRequiredStructId());
 	  
-	  String str = mtp.getName();
+	  String str = mj.getName();
 	  if (null != str) {
-		  mtpb.setName(str);
+		  mjpb.setName(str);
 	  }
 	  
-	  mtpb.setCashReward(mtp.getCashReward());
-	  mtpb.setOilReward(mtp.getOilReward());
-	  mtpb.setGemReward(mtp.getGemReward());
-	  mtpb.setMonsterIdReward(mtp.getMonsterIdReward());
+	  mjpb.setCashReward(mj.getCashReward());
+	  mjpb.setOilReward(mj.getOilReward());
+	  mjpb.setGemReward(mj.getGemReward());
+	  mjpb.setMonsterIdReward(mj.getMonsterIdReward());
 	  
-	  return mtpb.build();
+	  str = mj.getQuality();
+	  if (null != str) {
+		  try {
+			  Quality q = Quality.valueOf(str);
+			  mjpb.setQuality(q);
+		  } catch(Exception e) {
+			  log.error("invalid quality. MiniJob=" + mj);
+		  }
+	  }
+	  
+	  mjpb.setMaxNumMonstersAllowed(mj.getMaxNumMonstersAllowed());
+	  mjpb.setChanceToAppear(mj.getChanceToAppear());
+	  mjpb.setHpRequired(mj.getHpRequired());
+	  mjpb.setAtkRequired(mj.getAtkRequired());
+	  mjpb.setMinDmgDealt(mj.getMinDmgDealt());
+	  mjpb.setMaxDmgDealt(mj.getMaxDmgDealt());
+	  
+	  return mjpb.build();
+  }
+  
+  public static UserMiniJobProto createUserMiniJobProto(
+		  MiniJobForUser mjfu, MiniJob mj) {
+	  UserMiniJobProto.Builder umjpb = UserMiniJobProto.newBuilder();
+	  
+	  umjpb.setUserMiniJobId(mjfu.getId());
+	  umjpb.setBaseDmgReceived(mjfu.getBaseDmgReceived());
+	  
+	  Date time = mjfu.getTimeStarted();
+	  if (null != time) {
+		  umjpb.setTimeStarted(time.getTime());
+	  }
+	  
+	  List<Long> userMonsterIds = mjfu.getUserMonsterIds();
+	  if (null != userMonsterIds) {
+		  umjpb.addAllUserMonsterIds(userMonsterIds);
+	  }
+	  
+	  time = mjfu.getTimeCompleted();
+	  if (null != time) {
+		  umjpb.setTimeCompleted(time.getTime());
+	  }
+	  
+	  MiniJobProto mjp = createMiniJobProto(mj);
+	  umjpb.setMiniJob(mjp);
+	  
+	  return umjpb.build();
+  }
+  
+  public static List<UserMiniJobProto> createUserMiniJobProtos(
+		  List<MiniJobForUser> mjfuList, Map<Integer,
+		  MiniJob> miniJobIdToMiniJob) {
+	  List<UserMiniJobProto> umjpList = new ArrayList<UserMiniJobProto>();
+	  
+	  for (MiniJobForUser mjfu : mjfuList) {
+		  int miniJobId = mjfu.getMiniJobId();
+		  
+		  MiniJob mj = null;
+		  if (!miniJobIdToMiniJob.containsKey(miniJobId)) {
+			  mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		  } else {
+			  mj = miniJobIdToMiniJob.get(miniJobId);
+		  }
+		  
+		  UserMiniJobProto umjp = createUserMiniJobProto(mjfu, mj);
+		  umjpList.add(umjp);
+	  }
+	  
+	  return umjpList;
   }
   
   

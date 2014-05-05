@@ -1,10 +1,11 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class MiniJob implements Serializable {
-
-	private static final long serialVersionUID = -809651011006346155L;
+	
+	private static final long serialVersionUID = -6147449231938329245L;
 	
 	private int id;
 	private int requiredStructId;
@@ -20,6 +21,8 @@ public class MiniJob implements Serializable {
 	private int atkRequired;
 	private int minDmgDealt;
 	private int maxDmgDealt;
+	
+	private Random rand;
 	
 	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward, String quality,
@@ -41,6 +44,29 @@ public class MiniJob implements Serializable {
 		this.minDmgDealt = minDmgDealt;
 		this.maxDmgDealt = maxDmgDealt;
 	}
+
+	//covenience methods--------------------------------------------------------
+	public Random getRand() {
+		return rand;
+	}
+
+	public void setRand(Random rand) {
+		this.rand = rand;
+	}
+
+	public int getDmgDealt() {
+		//example goal: [min,max]=[5, 10], transform range to start at 0.
+		//[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
+		//this means there are (10-5)+1 possible numbers
+
+		int minMaxDiff = getMaxDmgDealt() - getMinDmgDealt();
+		int randCash = rand.nextInt(minMaxDiff + 1); 
+
+		//number generated in [0, max-min] range, but need to transform
+		//back to original range [min, max]. so add min. [0+min, max-min+min]
+		return randCash + getMinDmgDealt();
+	}
+	//end covenience methods--------------------------------------------------------
 
 	public int getId() {
 		return id;

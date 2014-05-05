@@ -735,6 +735,36 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateLastMiniJobGeneratedTime(Date now,
+			Timestamp nowTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (null != nowTime) {
+			absoluteParams.put(DBConstants
+					.USER__LAST_MINI_JOB_GENERATED_TIME, nowTime);
+		}
+		
+		if (absoluteParams.isEmpty()) {
+			//no need to write what is essentially nothing to db
+			return true;
+		}
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		
+		if (numUpdated == 1) {
+			if (null != now) {
+				this.lastMiniJobGeneratedTime = now;
+			}
+			
+			return true;
+		}
+		return false;
+	}
 
 	public int getId() {
 		return id;

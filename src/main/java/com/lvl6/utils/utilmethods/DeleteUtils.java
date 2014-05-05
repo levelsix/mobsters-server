@@ -341,4 +341,16 @@ public class DeleteUtils implements DeleteUtil {
 		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
 		return numDeleted;
 	}
+	
+	@Override
+	public int deleteMiniJobForUser(long userMiniJobId) {
+		String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
+
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.MINI_JOB_FOR_USER__ID, userMiniJobId);
+
+		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
+		return numDeleted;
+	}
+	
 }
