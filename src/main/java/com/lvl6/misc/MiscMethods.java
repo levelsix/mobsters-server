@@ -133,7 +133,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StructureMiniTaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -716,7 +716,7 @@ public class MiscMethods {
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
-    StructureMiniTaskRetrieveUtils.reload();
+    StructureMiniJobRetrieveUtils.reload();
     StructureResidenceRetrieveUtils.reload();
     StructureResourceGeneratorRetrieveUtils.reload();
     StructureResourceStorageRetrieveUtils.reload();

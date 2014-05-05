@@ -75,7 +75,7 @@ public class DBConstants {
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
   public static final String TABLE_STRUCTURE_LAB = "structure_lab";
-  public static final String TABLE_STRUCTURE_MINI_TASK = "structure_mini_task";
+  public static final String TABLE_STRUCTURE_MINI_JOB = "structure_mini_job";
   public static final String TABLE_STRUCTURE_RESIDENCE = "structure_residence";
   public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR = "structure_resource_generator";
   public static final String TABLE_STRUCTURE_RESOURCE_STORAGE = "structure_resource_storage";
