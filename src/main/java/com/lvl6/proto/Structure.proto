@@ -48,6 +48,7 @@ message StructureInfoProto {
 		EVO = 7; //FOR EVOLUTION
 		
 		//NO_STRUCT = 8; defined above
+		MINI_JOB = 9;
 	}
 }
 
