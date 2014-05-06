@@ -66,6 +66,7 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
+import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -146,6 +147,7 @@ import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
@@ -2100,6 +2102,21 @@ public class CreateInfoProtoUtils {
     thpb.setResourceCapacity(sth.getResourceCapacity());
 
     return thpb.build();
+  }
+  
+  public static MiniJobCenterProto createMiniJobCenterProto(Structure s,
+		  StructureInfoProto sip, StructureMiniJob miniJobCenter) {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+
+	  MiniJobCenterProto.Builder smjcpb = MiniJobCenterProto.newBuilder();
+	  smjcpb.setStructInfo(sip);
+	  smjcpb.setGeneratedJobLimit(miniJobCenter.getGeneratedJobLimit());
+	  smjcpb.setHoursBetweenJobGeneration(
+			  miniJobCenter.getHoursBetweenJobGeneration());
+	  
+	  return smjcpb.build();
   }
 
   public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(StructureForUser userStruct) {
