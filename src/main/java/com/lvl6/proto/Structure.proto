@@ -155,6 +155,15 @@ message TownHallProto {
 
 //------------------------------------------------------------------------------------------
 
+message MiniJobCenterProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 generatedJobLimit = 2;
+	optional int32 hoursBetweenJobGeneration = 3;
+}
+
+
+//------------------------------------------------------------------------------------------
+
 message FullUserStructureProto {
 	optional int32 userStructId = 1;
 	optional int32 userId = 2;
