@@ -1331,7 +1331,8 @@ public class CreateInfoProtoUtils {
 		  int miniJobId = mjfu.getMiniJobId();
 		  
 		  MiniJob mj = null;
-		  if (!miniJobIdToMiniJob.containsKey(miniJobId)) {
+		  if (null == miniJobIdToMiniJob ||
+				  !miniJobIdToMiniJob.containsKey(miniJobId)) {
 			  mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 		  } else {
 			  mj = miniJobIdToMiniJob.get(miniJobId);
