@@ -44,6 +44,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.EventPersistentForUser;
+import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -80,6 +81,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
+import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -107,6 +109,7 @@ import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
@@ -197,6 +200,9 @@ public class StartupController extends EventController {
 
   @Autowired
   protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil; 
+  
+  @Autowired
+  protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
 
   public StartupController() {
 	  numAllocatedThreads = 3;
@@ -304,6 +310,7 @@ public class StartupController extends EventController {
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
 			      setAchievementStuff(resBuilder, userId);
+			      setMiniJob(resBuilder, userId);
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			      setUnhandledForgeAttempts(resBuilder, user);
@@ -1354,7 +1361,6 @@ public class StartupController extends EventController {
   		resBuilder.addRaidStageHistory(stageProto);
   	}
   }
-
   
   private void setAchievementStuff(Builder resBuilder, int userId) {
 	  Map<Integer, AchievementForUser> achievementIdToUserAchievements =
@@ -1369,6 +1375,23 @@ public class StartupController extends EventController {
 	  }
   }
   
+  private void setMiniJob(Builder resBuilder, int userId) {
+	  Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs =
+			  getMiniJobForUserRetrieveUtil()
+			  .getSpecificOrAllIdToMiniJobForUser(userId, null);
+	  
+	  if (miniJobIdToUserMiniJobs.isEmpty()) {
+		  return;
+	  }
+	  
+	  List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
+			  miniJobIdToUserMiniJobs.values());
+	  List<UserMiniJobProto> umjpList = CreateInfoProtoUtils
+			  .createUserMiniJobProtos(mjfuList, null);
+	  
+	  resBuilder.addAllUserMiniJobProtos(umjpList);
+  }
+
   
   
   
@@ -2230,6 +2253,13 @@ public class StartupController extends EventController {
   public void setAchievementForUserRetrieveUtil(
 		  AchievementForUserRetrieveUtil achievementForUserRetrieveUtil) {
 	  this.achievementForUserRetrieveUtil = achievementForUserRetrieveUtil;
+  }
+  public MiniJobForUserRetrieveUtil getMiniJobForUserRetrieveUtil() {
+	  return miniJobForUserRetrieveUtil;
+  }
+  public void setMiniJobForUserRetrieveUtil(
+		  MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil) {
+	  this.miniJobForUserRetrieveUtil = miniJobForUserRetrieveUtil;
   }  
   
 }

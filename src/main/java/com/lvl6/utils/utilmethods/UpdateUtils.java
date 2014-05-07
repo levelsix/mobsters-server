@@ -1256,11 +1256,11 @@ public class UpdateUtils implements UpdateUtil {
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);
-			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID,
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__ID,
 					userMiniJobId);
 
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
-			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__ID,
+			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS,
 					userMonsterIdStr);
 			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED,
 					now);
@@ -1283,16 +1283,12 @@ public class UpdateUtils implements UpdateUtil {
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);
-			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__USER_ID,
+			conditionParams.put(DBConstants.MINI_JOB_FOR_USER__ID,
 					userMiniJobId);
 
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED,
 					now);
-
-			if (absoluteParams.isEmpty()) {
-				return 0;
-			}
 
 			Map<String, Object> relativeParams = null;
 			int numUpdated = DBConnection.get().updateTableRows(tableName,

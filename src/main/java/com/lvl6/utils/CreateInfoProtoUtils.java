@@ -66,6 +66,7 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
+import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -129,6 +130,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
@@ -146,6 +148,7 @@ import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
@@ -1331,7 +1334,8 @@ public class CreateInfoProtoUtils {
 		  int miniJobId = mjfu.getMiniJobId();
 		  
 		  MiniJob mj = null;
-		  if (!miniJobIdToMiniJob.containsKey(miniJobId)) {
+		  if (null == miniJobIdToMiniJob ||
+				  !miniJobIdToMiniJob.containsKey(miniJobId)) {
 			  mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 		  } else {
 			  mj = miniJobIdToMiniJob.get(miniJobId);
@@ -1668,6 +1672,17 @@ public class CreateInfoProtoUtils {
     return mbdpb.build();
   }
 
+  public static UserMonsterCurrentHealthProto createUserMonsterCurrentHealthProto(
+		  MonsterForUser mfu) {
+	  UserMonsterCurrentHealthProto.Builder umchpb =
+			  UserMonsterCurrentHealthProto.newBuilder(); 
+	  
+	  umchpb.setUserMonsterId(mfu.getId());
+	  umchpb.setCurrentHealth(mfu.getCurrentHealth());
+	  
+	  return umchpb.build();
+  }
+  
   /**Quest.proto****************************************************/
   public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
     //SET THE BUILDER
@@ -2099,6 +2114,21 @@ public class CreateInfoProtoUtils {
     thpb.setResourceCapacity(sth.getResourceCapacity());
 
     return thpb.build();
+  }
+  
+  public static MiniJobCenterProto createMiniJobCenterProto(Structure s,
+		  StructureInfoProto sip, StructureMiniJob miniJobCenter) {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+
+	  MiniJobCenterProto.Builder smjcpb = MiniJobCenterProto.newBuilder();
+	  smjcpb.setStructInfo(sip);
+	  smjcpb.setGeneratedJobLimit(miniJobCenter.getGeneratedJobLimit());
+	  smjcpb.setHoursBetweenJobGeneration(
+			  miniJobCenter.getHoursBetweenJobGeneration());
+	  
+	  return smjcpb.build();
   }
 
   public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(StructureForUser userStruct) {

@@ -28,6 +28,7 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
@@ -66,6 +67,8 @@ public class BeginMiniJobController extends EventController{
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		BeginMiniJobRequestProto reqProto = ((BeginMiniJobRequestEvent)event).getBeginMiniJobRequestProto();
+		
+		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -153,7 +156,7 @@ public class BeginMiniJobController extends EventController{
 		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
 		Map<Long, MiniJobForUser> idToUserMiniJob =
 				getMiniJobForUserRetrieveUtil()
-				.getSpecificOrAllIdToMiniJobForUserId(
+				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
 	
 		if (idToUserMiniJob.isEmpty()) {
@@ -167,8 +170,7 @@ public class BeginMiniJobController extends EventController{
 	
 	private boolean writeChangesToDB(int userId, long userMiniJobId,
 			List<Long> userMonsterIds, Timestamp clientTime) {
-		String userMonsterIdStr = getQueryConstructionUtil()
-				.implode(userMonsterIds, ",");
+		String userMonsterIdStr = StringUtils.implode(userMonsterIds, ",");
 		
 		int numUpdated = UpdateUtils.get().updateMiniJobForUser(userId,
 				userMiniJobId, userMonsterIdStr, clientTime);

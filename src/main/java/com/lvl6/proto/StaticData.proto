@@ -39,8 +39,9 @@ message StaticDataProto {
 	repeated ResidenceProto allResidences = 15;
 	repeated LabProto allLabs = 17;
 	repeated TownHallProto allTownHalls = 16;
-	
 	//repeated LabProto allLabs = 17; //defined above
+	repeated MiniJobCenterProto allMiniJobCenters = 27;
+	
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -52,9 +53,9 @@ message StaticDataProto {
 	repeated ItemProto items = 22;
 	repeated ObstacleProto obstacles = 23; //might generate gems for user upon removal
 	repeated ClanIconProto clanIcons = 24;
-	
 	repeated PvpLeagueProto leagues = 25;
-	
 	repeated AchievementProto achievements = 26;
+	
+	//repeated MiniJobProto allMiniJobs = 27; defined above
 }
 	

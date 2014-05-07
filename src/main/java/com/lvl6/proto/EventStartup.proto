@@ -8,6 +8,7 @@ import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
+import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
 import "StaticData.proto";
@@ -107,7 +108,7 @@ message StartupResponseProto {
 	repeated TaskStageProto curTaskStages = 37;
 	
 	repeated UserAchievementProto userAchievements = 38;
-	
+	repeated UserMiniJobProto userMiniJobProtos = 39;
 	
 	
 

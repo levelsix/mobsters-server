@@ -154,7 +154,7 @@ public class RedeemMiniJobController extends EventController{
 		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
 		Map<Long, MiniJobForUser> idToUserMiniJob =
 				getMiniJobForUserRetrieveUtil()
-				.getSpecificOrAllIdToMiniJobForUserId(
+				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
 	
 		if (idToUserMiniJob.isEmpty()) {

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component 
 public class MiniJobForUserRetrieveUtil {
@@ -43,7 +44,7 @@ public class MiniJobForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Long, MiniJobForUser> getSpecificOrAllIdToMiniJobForUserId(
+	public Map<Long, MiniJobForUser> getSpecificOrAllIdToMiniJobForUser(
 			int userId, Collection<Long> userMiniJobIds) {
 		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs = null;
 		try {
@@ -109,9 +110,6 @@ public class MiniJobForUserRetrieveUtil {
 	//says so (search for "private static final")
 	private static final class UserMiniJobForClientMapper implements RowMapper<MiniJobForUser> {
 
-		@Autowired
-		protected QueryConstructionUtil queryConstructionUtil;
-		
 		private static List<String> columnsSelected;
 
 		public MiniJobForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -132,7 +130,7 @@ public class MiniJobForUserRetrieveUtil {
 			try {
 				String stringToExplode = rs.getString(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS); 
 				if (null != stringToExplode) {
-					List<Long> userMonsterIds = getQueryConstructionUtil()
+					List<Long> userMonsterIds = StringUtils
 							.explodeIntoLongs(stringToExplode, ",");
 					mjfu.setUserMonsterIds(userMonsterIds);
 					mjfu.setUserMonsterIdStr(stringToExplode);
@@ -166,14 +164,5 @@ public class MiniJobForUserRetrieveUtil {
 			return columnsSelected;
 		}
 
-		public QueryConstructionUtil getQueryConstructionUtil() {
-			return queryConstructionUtil;
-		}
-
-		@SuppressWarnings("unused")
-		public void setQueryConstructionUtil(QueryConstructionUtil queryConstructionUtil) {
-			this.queryConstructionUtil = queryConstructionUtil;
-		}
-		
 	} 	
 }

@@ -481,14 +481,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     int numObstaclesRemoved = rs.getInt(i++);
     
-    Date lastMiniTaskGeneratedTime = null;
+    Date lastMiniJobGeneratedTime = null;
     try {
     	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
-    		lastMiniTaskGeneratedTime = new Date(ts.getTime());
+    		lastMiniJobGeneratedTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("lastMiniTaskGeneratedTime null...?", e);
+    	log.error("lastMiniJobGeneratedTime null...?", e);
     }
     
     User user = new User(id, name, level, gems, cash, oil, experience,
@@ -499,7 +499,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
     		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
-    		lastMiniTaskGeneratedTime);
+    		lastMiniJobGeneratedTime);
     return user;
   }
  

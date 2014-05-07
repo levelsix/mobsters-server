@@ -49,6 +49,7 @@ import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
+import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -88,6 +89,7 @@ import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MiniJobCenterProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
@@ -133,7 +135,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StructureMiniTaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -716,7 +718,7 @@ public class MiscMethods {
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
-    StructureMiniTaskRetrieveUtils.reload();
+    StructureMiniJobRetrieveUtils.reload();
     StructureResidenceRetrieveUtils.reload();
     StructureResourceGeneratorRetrieveUtils.reload();
     StructureResourceStorageRetrieveUtils.reload();
@@ -1678,6 +1680,7 @@ public class MiscMethods {
     setResidences(sdpb, structs, structProtos);
     setTownHalls(sdpb, structs, structProtos);
     setLabs(sdpb, structs, structProtos);
+    setMiniJobCenters(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -1762,6 +1765,22 @@ public class MiscMethods {
       LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
       sdpb.addAllLabs(rgp);
     }		
+  }
+  //mini job center
+  private static void setMiniJobCenters(Builder sdpb,
+		  Map<Integer, Structure> structs,
+	      Map<Integer, StructureInfoProto> structProtos) {
+	  Map<Integer, StructureMiniJob> idsToMiniJobs =
+			  StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
+	  for (Integer structId : idsToMiniJobs.keySet()) {
+		  Structure s = structs.get(structId);
+		  StructureInfoProto sip = structProtos.get(structId);
+		  StructureMiniJob smj = idsToMiniJobs.get(structId);
+		  
+		  MiniJobCenterProto mjcp = CreateInfoProtoUtils
+				  .createMiniJobCenterProto(s, sip, smj);
+		  sdpb.addAllMiniJobCenters(mjcp);
+	  }
   }
 
   private static void setEvents(Builder sdpb) {

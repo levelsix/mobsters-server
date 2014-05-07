@@ -1,6 +1,9 @@
 package com.lvl6.utils.utilmethods;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,4 +65,57 @@ public class StringUtils {
     }
     return toreturn.substring(0, toreturn.length() - 1);
   }
+  
+
+	public static String implode(Collection<?> thingsToImplode, String delimiter) {
+		if (null == thingsToImplode || thingsToImplode.isEmpty()) {
+			log.error("invalid parameters passed into StringUtils getListInString. clauses=" +
+					thingsToImplode + ", delimiter=" + delimiter);
+			return "";
+		}
+		StringBuilder strBuilder = new StringBuilder();
+
+		for (Object thing : thingsToImplode) {
+			strBuilder.append(thing);
+//			strBuilder.append(" ");
+			strBuilder.append(delimiter);
+//			strBuilder.append(" ");
+		}
+
+		int length = strBuilder.length();
+		int delimLength = delimiter.length(); 
+		return strBuilder.substring(0, length - delimLength);
+	}
+
+	public static List<Integer> explodeIntoInts(String stringToExplode, 
+			String delimiter) {
+		List<Integer> returnValue = new ArrayList<Integer>();
+		
+		if (null == stringToExplode) {
+			return returnValue;
+		}
+		
+		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
+		while (st.hasMoreTokens()) {
+			returnValue.add(Integer.parseInt(st.nextToken()));
+		}
+		return returnValue;
+	}
+
+	public static List<Long> explodeIntoLongs(String stringToExplode, 
+			String delimiter) {
+		List<Long> returnValue = new ArrayList<Long>();
+		
+		if (null == stringToExplode) {
+			return returnValue;
+		}
+		
+		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			returnValue.add(Long.parseLong(token.trim()));
+		}
+		return returnValue;
+	}
+
 }

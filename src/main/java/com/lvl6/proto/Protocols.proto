@@ -14,6 +14,7 @@ import "EventCity.proto";
 import "EventClan.proto";
 import "EventDungeon.proto";
 import "EventInAppPurchase.proto";
+import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
 import "EventQuest.proto";

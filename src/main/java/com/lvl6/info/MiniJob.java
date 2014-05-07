@@ -182,7 +182,7 @@ public class MiniJob implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MiniTask [id=" + id + ", requiredStructId=" + requiredStructId
+		return "MiniJob [id=" + id + ", requiredStructId=" + requiredStructId
 				+ ", name=" + name + ", cashReward=" + cashReward
 				+ ", oilReward=" + oilReward + ", gemReward=" + gemReward
 				+ ", monsterIdReward=" + monsterIdReward + ", quality="

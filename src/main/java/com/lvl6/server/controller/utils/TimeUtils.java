@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.MutableDateTime;
 import org.joda.time.Period;
 import org.slf4j.Logger;
@@ -59,8 +60,23 @@ public class TimeUtils {
   
   //not sure if DateTime works, as well.
   public boolean isFirstEarlierThanSecond(Date one, Date two) {
-	  LocalDate ldOne = new LocalDate(one);
-	  LocalDate ldTwo = new LocalDate(two);
+	  if (null == one && null == two) {
+		  log.info("both dates null");
+		  return false;
+	  } else if (null == one) {
+		  log.info("first date null");
+		  return true;
+	  } else if (null == two) {
+		  log.info("second date null");
+		  return false;
+	  }
+	  
+	  
+	  LocalDateTime ldOne = new LocalDateTime(one);
+	  LocalDateTime ldTwo = new LocalDateTime(two);
+	  
+//	  log.info("ldOne=" + ldOne);
+//	  log.info("ldTwo=" + ldTwo);
 	  
 	  return ldOne.isBefore(ldTwo);
   }

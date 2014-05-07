@@ -63,6 +63,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     RecordClanRaidStatsRequestProto reqProto = ((RecordClanRaidStatsRequestEvent)event)
     		.getRecordClanRaidStatsRequestProto();
+    final long startTime = System.nanoTime();
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -73,6 +74,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(RecordClanRaidStatsStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
+    final long endTimeAfterLock;
+    final long endTimeAfterCheckLegitRequest;
+    final long endTimeAfterWriteChangesToDb;
+    final long endTimeAfterWriteEvent;
+    final long endTimeAfterWriteClanEvent;
+    final long endTimeAfterUnlock;
     //OUTLINE: 
     //get the clan lock; get the clan raid object for the clan;
     // If does exist, record it and then delete it; same for clan user stuff.
@@ -87,10 +94,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	lockedClan = getLocker().lockClan(clanId);
     }
     try {
+    	endTimeAfterLock = System.nanoTime();
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	clanEvent = ClanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
       boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, senderProto, userId,
       		clanId, clanEvent);
+      
+      endTimeAfterCheckLegitRequest = System.nanoTime();
 
       RecordClanRaidStatsResponseEvent resEvent = new RecordClanRaidStatsResponseEvent(userId);
       resEvent.setTag(event.getTag());
@@ -101,14 +111,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         success = writeChangesToDB(userId, clanId, now, clanEvent, userIdToClanUserInfo);
       }
       
+      endTimeAfterWriteChangesToDb = System.nanoTime();
       if (success) {
       }
       server.writeEvent(resEvent);
+      endTimeAfterWriteEvent = System.nanoTime();
       
       if (legitRequest) {
       	//only write to the user if the request was valid
       	server.writeClanEvent(resEvent, clanId);
       }
+      endTimeAfterWriteClanEvent = System.nanoTime();
+      
+      log.info("startTime to afterLock took ~{}ms", (endTimeAfterLock - startTime) / 1000000);
+      log.info("afterLock to afterCheckLegitRequest took ~{}ms", (endTimeAfterCheckLegitRequest - endTimeAfterLock) / 1000000);
+      log.info("afterCheckLegitRequest to endTimeAfterWriteChangesToDb took ~{}ms", (endTimeAfterWriteChangesToDb - endTimeAfterCheckLegitRequest) / 1000000);
+      log.info("endTimeAfterWriteChangesToDb to endTimeAfterWriteEvent took ~{}ms", (endTimeAfterWriteEvent - endTimeAfterWriteChangesToDb) / 1000000);
+      log.info("endTimeAfterWriteEvent to endTimeAfterWriteClanEvent took ~{}ms", (endTimeAfterWriteClanEvent - endTimeAfterWriteEvent) / 1000000);
+      
     } catch (Exception e) {
     	//errorless = false;
     	try {
@@ -125,8 +145,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	if (0 != clanId && lockedClan) {
       	getLocker().unlockClan(clanId);
       }
-    	
+     endTimeAfterUnlock = System.nanoTime();
+     log.info("startTime to endTimeAfterUnlock took ~{}ms", (startTime - endTimeAfterUnlock) / 1000000);
     }
+    
     
 //    //not necessary, can just delete this part (purpose is to record in detail, a user's
 //    //contribution to a clan raid) on the clan raid stage monster level
