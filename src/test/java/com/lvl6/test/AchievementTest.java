@@ -56,7 +56,7 @@ public class AchievementTest extends TestCase {
 	@Test
 //	@Rollback(true) //doesn't roll back transaction >:C
 //	@Transactional //just manually undo...
-	public void sendIncompleteProgressedAchievement() {
+	public void testSendIncompleteProgressedAchievement() {
 		log.info("incomplete achievement progress");
 		int userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
@@ -102,7 +102,7 @@ public class AchievementTest extends TestCase {
 	}
 	
 	@Test
-	public void sendMultipleIncompleteProgressedAchievement() {
+	public void testSendMultipleIncompleteProgressedAchievement() {
 		log.info("incomplete achievement progress");
 		int userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);

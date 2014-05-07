@@ -1378,7 +1378,7 @@ public class StartupController extends EventController {
   private void setMiniJob(Builder resBuilder, int userId) {
 	  Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs =
 			  getMiniJobForUserRetrieveUtil()
-			  .getSpecificOrAllIdToMiniJobForUserId(userId, null);
+			  .getSpecificOrAllIdToMiniJobForUser(userId, null);
 	  
 	  if (miniJobIdToUserMiniJobs.isEmpty()) {
 		  return;

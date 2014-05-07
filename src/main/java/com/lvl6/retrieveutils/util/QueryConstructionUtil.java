@@ -5,11 +5,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
 public class QueryConstructionUtil {
@@ -38,7 +39,6 @@ public class QueryConstructionUtil {
 	private final String SELECTSTAR = "select *";
 	private final String SPACE = " ";
 	private final String WHERE = " where ";
-	private final int SPACELENGTH = 1;
 
 	//at the moment, just EQUALITY conditions, GREATER THAN conditions,  "IN ()" and IS
 	//conditions. the argument "values" is another return value. It will contain
@@ -96,7 +96,7 @@ public class QueryConstructionUtil {
 				allInConditions.add(inConditionsStr);
 			}
 			sb.append(conjunction);
-			sb.append(implode(allInConditions, inCondDelim));
+			sb.append(StringUtils.implode(allInConditions, inCondDelim));
 			conjunction = delimAcrossConditions;
 			
 		} else {
@@ -296,11 +296,12 @@ public class QueryConstructionUtil {
 			List<String> allInConditions = new ArrayList<String>(); 
 			for (String column : inConditions.keySet()) {
 				Collection<?> inValues = inConditions.get(column);
-				String inConditionsStr = createPreparedColInValuesString(column, inValues, values);
+				String inConditionsStr = createPreparedColInValuesString(
+						column, inValues, values);
 				
 				allInConditions.add(inConditionsStr);
 			}
-			sb.append(implode(allInConditions, conditionDelimiter));
+			sb.append(StringUtils.implode(allInConditions, conditionDelimiter));
 			
 		} else {
 			List<String> allInConditions = new ArrayList<String>(); 
@@ -310,7 +311,7 @@ public class QueryConstructionUtil {
 				
 				allInConditions.add(inConditionsStr);
 			}
-			sb.append(implode(allInConditions, conditionDelimiter));
+			sb.append(StringUtils.implode(allInConditions, conditionDelimiter));
 		}
 
 		//close the query
@@ -326,7 +327,8 @@ public class QueryConstructionUtil {
 			String tableName, Map<String, ?> equalityConditions, String eqDelim,
 			Map<String, Collection<?>> inConditions, String inDelim,
 			String overallDelim, List<Object> values, boolean preparedStatement) {
-		StringBuilder sb = createSelectColumnsFromTableString(columnsToSelect, tableName);
+		StringBuilder sb = createSelectColumnsFromTableString(
+				columnsToSelect, tableName);
 
 		boolean emptyEqConditions = (null == equalityConditions || equalityConditions.isEmpty());
 		boolean emptyInConditions = (null == inConditions || inConditions.isEmpty());
@@ -356,7 +358,7 @@ public class QueryConstructionUtil {
 				}
 				
 				sb.append(conjunction); //in case equality conditions are set
-				sb.append(implode(allInConditions, inDelim));
+				sb.append(StringUtils.implode(allInConditions, inDelim));
 			}
 		} else {
 			if (!emptyEqConditions) {
@@ -378,7 +380,7 @@ public class QueryConstructionUtil {
 				}
 				
 				sb.append(conjunction); //in case equality conditions are set
-				sb.append(implode(allInConditions, inDelim));
+				sb.append(StringUtils.implode(allInConditions, inDelim));
 				
 			}
 		}
@@ -390,15 +392,15 @@ public class QueryConstructionUtil {
 		return sb.toString();
 	}
 	
-	public StringBuilder createSelectColumnsFromTableString(List<String> columnsToSelect,
-			String tableName) {
+	public StringBuilder createSelectColumnsFromTableString(
+			List<String> columnsToSelect, String tableName) {
 		StringBuilder sb = new StringBuilder();
 		if (null == columnsToSelect || columnsToSelect.isEmpty()) { 
 			sb.append(SELECTSTAR);
 		} else {
 			sb.append(SELECT);
 			sb.append(SPACE);
-			String columnsToSelectStr = implode(columnsToSelect, COMMA);
+			String columnsToSelectStr = StringUtils.implode(columnsToSelect, COMMA);
 			sb.append(columnsToSelectStr);
 		}
 		sb.append(SPACE);
@@ -428,9 +430,11 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String equalityConditionsStr = implode(clauses, conditionDelimiter); 
+		String equalityConditionsStr = 
+				StringUtils.implode(clauses, conditionDelimiter); 
 
-		log.info("equalityConditionsStr=" + equalityConditionsStr + "\t values=" + values);
+		log.info("equalityConditionsStr=" + equalityConditionsStr +
+				"\t values=" + values);
 		return equalityConditionsStr;
 	}
 
@@ -459,14 +463,15 @@ public class QueryConstructionUtil {
 		//implode (join together) the EQUALITY conditions with "AND"
 
 		//e.g. List becomes String(String(col1=x) + AND +...+String(colN=something))
-		String equalityConditionsStr = implode(clauses, conditionDelimiter); 
+		String equalityConditionsStr = 
+				StringUtils.implode(clauses, conditionDelimiter); 
 
 		log.info("equalityConditionsStr=" + equalityConditionsStr);
 		return equalityConditionsStr;
 	}
 
-	public String createPreparedColInValuesString(String column, Collection<?> inValues,
-			List<Object> values) {
+	public String createPreparedColInValuesString(String column,
+			Collection<?> inValues, List<Object> values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(column);
 		sb.append(SPACE);
@@ -476,7 +481,7 @@ public class QueryConstructionUtil {
 		
 		int size = inValues.size();
 		List<String> questions = Collections.nCopies(size, QUESTION);
-		String valuesStr = implode(questions, COMMA);
+		String valuesStr = StringUtils.implode(questions, COMMA);
 		sb.append(valuesStr);
 		
 		sb.append(RPAREN);
@@ -494,7 +499,7 @@ public class QueryConstructionUtil {
 		sb.append(SPACE);
 		sb.append(LPAREN);
 
-		String valuesStr = implode(inValues, COMMA);
+		String valuesStr = StringUtils.implode(inValues, COMMA);
 		sb.append(valuesStr);
 
 		sb.append(RPAREN);
@@ -511,7 +516,7 @@ public class QueryConstructionUtil {
 		sb.append(SPACE);
 		sb.append(LPAREN);
 
-		String valuesStr = implode(inValues, COMMA);
+		String valuesStr = StringUtils.implode(inValues, COMMA);
 		sb.append(valuesStr);
 
 		sb.append(RPAREN);
@@ -538,14 +543,15 @@ public class QueryConstructionUtil {
 		}
 
 
-		String isConditionsStr = implode(clauses, conditionDelimiter); 
+		String isConditionsStr = StringUtils.implode(clauses, conditionDelimiter); 
 
 		log.info("equalityConditionsStr=" + isConditionsStr);
 		return isConditionsStr;
 	}
 	
 	public String createPreparedLikeConditionsString(Map<String, ?> likeCondition,
-			String likeCondDelim, boolean beginsWith, boolean endsWith, List<Object> values) {
+			String likeCondDelim, boolean beginsWith, boolean endsWith,
+			List<Object> values) {
 		List<Object> clauses = new ArrayList<Object>();
 
 		for (String key : likeCondition.keySet()) {
@@ -569,7 +575,7 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String likeConditionsStr = implode(clauses, likeCondDelim); 
+		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim); 
 
 		log.info("equalityConditionsStr=" + likeConditionsStr + "\t values=" + values);
 		return likeConditionsStr;
@@ -599,7 +605,7 @@ public class QueryConstructionUtil {
 			String clause = clauseSb.toString();
 			clauses.add(clause);
 		}
-		String likeConditionsStr = implode(clauses, likeCondDelim); 
+		String likeConditionsStr = StringUtils.implode(clauses, likeCondDelim); 
 
 		log.info("equalityConditionsStr=" + likeConditionsStr);
 		return likeConditionsStr;
@@ -648,7 +654,7 @@ public class QueryConstructionUtil {
 				allInConditions.add(inConditionsStr);
 			}
 			whereConditionsSb.append(conjunction);
-			whereConditionsSb.append(implode(allInConditions, AND));
+			whereConditionsSb.append(StringUtils.implode(allInConditions, AND));
 		}
 		
 		return whereConditionsSb.toString();
@@ -656,58 +662,6 @@ public class QueryConstructionUtil {
 	
 	
 	
-	
-	public String implode(Collection<?> thingsToImplode, String delimiter) {
-		if (null == thingsToImplode || thingsToImplode.isEmpty()) {
-			log.error("invalid parameters passed into StringUtils getListInString. clauses=" +
-					thingsToImplode + ", delimiter=" + delimiter);
-			return "";
-		}
-		StringBuilder strBuilder = new StringBuilder();
-
-		for (Object thing : thingsToImplode) {
-			strBuilder.append(thing);
-			strBuilder.append(SPACE);
-			strBuilder.append(delimiter);
-			strBuilder.append(SPACE);
-		}
-
-		int length = strBuilder.length();
-		int delimLength = delimiter.length(); 
-		return strBuilder.substring(0, length - delimLength - SPACELENGTH);
-	}
-
-	public List<Integer> explodeIntoInts(String stringToExplode, 
-			String delimiter) {
-		List<Integer> returnValue = new ArrayList<Integer>();
-		
-		if (null == stringToExplode) {
-			return returnValue;
-		}
-		
-		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
-		while (st.hasMoreTokens()) {
-			returnValue.add(Integer.parseInt(st.nextToken()));
-		}
-		return returnValue;
-	}
-
-	public List<Long> explodeIntoLongs(String stringToExplode, 
-			String delimiter) {
-		List<Long> returnValue = new ArrayList<Long>();
-		
-		if (null == stringToExplode) {
-			return returnValue;
-		}
-		
-		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
-		while (st.hasMoreTokens()) {
-			returnValue.add(Long.parseLong(st.nextToken()));
-		}
-		return returnValue;
-	}
-
-
 	public String getAnd() {
 		return AND;
 	}

@@ -130,6 +130,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
@@ -1671,6 +1672,17 @@ public class CreateInfoProtoUtils {
     return mbdpb.build();
   }
 
+  public static UserMonsterCurrentHealthProto createUserMonsterCurrentHealthProto(
+		  MonsterForUser mfu) {
+	  UserMonsterCurrentHealthProto.Builder umchpb =
+			  UserMonsterCurrentHealthProto.newBuilder(); 
+	  
+	  umchpb.setUserMonsterId(mfu.getId());
+	  umchpb.setCurrentHealth(mfu.getCurrentHealth());
+	  
+	  return umchpb.build();
+  }
+  
   /**Quest.proto****************************************************/
   public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
     //SET THE BUILDER
