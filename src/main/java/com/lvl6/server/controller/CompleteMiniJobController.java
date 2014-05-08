@@ -154,8 +154,8 @@ public class CompleteMiniJobController extends EventController{
 		
 		//sanity check
 		if (umchpList.isEmpty() || 0 == userMiniJobId) {
-			log.error("invalid userMonsterIds or userMiniJobId." +
-					" userMonsters=" + umchpList +
+			log.error("invalid userMonsterIds (monsters need to be damaged)" +
+					" or userMiniJobId. userMonsters=" + umchpList +
 					"\t userMiniJobId=" + userMiniJobId);
 			return false;
 		}
