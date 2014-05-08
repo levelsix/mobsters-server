@@ -38,10 +38,10 @@ message UserMiniJobProto {
 	optional int64 timeStarted = 3; 
 	repeated int64 userMonsterIds = 4;
 	optional int64 timeCompleted = 5;
-	optional int32 duration = 7;
+	optional int32 durationMinutes = 7;
 	
 	optional MiniJobProto miniJob = 6;
-	//optional int32 duration = 7; defined above
+	//optional int32 durationMinutes = 7; defined above
 }
 
 //------------------------------------------------------------------------------------------
