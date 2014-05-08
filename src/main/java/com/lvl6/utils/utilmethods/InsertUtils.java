@@ -1580,6 +1580,8 @@ public class InsertUtils implements InsertUtil{
 						mjfu.getMiniJobId());                                                                   
 				newRow.put(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED,
 						mjfu.getBaseDmgReceived());      
+				newRow.put(DBConstants.MINI_JOB_FOR_USER__DURATION_MINUTES,
+						mjfu.getDurationMinutes());
 
 				newRows.add(newRow);
 			}                                                                                        

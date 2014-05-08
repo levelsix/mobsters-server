@@ -22,21 +22,27 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.events.request.BeginMiniJobRequestEvent;
 import com.lvl6.events.request.CompleteMiniJobRequestEvent;
+import com.lvl6.events.request.RedeemMiniJobRequestEvent;
 import com.lvl6.events.request.SpawnMiniJobRequestEvent;
+import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobRequestProto;
+import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.controller.BeginMiniJobController;
 import com.lvl6.server.controller.CompleteMiniJobController;
+import com.lvl6.server.controller.RedeemMiniJobController;
 import com.lvl6.server.controller.SpawnMiniJobController;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -71,6 +77,9 @@ public class MiniJobTest extends TestCase {
 	
 	@Autowired
 	protected CompleteMiniJobController completeMiniJobController;
+	
+	@Autowired
+	protected RedeemMiniJobController redeemMiniJobController;
 	
 	@Test
 //	@Rollback(true) //doesn't roll back transaction >:C
@@ -232,7 +241,7 @@ public class MiniJobTest extends TestCase {
 	
 	@Test
 	public void testSendCompleteMiniJob() {
-		log.info("begin mini job");
+		log.info("complete mini job");
 		int userId = getTestUserId();
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date clientTime = new Date();
@@ -255,10 +264,17 @@ public class MiniJobTest extends TestCase {
 				newMiniJobForUserIdThen, false, 0, umchp);
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
+		Collection<Long> userMiniJobIds = Collections
+				.singleton(newMiniJobForUserIdThen);
+		Map<Long, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
+				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
+		MiniJobForUser mjfuNow = mjfuIdToMjfu.get(newMiniJobForUserIdThen);
+		
+		assertTrue("Expected completeTime: different. Actual: then=" +
+				mjfuThen + ", now=" + mjfuNow,
+				mjfuThen.getTimeCompleted() != mjfuNow.getTimeCompleted());
 		
 		//manually delete the created MiniJobForUser
-		Collection<Long> userMiniJobIds =
-				Collections.singleton(newMiniJobForUserIdThen);
 		Date lastMiniJobSpawnTimeThen = unitTesterThen
 				.getLastMiniJobGeneratedTime();
 		undoMiniJobTest(userId, unitTesterThen, lastMiniJobSpawnTimeThen, userMiniJobIds);
@@ -299,13 +315,164 @@ public class MiniJobTest extends TestCase {
 		return umchpList;
 	}
 	
+	@Test
+	public void testSendRedeemMiniJob() {
+		log.info("complete mini job");
+		int userId = getTestUserId();
+		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
+		Date clientTime = new Date();
+		Map<Long, MonsterForUser> monstersThen =
+				getMonsterForUserRetrieveUtils()
+				.getSpecificOrAllUserMonstersForUser(userId, null);
+		
+		MiniJobForUser mjfuThen = completeMiniJob(userId, unitTesterThen,
+				clientTime);
+		int miniJobId = mjfuThen.getMiniJobId();
+		long miniJobForUserId = mjfuThen.getId();
+		
+		//send the redeem mini job request
+		sendRedeemMiniJobRequestEvent(unitTesterThen, mjfuThen, clientTime);
+		
+		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
+		
+		//no more MiniJobForUser
+		Collection<Long> userMiniJobIds =
+				Collections.singleton(miniJobForUserId);
+		Map<Long, MiniJobForUser> idToMjfu = getMiniJobForUserRetieveUtil()
+				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
+		MiniJobForUser mjfuNow = null;
+		if (idToMjfu.containsKey(miniJobForUserId)) {
+			mjfuNow = idToMjfu.get(miniJobForUserId);
+		}
+		assertTrue("Expected MiniJobForUser: null. Actual: " + mjfuNow,
+				null == mjfuNow);
+		
+		User unitTesterNow = getUserRetrieveUtils().getUserById(userId);
+		Map<Long, MonsterForUser> monstersNow =
+				getMonsterForUserRetrieveUtils()
+				.getSpecificOrAllUserMonstersForUser(userId, null);
+		
+		
+		//user currency should change if MiniJob gave any reward
+		checkIfUserRewarded(unitTesterThen, unitTesterNow, miniJobId,
+				monstersThen, monstersNow);
+		
+		//user monsters should have changed if MiniJob gave monster reward
+	}
+	protected MiniJobForUser completeMiniJob(int userId, User user,
+			Date clientTime) {
+		Map<Long, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
+				.getSpecificOrAllUserMonstersForUser(userId, null);
+
+		//spawn the minijob
+		MiniJobForUser mjfuThen = createNewMiniJobForUser(userId,
+				user, clientTime); 
+		
+		//begin the minijob
+		long newMiniJobForUserIdThen = mjfuThen.getId();
+		beginMiniJobForUser(userId, user, clientTime,
+				newMiniJobForUserIdThen, mjfuThen, mfuIdToMfu);
+		
+		List<UserMonsterCurrentHealthProto> umchp = createUmchp(mfuIdToMfu);
+		
+		//send the complete mini job request
+		sendCompleteMiniJobRequestEvent(user, clientTime,
+				newMiniJobForUserIdThen, false, 0, umchp);
+		
+		Collection<Long> userMiniJobIds = Collections
+				.singleton(newMiniJobForUserIdThen);
+		Map<Long, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
+				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
+		MiniJobForUser mjfuNow = mjfuIdToMjfu.get(newMiniJobForUserIdThen);
+		
+		return mjfuNow;
+	}
+	protected void checkIfUserRewarded(User userThen, User userNow,
+			int miniJobId, Map<Long, MonsterForUser> monstersThen,
+			Map<Long, MonsterForUser> monstersNow) {
+		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		
+		int cashReward = mj.getCashReward();
+		if (cashReward > 0) {
+			int cashThen = userThen.getCash();
+			int cashNow = userNow.getCash();
+			
+			int expectedCash = cashThen + cashReward;
+			assertTrue("Expected cash: " + expectedCash +
+					". Actual: " + cashNow,
+					expectedCash == cashNow);
+		}
+		
+		int oilReward = mj.getOilReward();
+		if (oilReward > 0) {
+			int oilThen = userThen.getOil();
+			int oilNow = userNow.getOil();
+			
+			int expectedOil = oilThen + oilReward;
+			assertTrue("Expected oil: " + expectedOil +
+					". Actual: " + oilNow,
+					expectedOil == oilNow);
+		}
+		
+		int gemReward = mj.getGemReward();
+		if (gemReward > 0) {
+			int gemThen = userThen.getGems();
+			int gemNow = userNow.getGems();
+			
+			int expectedGem = gemThen + gemReward;
+			assertTrue("Expected gem: " + expectedGem +
+					". Actual: " + gemNow,
+					expectedGem == gemNow);
+		}
+		
+		int monsterIdReward = mj.getMonsterIdReward();
+		if (monsterIdReward > 0) {
+			//check that monstersThen is different than monstersNow
+			boolean monstersDifferent = checkMonstersDifferent(
+					monstersThen, monstersNow);
+			assertTrue("Expected MonsterForUser: different. Actual: not.",
+					monstersDifferent);
+		}
+	}
+	protected boolean checkMonstersDifferent(
+			Map<Long, MonsterForUser> monstersOne,
+			Map<Long, MonsterForUser> monstersTwo) {
+		boolean monstersDifferent = false;
+		
+		if (monstersOne.size() != monstersTwo.size()) {
+			monstersDifferent = true;
+			return monstersDifferent;
+		}
+		//since same size, then one of the monsters might be different
+		for(Long mfuId : monstersOne.keySet()) {
+			
+			boolean existsTwo = monstersTwo.containsKey(mfuId); 
+			
+			assertTrue("Expected monsterForUser: exists. Actual: doesn't.",
+					existsTwo);
+			
+			MonsterForUser one = monstersOne.get(mfuId);
+			MonsterForUser two = monstersTwo.get(mfuId);
+			
+			int numPiecesOne = one.getNumPieces();
+			int numPiecesTwo = two.getNumPieces();
+			
+			if (numPiecesOne == numPiecesTwo) {
+				continue;
+			}
+			
+			monstersDifferent = true;
+			break;
+		}
+		return monstersDifferent;
+	}
 	
 	protected int getTestUserId() {
 		return 11; //Unit testing account
 	}
 	
 	protected int getMiniJobTestStructId() {
-		return 130; //TODO: INCORRECT. Get the real one, this is just a dummy value;
+		return 130;
 	}
 	
 	protected void sendSpawnMiniJobRequestEvent(User user,
@@ -401,6 +568,46 @@ public class MiniJobTest extends TestCase {
 		return cmjrpb.build();
 	}
 	
+	protected void sendRedeemMiniJobRequestEvent(User user,
+			MiniJobForUser mjfu, Date clientTime) {
+		RedeemMiniJobRequestProto rmjrp =
+				createRedeemMiniJobRequestProto(user, mjfu, clientTime);
+		
+		RedeemMiniJobRequestEvent rmjre = new RedeemMiniJobRequestEvent();
+		rmjre.setTag(0);
+		rmjre.setRedeemMiniJobRequestProto(rmjrp);
+		
+		//SENDING THE REQUEST
+		getRedeemMiniJobController().handleEvent(rmjre);
+	}
+	protected RedeemMiniJobRequestProto createRedeemMiniJobRequestProto(
+			User user, MiniJobForUser mjfu, Date clientTime) {
+		assertTrue("Expected user: not null. Actual: " + user,
+				null != user);
+		int miniJobId = mjfu.getMiniJobId();
+		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
+		int cashReward = mj.getCashReward();
+		int oilReward = mj.getOilReward();
+		
+		MinimumUserProto mup = CreateInfoProtoUtils
+				.createMinimumUserProtoFromUser(user);
+		
+		MinimumUserProtoWithMaxResources.Builder mupwmrb =
+				MinimumUserProtoWithMaxResources.newBuilder();
+		int maxCash = cashReward + user.getCash();
+		int maxOil = oilReward + user.getOil();
+		mupwmrb.setMaxCash(maxCash);
+		mupwmrb.setMaxOil(maxOil);
+		mupwmrb.setMinUserProto(mup);
+		
+		RedeemMiniJobRequestProto.Builder rmjrpb =
+				RedeemMiniJobRequestProto.newBuilder();
+		rmjrpb.setSender(mupwmrb.build());
+		rmjrpb.setClientTime(clientTime.getTime());
+		rmjrpb.setUserMiniJobId(mjfu.getId());
+		
+		return rmjrpb.build();
+	}
 	
 	protected void undoMiniJobTest(int userId, User user,
 			Date lastMiniJobSpawnTime,
@@ -506,6 +713,15 @@ public class MiniJobTest extends TestCase {
 	public void setCompleteMiniJobController(
 			CompleteMiniJobController completeMiniJobController) {
 		this.completeMiniJobController = completeMiniJobController;
+	}
+
+	public RedeemMiniJobController getRedeemMiniJobController() {
+		return redeemMiniJobController;
+	}
+
+	public void setRedeemMiniJobController(
+			RedeemMiniJobController redeemMiniJobController) {
+		this.redeemMiniJobController = redeemMiniJobController;
 	}
 
 }

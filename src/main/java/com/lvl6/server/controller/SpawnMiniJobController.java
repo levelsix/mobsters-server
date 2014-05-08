@@ -178,11 +178,12 @@ public class SpawnMiniJobController extends EventController{
 			
 			int miniJobId = mj.getId();
 			int dmgDealt = mj.getDmgDealt();
+			int durationMinutes = mj.getDurationMinutes();
 			
 			mjfu.setUserId(userId);
 			mjfu.setMiniJobId(miniJobId);
 			mjfu.setBaseDmgReceived(dmgDealt);
-			
+			mjfu.setDurationMinutes(durationMinutes);
 			userMiniJobs.add(mjfu);
 		}
 		

@@ -6,12 +6,13 @@ import java.util.List;
 
 public class MiniJobForUser implements Serializable {
 	
-	private static final long serialVersionUID = 935935118122856378L;
+	private static final long serialVersionUID = -7377306943664515125L;
 	
 	private long id;
 	private int userId;
 	private int miniJobId;
 	private int baseDmgReceived;
+	private int durationMinutes;
 	private Date timeStarted;
 	private List<Long> userMonsterIds;
 	private String userMonsterIdStr;
@@ -22,19 +23,20 @@ public class MiniJobForUser implements Serializable {
 	}
 
 	public MiniJobForUser(long id, int userId, int miniJobId,
-			int baseDmgReceived, Date timeStarted, List<Long> userMonsterIds,
-			String userMonsterIdStr, Date timeCompleted) {
+			int baseDmgReceived, int durationMinutes, Date timeStarted,
+			List<Long> userMonsterIds, String userMonsterIdStr,
+			Date timeCompleted) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.miniJobId = miniJobId;
 		this.baseDmgReceived = baseDmgReceived;
+		this.durationMinutes = durationMinutes;
 		this.timeStarted = timeStarted;
 		this.userMonsterIds = userMonsterIds;
 		this.userMonsterIdStr = userMonsterIdStr;
 		this.timeCompleted = timeCompleted;
 	}
-
 
 	public long getId() {
 		return id;
@@ -66,6 +68,14 @@ public class MiniJobForUser implements Serializable {
 
 	public void setBaseDmgReceived(int baseDmgReceived) {
 		this.baseDmgReceived = baseDmgReceived;
+	}
+
+	public int getDurationMinutes() {
+		return durationMinutes;
+	}
+
+	public void setDurationMinutes(int durationMinutes) {
+		this.durationMinutes = durationMinutes;
 	}
 
 	public Date getTimeStarted() {
@@ -104,9 +114,10 @@ public class MiniJobForUser implements Serializable {
 	public String toString() {
 		return "MiniJobForUser [id=" + id + ", userId=" + userId
 				+ ", miniJobId=" + miniJobId + ", baseDmgReceived="
-				+ baseDmgReceived + ", timeStarted=" + timeStarted
-				+ ", userMonsterIds=" + userMonsterIds + ", userMonsterIdStr="
-				+ userMonsterIdStr + ", timeCompleted=" + timeCompleted + "]";
+				+ baseDmgReceived + ", durationMinutes=" + durationMinutes
+				+ ", timeStarted=" + timeStarted + ", userMonsterIds="
+				+ userMonsterIds + ", userMonsterIdStr=" + userMonsterIdStr
+				+ ", timeCompleted=" + timeCompleted + "]";
 	}
 
 }

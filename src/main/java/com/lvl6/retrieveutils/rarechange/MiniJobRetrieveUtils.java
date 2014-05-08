@@ -176,6 +176,8 @@ import com.lvl6.utils.DBConnection;
     int atkRequired = rs.getInt(i++);
     int minDmgDealt = rs.getInt(i++);
     int maxDmgDealt = rs.getInt(i++);
+    int durationMinMinutes = rs.getInt(i++);
+    int durationMaxMinutes = rs.getInt(i++);
     
     if (null != quality) {
     	String newQuality = quality.trim().toUpperCase();
@@ -194,7 +196,7 @@ import com.lvl6.utils.DBConnection;
     MiniJob miniJob = new MiniJob(id, requiredStructId, miniJobName,
     		cashReward, oilReward, gemReward, monsterIdReward, quality,
     		maxNumMonstersAllowed, chanceToAppear, hpRequired, atkRequired,
-    		minDmgDealt, maxDmgDealt);
+    		minDmgDealt, maxDmgDealt, durationMinMinutes, durationMaxMinutes);
     
     miniJob.setRand(rand);
     return miniJob;
