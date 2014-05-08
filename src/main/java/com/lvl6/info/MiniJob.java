@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MiniJob implements Serializable {
 	
-	private static final long serialVersionUID = -6147449231938329245L;
+	private static final long serialVersionUID = -2118005123485838628L;
 	
 	private int id;
 	private int requiredStructId;
@@ -21,13 +21,16 @@ public class MiniJob implements Serializable {
 	private int atkRequired;
 	private int minDmgDealt;
 	private int maxDmgDealt;
+	private int durationMinMinutes;
+	private int durationMaxMinutes;
 	
 	private Random rand;
-	
+
 	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward, String quality,
 			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
-			int atkRequired, int minDmgDealt, int maxDmgDealt) {
+			int atkRequired, int minDmgDealt, int maxDmgDealt,
+			int durationMinMinutes, int durationMaxMinutes) {
 		super();
 		this.id = id;
 		this.requiredStructId = requiredStructId;
@@ -43,6 +46,8 @@ public class MiniJob implements Serializable {
 		this.atkRequired = atkRequired;
 		this.minDmgDealt = minDmgDealt;
 		this.maxDmgDealt = maxDmgDealt;
+		this.durationMinMinutes = durationMinMinutes;
+		this.durationMaxMinutes = durationMaxMinutes;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -60,12 +65,20 @@ public class MiniJob implements Serializable {
 		//this means there are (10-5)+1 possible numbers
 
 		int minMaxDiff = getMaxDmgDealt() - getMinDmgDealt();
-		int randCash = rand.nextInt(minMaxDiff + 1); 
+		int randDmg = rand.nextInt(minMaxDiff + 1); 
 
 		//number generated in [0, max-min] range, but need to transform
 		//back to original range [min, max]. so add min. [0+min, max-min+min]
-		return randCash + getMinDmgDealt();
+		return randDmg + getMinDmgDealt();
 	}
+	
+	public int getDurationMinutes() {
+		int minMaxDiff = getDurationMaxMinutes() - getDurationMinMinutes();
+		int randMinutes = rand.nextInt(minMaxDiff + 1);
+		
+		return randMinutes + getDurationMinMinutes();
+	}
+	
 	//end covenience methods--------------------------------------------------------
 
 	public int getId() {
@@ -180,6 +193,22 @@ public class MiniJob implements Serializable {
 		this.maxDmgDealt = maxDmgDealt;
 	}
 
+	public int getDurationMinMinutes() {
+		return durationMinMinutes;
+	}
+
+	public void setDurationMinMinutes(int durationMinMinutes) {
+		this.durationMinMinutes = durationMinMinutes;
+	}
+
+	public int getDurationMaxMinutes() {
+		return durationMaxMinutes;
+	}
+
+	public void setDurationMaxMinutes(int durationMaxMinutes) {
+		this.durationMaxMinutes = durationMaxMinutes;
+	}
+
 	@Override
 	public String toString() {
 		return "MiniJob [id=" + id + ", requiredStructId=" + requiredStructId
@@ -190,7 +219,8 @@ public class MiniJob implements Serializable {
 				+ ", chanceToAppear=" + chanceToAppear + ", hpRequired="
 				+ hpRequired + ", atkRequired=" + atkRequired
 				+ ", minDmgDealt=" + minDmgDealt + ", maxDmgDealt="
-				+ maxDmgDealt + "]";
+				+ maxDmgDealt + ", durationMinMinutes=" + durationMinMinutes
+				+ ", durationMaxMinutes=" + durationMaxMinutes + "]";
 	}
 
 }
