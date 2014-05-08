@@ -22,6 +22,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto;
+import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -84,13 +85,22 @@ public class SpawnMiniJobController extends EventController{
 			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
 			
-			List<MiniJob> spawnedMiniJobs = spawnMiniJobs(numToSpawn,
-					structId, miniJobIdToMiniJob);
-			List<MiniJobForUser> spawnedUserMiniJobs =
-					convertIntoUserMiniJobs(userId, spawnedMiniJobs);
+			boolean legit = checkLegitRequest(resBuilder, userId, user,
+					numToSpawn, structId);
+			
+			List<MiniJob> spawnedMiniJobs = null;
+			List<MiniJobForUser> spawnedUserMiniJobs = null;
+			boolean success = false;
+			if (legit) {
+				
+				spawnedMiniJobs = spawnMiniJobs(numToSpawn, structId,
+						miniJobIdToMiniJob);
+				spawnedUserMiniJobs = convertIntoUserMiniJobs(
+						userId, spawnedMiniJobs);
+				success = writeChangesToDB(user, userId, clientTime,
+						now, spawnedUserMiniJobs);
+			}
 
-			boolean success = writeChangesToDB(user, userId, clientTime,
-					now, spawnedUserMiniJobs);
 			
 			if (success) {
 				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
@@ -130,6 +140,23 @@ public class SpawnMiniJobController extends EventController{
 //		} finally {
 //			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}
+	}
+	
+	private boolean checkLegitRequest(Builder resBuilder, int userId,
+			User user, int numToSpawn, int structId) {
+		
+		if (null == user) {
+			log.error("invalid userId, since user doesn't exist: " + userId);
+			return false;
+		}
+		
+		if (0 == numToSpawn || 0 == structId) {
+			log.error("invalid numToSpawn=" + numToSpawn +
+					"\t or structId=" + structId);
+			return false;
+		}
+		
+		return false;
 	}
 
 	private List<MiniJob> spawnMiniJobs(int numToSpawn, int structId,
