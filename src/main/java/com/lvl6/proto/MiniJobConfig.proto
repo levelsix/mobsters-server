@@ -25,6 +25,8 @@ message MiniJobProto {
      optional int32 atkRequired = 12;
      optional int32 minDmgDealt = 13;
      optional int32 maxDmgDealt = 14;
+     optional int32 durationMinMinutes = 15;
+     optional int32 durationMaxMinutes = 16;
      
 }
 
@@ -36,8 +38,10 @@ message UserMiniJobProto {
 	optional int64 timeStarted = 3; 
 	repeated int64 userMonsterIds = 4;
 	optional int64 timeCompleted = 5;
+	optional int32 duration = 7;
 	
 	optional MiniJobProto miniJob = 6;
+	//optional int32 duration = 7; defined above
 }
 
 //------------------------------------------------------------------------------------------
