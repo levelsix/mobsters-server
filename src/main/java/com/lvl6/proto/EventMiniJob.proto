@@ -14,7 +14,7 @@ option java_outer_classname = "EventMiniJobProto";
 message SpawnMiniJobRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 clientTime = 2;
-	optional int32 numToSpawn = 3;
+	optional int32 numToSpawn = 3; //0 means just reset the spawn time
 	
 	//id of structure (that user built) that controls mini jobs
 	optional int32 structId = 4;	

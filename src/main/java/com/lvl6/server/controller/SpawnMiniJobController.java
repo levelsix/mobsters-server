@@ -97,11 +97,10 @@ public class SpawnMiniJobController extends EventController{
 						miniJobIdToMiniJob);
 				spawnedUserMiniJobs = convertIntoUserMiniJobs(
 						userId, spawnedMiniJobs);
-				success = writeChangesToDB(user, userId, clientTime,
-						now, spawnedUserMiniJobs);
+				success = writeChangesToDB(user, userId, numToSpawn,
+						clientTime, now, spawnedUserMiniJobs);
 			}
 
-			
 			if (success) {
 				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
 				List<UserMiniJobProto> userMiniJobProtos =
@@ -151,9 +150,8 @@ public class SpawnMiniJobController extends EventController{
 			return false;
 		}
 		
-		if (0 == numToSpawn || 0 == structId) {
-			log.error("invalid numToSpawn=" + numToSpawn +
-					"\t or structId=" + structId);
+		if (0 == structId) {
+			log.error("invalid structId=" + structId);
 			return false;
 		}
 		
@@ -169,13 +167,19 @@ public class SpawnMiniJobController extends EventController{
 			Map<Integer, MiniJob> miniJobIdToMiniJob) {
 		List<MiniJob> spawnedMiniJobs = new ArrayList<MiniJob>();
 		
+		if (0 == numToSpawn) {
+			log.info("client just reseting the last spawn time");
+			return spawnedMiniJobs;
+		}
+		
 		float probabilitySum = MiniJobRetrieveUtils
 				.getMiniJobProbabilitySumForStructId(structId);
 		Random rand = new Random();
 		log.info("probabilitySum=" + probabilitySum);
 		log.info("miniJobIdToMiniJob=" + miniJobIdToMiniJob);
 		
-		while (numToSpawn > 0) {
+		int numToSpawnCopy = numToSpawn;
+		while (numToSpawnCopy > 0) {
 			float randFloat = rand.nextFloat();
 			log.info("randFloat=" + randFloat);
 			
@@ -199,7 +203,11 @@ public class SpawnMiniJobController extends EventController{
 			}
 			//regardless of whether or not we find one,
 			//prevent it from infinite looping
-			numToSpawn--;
+			numToSpawnCopy--;
+		}
+		if (spawnedMiniJobs.size() != numToSpawn) {
+			log.error("Could not spawn " + numToSpawn +
+					" mini jobs. spawned: " + spawnedMiniJobs);
 		}
 		return spawnedMiniJobs;
 	}
@@ -227,20 +235,25 @@ public class SpawnMiniJobController extends EventController{
 	}
 
 	private boolean writeChangesToDB(User user, int userId,
-			Timestamp clientTime, Date now,
+			int numToSpawn, Timestamp clientTime, Date now,
 			List<MiniJobForUser> spawnedUserMiniJobs) {
 		
-		//give user his mini jobs
-		List<Long> userMiniJobIds = InsertUtils.get()
-				.insertIntoMiniJobForUserGetIds(userId, spawnedUserMiniJobs);
-		log.info("inserted MiniJobForUser into mini_job_for_user:" +
-				spawnedUserMiniJobs + "\t ids=" + userMiniJobIds);
+		if (numToSpawn > 0 && spawnedUserMiniJobs.size() > 0) {
+			log.info("inserting user mini jobs: " + spawnedUserMiniJobs +
+					"\t numToSpawn: " + numToSpawn);
+			//give user his mini jobs
+			List<Long> userMiniJobIds = InsertUtils.get()
+					.insertIntoMiniJobForUserGetIds(
+							userId, spawnedUserMiniJobs);
+			log.info("inserted MiniJobForUser into mini_job_for_user:" +
+					spawnedUserMiniJobs + "\t ids=" + userMiniJobIds);
 
-		//TODO: move to some other class
-		for (int index = 0; index < userMiniJobIds.size(); index++) {
-			long userMiniJobId = userMiniJobIds.get(index);
-			MiniJobForUser mjfu = spawnedUserMiniJobs.get(index);
-			mjfu.setId(userMiniJobId);
+			//TODO: move to some other class
+			for (int index = 0; index < userMiniJobIds.size(); index++) {
+				long userMiniJobId = userMiniJobIds.get(index);
+				MiniJobForUser mjfu = spawnedUserMiniJobs.get(index);
+				mjfu.setId(userMiniJobId);
+			}
 		}
 		
 		//update user's last mini job spawn time
