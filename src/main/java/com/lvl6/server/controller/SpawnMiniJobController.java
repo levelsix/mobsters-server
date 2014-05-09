@@ -156,7 +156,7 @@ public class SpawnMiniJobController extends EventController{
 			return false;
 		}
 		
-		return false;
+		return true;
 	}
 
 	private List<MiniJob> spawnMiniJobs(int numToSpawn, int structId,
