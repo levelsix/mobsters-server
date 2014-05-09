@@ -86,7 +86,7 @@ public class SpawnMiniJobController extends EventController{
 					.getMiniJobForStructId(structId);
 			
 			boolean legit = checkLegitRequest(resBuilder, userId, user,
-					numToSpawn, structId);
+					numToSpawn, structId, miniJobIdToMiniJob);
 			
 			List<MiniJob> spawnedMiniJobs = null;
 			List<MiniJobForUser> spawnedUserMiniJobs = null;
@@ -143,7 +143,8 @@ public class SpawnMiniJobController extends EventController{
 	}
 	
 	private boolean checkLegitRequest(Builder resBuilder, int userId,
-			User user, int numToSpawn, int structId) {
+			User user, int numToSpawn, int structId,
+			Map<Integer, MiniJob> miniJobIdToMiniJob) {
 		
 		if (null == user) {
 			log.error("invalid userId, since user doesn't exist: " + userId);
@@ -156,6 +157,11 @@ public class SpawnMiniJobController extends EventController{
 			return false;
 		}
 		
+		if (null == miniJobIdToMiniJob || miniJobIdToMiniJob.isEmpty()) {
+			log.error("no minijobs for structId=" + structId);
+			return false;
+		}
+			
 		return true;
 	}
 
@@ -167,6 +173,7 @@ public class SpawnMiniJobController extends EventController{
 				.getMiniJobProbabilitySumForStructId(structId);
 		Random rand = new Random();
 		log.info("probabilitySum=" + probabilitySum);
+		log.info("miniJobIdToMiniJob=" + miniJobIdToMiniJob);
 		
 		while (numToSpawn > 0) {
 			float randFloat = rand.nextFloat();
@@ -188,10 +195,11 @@ public class SpawnMiniJobController extends EventController{
 				log.info("selected MiniJob!: " + mj);
 				//we have a winner
 				spawnedMiniJobs.add(mj);
-				numToSpawn--;
-				
 				break;
 			}
+			//regardless of whether or not we find one,
+			//prevent it from infinite looping
+			numToSpawn--;
 		}
 		return spawnedMiniJobs;
 	}
