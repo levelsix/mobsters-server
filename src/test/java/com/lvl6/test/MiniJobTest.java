@@ -472,7 +472,7 @@ public class MiniJobTest extends TestCase {
 	}
 	
 	protected int getMiniJobTestStructId() {
-		return 170;
+		return 171;
 	}
 	
 	protected void sendSpawnMiniJobRequestEvent(User user,
