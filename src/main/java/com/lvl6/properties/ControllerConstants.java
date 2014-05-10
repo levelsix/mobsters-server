@@ -122,7 +122,7 @@ public class ControllerConstants {
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -3F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
