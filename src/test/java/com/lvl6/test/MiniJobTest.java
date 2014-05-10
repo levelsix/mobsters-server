@@ -90,7 +90,8 @@ public class MiniJobTest extends TestCase {
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date lastMiniJobSpawnTimeThen = unitTesterThen.getLastMiniJobGeneratedTime();
 
-		Date clientTime = new Date();
+		//just so can set this in the future
+		Date clientTime = new Date(lastMiniJobSpawnTimeThen.getTime() + 10000);
 		int numToSpawn = 2;
 		int structId = getMiniJobTestStructId();
 

@@ -97,35 +97,35 @@ public final class SharedEnumConfigProto {
   
   public enum Element
       implements com.google.protobuf.ProtocolMessageEnum {
-    NO_ELEMENT(0, 1),
-    FIRE(1, 2),
-    EARTH(2, 3),
-    WATER(3, 4),
-    LIGHT(4, 5),
-    DARK(5, 6),
-    ROCK(6, 7),
+    FIRE(0, 1),
+    EARTH(1, 2),
+    WATER(2, 3),
+    LIGHT(3, 4),
+    DARK(4, 5),
+    ROCK(5, 6),
+    NO_ELEMENT(6, 7),
     ;
     
-    public static final int NO_ELEMENT_VALUE = 1;
-    public static final int FIRE_VALUE = 2;
-    public static final int EARTH_VALUE = 3;
-    public static final int WATER_VALUE = 4;
-    public static final int LIGHT_VALUE = 5;
-    public static final int DARK_VALUE = 6;
-    public static final int ROCK_VALUE = 7;
+    public static final int FIRE_VALUE = 1;
+    public static final int EARTH_VALUE = 2;
+    public static final int WATER_VALUE = 3;
+    public static final int LIGHT_VALUE = 4;
+    public static final int DARK_VALUE = 5;
+    public static final int ROCK_VALUE = 6;
+    public static final int NO_ELEMENT_VALUE = 7;
     
     
     public final int getNumber() { return value; }
     
     public static Element valueOf(int value) {
       switch (value) {
-        case 1: return NO_ELEMENT;
-        case 2: return FIRE;
-        case 3: return EARTH;
-        case 4: return WATER;
-        case 5: return LIGHT;
-        case 6: return DARK;
-        case 7: return ROCK;
+        case 1: return FIRE;
+        case 2: return EARTH;
+        case 3: return WATER;
+        case 4: return LIGHT;
+        case 5: return DARK;
+        case 6: return ROCK;
+        case 7: return NO_ELEMENT;
         default: return null;
       }
     }
@@ -156,7 +156,7 @@ public final class SharedEnumConfigProto {
     }
     
     private static final Element[] VALUES = {
-      NO_ELEMENT, FIRE, EARTH, WATER, LIGHT, DARK, ROCK, 
+      FIRE, EARTH, WATER, LIGHT, DARK, ROCK, NO_ELEMENT, 
     };
     
     public static Element valueOf(
@@ -276,9 +276,9 @@ public final class SharedEnumConfigProto {
       "*{\n\tDayOfWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n" +
       "\007TUESDAY\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022" +
       "\n\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020\007\022\022\n\016NO_DAY_OF_W" +
-      "EEK\020\010*X\n\007Element\022\016\n\nNO_ELEMENT\020\001\022\010\n\004FIRE" +
-      "\020\002\022\t\n\005EARTH\020\003\022\t\n\005WATER\020\004\022\t\n\005LIGHT\020\005\022\010\n\004D" +
-      "ARK\020\006\022\010\n\004ROCK\020\007*\\\n\007Quality\022\016\n\nNO_QUALITY" +
+      "EEK\020\010*X\n\007Element\022\010\n\004FIRE\020\001\022\t\n\005EARTH\020\002\022\t\n" +
+      "\005WATER\020\003\022\t\n\005LIGHT\020\004\022\010\n\004DARK\020\005\022\010\n\004ROCK\020\006\022" +
+      "\016\n\nNO_ELEMENT\020\007*\\\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005ULTRA\020\004\022\010\n\004E" +
       "PIC\020\005\022\r\n\tLEGENDARY\020\006\022\007\n\003EVO\020\007B\027B\025SharedE" +
       "numConfigProto"
