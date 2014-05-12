@@ -66,7 +66,7 @@ public class RedeemMiniJobController extends EventController{
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_COMPLETE_MINI_JOB_EVENT;
+		return EventProtocolRequest.C_REDEEM_MINI_JOB_EVENT;
 	}
 
 	@Override

@@ -20,15 +20,16 @@ enum DayOfWeek {
 }
 
 enum Element {
-	NO_ELEMENT = 1;
-	FIRE = 2;	//beats earth
-	EARTH = 3;	//beats water
-	WATER = 4;	//beats fire
+	FIRE = 1;	//beats earth
+	EARTH = 2;	//beats water
+	WATER = 3;	//beats fire
 
-	LIGHT = 5;	//beats dark
-	DARK = 6;	//beats light
+	LIGHT = 4;	//beats dark
+	DARK = 5;	//beats light
 
-	ROCK = 7;	//damages everything
+	ROCK = 6;	//damages everything
+	
+	NO_ELEMENT = 7;
 }
 
 
