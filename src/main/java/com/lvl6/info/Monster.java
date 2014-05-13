@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Monster implements Serializable {
 	
-	private static final long serialVersionUID = 2671875938930580866L;
+	private static final long serialVersionUID = 1638094543670310018L;
 	
 	private int id;
-	private String name;
+	private String evolutionGroup;
 	private String monsterGroup;
 	private String quality;
 	private int evolutionLevel;
@@ -33,10 +33,10 @@ public class Monster implements Serializable {
 	private int atkAnimationRepeatedFramesStart;
 	private int atkAnimationRepeatedFramesEnd;
 	private String shorterName;
-	
-	public Monster(int id, String name, String monsterGroup, String quality,
-			int evolutionLevel, String displayName, String element,
-			String imagePrefix, int numPuzzlePieces,
+
+	public Monster(int id, String evolutionGroup, String monsterGroup,
+			String quality, int evolutionLevel, String displayName,
+			String element, String imagePrefix, int numPuzzlePieces,
 			int minutesToCombinePieces, int maxLevel, int evolutionMonsterId,
 			int evolutionCatalystMonsterId, int minutesToEvolve,
 			int numCatalystsRequired, String carrotRecruited,
@@ -47,7 +47,7 @@ public class Monster implements Serializable {
 			int atkAnimationRepeatedFramesEnd, String shorterName) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.evolutionGroup = evolutionGroup;
 		this.monsterGroup = monsterGroup;
 		this.quality = quality;
 		this.evolutionLevel = evolutionLevel;
@@ -83,12 +83,12 @@ public class Monster implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getEvolutionGroup() {
+		return evolutionGroup;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEvolutionGroup(String evolutionGroup) {
+		this.evolutionGroup = evolutionGroup;
 	}
 
 	public String getMonsterGroup() {
@@ -294,11 +294,11 @@ public class Monster implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
-				+ monsterGroup + ", quality=" + quality + ", evolutionLevel="
-				+ evolutionLevel + ", displayName=" + displayName
-				+ ", element=" + element + ", imagePrefix=" + imagePrefix
-				+ ", numPuzzlePieces=" + numPuzzlePieces
+		return "Monster [id=" + id + ", evolutionGroup=" + evolutionGroup
+				+ ", monsterGroup=" + monsterGroup + ", quality=" + quality
+				+ ", evolutionLevel=" + evolutionLevel + ", displayName="
+				+ displayName + ", element=" + element + ", imagePrefix="
+				+ imagePrefix + ", numPuzzlePieces=" + numPuzzlePieces
 				+ ", minutesToCombinePieces=" + minutesToCombinePieces
 				+ ", maxLevel=" + maxLevel + ", evolutionMonsterId="
 				+ evolutionMonsterId + ", evolutionCatalystMonsterId="
@@ -317,5 +317,5 @@ public class Monster implements Serializable {
 				+ atkAnimationRepeatedFramesEnd + ", shorterName="
 				+ shorterName + "]";
 	}
-	
+
 }
