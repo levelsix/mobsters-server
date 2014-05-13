@@ -10,7 +10,7 @@ option java_outer_classname = "MonsterStuffProto";
 
 message MonsterProto {
 	optional int32 monsterId = 1;
-	optional string name = 2; //for grouping purposes
+	optional string evolutionGroup = 2; //This is used to group monsters by evolution level.
 	optional string shorterName = 28;
 	optional string monsterGroup = 3;
 	optional Quality quality = 4 [default = NO_QUALITY];

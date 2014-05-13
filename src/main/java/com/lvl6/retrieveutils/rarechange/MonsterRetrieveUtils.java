@@ -116,7 +116,7 @@ public class MonsterRetrieveUtils {
   private static Monster convertRSRowToMonster(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
-    String name = rs.getString(i++);
+    String evolutionGroup = rs.getString(i++);
     String monsterGroup = rs.getString(i++);
     String quality = rs.getString(i++);
     int evolutionLevel = rs.getInt(i++);
@@ -147,7 +147,7 @@ public class MonsterRetrieveUtils {
     int atkAnimationRepeatedFramesEnd = rs.getInt(i++);
     String shorterName = rs.getString(i++);
     
-    Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
+    Monster monster = new Monster(id, evolutionGroup, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
     		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,

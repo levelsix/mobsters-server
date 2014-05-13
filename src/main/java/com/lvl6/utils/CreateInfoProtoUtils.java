@@ -1357,11 +1357,11 @@ public class CreateInfoProtoUtils {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
     mpb.setMonsterId(aMonster.getId());
-    String aStr = aMonster.getName(); 
+    String aStr = aMonster.getEvolutionGroup(); 
     if (null != aStr) {
-    	mpb.setName(aStr);
+    	mpb.setEvolutionGroup(aStr);
     } else {
-    	log.error("monster has no name, aMonster=" + aMonster);
+    	log.error("monster has no evolutionGroup, aMonster=" + aMonster);
     }
     aStr = aMonster.getMonsterGroup();
     if (null != aStr) {
