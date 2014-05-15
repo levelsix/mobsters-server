@@ -43,3 +43,4 @@ enum Quality {
 	
 	EVO = 7; //MONSTERS USED FOR EVOLVING
 }
+// the ResourceType enum in Structure.proto, should be in here
