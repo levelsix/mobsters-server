@@ -75,7 +75,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent)event).getBeginDungeonRequestProto();
-//    log.info("reqProto=" + reqProto);
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
