@@ -1494,6 +1494,7 @@ public class CreateInfoProtoUtils {
       mlipb.setDmgExponentBase(info.getDmgExponentBase());
       mlipb.setExpLvlDivisor(info.getExpLvlDivisor());
       mlipb.setExpLvlExponent(info.getExpLvlExponent());
+      mlipb.setSellAmount(info.getSellAmount());
       
       lvlInfoProtos.add(mlipb.build());
     }

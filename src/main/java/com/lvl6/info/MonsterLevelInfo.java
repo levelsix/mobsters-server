@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = 5516157948001134283L;
+	private static final long serialVersionUID = -8044728335941154527L;
 	
 	private int monsterId;
 	private int level;
@@ -22,12 +22,13 @@ public class MonsterLevelInfo implements Serializable {
 	private float dmgExponentBase;
 	private float expLvlDivisor;
 	private float expLvlExponent;
+	private int sellAmount;
 	
 	public MonsterLevelInfo(int monsterId, int level, int hp,
 			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,
 			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg,
 			int speed, float hpExponentBase, float dmgExponentBase,
-			float expLvlDivisor, float expLvlExponent) {
+			float expLvlDivisor, float expLvlExponent, int sellAmount) {
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -45,6 +46,7 @@ public class MonsterLevelInfo implements Serializable {
 		this.dmgExponentBase = dmgExponentBase;
 		this.expLvlDivisor = expLvlDivisor;
 		this.expLvlExponent = expLvlExponent;
+		this.sellAmount = sellAmount;
 	}
 
 	public int getMonsterId() {
@@ -175,6 +177,14 @@ public class MonsterLevelInfo implements Serializable {
 		this.expLvlExponent = expLvlExponent;
 	}
 
+	public int getSellAmount() {
+		return sellAmount;
+	}
+
+	public void setSellAmount(int sellAmount) {
+		this.sellAmount = sellAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
@@ -185,7 +195,8 @@ public class MonsterLevelInfo implements Serializable {
 				+ darknessDmg + ", rockDmg=" + rockDmg + ", speed=" + speed
 				+ ", hpExponentBase=" + hpExponentBase + ", dmgExponentBase="
 				+ dmgExponentBase + ", expLvlDivisor=" + expLvlDivisor
-				+ ", expLvlExponent=" + expLvlExponent + "]";
+				+ ", expLvlExponent=" + expLvlExponent + ", sellAmount="
+				+ sellAmount + "]";
 	}
 
 }

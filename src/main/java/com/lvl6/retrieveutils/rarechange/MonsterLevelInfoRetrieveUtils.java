@@ -120,11 +120,12 @@ import com.lvl6.utils.DBConnection;
     float dmgExponentBase = rs.getFloat(i++);
     float expLvlDivisor = rs.getFloat(i++);
     float expLvlExponent = rs.getFloat(i++);
+    int sellAmount = rs.getInt(i++);
     
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
     		curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,
     		lightningDmg, darknessDmg, rockDmg, speed, hpExponentBase,
-    		dmgExponentBase, expLvlDivisor, expLvlExponent);
+    		dmgExponentBase, expLvlDivisor, expLvlExponent, sellAmount);
     
     return srs;
   }
