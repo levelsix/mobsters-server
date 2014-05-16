@@ -171,7 +171,7 @@ import com.lvl6.utils.DBConnection;
     int monsterIdReward = rs.getInt(i++);
     String quality = rs.getString(i++);
     int maxNumMonstersAllowed = rs.getInt(i++);
-    float chanceToAppear = rs.getInt(i++);
+    float chanceToAppear = rs.getFloat(i++);
     int hpRequired = rs.getInt(i++);
     int atkRequired = rs.getInt(i++);
     int minDmgDealt = rs.getInt(i++);
