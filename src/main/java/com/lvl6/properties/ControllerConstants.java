@@ -126,8 +126,8 @@ public class ControllerConstants {
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
-	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON = 5;
-	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON = 6;
+	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON = 5; 
+	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON = 6;
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;

@@ -28,6 +28,35 @@ import com.lvl6.utils.DBConnection;
 
   private static final String TABLE_NAME = DBConstants.TABLE_TASK;
 
+  //CONTROLLER LOGIC******************************************************************
+  public static int getTaskIdForCityElement(int cityId, int assetId) {
+	  log.debug("retrieving task id for city element, cityId=" + cityId +
+			  " assetId=" + assetId);
+	  if (null == cityIdsToTasks) {
+		  setStaticCityIdsToTasks();
+	  }
+	  
+	  if (!cityIdsToTasks.containsKey(cityId)) {
+		  log.warn("no task for cityId" + cityId + " assetId=" + assetId);
+		  return 0;
+	  }
+	  
+	  List<Task> tasksForCity = cityIdsToTasks.get(cityId);
+	  
+	  for (Task aTask : tasksForCity) {
+		  if (aTask.getAssetNumberWithinCity() != assetId) {
+			  return aTask.getId();
+		  }
+	  }
+	  log.error("no task id for city element, cityId=" + cityId +
+			  " assetId=" + assetId);
+	  
+	  return 0;
+  }
+  
+  //RETRIEVE QUERIES*********************************************************************
+
+
   public static Map<Integer, Task> getTaskIdsToTasks() {
     log.debug("retrieving all tasks data map");
     if (taskIdsToTasks == null) {
