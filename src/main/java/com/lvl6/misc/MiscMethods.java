@@ -389,9 +389,9 @@ public class MiscMethods {
     }
 
     tcb.setCityElementIdForFirstDungeon(
-        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
+        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
     tcb.setCityElementIdForSecondDungeon(
-        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
     tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
     tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
 
