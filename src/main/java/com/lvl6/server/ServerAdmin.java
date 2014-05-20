@@ -139,7 +139,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		return writer;
 	}
 
-	public void setWriter(EventWriterSockets writer) {
+	public void setWriter(EventWriter writer) {
 		this.writer = writer;
 	}
 
