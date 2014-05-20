@@ -1,4 +1,4 @@
-package com.lvl6.server.controller;
+	package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -35,9 +35,11 @@ import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
+import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -337,8 +339,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private void writeTaskCompleted(int userId, Timestamp createTime) {
   	List<Integer> taskIdList = new ArrayList<Integer>();
-  	taskIdList.add(ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
-  	taskIdList.add(ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+  	
+  	int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
+  	int assetIdOne = ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON;
+  	int taskIdOne = TaskRetrieveUtils.getTaskIdForCityElement(cityId, assetIdOne);
+  	taskIdList.add(taskIdOne);
+  	
+  	int assetIdTwo = ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON;
+  	int taskIdTwo = TaskRetrieveUtils.getTaskIdForCityElement(cityId, assetIdTwo);
+  	taskIdList.add(taskIdTwo);
   	
   	int size = taskIdList.size();
   	List<Integer> userIdList = Collections.nCopies(size, userId);
