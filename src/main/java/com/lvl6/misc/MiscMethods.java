@@ -1,5 +1,6 @@
 package com.lvl6.misc;
 
+import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -19,6 +20,8 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+
+import au.com.bytecode.opencsv.CSVReader;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -231,12 +234,14 @@ public class MiscMethods {
       try {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
-          StringTokenizer st2 = new StringTokenizer(tok, ".");
-          if (st2.countTokens() == 4) {
-            Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
-            String speaker = st2.nextToken();
-            String speakerImage = st2.nextToken();
-            String speakerText = st2.nextToken();
+          CSVReader reader = new CSVReader(new StringReader(tok), '.');
+          String[] strs = reader.readNext();
+          log.info(strs+"");
+          if (strs.length == 4) {
+            Boolean isLeftSide = strs[0].toUpperCase().equals("L");
+            String speaker = strs[1];
+            String speakerImage = strs[2];
+            String speakerText = strs[3];
             if (speakerText != null) {
               isLeftSides.add(isLeftSide);
               speakers.add(speaker);
@@ -384,9 +389,9 @@ public class MiscMethods {
     }
 
     tcb.setCityElementIdForFirstDungeon(
-        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
+        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
     tcb.setCityElementIdForSecondDungeon(
-        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
+        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
     tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
     tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
 
