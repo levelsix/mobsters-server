@@ -349,6 +349,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int taskIdTwo = TaskRetrieveUtils.getTaskIdForCityElement(cityId, assetIdTwo);
   	taskIdList.add(taskIdTwo);
   	
+  	log.info("taskIdList: "+taskIdList);
+  	
   	int size = taskIdList.size();
   	List<Integer> userIdList = Collections.nCopies(size, userId);
   	List<Timestamp> createTimeList = Collections.nCopies(size, createTime);
