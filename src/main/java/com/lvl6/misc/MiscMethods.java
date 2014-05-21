@@ -236,10 +236,6 @@ public class MiscMethods {
           String tok = st.nextToken();
           CSVReader reader = new CSVReader(new StringReader(tok), '.');
           String[] strs = reader.readNext();
-          log.info(strs.length+"");
-          for (String s : strs) {
-            log.info(s);
-          }
           if (strs.length == 4) {
             Boolean isLeftSide = strs[0].toUpperCase().equals("L");
             String speaker = strs[1];
