@@ -92,7 +92,7 @@ public class LogoutController extends EventController {
 //					List<Integer> eloChangeList = new ArrayList<Integer>();
 //					pvpBattleStuff(user, userId, eloChangeList, lastLogout);
 //					
-					int eloChange = 0;
+//					int eloChange = 0;
 //					if (!eloChangeList.isEmpty()) {
 //						eloChange = eloChangeList.get(0);
 //					}
@@ -132,6 +132,7 @@ public class LogoutController extends EventController {
 		// TODO: clear cache
 	}
 	
+	/*
 	private void pvpBattleStuff(User user, int userId, List<Integer> eloChange,
 			Timestamp now) {
 		PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
@@ -162,8 +163,9 @@ public class LogoutController extends EventController {
   		log.error("could not successfully penalize, reward attacker, defender respectively." +
   				" battle=" + battle, e2);
   	}
-	}
+	} */
 	
+	/*
 	private void penalizeUserForLeavingGameWhileInPvp(int userId, int defenderId,
 			int eloAttackerLoses, int eloDefenderWins, Timestamp now, PvpBattleForUser battle,
 			List<Integer> eloChange) {
@@ -219,7 +221,7 @@ public class LogoutController extends EventController {
 				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
 			}
 		}
-	}
+	}*/
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;

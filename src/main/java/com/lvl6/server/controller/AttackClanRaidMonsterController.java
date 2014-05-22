@@ -156,8 +156,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		new ArrayList<ClanEventPersistentUserReward>();
       if (legitRequest) {
       	log.info("legitRequest");
-      	clanEvent = clanEventList.get(0);
-      	ClanEventPersistentForClan clanEventClientSent = clanEventList.get(1);
+      	
+      	if (!clanEventList.isEmpty()) {
+      		clanEvent = clanEventList.get(0);
+      	}
+      	ClanEventPersistentForClan clanEventClientSent = ClanStuffUtils
+        		.createClanEventPersistentForClan(eventDetails);
       	
       	//clanevent MIGHT BE MODIFIED (this will always be sent to the client)
         writeChangesToDB(resBuilder, clanId, userId, damageDealt, curTime, clanEvent,
@@ -252,8 +256,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ClanEventPersistentForClan eventClientSent = ClanStuffUtils
     		.createClanEventPersistentForClan(eventDetails);
     
-    clanEventList.add(raidStartedByClan);
-    clanEventList.add(eventClientSent);
     //still want to deduct user's monsters' healths
 //    if (null == raidStartedByClan) {
 //    	
@@ -263,6 +265,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//null != raidStartedByClan.getStageStartTime()) { 
     	//stageStartTime won't be null in eventClientSent (this would mean stage has not
     	//started, so user can't attack, so this event should not have been sent)
+    	
+    	clanEventList.add(raidStartedByClan);
     	
     	resBuilder.setStatus(AttackClanRaidMonsterStatus.SUCCESS);
     	log.info("since data client sent matches up with db info, allowing attack, clanEvent=" +

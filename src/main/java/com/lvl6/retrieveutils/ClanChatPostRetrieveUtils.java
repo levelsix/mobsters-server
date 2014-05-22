@@ -23,6 +23,7 @@ import com.lvl6.utils.DBConnection;
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_CHAT_POST;
 
+  /*
   public static ClanChatPost getSpecificActiveClanChatPost(int wallPostId) {
     log.debug("retrieving clan chat post with id " + wallPostId);
     
@@ -40,8 +41,9 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
     return clanChatPost;
-  }
+  }*/
 
+  /*
   public static List<ClanChatPost> getMostRecentActiveClanChatPostsForClanBeforePostId(int limit, int postId, int clanId) {
     log.debug("retrieving " + limit + " player wall posts before certain postId " + postId + " for clan " + clanId);
     TreeMap <String, Object> lessThanParamsToVals = new TreeMap<String, Object>();
@@ -63,7 +65,7 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
     return clanChatPosts;
-  }
+  }*/
   
   public static List<ClanChatPost> getMostRecentClanChatPostsForClan(int limit, int clanId) {
     log.debug("retrieving " + limit + " clan wall posts for clan " + clanId);

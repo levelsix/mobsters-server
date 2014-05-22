@@ -954,7 +954,7 @@ public class InsertUtils implements InsertUtil{
 	@Override
 	public int insertIntoMonsterForUserDeleted(int userId, List<String> delReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate) {
-		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
 		List<Object> userIds = new ArrayList<Object>();
 		List<Object> monsterIds = new ArrayList<Object>(); 

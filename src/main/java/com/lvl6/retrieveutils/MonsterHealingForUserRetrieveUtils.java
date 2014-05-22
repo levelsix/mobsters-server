@@ -48,6 +48,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }
 
+  /*
   public static Map<Long, MonsterHealingForUser> getMonstersWithUserAndMonsterIds(
   		int userId, Collection<Long> userMonsterIds) {
   	int size = userMonsterIds.size();
@@ -78,7 +79,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	DBConnection.get().close(rs, null, conn);
     }
     return incompleteMonsters;
-  }
+  }*/
   
   private static Map<Long, MonsterHealingForUser> convertRSToUserMonsterIdsToMonsters(ResultSet rs) {
   	Map<Long, MonsterHealingForUser> monsterIdsToMonsters = new HashMap<Long, MonsterHealingForUser>();

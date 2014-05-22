@@ -49,6 +49,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }
 
+  /*
   ////@Cacheable(value="monstersToMonstersForUser", key="#userId")
   public Map<Integer, List<MonsterForUser>> getMonsterIdsToMonstersForUser(int userId) {
     log.debug("retrieving map of monster id to usermonsters for userId " + userId);
@@ -66,7 +67,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	DBConnection.get().close(rs, null, conn);
     }
     return monsterIdsToMonsters;
-  }
+  }*/
   
   public Map<Integer, List<MonsterForUser>> getUserIdsToMonsterTeamForUserIds(
   		List<Integer> userIds) {
@@ -212,6 +213,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }
 
+  /*
   ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
   public List<MonsterForUser> getMonstersWithMonsterIdAndUserId(int userId, int monsterId) {
     log.debug("retrieving user monster for user: " + userId + ", monsterId: " + monsterId);
@@ -233,7 +235,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	DBConnection.get().close(rs, null, conn);
     }
     return userMonsters;
-  }
+  }*/
   
   public Map<Integer, MonsterForUser> getIncompleteMonstersWithUserAndMonsterIds(
   		int userId, Collection<Integer> monsterIds) {
