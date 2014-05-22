@@ -44,7 +44,7 @@ import com.lvl6.utils.DBConnection;
 	  List<Task> tasksForCity = cityIdsToTasks.get(cityId);
 	  
 	  for (Task aTask : tasksForCity) {
-		  if (aTask.getAssetNumberWithinCity() != assetId) {
+		  if (aTask.getAssetNumberWithinCity() == assetId) {
 			  return aTask.getId();
 		  }
 	  }

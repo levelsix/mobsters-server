@@ -1,5 +1,6 @@
 package com.lvl6.misc;
 
+import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -19,6 +20,8 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+
+import au.com.bytecode.opencsv.CSVReader;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -231,12 +234,13 @@ public class MiscMethods {
       try {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
-          StringTokenizer st2 = new StringTokenizer(tok, ".");
-          if (st2.countTokens() == 4) {
-            Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
-            String speaker = st2.nextToken();
-            String speakerImage = st2.nextToken();
-            String speakerText = st2.nextToken();
+          CSVReader reader = new CSVReader(new StringReader(tok), '.');
+          String[] strs = reader.readNext();
+          if (strs.length == 4) {
+            Boolean isLeftSide = strs[0].toUpperCase().equals("L");
+            String speaker = strs[1];
+            String speakerImage = strs[2];
+            String speakerText = strs[3];
             if (speakerText != null) {
               isLeftSides.add(isLeftSide);
               speakers.add(speaker);
