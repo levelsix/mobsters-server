@@ -2,8 +2,8 @@ package com.lvl6.info;
 
 public class BlacksmithAttemptHistory {
 
-  private BlacksmithAttempt blacksmithAttempt;
-  private boolean success;
+	private BlacksmithAttempt blacksmithAttempt;
+	private boolean success;
   
   public BlacksmithAttemptHistory(BlacksmithAttempt blacksmithAttempt,
       boolean success) {

@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TournamentEvent implements Serializable {
-  private static final long serialVersionUID = -3130246899148578214L;
-  private int id;
-  private Date startDate;
-  private Date endDate;
-  private String eventName;
-  private boolean rewardsGivenOut;
+	private static final long serialVersionUID = -3130246899148578214L;
+	private int id;
+	private Date startDate;
+	private Date endDate;
+	private String eventName;
+	private boolean rewardsGivenOut;
   
   public TournamentEvent(int id, Date startDate, Date endDate, String eventName, boolean rewardsGivenOut) {
     super();

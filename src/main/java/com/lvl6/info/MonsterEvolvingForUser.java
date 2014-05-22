@@ -10,7 +10,7 @@ public class MonsterEvolvingForUser implements Serializable {
 	private long monsterForUserIdOne;
 	private long monsterForUserIdTwo;
 	private int userId;
-  private Date startTime;
+	private Date startTime;
 
   public MonsterEvolvingForUser(long catalystMonsterForUserId,
 			long monsterForUserIdOne, long monsterForUserIdTwo, int userId,

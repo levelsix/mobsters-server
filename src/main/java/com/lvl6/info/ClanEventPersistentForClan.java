@@ -7,12 +7,12 @@ public class ClanEventPersistentForClan implements Serializable {
 	
 	private static final long serialVersionUID = -8806794346949184851L;
 	private int clanId;
-  private int clanEventPersistentId; //not really needed, but oh well
-  private int crId; //clan raid id
-  private int crsId; //clan raid stage id
-  private Date stageStartTime; // refers to time clan started a daily event
-  private int crsmId; //clan raid stage monster id
-  private Date stageMonsterStartTime; //differentiate attacks across different stage monsters
+	private int clanEventPersistentId; //not really needed, but oh well
+	private int crId; //clan raid id
+	private int crsId; //clan raid stage id
+	private Date stageStartTime; // refers to time clan started a daily event
+	private int crsmId; //clan raid stage monster id
+	private Date stageMonsterStartTime; //differentiate attacks across different stage monsters
   
 	public ClanEventPersistentForClan(int clanId, int clanEventPersistentId,
 			int crId, int crsId, Date stageStartTime, int crsmId,

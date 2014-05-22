@@ -4,14 +4,14 @@ import java.util.List;
 
 public class DailyBonusReward {
   
-  private int id;
-  private int minLevel;
-  private int maxLevel;
-  private int dayOneCoins;
-  private int dayTwoCoins;
-  private int dayThreeDiamonds;
-  private int dayFourCoins;
-  private List<Integer> dayFiveBoosterPackIds;
+	private int id;
+	private int minLevel;
+	private int maxLevel;
+	private int dayOneCoins;
+	private int dayTwoCoins;
+	private int dayThreeDiamonds;
+	private int dayFourCoins;
+	private List<Integer> dayFiveBoosterPackIds;
   
   public DailyBonusReward(int id, int minLevel, int maxLevel, int dayOneCoins,
       int dayTwoCoins, int dayThreeDiamonds, int dayFourCoins,

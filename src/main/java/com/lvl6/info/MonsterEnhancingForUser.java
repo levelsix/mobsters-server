@@ -9,9 +9,9 @@ public class MonsterEnhancingForUser implements Serializable {
 	
 	private int userId;
 	private long monsterForUserId;
-  private Date expectedStartTime;
-//  private Date queuedTime;
-  private int enhancingCost;
+	private Date expectedStartTime;
+//	private Date queuedTime;
+	private int enhancingCost;
   
 	public MonsterEnhancingForUser(int userId, long monsterForUserId,
 			Date expectedStartTime, int enhancingCost) {

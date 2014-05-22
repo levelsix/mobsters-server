@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClanChatPost implements Serializable {
-  private static final long serialVersionUID = -7441177529235760896L;
-  private int id;
-  private int posterId;
-  private int clanId;
-  private Date timeOfPost;
-  private String content;
+	private static final long serialVersionUID = -7441177529235760896L;
+	private int id;
+	private int posterId;
+	private int clanId;
+	private Date timeOfPost;
+	private String content;
 
   public ClanChatPost(int id, int posterId, int clanId,
       Date timeOfPost, String content) {

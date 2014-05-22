@@ -5,19 +5,19 @@ import java.util.Date;
 
 public class BlacksmithAttempt implements Serializable {
   
-  private static final long serialVersionUID = 4280332245815139564L;
-  private int id;
-  private int userId;
-  private int equipId;
-  private int goalLevel;
-  private boolean guaranteed;
-  private Date startTime;
-  private int diamondGuaranteeCost;
-  private Date timeOfSpeedup;
-  private boolean attemptComplete;
-  private int equipOneEnhancementPercent;
-  private int equipTwoEnhancementPercent;
-  private int forgeSlotNumber;
+	private static final long serialVersionUID = 4280332245815139564L;
+	private int id;
+	private int userId;
+	private int equipId;
+	private int goalLevel;
+	private boolean guaranteed;
+	private Date startTime;
+	private int diamondGuaranteeCost;
+	private Date timeOfSpeedup;
+	private boolean attemptComplete;
+	private int equipOneEnhancementPercent;
+	private int equipTwoEnhancementPercent;
+	private int forgeSlotNumber;
 
   public BlacksmithAttempt(int id, int userId, int equipId, int goalLevel,
       boolean guaranteed, Date startTime, int diamondGuaranteeCost, 

@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 public class ClanBoss implements Serializable {
 
-  private static final long serialVersionUID = 4262433171624845065L;
-  private int id;
-  private String name;
-  private int hp;
-  private int energyCost;
-  private int numMinutesToKill;
-  private int numMinutesToRespawn;
-  private int numRunesOne;
-  private int numRunesTwo;
-  private int numRunesThree;
-  private int numRunesFour;
-  private int numRunesFive;
+	private static final long serialVersionUID = 4262433171624845065L;
+	private int id;
+	private String name;
+	private int hp;
+	private int energyCost;
+	private int numMinutesToKill;
+	private int numMinutesToRespawn;
+	private int numRunesOne;
+	private int numRunesTwo;
+	private int numRunesThree;
+	private int numRunesFour;
+	private int numRunesFive;
   
   public ClanBoss(int id, String name, int hp, int energyCost,
       int numMinutesToKill, int numMinutesToRespawn, int numRunesOne,

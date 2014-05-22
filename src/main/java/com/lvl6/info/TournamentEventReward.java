@@ -3,16 +3,16 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class TournamentEventReward implements Serializable {
-  private static final long serialVersionUID = -7235506292340192848L;
-  private int tournamentEventId;
-  private int minRank;
-  private int maxRank;
-  private int goldRewarded;
-  private String backgroundImageName;
-  private String prizeImageName;
-  private int blue;
-  private int green;
-  private int red;
+	private static final long serialVersionUID = -7235506292340192848L;
+	private int tournamentEventId;
+	private int minRank;
+	private int maxRank;
+	private int goldRewarded;
+	private String backgroundImageName;
+	private String prizeImageName;
+	private int blue;
+	private int green;
+	private int red;
   
   public TournamentEventReward(int tournamentEventId, int minRank, int maxRank, int goldRewarded,
       String backgroundImageName, String prizeImageName, int blue, int green, int red) {

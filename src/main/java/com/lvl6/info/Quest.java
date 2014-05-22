@@ -8,15 +8,15 @@ public class Quest implements Serializable {
 	private static final long serialVersionUID = 943974595064267438L;
 	
 	private int id;
-	//  private int cityId;
+	//	private int cityId;
 	private String questName;
 	private String description;
 	private String doneResponse;
 	private Dialogue acceptDialogue;
-	//  private String questType;
-	//  private String jobDescription;
-	//  private int staticDataId;
-	//  private int quantity;
+	//	private String questType;
+	//	private String jobDescription;
+	//	private int staticDataId;
+	//	private int quantity;
 	private int cashReward;
 	private int oilReward;
 	private int gemReward;
@@ -28,7 +28,7 @@ public class Quest implements Serializable {
 	private String questGiverImagePrefix;
 	private int priority;
 	private String carrotId;
-	//  private boolean isAchievement;
+	//	private boolean isAchievement;
 	private String monsterElement;
 	
 	public Quest(int id, String questName, String description, String doneResponse,

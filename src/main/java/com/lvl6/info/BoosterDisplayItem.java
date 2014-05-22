@@ -11,8 +11,8 @@ public class BoosterDisplayItem implements Serializable {
 	private boolean isMonster;
 	private boolean isComplete;
 	private String monsterQuality;
-  private int gemReward;
-  private int quantity;
+	private int gemReward;
+	private int quantity;
   
 	public BoosterDisplayItem(int id, int boosterPackId, boolean isMonster,
 			boolean isComplete, String monsterQuality, int gemReward,

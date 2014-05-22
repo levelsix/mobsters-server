@@ -6,14 +6,14 @@ public class BoosterItem implements Serializable {
 	
 	private static final long serialVersionUID = 6843248362650495626L;
 	private int id;
-  private int boosterPackId;
-  private int monsterId;
-  private int numPieces;
-  private boolean isComplete;
-  private boolean isSpecial;
-  private int gemReward;
-  private int cashReward;
-  private float chanceToAppear;
+	private int boosterPackId;
+	private int monsterId;
+	private int numPieces;
+	private boolean isComplete;
+	private boolean isSpecial;
+	private int gemReward;
+	private int cashReward;
+	private float chanceToAppear;
   
 	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,
 			boolean isComplete, boolean isSpecial, int gemReward, int cashReward,

@@ -4,23 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class GoldSale implements Serializable {
-  private static final long serialVersionUID = 7996839582751539192L;
-  private int id;
-  private Date startDate;
-  private Date endDate;
-  private String package1SaleIdentifier;
-  private String package2SaleIdentifier;
-  private String package3SaleIdentifier;
-  private String package4SaleIdentifier;
-  private String package5SaleIdentifier;
-  private String packageS1SaleIdentifier;
-  private String packageS2SaleIdentifier;
-  private String packageS3SaleIdentifier;
-  private String packageS4SaleIdentifier;
-  private String packageS5SaleIdentifier;
-  private String goldShoppeImageName;
-  private String goldBarImageName;
-  private boolean isBeginnerSale;
+	private static final long serialVersionUID = 7996839582751539192L;
+	private int id;
+	private Date startDate;
+	private Date endDate;
+	private String package1SaleIdentifier;
+	private String package2SaleIdentifier;
+	private String package3SaleIdentifier;
+	private String package4SaleIdentifier;
+	private String package5SaleIdentifier;
+	private String packageS1SaleIdentifier;
+	private String packageS2SaleIdentifier;
+	private String packageS3SaleIdentifier;
+	private String packageS4SaleIdentifier;
+	private String packageS5SaleIdentifier;
+	private String goldShoppeImageName;
+	private String goldBarImageName;
+	private boolean isBeginnerSale;
   
   public GoldSale(int id, Date startDate, Date endDate, String goldShoppeImageName,
       String goldBarImageName, String package1SaleIdentifier, 

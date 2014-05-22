@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BossEvent implements Serializable {
-  private static final long serialVersionUID = 828184315386406610L;
-  private int id;
-  private int cityId;
-  private Date startDate;
-  private Date endDate;
-  private String eventName;
-  private String headerImage;
-  private int leftEquipId;
-  private String leftTag;
-  private int middleEquipId;
-  private String middleTag;
-  private int rightEquipId;
-  private String rightTag;
-  private String infoDescription;
+	private static final long serialVersionUID = 828184315386406610L;
+	private int id;
+	private int cityId;
+	private Date startDate;
+	private Date endDate;
+	private String eventName;
+	private String headerImage;
+	private int leftEquipId;
+	private String leftTag;
+	private int middleEquipId;
+	private String middleTag;
+	private int rightEquipId;
+	private String rightTag;
+	private String infoDescription;
   
   public BossEvent(int id, int cityId, Date startDate, Date endDate,
       String eventName, String headerImage, int leftEquipId, String leftTag,

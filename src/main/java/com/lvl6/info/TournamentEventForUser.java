@@ -3,12 +3,12 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class TournamentEventForUser implements Serializable {
-  private static final long serialVersionUID = -4146319195339195482L;
-  private int tournamentEventId;
-  private int userId;
-  private int battlesWon;
-  private int battlesLost;
-  private int battlesFled;
+	private static final long serialVersionUID = -4146319195339195482L;
+	private int tournamentEventId;
+	private int userId;
+	private int battlesWon;
+	private int battlesLost;
+	private int battlesFled;
   
   public TournamentEventForUser(int tournamentEventId, int userId, int battlesWon,
       int battlesLost, int battlesFled) {
