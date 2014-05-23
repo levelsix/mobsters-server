@@ -470,7 +470,7 @@ public class UpdateUtils implements UpdateUtil {
 		conditionParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.CLAN_FOR_USER__STATUS, status.getNumber());
+		absoluteParams.put(DBConstants.CLAN_FOR_USER__STATUS, status.name());
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_CLAN_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
@@ -488,7 +488,7 @@ public class UpdateUtils implements UpdateUtil {
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		for(int index = 0; index < userIdList.size(); index++) {
 			int userId = userIdList.get(index);
-			int status = statuses.get(index).getNumber();
+			String status = statuses.get(index).name();
 
 			Map<String, Object> aRow = new HashMap<String, Object>();
 			aRow.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
