@@ -72,7 +72,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 		return clanPersistentEventUserInfo;
 	}
-	
+	/*
 	public static int getTotalCrsmDmgForClanId(int clanId) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ");
@@ -110,7 +110,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			return clanIdToCrsmDmg.get(clanId);
 		}
 		return 0;
-	}
+	}*/
 	
 	public static Map<Integer, Integer> getTotalCrsmDmgForClanIds(List<Integer> clanIds) {
 		StringBuilder sb = new StringBuilder();

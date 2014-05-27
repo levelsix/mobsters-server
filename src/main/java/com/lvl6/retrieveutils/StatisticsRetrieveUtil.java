@@ -27,7 +27,7 @@ public class StatisticsRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(StatisticsRetrieveUtil.class);
 	
 	private JdbcTemplate jdbcTemplate;
-	protected String iap = DBConstants.TABLE_IAP_HISTORY;
+//	protected String iap = DBConstants.TABLE_IAP_HISTORY;
 
 	@Resource
     public void setDataSource(DataSource dataSource) {
