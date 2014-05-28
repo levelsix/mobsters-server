@@ -108,6 +108,13 @@ import com.lvl6.utils.RetrieveUtils;
       			previousCash, previousOil, reason, details);
       	
       }
+      
+      //cheat code, reset user account
+      if (1234 == cashSpent && 1234 == oilSpent && 1234 == gemsSpent) {
+    	  log.info("resetting user " + aUser);
+    	  aUser.updateResetAccount();
+      }
+      
     } catch (Exception e) {
       log.error("exception in UpdateUserCurrencyController processEvent", e);
       //don't let the client hang

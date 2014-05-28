@@ -765,6 +765,26 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateResetAccount() {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__UDID, udid + "_reset");
+		absoluteParams.put(DBConstants.USER__UDID, facebookId + "_reset");
+		
+		if (absoluteParams.isEmpty()) {
+			//no need to write what is essentially nothing to db
+			return true;
+		}
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+
+		return true;
+	}
 
 	public int getId() {
 		return id;
