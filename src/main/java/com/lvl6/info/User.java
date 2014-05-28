@@ -773,8 +773,13 @@ public class User implements Serializable {
 		Map<String, Object> relativeParams = null;
 		
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__UDID, udid + "_reset");
-		absoluteParams.put(DBConstants.USER__UDID, facebookId + "_reset");
+		
+		if (null != udid && !udid.isEmpty()) {
+			absoluteParams.put(DBConstants.USER__UDID, udid + "_reset");
+		}
+		if (null != facebookId && facebookId != null) {
+			absoluteParams.put(DBConstants.USER__FACEBOOK_ID, facebookId + "_reset");
+		}
 		
 		if (absoluteParams.isEmpty()) {
 			//no need to write what is essentially nothing to db
