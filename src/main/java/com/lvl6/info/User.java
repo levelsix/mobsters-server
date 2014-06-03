@@ -794,6 +794,21 @@ public class User implements Serializable {
 		return true;
 	}
 
+	public boolean updateAvatarMonsterId(int avatarMonsterId) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__AVATAR_MONSTER_ID, avatarMonsterId);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+
+		return true;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -603,6 +603,7 @@ public class DBConstants {
   public static final String USER__LAST_OBSTACLE_SPAWNED_TIME = "last_obstacle_spawned_time";
   public static final String USER__NUM_OBSTACLES_REMOVED = "num_obstacles_removed";
   public static final String USER__LAST_MINI_JOB_GENERATED_TIME = "last_mini_job_generated_time";
+  public static final String USER__AVATAR_MONSTER_ID = "avatar_monster_id";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
