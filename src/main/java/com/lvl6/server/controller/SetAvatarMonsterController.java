@@ -57,7 +57,7 @@ import com.lvl6.utils.RetrieveUtils;
       
       boolean successful = false;
       if (legit) {
-    	  writeChangesToDb(user, monsterId);
+    	  successful = writeChangesToDb(user, monsterId);
       } else {
     	  log.error("can't unset avatarMonsterId");
       }
@@ -99,15 +99,16 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
 
-  private boolean writeChangesToDb(User user, int gameCenterId) {
+  private boolean writeChangesToDb(User user, int avatarMonsterId) {
   	try {
-			if (!user.updateAvatarMonsterId(gameCenterId)) {
-			  log.error("problem with setting user's facebook id to " + gameCenterId);
+			if (!user.updateAvatarMonsterId(avatarMonsterId)) {
+			  log.error("problem with setting user's avatarMonsterId to " + avatarMonsterId);
+			  return false;
 			}
 			return true;
 		} catch (Exception e) {
-			log.error("problem with updating user game center id. user=" + user +
-					"\t gameCenterId=" + gameCenterId);
+			log.error("problem with updating user avatar monster id. user=" + user +
+					"\t avatarMonsterId=" + avatarMonsterId);
 		}
   	
   	return false;
