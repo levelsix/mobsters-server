@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -3522735385815495261L;
+	private static final long serialVersionUID = -277920023393908200L;
 	
 	private int id;
 	private String name;
@@ -49,6 +49,7 @@ public class User implements Serializable {
 	private Date lastObstacleSpawnedTime;
 	private int numObstaclesRemoved;
 	private Date lastMiniJobGeneratedTime;
+	private int avatarMonsterId;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
@@ -61,7 +62,8 @@ public class User implements Serializable {
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
-			int numObstaclesRemoved, Date lastMiniJobGeneratedTime) {
+			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
+			int avatarMonsterId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -97,6 +99,7 @@ public class User implements Serializable {
 		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
 		this.numObstaclesRemoved = numObstaclesRemoved;
 		this.lastMiniJobGeneratedTime = lastMiniJobGeneratedTime;
+		this.avatarMonsterId = avatarMonsterId;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1063,6 +1066,14 @@ public class User implements Serializable {
 		this.lastMiniJobGeneratedTime = lastMiniJobGeneratedTime;
 	}
 
+	public int getAvatarMonsterId() {
+		return avatarMonsterId;
+	}
+
+	public void setAvatarMonsterId(int avatarMonsterId) {
+		this.avatarMonsterId = avatarMonsterId;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -1087,7 +1098,8 @@ public class User implements Serializable {
 				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
 				+ lastObstacleSpawnedTime + ", numObstaclesRemoved="
 				+ numObstaclesRemoved + ", lastMiniJobGeneratedTime="
-				+ lastMiniJobGeneratedTime + "]";
+				+ lastMiniJobGeneratedTime + ", avatarMonsterId="
+				+ avatarMonsterId + "]";
 	}
 
 }
