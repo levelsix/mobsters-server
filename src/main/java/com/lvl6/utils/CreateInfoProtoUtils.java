@@ -2578,6 +2578,7 @@ public class CreateInfoProtoUtils {
       Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
+    builder.setAvatarMonsterId(u.getAvatarMonsterId());
     return builder.build();
   }
 
@@ -2690,6 +2691,7 @@ public class CreateInfoProtoUtils {
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
+    builder.setAvatarMonsterId(u.getAvatarMonsterId());
 
     String facebookId = u.getFacebookId();
     if (null != facebookId) {
