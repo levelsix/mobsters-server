@@ -13,7 +13,7 @@ public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
   
   public SetAvatarMonsterResponseEvent(int playerId){
     super(playerId);
-    eventType = EventProtocolResponse.S_SET_GAME_CENTER_ID_EVENT;
+    eventType = EventProtocolResponse.S_SET_AVATAR_MONSTER_EVENT;
   }
   
   @Override
