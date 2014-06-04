@@ -167,4 +167,23 @@ message SetGameCenterIdResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message SetAvatarMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 monsterId = 2;
+}
+
+message SetAvatarMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	
+	optional SetAvatarMonsterStatus status = 2;
+	
+	enum SetAvatarMonsterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+	
 	

@@ -2578,6 +2578,7 @@ public class CreateInfoProtoUtils {
       Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
+    builder.setAvatarMonsterId(u.getAvatarMonsterId());
     return builder.build();
   }
 
@@ -2588,13 +2589,8 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUserAndClan(User u, Clan c) {
-    MinimumUserProto.Builder builder = MinimumUserProto.newBuilder();
-    builder.setName(u.getName());
-    builder.setUserId(u.getId());
-    builder.setClan(createMinimumClanProtoFromClan(c));
-
     MinimumUserProtoWithLevel.Builder builderWithLevel = MinimumUserProtoWithLevel.newBuilder();
-    builderWithLevel.setMinUserProto(builder.build());
+    builderWithLevel.setMinUserProto(createMinimumUserProtoFromUser(u));
     builderWithLevel.setLevel(u.getLevel());
     return builderWithLevel.build();
   }
@@ -2690,6 +2686,7 @@ public class CreateInfoProtoUtils {
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
+    builder.setAvatarMonsterId(u.getAvatarMonsterId());
 
     String facebookId = u.getFacebookId();
     if (null != facebookId) {
