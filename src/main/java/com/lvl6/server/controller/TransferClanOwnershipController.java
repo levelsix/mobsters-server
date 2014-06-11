@@ -54,6 +54,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent)event).getTransferClanOwnershipRequestProto();
+    log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -157,10 +158,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (!userClans.containsKey(userId) || !userClans.containsKey(newClanOwnerId)) {
     	log.error("a UserClan does not exist userId=" + userId + ", newClanOwner=" +
     			newClanOwnerId + "\t userClans=" + userClans);
+    	return false;
     }
     UserClan userClan = userClans.get(user.getId());
     
-    if (!UserClanStatus.LEADER.equals(userClan.getStatus())) {
+    String leaderStatusName = UserClanStatus.LEADER.name();
+    
+    if (!leaderStatusName.equals(userClan.getStatus())) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
       log.error("user is " + user + ", and user isn't owner. user is:" + userClan);
       return false;      
