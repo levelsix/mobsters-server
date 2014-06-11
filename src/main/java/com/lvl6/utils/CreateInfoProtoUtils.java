@@ -2589,13 +2589,8 @@ public class CreateInfoProtoUtils {
   }
 
   public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUserAndClan(User u, Clan c) {
-    MinimumUserProto.Builder builder = MinimumUserProto.newBuilder();
-    builder.setName(u.getName());
-    builder.setUserId(u.getId());
-    builder.setClan(createMinimumClanProtoFromClan(c));
-
     MinimumUserProtoWithLevel.Builder builderWithLevel = MinimumUserProtoWithLevel.newBuilder();
-    builderWithLevel.setMinUserProto(builder.build());
+    builderWithLevel.setMinUserProto(createMinimumUserProtoFromUser(u));
     builderWithLevel.setLevel(u.getLevel());
     return builderWithLevel.build();
   }
