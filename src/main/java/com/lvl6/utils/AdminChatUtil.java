@@ -68,7 +68,7 @@ public class AdminChatUtil {
 
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	protected String iap = DBConstants.TABLE_IAP_HISTORY;
+//	protected String iap = DBConstants.TABLE_IAP_HISTORY;
 
 	@Resource
 	public void setDataSource(DataSource dataSource) {

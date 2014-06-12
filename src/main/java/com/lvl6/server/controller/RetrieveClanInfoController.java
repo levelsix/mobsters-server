@@ -270,7 +270,7 @@ import com.lvl6.utils.RetrieveUtils;
 		for (Integer userId : userIdToRaidHistory.keySet()) {
 			CepfuRaidHistory raidHistory = userIdToRaidHistory.get(userId);
 			
-			//all of the clanCrDmg values for a CepfuRaidHistory are the same
+			//all of the clanCrDmg values for "userIdToRaidHistory" are the same
 			clanCrDmg = raidHistory.getClanCrDmg();
 				
 			int userCrDmg = raidHistory.getCrDmgDone();

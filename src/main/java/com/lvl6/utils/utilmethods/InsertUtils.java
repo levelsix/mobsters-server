@@ -462,7 +462,7 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
-  		String facebookId) {
+  		String facebookId, int avatarMonsterId) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -488,6 +488,7 @@ public class InsertUtils implements InsertUtil{
     }
     
     insertParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, createTime);
+    insertParams.put(DBConstants.USER__AVATAR_MONSTER_ID, avatarMonsterId);
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
@@ -954,7 +955,7 @@ public class InsertUtils implements InsertUtil{
 	@Override
 	public int insertIntoMonsterForUserDeleted(int userId, List<String> delReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate) {
-		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
 		List<Object> userIds = new ArrayList<Object>();
 		List<Object> monsterIds = new ArrayList<Object>(); 

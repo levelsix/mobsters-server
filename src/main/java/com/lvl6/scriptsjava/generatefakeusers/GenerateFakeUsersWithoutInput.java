@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
 
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
@@ -70,8 +71,9 @@ public class GenerateFakeUsersWithoutInput {
     
     InsertUtil insertUtils = (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
     String facebookId = null;
+    int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
     if (insertUtils.insertUser(name, null, level, 0, 0, 0, 0, true, null,
-    		new Timestamp((new Date()).getTime()), facebookId) < 0) {
+    		new Timestamp((new Date()).getTime()), facebookId, avatarMonsterId) < 0) {
       System.out.println("error in creating user");
     }
 

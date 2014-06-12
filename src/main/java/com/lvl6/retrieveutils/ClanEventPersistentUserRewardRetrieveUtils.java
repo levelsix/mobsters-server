@@ -26,7 +26,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;
 
-
+	/*
 	public static Map<Integer, ClanEventPersistentUserReward> getIdToUserRewardForUserId(
 			int userId) {
 		Connection conn = null;
@@ -48,8 +48,9 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
 		return userIdToClanPersistentEventUserInfo;
-	}
+	}*/
 	
+	/*
 	public static ClanEventPersistentUserReward getPersistentEventUserInfoUserRewardIdClanId(
 			int userId, int clanId) {
 		Connection conn = null;
@@ -72,7 +73,7 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
 		return clanPersistentEventUserInfo;
-	}
+	}*/
 	
 	public static Map<Date, List<ClanEventPersistentUserReward>> getCepUserRewardForPastNDaysForUserId(
 			int userId, int nDays, Date curDate, TimeUtils timeUtils) {

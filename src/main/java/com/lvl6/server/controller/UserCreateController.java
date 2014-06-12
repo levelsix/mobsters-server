@@ -233,11 +233,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
 	  int playerExp = 10;
-	  
-	  //newbie protection
+	  int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
-	      gems, false, deviceToken, createTime, facebookId);
+	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId);
 	        
 	  if (userId > 0) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*//*

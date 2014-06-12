@@ -491,6 +491,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("lastMiniJobGeneratedTime null...?", e);
     }
     
+    int avatarMonsterId = rs.getInt(i++);
+    
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, referralCode, numReferrals, udidForHistory,
     		lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
@@ -499,7 +501,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
     		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
-    		lastMiniJobGeneratedTime);
+    		lastMiniJobGeneratedTime, avatarMonsterId);
     return user;
   }
  

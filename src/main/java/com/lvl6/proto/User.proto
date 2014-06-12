@@ -29,6 +29,7 @@ message MinimumUserProto {
 	optional int32 userId = 1;
 	optional string name = 2;
 	optional MinimumClanProto clan = 3;
+	optional int32 avatarMonsterId = 4;
 }
 
 //------------------------------------------------------------------------------------------
@@ -109,6 +110,7 @@ message FullUserProto {
 	//optional string udid = 13; defined below, should be 46
 	optional int64 lastObstacleSpawnedTime = 47;
 	optional int32 numObstaclesRemoved = 49;
+	optional int32 avatarMonsterId = 51;
 	
 	optional UserPvpLeagueProto pvpLeagueInfo = 48; 
 	//optional int32 numObstaclesRemoved = 49; //defined above
