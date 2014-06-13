@@ -123,7 +123,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         successful = writeChangesToDB(resBuilder, user, clan);
       }
       
-      if (successful) {
+      // Only need to set clan data if it's a successful join.
+      if (successful && !requestToJoinRequired) {
       	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
         sendClanRaidStuff(resBuilder, clan, user);
       }
