@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -28,6 +30,7 @@ import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -38,6 +41,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @Component
@@ -83,6 +87,8 @@ public class RedeemMiniJobController extends EventController{
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		long userMiniJobId = reqProto.getUserMiniJobId();
 		
+		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
+		
 		
 		RedeemMiniJobResponseProto.Builder resBuilder = RedeemMiniJobResponseProto.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
@@ -95,10 +101,14 @@ public class RedeemMiniJobController extends EventController{
 			User user = RetrieveUtils.userRetrieveUtils()
 					.getUserById(senderProto.getUserId());
 			List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>();
-			
+
+			Map<Long, Integer> userMonsterIdToExpectedHealth =
+					new HashMap<Long, Integer>();
+
 			
 			boolean legit = checkLegit(resBuilder, userId, user,
-					userMiniJobId, mjfuList);
+					userMiniJobId, mjfuList, umchpList,
+					userMonsterIdToExpectedHealth);
 			
 			boolean success = false;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
@@ -106,7 +116,8 @@ public class RedeemMiniJobController extends EventController{
 			if (legit) {
 				MiniJobForUser mjfu = mjfuList.get(0);
 				success = writeChangesToDB(resBuilder, userId, user,
-						userMiniJobId, mjfu, now, clientTime, currencyChange,
+						userMiniJobId, mjfu, now, clientTime,
+						userMonsterIdToExpectedHealth, currencyChange,
 						previousCurrency);
 			}
 			
@@ -149,8 +160,11 @@ public class RedeemMiniJobController extends EventController{
 		}
 	}
 
+	//userMonsterIdToExpectedHealth  may be modified
 	private boolean checkLegit(Builder resBuilder, int userId, User user,
-			long userMiniJobId, List<MiniJobForUser> mjfuList) {
+			long userMiniJobId, List<MiniJobForUser> mjfuList,
+			List<UserMonsterCurrentHealthProto> umchpList,
+			Map<Long, Integer> userMonsterIdToExpectedHealth) {
 		
 		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
 		Map<Long, MiniJobForUser> idToUserMiniJob =
@@ -158,8 +172,10 @@ public class RedeemMiniJobController extends EventController{
 				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
 	
-		if (idToUserMiniJob.isEmpty()) {
-			log.error("no UserMiniJob exists with id=" + userMiniJobId);
+		if (idToUserMiniJob.isEmpty() || umchpList.isEmpty()) {
+			log.error("no UserMiniJob exists with id=" + userMiniJobId +
+				"or invalid userMonsterIds (monsters need to be damaged). " +
+				" userMonsters=" + umchpList);
 			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
 			return false;
 		}
@@ -181,6 +197,31 @@ public class RedeemMiniJobController extends EventController{
 			return false;
 		}
 		
+		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
+			umchpList, userMonsterIdToExpectedHealth);
+		
+		Map<Long, MonsterForUser> mfuIdsToUserMonsters = 
+			getMonsterForUserRetrieveUtils()
+			.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
+		
+		//keep only valid userMonsterIds another sanity check
+		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
+			log.warn("some userMonsterIds client sent are invalid." +
+					" Keeping valid ones. userMonsterIds=" + userMonsterIds +
+					" mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
+			
+			//since client sent some invalid monsters, keep only the valid
+			//mappings from userMonsterId to health
+			Set<Long> existing = mfuIdsToUserMonsters.keySet();
+			userMonsterIdToExpectedHealth.keySet().retainAll(existing);
+		}
+		
+		if (userMonsterIds.isEmpty()) {
+			log.error("no valid user monster ids sent by client");
+			return false;
+		}
+		
+		
 		mjfuList.add(mjfu);
 		return true;
 	}
@@ -188,7 +229,9 @@ public class RedeemMiniJobController extends EventController{
 	
 	private boolean writeChangesToDB(Builder resBuilder, int userId,
 			User user, long userMiniJobId, MiniJobForUser mjfu, Date now,
-			Timestamp clientTime, Map<String, Integer> currencyChange,
+			Timestamp clientTime,
+			Map<Long, Integer> userMonsterIdToExpectedHealth,
+			Map<String, Integer> currencyChange,
 			Map<String, Integer> previousCurrency) {
 		int miniJobId = mjfu.getMiniJobId();
 		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
@@ -244,6 +287,21 @@ public class RedeemMiniJobController extends EventController{
 		//delete the user mini job
 		int numDeleted = DeleteUtils.get().deleteMiniJobForUser(userMiniJobId);
 		log.info("userMiniJob numDeleted=" + numDeleted);
+		
+
+		log.info("updating user's monsters' healths");
+		int numUpdated = UpdateUtils.get()
+				.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+		log.info("numUpdated=" + numUpdated);
+
+		//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
+		//so returns 2 if one row was updated, 1 if inserted
+		if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
+			log.warn("unexpected error: more than user monsters were" +
+					" updated. actual numUpdated=" + numUpdated +
+					"expected: userMonsterIdToExpectedHealth=" +
+					userMonsterIdToExpectedHealth);
+		}
 		
 		return true;
 	}
