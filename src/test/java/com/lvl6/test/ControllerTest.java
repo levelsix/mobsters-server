@@ -19,16 +19,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.User;
+import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
 import com.lvl6.server.controller.StartupController;
+import com.lvl6.server.controller.TransferClanOwnershipController;
 import com.lvl6.server.controller.UserCreateController;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
+import com.lvl6.utils.CreateInfoProtoUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,6 +53,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	UserCreateController userCreateController;
+	
+	@Autowired
+	TransferClanOwnershipController transferClanOwnershipController;
 	
 	@Autowired
 	TimeUtils timeUtils;
@@ -350,8 +359,25 @@ public class ControllerTest extends TestCase {
 			log.error("exception creating hazelcast pvp query.", e);
 		}
 	}
-	
-	
+	/*
+	@Test
+	public void testTransferClanOwnership() {
+		User aUser = getUserRetrieveUtils().getUserById(379);
+		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
+		int clanOwnerIdNew = 574;
+		
+		TransferClanOwnershipRequestProto.Builder reqProto = TransferClanOwnershipRequestProto.newBuilder(); 
+		reqProto.setSender(mup);
+		reqProto.setClanOwnerIdNew(clanOwnerIdNew);
+		
+		TransferClanOwnershipRequestEvent reqEvent = new TransferClanOwnershipRequestEvent();
+		reqEvent.setTag(1);
+		reqEvent.setTransferClanOwnershipRequestProto(reqProto.build());
+		
+		getTransferClanOwnershipController().handleEvent(reqEvent);
+		
+	}
+	*/
 	
 	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
 		return purchaseCityExpansionController;
@@ -376,6 +402,17 @@ public class ControllerTest extends TestCase {
 
 	public void setUserCreateController(UserCreateController userCreateController) {
 		this.userCreateController = userCreateController;
+	}
+
+	public TransferClanOwnershipController getTransferClanOwnershipController()
+	{
+		return transferClanOwnershipController;
+	}
+
+	public void setTransferClanOwnershipController(
+		TransferClanOwnershipController transferClanOwnershipController )
+	{
+		this.transferClanOwnershipController = transferClanOwnershipController;
 	}
 
 	public TimeUtils getTimeUtils() {
