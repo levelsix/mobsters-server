@@ -242,7 +242,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		  QuestJob qj = QuestJobRetrieveUtils.getQuestJobForQuestJobId(questJobId);
 		  
 		  String questJobType = qj.getQuestJobType();
-		  if (!questJobType.equals(QuestJobType.DONATE_MONSTER)) {
+		  if (!questJobType.equals(QuestJobType.DONATE_MONSTER.name())) {
 			  continue;
 		  }
 		  donateMonsterQuestJobIds.add(questJobId);
