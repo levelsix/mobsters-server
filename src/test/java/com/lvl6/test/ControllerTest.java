@@ -1,8 +1,10 @@
 package com.lvl6.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,16 +21,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.QuestProgressRequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
+import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
+import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
+import com.lvl6.server.controller.QuestProgressController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
 import com.lvl6.server.controller.UserCreateController;
@@ -56,6 +62,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	TransferClanOwnershipController transferClanOwnershipController;
+	
+	@Autowired
+	QuestProgressController questProgressController;
 	
 	@Autowired
 	TimeUtils timeUtils;
@@ -377,6 +386,35 @@ public class ControllerTest extends TestCase {
 		getTransferClanOwnershipController().handleEvent(reqEvent);
 		
 	}
+	
+	@Test
+	public void testQuestProgress() {
+		User aUser = getUserRetrieveUtils().getUserById(379);
+		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
+		
+		QuestProgressRequestProto.Builder reqProto = QuestProgressRequestProto.newBuilder();
+		reqProto.setSender(mup);
+		reqProto.setQuestId(20);
+		reqProto.setIsComplete(true);
+		
+		UserQuestJobProto.Builder uqjpBuilder = UserQuestJobProto.newBuilder();
+		uqjpBuilder.setQuestId(20);
+		uqjpBuilder.setQuestJobId(20);
+		uqjpBuilder.setIsComplete(true);
+		uqjpBuilder.setProgress(4);
+		
+		List<UserQuestJobProto> lizt = new ArrayList<UserQuestJobProto>();
+		lizt.add(uqjpBuilder.build());
+		
+		reqProto.addAllUserQuestJobs(lizt);
+		reqProto.addAllDeleteUserMonsterIds(Arrays.asList(9195L, 9196L, 9197L, 9198L));
+		
+		QuestProgressRequestEvent reqEvent = new QuestProgressRequestEvent();
+		reqEvent.setTag(1);
+		reqEvent.setQuestProgressRequestProto(reqProto.build());
+		
+		getQuestProgressController().handleEvent(reqEvent);
+	}
 	*/
 	
 	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
@@ -413,6 +451,15 @@ public class ControllerTest extends TestCase {
 		TransferClanOwnershipController transferClanOwnershipController )
 	{
 		this.transferClanOwnershipController = transferClanOwnershipController;
+	}
+
+	public QuestProgressController getQuestProgressController()
+	{
+		return questProgressController;
+	}
+	public void setQuestProgressController( QuestProgressController questProgressController )
+	{
+		this.questProgressController = questProgressController;
 	}
 
 	public TimeUtils getTimeUtils() {
