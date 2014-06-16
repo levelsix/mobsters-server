@@ -805,8 +805,13 @@ public class User implements Serializable {
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
-
-		return true;
+    
+    if (numUpdated == 1) {
+      this.avatarMonsterId = avatarMonsterId;
+      
+      return true;
+    }
+    return false;
 	}
 	
 	public int getId() {
