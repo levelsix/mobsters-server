@@ -31,4 +31,9 @@ public class QuestProgressRequestEvent extends RequestEvent {
   public QuestProgressRequestProto getQuestProgressRequestProto() {
     return questProgressRequestProto;
   }
+
+public void setQuestProgressRequestProto( QuestProgressRequestProto questProgressRequestProto )
+{
+	this.questProgressRequestProto = questProgressRequestProto;
+}
 }
