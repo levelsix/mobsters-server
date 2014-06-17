@@ -18,11 +18,11 @@ public class IAPValues {
   public static final String PURCHASE_DATE = "purchase_date";
   public static final String PURCHASE_DATE_MS = "purchase_date_ms";
 
-  public static final String PACKAGE1 = Globals.APPLE_BUNDLE_ID() + ".package1";
-  public static final String PACKAGE2 = Globals.APPLE_BUNDLE_ID() + ".package2";
-  public static final String PACKAGE3 = Globals.APPLE_BUNDLE_ID() + ".package3";
-  public static final String PACKAGE4 = Globals.APPLE_BUNDLE_ID() + ".package4";
-  public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".package5";
+  public static final String PACKAGE1 = Globals.APPLE_BUNDLE_ID() + ".gem1";
+  public static final String PACKAGE2 = Globals.APPLE_BUNDLE_ID() + ".gem2";
+  public static final String PACKAGE3 = Globals.APPLE_BUNDLE_ID() + ".gem3";
+  public static final String PACKAGE4 = Globals.APPLE_BUNDLE_ID() + ".gem4";
+  public static final String PACKAGE5 = Globals.APPLE_BUNDLE_ID() + ".gem5";
 
   public static final String PACKAGE1SALE = Globals.APPLE_BUNDLE_ID() + ".package1sale";
   public static final String PACKAGE2SALE = Globals.APPLE_BUNDLE_ID() + ".package2sale";
