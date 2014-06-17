@@ -501,7 +501,7 @@ public class StartupController extends EventController {
   	    }
   	  }
   	  
-  	  //get the QuestJobForUser for ONLY the inProgressQuests
+  	  // TODO: get the QuestJobForUser for ONLY the inProgressQuests
   	  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs =
   			  getQuestJobForUserRetrieveUtil()
   			  .getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);

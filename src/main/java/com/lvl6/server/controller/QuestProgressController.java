@@ -22,6 +22,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJob;
 import com.lvl6.info.QuestJobForUser;
+import com.lvl6.info.User;
 import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder;
@@ -166,9 +167,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		  resBuilder.setStatus(QuestProgressStatus.FAIL_NO_QUEST_EXISTS);
 		  return false;
 	  }
+	  User u = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 	  
-	  validateDeletingMonsterQuestJob(questJobIdToUserQuestJobProto,
+	  if (!u.isAdmin()) {
+		  validateDeletingMonsterQuestJob(questJobIdToUserQuestJobProto,
 			  deleteUserMonsterIds, userMonstersInDb);
+	  } else {
+		  log.info("User is admin! Not checking delete monsters");
+	  }
 	  
 	  //Loop through each client UserQuestJobProto,
 	  //if it isn't valid, remove it from being persisted to db
