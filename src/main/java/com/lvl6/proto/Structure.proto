@@ -127,6 +127,8 @@ message ResidenceProto {
 	optional int32 numAcceptedFbInvites = 5;
 	
 	optional string occupationName = 6;
+	
+	optional string imgSuffix = 7;
 }
 
 //------------------------------------------------------------------------------------------

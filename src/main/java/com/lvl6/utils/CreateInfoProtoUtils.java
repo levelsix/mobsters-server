@@ -2094,6 +2094,11 @@ public class CreateInfoProtoUtils {
     if (null != str) {
       rpb.setOccupationName(str);
     }
+    str = sr.getImgSuffix();
+    if (null != str) {
+    	rpb.setImgSuffix(str);
+    }
+    
     return rpb.build();
   }
 
