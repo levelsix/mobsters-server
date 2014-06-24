@@ -18,6 +18,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -220,6 +221,8 @@ public class StartupController extends EventController {
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
+	  StopWatch stopWatch = new StopWatch();
+	  stopWatch.start();
     StartupRequestProto reqProto = ((StartupRequestEvent) event).getStartupRequestProto();
     log.info("Processing startup request event");
     UpdateStatus updateStatus;
@@ -227,9 +230,9 @@ public class StartupController extends EventController {
     String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
     String fbId = reqProto.getFbId();
     boolean freshRestart = reqProto.getIsFreshRestart();
-
+ 
     MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
-
+    log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
     double tempClientVersionNum = reqProto.getVersionNum() * 10;
     double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
 
@@ -260,7 +263,7 @@ public class StartupController extends EventController {
     boolean isLogin = true;
 
     int newNumConsecutiveDaysLoggedIn = 0;
-
+    log.info("{}ms at start of logic", stopWatch.getTime());
     try {
 			if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
 				List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
@@ -269,6 +272,7 @@ public class StartupController extends EventController {
 			  	int userId = user.getId();
 			  	//if can't lock player, exception will be thrown
 			    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+			    log.info("{}ms at got lock", stopWatch.getTime());
 			    try {
 			    	//force other devices on this account to logout
 			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
@@ -281,6 +285,7 @@ public class StartupController extends EventController {
 			      //only if a device is already on and then another one comes on and somehow
 			      //switches to the existing user account, no fbId though
 			      getEventWriter().processPreDBResponseEvent(logoutEvent, udid);
+			      log.info("{}ms at processPreDBResponseEvent", stopWatch.getTime());
 			      //to take care of one device already logged on (lot more common than above)
 			      getEventWriter().handleEvent(logoutEvent);
 			      //to take care of both the above, but when user is logged in via facebook id
@@ -293,30 +298,51 @@ public class StartupController extends EventController {
 			      log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
 			      setInProgressAndAvailableQuests(resBuilder, userId);
+			      log.info("{}ms at setInProgressAndAvailableQuests", stopWatch.getTime());
 			      setUserClanInfos(resBuilder, userId);
+			      log.info("{}ms at setUserClanInfos", stopWatch.getTime());
 			      setNotifications(resBuilder, user);
+			      log.info("{}ms at setNotifications", stopWatch.getTime());
 			      setNoticesToPlayers(resBuilder);
+			      log.info("{}ms at setNoticesToPlayers", stopWatch.getTime());
 			      setGroupChatMessages(resBuilder, user);
+			      log.info("{}ms at groupChatMessages", stopWatch.getTime());
 			      setPrivateChatPosts(resBuilder, user, userId);
+			      log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			      setUserMonsterStuff(resBuilder, userId);
+			      log.info("{}ms at setUserMonsterStuff", stopWatch.getTime());
 			      setBoosterPurchases(resBuilder);
+			      log.info("{}ms at boosterPurchases", stopWatch.getTime());
 			      setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
+			      log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			      setTaskStuff(resBuilder, userId);
+			      log.info("{}ms at task stuff", stopWatch.getTime());
 			      setAllStaticData(resBuilder, userId, true);
+			      log.info("{}ms at static data", stopWatch.getTime());
 			      setEventStuff(resBuilder, userId);
+			      log.info("{}ms at eventStuff", stopWatch.getTime());
 			      //if server sees that the user is in a pvp battle, decrement user's elo
 			      PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user,
-			    		  userId, freshRestart, now); 
+			    		  userId, freshRestart, now);
+			      log.info("{}ms at pvpBattleStuff", stopWatch.getTime());
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
+			      log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 			      setClanRaidStuff(resBuilder, user, userId, now);
+			      log.info("{}ms at clanRaidStuff", stopWatch.getTime());
 			      setAchievementStuff(resBuilder, userId);
+			      log.info("{}ms at achivementStuff", stopWatch.getTime());
 			      setMiniJob(resBuilder, userId);
+			      log.info("{}ms at miniJobStuff", stopWatch.getTime());
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
+			      log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
 			      setUnhandledForgeAttempts(resBuilder, user);
+			      log.info("{}ms at unhandleForgeAttempts", stopWatch.getTime());
 			      setLockBoxEvents(resBuilder, user);
+			      log.info("{}ms at lockBoxEvents", stopWatch.getTime());
 //          setLeaderboardEventStuff(resBuilder);
 			      setAllies(resBuilder, user);
+			      log.info("{}ms at Allies", stopWatch.getTime());
 //          setAllBosses(resBuilder, user.getType());
 
 			      //OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
@@ -331,11 +357,13 @@ public class StartupController extends EventController {
 
 			      boolean isNewUser = false;
 			      InsertUtils.get().insertIntoLoginHistory(udid, user.getId(), now, isLogin, isNewUser);
+			      log.info("{}ms at InsertIntoLoginHistory", stopWatch.getTime());
 			    } catch (Exception e) {
 			      log.error("exception in StartupController processEvent", e);
 			    } finally {
 			      // server.unlockClanTowersTable();
 			      getLocker().unlockPlayer(user.getId(), this.getClass().getSimpleName());
+			      log.info("{}ms at unlock", stopWatch.getTime());
 			    }
 			  } else {
 			    log.info("tutorial player with udid " + udid);
@@ -473,7 +501,7 @@ public class StartupController extends EventController {
   	    }
   	  }
   	  
-  	  //get the QuestJobForUser for ONLY the inProgressQuests
+  	  // TODO: get the QuestJobForUser for ONLY the inProgressQuests
   	  Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs =
   			  getQuestJobForUserRetrieveUtil()
   			  .getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);

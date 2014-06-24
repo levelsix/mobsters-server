@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,6 @@ import com.lvl6.events.request.CompleteMiniJobRequestEvent;
 import com.lvl6.events.response.CompleteMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJobForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -26,13 +23,11 @@ import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -77,8 +72,6 @@ public class CompleteMiniJobController extends EventController{
 		
 		boolean isSpeedUp = reqProto.getIsSpeedUp();
 		int gemCost = reqProto.getGemCost();
-		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
-		
 		
 		CompleteMiniJobResponseProto.Builder resBuilder = CompleteMiniJobResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -92,12 +85,8 @@ public class CompleteMiniJobController extends EventController{
 					.getUserById(senderProto.getUserId());
 			int previousGems = 0;
 			
-			Map<Long, Integer> userMonsterIdToExpectedHealth =
-					new HashMap<Long, Integer>();
-	    	
 			boolean legit = checkLegit(resBuilder, userId, user,
-					userMiniJobId, isSpeedUp, gemCost, umchpList,
-					userMonsterIdToExpectedHealth);
+					userMiniJobId, isSpeedUp, gemCost);
 			
 			boolean success = false;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
@@ -105,8 +94,7 @@ public class CompleteMiniJobController extends EventController{
 			if (legit) {
 				previousGems = user.getGems();
 				success = writeChangesToDB(userId, user, userMiniJobId,
-						isSpeedUp, gemCost, clientTime,
-						userMonsterIdToExpectedHealth, currencyChange);
+						isSpeedUp, gemCost, clientTime, currencyChange);
 			}
 			
 			if (success) {
@@ -148,36 +136,11 @@ public class CompleteMiniJobController extends EventController{
 	}
 
 	private boolean checkLegit(Builder resBuilder, int userId, User user,
-			long userMiniJobId, boolean isSpeedUp, int gemCost,
-			List<UserMonsterCurrentHealthProto> umchpList,
-			Map<Long, Integer> userMonsterIdToExpectedHealth) {
+			long userMiniJobId, boolean isSpeedUp, int gemCost) {
 		
 		//sanity check
-		if (umchpList.isEmpty() || 0 == userMiniJobId) {
-			log.error("invalid userMonsterIds (monsters need to be damaged)" +
-					" or userMiniJobId. userMonsters=" + umchpList +
-					"\t userMiniJobId=" + userMiniJobId);
-			return false;
-		}
-		
-		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(
-				umchpList, userMonsterIdToExpectedHealth);
-		Map<Long, MonsterForUser> mfuIdsToUserMonsters = 
-				getMonsterForUserRetrieveUtils()
-				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
-		
-		//keep only valid userMonsterIds another sanity check
-		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
-			log.warn("some userMonsterIds client sent are invalid." +
-					" Keeping valid ones. userMonsterIds=" + userMonsterIds +
-					" mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
-			
-			Set<Long> existing = mfuIdsToUserMonsters.keySet();
-			MonsterStuffUtils.retainValidMonsterIds(existing, userMonsterIds);
-		}
-		
-		if (userMonsterIds.isEmpty()) {
-			log.error("no valid user monster ids sent by client");
+		if (0 == userMiniJobId) {
+			log.error("invalid userMiniJobId. userMiniJobId=" + userMiniJobId);
 			return false;
 		}
 		
@@ -215,23 +178,7 @@ public class CompleteMiniJobController extends EventController{
 	
 	private boolean writeChangesToDB(int userId, User user,
 			long userMiniJobId, boolean isSpeedUp, int gemCost,
-			Timestamp clientTime, 
-	  		Map<Long, Integer> userMonsterIdToExpectedHealth,
-			Map<String, Integer> currencyChange) {
-
-		log.info("updating user's monsters' healths");
-		int numUpdated = UpdateUtils.get()
-				.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-		log.info("numUpdated=" + numUpdated);
-
-		//number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
-		//so returns 2 if one row was updated, 1 if inserted
-		if (numUpdated > 2 * userMonsterIdToExpectedHealth.size()) {
-			log.warn("unexpected error: more than user monsters were" +
-					" updated. actual numUpdated=" + numUpdated +
-					"expected: userMonsterIdToExpectedHealth=" +
-					userMonsterIdToExpectedHealth);
-		}
+			Timestamp clientTime, Map<String, Integer> currencyChange) {
 		
 		//update user currency
 		int gemsChange = -1 * Math.abs(gemCost);
@@ -251,8 +198,8 @@ public class CompleteMiniJobController extends EventController{
 		}
 		
 		//update complete time for MiniJobForUser
-		numUpdated = UpdateUtils.get().updateMiniJobForUserCompleteTime(userId,
-				userMiniJobId, clientTime);
+		int numUpdated = UpdateUtils.get().updateMiniJobForUserCompleteTime(
+			userId, userMiniJobId, clientTime);
 		
 		log.info("writeChangesToDB() numUpdated=" + numUpdated);
 		

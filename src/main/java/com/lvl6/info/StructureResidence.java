@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class StructureResidence implements Serializable {
 
-	private static final long serialVersionUID = 5657322728558293593L;
+	private static final long serialVersionUID = 1538477813718671920L;
+	
 	private int structId;
 	//how many monster slots this residence gives the user (absolute number)
 	//does not depend on previous lower level structures
@@ -21,10 +22,11 @@ public class StructureResidence implements Serializable {
 	
 	private String occupationName;
 	
+	private String imgSuffix;
 	
 	public StructureResidence(int structId, int numMonsterSlots,
 			int numBonusMonsterSlots, int numGemsRequired, int numAcceptedFbInvites,
-			String occupationName) {
+			String occupationName, String imgSuffix) {
 		super();
 		this.structId = structId;
 		this.numMonsterSlots = numMonsterSlots;
@@ -32,6 +34,7 @@ public class StructureResidence implements Serializable {
 		this.numGemsRequired = numGemsRequired;
 		this.numAcceptedFbInvites = numAcceptedFbInvites;
 		this.occupationName = occupationName;
+		this.imgSuffix = imgSuffix;
 	}
 
 	public int getStructId() {
@@ -82,12 +85,34 @@ public class StructureResidence implements Serializable {
 		this.occupationName = occupationName;
 	}
 
+	public String getImgSuffix()
+	{
+		return imgSuffix;
+	}
+
+	public void setImgSuffix( String imgSuffix )
+	{
+		this.imgSuffix = imgSuffix;
+	}
+
 	@Override
-	public String toString() {
-		return "StructureResidence [structId=" + structId + ", numMonsterSlots="
-				+ numMonsterSlots + ", numBonusMonsterSlots=" + numBonusMonsterSlots
-				+ ", numGemsRequired=" + numGemsRequired + ", numAcceptedFbInvites="
-				+ numAcceptedFbInvites + ", occupationName=" + occupationName + "]";
+	public String toString()
+	{
+		return "StructureResidence [structId="
+			+ structId
+			+ ", numMonsterSlots="
+			+ numMonsterSlots
+			+ ", numBonusMonsterSlots="
+			+ numBonusMonsterSlots
+			+ ", numGemsRequired="
+			+ numGemsRequired
+			+ ", numAcceptedFbInvites="
+			+ numAcceptedFbInvites
+			+ ", occupationName="
+			+ occupationName
+			+ ", imgSuffix="
+			+ imgSuffix
+			+ "]";
 	}
 
 }

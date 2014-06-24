@@ -9,18 +9,18 @@ public class TaskStageMonster implements Serializable {
 	
 	private int id;
 	private int stageId;
-  private int monsterId;
-  private String monsterType;
-  private int expReward;
-  private int minCashDrop;
-  private int maxCashDrop;
-  private int minOilDrop;
-  private int maxOilDrop;
-  private float puzzlePieceDropRate;
-  private int level;
-  private float chanceToAppear;
+	private int monsterId;
+	private String monsterType;
+	private int expReward;
+	private int minCashDrop;
+	private int maxCashDrop;
+	private int minOilDrop;
+	private int maxOilDrop;
+	private float puzzlePieceDropRate;
+	private int level;
+	private float chanceToAppear;
   
-  private Random rand;
+	private Random rand;
 
 	public TaskStageMonster(int id, int stageId, int monsterId, String monsterType,
 		int expReward, int minCashDrop, int maxCashDrop, int minOilDrop,

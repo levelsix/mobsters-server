@@ -2,9 +2,9 @@ package com.lvl6.info;
 
 public class UserLockBoxItem {
   
-  private int lockBoxItemId;
-  private int userId;
-  private int quantity;
+	private int lockBoxItemId;
+	private int userId;
+	private int quantity;
   
   public UserLockBoxItem(int lockBoxItemId, int userId,
       int quantity) {

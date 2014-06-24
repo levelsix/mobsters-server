@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class UserClanBossContribution implements Serializable {
 
-  private static final long serialVersionUID = 9153933930548195860L;
-  private int userId;
-  private int clanId;
-  private int bossId;
-  private int totalDamageDone;
-  private int totalEnergyUsed;
-  private int numRunesOne;
-  private int numRunesTwo;
-  private int numRunesThree;
-  private int numRunesFour;
-  private int numRunesFive;
+	private static final long serialVersionUID = 9153933930548195860L;
+	private int userId;
+	private int clanId;
+	private int bossId;
+	private int totalDamageDone;
+	private int totalEnergyUsed;
+	private int numRunesOne;
+	private int numRunesTwo;
+	private int numRunesThree;
+	private int numRunesFour;
+	private int numRunesFive;
   
   public UserClanBossContribution(int userId, int clanId, int bossId,
       int totalDamageDone, int totalEnergyUsed, int numRunesOne,

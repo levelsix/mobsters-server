@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class UserDailyBonusRewardHistory {
   
-  private int id;
-  private int userId;
-  private int currencyRewarded;
-  private boolean isCoins;
-  private int boosterPackIdRewarded;
-  private int equipIdRewarded;
-  private int nthConsecutiveDay;
-  private Date dateAwarded;
+	private int id;
+	private int userId;
+	private int currencyRewarded;
+	private boolean isCoins;
+	private int boosterPackIdRewarded;
+	private int equipIdRewarded;
+	private int nthConsecutiveDay;
+	private Date dateAwarded;
   
   public UserDailyBonusRewardHistory(int id, int userId, int currencyRewarded,
       boolean isCoins, int boosterPackIdRewarded, int equipIdRewarded,

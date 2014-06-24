@@ -6,13 +6,13 @@ public class BoosterPack implements Serializable {
 	
 	private static final long serialVersionUID = -5200606492974418991L;
 	private int id;
-  private String name;
-  private int gemPrice;
-  private String listBackgroundImgName;
-  private String listDescription;
-  private String navBarImgName;
-  private String navTitleImgName;
-  private String machineImgName;
+	private String name;
+	private int gemPrice;
+	private String listBackgroundImgName;
+	private String listDescription;
+	private String navBarImgName;
+	private String navTitleImgName;
+	private String machineImgName;
   
 	public BoosterPack(int id, String name, int gemPrice,
 			String listBackgroundImgName, String listDescription,

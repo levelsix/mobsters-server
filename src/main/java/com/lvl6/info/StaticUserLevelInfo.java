@@ -6,7 +6,7 @@ public class StaticUserLevelInfo implements Serializable{
 	
 	private static final long serialVersionUID = -258608581176466155L;
 	private int lvl;
-  private int requiredExp;
+	private int requiredExp;
   
 	public StaticUserLevelInfo(int lvl, int requiredExp) {
 		super();

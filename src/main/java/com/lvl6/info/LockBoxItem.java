@@ -8,12 +8,12 @@ public class LockBoxItem implements Serializable {
 	 */
 	private static final long serialVersionUID = -8050037227928651857L;
 	private int id;
-  private int lockBoxEventId;
-  private float chanceToUnlock;
-  private String name;
-  private String imageName;
-  private int redeemForNumBoosterItems;
-  private boolean isGoldBoosterPack;
+	private int lockBoxEventId;
+	private float chanceToUnlock;
+	private String name;
+	private String imageName;
+	private int redeemForNumBoosterItems;
+	private boolean isGoldBoosterPack;
   
   
   public LockBoxItem(int id, int lockBoxEventId, float chanceToUnlock,

@@ -31,4 +31,10 @@ public class TransferClanOwnershipRequestEvent extends RequestEvent {
   public TransferClanOwnershipRequestProto getTransferClanOwnershipRequestProto() {
     return transferClanOwnershipRequestProto;
   }
+
+public void setTransferClanOwnershipRequestProto(
+	TransferClanOwnershipRequestProto transferClanOwnershipRequestProto )
+{
+	this.transferClanOwnershipRequestProto = transferClanOwnershipRequestProto;
+}
 }

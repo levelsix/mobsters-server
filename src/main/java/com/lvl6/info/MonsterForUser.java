@@ -9,14 +9,14 @@ public class MonsterForUser implements Serializable {
 	private long id;
 	private int userId;
 	private int monsterId;
-  private int currentExp;
-  private int currentLvl;
-  private int currentHealth;
-  private int numPieces;
-  private boolean isComplete;
-  private Date combineStartTime;
-  private int teamSlotNum;
-  private String sourceOfPieces;
+	private int currentExp;
+	private int currentLvl;
+	private int currentHealth;
+	private int numPieces;
+	private boolean isComplete;
+	private Date combineStartTime;
+	private int teamSlotNum;
+	private String sourceOfPieces;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
 			int currentLvl, int currentHealth, int numPieces, boolean isComplete,

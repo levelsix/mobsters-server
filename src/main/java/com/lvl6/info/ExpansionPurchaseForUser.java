@@ -7,10 +7,10 @@ public class ExpansionPurchaseForUser implements Serializable {
 	
 	private static final long serialVersionUID = -5045515317226423462L;
 	private int userId;
-  private int xPosition;
-  private int yPosition;
-  private boolean isExpanding;
-  private Date expandStartTime; // refers to last time the user clicks the
+	private int xPosition;
+	private int yPosition;
+	private boolean isExpanding;
+	private Date expandStartTime; // refers to last time the user clicks the
   // upgrade button, not when the last upgrade
   // was complete
   

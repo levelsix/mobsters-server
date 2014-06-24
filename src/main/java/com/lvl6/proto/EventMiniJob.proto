@@ -65,7 +65,7 @@ message CompleteMiniJobRequestProto {
      optional bool isSpeedUp = 4;
      optional int32 gemCost = 5;
      
-	repeated UserMonsterCurrentHealthProto umchp = 6;
+	//repeated UserMonsterCurrentHealthProto umchp = 6;
 }
 
 																						//DONE
@@ -82,12 +82,13 @@ message CompleteMiniJobResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//MiniJobForUser is deleted here
+//MiniJobForUser is deleted here and user monsters' healths are decremented here
 message RedeemMiniJobRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional int64 clientTime = 2;
      optional int64 userMiniJobId = 3;
      
+	repeated UserMonsterCurrentHealthProto umchp = 6;
 }
 
 																						//DONE

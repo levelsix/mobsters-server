@@ -8,10 +8,10 @@ public class MonsterHealingForUser implements Serializable {
 	private static final long serialVersionUID = -2979320446074707533L;
 	private int userId;
 	private long monsterForUserId;
-  private Date queuedTime;
-//  private int userStructHospitalId;
-  private float healthProgress;
-  private int priority;
+	private Date queuedTime;
+//	private int userStructHospitalId;
+	private float healthProgress;
+	private int priority;
   
 	public MonsterHealingForUser(int userId, long monsterForUserId,
 			Date queuedTime, float healthProgress, int priority) {

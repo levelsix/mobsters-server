@@ -371,7 +371,7 @@ public class ControllerConstants {
   public static final int CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN = 1000;
   public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME = 15;
   public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION = 350;
-  public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG = 5;
+  public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG = 3;
   public static final int RETRIEVE_CLANS__NUM_CLANS_CAP = 50;
   public static final int CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 967 : 92;
   public static final int CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 958 : 148;

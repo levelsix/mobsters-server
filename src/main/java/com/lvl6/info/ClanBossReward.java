@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class ClanBossReward implements Serializable {
 
-  private static final long serialVersionUID = 4581148128205247466L;
+	private static final long serialVersionUID = 4581148128205247466L;
   
-  private int id;
-  private int clanBossId;
-  private int equipId;
+	private int id;
+	private int clanBossId;
+	private int equipId;
   
   public ClanBossReward(int id, int clanBossId, int equipId) {
     super();

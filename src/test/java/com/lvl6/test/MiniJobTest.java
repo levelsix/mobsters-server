@@ -258,11 +258,11 @@ public class MiniJobTest extends TestCase {
 		beginMiniJobForUser(userId, unitTesterThen, clientTime,
 				newMiniJobForUserIdThen, mjfuThen, mfuIdToMfu);
 		
-		List<UserMonsterCurrentHealthProto> umchp = createUmchp(mfuIdToMfu);
+		//List<UserMonsterCurrentHealthProto> umchp = createUmchp(mfuIdToMfu);
 		
 		//send the complete mini job request
 		sendCompleteMiniJobRequestEvent(unitTesterThen, clientTime,
-				newMiniJobForUserIdThen, false, 0, umchp);
+				newMiniJobForUserIdThen, false, 0);//, umchp);
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
 		Collection<Long> userMiniJobIds = Collections
@@ -331,8 +331,11 @@ public class MiniJobTest extends TestCase {
 		int miniJobId = mjfuThen.getMiniJobId();
 		long miniJobForUserId = mjfuThen.getId();
 		
+		List<UserMonsterCurrentHealthProto> umchp = createUmchp(monstersThen);
+		
 		//send the redeem mini job request
-		sendRedeemMiniJobRequestEvent(unitTesterThen, mjfuThen, clientTime);
+		sendRedeemMiniJobRequestEvent(unitTesterThen, mjfuThen, clientTime,
+			umchp);
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
 		
@@ -374,11 +377,11 @@ public class MiniJobTest extends TestCase {
 		beginMiniJobForUser(userId, user, clientTime,
 				newMiniJobForUserIdThen, mjfuThen, mfuIdToMfu);
 		
-		List<UserMonsterCurrentHealthProto> umchp = createUmchp(mfuIdToMfu);
+		//List<UserMonsterCurrentHealthProto> umchp = createUmchp(mfuIdToMfu);
 		
 		//send the complete mini job request
 		sendCompleteMiniJobRequestEvent(user, clientTime,
-				newMiniJobForUserIdThen, false, 0, umchp);
+				newMiniJobForUserIdThen, false, 0);//, umchp);
 		
 		Collection<Long> userMiniJobIds = Collections
 				.singleton(newMiniJobForUserIdThen);
@@ -537,10 +540,10 @@ public class MiniJobTest extends TestCase {
 	
 	
 	protected void sendCompleteMiniJobRequestEvent(User user, Date clientTime,
-			long userMiniJobId, boolean isSpeedUp, int gemCost,
-			List<UserMonsterCurrentHealthProto> umchp) {
+			long userMiniJobId, boolean isSpeedUp, int gemCost) {//,
+			//List<UserMonsterCurrentHealthProto> umchp) {
 		CompleteMiniJobRequestProto cmjrp = createCompleteMiniJobRequestProto(
-				user, clientTime, userMiniJobId, isSpeedUp, gemCost, umchp);
+				user, clientTime, userMiniJobId, isSpeedUp, gemCost);//, umchp);
 		
 		CompleteMiniJobRequestEvent cmjre = new CompleteMiniJobRequestEvent();
 		cmjre.setTag(0);
@@ -551,7 +554,7 @@ public class MiniJobTest extends TestCase {
 	}
 	protected CompleteMiniJobRequestProto createCompleteMiniJobRequestProto(
 			User user, Date clientTime, long userMiniJobId, boolean isSpeedUp,
-			int gemCost, List<UserMonsterCurrentHealthProto> umchp) {
+			int gemCost) {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
@@ -564,15 +567,17 @@ public class MiniJobTest extends TestCase {
 		cmjrpb.setUserMiniJobId(userMiniJobId);
 		cmjrpb.setIsSpeedUp(isSpeedUp);
 		cmjrpb.setGemCost(gemCost);
-		cmjrpb.addAllUmchp(umchp);
+		//cmjrpb.addAllUmchp(umchp);
 		
 		return cmjrpb.build();
 	}
 	
 	protected void sendRedeemMiniJobRequestEvent(User user,
-			MiniJobForUser mjfu, Date clientTime) {
+			MiniJobForUser mjfu, Date clientTime,
+			List<UserMonsterCurrentHealthProto> umchp) {
 		RedeemMiniJobRequestProto rmjrp =
-				createRedeemMiniJobRequestProto(user, mjfu, clientTime);
+				createRedeemMiniJobRequestProto(user, mjfu, clientTime,
+					umchp);
 		
 		RedeemMiniJobRequestEvent rmjre = new RedeemMiniJobRequestEvent();
 		rmjre.setTag(0);
@@ -582,7 +587,8 @@ public class MiniJobTest extends TestCase {
 		getRedeemMiniJobController().handleEvent(rmjre);
 	}
 	protected RedeemMiniJobRequestProto createRedeemMiniJobRequestProto(
-			User user, MiniJobForUser mjfu, Date clientTime) {
+			User user, MiniJobForUser mjfu, Date clientTime,
+			List<UserMonsterCurrentHealthProto> umchp) {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		int miniJobId = mjfu.getMiniJobId();
@@ -606,6 +612,7 @@ public class MiniJobTest extends TestCase {
 		rmjrpb.setSender(mupwmrb.build());
 		rmjrpb.setClientTime(clientTime.getTime());
 		rmjrpb.setUserMiniJobId(mjfu.getId());
+		rmjrpb.addAllUmchp(umchp);
 		
 		return rmjrpb.build();
 	}

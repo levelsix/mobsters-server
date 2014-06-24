@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class MonsterReward implements Serializable {
 
-  private static final long serialVersionUID = 2695141690452902009L;
-  private int id;
+	private static final long serialVersionUID = 2695141690452902009L;
+	private int id;
 	private int monsterId;
 	private int equipId;
 	private float dropRate;

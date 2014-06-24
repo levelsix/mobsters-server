@@ -7,8 +7,8 @@ public class EventPersistentForUser implements Serializable {
 	
 	private static final long serialVersionUID = -5875488219039765364L;
 	private int userId;
-  private int eventPersistentId;
-  private Date timeOfEntry; // refers to time user started a daily event
+	private int eventPersistentId;
+	private Date timeOfEntry; // refers to time user started a daily event
 
   public EventPersistentForUser(int userId, int eventPersistentId,
 			Date timeOfEntry) {

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserLockBoxEvent implements Serializable {
-  private static final long serialVersionUID = -2707386084442793864L;
-  private int lockBoxId;
-  private int userId;
-  private int numLockBoxes;
-  private int numTimesCompleted;
-  private Date lastPickTime;
-  private boolean hasBeenRedeemed;
+	private static final long serialVersionUID = -2707386084442793864L;
+	private int lockBoxId;
+	private int userId;
+	private int numLockBoxes;
+	private int numTimesCompleted;
+	private Date lastPickTime;
+	private boolean hasBeenRedeemed;
 
 
   public UserLockBoxEvent(int lockBoxId, int userId, int numLockBoxes,

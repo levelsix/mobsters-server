@@ -184,19 +184,21 @@ public final class SharedEnumConfigProto {
     NO_QUALITY(0, 1),
     COMMON(1, 2),
     RARE(2, 3),
-    ULTRA(3, 4),
-    EPIC(4, 5),
-    LEGENDARY(5, 6),
-    EVO(6, 7),
+    SUPER(3, 4),
+    ULTRA(4, 5),
+    EPIC(5, 6),
+    LEGENDARY(6, 7),
+    EVO(7, 8),
     ;
     
     public static final int NO_QUALITY_VALUE = 1;
     public static final int COMMON_VALUE = 2;
     public static final int RARE_VALUE = 3;
-    public static final int ULTRA_VALUE = 4;
-    public static final int EPIC_VALUE = 5;
-    public static final int LEGENDARY_VALUE = 6;
-    public static final int EVO_VALUE = 7;
+    public static final int SUPER_VALUE = 4;
+    public static final int ULTRA_VALUE = 5;
+    public static final int EPIC_VALUE = 6;
+    public static final int LEGENDARY_VALUE = 7;
+    public static final int EVO_VALUE = 8;
     
     
     public final int getNumber() { return value; }
@@ -206,10 +208,11 @@ public final class SharedEnumConfigProto {
         case 1: return NO_QUALITY;
         case 2: return COMMON;
         case 3: return RARE;
-        case 4: return ULTRA;
-        case 5: return EPIC;
-        case 6: return LEGENDARY;
-        case 7: return EVO;
+        case 4: return SUPER;
+        case 5: return ULTRA;
+        case 6: return EPIC;
+        case 7: return LEGENDARY;
+        case 8: return EVO;
         default: return null;
       }
     }
@@ -240,7 +243,7 @@ public final class SharedEnumConfigProto {
     }
     
     private static final Quality[] VALUES = {
-      NO_QUALITY, COMMON, RARE, ULTRA, EPIC, LEGENDARY, EVO, 
+      NO_QUALITY, COMMON, RARE, SUPER, ULTRA, EPIC, LEGENDARY, EVO, 
     };
     
     public static Quality valueOf(
@@ -278,10 +281,10 @@ public final class SharedEnumConfigProto {
       "\n\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020\007\022\022\n\016NO_DAY_OF_W" +
       "EEK\020\010*X\n\007Element\022\010\n\004FIRE\020\001\022\t\n\005EARTH\020\002\022\t\n" +
       "\005WATER\020\003\022\t\n\005LIGHT\020\004\022\010\n\004DARK\020\005\022\010\n\004ROCK\020\006\022" +
-      "\016\n\nNO_ELEMENT\020\007*\\\n\007Quality\022\016\n\nNO_QUALITY" +
-      "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005ULTRA\020\004\022\010\n\004E" +
-      "PIC\020\005\022\r\n\tLEGENDARY\020\006\022\007\n\003EVO\020\007B\027B\025SharedE" +
-      "numConfigProto"
+      "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
+      "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
+      "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
+      "B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

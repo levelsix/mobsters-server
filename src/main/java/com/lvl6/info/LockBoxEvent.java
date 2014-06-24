@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LockBoxEvent implements Serializable {
-  private static final long serialVersionUID = -368747979562792778L;
-  private int id;
-  private Date startDate;
-  private Date endDate;
-  private String lockBoxImageName;
-  private String eventName;
-  private int prizeEquipId;
-  private String descriptionString;
-  private String descriptionImageName;
-  private String tagImageName;
+	private static final long serialVersionUID = -368747979562792778L;
+	private int id;
+	private Date startDate;
+	private Date endDate;
+	private String lockBoxImageName;
+	private String eventName;
+	private int prizeEquipId;
+	private String descriptionString;
+	private String descriptionImageName;
+	private String tagImageName;
   
   public LockBoxEvent(int id, Date startDate, Date endDate,
       String lockBoxImageName, String eventName, int prizeEquipId,

@@ -116,8 +116,9 @@ import com.lvl6.utils.DBConnection;
     int numGemsRequired = rs.getInt(i++);
     int numAcceptedFbInvites = rs.getInt(i++);
     String occupationName = rs.getString(i++);
+    String imgSuffix = rs.getString(i++);
     
     return new StructureResidence(structId, numMonsterSlots, numBonusMonsterSlots,
-    		numGemsRequired, numAcceptedFbInvites, occupationName);
+    		numGemsRequired, numAcceptedFbInvites, occupationName, imgSuffix);
   }
 }
