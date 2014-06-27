@@ -37,10 +37,11 @@ enum Quality {
 	NO_QUALITY = 1;
 	COMMON = 2;
 	RARE = 3;
-	ULTRA = 4;
-	EPIC = 5;
-	LEGENDARY = 6;
+	SUPER = 4;
+	ULTRA = 5;
+	EPIC = 6;
+	LEGENDARY = 7;
 	
-	EVO = 7; //MONSTERS USED FOR EVOLVING
+	EVO = 8; //MONSTERS USED FOR EVOLVING
 }
 // the ResourceType enum in Structure.proto, should be in here
