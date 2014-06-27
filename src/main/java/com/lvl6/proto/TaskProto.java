@@ -3985,6 +3985,515 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserPersistentEventProto)
   }
   
+  public interface TaskMapElementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 mapElementId = 1;
+    boolean hasMapElementId();
+    int getMapElementId();
+    
+    // optional int32 taskId = 2;
+    boolean hasTaskId();
+    int getTaskId();
+    
+    // optional int32 xPos = 3;
+    boolean hasXPos();
+    int getXPos();
+    
+    // optional int32 yPos = 4;
+    boolean hasYPos();
+    int getYPos();
+  }
+  public static final class TaskMapElementProto extends
+      com.google.protobuf.GeneratedMessage
+      implements TaskMapElementProtoOrBuilder {
+    // Use TaskMapElementProto.newBuilder() to construct.
+    private TaskMapElementProto(Builder builder) {
+      super(builder);
+    }
+    private TaskMapElementProto(boolean noInit) {}
+    
+    private static final TaskMapElementProto defaultInstance;
+    public static TaskMapElementProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public TaskMapElementProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskMapElementProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 mapElementId = 1;
+    public static final int MAPELEMENTID_FIELD_NUMBER = 1;
+    private int mapElementId_;
+    public boolean hasMapElementId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getMapElementId() {
+      return mapElementId_;
+    }
+    
+    // optional int32 taskId = 2;
+    public static final int TASKID_FIELD_NUMBER = 2;
+    private int taskId_;
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getTaskId() {
+      return taskId_;
+    }
+    
+    // optional int32 xPos = 3;
+    public static final int XPOS_FIELD_NUMBER = 3;
+    private int xPos_;
+    public boolean hasXPos() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getXPos() {
+      return xPos_;
+    }
+    
+    // optional int32 yPos = 4;
+    public static final int YPOS_FIELD_NUMBER = 4;
+    private int yPos_;
+    public boolean hasYPos() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getYPos() {
+      return yPos_;
+    }
+    
+    private void initFields() {
+      mapElementId_ = 0;
+      taskId_ = 0;
+      xPos_ = 0;
+      yPos_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, mapElementId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, taskId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, xPos_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, yPos_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, mapElementId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, taskId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, xPos_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, yPos_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.TaskMapElementProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.TaskProto.TaskMapElementProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskMapElementProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.TaskProto.TaskMapElementProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        mapElementId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        taskId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        xPos_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        yPos_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.TaskProto.TaskMapElementProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.TaskProto.TaskMapElementProto getDefaultInstanceForType() {
+        return com.lvl6.proto.TaskProto.TaskMapElementProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.TaskProto.TaskMapElementProto build() {
+        com.lvl6.proto.TaskProto.TaskMapElementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.TaskProto.TaskMapElementProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.TaskProto.TaskMapElementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.TaskProto.TaskMapElementProto buildPartial() {
+        com.lvl6.proto.TaskProto.TaskMapElementProto result = new com.lvl6.proto.TaskProto.TaskMapElementProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.mapElementId_ = mapElementId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.taskId_ = taskId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.xPos_ = xPos_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.yPos_ = yPos_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.TaskProto.TaskMapElementProto) {
+          return mergeFrom((com.lvl6.proto.TaskProto.TaskMapElementProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.TaskProto.TaskMapElementProto other) {
+        if (other == com.lvl6.proto.TaskProto.TaskMapElementProto.getDefaultInstance()) return this;
+        if (other.hasMapElementId()) {
+          setMapElementId(other.getMapElementId());
+        }
+        if (other.hasTaskId()) {
+          setTaskId(other.getTaskId());
+        }
+        if (other.hasXPos()) {
+          setXPos(other.getXPos());
+        }
+        if (other.hasYPos()) {
+          setYPos(other.getYPos());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              mapElementId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              taskId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              xPos_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              yPos_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 mapElementId = 1;
+      private int mapElementId_ ;
+      public boolean hasMapElementId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getMapElementId() {
+        return mapElementId_;
+      }
+      public Builder setMapElementId(int value) {
+        bitField0_ |= 0x00000001;
+        mapElementId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMapElementId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        mapElementId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 taskId = 2;
+      private int taskId_ ;
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getTaskId() {
+        return taskId_;
+      }
+      public Builder setTaskId(int value) {
+        bitField0_ |= 0x00000002;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        taskId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 xPos = 3;
+      private int xPos_ ;
+      public boolean hasXPos() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getXPos() {
+        return xPos_;
+      }
+      public Builder setXPos(int value) {
+        bitField0_ |= 0x00000004;
+        xPos_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearXPos() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        xPos_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 yPos = 4;
+      private int yPos_ ;
+      public boolean hasYPos() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getYPos() {
+        return yPos_;
+      }
+      public Builder setYPos(int value) {
+        bitField0_ |= 0x00000008;
+        yPos_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearYPos() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        yPos_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
+    }
+    
+    static {
+      defaultInstance = new TaskMapElementProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TaskMapElementProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskStageProto_descriptor;
   private static
@@ -4015,6 +4524,11 @@ public final class TaskProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_TaskMapElementProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4053,7 +4567,9 @@ public final class TaskProto {
       "ventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030" +
       "UserPersistentEventProto\022\016\n\006userId\030\001 \001(\005" +
       "\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003" +
-      " \001(\003B\013B\tTaskProto"
+      " \001(\003\"W\n\023TaskMapElementProto\022\024\n\014mapElemen",
+      "tId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022" +
+      "\014\n\004yPos\030\004 \001(\005B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4108,6 +4624,14 @@ public final class TaskProto {
               new java.lang.String[] { "UserId", "EventId", "CoolDownStartTime", },
               com.lvl6.proto.TaskProto.UserPersistentEventProto.class,
               com.lvl6.proto.TaskProto.UserPersistentEventProto.Builder.class);
+          internal_static_com_lvl6_proto_TaskMapElementProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", },
+              com.lvl6.proto.TaskProto.TaskMapElementProto.class,
+              com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;
         }
       };

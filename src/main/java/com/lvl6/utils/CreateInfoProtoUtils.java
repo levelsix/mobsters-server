@@ -73,6 +73,7 @@ import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
+import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
@@ -165,6 +166,7 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
+import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
@@ -2521,6 +2523,15 @@ public class CreateInfoProtoUtils {
     return upepb.build();
   }
 
+  public static TaskMapElementProto createTaskMapElementProto(TaskMapElement tme) {
+	  TaskMapElementProto.Builder tmepb = TaskMapElementProto.newBuilder();
+	  tmepb.setMapElementId(tme.getId());
+	  tmepb.setTaskId(tme.getTaskId());
+	  tmepb.setXPos(tme.getxPos());
+	  tmepb.setYPos(tme.getyPos());
+	  return tmepb.build();
+  }
+  
   /**TournamentStuff.proto******************************************/
   public static TournamentEventProto createTournamentEventProtoFromTournamentEvent(
       TournamentEvent e, List<TournamentEventReward> rList) {

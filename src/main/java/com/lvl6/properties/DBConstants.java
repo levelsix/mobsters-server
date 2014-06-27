@@ -84,6 +84,7 @@ public class DBConstants {
   public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
   public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
   public static final String TABLE_TASK_HISTORY = "task_history";
+  public static final String TABLE_TASK_MAP_ELEMENT = "task_map_element";
   public static final String TABLE_TASK_STAGE = "task_stage";
   public static final String TABLE_TASK_STAGE_FOR_USER = "task_stage_for_user";
   public static final String TABLE_TASK_STAGE_HISTORY = "task_stage_history";

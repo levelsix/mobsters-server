@@ -58,6 +58,7 @@ import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
@@ -103,6 +104,7 @@ import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
+import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
@@ -144,6 +146,7 @@ import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -728,6 +731,7 @@ public class MiscMethods {
     StructureResourceStorageRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
     StructureTownHallRetrieveUtils.reload();
+    TaskMapElementRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
     TaskStageMonsterRetrieveUtils.reload();
     TaskStageRetrieveUtils.reload();
@@ -1559,6 +1563,13 @@ public class MiscMethods {
       FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
       sdpb.addAllTasks(ftp);
     }
+    
+    Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils.getTaskMapElement();
+    for (TaskMapElement tme : idsToMapElement.values()) {
+    	TaskMapElementProto tmep = CreateInfoProtoUtils.createTaskMapElementProto(tme);
+    	sdpb.addAllTaskMapElements(tmep);
+    }
+    
   }
   //TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
   //ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
