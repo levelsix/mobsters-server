@@ -38,6 +38,8 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
+    Map<Integer, TaskMapElement> idsToTaskMapElementsTemp =
+    	new HashMap<Integer, TaskMapElement>();
     try {
 			if (conn != null) {
 			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
@@ -46,8 +48,6 @@ import com.lvl6.utils.DBConnection;
 			    try {
 			      rs.last();
 			      rs.beforeFirst();
-			      Map<Integer, TaskMapElement> idsToTaskMapElementsTemp =
-			    		  new HashMap<Integer, TaskMapElement>();
 			      //loop throughe each row and convert it into a java object
 			      while(rs.next()) {  
 			        TaskMapElement taskMap = convertRSRowToTaskMapElement(rs);
@@ -70,6 +70,7 @@ import com.lvl6.utils.DBConnection;
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }
+    idToTaskMapElement = idsToTaskMapElementsTemp;
   }
   
   public static void reload() {
