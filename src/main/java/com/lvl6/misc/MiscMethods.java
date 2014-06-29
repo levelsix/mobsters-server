@@ -81,6 +81,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Cl
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
@@ -495,6 +496,7 @@ public class MiscMethods {
     mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
     mcb.setElementalStrength(ControllerConstants.MONSTER__ELEMENTAL_STRENGTH);
     mcb.setElementalWeakness(ControllerConstants.MONSTER__ELEMENTAL_WEAKNESS);
+    mcb.setOilPerMonsterLevel(ControllerConstants.MONSTER__OIL_PER_MONSTER_LEVEL);
     cb.setMonsterConstants(mcb.build());
 
     cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
@@ -509,6 +511,14 @@ public class MiscMethods {
     
     cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
     cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
+    
+    TaskMapConstants.Builder mapConstants = TaskMapConstants.newBuilder();
+    mapConstants.setMapSectionImagePrefix(ControllerConstants.TASK_MAP__SECTION_IMAGE_PREFIX);
+    mapConstants.setMapNumberOfSections(ControllerConstants.TASK_MAP__NUMBER_OF_SECTIONS);
+    mapConstants.setMapSectionHeight(ControllerConstants.TASK_MAP__SECTION_HEIGHT);
+    mapConstants.setMapTotalHeight(ControllerConstants.TASK_MAP__TOTAL_HEIGHT);
+    mapConstants.setMapTotalWidth(ControllerConstants.TASK_MAP__TOTAL_WIDTH);
+    cb.setTaskMapConstants(mapConstants.build());
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
