@@ -4003,6 +4003,10 @@ public final class TaskProto {
     // optional int32 yPos = 4;
     boolean hasYPos();
     int getYPos();
+    
+    // optional .com.lvl6.proto.Element element = 5;
+    boolean hasElement();
+    com.lvl6.proto.SharedEnumConfigProto.Element getElement();
   }
   public static final class TaskMapElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -4073,11 +4077,22 @@ public final class TaskProto {
       return yPos_;
     }
     
+    // optional .com.lvl6.proto.Element element = 5;
+    public static final int ELEMENT_FIELD_NUMBER = 5;
+    private com.lvl6.proto.SharedEnumConfigProto.Element element_;
+    public boolean hasElement() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
+      return element_;
+    }
+    
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
       xPos_ = 0;
       yPos_ = 0;
+      element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4103,6 +4118,9 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, yPos_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, element_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -4127,6 +4145,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, yPos_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, element_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4260,6 +4282,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         yPos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -4314,6 +4338,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000008;
         }
         result.yPos_ = yPos_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.element_ = element_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4341,6 +4369,9 @@ public final class TaskProto {
         }
         if (other.hasYPos()) {
           setYPos(other.getYPos());
+        }
+        if (other.hasElement()) {
+          setElement(other.getElement());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4391,6 +4422,17 @@ public final class TaskProto {
             case 32: {
               bitField0_ |= 0x00000008;
               yPos_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Element value = com.lvl6.proto.SharedEnumConfigProto.Element.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                element_ = value;
+              }
               break;
             }
           }
@@ -4483,6 +4525,30 @@ public final class TaskProto {
         return this;
       }
       
+      // optional .com.lvl6.proto.Element element = 5;
+      private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      public boolean hasElement() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
+        return element_;
+      }
+      public Builder setElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        element_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElement() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
     
@@ -4567,9 +4633,10 @@ public final class TaskProto {
       "ventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030" +
       "UserPersistentEventProto\022\016\n\006userId\030\001 \001(\005" +
       "\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003" +
-      " \001(\003\"W\n\023TaskMapElementProto\022\024\n\014mapElemen",
-      "tId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022" +
-      "\014\n\004yPos\030\004 \001(\005B\013B\tTaskProto"
+      " \001(\003\"\201\001\n\023TaskMapElementProto\022\024\n\014mapEleme",
+      "ntId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005" +
+      "\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.lv" +
+      "l6.proto.ElementB\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4629,7 +4696,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", },
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", },
               com.lvl6.proto.TaskProto.TaskMapElementProto.class,
               com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;

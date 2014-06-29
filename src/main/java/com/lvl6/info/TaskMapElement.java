@@ -10,15 +10,23 @@ public class TaskMapElement implements Serializable {
 	private int taskId;
 	private int xPos;
 	private int yPos;
-	public TaskMapElement( int id, int taskId, int xPos, int yPos )
+  private String element;
+	public TaskMapElement( int id, int taskId, int xPos, int yPos, String element)
 	{
 		super();
 		this.id = id;
 		this.taskId = taskId;
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.element = element;
 	}
-	public int getId()
+	public String getElement() {
+    return element;
+  }
+  public void setElement(String element) {
+    this.element = element;
+  }
+  public int getId()
 	{
 		return id;
 	}
