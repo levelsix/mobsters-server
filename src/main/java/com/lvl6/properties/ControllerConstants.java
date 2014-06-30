@@ -31,6 +31,7 @@ public class ControllerConstants {
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
 	public static final float MONSTER__ELEMENTAL_STRENGTH = 1.2F;
 	public static final float MONSTER__ELEMENTAL_WEAKNESS = 0.8F;
+  public static final float MONSTER__OIL_PER_MONSTER_LEVEL = 100f;
 	
 //	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 //	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
@@ -470,6 +471,13 @@ public class ControllerConstants {
   public static final String BOOSTER_PACK__INFO_IMAGE_NAME = "howchestswork.png";
   public static final int BOOSTER_PACK__NUM_TIMES_TO_BUY_STARTER_PACK = 4;
   public static final int BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK = 3;
+  
+  // MAP
+  public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "mapsection";
+  public static final int TASK_MAP__NUMBER_OF_SECTIONS = 5;
+  public static final float TASK_MAP__SECTION_HEIGHT = 328;
+  public static final float TASK_MAP__TOTAL_WIDTH = 328;
+  public static final float TASK_MAP__TOTAL_HEIGHT = 1406;
   
   public static final AnimatedSpriteOffset[] STARTUP__ANIMATED_SPRITE_OFFSETS = {
     new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),

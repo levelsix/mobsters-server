@@ -2545,6 +2545,15 @@ public class CreateInfoProtoUtils {
 	  tmepb.setTaskId(tme.getTaskId());
 	  tmepb.setXPos(tme.getxPos());
 	  tmepb.setYPos(tme.getyPos());
+
+    String monsterElement = tme.getElement();
+    try {
+      Element me = Element.valueOf(monsterElement);
+      tmepb.setElement(me);
+    } catch (Exception e){
+      log.error("invalid element. task map element=" + tme);
+    }
+    
 	  return tmepb.build();
   }
   

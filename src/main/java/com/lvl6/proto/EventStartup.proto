@@ -163,6 +163,8 @@ message StartupResponseProto {
 		optional int32 maxObstacles = 25;
 		optional int32 minutesPerObstacle = 26; //minutes it takes to spawn obstacles
 		
+		optional TaskMapConstants taskMapConstants = 27;
+		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;
@@ -201,6 +203,15 @@ message StartupResponseProto {
 			
 			optional float elementalStrength = 3;
 			optional float elementalWeakness = 4;
+			
+			optional float oilPerMonsterLevel = 5;
+		}
+		message TaskMapConstants {
+			optional string mapSectionImagePrefix = 1;
+			optional int32 mapNumberOfSections = 2;
+			optional float mapSectionHeight = 3;
+			optional float mapTotalWidth = 4;
+			optional float mapTotalHeight = 5;
 		}
 		message MiniTutorialConstants {
 			optional int32 matchThreeTutorialAssetId = 1; 

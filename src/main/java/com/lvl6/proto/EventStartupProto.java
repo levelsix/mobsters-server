@@ -2588,6 +2588,11 @@ public final class EventStartupProto {
       // optional int32 minutesPerObstacle = 26;
       boolean hasMinutesPerObstacle();
       int getMinutesPerObstacle();
+      
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
+      boolean hasTaskMapConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants getTaskMapConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder getTaskMapConstantsOrBuilder();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5186,6 +5191,10 @@ public final class EventStartupProto {
         // optional float elementalWeakness = 4;
         boolean hasElementalWeakness();
         float getElementalWeakness();
+        
+        // optional float oilPerMonsterLevel = 5;
+        boolean hasOilPerMonsterLevel();
+        float getOilPerMonsterLevel();
       }
       public static final class MonsterConstants extends
           com.google.protobuf.GeneratedMessage
@@ -5256,11 +5265,22 @@ public final class EventStartupProto {
           return elementalWeakness_;
         }
         
+        // optional float oilPerMonsterLevel = 5;
+        public static final int OILPERMONSTERLEVEL_FIELD_NUMBER = 5;
+        private float oilPerMonsterLevel_;
+        public boolean hasOilPerMonsterLevel() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        public float getOilPerMonsterLevel() {
+          return oilPerMonsterLevel_;
+        }
+        
         private void initFields() {
           cashPerHealthPoint_ = 0F;
           secondsToHealPerHealthPoint_ = 0F;
           elementalStrength_ = 0F;
           elementalWeakness_ = 0F;
+          oilPerMonsterLevel_ = 0F;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -5286,6 +5306,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             output.writeFloat(4, elementalWeakness_);
           }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeFloat(5, oilPerMonsterLevel_);
+          }
           getUnknownFields().writeTo(output);
         }
         
@@ -5310,6 +5333,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             size += com.google.protobuf.CodedOutputStream
               .computeFloatSize(4, elementalWeakness_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(5, oilPerMonsterLevel_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -5443,6 +5470,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000004);
             elementalWeakness_ = 0F;
             bitField0_ = (bitField0_ & ~0x00000008);
+            oilPerMonsterLevel_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000010);
             return this;
           }
           
@@ -5497,6 +5526,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000008;
             }
             result.elementalWeakness_ = elementalWeakness_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.oilPerMonsterLevel_ = oilPerMonsterLevel_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -5524,6 +5557,9 @@ public final class EventStartupProto {
             }
             if (other.hasElementalWeakness()) {
               setElementalWeakness(other.getElementalWeakness());
+            }
+            if (other.hasOilPerMonsterLevel()) {
+              setOilPerMonsterLevel(other.getOilPerMonsterLevel());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -5574,6 +5610,11 @@ public final class EventStartupProto {
                 case 37: {
                   bitField0_ |= 0x00000008;
                   elementalWeakness_ = input.readFloat();
+                  break;
+                }
+                case 45: {
+                  bitField0_ |= 0x00000010;
+                  oilPerMonsterLevel_ = input.readFloat();
                   break;
                 }
               }
@@ -5666,6 +5707,27 @@ public final class EventStartupProto {
             return this;
           }
           
+          // optional float oilPerMonsterLevel = 5;
+          private float oilPerMonsterLevel_ ;
+          public boolean hasOilPerMonsterLevel() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          public float getOilPerMonsterLevel() {
+            return oilPerMonsterLevel_;
+          }
+          public Builder setOilPerMonsterLevel(float value) {
+            bitField0_ |= 0x00000010;
+            oilPerMonsterLevel_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearOilPerMonsterLevel() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            oilPerMonsterLevel_ = 0F;
+            onChanged();
+            return this;
+          }
+          
           // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
         }
         
@@ -5675,6 +5737,609 @@ public final class EventStartupProto {
         }
         
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
+      }
+      
+      public interface TaskMapConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional string mapSectionImagePrefix = 1;
+        boolean hasMapSectionImagePrefix();
+        String getMapSectionImagePrefix();
+        
+        // optional int32 mapNumberOfSections = 2;
+        boolean hasMapNumberOfSections();
+        int getMapNumberOfSections();
+        
+        // optional float mapSectionHeight = 3;
+        boolean hasMapSectionHeight();
+        float getMapSectionHeight();
+        
+        // optional float mapTotalWidth = 4;
+        boolean hasMapTotalWidth();
+        float getMapTotalWidth();
+        
+        // optional float mapTotalHeight = 5;
+        boolean hasMapTotalHeight();
+        float getMapTotalHeight();
+      }
+      public static final class TaskMapConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements TaskMapConstantsOrBuilder {
+        // Use TaskMapConstants.newBuilder() to construct.
+        private TaskMapConstants(Builder builder) {
+          super(builder);
+        }
+        private TaskMapConstants(boolean noInit) {}
+        
+        private static final TaskMapConstants defaultInstance;
+        public static TaskMapConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public TaskMapConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional string mapSectionImagePrefix = 1;
+        public static final int MAPSECTIONIMAGEPREFIX_FIELD_NUMBER = 1;
+        private java.lang.Object mapSectionImagePrefix_;
+        public boolean hasMapSectionImagePrefix() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getMapSectionImagePrefix() {
+          java.lang.Object ref = mapSectionImagePrefix_;
+          if (ref instanceof String) {
+            return (String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+              mapSectionImagePrefix_ = s;
+            }
+            return s;
+          }
+        }
+        private com.google.protobuf.ByteString getMapSectionImagePrefixBytes() {
+          java.lang.Object ref = mapSectionImagePrefix_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            mapSectionImagePrefix_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        
+        // optional int32 mapNumberOfSections = 2;
+        public static final int MAPNUMBEROFSECTIONS_FIELD_NUMBER = 2;
+        private int mapNumberOfSections_;
+        public boolean hasMapNumberOfSections() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getMapNumberOfSections() {
+          return mapNumberOfSections_;
+        }
+        
+        // optional float mapSectionHeight = 3;
+        public static final int MAPSECTIONHEIGHT_FIELD_NUMBER = 3;
+        private float mapSectionHeight_;
+        public boolean hasMapSectionHeight() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public float getMapSectionHeight() {
+          return mapSectionHeight_;
+        }
+        
+        // optional float mapTotalWidth = 4;
+        public static final int MAPTOTALWIDTH_FIELD_NUMBER = 4;
+        private float mapTotalWidth_;
+        public boolean hasMapTotalWidth() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public float getMapTotalWidth() {
+          return mapTotalWidth_;
+        }
+        
+        // optional float mapTotalHeight = 5;
+        public static final int MAPTOTALHEIGHT_FIELD_NUMBER = 5;
+        private float mapTotalHeight_;
+        public boolean hasMapTotalHeight() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        public float getMapTotalHeight() {
+          return mapTotalHeight_;
+        }
+        
+        private void initFields() {
+          mapSectionImagePrefix_ = "";
+          mapNumberOfSections_ = 0;
+          mapSectionHeight_ = 0F;
+          mapTotalWidth_ = 0F;
+          mapTotalHeight_ = 0F;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeBytes(1, getMapSectionImagePrefixBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, mapNumberOfSections_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeFloat(3, mapSectionHeight_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            output.writeFloat(4, mapTotalWidth_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeFloat(5, mapTotalHeight_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBytesSize(1, getMapSectionImagePrefixBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, mapNumberOfSections_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(3, mapSectionHeight_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(4, mapTotalWidth_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(5, mapTotalHeight_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            mapSectionImagePrefix_ = "";
+            bitField0_ = (bitField0_ & ~0x00000001);
+            mapNumberOfSections_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            mapSectionHeight_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            mapTotalWidth_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000008);
+            mapTotalHeight_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000010);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.mapSectionImagePrefix_ = mapSectionImagePrefix_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.mapNumberOfSections_ = mapNumberOfSections_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.mapSectionHeight_ = mapSectionHeight_;
+            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+              to_bitField0_ |= 0x00000008;
+            }
+            result.mapTotalWidth_ = mapTotalWidth_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.mapTotalHeight_ = mapTotalHeight_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance()) return this;
+            if (other.hasMapSectionImagePrefix()) {
+              setMapSectionImagePrefix(other.getMapSectionImagePrefix());
+            }
+            if (other.hasMapNumberOfSections()) {
+              setMapNumberOfSections(other.getMapNumberOfSections());
+            }
+            if (other.hasMapSectionHeight()) {
+              setMapSectionHeight(other.getMapSectionHeight());
+            }
+            if (other.hasMapTotalWidth()) {
+              setMapTotalWidth(other.getMapTotalWidth());
+            }
+            if (other.hasMapTotalHeight()) {
+              setMapTotalHeight(other.getMapTotalHeight());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 10: {
+                  bitField0_ |= 0x00000001;
+                  mapSectionImagePrefix_ = input.readBytes();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  mapNumberOfSections_ = input.readInt32();
+                  break;
+                }
+                case 29: {
+                  bitField0_ |= 0x00000004;
+                  mapSectionHeight_ = input.readFloat();
+                  break;
+                }
+                case 37: {
+                  bitField0_ |= 0x00000008;
+                  mapTotalWidth_ = input.readFloat();
+                  break;
+                }
+                case 45: {
+                  bitField0_ |= 0x00000010;
+                  mapTotalHeight_ = input.readFloat();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional string mapSectionImagePrefix = 1;
+          private java.lang.Object mapSectionImagePrefix_ = "";
+          public boolean hasMapSectionImagePrefix() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public String getMapSectionImagePrefix() {
+            java.lang.Object ref = mapSectionImagePrefix_;
+            if (!(ref instanceof String)) {
+              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+              mapSectionImagePrefix_ = s;
+              return s;
+            } else {
+              return (String) ref;
+            }
+          }
+          public Builder setMapSectionImagePrefix(String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+            mapSectionImagePrefix_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapSectionImagePrefix() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            mapSectionImagePrefix_ = getDefaultInstance().getMapSectionImagePrefix();
+            onChanged();
+            return this;
+          }
+          void setMapSectionImagePrefix(com.google.protobuf.ByteString value) {
+            bitField0_ |= 0x00000001;
+            mapSectionImagePrefix_ = value;
+            onChanged();
+          }
+          
+          // optional int32 mapNumberOfSections = 2;
+          private int mapNumberOfSections_ ;
+          public boolean hasMapNumberOfSections() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getMapNumberOfSections() {
+            return mapNumberOfSections_;
+          }
+          public Builder setMapNumberOfSections(int value) {
+            bitField0_ |= 0x00000002;
+            mapNumberOfSections_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapNumberOfSections() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            mapNumberOfSections_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional float mapSectionHeight = 3;
+          private float mapSectionHeight_ ;
+          public boolean hasMapSectionHeight() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public float getMapSectionHeight() {
+            return mapSectionHeight_;
+          }
+          public Builder setMapSectionHeight(float value) {
+            bitField0_ |= 0x00000004;
+            mapSectionHeight_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapSectionHeight() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            mapSectionHeight_ = 0F;
+            onChanged();
+            return this;
+          }
+          
+          // optional float mapTotalWidth = 4;
+          private float mapTotalWidth_ ;
+          public boolean hasMapTotalWidth() {
+            return ((bitField0_ & 0x00000008) == 0x00000008);
+          }
+          public float getMapTotalWidth() {
+            return mapTotalWidth_;
+          }
+          public Builder setMapTotalWidth(float value) {
+            bitField0_ |= 0x00000008;
+            mapTotalWidth_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapTotalWidth() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            mapTotalWidth_ = 0F;
+            onChanged();
+            return this;
+          }
+          
+          // optional float mapTotalHeight = 5;
+          private float mapTotalHeight_ ;
+          public boolean hasMapTotalHeight() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          public float getMapTotalHeight() {
+            return mapTotalHeight_;
+          }
+          public Builder setMapTotalHeight(float value) {
+            bitField0_ |= 0x00000010;
+            mapTotalHeight_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapTotalHeight() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            mapTotalHeight_ = 0F;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
+        }
+        
+        static {
+          defaultInstance = new TaskMapConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants)
       }
       
       public interface MiniTutorialConstantsOrBuilder
@@ -6740,6 +7405,19 @@ public final class EventStartupProto {
         return minutesPerObstacle_;
       }
       
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
+      public static final int TASKMAPCONSTANTS_FIELD_NUMBER = 27;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants_;
+      public boolean hasTaskMapConstants() {
+        return ((bitField0_ & 0x01000000) == 0x01000000);
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants getTaskMapConstants() {
+        return taskMapConstants_;
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder getTaskMapConstantsOrBuilder() {
+        return taskMapConstants_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -6767,6 +7445,7 @@ public final class EventStartupProto {
         miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
         maxObstacles_ = 0;
         minutesPerObstacle_ = 0;
+        taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -6857,6 +7536,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00800000) == 0x00800000)) {
           output.writeInt32(26, minutesPerObstacle_);
+        }
+        if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          output.writeMessage(27, taskMapConstants_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6970,6 +7652,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00800000) == 0x00800000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(26, minutesPerObstacle_);
+        }
+        if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(27, taskMapConstants_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -7096,6 +7782,7 @@ public final class EventStartupProto {
             getUserMonsterConstantsFieldBuilder();
             getMonsterConstantsFieldBuilder();
             getMiniTutsFieldBuilder();
+            getTaskMapConstantsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -7192,6 +7879,12 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x01000000);
           minutesPerObstacle_ = 0;
           bitField0_ = (bitField0_ & ~0x02000000);
+          if (taskMapConstantsBuilder_ == null) {
+            taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
+          } else {
+            taskMapConstantsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x04000000);
           return this;
         }
         
@@ -7372,6 +8065,14 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00800000;
           }
           result.minutesPerObstacle_ = minutesPerObstacle_;
+          if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
+            to_bitField0_ |= 0x01000000;
+          }
+          if (taskMapConstantsBuilder_ == null) {
+            result.taskMapConstants_ = taskMapConstants_;
+          } else {
+            result.taskMapConstants_ = taskMapConstantsBuilder_.build();
+          }
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -7511,6 +8212,9 @@ public final class EventStartupProto {
           }
           if (other.hasMinutesPerObstacle()) {
             setMinutesPerObstacle(other.getMinutesPerObstacle());
+          }
+          if (other.hasTaskMapConstants()) {
+            mergeTaskMapConstants(other.getTaskMapConstants());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -7701,6 +8405,15 @@ public final class EventStartupProto {
               case 208: {
                 bitField0_ |= 0x02000000;
                 minutesPerObstacle_ = input.readInt32();
+                break;
+              }
+              case 218: {
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.newBuilder();
+                if (hasTaskMapConstants()) {
+                  subBuilder.mergeFrom(getTaskMapConstants());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setTaskMapConstants(subBuilder.buildPartial());
                 break;
               }
             }
@@ -9081,6 +9794,96 @@ public final class EventStartupProto {
           minutesPerObstacle_ = 0;
           onChanged();
           return this;
+        }
+        
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants = 27;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder> taskMapConstantsBuilder_;
+        public boolean hasTaskMapConstants() {
+          return ((bitField0_ & 0x04000000) == 0x04000000);
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants getTaskMapConstants() {
+          if (taskMapConstantsBuilder_ == null) {
+            return taskMapConstants_;
+          } else {
+            return taskMapConstantsBuilder_.getMessage();
+          }
+        }
+        public Builder setTaskMapConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants value) {
+          if (taskMapConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            taskMapConstants_ = value;
+            onChanged();
+          } else {
+            taskMapConstantsBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x04000000;
+          return this;
+        }
+        public Builder setTaskMapConstants(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder builderForValue) {
+          if (taskMapConstantsBuilder_ == null) {
+            taskMapConstants_ = builderForValue.build();
+            onChanged();
+          } else {
+            taskMapConstantsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x04000000;
+          return this;
+        }
+        public Builder mergeTaskMapConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants value) {
+          if (taskMapConstantsBuilder_ == null) {
+            if (((bitField0_ & 0x04000000) == 0x04000000) &&
+                taskMapConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance()) {
+              taskMapConstants_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.newBuilder(taskMapConstants_).mergeFrom(value).buildPartial();
+            } else {
+              taskMapConstants_ = value;
+            }
+            onChanged();
+          } else {
+            taskMapConstantsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x04000000;
+          return this;
+        }
+        public Builder clearTaskMapConstants() {
+          if (taskMapConstantsBuilder_ == null) {
+            taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
+            onChanged();
+          } else {
+            taskMapConstantsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x04000000);
+          return this;
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder getTaskMapConstantsBuilder() {
+          bitField0_ |= 0x04000000;
+          onChanged();
+          return getTaskMapConstantsFieldBuilder().getBuilder();
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder getTaskMapConstantsOrBuilder() {
+          if (taskMapConstantsBuilder_ != null) {
+            return taskMapConstantsBuilder_.getMessageOrBuilder();
+          } else {
+            return taskMapConstants_;
+          }
+        }
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder> 
+            getTaskMapConstantsFieldBuilder() {
+          if (taskMapConstantsBuilder_ == null) {
+            taskMapConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstantsOrBuilder>(
+                    taskMapConstants_,
+                    getParentForChildren(),
+                    isClean());
+            taskMapConstants_ = null;
+          }
+          return taskMapConstantsBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -18718,6 +19521,11 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -18752,7 +19560,7 @@ public final class EventStartupProto {
       "\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030" +
       "\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTu",
       "torial\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRes" +
-      "tart\030\010 \001(\010\"\230+\n\024StartupResponseProto\022\030\n\020s" +
+      "tart\030\010 \001(\010\"\260-\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp" +
@@ -18815,7 +19623,7 @@ public final class EventStartupProto {
       "\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010" +
       "referred\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGi" +
-      "venToReferrer\030\003 \001(\005\032\270\022\n\020StartupConstants" +
+      "venToReferrer\030\003 \001(\005\032\320\024\n\020StartupConstants" +
       "\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com.lv" +
       "l6.proto.InAppPurchasePackageProto\022\027\n\017ma" +
       "xLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStr" +
@@ -18849,48 +19657,55 @@ public final class EventStartupProto {
       "niTuts\030\030 \001(\0132K.com.lvl6.proto.StartupRes" +
       "ponseProto.StartupConstants.MiniTutorial" +
       "Constants\022\024\n\014maxObstacles\030\031 \001(\005\022\032\n\022minut" +
-      "esPerObstacle\030\032 \001(\005\032_\n\031AnimatedSpriteOff" +
-      "setProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 ",
-      "\001(\0132\037.com.lvl6.proto.CoordinateProto\032\257\001\n" +
-      "\rClanConstants\022\035\n\025coinPriceToCreateClan\030" +
-      "\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005\022" +
-      "\'\n\037maxCharLengthForClanDescription\030\003 \001(\005" +
-      "\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\022\023\n\013max" +
-      "ClanSize\030\005 \001(\005\032c\n\030DownloadableNibConstan" +
-      "ts\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNibNa" +
-      "me\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023T" +
-      "ournamentConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024" +
-      "\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(",
-      "\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005\032R" +
-      "\n\024UserMonsterConstants\022\027\n\017maxNumTeamSlot" +
-      "s\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001" +
-      "(\005\032\211\001\n\020MonsterConstants\022\032\n\022cashPerHealth" +
-      "Point\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoi" +
-      "nt\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021e" +
-      "lementalWeakness\030\004 \001(\002\032\225\002\n\025MiniTutorialC" +
+      "esPerObstacle\030\032 \001(\005\022`\n\020taskMapConstants\030" +
+      "\033 \001(\0132F.com.lvl6.proto.StartupResponsePr",
+      "oto.StartupConstants.TaskMapConstants\032_\n" +
+      "\031AnimatedSpriteOffsetProto\022\021\n\timageName\030" +
+      "\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.C" +
+      "oordinateProto\032\257\001\n\rClanConstants\022\035\n\025coin" +
+      "PriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLength" +
+      "ForClanName\030\002 \001(\005\022\'\n\037maxCharLengthForCla" +
+      "nDescription\030\003 \001(\005\022\037\n\027maxCharLengthForCl" +
+      "anTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n\030Down" +
+      "loadableNibConstants\022\022\n\nmapNibName\030\001 \001(\t" +
+      "\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppe",
+      "NibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\n" +
+      "winsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023" +
+      "\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAft" +
+      "erEventEnd\030\004 \001(\005\032R\n\024UserMonsterConstants" +
+      "\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxN" +
+      "umMonsterLimit\030\002 \001(\005\032\245\001\n\020MonsterConstant" +
+      "s\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033seconds" +
+      "ToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementalS" +
+      "trength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002" +
+      "\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMap",
+      "Constants\022\035\n\025mapSectionImagePrefix\030\001 \001(\t" +
+      "\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSect" +
+      "ionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026" +
+      "\n\016mapTotalHeight\030\005 \001(\002\032\225\002\n\025MiniTutorialC" +
       "onstants\022!\n\031matchThreeTutorialAssetId\030\001 " +
       "\001(\005\022\033\n\023firstPowerUpAssetId\030\002 \001(\005\022\036\n\026rain" +
-      "bowTutorialAssetId\030\003 \001(\005\022#\n\033powerUpCombo",
+      "bowTutorialAssetId\030\003 \001(\005\022#\n\033powerUpCombo" +
       "TutorialAssetId\030\004 \001(\005\022\"\n\032monsterDropTuto" +
       "rialAssetId\030\005 \001(\005\022\036\n\026elementTutorialAsse" +
-      "tId\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForC" +
+      "tId\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForC",
       "ombiningPowerUps\030\010 \001(\005\032\351\003\n\021TutorialConst" +
       "ants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016enemy" +
       "MonsterId\030\002 \001(\005\022\032\n\022enemyBossMonsterId\030\t " +
       "\001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialS" +
       "tructures\030\003 \003(\0132#.com.lvl6.proto.Tutoria" +
       "lStructProto\022\036\n\026structureIdsToBeBuillt\030\004" +
-      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030",
+      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030" +
       "\006 \003(\0132 .com.lvl6.proto.CityElementProto\022" +
       "$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n" +
-      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010" +
+      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010",
       "cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsI" +
       "nit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.c" +
       "om.lvl6.proto.MinimumObstacleProto\"A\n\014Up" +
       "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
       "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016" +
       "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SE" +
-      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp",
+      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp" +
       "onseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004" +
       "udid\030\002 \001(\tB\023B\021EventStartupProto"
     };
@@ -18936,7 +19751,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", "AddAllFbFriends", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", "AddAllFbFriends", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
@@ -18984,11 +19799,19 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
-              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", },
+              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", "OilPerMonsterLevel", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor =
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TaskMapConstants_descriptor,
+              new java.lang.String[] { "MapSectionImagePrefix", "MapNumberOfSections", "MapSectionHeight", "MapTotalWidth", "MapTotalHeight", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(7);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
