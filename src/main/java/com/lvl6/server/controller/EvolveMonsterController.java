@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -189,11 +190,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			return false;
 		}
 		
+		// TODO: Check minijob
+		Set<Long> prospectiveEvolutionMfuIds = new HashSet<Long>(userMonsterIds);
+		prospectiveEvolutionMfuIds.add(catalystUserMonsterId);
+		
+		Set<Long> unavailableMfuIds = new HashSet<Long>(alreadyEnhancing.keySet());
+		unavailableMfuIds.addAll(alreadyHealing.keySet());
+		
 		//don't allow this transaction through because at least one of these monsters is
 		//used in enhancing or is being healed
-		if ((null != alreadyEnhancing && !alreadyEnhancing.isEmpty()) ||
-				(null != alreadyHealing && !alreadyHealing.isEmpty())) {
-			log.error("the monsters provided are in healing or enhancing. enhancing=" +
+		if (!Collections.disjoint(prospectiveEvolutionMfuIds, unavailableMfuIds))
+		{
+			log.error("at least one of the monsters provided is in healing or enhancing. enhancing=" +
 				alreadyEnhancing + "\t healing=" + alreadyHealing + "\t catalyst=" +
 					catalystUserMonsterId + "\t others=" + userMonsterIds);
 			return false;

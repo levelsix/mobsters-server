@@ -23,6 +23,7 @@ message StaticDataProto {
 	repeated CityExpansionCostProto expansionCosts = 2;
 	repeated FullCityProto allCities = 3;
 	repeated FullTaskProto allTasks = 4;
+	repeated TaskMapElementProto allTaskMapElements = 28;
 	repeated MonsterProto allMonsters = 5;
 	repeated StaticUserLevelInfoProto slip = 6;
 	
@@ -41,7 +42,7 @@ message StaticDataProto {
 	repeated TownHallProto allTownHalls = 16;
 	//repeated LabProto allLabs = 17; //defined above
 	repeated MiniJobCenterProto allMiniJobCenters = 27;
-	
+	repeated EvoChamberProto allEvoChambers = 29;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -57,5 +58,7 @@ message StaticDataProto {
 	repeated AchievementProto achievements = 26;
 	
 	//repeated MiniJobProto allMiniJobs = 27; defined above
+	//repeated TaskMapElementProto allTaskMapElements = 28; defined above
+	//repeated EvoChamberProto allEvoChambers = 29; defined above
 }
 	

@@ -50,6 +50,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
@@ -58,6 +59,7 @@ import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
@@ -80,6 +82,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Cl
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
@@ -90,6 +93,7 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.MiniJobCenterProto;
@@ -103,6 +107,7 @@ import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
+import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
@@ -136,6 +141,7 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
@@ -144,6 +150,7 @@ import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -492,6 +499,7 @@ public class MiscMethods {
     mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
     mcb.setElementalStrength(ControllerConstants.MONSTER__ELEMENTAL_STRENGTH);
     mcb.setElementalWeakness(ControllerConstants.MONSTER__ELEMENTAL_WEAKNESS);
+    mcb.setOilPerMonsterLevel(ControllerConstants.MONSTER__OIL_PER_MONSTER_LEVEL);
     cb.setMonsterConstants(mcb.build());
 
     cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
@@ -506,6 +514,14 @@ public class MiscMethods {
     
     cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
     cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
+    
+    TaskMapConstants.Builder mapConstants = TaskMapConstants.newBuilder();
+    mapConstants.setMapSectionImagePrefix(ControllerConstants.TASK_MAP__SECTION_IMAGE_PREFIX);
+    mapConstants.setMapNumberOfSections(ControllerConstants.TASK_MAP__NUMBER_OF_SECTIONS);
+    mapConstants.setMapSectionHeight(ControllerConstants.TASK_MAP__SECTION_HEIGHT);
+    mapConstants.setMapTotalHeight(ControllerConstants.TASK_MAP__TOTAL_HEIGHT);
+    mapConstants.setMapTotalWidth(ControllerConstants.TASK_MAP__TOTAL_WIDTH);
+    cb.setTaskMapConstants(mapConstants.build());
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -720,6 +736,7 @@ public class MiscMethods {
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
+    StructureEvoChamberRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
     StructureMiniJobRetrieveUtils.reload();
@@ -728,6 +745,7 @@ public class MiscMethods {
     StructureResourceStorageRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
     StructureTownHallRetrieveUtils.reload();
+    TaskMapElementRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
     TaskStageMonsterRetrieveUtils.reload();
     TaskStageRetrieveUtils.reload();
@@ -1559,6 +1577,13 @@ public class MiscMethods {
       FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
       sdpb.addAllTasks(ftp);
     }
+    
+    Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils.getTaskMapElement();
+    for (TaskMapElement tme : idsToMapElement.values()) {
+    	TaskMapElementProto tmep = CreateInfoProtoUtils.createTaskMapElementProto(tme);
+    	sdpb.addAllTaskMapElements(tmep);
+    }
+    
   }
   //TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
   //ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
@@ -1685,6 +1710,7 @@ public class MiscMethods {
     setTownHalls(sdpb, structs, structProtos);
     setLabs(sdpb, structs, structProtos);
     setMiniJobCenters(sdpb, structs, structProtos);
+    setEvoChambers(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -1784,6 +1810,24 @@ public class MiscMethods {
 		  MiniJobCenterProto mjcp = CreateInfoProtoUtils
 				  .createMiniJobCenterProto(s, sip, smj);
 		  sdpb.addAllMiniJobCenters(mjcp);
+	  }
+  }
+  
+  private static void setEvoChambers(Builder sdpb,
+	  Map<Integer, Structure> structs,
+	  Map<Integer, StructureInfoProto> structProtos)
+  {
+	  Map<Integer, StructureEvoChamber> idsToEvoChambers =
+		  StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
+	  
+	  for (Integer structId : idsToEvoChambers.keySet()) {
+		  Structure s = structs.get(structId);
+		  StructureInfoProto sip = structProtos.get(structId);
+		  StructureEvoChamber sec = idsToEvoChambers.get(structId);
+		  
+		  EvoChamberProto ecp = CreateInfoProtoUtils
+			  .createEvoChamberProto(s, sip, sec);
+		  sdpb.addAllEvoChambers(ecp);
 	  }
   }
 

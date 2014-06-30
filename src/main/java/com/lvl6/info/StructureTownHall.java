@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class StructureTownHall implements Serializable {
 
-	private static final long serialVersionUID = 3098858652882579526L;
+	private static final long serialVersionUID = -7228014466529143078L;
+	
 	private int structId;
 	private int numResourceOneGenerators;
 	private int numResourceOneStorages;
@@ -16,12 +17,22 @@ public class StructureTownHall implements Serializable {
 	private int numLabs;
 	private int pvpQueueCashCost;
 	private int resourceCapacity;
+	private int numEvoChambers;
 	
-	public StructureTownHall(int structId, int numResourceOneGenerators,
-			int numResourceOneStorages, int numResourceTwoGenerators,
-			int numResourceTwoStorages, int numHospitals, int numResidences,
-			int numMonsterSlots, int numLabs, int pvpQueueCashCost,
-			int resourceCapacity) {
+	public StructureTownHall(
+		int structId,
+		int numResourceOneGenerators,
+		int numResourceOneStorages,
+		int numResourceTwoGenerators,
+		int numResourceTwoStorages,
+		int numHospitals,
+		int numResidences,
+		int numMonsterSlots,
+		int numLabs,
+		int pvpQueueCashCost,
+		int resourceCapacity,
+		int numEvoChambers )
+	{
 		super();
 		this.structId = structId;
 		this.numResourceOneGenerators = numResourceOneGenerators;
@@ -34,6 +45,7 @@ public class StructureTownHall implements Serializable {
 		this.numLabs = numLabs;
 		this.pvpQueueCashCost = pvpQueueCashCost;
 		this.resourceCapacity = resourceCapacity;
+		this.numEvoChambers = numEvoChambers;
 	}
 
 	public int getStructId() {
@@ -124,17 +136,44 @@ public class StructureTownHall implements Serializable {
 		this.resourceCapacity = resourceCapacity;
 	}
 
-	@Override
-	public String toString() {
-		return "StructureTownHall [structId=" + structId
-				+ ", numResourceOneGenerators=" + numResourceOneGenerators
-				+ ", numResourceOneStorages=" + numResourceOneStorages
-				+ ", numResourceTwoGenerators=" + numResourceTwoGenerators
-				+ ", numResourceTwoStorages=" + numResourceTwoStorages
-				+ ", numHospitals=" + numHospitals + ", numResidences=" + numResidences
-				+ ", numMonsterSlots=" + numMonsterSlots + ", numLabs=" + numLabs
-				+ ", pvpQueueCashCost=" + pvpQueueCashCost + ", resourceCapacity="
-				+ resourceCapacity + "]";
+	public int getNumEvoChambers()
+	{
+		return numEvoChambers;
 	}
-	
+
+	public void setNumEvoChambers( int numEvoChambers )
+	{
+		this.numEvoChambers = numEvoChambers;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "StructureTownHall [structId="
+			+ structId
+			+ ", numResourceOneGenerators="
+			+ numResourceOneGenerators
+			+ ", numResourceOneStorages="
+			+ numResourceOneStorages
+			+ ", numResourceTwoGenerators="
+			+ numResourceTwoGenerators
+			+ ", numResourceTwoStorages="
+			+ numResourceTwoStorages
+			+ ", numHospitals="
+			+ numHospitals
+			+ ", numResidences="
+			+ numResidences
+			+ ", numMonsterSlots="
+			+ numMonsterSlots
+			+ ", numLabs="
+			+ numLabs
+			+ ", pvpQueueCashCost="
+			+ pvpQueueCashCost
+			+ ", resourceCapacity="
+			+ resourceCapacity
+			+ ", numEvoChambers="
+			+ numEvoChambers
+			+ "]";
+	}
+
 }
