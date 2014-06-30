@@ -244,3 +244,9 @@ message UserObstacleProto {
 message EvoChamberProto {
 	optional StructureInfoProto structInfo = 1; 
 }
+
+//------------------------------------------------------------------------------------------
+
+message TeamCenterProto {
+	optional StructureInfoProto structInfo = 1; 
+}

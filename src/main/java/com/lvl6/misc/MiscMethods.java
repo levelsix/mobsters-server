@@ -57,6 +57,7 @@ import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
+import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
@@ -103,6 +104,7 @@ import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
+import com.lvl6.proto.StructureProto.TeamCenterProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
@@ -149,6 +151,7 @@ import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureTeamCenterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureTownHallRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
@@ -744,6 +747,7 @@ public class MiscMethods {
     StructureResourceGeneratorRetrieveUtils.reload();
     StructureResourceStorageRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
+    StructureTeamCenterRetrieveUtils.reload();
     StructureTownHallRetrieveUtils.reload();
     TaskMapElementRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
@@ -1711,6 +1715,7 @@ public class MiscMethods {
     setLabs(sdpb, structs, structProtos);
     setMiniJobCenters(sdpb, structs, structProtos);
     setEvoChambers(sdpb, structs, structProtos);
+    setTeamCenters(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -1828,6 +1833,24 @@ public class MiscMethods {
 		  EvoChamberProto ecp = CreateInfoProtoUtils
 			  .createEvoChamberProto(s, sip, sec);
 		  sdpb.addAllEvoChambers(ecp);
+	  }
+  }
+  
+  private static void setTeamCenters(Builder sdpb,
+	  Map<Integer, Structure> structs,
+	  Map<Integer, StructureInfoProto> structProtos)
+  {
+	  Map<Integer, StructureTeamCenter> idsToTeamCenters =
+		  StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
+	  
+	  for (Integer structId : idsToTeamCenters.keySet()) {
+		  Structure s = structs.get(structId);
+		  StructureInfoProto sip = structProtos.get(structId);
+		  StructureTeamCenter stc = idsToTeamCenters.get(structId);
+		  
+		  TeamCenterProto tcp = CreateInfoProtoUtils
+			  .createTeamCenterProto(s, sip, stc);
+		  sdpb.addAllTeamCenters(tcp);
 	  }
   }
 
