@@ -881,7 +881,7 @@ public class StartupController extends EventController {
   						isAccepted, filterByRedeemed, isRedeemed);
   	}
   	
-  	//get the invites where this user is the inviter, get accepted, unredeemed does not matter 
+  	//get the invites where this user is the inviter: get accepted, unredeemed/redeemed does not matter 
   	isAccepted = true;
   	Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe = 
   			UserFacebookInviteForSlotRetrieveUtils.getSpecificOrAllInvitesForInviter(

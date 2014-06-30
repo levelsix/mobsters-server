@@ -63,6 +63,7 @@ import com.lvl6.info.QuestJob;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
@@ -146,6 +147,7 @@ import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.StructureProto.CoordinateProto;
+import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
@@ -2122,6 +2124,7 @@ public class CreateInfoProtoUtils {
     thpb.setNumLabs(sth.getNumLabs());
     thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
     thpb.setResourceCapacity(sth.getResourceCapacity());
+    thpb.setNumEvoChambers(sth.getNumEvoChambers());
 
     return thpb.build();
   }
@@ -2278,6 +2281,19 @@ public class CreateInfoProtoUtils {
   	}
   	
   	return uopb.build();
+  }
+  
+  public static EvoChamberProto  createEvoChamberProto (Structure s,
+	  StructureInfoProto sip, StructureEvoChamber sec)
+  {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+	  
+	  EvoChamberProto.Builder ecpb = EvoChamberProto.newBuilder();
+	  ecpb.setStructInfo(sip);
+	  
+	  return ecpb.build();
   }
   
   /**Task.proto*****************************************************/

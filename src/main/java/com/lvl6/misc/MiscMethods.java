@@ -50,6 +50,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureMiniJob;
@@ -91,6 +92,7 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.MiniJobCenterProto;
@@ -138,6 +140,7 @@ import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureMiniJobRetrieveUtils;
@@ -723,6 +726,7 @@ public class MiscMethods {
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
+    StructureEvoChamberRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
     StructureMiniJobRetrieveUtils.reload();
@@ -1696,6 +1700,7 @@ public class MiscMethods {
     setTownHalls(sdpb, structs, structProtos);
     setLabs(sdpb, structs, structProtos);
     setMiniJobCenters(sdpb, structs, structProtos);
+    setEvoChambers(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -1795,6 +1800,24 @@ public class MiscMethods {
 		  MiniJobCenterProto mjcp = CreateInfoProtoUtils
 				  .createMiniJobCenterProto(s, sip, smj);
 		  sdpb.addAllMiniJobCenters(mjcp);
+	  }
+  }
+  
+  private static void setEvoChambers(Builder sdpb,
+	  Map<Integer, Structure> structs,
+	  Map<Integer, StructureInfoProto> structProtos)
+  {
+	  Map<Integer, StructureEvoChamber> idsToEvoChambers =
+		  StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
+	  
+	  for (Integer structId : idsToEvoChambers.keySet()) {
+		  Structure s = structs.get(structId);
+		  StructureInfoProto sip = structProtos.get(structId);
+		  StructureEvoChamber sec = idsToEvoChambers.get(structId);
+		  
+		  EvoChamberProto ecp = CreateInfoProtoUtils
+			  .createEvoChamberProto(s, sip, sec);
+		  sdpb.addAllEvoChambers(ecp);
 	  }
   }
 

@@ -72,6 +72,7 @@ public class DBConstants {
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
   public static final String TABLE_STATIC_LEVEL_INFO = "static_level_info";
   public static final String TABLE_STRUCTURE = "structure";
+  public static final String TABLE_STRUCTURE_EVO_CHAMBER = "structure_evo_chamber";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
   public static final String TABLE_STRUCTURE_LAB = "structure_lab";
