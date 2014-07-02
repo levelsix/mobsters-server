@@ -49,6 +49,7 @@ message StructureInfoProto {
 		
 		//NO_STRUCT = 8; defined above
 		MINI_JOB = 9;
+		TEAM_CENTER = 10;
 	}
 }
 
@@ -242,5 +243,11 @@ message UserObstacleProto {
 //------------------------------------------------------------------------------------------
 
 message EvoChamberProto {
+	optional StructureInfoProto structInfo = 1; 
+}
+
+//------------------------------------------------------------------------------------------
+
+message TeamCenterProto {
 	optional StructureInfoProto structInfo = 1; 
 }

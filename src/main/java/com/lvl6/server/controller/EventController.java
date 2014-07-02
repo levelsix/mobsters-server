@@ -18,6 +18,7 @@ import com.lvl6.server.EventWriter;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.Wrap;
+import com.newrelic.api.agent.Trace;
 
 @Component
 @DependsOn("gameServer")
@@ -149,6 +150,7 @@ public abstract class EventController extends Wrap {
 	public abstract EventProtocolRequest getEventType();
 
 	@Async
+	@Trace (dispatcher=true)
 	protected abstract void processRequestEvent(RequestEvent event)
 			throws Exception;
 

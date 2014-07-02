@@ -284,6 +284,7 @@ public final class StructureProto {
       LAB(6, 6),
       EVO(7, 7),
       MINI_JOB(8, 9),
+      TEAM_CENTER(9, 10),
       ;
       
       public static final int NO_STRUCT_VALUE = 8;
@@ -295,6 +296,7 @@ public final class StructureProto {
       public static final int LAB_VALUE = 6;
       public static final int EVO_VALUE = 7;
       public static final int MINI_JOB_VALUE = 9;
+      public static final int TEAM_CENTER_VALUE = 10;
       
       
       public final int getNumber() { return value; }
@@ -310,6 +312,7 @@ public final class StructureProto {
           case 6: return LAB;
           case 7: return EVO;
           case 9: return MINI_JOB;
+          case 10: return TEAM_CENTER;
           default: return null;
         }
       }
@@ -340,7 +343,7 @@ public final class StructureProto {
       }
       
       private static final StructType[] VALUES = {
-        NO_STRUCT, RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, EVO, MINI_JOB, 
+        NO_STRUCT, RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, EVO, MINI_JOB, TEAM_CENTER, 
       };
       
       public static StructType valueOf(
@@ -11275,6 +11278,430 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EvoChamberProto)
   }
   
+  public interface TeamCenterProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
+    boolean hasStructInfo();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+  }
+  public static final class TeamCenterProto extends
+      com.google.protobuf.GeneratedMessage
+      implements TeamCenterProtoOrBuilder {
+    // Use TeamCenterProto.newBuilder() to construct.
+    private TeamCenterProto(Builder builder) {
+      super(builder);
+    }
+    private TeamCenterProto(boolean noInit) {}
+    
+    private static final TeamCenterProto defaultInstance;
+    public static TeamCenterProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public TeamCenterProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TeamCenterProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
+    public static final int STRUCTINFO_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_;
+    public boolean hasStructInfo() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+      return structInfo_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+      return structInfo_;
+    }
+    
+    private void initFields() {
+      structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, structInfo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, structInfo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.TeamCenterProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.TeamCenterProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TeamCenterProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.StructureProto.TeamCenterProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.TeamCenterProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.StructureProto.TeamCenterProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.StructureProto.TeamCenterProto build() {
+        com.lvl6.proto.StructureProto.TeamCenterProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.StructureProto.TeamCenterProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.StructureProto.TeamCenterProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.StructureProto.TeamCenterProto buildPartial() {
+        com.lvl6.proto.StructureProto.TeamCenterProto result = new com.lvl6.proto.StructureProto.TeamCenterProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (structInfoBuilder_ == null) {
+          result.structInfo_ = structInfo_;
+        } else {
+          result.structInfo_ = structInfoBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.TeamCenterProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.TeamCenterProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.TeamCenterProto other) {
+        if (other == com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance()) return this;
+        if (other.hasStructInfo()) {
+          mergeStructInfo(other.getStructInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructInfo()) {
+                subBuilder.mergeFrom(getStructInfo());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructInfo(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.StructureInfoProto structInfo = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structInfoBuilder_;
+      public boolean hasStructInfo() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructInfo() {
+        if (structInfoBuilder_ == null) {
+          return structInfo_;
+        } else {
+          return structInfoBuilder_.getMessage();
+        }
+      }
+      public Builder setStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structInfo_ = value;
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setStructInfo(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          structInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeStructInfo(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structInfo_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structInfo_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structInfo_).mergeFrom(value).buildPartial();
+          } else {
+            structInfo_ = value;
+          }
+          onChanged();
+        } else {
+          structInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructInfo() {
+        if (structInfoBuilder_ == null) {
+          structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructInfoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructInfoFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder() {
+        if (structInfoBuilder_ != null) {
+          return structInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return structInfo_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructInfoFieldBuilder() {
+        if (structInfoBuilder_ == null) {
+          structInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structInfo_,
+                  getParentForChildren(),
+                  isClean());
+          structInfo_ = null;
+        }
+        return structInfoBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TeamCenterProto)
+    }
+    
+    static {
+      defaultInstance = new TeamCenterProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TeamCenterProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
   private static
@@ -11350,6 +11777,11 @@ public final class StructureProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_TeamCenterProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11359,7 +11791,7 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\347\005\n\022St" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\370\005\n\022St" +
       "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
       "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
@@ -11374,78 +11806,80 @@ public final class StructureProto {
       "cription\030\020 \001(\t\022\030\n\020shortDescription\030\021 \001(\t" +
       "\022\025\n\rshadowImgName\030\023 \001(\t\022\034\n\024shadowVertica" +
       "lOffset\030\024 \001(\002\022\037\n\027shadowHorizontalOfffset" +
-      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"\225\001\n\nStructTy" +
+      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"\246\001\n\nStructTy" +
       "pe\022\r\n\tNO_STRUCT\020\010\022\026\n\022RESOURCE_GENERATOR\020" +
       "\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n" +
       "\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003" +
-      "EVO\020\007\022\014\n\010MINI_JOB\020\t\"\256\001\n\026ResourceGenerato",
-      "rProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pr" +
-      "oto.StructureInfoProto\0222\n\014resourceType\030\002" +
-      " \001(\0162\034.com.lvl6.proto.ResourceType\022\026\n\016pr" +
-      "oductionRate\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n" +
-      "\024ResourceStorageProto\0226\n\nstructInfo\030\001 \001(" +
-      "\0132\".com.lvl6.proto.StructureInfoProto\0222\n" +
-      "\014resourceType\030\002 \001(\0162\034.com.lvl6.proto.Res" +
-      "ourceType\022\020\n\010capacity\030\003 \001(\005\"s\n\rHospitalP" +
-      "roto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.prot" +
-      "o.StructureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022",
-      "\027\n\017healthPerSecond\030\003 \001(\002\"n\n\010LabProto\0226\n\n" +
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
-      "ureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017point" +
-      "sPerSecond\030\003 \001(\002\"\341\001\n\016ResidenceProto\0226\n\ns" +
-      "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu" +
-      "reInfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024" +
-      "numBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsReq" +
-      "uired\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(" +
-      "\005\022\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007" +
-      " \001(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001",
-      "(\0132\".com.lvl6.proto.StructureInfoProto\022 " +
-      "\n\030numResourceOneGenerators\030\002 \001(\005\022\036\n\026numR" +
-      "esourceOneStorages\030\003 \001(\005\022 \n\030numResourceT" +
-      "woGenerators\030\004 \001(\005\022\036\n\026numResourceTwoStor" +
-      "ages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumR" +
-      "esidences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005" +
-      "\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n " +
-      "\001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoC" +
-      "hambers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\n" +
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct",
-      "ureInfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022" +
-      "!\n\031hoursBetweenJobGeneration\030\003 \001(\005\"\232\002\n\026F" +
-      "ullUserStructureProto\022\024\n\014userStructId\030\001 " +
-      "\001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n" +
-      "\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001" +
-      "(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007 " +
-      "\001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013" +
-      "orientation\030\010 \001(\0162!.com.lvl6.proto.Struc" +
-      "tOrientation\022\031\n\021fbInviteStructLvl\030\t \001(\005\"" +
-      "\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002",
-      "\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 \001(" +
-      "\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto.C" +
-      "oordinateProto\"\342\002\n\rObstacleProto\022\022\n\nobst" +
-      "acleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCos" +
-      "tType\030\003 \001(\0162\034.com.lvl6.proto.ResourceTyp" +
-      "e\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(\005" +
-      "\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgNa" +
-      "me\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001(\002" +
-      "\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppear\030" +
-      "\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowVe",
-      "rticalOffset\030\r \001(\002\022\037\n\027shadowHorizontalOf" +
-      "ffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n\n" +
-      "obstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.c" +
-      "om.lvl6.proto.CoordinateProto\0226\n\013orienta" +
-      "tion\030\005 \001(\0162!.com.lvl6.proto.StructOrient" +
-      "ation\"\327\001\n\021UserObstacleProto\022\026\n\016userObsta" +
-      "cleId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobstacleI" +
-      "d\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl6." +
-      "proto.CoordinateProto\0226\n\013orientation\030\005 \001" +
-      "(\0162!.com.lvl6.proto.StructOrientation\022\030\n",
-      "\020removalStartTime\030\006 \001(\003\"I\n\017EvoChamberPro" +
-      "to\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto." +
-      "StructureInfoProto*I\n\014ResourceType\022\017\n\013NO" +
-      "_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003" +
-      "\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016NO" +
-      "_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITI" +
-      "ON_2\020\002B\020B\016StructureProto"
+      "EVO\020\007\022\014\n\010MINI_JOB\020\t\022\017\n\013TEAM_CENTER\020\n\"\256\001\n",
+      "\026ResourceGeneratorProto\0226\n\nstructInfo\030\001 " +
+      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
+      "2\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto.R" +
+      "esourceType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010c" +
+      "apacity\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226" +
+      "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
+      "ctureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034.c" +
+      "om.lvl6.proto.ResourceType\022\020\n\010capacity\030\003" +
+      " \001(\005\"s\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(" +
+      "\0132\".com.lvl6.proto.StructureInfoProto\022\021\n",
+      "\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(" +
+      "\002\"n\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
+      "lvl6.proto.StructureInfoProto\022\021\n\tqueueSi" +
+      "ze\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\341\001\n\016Re" +
+      "sidenceProto\0226\n\nstructInfo\030\001 \001(\0132\".com.l" +
+      "vl6.proto.StructureInfoProto\022\027\n\017numMonst" +
+      "erSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 " +
+      "\001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAccep" +
+      "tedFbInvites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001" +
+      "(\t\022\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownHallProto\022",
+      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
+      "uctureInfoProto\022 \n\030numResourceOneGenerat" +
+      "ors\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 \001(" +
+      "\005\022 \n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n\026n" +
+      "umResourceTwoStorages\030\005 \001(\005\022\024\n\014numHospit" +
+      "als\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numM" +
+      "onsterSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pv" +
+      "pQueueCashCost\030\n \001(\005\022\030\n\020resourceCapacity" +
+      "\030\013 \001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJ" +
+      "obCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.",
+      "lvl6.proto.StructureInfoProto\022\031\n\021generat" +
+      "edJobLimit\030\002 \001(\005\022!\n\031hoursBetweenJobGener" +
+      "ation\030\003 \001(\005\"\232\002\n\026FullUserStructureProto\022\024" +
+      "\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010" +
+      "structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n" +
+      "\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\022" +
+      "4\n\013coordinates\030\007 \001(\0132\037.com.lvl6.proto.Co" +
+      "ordinateProto\0226\n\013orientation\030\010 \001(\0162!.com" +
+      ".lvl6.proto.StructOrientation\022\031\n\021fbInvit" +
+      "eStructLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x",
+      "\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto" +
+      "\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
+      ".com.lvl6.proto.CoordinateProto\"\342\002\n\rObst" +
+      "acleProto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 " +
+      "\001(\t\0225\n\017removalCostType\030\003 \001(\0162\034.com.lvl6." +
+      "proto.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017seco" +
+      "ndsToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006heig" +
+      "ht\030\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVertical" +
+      "PixelOffset\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026" +
+      "\n\016chanceToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030",
+      "\014 \001(\t\022\034\n\024shadowVerticalOffset\030\r \001(\002\022\037\n\027s" +
+      "hadowHorizontalOfffset\030\016 \001(\002\"\227\001\n\024Minimum" +
+      "ObstacleProto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoo" +
+      "rdinate\030\002 \001(\0132\037.com.lvl6.proto.Coordinat" +
+      "eProto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.p" +
+      "roto.StructOrientation\"\327\001\n\021UserObstacleP" +
+      "roto\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n\006userId\030\002" +
+      " \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030" +
+      "\004 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\005 \001(\0162!.com.lvl6.proto.Str",
+      "uctOrientation\022\030\n\020removalStartTime\030\006 \001(\003" +
+      "\"I\n\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132" +
+      "\".com.lvl6.proto.StructureInfoProto\"I\n\017T" +
+      "eamCenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com" +
+      ".lvl6.proto.StructureInfoProto*I\n\014Resour" +
+      "ceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL" +
+      "\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrien" +
+      "tation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1" +
+      "\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11572,6 +12006,14 @@ public final class StructureProto {
               new java.lang.String[] { "StructInfo", },
               com.lvl6.proto.StructureProto.EvoChamberProto.class,
               com.lvl6.proto.StructureProto.EvoChamberProto.Builder.class);
+          internal_static_com_lvl6_proto_TeamCenterProto_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_TeamCenterProto_descriptor,
+              new java.lang.String[] { "StructInfo", },
+              com.lvl6.proto.StructureProto.TeamCenterProto.class,
+              com.lvl6.proto.StructureProto.TeamCenterProto.Builder.class);
           return null;
         }
       };

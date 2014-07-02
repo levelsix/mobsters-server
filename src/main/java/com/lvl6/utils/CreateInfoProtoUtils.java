@@ -71,6 +71,7 @@ import com.lvl6.info.StructureMiniJob;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
+import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
@@ -161,6 +162,7 @@ import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
+import com.lvl6.proto.StructureProto.TeamCenterProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
@@ -2294,6 +2296,19 @@ public class CreateInfoProtoUtils {
 	  ecpb.setStructInfo(sip);
 	  
 	  return ecpb.build();
+  }
+  
+  public static TeamCenterProto createTeamCenterProto(Structure s,
+	  StructureInfoProto sip, StructureTeamCenter sec)
+  {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+	  
+	  TeamCenterProto.Builder tcpb = TeamCenterProto.newBuilder();
+	  tcpb.setStructInfo(sip);
+	  
+	  return tcpb.build();
   }
   
   /**Task.proto*****************************************************/

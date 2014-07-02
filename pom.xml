@@ -96,7 +96,7 @@
 		<globals.appleBundleId>com.scopely.mobsquad</globals.appleBundleId>
 		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
-		
+
 		<lvl6.application.version>0.1f</lvl6.application.version>
 		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
 		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
@@ -117,7 +117,7 @@
 		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
 		<application.release.name>Kingdom</application.release.name>
 		<wicket.mode>development</wicket.mode>
-		
+
 		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
 		<lvl6.jedis.auth>L3v3lS!x_K!ngd0m$</lvl6.jedis.auth>
 		<lvl6.jedis.database>1</lvl6.jedis.database>
@@ -216,32 +216,13 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-<!-- 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.2</version>
-				<executions>
-					<execution>
-						<id>default-copy-resources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<overwrite>true</overwrite>
-							<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${project.basedir}/src/main/resources/</directory>
-									<includes>
-										<include>logback.xml</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
+				<version>2.4.2</version> <executions> <execution> <id>default-copy-resources</id> 
+				<phase>process-resources</phase> <goals> <goal>copy-resources</goal> </goals> 
+				<configuration> <overwrite>true</overwrite> <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory> 
+				<resources> <resource> <directory>${project.basedir}/src/main/resources/</directory> 
+				<includes> <include>logback.xml</include> </includes> </resource> </resources> 
+				</configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -376,11 +357,11 @@
 							<optionName>Stickiness Cookie Expiration</optionName>
 							<value>0</value>
 						</optionSetting>
- 						<optionSetting>
+						<optionSetting>
 							<namespace>aws:elb:policies</namespace>
 							<optionName>Stickiness Policy</optionName>
 							<value>true</value>
-						</optionSetting> 
+						</optionSetting>
 						<optionSetting>
 							<namespace>aws:elasticbeanstalk:hostmanager</namespace>
 							<optionName>LogPublicationControl</optionName>
@@ -445,9 +426,14 @@
 				<version>2.1.3.RELEASE</version>
 			</dependency>
 			<dependency>
-       			<groupId>net.sf.opencsv</groupId>
-       			<artifactId>opencsv</artifactId>
-      			<version>2.3</version>
+				<groupId>net.sf.opencsv</groupId>
+				<artifactId>opencsv</artifactId>
+				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newrelic.agent.java</groupId>
+				<artifactId>newrelic-api</artifactId>
+				<version>3.7.2</version>
 			</dependency>
 			<dependency>
 				<groupId>mysql</groupId>
@@ -744,9 +730,9 @@
 
 
 	<dependencies>
-	    <dependency>
-       		<groupId>net.sf.opencsv</groupId>
-      		<artifactId>opencsv</artifactId>
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -940,6 +926,11 @@
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.newrelic.agent.java</groupId>
+			<artifactId>newrelic-api</artifactId>
+			<version>3.7.2</version>
 		</dependency>
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
 			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 

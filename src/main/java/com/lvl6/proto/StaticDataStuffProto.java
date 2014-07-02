@@ -196,6 +196,16 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder getAllEvoChambersOrBuilder(
         int index);
     
+    // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+    java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> 
+        getAllTeamCentersList();
+    com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index);
+    int getAllTeamCentersCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
+        getAllTeamCentersOrBuilderList();
+    com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
+        int index);
+    
     // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
     java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> 
         getPersistentEventsList();
@@ -706,6 +716,27 @@ public final class StaticDataStuffProto {
       return allEvoChambers_.get(index);
     }
     
+    // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+    public static final int ALLTEAMCENTERS_FIELD_NUMBER = 30;
+    private java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> allTeamCenters_;
+    public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> getAllTeamCentersList() {
+      return allTeamCenters_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
+        getAllTeamCentersOrBuilderList() {
+      return allTeamCenters_;
+    }
+    public int getAllTeamCentersCount() {
+      return allTeamCenters_.size();
+    }
+    public com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index) {
+      return allTeamCenters_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
+        int index) {
+      return allTeamCenters_.get(index);
+    }
+    
     // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
     public static final int PERSISTENTEVENTS_FIELD_NUMBER = 18;
     private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_;
@@ -915,6 +946,7 @@ public final class StaticDataStuffProto {
       allTownHalls_ = java.util.Collections.emptyList();
       allMiniJobCenters_ = java.util.Collections.emptyList();
       allEvoChambers_ = java.util.Collections.emptyList();
+      allTeamCenters_ = java.util.Collections.emptyList();
       persistentEvents_ = java.util.Collections.emptyList();
       mbds_ = java.util.Collections.emptyList();
       raids_ = java.util.Collections.emptyList();
@@ -1020,6 +1052,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < allEvoChambers_.size(); i++) {
         output.writeMessage(29, allEvoChambers_.get(i));
+      }
+      for (int i = 0; i < allTeamCenters_.size(); i++) {
+        output.writeMessage(30, allTeamCenters_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1141,6 +1176,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < allEvoChambers_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(29, allEvoChambers_.get(i));
+      }
+      for (int i = 0; i < allTeamCenters_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(30, allTeamCenters_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1277,6 +1316,7 @@ public final class StaticDataStuffProto {
           getAllTownHallsFieldBuilder();
           getAllMiniJobCentersFieldBuilder();
           getAllEvoChambersFieldBuilder();
+          getAllTeamCentersFieldBuilder();
           getPersistentEventsFieldBuilder();
           getMbdsFieldBuilder();
           getRaidsFieldBuilder();
@@ -1408,57 +1448,63 @@ public final class StaticDataStuffProto {
         } else {
           allEvoChambersBuilder_.clear();
         }
+        if (allTeamCentersBuilder_ == null) {
+          allTeamCenters_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00080000);
+        } else {
+          allTeamCentersBuilder_.clear();
+        }
         if (persistentEventsBuilder_ == null) {
           persistentEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
         } else {
           persistentEventsBuilder_.clear();
         }
         if (mbdsBuilder_ == null) {
           mbds_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
         } else {
           mbdsBuilder_.clear();
         }
         if (raidsBuilder_ == null) {
           raids_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
         } else {
           raidsBuilder_.clear();
         }
         if (persistentClanEventsBuilder_ == null) {
           persistentClanEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
         } else {
           persistentClanEventsBuilder_.clear();
         }
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
         } else {
           itemsBuilder_.clear();
         }
         if (obstaclesBuilder_ == null) {
           obstacles_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
         } else {
           obstaclesBuilder_.clear();
         }
         if (clanIconsBuilder_ == null) {
           clanIcons_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
         } else {
           clanIconsBuilder_.clear();
         }
         if (leaguesBuilder_ == null) {
           leagues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
         } else {
           leaguesBuilder_.clear();
         }
         if (achievementsBuilder_ == null) {
           achievements_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
         } else {
           achievementsBuilder_.clear();
         }
@@ -1670,82 +1716,91 @@ public final class StaticDataStuffProto {
         } else {
           result.allEvoChambers_ = allEvoChambersBuilder_.build();
         }
-        if (persistentEventsBuilder_ == null) {
+        if (allTeamCentersBuilder_ == null) {
           if (((bitField0_ & 0x00080000) == 0x00080000)) {
-            persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
+            allTeamCenters_ = java.util.Collections.unmodifiableList(allTeamCenters_);
             bitField0_ = (bitField0_ & ~0x00080000);
+          }
+          result.allTeamCenters_ = allTeamCenters_;
+        } else {
+          result.allTeamCenters_ = allTeamCentersBuilder_.build();
+        }
+        if (persistentEventsBuilder_ == null) {
+          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+            persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
+            bitField0_ = (bitField0_ & ~0x00100000);
           }
           result.persistentEvents_ = persistentEvents_;
         } else {
           result.persistentEvents_ = persistentEventsBuilder_.build();
         }
         if (mbdsBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          if (((bitField0_ & 0x00200000) == 0x00200000)) {
             mbds_ = java.util.Collections.unmodifiableList(mbds_);
-            bitField0_ = (bitField0_ & ~0x00100000);
+            bitField0_ = (bitField0_ & ~0x00200000);
           }
           result.mbds_ = mbds_;
         } else {
           result.mbds_ = mbdsBuilder_.build();
         }
         if (raidsBuilder_ == null) {
-          if (((bitField0_ & 0x00200000) == 0x00200000)) {
+          if (((bitField0_ & 0x00400000) == 0x00400000)) {
             raids_ = java.util.Collections.unmodifiableList(raids_);
-            bitField0_ = (bitField0_ & ~0x00200000);
+            bitField0_ = (bitField0_ & ~0x00400000);
           }
           result.raids_ = raids_;
         } else {
           result.raids_ = raidsBuilder_.build();
         }
         if (persistentClanEventsBuilder_ == null) {
-          if (((bitField0_ & 0x00400000) == 0x00400000)) {
+          if (((bitField0_ & 0x00800000) == 0x00800000)) {
             persistentClanEvents_ = java.util.Collections.unmodifiableList(persistentClanEvents_);
-            bitField0_ = (bitField0_ & ~0x00400000);
+            bitField0_ = (bitField0_ & ~0x00800000);
           }
           result.persistentClanEvents_ = persistentClanEvents_;
         } else {
           result.persistentClanEvents_ = persistentClanEventsBuilder_.build();
         }
         if (itemsBuilder_ == null) {
-          if (((bitField0_ & 0x00800000) == 0x00800000)) {
+          if (((bitField0_ & 0x01000000) == 0x01000000)) {
             items_ = java.util.Collections.unmodifiableList(items_);
-            bitField0_ = (bitField0_ & ~0x00800000);
+            bitField0_ = (bitField0_ & ~0x01000000);
           }
           result.items_ = items_;
         } else {
           result.items_ = itemsBuilder_.build();
         }
         if (obstaclesBuilder_ == null) {
-          if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          if (((bitField0_ & 0x02000000) == 0x02000000)) {
             obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
-            bitField0_ = (bitField0_ & ~0x01000000);
+            bitField0_ = (bitField0_ & ~0x02000000);
           }
           result.obstacles_ = obstacles_;
         } else {
           result.obstacles_ = obstaclesBuilder_.build();
         }
         if (clanIconsBuilder_ == null) {
-          if (((bitField0_ & 0x02000000) == 0x02000000)) {
+          if (((bitField0_ & 0x04000000) == 0x04000000)) {
             clanIcons_ = java.util.Collections.unmodifiableList(clanIcons_);
-            bitField0_ = (bitField0_ & ~0x02000000);
+            bitField0_ = (bitField0_ & ~0x04000000);
           }
           result.clanIcons_ = clanIcons_;
         } else {
           result.clanIcons_ = clanIconsBuilder_.build();
         }
         if (leaguesBuilder_ == null) {
-          if (((bitField0_ & 0x04000000) == 0x04000000)) {
+          if (((bitField0_ & 0x08000000) == 0x08000000)) {
             leagues_ = java.util.Collections.unmodifiableList(leagues_);
-            bitField0_ = (bitField0_ & ~0x04000000);
+            bitField0_ = (bitField0_ & ~0x08000000);
           }
           result.leagues_ = leagues_;
         } else {
           result.leagues_ = leaguesBuilder_.build();
         }
         if (achievementsBuilder_ == null) {
-          if (((bitField0_ & 0x08000000) == 0x08000000)) {
+          if (((bitField0_ & 0x10000000) == 0x10000000)) {
             achievements_ = java.util.Collections.unmodifiableList(achievements_);
-            bitField0_ = (bitField0_ & ~0x08000000);
+            bitField0_ = (bitField0_ & ~0x10000000);
           }
           result.achievements_ = achievements_;
         } else {
@@ -2238,11 +2293,37 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (allTeamCentersBuilder_ == null) {
+          if (!other.allTeamCenters_.isEmpty()) {
+            if (allTeamCenters_.isEmpty()) {
+              allTeamCenters_ = other.allTeamCenters_;
+              bitField0_ = (bitField0_ & ~0x00080000);
+            } else {
+              ensureAllTeamCentersIsMutable();
+              allTeamCenters_.addAll(other.allTeamCenters_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.allTeamCenters_.isEmpty()) {
+            if (allTeamCentersBuilder_.isEmpty()) {
+              allTeamCentersBuilder_.dispose();
+              allTeamCentersBuilder_ = null;
+              allTeamCenters_ = other.allTeamCenters_;
+              bitField0_ = (bitField0_ & ~0x00080000);
+              allTeamCentersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAllTeamCentersFieldBuilder() : null;
+            } else {
+              allTeamCentersBuilder_.addAllMessages(other.allTeamCenters_);
+            }
+          }
+        }
         if (persistentEventsBuilder_ == null) {
           if (!other.persistentEvents_.isEmpty()) {
             if (persistentEvents_.isEmpty()) {
               persistentEvents_ = other.persistentEvents_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
             } else {
               ensurePersistentEventsIsMutable();
               persistentEvents_.addAll(other.persistentEvents_);
@@ -2255,7 +2336,7 @@ public final class StaticDataStuffProto {
               persistentEventsBuilder_.dispose();
               persistentEventsBuilder_ = null;
               persistentEvents_ = other.persistentEvents_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
               persistentEventsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPersistentEventsFieldBuilder() : null;
@@ -2268,7 +2349,7 @@ public final class StaticDataStuffProto {
           if (!other.mbds_.isEmpty()) {
             if (mbds_.isEmpty()) {
               mbds_ = other.mbds_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
             } else {
               ensureMbdsIsMutable();
               mbds_.addAll(other.mbds_);
@@ -2281,7 +2362,7 @@ public final class StaticDataStuffProto {
               mbdsBuilder_.dispose();
               mbdsBuilder_ = null;
               mbds_ = other.mbds_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
               mbdsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMbdsFieldBuilder() : null;
@@ -2294,7 +2375,7 @@ public final class StaticDataStuffProto {
           if (!other.raids_.isEmpty()) {
             if (raids_.isEmpty()) {
               raids_ = other.raids_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
             } else {
               ensureRaidsIsMutable();
               raids_.addAll(other.raids_);
@@ -2307,7 +2388,7 @@ public final class StaticDataStuffProto {
               raidsBuilder_.dispose();
               raidsBuilder_ = null;
               raids_ = other.raids_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
               raidsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRaidsFieldBuilder() : null;
@@ -2320,7 +2401,7 @@ public final class StaticDataStuffProto {
           if (!other.persistentClanEvents_.isEmpty()) {
             if (persistentClanEvents_.isEmpty()) {
               persistentClanEvents_ = other.persistentClanEvents_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
             } else {
               ensurePersistentClanEventsIsMutable();
               persistentClanEvents_.addAll(other.persistentClanEvents_);
@@ -2333,7 +2414,7 @@ public final class StaticDataStuffProto {
               persistentClanEventsBuilder_.dispose();
               persistentClanEventsBuilder_ = null;
               persistentClanEvents_ = other.persistentClanEvents_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
               persistentClanEventsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPersistentClanEventsFieldBuilder() : null;
@@ -2346,7 +2427,7 @@ public final class StaticDataStuffProto {
           if (!other.items_.isEmpty()) {
             if (items_.isEmpty()) {
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
             } else {
               ensureItemsIsMutable();
               items_.addAll(other.items_);
@@ -2359,7 +2440,7 @@ public final class StaticDataStuffProto {
               itemsBuilder_.dispose();
               itemsBuilder_ = null;
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
               itemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getItemsFieldBuilder() : null;
@@ -2372,7 +2453,7 @@ public final class StaticDataStuffProto {
           if (!other.obstacles_.isEmpty()) {
             if (obstacles_.isEmpty()) {
               obstacles_ = other.obstacles_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
             } else {
               ensureObstaclesIsMutable();
               obstacles_.addAll(other.obstacles_);
@@ -2385,7 +2466,7 @@ public final class StaticDataStuffProto {
               obstaclesBuilder_.dispose();
               obstaclesBuilder_ = null;
               obstacles_ = other.obstacles_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
               obstaclesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getObstaclesFieldBuilder() : null;
@@ -2398,7 +2479,7 @@ public final class StaticDataStuffProto {
           if (!other.clanIcons_.isEmpty()) {
             if (clanIcons_.isEmpty()) {
               clanIcons_ = other.clanIcons_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
             } else {
               ensureClanIconsIsMutable();
               clanIcons_.addAll(other.clanIcons_);
@@ -2411,7 +2492,7 @@ public final class StaticDataStuffProto {
               clanIconsBuilder_.dispose();
               clanIconsBuilder_ = null;
               clanIcons_ = other.clanIcons_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
               clanIconsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanIconsFieldBuilder() : null;
@@ -2424,7 +2505,7 @@ public final class StaticDataStuffProto {
           if (!other.leagues_.isEmpty()) {
             if (leagues_.isEmpty()) {
               leagues_ = other.leagues_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
             } else {
               ensureLeaguesIsMutable();
               leagues_.addAll(other.leagues_);
@@ -2437,7 +2518,7 @@ public final class StaticDataStuffProto {
               leaguesBuilder_.dispose();
               leaguesBuilder_ = null;
               leagues_ = other.leagues_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
               leaguesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLeaguesFieldBuilder() : null;
@@ -2450,7 +2531,7 @@ public final class StaticDataStuffProto {
           if (!other.achievements_.isEmpty()) {
             if (achievements_.isEmpty()) {
               achievements_ = other.achievements_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
             } else {
               ensureAchievementsIsMutable();
               achievements_.addAll(other.achievements_);
@@ -2463,7 +2544,7 @@ public final class StaticDataStuffProto {
               achievementsBuilder_.dispose();
               achievementsBuilder_ = null;
               achievements_ = other.achievements_;
-              bitField0_ = (bitField0_ & ~0x08000000);
+              bitField0_ = (bitField0_ & ~0x10000000);
               achievementsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAchievementsFieldBuilder() : null;
@@ -2672,6 +2753,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.StructureProto.EvoChamberProto.Builder subBuilder = com.lvl6.proto.StructureProto.EvoChamberProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAllEvoChambers(subBuilder.buildPartial());
+              break;
+            }
+            case 242: {
+              com.lvl6.proto.StructureProto.TeamCenterProto.Builder subBuilder = com.lvl6.proto.StructureProto.TeamCenterProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAllTeamCenters(subBuilder.buildPartial());
               break;
             }
           }
@@ -6118,13 +6205,199 @@ public final class StaticDataStuffProto {
         return allEvoChambersBuilder_;
       }
       
+      // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+      private java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> allTeamCenters_ =
+        java.util.Collections.emptyList();
+      private void ensureAllTeamCentersIsMutable() {
+        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
+          allTeamCenters_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TeamCenterProto>(allTeamCenters_);
+          bitField0_ |= 0x00080000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.TeamCenterProto, com.lvl6.proto.StructureProto.TeamCenterProto.Builder, com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> allTeamCentersBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> getAllTeamCentersList() {
+        if (allTeamCentersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allTeamCenters_);
+        } else {
+          return allTeamCentersBuilder_.getMessageList();
+        }
+      }
+      public int getAllTeamCentersCount() {
+        if (allTeamCentersBuilder_ == null) {
+          return allTeamCenters_.size();
+        } else {
+          return allTeamCentersBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index) {
+        if (allTeamCentersBuilder_ == null) {
+          return allTeamCenters_.get(index);
+        } else {
+          return allTeamCentersBuilder_.getMessage(index);
+        }
+      }
+      public Builder setAllTeamCenters(
+          int index, com.lvl6.proto.StructureProto.TeamCenterProto value) {
+        if (allTeamCentersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.set(index, value);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setAllTeamCenters(
+          int index, com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
+        if (allTeamCentersBuilder_ == null) {
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllTeamCenters(com.lvl6.proto.StructureProto.TeamCenterProto value) {
+        if (allTeamCentersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.add(value);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addAllTeamCenters(
+          int index, com.lvl6.proto.StructureProto.TeamCenterProto value) {
+        if (allTeamCentersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.add(index, value);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addAllTeamCenters(
+          com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
+        if (allTeamCentersBuilder_ == null) {
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.add(builderForValue.build());
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllTeamCenters(
+          int index, com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
+        if (allTeamCentersBuilder_ == null) {
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllAllTeamCenters(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.TeamCenterProto> values) {
+        if (allTeamCentersBuilder_ == null) {
+          ensureAllTeamCentersIsMutable();
+          super.addAll(values, allTeamCenters_);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearAllTeamCenters() {
+        if (allTeamCentersBuilder_ == null) {
+          allTeamCenters_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00080000);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeAllTeamCenters(int index) {
+        if (allTeamCentersBuilder_ == null) {
+          ensureAllTeamCentersIsMutable();
+          allTeamCenters_.remove(index);
+          onChanged();
+        } else {
+          allTeamCentersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.TeamCenterProto.Builder getAllTeamCentersBuilder(
+          int index) {
+        return getAllTeamCentersFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
+          int index) {
+        if (allTeamCentersBuilder_ == null) {
+          return allTeamCenters_.get(index);  } else {
+          return allTeamCentersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
+           getAllTeamCentersOrBuilderList() {
+        if (allTeamCentersBuilder_ != null) {
+          return allTeamCentersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(allTeamCenters_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.TeamCenterProto.Builder addAllTeamCentersBuilder() {
+        return getAllTeamCentersFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.TeamCenterProto.Builder addAllTeamCentersBuilder(
+          int index) {
+        return getAllTeamCentersFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto.Builder> 
+           getAllTeamCentersBuilderList() {
+        return getAllTeamCentersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.TeamCenterProto, com.lvl6.proto.StructureProto.TeamCenterProto.Builder, com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
+          getAllTeamCentersFieldBuilder() {
+        if (allTeamCentersBuilder_ == null) {
+          allTeamCentersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.TeamCenterProto, com.lvl6.proto.StructureProto.TeamCenterProto.Builder, com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder>(
+                  allTeamCenters_,
+                  ((bitField0_ & 0x00080000) == 0x00080000),
+                  getParentForChildren(),
+                  isClean());
+          allTeamCenters_ = null;
+        }
+        return allTeamCentersBuilder_;
+      }
+      
       // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
       private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentEventsIsMutable() {
-        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
           persistentEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.PersistentEventProto>(persistentEvents_);
-          bitField0_ |= 0x00080000;
+          bitField0_ |= 0x00100000;
          }
       }
       
@@ -6240,7 +6513,7 @@ public final class StaticDataStuffProto {
       public Builder clearPersistentEvents() {
         if (persistentEventsBuilder_ == null) {
           persistentEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
           onChanged();
         } else {
           persistentEventsBuilder_.clear();
@@ -6296,7 +6569,7 @@ public final class StaticDataStuffProto {
           persistentEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder>(
                   persistentEvents_,
-                  ((bitField0_ & 0x00080000) == 0x00080000),
+                  ((bitField0_ & 0x00100000) == 0x00100000),
                   getParentForChildren(),
                   isClean());
           persistentEvents_ = null;
@@ -6308,9 +6581,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_ =
         java.util.Collections.emptyList();
       private void ensureMbdsIsMutable() {
-        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
           mbds_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto>(mbds_);
-          bitField0_ |= 0x00100000;
+          bitField0_ |= 0x00200000;
          }
       }
       
@@ -6426,7 +6699,7 @@ public final class StaticDataStuffProto {
       public Builder clearMbds() {
         if (mbdsBuilder_ == null) {
           mbds_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
           onChanged();
         } else {
           mbdsBuilder_.clear();
@@ -6482,7 +6755,7 @@ public final class StaticDataStuffProto {
           mbdsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder>(
                   mbds_,
-                  ((bitField0_ & 0x00100000) == 0x00100000),
+                  ((bitField0_ & 0x00200000) == 0x00200000),
                   getParentForChildren(),
                   isClean());
           mbds_ = null;
@@ -6494,9 +6767,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> raids_ =
         java.util.Collections.emptyList();
       private void ensureRaidsIsMutable() {
-        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
           raids_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidProto>(raids_);
-          bitField0_ |= 0x00200000;
+          bitField0_ |= 0x00400000;
          }
       }
       
@@ -6612,7 +6885,7 @@ public final class StaticDataStuffProto {
       public Builder clearRaids() {
         if (raidsBuilder_ == null) {
           raids_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
           onChanged();
         } else {
           raidsBuilder_.clear();
@@ -6668,7 +6941,7 @@ public final class StaticDataStuffProto {
           raidsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanRaidProto, com.lvl6.proto.ClanProto.ClanRaidProto.Builder, com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder>(
                   raids_,
-                  ((bitField0_ & 0x00200000) == 0x00200000),
+                  ((bitField0_ & 0x00400000) == 0x00400000),
                   getParentForChildren(),
                   isClean());
           raids_ = null;
@@ -6680,9 +6953,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> persistentClanEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentClanEventsIsMutable() {
-        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
           persistentClanEvents_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventProto>(persistentClanEvents_);
-          bitField0_ |= 0x00400000;
+          bitField0_ |= 0x00800000;
          }
       }
       
@@ -6798,7 +7071,7 @@ public final class StaticDataStuffProto {
       public Builder clearPersistentClanEvents() {
         if (persistentClanEventsBuilder_ == null) {
           persistentClanEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
           onChanged();
         } else {
           persistentClanEventsBuilder_.clear();
@@ -6854,7 +7127,7 @@ public final class StaticDataStuffProto {
           persistentClanEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.PersistentClanEventProto, com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder>(
                   persistentClanEvents_,
-                  ((bitField0_ & 0x00400000) == 0x00400000),
+                  ((bitField0_ & 0x00800000) == 0x00800000),
                   getParentForChildren(),
                   isClean());
           persistentClanEvents_ = null;
@@ -6866,9 +7139,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.QuestProto.ItemProto> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
-        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
+        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
           items_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.ItemProto>(items_);
-          bitField0_ |= 0x00800000;
+          bitField0_ |= 0x01000000;
          }
       }
       
@@ -6984,7 +7257,7 @@ public final class StaticDataStuffProto {
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
           onChanged();
         } else {
           itemsBuilder_.clear();
@@ -7040,7 +7313,7 @@ public final class StaticDataStuffProto {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.QuestProto.ItemProto, com.lvl6.proto.QuestProto.ItemProto.Builder, com.lvl6.proto.QuestProto.ItemProtoOrBuilder>(
                   items_,
-                  ((bitField0_ & 0x00800000) == 0x00800000),
+                  ((bitField0_ & 0x01000000) == 0x01000000),
                   getParentForChildren(),
                   isClean());
           items_ = null;
@@ -7052,9 +7325,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_ =
         java.util.Collections.emptyList();
       private void ensureObstaclesIsMutable() {
-        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
           obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ObstacleProto>(obstacles_);
-          bitField0_ |= 0x01000000;
+          bitField0_ |= 0x02000000;
          }
       }
       
@@ -7170,7 +7443,7 @@ public final class StaticDataStuffProto {
       public Builder clearObstacles() {
         if (obstaclesBuilder_ == null) {
           obstacles_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
           onChanged();
         } else {
           obstaclesBuilder_.clear();
@@ -7226,7 +7499,7 @@ public final class StaticDataStuffProto {
           obstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder>(
                   obstacles_,
-                  ((bitField0_ & 0x01000000) == 0x01000000),
+                  ((bitField0_ & 0x02000000) == 0x02000000),
                   getParentForChildren(),
                   isClean());
           obstacles_ = null;
@@ -7238,9 +7511,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_ =
         java.util.Collections.emptyList();
       private void ensureClanIconsIsMutable() {
-        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
+        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
           clanIcons_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanIconProto>(clanIcons_);
-          bitField0_ |= 0x02000000;
+          bitField0_ |= 0x04000000;
          }
       }
       
@@ -7356,7 +7629,7 @@ public final class StaticDataStuffProto {
       public Builder clearClanIcons() {
         if (clanIconsBuilder_ == null) {
           clanIcons_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
           onChanged();
         } else {
           clanIconsBuilder_.clear();
@@ -7412,7 +7685,7 @@ public final class StaticDataStuffProto {
           clanIconsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder>(
                   clanIcons_,
-                  ((bitField0_ & 0x02000000) == 0x02000000),
+                  ((bitField0_ & 0x04000000) == 0x04000000),
                   getParentForChildren(),
                   isClean());
           clanIcons_ = null;
@@ -7424,9 +7697,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_ =
         java.util.Collections.emptyList();
       private void ensureLeaguesIsMutable() {
-        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
           leagues_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpLeagueProto>(leagues_);
-          bitField0_ |= 0x04000000;
+          bitField0_ |= 0x08000000;
          }
       }
       
@@ -7542,7 +7815,7 @@ public final class StaticDataStuffProto {
       public Builder clearLeagues() {
         if (leaguesBuilder_ == null) {
           leagues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
           onChanged();
         } else {
           leaguesBuilder_.clear();
@@ -7598,7 +7871,7 @@ public final class StaticDataStuffProto {
           leaguesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder>(
                   leagues_,
-                  ((bitField0_ & 0x04000000) == 0x04000000),
+                  ((bitField0_ & 0x08000000) == 0x08000000),
                   getParentForChildren(),
                   isClean());
           leagues_ = null;
@@ -7610,9 +7883,9 @@ public final class StaticDataStuffProto {
       private java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> achievements_ =
         java.util.Collections.emptyList();
       private void ensureAchievementsIsMutable() {
-        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
+        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
           achievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.AchievementProto>(achievements_);
-          bitField0_ |= 0x08000000;
+          bitField0_ |= 0x10000000;
          }
       }
       
@@ -7728,7 +8001,7 @@ public final class StaticDataStuffProto {
       public Builder clearAchievements() {
         if (achievementsBuilder_ == null) {
           achievements_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x08000000);
+          bitField0_ = (bitField0_ & ~0x10000000);
           onChanged();
         } else {
           achievementsBuilder_.clear();
@@ -7784,7 +8057,7 @@ public final class StaticDataStuffProto {
           achievementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.AchievementStuffProto.AchievementProto, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder>(
                   achievements_,
-                  ((bitField0_ & 0x08000000) == 0x08000000),
+                  ((bitField0_ & 0x10000000) == 0x10000000),
                   getParentForChildren(),
                   isClean());
           achievements_ = null;
@@ -7821,7 +8094,7 @@ public final class StaticDataStuffProto {
       "evementStuff.proto\032\014Battle.proto\032\026Booste" +
       "rPackStuff.proto\032\nCity.proto\032\nClan.proto" +
       "\032\022MonsterStuff.proto\032\013Quest.proto\032\017Struc" +
-      "ture.proto\032\nTask.proto\032\nUser.proto\"\234\014\n\017S" +
+      "ture.proto\032\nTask.proto\032\nUser.proto\"\325\014\n\017S" +
       "taticDataProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
       "6.proto.MinimumUserProto\022>\n\016expansionCos" +
       "ts\030\002 \003(\0132&.com.lvl6.proto.CityExpansionC" +
@@ -7848,20 +8121,22 @@ public final class StaticDataStuffProto {
       "\003(\0132\035.com.lvl6.proto.TownHallProto\022=\n\021al" +
       "lMiniJobCenters\030\033 \003(\0132\".com.lvl6.proto.M",
       "iniJobCenterProto\0227\n\016allEvoChambers\030\035 \003(" +
-      "\0132\037.com.lvl6.proto.EvoChamberProto\022>\n\020pe" +
-      "rsistentEvents\030\022 \003(\0132$.com.lvl6.proto.Pe" +
-      "rsistentEventProto\0228\n\004mbds\030\023 \003(\0132*.com.l" +
-      "vl6.proto.MonsterBattleDialogueProto\022,\n\005" +
-      "raids\030\024 \003(\0132\035.com.lvl6.proto.ClanRaidPro" +
-      "to\022F\n\024persistentClanEvents\030\025 \003(\0132(.com.l" +
-      "vl6.proto.PersistentClanEventProto\022(\n\005it" +
-      "ems\030\026 \003(\0132\031.com.lvl6.proto.ItemProto\0220\n\t" +
-      "obstacles\030\027 \003(\0132\035.com.lvl6.proto.Obstacl",
-      "eProto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6.pro" +
-      "to.ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036.com." +
-      "lvl6.proto.PvpLeagueProto\0226\n\014achievement" +
-      "s\030\032 \003(\0132 .com.lvl6.proto.AchievementProt" +
-      "oB\026B\024StaticDataStuffProto"
+      "\0132\037.com.lvl6.proto.EvoChamberProto\0227\n\016al" +
+      "lTeamCenters\030\036 \003(\0132\037.com.lvl6.proto.Team" +
+      "CenterProto\022>\n\020persistentEvents\030\022 \003(\0132$." +
+      "com.lvl6.proto.PersistentEventProto\0228\n\004m" +
+      "bds\030\023 \003(\0132*.com.lvl6.proto.MonsterBattle" +
+      "DialogueProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6." +
+      "proto.ClanRaidProto\022F\n\024persistentClanEve" +
+      "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
+      "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr",
+      "oto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.l" +
+      "vl6.proto.ObstacleProto\0220\n\tclanIcons\030\030 \003" +
+      "(\0132\035.com.lvl6.proto.ClanIconProto\022/\n\007lea" +
+      "gues\030\031 \003(\0132\036.com.lvl6.proto.PvpLeaguePro" +
+      "to\0226\n\014achievements\030\032 \003(\0132 .com.lvl6.prot" +
+      "o.AchievementProtoB\026B\024StaticDataStuffPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7873,7 +8148,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "AllMiniJobCenters", "AllEvoChambers", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;
