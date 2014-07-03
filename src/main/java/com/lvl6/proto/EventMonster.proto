@@ -107,7 +107,7 @@ message SubmitMonsterEnhancementResponseProto {
 message EnhancementWaitTimeCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	
-	//speeds up all or some monsters finished healing by waiting 
+	//speeds up consuming all queued monsters or enhancing finished by waiting 
 	optional bool isSpeedup = 2; 
 	//will be set if isSpeedup is true (positive amount)
 	optional int32 gemsForSpeedup = 3;

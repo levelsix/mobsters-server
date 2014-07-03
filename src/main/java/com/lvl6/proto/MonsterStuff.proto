@@ -152,6 +152,7 @@ message UserMonsterCurrentExpProto {
 	optional int64 userMonsterId = 1;
 	optional int32 expectedExperience = 2;
 	optional int32 expectedLevel = 3;
+	optional int32 expectedHp = 4;
 }
 
 //------------------------------------------------------------------------------------------
