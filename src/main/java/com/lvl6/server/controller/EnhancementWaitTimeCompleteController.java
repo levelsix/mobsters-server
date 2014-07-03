@@ -247,10 +247,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
   	int newExp = umcep.getExpectedExperience();
   	int newLvl = umcep.getExpectedLevel();
+  	int newHp = umcep.getExpectedHp();
   	
   	//GIVE THE MONSTER EXP
   	int num = UpdateUtils.get().updateUserMonsterExpAndLvl(userMonsterIdBeingEnhanced,
-  			newExp, newLvl);
+  			newExp, newLvl, newHp);
   	log.info("num updated=" + num);
 
 	  return true;

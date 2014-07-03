@@ -7190,6 +7190,10 @@ public final class MonsterStuffProto {
     // optional int32 expectedLevel = 3;
     boolean hasExpectedLevel();
     int getExpectedLevel();
+    
+    // optional int32 expectedHp = 4;
+    boolean hasExpectedHp();
+    int getExpectedHp();
   }
   public static final class UserMonsterCurrentExpProto extends
       com.google.protobuf.GeneratedMessage
@@ -7250,10 +7254,21 @@ public final class MonsterStuffProto {
       return expectedLevel_;
     }
     
+    // optional int32 expectedHp = 4;
+    public static final int EXPECTEDHP_FIELD_NUMBER = 4;
+    private int expectedHp_;
+    public boolean hasExpectedHp() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getExpectedHp() {
+      return expectedHp_;
+    }
+    
     private void initFields() {
       userMonsterId_ = 0L;
       expectedExperience_ = 0;
       expectedLevel_ = 0;
+      expectedHp_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7276,6 +7291,9 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, expectedLevel_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, expectedHp_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -7296,6 +7314,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, expectedLevel_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, expectedHp_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7427,6 +7449,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         expectedLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        expectedHp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -7477,6 +7501,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.expectedLevel_ = expectedLevel_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.expectedHp_ = expectedHp_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7501,6 +7529,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasExpectedLevel()) {
           setExpectedLevel(other.getExpectedLevel());
+        }
+        if (other.hasExpectedHp()) {
+          setExpectedHp(other.getExpectedHp());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7546,6 +7577,11 @@ public final class MonsterStuffProto {
             case 24: {
               bitField0_ |= 0x00000004;
               expectedLevel_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              expectedHp_ = input.readInt32();
               break;
             }
           }
@@ -7613,6 +7649,27 @@ public final class MonsterStuffProto {
       public Builder clearExpectedLevel() {
         bitField0_ = (bitField0_ & ~0x00000004);
         expectedLevel_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 expectedHp = 4;
+      private int expectedHp_ ;
+      public boolean hasExpectedHp() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getExpectedHp() {
+        return expectedHp_;
+      }
+      public Builder setExpectedHp(int value) {
+        bitField0_ |= 0x00000008;
+        expectedHp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearExpectedHp() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        expectedHp_ = 0;
         onChanged();
         return this;
       }
@@ -9888,23 +9945,23 @@ public final class MonsterStuffProto {
       "to.UserEnhancementItemProto\"i\n\030UserEnhan" +
       "cementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037" +
       "\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renhan" +
-      "cingCost\030\003 \001(\005\"f\n\032UserMonsterCurrentExpP" +
+      "cingCost\030\003 \001(\005\"z\n\032UserMonsterCurrentExpP" +
       "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expectedE" +
-      "xperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H" +
-      "\n\033MinimumUserMonsterSellProto\022\025\n\ruserMon" +
-      "sterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033User" +
-      "CurrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005\022" +
-      "9\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Fu",
-      "llUserMonsterProto\"e\n\031UserMonsterEvoluti" +
-      "onProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022\026" +
-      "\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(" +
-      "\003\"\337\001\n\032MonsterBattleDialogueProto\022\021\n\tmons" +
-      "terId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com." +
-      "lvl6.proto.MonsterBattleDialogueProto.Di" +
-      "alogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabil" +
-      "ityUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_D" +
-      "IALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterSt" +
-      "uffProto"
+      "xperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022" +
+      "\n\nexpectedHp\030\004 \001(\005\"H\n\033MinimumUserMonster" +
+      "SellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncash" +
+      "Amount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeamPr" +
+      "oto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\013",
+      "2$.com.lvl6.proto.FullUserMonsterProto\"e" +
+      "\n\031UserMonsterEvolutionProto\022\035\n\025catalystU" +
+      "serMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003" +
+      "(\003\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterBattleD" +
+      "ialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialo" +
+      "gueType\030\003 \001(\01627.com.lvl6.proto.MonsterBa" +
+      "ttleDialogueProto.DialogueType\022\020\n\010dialog" +
+      "ue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001(\002\"1\n\014" +
+      "DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_B" +
+      "ATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9980,7 +10037,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "ExpectedExperience", "ExpectedLevel", },
+              new java.lang.String[] { "UserMonsterId", "ExpectedExperience", "ExpectedLevel", "ExpectedHp", },
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor =
