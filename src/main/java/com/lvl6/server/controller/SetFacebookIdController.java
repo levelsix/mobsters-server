@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetFacebookIdRequestEvent;
 import com.lvl6.events.response.SetFacebookIdResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
@@ -94,6 +96,13 @@ import com.lvl6.utils.RetrieveUtils;
       resEvent.setTag(event.getTag());
       resEvent.setSetFacebookIdResponseProto(resProto);
       server.writeEvent(resEvent);
+      
+      if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
+    	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+    	  resEventUpdate.setTag(event.getTag());
+    	  server.writeEvent(resEventUpdate);
+      }
       
     } catch (Exception e) {
     	log.error("exception in SetFacebookIdController processEvent", e);
