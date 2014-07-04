@@ -372,8 +372,12 @@ public class MiscMethods {
     TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
 
     tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
-    tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID);
-
+    tcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+    tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_ONE);
+    tcb.setEnemyMonsterIdTwo(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_TWO);
+    tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
+    tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+    
     for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
 
       int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
@@ -401,8 +405,7 @@ public class MiscMethods {
         ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
     tcb.setCityElementIdForSecondDungeon(
         ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
-    tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
-    tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+    
 
     tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
     tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);

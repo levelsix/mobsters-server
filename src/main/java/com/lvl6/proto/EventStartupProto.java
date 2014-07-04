@@ -9904,9 +9904,17 @@ public final class EventStartupProto {
       boolean hasStartingMonsterId();
       int getStartingMonsterId();
       
+      // optional int32 guideMonsterId = 16;
+      boolean hasGuideMonsterId();
+      int getGuideMonsterId();
+      
       // optional int32 enemyMonsterId = 2;
       boolean hasEnemyMonsterId();
       int getEnemyMonsterId();
+      
+      // optional int32 enemyMonsterIdTwo = 15;
+      boolean hasEnemyMonsterIdTwo();
+      int getEnemyMonsterIdTwo();
       
       // optional int32 enemyBossMonsterId = 9;
       boolean hasEnemyBossMonsterId();
@@ -10014,21 +10022,41 @@ public final class EventStartupProto {
         return startingMonsterId_;
       }
       
+      // optional int32 guideMonsterId = 16;
+      public static final int GUIDEMONSTERID_FIELD_NUMBER = 16;
+      private int guideMonsterId_;
+      public boolean hasGuideMonsterId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getGuideMonsterId() {
+        return guideMonsterId_;
+      }
+      
       // optional int32 enemyMonsterId = 2;
       public static final int ENEMYMONSTERID_FIELD_NUMBER = 2;
       private int enemyMonsterId_;
       public boolean hasEnemyMonsterId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getEnemyMonsterId() {
         return enemyMonsterId_;
+      }
+      
+      // optional int32 enemyMonsterIdTwo = 15;
+      public static final int ENEMYMONSTERIDTWO_FIELD_NUMBER = 15;
+      private int enemyMonsterIdTwo_;
+      public boolean hasEnemyMonsterIdTwo() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getEnemyMonsterIdTwo() {
+        return enemyMonsterIdTwo_;
       }
       
       // optional int32 enemyBossMonsterId = 9;
       public static final int ENEMYBOSSMONSTERID_FIELD_NUMBER = 9;
       private int enemyBossMonsterId_;
       public boolean hasEnemyBossMonsterId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getEnemyBossMonsterId() {
         return enemyBossMonsterId_;
@@ -10038,7 +10066,7 @@ public final class EventStartupProto {
       public static final int MARKZMONSTERID_FIELD_NUMBER = 10;
       private int markZMonsterId_;
       public boolean hasMarkZMonsterId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getMarkZMonsterId() {
         return markZMonsterId_;
@@ -10083,7 +10111,7 @@ public final class EventStartupProto {
       public static final int CITYID_FIELD_NUMBER = 5;
       private int cityId_;
       public boolean hasCityId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getCityId() {
         return cityId_;
@@ -10114,7 +10142,7 @@ public final class EventStartupProto {
       public static final int CITYELEMENTIDFORFIRSTDUNGEON_FIELD_NUMBER = 7;
       private int cityElementIdForFirstDungeon_;
       public boolean hasCityElementIdForFirstDungeon() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getCityElementIdForFirstDungeon() {
         return cityElementIdForFirstDungeon_;
@@ -10124,7 +10152,7 @@ public final class EventStartupProto {
       public static final int CITYELEMENTIDFORSECONDDUNGEON_FIELD_NUMBER = 8;
       private int cityElementIdForSecondDungeon_;
       public boolean hasCityElementIdForSecondDungeon() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getCityElementIdForSecondDungeon() {
         return cityElementIdForSecondDungeon_;
@@ -10134,7 +10162,7 @@ public final class EventStartupProto {
       public static final int CASHINIT_FIELD_NUMBER = 11;
       private int cashInit_;
       public boolean hasCashInit() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getCashInit() {
         return cashInit_;
@@ -10144,7 +10172,7 @@ public final class EventStartupProto {
       public static final int OILINIT_FIELD_NUMBER = 12;
       private int oilInit_;
       public boolean hasOilInit() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getOilInit() {
         return oilInit_;
@@ -10154,7 +10182,7 @@ public final class EventStartupProto {
       public static final int GEMSINIT_FIELD_NUMBER = 13;
       private int gemsInit_;
       public boolean hasGemsInit() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public int getGemsInit() {
         return gemsInit_;
@@ -10183,7 +10211,9 @@ public final class EventStartupProto {
       
       private void initFields() {
         startingMonsterId_ = 0;
+        guideMonsterId_ = 0;
         enemyMonsterId_ = 0;
+        enemyMonsterIdTwo_ = 0;
         enemyBossMonsterId_ = 0;
         markZMonsterId_ = 0;
         tutorialStructures_ = java.util.Collections.emptyList();
@@ -10212,7 +10242,7 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           output.writeInt32(1, startingMonsterId_);
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeInt32(2, enemyMonsterId_);
         }
         for (int i = 0; i < tutorialStructures_.size(); i++) {
@@ -10221,35 +10251,41 @@ public final class EventStartupProto {
         for (int i = 0; i < structureIdsToBeBuillt_.size(); i++) {
           output.writeInt32(4, structureIdsToBeBuillt_.get(i));
         }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           output.writeInt32(5, cityId_);
         }
         for (int i = 0; i < cityOneElements_.size(); i++) {
           output.writeMessage(6, cityOneElements_.get(i));
         }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           output.writeInt32(7, cityElementIdForFirstDungeon_);
         }
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
           output.writeInt32(8, cityElementIdForSecondDungeon_);
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           output.writeInt32(9, enemyBossMonsterId_);
         }
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
           output.writeInt32(10, markZMonsterId_);
         }
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
           output.writeInt32(11, cashInit_);
         }
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
           output.writeInt32(12, oilInit_);
         }
-        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((bitField0_ & 0x00000800) == 0x00000800)) {
           output.writeInt32(13, gemsInit_);
         }
         for (int i = 0; i < tutorialObstacles_.size(); i++) {
           output.writeMessage(14, tutorialObstacles_.get(i));
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(15, enemyMonsterIdTwo_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt32(16, guideMonsterId_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -10264,7 +10300,7 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(1, startingMonsterId_);
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(2, enemyMonsterId_);
         }
@@ -10281,7 +10317,7 @@ public final class EventStartupProto {
           size += dataSize;
           size += 1 * getStructureIdsToBeBuilltList().size();
         }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(5, cityId_);
         }
@@ -10289,37 +10325,45 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(6, cityOneElements_.get(i));
         }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(7, cityElementIdForFirstDungeon_);
         }
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(8, cityElementIdForSecondDungeon_);
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(9, enemyBossMonsterId_);
         }
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(10, markZMonsterId_);
         }
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(11, cashInit_);
         }
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(12, oilInit_);
         }
-        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((bitField0_ & 0x00000800) == 0x00000800)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(13, gemsInit_);
         }
         for (int i = 0; i < tutorialObstacles_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(14, tutorialObstacles_.get(i));
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(15, enemyMonsterIdTwo_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(16, guideMonsterId_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -10450,41 +10494,45 @@ public final class EventStartupProto {
           super.clear();
           startingMonsterId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
-          enemyMonsterId_ = 0;
+          guideMonsterId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000002);
-          enemyBossMonsterId_ = 0;
+          enemyMonsterId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000004);
-          markZMonsterId_ = 0;
+          enemyMonsterIdTwo_ = 0;
           bitField0_ = (bitField0_ & ~0x00000008);
+          enemyBossMonsterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000010);
+          markZMonsterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000020);
           if (tutorialStructuresBuilder_ == null) {
             tutorialStructures_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             tutorialStructuresBuilder_.clear();
           }
           structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000080);
           cityId_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000100);
           if (cityOneElementsBuilder_ == null) {
             cityOneElements_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000200);
           } else {
             cityOneElementsBuilder_.clear();
           }
           cityElementIdForFirstDungeon_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000100);
-          cityElementIdForSecondDungeon_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000200);
-          cashInit_ = 0;
           bitField0_ = (bitField0_ & ~0x00000400);
-          oilInit_ = 0;
+          cityElementIdForSecondDungeon_ = 0;
           bitField0_ = (bitField0_ & ~0x00000800);
-          gemsInit_ = 0;
+          cashInit_ = 0;
           bitField0_ = (bitField0_ & ~0x00001000);
+          oilInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00002000);
+          gemsInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00004000);
           if (tutorialObstaclesBuilder_ == null) {
             tutorialObstacles_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           } else {
             tutorialObstaclesBuilder_.clear();
           }
@@ -10533,66 +10581,74 @@ public final class EventStartupProto {
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          result.enemyMonsterId_ = enemyMonsterId_;
+          result.guideMonsterId_ = guideMonsterId_;
           if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
             to_bitField0_ |= 0x00000004;
           }
-          result.enemyBossMonsterId_ = enemyBossMonsterId_;
+          result.enemyMonsterId_ = enemyMonsterId_;
           if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
             to_bitField0_ |= 0x00000008;
           }
+          result.enemyMonsterIdTwo_ = enemyMonsterIdTwo_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.enemyBossMonsterId_ = enemyBossMonsterId_;
+          if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+            to_bitField0_ |= 0x00000020;
+          }
           result.markZMonsterId_ = markZMonsterId_;
           if (tutorialStructuresBuilder_ == null) {
-            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            if (((bitField0_ & 0x00000040) == 0x00000040)) {
               tutorialStructures_ = java.util.Collections.unmodifiableList(tutorialStructures_);
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000040);
             }
             result.tutorialStructures_ = tutorialStructures_;
           } else {
             result.tutorialStructures_ = tutorialStructuresBuilder_.build();
           }
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
             structureIdsToBeBuillt_ = java.util.Collections.unmodifiableList(structureIdsToBeBuillt_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000080);
           }
           result.structureIdsToBeBuillt_ = structureIdsToBeBuillt_;
-          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-            to_bitField0_ |= 0x00000010;
+          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+            to_bitField0_ |= 0x00000040;
           }
           result.cityId_ = cityId_;
           if (cityOneElementsBuilder_ == null) {
-            if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            if (((bitField0_ & 0x00000200) == 0x00000200)) {
               cityOneElements_ = java.util.Collections.unmodifiableList(cityOneElements_);
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000200);
             }
             result.cityOneElements_ = cityOneElements_;
           } else {
             result.cityOneElements_ = cityOneElementsBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-            to_bitField0_ |= 0x00000020;
-          }
-          result.cityElementIdForFirstDungeon_ = cityElementIdForFirstDungeon_;
-          if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-            to_bitField0_ |= 0x00000040;
-          }
-          result.cityElementIdForSecondDungeon_ = cityElementIdForSecondDungeon_;
           if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
             to_bitField0_ |= 0x00000080;
           }
-          result.cashInit_ = cashInit_;
+          result.cityElementIdForFirstDungeon_ = cityElementIdForFirstDungeon_;
           if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
             to_bitField0_ |= 0x00000100;
           }
-          result.oilInit_ = oilInit_;
+          result.cityElementIdForSecondDungeon_ = cityElementIdForSecondDungeon_;
           if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
             to_bitField0_ |= 0x00000200;
           }
+          result.cashInit_ = cashInit_;
+          if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+            to_bitField0_ |= 0x00000400;
+          }
+          result.oilInit_ = oilInit_;
+          if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+            to_bitField0_ |= 0x00000800;
+          }
           result.gemsInit_ = gemsInit_;
           if (tutorialObstaclesBuilder_ == null) {
-            if (((bitField0_ & 0x00002000) == 0x00002000)) {
+            if (((bitField0_ & 0x00008000) == 0x00008000)) {
               tutorialObstacles_ = java.util.Collections.unmodifiableList(tutorialObstacles_);
-              bitField0_ = (bitField0_ & ~0x00002000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             }
             result.tutorialObstacles_ = tutorialObstacles_;
           } else {
@@ -10617,8 +10673,14 @@ public final class EventStartupProto {
           if (other.hasStartingMonsterId()) {
             setStartingMonsterId(other.getStartingMonsterId());
           }
+          if (other.hasGuideMonsterId()) {
+            setGuideMonsterId(other.getGuideMonsterId());
+          }
           if (other.hasEnemyMonsterId()) {
             setEnemyMonsterId(other.getEnemyMonsterId());
+          }
+          if (other.hasEnemyMonsterIdTwo()) {
+            setEnemyMonsterIdTwo(other.getEnemyMonsterIdTwo());
           }
           if (other.hasEnemyBossMonsterId()) {
             setEnemyBossMonsterId(other.getEnemyBossMonsterId());
@@ -10630,7 +10692,7 @@ public final class EventStartupProto {
             if (!other.tutorialStructures_.isEmpty()) {
               if (tutorialStructures_.isEmpty()) {
                 tutorialStructures_ = other.tutorialStructures_;
-                bitField0_ = (bitField0_ & ~0x00000010);
+                bitField0_ = (bitField0_ & ~0x00000040);
               } else {
                 ensureTutorialStructuresIsMutable();
                 tutorialStructures_.addAll(other.tutorialStructures_);
@@ -10643,7 +10705,7 @@ public final class EventStartupProto {
                 tutorialStructuresBuilder_.dispose();
                 tutorialStructuresBuilder_ = null;
                 tutorialStructures_ = other.tutorialStructures_;
-                bitField0_ = (bitField0_ & ~0x00000010);
+                bitField0_ = (bitField0_ & ~0x00000040);
                 tutorialStructuresBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getTutorialStructuresFieldBuilder() : null;
@@ -10655,7 +10717,7 @@ public final class EventStartupProto {
           if (!other.structureIdsToBeBuillt_.isEmpty()) {
             if (structureIdsToBeBuillt_.isEmpty()) {
               structureIdsToBeBuillt_ = other.structureIdsToBeBuillt_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000080);
             } else {
               ensureStructureIdsToBeBuilltIsMutable();
               structureIdsToBeBuillt_.addAll(other.structureIdsToBeBuillt_);
@@ -10669,7 +10731,7 @@ public final class EventStartupProto {
             if (!other.cityOneElements_.isEmpty()) {
               if (cityOneElements_.isEmpty()) {
                 cityOneElements_ = other.cityOneElements_;
-                bitField0_ = (bitField0_ & ~0x00000080);
+                bitField0_ = (bitField0_ & ~0x00000200);
               } else {
                 ensureCityOneElementsIsMutable();
                 cityOneElements_.addAll(other.cityOneElements_);
@@ -10682,7 +10744,7 @@ public final class EventStartupProto {
                 cityOneElementsBuilder_.dispose();
                 cityOneElementsBuilder_ = null;
                 cityOneElements_ = other.cityOneElements_;
-                bitField0_ = (bitField0_ & ~0x00000080);
+                bitField0_ = (bitField0_ & ~0x00000200);
                 cityOneElementsBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getCityOneElementsFieldBuilder() : null;
@@ -10710,7 +10772,7 @@ public final class EventStartupProto {
             if (!other.tutorialObstacles_.isEmpty()) {
               if (tutorialObstacles_.isEmpty()) {
                 tutorialObstacles_ = other.tutorialObstacles_;
-                bitField0_ = (bitField0_ & ~0x00002000);
+                bitField0_ = (bitField0_ & ~0x00008000);
               } else {
                 ensureTutorialObstaclesIsMutable();
                 tutorialObstacles_.addAll(other.tutorialObstacles_);
@@ -10723,7 +10785,7 @@ public final class EventStartupProto {
                 tutorialObstaclesBuilder_.dispose();
                 tutorialObstaclesBuilder_ = null;
                 tutorialObstacles_ = other.tutorialObstacles_;
-                bitField0_ = (bitField0_ & ~0x00002000);
+                bitField0_ = (bitField0_ & ~0x00008000);
                 tutorialObstaclesBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getTutorialObstaclesFieldBuilder() : null;
@@ -10769,7 +10831,7 @@ public final class EventStartupProto {
                 break;
               }
               case 16: {
-                bitField0_ |= 0x00000002;
+                bitField0_ |= 0x00000004;
                 enemyMonsterId_ = input.readInt32();
                 break;
               }
@@ -10794,7 +10856,7 @@ public final class EventStartupProto {
                 break;
               }
               case 40: {
-                bitField0_ |= 0x00000040;
+                bitField0_ |= 0x00000100;
                 cityId_ = input.readInt32();
                 break;
               }
@@ -10805,37 +10867,37 @@ public final class EventStartupProto {
                 break;
               }
               case 56: {
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000400;
                 cityElementIdForFirstDungeon_ = input.readInt32();
                 break;
               }
               case 64: {
-                bitField0_ |= 0x00000200;
+                bitField0_ |= 0x00000800;
                 cityElementIdForSecondDungeon_ = input.readInt32();
                 break;
               }
               case 72: {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000010;
                 enemyBossMonsterId_ = input.readInt32();
                 break;
               }
               case 80: {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000020;
                 markZMonsterId_ = input.readInt32();
                 break;
               }
               case 88: {
-                bitField0_ |= 0x00000400;
+                bitField0_ |= 0x00001000;
                 cashInit_ = input.readInt32();
                 break;
               }
               case 96: {
-                bitField0_ |= 0x00000800;
+                bitField0_ |= 0x00002000;
                 oilInit_ = input.readInt32();
                 break;
               }
               case 104: {
-                bitField0_ |= 0x00001000;
+                bitField0_ |= 0x00004000;
                 gemsInit_ = input.readInt32();
                 break;
               }
@@ -10843,6 +10905,16 @@ public final class EventStartupProto {
                 com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.MinimumObstacleProto.newBuilder();
                 input.readMessage(subBuilder, extensionRegistry);
                 addTutorialObstacles(subBuilder.buildPartial());
+                break;
+              }
+              case 120: {
+                bitField0_ |= 0x00000008;
+                enemyMonsterIdTwo_ = input.readInt32();
+                break;
+              }
+              case 128: {
+                bitField0_ |= 0x00000002;
+                guideMonsterId_ = input.readInt32();
                 break;
               }
             }
@@ -10872,23 +10944,65 @@ public final class EventStartupProto {
           return this;
         }
         
+        // optional int32 guideMonsterId = 16;
+        private int guideMonsterId_ ;
+        public boolean hasGuideMonsterId() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getGuideMonsterId() {
+          return guideMonsterId_;
+        }
+        public Builder setGuideMonsterId(int value) {
+          bitField0_ |= 0x00000002;
+          guideMonsterId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearGuideMonsterId() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          guideMonsterId_ = 0;
+          onChanged();
+          return this;
+        }
+        
         // optional int32 enemyMonsterId = 2;
         private int enemyMonsterId_ ;
         public boolean hasEnemyMonsterId() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
+          return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         public int getEnemyMonsterId() {
           return enemyMonsterId_;
         }
         public Builder setEnemyMonsterId(int value) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           enemyMonsterId_ = value;
           onChanged();
           return this;
         }
         public Builder clearEnemyMonsterId() {
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           enemyMonsterId_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 enemyMonsterIdTwo = 15;
+        private int enemyMonsterIdTwo_ ;
+        public boolean hasEnemyMonsterIdTwo() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public int getEnemyMonsterIdTwo() {
+          return enemyMonsterIdTwo_;
+        }
+        public Builder setEnemyMonsterIdTwo(int value) {
+          bitField0_ |= 0x00000008;
+          enemyMonsterIdTwo_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearEnemyMonsterIdTwo() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          enemyMonsterIdTwo_ = 0;
           onChanged();
           return this;
         }
@@ -10896,19 +11010,19 @@ public final class EventStartupProto {
         // optional int32 enemyBossMonsterId = 9;
         private int enemyBossMonsterId_ ;
         public boolean hasEnemyBossMonsterId() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
+          return ((bitField0_ & 0x00000010) == 0x00000010);
         }
         public int getEnemyBossMonsterId() {
           return enemyBossMonsterId_;
         }
         public Builder setEnemyBossMonsterId(int value) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000010;
           enemyBossMonsterId_ = value;
           onChanged();
           return this;
         }
         public Builder clearEnemyBossMonsterId() {
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000010);
           enemyBossMonsterId_ = 0;
           onChanged();
           return this;
@@ -10917,19 +11031,19 @@ public final class EventStartupProto {
         // optional int32 markZMonsterId = 10;
         private int markZMonsterId_ ;
         public boolean hasMarkZMonsterId() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
+          return ((bitField0_ & 0x00000020) == 0x00000020);
         }
         public int getMarkZMonsterId() {
           return markZMonsterId_;
         }
         public Builder setMarkZMonsterId(int value) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000020;
           markZMonsterId_ = value;
           onChanged();
           return this;
         }
         public Builder clearMarkZMonsterId() {
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000020);
           markZMonsterId_ = 0;
           onChanged();
           return this;
@@ -10939,9 +11053,9 @@ public final class EventStartupProto {
         private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> tutorialStructures_ =
           java.util.Collections.emptyList();
         private void ensureTutorialStructuresIsMutable() {
-          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (!((bitField0_ & 0x00000040) == 0x00000040)) {
             tutorialStructures_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TutorialStructProto>(tutorialStructures_);
-            bitField0_ |= 0x00000010;
+            bitField0_ |= 0x00000040;
            }
         }
         
@@ -11057,7 +11171,7 @@ public final class EventStartupProto {
         public Builder clearTutorialStructures() {
           if (tutorialStructuresBuilder_ == null) {
             tutorialStructures_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000040);
             onChanged();
           } else {
             tutorialStructuresBuilder_.clear();
@@ -11113,7 +11227,7 @@ public final class EventStartupProto {
             tutorialStructuresBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.StructureProto.TutorialStructProto, com.lvl6.proto.StructureProto.TutorialStructProto.Builder, com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder>(
                     tutorialStructures_,
-                    ((bitField0_ & 0x00000010) == 0x00000010),
+                    ((bitField0_ & 0x00000040) == 0x00000040),
                     getParentForChildren(),
                     isClean());
             tutorialStructures_ = null;
@@ -11124,9 +11238,9 @@ public final class EventStartupProto {
         // repeated int32 structureIdsToBeBuillt = 4;
         private java.util.List<java.lang.Integer> structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
         private void ensureStructureIdsToBeBuilltIsMutable() {
-          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (!((bitField0_ & 0x00000080) == 0x00000080)) {
             structureIdsToBeBuillt_ = new java.util.ArrayList<java.lang.Integer>(structureIdsToBeBuillt_);
-            bitField0_ |= 0x00000020;
+            bitField0_ |= 0x00000080;
            }
         }
         public java.util.List<java.lang.Integer>
@@ -11161,7 +11275,7 @@ public final class EventStartupProto {
         }
         public Builder clearStructureIdsToBeBuillt() {
           structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000080);
           onChanged();
           return this;
         }
@@ -11169,19 +11283,19 @@ public final class EventStartupProto {
         // optional int32 cityId = 5;
         private int cityId_ ;
         public boolean hasCityId() {
-          return ((bitField0_ & 0x00000040) == 0x00000040);
+          return ((bitField0_ & 0x00000100) == 0x00000100);
         }
         public int getCityId() {
           return cityId_;
         }
         public Builder setCityId(int value) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000100;
           cityId_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityId() {
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000100);
           cityId_ = 0;
           onChanged();
           return this;
@@ -11191,9 +11305,9 @@ public final class EventStartupProto {
         private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_ =
           java.util.Collections.emptyList();
         private void ensureCityOneElementsIsMutable() {
-          if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          if (!((bitField0_ & 0x00000200) == 0x00000200)) {
             cityOneElements_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityElementProto>(cityOneElements_);
-            bitField0_ |= 0x00000080;
+            bitField0_ |= 0x00000200;
            }
         }
         
@@ -11309,7 +11423,7 @@ public final class EventStartupProto {
         public Builder clearCityOneElements() {
           if (cityOneElementsBuilder_ == null) {
             cityOneElements_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000200);
             onChanged();
           } else {
             cityOneElementsBuilder_.clear();
@@ -11365,7 +11479,7 @@ public final class EventStartupProto {
             cityOneElementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder>(
                     cityOneElements_,
-                    ((bitField0_ & 0x00000080) == 0x00000080),
+                    ((bitField0_ & 0x00000200) == 0x00000200),
                     getParentForChildren(),
                     isClean());
             cityOneElements_ = null;
@@ -11376,19 +11490,19 @@ public final class EventStartupProto {
         // optional int32 cityElementIdForFirstDungeon = 7;
         private int cityElementIdForFirstDungeon_ ;
         public boolean hasCityElementIdForFirstDungeon() {
-          return ((bitField0_ & 0x00000100) == 0x00000100);
+          return ((bitField0_ & 0x00000400) == 0x00000400);
         }
         public int getCityElementIdForFirstDungeon() {
           return cityElementIdForFirstDungeon_;
         }
         public Builder setCityElementIdForFirstDungeon(int value) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000400;
           cityElementIdForFirstDungeon_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityElementIdForFirstDungeon() {
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000400);
           cityElementIdForFirstDungeon_ = 0;
           onChanged();
           return this;
@@ -11397,19 +11511,19 @@ public final class EventStartupProto {
         // optional int32 cityElementIdForSecondDungeon = 8;
         private int cityElementIdForSecondDungeon_ ;
         public boolean hasCityElementIdForSecondDungeon() {
-          return ((bitField0_ & 0x00000200) == 0x00000200);
+          return ((bitField0_ & 0x00000800) == 0x00000800);
         }
         public int getCityElementIdForSecondDungeon() {
           return cityElementIdForSecondDungeon_;
         }
         public Builder setCityElementIdForSecondDungeon(int value) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000800;
           cityElementIdForSecondDungeon_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityElementIdForSecondDungeon() {
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000800);
           cityElementIdForSecondDungeon_ = 0;
           onChanged();
           return this;
@@ -11418,19 +11532,19 @@ public final class EventStartupProto {
         // optional int32 cashInit = 11;
         private int cashInit_ ;
         public boolean hasCashInit() {
-          return ((bitField0_ & 0x00000400) == 0x00000400);
+          return ((bitField0_ & 0x00001000) == 0x00001000);
         }
         public int getCashInit() {
           return cashInit_;
         }
         public Builder setCashInit(int value) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00001000;
           cashInit_ = value;
           onChanged();
           return this;
         }
         public Builder clearCashInit() {
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00001000);
           cashInit_ = 0;
           onChanged();
           return this;
@@ -11439,19 +11553,19 @@ public final class EventStartupProto {
         // optional int32 oilInit = 12;
         private int oilInit_ ;
         public boolean hasOilInit() {
-          return ((bitField0_ & 0x00000800) == 0x00000800);
+          return ((bitField0_ & 0x00002000) == 0x00002000);
         }
         public int getOilInit() {
           return oilInit_;
         }
         public Builder setOilInit(int value) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00002000;
           oilInit_ = value;
           onChanged();
           return this;
         }
         public Builder clearOilInit() {
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00002000);
           oilInit_ = 0;
           onChanged();
           return this;
@@ -11460,19 +11574,19 @@ public final class EventStartupProto {
         // optional int32 gemsInit = 13;
         private int gemsInit_ ;
         public boolean hasGemsInit() {
-          return ((bitField0_ & 0x00001000) == 0x00001000);
+          return ((bitField0_ & 0x00004000) == 0x00004000);
         }
         public int getGemsInit() {
           return gemsInit_;
         }
         public Builder setGemsInit(int value) {
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00004000;
           gemsInit_ = value;
           onChanged();
           return this;
         }
         public Builder clearGemsInit() {
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           gemsInit_ = 0;
           onChanged();
           return this;
@@ -11482,9 +11596,9 @@ public final class EventStartupProto {
         private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_ =
           java.util.Collections.emptyList();
         private void ensureTutorialObstaclesIsMutable() {
-          if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          if (!((bitField0_ & 0x00008000) == 0x00008000)) {
             tutorialObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>(tutorialObstacles_);
-            bitField0_ |= 0x00002000;
+            bitField0_ |= 0x00008000;
            }
         }
         
@@ -11600,7 +11714,7 @@ public final class EventStartupProto {
         public Builder clearTutorialObstacles() {
           if (tutorialObstaclesBuilder_ == null) {
             tutorialObstacles_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00008000);
             onChanged();
           } else {
             tutorialObstaclesBuilder_.clear();
@@ -11656,7 +11770,7 @@ public final class EventStartupProto {
             tutorialObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder>(
                     tutorialObstacles_,
-                    ((bitField0_ & 0x00002000) == 0x00002000),
+                    ((bitField0_ & 0x00008000) == 0x00008000),
                     getParentForChildren(),
                     isClean());
             tutorialObstacles_ = null;
@@ -19560,7 +19674,7 @@ public final class EventStartupProto {
       "\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030" +
       "\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTu",
       "torial\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRes" +
-      "tart\030\010 \001(\010\"\260-\n\024StartupResponseProto\022\030\n\020s" +
+      "tart\030\010 \001(\010\"\343-\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp" +
@@ -19689,25 +19803,27 @@ public final class EventStartupProto {
       "TutorialAssetId\030\004 \001(\005\022\"\n\032monsterDropTuto" +
       "rialAssetId\030\005 \001(\005\022\036\n\026elementTutorialAsse" +
       "tId\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForC",
-      "ombiningPowerUps\030\010 \001(\005\032\351\003\n\021TutorialConst" +
-      "ants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016enemy" +
-      "MonsterId\030\002 \001(\005\022\032\n\022enemyBossMonsterId\030\t " +
-      "\001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialS" +
-      "tructures\030\003 \003(\0132#.com.lvl6.proto.Tutoria" +
-      "lStructProto\022\036\n\026structureIdsToBeBuillt\030\004" +
-      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030" +
-      "\006 \003(\0132 .com.lvl6.proto.CityElementProto\022" +
-      "$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n" +
-      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010",
-      "cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsI" +
-      "nit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.c" +
-      "om.lvl6.proto.MinimumObstacleProto\"A\n\014Up" +
-      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
-      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016" +
-      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SE" +
-      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp" +
-      "onseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004" +
-      "udid\030\002 \001(\tB\023B\021EventStartupProto"
+      "ombiningPowerUps\030\010 \001(\005\032\234\004\n\021TutorialConst" +
+      "ants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016guide" +
+      "MonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022" +
+      "\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossM" +
+      "onsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?" +
+      "\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6.pr" +
+      "oto.TutorialStructProto\022\036\n\026structureIdsT" +
+      "oBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityO" +
+      "neElements\030\006 \003(\0132 .com.lvl6.proto.CityEl" +
+      "ementProto\022$\n\034cityElementIdForFirstDunge",
+      "on\030\007 \001(\005\022%\n\035cityElementIdForSecondDungeo" +
+      "n\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001" +
+      "(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstacle" +
+      "s\030\016 \003(\0132$.com.lvl6.proto.MinimumObstacle" +
+      "Proto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014" +
+      "MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStar" +
+      "tupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN" +
+      "_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030Forc" +
+      "eLogoutResponseProto\022\031\n\021previousLoginTim" +
+      "e\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupPro",
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19823,7 +19939,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", },
+              new java.lang.String[] { "StartingMonsterId", "GuideMonsterId", "EnemyMonsterId", "EnemyMonsterIdTwo", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor =

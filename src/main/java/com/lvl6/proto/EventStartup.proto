@@ -236,7 +236,9 @@ message StartupResponseProto {
 	
 	message TutorialConstants {
 		optional int32 startingMonsterId = 1;
+		optional int32 guideMonsterId = 16;
 		optional int32 enemyMonsterId = 2;
+		optional int32 enemyMonsterIdTwo = 15;
 		optional int32 enemyBossMonsterId = 9;
 		optional int32 markZMonsterId = 10;
 		
@@ -255,7 +257,8 @@ message StartupResponseProto {
 		optional int32 gemsInit = 13;
 		
 		repeated MinimumObstacleProto tutorialObstacles = 14;
-		 	
+		//optional int32 guideMonsterId = 15; defined above 
+		//optional int32 guideMonsterId = 16; defined above
 	}
 	
     enum UpdateStatus {

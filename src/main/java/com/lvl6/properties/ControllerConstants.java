@@ -115,15 +115,17 @@ public class ControllerConstants {
 		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
-	public static final int TUTORIAL__STARTING_MONSTER_ID = 2000;
-	public static final int TUTORIAL__ENEMY_MONSTER_ID = 2010;
-	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1100;
+	public static final int TUTORIAL__STARTING_MONSTER_ID = 37;
+	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 1;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1002;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together
-	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F};
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170, 180};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F, 5F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F, 11F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
