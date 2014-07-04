@@ -1464,6 +1464,8 @@ public class CreateInfoProtoUtils {
     if (null != shorterName) {
     	mpb.setShorterName(shorterName);
     }
+    
+    mpb.setShadowScaleFactor(aMonster.getShadowScaleFactor());
     return mpb.build();
   }
 

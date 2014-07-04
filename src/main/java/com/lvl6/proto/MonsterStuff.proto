@@ -47,6 +47,7 @@ message MonsterProto {
 	optional int32 atkAnimationRepeatedFramesEnd = 27;
 	
 	//optional string shorterName = 28; defined above
+	optional float shadowScaleFactor = 29;
 	
 	enum AnimationType {
 		NO_ANIMATION = 3;

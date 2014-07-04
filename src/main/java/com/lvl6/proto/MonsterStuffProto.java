@@ -128,6 +128,10 @@ public final class MonsterStuffProto {
     // optional int32 atkAnimationRepeatedFramesEnd = 27;
     boolean hasAtkAnimationRepeatedFramesEnd();
     int getAtkAnimationRepeatedFramesEnd();
+    
+    // optional float shadowScaleFactor = 29;
+    boolean hasShadowScaleFactor();
+    float getShadowScaleFactor();
   }
   public static final class MonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -741,6 +745,16 @@ public final class MonsterStuffProto {
       return atkAnimationRepeatedFramesEnd_;
     }
     
+    // optional float shadowScaleFactor = 29;
+    public static final int SHADOWSCALEFACTOR_FIELD_NUMBER = 29;
+    private float shadowScaleFactor_;
+    public boolean hasShadowScaleFactor() {
+      return ((bitField0_ & 0x08000000) == 0x08000000);
+    }
+    public float getShadowScaleFactor() {
+      return shadowScaleFactor_;
+    }
+    
     private void initFields() {
       monsterId_ = 0;
       evolutionGroup_ = "";
@@ -770,6 +784,7 @@ public final class MonsterStuffProto {
       atkSoundAnimationFrame_ = 0;
       atkAnimationRepeatedFramesStart_ = 0;
       atkAnimationRepeatedFramesEnd_ = 0;
+      shadowScaleFactor_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -866,6 +881,9 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(28, getShorterNameBytes());
+      }
+      if (((bitField0_ & 0x08000000) == 0x08000000)) {
+        output.writeFloat(29, shadowScaleFactor_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -987,6 +1005,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(28, getShorterNameBytes());
+      }
+      if (((bitField0_ & 0x08000000) == 0x08000000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(29, shadowScaleFactor_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1173,6 +1195,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x04000000);
         atkAnimationRepeatedFramesEnd_ = 0;
         bitField0_ = (bitField0_ & ~0x08000000);
+        shadowScaleFactor_ = 0F;
+        bitField0_ = (bitField0_ & ~0x10000000);
         return this;
       }
       
@@ -1328,6 +1352,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x04000000;
         }
         result.atkAnimationRepeatedFramesEnd_ = atkAnimationRepeatedFramesEnd_;
+        if (((from_bitField0_ & 0x10000000) == 0x10000000)) {
+          to_bitField0_ |= 0x08000000;
+        }
+        result.shadowScaleFactor_ = shadowScaleFactor_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1450,6 +1478,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasAtkAnimationRepeatedFramesEnd()) {
           setAtkAnimationRepeatedFramesEnd(other.getAtkAnimationRepeatedFramesEnd());
+        }
+        if (other.hasShadowScaleFactor()) {
+          setShadowScaleFactor(other.getShadowScaleFactor());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1639,6 +1670,11 @@ public final class MonsterStuffProto {
             case 226: {
               bitField0_ |= 0x00000004;
               shorterName_ = input.readBytes();
+              break;
+            }
+            case 237: {
+              bitField0_ |= 0x10000000;
+              shadowScaleFactor_ = input.readFloat();
               break;
             }
           }
@@ -2555,6 +2591,27 @@ public final class MonsterStuffProto {
       public Builder clearAtkAnimationRepeatedFramesEnd() {
         bitField0_ = (bitField0_ & ~0x08000000);
         atkAnimationRepeatedFramesEnd_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional float shadowScaleFactor = 29;
+      private float shadowScaleFactor_ ;
+      public boolean hasShadowScaleFactor() {
+        return ((bitField0_ & 0x10000000) == 0x10000000);
+      }
+      public float getShadowScaleFactor() {
+        return shadowScaleFactor_;
+      }
+      public Builder setShadowScaleFactor(float value) {
+        bitField0_ |= 0x10000000;
+        shadowScaleFactor_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShadowScaleFactor() {
+        bitField0_ = (bitField0_ & ~0x10000000);
+        shadowScaleFactor_ = 0F;
         onChanged();
         return this;
       }
@@ -9893,7 +9950,7 @@ public final class MonsterStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022MonsterStuff.proto\022\016com.lvl6.proto\032\026Sh" +
-      "aredEnumConfig.proto\"\264\007\n\014MonsterProto\022\021\n" +
+      "aredEnumConfig.proto\"\317\007\n\014MonsterProto\022\021\n" +
       "\tmonsterId\030\001 \001(\005\022\026\n\016evolutionGroup\030\002 \001(\t" +
       "\022\023\n\013shorterName\030\034 \001(\t\022\024\n\014monsterGroup\030\003 " +
       "\001(\t\0224\n\007quality\030\004 \001(\0162\027.com.lvl6.proto.Qu" +
@@ -9915,53 +9972,54 @@ public final class MonsterStuffProto {
       "alPixelOffset\030\027 \001(\005\022\024\n\014atkSoundFile\030\030 \001(" +
       "\t\022\036\n\026atkSoundAnimationFrame\030\031 \001(\005\022\'\n\037atk" +
       "AnimationRepeatedFramesStart\030\032 \001(\005\022%\n\035at" +
-      "kAnimationRepeatedFramesEnd\030\033 \001(\005\"8\n\rAni" +
-      "mationType\022\020\n\014NO_ANIMATION\020\003\022\t\n\005MELEE\020\001\022" +
-      "\n\n\006RANGED\020\002\"\322\002\n\025MonsterLevelInfoProto\022\013\n" +
-      "\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\031\n\021curLvlRequired" +
-      "Exp\030\003 \001(\005\022\021\n\tfeederExp\030\004 \001(\005\022\017\n\007fireDmg\030" +
-      "\005 \001(\021\022\020\n\010grassDmg\030\006 \001(\021\022\020\n\010waterDmg\030\007 \001(" +
-      "\021\022\024\n\014lightningDmg\030\010 \001(\021\022\023\n\013darknessDmg\030\t",
-      " \001(\021\022\017\n\007rockDmg\030\n \001(\021\022\r\n\005speed\030\013 \001(\005\022\026\n\016" +
-      "hpExponentBase\030\014 \001(\002\022\027\n\017dmgExponentBase\030" +
-      "\r \001(\002\022\025\n\rexpLvlDivisor\030\016 \001(\002\022\026\n\016expLvlEx" +
-      "ponent\030\017 \001(\002\022\022\n\nsellAmount\030\020 \001(\005\"\345\001\n\024Ful" +
-      "lUserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
-      "\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\nc" +
-      "urrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rc" +
-      "urrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n" +
-      "\nisComplete\030\010 \001(\010\022\030\n\020combineStartTime\030\t " +
-      "\001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"@\n\027MinimumUserM",
-      "onsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonste" +
-      "rLvl\030\002 \001(\005\"\204\001\n\027UserMonsterHealingProto\022\016" +
-      "\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n" +
-      "\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healthProgres" +
-      "s\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonster" +
-      "CurrentHealthProto\022\025\n\ruserMonsterId\030\001 \001(" +
-      "\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhance" +
-      "mentProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster" +
-      "\030\002 \001(\0132(.com.lvl6.proto.UserEnhancementI" +
-      "temProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.pro",
-      "to.UserEnhancementItemProto\"i\n\030UserEnhan" +
-      "cementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037" +
-      "\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renhan" +
-      "cingCost\030\003 \001(\005\"z\n\032UserMonsterCurrentExpP" +
-      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expectedE" +
-      "xperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022" +
-      "\n\nexpectedHp\030\004 \001(\005\"H\n\033MinimumUserMonster" +
-      "SellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncash" +
-      "Amount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeamPr" +
-      "oto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\013",
-      "2$.com.lvl6.proto.FullUserMonsterProto\"e" +
-      "\n\031UserMonsterEvolutionProto\022\035\n\025catalystU" +
-      "serMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003" +
-      "(\003\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterBattleD" +
-      "ialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialo" +
-      "gueType\030\003 \001(\01627.com.lvl6.proto.MonsterBa" +
-      "ttleDialogueProto.DialogueType\022\020\n\010dialog" +
-      "ue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001(\002\"1\n\014" +
-      "DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_B" +
-      "ATTLE\020\001B\023B\021MonsterStuffProto"
+      "kAnimationRepeatedFramesEnd\030\033 \001(\005\022\031\n\021sha" +
+      "dowScaleFactor\030\035 \001(\002\"8\n\rAnimationType\022\020\n" +
+      "\014NO_ANIMATION\020\003\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\322" +
+      "\002\n\025MonsterLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n" +
+      "\002hp\030\002 \001(\005\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\t" +
+      "feederExp\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010gras" +
+      "sDmg\030\006 \001(\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightnin",
+      "gDmg\030\010 \001(\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockD" +
+      "mg\030\n \001(\021\022\r\n\005speed\030\013 \001(\005\022\026\n\016hpExponentBas" +
+      "e\030\014 \001(\002\022\027\n\017dmgExponentBase\030\r \001(\002\022\025\n\rexpL" +
+      "vlDivisor\030\016 \001(\002\022\026\n\016expLvlExponent\030\017 \001(\002\022" +
+      "\022\n\nsellAmount\030\020 \001(\005\"\345\001\n\024FullUserMonsterP" +
+      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 " +
+      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001" +
+      "(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030" +
+      "\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010" +
+      " \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSl",
+      "otNum\030\n \001(\005\"@\n\027MinimumUserMonsterProto\022\021" +
+      "\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001" +
+      "\n\027UserMonsterHealingProto\022\016\n\006userId\030\001 \001(" +
+      "\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMi" +
+      "llis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010pr" +
+      "iority\030\006 \001(\005\"M\n\035UserMonsterCurrentHealth" +
+      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentH" +
+      "ealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com." +
+      "lvl6.proto.UserEnhancementItemProto\0229\n\007f",
+      "eeders\030\003 \003(\0132(.com.lvl6.proto.UserEnhanc" +
+      "ementItemProto\"i\n\030UserEnhancementItemPro" +
+      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedSta" +
+      "rtTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(" +
+      "\005\"z\n\032UserMonsterCurrentExpProto\022\025\n\ruserM" +
+      "onsterId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001" +
+      "(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\nexpectedHp\030" +
+      "\004 \001(\005\"H\n\033MinimumUserMonsterSellProto\022\025\n\r" +
+      "userMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"" +
+      "h\n\033UserCurrentMonsterTeamProto\022\016\n\006userId",
+      "\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.p" +
+      "roto.FullUserMonsterProto\"e\n\031UserMonster" +
+      "EvolutionProto\022\035\n\025catalystUserMonsterId\030" +
+      "\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTi" +
+      "me\030\003 \001(\003\"\337\001\n\032MonsterBattleDialogueProto\022" +
+      "\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\016" +
+      "27.com.lvl6.proto.MonsterBattleDialogueP" +
+      "roto.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022p" +
+      "robabilityUttered\030\004 \001(\002\"1\n\014DialogueType\022" +
+      "\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021Mo",
+      "nsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9973,7 +10031,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "EvolutionGroup", "ShorterName", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "LvlInfo", "EvolutionCost", "AttackAnimationType", "VerticalPixelOffset", "AtkSoundFile", "AtkSoundAnimationFrame", "AtkAnimationRepeatedFramesStart", "AtkAnimationRepeatedFramesEnd", },
+              new java.lang.String[] { "MonsterId", "EvolutionGroup", "ShorterName", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "LvlInfo", "EvolutionCost", "AttackAnimationType", "VerticalPixelOffset", "AtkSoundFile", "AtkSoundAnimationFrame", "AtkAnimationRepeatedFramesStart", "AtkAnimationRepeatedFramesEnd", "ShadowScaleFactor", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor =

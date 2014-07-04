@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Monster implements Serializable {
 	
-	private static final long serialVersionUID = 1638094543670310018L;
+	private static final long serialVersionUID = -8508226095721099580L;
 	
 	private int id;
 	private String evolutionGroup;
@@ -33,6 +33,7 @@ public class Monster implements Serializable {
 	private int atkAnimationRepeatedFramesStart;
 	private int atkAnimationRepeatedFramesEnd;
 	private String shorterName;
+	private float shadowScaleFactor;
 
 	public Monster(int id, String evolutionGroup, String monsterGroup,
 			String quality, int evolutionLevel, String displayName,
@@ -44,7 +45,8 @@ public class Monster implements Serializable {
 			int evolutionCost, String animationType, int verticalPixelOffset,
 			String atkSoundFile, int atkSoundAnimationFrame,
 			int atkAnimationRepeatedFramesStart,
-			int atkAnimationRepeatedFramesEnd, String shorterName) {
+			int atkAnimationRepeatedFramesEnd, String shorterName,
+			float shadowScaleFactor) {
 		super();
 		this.id = id;
 		this.evolutionGroup = evolutionGroup;
@@ -73,6 +75,7 @@ public class Monster implements Serializable {
 		this.atkAnimationRepeatedFramesStart = atkAnimationRepeatedFramesStart;
 		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
 		this.shorterName = shorterName;
+		this.shadowScaleFactor = shadowScaleFactor;
 	}
 
 	public int getId() {
@@ -292,30 +295,75 @@ public class Monster implements Serializable {
 		this.shorterName = shorterName;
 	}
 
-	@Override
-	public String toString() {
-		return "Monster [id=" + id + ", evolutionGroup=" + evolutionGroup
-				+ ", monsterGroup=" + monsterGroup + ", quality=" + quality
-				+ ", evolutionLevel=" + evolutionLevel + ", displayName="
-				+ displayName + ", element=" + element + ", imagePrefix="
-				+ imagePrefix + ", numPuzzlePieces=" + numPuzzlePieces
-				+ ", minutesToCombinePieces=" + minutesToCombinePieces
-				+ ", maxLevel=" + maxLevel + ", evolutionMonsterId="
-				+ evolutionMonsterId + ", evolutionCatalystMonsterId="
-				+ evolutionCatalystMonsterId + ", minutesToEvolve="
-				+ minutesToEvolve + ", numCatalystsRequired="
-				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
-				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
-				+ carrotEvolved + ", description=" + description
-				+ ", evolutionCost=" + evolutionCost + ", animationType="
-				+ animationType + ", verticalPixelOffset="
-				+ verticalPixelOffset + ", atkSoundFile=" + atkSoundFile
-				+ ", atkSoundAnimationFrame=" + atkSoundAnimationFrame
-				+ ", atkAnimationRepeatedFramesStart="
-				+ atkAnimationRepeatedFramesStart
-				+ ", atkAnimationRepeatedFramesEnd="
-				+ atkAnimationRepeatedFramesEnd + ", shorterName="
-				+ shorterName + "]";
+	public float getShadowScaleFactor()
+	{
+		return shadowScaleFactor;
 	}
 
+	public void setShadowScaleFactor( float shadowScaleFactor )
+	{
+		this.shadowScaleFactor = shadowScaleFactor;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Monster [id="
+			+ id
+			+ ", evolutionGroup="
+			+ evolutionGroup
+			+ ", monsterGroup="
+			+ monsterGroup
+			+ ", quality="
+			+ quality
+			+ ", evolutionLevel="
+			+ evolutionLevel
+			+ ", displayName="
+			+ displayName
+			+ ", element="
+			+ element
+			+ ", imagePrefix="
+			+ imagePrefix
+			+ ", numPuzzlePieces="
+			+ numPuzzlePieces
+			+ ", minutesToCombinePieces="
+			+ minutesToCombinePieces
+			+ ", maxLevel="
+			+ maxLevel
+			+ ", evolutionMonsterId="
+			+ evolutionMonsterId
+			+ ", evolutionCatalystMonsterId="
+			+ evolutionCatalystMonsterId
+			+ ", minutesToEvolve="
+			+ minutesToEvolve
+			+ ", numCatalystsRequired="
+			+ numCatalystsRequired
+			+ ", carrotRecruited="
+			+ carrotRecruited
+			+ ", carrotDefeated="
+			+ carrotDefeated
+			+ ", carrotEvolved="
+			+ carrotEvolved
+			+ ", description="
+			+ description
+			+ ", evolutionCost="
+			+ evolutionCost
+			+ ", animationType="
+			+ animationType
+			+ ", verticalPixelOffset="
+			+ verticalPixelOffset
+			+ ", atkSoundFile="
+			+ atkSoundFile
+			+ ", atkSoundAnimationFrame="
+			+ atkSoundAnimationFrame
+			+ ", atkAnimationRepeatedFramesStart="
+			+ atkAnimationRepeatedFramesStart
+			+ ", atkAnimationRepeatedFramesEnd="
+			+ atkAnimationRepeatedFramesEnd
+			+ ", shorterName="
+			+ shorterName
+			+ ", shadowScaleFactor="
+			+ shadowScaleFactor
+			+ "]";
+	}
 }
