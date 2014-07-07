@@ -115,9 +115,9 @@ public class ControllerConstants {
 		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
-	public static final int TUTORIAL__STARTING_MONSTER_ID = 37;
+	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
 	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
-	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 1;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
 	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1002;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
