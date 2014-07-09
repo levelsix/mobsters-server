@@ -214,23 +214,8 @@ message StartupResponseProto {
 			optional float mapTotalHeight = 5;
 		}
 		message MiniTutorialConstants {
-			optional int32 matchThreeTutorialAssetId = 1; 
-			optional int32 firstPowerUpAssetId = 2;
-			
-			//creating rainbow orb, connecting 5 in a row 
-			optional int32 rainbowTutorialAssetId = 3; //building id 3
-			
-			optional int32 powerUpComboTutorialAssetId = 4; //building id 4
-			
-			//encompasses equipping monster
-			optional int32 monsterDropTutorialAssetId = 5;
-			
-			//teaching different elements
-			optional int32 elementTutorialAssetId = 6;
-			
-			optional int32 cityId = 7;
-			optional int32 questIdForCombiningPowerUps = 8;
-			optional int32 guideMonsterId = 9;
+			optional int32 miniTutorialTaskId = 1;
+			optional int32 guideMonsterId = 2;
 		}
 		
 	}

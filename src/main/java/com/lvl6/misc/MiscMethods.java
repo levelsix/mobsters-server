@@ -635,14 +635,7 @@ public class MiscMethods {
   
   public static MiniTutorialConstants createMiniTutorialConstantsProto() {
   	MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
-  	mtcb.setMatchThreeTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID);
-  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID);
-  	mtcb.setRainbowTutorialAssetId(ControllerConstants.MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID);
-  	mtcb.setPowerUpComboTutorialAssetId(ControllerConstants.MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID);
-  	mtcb.setMonsterDropTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID);
-  	mtcb.setElementTutorialAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
-  	mtcb.setCityId(ControllerConstants.MINI_TUTORIAL__CITY_ID);
-  	mtcb.setQuestIdForCombiningPowerUps(ControllerConstants.MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS);
+  	mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
   	mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
   	
   	return mtcb.build();
