@@ -54,7 +54,7 @@ public class ControllerConstants {
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	
 	//MINI TUTORIAL CONSTANTS
-	public static final int MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID = 2;
+	public static final int MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID = 4;
 	
 	//OBSTACLE CONSTANTS
 	public static final int OBSTACLE__MAX_OBSTACLES = 15;
