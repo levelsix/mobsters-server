@@ -230,6 +230,7 @@ message StartupResponseProto {
 			
 			optional int32 cityId = 7;
 			optional int32 questIdForCombiningPowerUps = 8;
+			optional int32 guideMonsterId = 9;
 		}
 		
 	}
@@ -257,7 +258,7 @@ message StartupResponseProto {
 		optional int32 gemsInit = 13;
 		
 		repeated MinimumObstacleProto tutorialObstacles = 14;
-		//optional int32 guideMonsterId = 15; defined above 
+		//optional int32 enemyMonsterIdTwo = 15; defined above 
 		//optional int32 guideMonsterId = 16; defined above
 	}
 	

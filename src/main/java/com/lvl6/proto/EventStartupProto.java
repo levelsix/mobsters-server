@@ -6376,6 +6376,10 @@ public final class EventStartupProto {
         // optional int32 questIdForCombiningPowerUps = 8;
         boolean hasQuestIdForCombiningPowerUps();
         int getQuestIdForCombiningPowerUps();
+        
+        // optional int32 guideMonsterId = 9;
+        boolean hasGuideMonsterId();
+        int getGuideMonsterId();
       }
       public static final class MiniTutorialConstants extends
           com.google.protobuf.GeneratedMessage
@@ -6486,6 +6490,16 @@ public final class EventStartupProto {
           return questIdForCombiningPowerUps_;
         }
         
+        // optional int32 guideMonsterId = 9;
+        public static final int GUIDEMONSTERID_FIELD_NUMBER = 9;
+        private int guideMonsterId_;
+        public boolean hasGuideMonsterId() {
+          return ((bitField0_ & 0x00000100) == 0x00000100);
+        }
+        public int getGuideMonsterId() {
+          return guideMonsterId_;
+        }
+        
         private void initFields() {
           matchThreeTutorialAssetId_ = 0;
           firstPowerUpAssetId_ = 0;
@@ -6495,6 +6509,7 @@ public final class EventStartupProto {
           elementTutorialAssetId_ = 0;
           cityId_ = 0;
           questIdForCombiningPowerUps_ = 0;
+          guideMonsterId_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -6531,6 +6546,9 @@ public final class EventStartupProto {
           }
           if (((bitField0_ & 0x00000080) == 0x00000080)) {
             output.writeInt32(8, questIdForCombiningPowerUps_);
+          }
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            output.writeInt32(9, guideMonsterId_);
           }
           getUnknownFields().writeTo(output);
         }
@@ -6572,6 +6590,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000080) == 0x00000080)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(8, questIdForCombiningPowerUps_);
+          }
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(9, guideMonsterId_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -6713,6 +6735,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000040);
             questIdForCombiningPowerUps_ = 0;
             bitField0_ = (bitField0_ & ~0x00000080);
+            guideMonsterId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000100);
             return this;
           }
           
@@ -6783,6 +6807,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000080;
             }
             result.questIdForCombiningPowerUps_ = questIdForCombiningPowerUps_;
+            if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+              to_bitField0_ |= 0x00000100;
+            }
+            result.guideMonsterId_ = guideMonsterId_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -6822,6 +6850,9 @@ public final class EventStartupProto {
             }
             if (other.hasQuestIdForCombiningPowerUps()) {
               setQuestIdForCombiningPowerUps(other.getQuestIdForCombiningPowerUps());
+            }
+            if (other.hasGuideMonsterId()) {
+              setGuideMonsterId(other.getGuideMonsterId());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -6892,6 +6923,11 @@ public final class EventStartupProto {
                 case 64: {
                   bitField0_ |= 0x00000080;
                   questIdForCombiningPowerUps_ = input.readInt32();
+                  break;
+                }
+                case 72: {
+                  bitField0_ |= 0x00000100;
+                  guideMonsterId_ = input.readInt32();
                   break;
                 }
               }
@@ -7064,6 +7100,27 @@ public final class EventStartupProto {
           public Builder clearQuestIdForCombiningPowerUps() {
             bitField0_ = (bitField0_ & ~0x00000080);
             questIdForCombiningPowerUps_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 guideMonsterId = 9;
+          private int guideMonsterId_ ;
+          public boolean hasGuideMonsterId() {
+            return ((bitField0_ & 0x00000100) == 0x00000100);
+          }
+          public int getGuideMonsterId() {
+            return guideMonsterId_;
+          }
+          public Builder setGuideMonsterId(int value) {
+            bitField0_ |= 0x00000100;
+            guideMonsterId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearGuideMonsterId() {
+            bitField0_ = (bitField0_ & ~0x00000100);
+            guideMonsterId_ = 0;
             onChanged();
             return this;
           }
@@ -19674,7 +19731,7 @@ public final class EventStartupProto {
       "\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030" +
       "\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTu",
       "torial\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRes" +
-      "tart\030\010 \001(\010\"\343-\n\024StartupResponseProto\022\030\n\020s" +
+      "tart\030\010 \001(\010\"\373-\n\024StartupResponseProto\022\030\n\020s" +
       "erverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035." +
       "com.lvl6.proto.FullUserProto\022I\n\rstartupS" +
       "tatus\030\003 \001(\01622.com.lvl6.proto.StartupResp" +
@@ -19737,7 +19794,7 @@ public final class EventStartupProto {
       "\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010" +
       "referred\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGi" +
-      "venToReferrer\030\003 \001(\005\032\320\024\n\020StartupConstants" +
+      "venToReferrer\030\003 \001(\005\032\350\024\n\020StartupConstants" +
       "\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com.lv" +
       "l6.proto.InAppPurchasePackageProto\022\027\n\017ma" +
       "xLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStr" +
@@ -19796,34 +19853,34 @@ public final class EventStartupProto {
       "Constants\022\035\n\025mapSectionImagePrefix\030\001 \001(\t" +
       "\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n\020mapSect" +
       "ionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026" +
-      "\n\016mapTotalHeight\030\005 \001(\002\032\225\002\n\025MiniTutorialC" +
+      "\n\016mapTotalHeight\030\005 \001(\002\032\255\002\n\025MiniTutorialC" +
       "onstants\022!\n\031matchThreeTutorialAssetId\030\001 " +
       "\001(\005\022\033\n\023firstPowerUpAssetId\030\002 \001(\005\022\036\n\026rain" +
       "bowTutorialAssetId\030\003 \001(\005\022#\n\033powerUpCombo" +
       "TutorialAssetId\030\004 \001(\005\022\"\n\032monsterDropTuto" +
       "rialAssetId\030\005 \001(\005\022\036\n\026elementTutorialAsse" +
       "tId\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForC",
-      "ombiningPowerUps\030\010 \001(\005\032\234\004\n\021TutorialConst" +
-      "ants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016guide" +
-      "MonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022" +
-      "\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossM" +
-      "onsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?" +
-      "\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6.pr" +
-      "oto.TutorialStructProto\022\036\n\026structureIdsT" +
-      "oBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityO" +
-      "neElements\030\006 \003(\0132 .com.lvl6.proto.CityEl" +
-      "ementProto\022$\n\034cityElementIdForFirstDunge",
-      "on\030\007 \001(\005\022%\n\035cityElementIdForSecondDungeo" +
-      "n\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001" +
-      "(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstacle" +
-      "s\030\016 \003(\0132$.com.lvl6.proto.MinimumObstacle" +
-      "Proto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014" +
-      "MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStar" +
-      "tupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN" +
-      "_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030Forc" +
-      "eLogoutResponseProto\022\031\n\021previousLoginTim" +
-      "e\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupPro",
-      "to"
+      "ombiningPowerUps\030\010 \001(\005\022\026\n\016guideMonsterId" +
+      "\030\t \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021starting" +
+      "MonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022" +
+      "\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterI" +
+      "dTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026" +
+      "\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialStruct" +
+      "ures\030\003 \003(\0132#.com.lvl6.proto.TutorialStru" +
+      "ctProto\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022" +
+      "\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\013" +
+      "2 .com.lvl6.proto.CityElementProto\022$\n\034ci",
+      "tyElementIdForFirstDungeon\030\007 \001(\005\022%\n\035city" +
+      "ElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashI" +
+      "nit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r" +
+      " \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.lv" +
+      "l6.proto.MinimumObstacleProto\"A\n\014UpdateS" +
+      "tatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020" +
+      "\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSE" +
+      "R_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_" +
+      "IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResponseP" +
+      "roto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030",
+      "\002 \001(\tB\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19931,7 +19988,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
-              new java.lang.String[] { "MatchThreeTutorialAssetId", "FirstPowerUpAssetId", "RainbowTutorialAssetId", "PowerUpComboTutorialAssetId", "MonsterDropTutorialAssetId", "ElementTutorialAssetId", "CityId", "QuestIdForCombiningPowerUps", },
+              new java.lang.String[] { "MatchThreeTutorialAssetId", "FirstPowerUpAssetId", "RainbowTutorialAssetId", "PowerUpComboTutorialAssetId", "MonsterDropTutorialAssetId", "ElementTutorialAssetId", "CityId", "QuestIdForCombiningPowerUps", "GuideMonsterId", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =

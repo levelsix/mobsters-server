@@ -643,6 +643,8 @@ public class MiscMethods {
   	mtcb.setElementTutorialAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
   	mtcb.setCityId(ControllerConstants.MINI_TUTORIAL__CITY_ID);
   	mtcb.setQuestIdForCombiningPowerUps(ControllerConstants.MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS);
+  	mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+  	
   	return mtcb.build();
   }
 
