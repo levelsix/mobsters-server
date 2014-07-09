@@ -2393,6 +2393,9 @@ public class CreateInfoProtoUtils {
       builder.setPrerequisiteQuestId(prerequisiteQuestId);
     }
 
+    builder.setBoardHeight(task.getBoardHeight());
+    builder.setBoardWidth(task.getBoardWidth());
+    
     return builder.build();
   }
 
