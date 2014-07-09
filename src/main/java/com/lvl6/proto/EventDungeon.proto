@@ -37,6 +37,17 @@ message BeginDungeonRequestProto {
 	
 	// if not set, then go select monsters at random
 	optional bool forceEnemyElem = 10;
+	
+	
+	// Consider moving the logic using this into another event.
+	// Purpose is efficiency. When user completes a mini tutorial
+	// for the first time and the mini tutorial guarantees a 
+	// monster drop, then the user will only get that monster once.
+	// Subsequent completions of said mini tutorial yield no monster
+	// drop. To limit number of db queries the server makes to determine
+	// whether or not the user completed the task, the client will tell
+	// the server if the user already completed the task. 
+	optional bool alreadyCompletedMiniTutorialTask = 11;
 }
 
 message BeginDungeonResponseProto {
