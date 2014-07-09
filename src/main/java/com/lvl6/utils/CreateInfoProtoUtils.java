@@ -2430,6 +2430,7 @@ public class CreateInfoProtoUtils {
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
+    bldr.setDmgMultiplier(tsm.getDmgMultiplier());
 
     int tsmId = tsm.getId();
     if (tsmIdToItemId.containsKey(tsmId)) {
