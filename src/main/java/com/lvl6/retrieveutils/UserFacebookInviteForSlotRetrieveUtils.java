@@ -322,14 +322,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private static UserFacebookInviteForSlot convertRSRowToInvite(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int inviterUserId = rs.getInt(i++);
-    String recipientFacebookId = rs.getString(i++);
+    int id = rs.getInt(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+    int inviterUserId = rs.getInt(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+    String recipientFacebookId = rs.getString(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
     
     Date timeOfInvite = null;
     try {
-    	Timestamp ts = rs.getTimestamp(i++);
+    	Timestamp ts = rs.getTimestamp(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE);
     	if (!rs.wasNull()) {
     		timeOfInvite = new Date(ts.getTime());
     	}
@@ -341,7 +340,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     Date timeAccepted = null; 
     try {
-    		Timestamp ts = rs.getTimestamp(i++);
+    		Timestamp ts = rs.getTimestamp(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
     		if (!rs.wasNull()) {
     			timeAccepted = new Date(ts.getTime());
     		}
@@ -351,12 +350,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
     }
     
-    int userStructId = rs.getInt(i++);
-    int userStructFbLvl = rs.getInt(i++);
+    int userStructId = rs.getInt(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID);
+    int userStructFbLvl = rs.getInt(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL);
     
     Date timeRedeemed = null;
     try {
-    	Timestamp ts = rs.getTimestamp(i++);
+    	Timestamp ts = rs.getTimestamp(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
     	if (!rs.wasNull()) {
     		timeRedeemed = new Date(ts.getTime());
     	}

@@ -389,13 +389,13 @@ import com.lvl6.utils.DBConnection;
    */
   private UserClan convertRSRowToUserClan(ResultSet rs) throws SQLException {
     int i = 1;
-    int userId = rs.getInt(i++);
-    int clanId = rs.getInt(i++);
-    String status = rs.getString(i++);
+    int userId = rs.getInt(DBConstants.CLAN_FOR_USER__USER_ID);
+    int clanId = rs.getInt(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
 
     Date requestTime = null;
     try {
-    	Timestamp ts = rs.getTimestamp(i++);
+    	Timestamp ts = rs.getTimestamp(DBConstants.CLAN_FOR_USER__REQUEST_TIME);
     	if (!rs.wasNull()) {
     		requestTime = new Date(ts.getTime());
     	}
