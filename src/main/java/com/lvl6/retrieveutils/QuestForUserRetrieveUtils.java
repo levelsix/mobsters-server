@@ -195,10 +195,10 @@ import com.lvl6.utils.DBConnection;
    */
   private QuestForUser convertRSRowToUserQuest(ResultSet rs) throws SQLException {
     int i = 1;
-    int userId = rs.getInt(i++);
-    int questId = rs.getInt(i++);
-    boolean isRedeemed = rs.getBoolean(i++);
-    boolean isComplete = rs.getBoolean(i++);
+    int userId = rs.getInt(DBConstants.QUEST_FOR_USER__USER_ID);
+    int questId = rs.getInt(DBConstants.QUEST_FOR_USER__QUEST_ID);
+    boolean isRedeemed = rs.getBoolean(DBConstants.QUEST_FOR_USER__IS_REDEEMED);
+    boolean isComplete = rs.getBoolean(DBConstants.QUEST_FOR_USER__IS_COMPLETE);
     
     QuestForUser userQuest = new QuestForUser(userId, questId, isRedeemed,
     		isComplete);

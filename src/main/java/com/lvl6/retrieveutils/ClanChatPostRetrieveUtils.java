@@ -126,11 +126,11 @@ import com.lvl6.utils.DBConnection;
 
   private static ClanChatPost convertRSRowToClanChatPost(ResultSet rs) throws SQLException {
     int i = 1;
-    int id = rs.getInt(i++);
-    int posterId = rs.getInt(i++);
-    int clanId = rs.getInt(i++);
-    Date timeOfPost = new Date(rs.getTimestamp(i++).getTime());
-    String content = rs.getString(i++);
+    int id = rs.getInt(DBConstants.CLAN_CHAT_POST__ID);
+    int posterId = rs.getInt(DBConstants.CLAN_CHAT_POST__POSTER_ID);
+    int clanId = rs.getInt(DBConstants.CLAN_CHAT_POST__CLAN_ID);
+    Date timeOfPost = new Date(rs.getTimestamp(DBConstants.CLAN_CHAT_POST__TIME_OF_POST).getTime());
+    String content = rs.getString(DBConstants.CLAN_CHAT_POST__CONTENT);
 
     ClanChatPost pwp = new ClanChatPost(id, posterId, clanId, timeOfPost, content);
   

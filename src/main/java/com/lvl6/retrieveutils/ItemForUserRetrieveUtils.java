@@ -87,9 +87,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   private static ItemForUser convertRSRowToItemForUser(ResultSet rs) throws SQLException {
     int i = 1;
-    int userId = rs.getInt(i++);
-    int itemId = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
+    int userId = rs.getInt(DBConstants.ITEM_FOR_USER__USER_ID);
+    int itemId = rs.getInt(DBConstants.ITEM_FOR_USER__ITEM_ID);
+    int quantity = rs.getInt(DBConstants.ITEM_FOR_USER__QUANTITY);
     
     return new ItemForUser(userId, itemId, quantity);
   }

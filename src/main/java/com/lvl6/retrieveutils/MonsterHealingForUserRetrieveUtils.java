@@ -105,13 +105,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
    */
   private static MonsterHealingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
     int i = 1;
-    int userId = rs.getInt(i++);
-    long monsterForUserId = rs.getLong(i++);
+    int userId = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__USER_ID);
+    long monsterForUserId = rs.getLong(DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID);
     
     Timestamp ts = null;
     Date queuedTime = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME);
     	if (!rs.wasNull()) {
     		queuedTime = new Date(ts.getTime());
     	}
@@ -119,8 +119,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("expected start time might be null userId=" + userId, e);
     }
     
-    int healthProgress = rs.getInt(i++);
-    int priority = rs.getInt(i++);
+    int healthProgress = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS);
+    int priority = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY);
     
     MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
     		monsterForUserId, queuedTime, healthProgress, priority);
