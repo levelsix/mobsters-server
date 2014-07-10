@@ -391,23 +391,22 @@ import com.lvl6.utils.utilmethods.StringUtils;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   public User convertRSRowToUser(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String name = rs.getString(i++);
-    int level = rs.getInt(i++);
-    int gems = rs.getInt(i++);
-    int cash = rs.getInt(i++);
-    int oil = rs.getInt(i++);
-    int experience = rs.getInt(i++);
-    int tasksCompleted = rs.getInt(i++);
-    String referralCode = rs.getString(i++);
-    int numReferrals = rs.getInt(i++);
-    String udidForHistory = rs.getString(i++);
+    int id = rs.getInt(DBConstants.USER__ID);
+    String name = rs.getString(DBConstants.USER__NAME);
+    int level = rs.getInt(DBConstants.USER__LEVEL);
+    int gems = rs.getInt(DBConstants.USER__GEMS);
+    int cash = rs.getInt(DBConstants.USER__CASH);
+    int oil = rs.getInt(DBConstants.USER__OIL);
+    int experience = rs.getInt(DBConstants.USER__EXPERIENCE);
+    int tasksCompleted = rs.getInt(DBConstants.USER__TASKS_COMPLETED);
+    String referralCode = rs.getString(DBConstants.USER__REFERRAL_CODE);
+    int numReferrals = rs.getInt(DBConstants.USER__NUM_REFERRALS);
+    String udidForHistory = rs.getString(DBConstants.USER__UDID_FOR_HISTORY);
 
     Timestamp ts;
     Date lastLogin = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_LOGIN);
     	if (!rs.wasNull()) {
     		lastLogin = new Date(ts.getTime());
     	}
@@ -417,7 +416,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     Date lastLogout = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_LOGOUT);
     	if (!rs.wasNull()) {
     		lastLogout = new Date(ts.getTime());
     	}
@@ -425,13 +424,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: last_logout not set. user_id=" + id);
     }
 
-    String deviceToken = rs.getString(i++);
-    int numBadges = rs.getInt(i++);
-    boolean isFake = rs.getBoolean(i++);
+    String deviceToken = rs.getString(DBConstants.USER__DEVICE_TOKEN);
+    int numBadges = rs.getInt(DBConstants.USER__NUM_BADGES);
+    boolean isFake = rs.getBoolean(DBConstants.USER__IS_FAKE);
     
     Date createTime = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__CREATE_TIME);
     	if (!rs.wasNull()) {
     		createTime = new Date(ts.getTime());
     	}
@@ -439,20 +438,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: create_time not set. user_id=" + id);
     }
 
-    boolean isAdmin = rs.getBoolean(i++);
-    String apsalarId = rs.getString(i++);
-    int numCoinsRetrievedFromStructs = rs.getInt(i++);
-    int numOilRetrievedFromStructs = rs.getInt(i++);
-    int numConsecutiveDaysPlayed = rs.getInt(i++);
+    boolean isAdmin = rs.getBoolean(DBConstants.USER__IS_ADMIN);
+    String apsalarId = rs.getString(DBConstants.USER__APSALAR_ID);
+    int numCoinsRetrievedFromStructs = rs.getInt(DBConstants.USER__NUM_COINS_RETRIEVED_FROM_STRUCTS);
+    int numOilRetrievedFromStructs = rs.getInt(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS);
+    int numConsecutiveDaysPlayed = rs.getInt(DBConstants.USER__NUM_CONSECUTIVE_DAYS_PLAYED);
     
-    int clanId = rs.getInt(i++);
+    int clanId = rs.getInt(DBConstants.USER__CLAN_ID);
     if (rs.wasNull()) {
       clanId = ControllerConstants.NOT_SET;
     }
     
     Date lastWallPostNotificationTime = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME);
     	if (!rs.wasNull()) {
     		lastWallPostNotificationTime = new Date(ts.getTime());
     	}
@@ -460,17 +459,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: last_wall_post_notification_time not set. user_id=" + id);
     }
     
-    int kabamNaid = rs.getInt(i++);
+    int kabamNaid = rs.getInt(DBConstants.USER__KABAM_NAID);
 
-    boolean hasReceivedfbReward = rs.getBoolean(i++);
-    int numBeginnerSalesPurchased = rs.getInt(i++);
-    String facebookId = rs.getString(i++);
-    boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
-    String gameCenterId = rs.getString(i++);
-    String udid = rs.getString(i++);
+    boolean hasReceivedfbReward = rs.getBoolean(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
+    int numBeginnerSalesPurchased = rs.getInt(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
+    String facebookId = rs.getString(DBConstants.USER__FACEBOOK_ID);
+    boolean fbIdSetOnUserCreate = rs.getBoolean(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
+    String gameCenterId = rs.getString(DBConstants.USER__GAME_CENTER_ID);
+    String udid = rs.getString(DBConstants.USER__UDID);
     Date lastObstacleSpawnedTime = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME);
     	if (!rs.wasNull()) {
     		lastObstacleSpawnedTime = new Date(ts.getTime());
     	}
@@ -479,11 +478,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     			" was null...?");
     }
     
-    int numObstaclesRemoved = rs.getInt(i++);
+    int numObstaclesRemoved = rs.getInt(DBConstants.USER__NUM_OBSTACLES_REMOVED);
     
     Date lastMiniJobGeneratedTime = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_MINI_JOB_GENERATED_TIME);
     	if (!rs.wasNull()) {
     		lastMiniJobGeneratedTime = new Date(ts.getTime());
     	}
@@ -491,7 +490,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("lastMiniJobGeneratedTime null...?", e);
     }
     
-    int avatarMonsterId = rs.getInt(i++);
+    int avatarMonsterId = rs.getInt(DBConstants.USER__AVATAR_MONSTER_ID);
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, referralCode, numReferrals, udidForHistory,

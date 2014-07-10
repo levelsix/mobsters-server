@@ -199,23 +199,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
    */
   private StructureForUser convertRSRowToUserStruct(ResultSet rs) throws SQLException {
     int i = 1;
-    int id = rs.getInt(i++);
-    int userId = rs.getInt(i++);
-    int structId = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.STRUCTURE_FOR_USER__ID);
+    int userId = rs.getInt(DBConstants.STRUCTURE_FOR_USER__USER_ID);
+    int structId = rs.getInt(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID);
     
     Date lastRetrieved = null;
-    Timestamp ts = rs.getTimestamp(i++);
+    Timestamp ts = rs.getTimestamp(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
     if (!rs.wasNull()) {
       lastRetrieved = new Date(ts.getTime());
     }
     
-    CoordinatePair coordinates = new CoordinatePair(rs.getInt(i++), rs.getInt(i++));
+    CoordinatePair coordinates = new CoordinatePair(rs.getInt(DBConstants.STRUCTURE_FOR_USER__X_COORD), rs.getInt(DBConstants.STRUCTURE_FOR_USER__Y_COORD));
 //    int level = rs.getInt(i++);
-    Date purchaseTime = new Date(rs.getTimestamp(i++).getTime());
+    Date purchaseTime = new Date(rs.getTimestamp(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME).getTime());
     
-    boolean isComplete = rs.getBoolean(i++);
-    String orientation = rs.getString(i++);
-    int fbInviteStructLvl = rs.getInt(i++);
+    boolean isComplete = rs.getBoolean(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE);
+    String orientation = rs.getString(DBConstants.STRUCTURE_FOR_USER__ORIENTATION);
+    int fbInviteStructLvl = rs.getInt(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL);
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
     		purchaseTime, isComplete, orientation, fbInviteStructLvl);

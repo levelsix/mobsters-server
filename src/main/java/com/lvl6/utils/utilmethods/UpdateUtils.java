@@ -781,13 +781,14 @@ public class UpdateUtils implements UpdateUtil {
 	
 //	update a user equip after enhancing
 		@Override
-	public int updateUserMonsterExpAndLvl(long userEquipId, int newExp, int newLvl) {
+	public int updateUserMonsterExpAndLvl(long userEquipId, int newExp, int newLvl, int newHp) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, newExp);
 		absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, newLvl);
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, newHp);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");

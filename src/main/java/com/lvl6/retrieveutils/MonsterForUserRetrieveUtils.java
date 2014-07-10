@@ -484,18 +484,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
    */
   private MonsterForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
     int i = 1;
-    int id = rs.getInt(i++);
-    int userId = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
-    int currentExp = rs.getInt(i++);
-    int currentLvl = rs.getInt(i++);
-    int currentHealth = rs.getInt(i++);
-    int numPieces = rs.getInt(i++);
-    boolean isComplete = rs.getBoolean(i++);
+    int id = rs.getInt(DBConstants.MONSTER_FOR_USER__ID);
+    int userId = rs.getInt(DBConstants.MONSTER_FOR_USER__USER_ID);
+    int monsterId = rs.getInt(DBConstants.MONSTER_FOR_USER__MONSTER_ID);
+    int currentExp = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE);
+    int currentLvl = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL);
+    int currentHealth = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
+    int numPieces = rs.getInt(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
+    boolean isComplete = rs.getBoolean(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
     
     Date combineStartTime = null;
     try {
-    	Timestamp ts = rs.getTimestamp(i++);
+    	Timestamp ts = rs.getTimestamp(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME);
     	if (!rs.wasNull()) {
     		combineStartTime = new Date(ts.getTime());
     	}
@@ -503,8 +503,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("maybe combineStartTime is null for monsterForUserId=" + id +
     			" userId=" + userId, e);
     }
-    int teamSlotNum = rs.getInt(i++);
-    String sourceOfPieces = rs.getString(i++);
+    int teamSlotNum = rs.getInt(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
+    String sourceOfPieces = rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
     		currentExp, currentLvl, currentHealth, numPieces, isComplete,

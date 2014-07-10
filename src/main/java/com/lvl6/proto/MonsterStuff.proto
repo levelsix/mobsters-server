@@ -47,6 +47,7 @@ message MonsterProto {
 	optional int32 atkAnimationRepeatedFramesEnd = 27;
 	
 	//optional string shorterName = 28; defined above
+	optional float shadowScaleFactor = 29;
 	
 	enum AnimationType {
 		NO_ANIMATION = 3;
@@ -152,6 +153,7 @@ message UserMonsterCurrentExpProto {
 	optional int64 userMonsterId = 1;
 	optional int32 expectedExperience = 2;
 	optional int32 expectedLevel = 3;
+	optional int32 expectedHp = 4;
 }
 
 //------------------------------------------------------------------------------------------

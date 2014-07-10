@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -192,6 +191,7 @@ public class ObstacleTest extends TestCase {
 		//make sure object's start removal time is null
 		//this is assuming spawnObstacle works...
 		ObstacleForUser ofu = getLastCreatedObstacle(ofuList);
+		log.info("lastCreatedObstacle=" + ofu);
 		Date removalTime = ofu.getRemovalTime();
 		assertTrue("Expected time: null. Actual: " + removalTime,
 				null == removalTime);
@@ -202,6 +202,8 @@ public class ObstacleTest extends TestCase {
 		richerUnitTester.updateRelativeCashAndOilAndGems(1, 0, 0);
 		
 		//send event to remove it now
+		log.info("before remove obstacle event, obstacles for user:" +
+			getObstacleForUserRetrieveUtil().getUserObstacleForUser(userId));
 		BeginObstacleRemovalRequestProto.Builder borrpb =
 				BeginObstacleRemovalRequestProto.newBuilder();
 		borrpb.setSender(mup);
@@ -215,6 +217,9 @@ public class ObstacleTest extends TestCase {
 		borre.setTag(1);
 		borre.setBeginObstacleRemovalRequestProto(borrpb.build());
 		getBeginObstacleRemovalController().handleEvent(borre);
+		
+		log.info("after remove obstacle event, obstacles for user:" +
+			getObstacleForUserRetrieveUtil().getUserObstacleForUser(userId));
 		
 		//check to make sure user's currency is back where it was
 		User poorerUnitTester = getUserRetrieveUtils().getUserById(userId);

@@ -123,15 +123,15 @@ import com.lvl6.utils.DBConnection;
 	 */
 	private static MonsterEvolvingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
 		int i = 1;
-		long catalystMonsterForUserId = rs.getLong(i++);
-		long monsterForUserIdOne = rs.getLong(i++);
-		long monsterForUserIdTwo = rs.getLong(i++);
+		long catalystMonsterForUserId = rs.getLong(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID);
+		long monsterForUserIdOne = rs.getLong(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE);
+		long monsterForUserIdTwo = rs.getLong(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_TWO);
 		
-		int userId = rs.getInt(i++);
+		int userId = rs.getInt(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID);
 
 		Timestamp ts = null;
 		Date startTime = null;
-		ts = rs.getTimestamp(i++);
+		ts = rs.getTimestamp(DBConstants.MONSTER_EVOLVING_FOR_USER__START_TIME);
 		if (!rs.wasNull()) {
 			startTime = new Date(ts.getTime());
 		}

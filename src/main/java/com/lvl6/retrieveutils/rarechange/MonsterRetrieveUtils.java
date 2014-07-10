@@ -146,6 +146,7 @@ public class MonsterRetrieveUtils {
     int atkAnimationRepeatedFramesStart = rs.getInt(i++);
     int atkAnimationRepeatedFramesEnd = rs.getInt(i++);
     String shorterName = rs.getString(i++);
+    float shadowScaleFactor = rs.getFloat(i++);
     
     Monster monster = new Monster(id, evolutionGroup, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
@@ -153,7 +154,7 @@ public class MonsterRetrieveUtils {
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
     		description, evolutionCost, animationType, verticalPixelOffset, atkSoundFile,
     		atkSoundAnimationFrame, atkAnimationRepeatedFramesStart,
-    		atkAnimationRepeatedFramesEnd, shorterName);
+    		atkAnimationRepeatedFramesEnd, shorterName, shadowScaleFactor);
     
     if (null != animationType) {
     	String newAnimationType = animationType.trim().toUpperCase();

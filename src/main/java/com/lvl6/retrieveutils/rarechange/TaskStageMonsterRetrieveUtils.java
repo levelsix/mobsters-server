@@ -146,6 +146,7 @@ public class TaskStageMonsterRetrieveUtils {
     float puzzlePieceDropRate = rs.getFloat(i++);
     int level = rs.getInt(i++);
     float chanceToAppear = rs.getFloat(i++);
+    float dmgMultiplier = rs.getFloat(i++);
     
     if (null != monsterType) {
     	String newMonsterType = monsterType.trim().toUpperCase();
@@ -168,9 +169,15 @@ public class TaskStageMonsterRetrieveUtils {
     	chanceToAppear = Math.max(0F, chanceToAppear);
     }
     
+    if (dmgMultiplier < 0F) {
+    	log.error("incorrect dmgMultiplier: " + dmgMultiplier +
+			". Forcing it to be above 0. id=" + id);
+    	dmgMultiplier = Math.max(0F, dmgMultiplier);
+    }
+    
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
-    		puzzlePieceDropRate, level, chanceToAppear);
+    		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier);
     
     if (null == monsterType) {
     	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +

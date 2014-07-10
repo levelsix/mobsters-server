@@ -54,14 +54,7 @@ public class ControllerConstants {
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	
 	//MINI TUTORIAL CONSTANTS
-	public static final int MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID = 5;
-	public static final int MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID = 6;
-	public static final int MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID = 3;
-	public static final int MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID = 4;
-	public static final int MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID = 1;
-	public static final int MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID = 2;
-	public static final int MINI_TUTORIAL__CITY_ID = 1;
-	public static final int MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS = 1;
+	public static final int MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID = 4;
 	
 	//OBSTACLE CONSTANTS
 	public static final int OBSTACLE__MAX_OBSTACLES = 15;
@@ -115,15 +108,17 @@ public class ControllerConstants {
 		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
-	public static final int TUTORIAL__STARTING_MONSTER_ID = 2000;
-	public static final int TUTORIAL__ENEMY_MONSTER_ID = 2010;
-	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1100;
+	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
+	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1002;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together
-	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F};
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170, 180};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F, 5F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F, 11F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;

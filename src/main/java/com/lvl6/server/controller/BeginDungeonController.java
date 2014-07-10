@@ -37,6 +37,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
@@ -98,6 +99,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     // if not set, then go select monsters at random
     boolean forceEnemyElem = reqProto.getForceEnemyElem();
     
+    boolean alreadyCompletedMiniTutorialTask = reqProto.getAlreadyCompletedMiniTutorialTask();
+    
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -125,6 +128,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap,
     			  curTime, isEvent, eventId, gemsSpent, userTaskIdList,
     			  stageNumsToProtos, questIds, elem, forceEnemyElem,
+    			  alreadyCompletedMiniTutorialTask,
     			  currencyChange, previousCurrency);
       }
       if (successful) {
@@ -292,7 +296,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  int eventId, int gemsSpent, List<Long> utIdList,
 		  Map<Integer, TaskStageProto> stageNumsToProtos,
 		  List<Integer> questIds, Element elem,
-		  boolean forceEnemyElem, Map<String, Integer> currencyChange,
+		  boolean forceEnemyElem,
+		  boolean alreadyCompletedMiniTutorialTask,
+		  Map<String, Integer> currencyChange,
 		  Map<String, Integer> previousCurrency) {
 	  boolean success = false;
 	  
@@ -309,7 +315,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
 			  tsMap, stageNumsToExps, stageNumsToCash, stageNumsToOil,
 			  stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters,
-			  stageNumsToTsmIdToItemId, elem, forceEnemyElem);
+			  stageNumsToTsmIdToItemId, elem, forceEnemyElem,
+			  uId, tId, alreadyCompletedMiniTutorialTask);
 	  
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
@@ -377,7 +384,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
   		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
   		Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId,
-  		Element elem, boolean forceEnemyElem) {
+  		Element elem, boolean forceEnemyElem, int userId, int taskId,
+  		boolean alreadyCompletedMiniTutorialTask) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
@@ -413,12 +421,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  //task stage monster id (not task stage monster monster id) can only represent 1
 		  //monster, so no need to worry about dup monsters
 		  Map<Integer, Integer> tsmIdToItemId = new HashMap<Integer, Integer>();
-		  generateItems(spawnedTaskStageMonsters, questJobIds, tsmIdToItemId);
+		  //if mini tutorial, then there is no item drop, just guaranteed monster drop
+		  if (taskId != ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID) {
+			  generateItems(spawnedTaskStageMonsters, questJobIds, tsmIdToItemId);
+		  }
 		  
 		  //randomly select a reward, IF ANY, that this monster can drop;
 		  //if an item drops puzzle piece does not drop.
 		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedTaskStageMonsters,
-		  		tsmIdToItemId);
+		  		tsmIdToItemId, userId, taskId, alreadyCompletedMiniTutorialTask);
 		  
 		  List<Integer> individualExps = calculateExpGained(spawnedTaskStageMonsters);
 		  List<Integer> individualCash = calculateCashGained(spawnedTaskStageMonsters);
@@ -577,7 +588,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //for a monster, choose the reward to give (monster puzzle piece)
   private List<Boolean> generatePuzzlePieces(List<TaskStageMonster> taskStageMonsters,
-  		Map<Integer, Integer> tsmIdToItemId) {
+  		Map<Integer, Integer> tsmIdToItemId, int userId, int taskId,
+  		boolean alreadyCompletedMiniTutorialTask) {
   	List<Boolean> piecesDropped = new ArrayList<Boolean>();
   	
   	//ostensibly and explicitly preserve ordering in monsterIds
@@ -592,7 +604,32 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			continue;
   		}
   		
-  		boolean pieceDropped = tsm.didPuzzlePieceDrop();
+  		// When user completes a mini tutorial for the first time
+  		// and the mini tutorial guarantees a monster drop, then
+  		// the user will only get that monster once. Subsequent
+  		// completions of said mini tutorial yield no monster drop.
+  		// alreadyCompletedMiniTutorialTask is used to limit number
+  		// of db queries the server makes to determine
+  		// whether or not the user completed the task
+  		if (taskId != ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID) {
+  			boolean pieceDropped = tsm.didPuzzlePieceDrop();
+  			piecesDropped.add(pieceDropped);
+  			continue;
+  		}
+
+  		boolean pieceDropped = false;
+  		if (!alreadyCompletedMiniTutorialTask) {
+  			//most likely first time user completed mini tutorial
+  			log.info("User completed mini tutorial for first time"
+  				+ "...maybe, guaranteeing monster drop if true! taskId="
+  				+ taskId + ", taskStageMonsters=" + taskStageMonsters);
+  			List<Integer> completedTaskIds = TaskForUserCompletedRetrieveUtils
+  				.getAllTaskIdsForUser(userId);
+  			if (!completedTaskIds.contains(taskId)) {
+  				pieceDropped = true;
+  			}
+  		}
+
   		piecesDropped.add(pieceDropped);
   	}
   	

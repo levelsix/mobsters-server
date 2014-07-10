@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
-
-	private static final long serialVersionUID = 6294339139996875888L;
+	
+	private static final long serialVersionUID = -9377292039646784L;
 	
 	private int id;
 	private int stageId;
@@ -19,13 +19,14 @@ public class TaskStageMonster implements Serializable {
 	private float puzzlePieceDropRate;
 	private int level;
 	private float chanceToAppear;
+	private float dmgMultiplier;
   
 	private Random rand;
 
 	public TaskStageMonster(int id, int stageId, int monsterId, String monsterType,
 		int expReward, int minCashDrop, int maxCashDrop, int minOilDrop,
 		int maxOilDrop, float puzzlePieceDropRate, int level,
-		float chanceToAppear) {
+		float chanceToAppear, float dmgMultiplier) {
 	super();
 	this.id = id;
 	this.stageId = stageId;
@@ -39,6 +40,7 @@ public class TaskStageMonster implements Serializable {
 	this.puzzlePieceDropRate = puzzlePieceDropRate;
 	this.level = level;
 	this.chanceToAppear = chanceToAppear;
+	this.dmgMultiplier = dmgMultiplier;
 	}
 
 //covenience methods--------------------------------------------------------
@@ -179,15 +181,46 @@ public class TaskStageMonster implements Serializable {
 	  this.chanceToAppear = chanceToAppear;
   }
 
-  @Override
-  public String toString() {
-	  return "TaskStageMonster [id=" + id + ", stageId=" + stageId
-			  + ", monsterId=" + monsterId + ", monsterType=" + monsterType
-			  + ", expReward=" + expReward + ", minCashDrop=" + minCashDrop
-			  + ", maxCashDrop=" + maxCashDrop + ", minOilDrop=" + minOilDrop
-			  + ", maxOilDrop=" + maxOilDrop + ", puzzlePieceDropRate="
-			  + puzzlePieceDropRate + ", level=" + level + ", chanceToAppear="
-			  + chanceToAppear + "]";
-  }
+  public float getDmgMultiplier()
+{
+	return dmgMultiplier;
+}
+
+public void setDmgMultiplier( float dmgMultiplier )
+{
+	this.dmgMultiplier = dmgMultiplier;
+}
+
+@Override
+public String toString()
+{
+	return "TaskStageMonster [id="
+		+ id
+		+ ", stageId="
+		+ stageId
+		+ ", monsterId="
+		+ monsterId
+		+ ", monsterType="
+		+ monsterType
+		+ ", expReward="
+		+ expReward
+		+ ", minCashDrop="
+		+ minCashDrop
+		+ ", maxCashDrop="
+		+ maxCashDrop
+		+ ", minOilDrop="
+		+ minOilDrop
+		+ ", maxOilDrop="
+		+ maxOilDrop
+		+ ", puzzlePieceDropRate="
+		+ puzzlePieceDropRate
+		+ ", level="
+		+ level
+		+ ", chanceToAppear="
+		+ chanceToAppear
+		+ ", dmgMultiplier="
+		+ dmgMultiplier
+		+ "]";
+}
 
 }

@@ -158,6 +158,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
+    if (gemsSpent < 0) {
+    	log.warn("gemsSpent is negative! gemsSpent=" + gemsSpent);
+    	gemsSpent = Math.abs(gemsSpent);
+    }
     int userGems = user.getGems();
     if (gemsSpent > 0 && userGems < gemsSpent) {
     	log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
@@ -166,13 +170,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	return false;
     }
     if (ResourceType.CASH.equals(rt)) {
-    	if (user.getCash() < resourceChange) {
+    	if (user.getCash() < Math.abs(resourceChange)) {
     		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
     		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + resourceChange);
     		return false;
     	}
     } else if (ResourceType.OIL.equals(rt)){
-    	if (user.getOil() < resourceChange) {
+    	if (user.getOil() < Math.abs(resourceChange)) {
     		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
     		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + resourceChange);
     		return false;
@@ -210,7 +214,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//charge the user  	
   	int cashChange = 0;
     int oilChange = 0;
-    int gemChange = -1 * gemsSpent;
+    int gemChange = -1 * Math.abs(gemsSpent);
     
     if (ResourceType.CASH.equals(rt)) {
     	cashChange = resourceChange;

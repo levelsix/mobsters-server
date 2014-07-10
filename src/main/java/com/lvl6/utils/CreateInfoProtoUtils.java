@@ -1464,6 +1464,8 @@ public class CreateInfoProtoUtils {
     if (null != shorterName) {
     	mpb.setShorterName(shorterName);
     }
+    
+    mpb.setShadowScaleFactor(aMonster.getShadowScaleFactor());
     return mpb.build();
   }
 
@@ -2391,6 +2393,9 @@ public class CreateInfoProtoUtils {
       builder.setPrerequisiteQuestId(prerequisiteQuestId);
     }
 
+    builder.setBoardHeight(task.getBoardHeight());
+    builder.setBoardWidth(task.getBoardWidth());
+    
     return builder.build();
   }
 
@@ -2428,6 +2433,7 @@ public class CreateInfoProtoUtils {
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
+    bldr.setDmgMultiplier(tsm.getDmgMultiplier());
 
     int tsmId = tsm.getId();
     if (tsmIdToItemId.containsKey(tsmId)) {

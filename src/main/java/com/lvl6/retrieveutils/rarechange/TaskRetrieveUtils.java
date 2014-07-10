@@ -215,9 +215,11 @@ import com.lvl6.utils.DBConnection;
     int assetNumberWithinCity = rs.getInt(i++);
     int prerequisiteTaskId = rs.getInt(i++);
     int prerequisiteQuestId = rs.getInt(i++);
+    int boardWidth = rs.getInt(i++);
+    int boardHeight = rs.getInt(i++);
     
     Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
-    		prerequisiteTaskId, prerequisiteQuestId);
+    		prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight);
     return task;
   }
 }
