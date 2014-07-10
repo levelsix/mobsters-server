@@ -65,17 +65,17 @@ import com.lvl6.utils.DBConnection;
    */
   private static PvpBattleForUser convertRSRowToPvpBattleForUser(ResultSet rs) throws SQLException {
     int i = 1;
-    int attackerId = rs.getInt(i++);
-    int defenderId = rs.getInt(i++);
-    int attackerWinEloChange = rs.getInt(i++);
-    int defenderLoseEloChange = rs.getInt(i++);
-    int attackerLoseEloChange = rs.getInt(i++);
-    int defenderWinEloChange = rs.getInt(i++);
+    int attackerId = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
+    int defenderId = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID);
+    int attackerWinEloChange = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE);
+    int defenderLoseEloChange = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE);
+    int attackerLoseEloChange = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE);
+    int defenderWinEloChange = rs.getInt(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE);
     Date defenderOldInBattleShieldEndTime = null;
     
     Timestamp ts = null;
     try {
-    	ts = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME);
     	if (!rs.wasNull()) {
     		defenderOldInBattleShieldEndTime = new Date(ts.getTime());
     	}

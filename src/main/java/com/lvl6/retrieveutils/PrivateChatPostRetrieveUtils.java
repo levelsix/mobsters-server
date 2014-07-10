@@ -169,11 +169,11 @@ import com.lvl6.utils.DBConnection;
   private static PrivateChatPost convertRSRowToPrivateChatPost(ResultSet rs)
       throws SQLException {
     int i = 1;
-    int id = rs.getInt(i++);
-    int posterId = rs.getInt(i++);
-    int recipientId = rs.getInt(i++);
-    Date timeOfPost = new Date(rs.getTimestamp(i++).getTime());
-    String content = rs.getString(i++);
+    int id = rs.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__ID);
+    int posterId = rs.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID);
+    int recipientId = rs.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID);
+    Date timeOfPost = new Date(rs.getTimestamp(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST).getTime());
+    String content = rs.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT);
 
     PrivateChatPost pwp = new PrivateChatPost(id, posterId, recipientId,
         timeOfPost, content);

@@ -105,12 +105,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	 */
 	private static MonsterEnhancingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
 		int i = 1;
-		int userId = rs.getInt(i++);
-		long monsterForUserId = rs.getLong(i++);
+		int userId = rs.getInt(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID);
+		long monsterForUserId = rs.getLong(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID);
 
 		Timestamp ts = null;
 		Date expectedStartTime = null;
-		ts = rs.getTimestamp(i++);
+		ts = rs.getTimestamp(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME);
 		if (!rs.wasNull()) {
 			expectedStartTime = new Date(ts.getTime());
 		}
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		//    	log.error("expected start time might be null userId=" + userId, e);
 		//    }
 		
-		int enhancingCost = rs.getInt(i++);
+		int enhancingCost = rs.getInt(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST);
 
 		MonsterEnhancingForUser userMonster = new MonsterEnhancingForUser(userId,
 				monsterForUserId, expectedStartTime, enhancingCost);//, queuedTime);

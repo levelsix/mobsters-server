@@ -75,18 +75,18 @@ import com.lvl6.utils.DBConnection;
   
   private static TaskForUserOngoing convertRSRowToUserTask(ResultSet rs) throws SQLException {
     int i = 1;
-    long id = rs.getLong(i++);
-    int userId = rs.getInt(i++);
-    int taskId = rs.getInt(i++);
+    long id = rs.getLong(DBConstants.TASK_FOR_USER_ONGOING__ID);
+    int userId = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__USER_ID);
+    int taskId = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__TASK_ID);
     
-    int expGained = rs.getInt(i++);
-    int cashGained = rs.getInt(i++);
-    int oilGained = rs.getInt(i++);
-    int numRevives = rs.getInt(i++);
+    int expGained = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__EXP_GAINED);
+    int cashGained = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__CASH_GAINED);
+    int oilGained = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__OIL_GAINED);
+    int numRevives = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES);
     
     Date startDate = null;
     try {
-    	Timestamp ts = rs.getTimestamp(i++);
+    	Timestamp ts = rs.getTimestamp(DBConstants.TASK_FOR_USER_ONGOING__START_TIME);
     	if (!rs.wasNull()) {
     		startDate = new Date(ts.getTime());
     	}
@@ -94,7 +94,7 @@ import com.lvl6.utils.DBConnection;
     	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
-    int taskStageId = rs.getInt(i++);
+    int taskStageId = rs.getInt(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID);
     
     return new TaskForUserOngoing(id, userId, taskId, expGained, cashGained,
     		oilGained, numRevives, startDate, taskStageId);

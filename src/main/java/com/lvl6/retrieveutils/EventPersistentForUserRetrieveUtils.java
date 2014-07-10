@@ -64,12 +64,12 @@ import com.lvl6.utils.DBConnection;
 	 */
 	private static EventPersistentForUser convertRSRowToUserCityExpansionData(ResultSet rs) throws SQLException {
 		int i = 1;
-		int userId = rs.getInt(i++);
-		int eventId = rs.getInt(i++);
+		int userId = rs.getInt(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID);
+		int eventId = rs.getInt(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID);
 
 		Date timeOfEntry = null;
 		try {
-			Timestamp ts = rs.getTimestamp(i++);
+			Timestamp ts = rs.getTimestamp(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY);
 			if (!rs.wasNull()) {
 				timeOfEntry = new Date(ts.getTime());
 			}
