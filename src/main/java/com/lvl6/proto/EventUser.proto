@@ -97,6 +97,7 @@ message SetFacebookIdRequestProto {
 	optional string fbId = 2;
 	
 	optional bool isUserCreate = 3;
+	optional string email = 4;
 }
 
 message SetFacebookIdResponseProto {

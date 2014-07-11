@@ -15,6 +15,8 @@ public class ControllerConstants {
 	//this multiplies with the cost to heal all monsters on user's battle team
 	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
+	public static final float BATTLE__RUN_AWAY_BASE_PERCENT = 0.5F;
+	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = 3;
