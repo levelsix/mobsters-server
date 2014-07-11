@@ -56,6 +56,7 @@ import com.lvl6.utils.RetrieveUtils;
     String fbId = reqProto.getFbId();
     boolean isUserCreate = reqProto.getIsUserCreate();
     String email = reqProto.getEmail();
+    String fbData = reqProto.getFbData();
     
     //basically, if fbId is empty make it null
     if (null != fbId && fbId.isEmpty()) {
@@ -85,7 +86,7 @@ import com.lvl6.utils.RetrieveUtils;
       boolean legit = checkLegitRequest(resBuilder, user, fbId, userMap);
 
       if (legit) {
-        legit = writeChangesToDb(user, fbId, isUserCreate, email);
+        legit = writeChangesToDb(user, fbId, isUserCreate, email, fbData);
       }
       
       if (legit) {
@@ -166,9 +167,9 @@ import com.lvl6.utils.RetrieveUtils;
   	return true;
   }
   
-  private boolean writeChangesToDb(User user, String fbId, boolean isUserCreate, String email) {
+  private boolean writeChangesToDb(User user, String fbId, boolean isUserCreate, String email, String fbData) {
   	
-  	if (!user.updateSetFacebookId(fbId, isUserCreate, email)) {
+  	if (!user.updateSetFacebookId(fbId, isUserCreate, email, fbData)) {
   		log.error("problem with setting user's facebook id to " + fbId);
   		return false;
   	}

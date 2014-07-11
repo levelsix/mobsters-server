@@ -99,6 +99,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int gems = Math.min(reqProto.getGems(), ControllerConstants.TUTORIAL__INIT_GEMS);
     
     String email = reqProto.getEmail();
+    String fbData = reqProto.getFbData();
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
     resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -117,7 +118,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			if (legitUserCreate) {
 //			  String newReferCode = grabNewReferCode();
 			  userId = writeChangeToDb(resBuilder, name, udid, cash, oil, gems, deviceToken,
-			  		createTime, facebookId, email);
+			  		createTime, facebookId, email, fbData);
 			}
 
 			UserCreateResponseProto resProto = resBuilder.build();
@@ -231,7 +232,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private int writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
-  		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId, String email) {
+  		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId,
+  		String email, String fbData) {
   	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
 	  int playerExp = 10;
@@ -239,7 +241,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
 	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
-	      email);
+	      email, fbData);
 	        
 	  if (userId > 0) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
