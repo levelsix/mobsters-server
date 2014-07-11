@@ -118,7 +118,8 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateSetFacebookId(String facebookId, boolean fbIdSetOnUserCreate) {
+	public boolean updateSetFacebookId(String facebookId, boolean fbIdSetOnUserCreate,
+		String email) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -127,6 +128,7 @@ public class User implements Serializable {
 		absoluteParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, fbIdSetOnUserCreate);
 		
 		absoluteParams.put(DBConstants.USER__UDID, null);
+		absoluteParams.put(DBConstants.USER__EMAIL, email);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");

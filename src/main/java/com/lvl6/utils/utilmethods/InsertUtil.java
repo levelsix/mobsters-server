@@ -71,7 +71,7 @@ public interface InsertUtil {
 	// returns -1 if error
 	public abstract int insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
-			Timestamp createTime, String facebookId, int avatarMonsterId);
+			Timestamp createTime, String facebookId, int avatarMonsterId, String email);
 	
 	public abstract int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
 			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime);

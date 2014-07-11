@@ -512,6 +512,8 @@ public class MiscMethods {
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
+    cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
+    cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
 
     cb.setAddAllFbFriends(globals.isAddAllFbFriends());
     

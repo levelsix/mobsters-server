@@ -462,7 +462,7 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
-  		String facebookId, int avatarMonsterId) {
+  		String facebookId, int avatarMonsterId, String email) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -489,6 +489,10 @@ public class InsertUtils implements InsertUtil{
     
     insertParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, createTime);
     insertParams.put(DBConstants.USER__AVATAR_MONSTER_ID, avatarMonsterId);
+    
+    if (null != email && !email.isEmpty()) {
+    	insertParams.put(DBConstants.USER__EMAIL, email);
+    }
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
