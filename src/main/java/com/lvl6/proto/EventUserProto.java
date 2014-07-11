@@ -52,6 +52,10 @@ public final class EventUserProto {
     // optional string email = 13;
     boolean hasEmail();
     String getEmail();
+    
+    // optional string fbData = 14;
+    boolean hasFbData();
+    String getFbData();
   }
   public static final class UserCreateRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -293,6 +297,38 @@ public final class EventUserProto {
       }
     }
     
+    // optional string fbData = 14;
+    public static final int FBDATA_FIELD_NUMBER = 14;
+    private java.lang.Object fbData_;
+    public boolean hasFbData() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public String getFbData() {
+      java.lang.Object ref = fbData_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          fbData_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFbDataBytes() {
+      java.lang.Object ref = fbData_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        fbData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       udid_ = "";
       name_ = "";
@@ -303,6 +339,7 @@ public final class EventUserProto {
       oil_ = 0;
       gems_ = 0;
       email_ = "";
+      fbData_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -342,6 +379,9 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(13, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(14, getFbDataBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -387,6 +427,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(14, getFbDataBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -535,6 +579,8 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         email_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        fbData_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       
@@ -614,6 +660,10 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000080;
         }
         result.email_ = email_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.fbData_ = fbData_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -679,6 +729,9 @@ public final class EventUserProto {
         }
         if (other.hasEmail()) {
           setEmail(other.getEmail());
+        }
+        if (other.hasFbData()) {
+          setFbData(other.getFbData());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -755,6 +808,11 @@ public final class EventUserProto {
             case 106: {
               bitField0_ |= 0x00000100;
               email_ = input.readBytes();
+              break;
+            }
+            case 114: {
+              bitField0_ |= 0x00000200;
+              fbData_ = input.readBytes();
               break;
             }
           }
@@ -1189,6 +1247,42 @@ public final class EventUserProto {
       void setEmail(com.google.protobuf.ByteString value) {
         bitField0_ |= 0x00000100;
         email_ = value;
+        onChanged();
+      }
+      
+      // optional string fbData = 14;
+      private java.lang.Object fbData_ = "";
+      public boolean hasFbData() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public String getFbData() {
+        java.lang.Object ref = fbData_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          fbData_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFbData(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        fbData_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFbData() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        fbData_ = getDefaultInstance().getFbData();
+        onChanged();
+        return this;
+      }
+      void setFbData(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000200;
+        fbData_ = value;
         onChanged();
       }
       
@@ -5154,6 +5248,10 @@ public final class EventUserProto {
     // optional string email = 4;
     boolean hasEmail();
     String getEmail();
+    
+    // optional string fbData = 5;
+    boolean hasFbData();
+    String getFbData();
   }
   public static final class SetFacebookIdRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -5271,11 +5369,44 @@ public final class EventUserProto {
       }
     }
     
+    // optional string fbData = 5;
+    public static final int FBDATA_FIELD_NUMBER = 5;
+    private java.lang.Object fbData_;
+    public boolean hasFbData() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getFbData() {
+      java.lang.Object ref = fbData_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          fbData_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFbDataBytes() {
+      java.lang.Object ref = fbData_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        fbData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       fbId_ = "";
       isUserCreate_ = false;
       email_ = "";
+      fbData_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5301,6 +5432,9 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getEmailBytes());
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getFbDataBytes());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -5325,6 +5459,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getFbDataBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5463,6 +5601,8 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         email_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        fbData_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -5521,6 +5661,10 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000008;
         }
         result.email_ = email_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.fbData_ = fbData_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5548,6 +5692,9 @@ public final class EventUserProto {
         }
         if (other.hasEmail()) {
           setEmail(other.getEmail());
+        }
+        if (other.hasFbData()) {
+          setFbData(other.getFbData());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5602,6 +5749,11 @@ public final class EventUserProto {
             case 34: {
               bitField0_ |= 0x00000008;
               email_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              fbData_ = input.readBytes();
               break;
             }
           }
@@ -5790,6 +5942,42 @@ public final class EventUserProto {
       void setEmail(com.google.protobuf.ByteString value) {
         bitField0_ |= 0x00000008;
         email_ = value;
+        onChanged();
+      }
+      
+      // optional string fbData = 5;
+      private java.lang.Object fbData_ = "";
+      public boolean hasFbData() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getFbData() {
+        java.lang.Object ref = fbData_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          fbData_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFbData(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        fbData_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFbData() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        fbData_ = getDefaultInstance().getFbData();
+        onChanged();
+        return this;
+      }
+      void setFbData(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        fbData_ = value;
         onChanged();
       }
       
@@ -10222,81 +10410,81 @@ public final class EventUserProto {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
       "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
-      "to\"\324\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "to\"\344\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
       "\001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013deviceToken\030\003 \001(\t\022\022" +
       "\n\nfacebookId\030\004 \001(\t\022=\n\020structsJustBuilt\030\005" +
       " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
       "o\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013 \001(\005\022\014\n\004gems\030\014 \001" +
-      "(\005\022\r\n\005email\030\r \001(\t\"\230\002\n\027UserCreateResponse" +
-      "Proto\022H\n\006status\030\002 \001(\01628.com.lvl6.proto.U" +
-      "serCreateResponseProto.UserCreateStatus\"",
-      "\262\001\n\020UserCreateStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAI" +
-      "L_INVALID_NAME\020\002\022&\n\"FAIL_USER_WITH_UDID_" +
-      "ALREADY_EXISTS\020\003\022\033\n\027FAIL_INVALID_REFER_C" +
-      "ODE\020\004\022%\n!FAIL_USER_WITH_FACEBOOK_ID_EXIS" +
-      "TS\020\005\022\016\n\nFAIL_OTHER\020\006\"Z\n\023LevelUpRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\021\n\tnextLevel\030\002 \001(\005\"\272\001\n\024Lev" +
-      "elUpResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022B\n\006status\030\002 " +
-      "\001(\01622.com.lvl6.proto.LevelUpResponseProt",
-      "o.LevelUpStatus\",\n\rLevelUpStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\220\001\n#RetrieveUsersF" +
-      "orUserIdsRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\030\n\020reque" +
-      "stedUserIds\030\002 \003(\005\022\035\n\025includeCurMonsterTe" +
-      "am\030\003 \001(\010\"\315\001\n$RetrieveUsersForUserIdsResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\0225\n\016requestedUsers\030\002 " +
-      "\003(\0132\035.com.lvl6.proto.FullUserProto\022<\n\007cu" +
-      "rTeam\030\003 \003(\0132+.com.lvl6.proto.UserCurrent",
-      "MonsterTeamProto\"F\n\022LogoutRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\"h\n\035UpdateClientUserResponseProt" +
-      "o\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.FullU" +
-      "serProto\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"\200\001\n\031S" +
-      "etFacebookIdRequestProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\014\n\004fb" +
-      "Id\030\002 \001(\t\022\024\n\014isUserCreate\030\003 \001(\010\022\r\n\005email\030" +
-      "\004 \001(\t\"\276\002\n\032SetFacebookIdResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse",
-      "rProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto." +
-      "SetFacebookIdResponseProto.SetFacebookId" +
-      "Status\0222\n\010existing\030\003 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\"j\n\023SetFacebookIdStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_F" +
-      "B_ID_EXISTS\020\003\022\037\n\033FAIL_USER_FB_ID_ALREADY" +
-      "_SET\020\004\"\277\001\n\036UpdateUserCurrencyRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpe" +
-      "nt\030\003 \001(\021\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTim",
-      "e\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t" +
-      "\"\272\002\n\037UpdateUserCurrencyResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto." +
-      "UpdateUserCurrencyResponseProto.UpdateUs" +
-      "erCurrencyStatus\"\212\001\n\030UpdateUserCurrencyS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FA" +
-      "IL_INSUFFICIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICI" +
-      "ENT_OIL\020\004\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\005\"e\n" +
-      "\033SetGameCenterIdRequestProto\0220\n\006sender\030\001",
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\024" +
-      "\n\014gameCenterId\030\002 \001(\t\"\360\001\n\034SetGameCenterId" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\024\n\014gameCenterId\030" +
-      "\002 \001(\t\022R\n\006status\030\003 \001(\0162B.com.lvl6.proto.S" +
-      "etGameCenterIdResponseProto.SetGameCente" +
-      "rIdStatus\"4\n\025SetGameCenterIdStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"c\n\034SetAvatarMons" +
-      "terRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\021\n\tmonsterId\030\002",
-      " \001(\005\"\336\001\n\035SetAvatarMonsterResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022T\n\006status\030\002 \001(\0162D.com.lvl6.prot" +
-      "o.SetAvatarMonsterResponseProto.SetAvata" +
-      "rMonsterStatus\"5\n\026SetAvatarMonsterStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventUs" +
-      "erProto"
+      "(\005\022\r\n\005email\030\r \001(\t\022\016\n\006fbData\030\016 \001(\t\"\230\002\n\027Us" +
+      "erCreateResponseProto\022H\n\006status\030\002 \001(\01628." +
+      "com.lvl6.proto.UserCreateResponseProto.U",
+      "serCreateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL" +
+      "_USER_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL" +
+      "_INVALID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_" +
+      "FACEBOOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"Z\n\023" +
+      "LevelUpRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\021\n\tnextLev" +
+      "el\030\002 \001(\005\"\272\001\n\024LevelUpResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022B\n\006status\030\002 \001(\01622.com.lvl6.proto.Lev",
+      "elUpResponseProto.LevelUpStatus\",\n\rLevel" +
+      "UpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\220\001" +
+      "\n#RetrieveUsersForUserIdsRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025inc" +
+      "ludeCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUse" +
+      "rsForUserIdsResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\0225\n\016r" +
+      "equestedUsers\030\002 \003(\0132\035.com.lvl6.proto.Ful" +
+      "lUserProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6.p",
+      "roto.UserCurrentMonsterTeamProto\"F\n\022Logo" +
+      "utRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\"h\n\035UpdateClient" +
+      "UserResponseProto\022-\n\006sender\030\001 \001(\0132\035.com." +
+      "lvl6.proto.FullUserProto\022\030\n\020timeOfUserUp" +
+      "date\030\002 \001(\003\"\220\001\n\031SetFacebookIdRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\014\n\004fbId\030\002 \001(\t\022\024\n\014isUserCreate" +
+      "\030\003 \001(\010\022\r\n\005email\030\004 \001(\t\022\016\n\006fbData\030\005 \001(\t\"\276\002" +
+      "\n\032SetFacebookIdResponseProto\0220\n\006sender\030\001",
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022N" +
+      "\n\006status\030\002 \001(\0162>.com.lvl6.proto.SetFaceb" +
+      "ookIdResponseProto.SetFacebookIdStatus\0222" +
+      "\n\010existing\030\003 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\"j\n\023SetFacebookIdStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_FB_ID_EXI" +
+      "STS\020\003\022\037\n\033FAIL_USER_FB_ID_ALREADY_SET\020\004\"\277" +
+      "\001\n\036UpdateUserCurrencyRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021",
+      "\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022" +
+      "\016\n\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037Upd" +
+      "ateUserCurrencyResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022X" +
+      "\n\006status\030\002 \001(\0162H.com.lvl6.proto.UpdateUs" +
+      "erCurrencyResponseProto.UpdateUserCurren" +
+      "cyStatus\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUF" +
+      "FICIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020" +
+      "\004\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\005\"e\n\033SetGame",
+      "CenterIdRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\024\n\014gameCe" +
+      "nterId\030\002 \001(\t\"\360\001\n\034SetGameCenterIdResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\022R\n" +
+      "\006status\030\003 \001(\0162B.com.lvl6.proto.SetGameCe" +
+      "nterIdResponseProto.SetGameCenterIdStatu" +
+      "s\"4\n\025SetGameCenterIdStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\016\n\nFAIL_OTHER\020\002\"c\n\034SetAvatarMonsterReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto",
+      ".MinimumUserProto\022\021\n\tmonsterId\030\002 \001(\005\"\336\001\n" +
+      "\035SetAvatarMonsterResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.SetAva" +
+      "tarMonsterResponseProto.SetAvatarMonster" +
+      "Status\"5\n\026SetAvatarMonsterStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10308,7 +10496,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_UserCreateRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCreateRequestProto_descriptor,
-              new java.lang.String[] { "Udid", "Name", "DeviceToken", "FacebookId", "StructsJustBuilt", "Cash", "Oil", "Gems", "Email", },
+              new java.lang.String[] { "Udid", "Name", "DeviceToken", "FacebookId", "StructsJustBuilt", "Cash", "Oil", "Gems", "Email", "FbData", },
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.class,
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UserCreateResponseProto_descriptor =
@@ -10372,7 +10560,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_SetFacebookIdRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SetFacebookIdRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "FbId", "IsUserCreate", "Email", },
+              new java.lang.String[] { "Sender", "FbId", "IsUserCreate", "Email", "FbData", },
               com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto.class,
               com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto.Builder.class);
           internal_static_com_lvl6_proto_SetFacebookIdResponseProto_descriptor =

@@ -26,6 +26,8 @@ message UserCreateRequestProto {
      optional int32 oil = 11;
      optional int32 gems = 12;
      optional string email = 13;
+     
+     optional string fbData = 14;
 }
 
 message UserCreateResponseProto {
@@ -99,6 +101,7 @@ message SetFacebookIdRequestProto {
 	
 	optional bool isUserCreate = 3;
 	optional string email = 4;
+	optional string fbData = 5;
 }
 
 message SetFacebookIdResponseProto {
