@@ -2575,6 +2575,8 @@ public class CreateInfoProtoUtils {
       log.error("invalid element. task map element=" + tme);
     }
     
+    tmepb.setBoss(tme.isBoss());
+    
 	  return tmepb.build();
   }
   

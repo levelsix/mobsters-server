@@ -4,22 +4,25 @@ import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
 
-	private static final long serialVersionUID = 5377955739780140314L;
+	private static final long serialVersionUID = -2717944876986726663L;
 	
 	private int id;
 	private int taskId;
 	private int xPos;
 	private int yPos;
   private String element;
-	public TaskMapElement( int id, int taskId, int xPos, int yPos, String element)
-	{
-		super();
-		this.id = id;
-		this.taskId = taskId;
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.element = element;
-	}
+  private boolean boss;
+  
+	public TaskMapElement( int id, int taskId, int xPos, int yPos, String element, boolean boss )
+{
+	super();
+	this.id = id;
+	this.taskId = taskId;
+	this.xPos = xPos;
+	this.yPos = yPos;
+	this.element = element;
+	this.boss = boss;
+}
 	public String getElement() {
     return element;
   }
@@ -58,7 +61,14 @@ public class TaskMapElement implements Serializable {
 	{
 		this.yPos = yPos;
 	}
-	
+	public boolean isBoss()
+	{
+		return boss;
+	}
+	public void setBoss( boolean boss )
+	{
+		this.boss = boss;
+	}
 	@Override
 	public String toString()
 	{
@@ -70,7 +80,11 @@ public class TaskMapElement implements Serializable {
 			+ xPos
 			+ ", yPos="
 			+ yPos
+			+ ", element="
+			+ element
+			+ ", boss="
+			+ boss
 			+ "]";
 	}
-
+	
 }

@@ -4178,6 +4178,10 @@ public final class TaskProto {
     // optional .com.lvl6.proto.Element element = 5;
     boolean hasElement();
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
+    
+    // optional bool boss = 6;
+    boolean hasBoss();
+    boolean getBoss();
   }
   public static final class TaskMapElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -4258,12 +4262,23 @@ public final class TaskProto {
       return element_;
     }
     
+    // optional bool boss = 6;
+    public static final int BOSS_FIELD_NUMBER = 6;
+    private boolean boss_;
+    public boolean hasBoss() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getBoss() {
+      return boss_;
+    }
+    
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
       xPos_ = 0;
       yPos_ = 0;
       element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      boss_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4291,6 +4306,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(5, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, boss_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4320,6 +4338,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, boss_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4455,6 +4477,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
         bitField0_ = (bitField0_ & ~0x00000010);
+        boss_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -4513,6 +4537,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000010;
         }
         result.element_ = element_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.boss_ = boss_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4543,6 +4571,9 @@ public final class TaskProto {
         }
         if (other.hasElement()) {
           setElement(other.getElement());
+        }
+        if (other.hasBoss()) {
+          setBoss(other.getBoss());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4604,6 +4635,11 @@ public final class TaskProto {
                 bitField0_ |= 0x00000010;
                 element_ = value;
               }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              boss_ = input.readBool();
               break;
             }
           }
@@ -4720,6 +4756,27 @@ public final class TaskProto {
         return this;
       }
       
+      // optional bool boss = 6;
+      private boolean boss_ ;
+      public boolean hasBoss() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getBoss() {
+        return boss_;
+      }
+      public Builder setBoss(boolean value) {
+        bitField0_ |= 0x00000020;
+        boss_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBoss() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        boss_ = false;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
     
@@ -4805,11 +4862,11 @@ public final class TaskProto {
       "Element:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHA" +
       "NCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserPersistentEv" +
       "entProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(",
-      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\201\001\n\023TaskMap" +
+      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\217\001\n\023TaskMap" +
       "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
       "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(" +
       "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
-      "B\013B\tTaskProto"
+      "\022\014\n\004boss\030\006 \001(\010B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4869,7 +4926,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", },
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", },
               com.lvl6.proto.TaskProto.TaskMapElementProto.class,
               com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;
