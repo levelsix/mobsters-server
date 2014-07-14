@@ -916,7 +916,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  List<Integer> userIds = new ArrayList<Integer>();
 	  userIds.add(attackerId);
 	  
-	  if (null != defender) {
+	  if (null != defender && defenderId > 0) {
 		  userIds.add(defenderId);
 	  }
 	  
