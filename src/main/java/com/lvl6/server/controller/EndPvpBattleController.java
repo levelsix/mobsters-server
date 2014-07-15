@@ -915,7 +915,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  List<Integer> userIds = new ArrayList<Integer>();
 	  userIds.add(attackerId);
-	  userIds.add(defenderId);
+	  
+	  if (null != defender && defenderId > 0) {
+		  userIds.add(defenderId);
+	  }
+	  
 	  MiscMethods.writeToUserCurrencyUsers(userIds, curTime, changeMap,
 			  previousCurrencyMap, currentCurrencyMap, changeReasonsMap,
 			  detailsMap);
