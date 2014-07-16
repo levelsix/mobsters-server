@@ -459,7 +459,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("db error: last_wall_post_notification_time not set. user_id=" + id);
     }
     
-    int kabamNaid = rs.getInt(DBConstants.USER__KABAM_NAID);
+//    int kabamNaid = rs.getInt(DBConstants.USER__KABAM_NAID);
 
     boolean hasReceivedfbReward = rs.getBoolean(DBConstants.USER__HAS_RECEIVED_FB_REWARD);
     int numBeginnerSalesPurchased = rs.getInt(DBConstants.USER__NUM_BEGINNER_SALES_PURCHASED);
@@ -497,7 +497,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
     		isAdmin, apsalarId, numCoinsRetrievedFromStructs,
     		numOilRetrievedFromStructs, numConsecutiveDaysPlayed, clanId,
-    		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
+    		lastWallPostNotificationTime, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
     		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
     		lastMiniJobGeneratedTime, avatarMonsterId);
