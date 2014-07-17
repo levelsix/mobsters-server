@@ -172,7 +172,7 @@ public class BeginObstacleRemovalController extends EventController{
   private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
-  	if (userCash < cashSpent) {
+  	if (userCash < Math.abs(cashSpent)) {
   		log.error("user error: user does not have enough cash. userCash=" + userCash +
   				"\t cashSpent=" + cashSpent);
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
@@ -185,7 +185,7 @@ public class BeginObstacleRemovalController extends EventController{
   private boolean hasEnoughOil(Builder resBuilder, User u, int oilSpent) {
   	int userOil = u.getOil();
   	//if user's aggregate oil is < cost, don't allow transaction
-  	if (userOil < oilSpent) {
+  	if (userOil < Math.abs(oilSpent)) {
   		log.error("user error: user does not have enough oil. userOil=" + userOil +
   				"\t oilSpent=" + oilSpent);
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
