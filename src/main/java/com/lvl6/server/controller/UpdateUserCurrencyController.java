@@ -54,7 +54,7 @@ import com.lvl6.utils.RetrieveUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     
-    //both positive numbers, server will change to negative
+    //all positive numbers, server will change to negative
     int cashSpent = reqProto.getCashSpent();
     int oilSpent = reqProto.getOilSpent();
     int gemsSpent = reqProto.getGemsSpent();

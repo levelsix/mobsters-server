@@ -64,6 +64,7 @@ public class BeginObstacleRemovalController extends EventController{
 		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int gemsSpent = reqProto.getGemsSpent();
+	    //positive means refund, negative means charge user
 		int resourceChange = reqProto.getResourceChange();
 		ResourceType rt = reqProto.getResourceType();
 		int userObstacleId = reqProto.getUserObstacleId();
@@ -138,15 +139,19 @@ public class BeginObstacleRemovalController extends EventController{
     if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
     		return false;
     }
-    
+
+    //since negative resourceChange means charge, then negative of that is
+    //the cost. If resourceChange is positive, meaning refund, user will always
+    //have more than a negative amount
+    int resourceRequired = -1 * resourceChange;
     if (ResourceType.CASH.equals(rt)) {
-    	if (resourceChange < 0 && !hasEnoughCash(resBuilder, user, resourceChange)) {
+    	if (!hasEnoughCash(resBuilder, user, resourceRequired)) {
     		return false;
       }
     }
 
     if (ResourceType.OIL.equals(rt)) {
-      if (resourceChange < 0 && !hasEnoughOil(resBuilder, user, resourceChange)) {
+      if (!hasEnoughOil(resBuilder, user, resourceRequired)) {
       		return false;
       }
     }
@@ -172,7 +177,7 @@ public class BeginObstacleRemovalController extends EventController{
   private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
-  	if (userCash < Math.abs(cashSpent)) {
+  	if (userCash < cashSpent) {
   		log.error("user error: user does not have enough cash. userCash=" + userCash +
   				"\t cashSpent=" + cashSpent);
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
@@ -185,7 +190,7 @@ public class BeginObstacleRemovalController extends EventController{
   private boolean hasEnoughOil(Builder resBuilder, User u, int oilSpent) {
   	int userOil = u.getOil();
   	//if user's aggregate oil is < cost, don't allow transaction
-  	if (userOil < Math.abs(oilSpent)) {
+  	if (userOil < oilSpent) {
   		log.error("user error: user does not have enough oil. userOil=" + userOil +
   				"\t oilSpent=" + oilSpent);
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);

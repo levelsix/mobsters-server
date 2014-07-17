@@ -181,6 +181,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     	
     }
     
+    //since negative resourceChange means charge, then negative of that is
+    //the cost. If resourceChange is positive, meaning refund, user will always
+    //have more than a negative amount
     int requiredResourceAmount = -1 * resourceChange;
     if (resourceType == ResourceType.CASH) {
     	int userResource = user.getCash();

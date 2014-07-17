@@ -68,6 +68,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     String description = reqProto.getDescription();
     int clanIconId = reqProto.getClanIconId();
     int gemsSpent = reqProto.getGemsSpent();
+    //positive means refund, negative means charge user
+    //most likely never positive
     int cashChange = reqProto.getCashChange();
     
     CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
@@ -190,9 +192,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
-  	int userCash = u.getCash();
-  	//if user's aggregate cash is < cost, don't allow transaction
-  	if (userCash < cashSpent) {
+	//if user's aggregate cash is < cost, don't allow transaction
+	int userCash = u.getCash();
+  	
+  	//since negative resourceChange means charge, then negative of that is
+    //the cost. If resourceChange is positive, meaning refund, user will always
+    //have more than a negative amount
+  	int cashRequired = -1 * cashSpent;
+  	if (userCash < cashRequired) {
   		log.error("user error: user does not have enough cash. userCash=" + userCash +
   				"\t cashSpent=" + cashSpent);
   		resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
