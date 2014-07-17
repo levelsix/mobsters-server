@@ -140,13 +140,13 @@ public class BeginObstacleRemovalController extends EventController{
     }
     
     if (ResourceType.CASH.equals(rt)) {
-    	if (!hasEnoughCash(resBuilder, user, resourceChange)) {
+    	if (resourceChange < 0 && !hasEnoughCash(resBuilder, user, resourceChange)) {
     		return false;
       }
     }
 
     if (ResourceType.OIL.equals(rt)) {
-      if (!hasEnoughOil(resBuilder, user, resourceChange)) {
+      if (resourceChange < 0 && !hasEnoughOil(resBuilder, user, resourceChange)) {
       		return false;
       }
     }
