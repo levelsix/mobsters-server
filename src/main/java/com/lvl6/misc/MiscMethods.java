@@ -931,8 +931,10 @@ public class MiscMethods {
 		  log.info("numInserted into currency history: " + numInserted);
 		  
 	  } catch (Exception e) {
-		  log.error("error updating user_curency_history; reasonsForChanges=" +
-				  changeReasonsMap, e);
+		  log.error("error updating user_curency_history; userIds=" +
+				  userIds + ", reasonsForChanges=" + changeMap +
+				  ", changeReasonsMap=" + changeReasonsMap +
+				  ", detailsMap=" + detailsMap, e);
 	  }
   }
   
