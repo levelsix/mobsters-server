@@ -313,7 +313,7 @@ public class CreateInfoProtoUtils {
     ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
     
     int userId = u.getId();
-    UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, false);
+    UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, true);
     ppb.setPvpLeagueStats(uplp);
 
     return ppb.build();
@@ -2484,6 +2484,7 @@ public class CreateInfoProtoUtils {
 	  bldr.setExpReward(tsfu.getExpGained());
 	  
 	  bldr.setLevel(tsm.getLevel());
+	  bldr.setDmgMultiplier(tsm.getDmgMultiplier());
 
 	  int itemId = tsfu.getItemIdDropped();
 	  if (itemId > 0) {
