@@ -369,7 +369,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	Date combineStartDate = getTimeUtils().createDateAddDays(createDate, -7);
   	
   	List<Integer> monsterIds = new ArrayList<Integer>();
-  	monsterIds.add(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+  	monsterIds.add(ControllerConstants.TUTORIAL__USER_STARTING_MONSTER_ID);
   	
   	if (null != fbId && !fbId.isEmpty()) {
   		log.info("awarding facebook zucker mucker burger.");
