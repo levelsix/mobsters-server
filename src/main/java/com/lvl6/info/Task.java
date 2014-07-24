@@ -4,22 +4,23 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-	private static final long serialVersionUID = 3957205603582931023L;
+	private static final long serialVersionUID = -1210759832572232693L;
 	
 	private int id;
 	private String goodName;
 	private String description;
 	private int cityId;
-//	private int energyCost;
 	private int assetNumberWithinCity;
 	private int prerequisiteTaskId;
 	private int prerequisiteQuestId;
 	private int boardWidth;
 	private int boardHeight;
+	private String groundImgPrefix;
 	
 	public Task(int id, String goodName, String description, int cityId,
 			int assetNumberWithinCity, int prerequisiteTaskId,
-			int prerequisiteQuestId, int boardWidth, int boardHeight)
+			int prerequisiteQuestId, int boardWidth, int boardHeight,
+			String groundImgPrefix)
 	{
 		super();
 		this.id = id;
@@ -31,6 +32,7 @@ public class Task implements Serializable {
 		this.prerequisiteQuestId = prerequisiteQuestId;
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
+		this.groundImgPrefix = groundImgPrefix;
 	}
 	
 	public int getId() {
@@ -96,6 +98,16 @@ public class Task implements Serializable {
 		this.boardHeight = boardHeight;
 	}
 
+	public String getGroundImgPrefix()
+	{
+		return groundImgPrefix;
+	}
+
+	public void setGroundImgPrefix( String groundImgPrefix )
+	{
+		this.groundImgPrefix = groundImgPrefix;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -117,7 +129,9 @@ public class Task implements Serializable {
 			+ boardWidth
 			+ ", boardHeight="
 			+ boardHeight
+			+ ", groundImgPrefix="
+			+ groundImgPrefix
 			+ "]";
 	}
-	
+
 }

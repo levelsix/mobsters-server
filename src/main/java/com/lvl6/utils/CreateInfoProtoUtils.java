@@ -2396,6 +2396,11 @@ public class CreateInfoProtoUtils {
     builder.setBoardHeight(task.getBoardHeight());
     builder.setBoardWidth(task.getBoardWidth());
     
+    String groundImgPrefix = task.getGroundImgPrefix();
+    if (null != groundImgPrefix) {
+    	builder.setGroundImgPrefix(groundImgPrefix);
+    }
+    
     return builder.build();
   }
 

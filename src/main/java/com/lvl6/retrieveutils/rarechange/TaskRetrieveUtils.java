@@ -217,9 +217,11 @@ import com.lvl6.utils.DBConnection;
     int prerequisiteQuestId = rs.getInt(i++);
     int boardWidth = rs.getInt(i++);
     int boardHeight = rs.getInt(i++);
+    String groundImgPrefix = rs.getString(i++);
     
     Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
-    		prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight);
+    		prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight,
+    		groundImgPrefix);
     return task;
   }
 }
