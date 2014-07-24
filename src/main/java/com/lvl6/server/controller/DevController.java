@@ -17,6 +17,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.Globals;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto;
@@ -64,7 +65,9 @@ import com.lvl6.utils.RetrieveUtils;
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 			//TODO: Consider writing currency history and other history
 			
-			if (aUser.isAdmin()) {
+			log.info(String.format(
+				"CHEATER DETECTED!!!! %s", aUser));
+			if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
 				cheat(userId, request, num, resBuilder, aUser);
 			} else {
 				log.error(String.format(
