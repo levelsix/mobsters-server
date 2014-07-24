@@ -1,0 +1,33 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+import "Dev.proto";
+import "MonsterStuff.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventDevProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message DevRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional DevRequest devRequest = 2;
+	
+	//could be for cash, oil, and or gems, or monster id
+	optional int32 num = 3;
+}
+
+																						//DONE
+message DevResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional DevStatus status = 2;
+	
+	optional FullUserMonsterProto fump = 3;
+	
+	enum DevStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------

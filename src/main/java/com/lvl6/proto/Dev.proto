@@ -1,0 +1,15 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+package com.lvl6.proto;
+
+option java_outer_classname = "DevProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+enum DevRequest {
+	RESET_ACCOUNT = 1;
+	GET_MONZTER = 2;
+	F_B_GET_CASH = 3;
+	F_B_GET_OIL = 4;
+	F_B_GET_GEMS = 5;
+	F_B_GET_CASH_OIL_GEMS = 6;
+}
