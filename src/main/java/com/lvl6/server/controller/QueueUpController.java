@@ -34,6 +34,7 @@ import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
@@ -230,12 +231,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		int maxElo = maxEloList.get(0);
 		
 		//just select people above and below attacker's elo
-		int minElo = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_RANGE_SUBTRAHEND);
-		int maxElo = attackerElo + ControllerConstants.PVP__ELO_RANGE_ADDEND;
+//		int minElo = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_RANGE_SUBTRAHEND);
+//		int maxElo = attackerElo + ControllerConstants.PVP__ELO_RANGE_ADDEND;
+		Map.Entry<Integer, Integer> minAndMaxElo = MiscMethods
+			.getMinAndMaxElo(attackerElo);
+		int minElo = minAndMaxElo.getKey();
+		int maxElo = minAndMaxElo.getValue();
 		
 		//ids are for convenience 
 		List<Integer> queuedOpponentIdsList = new ArrayList<Integer>();
-		//if want up to date info comment this out and query from db instead 
+		//if want up-to-date info comment this out and query from db instead 
 		Map<Integer, PvpUser> userIdToPvpUser = new HashMap<Integer, PvpUser>();
 		
 		//get the users that the attacker will fight
@@ -281,8 +286,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<Integer, Integer> userIdToProspectiveCashReward = new HashMap<Integer, Integer>();
 			Map<Integer, Integer> userIdToProspectiveOilReward = new HashMap<Integer, Integer>();
 			
-			calculateCashOilRewards(queuedOpponents, userIdToProspectiveCashReward,
-					userIdToProspectiveOilReward);
+			calculateCashOilRewards(attacker.getId(), attackerElo,
+				queuedOpponents, userIdToPvpUser, userIdToProspectiveCashReward,
+				userIdToProspectiveOilReward);
 			
 			//create the protos for all this
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
@@ -631,18 +637,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 	
 	
-	private void calculateCashOilRewards(List<User> queuedOpponents,
-			Map<Integer, Integer> userIdToProspectiveCashReward,
-			Map<Integer, Integer> userIdToProspectiveOilReward) {
-		
+	private void calculateCashOilRewards(int attackerId, int attackerElo,
+		List<User> queuedOpponents, Map<Integer, PvpUser> userIdToPvpUser,
+		Map<Integer, Integer> userIdToProspectiveCashReward,
+		Map<Integer, Integer> userIdToProspectiveOilReward)
+	{
+		//TODO: Need to account for the user's uncollected resources
 		for (User queuedOpponent : queuedOpponents) {
 			int userId = queuedOpponent.getId();
+			PvpUser pu = userIdToPvpUser.get(userId);
 			
-			int cashReward = MiscMethods.calculateCashRewardFromPvpUser(queuedOpponent);
-			int oilReward = MiscMethods.calculateOilRewardFromPvpUser(queuedOpponent);
+			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
+				attackerId, attackerElo, userId, pu.getElo(),
+				queuedOpponent.getCash(), queuedOpponent.getOil());
 			
-			userIdToProspectiveCashReward.put(userId, cashReward);
-			userIdToProspectiveOilReward.put(userId, oilReward);
+			userIdToProspectiveCashReward.put(userId,
+				potentialResult.getUnsignedCashAttackerWins());
+			
+			userIdToProspectiveOilReward.put(userId, 
+				potentialResult.getUnsignedOilAttackerWins());
 		}
 	}
 	

@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import com.google.common.base.Functions;
+import com.google.common.collect.Lists;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.PagingPredicate;
@@ -248,6 +250,24 @@ public class HazelcastPvpUtil implements InitializingBean {
 			log.info("getting a user from hazelcast instead of db");
 			return getPvpUserViaHazelcast(userIdStr);
 		}
+	}
+	
+	public Map<String, PvpUser> getPvpUsers(Collection<Integer> userIds) {
+		List<String> stringIds = Lists.transform(
+			new ArrayList<Integer>(userIds), Functions.toStringFunction());
+			
+		if (isUseDatabaseInstead()) {
+			log.info("getting users from db instead of hazelcast. userIds=" + userIds);
+			return getPvpUserRetrieveUtil().getUserPvpLeagueForUsers(stringIds);
+		}
+		
+		Map<String, PvpUser> users = new HashMap<String, PvpUser>();
+		for (Integer userId : userIds) {
+			String userIdStr = String.valueOf(userId);
+			
+			users.put(userIdStr, getPvpUserViaHazelcast(userIdStr));
+		}
+		return users;
 	}
 	
 	protected PvpUser getPvpUserViaHazelcast(String userIdStr) {

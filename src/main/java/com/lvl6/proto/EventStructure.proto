@@ -187,6 +187,7 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+/*TODO GET RID OF THIS*/
 																						//DONE
 message ExpansionWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -215,6 +216,7 @@ message ExpansionWaitCompleteResponseProto {
      	FAIL_OTHER = 5;
      }
 }
+/*TODO GET RID OF THIS*/
 
 //------------------------------------------------------------------------------------------
 message SpawnObstacleRequestProto {

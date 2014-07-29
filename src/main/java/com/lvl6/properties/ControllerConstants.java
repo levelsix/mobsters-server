@@ -63,6 +63,7 @@ public class ControllerConstants {
 	public static final int OBSTACLE__MINUTES_PER_OBSTACLE = 5;
 
 	//PVP
+	public static final int PVP__DEFAULT_MIN_ELO = 1000;
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
 	public static final int PVP__MAX_QUEUE_SIZE = 10;

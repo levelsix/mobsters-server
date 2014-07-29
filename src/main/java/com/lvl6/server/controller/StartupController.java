@@ -93,6 +93,7 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
@@ -1232,17 +1233,48 @@ public class StartupController extends EventController {
   			attackerIdsList);
   	log.info("history monster teams=" + attackerIdToCurTeam);
 
-  	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings = MiscMethods
-  			.calculateCashRewardFromPvpUsers(idsToAttackers);
-  	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings = MiscMethods
-  			.calculateOilRewardFromPvpUsers(idsToAttackers);
-
+  	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings =
+  		new HashMap<Integer, Integer>();
+  	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings =
+  		new HashMap<Integer, Integer>();
+  	PvpUser attackerPu = getHazelcastPvpUtil().getPvpUser(userId);
+  	calculateCashOilRewardFromPvpUsers(userId, attackerPu.getElo(),
+  		idsToAttackers, attackerIdsToProspectiveCashWinnings,
+  		attackerIdsToProspectiveOilWinnings);
+  	
   	List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
 //  	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
+  }
+
+  //Similar logic to calculateCashOilRewards in QueueUpController
+  private void calculateCashOilRewardFromPvpUsers( int attackerId,
+	  int attackerElo, Map<Integer, User> userIdsToUsers,
+	  Map<Integer, Integer> userIdToCashStolen,
+	  Map<Integer, Integer> userIdToOilStolen )
+  {
+	  Collection<Integer> userIdz = userIdsToUsers.keySet() ;
+	  Map<String, PvpUser> idsToPvpUsers = getHazelcastPvpUtil()
+		  .getPvpUsers(userIdz);
+	  
+	  for (Integer defenderId : userIdz) {
+		  String defenderEyed = defenderId.toString();
+		  
+		  User defender = userIdsToUsers.get(defenderId);
+		  PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
+		  
+		  PvpBattleOutcome potentialResult = new PvpBattleOutcome(
+			  attackerId, attackerElo, defenderId, defenderPu.getElo(),
+			  defender.getCash(), defender.getOil());
+		  
+		  userIdToCashStolen.put(defenderId, 
+			  potentialResult.getUnsignedCashAttackerWins());
+		  userIdToOilStolen.put(defenderId, 
+			  potentialResult.getUnsignedOilAttackerWins());
+	  }
   }
   
   //SOOOOOO DISGUSTING.............ALL THIS FUCKING CODE. SO GROSS.
