@@ -1534,9 +1534,11 @@ public class CreateInfoProtoUtils {
       List<MonsterForUser> userMonsters) {
     List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
 
-    for (MonsterForUser mfu : userMonsters) {
-      FullUserMonsterProto ump = createFullUserMonsterProtoFromUserMonster(mfu);
-      protos.add(ump);
+    if (userMonsters != null) {
+      for (MonsterForUser mfu : userMonsters) {
+        FullUserMonsterProto ump = createFullUserMonsterProtoFromUserMonster(mfu);
+        protos.add(ump);
+      }
     }
 
     return protos;
