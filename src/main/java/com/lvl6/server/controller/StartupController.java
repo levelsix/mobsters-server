@@ -17,7 +17,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -29,9 +28,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
-import com.kabam.apiclient.KabamApi;
-import com.kabam.apiclient.MobileNaidResponse;
-import com.kabam.apiclient.ResponseCode;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.ForceLogoutResponseEvent;
@@ -66,7 +62,6 @@ import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
-import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
@@ -98,6 +93,7 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
@@ -417,11 +413,12 @@ public class StartupController extends EventController {
       }
 		}
 
+    /*
     if (Globals.KABAM_ENABLED()) {
       String naid = retrieveKabamNaid(user, udid, reqProto.getMacAddress(),
           reqProto.getAdvertiserId());
       resBuilder.setKabamNaid(naid);
-    }
+    }*/
     
     //startup time
     resBuilder.setServerTimeMillis((new Date()).getTime());
@@ -1236,17 +1233,48 @@ public class StartupController extends EventController {
   			attackerIdsList);
   	log.info("history monster teams=" + attackerIdToCurTeam);
 
-  	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings = MiscMethods
-  			.calculateCashRewardFromPvpUsers(idsToAttackers);
-  	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings = MiscMethods
-  			.calculateOilRewardFromPvpUsers(idsToAttackers);
-
+  	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings =
+  		new HashMap<Integer, Integer>();
+  	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings =
+  		new HashMap<Integer, Integer>();
+  	PvpUser attackerPu = getHazelcastPvpUtil().getPvpUser(userId);
+  	calculateCashOilRewardFromPvpUsers(userId, attackerPu.getElo(),
+  		idsToAttackers, attackerIdsToProspectiveCashWinnings,
+  		attackerIdsToProspectiveOilWinnings);
+  	
   	List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
 //  	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
+  }
+
+  //Similar logic to calculateCashOilRewards in QueueUpController
+  private void calculateCashOilRewardFromPvpUsers( int attackerId,
+	  int attackerElo, Map<Integer, User> userIdsToUsers,
+	  Map<Integer, Integer> userIdToCashStolen,
+	  Map<Integer, Integer> userIdToOilStolen )
+  {
+	  Collection<Integer> userIdz = userIdsToUsers.keySet() ;
+	  Map<String, PvpUser> idsToPvpUsers = getHazelcastPvpUtil()
+		  .getPvpUsers(userIdz);
+	  
+	  for (Integer defenderId : userIdz) {
+		  String defenderEyed = defenderId.toString();
+		  
+		  User defender = userIdsToUsers.get(defenderId);
+		  PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
+		  
+		  PvpBattleOutcome potentialResult = new PvpBattleOutcome(
+			  attackerId, attackerElo, defenderId, defenderPu.getElo(),
+			  defender.getCash(), defender.getOil());
+		  
+		  userIdToCashStolen.put(defenderId, 
+			  potentialResult.getUnsignedCashAttackerWins());
+		  userIdToOilStolen.put(defenderId, 
+			  potentialResult.getUnsignedOilAttackerWins());
+	  }
   }
   
   //SOOOOOO DISGUSTING.............ALL THIS FUCKING CODE. SO GROSS.
@@ -1485,7 +1513,7 @@ public class StartupController extends EventController {
     }
   }
 
-  private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
+  /*private String retrieveKabamNaid(User user, String openUdid, String mac, String advertiserId) {
     String host;
     int port = 443;
     int clientId;
@@ -1527,7 +1555,7 @@ public class StartupController extends EventController {
       log.error("Error retrieving kabam naid: " + naidResponse.getReturnCode());
     }
     return "";
-  }
+  }*/
 
   private void setLockBoxEvents(StartupResponseProto.Builder resBuilder, User user) {
 //    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());

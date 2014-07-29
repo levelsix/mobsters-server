@@ -232,6 +232,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     // scenario can be user has insufficient cash but has enough
     // gems to cover the difference
     int userCash = u.getCash();
+    //since negative cashChange means charge, then negative of that is
+    //the cost. If cashChange is positive, meaning refund, user will always
+    //have more than a negative amount
     int cashCost = -1 * cashChange;
     if (gemCost == 0 && cashCost > userCash) {
     	//user doesn't have enough cash and is not paying gems.

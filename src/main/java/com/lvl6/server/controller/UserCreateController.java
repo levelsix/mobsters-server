@@ -35,7 +35,6 @@ import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
-import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
@@ -97,6 +96,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
     int oil = Math.min(reqProto.getOil(), ControllerConstants.TUTORIAL__INIT_OIL);
     int gems = Math.min(reqProto.getGems(), ControllerConstants.TUTORIAL__INIT_GEMS);
+    
+    String email = reqProto.getEmail();
+    String fbData = reqProto.getFbData();
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
     resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
@@ -115,7 +117,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			if (legitUserCreate) {
 //			  String newReferCode = grabNewReferCode();
 			  userId = writeChangeToDb(resBuilder, name, udid, cash, oil, gems, deviceToken,
-			  		createTime, facebookId);
+			  		createTime, facebookId, email, fbData);
 			}
 
 			UserCreateResponseProto resProto = resBuilder.build();
@@ -141,7 +143,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  	writeStructs(userId, createTime, structsJustBuilt);
 			  	writeObstacles(userId);
 			  	log.info("writing tasks");
-			    writeTaskCompleted(userId, createTime);
+//			    writeTaskCompleted(userId, createTime);
 			    writeMonsters(userId, createTime, facebookId);
 			    writePvpStuff(userId, createTime);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
@@ -229,14 +231,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private int writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
-  		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId) {
+  		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId,
+  		String email, String fbData) {
   	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
 	  int playerExp = 10;
 	  int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
-	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId);
+	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
+	      email, fbData);
 	        
 	  if (userId > 0) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
@@ -365,7 +369,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	Date combineStartDate = getTimeUtils().createDateAddDays(createDate, -7);
   	
   	List<Integer> monsterIds = new ArrayList<Integer>();
-  	monsterIds.add(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+  	monsterIds.add(ControllerConstants.TUTORIAL__USER_STARTING_MONSTER_ID);
   	
   	if (null != fbId && !fbId.isEmpty()) {
   		log.info("awarding facebook zucker mucker burger.");

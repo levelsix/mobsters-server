@@ -221,13 +221,13 @@ public class InAppPurchaseController extends EventController {
       resEvent.setInAppPurchaseResponseProto(resProto);
       server.writeEvent(resEvent);
 
-      if (Globals.KABAM_ENABLED()) {
+      /*if (Globals.KABAM_ENABLED()) {
         if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
           JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
           List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
           doKabamPost(queryParams, 0);
         }
-      }
+      }*/
 
       //null PvpLeagueFromUser means will pull from hazelcast instead
       UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -248,7 +248,7 @@ public class InAppPurchaseController extends EventController {
     }
   }
 
-  private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
+  /*private void doKabamPost(List<NameValuePair> queryParams, int numTries) {
     log.info("Posting to Kabam");
     String host = Globals.IS_SANDBOX() ? KabamProperties.SANDBOX_PAYMENT_URL : KabamProperties.PRODUCTION_PAYMENT_URL;
     HttpClient client = new DefaultHttpClient();
@@ -315,7 +315,7 @@ public class InAppPurchaseController extends EventController {
     logParams.put("ipaddr", reqProto.getIpaddr());
     JSONObject logJson = new JSONObject(logParams);
     return logJson;
-  }
+  }*/
 
   private static String sha1(String input) throws NoSuchAlgorithmException {
     MessageDigest mDigest = MessageDigest.getInstance("SHA1");

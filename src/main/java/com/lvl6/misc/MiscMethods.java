@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -180,6 +182,68 @@ public class MiscMethods {
   public static final String MONSTER = "MONSTER";
 
   
+
+	//METHODS FOR MATCH MAKING
+
+	public static final double ELO__RANDOM_VAR_MIN = 0.1D;
+	public static final double ELO__RANDOM_VAR_MAX = 0.9D;
+	public static final double ELO__ICND_MEAN = -0.2D;
+	public static final double ELO__ICND_STANDARD_DEVIATION = 0.608D;
+	public static final double ELO__MAX_RANGE = 0.4D;
+	
+	/*
+	 * randVal (aka eloAddend) = [Max Range] x Player's Score x ICND( Random( 0.1, 0.9 ), [Bias], 0.608 )
+	 * Recommended Max Range: 40.0%
+	 * Recommended Bias: -0.20
+	 * 
+	 * computed elo = elo + randVal
+	 * 
+	 * minEloToSearchFor = 95% * computed elo
+	 * maxEloToSearchFor = 105% * computed elo
+	 * 
+	 * elo should be between minElo and maxElo:
+	 *  defaultMinElo <= computed elo <= defaultMaxElo
+	 */
+	public static Map.Entry<Integer, Integer> getMinAndMaxElo(double playerElo) {
+		double randVar = ELO__RANDOM_VAR_MIN + (Math.random() * (ELO__RANDOM_VAR_MAX - ELO__RANDOM_VAR_MIN));
+		
+		double computedElo = getProspectiveOpponentElo(randVar, playerElo);
+		
+		
+		int minElo = (int) (0.95D * computedElo);
+		int maxElo = (int) (1.05D * computedElo);
+		log.info(String.format(
+			"computedElo=%f, minElo=%f, maxElo=%f",
+			computedElo, minElo, maxElo));
+		
+		//the minimum elo to be searched for is 1000, er PVP__DEFAULT_MIN_ELO
+		minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO, minElo);
+		log.info(String.format(
+			"after capping minElo. computedElo=%f, minElo=%f, maxElo=%f",
+			computedElo, minElo, maxElo));
+		
+		//poor man's pair
+		return new AbstractMap.SimpleEntry<Integer, Integer>(minElo,maxElo);
+	}
+	
+	public static double getProspectiveOpponentElo(
+		double randVar, double playerElo)
+	{
+		NormalDistribution eloRangeFunc = new NormalDistribution(
+			ELO__ICND_MEAN, ELO__ICND_STANDARD_DEVIATION);
+		
+		double cndVal = eloRangeFunc.inverseCumulativeProbability(randVar);
+		double eloAddend = ELO__MAX_RANGE * playerElo * cndVal; 
+		log.info(String.format(
+			"cndVal=%f, playerElo=%f, randVar=%f, eloAddend=%f",
+			cndVal, playerElo, randVar, eloAddend));
+		
+		return playerElo + eloAddend;
+//		eloAddend = Math.max(eloAddend, ControllerConstants.PVP__DEFAULT_MIN_ELO);
+		
+	}
+  
+  /*
   public static int calculateCashRewardFromPvpUser(User queuedOpponent) {
 		int cash = queuedOpponent.getCash();
 		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
@@ -230,7 +294,7 @@ public class MiscMethods {
   	
   	return userIdToOilReward;
   }
-
+*/
 
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
@@ -512,6 +576,8 @@ public class MiscMethods {
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
+    cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
+    cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
 
     cb.setAddAllFbFriends(globals.isAddAllFbFriends());
     
@@ -929,8 +995,10 @@ public class MiscMethods {
 		  log.info("numInserted into currency history: " + numInserted);
 		  
 	  } catch (Exception e) {
-		  log.error("error updating user_curency_history; reasonsForChanges=" +
-				  changeReasonsMap, e);
+		  log.error("error updating user_curency_history; userIds=" +
+				  userIds + ", reasonsForChanges=" + changeMap +
+				  ", changeReasonsMap=" + changeReasonsMap +
+				  ", detailsMap=" + detailsMap, e);
 	  }
   }
   

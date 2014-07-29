@@ -15,6 +15,8 @@ public class ControllerConstants {
 	//this multiplies with the cost to heal all monsters on user's battle team
 	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
+	public static final float BATTLE__RUN_AWAY_BASE_PERCENT = 0.5F;
+	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
 	public static final int CLAN__MAX_NUM_MEMBERS = 3;
@@ -61,6 +63,7 @@ public class ControllerConstants {
 	public static final int OBSTACLE__MINUTES_PER_OBSTACLE = 5;
 
 	//PVP
+	public static final int PVP__DEFAULT_MIN_ELO = 1000;
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
@@ -108,7 +111,10 @@ public class ControllerConstants {
 		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
+	//the monster id that is used in tutorial
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 2011;
+	//the monster id the user gets to use after tutorial
+	public static final int TUTORIAL__USER_STARTING_MONSTER_ID = 37;
 	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
@@ -469,10 +475,10 @@ public class ControllerConstants {
   
   // MAP
   public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "mapsection";
-  public static final int TASK_MAP__NUMBER_OF_SECTIONS = 5;
+  public static final int TASK_MAP__NUMBER_OF_SECTIONS = 9;
   public static final float TASK_MAP__SECTION_HEIGHT = 328;
   public static final float TASK_MAP__TOTAL_WIDTH = 328;
-  public static final float TASK_MAP__TOTAL_HEIGHT = 1406;
+  public static final float TASK_MAP__TOTAL_HEIGHT = 2853;
   
   public static final AnimatedSpriteOffset[] STARTUP__ANIMATED_SPRITE_OFFSETS = {
     new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),

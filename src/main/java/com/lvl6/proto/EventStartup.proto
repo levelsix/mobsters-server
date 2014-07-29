@@ -154,8 +154,11 @@ message StartupResponseProto {
 		optional float minutesPerGem = 19; 
 		optional int32 pvpRequiredMinLvl = 20;
 		optional float gemsPerResource = 21;
+		
 		//(multiplies with cost to heal all battle team monsters while in dungeon)
 		optional float continueBattleGemCostMultiplier = 22;
+		optional float battleRunAwayBasePercent = 28;
+		optional float battleRunAwayIncrement = 29;
 		
 		optional bool addAllFbFriends = 23;
 		optional MiniTutorialConstants miniTuts = 24;
@@ -164,6 +167,9 @@ message StartupResponseProto {
 		optional int32 minutesPerObstacle = 26; //minutes it takes to spawn obstacles
 		
 		optional TaskMapConstants taskMapConstants = 27;
+		
+		//optional float battleRunAwayBasePercent = 28; defined above
+		//optional float battleRunAwayIncrement = 29; defined above
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

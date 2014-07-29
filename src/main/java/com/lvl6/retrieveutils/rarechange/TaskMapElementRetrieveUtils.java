@@ -87,8 +87,10 @@ import com.lvl6.utils.DBConnection;
     int xPos = rs.getInt(i++);
     int yPos = rs.getInt(i++);
     String element = rs.getString(i++);
+    boolean boss = rs.getBoolean(i++);
         
-    TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos, element);
+    TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
+    	element, boss);
         
     return taskMap;
   }

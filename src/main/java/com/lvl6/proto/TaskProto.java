@@ -657,6 +657,10 @@ public final class TaskProto {
     // optional int32 boardHeight = 9;
     boolean hasBoardHeight();
     int getBoardHeight();
+    
+    // optional string groundImgPrefix = 10;
+    boolean hasGroundImgPrefix();
+    String getGroundImgPrefix();
   }
   public static final class FullTaskProto extends
       com.google.protobuf.GeneratedMessage
@@ -821,6 +825,38 @@ public final class TaskProto {
       return boardHeight_;
     }
     
+    // optional string groundImgPrefix = 10;
+    public static final int GROUNDIMGPREFIX_FIELD_NUMBER = 10;
+    private java.lang.Object groundImgPrefix_;
+    public boolean hasGroundImgPrefix() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public String getGroundImgPrefix() {
+      java.lang.Object ref = groundImgPrefix_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          groundImgPrefix_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getGroundImgPrefixBytes() {
+      java.lang.Object ref = groundImgPrefix_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        groundImgPrefix_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       taskId_ = 0;
       name_ = "";
@@ -831,6 +867,7 @@ public final class TaskProto {
       prerequisiteQuestId_ = 0;
       boardWidth_ = 0;
       boardHeight_ = 0;
+      groundImgPrefix_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -870,6 +907,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(9, boardHeight_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, getGroundImgPrefixBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -915,6 +955,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, boardHeight_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getGroundImgPrefixBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1058,6 +1102,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         boardHeight_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        groundImgPrefix_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       
@@ -1132,6 +1178,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000100;
         }
         result.boardHeight_ = boardHeight_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.groundImgPrefix_ = groundImgPrefix_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1174,6 +1224,9 @@ public final class TaskProto {
         }
         if (other.hasBoardHeight()) {
           setBoardHeight(other.getBoardHeight());
+        }
+        if (other.hasGroundImgPrefix()) {
+          setGroundImgPrefix(other.getGroundImgPrefix());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1249,6 +1302,11 @@ public final class TaskProto {
             case 72: {
               bitField0_ |= 0x00000100;
               boardHeight_ = input.readInt32();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              groundImgPrefix_ = input.readBytes();
               break;
             }
           }
@@ -1474,6 +1532,42 @@ public final class TaskProto {
         boardHeight_ = 0;
         onChanged();
         return this;
+      }
+      
+      // optional string groundImgPrefix = 10;
+      private java.lang.Object groundImgPrefix_ = "";
+      public boolean hasGroundImgPrefix() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public String getGroundImgPrefix() {
+        java.lang.Object ref = groundImgPrefix_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          groundImgPrefix_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setGroundImgPrefix(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        groundImgPrefix_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGroundImgPrefix() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        groundImgPrefix_ = getDefaultInstance().getGroundImgPrefix();
+        onChanged();
+        return this;
+      }
+      void setGroundImgPrefix(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000200;
+        groundImgPrefix_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullTaskProto)
@@ -4178,6 +4272,10 @@ public final class TaskProto {
     // optional .com.lvl6.proto.Element element = 5;
     boolean hasElement();
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
+    
+    // optional bool boss = 6;
+    boolean hasBoss();
+    boolean getBoss();
   }
   public static final class TaskMapElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -4258,12 +4356,23 @@ public final class TaskProto {
       return element_;
     }
     
+    // optional bool boss = 6;
+    public static final int BOSS_FIELD_NUMBER = 6;
+    private boolean boss_;
+    public boolean hasBoss() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getBoss() {
+      return boss_;
+    }
+    
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
       xPos_ = 0;
       yPos_ = 0;
       element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
+      boss_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4291,6 +4400,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(5, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, boss_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4320,6 +4432,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, boss_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4455,6 +4571,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
         bitField0_ = (bitField0_ & ~0x00000010);
+        boss_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -4513,6 +4631,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000010;
         }
         result.element_ = element_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.boss_ = boss_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4543,6 +4665,9 @@ public final class TaskProto {
         }
         if (other.hasElement()) {
           setElement(other.getElement());
+        }
+        if (other.hasBoss()) {
+          setBoss(other.getBoss());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4604,6 +4729,11 @@ public final class TaskProto {
                 bitField0_ |= 0x00000010;
                 element_ = value;
               }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              boss_ = input.readBool();
               break;
             }
           }
@@ -4720,6 +4850,27 @@ public final class TaskProto {
         return this;
       }
       
+      // optional bool boss = 6;
+      private boolean boss_ ;
+      public boolean hasBoss() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getBoss() {
+        return boss_;
+      }
+      public Builder setBoss(boolean value) {
+        bitField0_ |= 0x00000020;
+        boss_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBoss() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        boss_ = false;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
     
@@ -4779,37 +4930,38 @@ public final class TaskProto {
       "ff.proto\032\026SharedEnumConfig.proto\"_\n\016Task" +
       "StageProto\022\017\n\007stageId\030\001 \001(\005\022<\n\rstageMons" +
       "ters\030\002 \003(\0132%.com.lvl6.proto.TaskStageMon" +
-      "sterProto\"\320\001\n\rFullTaskProto\022\016\n\006taskId\030\001 " +
+      "sterProto\"\351\001\n\rFullTaskProto\022\016\n\006taskId\030\001 " +
       "\001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\016" +
       "\n\006cityId\030\004 \001(\005\022\032\n\022assetNumWithinCity\030\005 \001" +
       "(\005\022\032\n\022prerequisiteTaskId\030\006 \001(\005\022\033\n\023prereq" +
       "uisiteQuestId\030\007 \001(\005\022\022\n\nboardWidth\030\010 \001(\005\022" +
-      "\023\n\013boardHeight\030\t \001(\005\"b\n\024MinimumUserTaskP",
-      "roto\022\016\n\006userId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016" +
-      "curTaskStageId\030\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003" +
-      "\"\263\002\n\025TaskStageMonsterProto\022\021\n\tmonsterId\030" +
-      "\001 \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.pr" +
-      "oto.TaskStageMonsterProto.MonsterType\022\021\n" +
-      "\texpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\t" +
-      "oilReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 " +
-      "\001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdm" +
-      "gMultiplier\030\t \001(\002\"3\n\013MonsterType\022\013\n\007REGU" +
-      "LAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024Persi",
-      "stentEventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayO" +
-      "fWeek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006" +
-      "MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurati" +
-      "onMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017coold" +
-      "ownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl" +
-      "6.proto.PersistentEventProto.EventType\022;" +
-      "\n\016monsterElement\030\010 \001(\0162\027.com.lvl6.proto." +
-      "Element:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHA" +
-      "NCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserPersistentEv" +
-      "entProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(",
-      "\005\022\031\n\021coolDownStartTime\030\003 \001(\003\"\201\001\n\023TaskMap" +
-      "ElementProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006ta" +
-      "skId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(" +
-      "\n\007element\030\005 \001(\0162\027.com.lvl6.proto.Element" +
-      "B\013B\tTaskProto"
+      "\023\n\013boardHeight\030\t \001(\005\022\027\n\017groundImgPrefix\030",
+      "\n \001(\t\"b\n\024MinimumUserTaskProto\022\016\n\006userId\030" +
+      "\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030" +
+      "\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\263\002\n\025TaskStageM" +
+      "onsterProto\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monste" +
+      "rType\030\002 \001(\01621.com.lvl6.proto.TaskStageMo" +
+      "nsterProto.MonsterType\022\021\n\texpReward\030\003 \001(" +
+      "\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilReward\030\010 \001(\005" +
+      "\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r\n\005level\030\006 " +
+      "\001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdmgMultiplier\030\t \001" +
+      "(\002\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_B",
+      "OSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEventProto" +
+      "\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.c" +
+      "om.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tstart" +
+      "Hour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005" +
+      "\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(" +
+      "\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Persist" +
+      "entEventProto.EventType\022;\n\016monsterElemen" +
+      "t\030\010 \001(\0162\027.com.lvl6.proto.Element:\nNO_ELE" +
+      "MENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUT" +
+      "ION\020\002\"V\n\030UserPersistentEventProto\022\016\n\006use",
+      "rId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownSt" +
+      "artTime\030\003 \001(\003\"\217\001\n\023TaskMapElementProto\022\024\n" +
+      "\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004x" +
+      "Pos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\016" +
+      "2\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001(\010B" +
+      "\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4829,7 +4981,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", },
+              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", },
               com.lvl6.proto.TaskProto.FullTaskProto.class,
               com.lvl6.proto.TaskProto.FullTaskProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
@@ -4869,7 +5021,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", },
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", },
               com.lvl6.proto.TaskProto.TaskMapElementProto.class,
               com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;

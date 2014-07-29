@@ -25,6 +25,7 @@ import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.server.Locker;
@@ -120,7 +121,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//second values will be when attacker loses
     		List<Integer> attackerEloChange = new ArrayList<Integer>();
     		List<Integer> defenderEloChange = new ArrayList<Integer>();
-    		calculateEloChange(senderElo, enemyProto, attackerEloChange, defenderEloChange);
+    		calculateEloChange(attackerId, senderElo, enemyUserId, enemyPlfu, attackerEloChange, defenderEloChange);
     		//enemyProto could be a pastVersion of the current version of enemy if
     		//revenging
 
@@ -191,20 +192,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //fills up the lists attackerEloChange, defenderEloChange
-  private void calculateEloChange(int attackerElo, PvpProto defenderProto, 
-  		List<Integer> attackerEloChange, List<Integer> defenderEloChange) {
+  private void calculateEloChange(int attackerId, int attackerElo,
+	  int defenderId, PvpLeagueForUser defender,
+	  List<Integer> attackerEloChange, List<Integer> defenderEloChange)
+  {
   	
-  	//TODO: calculate the actual values! And account for fake users!
+	  int defenderElo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
+	  
+	  if (null != defender) {
+		  defenderElo = defender.getElo();
+	  }
+	
+	  //TODO: Figure out a way to not even have to set 0 for resources
+	  PvpBattleOutcome results = new PvpBattleOutcome(attackerId, attackerElo, defenderId, defenderElo, 0, 0);
+	  
+  	//calculate the actual values. And account for fake defenders!
   	//case where attacker wins
-  	int attackerWinEloChange = attackerElo + 10;
-  	int defenderElo = 4;
-  	int defenderLoseEloChange = Math.min(0, defenderElo - 10);
-  	
+  	int attackerWinEloChange = results.getUnsignedEloAttackerWins();
+  	int defenderLoseEloChange = -1 * attackerWinEloChange;
+  	//when defender loses elo, it should not go below a minimum
+  	if ((defenderElo + defenderLoseEloChange) <
+  		ControllerConstants.PVP__DEFAULT_MIN_ELO)
+  	{
+  		defenderLoseEloChange = 0;
+  	}
   	
   	//case where attacker loses
-  	int attackerLoseEloChange = Math.min(0, attackerElo - 10);
-  	int defenderWinEloChange = defenderElo + 10;
-  	
+  	int defenderWinEloChange = results.getUnsignedEloAttackerLoses();
+  	int attackerLoseEloChange = -1 * defenderWinEloChange;
+  	//when attacker loses elo, it should not go below a minimum
+  	if ((attackerElo + attackerLoseEloChange) <
+  		ControllerConstants.PVP__DEFAULT_MIN_ELO) 
+  	{
+  		attackerLoseEloChange = 0;
+  	}
   	
   	//values are ordered by attacker win then attacker loses
   	attackerEloChange.add(attackerWinEloChange);

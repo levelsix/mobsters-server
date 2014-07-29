@@ -64,6 +64,7 @@ public class BeginObstacleRemovalController extends EventController{
 		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int gemsSpent = reqProto.getGemsSpent();
+	    //positive means refund, negative means charge user
 		int resourceChange = reqProto.getResourceChange();
 		ResourceType rt = reqProto.getResourceType();
 		int userObstacleId = reqProto.getUserObstacleId();
@@ -138,15 +139,19 @@ public class BeginObstacleRemovalController extends EventController{
     if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
     		return false;
     }
-    
+
+    //since negative resourceChange means charge, then negative of that is
+    //the cost. If resourceChange is positive, meaning refund, user will always
+    //have more than a negative amount
+    int resourceRequired = -1 * resourceChange;
     if (ResourceType.CASH.equals(rt)) {
-    	if (!hasEnoughCash(resBuilder, user, resourceChange)) {
+    	if (!hasEnoughCash(resBuilder, user, resourceRequired)) {
     		return false;
       }
     }
 
     if (ResourceType.OIL.equals(rt)) {
-      if (!hasEnoughOil(resBuilder, user, resourceChange)) {
+      if (!hasEnoughOil(resBuilder, user, resourceRequired)) {
       		return false;
       }
     }

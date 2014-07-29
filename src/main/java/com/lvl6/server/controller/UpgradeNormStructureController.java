@@ -169,14 +169,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
     	return false;
     }
+
+    //since negative resourceChange means charge, then negative of that is
+    //the cost. If resourceChange is positive, meaning refund, user will always
+    //have more than a negative amount
+    int resourceRequired = -1 * resourceChange;
     if (ResourceType.CASH.equals(rt)) {
-    	if (user.getCash() < Math.abs(resourceChange)) {
+    	if (user.getCash() < resourceRequired) {
     		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
     		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + resourceChange);
     		return false;
     	}
     } else if (ResourceType.OIL.equals(rt)){
-    	if (user.getOil() < Math.abs(resourceChange)) {
+    	if (user.getOil() < resourceRequired) {
     		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
     		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + resourceChange);
     		return false;

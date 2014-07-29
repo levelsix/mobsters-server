@@ -186,6 +186,42 @@ public class PvpUserRetrieveUtil {
 		return pu;
 	}
 
+	//copy pasted form PvpLeagueForUserRetrieveUtil
+	public Map<String, PvpUser> getUserPvpLeagueForUsers(List<String> userIdList) {
+		Map<String, PvpUser> puMap = new HashMap<String, PvpUser>();
+		try {
+			List<String> columnsToSelect = PvpUserMapper.getColumnsSelected();
+			
+			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
+			inConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userIdList);
+			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil().selectRowsQueryInConditions(
+					columnsToSelect, TABLE_NAME, inConditions, conditionDelimiter, values,
+					preparedStatement);
+
+			log.info("query=" + query);
+
+			List<PvpUser> puList = this.jdbcTemplate
+					.query(query, new PvpUserMapper());
+			
+			for (PvpUser pu : puList) {
+				String userId = pu.getUserId();
+				puMap.put(userId, pu);
+			}
+		} catch (Exception e) {
+			log.error("could not retrieve user pvpLeague for userIds=" + userIdList, e);
+		}
+		
+		return puMap;
+	}
+	
 	private static final class PvpUserMapper implements RowMapper<PvpUser> {
 
 		private static List<String> columnsSelected;

@@ -139,7 +139,7 @@
 		<amqp.host>robot.lvl6.com</amqp.host>
 		<amqp.user>lvl6server</amqp.user>
 		<amqp.pass>devserver</amqp.pass>
-		<amqp.vhost>devageofchaos</amqp.vhost>
+		<amqp.vhost>devmobsters</amqp.vhost>
 		<amqp.exchange>gamemessages</amqp.exchange>
 		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
 		<amqp.client.messages.routing.key>messagesFromPlayers</amqp.client.messages.routing.key>
@@ -932,6 +932,12 @@
 			<artifactId>newrelic-api</artifactId>
 			<version>3.7.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.0</version>
+		</dependency>
+		
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
 			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
 			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 

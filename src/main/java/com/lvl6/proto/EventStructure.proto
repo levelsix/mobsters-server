@@ -48,7 +48,7 @@ message MoveOrRotateNormStructureRequestProto {
 	optional int32 userStructId = 2;
 	optional MoveOrRotateNormStructType type = 3;
 	optional CoordinateProto curStructCoordinates = 4;
-	optional StructOrientation newOrientation = 5 [default = POSITION_1];
+	optional StructOrientation orientationNew = 5 [default = POSITION_1];
 	
 	enum MoveOrRotateNormStructType {
 		MOVE = 1;
@@ -187,6 +187,7 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+/*TODO GET RID OF THIS*/
 																						//DONE
 message ExpansionWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -215,6 +216,7 @@ message ExpansionWaitCompleteResponseProto {
      	FAIL_OTHER = 5;
      }
 }
+/*TODO GET RID OF THIS*/
 
 //------------------------------------------------------------------------------------------
 message SpawnObstacleRequestProto {

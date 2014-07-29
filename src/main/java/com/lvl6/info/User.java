@@ -39,7 +39,7 @@ public class User implements Serializable {
 	private int numConsecutiveDaysPlayed;
 	private int clanId;
 	private Date lastWallPostNotificationTime;
-	private int kabamNaid;
+//	private int kabamNaid;
 	private boolean hasReceivedfbReward;
 	private int numBeginnerSalesPurchased;
 	private String facebookId;
@@ -58,7 +58,7 @@ public class User implements Serializable {
 			Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
 			int numConsecutiveDaysPlayed, int clanId,
-			Date lastWallPostNotificationTime, int kabamNaid,
+			Date lastWallPostNotificationTime, /*int kabamNaid,*/
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
@@ -89,7 +89,7 @@ public class User implements Serializable {
 		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
 		this.clanId = clanId;
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
-		this.kabamNaid = kabamNaid;
+//		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 		this.facebookId = facebookId;
@@ -118,7 +118,8 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateSetFacebookId(String facebookId, boolean fbIdSetOnUserCreate) {
+	public boolean updateSetFacebookId(String facebookId, boolean fbIdSetOnUserCreate,
+		String email, String fbData) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -127,6 +128,8 @@ public class User implements Serializable {
 		absoluteParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, fbIdSetOnUserCreate);
 		
 		absoluteParams.put(DBConstants.USER__UDID, null);
+		absoluteParams.put(DBConstants.USER__EMAIL, email);
+		absoluteParams.put(DBConstants.USER__FB_DATA, fbData);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
@@ -139,6 +142,7 @@ public class User implements Serializable {
 		return false;
 	}
 
+	/*
 	public boolean updateSetKabamNaid(int kabamNaid) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -153,7 +157,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
 	public boolean updateGameCenterId(String gameCenterId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1006,13 +1010,13 @@ public class User implements Serializable {
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 	}
 
-	public int getKabamNaid() {
+	/*public int getKabamNaid() {
 		return kabamNaid;
 	}
 
 	public void setKabamNaid(int kabamNaid) {
 		this.kabamNaid = kabamNaid;
-	}
+	}*/
 
 	public boolean isHasReceivedfbReward() {
 		return hasReceivedfbReward;
@@ -1110,7 +1114,7 @@ public class User implements Serializable {
 				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
 				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
 				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
-				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
+				+ lastWallPostNotificationTime /*+ ", kabamNaid=" + kabamNaid*/
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
 				+ ", facebookId=" + facebookId + ", fbIdSetOnUserCreate="
