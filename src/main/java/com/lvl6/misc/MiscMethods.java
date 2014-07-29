@@ -217,7 +217,9 @@ public class MiscMethods {
 			computedElo, minElo, maxElo));
 		
 		//the minimum elo to be searched for is 1000, er PVP__DEFAULT_MIN_ELO
-		minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO, minElo);
+		//TODO: Fix up this hackiness: ensuring DEFAULT MIN ELO is between min (inclusive) and max elo (inclusive)
+		minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO - 1, minElo);
+		maxElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO + 1, maxElo);
 		log.info(String.format(
 			"after capping minElo. computedElo=%f, minElo=%d, maxElo=%d",
 			computedElo, minElo, maxElo));
