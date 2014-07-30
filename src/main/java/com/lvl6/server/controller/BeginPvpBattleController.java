@@ -219,7 +219,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	
 	  //TODO: Figure out a way to not even have to set 0 for resources
 	  PvpBattleOutcome results = new PvpBattleOutcome(attackerId, attackerElo, defenderId, defenderElo, 0, 0);
-	  
+	  log.info("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCK");
   	//calculate the actual values. And account for fake defenders!
   	//case where attacker wins
   	int attackerWinEloChange = results.getUnsignedEloAttackerWins();
