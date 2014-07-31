@@ -403,7 +403,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void writePvpStuff(int userId, Timestamp createTime) {
-	  int elo = ControllerConstants.PVP__INITIAL_ELO;
+	  int elo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 	  int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
 	  List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils.getLeaguesForElo(elo);
 	  if (pvpLeagueList.size() > 1) {
