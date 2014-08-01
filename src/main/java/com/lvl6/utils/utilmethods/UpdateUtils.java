@@ -805,6 +805,12 @@ public class UpdateUtils implements UpdateUtil {
 			
 			for (MonsterForUser mfu : monsterForUserList) {
 				Map <String, Object> aRow = new HashMap<String, Object>();
+				String newSourceOfPieces = mfu.getSourceOfPieces();
+				if (null != newSourceOfPieces) {
+					newSourceOfPieces += updateReason;
+				} else {
+					newSourceOfPieces = updateReason;
+				}
 				
 				aRow.put(DBConstants.MONSTER_FOR_USER__ID, mfu.getId());
 				aRow.put(DBConstants.MONSTER_FOR_USER__USER_ID, mfu.getUserId());
@@ -813,10 +819,11 @@ public class UpdateUtils implements UpdateUtil {
 				aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, mfu.getCurrentLvl());
 				aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, mfu.getCurrentHealth());
 				aRow.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, mfu.getNumPieces());
+				aRow.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, mfu.isHasAllPieces());
 				aRow.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, mfu.isComplete());
 				aRow.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
 				aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
-				aRow.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, updateReason);
+				aRow.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, newSourceOfPieces);
 				newRows.add(aRow);
 			}
 			log.info("newRows=" + newRows);

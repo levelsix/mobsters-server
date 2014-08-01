@@ -237,7 +237,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }*/
   
-  public Map<Integer, MonsterForUser> getIncompleteMonstersWithUserAndMonsterIds(
+  public Map<Integer, MonsterForUser> getPieceDeficientIncompleteMonstersWithUserAndMonsterIds(
   		int userId, Collection<Integer> monsterIds) {
   	int size = monsterIds.size();
   	List<String> questions = Collections.nCopies(size, "?");
@@ -254,6 +254,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     StringUtils.getListInString(questions, delimiter) + ") and ";
     values.addAll(monsterIds);
     
+    query += DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES + "=? and ";
+    values.add(false);
+
     query += DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
     values.add(false);
 
@@ -491,6 +494,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int currentLvl = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL);
     int currentHealth = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
     int numPieces = rs.getInt(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
+    boolean hasAllPieces = rs.getBoolean(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES);
     boolean isComplete = rs.getBoolean(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
     
     Date combineStartTime = null;
@@ -507,8 +511,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String sourceOfPieces = rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
-    		currentExp, currentLvl, currentHealth, numPieces, isComplete,
-    		combineStartTime, teamSlotNum, sourceOfPieces);
+    		currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
+    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces);
     return userMonster;
   }
 

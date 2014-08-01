@@ -274,9 +274,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		int monsterId = unevolvedMonster.getMonsterId();
 		Monster evolvedMonster = MonsterRetrieveUtils.getEvolvedFormForMonster(monsterId);
 		int numPieces = evolvedMonster.getNumPuzzlePieces();
+		boolean hasAllPieces = true;
 		boolean isComplete = true;
 		MonsterForUser mfu = MonsterStuffUtils.createNewUserMonster(uId, numPieces,
-				evolvedMonster, now, isComplete);
+				evolvedMonster, now, hasAllPieces, isComplete);
 		
 		return mfu;
 	}
