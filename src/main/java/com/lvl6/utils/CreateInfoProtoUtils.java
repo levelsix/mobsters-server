@@ -2575,16 +2575,21 @@ public class CreateInfoProtoUtils {
 	  tmepb.setXPos(tme.getxPos());
 	  tmepb.setYPos(tme.getyPos());
 
-    String monsterElement = tme.getElement();
-    try {
-      Element me = Element.valueOf(monsterElement);
-      tmepb.setElement(me);
-    } catch (Exception e){
-      log.error("invalid element. task map element=" + tme);
-    }
-    
-    tmepb.setBoss(tme.isBoss());
-    
+	  String monsterElement = tme.getElement();
+	  try {
+		  Element me = Element.valueOf(monsterElement);
+		  tmepb.setElement(me);
+	  } catch (Exception e){
+		  log.error("invalid element. task map element=" + tme);
+	  }
+
+	  tmepb.setBoss(tme.isBoss());
+
+	  String bossImgName = tme.getBossImgName();
+	  if (null != bossImgName) {
+		tmepb.setBossImgName(bossImgName);
+	  }
+	  
 	  return tmepb.build();
   }
   

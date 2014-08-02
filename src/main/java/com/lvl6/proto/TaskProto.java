@@ -4276,6 +4276,10 @@ public final class TaskProto {
     // optional bool boss = 6;
     boolean hasBoss();
     boolean getBoss();
+    
+    // optional string bossImgName = 7;
+    boolean hasBossImgName();
+    String getBossImgName();
   }
   public static final class TaskMapElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -4366,6 +4370,38 @@ public final class TaskProto {
       return boss_;
     }
     
+    // optional string bossImgName = 7;
+    public static final int BOSSIMGNAME_FIELD_NUMBER = 7;
+    private java.lang.Object bossImgName_;
+    public boolean hasBossImgName() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public String getBossImgName() {
+      java.lang.Object ref = bossImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          bossImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getBossImgNameBytes() {
+      java.lang.Object ref = bossImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        bossImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
@@ -4373,6 +4409,7 @@ public final class TaskProto {
       yPos_ = 0;
       element_ = com.lvl6.proto.SharedEnumConfigProto.Element.FIRE;
       boss_ = false;
+      bossImgName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4403,6 +4440,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(6, boss_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getBossImgNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4436,6 +4476,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(6, boss_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getBossImgNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4573,6 +4617,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         boss_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
+        bossImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -4635,6 +4681,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000020;
         }
         result.boss_ = boss_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.bossImgName_ = bossImgName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4668,6 +4718,9 @@ public final class TaskProto {
         }
         if (other.hasBoss()) {
           setBoss(other.getBoss());
+        }
+        if (other.hasBossImgName()) {
+          setBossImgName(other.getBossImgName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4734,6 +4787,11 @@ public final class TaskProto {
             case 48: {
               bitField0_ |= 0x00000020;
               boss_ = input.readBool();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              bossImgName_ = input.readBytes();
               break;
             }
           }
@@ -4871,6 +4929,42 @@ public final class TaskProto {
         return this;
       }
       
+      // optional string bossImgName = 7;
+      private java.lang.Object bossImgName_ = "";
+      public boolean hasBossImgName() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getBossImgName() {
+        java.lang.Object ref = bossImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          bossImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setBossImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        bossImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBossImgName() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        bossImgName_ = getDefaultInstance().getBossImgName();
+        onChanged();
+        return this;
+      }
+      void setBossImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        bossImgName_ = value;
+        onChanged();
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
     
@@ -4957,11 +5051,11 @@ public final class TaskProto {
       "MENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUT" +
       "ION\020\002\"V\n\030UserPersistentEventProto\022\016\n\006use",
       "rId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownSt" +
-      "artTime\030\003 \001(\003\"\217\001\n\023TaskMapElementProto\022\024\n" +
+      "artTime\030\003 \001(\003\"\244\001\n\023TaskMapElementProto\022\024\n" +
       "\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004x" +
       "Pos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\016" +
-      "2\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001(\010B" +
-      "\013B\tTaskProto"
+      "2\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001(\010\022" +
+      "\023\n\013bossImgName\030\007 \001(\tB\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5021,7 +5115,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", },
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", },
               com.lvl6.proto.TaskProto.TaskMapElementProto.class,
               com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;

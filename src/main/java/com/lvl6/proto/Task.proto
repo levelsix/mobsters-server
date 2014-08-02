@@ -100,4 +100,5 @@ message TaskMapElementProto {
 	optional int32 yPos = 4;
 	optional Element element = 5;
 	optional bool boss = 6;
+	optional string bossImgName = 7;
 } 

@@ -661,4 +661,15 @@ public class DBConstants {
   public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
   public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
  
+  
+  /**************CONFIGURATION DATA TABLES*****************************/
+  
+  public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
+  public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
+  public static final String TASK_MAP_ELEMENT__X_POS = "x_pos";
+  public static final String TASK_MAP_ELEMENT__Y_POS = "y_pos";
+  public static final String TASK_MAP_ELEMENT__ELEMENT = "element";
+  public static final String TASK_MAP_ELEMENT__IS_BOSS = "is_boss";
+  public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
+  
 }

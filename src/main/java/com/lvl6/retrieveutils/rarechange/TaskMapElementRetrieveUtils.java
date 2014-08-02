@@ -81,16 +81,16 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static TaskMapElement convertRSRowToTaskMapElement(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int taskId = rs.getInt(i++);
-    int xPos = rs.getInt(i++);
-    int yPos = rs.getInt(i++);
-    String element = rs.getString(i++);
-    boolean boss = rs.getBoolean(i++);
+    int id = rs.getInt(DBConstants.TASK_MAP_ELEMENT__ID);
+    int taskId = rs.getInt(DBConstants.TASK_MAP_ELEMENT__TASK_ID);
+    int xPos = rs.getInt(DBConstants.TASK_MAP_ELEMENT__X_POS);
+    int yPos = rs.getInt(DBConstants.TASK_MAP_ELEMENT__Y_POS);
+    String element = rs.getString(DBConstants.TASK_MAP_ELEMENT__ELEMENT);
+    boolean boss = rs.getBoolean(DBConstants.TASK_MAP_ELEMENT__IS_BOSS);
+    String bossImgName = rs.getString(DBConstants.TASK_MAP_ELEMENT__BOSS_IMG_NAME);
         
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
-    	element, boss);
+    	element, boss, bossImgName);
         
     return taskMap;
   }
