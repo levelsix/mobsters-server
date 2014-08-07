@@ -90,7 +90,7 @@ public class SellUserMonsterController extends EventController {
 
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
-					.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId,
+					.monsterForUserRetrieveUtils().getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
 							userMonsterIds);
 
 			boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
