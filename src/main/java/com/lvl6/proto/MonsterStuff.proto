@@ -95,6 +95,7 @@ message FullUserMonsterProto {
 	optional int64 combineStartTime = 9;
 	optional int32 teamSlotNum = 10;
 	//optional string sourceOfPieces = 11;	//not needed for client
+	optional bool isRestrictd = 12;
 }
 
 message MinimumUserMonsterProto {

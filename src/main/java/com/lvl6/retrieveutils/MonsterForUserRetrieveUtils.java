@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -486,7 +485,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private MonsterForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
-    int i = 1;
     int id = rs.getInt(DBConstants.MONSTER_FOR_USER__ID);
     int userId = rs.getInt(DBConstants.MONSTER_FOR_USER__USER_ID);
     int monsterId = rs.getInt(DBConstants.MONSTER_FOR_USER__MONSTER_ID);
@@ -509,11 +507,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     int teamSlotNum = rs.getInt(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
     String sourceOfPieces = rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
+    boolean restricted = rs.getBoolean(DBConstants.MONSTER_FOR_USER__RESTRICTED);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
     		currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
-    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces);
+    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces, restricted);
     return userMonster;
+    
   }
 
 }

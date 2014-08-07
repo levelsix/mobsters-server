@@ -1527,6 +1527,7 @@ public class CreateInfoProtoUtils {
     }
 
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
+    fumpb.setIsRestrictd(mfu.isRestricted());
     return fumpb.build();
   }
 

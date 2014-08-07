@@ -3862,6 +3862,10 @@ public final class MonsterStuffProto {
     // optional int32 teamSlotNum = 10;
     boolean hasTeamSlotNum();
     int getTeamSlotNum();
+    
+    // optional bool isRestrictd = 12;
+    boolean hasIsRestrictd();
+    boolean getIsRestrictd();
   }
   public static final class FullUserMonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -3992,6 +3996,16 @@ public final class MonsterStuffProto {
       return teamSlotNum_;
     }
     
+    // optional bool isRestrictd = 12;
+    public static final int ISRESTRICTD_FIELD_NUMBER = 12;
+    private boolean isRestrictd_;
+    public boolean hasIsRestrictd() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public boolean getIsRestrictd() {
+      return isRestrictd_;
+    }
+    
     private void initFields() {
       userMonsterId_ = 0L;
       userId_ = 0;
@@ -4003,6 +4017,7 @@ public final class MonsterStuffProto {
       isComplete_ = false;
       combineStartTime_ = 0L;
       teamSlotNum_ = 0;
+      isRestrictd_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4045,6 +4060,9 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(10, teamSlotNum_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(12, isRestrictd_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4094,6 +4112,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, teamSlotNum_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(12, isRestrictd_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4239,6 +4261,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         teamSlotNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
+        isRestrictd_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       
@@ -4317,6 +4341,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000200;
         }
         result.teamSlotNum_ = teamSlotNum_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.isRestrictd_ = isRestrictd_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4362,6 +4390,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasTeamSlotNum()) {
           setTeamSlotNum(other.getTeamSlotNum());
+        }
+        if (other.hasIsRestrictd()) {
+          setIsRestrictd(other.getIsRestrictd());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4442,6 +4473,11 @@ public final class MonsterStuffProto {
             case 80: {
               bitField0_ |= 0x00000200;
               teamSlotNum_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000400;
+              isRestrictd_ = input.readBool();
               break;
             }
           }
@@ -4656,6 +4692,27 @@ public final class MonsterStuffProto {
       public Builder clearTeamSlotNum() {
         bitField0_ = (bitField0_ & ~0x00000200);
         teamSlotNum_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isRestrictd = 12;
+      private boolean isRestrictd_ ;
+      public boolean hasIsRestrictd() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public boolean getIsRestrictd() {
+        return isRestrictd_;
+      }
+      public Builder setIsRestrictd(boolean value) {
+        bitField0_ |= 0x00000400;
+        isRestrictd_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsRestrictd() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isRestrictd_ = false;
         onChanged();
         return this;
       }
@@ -9983,43 +10040,43 @@ public final class MonsterStuffProto {
       "mg\030\n \001(\021\022\r\n\005speed\030\013 \001(\005\022\026\n\016hpExponentBas" +
       "e\030\014 \001(\002\022\027\n\017dmgExponentBase\030\r \001(\002\022\025\n\rexpL" +
       "vlDivisor\030\016 \001(\002\022\026\n\016expLvlExponent\030\017 \001(\002\022" +
-      "\022\n\nsellAmount\030\020 \001(\005\"\345\001\n\024FullUserMonsterP" +
+      "\022\n\nsellAmount\030\020 \001(\005\"\372\001\n\024FullUserMonsterP" +
       "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 " +
       "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001" +
       "(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030" +
       "\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010" +
       " \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSl",
-      "otNum\030\n \001(\005\"@\n\027MinimumUserMonsterProto\022\021" +
-      "\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001" +
-      "\n\027UserMonsterHealingProto\022\016\n\006userId\030\001 \001(" +
-      "\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMi" +
-      "llis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010pr" +
-      "iority\030\006 \001(\005\"M\n\035UserMonsterCurrentHealth" +
-      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentH" +
-      "ealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006" +
-      "userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com." +
-      "lvl6.proto.UserEnhancementItemProto\0229\n\007f",
-      "eeders\030\003 \003(\0132(.com.lvl6.proto.UserEnhanc" +
-      "ementItemProto\"i\n\030UserEnhancementItemPro" +
-      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedSta" +
-      "rtTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(" +
-      "\005\"z\n\032UserMonsterCurrentExpProto\022\025\n\ruserM" +
-      "onsterId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001" +
-      "(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\nexpectedHp\030" +
-      "\004 \001(\005\"H\n\033MinimumUserMonsterSellProto\022\025\n\r" +
-      "userMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"" +
-      "h\n\033UserCurrentMonsterTeamProto\022\016\n\006userId",
-      "\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\"e\n\031UserMonster" +
-      "EvolutionProto\022\035\n\025catalystUserMonsterId\030" +
-      "\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTi" +
-      "me\030\003 \001(\003\"\337\001\n\032MonsterBattleDialogueProto\022" +
-      "\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\016" +
-      "27.com.lvl6.proto.MonsterBattleDialogueP" +
-      "roto.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022p" +
-      "robabilityUttered\030\004 \001(\002\"1\n\014DialogueType\022" +
-      "\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021Mo",
-      "nsterStuffProto"
+      "otNum\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\"@\n\027Mini" +
+      "mumUserMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022" +
+      "\n\nmonsterLvl\030\002 \001(\005\"\204\001\n\027UserMonsterHealin" +
+      "gProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030" +
+      "\002 \001(\003\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healt" +
+      "hProgress\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035Use" +
+      "rMonsterCurrentHealthProto\022\025\n\ruserMonste" +
+      "rId\030\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024Use" +
+      "rEnhancementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013bas" +
+      "eMonster\030\002 \001(\0132(.com.lvl6.proto.UserEnha",
+      "ncementItemProto\0229\n\007feeders\030\003 \003(\0132(.com." +
+      "lvl6.proto.UserEnhancementItemProto\"i\n\030U" +
+      "serEnhancementItemProto\022\025\n\ruserMonsterId" +
+      "\030\001 \001(\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022" +
+      "\025\n\renhancingCost\030\003 \001(\005\"z\n\032UserMonsterCur" +
+      "rentExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022e" +
+      "xpectedExperience\030\002 \001(\005\022\025\n\rexpectedLevel" +
+      "\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"H\n\033MinimumUse" +
+      "rMonsterSellProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
+      "\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMonst",
+      "erTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTe" +
+      "am\030\002 \003(\0132$.com.lvl6.proto.FullUserMonste" +
+      "rProto\"e\n\031UserMonsterEvolutionProto\022\035\n\025c" +
+      "atalystUserMonsterId\030\001 \001(\003\022\026\n\016userMonste" +
+      "rIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032Monste" +
+      "rBattleDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022" +
+      "M\n\014dialogueType\030\003 \001(\01627.com.lvl6.proto.M" +
+      "onsterBattleDialogueProto.DialogueType\022\020" +
+      "\n\010dialogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004" +
+      " \001(\002\"1\n\014DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n",
+      "\014ENTER_BATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10047,7 +10104,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", },
+              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", "IsRestrictd", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor =

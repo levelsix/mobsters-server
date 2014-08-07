@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = -281527233826175940L;
+	private static final long serialVersionUID = 1035959159590035087L;
 	
 	private long id;
 	private int userId;
@@ -19,11 +19,12 @@ public class MonsterForUser implements Serializable {
 	private Date combineStartTime;
 	private int teamSlotNum;
 	private String sourceOfPieces;
+	private boolean restricted;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
 			int currentLvl, int currentHealth, int numPieces, boolean hasAllPieces,
 			boolean isComplete, Date combineStartTime, int teamSlotNum,
-			String sourceOfPieces) {
+			String sourceOfPieces, boolean restricted) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -37,6 +38,7 @@ public class MonsterForUser implements Serializable {
 		this.combineStartTime = combineStartTime;
 		this.teamSlotNum = teamSlotNum;
 		this.sourceOfPieces = sourceOfPieces;
+		this.restricted = restricted;
 	}
 
 	public long getId() {
@@ -137,6 +139,16 @@ public class MonsterForUser implements Serializable {
 		this.sourceOfPieces = sourceOfPieces;
 	}
 
+	public boolean isRestricted()
+	{
+		return restricted;
+	}
+
+	public void setRestricted( boolean restricted )
+	{
+		this.restricted = restricted;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -164,8 +176,9 @@ public class MonsterForUser implements Serializable {
 			+ teamSlotNum
 			+ ", sourceOfPieces="
 			+ sourceOfPieces
+			+ ", restricted="
+			+ restricted
 			+ "]";
 	}
 
-  
 }
