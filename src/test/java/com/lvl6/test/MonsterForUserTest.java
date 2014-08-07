@@ -1,7 +1,9 @@
 package com.lvl6.test;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -19,6 +21,8 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -92,6 +96,40 @@ public class MonsterForUserTest extends TestCase {
 			newMonsterIdToQuantity.get(PIECE_SUFFICIENT_MONSTER_ID));
 		assertTrue(monsterIdToMfu.isEmpty());
 		
+		
+	}
+	
+	@Test
+	public void testRetrieveUnrestrictedMonster() {
+		Date now = new Date();
+		Monster monzter = MonsterRetrieveUtils
+			.getMonsterForMonsterId(PIECE_DEFICIENT_MONSTER_ID);
+		
+		MonsterForUser mfu = MonsterStuffUtils.createNewUserMonster(
+			TESTER_ID, PIECE_DEFICIENT_MONSTER_ID, monzter, now,
+			false, false); 
+		
+		List<Long> ids = InsertUtils.get()
+			.insertIntoMonsterForUserReturnIds(
+				TESTER_ID, Collections.singletonList(mfu), "testcase", now);
+		
+		assertNotNull("Creating one test user monster didn't work.", ids);
+		assertTrue("No ids returned when creating one test user monster.", !ids.isEmpty());
+		
+		Map<Long, MonsterForUser> mfuIdToMfu = mfuRetrieveUtil
+			.getSpecificOrAllUnrestrictedUserMonstersForUser(TESTER_ID, ids);
+		
+		assertNotNull("Retrieving one unrestricted user monster didn't work.", mfuIdToMfu);
+		assertTrue("Newly created unrestricted user monster does not exist.", !mfuIdToMfu.isEmpty());
+		
+		Long userMonsterId = ids.get(0);
+		assertTrue(
+			String.format(
+				"Somehow retrieved different unrestricted user monster: %s, expectedId=%d",
+				mfuIdToMfu, userMonsterId ),
+			mfuIdToMfu.containsKey(userMonsterId));
+		
+		DeleteUtils.get().deleteMonsterForUser(userMonsterId);
 	}
 	
 	public MonsterForUserRetrieveUtils getMfuRetrieveUtil()

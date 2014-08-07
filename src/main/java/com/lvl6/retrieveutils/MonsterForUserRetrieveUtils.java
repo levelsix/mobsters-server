@@ -212,6 +212,56 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }
 
+  public Map<Long, MonsterForUser> getSpecificOrAllUnrestrictedUserMonstersForUser(int userId,
+		Collection<Long> userMonsterIds) {
+  
+  StringBuilder querySb = new StringBuilder();
+  querySb.append("SELECT * FROM ");
+  querySb.append(TABLE_NAME); 
+  querySb.append(" WHERE ");
+  querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+  querySb.append("=?");
+  querySb.append(" AND ");
+  querySb.append(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+  querySb.append("=?");
+  
+  List <Object> values = new ArrayList<Object>();
+  values.add(userId);
+  values.add(false);
+  
+  //if user didn't give userMonsterIds then get all the user's monsters 
+  if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
+  	log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
+  	querySb.append(" AND ");
+  	querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+  	querySb.append(" IN (");
+  	
+  	int amount = userMonsterIds.size();
+  	List<String> questions = Collections.nCopies(amount, "?");
+  	String questionMarkStr = StringUtils.csvList(questions);
+  	
+  	querySb.append(questionMarkStr);
+  	querySb.append(");");
+  	values.addAll(userMonsterIds);
+  }
+  String query = querySb.toString();
+  log.info("query=" + query + "\t values=" + values);
+
+  Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+  	log.error("monster for user retrieve db error.", e);
+  } finally {
+  	DBConnection.get().close(rs, null, conn);
+  }
+  return userMonsters;
+}
+  
   /*
   ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
   public List<MonsterForUser> getMonstersWithMonsterIdAndUserId(int userId, int monsterId) {
