@@ -375,7 +375,7 @@ public class MonsterStuffUtils {
   		
   		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
   				currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
-  				isComplete, combineStartTime, teamSlotNum, sourceOfPieces);
+  				isComplete, combineStartTime, teamSlotNum, sourceOfPieces, false);
   		returnList.add(mfu);
   	}
   	
@@ -527,7 +527,7 @@ public class MonsterStuffUtils {
   	String sourceOfPieces = "";
   	MonsterForUser mfu = new MonsterForUser(id, userId, monsterId, currentExp,
   			currentLvl, currentHealth, numPieces, hasAllPieces, isComplete, now,
-  			teamSlotNum, sourceOfPieces);
+  			teamSlotNum, sourceOfPieces, false);
   	
   	return mfu;
   }

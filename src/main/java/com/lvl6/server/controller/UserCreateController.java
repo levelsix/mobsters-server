@@ -392,7 +392,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		
   		MonsterForUser mfu = new MonsterForUser(0, userId, monsterId, 0,//mli.getCurLvlRequiredExp(),
   				mli.getLevel(), mli.getHp(), monzter.getNumPuzzlePieces(),
-  				true, true, combineStartDate, teamSlotNum, sourceOfPieces);
+  				true, true, combineStartDate, teamSlotNum, sourceOfPieces,
+  				false);
   		userMonsters.add(mfu);
   	}
   	List<Long> ids = InsertUtils.get().insertIntoMonsterForUserReturnIds(userId,
