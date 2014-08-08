@@ -168,4 +168,6 @@ public interface UpdateUtil {
   
   public abstract int updateMiniJobForUserCompleteTime(int userId,
 		  long userMiniJobId, Timestamp now);
+
+  public int updateRestrictUserMonsters( int userId, List<Long> userMonsterIdList );
 }

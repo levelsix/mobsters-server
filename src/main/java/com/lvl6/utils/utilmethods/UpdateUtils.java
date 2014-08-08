@@ -1304,4 +1304,40 @@ public class UpdateUtils implements UpdateUtil {
 
 			return numUpdated;
 		}
+		
+		@Override
+		public int updateRestrictUserMonsters(int userId, List<Long> userMonsterIdList) {
+			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+			int size = userMonsterIdList.size();
+			List<String> questions = Collections.nCopies(size, "?");
+			List<Object> values = new ArrayList<Object>();
+			
+			StringBuilder querySb = new StringBuilder();
+			querySb.append("UPDATE ");
+			querySb.append(tableName);
+			querySb.append(" SET ");
+			querySb.append(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+			querySb.append("=? WHERE ");
+			values.add(true);
+			
+			querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+			querySb.append(" IN (");
+			String questionsStr = StringUtils.csvList(questions);
+			querySb.append(questionsStr);
+			querySb.append(") AND ");
+			values.addAll(userMonsterIdList);
+			
+			querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+			querySb.append("=?");
+			values.add(userId);
+
+			String query = querySb.toString();
+			log.info(String.format(
+				"updateRestrictUserMonsters query=%s, values=%s",
+				query, values));
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			
+			return numUpdated;
+		}
+		
 }
