@@ -19397,7 +19397,7 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RestrictUserMonsterRequestProto)
   }
   
-  public interface RestrictMonsterResponseProtoOrBuilder
+  public interface RestrictUserMonsterResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -19405,39 +19405,39 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.RestrictMonsterResponseProto.RestrictMonsterStatus status = 2;
+    // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
     boolean hasStatus();
-    com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus getStatus();
+    com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus();
   }
-  public static final class RestrictMonsterResponseProto extends
+  public static final class RestrictUserMonsterResponseProto extends
       com.google.protobuf.GeneratedMessage
-      implements RestrictMonsterResponseProtoOrBuilder {
-    // Use RestrictMonsterResponseProto.newBuilder() to construct.
-    private RestrictMonsterResponseProto(Builder builder) {
+      implements RestrictUserMonsterResponseProtoOrBuilder {
+    // Use RestrictUserMonsterResponseProto.newBuilder() to construct.
+    private RestrictUserMonsterResponseProto(Builder builder) {
       super(builder);
     }
-    private RestrictMonsterResponseProto(boolean noInit) {}
+    private RestrictUserMonsterResponseProto(boolean noInit) {}
     
-    private static final RestrictMonsterResponseProto defaultInstance;
-    public static RestrictMonsterResponseProto getDefaultInstance() {
+    private static final RestrictUserMonsterResponseProto defaultInstance;
+    public static RestrictUserMonsterResponseProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public RestrictMonsterResponseProto getDefaultInstanceForType() {
+    public RestrictUserMonsterResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictMonsterResponseProto_descriptor;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictMonsterResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable;
     }
     
-    public enum RestrictMonsterStatus
+    public enum RestrictUserMonsterStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_OTHER(1, 2),
@@ -19449,7 +19449,7 @@ public final class EventMonsterProto {
       
       public final int getNumber() { return value; }
       
-      public static RestrictMonsterStatus valueOf(int value) {
+      public static RestrictUserMonsterStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
@@ -19457,15 +19457,15 @@ public final class EventMonsterProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<RestrictMonsterStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<RestrictMonsterStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RestrictMonsterStatus>() {
-              public RestrictMonsterStatus findValueByNumber(int number) {
-                return RestrictMonsterStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>() {
+              public RestrictUserMonsterStatus findValueByNumber(int number) {
+                return RestrictUserMonsterStatus.valueOf(number);
               }
             };
       
@@ -19479,14 +19479,14 @@ public final class EventMonsterProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final RestrictMonsterStatus[] VALUES = {
+      private static final RestrictUserMonsterStatus[] VALUES = {
         SUCCESS, FAIL_OTHER, 
       };
       
-      public static RestrictMonsterStatus valueOf(
+      public static RestrictUserMonsterStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -19498,12 +19498,12 @@ public final class EventMonsterProto {
       private final int index;
       private final int value;
       
-      private RestrictMonsterStatus(int index, int value) {
+      private RestrictUserMonsterStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RestrictMonsterResponseProto.RestrictMonsterStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus)
     }
     
     private int bitField0_;
@@ -19520,19 +19520,19 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.RestrictMonsterResponseProto.RestrictMonsterStatus status = 2;
+    // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus status_;
+    private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus getStatus() {
+    public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -19581,41 +19581,41 @@ public final class EventMonsterProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -19624,7 +19624,7 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -19635,12 +19635,12 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -19650,7 +19650,7 @@ public final class EventMonsterProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -19663,18 +19663,18 @@ public final class EventMonsterProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProtoOrBuilder {
+       implements com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictMonsterResponseProto_descriptor;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictMonsterResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.newBuilder()
+      // Construct using com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -19700,7 +19700,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -19711,24 +19711,24 @@ public final class EventMonsterProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.getDescriptor();
+        return com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.getDefaultInstance();
+      public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto build() {
-        com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto result = buildPartial();
+      public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto build() {
+        com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto buildParsed()
+      private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto result = buildPartial();
+        com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -19736,8 +19736,8 @@ public final class EventMonsterProto {
         return result;
       }
       
-      public com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto buildPartial() {
-        com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto result = new com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto(this);
+      public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto result = new com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -19758,16 +19758,16 @@ public final class EventMonsterProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto)other);
+        if (other instanceof com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto other) {
-        if (other == com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -19816,7 +19816,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus value = com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus value = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -19921,15 +19921,15 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.RestrictMonsterResponseProto.RestrictMonsterStatus status = 2;
-      private com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus.SUCCESS;
+      // optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;
+      private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus getStatus() {
+      public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -19940,20 +19940,20 @@ public final class EventMonsterProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.RestrictMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
         onChanged();
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RestrictMonsterResponseProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RestrictUserMonsterResponseProto)
     }
     
     static {
-      defaultInstance = new RestrictMonsterResponseProto(true);
+      defaultInstance = new RestrictUserMonsterResponseProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RestrictMonsterResponseProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RestrictUserMonsterResponseProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -20097,10 +20097,10 @@ public final class EventMonsterProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_RestrictMonsterResponseProto_descriptor;
+    internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_RestrictMonsterResponseProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -20290,13 +20290,14 @@ public final class EventMonsterProto {
       "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"k\n\037R" +
       "estrictUserMonsterRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
-      "\022\026\n\016userMonsterIds\030\003 \003(\003\"\332\001\n\034RestrictMon" +
-      "sterResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022R\n\006status\030\002 " +
-      "\001(\0162B.com.lvl6.proto.RestrictMonsterResp" +
-      "onseProto.RestrictMonsterStatus\"4\n\025Restr" +
-      "ictMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002B\023B\021EventMonsterProto"
+      "\022\026\n\016userMonsterIds\030\003 \003(\003\"\352\001\n RestrictUse" +
+      "rMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022Z\n\006statu" +
+      "s\030\002 \001(\0162J.com.lvl6.proto.RestrictUserMon" +
+      "sterResponseProto.RestrictUserMonsterSta" +
+      "tus\"8\n\031RestrictUserMonsterStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20527,14 +20528,14 @@ public final class EventMonsterProto {
               new java.lang.String[] { "Sender", "UserMonsterIds", },
               com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProto.class,
               com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_RestrictMonsterResponseProto_descriptor =
+          internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(27);
-          internal_static_com_lvl6_proto_RestrictMonsterResponseProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_RestrictMonsterResponseProto_descriptor,
+              internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor,
               new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.class,
-              com.lvl6.proto.EventMonsterProto.RestrictMonsterResponseProto.Builder.class);
+              com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.class,
+              com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.Builder.class);
           return null;
         }
       };

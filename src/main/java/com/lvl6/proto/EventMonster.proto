@@ -406,11 +406,11 @@ message RestrictUserMonsterRequestProto {
 	repeated int64 userMonsterIds = 3;
 }
 
-message RestrictMonsterResponseProto {
+message RestrictUserMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RestrictMonsterStatus status = 2;
+	optional RestrictUserMonsterStatus status = 2;
 	
-	enum RestrictMonsterStatus {
+	enum RestrictUserMonsterStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
