@@ -318,7 +318,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//no change could still be made if the defender is already under attack by another
   		//and this attacker is the second guy attacking the defender
   		updateDefender(attacker, defender, defenderId, defenderPlfu, pvpBattleInfo,
-  				defenderEloChange, cashStolen, oilStolen, clientDate, attackerWon,
+  				defenderEloChange, oilStolen, cashStolen, clientDate, attackerWon,
   				defenderEloChangeList, defenderOilChangeList, defenderCashChangeList,
   				displayToDefenderList, changeMap, previousCurrencyMap);
   		

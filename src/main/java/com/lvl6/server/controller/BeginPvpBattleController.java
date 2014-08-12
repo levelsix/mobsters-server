@@ -73,7 +73,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int senderElo = reqProto.getSenderElo();
+    //TODO: FIGURE OUT IF STILL NEEDED
+    //int senderElo = reqProto.getSenderElo();
+    
     int attackerId = senderProto.getUserId();
     Timestamp curTime = new Timestamp(reqProto.getAttackStartTime());
     Date curDate = new Date(curTime.getTime());
@@ -121,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//second values will be when attacker loses
     		List<Integer> attackerEloChange = new ArrayList<Integer>();
     		List<Integer> defenderEloChange = new ArrayList<Integer>();
-    		calculateEloChange(attackerId, senderElo, enemyUserId, enemyPlfu, attackerEloChange, defenderEloChange);
+    		calculateEloChange(attackerId, enemyUserId, enemyPlfu, attackerEloChange, defenderEloChange);
     		//enemyProto could be a pastVersion of the current version of enemy if
     		//revenging
 
@@ -192,10 +194,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //fills up the lists attackerEloChange, defenderEloChange
-  private void calculateEloChange(int attackerId, int attackerElo,
+  private void calculateEloChange(int attackerId,
 	  int defenderId, PvpLeagueForUser defender,
 	  List<Integer> attackerEloChange, List<Integer> defenderEloChange)
   {
+	  //TODO: Hackery!!!  Getting attacker elo,  make it more efficient.
+	  PvpUser attacker = getHazelcastPvpUtil().getPvpUser(attackerId);
+	  int attackerElo;
+	  if (null == attacker)
+	  {
+		  log.warn("User has no PvpUser in hazelcast, querying db");
+		  PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
+			  .getUserPvpLeagueForId(attackerId);
+		  attackerElo = plfu.getElo();
+	  } else {
+		  attackerElo = attacker.getElo();
+	  }
   	
 	  int defenderElo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 	  

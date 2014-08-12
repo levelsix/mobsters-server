@@ -5,7 +5,8 @@ import java.util.Date;
 
 public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = -6261386860780660263L;
+	private static final long serialVersionUID = 1035959159590035087L;
+	
 	private long id;
 	private int userId;
 	private int monsterId;
@@ -13,14 +14,17 @@ public class MonsterForUser implements Serializable {
 	private int currentLvl;
 	private int currentHealth;
 	private int numPieces;
+	private boolean hasAllPieces;
 	private boolean isComplete;
 	private Date combineStartTime;
 	private int teamSlotNum;
 	private String sourceOfPieces;
+	private boolean restricted;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
-			int currentLvl, int currentHealth, int numPieces, boolean isComplete,
-			Date combineStartTime, int teamSlotNum, String sourceOfPieces) {
+			int currentLvl, int currentHealth, int numPieces, boolean hasAllPieces,
+			boolean isComplete, Date combineStartTime, int teamSlotNum,
+			String sourceOfPieces, boolean restricted) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -29,10 +33,12 @@ public class MonsterForUser implements Serializable {
 		this.currentLvl = currentLvl;
 		this.currentHealth = currentHealth;
 		this.numPieces = numPieces;
+		this.hasAllPieces = hasAllPieces;
 		this.isComplete = isComplete;
 		this.combineStartTime = combineStartTime;
 		this.teamSlotNum = teamSlotNum;
 		this.sourceOfPieces = sourceOfPieces;
+		this.restricted = restricted;
 	}
 
 	public long getId() {
@@ -91,6 +97,16 @@ public class MonsterForUser implements Serializable {
 		this.numPieces = numPieces;
 	}
 
+	public boolean isHasAllPieces()
+	{
+		return hasAllPieces;
+	}
+
+	public void setHasAllPieces( boolean hasAllPieces )
+	{
+		this.hasAllPieces = hasAllPieces;
+	}
+
 	public boolean isComplete() {
 		return isComplete;
 	}
@@ -123,14 +139,46 @@ public class MonsterForUser implements Serializable {
 		this.sourceOfPieces = sourceOfPieces;
 	}
 
-	@Override
-	public String toString() {
-		return "MonsterForUser [id=" + id + ", userId=" + userId + ", monsterId="
-				+ monsterId + ", currentExp=" + currentExp + ", currentLvl="
-				+ currentLvl + ", currentHealth=" + currentHealth + ", numPieces="
-				+ numPieces + ", isComplete=" + isComplete + ", combineStartTime="
-				+ combineStartTime + ", teamSlotNum=" + teamSlotNum
-				+ ", sourceOfPieces=" + sourceOfPieces + "]";
+	public boolean isRestricted()
+	{
+		return restricted;
 	}
-  
+
+	public void setRestricted( boolean restricted )
+	{
+		this.restricted = restricted;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "MonsterForUser [id="
+			+ id
+			+ ", userId="
+			+ userId
+			+ ", monsterId="
+			+ monsterId
+			+ ", currentExp="
+			+ currentExp
+			+ ", currentLvl="
+			+ currentLvl
+			+ ", currentHealth="
+			+ currentHealth
+			+ ", numPieces="
+			+ numPieces
+			+ ", hasAllPieces="
+			+ hasAllPieces
+			+ ", isComplete="
+			+ isComplete
+			+ ", combineStartTime="
+			+ combineStartTime
+			+ ", teamSlotNum="
+			+ teamSlotNum
+			+ ", sourceOfPieces="
+			+ sourceOfPieces
+			+ ", restricted="
+			+ restricted
+			+ "]";
+	}
+
 }

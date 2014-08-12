@@ -399,4 +399,21 @@ message SellUserMonsterResponseProto {
 	}
 }
 
+//------------------------------------------------------------------------------------------
+
+message RestrictUserMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 userMonsterIds = 3;
+}
+
+message RestrictUserMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RestrictUserMonsterStatus status = 2;
+	
+	enum RestrictUserMonsterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
 

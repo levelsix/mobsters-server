@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -213,6 +212,56 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }
 
+  public Map<Long, MonsterForUser> getSpecificOrAllUnrestrictedUserMonstersForUser(int userId,
+		Collection<Long> userMonsterIds) {
+  
+  StringBuilder querySb = new StringBuilder();
+  querySb.append("SELECT * FROM ");
+  querySb.append(TABLE_NAME); 
+  querySb.append(" WHERE ");
+  querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+  querySb.append("=?");
+  querySb.append(" AND ");
+  querySb.append(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+  querySb.append("=?");
+  
+  List <Object> values = new ArrayList<Object>();
+  values.add(userId);
+  values.add(false);
+  
+  //if user didn't give userMonsterIds then get all the user's monsters 
+  if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
+  	log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
+  	querySb.append(" AND ");
+  	querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+  	querySb.append(" IN (");
+  	
+  	int amount = userMonsterIds.size();
+  	List<String> questions = Collections.nCopies(amount, "?");
+  	String questionMarkStr = StringUtils.csvList(questions);
+  	
+  	querySb.append(questionMarkStr);
+  	querySb.append(");");
+  	values.addAll(userMonsterIds);
+  }
+  String query = querySb.toString();
+  log.info("query=" + query + "\t values=" + values);
+
+  Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+  	log.error("monster for user retrieve db error.", e);
+  } finally {
+  	DBConnection.get().close(rs, null, conn);
+  }
+  return userMonsters;
+}
+  
   /*
   ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
   public List<MonsterForUser> getMonstersWithMonsterIdAndUserId(int userId, int monsterId) {
@@ -237,7 +286,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonsters;
   }*/
   
-  public Map<Integer, MonsterForUser> getIncompleteMonstersWithUserAndMonsterIds(
+  public Map<Integer, MonsterForUser> getPieceDeficientIncompleteMonstersWithUserAndMonsterIds(
   		int userId, Collection<Integer> monsterIds) {
   	int size = monsterIds.size();
   	List<String> questions = Collections.nCopies(size, "?");
@@ -254,6 +303,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     StringUtils.getListInString(questions, delimiter) + ") and ";
     values.addAll(monsterIds);
     
+    query += DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES + "=? and ";
+    values.add(false);
+
     query += DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
     values.add(false);
 
@@ -483,7 +535,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private MonsterForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
-    int i = 1;
     int id = rs.getInt(DBConstants.MONSTER_FOR_USER__ID);
     int userId = rs.getInt(DBConstants.MONSTER_FOR_USER__USER_ID);
     int monsterId = rs.getInt(DBConstants.MONSTER_FOR_USER__MONSTER_ID);
@@ -491,6 +542,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int currentLvl = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL);
     int currentHealth = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
     int numPieces = rs.getInt(DBConstants.MONSTER_FOR_USER__NUM_PIECES);
+    boolean hasAllPieces = rs.getBoolean(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES);
     boolean isComplete = rs.getBoolean(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
     
     Date combineStartTime = null;
@@ -505,11 +557,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     int teamSlotNum = rs.getInt(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
     String sourceOfPieces = rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
+    boolean restricted = rs.getBoolean(DBConstants.MONSTER_FOR_USER__RESTRICTED);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
-    		currentExp, currentLvl, currentHealth, numPieces, isComplete,
-    		combineStartTime, teamSlotNum, sourceOfPieces);
+    		currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
+    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces, restricted);
     return userMonster;
+    
   }
 
 }

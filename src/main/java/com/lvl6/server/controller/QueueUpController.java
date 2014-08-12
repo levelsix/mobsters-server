@@ -94,7 +94,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
 		int attackerId = attackerProto.getUserId();
-		int attackerElo = reqProto.getAttackerElo();
+		//TODO: Maybe delete this since going to use db value anyway
+//		int attackerElo = reqProto.getAttackerElo();
 		
 		//positive means refund, negative means charge user; don't forsee being positive
 //		int gemsSpent = reqProto.getGemsSpent();
@@ -126,7 +127,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			if (legitQueueUp) {
 				setProspectivePvpMatches(resBuilder, attacker, uniqSeenUserIds, clientDate,
-						attackerElo);
+						plfu.getElo());
 				
 				//update the user, and his shield
 				success = writeChangesToDB(attackerId, attacker, clientTime, plfu,

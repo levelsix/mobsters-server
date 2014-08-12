@@ -113,7 +113,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
     	Map<Long, MonsterForUser> userMonstersInDb = null;
     	if (null != deleteUserMonsterIds && !deleteUserMonsterIds.isEmpty()) {
     		userMonstersInDb = RetrieveUtils.monsterForUserRetrieveUtils()
-    				.getSpecificOrAllUserMonstersForUser(
+    				.getSpecificOrAllUnrestrictedUserMonstersForUser(
     						userId, deleteUserMonsterIds);
     	}
 

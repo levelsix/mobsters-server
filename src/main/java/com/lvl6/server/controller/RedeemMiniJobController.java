@@ -80,6 +80,8 @@ public class RedeemMiniJobController extends EventController{
 
 		MinimumUserProtoWithMaxResources senderResourcesProto =
 				reqProto.getSender();
+		int maxCash = senderResourcesProto.getMaxCash();
+		int maxOil = senderResourcesProto.getMaxOil();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		
 		int userId = senderProto.getUserId();
@@ -116,7 +118,7 @@ public class RedeemMiniJobController extends EventController{
 			if (legit) {
 				MiniJobForUser mjfu = mjfuList.get(0);
 				success = writeChangesToDB(resBuilder, userId, user,
-						userMiniJobId, mjfu, now, clientTime,
+						userMiniJobId, mjfu, now, clientTime, maxCash, maxOil,
 						userMonsterIdToExpectedHealth, currencyChange,
 						previousCurrency);
 			}
@@ -229,7 +231,7 @@ public class RedeemMiniJobController extends EventController{
 	
 	private boolean writeChangesToDB(Builder resBuilder, int userId,
 			User user, long userMiniJobId, MiniJobForUser mjfu, Date now,
-			Timestamp clientTime,
+			Timestamp clientTime, int maxCash, int maxOil,
 			Map<Long, Integer> userMonsterIdToExpectedHealth,
 			Map<String, Integer> currencyChange,
 			Map<String, Integer> previousCurrency) {
@@ -246,7 +248,7 @@ public class RedeemMiniJobController extends EventController{
 		int oilChange = mj.getOilReward();
 		int monsterIdReward = mj.getMonsterIdReward();
 
-		if (!updateUser(user, gemsChange, cashChange, oilChange)) {
+		if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange, maxOil)) {
 			log.error("unexpected error: could not decrement user gems by " +
 					gemsChange + ", cash by " + cashChange + ", and oil by " +
 					oilChange);
@@ -308,7 +310,16 @@ public class RedeemMiniJobController extends EventController{
 	
 
 	private boolean updateUser(User u, int gemsChange, int cashChange,
-			int oilChange) {
+			int maxCash, int oilChange, int maxOil) {
+		//capping how much the user can gain of a certain resource
+	  	int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
+	  	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
+	  	cashChange = Math.min(maxCashUserCanGain, cashChange);
+	  	
+	  	int curOil = Math.min(u.getOil(), maxOil); //in case user's oil is more than maxOil
+	  	int maxOilUserCanGain = maxOil - curOil;
+	  	oilChange = Math.min(maxOilUserCanGain, oilChange);
+		
 		int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
 				oilChange, gemsChange);
 

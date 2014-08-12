@@ -201,7 +201,7 @@ public class MonsterStuffUtils {
   // a user_monster 
   // ALSO MODIFIES the monsters in monsterIdToIncompleteUserMonster
   //monsterIdToQuantity will not be modified
-  public static Map<Integer, Integer> completeMonsterForUserFromMonsterIdsAndQuantities(
+  public static Map<Integer, Integer> completeMonstersFromQuantities(
   		Map<Integer, MonsterForUser> monsterIdToIncompleteUserMonster,
   		Map<Integer, Integer> monsterIdToQuantity) {
   	
@@ -214,7 +214,8 @@ public class MonsterStuffUtils {
   	}
   	
   	//retrieve the monsters so we know how much is needed to complete it
-  	Set<Integer> incompleteMonsterIds = monsterIdToIncompleteUserMonster.keySet();
+  	Set<Integer> incompleteMonsterIds =
+  		new HashSet<Integer>(monsterIdToIncompleteUserMonster.keySet());
   	Map<Integer, Monster> monsterIdsToMonsters =  MonsterRetrieveUtils
   			.getMonstersForMonsterIds(incompleteMonsterIds);
   	
@@ -227,8 +228,17 @@ public class MonsterStuffUtils {
   		int numPiecesAvailable = monsterIdToQuantity.get(monsterId);
   		Monster monzter = monsterIdsToMonsters.get(monsterId);
   		
-  		int newPiecesAvailable = completeMonsterForUserFromQuantity(
+  		int newPiecesAvailable = numPiecesAvailable;
+  		//sanity check
+  		if (mfu.getNumPieces() >= monzter.getNumPuzzlePieces()) {
+  			log.warn("(will not process this one) somehow retrieved monster"
+  				+ " with max pieces, when it shouldn't be at max pieces. mfu=" + mfu);
+  			monsterIdToIncompleteUserMonster.remove(monsterId);
+  			
+  		} else {
+  			newPiecesAvailable = completePieceDeficientMonster(
   				mfu, numPiecesAvailable, monzter);
+  		}
   		
   		if (newPiecesAvailable > 0) {
   			monsterIdToNewQuantity.put(monsterId, newPiecesAvailable);
@@ -241,7 +251,7 @@ public class MonsterStuffUtils {
   //(breaking the abstraction) MonsterForUser mfu will be modified.
   //returns the number of pieces remaining after using up the pieces
   //available in order to try completing the monster_for_user
-  public static int completeMonsterForUserFromQuantity(MonsterForUser mfu,
+  public static int completePieceDeficientMonster(MonsterForUser mfu,
   		int numPiecesAvailable, Monster monzter) {
   	int numPiecesRemaining = 0;
   	
@@ -257,7 +267,7 @@ public class MonsterStuffUtils {
   		//there are more than enough pieces to complete this monster
   		//"complete" the monsterForUser
   		mfu.setNumPieces(numPiecesForCompletion);
-
+  		
   		//calculate the remaining pieces remaining
   		numPiecesRemaining = updatedExistingPieces - numPiecesForCompletion;
   		
@@ -270,8 +280,12 @@ public class MonsterStuffUtils {
   	//it should be marked as complete
   	int mfuNewNumPieces = mfu.getNumPieces();
   	int numMinutesForCompletion = monzter.getMinutesToCombinePieces();
-  	if (mfuNewNumPieces == numPiecesForCompletion && 0 == numMinutesForCompletion) {
-  		mfu.setComplete(true);
+  	if (mfuNewNumPieces >= numPiecesForCompletion) { //shouldn't really be >= but == seems not safe enough
+  		mfu.setHasAllPieces(true);
+  		
+  		if (0 >= numMinutesForCompletion) {
+  			mfu.setComplete(true);
+  		}
   	}
   	
   	return numPiecesRemaining;
@@ -340,9 +354,11 @@ public class MonsterStuffUtils {
   	for (; quantity > 0; quantity -= numPiecesForCompletion) {
   		boolean isComplete = false;
   		int numPieces = 0;
+  		boolean hasAllPieces = false;
   		
   		if (quantity >= numPiecesForCompletion) {
   			numPieces = numPiecesForCompletion;
+  			hasAllPieces = true;
   			
   			//since there's enough pieces to create a whole monster, if the time
   			//it takes to combine a monster is 0 then the monster is complete
@@ -358,10 +374,11 @@ public class MonsterStuffUtils {
   		
   		
   		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
-  				currentExp, currentLvl, currentHealth, numPieces, isComplete,
-  				combineStartTime, teamSlotNum, sourceOfPieces);
+  				currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
+  				isComplete, combineStartTime, teamSlotNum, sourceOfPieces, false);
   		returnList.add(mfu);
   	}
+  	
   	return returnList;
   }
   
@@ -383,14 +400,14 @@ public class MonsterStuffUtils {
   	
   	Map<Integer, MonsterForUser> monsterIdsToIncompletes =  RetrieveUtils
   			.monsterForUserRetrieveUtils()
-  			.getIncompleteMonstersWithUserAndMonsterIds(userId, droppedMonsterIds);
+  			.getPieceDeficientIncompleteMonstersWithUserAndMonsterIds(userId, droppedMonsterIds);
+  	monsterIdsToIncompletes = new HashMap<Integer, MonsterForUser>(monsterIdsToIncompletes);
   	
   	//take however many pieces necessary from monsterIdToNumPieces to
   	//complete these incomplete monsterForUsers
   	//monsterIdsToIncompletes will be modified
-  	Map<Integer, Integer> monsterIdToRemainingPieces = 
-  			completeMonsterForUserFromMonsterIdsAndQuantities(
-  					monsterIdsToIncompletes, monsterIdToNumPieces);
+  	Map<Integer, Integer> monsterIdToRemainingPieces = completeMonstersFromQuantities(
+  			monsterIdsToIncompletes, monsterIdToNumPieces);
   	
   	//UPDATE THESE INCOMPLETE MONSTERS, IF ANY. SINCE UPDATING, UPDATE THE
   	//combineStartTime
@@ -493,7 +510,7 @@ public class MonsterStuffUtils {
   }
   
   public static MonsterForUser createNewUserMonster(int userId, int numPieces,
-  		Monster monster, Date now, boolean isComplete) {
+  		Monster monster, Date now, boolean hasAllPieces, boolean isComplete) {
   	
   	int monsterId = monster.getId();
   	
@@ -509,8 +526,8 @@ public class MonsterStuffUtils {
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
   	MonsterForUser mfu = new MonsterForUser(id, userId, monsterId, currentExp,
-  			currentLvl, currentHealth, numPieces, isComplete, now,
-  			teamSlotNum, sourceOfPieces);
+  			currentLvl, currentHealth, numPieces, hasAllPieces, isComplete, now,
+  			teamSlotNum, sourceOfPieces, false);
   	
   	return mfu;
   }

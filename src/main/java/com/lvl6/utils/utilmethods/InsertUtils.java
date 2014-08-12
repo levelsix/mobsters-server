@@ -935,6 +935,7 @@ public class InsertUtils implements InsertUtil{
 			int currentLvl = mfu.getCurrentLvl();
 			int currentHp = mfu.getCurrentHealth();
 			int numPieces = mfu.getNumPieces();
+			boolean hasAllPieces = mfu.isHasAllPieces();
 			boolean isComplete = mfu.isComplete();
 			int teamSlotNum = mfu.getTeamSlotNum();
 			//Since this is a new monster just use argument for sourceOfPieces
@@ -946,6 +947,7 @@ public class InsertUtils implements InsertUtil{
 			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currentLvl);
 			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currentHp);
 			row.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+			row.put(DBConstants.MONSTER_FOR_USER__HAS_ALL_PIECES, hasAllPieces);
 			row.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
 			row.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
 			row.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);

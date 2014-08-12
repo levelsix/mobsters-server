@@ -401,7 +401,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	for (BoosterItem item : boosterItems) {
   		Integer id = item.getId();
   		Integer monsterId = item.getMonsterId();
-  		Integer numPieces = item.getNumPieces();
   		
   		//only keep track of the booster item ids that are a monster reward
   		if (monsterId <= 0) {
@@ -409,17 +408,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		}
   		if (item.isComplete()) {
   			//create a "complete" user monster
+  			boolean hasAllPieces = true;
   			boolean isComplete = true;
   			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
   			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
-  					userId, numPieces, monzter, now, isComplete);
+  					userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
 
   			//return this monster in the argument list completeUserMonsters, so caller
   			//can use it
   			completeUserMonsters.add(newUserMonster);
 
   		} else {
-  			monsterIdsToNumPieces.put(monsterId, numPieces);
+  			monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
   		}
   		boosterItemIds.add(id);
   	}
