@@ -418,16 +418,16 @@ message RestrictUserMonsterResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message UnRestrictUserMonsterRequestProto {
+message UnrestrictUserMonsterRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated int64 userMonsterIds = 3;
 }
 
-message UnRestrictUserMonsterResponseProto {
+message UnrestrictUserMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UnRestrictUserMonsterStatus status = 2;
+	optional UnrestrictUserMonsterStatus status = 2;
 	
-	enum UnRestrictUserMonsterStatus {
+	enum UnrestrictUserMonsterStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
