@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	//make sure it exists
     	Map<Long, MonsterForUser> mfuMap = RetrieveUtils
     		.monsterForUserRetrieveUtils()
-    		.getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIdList);
+    		.getSpecificOrAllRestrictedUserMonstersForUser(userId, userMonsterIdList);
     	
       boolean legit = checkLegit(resBuilder, userId, userMonsterIdList, mfuMap);
 
@@ -115,7 +115,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	if (null == mfuMap || mfuMap.isEmpty()) {
   		log.error(String.format(
-  			"no unrestricted monsters_for_user exist with ids=%s",
+  			"no restricted monsters_for_user exist with ids=%s",
   			userMonsterIdList));
   		return false;
   	}
