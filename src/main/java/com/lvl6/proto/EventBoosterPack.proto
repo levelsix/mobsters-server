@@ -17,7 +17,11 @@ message PurchaseBoosterPackRequestProto {
 	//the user can only buy one item from a booster pack at a time
 	optional MinimumUserProto sender = 1;
 	optional int32 boosterPackId = 2;
-	optional int64 clientTime = 3; 
+	optional int64 clientTime = 3;  
+	
+	//used to implement one free booster pack per day,
+	//set to true to make server not charge user
+	optional bool freeBoosterPack = 4;
 }
 
 message PurchaseBoosterPackResponseProto {
