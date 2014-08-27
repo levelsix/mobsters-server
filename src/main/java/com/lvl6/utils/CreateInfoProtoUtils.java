@@ -2797,6 +2797,11 @@ public class CreateInfoProtoUtils {
     	builder.setLastMiniJobSpawnedTime(lastMiniJobSpawnedTime.getTime());
     }
     
+    Date lastFreeBoosterPackTime = u.getLastFreeBoosterPackTime();
+    if (null != lastFreeBoosterPackTime) {
+    	builder.setLastFreeBoosterPackTime(lastFreeBoosterPackTime.getTime());
+    }
+    
     //add new columns above here, not below the if. if case for is fake
 
     if (u.isFake()) {
