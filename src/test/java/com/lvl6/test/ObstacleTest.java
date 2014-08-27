@@ -414,6 +414,21 @@ public class ObstacleTest extends TestCase {
 		log.info("ending completing removing obstacle at max");
 	}
 	
+	//TODO: Find a better home for this test
+	@Test
+	public void testNumDaysDiff() {
+		Date now = new Date();
+		
+		//supposed to create today midnight 12:00am
+		Date thisDay = timeUtils.createPstDate(now, 0, 0, 0);
+		log.info(String.format("today=%s", thisDay));
+		
+		Date oneDayPrevious = timeUtils.createDateAddDays(thisDay, -1);
+		assertEquals(-1, timeUtils.numDaysDifference(thisDay, oneDayPrevious));
+		
+		Date oneHourFromThisDay = timeUtils.createDateAddHours(thisDay, 1);
+		assertEquals(0, timeUtils.numDaysDifference(thisDay, oneHourFromThisDay));
+	}
 	
 	protected int getTestUserId() {
 		return 11; //Unit testing account

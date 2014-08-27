@@ -112,11 +112,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			MonsterEvolvingForUser evolution = MonsterEvolvingForUserRetrieveUtils
 					.getEvolutionForUser(userId);
     	
-			//retrieve only the new monsters that will be used in enhancing
-			Set<Long> newIds = new HashSet<Long>();
-			newIds.addAll(newMap.keySet());
-    	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
-    			.monsterForUserRetrieveUtils().getSpecificOrAllUnrestrictedUserMonstersForUser(userId, newIds);
+			//retrieve the new monsters that will be used in enhancing, and
+			//the ones being updated
+			Set<Long> newAndUpdatedIds = new HashSet<Long>();
+			newAndUpdatedIds.addAll(newMap.keySet());
+			newAndUpdatedIds.addAll(updateMap.keySet());
+			Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
+    			.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newAndUpdatedIds);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
 					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap, evolution,
@@ -168,10 +170,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   * (Will return fail if user does not have enough funds.) 
   * Answer: For the map
   * 
-  * delete - The monsters to be removed from enhancing will only be the ones
+  * delete - The monsters to be removed from enhancing will/should only be the ones
   * the user already has in enhancing.
-  * update - Same logic as above.
-  * new - Same as above.
+  * update - The monsters to be updated in enhancing will/should already exist
+  * new - brand new monsters
+  * 
+  * Note: If any of the monsters have "restricted" property set to true,
+  * then said monster can only be the base monster. 
   * 
   * Ex. If user wants to delete a monster (A) that isn't enhancing, along with some
   * monsters already enhancing (B), only the valid monsters (B) will be deleted.
@@ -191,7 +196,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					"\t updateMap=" + updateMap + "\t newMap=" + newMap);
 			return false;
 		}
-		//NOTE: RETAIN CASES ONLY FILTER THINGS, AND NOT CAUSE THIS REQUEST TO FAIL
+		
 		//retain only the userMonsters in deleteMap and updateMap that are in enhancing
 		boolean keepThingsInDomain = true;
 		boolean keepThingsNotInDomain = false;
@@ -227,6 +232,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 		}
 		
+		// If any of the monsters have "restricted" property set to true,
+		// then said monster can only be the base monster.
+		Set<Long> restrictedUserMonsterIds = restrictedUserMonsters(existingUserMonsters);
+		for (Long restrictedUserMonsterId : restrictedUserMonsterIds) {
+			
+			UserEnhancementItemProto ueip = null;
+			if (updateMap.containsKey(restrictedUserMonsterId)) {
+				ueip = updateMap.get(restrictedUserMonsterId);
+				
+			} else if (newMap.containsKey(restrictedUserMonsterId)) {
+				ueip = newMap.get(restrictedUserMonsterId);
+			}
+			
+			if (null == ueip) {
+				continue;
+			}
+			
+			//monster is restricted, better be a base monster
+			if (ueip.getEnhancingCost() > 0 || ueip.getExpectedStartTimeMillis() > 0) {
+				String msg = String.format(
+					"user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, updateMap=%s, newMap=%s",
+					ueip, existingUserMonsters, updateMap, newMap );
+				log.error(msg);
+				return false;
+			}
+		}
+		
+		
 
 		//CHECK MONEY
 		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
@@ -238,6 +271,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		return true;
+	}
+	
+	private Set<Long> restrictedUserMonsters(Map<Long, MonsterForUser> existingUserMonsters) {
+		
+		Set<Long> restrictedUserMonsterIds = new HashSet<Long>();
+		for ( MonsterForUser mfu : existingUserMonsters.values() ) {
+			if (mfu.isRestricted()) {
+				restrictedUserMonsterIds.add(mfu.getId());
+			}
+		}
+		
+		return restrictedUserMonsterIds;
 	}
  
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent,

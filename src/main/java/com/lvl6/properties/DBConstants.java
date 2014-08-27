@@ -611,6 +611,7 @@ public class DBConstants {
   public static final String USER__AVATAR_MONSTER_ID = "avatar_monster_id";
   public static final String USER__EMAIL = "email";
   public static final String USER__FB_DATA = "fb_data";
+  public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

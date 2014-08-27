@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -277920023393908200L;
+	private static final long serialVersionUID = -7797133509771235886L;
 	
 	private int id;
 	private String name;
@@ -50,6 +50,7 @@ public class User implements Serializable {
 	private int numObstaclesRemoved;
 	private Date lastMiniJobGeneratedTime;
 	private int avatarMonsterId;
+	private Date lastFreeBoosterPackTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
@@ -63,7 +64,7 @@ public class User implements Serializable {
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
-			int avatarMonsterId) {
+			int avatarMonsterId, Date lastFreeBoosterPackTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -100,6 +101,7 @@ public class User implements Serializable {
 		this.numObstaclesRemoved = numObstaclesRemoved;
 		this.lastMiniJobGeneratedTime = lastMiniJobGeneratedTime;
 		this.avatarMonsterId = avatarMonsterId;
+		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -803,20 +805,47 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map<String, Object> relativeParams = null;
-		
+
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__AVATAR_MONSTER_ID, avatarMonsterId);
-		
+
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-				relativeParams, absoluteParams, conditionParams, "and");
-    
-    if (numUpdated == 1) {
-      this.avatarMonsterId = avatarMonsterId;
-      
-      return true;
-    }
-    return false;
+			relativeParams, absoluteParams, conditionParams, "and");
+
+		if (numUpdated == 1) {
+			this.avatarMonsterId = avatarMonsterId;
+
+			return true;
+		}
+		return false;
 	}
+	
+	public boolean updateFreeBoosterPack( int gemChange, Date now )
+	{
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+
+		if (gemChange != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, now);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gems += gemChange;
+			this.lastFreeBoosterPackTime = now;
+			return true;
+		}
+		return false;
+
+	}
+
 	
 	public int getId() {
 		return id;
@@ -1098,32 +1127,90 @@ public class User implements Serializable {
 		this.avatarMonsterId = avatarMonsterId;
 	}
 
+	public Date getLastFreeBoosterPackTime()
+	{
+		return lastFreeBoosterPackTime;
+	}
+
+	public void setLastFreeBoosterPackTime( Date lastFreeBoosterPackTime )
+	{
+		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
+	}
+
 	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", gems=" + gems + ", cash=" + cash + ", oil=" + oil
-				+ ", experience=" + experience + ", tasksCompleted="
-				+ tasksCompleted + ", referralCode=" + referralCode
-				+ ", numReferrals=" + numReferrals + ", udidForHistory="
-				+ udidForHistory + ", lastLogin=" + lastLogin + ", lastLogout="
-				+ lastLogout + ", deviceToken=" + deviceToken + ", numBadges="
-				+ numBadges + ", isFake=" + isFake + ", createTime="
-				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId="
-				+ apsalarId + ", numCoinsRetrievedFromStructs="
-				+ numCoinsRetrievedFromStructs
-				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
-				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
-				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
-				+ lastWallPostNotificationTime /*+ ", kabamNaid=" + kabamNaid*/
-				+ ", hasReceivedfbReward=" + hasReceivedfbReward
-				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
-				+ ", facebookId=" + facebookId + ", fbIdSetOnUserCreate="
-				+ fbIdSetOnUserCreate + ", gameCenterId=" + gameCenterId
-				+ ", udid=" + udid + ", lastObstacleSpawnedTime="
-				+ lastObstacleSpawnedTime + ", numObstaclesRemoved="
-				+ numObstaclesRemoved + ", lastMiniJobGeneratedTime="
-				+ lastMiniJobGeneratedTime + ", avatarMonsterId="
-				+ avatarMonsterId + "]";
+	public String toString()
+	{
+		return "User [id="
+			+ id
+			+ ", name="
+			+ name
+			+ ", level="
+			+ level
+			+ ", gems="
+			+ gems
+			+ ", cash="
+			+ cash
+			+ ", oil="
+			+ oil
+			+ ", experience="
+			+ experience
+			+ ", tasksCompleted="
+			+ tasksCompleted
+			+ ", referralCode="
+			+ referralCode
+			+ ", numReferrals="
+			+ numReferrals
+			+ ", udidForHistory="
+			+ udidForHistory
+			+ ", lastLogin="
+			+ lastLogin
+			+ ", lastLogout="
+			+ lastLogout
+			+ ", deviceToken="
+			+ deviceToken
+			+ ", numBadges="
+			+ numBadges
+			+ ", isFake="
+			+ isFake
+			+ ", createTime="
+			+ createTime
+			+ ", isAdmin="
+			+ isAdmin
+			+ ", apsalarId="
+			+ apsalarId
+			+ ", numCoinsRetrievedFromStructs="
+			+ numCoinsRetrievedFromStructs
+			+ ", numOilRetrievedFromStructs="
+			+ numOilRetrievedFromStructs
+			+ ", numConsecutiveDaysPlayed="
+			+ numConsecutiveDaysPlayed
+			+ ", clanId="
+			+ clanId
+			+ ", lastWallPostNotificationTime="
+			+ lastWallPostNotificationTime
+			+ ", hasReceivedfbReward="
+			+ hasReceivedfbReward
+			+ ", numBeginnerSalesPurchased="
+			+ numBeginnerSalesPurchased
+			+ ", facebookId="
+			+ facebookId
+			+ ", fbIdSetOnUserCreate="
+			+ fbIdSetOnUserCreate
+			+ ", gameCenterId="
+			+ gameCenterId
+			+ ", udid="
+			+ udid
+			+ ", lastObstacleSpawnedTime="
+			+ lastObstacleSpawnedTime
+			+ ", numObstaclesRemoved="
+			+ numObstaclesRemoved
+			+ ", lastMiniJobGeneratedTime="
+			+ lastMiniJobGeneratedTime
+			+ ", avatarMonsterId="
+			+ avatarMonsterId
+			+ ", lastFreeBoosterPackTime="
+			+ lastFreeBoosterPackTime
+			+ "]";
 	}
 
 }

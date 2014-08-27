@@ -58,6 +58,28 @@ public class TimeUtils {
 	  return interim.getMinutes();
   }
   
+  public int numDaysDifference(Date d1, Date d2) {
+//	  log.info("numMinutesDifference() d1=" + d1);
+//	  log.info("numMinutesDifference() d2=" + d2);
+	  /*
+	  MutableDateTime mdtOne = new DateTime(d1).toMutableDateTime();
+	  mdtOne.setSecondOfMinute(0);
+	  mdtOne.setMinuteOfHour(0);
+	  mdtOne.setHourOfDay(0);
+	  DateTime dOne = mdtOne.toDateTime();
+
+	  MutableDateTime mdtTwo = new DateTime(d2).toMutableDateTime();
+	  mdtTwo.setSecondOfMinute(0);
+	  mdtTwo.setMinuteOfHour(0);
+	  mdtTwo.setHourOfDay(0);
+	  DateTime dTwo = mdtTwo.toDateTime();
+	  */
+	  
+	  Period interim = new Period(new DateTime(d1), new DateTime(d2));
+
+	  return interim.getDays();
+  }
+  
   //not sure if DateTime works, as well.
   public boolean isFirstEarlierThanSecond(Date one, Date two) {
 	  if (null == one && null == two) {
@@ -65,7 +87,7 @@ public class TimeUtils {
 		  return false;
 	  } else if (null == one) {
 		  log.info("first date null");
-		  return true;
+		  return true; //TODO: why TRUE??
 	  } else if (null == two) {
 		  log.info("second date null");
 		  return false;

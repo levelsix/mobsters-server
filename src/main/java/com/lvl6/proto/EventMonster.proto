@@ -416,4 +416,19 @@ message RestrictUserMonsterResponseProto {
 	}
 }
 
+//------------------------------------------------------------------------------------------
 
+message UnrestrictUserMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 userMonsterIds = 3;
+}
+
+message UnrestrictUserMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UnrestrictUserMonsterStatus status = 2;
+	
+	enum UnrestrictUserMonsterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}

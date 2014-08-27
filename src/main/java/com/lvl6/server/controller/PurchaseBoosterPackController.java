@@ -43,6 +43,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -57,6 +58,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   @Autowired
   protected Locker locker;
 
+  @Autowired
+  protected TimeUtils timeUtils;
+  
   @Resource(name = "goodEquipsRecievedFromBoosterPacks")
   protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 
@@ -84,6 +88,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int boosterPackId = reqProto.getBoosterPackId();
     Date now = new Date(reqProto.getClientTime());
     Timestamp nowTimestamp = new Timestamp(now.getTime());
+    
+    boolean freeBoosterPack = reqProto.getFreeBoosterPack();
 
     //values to send to client
     PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto.newBuilder();
@@ -104,7 +110,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
       int gemReward = 0;
       
       boolean legit = checkLegitPurchase(resBuilder, user, userId, now,
-          aPack, boosterPackId, gemPrice, boosterItemIdsToBoosterItems);
+          aPack, boosterPackId, gemPrice, freeBoosterPack,
+          boosterItemIdsToBoosterItems);
 
       boolean successful = false;
       if (legit) {
@@ -122,7 +129,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
         gemReward = determineGemReward(itemsUserReceives);
         //set the FullUserMonsterProtos (in resBuilder) to send to the client
         successful = writeChangesToDB(resBuilder, user, boosterPackId,
-        		itemsUserReceives, gemPrice, now, gemReward);
+        		itemsUserReceives, gemPrice, now, gemReward, freeBoosterPack);
       }
       
       if (successful) {
@@ -148,7 +155,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
         server.writeEvent(resEventUpdate);
         
         writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
-            gemPrice, previousGems, itemsUserReceives, gemReward);
+            gemPrice, previousGems, itemsUserReceives, gemReward, freeBoosterPack);
         
         //just assume user can only buy one booster pack at a time
         writeToBoosterPackPurchaseHistory(userId, boosterPackId, itemsUserReceives,
@@ -200,7 +207,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   private boolean checkLegitPurchase(Builder resBuilder, User aUser, int userId, 
       Date now, BoosterPack aPack, int boosterPackId, int gemPrice,
-      Map<Integer, BoosterItem> idsToBoosterItems) {
+      boolean freeBoosterPack, Map<Integer, BoosterItem> idsToBoosterItems) {
     
     if (null == aUser || null == aPack || null == idsToBoosterItems ||
     		idsToBoosterItems.isEmpty()) {
@@ -213,11 +220,30 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     int userGems = aUser.getGems();
     //check if user can afford to buy however many more user wants to buy
-    if (userGems < gemPrice) {
-    	resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GEMS);
-      return false; //resBuilder status set in called function 
+    if (!freeBoosterPack) {
+    	if (userGems < gemPrice) {
+    		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GEMS);
+    		return false; //resBuilder status set in called function 
+    	}
+    } else {
+
+    	Date lastFreeDate = aUser.getLastFreeBoosterPackTime();
+    	if (null != lastFreeDate) {
+    		if (!timeUtils.isFirstEarlierThanSecond(lastFreeDate, now)) {
+    			log.error(String.format(
+    				"client incorrectly says time now=%s is before lastFreeBoosterPackDate=%s",
+    				now, lastFreeDate));
+    			return false;
+    		} else if ( timeUtils.getDayOfWeekPst(lastFreeDate) == timeUtils.getDayOfWeekPst(now)) {
+    			
+    			log.error(String.format(
+    				"client already received free booster pack today. lastFreeBoosterPackDate=%s, now=%s",
+    				lastFreeDate, now));
+    			return false;
+    		}
+    		
+    	}
     }
-    
     resBuilder.setStatus(PurchaseBoosterPackStatus.SUCCESS);
     return true;
   }
@@ -326,22 +352,35 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
-      List<BoosterItem> itemsUserReceives, int gemPrice, Date now, int gemReward) {
+      List<BoosterItem> itemsUserReceives, int gemPrice, Date now, int gemReward,
+      boolean freeBoosterPack) {
   	
     //update user, user_monsters
   	int userId = user.getId();
   	int currencyChange = -1 * gemPrice; //should be negative
+  	if (freeBoosterPack) {
+  		currencyChange = 0;
+  	}
   	currencyChange += gemReward;
   	
   	//update user's money
-  	if (!user.updateRelativeGemsNaive(currencyChange)) {
-  		log.error("could not change user's money. gemPrice=" + gemPrice + "\t gemReward=" +
+  	if (!freeBoosterPack) {
+  		if (!user.updateRelativeGemsNaive(currencyChange)) {
+  			log.error("could not change user's money. gemPrice=" + gemPrice + "\t gemReward=" +
   				gemReward + "\t change=" + currencyChange);
-  		return false;
+  			return false;
+  		}
+  	} else {
+  		if (!user.updateFreeBoosterPack(currencyChange, now)) {
+  			log.error("could not change user's money and freeBoosterPackTime. gemPrice=" + gemPrice + "\t gemReward=" +
+  				gemReward + "\t change=" + currencyChange);
+  			return false;
+  		}
   	}
   	
-  	log.info("SPENT MONEY ON BOOSTER PACK: " + bPackId + "\t gemPrice=" + gemPrice +
-  			"\t gemReward=" + gemReward + "\t itemsUserReceives=" + itemsUserReceives);
+  	log.info(String.format(
+  		"SPENT MONEY(?) ON BOOSTER PACK: free=%s, bPackId=%s, gemPrice=%s, gemReward=%s, itemsUserReceives=%s",
+  			freeBoosterPack, bPackId, gemPrice, gemReward, itemsUserReceives));
   	
     Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
     List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
@@ -450,7 +489,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
-  		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward) {
+  		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward,
+  		boolean freeBoosterPack) {
+	  
+	  if (freeBoosterPack) {
+		  return;
+	  }
   	int userId = aUser.getId();
   	List<Integer> itemIds = new ArrayList<Integer>();
   	for (BoosterItem item : items) {
@@ -524,6 +568,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public TimeUtils getTimeUtils()
+  {
+	  return timeUtils;
+  }
+
+  public void setTimeUtils( TimeUtils timeUtils )
+  {
+	  this.timeUtils = timeUtils;
   }
 
 }

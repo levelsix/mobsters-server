@@ -492,6 +492,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     int avatarMonsterId = rs.getInt(DBConstants.USER__AVATAR_MONSTER_ID);
     
+    Date lastFreeBoosterPackTime = null;
+    try {
+    	ts = rs.getTimestamp(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME);
+    	if (!rs.wasNull()) {
+    		lastFreeBoosterPackTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("last_free_booster_pack_time null...?", e);
+    }
+    
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, referralCode, numReferrals, udidForHistory,
     		lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
@@ -500,7 +510,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastWallPostNotificationTime, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
     		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
-    		lastMiniJobGeneratedTime, avatarMonsterId);
+    		lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime);
     return user;
   }
  
