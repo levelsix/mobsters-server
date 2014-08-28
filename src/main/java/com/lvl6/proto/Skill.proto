@@ -1,0 +1,54 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
+package com.lvl6.proto;
+
+option java_outer_classname = "SkillsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+//------------------------------------------------------------------------------------------
+
+message SkillProto {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional int32 orbCost = 3;
+	
+	//this is what separates a grouping of skills from another grouping
+	//let's say a grouping of skills groupA is concerned with buffing a monster's attack
+	//and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+	//then groupA and groupB's SkillType 'type' would be different
+	optional SkillType type = 4;
+	
+	//this is whether a skill requires user input to use (user_activated), or
+	//the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+	//the skill is always active(?) passive
+	optional SkillActivationType activationType = 5;
+	
+	//the skill that is weaker than this skill in the grouping of skills
+	optional int32 predecId = 6;
+	
+	//the skill that is stronger than this skill in the grouping of skills
+	optional int32 sucId = 7;
+	
+	repeated SkillPropertyProto properties = 8;
+}
+
+message SkillPropertyProto {
+	optional int32 id = 1;
+	optional string name = 2; //TODO: should be an enum later on
+	optional float value = 3; //could be a non number like string
+}
+
+
+enum SkillType {
+	NO_SKILL = 1;
+	
+	
+}
+
+enum SkillActivationType {
+	USER_ACTIVATED = 1;
+	AUTO_ACTIVATED = 2;
+	PASSIVE = 3; //think this should be always active
+}
