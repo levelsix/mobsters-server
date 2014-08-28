@@ -44,7 +44,7 @@ message SkillPropertyProto {
 enum SkillType {
 	NO_SKILL = 1;
 	
-	
+	CAKE_DROP = 2;
 }
 
 enum SkillActivationType {

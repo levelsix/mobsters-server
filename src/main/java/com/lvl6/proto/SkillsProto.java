@@ -11,9 +11,11 @@ public final class SkillsProto {
   public enum SkillType
       implements com.google.protobuf.ProtocolMessageEnum {
     NO_SKILL(0, 1),
+    CAKE_DROP(1, 2),
     ;
     
     public static final int NO_SKILL_VALUE = 1;
+    public static final int CAKE_DROP_VALUE = 2;
     
     
     public final int getNumber() { return value; }
@@ -21,6 +23,7 @@ public final class SkillsProto {
     public static SkillType valueOf(int value) {
       switch (value) {
         case 1: return NO_SKILL;
+        case 2: return CAKE_DROP;
         default: return null;
       }
     }
@@ -51,7 +54,7 @@ public final class SkillsProto {
     }
     
     private static final SkillType[] VALUES = {
-      NO_SKILL, 
+      NO_SKILL, CAKE_DROP, 
     };
     
     public static SkillType valueOf(
@@ -1670,10 +1673,10 @@ public final class SkillsProto {
       "d\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\nproperties\030\010 \003" +
       "(\0132\".com.lvl6.proto.SkillPropertyProto\"=" +
       "\n\022SkillPropertyProto\022\n\n\002id\030\001 \001(\005\022\014\n\004name" +
-      "\030\002 \001(\t\022\r\n\005value\030\003 \001(\002*\031\n\tSkillType\022\014\n\010NO" +
-      "_SKILL\020\001*J\n\023SkillActivationType\022\022\n\016USER_",
-      "ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSI" +
-      "VE\020\003B\rB\013SkillsProto"
+      "\030\002 \001(\t\022\r\n\005value\030\003 \001(\002*(\n\tSkillType\022\014\n\010NO" +
+      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002*J\n\023SkillActivati",
+      "onType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIV" +
+      "ATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
