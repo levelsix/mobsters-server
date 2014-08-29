@@ -152,9 +152,9 @@ public final class SkillsProto {
   public interface SkillProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 id = 1;
-    boolean hasId();
-    int getId();
+    // optional int32 skillId = 1;
+    boolean hasSkillId();
+    int getSkillId();
     
     // optional string name = 2;
     boolean hasName();
@@ -219,14 +219,14 @@ public final class SkillsProto {
     }
     
     private int bitField0_;
-    // optional int32 id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    public boolean hasId() {
+    // optional int32 skillId = 1;
+    public static final int SKILLID_FIELD_NUMBER = 1;
+    private int skillId_;
+    public boolean hasSkillId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getId() {
-      return id_;
+    public int getSkillId() {
+      return skillId_;
     }
     
     // optional string name = 2;
@@ -333,7 +333,7 @@ public final class SkillsProto {
     }
     
     private void initFields() {
-      id_ = 0;
+      skillId_ = 0;
       name_ = "";
       orbCost_ = 0;
       type_ = com.lvl6.proto.SkillsProto.SkillType.NO_SKILL;
@@ -355,7 +355,7 @@ public final class SkillsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, id_);
+        output.writeInt32(1, skillId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getNameBytes());
@@ -389,7 +389,7 @@ public final class SkillsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+          .computeInt32Size(1, skillId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -544,7 +544,7 @@ public final class SkillsProto {
       
       public Builder clear() {
         super.clear();
-        id_ = 0;
+        skillId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -605,7 +605,7 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.id_ = id_;
+        result.skillId_ = skillId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -655,8 +655,8 @@ public final class SkillsProto {
       
       public Builder mergeFrom(com.lvl6.proto.SkillsProto.SkillProto other) {
         if (other == com.lvl6.proto.SkillsProto.SkillProto.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
+        if (other.hasSkillId()) {
+          setSkillId(other.getSkillId());
         }
         if (other.hasName()) {
           setName(other.getName());
@@ -735,7 +735,7 @@ public final class SkillsProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              id_ = input.readInt32();
+              skillId_ = input.readInt32();
               break;
             }
             case 18: {
@@ -792,23 +792,23 @@ public final class SkillsProto {
       
       private int bitField0_;
       
-      // optional int32 id = 1;
-      private int id_ ;
-      public boolean hasId() {
+      // optional int32 skillId = 1;
+      private int skillId_ ;
+      public boolean hasSkillId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getId() {
-        return id_;
+      public int getSkillId() {
+        return skillId_;
       }
-      public Builder setId(int value) {
+      public Builder setSkillId(int value) {
         bitField0_ |= 0x00000001;
-        id_ = value;
+        skillId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearId() {
+      public Builder clearSkillId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = 0;
+        skillId_ = 0;
         onChanged();
         return this;
       }
@@ -1160,17 +1160,17 @@ public final class SkillsProto {
   public interface SkillPropertyProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 id = 1;
-    boolean hasId();
-    int getId();
+    // optional int32 skillPropertyId = 1;
+    boolean hasSkillPropertyId();
+    int getSkillPropertyId();
     
     // optional string name = 2;
     boolean hasName();
     String getName();
     
-    // optional float value = 3;
-    boolean hasValue();
-    float getValue();
+    // optional float skillValue = 3;
+    boolean hasSkillValue();
+    float getSkillValue();
   }
   public static final class SkillPropertyProto extends
       com.google.protobuf.GeneratedMessage
@@ -1201,14 +1201,14 @@ public final class SkillsProto {
     }
     
     private int bitField0_;
-    // optional int32 id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    public boolean hasId() {
+    // optional int32 skillPropertyId = 1;
+    public static final int SKILLPROPERTYID_FIELD_NUMBER = 1;
+    private int skillPropertyId_;
+    public boolean hasSkillPropertyId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getId() {
-      return id_;
+    public int getSkillPropertyId() {
+      return skillPropertyId_;
     }
     
     // optional string name = 2;
@@ -1243,20 +1243,20 @@ public final class SkillsProto {
       }
     }
     
-    // optional float value = 3;
-    public static final int VALUE_FIELD_NUMBER = 3;
-    private float value_;
-    public boolean hasValue() {
+    // optional float skillValue = 3;
+    public static final int SKILLVALUE_FIELD_NUMBER = 3;
+    private float skillValue_;
+    public boolean hasSkillValue() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public float getValue() {
-      return value_;
+    public float getSkillValue() {
+      return skillValue_;
     }
     
     private void initFields() {
-      id_ = 0;
+      skillPropertyId_ = 0;
       name_ = "";
-      value_ = 0F;
+      skillValue_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1271,13 +1271,13 @@ public final class SkillsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, id_);
+        output.writeInt32(1, skillPropertyId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeFloat(3, value_);
+        output.writeFloat(3, skillValue_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1290,7 +1290,7 @@ public final class SkillsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+          .computeInt32Size(1, skillPropertyId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1298,7 +1298,7 @@ public final class SkillsProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, value_);
+          .computeFloatSize(3, skillValue_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1424,11 +1424,11 @@ public final class SkillsProto {
       
       public Builder clear() {
         super.clear();
-        id_ = 0;
+        skillPropertyId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        value_ = 0F;
+        skillValue_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -1471,7 +1471,7 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.id_ = id_;
+        result.skillPropertyId_ = skillPropertyId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1479,7 +1479,7 @@ public final class SkillsProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.value_ = value_;
+        result.skillValue_ = skillValue_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1496,14 +1496,14 @@ public final class SkillsProto {
       
       public Builder mergeFrom(com.lvl6.proto.SkillsProto.SkillPropertyProto other) {
         if (other == com.lvl6.proto.SkillsProto.SkillPropertyProto.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
+        if (other.hasSkillPropertyId()) {
+          setSkillPropertyId(other.getSkillPropertyId());
         }
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasValue()) {
-          setValue(other.getValue());
+        if (other.hasSkillValue()) {
+          setSkillValue(other.getSkillValue());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1538,7 +1538,7 @@ public final class SkillsProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              id_ = input.readInt32();
+              skillPropertyId_ = input.readInt32();
               break;
             }
             case 18: {
@@ -1548,7 +1548,7 @@ public final class SkillsProto {
             }
             case 29: {
               bitField0_ |= 0x00000004;
-              value_ = input.readFloat();
+              skillValue_ = input.readFloat();
               break;
             }
           }
@@ -1557,23 +1557,23 @@ public final class SkillsProto {
       
       private int bitField0_;
       
-      // optional int32 id = 1;
-      private int id_ ;
-      public boolean hasId() {
+      // optional int32 skillPropertyId = 1;
+      private int skillPropertyId_ ;
+      public boolean hasSkillPropertyId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getId() {
-        return id_;
+      public int getSkillPropertyId() {
+        return skillPropertyId_;
       }
-      public Builder setId(int value) {
+      public Builder setSkillPropertyId(int value) {
         bitField0_ |= 0x00000001;
-        id_ = value;
+        skillPropertyId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearId() {
+      public Builder clearSkillPropertyId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = 0;
+        skillPropertyId_ = 0;
         onChanged();
         return this;
       }
@@ -1614,23 +1614,23 @@ public final class SkillsProto {
         onChanged();
       }
       
-      // optional float value = 3;
-      private float value_ ;
-      public boolean hasValue() {
+      // optional float skillValue = 3;
+      private float skillValue_ ;
+      public boolean hasSkillValue() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public float getValue() {
-        return value_;
+      public float getSkillValue() {
+        return skillValue_;
       }
-      public Builder setValue(float value) {
+      public Builder setSkillValue(float value) {
         bitField0_ |= 0x00000004;
-        value_ = value;
+        skillValue_ = value;
         onChanged();
         return this;
       }
-      public Builder clearValue() {
+      public Builder clearSkillValue() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        value_ = 0F;
+        skillValue_ = 0F;
         onChanged();
         return this;
       }
@@ -1665,18 +1665,19 @@ public final class SkillsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Skill.proto\022\016com.lvl6.proto\"\366\001\n\nSkillP" +
-      "roto\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007orbCos" +
-      "t\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.proto.S" +
-      "killType\022;\n\016activationType\030\005 \001(\0162#.com.l" +
-      "vl6.proto.SkillActivationType\022\020\n\010predecI" +
-      "d\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\nproperties\030\010 \003" +
-      "(\0132\".com.lvl6.proto.SkillPropertyProto\"=" +
-      "\n\022SkillPropertyProto\022\n\n\002id\030\001 \001(\005\022\014\n\004name" +
-      "\030\002 \001(\t\022\r\n\005value\030\003 \001(\002*(\n\tSkillType\022\014\n\010NO" +
-      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002*J\n\023SkillActivati",
-      "onType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIV" +
-      "ATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "\n\013Skill.proto\022\016com.lvl6.proto\"\373\001\n\nSkillP" +
+      "roto\022\017\n\007skillId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007o" +
+      "rbCost\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.pr" +
+      "oto.SkillType\022;\n\016activationType\030\005 \001(\0162#." +
+      "com.lvl6.proto.SkillActivationType\022\020\n\010pr" +
+      "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
+      "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
+      "oto\"O\n\022SkillPropertyProto\022\027\n\017skillProper" +
+      "tyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003" +
+      " \001(\002*(\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_",
+      "DROP\020\002*J\n\023SkillActivationType\022\022\n\016USER_AC" +
+      "TIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE" +
+      "\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1688,7 +1689,7 @@ public final class SkillsProto {
           internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SkillProto_descriptor,
-              new java.lang.String[] { "Id", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", },
+              new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", },
               com.lvl6.proto.SkillsProto.SkillProto.class,
               com.lvl6.proto.SkillsProto.SkillProto.Builder.class);
           internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
@@ -1696,7 +1697,7 @@ public final class SkillsProto {
           internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
-              new java.lang.String[] { "Id", "Name", "Value", },
+              new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", },
               com.lvl6.proto.SkillsProto.SkillPropertyProto.class,
               com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder.class);
           return null;

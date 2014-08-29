@@ -10,7 +10,7 @@ option java_outer_classname = "SkillsProto";
 //------------------------------------------------------------------------------------------
 
 message SkillProto {
-	optional int32 id = 1;
+	optional int32 skillId = 1;
 	optional string name = 2;
 	optional int32 orbCost = 3;
 	
@@ -35,9 +35,9 @@ message SkillProto {
 }
 
 message SkillPropertyProto {
-	optional int32 id = 1;
+	optional int32 skillPropertyId = 1;
 	optional string name = 2; //TODO: should be an enum later on
-	optional float value = 3; //could be a non number like string
+	optional float skillValue = 3; //DO NOT USE VALUE, could be a non number like string
 }
 
 
