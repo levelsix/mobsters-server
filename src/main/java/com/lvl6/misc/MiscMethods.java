@@ -50,6 +50,8 @@ import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.Skill;
+import com.lvl6.info.SkillProperty;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureEvoChamber;
@@ -94,6 +96,7 @@ import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
+import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
@@ -143,6 +146,8 @@ import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
@@ -1621,6 +1626,7 @@ public class MiscMethods {
     setClanIconStuff(sdpb);
     setPvpLeagueStuff(sdpb);
     setAchievementStuff(sdpb);
+    setSkillStuff(sdpb);
 
     return sdpb.build();
   }
@@ -2041,6 +2047,35 @@ public class MiscMethods {
 		  AchievementProto ap = CreateInfoProtoUtils.createAchievementProto(a);
 		  sdpb.addAchievements(ap);
 	  }
+  }
+
+  private static void setSkillStuff(Builder sdpb) {
+	  Map<Integer, Skill> skillz =
+		  SkillRetrieveUtils.getIdsToSkills();
+	  Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
+		  SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
+	  
+	  if (null == skillz || skillz.isEmpty()) {
+		  log.warn("setSkillStuff() no skillz");
+		  return;
+	  }
+	  
+	  //get id and then manually get Skill
+	  //could also get Skill, but then manually get id
+	  for (Integer skillId : skillz.keySet())
+	  {
+		  Skill skil = skillz.get(skillId);
+		  
+		  //skill can have no properties
+		  Map<Integer, SkillProperty> propertyz = null;
+		  if (skillPropertyz.containsKey(skillId)) {
+			  propertyz = skillPropertyz.get(skillId);
+		  }
+		  
+		  SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
+		  sdpb.addSkills(sp);
+	  }
+	  
   }
   
 }

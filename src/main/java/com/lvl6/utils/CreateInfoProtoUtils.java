@@ -62,6 +62,8 @@ import com.lvl6.info.QuestForUser;
 import com.lvl6.info.QuestJob;
 import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.Referral;
+import com.lvl6.info.Skill;
+import com.lvl6.info.SkillProperty;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureForUser;
@@ -147,6 +149,10 @@ import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
+import com.lvl6.proto.SkillsProto.SkillActivationType;
+import com.lvl6.proto.SkillsProto.SkillPropertyProto;
+import com.lvl6.proto.SkillsProto.SkillProto;
+import com.lvl6.proto.SkillsProto.SkillType;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
@@ -1943,7 +1949,86 @@ public class CreateInfoProtoUtils {
   	
   	return ipb.build();
   }
+  
+  /**Skill.proto***************************************************/
+  public static SkillProto createSkillProtoFromSkill(Skill s,
+	  Map<Integer, SkillProperty> skillPropertyIdToProperty)
+  {
+	  SkillProto.Builder spb = SkillProto.newBuilder();
+	  spb.setSkillId(s.getId());
+	  
+	  String str = s.getName();
+	  if (null != str) {
+		  spb.setName(str);
+	  }
+	  
+	  int orbCost = s.getOrbCost();
+	  if (orbCost > 0) {
+		  spb.setOrbCost(orbCost);
+	  }
+	  
+	  str = s.getType();
+	  if (null != str) {
+		  try {
+			  SkillType st = SkillType.valueOf(str);
+			  spb.setType(st);
+		  } catch (Exception e) {
+			  log.error(String.format(
+				  "can't create enum type. skillType=%s.",
+				  str));
+		  }
+	  }
 
+	  str = s.getActivationType();
+	  if (null != str) {
+		  try {
+			  SkillActivationType st = SkillActivationType.valueOf(str);
+			  spb.setActivationType(st);
+		  } catch (Exception e) {
+			  log.error(String.format(
+				  "can't create enum type. skillType=%s.",
+				  str));
+		  }
+	  }
+	  
+	  int predecId = s.getPredecId();
+	  if (predecId > 0) {
+		  spb.setPredecId(predecId);
+	  }
+	  
+	  int succId = s.getSuccessorId();
+	  if (succId > 0) {
+		  spb.setSucId(succId);
+	  }
+	  
+	  //skills can have no properties
+	  if (null != skillPropertyIdToProperty) { 
+		  for (SkillProperty sp : skillPropertyIdToProperty.values()) {
+			  spb.addProperties(
+				  createSkillPropertyProtoFromSkillProperty(sp));
+		  }
+	  }
+	  
+	  return spb.build();
+  }
+
+  public static SkillPropertyProto createSkillPropertyProtoFromSkillProperty(
+	  SkillProperty property)
+  {
+	  SkillPropertyProto.Builder sppb = SkillPropertyProto.newBuilder();
+	  sppb.setSkillPropertyId(property.getId());
+	  
+	  //TODO: Consider making this an enum
+	  String str = property.getName();
+	  if (null != str) { 
+		  sppb.setName(str);
+	  }
+	  //TODO: Account for non number values
+	  sppb.setSkillValue(property.getValue());
+	  
+	  return sppb.build();
+  }
+  
   /**Structure.proto************************************************/
   public static StructureInfoProto createStructureInfoProtoFromStructure(Structure s) {
     StructureInfoProto.Builder builder = StructureInfoProto.newBuilder();

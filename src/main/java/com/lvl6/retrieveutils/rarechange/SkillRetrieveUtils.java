@@ -94,7 +94,14 @@ import com.lvl6.utils.DBConnection;
 		String type = rs.getString(DBConstants.SKILL__TYPE);
 		String activationType = rs.getString(DBConstants.SKILL__ACTIVATION_TYPE);
 		int predecId = rs.getInt(DBConstants.SKILL__PREDEC_ID);
+		if (rs.wasNull()) {
+			predecId = 0;
+		}
+		
 		int succId = rs.getInt(DBConstants.SKILL__SUCC_ID);
+		if (rs.wasNull()) {
+			succId = 0;
+		}
 
 		Skill skill = new Skill(id, name, orbCost, type, activationType, predecId, succId);
 		return skill;
