@@ -37,7 +37,9 @@ message SkillProto {
 message SkillPropertyProto {
 	optional int32 skillPropertyId = 1;
 	optional string name = 2; //TODO: should be an enum later on
-	optional float skillValue = 3; //DO NOT USE VALUE, could be a non number like string
+	//Do not use the word 'value'
+	//this could be a non number like string
+	optional float skillValue = 3; 
 }
 
 
@@ -45,6 +47,8 @@ enum SkillType {
 	NO_SKILL = 1;
 	
 	CAKE_DROP = 2;
+	JELLY = 3;
+	QUICK_ATTACK = 4;
 }
 
 enum SkillActivationType {
