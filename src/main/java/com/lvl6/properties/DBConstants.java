@@ -70,6 +70,8 @@ public class DBConstants {
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
+	public static final String TABLE_SKILL = "skill";
+	public static final String TABLE_SKILL_PROPERTY = "skill_property";
   public static final String TABLE_STATIC_LEVEL_INFO = "static_level_info";
   public static final String TABLE_STRUCTURE = "structure";
   public static final String TABLE_STRUCTURE_EVO_CHAMBER = "structure_evo_chamber";
@@ -665,6 +667,19 @@ public class DBConstants {
  
   
   /**************CONFIGURATION DATA TABLES*****************************/
+  
+  public static final String SKILL__ID = GENERIC__ID;
+  public static final String SKILL__NAME = "name";
+  public static final String SKILL__ORB_COST = "orb_cost";
+  public static final String SKILL__TYPE = "type";
+  public static final String SKILL__ACTIVATION_TYPE = "activation_type";
+  public static final String SKILL__PREDEC_ID = "predec_id";
+  public static final String SKILL__SUCC_ID = "succ_id";
+  
+  public static final String SKILL_PROPERTY__ID = GENERIC__ID;
+  public static final String SKILL_PROPERTY__NAME = "name";
+  public static final String SKILL_PROPERTY__VALUE = "value";
+  public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
   
   public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
   public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
