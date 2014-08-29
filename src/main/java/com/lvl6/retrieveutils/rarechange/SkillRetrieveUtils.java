@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Map<Integer, Skill> idsToSkills;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_PROPERTY;
+	private static final String TABLE_NAME = DBConstants.TABLE_SKILL;
 
 	public static Map<Integer, Skill> getIdsToSkills() {
 		log.debug("retrieving all Skills data map");
