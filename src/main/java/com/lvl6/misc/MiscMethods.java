@@ -808,6 +808,7 @@ public class MiscMethods {
     QuestJobRetrieveUtils.reload();
     QuestJobMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
+    SkillRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureEvoChamberRetrieveUtils.reload();
