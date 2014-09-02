@@ -555,7 +555,7 @@ public class ControllerTest extends TestCase {
 			EnhanceMonsterRequestProto.newBuilder();
 		eventBuilder.setSender(mup);
 		eventBuilder.setUep(uep);
-		eventBuilder.setResult(result.build());
+		eventBuilder.setEnhancingResult(result.build());
 		eventBuilder.setGemsSpent(gemsSpent);
 		eventBuilder.setOilChange(oilChange);
 

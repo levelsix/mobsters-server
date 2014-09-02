@@ -69,7 +69,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     UserEnhancementProto uep = reqProto.getUep();
-    UserMonsterCurrentExpProto result = reqProto.getResult();
+    UserMonsterCurrentExpProto result = reqProto.getEnhancingResult();
     int gemsSpent = reqProto.getGemsSpent();
     int oilChange = reqProto.getOilChange();
     

@@ -141,7 +141,7 @@ message EnhanceMonsterRequestProto {
 	optional UserEnhancementProto uep = 2;
 	
 	//the result of enhancing
-	optional UserMonsterCurrentExpProto result = 3;
+	optional UserMonsterCurrentExpProto enhancingResult = 3;
 	
 	//if user needs, say, five more oil, then user can spend gems to replace
 	//said five oil. (positive number, server will convert it to negative)
