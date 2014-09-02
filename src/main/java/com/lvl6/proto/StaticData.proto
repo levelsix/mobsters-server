@@ -8,6 +8,7 @@ import "City.proto";
 import "Clan.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "Skill.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";
@@ -62,5 +63,7 @@ message StaticDataProto {
 	//repeated TaskMapElementProto allTaskMapElements = 28; defined above
 	//repeated EvoChamberProto allEvoChambers = 29; defined above
 	//repeated TeamCenterProto allTeamCenters = 30; defined above
+	
+	repeated SkillProto skills = 31;
 }
 	

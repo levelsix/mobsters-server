@@ -1,9 +1,9 @@
 package com.lvl6.test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,26 +21,34 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
-import com.lvl6.events.request.QuestProgressRequestEvent;
-import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
+import com.lvl6.events.request.EnhanceMonsterRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
-import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
-import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.controller.EnhanceMonsterController;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
 import com.lvl6.server.controller.QuestProgressController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
 import com.lvl6.server.controller.UserCreateController;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -67,10 +75,16 @@ public class ControllerTest extends TestCase {
 	QuestProgressController questProgressController;
 	
 	@Autowired
+	EnhanceMonsterController enhanceMonsterController;
+	
+	@Autowired
 	TimeUtils timeUtils;
 	
 	@Autowired
 	UserRetrieveUtils userRetrieveUtils;
+	
+	@Autowired
+	MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
 	
 	@Autowired
 	GameServer server;
@@ -361,12 +375,15 @@ public class ControllerTest extends TestCase {
 		excludeIds.add("1");
 		excludeIds.add("a");
 		
+		Predicate<?, ?> predicate = null;
 		try {
-			Predicate<?, ?> predicate = getHazelcastPvpUtil().generatePredicate(minElo,
+			predicate = getHazelcastPvpUtil().generatePredicate(minElo,
 					maxElo, now, limit, excludeIds);
 		} catch(Exception e) {
 			log.error("exception creating hazelcast pvp query.", e);
 		}
+		
+		assertNotNull(predicate);
 	}
 	/*
 	@Test
@@ -417,6 +434,148 @@ public class ControllerTest extends TestCase {
 	}
 	*/
 	
+	@Test
+	public void testEnhanceMonster() {
+		int unitTesterId = getUnitTesterId();
+		User unitTester = getUserRetrieveUtils().getUserById(unitTesterId);
+		Date now = new Date();
+		//get num monsters
+		List<MonsterForUser> mfuList = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
+		assertNotNull(mfuList);
+		assertTrue(String.format(
+			"Monsters should exist, but don't. %s",
+				mfuList),
+			!mfuList.isEmpty());
+		
+		//add 'n' monsters
+		Map<Long, MonsterForUser> newMonsters = createCompleteMonsters(unitTesterId, now);
+		log.info(String.format("newMonsters=%s", newMonsters));
+		int newMonsterCount = newMonsters.size();
+		assertNotNull(newMonsters);
+		
+		List<MonsterForUser> mfuListTwo = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
+				
+		assertEquals(String.format(
+			"supposed to be n=%s more monsters. old=%s, new=%s, expectedDelta=%s",
+			newMonsterCount, mfuList, mfuListTwo, newMonsters ),
+			mfuList.size() + newMonsterCount,
+			mfuListTwo.size());
+		
+		//submit EnhanceMonsterRequest with these 'n' newly added monsters
+		Long enhancedMonsterId = submitEnhanceMonsterRequest(unitTester, newMonsters);
+		
+		//check to make sure num monsters is down by 1
+		Map<Long, MonsterForUser> mfuMapThree = monsterForUserRetrieveUtils.getSpecificOrAllUserMonstersForUser(unitTesterId, null);
+		assertEquals(String.format(
+			"supposed to be n=%s more monsters. old=%s, new=%s",
+			newMonsterCount - 1, mfuList, mfuMapThree),
+			mfuList.size() + newMonsterCount - 1,
+			mfuMapThree.size());
+		
+		//check to make sure the newly enhanced monster changed
+		MonsterForUser enhancedMonster = mfuMapThree.get(enhancedMonsterId);
+		assertEquals(
+			String.format( "exp should have been: %s", expectedEnhancedMonsterExpLvlHp),
+			expectedEnhancedMonsterExpLvlHp, enhancedMonster.getCurrentExp());
+		assertEquals(
+			String.format( "lvl should have been: %s", expectedEnhancedMonsterExpLvlHp),
+			expectedEnhancedMonsterExpLvlHp, enhancedMonster.getCurrentLvl());
+		assertEquals(
+			String.format( "health should have been: %s", expectedEnhancedMonsterExpLvlHp),
+			expectedEnhancedMonsterExpLvlHp, enhancedMonster.getCurrentHealth());
+		
+		//delete it
+		DeleteUtils.get().deleteMonsterForUser(enhancedMonster.getId());
+	}
+	
+	private Map<Long, MonsterForUser> createCompleteMonsters(int userId,
+		Date now) {
+		
+		List<Monster> twoMonsters = new ArrayList<Monster>(
+			MonsterRetrieveUtils.getMonsterIdsToMonsters().values());
+		twoMonsters = twoMonsters.subList(0, 2);
+		
+		List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
+		for (Monster monzter : twoMonsters) {
+			//create a "complete" user monster
+			boolean hasAllPieces = true;
+			boolean isComplete = true;
+			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
+				userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
+
+			//return this monster in the argument list completeUserMonsters, so caller
+			//can use it
+			completeUserMonsters.add(newUserMonster);
+		}
+		
+		String mfusop = "ControllerTest.createCompleteMonsters";
+		List<Long> monsterForUserIds = InsertUtils.get()
+			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
+	
+		Map<Long, MonsterForUser> returnMap = new HashMap<Long, MonsterForUser>();
+		for (int index = 0; index < twoMonsters.size(); index++) {
+			MonsterForUser mfu = completeUserMonsters.get(index);
+			Long mfuId = monsterForUserIds.get(index);
+			
+			mfu.setId(mfuId);
+			returnMap.put(mfuId, mfu);
+		}
+		return returnMap;
+	}
+	
+	private static int expectedEnhancedMonsterExpLvlHp = 1;
+	private Long submitEnhanceMonsterRequest(User aUser, Map<Long, MonsterForUser> mfuMap) {
+		//create the arguments for the event
+		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
+		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
+		
+		for (MonsterForUser mfu: mfuMap.values()) {
+
+		    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
+		    ueipb.setUserMonsterId(mfu.getId());
+		    ueipb.setEnhancingCost(0);
+		    feeders.add(ueipb.build());
+		}
+		
+		UserEnhancementItemProto baseMonster = feeders.remove(0);
+		
+		UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+			aUser.getId(), baseMonster, feeders);
+		
+		UserMonsterCurrentExpProto.Builder result = UserMonsterCurrentExpProto.newBuilder();
+		result.setUserMonsterId(baseMonster.getUserMonsterId());
+		result.setExpectedExperience(expectedEnhancedMonsterExpLvlHp);
+		result.setExpectedLevel(expectedEnhancedMonsterExpLvlHp);
+		result.setExpectedHp(expectedEnhancedMonsterExpLvlHp);
+		
+		int gemsSpent = 1;
+		int oilChange = 1;
+		
+		EnhanceMonsterRequestProto.Builder eventBuilder =
+			EnhanceMonsterRequestProto.newBuilder();
+		eventBuilder.setSender(mup);
+		eventBuilder.setUep(uep);
+		eventBuilder.setEnhancingResult(result.build());
+		eventBuilder.setGemsSpent(gemsSpent);
+		eventBuilder.setOilChange(oilChange);
+
+		//give the user money
+		aUser.updateRelativeCashAndOilAndGems(0, 1, 1);
+		
+		//generate the event
+		EnhanceMonsterRequestEvent event = new EnhanceMonsterRequestEvent();
+		event.setTag(0);
+		event.setEnhanceMonsterRequestProto(eventBuilder.build());
+		enhanceMonsterController.handleEvent(event);
+		
+		return baseMonster.getUserMonsterId();
+	}
+	
+	private int getUnitTesterId() {
+		return 11;
+	}
+	
+	
 	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
 		return purchaseCityExpansionController;
 	}
@@ -462,6 +621,16 @@ public class ControllerTest extends TestCase {
 		this.questProgressController = questProgressController;
 	}
 
+	public EnhanceMonsterController getEnhanceMonsterController()
+	{
+		return enhanceMonsterController;
+	}
+
+	public void setEnhanceMonsterController( EnhanceMonsterController enhanceMonsterController )
+	{
+		this.enhanceMonsterController = enhanceMonsterController;
+	}
+
 	public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
@@ -478,6 +647,18 @@ public class ControllerTest extends TestCase {
 		this.userRetrieveUtils = userRetrieveUtils;
 	}
 	
+	public MonsterForUserRetrieveUtils getMonsterForUserRetrieveUtils()
+	{
+		return monsterForUserRetrieveUtils;
+	}
+
+	public void setMonsterForUserRetrieveUtils(
+		MonsterForUserRetrieveUtils monsterForUserRetrieveUtils )
+	{
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
+
+
 	public GameServer getServer() {
 		return server;
 	}
