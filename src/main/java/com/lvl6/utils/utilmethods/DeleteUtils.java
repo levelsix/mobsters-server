@@ -207,8 +207,13 @@ public class DeleteUtils implements DeleteUtil {
     List<String> questions = Collections.nCopies(size, "?");
     
     String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+//    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID
+//    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    
+    String query = String.format(
+    	" DELETE FROM %s WHERE %s IN(%s)",
+    	tableName, DBConstants.MONSTER_FOR_USER__ID,
+    	StringUtils.getListInString(questions, delimiter));
     
     int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userMonsterIds);
     return numDeleted;
