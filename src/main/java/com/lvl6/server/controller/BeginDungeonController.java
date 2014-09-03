@@ -261,7 +261,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> oilGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
-
+  	List<Integer> monsterIdDrops = new ArrayList<Integer>();
   	for (int i = 0; i < taskStages.size(); i++) {
   		TaskStageForUser tsfu = taskStages.get(i);
   		userTaskStageId.add(tsfu.getId());
@@ -277,7 +277,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
-  		
+  		monsterIdDrops.add(tsfu.getMonsterIdDropped());
   	}
   	
   	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
@@ -286,7 +286,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, oilGained, monsterPieceDropped, itemIdDropped);
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped, monsterIdDrops);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
   }
@@ -703,14 +703,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	
 	  	List<Integer> tsmIds = new ArrayList<Integer>();
 	  	List<String> monsterTypes = new ArrayList<String>();
+	  	List<Integer> monsterIdDrops = new ArrayList<Integer>();
 	  	for (TaskStageMonster tsm : taskStageMonsters) {
-        tsmIds.add(tsm.getId());
-        monsterTypes.add(tsm.getMonsterType());
-      }
+	  		tsmIds.add(tsm.getId());
+	  		monsterTypes.add(tsm.getMonsterType());
+	  		monsterIdDrops.add(tsm.getMonsterIdDrop());
+	  	}
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds, repeatedStageNum,
 	  			tsmIds, monsterTypes, expsGained, cashGained, oilGained, monsterPiecesDropped,
-	  			tsmIdToItemId);
+	  			tsmIdToItemId, monsterIdDrops);
 	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }

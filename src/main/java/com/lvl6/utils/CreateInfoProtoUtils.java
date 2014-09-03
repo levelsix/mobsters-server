@@ -2513,6 +2513,7 @@ public class CreateInfoProtoUtils {
     int tsmMonsterId = tsm.getMonsterId();
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+    bldr.setTsmId(tsm.getId());
     bldr.setMonsterId(tsmMonsterId);
     String tsmMonsterType = tsm.getMonsterType(); 
     try {
@@ -2523,10 +2524,14 @@ public class CreateInfoProtoUtils {
     }
     bldr.setCashReward(cashReward);
     bldr.setOilReward(oilReward);
-    bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
     bldr.setDmgMultiplier(tsm.getDmgMultiplier());
+    
+    bldr.setPuzzlePieceDropped(pieceDropped);
+    if ( tsm.getMonsterIdDrop() > 0 ) {
+    	bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+    }
 
     int tsmId = tsm.getId();
     if (tsmIdToItemId.containsKey(tsmId)) {
@@ -2563,6 +2568,7 @@ public class CreateInfoProtoUtils {
 	  }
 
 	  TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+	  bldr.setTsmId(tsmId);
 	  bldr.setMonsterId(tsmMonsterId);
 	  String tsmMonsterType = tsfu.getMonsterType(); 
 	  try {
@@ -2588,6 +2594,10 @@ public class CreateInfoProtoUtils {
 					  tsfu);
 		  }
 		  bldr.setItemId(itemId);
+	  }
+	  //TODO: Should the monster id dropped be from tsfu or tsm?
+	  if (tsfu.getMonsterIdDropped() > 0) {
+		  bldr.setPuzzlePieceMonsterId(tsfu.getMonsterIdDropped());
 	  }
 
 	  return bldr.build();

@@ -536,19 +536,21 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
+  public static final String TASK_STAGE_FOR_USER__MONSTER_ID_DROPPED = "monster_id_dropped";
   
   /*USER TASK STAGE HISTORY TABLE*/
   public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
   public static final String TASK_STAGE_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
   public static final String TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID = "task_stage_monster_id";
-  //not needed since task stage monster now has monster_type
+  //monster_type not needed here since task stage monster now has monster_type
   public static final String TASK_STAGE_HISTORY__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String TASK_STAGE_HISTORY__CASH_GAINED = "cash_gained";
   public static final String TASK_STAGE_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
+  public static final String TASK_STAGE_HISTORY__MONSTER_ID_DROPPED = "monster_id_dropped";
   
   /*TOURNAMENT EVENT*/
   public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
@@ -688,5 +690,19 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__ELEMENT = "element";
   public static final String TASK_MAP_ELEMENT__IS_BOSS = "is_boss";
   public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
-  
+
+  public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
+  public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
+  public static final String TASK_STAGE_MONSTER__MONSTER_ID = "monster_id";
+  public static final String TASK_STAGE_MONSTER__MONSTER_TYPE = "monster_type";
+  public static final String TASK_STAGE_MONSTER__EXP_REWARD = "exp_reward";
+  public static final String TASK_STAGE_MONSTER__MIN_CASH_DROP = "min_cash_drop";
+  public static final String TASK_STAGE_MONSTER__MAX_CASH_DROP = "max_cash_drop";
+  public static final String TASK_STAGE_MONSTER__MIN_OIL_DROP = "min_oil_drop";
+  public static final String TASK_STAGE_MONSTER__MAX_OIL_DROP = "max_oil_drop";
+  public static final String TASK_STAGE_MONSTER__PUZZLE_PIECE_DROP_RATE = "puzzle_piece_drop_rate";
+  public static final String TASK_STAGE_MONSTER__LEVEL = "level";
+  public static final String TASK_STAGE_MONSTER__CHANCE_TO_APPEAR = "chance_to_appear";
+  public static final String TASK_STAGE_MONSTER__DMG_MULTIPLIER = "dmg_multiplier";
+  public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
 }

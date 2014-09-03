@@ -133,20 +133,20 @@ public class TaskStageMonsterRetrieveUtils {
    */
   private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs,
 		  Random rand) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int stageId = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
-    String monsterType = rs.getString(i++);
-    int expReward = rs.getInt(i++);
-    int minCashDrop = rs.getInt(i++);
-    int maxCashDrop = rs.getInt(i++);
-    int minOilDrop = rs.getInt(i++);
-    int maxOilDrop = rs.getInt(i++);
-    float puzzlePieceDropRate = rs.getFloat(i++);
-    int level = rs.getInt(i++);
-    float chanceToAppear = rs.getFloat(i++);
-    float dmgMultiplier = rs.getFloat(i++);
+    int id = rs.getInt(DBConstants.TASK_STAGE_MONSTER__ID);
+    int stageId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__TASK_STAGE_ID);
+    int monsterId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID);
+    String monsterType = rs.getString(DBConstants.TASK_STAGE_MONSTER__MONSTER_TYPE);
+    int expReward = rs.getInt(DBConstants.TASK_STAGE_MONSTER__EXP_REWARD);
+    int minCashDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_CASH_DROP);
+    int maxCashDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_CASH_DROP);
+    int minOilDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MIN_OIL_DROP);
+    int maxOilDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MAX_OIL_DROP);
+    float puzzlePieceDropRate = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__PUZZLE_PIECE_DROP_RATE);
+    int level = rs.getInt(DBConstants.TASK_STAGE_MONSTER__LEVEL);
+    float chanceToAppear = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__CHANCE_TO_APPEAR);
+    float dmgMultiplier = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
+    int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
     
     if (null != monsterType) {
     	String newMonsterType = monsterType.trim().toUpperCase();
@@ -165,19 +165,20 @@ public class TaskStageMonsterRetrieveUtils {
     
     if (chanceToAppear < 0F) {
     	log.error("incorrect chanceToAppear: " + chanceToAppear +
-    			". Forcing it to be above 0. id=" + id);
+    			". Forcing it to be at/above 0. id=" + id);
     	chanceToAppear = Math.max(0F, chanceToAppear);
     }
     
     if (dmgMultiplier < 0F) {
     	log.error("incorrect dmgMultiplier: " + dmgMultiplier +
-			". Forcing it to be above 0. id=" + id);
+			". Forcing it to be at/above 0. id=" + id);
     	dmgMultiplier = Math.max(0F, dmgMultiplier);
     }
     
+    
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
-    		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier);
+    		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop);
     
     if (null == monsterType) {
     	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +
