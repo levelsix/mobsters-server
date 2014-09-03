@@ -121,8 +121,9 @@ import com.lvl6.utils.DBConnection;
 		String name = rs.getString(DBConstants.SKILL_PROPERTY__NAME);
 		float value = rs.getFloat(DBConstants.SKILL_PROPERTY__VALUE);
 		int skillId = rs.getInt(DBConstants.SKILL_PROPERTY__SKILL_ID);
+		String shortName = rs.getString(DBConstants.SKILL_PROPERTY__SHORT_NAME);
 
-		SkillProperty skillProperty = new SkillProperty(id, name, value, skillId);
+		SkillProperty skillProperty = new SkillProperty(id, name, value, skillId, shortName);
 
 		return skillProperty;
 	}
