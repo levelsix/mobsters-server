@@ -844,7 +844,7 @@ public class InsertUtils implements InsertUtil{
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> tsmIds, List<String> monsterTypes, List<Integer> expsGained,
 			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
-			Map<Integer, Integer> tsmIdToItemId, List<Integer> monsterIdDrops) {
+			Map<Integer, Integer> tsmIdToItemId) {
 		//even if a taskStageMonsterId has multiple items, just choose the first one
 		List<Integer> itemIds = new ArrayList<Integer>();
 		
@@ -878,8 +878,6 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, oilGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, itemIds);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_ID_DROPPED, monsterIdDrops);
-    
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);

@@ -114,10 +114,9 @@ import com.lvl6.utils.DBConnection;
     int oilGained = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED);
     boolean monsterPieceDropped = rs.getBoolean(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED);
     int itemIdDropped = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED);
-    int monsterIdDropped = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__MONSTER_ID_DROPPED);
     
     return new TaskStageForUser(id, taskForUserId, stageNum, tsmId,
     	monsterType, expGained, cashGained, oilGained, monsterPieceDropped,
-    	itemIdDropped, monsterIdDropped);
+    	itemIdDropped);
   }
 }

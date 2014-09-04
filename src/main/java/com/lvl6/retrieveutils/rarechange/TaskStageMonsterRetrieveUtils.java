@@ -28,6 +28,16 @@ public class TaskStageMonsterRetrieveUtils {
 
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
 
+  public static int getMonsterIdDropForId(int tsmId) {
+	  TaskStageMonster tsm = getTaskStageMonsterForId(tsmId);
+	  if (null != tsm) {
+		  return tsm.getMonsterIdDrop();
+	  }
+	  log.error( String.format(
+		  "no TaskStageMonster for tsmId=%s", tsmId));
+	  return 0;
+  }
+  
   public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
     log.debug("retrieving all task stage monster data map");
     if (null == taskStageIdsToTaskStageMonsters) {
@@ -147,6 +157,7 @@ public class TaskStageMonsterRetrieveUtils {
     float chanceToAppear = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__CHANCE_TO_APPEAR);
     float dmgMultiplier = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
     int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
+    int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
     
     if (null != monsterType) {
     	String newMonsterType = monsterType.trim().toUpperCase();
@@ -178,7 +189,8 @@ public class TaskStageMonsterRetrieveUtils {
     
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
-    		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop);
+    		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop,
+    		monsterDropLvl);
     
     if (null == monsterType) {
     	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +

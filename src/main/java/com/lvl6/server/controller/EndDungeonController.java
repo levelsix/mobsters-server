@@ -298,7 +298,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
-  		monsterIdDrops.add(tsfu.getMonsterIdDropped());
+  		
+  		monsterIdDrops.add(
+  			TaskStageMonsterRetrieveUtils.getMonsterIdDropForId(
+  				tsmId));
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces

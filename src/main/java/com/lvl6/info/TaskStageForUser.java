@@ -17,12 +17,11 @@ public class TaskStageForUser implements Serializable {
 	private boolean monsterPieceDropped;
 	private int itemIdDropped;
 	//maybe should specify the (enhancement) level of monster dropped
-	private int monsterIdDropped;
 	
 	public TaskStageForUser(long id, long userTaskId, int stageNum,
 			int taskStageMonsterId, String monsterType, int expGained,
 			int cashGained, int oilGained, boolean monsterPieceDropped,
-			int itemIdDropped, int monsterIdDropped) {
+			int itemIdDropped) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
@@ -34,7 +33,6 @@ public class TaskStageForUser implements Serializable {
 		this.oilGained = oilGained;
 		this.monsterPieceDropped = monsterPieceDropped;
 		this.itemIdDropped = itemIdDropped;
-		this.monsterIdDropped = monsterIdDropped;
 	}
 
 	public long getId() {
@@ -117,16 +115,6 @@ public class TaskStageForUser implements Serializable {
 		this.itemIdDropped = itemIdDropped;
 	}
 
-	public int getMonsterIdDropped()
-	{
-		return monsterIdDropped;
-	}
-
-	public void setMonsterIdDropped( int monsterIdDropped )
-	{
-		this.monsterIdDropped = monsterIdDropped;
-	}
-
 	@Override
 	public String toString()
 	{
@@ -150,8 +138,6 @@ public class TaskStageForUser implements Serializable {
 			+ monsterPieceDropped
 			+ ", itemIdDropped="
 			+ itemIdDropped
-			+ ", monsterIdDropped="
-			+ monsterIdDropped
 			+ "]";
 	}
 

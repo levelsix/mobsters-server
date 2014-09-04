@@ -2600,9 +2600,9 @@ public class CreateInfoProtoUtils {
 		  }
 		  bldr.setItemId(itemId);
 	  }
-	  //TODO: Should the monster id dropped be from tsfu or tsm?
-	  if (tsfu.getMonsterIdDropped() > 0) {
-		  bldr.setPuzzlePieceMonsterId(tsfu.getMonsterIdDropped());
+	  
+	  if (tsm.getMonsterIdDrop() > 0) {
+		  bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
 	  }
 
 	  return bldr.build();

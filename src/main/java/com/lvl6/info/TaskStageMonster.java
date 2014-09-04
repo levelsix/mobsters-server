@@ -5,7 +5,8 @@ import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
 	
-	private static final long serialVersionUID = -7914239878850424531L;
+	private static final long serialVersionUID = -7676232536431741400L;
+	
 	private int id;
 	private int stageId;
 	private int monsterId;
@@ -20,9 +21,9 @@ public class TaskStageMonster implements Serializable {
 	private float chanceToAppear;
 	private float dmgMultiplier;
 	private int monsterIdDrop;
+	private int monsterDropLvl; //the leve of the monster that is dropped
   
 	private Random rand;
-
 
 	public TaskStageMonster(
 		int id,
@@ -38,7 +39,8 @@ public class TaskStageMonster implements Serializable {
 		int level,
 		float chanceToAppear,
 		float dmgMultiplier,
-		int monsterIdDrop )
+		int monsterIdDrop,
+		int monsterDropLvl)
 	{
 		super();
 		this.id = id;
@@ -55,6 +57,7 @@ public class TaskStageMonster implements Serializable {
 		this.chanceToAppear = chanceToAppear;
 		this.dmgMultiplier = dmgMultiplier;
 		this.monsterIdDrop = monsterIdDrop;
+		this.monsterDropLvl = monsterDropLvl;
 	}
 
 //covenience methods--------------------------------------------------------
@@ -215,6 +218,16 @@ public class TaskStageMonster implements Serializable {
 	  this.monsterIdDrop = monsterIdDrop;
   }
 
+  public int getMonsterDropLvl()
+  {
+	  return monsterDropLvl;
+  }
+
+  public void setMonsterDropLvl( int monsterDropLvl )
+  {
+	  this.monsterDropLvl = monsterDropLvl;
+  }
+
   @Override
   public String toString()
   {
@@ -246,6 +259,8 @@ public class TaskStageMonster implements Serializable {
 		  + dmgMultiplier
 		  + ", monsterIdDrop="
 		  + monsterIdDrop
+		  + ", monsterDropLvl="
+		  + monsterDropLvl
 		  + "]";
   }
 

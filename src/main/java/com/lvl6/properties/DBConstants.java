@@ -536,7 +536,6 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
-  public static final String TASK_STAGE_FOR_USER__MONSTER_ID_DROPPED = "monster_id_dropped";
   
   /*USER TASK STAGE HISTORY TABLE*/
   public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
@@ -551,6 +550,7 @@ public class DBConstants {
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   public static final String TASK_STAGE_HISTORY__MONSTER_ID_DROPPED = "monster_id_dropped";
+  public static final String TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL = "monster_dropped_lvl";
   
   /*TOURNAMENT EVENT*/
   public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
@@ -706,4 +706,5 @@ public class DBConstants {
   public static final String TASK_STAGE_MONSTER__CHANCE_TO_APPEAR = "chance_to_appear";
   public static final String TASK_STAGE_MONSTER__DMG_MULTIPLIER = "dmg_multiplier";
   public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
+  public static final String TASK_STAGE_MONSTER__MONSTER_DROP_LVL = "monster_drop_lvl";
 }
