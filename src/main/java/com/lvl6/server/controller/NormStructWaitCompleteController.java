@@ -61,7 +61,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<Integer> userStructIds = reqProto.getUserStructIdList();
     userStructIds = new ArrayList<Integer>(userStructIds);
     Timestamp clientTime = new Timestamp(reqProto.getCurTime());
-    boolean freeSpeedUp = reqProto.getFreeSpeedUp();
 
     //stuff to send to client
     NormStructWaitCompleteResponseProto.Builder resBuilder = NormStructWaitCompleteResponseProto.newBuilder();
@@ -75,7 +74,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
       boolean legitWaitComplete = checkLegitWaitComplete(resBuilder, userStructs,
-      		userStructIds, senderProto.getUserId(), clientTime, freeSpeedUp,
+      		userStructIds, senderProto.getUserId(), clientTime, 
       		newRetrievedTimes);
 
 
@@ -109,7 +108,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
       List<StructureForUser> userStructs, List<Integer> userStructIds,
-      int userId, Timestamp clientTime, boolean freeSpeedUp,
+      int userId, Timestamp clientTime, 
       List<Timestamp> newRetrievedTimes) {
   	
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
@@ -125,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<Integer> validUserStructIds = new ArrayList<Integer>();
     
     List<Timestamp> timesBuildsFinished = calculateValidUserStructs(userId,
-    	clientTime, userStructs, freeSpeedUp, validUserStructIds, validUserStructs);
+    	clientTime, userStructs, validUserStructIds, validUserStructs);
     
     if (userStructs.size() != validUserStructs.size()) {
     	log.warn("some of what the client sent is invalid. idsClientSent=" +
@@ -144,7 +143,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   //"validUserStructIds" and "validUserStructs" WILL BE POPULATED
   private List<Timestamp> calculateValidUserStructs(int userId, Timestamp clientTime, 
-  		List<StructureForUser> userStructs, boolean freeSpeedUp,
+  		List<StructureForUser> userStructs, 
   		List<Integer> validUserStructIds, List<StructureForUser> validUserStructs) {
   	List<Timestamp> timesBuildsFinished = new ArrayList<Timestamp>();
     Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
@@ -165,16 +164,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       if (null != purchaseDate) {
       	long timeBuildFinishes = purchaseDate.getTime() + buildTimeMillis;
-      	long timeBuildFinishesWithFreeSpeedUp = timeBuildFinishes -
-      		(ControllerConstants.MAX_MINUTES_FOR_FREE_SPEED_UP * 60 * 1000);
       	
-      	if (freeSpeedUp && timeBuildFinishesWithFreeSpeedUp > clientTime.getTime()) {
-      		log.warn(String.format(
-      			"building with free speed up not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes_with_free_speed_up=%s",
-      			us, clientTime, purchaseDate, timeBuildFinishesWithFreeSpeedUp));
-      		continue;
-
-      	} else if (timeBuildFinishes > clientTime.getTime()) {
+      	if (timeBuildFinishes > clientTime.getTime()) {
       		log.warn(String.format(
       			"building not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes=%s",
       			us, clientTime, purchaseDate, timeBuildFinishes));

@@ -145,7 +145,6 @@ message NormStructWaitCompleteRequestProto {
 	//server will compute last retrieved times
 	//this is just for history purposes
 	optional int64 curTime = 3;
-	optional bool freeSpeedUp = 4;
 	
 }
 
