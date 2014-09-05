@@ -49,6 +49,9 @@ message MonsterProto {
 	//optional string shorterName = 28; defined above
 	optional float shadowScaleFactor = 29;
 	
+	optional int32 baseOffensiveSkillId = 30;
+	optional int32 baseDefensiveSkillId = 31;
+	
 	enum AnimationType {
 		NO_ANIMATION = 3;
 		MELEE = 1;

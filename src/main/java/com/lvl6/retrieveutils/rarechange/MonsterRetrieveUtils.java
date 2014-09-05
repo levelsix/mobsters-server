@@ -114,39 +114,40 @@ public class MonsterRetrieveUtils {
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Monster convertRSRowToMonster(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String evolutionGroup = rs.getString(i++);
-    String monsterGroup = rs.getString(i++);
-    String quality = rs.getString(i++);
-    int evolutionLevel = rs.getInt(i++);
-    String displayName = rs.getString(i++);
-    String element = rs.getString(i++);
-    String imagePrefix = rs.getString(i++);
-    int numPuzzlePieces = rs.getInt(i++);
-    int minutesToCombinePieces = rs.getInt(i++);
-    int maxLevel = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.MONSTER__ID);
+    String evolutionGroup = rs.getString(DBConstants.MONSTER__EVOLUTION_GROUP);
+    String monsterGroup = rs.getString(DBConstants.MONSTER__MONSTER_GROUP);
+    String quality = rs.getString(DBConstants.MONSTER__QUALITY);
+    int evolutionLevel = rs.getInt(DBConstants.MONSTER__EVOLUTION_LEVEL);
+    String displayName = rs.getString(DBConstants.MONSTER__DISPLAY_NAME);
+    String element = rs.getString(DBConstants.MONSTER__ELEMENT);
+    String imagePrefix = rs.getString(DBConstants.MONSTER__IMAGE_PREFIX);
+    int numPuzzlePieces = rs.getInt(DBConstants.MONSTER__NUM_PUZZLE_PIECES);
+    int minutesToCombinePieces = rs.getInt(DBConstants.MONSTER__MINUTES_TO_COMBINE_PIECES);
+    int maxLevel = rs.getInt(DBConstants.MONSTER__MAX_LEVEL);
 
-    int evolutionMonsterId = rs.getInt(i++);
-    int evolutionCatalystMonsterId = rs.getInt(i++);
-    int minutesToEvolve = rs.getInt(i++);
-    int numCatalystsRequired = rs.getInt(i++);
+    int evolutionMonsterId = rs.getInt(DBConstants.MONSTER__EVOLUTION_MONSTER_ID);
+    int evolutionCatalystMonsterId = rs.getInt(DBConstants.MONSTER__EVOLUTION_CATALYST_MONSTER_ID);
+    int minutesToEvolve = rs.getInt(DBConstants.MONSTER__MINUTES_TO_EVOLVE);
+    int numCatalystsRequired = rs.getInt(DBConstants.MONSTER__NUM_EVOLUTION_CATALYSTS);
 
-    String carrotRecruited = rs.getString(i++);
-    String carrotDefeated = rs.getString(i++);
-    String carrotEvolved = rs.getString(i++);
-    String description = rs.getString(i++);
+    String carrotRecruited = rs.getString(DBConstants.MONSTER__CARROT_RECRUITED);
+    String carrotDefeated = rs.getString(DBConstants.MONSTER__CARROT_DEFEATED);
+    String carrotEvolved = rs.getString(DBConstants.MONSTER__CARROT_EVOLVED);
+    String description = rs.getString(DBConstants.MONSTER__DESCRIPTION);
     
-    int evolutionCost = rs.getInt(i++);
+    int evolutionCost = rs.getInt(DBConstants.MONSTER__EVOLUTION_COST);
     
-    String animationType = rs.getString(i++);
-    int verticalPixelOffset = rs.getInt(i++);
-    String atkSoundFile = rs.getString(i++);
-    int atkSoundAnimationFrame = rs.getInt(i++);
-    int atkAnimationRepeatedFramesStart = rs.getInt(i++);
-    int atkAnimationRepeatedFramesEnd = rs.getInt(i++);
-    String shorterName = rs.getString(i++);
-    float shadowScaleFactor = rs.getFloat(i++);
+    String animationType = rs.getString(DBConstants.MONSTER__ANIMATION_TYPE);
+    int verticalPixelOffset = rs.getInt(DBConstants.MONSTER__VERTICAL_PIXEL_OFFSET);
+    String atkSoundFile = rs.getString(DBConstants.MONSTER__ATK_SOUND_FILE);
+    int atkSoundAnimationFrame = rs.getInt(DBConstants.MONSTER__ATK_SOUND_ANIMATION_FRAME);
+    int atkAnimationRepeatedFramesStart = rs.getInt(DBConstants.MONSTER__ATK_ANIMATION_REPEATED_FRAMES_START);
+    int atkAnimationRepeatedFramesEnd = rs.getInt(DBConstants.MONSTER__ATK_ANIMATION_REPEATED_FRAMES_END);
+    String shorterName = rs.getString(DBConstants.MONSTER__SHORT_NAME);
+    float shadowScaleFactor = rs.getFloat(DBConstants.MONSTER__SHADOW_SCALE_FACTOR);
+    int baseOffensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_OFFENSIVE_SKILL_ID);
+    int baseDefensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_DEFENSIVE_SKILL_ID);
     
     Monster monster = new Monster(id, evolutionGroup, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
@@ -154,7 +155,8 @@ public class MonsterRetrieveUtils {
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
     		description, evolutionCost, animationType, verticalPixelOffset, atkSoundFile,
     		atkSoundAnimationFrame, atkAnimationRepeatedFramesStart,
-    		atkAnimationRepeatedFramesEnd, shorterName, shadowScaleFactor);
+    		atkAnimationRepeatedFramesEnd, shorterName, shadowScaleFactor,
+    		baseOffensiveSkillId, baseDefensiveSkillId);
     
     if (null != animationType) {
     	String newAnimationType = animationType.trim().toUpperCase();

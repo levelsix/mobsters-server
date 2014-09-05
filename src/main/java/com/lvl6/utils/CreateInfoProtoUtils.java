@@ -1472,6 +1472,8 @@ public class CreateInfoProtoUtils {
     }
     
     mpb.setShadowScaleFactor(aMonster.getShadowScaleFactor());
+    mpb.setBaseOffensiveSkillId(aMonster.getBaseOffensiveSkillId());
+    mpb.setBaseDefensiveSkillId(aMonster.getBaseDefensiveSkillId());
     return mpb.build();
   }
 
