@@ -609,10 +609,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int teamSlotNum = rs.getInt(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
     String sourceOfPieces = rs.getString(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES);
     boolean restricted = rs.getBoolean(DBConstants.MONSTER_FOR_USER__RESTRICTED);
+    int offensiveSkillId = rs.getInt(DBConstants.MONSTER_FOR_USER__OFFENSIVE_SKILL_ID);
+    int defensiveSkillId = rs.getInt(DBConstants.MONSTER_FOR_USER__DEFENSIVE_SKILL_ID);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
     		currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
-    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces, restricted);
+    		isComplete, combineStartTime, teamSlotNum, sourceOfPieces, restricted,
+    		offensiveSkillId, defensiveSkillId);
     return userMonster;
     
   }

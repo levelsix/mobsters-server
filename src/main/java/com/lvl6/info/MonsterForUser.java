@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = 1035959159590035087L;
+	private static final long serialVersionUID = 3751497461423196442L;
 	
 	private long id;
 	private int userId;
@@ -20,11 +20,14 @@ public class MonsterForUser implements Serializable {
 	private int teamSlotNum;
 	private String sourceOfPieces;
 	private boolean restricted;
+	private int offensiveSkillId;
+	private int defensiveSkillId;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
 			int currentLvl, int currentHealth, int numPieces, boolean hasAllPieces,
 			boolean isComplete, Date combineStartTime, int teamSlotNum,
-			String sourceOfPieces, boolean restricted) {
+			String sourceOfPieces, boolean restricted, int offensiveSkillId,
+			int defensiveSkillId) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -39,6 +42,8 @@ public class MonsterForUser implements Serializable {
 		this.teamSlotNum = teamSlotNum;
 		this.sourceOfPieces = sourceOfPieces;
 		this.restricted = restricted;
+		this.offensiveSkillId = offensiveSkillId;
+		this.defensiveSkillId = defensiveSkillId;
 	}
 
 	public long getId() {
@@ -149,6 +154,26 @@ public class MonsterForUser implements Serializable {
 		this.restricted = restricted;
 	}
 
+	public int getOffensiveSkillId()
+	{
+		return offensiveSkillId;
+	}
+
+	public void setOffensiveSkillId( int offensiveSkillId )
+	{
+		this.offensiveSkillId = offensiveSkillId;
+	}
+
+	public int getDefensiveSkillId()
+	{
+		return defensiveSkillId;
+	}
+
+	public void setDefensiveSkillId( int defensiveSkillId )
+	{
+		this.defensiveSkillId = defensiveSkillId;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -178,6 +203,10 @@ public class MonsterForUser implements Serializable {
 			+ sourceOfPieces
 			+ ", restricted="
 			+ restricted
+			+ ", offensiveSkillId="
+			+ offensiveSkillId
+			+ ", defensiveSkillId="
+			+ defensiveSkillId
 			+ "]";
 	}
 

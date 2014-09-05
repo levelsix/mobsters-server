@@ -375,7 +375,8 @@ public class MonsterStuffUtils {
   		
   		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
   				currentExp, currentLvl, currentHealth, numPieces, hasAllPieces,
-  				isComplete, combineStartTime, teamSlotNum, sourceOfPieces, false);
+  				isComplete, combineStartTime, teamSlotNum, sourceOfPieces, false,
+  				monzter.getBaseOffensiveSkillId(), monzter.getBaseDefensiveSkillId());
   		returnList.add(mfu);
   	}
   	
@@ -510,9 +511,9 @@ public class MonsterStuffUtils {
   }
   
   public static MonsterForUser createNewUserMonster(int userId, int numPieces,
-  		Monster monster, Date now, boolean hasAllPieces, boolean isComplete) {
+  		Monster monzter, Date now, boolean hasAllPieces, boolean isComplete) {
   	
-  	int monsterId = monster.getId();
+  	int monsterId = monzter.getId();
   	
   	Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
   			.getMonsterLevelInfoForMonsterId(monsterId);
@@ -527,7 +528,8 @@ public class MonsterStuffUtils {
   	String sourceOfPieces = "";
   	MonsterForUser mfu = new MonsterForUser(id, userId, monsterId, currentExp,
   			currentLvl, currentHealth, numPieces, hasAllPieces, isComplete, now,
-  			teamSlotNum, sourceOfPieces, false);
+  			teamSlotNum, sourceOfPieces, false, monzter.getBaseOffensiveSkillId(),
+  			monzter.getBaseDefensiveSkillId());
   	
   	return mfu;
   }

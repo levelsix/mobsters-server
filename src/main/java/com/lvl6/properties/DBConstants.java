@@ -362,6 +362,8 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
   public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
   public static final String MONSTER_FOR_USER__RESTRICTED = "restricted";
+  public static final String MONSTER_FOR_USER__OFFENSIVE_SKILL_ID = "offensive_skill_id";
+  public static final String MONSTER_FOR_USER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
   
   /*MONSTER FOR USER DELETED*/
   public static final String MONSTER_FOR_USER_DELETED__ID = "monster_for_user_id";

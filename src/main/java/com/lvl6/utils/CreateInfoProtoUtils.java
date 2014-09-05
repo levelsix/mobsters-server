@@ -1536,6 +1536,8 @@ public class CreateInfoProtoUtils {
 
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     fumpb.setIsRestrictd(mfu.isRestricted());
+    fumpb.setOffensiveSkillId(mfu.getOffensiveSkillId());
+    fumpb.setDefensiveSkillId(mfu.getDefensiveSkillId());
     return fumpb.build();
   }
 
