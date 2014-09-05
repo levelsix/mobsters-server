@@ -153,17 +153,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDB(User user, StructureForUser userStruct,
   		Timestamp timeOfSpeedup, Structure struct, int gemCost, Map<String, Integer> money) {
 
-  	int gemChange = -1 * gemCost;
-  	//update user gems
-  	if (!user.updateRelativeGemsNaive(gemChange)) {
-  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
-  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
-  		return false;
-  	} else {
-  		if (0 != gemChange) {
-  			money.put(MiscMethods.gems, gemChange);
-  		}
-  	}
+    int gemChange = -1 * gemCost;
+    if (0 != gemChange) {
+      //update user gems
+      if (!user.updateRelativeGemsNaive(gemChange)) {
+        log.error("problem with using diamonds to finish norm struct build. userStruct=" +
+            userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+        return false;
+      } else {
+          money.put(MiscMethods.gems, gemChange);
+      }
+    }
   	
   	//the last retrieved time has a value of timeOfSpeedup
   	

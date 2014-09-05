@@ -542,13 +542,15 @@ public class DBConstants {
   public static final String TASK_STAGE_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
   public static final String TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID = "task_stage_monster_id";
-  //not needed since task stage monster now has monster_type
+  //monster_type not needed here since task stage monster now has monster_type
   public static final String TASK_STAGE_HISTORY__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String TASK_STAGE_HISTORY__CASH_GAINED = "cash_gained";
   public static final String TASK_STAGE_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
+  public static final String TASK_STAGE_HISTORY__MONSTER_ID_DROPPED = "monster_id_dropped";
+  public static final String TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL = "monster_dropped_lvl";
   
   /*TOURNAMENT EVENT*/
   public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
@@ -668,6 +670,37 @@ public class DBConstants {
   
   /**************CONFIGURATION DATA TABLES*****************************/
   
+  public static final String MONSTER__ID = GENERIC__ID;
+  public static final String MONSTER__EVOLUTION_GROUP = "evolution_group";
+  public static final String MONSTER__MONSTER_GROUP = "monster_group";
+  public static final String MONSTER__QUALITY = "quality";
+  public static final String MONSTER__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER__DISPLAY_NAME = "display_name";
+  public static final String MONSTER__ELEMENT = "element";
+  public static final String MONSTER__IMAGE_PREFIX = "image_prefix";
+  public static final String MONSTER__NUM_PUZZLE_PIECES = "num_puzzle_pieces";
+  public static final String MONSTER__MINUTES_TO_COMBINE_PIECES = "minutes_to_combine_pieces"; 
+  public static final String MONSTER__MAX_LEVEL = "max_level";
+  public static final String MONSTER__EVOLUTION_MONSTER_ID = "evolution_monster_id";
+  public static final String MONSTER__EVOLUTION_CATALYST_MONSTER_ID = "evolution_catalyst_monster_id";
+  public static final String MONSTER__MINUTES_TO_EVOLVE = "minutes_to_evolve";
+  public static final String MONSTER__NUM_EVOLUTION_CATALYSTS = "num_evolution_catalysts";
+  public static final String MONSTER__CARROT_RECRUITED = "carrot_recruited";
+  public static final String MONSTER__CARROT_DEFEATED = "carrot_defeated";
+  public static final String MONSTER__CARROT_EVOLVED = "carrot_evolved";
+  public static final String MONSTER__DESCRIPTION = "description";
+  public static final String MONSTER__EVOLUTION_COST = "evolution_cost";
+  public static final String MONSTER__ANIMATION_TYPE = "animation_type";
+  public static final String MONSTER__VERTICAL_PIXEL_OFFSET = "vertical_pixel_offset";
+  public static final String MONSTER__ATK_SOUND_FILE = "atk_sound_file";
+  public static final String MONSTER__ATK_SOUND_ANIMATION_FRAME = "atk_sound_animation_frame";
+  public static final String MONSTER__ATK_ANIMATION_REPEATED_FRAMES_START = "atk_animation_repeated_frames_start";
+  public static final String MONSTER__ATK_ANIMATION_REPEATED_FRAMES_END = "atk_animation_repeated_frames_end";
+  public static final String MONSTER__SHORT_NAME = "short_name";
+  public static final String MONSTER__SHADOW_SCALE_FACTOR = "shadow_scale_factor";
+  public static final String MONSTER__BASE_OFFENSIVE_SKILL_ID = "base_offensive_skill_id";
+  public static final String MONSTER__BASE_DEFENSIVE_SKILL_ID = "base_defensive_skill_id";
+  
   public static final String SKILL__ID = GENERIC__ID;
   public static final String SKILL__NAME = "name";
   public static final String SKILL__ORB_COST = "orb_cost";
@@ -680,6 +713,7 @@ public class DBConstants {
   public static final String SKILL_PROPERTY__NAME = "name";
   public static final String SKILL_PROPERTY__VALUE = "value";
   public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
+  public static final String SKILL_PROPERTY__SHORT_NAME = "short_name";
   
   public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
   public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
@@ -688,5 +722,22 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__ELEMENT = "element";
   public static final String TASK_MAP_ELEMENT__IS_BOSS = "is_boss";
   public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
+
+  public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
+  public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
+  public static final String TASK_STAGE_MONSTER__MONSTER_ID = "monster_id";
+  public static final String TASK_STAGE_MONSTER__MONSTER_TYPE = "monster_type";
+  public static final String TASK_STAGE_MONSTER__EXP_REWARD = "exp_reward";
+  public static final String TASK_STAGE_MONSTER__MIN_CASH_DROP = "min_cash_drop";
+  public static final String TASK_STAGE_MONSTER__MAX_CASH_DROP = "max_cash_drop";
+  public static final String TASK_STAGE_MONSTER__MIN_OIL_DROP = "min_oil_drop";
+  public static final String TASK_STAGE_MONSTER__MAX_OIL_DROP = "max_oil_drop";
+  public static final String TASK_STAGE_MONSTER__PUZZLE_PIECE_DROP_RATE = "puzzle_piece_drop_rate";
+  public static final String TASK_STAGE_MONSTER__LEVEL = "level";
+  public static final String TASK_STAGE_MONSTER__CHANCE_TO_APPEAR = "chance_to_appear";
+  public static final String TASK_STAGE_MONSTER__DMG_MULTIPLIER = "dmg_multiplier";
+  public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
+  public static final String TASK_STAGE_MONSTER__MONSTER_DROP_LVL = "monster_drop_lvl";
+  public static final String TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
   
 }

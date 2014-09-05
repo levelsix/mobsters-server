@@ -104,7 +104,6 @@ import com.lvl6.utils.DBConnection;
   
   
   private static TaskStageForUser convertRSRowToUserTask(ResultSet rs) throws SQLException {
-    int i = 1;
     long id = rs.getLong(DBConstants.TASK_STAGE_FOR_USER__ID);
     long taskForUserId = rs.getLong(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID);
     int stageNum = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM);
@@ -116,7 +115,8 @@ import com.lvl6.utils.DBConnection;
     boolean monsterPieceDropped = rs.getBoolean(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED);
     int itemIdDropped = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED);
     
-    return new TaskStageForUser(id, taskForUserId, stageNum, tsmId, monsterType,
-    		expGained, cashGained, oilGained, monsterPieceDropped, itemIdDropped);
+    return new TaskStageForUser(id, taskForUserId, stageNum, tsmId,
+    	monsterType, expGained, cashGained, oilGained, monsterPieceDropped,
+    	itemIdDropped);
   }
 }

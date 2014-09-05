@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = -8159939137604127481L;
+	private static final long serialVersionUID = 556916370155015759L;
 	
 	private long id;
 	private long userTaskId;
@@ -116,13 +116,29 @@ public class TaskStageForUser implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
-				+ ", stageNum=" + stageNum + ", taskStageMonsterId="
-				+ taskStageMonsterId + ", monsterType=" + monsterType + ", expGained="
-				+ expGained + ", cashGained=" + cashGained + ", oilGained=" + oilGained
-				+ ", monsterPieceDropped=" + monsterPieceDropped + ", itemIdDropped="
-				+ itemIdDropped + "]";
+	public String toString()
+	{
+		return "TaskStageForUser [id="
+			+ id
+			+ ", userTaskId="
+			+ userTaskId
+			+ ", stageNum="
+			+ stageNum
+			+ ", taskStageMonsterId="
+			+ taskStageMonsterId
+			+ ", monsterType="
+			+ monsterType
+			+ ", expGained="
+			+ expGained
+			+ ", cashGained="
+			+ cashGained
+			+ ", oilGained="
+			+ oilGained
+			+ ", monsterPieceDropped="
+			+ monsterPieceDropped
+			+ ", itemIdDropped="
+			+ itemIdDropped
+			+ "]";
 	}
-	
+
 }

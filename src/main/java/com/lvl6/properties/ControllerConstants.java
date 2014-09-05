@@ -11,6 +11,7 @@ public class ControllerConstants {
 	public static final float GEMS_PER_RESOURCE = 0.001F;
 	public static final float GEMS_PER_DOLLAR = 10f;//client doesn't need this
 	public static final float MINUTES_PER_GEM = 10f;
+	public static final Integer MAX_MINUTES_FOR_FREE_SPEED_UP = 5;
 	
 	//this multiplies with the cost to heal all monsters on user's battle team
 	//BATTLE, DUNGEON, TASK

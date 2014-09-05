@@ -266,7 +266,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
   		Map<Integer, Integer> monsterIdToNumPieces) {
   	//keep track of how many pieces dropped and by which task stage monster
-  	Map<Integer, Integer> taskStageMonsterIdToQuantity =
+  	Map<Integer, Integer> tsmIdToQuantity =
   			new HashMap<Integer, Integer>();
   	
   	
@@ -274,13 +274,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Long> userTaskStageId = new ArrayList<Long>();
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
-  	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
+  	List<Integer> tsmIdList = new ArrayList<Integer>();
   	List<String> monsterTypes = new ArrayList<String>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Integer> oilGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
+  	List<Integer> monsterIdDrops = new ArrayList<Integer>();
   	
   	for (int i = 0; i < tsfuList.size(); i++) {
   		TaskStageForUser tsfu = tsfuList.get(i);
@@ -288,8 +289,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		userTaskId.add(tsfu.getUserTaskId());
   		stageNum.add(tsfu.getStageNum());
   		
-  		int taskStageMonsterId = tsfu.getTaskStageMonsterId();
-  		taskStageMonsterIdList.add(taskStageMonsterId);
+  		int tsmId = tsfu.getTaskStageMonsterId();
+  		tsmIdList.add(tsmId);
   		monsterTypes.add(tsfu.getMonsterType());
   		expGained.add(tsfu.getExpGained());
   		cashGained.add(tsfu.getCashGained());
@@ -297,6 +298,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
+  		
+  		monsterIdDrops.add(
+  			TaskStageMonsterRetrieveUtils.getMonsterIdDropForId(
+  				tsmId));
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces
@@ -306,20 +311,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//since monster piece dropped, update our current stats on monster pieces
   		//this was done under the assumption that one task stage could have
   		//more than one task stage monster (otheriwse only the else case would execute)
-  		if (taskStageMonsterIdToQuantity.containsKey(taskStageMonsterId)) {
+  		if (tsmIdToQuantity.containsKey(tsmId)) {
   			//saw this task stage monster id before, increment quantity
-  			int quantity = 1 + taskStageMonsterIdToQuantity.get(taskStageMonsterId);
-  			taskStageMonsterIdToQuantity.put(taskStageMonsterId, quantity);
+  			int quantity = 1 + tsmIdToQuantity.get(tsmId);
+  			tsmIdToQuantity.put(tsmId, quantity);
   			
   		} else {
   			//haven't seen this task stage monster id yet, so start off at 1
-  			taskStageMonsterIdToQuantity.put(taskStageMonsterId, 1);
+  			tsmIdToQuantity.put(tsmId, 1);
   		}
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, oilGained, monsterPieceDropped, itemIdDropped);
+  			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped, monsterIdDrops);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
   	
@@ -329,14 +334,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	//retrieve those task stage monsters. aggregate the quantities by monster id
   	//assume different task stage monsters can be the same monster
-  	Collection<Integer> taskStageMonsterIds = taskStageMonsterIdToQuantity.keySet();
+  	Collection<Integer> tsmIds = tsmIdToQuantity.keySet();
   	Map<Integer, TaskStageMonster> monstersThatDropped = TaskStageMonsterRetrieveUtils
-  			.getTaskStageMonstersForIds(taskStageMonsterIds);
+  			.getTaskStageMonstersForIds(tsmIds);
   	
-  	for (int taskStageMonsterId : taskStageMonsterIds) {
-  		TaskStageMonster monsterThatDropped = monstersThatDropped.get(taskStageMonsterId);
-  		int monsterId = monsterThatDropped.getMonsterId();
-  		int numPiecesDroppedForMonster = taskStageMonsterIdToQuantity.get(taskStageMonsterId); 
+  	for (int tsmId : tsmIds) {
+  		TaskStageMonster monsterThatDropped = monstersThatDropped.get(tsmId);
+  		//int monsterId = monsterThatDropped.getMonsterId();
+  		//task stage monster can drop something other than itself
+  		int monsterId = monsterThatDropped.getMonsterIdDrop();
+  		int numPiecesDroppedForMonster = tsmIdToQuantity.get(tsmId); 
   		
   		//aggregate pieces based on monsterId, since assuming different task
   		//stage monsters can be the same monster

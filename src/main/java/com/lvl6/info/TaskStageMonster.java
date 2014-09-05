@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
 	
-	private static final long serialVersionUID = -9377292039646784L;
+	private static final long serialVersionUID = -8489223987733342120L;
 	
 	private int id;
 	private int stageId;
@@ -20,27 +20,47 @@ public class TaskStageMonster implements Serializable {
 	private int level;
 	private float chanceToAppear;
 	private float dmgMultiplier;
+	private int monsterIdDrop;
+	private int monsterDropLvl; //the level of the monster that is dropped
+	private int defensiveSkillId;
   
 	private Random rand;
 
-	public TaskStageMonster(int id, int stageId, int monsterId, String monsterType,
-		int expReward, int minCashDrop, int maxCashDrop, int minOilDrop,
-		int maxOilDrop, float puzzlePieceDropRate, int level,
-		float chanceToAppear, float dmgMultiplier) {
-	super();
-	this.id = id;
-	this.stageId = stageId;
-	this.monsterId = monsterId;
-	this.monsterType = monsterType;
-	this.expReward = expReward;
-	this.minCashDrop = minCashDrop;
-	this.maxCashDrop = maxCashDrop;
-	this.minOilDrop = minOilDrop;
-	this.maxOilDrop = maxOilDrop;
-	this.puzzlePieceDropRate = puzzlePieceDropRate;
-	this.level = level;
-	this.chanceToAppear = chanceToAppear;
-	this.dmgMultiplier = dmgMultiplier;
+	public TaskStageMonster(
+		int id,
+		int stageId,
+		int monsterId,
+		String monsterType,
+		int expReward,
+		int minCashDrop,
+		int maxCashDrop,
+		int minOilDrop,
+		int maxOilDrop,
+		float puzzlePieceDropRate,
+		int level,
+		float chanceToAppear,
+		float dmgMultiplier,
+		int monsterIdDrop,
+		int monsterDropLvl,
+		int defensiveSkillId)
+	{
+		super();
+		this.id = id;
+		this.stageId = stageId;
+		this.monsterId = monsterId;
+		this.monsterType = monsterType;
+		this.expReward = expReward;
+		this.minCashDrop = minCashDrop;
+		this.maxCashDrop = maxCashDrop;
+		this.minOilDrop = minOilDrop;
+		this.maxOilDrop = maxOilDrop;
+		this.puzzlePieceDropRate = puzzlePieceDropRate;
+		this.level = level;
+		this.chanceToAppear = chanceToAppear;
+		this.dmgMultiplier = dmgMultiplier;
+		this.monsterIdDrop = monsterIdDrop;
+		this.monsterDropLvl = monsterDropLvl;
+		this.defensiveSkillId = defensiveSkillId;
 	}
 
 //covenience methods--------------------------------------------------------
@@ -182,45 +202,81 @@ public class TaskStageMonster implements Serializable {
   }
 
   public float getDmgMultiplier()
-{
-	return dmgMultiplier;
-}
+  {
+	  return dmgMultiplier;
+  }
 
-public void setDmgMultiplier( float dmgMultiplier )
-{
-	this.dmgMultiplier = dmgMultiplier;
-}
+  public void setDmgMultiplier( float dmgMultiplier )
+  {
+	  this.dmgMultiplier = dmgMultiplier;
+  }
 
-@Override
-public String toString()
-{
-	return "TaskStageMonster [id="
-		+ id
-		+ ", stageId="
-		+ stageId
-		+ ", monsterId="
-		+ monsterId
-		+ ", monsterType="
-		+ monsterType
-		+ ", expReward="
-		+ expReward
-		+ ", minCashDrop="
-		+ minCashDrop
-		+ ", maxCashDrop="
-		+ maxCashDrop
-		+ ", minOilDrop="
-		+ minOilDrop
-		+ ", maxOilDrop="
-		+ maxOilDrop
-		+ ", puzzlePieceDropRate="
-		+ puzzlePieceDropRate
-		+ ", level="
-		+ level
-		+ ", chanceToAppear="
-		+ chanceToAppear
-		+ ", dmgMultiplier="
-		+ dmgMultiplier
-		+ "]";
-}
+  public int getMonsterIdDrop()
+  {
+	  return monsterIdDrop;
+  }
+
+  public void setMonsterIdDrop( int monsterIdDrop )
+  {
+	  this.monsterIdDrop = monsterIdDrop;
+  }
+
+  public int getMonsterDropLvl()
+  {
+	  return monsterDropLvl;
+  }
+
+  public void setMonsterDropLvl( int monsterDropLvl )
+  {
+	  this.monsterDropLvl = monsterDropLvl;
+  }
+
+  public int getDefensiveSkillId()
+  {
+	  return defensiveSkillId;
+  }
+
+  public void setDefensiveSkillId( int defensiveSkillId )
+  {
+	  this.defensiveSkillId = defensiveSkillId;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "TaskStageMonster [id="
+		  + id
+		  + ", stageId="
+		  + stageId
+		  + ", monsterId="
+		  + monsterId
+		  + ", monsterType="
+		  + monsterType
+		  + ", expReward="
+		  + expReward
+		  + ", minCashDrop="
+		  + minCashDrop
+		  + ", maxCashDrop="
+		  + maxCashDrop
+		  + ", minOilDrop="
+		  + minOilDrop
+		  + ", maxOilDrop="
+		  + maxOilDrop
+		  + ", puzzlePieceDropRate="
+		  + puzzlePieceDropRate
+		  + ", level="
+		  + level
+		  + ", chanceToAppear="
+		  + chanceToAppear
+		  + ", dmgMultiplier="
+		  + dmgMultiplier
+		  + ", monsterIdDrop="
+		  + monsterIdDrop
+		  + ", monsterDropLvl="
+		  + monsterDropLvl
+		  + ", defensiveSkillId="
+		  + defensiveSkillId
+		  + "]";
+  }
 
 }

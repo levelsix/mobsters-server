@@ -1472,6 +1472,8 @@ public class CreateInfoProtoUtils {
     }
     
     mpb.setShadowScaleFactor(aMonster.getShadowScaleFactor());
+    mpb.setBaseOffensiveSkillId(aMonster.getBaseOffensiveSkillId());
+    mpb.setBaseDefensiveSkillId(aMonster.getBaseDefensiveSkillId());
     return mpb.build();
   }
 
@@ -2026,6 +2028,11 @@ public class CreateInfoProtoUtils {
 	  //TODO: Account for non number values
 	  sppb.setSkillValue(property.getValue());
 	  
+	  str = property.getShortName();
+	  if (null != str) {
+		  sppb.setShorterName(str);
+	  }
+	  
 	  return sppb.build();
   }
   
@@ -2513,6 +2520,7 @@ public class CreateInfoProtoUtils {
     int tsmMonsterId = tsm.getMonsterId();
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+    bldr.setTsmId(tsm.getId());
     bldr.setMonsterId(tsmMonsterId);
     String tsmMonsterType = tsm.getMonsterType(); 
     try {
@@ -2523,10 +2531,18 @@ public class CreateInfoProtoUtils {
     }
     bldr.setCashReward(cashReward);
     bldr.setOilReward(oilReward);
-    bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
     bldr.setDmgMultiplier(tsm.getDmgMultiplier());
+    
+    bldr.setPuzzlePieceDropped(pieceDropped);
+    if ( tsm.getMonsterIdDrop() > 0 ) {
+    	bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+    }
+    
+    if (tsm.getDefensiveSkillId() > 0) {
+    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    }
 
     int tsmId = tsm.getId();
     if (tsmIdToItemId.containsKey(tsmId)) {
@@ -2563,6 +2579,7 @@ public class CreateInfoProtoUtils {
 	  }
 
 	  TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+	  bldr.setTsmId(tsmId);
 	  bldr.setMonsterId(tsmMonsterId);
 	  String tsmMonsterType = tsfu.getMonsterType(); 
 	  try {
@@ -2588,6 +2605,14 @@ public class CreateInfoProtoUtils {
 					  tsfu);
 		  }
 		  bldr.setItemId(itemId);
+	  }
+	  
+	  if (tsm.getMonsterIdDrop() > 0) {
+		  bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+	  }
+
+	  if (tsm.getDefensiveSkillId() > 0) {
+		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
 	  }
 
 	  return bldr.build();

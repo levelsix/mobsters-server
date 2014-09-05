@@ -601,6 +601,9 @@ public class MiscMethods {
     mapConstants.setMapTotalHeight(ControllerConstants.TASK_MAP__TOTAL_HEIGHT);
     mapConstants.setMapTotalWidth(ControllerConstants.TASK_MAP__TOTAL_WIDTH);
     cb.setTaskMapConstants(mapConstants.build());
+    
+    cb.setMaxMinutesForFreeSpeedUp(ControllerConstants.MAX_MINUTES_FOR_FREE_SPEED_UP);
+    
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)

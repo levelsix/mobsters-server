@@ -2093,6 +2093,10 @@ public final class TaskProto {
   public interface TaskStageMonsterProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
+    // optional int32 tsmId = 11;
+    boolean hasTsmId();
+    int getTsmId();
+    
     // optional int32 monsterId = 1;
     boolean hasMonsterId();
     int getMonsterId();
@@ -2117,6 +2121,10 @@ public final class TaskProto {
     boolean hasPuzzlePieceDropped();
     boolean getPuzzlePieceDropped();
     
+    // optional int32 puzzlePieceMonsterId = 10;
+    boolean hasPuzzlePieceMonsterId();
+    int getPuzzlePieceMonsterId();
+    
     // optional int32 level = 6;
     boolean hasLevel();
     int getLevel();
@@ -2128,6 +2136,10 @@ public final class TaskProto {
     // optional float dmgMultiplier = 9;
     boolean hasDmgMultiplier();
     float getDmgMultiplier();
+    
+    // optional int32 defensiveSkillId = 12;
+    boolean hasDefensiveSkillId();
+    int getDefensiveSkillId();
   }
   public static final class TaskStageMonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -2230,11 +2242,21 @@ public final class TaskProto {
     }
     
     private int bitField0_;
+    // optional int32 tsmId = 11;
+    public static final int TSMID_FIELD_NUMBER = 11;
+    private int tsmId_;
+    public boolean hasTsmId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getTsmId() {
+      return tsmId_;
+    }
+    
     // optional int32 monsterId = 1;
     public static final int MONSTERID_FIELD_NUMBER = 1;
     private int monsterId_;
     public boolean hasMonsterId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     public int getMonsterId() {
       return monsterId_;
@@ -2244,7 +2266,7 @@ public final class TaskProto {
     public static final int MONSTERTYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType monsterType_;
     public boolean hasMonsterType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType getMonsterType() {
       return monsterType_;
@@ -2254,7 +2276,7 @@ public final class TaskProto {
     public static final int EXPREWARD_FIELD_NUMBER = 3;
     private int expReward_;
     public boolean hasExpReward() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getExpReward() {
       return expReward_;
@@ -2264,7 +2286,7 @@ public final class TaskProto {
     public static final int CASHREWARD_FIELD_NUMBER = 4;
     private int cashReward_;
     public boolean hasCashReward() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getCashReward() {
       return cashReward_;
@@ -2274,7 +2296,7 @@ public final class TaskProto {
     public static final int OILREWARD_FIELD_NUMBER = 8;
     private int oilReward_;
     public boolean hasOilReward() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getOilReward() {
       return oilReward_;
@@ -2284,17 +2306,27 @@ public final class TaskProto {
     public static final int PUZZLEPIECEDROPPED_FIELD_NUMBER = 5;
     private boolean puzzlePieceDropped_;
     public boolean hasPuzzlePieceDropped() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public boolean getPuzzlePieceDropped() {
       return puzzlePieceDropped_;
+    }
+    
+    // optional int32 puzzlePieceMonsterId = 10;
+    public static final int PUZZLEPIECEMONSTERID_FIELD_NUMBER = 10;
+    private int puzzlePieceMonsterId_;
+    public boolean hasPuzzlePieceMonsterId() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public int getPuzzlePieceMonsterId() {
+      return puzzlePieceMonsterId_;
     }
     
     // optional int32 level = 6;
     public static final int LEVEL_FIELD_NUMBER = 6;
     private int level_;
     public boolean hasLevel() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getLevel() {
       return level_;
@@ -2304,7 +2336,7 @@ public final class TaskProto {
     public static final int ITEMID_FIELD_NUMBER = 7;
     private int itemId_;
     public boolean hasItemId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public int getItemId() {
       return itemId_;
@@ -2314,22 +2346,35 @@ public final class TaskProto {
     public static final int DMGMULTIPLIER_FIELD_NUMBER = 9;
     private float dmgMultiplier_;
     public boolean hasDmgMultiplier() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     public float getDmgMultiplier() {
       return dmgMultiplier_;
     }
     
+    // optional int32 defensiveSkillId = 12;
+    public static final int DEFENSIVESKILLID_FIELD_NUMBER = 12;
+    private int defensiveSkillId_;
+    public boolean hasDefensiveSkillId() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public int getDefensiveSkillId() {
+      return defensiveSkillId_;
+    }
+    
     private void initFields() {
+      tsmId_ = 0;
       monsterId_ = 0;
       monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
       expReward_ = 0;
       cashReward_ = 0;
       oilReward_ = 0;
       puzzlePieceDropped_ = false;
+      puzzlePieceMonsterId_ = 0;
       level_ = 0;
       itemId_ = 0;
       dmgMultiplier_ = 0F;
+      defensiveSkillId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2343,32 +2388,41 @@ public final class TaskProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(1, monsterId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(2, monsterType_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(3, expReward_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(4, cashReward_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(5, puzzlePieceDropped_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(6, level_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(7, itemId_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(8, oilReward_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeFloat(9, dmgMultiplier_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(10, puzzlePieceMonsterId_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(11, tsmId_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(12, defensiveSkillId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2379,41 +2433,53 @@ public final class TaskProto {
       if (size != -1) return size;
     
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, monsterId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, monsterType_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, expReward_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, cashReward_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, puzzlePieceDropped_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, level_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, itemId_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(8, oilReward_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(9, dmgMultiplier_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, puzzlePieceMonsterId_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, tsmId_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, defensiveSkillId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2539,24 +2605,30 @@ public final class TaskProto {
       
       public Builder clear() {
         super.clear();
-        monsterId_ = 0;
+        tsmId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
+        monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        expReward_ = 0;
+        monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
         bitField0_ = (bitField0_ & ~0x00000004);
-        cashReward_ = 0;
+        expReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        oilReward_ = 0;
+        cashReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        puzzlePieceDropped_ = false;
+        oilReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        level_ = 0;
+        puzzlePieceDropped_ = false;
         bitField0_ = (bitField0_ & ~0x00000040);
-        itemId_ = 0;
+        puzzlePieceMonsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        dmgMultiplier_ = 0F;
+        level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        dmgMultiplier_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        defensiveSkillId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
       
@@ -2598,39 +2670,51 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.monsterId_ = monsterId_;
+        result.tsmId_ = tsmId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.monsterType_ = monsterType_;
+        result.monsterId_ = monsterId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.expReward_ = expReward_;
+        result.monsterType_ = monsterType_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.cashReward_ = cashReward_;
+        result.expReward_ = expReward_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.oilReward_ = oilReward_;
+        result.cashReward_ = cashReward_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.puzzlePieceDropped_ = puzzlePieceDropped_;
+        result.oilReward_ = oilReward_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.level_ = level_;
+        result.puzzlePieceDropped_ = puzzlePieceDropped_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.itemId_ = itemId_;
+        result.puzzlePieceMonsterId_ = puzzlePieceMonsterId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
+        result.level_ = level_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
         result.dmgMultiplier_ = dmgMultiplier_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.defensiveSkillId_ = defensiveSkillId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2647,6 +2731,9 @@ public final class TaskProto {
       
       public Builder mergeFrom(com.lvl6.proto.TaskProto.TaskStageMonsterProto other) {
         if (other == com.lvl6.proto.TaskProto.TaskStageMonsterProto.getDefaultInstance()) return this;
+        if (other.hasTsmId()) {
+          setTsmId(other.getTsmId());
+        }
         if (other.hasMonsterId()) {
           setMonsterId(other.getMonsterId());
         }
@@ -2665,6 +2752,9 @@ public final class TaskProto {
         if (other.hasPuzzlePieceDropped()) {
           setPuzzlePieceDropped(other.getPuzzlePieceDropped());
         }
+        if (other.hasPuzzlePieceMonsterId()) {
+          setPuzzlePieceMonsterId(other.getPuzzlePieceMonsterId());
+        }
         if (other.hasLevel()) {
           setLevel(other.getLevel());
         }
@@ -2673,6 +2763,9 @@ public final class TaskProto {
         }
         if (other.hasDmgMultiplier()) {
           setDmgMultiplier(other.getDmgMultiplier());
+        }
+        if (other.hasDefensiveSkillId()) {
+          setDefensiveSkillId(other.getDefensiveSkillId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2706,7 +2799,7 @@ public final class TaskProto {
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               monsterId_ = input.readInt32();
               break;
             }
@@ -2716,44 +2809,59 @@ public final class TaskProto {
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
-                bitField0_ |= 0x00000002;
+                bitField0_ |= 0x00000004;
                 monsterType_ = value;
               }
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               expReward_ = input.readInt32();
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               cashReward_ = input.readInt32();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               puzzlePieceDropped_ = input.readBool();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000100;
               level_ = input.readInt32();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000200;
               itemId_ = input.readInt32();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               oilReward_ = input.readInt32();
               break;
             }
             case 77: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000400;
               dmgMultiplier_ = input.readFloat();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              puzzlePieceMonsterId_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000001;
+              tsmId_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              defensiveSkillId_ = input.readInt32();
               break;
             }
           }
@@ -2762,22 +2870,43 @@ public final class TaskProto {
       
       private int bitField0_;
       
+      // optional int32 tsmId = 11;
+      private int tsmId_ ;
+      public boolean hasTsmId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getTsmId() {
+        return tsmId_;
+      }
+      public Builder setTsmId(int value) {
+        bitField0_ |= 0x00000001;
+        tsmId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTsmId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tsmId_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // optional int32 monsterId = 1;
       private int monsterId_ ;
       public boolean hasMonsterId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       public int getMonsterId() {
         return monsterId_;
       }
       public Builder setMonsterId(int value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         monsterId_ = value;
         onChanged();
         return this;
       }
       public Builder clearMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         monsterId_ = 0;
         onChanged();
         return this;
@@ -2786,7 +2915,7 @@ public final class TaskProto {
       // optional .com.lvl6.proto.TaskStageMonsterProto.MonsterType monsterType = 2;
       private com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
       public boolean hasMonsterType() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType getMonsterType() {
         return monsterType_;
@@ -2795,13 +2924,13 @@ public final class TaskProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         monsterType_ = value;
         onChanged();
         return this;
       }
       public Builder clearMonsterType() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
         onChanged();
         return this;
@@ -2810,19 +2939,19 @@ public final class TaskProto {
       // optional int32 expReward = 3;
       private int expReward_ ;
       public boolean hasExpReward() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getExpReward() {
         return expReward_;
       }
       public Builder setExpReward(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         expReward_ = value;
         onChanged();
         return this;
       }
       public Builder clearExpReward() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         expReward_ = 0;
         onChanged();
         return this;
@@ -2831,19 +2960,19 @@ public final class TaskProto {
       // optional int32 cashReward = 4;
       private int cashReward_ ;
       public boolean hasCashReward() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getCashReward() {
         return cashReward_;
       }
       public Builder setCashReward(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         cashReward_ = value;
         onChanged();
         return this;
       }
       public Builder clearCashReward() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         cashReward_ = 0;
         onChanged();
         return this;
@@ -2852,19 +2981,19 @@ public final class TaskProto {
       // optional int32 oilReward = 8;
       private int oilReward_ ;
       public boolean hasOilReward() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getOilReward() {
         return oilReward_;
       }
       public Builder setOilReward(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         oilReward_ = value;
         onChanged();
         return this;
       }
       public Builder clearOilReward() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         oilReward_ = 0;
         onChanged();
         return this;
@@ -2873,20 +3002,41 @@ public final class TaskProto {
       // optional bool puzzlePieceDropped = 5;
       private boolean puzzlePieceDropped_ ;
       public boolean hasPuzzlePieceDropped() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public boolean getPuzzlePieceDropped() {
         return puzzlePieceDropped_;
       }
       public Builder setPuzzlePieceDropped(boolean value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         puzzlePieceDropped_ = value;
         onChanged();
         return this;
       }
       public Builder clearPuzzlePieceDropped() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         puzzlePieceDropped_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 puzzlePieceMonsterId = 10;
+      private int puzzlePieceMonsterId_ ;
+      public boolean hasPuzzlePieceMonsterId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getPuzzlePieceMonsterId() {
+        return puzzlePieceMonsterId_;
+      }
+      public Builder setPuzzlePieceMonsterId(int value) {
+        bitField0_ |= 0x00000080;
+        puzzlePieceMonsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPuzzlePieceMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        puzzlePieceMonsterId_ = 0;
         onChanged();
         return this;
       }
@@ -2894,19 +3044,19 @@ public final class TaskProto {
       // optional int32 level = 6;
       private int level_ ;
       public boolean hasLevel() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getLevel() {
         return level_;
       }
       public Builder setLevel(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000100;
         level_ = value;
         onChanged();
         return this;
       }
       public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000100);
         level_ = 0;
         onChanged();
         return this;
@@ -2915,19 +3065,19 @@ public final class TaskProto {
       // optional int32 itemId = 7;
       private int itemId_ ;
       public boolean hasItemId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getItemId() {
         return itemId_;
       }
       public Builder setItemId(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000200;
         itemId_ = value;
         onChanged();
         return this;
       }
       public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000200);
         itemId_ = 0;
         onChanged();
         return this;
@@ -2936,20 +3086,41 @@ public final class TaskProto {
       // optional float dmgMultiplier = 9;
       private float dmgMultiplier_ ;
       public boolean hasDmgMultiplier() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public float getDmgMultiplier() {
         return dmgMultiplier_;
       }
       public Builder setDmgMultiplier(float value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000400;
         dmgMultiplier_ = value;
         onChanged();
         return this;
       }
       public Builder clearDmgMultiplier() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000400);
         dmgMultiplier_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 defensiveSkillId = 12;
+      private int defensiveSkillId_ ;
+      public boolean hasDefensiveSkillId() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public int getDefensiveSkillId() {
+        return defensiveSkillId_;
+      }
+      public Builder setDefensiveSkillId(int value) {
+        bitField0_ |= 0x00000800;
+        defensiveSkillId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDefensiveSkillId() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        defensiveSkillId_ = 0;
         onChanged();
         return this;
       }
@@ -5032,30 +5203,32 @@ public final class TaskProto {
       "\023\n\013boardHeight\030\t \001(\005\022\027\n\017groundImgPrefix\030",
       "\n \001(\t\"b\n\024MinimumUserTaskProto\022\016\n\006userId\030" +
       "\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030" +
-      "\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\263\002\n\025TaskStageM" +
-      "onsterProto\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monste" +
-      "rType\030\002 \001(\01621.com.lvl6.proto.TaskStageMo" +
-      "nsterProto.MonsterType\022\021\n\texpReward\030\003 \001(" +
-      "\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilReward\030\010 \001(\005" +
-      "\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r\n\005level\030\006 " +
-      "\001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdmgMultiplier\030\t \001" +
-      "(\002\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_B",
-      "OSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEventProto" +
-      "\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.c" +
-      "om.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tstart" +
-      "Hour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005" +
-      "\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(" +
-      "\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Persist" +
-      "entEventProto.EventType\022;\n\016monsterElemen" +
-      "t\030\010 \001(\0162\027.com.lvl6.proto.Element:\nNO_ELE" +
-      "MENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUT" +
-      "ION\020\002\"V\n\030UserPersistentEventProto\022\016\n\006use",
-      "rId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownSt" +
-      "artTime\030\003 \001(\003\"\244\001\n\023TaskMapElementProto\022\024\n" +
-      "\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004x" +
-      "Pos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\016" +
-      "2\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001(\010\022" +
-      "\023\n\013bossImgName\030\007 \001(\tB\013B\tTaskProto"
+      "\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\372\002\n\025TaskStageM" +
+      "onsterProto\022\r\n\005tsmId\030\013 \001(\005\022\021\n\tmonsterId\030" +
+      "\001 \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.pr" +
+      "oto.TaskStageMonsterProto.MonsterType\022\021\n" +
+      "\texpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\t" +
+      "oilReward\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 " +
+      "\001(\010\022\034\n\024puzzlePieceMonsterId\030\n \001(\005\022\r\n\005lev" +
+      "el\030\006 \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdmgMultiplie",
+      "r\030\t \001(\002\022\030\n\020defensiveSkillId\030\014 \001(\005\"3\n\013Mon" +
+      "sterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004" +
+      "BOSS\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007event" +
+      "Id\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.p" +
+      "roto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(" +
+      "\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\016\n\006taskI" +
+      "d\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005\022<\n\004type" +
+      "\030\007 \001(\0162..com.lvl6.proto.PersistentEventP" +
+      "roto.EventType\022;\n\016monsterElement\030\010 \001(\0162\027" +
+      ".com.lvl6.proto.Element:\nNO_ELEMENT\"\'\n\tE",
+      "ventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030" +
+      "UserPersistentEventProto\022\016\n\006userId\030\001 \001(\005" +
+      "\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003" +
+      " \001(\003\"\244\001\n\023TaskMapElementProto\022\024\n\014mapEleme" +
+      "ntId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005" +
+      "\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.lv" +
+      "l6.proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossIm" +
+      "gName\030\007 \001(\tB\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5091,7 +5264,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "Level", "ItemId", "DmgMultiplier", },
+              new java.lang.String[] { "TsmId", "MonsterId", "MonsterType", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "Level", "ItemId", "DmgMultiplier", "DefensiveSkillId", },
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.class,
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_PersistentEventProto_descriptor =

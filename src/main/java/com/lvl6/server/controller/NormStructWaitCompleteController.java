@@ -17,6 +17,7 @@ import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
@@ -73,7 +74,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
       boolean legitWaitComplete = checkLegitWaitComplete(resBuilder, userStructs,
-      		userStructIds, senderProto.getUserId(), clientTime, newRetrievedTimes);
+      		userStructIds, senderProto.getUserId(), clientTime, 
+      		newRetrievedTimes);
 
 
       boolean success = false;
@@ -106,7 +108,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
       List<StructureForUser> userStructs, List<Integer> userStructIds,
-      int userId, Timestamp clientTime, List<Timestamp> newRetrievedTimes) {
+      int userId, Timestamp clientTime, 
+      List<Timestamp> newRetrievedTimes) {
   	
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
       resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
@@ -120,8 +123,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<StructureForUser> validUserStructs = new ArrayList<StructureForUser>();
     List<Integer> validUserStructIds = new ArrayList<Integer>();
     
-    List<Timestamp> timesBuildsFinished = calculateValidUserStructs(userId, clientTime,
-    		userStructs, validUserStructIds, validUserStructs);
+    List<Timestamp> timesBuildsFinished = calculateValidUserStructs(userId,
+    	clientTime, userStructs, validUserStructIds, validUserStructs);
     
     if (userStructs.size() != validUserStructs.size()) {
     	log.warn("some of what the client sent is invalid. idsClientSent=" +
@@ -140,8 +143,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   //"validUserStructIds" and "validUserStructs" WILL BE POPULATED
   private List<Timestamp> calculateValidUserStructs(int userId, Timestamp clientTime, 
-  		List<StructureForUser> userStructs, List<Integer> validUserStructIds,
-  		List<StructureForUser> validUserStructs) {
+  		List<StructureForUser> userStructs, 
+  		List<Integer> validUserStructIds, List<StructureForUser> validUserStructs) {
   	List<Timestamp> timesBuildsFinished = new ArrayList<Timestamp>();
     Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
     
@@ -160,16 +163,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       long buildTimeMillis = 60000*struct.getMinutesToBuild();
       
       if (null != purchaseDate) {
-      	long timeBuildFinished = purchaseDate.getTime() + buildTimeMillis;
-        if (timeBuildFinished > clientTime.getTime()) {
-          log.warn("the building is not done yet. userstruct=" + ", client time is " +
-          		clientTime + ", purchase time was " + purchaseDate);
-          continue;
+      	long timeBuildFinishes = purchaseDate.getTime() + buildTimeMillis;
+      	
+      	if (timeBuildFinishes > clientTime.getTime()) {
+      		log.warn(String.format(
+      			"building not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes=%s",
+      			us, clientTime, purchaseDate, timeBuildFinishes));
+      		continue;
         }//else this building is done now     
         
         validUserStructIds.add(us.getId());
         validUserStructs.add(us);
-        timesBuildsFinished.add(new Timestamp(timeBuildFinished));
+        timesBuildsFinished.add(new Timestamp(timeBuildFinishes));
         
       } else {
         log.warn("user struct has never been bought or purchased according to db. " + us);

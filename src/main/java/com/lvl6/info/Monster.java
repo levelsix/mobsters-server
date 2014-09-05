@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Monster implements Serializable {
 	
-	private static final long serialVersionUID = -8508226095721099580L;
+	private static final long serialVersionUID = -8200270820308772397L;
 	
 	private int id;
 	private String evolutionGroup;
@@ -34,6 +34,8 @@ public class Monster implements Serializable {
 	private int atkAnimationRepeatedFramesEnd;
 	private String shorterName;
 	private float shadowScaleFactor;
+	private int baseOffensiveSkillId;
+	private int baseDefensiveSkillId;
 
 	public Monster(int id, String evolutionGroup, String monsterGroup,
 			String quality, int evolutionLevel, String displayName,
@@ -46,7 +48,8 @@ public class Monster implements Serializable {
 			String atkSoundFile, int atkSoundAnimationFrame,
 			int atkAnimationRepeatedFramesStart,
 			int atkAnimationRepeatedFramesEnd, String shorterName,
-			float shadowScaleFactor) {
+			float shadowScaleFactor, int baseOffensiveSkillId,
+			int baseDefensiveSkillId) {
 		super();
 		this.id = id;
 		this.evolutionGroup = evolutionGroup;
@@ -76,6 +79,8 @@ public class Monster implements Serializable {
 		this.atkAnimationRepeatedFramesEnd = atkAnimationRepeatedFramesEnd;
 		this.shorterName = shorterName;
 		this.shadowScaleFactor = shadowScaleFactor;
+		this.baseOffensiveSkillId = baseOffensiveSkillId;
+		this.baseDefensiveSkillId = baseDefensiveSkillId;
 	}
 
 	public int getId() {
@@ -305,6 +310,26 @@ public class Monster implements Serializable {
 		this.shadowScaleFactor = shadowScaleFactor;
 	}
 
+	public int getBaseOffensiveSkillId()
+	{
+		return baseOffensiveSkillId;
+	}
+
+	public void setBaseOffensiveSkillId( int baseOffensiveSkillId )
+	{
+		this.baseOffensiveSkillId = baseOffensiveSkillId;
+	}
+
+	public int getBaseDefensiveSkillId()
+	{
+		return baseDefensiveSkillId;
+	}
+
+	public void setBaseDefensiveSkillId( int baseDefensiveSkillId )
+	{
+		this.baseDefensiveSkillId = baseDefensiveSkillId;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -364,6 +389,11 @@ public class Monster implements Serializable {
 			+ shorterName
 			+ ", shadowScaleFactor="
 			+ shadowScaleFactor
+			+ ", baseOffensiveSkillId="
+			+ baseOffensiveSkillId
+			+ ", baseDefensiveSkillId="
+			+ baseDefensiveSkillId
 			+ "]";
 	}
+
 }
