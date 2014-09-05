@@ -5343,6 +5343,10 @@ public final class EventStructureProto {
     // optional int64 curTime = 3;
     boolean hasCurTime();
     long getCurTime();
+    
+    // optional bool freeSpeedUp = 4;
+    boolean hasFreeSpeedUp();
+    boolean getFreeSpeedUp();
   }
   public static final class NormStructWaitCompleteRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -5410,10 +5414,21 @@ public final class EventStructureProto {
       return curTime_;
     }
     
+    // optional bool freeSpeedUp = 4;
+    public static final int FREESPEEDUP_FIELD_NUMBER = 4;
+    private boolean freeSpeedUp_;
+    public boolean hasFreeSpeedUp() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public boolean getFreeSpeedUp() {
+      return freeSpeedUp_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userStructId_ = java.util.Collections.emptyList();;
       curTime_ = 0L;
+      freeSpeedUp_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5435,6 +5450,9 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(3, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(4, freeSpeedUp_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5461,6 +5479,10 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, curTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, freeSpeedUp_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5597,6 +5619,8 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         curTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        freeSpeedUp_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -5652,6 +5676,10 @@ public final class EventStructureProto {
           to_bitField0_ |= 0x00000002;
         }
         result.curTime_ = curTime_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.freeSpeedUp_ = freeSpeedUp_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5683,6 +5711,9 @@ public final class EventStructureProto {
         }
         if (other.hasCurTime()) {
           setCurTime(other.getCurTime());
+        }
+        if (other.hasFreeSpeedUp()) {
+          setFreeSpeedUp(other.getFreeSpeedUp());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5741,6 +5772,11 @@ public final class EventStructureProto {
             case 24: {
               bitField0_ |= 0x00000004;
               curTime_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              freeSpeedUp_ = input.readBool();
               break;
             }
           }
@@ -5901,6 +5937,27 @@ public final class EventStructureProto {
       public Builder clearCurTime() {
         bitField0_ = (bitField0_ & ~0x00000004);
         curTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool freeSpeedUp = 4;
+      private boolean freeSpeedUp_ ;
+      public boolean hasFreeSpeedUp() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public boolean getFreeSpeedUp() {
+        return freeSpeedUp_;
+      }
+      public Builder setFreeSpeedUp(boolean value) {
+        bitField0_ |= 0x00000008;
+        freeSpeedUp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFreeSpeedUp() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        freeSpeedUp_ = false;
         onChanged();
         return this;
       }
@@ -14195,84 +14252,85 @@ public final class EventStructureProto {
       "o.FinishNormStructWaittimeStatus\"W\n\036Fini",
       "shNormStructWaittimeStatus\022\013\n\007SUCCESS\020\001\022" +
       "\030\n\024FAIL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020" +
-      "\003\"}\n\"NormStructWaitCompleteRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007curTi" +
-      "me\030\003 \001(\003\"\311\002\n#NormStructWaitCompleteRespo" +
+      "\003\"\222\001\n\"NormStructWaitCompleteRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007curT" +
+      "ime\030\003 \001(\003\022\023\n\013freeSpeedUp\030\004 \001(\010\"\311\002\n#NormS" +
+      "tructWaitCompleteResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.NormSt" +
+      "ructWaitCompleteResponseProto.NormStruct",
+      "WaitCompleteStatus\022:\n\nuserStruct\030\003 \003(\0132&" +
+      ".com.lvl6.proto.FullUserStructureProto\"R" +
+      "\n\034NormStructWaitCompleteStatus\022\013\n\007SUCCES" +
+      "S\020\001\022\025\n\021FAIL_NOT_DONE_YET\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003\"\265\002\n-RetrieveCurrencyFromNormStructure" +
+      "RequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
+      "proto.MinimumUserProtoWithMaxResources\022g" +
+      "\n\020structRetrievals\030\002 \003(\0132M.com.lvl6.prot" +
+      "o.RetrieveCurrencyFromNormStructureReque" +
+      "stProto.StructRetrieval\032Y\n\017StructRetriev",
+      "al\022\024\n\014userStructId\030\001 \001(\005\022\027\n\017timeOfRetrie" +
+      "val\030\002 \001(\003\022\027\n\017amountCollected\030\003 \001(\005\"\262\002\n.R" +
+      "etrieveCurrencyFromNormStructureResponse" +
+      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
+      "inimumUserProtoWithMaxResources\022v\n\006statu" +
+      "s\030\002 \001(\0162f.com.lvl6.proto.RetrieveCurrenc" +
+      "yFromNormStructureResponseProto.Retrieve" +
+      "CurrencyFromNormStructureStatus\"F\n\'Retri" +
+      "eveCurrencyFromNormStructureStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\267\001\n!ExpansionWai",
+      "tCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\017\n\007curTi" +
+      "me\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022\021\n\tyPosition" +
+      "\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020gemCostToSpee" +
+      "dup\030\006 \001(\005\"\375\002\n\"ExpansionWaitCompleteRespo" +
       "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022`\n\006status\030\002 \001(\0162P.com" +
-      ".lvl6.proto.NormStructWaitCompleteRespon" +
-      "seProto.NormStructWaitCompleteStatus\022:\n\n",
-      "userStruct\030\003 \003(\0132&.com.lvl6.proto.FullUs" +
-      "erStructureProto\"R\n\034NormStructWaitComple" +
-      "teStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_DONE_Y" +
-      "ET\020\002\022\016\n\nFAIL_OTHER\020\003\"\265\002\n-RetrieveCurrenc" +
-      "yFromNormStructureRequestProto\022@\n\006sender" +
-      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
-      "WithMaxResources\022g\n\020structRetrievals\030\002 \003" +
-      "(\0132M.com.lvl6.proto.RetrieveCurrencyFrom" +
-      "NormStructureRequestProto.StructRetrieva" +
-      "l\032Y\n\017StructRetrieval\022\024\n\014userStructId\030\001 \001",
-      "(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017amountCol" +
-      "lected\030\003 \001(\005\"\262\002\n.RetrieveCurrencyFromNor" +
-      "mStructureResponseProto\022@\n\006sender\030\001 \001(\0132" +
-      "0.com.lvl6.proto.MinimumUserProtoWithMax" +
-      "Resources\022v\n\006status\030\002 \001(\0162f.com.lvl6.pro" +
-      "to.RetrieveCurrencyFromNormStructureResp" +
-      "onseProto.RetrieveCurrencyFromNormStruct" +
-      "ureStatus\"F\n\'RetrieveCurrencyFromNormStr" +
-      "uctureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
-      "\002\"\267\001\n!ExpansionWaitCompleteRequestProto\022",
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030" +
-      "\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(" +
-      "\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expansio" +
-      "nWaitCompleteResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006" +
-      "status\030\002 \001(\0162N.com.lvl6.proto.ExpansionW" +
-      "aitCompleteResponseProto.ExpansionWaitCo" +
-      "mpleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.p" +
-      "roto.UserCityExpansionDataProto\"\211\001\n\033Expa",
-      "nsionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
-      "FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DON" +
-      "E_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nF" +
-      "AIL_OTHER\020\005\"\242\001\n\031SpawnObstacleRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022B\n\024prospectiveObstacles\030\002 \003(" +
-      "\0132$.com.lvl6.proto.MinimumObstacleProto\022" +
-      "\017\n\007curTime\030\003 \001(\003\"\217\002\n\032SpawnObstacleRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022;\n\020spawnedObstacles\030\002 ",
-      "\003(\0132!.com.lvl6.proto.UserObstacleProto\022N" +
-      "\n\006status\030\003 \001(\0162>.com.lvl6.proto.SpawnObs" +
-      "tacleResponseProto.SpawnObstacleStatus\"2" +
-      "\n\023SpawnObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
-      "IL_OTHER\020\002\"\342\001\n BeginObstacleRemovalReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tge" +
-      "msSpent\030\003 \001(\005\022\026\n\016resourceChange\030\004 \001(\021\0228\n" +
-      "\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Res" +
-      "ourceType:\004CASH\022\026\n\016userObstacleId\030\006 \001(\005\"",
-      "\252\002\n!BeginObstacleRemovalResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto" +
-      ".BeginObstacleRemovalResponseProto.Begin" +
-      "ObstacleRemovalStatus\"u\n\032BeginObstacleRe" +
-      "movalStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
-      "CIENT_GEMS\020\002\022\036\n\032FAIL_INSUFFICIENT_RESOUR" +
-      "CE\020\003\022\016\n\nFAIL_OTHER\020\004\"\274\001\n#ObstacleRemoval" +
-      "CompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\017\n\007curTim",
-      "e\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 " +
-      "\001(\005\022\026\n\016userObstacleId\030\005 \001(\005\022\026\n\016atMaxObst" +
-      "acles\030\006 \001(\010\"\226\002\n$ObstacleRemovalCompleteR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022b\n\006status\030\002 \001(\0162R" +
-      ".com.lvl6.proto.ObstacleRemovalCompleteR" +
-      "esponseProto.ObstacleRemovalCompleteStat" +
-      "us\"X\n\035ObstacleRemovalCompleteStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\n" +
-      "FAIL_OTHER\020\003B\025B\023EventStructureProto"
+      "o.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.com" +
+      ".lvl6.proto.ExpansionWaitCompleteRespons" +
+      "eProto.ExpansionWaitCompleteStatus\0229\n\005uc" +
+      "edp\030\003 \001(\0132*.com.lvl6.proto.UserCityExpan",
+      "sionDataProto\"\211\001\n\033ExpansionWaitCompleteS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPAN" +
+      "DING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_IN" +
+      "SUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005\"\242\001\n\031Sp" +
+      "awnObstacleRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022B\n\024pro" +
+      "spectiveObstacles\030\002 \003(\0132$.com.lvl6.proto" +
+      ".MinimumObstacleProto\022\017\n\007curTime\030\003 \001(\003\"\217" +
+      "\002\n\032SpawnObstacleResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022",
+      ";\n\020spawnedObstacles\030\002 \003(\0132!.com.lvl6.pro" +
+      "to.UserObstacleProto\022N\n\006status\030\003 \001(\0162>.c" +
+      "om.lvl6.proto.SpawnObstacleResponseProto" +
+      ".SpawnObstacleStatus\"2\n\023SpawnObstacleSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\342\001\n Beg" +
+      "inObstacleRemovalRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\017\n\007curTime\030\002 \001(\003\022\021\n\tgemsSpent\030\003 \001(\005\022\026\n\016r" +
+      "esourceChange\030\004 \001(\021\0228\n\014resourceType\030\005 \001(" +
+      "\0162\034.com.lvl6.proto.ResourceType:\004CASH\022\026\n",
+      "\016userObstacleId\030\006 \001(\005\"\252\002\n!BeginObstacleR" +
+      "emovalResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\\\n\006status\030" +
+      "\002 \001(\0162L.com.lvl6.proto.BeginObstacleRemo" +
+      "valResponseProto.BeginObstacleRemovalSta" +
+      "tus\"u\n\032BeginObstacleRemovalStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\036\n\032FA" +
+      "IL_INSUFFICIENT_RESOURCE\020\003\022\016\n\nFAIL_OTHER" +
+      "\020\004\"\274\001\n#ObstacleRemovalCompleteRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini",
+      "mumUserProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp" +
+      "\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001(\005\022\026\n\016userObstacl" +
+      "eId\030\005 \001(\005\022\026\n\016atMaxObstacles\030\006 \001(\010\"\226\002\n$Ob" +
+      "stacleRemovalCompleteResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto.Ob" +
+      "stacleRemovalCompleteResponseProto.Obsta" +
+      "cleRemovalCompleteStatus\"X\n\035ObstacleRemo" +
+      "valCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_I" +
+      "NSUFFICIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\025B\023Ev",
+      "entStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14348,7 +14406,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructId", "CurTime", },
+              new java.lang.String[] { "Sender", "UserStructId", "CurTime", "FreeSpeedUp", },
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto.class,
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
