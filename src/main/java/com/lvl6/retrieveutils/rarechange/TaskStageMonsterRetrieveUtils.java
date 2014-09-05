@@ -158,6 +158,7 @@ public class TaskStageMonsterRetrieveUtils {
     float dmgMultiplier = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
     int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
     int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
+    int defensiveSkillId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
     
     if (null != monsterType) {
     	String newMonsterType = monsterType.trim().toUpperCase();
@@ -190,7 +191,7 @@ public class TaskStageMonsterRetrieveUtils {
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
     		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop,
-    		monsterDropLvl);
+    		monsterDropLvl, defensiveSkillId);
     
     if (null == monsterType) {
     	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +

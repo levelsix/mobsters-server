@@ -707,4 +707,6 @@ public class DBConstants {
   public static final String TASK_STAGE_MONSTER__DMG_MULTIPLIER = "dmg_multiplier";
   public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
   public static final String TASK_STAGE_MONSTER__MONSTER_DROP_LVL = "monster_drop_lvl";
+  public static final String TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
+  
 }

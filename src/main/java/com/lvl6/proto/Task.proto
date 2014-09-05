@@ -63,6 +63,7 @@ message TaskStageMonsterProto {
 	
 	//optional int32 puzzlePieceMonsterId = 10; defined above
 	//optional int32 taskStageMonsterId = 11; defined above
+	optional int32 defensiveSkillId = 12;
 	
 	enum MonsterType {
 		REGULAR = 1;

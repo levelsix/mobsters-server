@@ -2537,6 +2537,10 @@ public class CreateInfoProtoUtils {
     if ( tsm.getMonsterIdDrop() > 0 ) {
     	bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
     }
+    
+    if (tsm.getDefensiveSkillId() > 0) {
+    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    }
 
     int tsmId = tsm.getId();
     if (tsmIdToItemId.containsKey(tsmId)) {
@@ -2603,6 +2607,10 @@ public class CreateInfoProtoUtils {
 	  
 	  if (tsm.getMonsterIdDrop() > 0) {
 		  bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+	  }
+
+	  if (tsm.getDefensiveSkillId() > 0) {
+		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
 	  }
 
 	  return bldr.build();
