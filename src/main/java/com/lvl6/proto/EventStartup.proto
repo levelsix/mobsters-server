@@ -170,6 +170,7 @@ message StartupResponseProto {
 		
 		//optional float battleRunAwayBasePercent = 28; defined above
 		//optional float battleRunAwayIncrement = 29; defined above
+		optional int32 maxMinutesForFreeSpeedUp = 30;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
