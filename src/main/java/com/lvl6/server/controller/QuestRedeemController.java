@@ -189,7 +189,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	String mfusop = ControllerConstants.MFUSOP__QUEST + questId;
     	List<FullUserMonsterProto> reward = MonsterStuffUtils
-    			.updateUserMonsters(userId, monsterIdToNumPieces, mfusop, combineStartDate);
+    			.updateUserMonsters(userId, monsterIdToNumPieces, null,
+    				mfusop, combineStartDate);
     	
       if (reward.isEmpty()) {
         resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);

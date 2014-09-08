@@ -262,6 +262,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	List<Integer> monsterIdDrops = new ArrayList<Integer>();
+  	List<Integer> monsterDropLvls = new ArrayList<Integer>();
   	for (int i = 0; i < taskStages.size(); i++) {
   		TaskStageForUser tsfu = taskStages.get(i);
   		userTaskStageId.add(tsfu.getId());
@@ -277,9 +278,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
+  		
+  		TaskStageMonster tsm = TaskStageMonsterRetrieveUtils.getTaskStageMonsterForId(
+				tsmId);
   		monsterIdDrops.add(
-  			TaskStageMonsterRetrieveUtils.getMonsterIdDropForId(
-  				tsmId));
+  			tsm.getMonsterIdDrop());
+  		monsterDropLvls.add(
+  			tsm.getMonsterDropLvl());
   	}
   	
   	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
@@ -288,7 +293,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
-  			cashGained, oilGained, monsterPieceDropped, itemIdDropped, monsterIdDrops);
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped,
+  			monsterIdDrops, monsterDropLvls);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
   }

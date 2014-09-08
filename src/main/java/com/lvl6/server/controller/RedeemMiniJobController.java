@@ -280,8 +280,8 @@ public class RedeemMiniJobController extends EventController{
 			monsterIdToNumPieces.put(monsterIdReward, 1);
 			
 			List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-      				updateUserMonsters(userId, monsterIdToNumPieces, mfusop,
-      						now);
+      				updateUserMonsters(userId, monsterIdToNumPieces, null,
+      					mfusop, now);
 			FullUserMonsterProto fump = newOrUpdated.get(0);
 			resBuilder.setFump(fump);
 		}

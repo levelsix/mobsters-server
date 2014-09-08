@@ -3,7 +3,9 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,6 +22,8 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, Map<Integer, MonsterLevelInfo>> monsterIdToLevelToInfo;
+  
+  private static Map<Integer, Map<Integer, MonsterLevelInfo>> enumeratedPartialMonsterLevelInfo;
 
   private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO;
 
@@ -31,17 +35,40 @@ import com.lvl6.utils.DBConnection;
     return monsterIdToLevelToInfo;
   }
   
+  //TODO: return enumeratedCompleteMonsterLevelInfo for a monster,
+  //similar to getAllPartialMonsterLevelInfo() but complete data
   public static Map<Integer, MonsterLevelInfo> getMonsterLevelInfoForMonsterId(int id) {
-  	log.debug("retrieving monster lvl info for monster id=" + id);
+  	log.debug(String.format(
+  		"retrieving MonsterLevelInfo for monster id=%s",
+  		id));
   	if (null == monsterIdToLevelToInfo) {
   		setStaticMonsterIdToLevelToInfo();
   	}
   	
   	if (!monsterIdToLevelToInfo.containsKey(id)) {
-  		log.error("no monster level info for monsterId=" + id);
+  		log.error(String.format(
+  			"no MonsterLevelInfo for monsterId=%s",
+  			id));
   	}
   	
   	return monsterIdToLevelToInfo.get(id);
+  }
+  
+  public static Map<Integer, MonsterLevelInfo> getAllPartialMonsterLevelInfo(int id) {
+  	log.debug(String.format(
+  		"retrieving MonsterLevelInfo for monster id=%s",
+  		id));
+  	if (null == enumeratedPartialMonsterLevelInfo) {
+  		setStaticMonsterIdToLevelToInfo();
+  	}
+  	
+  	if (!enumeratedPartialMonsterLevelInfo.containsKey(id)) {
+  		log.error(String.format(
+  			"no MonsterLevelInfo for monsterId=%s",
+  			id));
+  	}
+  	
+  	return enumeratedPartialMonsterLevelInfo.get(id);
   }
 
   private static void setStaticMonsterIdToLevelToInfo() {
@@ -87,13 +114,90 @@ import com.lvl6.utils.DBConnection;
 			    }
 			  }    
 			}
+			
+			computePartials();
 		} catch (Exception e) {
-    	log.error("resourceStorage retrieve db error.", e);
+    	log.error("MonsterLevelInfo retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }
   }
+  
+  //since only given first and last monsterLevelInfo, need to compute
+  //inbetween values
+  private static void computePartials() {
+	  
+	  Map<Integer, Map<Integer, MonsterLevelInfo>> allPartialMonsterLevelInfo =
+		  new HashMap<Integer, Map<Integer, MonsterLevelInfo>>();
+	  
+	  for (Integer monsterId : monsterIdToLevelToInfo.keySet()) {
+		  Map<Integer, MonsterLevelInfo> lvlToInfo =
+			  monsterIdToLevelToInfo.get(monsterId);
+			  
+		  List<Integer> orderedLvls = new ArrayList<Integer>(
+			  lvlToInfo.keySet());
+		  
+		  if (2 != orderedLvls.size()) {
+			  log.warn(String.format(
+				  "monsterId=%s has incorrect num lvls=%s",
+				  monsterId, orderedLvls));
+			  continue;
+		  }
+		  
+		  int lvl1 = orderedLvls.get(0);
+		  int lvl2 = orderedLvls.get(1);
+		  int minLvl = Math.min(lvl1, lvl2);
+		  int maxLvl = Math.max(lvl1, lvl2);
+		  
+		  MonsterLevelInfo minLvlInfo = lvlToInfo.get(minLvl); 
+		  MonsterLevelInfo maxLvlInfo = lvlToInfo.get(maxLvl);
+		  
+		  //given min and max range, generate MonsterLevelInfo data inbetween
+		  Map<Integer, MonsterLevelInfo> allLvlToPartialInfo =
+			  new HashMap<Integer, MonsterLevelInfo>();
+		  allLvlToPartialInfo.put(minLvl, minLvlInfo);
+		  allLvlToPartialInfo.put(maxLvl, maxLvlInfo);
+		  
+		  for (int curLvl = minLvl + 1; curLvl < maxLvl; curLvl++) {
+			  MonsterLevelInfo nextLvlInfo = new MonsterLevelInfo();
+			  int hp = calculateHp(minLvlInfo, maxLvlInfo, curLvl);
+			  nextLvlInfo.setHp(hp);
+			  
+			  int exp = calculateExp(maxLvlInfo, curLvl);
+			  nextLvlInfo.setCurLvlRequiredExp(exp);
+			  
+			  log.info(String.format(
+				  "hp=%s, exp=%s, currentLvl=%s",
+				  hp, exp, curLvl));
+			  
+			  allLvlToPartialInfo.put(curLvl, nextLvlInfo);
+		  }
+		  
+		  allPartialMonsterLevelInfo.put(monsterId, allLvlToPartialInfo);
+	  }
+	  enumeratedPartialMonsterLevelInfo = allPartialMonsterLevelInfo;
+  }
 
+  private static int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max, int currentLvl) {
+	  
+	  double base = ((double)(currentLvl-1))/(double)(max.getLevel()-1);
+	  double hpDiff = (max.getHp()-min.getHp());
+	  int hpOffset = (int) (hpDiff * Math.pow(base, max.getHpExponentBase()));
+	  log.info(String.format(
+		  "minInfo=%s, maxInfo=%s, curLvl=%s, base=%s, hpDiff=%s, hpOffset=%s, minHp=%s",
+		  min, max, currentLvl, base, hpDiff, hpOffset, min.getHp()));
+	  return (min.getHp()+hpOffset);
+  }
+  
+  private static int calculateExp(MonsterLevelInfo max, int currentLvl) {
+	  double base = ((double) (currentLvl-1))/((double) (max.getExpLvlDivisor()-1));
+	  double multiplicand = Math.pow(base, max.getExpLvlExponent()); 
+	  log.info(String.format(
+		  "base=%s, resultMultiplicand=%s, currentLvl=%s",
+		  base, multiplicand, currentLvl));
+	  return  (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
+  }
+  
   public static void reload() {
     setStaticMonsterIdToLevelToInfo();
   }

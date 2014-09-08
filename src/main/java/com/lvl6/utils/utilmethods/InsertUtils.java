@@ -890,7 +890,8 @@ public class InsertUtils implements InsertUtil{
 			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
-			List<Integer> itemIdDropped, List<Integer> monsterIdDrops) {
+			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
+			List<Integer> monsterDropLvls) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNums.size();
 		
@@ -906,6 +907,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID_DROPPED, monsterIdDrops);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_DROPPED_LVL, monsterDropLvls);
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);
