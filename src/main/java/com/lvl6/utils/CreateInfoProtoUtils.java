@@ -87,6 +87,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
@@ -1536,8 +1537,17 @@ public class CreateInfoProtoUtils {
 
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     fumpb.setIsRestrictd(mfu.isRestricted());
-    fumpb.setOffensiveSkillId(mfu.getOffensiveSkillId());
-    fumpb.setDefensiveSkillId(mfu.getDefensiveSkillId());
+    
+    //TODO: For production, only have else case
+    if (Globals.IS_SANDBOX()) {
+    	Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
+    	fumpb.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
+    	fumpb.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());	
+    	
+    } else {
+    	fumpb.setOffensiveSkillId(mfu.getOffensiveSkillId());
+    	fumpb.setDefensiveSkillId(mfu.getDefensiveSkillId());
+    }
     return fumpb.build();
   }
 
@@ -2541,6 +2551,7 @@ public class CreateInfoProtoUtils {
     if ( tsm.getMonsterIdDrop() > 0 ) {
     	bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
     }
+    //bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     
     if (tsm.getDefensiveSkillId() > 0) {
     	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
@@ -2612,6 +2623,7 @@ public class CreateInfoProtoUtils {
 	  if (tsm.getMonsterIdDrop() > 0) {
 		  bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
 	  }
+	  //bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 
 	  if (tsm.getDefensiveSkillId() > 0) {
 		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
