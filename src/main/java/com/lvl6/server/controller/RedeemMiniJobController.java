@@ -320,13 +320,18 @@ public class RedeemMiniJobController extends EventController{
 	  	int maxOilUserCanGain = maxOil - curOil;
 	  	oilChange = Math.min(maxOilUserCanGain, oilChange);
 		
+	  	if (0 == cashChange || 0 == oilChange || 0 == gemsChange) {
+	  		log.info("after caping rewards to max, user gets no resources");
+	  		return true;
+	  	}
+	  	
 		int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
 				oilChange, gemsChange);
 
 		if (numChange <= 0) {
-			log.error("unexpected error: problem with updating user gems," +
-					" cash, and oil. gemChange=" + gemsChange + ", cash= " +
-					cashChange + ", oil=" + oilChange + " user=" + u);
+			log.error(String.format(
+				"could not update user gems, cash, and oil. gemChange=%s, cash=%s, oil=%s, user=%s",
+				gemsChange, cashChange, oilChange, u));
 			return false;
 		}
 		return true;
