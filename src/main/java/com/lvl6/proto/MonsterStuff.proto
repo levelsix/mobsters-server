@@ -99,6 +99,9 @@ message FullUserMonsterProto {
 	optional int32 teamSlotNum = 10;
 	//optional string sourceOfPieces = 11;	//not needed for client
 	optional bool isRestrictd = 12;
+	
+	optional int32 offensiveSkillId = 13;
+	optional int32 defensiveSkillId = 14;
 }
 
 message MinimumUserMonsterProto {

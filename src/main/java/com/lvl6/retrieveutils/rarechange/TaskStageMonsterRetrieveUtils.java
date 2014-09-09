@@ -27,16 +27,6 @@ public class TaskStageMonsterRetrieveUtils {
   private static Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonsters;
 
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
-
-  public static int getMonsterIdDropForId(int tsmId) {
-	  TaskStageMonster tsm = getTaskStageMonsterForId(tsmId);
-	  if (null != tsm) {
-		  return tsm.getMonsterIdDrop();
-	  }
-	  log.error( String.format(
-		  "no TaskStageMonster for tsmId=%s", tsmId));
-	  return 0;
-  }
   
   public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
     log.debug("retrieving all task stage monster data map");

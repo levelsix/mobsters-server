@@ -362,6 +362,8 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
   public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
   public static final String MONSTER_FOR_USER__RESTRICTED = "restricted";
+  public static final String MONSTER_FOR_USER__OFFENSIVE_SKILL_ID = "offensive_skill_id";
+  public static final String MONSTER_FOR_USER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
   
   /*MONSTER FOR USER DELETED*/
   public static final String MONSTER_FOR_USER_DELETED__ID = "monster_for_user_id";
@@ -722,6 +724,8 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__ELEMENT = "element";
   public static final String TASK_MAP_ELEMENT__IS_BOSS = "is_boss";
   public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
+//  public static final String TASK_MAP_ELEMENT__ITEM_DROP_ID = "item_drop_id";
+//  public static final String TASK_MAP_ELEMENT__SECTION_NAME = "section_name";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

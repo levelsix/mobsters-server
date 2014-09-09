@@ -138,7 +138,8 @@ public interface InsertUtil {
 			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
-			List<Integer> itemIdDropped, List<Integer> monsterIdDrops);
+			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
+			List<Integer> monsterDropLvls);
 	
 	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);

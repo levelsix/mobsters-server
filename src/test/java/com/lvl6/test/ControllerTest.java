@@ -21,11 +21,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
+import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.DevProto.DevRequest;
+import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -37,6 +41,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.controller.DevController;
 import com.lvl6.server.controller.EnhanceMonsterController;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
 import com.lvl6.server.controller.QuestProgressController;
@@ -76,6 +81,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	EnhanceMonsterController enhanceMonsterController;
+	
+	@Autowired
+	DevController devController;
 	
 	@Autowired
 	TimeUtils timeUtils;
@@ -571,6 +579,44 @@ public class ControllerTest extends TestCase {
 		return baseMonster.getUserMonsterId();
 	}
 	
+	@Test
+	public void testDevControllerAwardMonster() {
+		int unitTesterId = getUnitTesterId();
+		User unitTester = getUserRetrieveUtils().getUserById(unitTesterId);
+		
+		//get num monsters
+		List<MonsterForUser> mfuList = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
+		assertNotNull(mfuList);
+		assertTrue(String.format(
+			"Monsters should exist, but don't. %s",
+			mfuList),
+			!mfuList.isEmpty());
+
+		//build arguments
+		DevRequestProto.Builder drpb = DevRequestProto.newBuilder();
+		drpb.setSender(
+			CreateInfoProtoUtils.createMinimumUserProtoFromUser(unitTester));
+		drpb.setDevRequest(DevRequest.GET_MONZTER);
+		drpb.setNum(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+		
+		DevRequestEvent event = new DevRequestEvent();
+		event.setTag(0);
+		event.setDevRequestProto(drpb.build());
+		
+		//call controller
+		devController.handleEvent(event);
+		
+		List<MonsterForUser> mfuListTwo = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
+		assertTrue(String.format(
+				"one more monster should have been added to %s, but is %s",
+				mfuList, mfuListTwo),
+			mfuListTwo.size() == (mfuList.size() + 1));
+		
+		mfuListTwo.removeAll(mfuList);
+		
+		DeleteUtils.get().deleteMonsterForUser(mfuListTwo.get(0).getId());
+	}
+	
 	private int getUnitTesterId() {
 		return 11;
 	}
@@ -630,6 +676,18 @@ public class ControllerTest extends TestCase {
 	{
 		this.enhanceMonsterController = enhanceMonsterController;
 	}
+
+	public DevController getDevController()
+	{
+		return devController;
+	}
+
+
+	public void setDevController( DevController devController )
+	{
+		this.devController = devController;
+	}
+
 
 	public TimeUtils getTimeUtils() {
 		return timeUtils;

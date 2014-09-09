@@ -407,7 +407,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     if (!monsterIdToNumPieces.isEmpty()) {
     	//assume things just work while updating user monsters
     	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-    			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, now);
+    			updateUserMonsters(userId, monsterIdToNumPieces, null,
+    				mfusop, now);
     	
     	log.info("YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
     			newOrUpdated + "\t bpackId=" + bPackId);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = -8044728335941154527L;
+	private static final long serialVersionUID = 6880997712330999431L;
 	
 	private int monsterId;
 	private int level;
@@ -23,6 +23,12 @@ public class MonsterLevelInfo implements Serializable {
 	private float expLvlDivisor;
 	private float expLvlExponent;
 	private int sellAmount;
+
+
+	public MonsterLevelInfo()
+	{
+		// TODO Auto-generated constructor stub
+	}
 	
 	public MonsterLevelInfo(int monsterId, int level, int hp,
 			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,

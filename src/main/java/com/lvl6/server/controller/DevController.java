@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.response.DevResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Monster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.Globals;
@@ -25,7 +25,6 @@ import com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -122,13 +121,18 @@ import com.lvl6.utils.RetrieveUtils;
 				log.info(String.format(
 					"giving user=%s monsterId=%d", 
 					aUser, num));
-				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
-				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
+//				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
+//				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+//				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
 
+				Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity =
+					new HashMap<Integer, Map<Integer, Integer>>();
+					monsterIdToLvlToQuantity.put(num, Collections.singletonMap(1, 1));
+					
+				
 				String mfusop = "cheater, cheater, pumpkin eater";
 				List<FullUserMonsterProto> reward = MonsterStuffUtils
-					.updateUserMonsters(userId, monsterIdToNumPieces, mfusop, new Date());
+					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity, mfusop, new Date());
 				resBuilder.setFump(reward.get(0));
 				break;
 

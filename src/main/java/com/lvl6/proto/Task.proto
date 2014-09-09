@@ -45,12 +45,12 @@ message TaskStageMonsterProto {
 	optional int32 tsmId = 11;
 	optional int32 monsterId = 1;
 	optional MonsterType monsterType = 2;
+	optional int32 level = 6;
 	optional int32 expReward = 3;
 	optional int32 cashReward = 4;
 	optional int32 oilReward = 8;
 	optional bool puzzlePieceDropped = 5;
 	optional int32 puzzlePieceMonsterId = 10;
-	optional int32 level = 6;
 	
     //NOTE: Some quests have special monsters that spawn, and these special monsters
     //can drop one item at a time. These items only exist as long as the quest is active.
@@ -62,9 +62,15 @@ message TaskStageMonsterProto {
 	optional float dmgMultiplier = 9;
 	
 	//optional int32 puzzlePieceMonsterId = 10; defined above
-	//optional int32 taskStageMonsterId = 11; defined above
+	//optional int32 tsmId = 11; defined above
 	optional int32 defensiveSkillId = 12;
 	
+	//The level of the monster that is dropped, if a monster does drop.
+	// Level 0 means a piece is dropped, and anything higher than one
+	// is complete monster.
+	optional int32 puzzlePieceMonsterDropLvl = 13;
+
+
 	enum MonsterType {
 		REGULAR = 1;
 		MINI_BOSS = 2;

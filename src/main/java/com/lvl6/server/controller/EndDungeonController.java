@@ -111,11 +111,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
       			.getTaskStagesForUserWithTaskForUserId(taskForUserId);
       	
-      	//delete from task_stage_for_user and put into task_stage_history
+      	//delete from task_stage_for_user and put into task_stage_history,
+      	//keep track of the monsters the user gets in the next two maps
       	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+      	Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity =
+      		new HashMap<Integer, Map<Integer, Integer>>();
       	//TODO: record  (items(?))
 //      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-      	recordStageHistory(tsfuList, monsterIdToNumPieces);
+      	recordStageHistory(tsfuList, monsterIdToNumPieces, monsterIdToLvlToQuantity);
       	
       	
       	if (userWon) {
@@ -127,7 +130,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		mfusopB.append(taskForUserId);
       		String mfusop = mfusopB.toString();
       		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-      				updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
+      				updateUserMonsters(userId, monsterIdToNumPieces,
+      					monsterIdToLvlToQuantity, mfusop, currentDate);
       		setResponseBuilder(resBuilder, newOrUpdated);
       		
 //      		//MAYBE NEED TO SEND THESE TO THE CLIENT?
@@ -264,7 +268,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   //
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
-  		Map<Integer, Integer> monsterIdToNumPieces) {
+  		Map<Integer, Integer> monsterIdToNumPieces,
+  		Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity) {
   	//keep track of how many pieces dropped and by which task stage monster
   	Map<Integer, Integer> tsmIdToQuantity =
   			new HashMap<Integer, Integer>();
@@ -282,6 +287,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	List<Integer> monsterIdDrops = new ArrayList<Integer>();
+  	List<Integer> monsterDropLvls = new ArrayList<Integer>();
   	
   	for (int i = 0; i < tsfuList.size(); i++) {
   		TaskStageForUser tsfu = tsfuList.get(i);
@@ -299,12 +305,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
   		
+  		TaskStageMonster tsm = TaskStageMonsterRetrieveUtils.getTaskStageMonsterForId(tsmId);
   		monsterIdDrops.add(
-  			TaskStageMonsterRetrieveUtils.getMonsterIdDropForId(
-  				tsmId));
+  			tsm.getMonsterIdDrop());
+  		monsterDropLvls.add(
+  			tsm.getMonsterIdDrop());
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces
+  			//since user is not going to get it
   			continue;
   		}
   		
@@ -324,7 +333,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
-  			cashGained, oilGained, monsterPieceDropped, itemIdDropped, monsterIdDrops);
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped,
+  			monsterIdDrops, monsterDropLvls);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
   	
@@ -343,7 +353,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//int monsterId = monsterThatDropped.getMonsterId();
   		//task stage monster can drop something other than itself
   		int monsterId = monsterThatDropped.getMonsterIdDrop();
+  		int monsterDropLvl = monsterThatDropped.getMonsterDropLvl();
   		int numPiecesDroppedForMonster = tsmIdToQuantity.get(tsmId); 
+  		
+  		
+  		//if monster that drop has level higher than zero, it is a complete monster
+  		if (monsterDropLvl > 0) {
+  			//base case initialization when inserting never before seen monsterId
+  			if (!monsterIdToLvlToQuantity.containsKey(monsterId)) {
+  				monsterIdToLvlToQuantity.put(
+  					monsterId, new HashMap<Integer, Integer>());
+  			}
+  			Map<Integer, Integer> lvlToQuantity =
+  				monsterIdToLvlToQuantity.get(monsterId);
+  			
+  			//base case initialization when inserting never before seen level for monsterId
+  			if (!lvlToQuantity.containsKey(monsterDropLvl)) {
+  				lvlToQuantity.put(monsterDropLvl, 0);
+  			}
+  			int newAmount = 1 + lvlToQuantity.get(monsterDropLvl); 
+  			lvlToQuantity.put(monsterDropLvl, newAmount);
+  			
+  			
+  			continue;
+  		}
   		
   		//aggregate pieces based on monsterId, since assuming different task
   		//stage monsters can be the same monster
