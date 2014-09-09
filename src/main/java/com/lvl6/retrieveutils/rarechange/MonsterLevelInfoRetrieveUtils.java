@@ -14,6 +14,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -133,16 +134,26 @@ import com.lvl6.utils.DBConnection;
 	  for (Integer monsterId : monsterIdToLevelToInfo.keySet()) {
 		  Map<Integer, MonsterLevelInfo> lvlToInfo =
 			  monsterIdToLevelToInfo.get(monsterId);
+		  
+		  Map<Integer, MonsterLevelInfo> allLvlToPartialInfo =
+			  new HashMap<Integer, MonsterLevelInfo>();
 			  
 		  List<Integer> orderedLvls = new ArrayList<Integer>(
 			  lvlToInfo.keySet());
 		  
-		  if (2 != orderedLvls.size()) {
+		  if (orderedLvls.size() < 2) {
+			  allLvlToPartialInfo.putAll(lvlToInfo);
 			  log.warn(String.format(
-				  "monsterId=%s has incorrect num lvls=%s",
+				  "monsterId=%s has only one specified lvl=%s",
+				  monsterId, orderedLvls));
+			  continue;
+		  } else if (orderedLvls.size() > 2) {
+			  log.warn(String.format(
+				  "monsterId=%s has more than one specified lvl=%s",
 				  monsterId, orderedLvls));
 			  continue;
 		  }
+		  
 		  
 		  int lvl1 = orderedLvls.get(0);
 		  int lvl2 = orderedLvls.get(1);
@@ -153,12 +164,14 @@ import com.lvl6.utils.DBConnection;
 		  MonsterLevelInfo maxLvlInfo = lvlToInfo.get(maxLvl);
 		  
 		  //given min and max range, generate MonsterLevelInfo data inbetween
-		  Map<Integer, MonsterLevelInfo> allLvlToPartialInfo =
-			  new HashMap<Integer, MonsterLevelInfo>();
 		  allLvlToPartialInfo.put(minLvl, minLvlInfo);
-		  allLvlToPartialInfo.put(maxLvl, maxLvlInfo);
 		  
-		  for (int curLvl = minLvl + 1; curLvl < maxLvl; curLvl++) {
+		  //due to hackery the max lvl info needs to be calculated as well,
+		  //specifically exp. The exp value is the max value
+		  //corresponding to the max lvl of 99, not max.getLevel()
+		  //allLvlToPartialInfo.put(maxLvl, maxLvlInfo);
+		  
+		  for (int curLvl = minLvl + 1; curLvl <= maxLvl; curLvl++) {
 			  MonsterLevelInfo nextLvlInfo = new MonsterLevelInfo();
 			  int hp = calculateHp(minLvlInfo, maxLvlInfo, curLvl);
 			  nextLvlInfo.setHp(hp);
@@ -166,9 +179,11 @@ import com.lvl6.utils.DBConnection;
 			  int exp = calculateExp(maxLvlInfo, curLvl);
 			  nextLvlInfo.setCurLvlRequiredExp(exp);
 			  
-			  log.info(String.format(
-				  "hp=%s, exp=%s, currentLvl=%s",
-				  hp, exp, curLvl));
+			  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == monsterId) {
+				  log.info(String.format(
+					  "hp=%s, exp=%s, currentLvl=%s",
+					  hp, exp, curLvl));
+			  }
 			  
 			  allLvlToPartialInfo.put(curLvl, nextLvlInfo);
 		  }
@@ -183,18 +198,22 @@ import com.lvl6.utils.DBConnection;
 	  double base = ((double)(currentLvl-1))/(double)(max.getLevel()-1);
 	  double hpDiff = (max.getHp()-min.getHp());
 	  int hpOffset = (int) (hpDiff * Math.pow(base, max.getHpExponentBase()));
-	  log.info(String.format(
-		  "minInfo=%s, maxInfo=%s, curLvl=%s, base=%s, hpDiff=%s, hpOffset=%s, minHp=%s",
-		  min, max, currentLvl, base, hpDiff, hpOffset, min.getHp()));
+	  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == min.getMonsterId()) {
+		  log.info(String.format(
+			  "minInfo=%s, maxInfo=%s, curLvl=%s, base=%s, hpDiff=%s, hpOffset=%s, minHp=%s",
+			  min, max, currentLvl, base, hpDiff, hpOffset, min.getHp()));
+	  }
 	  return (min.getHp()+hpOffset);
   }
   
   private static int calculateExp(MonsterLevelInfo max, int currentLvl) {
 	  double base = ((double) (currentLvl-1))/((double) (max.getExpLvlDivisor()-1));
 	  double multiplicand = Math.pow(base, max.getExpLvlExponent()); 
-	  log.info(String.format(
-		  "base=%s, resultMultiplicand=%s, currentLvl=%s",
-		  base, multiplicand, currentLvl));
+	  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == max.getMonsterId()) {
+		  log.info(String.format(
+			  "base=%s, resultMultiplicand=%s, currentLvl=%s",
+			  base, multiplicand, currentLvl));
+	  }
 	  return  (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
   }
   

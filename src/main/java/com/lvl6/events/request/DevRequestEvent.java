@@ -31,4 +31,10 @@ public class DevRequestEvent extends RequestEvent {
   public DevRequestProto getDevRequestProto() {
     return devRequestProto;
   }
+
+  public void setDevRequestProto( DevRequestProto devRequestProto )
+  {
+	  this.devRequestProto = devRequestProto;
+  }
+
 }
