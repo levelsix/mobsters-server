@@ -120,14 +120,3 @@ message UserQuestJobProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-message ItemProto {
-	optional int32 itemId = 1;
-	optional string name = 2;
-	optional string imgName = 3;
-	optional string borderImgName = 4;
-	optional ColorProto color = 5; //for the border?
-	
-}
-
-//------------------------------------------------------------------------------------------

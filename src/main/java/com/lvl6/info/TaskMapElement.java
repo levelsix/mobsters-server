@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
 
-	private static final long serialVersionUID = 5914413975553442275L;
+	private static final long serialVersionUID = 7214663032423732406L;
 	
 	private int id;
 	private int taskId;
@@ -13,6 +13,8 @@ public class TaskMapElement implements Serializable {
 	private String element;
 	private boolean boss;
 	private String bossImgName;
+	private int itemDropId;
+	private String sectionName; //groups a bunch of TaskMapElement
 
 	public TaskMapElement(
 		int id,
@@ -21,7 +23,9 @@ public class TaskMapElement implements Serializable {
 		int yPos,
 		String element,
 		boolean boss,
-		String bossImgName )
+		String bossImgName,
+		int itemDropId,
+		String sectionName )
 	{
 		super();
 		this.id = id;
@@ -31,8 +35,10 @@ public class TaskMapElement implements Serializable {
 		this.element = element;
 		this.boss = boss;
 		this.bossImgName = bossImgName;
+		this.itemDropId = itemDropId;
+		this.sectionName = sectionName;
 	}
-	
+
 	public int getId()
 	{
 		return id;
@@ -103,6 +109,26 @@ public class TaskMapElement implements Serializable {
 		this.bossImgName = bossImgName;
 	}
 
+	public int getItemDropId()
+	{
+		return itemDropId;
+	}
+
+	public void setItemDropId( int itemDropId )
+	{
+		this.itemDropId = itemDropId;
+	}
+
+	public String getSectionName()
+	{
+		return sectionName;
+	}
+
+	public void setSectionName( String sectionName )
+	{
+		this.sectionName = sectionName;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -120,6 +146,10 @@ public class TaskMapElement implements Serializable {
 			+ boss
 			+ ", bossImgName="
 			+ bossImgName
+			+ ", itemDropId="
+			+ itemDropId
+			+ ", sectionName="
+			+ sectionName
 			+ "]";
 	}
 
