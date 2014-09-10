@@ -81,9 +81,9 @@ public final class ItemsProto {
     boolean hasUserId();
     int getUserId();
     
-    // optional int32 userItemId = 2;
-    boolean hasUserItemId();
-    int getUserItemId();
+    // optional int32 itemId = 2;
+    boolean hasItemId();
+    int getItemId();
     
     // optional int32 quantity = 3;
     boolean hasQuantity();
@@ -128,14 +128,14 @@ public final class ItemsProto {
       return userId_;
     }
     
-    // optional int32 userItemId = 2;
-    public static final int USERITEMID_FIELD_NUMBER = 2;
-    private int userItemId_;
-    public boolean hasUserItemId() {
+    // optional int32 itemId = 2;
+    public static final int ITEMID_FIELD_NUMBER = 2;
+    private int itemId_;
+    public boolean hasItemId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getUserItemId() {
-      return userItemId_;
+    public int getItemId() {
+      return itemId_;
     }
     
     // optional int32 quantity = 3;
@@ -150,7 +150,7 @@ public final class ItemsProto {
     
     private void initFields() {
       userId_ = 0;
-      userItemId_ = 0;
+      itemId_ = 0;
       quantity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -169,7 +169,7 @@ public final class ItemsProto {
         output.writeInt32(1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userItemId_);
+        output.writeInt32(2, itemId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, quantity_);
@@ -189,7 +189,7 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userItemId_);
+          .computeInt32Size(2, itemId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -321,7 +321,7 @@ public final class ItemsProto {
         super.clear();
         userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        userItemId_ = 0;
+        itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         quantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -370,7 +370,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userItemId_ = userItemId_;
+        result.itemId_ = itemId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -394,8 +394,8 @@ public final class ItemsProto {
         if (other.hasUserId()) {
           setUserId(other.getUserId());
         }
-        if (other.hasUserItemId()) {
-          setUserItemId(other.getUserItemId());
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
         }
         if (other.hasQuantity()) {
           setQuantity(other.getQuantity());
@@ -438,7 +438,7 @@ public final class ItemsProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              userItemId_ = input.readInt32();
+              itemId_ = input.readInt32();
               break;
             }
             case 24: {
@@ -473,23 +473,23 @@ public final class ItemsProto {
         return this;
       }
       
-      // optional int32 userItemId = 2;
-      private int userItemId_ ;
-      public boolean hasUserItemId() {
+      // optional int32 itemId = 2;
+      private int itemId_ ;
+      public boolean hasItemId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public int getUserItemId() {
-        return userItemId_;
+      public int getItemId() {
+        return itemId_;
       }
-      public Builder setUserItemId(int value) {
+      public Builder setItemId(int value) {
         bitField0_ |= 0x00000002;
-        userItemId_ = value;
+        itemId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearUserItemId() {
+      public Builder clearItemId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userItemId_ = 0;
+        itemId_ = 0;
         onChanged();
         return this;
       }
@@ -1194,13 +1194,13 @@ public final class ItemsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nItem.proto\022\016com.lvl6.proto\"E\n\rUserItem" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\022\022\n\nuserItemId\030\002 \001(" +
-      "\005\022\020\n\010quantity\030\003 \001(\005\"|\n\tItemProto\022\016\n\006item" +
-      "Id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022" +
-      "*\n\010itemType\030\004 \001(\0162\030.com.lvl6.proto.ItemT" +
-      "ype\022\024\n\014staticDataId\030\005 \001(\005*\034\n\010ItemType\022\020\n" +
-      "\014BOOSTER_PACK\020\001B\014B\nItemsProto"
+      "\n\nItem.proto\022\016com.lvl6.proto\"A\n\rUserItem" +
+      "Proto\022\016\n\006userId\030\001 \001(\005\022\016\n\006itemId\030\002 \001(\005\022\020\n" +
+      "\010quantity\030\003 \001(\005\"|\n\tItemProto\022\016\n\006itemId\030\001" +
+      " \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010i" +
+      "temType\030\004 \001(\0162\030.com.lvl6.proto.ItemType\022" +
+      "\024\n\014staticDataId\030\005 \001(\005*\034\n\010ItemType\022\020\n\014BOO" +
+      "STER_PACK\020\001B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1212,7 +1212,7 @@ public final class ItemsProto {
           internal_static_com_lvl6_proto_UserItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserItemProto_descriptor,
-              new java.lang.String[] { "UserId", "UserItemId", "Quantity", },
+              new java.lang.String[] { "UserId", "ItemId", "Quantity", },
               com.lvl6.proto.ItemsProto.UserItemProto.class,
               com.lvl6.proto.ItemsProto.UserItemProto.Builder.class);
           internal_static_com_lvl6_proto_ItemProto_descriptor =

@@ -8,6 +8,7 @@ import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
+import "Item.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
@@ -109,7 +110,7 @@ message StartupResponseProto {
 	
 	repeated UserAchievementProto userAchievements = 38;
 	repeated UserMiniJobProto userMiniJobProtos = 39;
-	
+	repeated UserItemProto userItems = 40;
 	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;

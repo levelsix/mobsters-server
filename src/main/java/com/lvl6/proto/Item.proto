@@ -10,7 +10,7 @@ option java_outer_classname = "ItemsProto";
 
 message UserItemProto {
 	optional int32 userId = 1;
-	optional int32 userItemId = 2;
+	optional int32 itemId = 2;
 	optional int32 quantity = 3;
 }
 
