@@ -41,6 +41,7 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.EventPersistentForUser;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -77,6 +78,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -105,6 +107,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
@@ -201,6 +204,9 @@ public class StartupController extends EventController {
   @Autowired
   protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
 
+  @Autowired
+  protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+  
   public StartupController() {
 	  numAllocatedThreads = 3;
   }
@@ -329,6 +335,7 @@ public class StartupController extends EventController {
 			      log.info("{}ms at achivementStuff", stopWatch.getTime());
 			      setMiniJob(resBuilder, userId);
 			      log.info("{}ms at miniJobStuff", stopWatch.getTime());
+			      setUserItems(resBuilder, userId);
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			      log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
@@ -1448,7 +1455,22 @@ public class StartupController extends EventController {
 	  resBuilder.addAllUserMiniJobProtos(umjpList);
   }
 
-  
+  private void setUserItems(Builder resBuilder, int userId) {
+	  Map<Integer, ItemForUser> itemIdToUserItems =
+			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
+				userId, null);
+	  
+	  if (itemIdToUserItems.isEmpty()) {
+		  return;
+	  }
+	  
+	  List<UserItemProto> uipList = CreateInfoProtoUtils
+		  .createUserItemProtosFromUserItems(
+			  new ArrayList<ItemForUser>(
+				  itemIdToUserItems.values()));
+	  
+	  resBuilder.addAllUserItems(uipList);
+  }
   
   
   
@@ -2316,6 +2338,15 @@ public class StartupController extends EventController {
   public void setMiniJobForUserRetrieveUtil(
 		  MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil) {
 	  this.miniJobForUserRetrieveUtil = miniJobForUserRetrieveUtil;
-  }  
+  }
   
+  public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+  {
+	  return itemForUserRetrieveUtil;
+  }
+  public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+  {
+	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+  }  
+
 }
