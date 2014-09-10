@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +59,6 @@ import com.lvl6.utils.DBConnection;
   private static void setStaticItemIdsToItems() {
     log.debug("setting static map of item ids to items");
 
-    Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     try {
@@ -76,7 +74,7 @@ import com.lvl6.utils.DBConnection;
 			      
 			      //loop through each row and convert it into a java object
 			      while(rs.next()) {  
-			        Item item = convertRSRowToItem(rs, rand);
+			        Item item = convertRSRowToItem(rs);
 			        
 			        int itemId = item.getId();
 			        itemIdsToItemsTemp.put(itemId, item);
@@ -103,17 +101,14 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static Item convertRSRowToItem(ResultSet rs, Random rand) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String name = rs.getString(i++);
-    String imgName = rs.getString(i++);
-    String borderImgName = rs.getString(i++);
-    int blue = rs.getInt(i++);
-    int green = rs.getInt(i++);
-    int red = rs.getInt(i++);
+  private static Item convertRSRowToItem(ResultSet rs) throws SQLException {
+    int id = rs.getInt(DBConstants.ITEM__ID);
+    String name = rs.getString(DBConstants.ITEM__NAME);
+    String imgName = rs.getString(DBConstants.ITEM__IMG_NAME);
+    String itemType = rs.getString(DBConstants.ITEM__ITEM_TYPE);
+    int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
     
-    Item item = new Item(id, name, imgName, borderImgName, blue, green, red);
+    Item item = new Item(id, name, imgName, itemType, staticDataId);
     return item;
   }
 }

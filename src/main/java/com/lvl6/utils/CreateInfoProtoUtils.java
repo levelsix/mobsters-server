@@ -124,6 +124,8 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.ItemsProto.ItemProto;
+import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -143,7 +145,6 @@ import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
-import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
@@ -1950,16 +1951,19 @@ public class CreateInfoProtoUtils {
   		ipb.setImgName(str);
   	}
   	
-  	str = item.getBorderImgName();
+  	str = item.getItemType();
   	if (null != str) {
-  		ipb.setBorderImgName(str);
+  		try {
+  			ItemType it = ItemType.valueOf(str);
+  			ipb.setItemType(it);
+  		} catch (Exception e) {
+  			log.error(String.format(
+  				"can't create enum type. itemType=%s.",
+  				str));
+  		}
   	}
-  	
-  	ColorProto.Builder clrB = ColorProto.newBuilder();
-  	clrB.setBlue(item.getBlue());
-  	clrB.setGreen(item.getGreen());
-  	clrB.setRed(item.getRed());
-  	ipb.setColor(clrB.build());
+
+  	ipb.setStaticDataId(item.getStaticDataId());
   	
   	return ipb.build();
   }

@@ -672,6 +672,12 @@ public class DBConstants {
   
   /**************CONFIGURATION DATA TABLES*****************************/
   
+  public static final String ITEM__ID = GENERIC__ID;
+  public static final String ITEM__NAME = "name";
+  public static final String ITEM__IMG_NAME = "img_name";
+  public static final String ITEM__ITEM_TYPE = "item_type";
+  public static final String ITEM__STATIC_DATA_ID = "static_data_id";
+  
   public static final String MONSTER__ID = GENERIC__ID;
   public static final String MONSTER__EVOLUTION_GROUP = "evolution_group";
   public static final String MONSTER__MONSTER_GROUP = "monster_group";

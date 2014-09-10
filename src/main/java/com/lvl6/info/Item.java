@@ -4,26 +4,22 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = 4660675777685331403L;
+	private static final long serialVersionUID = -2498724147517643493L;
 	
 	private int id;
 	private String name;
 	private String imgName;
-	private String borderImgName;
-	private int blue; //colors for the border?
-	private int green;
-	private int red;
-	
-	public Item(int id, String name, String imgName, String borderImgName,
-			int blue, int green, int red) {
+	private String itemType;
+	private int staticDataId;
+
+	public Item( int id, String name, String imgName, String itemType, int staticDataId )
+	{
 		super();
 		this.id = id;
 		this.name = name;
 		this.imgName = imgName;
-		this.borderImgName = borderImgName;
-		this.blue = blue;
-		this.green = green;
-		this.red = red;
+		this.itemType = itemType;
+		this.staticDataId = staticDataId;
 	}
 
 	public int getId() {
@@ -50,43 +46,40 @@ public class Item implements Serializable {
 		this.imgName = imgName;
 	}
 
-	public String getBorderImgName() {
-		return borderImgName;
+	public String getItemType()
+	{
+		return itemType;
 	}
 
-	public void setBorderImgName(String borderImgName) {
-		this.borderImgName = borderImgName;
+	public void setItemType( String itemType )
+	{
+		this.itemType = itemType;
 	}
 
-	public int getBlue() {
-		return blue;
+	public int getStaticDataId()
+	{
+		return staticDataId;
 	}
 
-	public void setBlue(int blue) {
-		this.blue = blue;
-	}
-
-	public int getGreen() {
-		return green;
-	}
-
-	public void setGreen(int green) {
-		this.green = green;
-	}
-
-	public int getRed() {
-		return red;
-	}
-
-	public void setRed(int red) {
-		this.red = red;
+	public void setStaticDataId( int staticDataId )
+	{
+		this.staticDataId = staticDataId;
 	}
 
 	@Override
-	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", imgName=" + imgName
-				+ ", borderImgName=" + borderImgName + ", blue=" + blue
-				+ ", green=" + green + ", red=" + red + "]";
+	public String toString()
+	{
+		return "Item [id="
+			+ id
+			+ ", name="
+			+ name
+			+ ", imgName="
+			+ imgName
+			+ ", itemType="
+			+ itemType
+			+ ", staticDataId="
+			+ staticDataId
+			+ "]";
 	}
-	
+
 }
