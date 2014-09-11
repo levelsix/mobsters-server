@@ -79,6 +79,7 @@ import com.lvl6.utils.RetrieveUtils;
 			DevResponseProto resProto = resBuilder.build();
 			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserId());
 			resEvent.setDevResponseProto(resProto);
+			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
