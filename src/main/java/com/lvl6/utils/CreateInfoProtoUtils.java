@@ -1608,14 +1608,30 @@ public class CreateInfoProtoUtils {
     fumpb.setIsRestrictd(mfu.isRestricted());
     
     //TODO: For production, only have else case
+    int curOffensiveSkillId = mfu.getOffensiveSkillId();
+    int curDefensiveSkillId = mfu.getDefensiveSkillId();
+    
+    if (curOffensiveSkillId > 0) {
+    	fumpb.setOffensiveSkillId(curOffensiveSkillId);
+    }
+    if (curDefensiveSkillId > 0) {
+    	fumpb.setDefensiveSkillId(curDefensiveSkillId);
+    }
+    
     if (Globals.IS_SANDBOX()) {
-    	Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
-    	fumpb.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
-    	fumpb.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());	
+    	//for development, set userMonster skill (if absent) to monster skill
     	
-    } else {
-    	fumpb.setOffensiveSkillId(mfu.getOffensiveSkillId());
-    	fumpb.setDefensiveSkillId(mfu.getDefensiveSkillId());
+    	Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(mfu.getMonsterId());
+    	int defaultOffensiveSkillId = monzter.getBaseOffensiveSkillId();
+    	if (curOffensiveSkillId <= 0 && defaultOffensiveSkillId > 0) {
+    		fumpb.setOffensiveSkillId(defaultOffensiveSkillId);
+    	}
+    	
+    	int defaultDefSkillId = monzter.getBaseDefensiveSkillId();
+    	if (curDefensiveSkillId <= 0 && defaultDefSkillId > 0) {
+    		fumpb.setDefensiveSkillId(defaultDefSkillId);	
+    	}
+    	
     }
     return fumpb.build();
   }
@@ -2589,11 +2605,19 @@ public class CreateInfoProtoUtils {
     bldr.setPuzzlePieceDropped(pieceDropped);
     if ( tsm.getMonsterIdDrop() > 0 ) {
     	bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+    	bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     }
-    //bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     
     if (tsm.getDefensiveSkillId() > 0) {
     	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    	
+    } else if (Globals.IS_SANDBOX()) {
+    	
+    	//TODO: Find cleaner way of defaulting to skill in monster table
+    	Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
+    	if (null != monzter) {
+    		bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
+    	}
     }
 
     int tsmId = tsm.getId();
@@ -2661,11 +2685,18 @@ public class CreateInfoProtoUtils {
 	  
 	  if (tsm.getMonsterIdDrop() > 0) {
 		  bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+		  bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 	  }
-	  //bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 
 	  if (tsm.getDefensiveSkillId() > 0) {
 		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+		  
+	  } else if (Globals.IS_SANDBOX()) {
+		  //TODO: Find cleaner way of defaulting to skill in monster table
+		  Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
+		  if (null != monzter) {
+			  bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
+		  }
 	  }
 
 	  return bldr.build();

@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       				updateUserMonsters(userId, monsterIdToNumPieces,
       					monsterIdToLvlToQuantity, mfusop, currentDate);
       		
-      		awardItem(userId, firstTimeUserWonTask, resBuilder, taskId);
+      		awardOneTimeItem(userId, firstTimeUserWonTask, resBuilder, taskId);
       		
       		setResponseBuilder(resBuilder, newOrUpdated);
       		
@@ -398,29 +398,37 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   }
   
-  private void awardItem(
+  private void awardOneTimeItem(
 	  int userId,
 	  boolean firstTimeUserWonTask,
 	  EndDungeonResponseProto.Builder resBuilder,
 	  int taskId )
   {
+	  TaskMapElement tme = null;
 	  if (firstTimeUserWonTask) {
-		  TaskMapElement tme = TaskMapElementRetrieveUtils
+		  tme = TaskMapElementRetrieveUtils
 			  .getTaskMapElementForTaskId(taskId);
-		  int itemId = tme.getItemDropId();
-		  int quantity = 1;
-		  int numInserted = InsertUtils.get()
-			  .insertIntoUpdateUserItem(
-				  userId, itemId, quantity);
-
-		  if (numInserted > 0) {
-			  resBuilder.setUserItem(
-				  CreateInfoProtoUtils.createUserItemProto(userId, itemId, quantity));
-			  resBuilder.setTaskMapSectionName(tme.getSectionName());
-
-		  }
-
 	  }
+
+	  //award the item only once
+	  if (null != tme) {
+		int itemId = tme.getItemDropId();
+		int quantity = 1;
+		int numInserted = InsertUtils.get()
+			.insertIntoUpdateUserItem(userId, itemId, quantity);
+		log.info(String.format(
+			"numInserted into userItem: %s",
+			numInserted));
+		if (numInserted > 0) {
+			resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
+				quantity));
+			resBuilder.setTaskMapSectionName(tme.getSectionName());
+		} else {
+			log.error(String.format(
+				"unable to award item specified in TaskMapElement=%s",
+				tme));
+		}
+	}
   }
   
   private void setResponseBuilder(Builder resBuilder,
