@@ -19,6 +19,10 @@ public final class EventItemProto {
     // optional int32 itemId = 2;
     boolean hasItemId();
     int getItemId();
+    
+    // optional int64 clientTime = 3;
+    boolean hasClientTime();
+    long getClientTime();
   }
   public static final class TradeItemForBoosterRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -72,9 +76,20 @@ public final class EventItemProto {
       return itemId_;
     }
     
+    // optional int64 clientTime = 3;
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public long getClientTime() {
+      return clientTime_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       itemId_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -94,6 +109,9 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, itemId_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -110,6 +128,10 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, itemId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -244,6 +266,8 @@ public final class EventItemProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -294,6 +318,10 @@ public final class EventItemProto {
           to_bitField0_ |= 0x00000002;
         }
         result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -315,6 +343,9 @@ public final class EventItemProto {
         }
         if (other.hasItemId()) {
           setItemId(other.getItemId());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -359,6 +390,11 @@ public final class EventItemProto {
             case 16: {
               bitField0_ |= 0x00000002;
               itemId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -474,6 +510,27 @@ public final class EventItemProto {
       public Builder clearItemId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         itemId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 clientTime = 3;
+      private long clientTime_ ;
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public long getClientTime() {
+        return clientTime_;
+      }
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -1211,17 +1268,18 @@ public final class EventItemProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\022Monst" +
-      "erStuff.proto\032\nUser.proto\"c\n\037TradeItemFo" +
+      "erStuff.proto\032\nUser.proto\"w\n\037TradeItemFo" +
       "rBoosterRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022\016\n\006itemId" +
-      "\030\002 \001(\005\"\236\002\n TradeItemForBoosterResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6" +
-      ".proto.TradeItemForBoosterResponseProto." +
-      "TradeItemForBoosterStatus\0222\n\004fump\030\003 \001(\0132" +
-      "$.com.lvl6.proto.FullUserMonsterProto\"8\n",
-      "\031TradeItemForBoosterStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\016\n\nFAIL_OTHER\020\002B\020B\016EventItemProto"
+      "\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\236\002\n TradeItem" +
+      "ForBoosterResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022Z\n\006sta" +
+      "tus\030\002 \001(\0162J.com.lvl6.proto.TradeItemForB" +
+      "oosterResponseProto.TradeItemForBoosterS" +
+      "tatus\0222\n\004fump\030\003 \001(\0132$.com.lvl6.proto.Ful",
+      "lUserMonsterProto\"8\n\031TradeItemForBooster" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016E" +
+      "ventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1233,7 +1291,7 @@ public final class EventItemProto {
           internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ItemId", },
+              new java.lang.String[] { "Sender", "ItemId", "ClientTime", },
               com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto.class,
               com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto.Builder.class);
           internal_static_com_lvl6_proto_TradeItemForBoosterResponseProto_descriptor =

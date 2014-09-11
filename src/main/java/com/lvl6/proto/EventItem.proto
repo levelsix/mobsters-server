@@ -11,7 +11,7 @@ option java_outer_classname = "EventItemProto";
 message TradeItemForBoosterRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 itemId = 2;
-	
+	optional int64 clientTime = 3; //for history purposes
 }
 
 																						//DONE
