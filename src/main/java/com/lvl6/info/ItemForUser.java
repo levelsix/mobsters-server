@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 public class ItemForUser implements Serializable {
 
-	private static final long serialVersionUID = 7590495608689889244L;
+	private static final long serialVersionUID = -1504114174323721269L;
+	
 	private int userId;
 	private int itemId;
 	private int quantity;
+	
+	public ItemForUser() {
+		super();
+	}
 	
 	public ItemForUser(int userId, int itemId, int quantity) {
 		super();

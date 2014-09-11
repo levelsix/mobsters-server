@@ -496,6 +496,7 @@ public class InsertUtils implements InsertUtil{
     if (null != fbData && !fbData.isEmpty()) {
     	insertParams.put(DBConstants.USER__FB_DATA, fbData);
     }
+    insertParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, createTime);
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);

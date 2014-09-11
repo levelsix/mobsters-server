@@ -88,9 +88,11 @@ import com.lvl6.utils.DBConnection;
     String element = rs.getString(DBConstants.TASK_MAP_ELEMENT__ELEMENT);
     boolean boss = rs.getBoolean(DBConstants.TASK_MAP_ELEMENT__IS_BOSS);
     String bossImgName = rs.getString(DBConstants.TASK_MAP_ELEMENT__BOSS_IMG_NAME);
+    int itemDropId = rs.getInt(DBConstants.TASK_MAP_ELEMENT__ITEM_DROP_ID); 
+    String sectionName = rs.getString(DBConstants.TASK_MAP_ELEMENT__SECTION_NAME);
         
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
-    	element, boss, bossImgName);
+    	element, boss, bossImgName, itemDropId, sectionName);
         
     return taskMap;
   }

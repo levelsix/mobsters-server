@@ -6,6 +6,7 @@ import "Battle.proto";
 import "BoosterPackStuff.proto";
 import "City.proto";
 import "Clan.proto";
+import "Item.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
 import "Skill.proto";

@@ -89,7 +89,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Date now = new Date(reqProto.getClientTime());
     Timestamp nowTimestamp = new Timestamp(now.getTime());
     
-    boolean freeBoosterPack = reqProto.getFreeBoosterPack();
+    boolean freeBoosterPack = reqProto.getDailyFreeBoosterPack();
 
     //values to send to client
     PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto.newBuilder();

@@ -16,6 +16,7 @@ import "EventClan.proto";
 import "EventDev.proto";
 import "EventDungeon.proto";
 import "EventInAppPurchase.proto";
+import "EventItem.proto";
 import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
@@ -27,6 +28,7 @@ import "EventStructure.proto";
 import "EventTournament.proto";
 import "EventUser.proto";
 import "InAppPurchase.proto";
+import "Item.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
@@ -139,6 +141,7 @@ enum EventProtocolRequest {
 	C_RESTRICT_USER_MONSTER_EVENT = 75;
 	C_UNRESTRICT_USER_MONSTER_EVENT = 76;
 	C_ENHANCE_MONSTER_EVENT = 77;
+	C_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;
 	
 	//STOP AT 99, SKIP TO 200
 	C_LOGOUT_EVENT = 101;
@@ -242,6 +245,7 @@ enum EventProtocolResponse {
 	S_RESTRICT_USER_MONSTER_EVENT = 75;
 	S_UNRESTRICT_USER_MONSTER_EVENT = 76;
 	S_ENHANCE_MONSTER_EVENT = 77;
+	S_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;
 			
 	//STOP AT 99, SKIP TO 200
 	S_UPDATE_CLIENT_USER_EVENT = 101;

@@ -41,6 +41,7 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
@@ -124,6 +125,9 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.ItemsProto.ItemProto;
+import com.lvl6.proto.ItemsProto.ItemType;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -143,7 +147,6 @@ import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
-import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
@@ -1272,6 +1275,62 @@ public class CreateInfoProtoUtils {
 
     return b.build();
   }
+
+  /**Item.proto***************************************************/
+  public static ItemProto createItemProtoFromItem(Item item) {
+	  ItemProto.Builder ipb = ItemProto.newBuilder();
+
+	  ipb.setItemId(item.getId());
+
+	  String str = item.getName();
+	  if (null != str) {
+		  ipb.setName(str);
+	  }
+
+	  str = item.getImgName();
+	  if (null != str) {
+		  ipb.setImgName(str);
+	  }
+
+	  str = item.getItemType();
+	  if (null != str) {
+		  try {
+			  ItemType it = ItemType.valueOf(str);
+			  ipb.setItemType(it);
+		  } catch (Exception e) {
+			  log.error(String.format(
+				  "can't create enum type. itemType=%s.",
+				  str));
+		  }
+	  }
+
+	  ipb.setStaticDataId(item.getStaticDataId());
+
+	  return ipb.build();
+  }
+  
+
+  public static List<UserItemProto> createUserItemProtosFromUserItems(
+	  List<ItemForUser> ifuCollection) {
+
+	  List<UserItemProto> userItems = new ArrayList<UserItemProto>();
+	  
+	  for (ItemForUser ifu : ifuCollection) {
+		  userItems.add(
+			  createUserItemProtoFromUserItem(ifu));
+	  }
+	  return userItems;
+  }
+  
+  public static UserItemProto createUserItemProtoFromUserItem(ItemForUser ifu) {
+	  UserItemProto.Builder uipb = UserItemProto.newBuilder();
+	  
+	  uipb.setItemId(ifu.getItemId());
+	  uipb.setUserId(ifu.getUserId());
+	  uipb.setQuantity(ifu.getQuantity());
+	  
+	  return uipb.build();
+  }
   
   /**MiniJobConfig.proto********************************************/
   public static MiniJobProto createMiniJobProto(MiniJob mj) {
@@ -1934,36 +1993,6 @@ public class CreateInfoProtoUtils {
 	  
 	  return uqjpb.build();
   }
-
-  public static ItemProto createItemProtoFromItem(Item item) {
-  	ItemProto.Builder ipb = ItemProto.newBuilder();
-  	
-  	ipb.setItemId(item.getId());
-  	
-  	String str = item.getName();
-  	if (null != str) {
-  		ipb.setName(str);
-  	}
-  	
-  	str = item.getImgName();
-  	if (null != str) {
-  		ipb.setImgName(str);
-  	}
-  	
-  	str = item.getBorderImgName();
-  	if (null != str) {
-  		ipb.setBorderImgName(str);
-  	}
-  	
-  	ColorProto.Builder clrB = ColorProto.newBuilder();
-  	clrB.setBlue(item.getBlue());
-  	clrB.setGreen(item.getGreen());
-  	clrB.setRed(item.getRed());
-  	ipb.setColor(clrB.build());
-  	
-  	return ipb.build();
-  }
-  
   /**Skill.proto***************************************************/
   public static SkillProto createSkillProtoFromSkill(Skill s,
 	  Map<Integer, SkillProperty> skillPropertyIdToProperty)

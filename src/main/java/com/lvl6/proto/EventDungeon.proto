@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Item.proto";
 import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
 import "Task.proto";
@@ -17,7 +18,7 @@ message BeginDungeonRequestProto {
 	
 	//used for determining if boss spawned (NOT USED ATM)
 	//not really needed. server can calculate it 
-	optional bool userBeatAllCityTasks = 4;
+	optional bool userBeatAllCityTasks = 4;//TODO: REMOVE
 	
 	//used for PersistentEvent stuff
 	optional bool isEvent = 5;
@@ -33,10 +34,10 @@ message BeginDungeonRequestProto {
 
 	//used for element tutorial, client sets what enemy monster element should appear
 	//and only that one guy should appear (quest tasks should have only one stage in db)	
-	optional Element elem = 9 [default = NO_ELEMENT];
+	optional Element elem = 9 [default = NO_ELEMENT];//TODO: REMOVE
 	
 	// if not set, then go select monsters at random
-	optional bool forceEnemyElem = 10;
+	optional bool forceEnemyElem = 10; //TODO: REMOVE
 	
 	
 	// Consider moving the logic using this into another event.
@@ -47,7 +48,7 @@ message BeginDungeonRequestProto {
 	// drop. To limit number of db queries the server makes to determine
 	// whether or not the user completed the task, the client will tell
 	// the server if the user already completed the task. 
-	optional bool alreadyCompletedMiniTutorialTask = 11;
+	optional bool alreadyCompletedMiniTutorialTask = 11;//TODO: REMOVE
 }
 
 message BeginDungeonResponseProto {
@@ -77,7 +78,7 @@ message EndDungeonRequestProto {
 	optional bool firstTimeUserWonTask = 5;
 	
 	//used for determining if boss spawns
-	optional bool userBeatAllCityTasks = 6;
+	optional bool userBeatAllCityTasks = 6; //TODO: REMOVE
 }
 
 message EndDungeonResponseProto {
@@ -85,8 +86,11 @@ message EndDungeonResponseProto {
 	optional EndDungeonStatus status = 2;
 	//repeated FullUserMonsterProto newOrUpdated = 3; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 3;
-	optional int32 taskId = 4;
+	optional int32 taskId = 4; //TODO: REMOVE
 	optional bool userWon = 5;
+	
+	optional UserItemProto userItem = 6;
+	optional string taskMapSectionName = 7; //TODO: Consider having client calculate this
 	
 	enum EndDungeonStatus {
 		SUCCESS = 1;
