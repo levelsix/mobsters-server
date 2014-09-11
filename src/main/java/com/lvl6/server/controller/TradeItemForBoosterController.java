@@ -133,6 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 			TradeItemForBoosterResponseProto resProto = resBuilder.build();
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(senderProto.getUserId());
+			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForBoosterResponseProto(resProto);
 			server.writeEvent(resEvent);
 
