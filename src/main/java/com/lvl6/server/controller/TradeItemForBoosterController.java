@@ -43,7 +43,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
-import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class TradeItemForBoosterController extends EventController {
@@ -121,15 +120,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		        successful = writeChangesToDB(resBuilder, aUser, userId, ifu, itemId, 
 		        	boosterPackId, itemsUserReceives, now, gemReward);
 			}
-			
+
 			if (successful) {
-		      	//assume user only receives 1 item. NEED TO LET CLIENT KNOW THE PRIZE
-		      	if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
-		      		BoosterItem bi = itemsUserReceives.get(0);
-		      		BoosterItemProto bip = CreateInfoProtoUtils.createBoosterItemProto(bi);
-		      		resBuilder.setPrize(bip);
-		      	}
-		      }
+				//assume user only receives 1 item. NEED TO LET CLIENT KNOW THE PRIZE
+				if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
+					BoosterItem bi = itemsUserReceives.get(0);
+					BoosterItemProto bip = CreateInfoProtoUtils.createBoosterItemProto(bi);
+					resBuilder.setPrize(bip);
+				}
+				resBuilder.setStatus(TradeItemForBoosterStatus.SUCCESS);
+			}
 			
 			TradeItemForBoosterResponseProto resProto = resBuilder.build();
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(senderProto.getUserId());
