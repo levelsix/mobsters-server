@@ -1,0 +1,30 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+import "MonsterStuff.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventItemProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message TradeItemForBoosterRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 itemId = 2;
+	
+}
+
+																						//DONE
+message TradeItemForBoosterResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional TradeItemForBoosterStatus status = 2;
+	
+	optional FullUserMonsterProto fump = 3;
+	
+	enum TradeItemForBoosterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------

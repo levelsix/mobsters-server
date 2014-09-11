@@ -16,6 +16,7 @@ import "EventClan.proto";
 import "EventDev.proto";
 import "EventDungeon.proto";
 import "EventInAppPurchase.proto";
+import "EventItem.proto";
 import "EventMiniJob.proto";
 import "EventMonster.proto";
 import "EventPvp.proto";
