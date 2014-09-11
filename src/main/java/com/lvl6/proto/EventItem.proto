@@ -1,5 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
+import "BoosterPackStuff.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -19,11 +20,18 @@ message TradeItemForBoosterResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional TradeItemForBoosterStatus status = 2;
 	
-	optional FullUserMonsterProto fump = 3;
+	//if user received, say, two pieces of a monster
+	//and he needs one to complete an existing monster
+	//there would be one monster that would be completed
+	//and another that would be the remaining pieces of the monster
+	repeated FullUserMonsterProto updatedOrNew = 3;
+	
+	optional BoosterItemProto prize = 4;
 	
 	enum TradeItemForBoosterStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_ITEM = 3;
 	}
 }
 
