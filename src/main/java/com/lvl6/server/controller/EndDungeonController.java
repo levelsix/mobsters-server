@@ -19,6 +19,7 @@ import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.TaskForUserOngoing;
+import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
@@ -34,9 +35,11 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -97,13 +100,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
       boolean successful = false;
       Map<String, Integer> money = new HashMap<String, Integer>();
+      int taskId = 0;
       if(legit) {
         previousCash = aUser.getCash();
         previousOil = aUser.getOil();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
     			  money, maxCash, maxOil);
     	  
-    	  resBuilder.setTaskId(ut.getTaskId());
+    	  taskId = ut.getTaskId();
+    	  resBuilder.setTaskId(taskId);
       }
       if (successful) {
       	long taskForUserId = ut.getId(); 
@@ -132,6 +137,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
       				updateUserMonsters(userId, monsterIdToNumPieces,
       					monsterIdToLvlToQuantity, mfusop, currentDate);
+      		
+      		awardItem(userId, firstTimeUserWonTask, resBuilder, taskId);
+      		
       		setResponseBuilder(resBuilder, newOrUpdated);
       		
 //      		//MAYBE NEED TO SEND THESE TO THE CLIENT?
@@ -152,7 +160,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
-      	int taskId = ut.getTaskId();
       	writeToUserCurrencyHistory(aUser, curTime, userTaskId, taskId,
       			previousCash, previousOil, money);
       	writeToTaskForUserCompleted(userId, taskId, userWon, firstTimeUserWonTask, curTime);
@@ -391,6 +398,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   }
   
+  private void awardItem(
+	  int userId,
+	  boolean firstTimeUserWonTask,
+	  EndDungeonResponseProto.Builder resBuilder,
+	  int taskId )
+  {
+	  if (firstTimeUserWonTask) {
+		  TaskMapElement tme = TaskMapElementRetrieveUtils
+			  .getTaskMapElementForTaskId(taskId);
+		  int itemId = tme.getItemDropId();
+		  int quantity = 1;
+		  int numInserted = InsertUtils.get()
+			  .insertIntoUpdateUserItem(
+				  userId, itemId, quantity);
+
+		  if (numInserted > 0) {
+			  resBuilder.setUserItem(
+				  CreateInfoProtoUtils.createUserItemProto(userId, itemId, quantity));
+			  resBuilder.setTaskMapSectionName(tme.getSectionName());
+
+		  }
+
+	  }
+  }
   
   private void setResponseBuilder(Builder resBuilder,
 		  List<FullUserMonsterProto> protos) {

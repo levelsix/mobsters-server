@@ -1603,4 +1603,25 @@ public class InsertUtils implements InsertUtil{
 			return ids;            
 
 		}
+		
+		@Override
+		public int insertIntoUpdateUserItem(int userId, int itemId, int delta) {
+			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+
+			Map<String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
+			insertParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
+			insertParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
+
+			Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+			relativeUpdates.put(DBConstants.ITEM_FOR_USER__QUANTITY, delta);
+			
+			Map<String, Object> absoluteUpdates = null;
+
+
+			int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+				insertParams, relativeUpdates, absoluteUpdates);
+			return numInserted;
+		}
+		
 }

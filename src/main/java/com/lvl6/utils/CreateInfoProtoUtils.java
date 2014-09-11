@@ -1331,6 +1331,16 @@ public class CreateInfoProtoUtils {
 	  
 	  return uipb.build();
   }
+
+  public static UserItemProto createUserItemProto(int userId, int itemId, int quantity) {
+	  UserItemProto.Builder uipb = UserItemProto.newBuilder();
+	  
+	  uipb.setItemId(itemId);
+	  uipb.setUserId(userId);
+	  uipb.setQuantity(quantity);
+	  
+	  return uipb.build();
+  }
   
   /**MiniJobConfig.proto********************************************/
   public static MiniJobProto createMiniJobProto(MiniJob mj) {
