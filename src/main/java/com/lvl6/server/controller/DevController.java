@@ -95,7 +95,7 @@ import com.lvl6.utils.RetrieveUtils;
 				resEvent.setDevResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 			} catch (Exception e2) {
-				log.error("exception2 in UpdateUserCurrencyController processEvent", e);
+				log.error("exception2 in DevController processEvent", e);
 			}
 
 		} finally {

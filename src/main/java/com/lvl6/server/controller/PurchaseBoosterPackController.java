@@ -119,14 +119,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
       	int numBoosterItemsUserWants = 1;
       	log.info("determining the booster items the user receives.");
-        itemsUserReceives = determineBoosterItemsUserReceives(
+        itemsUserReceives = MiscMethods.determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
-        legit = checkIfMonstersExist(itemsUserReceives);
+        legit = MiscMethods.checkIfMonstersExist(itemsUserReceives);
       }
         
       if (legit) {
-        gemReward = determineGemReward(itemsUserReceives);
+        gemReward = MiscMethods.determineGemReward(itemsUserReceives);
         //set the FullUserMonsterProtos (in resBuilder) to send to the client
         successful = writeChangesToDB(resBuilder, user, boosterPackId,
         		itemsUserReceives, gemPrice, now, gemReward, freeBoosterPack);
@@ -212,9 +212,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     if (null == aUser || null == aPack || null == idsToBoosterItems ||
     		idsToBoosterItems.isEmpty()) {
       resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-      log.error("no user for id: " + userId + ", or no BoosterPack for id: " +
-      boosterPackId + ", or no booster items for BoosterPack id. items=" +
-      		idsToBoosterItems);
+      log.error(String.format(
+    	  "no user for id=%s, or no BoosterPack for id=%s, or no booster items=%s",
+      		userId, boosterPackId, idsToBoosterItems));
       return false;
     }
 
@@ -261,96 +261,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 //    return numPurchased;
 //  }
   
-  //no arguments are modified
-  private List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
-      Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
-    //return value
-    List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-    
-    Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId.values();
-    List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-    float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId.values());    
-    
-    //selecting items at random with replacement
-    for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-    	BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
-    	if (null == bi) {
-    		continue;
-    	}
-    	itemsUserReceives.add(bi);
-    }
-    
-    return itemsUserReceives;
-  }
-  
-  private float sumProbabilities(Collection<BoosterItem> boosterItems) {
-  	float sumOfProbabilities = 0.0f;
-  	for (BoosterItem bi : boosterItems) {
-  		sumOfProbabilities += bi.getChanceToAppear();
-  	}
-  	return sumOfProbabilities;
-  }
-  
-  private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
-  		float sumOfProbabilities) {
-  	Random rand = new Random();
-  	float unnormalizedProbabilitySoFar = 0f;
-    float randFloat = rand.nextFloat();
-    
-    log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
-    		"\t randFloat=" + randFloat);
-    
-    int size = itemsList.size();
-    //for each item, normalize before seeing if it is selected
-    for(int i = 0; i < size; i++) {
-      BoosterItem item = itemsList.get(i);
-      
-      //normalize probability
-      unnormalizedProbabilitySoFar += item.getChanceToAppear();
-      float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
-      
-      log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
-      		normalizedProbabilitySoFar);
-      
-      if(randFloat < normalizedProbabilitySoFar) {
-        //we have a winner! current boosterItem is what the user gets
-        return item;
-      }
-    }
-
-    log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
-    return null;
-  }
-  
-  //purpose of this method is to discover if the booster items that contain
-  //monsters as rewards, if the monster ids are valid 
-  private boolean checkIfMonstersExist(List<BoosterItem> itemsUserReceives) {
-  	boolean monstersExist = true;
-  	
-  	Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
-  	for (BoosterItem bi : itemsUserReceives) {
-  		int monsterId = bi.getMonsterId();
-  		
-  		if (0 == monsterId) {
-  			//this booster item does not contain a monster reward
-  			continue;
-  		} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
-  			log.error("This booster item contains nonexistent monsterId. item=" + bi);
-  			monstersExist = false;
-  		}
-  	}
-  	return monstersExist;
-  }
-
-  private int determineGemReward(List<BoosterItem> boosterItems) {
-  	int gemReward = 0;
-  	for (BoosterItem bi : boosterItems) {
-  		gemReward += bi.getGemReward();
-  	}
-  	
-  	return gemReward;
-  }
-  
   private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
       List<BoosterItem> itemsUserReceives, int gemPrice, Date now, int gemReward,
       boolean freeBoosterPack) {
@@ -385,7 +295,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
     List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
     //sop = source of pieces
-    String mfusop = createUpdateUserMonsterArguments(userId, bPackId,
+    String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId, bPackId,
     		itemsUserReceives, monsterIdToNumPieces, completeUserMonsters, now);
     
     log.info("!!!!!!!!!mfusop=" + mfusop);
@@ -394,7 +304,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     if (!completeUserMonsters.isEmpty()) {
     	List<Long> monsterForUserIds = InsertUtils.get()
     			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
-    	List<FullUserMonsterProto> newOrUpdated = createFullUserMonsterProtos(
+    	List<FullUserMonsterProto> newOrUpdated = MiscMethods. 
+    		createFullUserMonsterProtos(
     			monsterForUserIds, completeUserMonsters);
     	
     	log.info("YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
@@ -427,67 +338,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return true;
   }
   
-  //monsterIdsToNumPieces or completeUserMonsters will be populated
-  private String createUpdateUserMonsterArguments(int userId, int boosterPackId,
-  		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
-  		List<MonsterForUser> completeUserMonsters, Date now) {
-  	StringBuilder sb = new StringBuilder();
-  	sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-  	sb.append(" ");
-  	sb.append(boosterPackId);
-  	sb.append(" boosterItemIds ");
-  	
-  	List<Integer> boosterItemIds = new ArrayList<Integer>();
-  	for (BoosterItem item : boosterItems) {
-  		Integer id = item.getId();
-  		Integer monsterId = item.getMonsterId();
-  		
-  		//only keep track of the booster item ids that are a monster reward
-  		if (monsterId <= 0) {
-  			continue;
-  		}
-  		if (item.isComplete()) {
-  			//create a "complete" user monster
-  			boolean hasAllPieces = true;
-  			boolean isComplete = true;
-  			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
-  			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
-  					userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
-
-  			//return this monster in the argument list completeUserMonsters, so caller
-  			//can use it
-  			completeUserMonsters.add(newUserMonster);
-
-  		} else {
-  			monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
-  		}
-  		boosterItemIds.add(id);
-  	}
-  	if (!boosterItemIds.isEmpty()) {
-  		String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-  		sb.append(boosterItemIdsStr);
-  	}
-  	
-  	return sb.toString();
-  }
-
   
-  
-  private List<FullUserMonsterProto> createFullUserMonsterProtos(
-  		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
-    List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
-    
-    for(int i = 0; i < userMonsterIds.size(); i++) {
-      long mfuId = userMonsterIds.get(i);
-      MonsterForUser mfu = mfuList.get(i);
-      mfu.setId(mfuId);
-      FullUserMonsterProto fump = CreateInfoProtoUtils
-      		.createFullUserMonsterProtoFromUserMonster(mfu);
-      protos.add(fump);
-    }
-    
-    return protos;
-  }
+
   
   private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
   		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward,

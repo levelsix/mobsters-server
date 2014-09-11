@@ -44,6 +44,7 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
 import com.lvl6.info.PvpLeague;
@@ -94,6 +95,7 @@ import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
@@ -167,12 +169,14 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 public class MiscMethods {
 
@@ -186,8 +190,162 @@ public class MiscMethods {
   public static final String OIL = "OIL";
   public static final String MONSTER = "MONSTER";
 
+  	//METHODS FOR PICKING A BOOSTER PACK
   
+  	//no arguments are modified
+  	public static List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
+  		Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
+  		//return value
+  		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
+  		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId.values();
+  		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
+  		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId.values());    
+
+  		//selecting items at random with replacement
+  		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
+  			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
+  			if (null == bi) {
+  				continue;
+  			}
+  			itemsUserReceives.add(bi);
+  		}
+
+  		return itemsUserReceives;
+  	}
+
+    private static float sumProbabilities(Collection<BoosterItem> boosterItems) {
+    	float sumOfProbabilities = 0.0f;
+    	for (BoosterItem bi : boosterItems) {
+    		sumOfProbabilities += bi.getChanceToAppear();
+    	}
+    	return sumOfProbabilities;
+    }
+    
+    private static BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
+    		float sumOfProbabilities) {
+    	Random rand = new Random();
+    	float unnormalizedProbabilitySoFar = 0f;
+      float randFloat = rand.nextFloat();
+      
+      log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
+      		"\t randFloat=" + randFloat);
+      
+      int size = itemsList.size();
+      //for each item, normalize before seeing if it is selected
+      for(int i = 0; i < size; i++) {
+        BoosterItem item = itemsList.get(i);
+        
+        //normalize probability
+        unnormalizedProbabilitySoFar += item.getChanceToAppear();
+        float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
+        
+        log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
+        		normalizedProbabilitySoFar);
+        
+        if(randFloat < normalizedProbabilitySoFar) {
+          //we have a winner! current boosterItem is what the user gets
+          return item;
+        }
+      }
+
+      log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
+      return null;
+    }
+  	
+
+    //purpose of this method is to discover if the booster items that contain
+    //monsters as rewards, if the monster ids are valid 
+    public static boolean checkIfMonstersExist(List<BoosterItem> itemsUserReceives) {
+    	boolean monstersExist = true;
+    	
+    	Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+    	for (BoosterItem bi : itemsUserReceives) {
+    		int monsterId = bi.getMonsterId();
+    		
+    		if (0 == monsterId) {
+    			//this booster item does not contain a monster reward
+    			continue;
+    		} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
+    			log.error("This booster item contains nonexistent monsterId. item=" + bi);
+    			monstersExist = false;
+    		}
+    	}
+    	return monstersExist;
+    }
+    
+
+    public static int determineGemReward(List<BoosterItem> boosterItems) {
+    	int gemReward = 0;
+    	for (BoosterItem bi : boosterItems) {
+    		gemReward += bi.getGemReward();
+    	}
+    	
+    	return gemReward;
+    }
+    
+    //monsterIdsToNumPieces or completeUserMonsters will be populated
+    public static String createUpdateUserMonsterArguments(int userId, int boosterPackId,
+    		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
+    		List<MonsterForUser> completeUserMonsters, Date now) {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+    	sb.append(" ");
+    	sb.append(boosterPackId);
+    	sb.append(" boosterItemIds ");
+    	
+    	List<Integer> boosterItemIds = new ArrayList<Integer>();
+    	for (BoosterItem item : boosterItems) {
+    		Integer id = item.getId();
+    		Integer monsterId = item.getMonsterId();
+    		
+    		//only keep track of the booster item ids that are a monster reward
+    		if (monsterId <= 0) {
+    			continue;
+    		}
+    		if (item.isComplete()) {
+    			//create a "complete" user monster
+    			boolean hasAllPieces = true;
+    			boolean isComplete = true;
+    			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+    			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
+    					userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
+
+    			//return this monster in the argument list completeUserMonsters, so caller
+    			//can use it
+    			completeUserMonsters.add(newUserMonster);
+
+    		} else {
+    			monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
+    		}
+    		boosterItemIds.add(id);
+    	}
+    	if (!boosterItemIds.isEmpty()) {
+    		String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
+    		sb.append(boosterItemIdsStr);
+    	}
+    	
+    	return sb.toString();
+    }
+    
+
+    public static List<FullUserMonsterProto> createFullUserMonsterProtos(
+    		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
+      List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
+      
+      for(int i = 0; i < userMonsterIds.size(); i++) {
+        long mfuId = userMonsterIds.get(i);
+        MonsterForUser mfu = mfuList.get(i);
+        mfu.setId(mfuId);
+        FullUserMonsterProto fump = CreateInfoProtoUtils
+        		.createFullUserMonsterProtoFromUserMonster(mfu);
+        protos.add(fump);
+      }
+      
+      return protos;
+    }
+    
+  	
 	//METHODS FOR MATCH MAKING
 
 	public static final double ELO__RANDOM_VAR_MIN = 0.1D;
