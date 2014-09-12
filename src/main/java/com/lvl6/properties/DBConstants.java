@@ -732,6 +732,8 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
   public static final String TASK_MAP_ELEMENT__ITEM_DROP_ID = "item_drop_id";
   public static final String TASK_MAP_ELEMENT__SECTION_NAME = "section_name";
+  public static final String TASK_MAP_ELEMENT__CASH_REWARD = "cash_reward";
+  public static final String TASK_MAP_ELEMENT__OIL_REWARD = "oil_reward";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

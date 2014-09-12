@@ -2770,9 +2770,9 @@ public class CreateInfoProtoUtils {
 	  tmepb.setXPos(tme.getxPos());
 	  tmepb.setYPos(tme.getyPos());
 
-	  String monsterElement = tme.getElement();
+	  String str = tme.getElement();
 	  try {
-		  Element me = Element.valueOf(monsterElement);
+		  Element me = Element.valueOf(str);
 		  tmepb.setElement(me);
 	  } catch (Exception e){
 		  log.error("invalid element. task map element=" + tme);
@@ -2780,10 +2780,19 @@ public class CreateInfoProtoUtils {
 
 	  tmepb.setBoss(tme.isBoss());
 
-	  String bossImgName = tme.getBossImgName();
-	  if (null != bossImgName) {
-		tmepb.setBossImgName(bossImgName);
+	  str = tme.getBossImgName();
+	  if (null != str) {
+		tmepb.setBossImgName(str);
 	  }
+	  
+	  tmepb.setItemDropId(tme.getItemDropId());
+	  
+	  str = tme.getSectionName();
+	  if (null != str) {
+		  tmepb.setSectionName(tme.getSectionName());
+	  }
+	  tmepb.setCashReward(tme.getCashReward());
+	  tmepb.setOilReward(tme.getOilReward());
 	  
 	  return tmepb.build();
   }

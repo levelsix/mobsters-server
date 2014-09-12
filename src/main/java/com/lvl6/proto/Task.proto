@@ -114,4 +114,8 @@ message TaskMapElementProto {
 	optional Element element = 5;
 	optional bool boss = 6;
 	optional string bossImgName = 7;
+	optional int32 itemDropId = 8;
+	optional string sectionName = 9;
+	optional int32 cashReward = 10;
+	optional int32 oilReward = 11;
 } 

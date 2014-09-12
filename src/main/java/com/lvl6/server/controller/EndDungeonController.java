@@ -101,12 +101,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean successful = false;
       Map<String, Integer> money = new HashMap<String, Integer>();
       int taskId = 0;
+      TaskMapElement tme = null;
+      int itemId = 0;
       if(legit) {
-        previousCash = aUser.getCash();
-        previousOil = aUser.getOil();
+
+    	  if (firstTimeUserWonTask) {
+    		  tme = TaskMapElementRetrieveUtils
+    			  .getTaskMapElementForTaskId(taskId);
+    	  }
+    	  //award the item only once
+    	  if (null != tme) {
+    		  itemId = tme.getItemDropId();
+    	  }
+
+    	  previousCash = aUser.getCash();
+    	  previousOil = aUser.getOil();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
-    			  money, maxCash, maxOil);
-    	  
+    		  money, maxCash, maxOil, firstTimeUserWonTask, tme);
+
     	  taskId = ut.getTaskId();
     	  resBuilder.setTaskId(taskId);
       }
@@ -138,7 +150,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       				updateUserMonsters(userId, monsterIdToNumPieces,
       					monsterIdToLvlToQuantity, mfusop, currentDate);
       		
-      		awardOneTimeItem(userId, firstTimeUserWonTask, resBuilder, taskId);
+      		awardOneTimeItem(resBuilder, userId, itemId, taskId, tme);
       		
       		setResponseBuilder(resBuilder, newOrUpdated);
       		
@@ -204,22 +216,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut,
 		  boolean userWon, Timestamp clientTime, Map<String, Integer> money,
-		  int maxCash, int maxOil) {
+		  int maxCash, int maxOil, boolean firstTimeUserWonTask, TaskMapElement tme) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
 	  int oilGained = ut.getOilGained();
-	  
-	  int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
-		int maxCashUserCanGain = maxCash - curCash;
-		cashGained = Math.min(cashGained, maxCashUserCanGain);
-		
-		int curOil = Math.min(u.getOil(), maxOil);
-		int maxOilUserCanGain = maxOil - curOil;
-		oilGained = Math.min(oilGained, maxOilUserCanGain);
-		
+
+	  if (firstTimeUserWonTask && null != tme) {
+		  cashGained += tme.getCashReward();
+		  oilGained += tme.getOilReward();
+	  }
+
+	  cashGained = MiscMethods.capResourceGain(u.getCash(), cashGained, maxCash);
+	  oilGained = MiscMethods.capResourceGain(u.getOil(), oilGained, maxOil);
+
 	  log.info("user before currency change. " + u);
 	  if (userWon) {
-	  	log.info("user WON DUNGEON!!!!!!!!. ");
+		  log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
 		  if (!updateUser(u, expGained, cashGained, oilGained, clientTime)) {
 			  return false;
@@ -399,22 +411,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void awardOneTimeItem(
-	  int userId,
-	  boolean firstTimeUserWonTask,
-	  EndDungeonResponseProto.Builder resBuilder,
-	  int taskId )
+	  Builder resBuilder, int userId, int itemId, int taskId,
+	  TaskMapElement tme)
   {
-	  TaskMapElement tme = null;
-	  if (firstTimeUserWonTask) {
-		  tme = TaskMapElementRetrieveUtils
-			  .getTaskMapElementForTaskId(taskId);
-	  }
-
-	  int itemId = 0;
-	  //award the item only once
-	  if (null != tme) {
-		  itemId = tme.getItemDropId();
-	  }
 
 	  if (itemId > 0) {
 		  int quantity = 1;

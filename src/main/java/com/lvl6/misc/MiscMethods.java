@@ -189,6 +189,14 @@ public class MiscMethods {
   public static final String CASH = "CASH";
   public static final String OIL = "OIL";
   public static final String MONSTER = "MONSTER";
+  
+  
+  	//METHODS FOR CAPPING USER RESOURCE
+  	public static int capResourceGain(int currentAmt, int delta, int maxAmt) {
+  		currentAmt = Math.min(currentAmt, maxAmt); //in case user resource is more than max
+  		int maxResourceUserCanGain = maxAmt - currentAmt;
+  		return Math.min(delta, maxResourceUserCanGain);
+  	}
 
   	//METHODS FOR PICKING A BOOSTER PACK
   

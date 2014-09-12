@@ -106,9 +106,12 @@ import com.lvl6.utils.DBConnection;
     String bossImgName = rs.getString(DBConstants.TASK_MAP_ELEMENT__BOSS_IMG_NAME);
     int itemDropId = rs.getInt(DBConstants.TASK_MAP_ELEMENT__ITEM_DROP_ID); 
     String sectionName = rs.getString(DBConstants.TASK_MAP_ELEMENT__SECTION_NAME);
+    int cashReward = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CASH_REWARD);
+    int oilReward = rs.getInt(DBConstants.TASK_MAP_ELEMENT__OIL_REWARD);
         
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
-    	element, boss, bossImgName, itemDropId, sectionName);
+    	element, boss, bossImgName, itemDropId, sectionName, cashReward,
+    	oilReward);
         
     return taskMap;
   }
