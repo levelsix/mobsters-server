@@ -410,25 +410,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  .getTaskMapElementForTaskId(taskId);
 	  }
 
+	  int itemId = 0;
 	  //award the item only once
 	  if (null != tme) {
-		int itemId = tme.getItemDropId();
-		int quantity = 1;
-		int numInserted = InsertUtils.get()
-			.insertIntoUpdateUserItem(userId, itemId, quantity);
-		log.info(String.format(
-			"numInserted into userItem: %s",
-			numInserted));
-		if (numInserted > 0) {
-			resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
-				quantity));
-			resBuilder.setTaskMapSectionName(tme.getSectionName());
-		} else {
-			log.error(String.format(
-				"unable to award item specified in TaskMapElement=%s",
-				tme));
-		}
-	}
+		  itemId = tme.getItemDropId();
+	  }
+
+	  if (itemId > 0) {
+		  int quantity = 1;
+		  int numInserted = InsertUtils.get()
+			  .insertIntoUpdateUserItem(userId, itemId, quantity);
+		  log.info(String.format(
+			  "numInserted into userItem: %s",
+			  numInserted));
+		  if (numInserted > 0) {
+			  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
+				  quantity));
+			  resBuilder.setTaskMapSectionName(tme.getSectionName());
+		  } else {
+			  log.error(String.format(
+				  "unable to award item specified in TaskMapElement=%s",
+				  tme));
+		  }
+	  }
+
   }
   
   private void setResponseBuilder(Builder resBuilder,
