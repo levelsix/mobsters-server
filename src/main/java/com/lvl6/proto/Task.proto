@@ -64,12 +64,14 @@ message TaskStageMonsterProto {
 	//optional int32 puzzlePieceMonsterId = 10; defined above
 	//optional int32 tsmId = 11; defined above
 	optional int32 defensiveSkillId = 12;
+	optional int32 offensiveSkillId = 14;
 	
 	//The level of the monster that is dropped, if a monster does drop.
 	// Level 0 means a piece is dropped, and anything higher than one
 	// is complete monster.
 	optional int32 puzzlePieceMonsterDropLvl = 13;
 
+	//optional int32 offensiveSkillId = 14; defined above
 
 	enum MonsterType {
 		REGULAR = 1;

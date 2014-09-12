@@ -2608,16 +2608,19 @@ public class CreateInfoProtoUtils {
     	bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     }
     
-    if (tsm.getDefensiveSkillId() > 0) {
-    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    //TODO: Find cleaner way of defaulting to skill in monster table
+    Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
+    if (null != monzter) {
+    	bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
     	
-    } else if (Globals.IS_SANDBOX()) {
-    	
-    	//TODO: Find cleaner way of defaulting to skill in monster table
-    	Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-    	if (null != monzter) {
+    	//if development, default to monster defensive skill
+    	if (Globals.IS_SANDBOX()) {
     		bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
     	}
+    }
+    
+    if (tsm.getDefensiveSkillId() > 0) {
+    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
     }
 
     int tsmId = tsm.getId();
@@ -2688,15 +2691,19 @@ public class CreateInfoProtoUtils {
 		  bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 	  }
 
-	  if (tsm.getDefensiveSkillId() > 0) {
-		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
-		  
-	  } else if (Globals.IS_SANDBOX()) {
-		  //TODO: Find cleaner way of defaulting to skill in monster table
-		  Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-		  if (null != monzter) {
+	  //TODO: Find cleaner way of defaulting to skill in monster table
+	  Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
+	  if (null != monzter) {
+		  bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
+
+		  //if development, default to monster defensive skill
+		  if (Globals.IS_SANDBOX()) {
 			  bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
 		  }
+	  }
+	  
+	  if (tsm.getDefensiveSkillId() > 0) {
+		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
 	  }
 
 	  return bldr.build();
