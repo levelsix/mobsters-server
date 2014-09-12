@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Skill implements Serializable {
 	
-	private static final long serialVersionUID = -7700336469305956148L;
+	private static final long serialVersionUID = -2406732110892655927L;
 	
 	private int id;
 	private String name;
@@ -13,6 +13,8 @@ public class Skill implements Serializable {
 	private String activationType;
 	private int predecId;
 	private int successorId;
+	private String desc;
+	private String iconImgName;
 	
 	public Skill(
 		int id,
@@ -21,7 +23,9 @@ public class Skill implements Serializable {
 		String type,
 		String activationType,
 		int predecId,
-		int successorId )
+		int successorId,
+		String desc,
+		String iconImgName )
 	{
 		super();
 		this.id = id;
@@ -31,6 +35,8 @@ public class Skill implements Serializable {
 		this.activationType = activationType;
 		this.predecId = predecId;
 		this.successorId = successorId;
+		this.desc = desc;
+		this.iconImgName = iconImgName;
 	}
 
 	public int getId()
@@ -103,6 +109,26 @@ public class Skill implements Serializable {
 		this.successorId = successorId;
 	}
 
+	public String getDesc()
+	{
+		return desc;
+	}
+
+	public void setDesc( String desc )
+	{
+		this.desc = desc;
+	}
+
+	public String getIconImgName()
+	{
+		return iconImgName;
+	}
+
+	public void setIconImgName( String iconImgName )
+	{
+		this.iconImgName = iconImgName;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -120,7 +146,11 @@ public class Skill implements Serializable {
 			+ predecId
 			+ ", successorId="
 			+ successorId
+			+ ", desc="
+			+ desc
+			+ ", iconImgName="
+			+ iconImgName
 			+ "]";
 	}
-	
+
 }

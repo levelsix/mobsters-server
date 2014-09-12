@@ -716,6 +716,8 @@ public class DBConstants {
   public static final String SKILL__ACTIVATION_TYPE = "activation_type";
   public static final String SKILL__PREDEC_ID = "predec_id";
   public static final String SKILL__SUCC_ID = "succ_id";
+  public static final String SKILL__DESC = "desc";
+  public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
   
   public static final String SKILL_PROPERTY__ID = GENERIC__ID;
   public static final String SKILL_PROPERTY__NAME = "name";

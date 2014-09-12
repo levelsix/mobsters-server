@@ -2078,6 +2078,17 @@ public class CreateInfoProtoUtils {
 		  }
 	  }
 	  
+	  str = s.getDesc();
+	  if (null != str) {
+		  spb.setDesc(str);
+	  }
+	  
+	  str = s.getIconImgName();
+	  if (null != str) {
+		  spb.setIconImgName(str);
+	  }
+	  
+	  
 	  return spb.build();
   }
 

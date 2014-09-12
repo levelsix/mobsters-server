@@ -32,6 +32,9 @@ message SkillProto {
 	optional int32 sucId = 7;
 	
 	repeated SkillPropertyProto properties = 8;
+	
+	optional string desc = 9;
+	optional string iconImgName = 10;
 }
 
 message SkillPropertyProto {
