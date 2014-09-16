@@ -14,12 +14,22 @@ public final class SkillsProto {
     CAKE_DROP(1, 2),
     JELLY(2, 3),
     QUICK_ATTACK(3, 4),
+    BOMBS(4, 5),
+    SHIELD(5, 6),
+    POISON(6, 7),
+    ROID_RAGE(7, 8),
+    MOMENTUM(8, 9),
     ;
     
     public static final int NO_SKILL_VALUE = 1;
     public static final int CAKE_DROP_VALUE = 2;
     public static final int JELLY_VALUE = 3;
     public static final int QUICK_ATTACK_VALUE = 4;
+    public static final int BOMBS_VALUE = 5;
+    public static final int SHIELD_VALUE = 6;
+    public static final int POISON_VALUE = 7;
+    public static final int ROID_RAGE_VALUE = 8;
+    public static final int MOMENTUM_VALUE = 9;
     
     
     public final int getNumber() { return value; }
@@ -30,6 +40,11 @@ public final class SkillsProto {
         case 2: return CAKE_DROP;
         case 3: return JELLY;
         case 4: return QUICK_ATTACK;
+        case 5: return BOMBS;
+        case 6: return SHIELD;
+        case 7: return POISON;
+        case 8: return ROID_RAGE;
+        case 9: return MOMENTUM;
         default: return null;
       }
     }
@@ -60,7 +75,7 @@ public final class SkillsProto {
     }
     
     private static final SkillType[] VALUES = {
-      NO_SKILL, CAKE_DROP, JELLY, QUICK_ATTACK, 
+      NO_SKILL, CAKE_DROP, JELLY, QUICK_ATTACK, BOMBS, SHIELD, POISON, ROID_RAGE, MOMENTUM, 
     };
     
     public static SkillType valueOf(
@@ -1963,11 +1978,13 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\023\n\013iconImgName\030\n \001(\t\"d" +
       "\n\022SkillPropertyProto\022\027\n\017skillPropertyId\030" +
       "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(\002\022",
-      "\023\n\013shorterName\030\004 \001(\t*E\n\tSkillType\022\014\n\010NO_" +
-      "SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUI" +
-      "CK_ATTACK\020\004*J\n\023SkillActivationType\022\022\n\016US" +
-      "ER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PA" +
-      "SSIVE\020\003B\rB\013SkillsProto"
+      "\023\n\013shorterName\030\004 \001(\t*\205\001\n\tSkillType\022\014\n\010NO" +
+      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QU" +
+      "ICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006P" +
+      "OISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t*J\n\023" +
+      "SkillActivationType\022\022\n\016USER_ACTIVATED\020\001\022" +
+      "\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Skil" +
+      "lsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
