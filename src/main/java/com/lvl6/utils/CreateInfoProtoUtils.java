@@ -2249,7 +2249,7 @@ public class CreateInfoProtoUtils {
     LabProto.Builder lpb = LabProto.newBuilder();
     lpb.setStructInfo(sip);
     lpb.setQueueSize(sl.getQueueSize());
-    lpb.setPointsPerSecond(sl.getPointsPerSecond());
+    lpb.setPointsMultiplier(sl.getPointsMultiplier());
 
     return lpb.build();
   }

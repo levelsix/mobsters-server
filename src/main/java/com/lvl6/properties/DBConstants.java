@@ -736,6 +736,10 @@ public class DBConstants {
   public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
   public static final String SKILL_PROPERTY__SHORT_NAME = "short_name";
   
+  public static final String STRUCTURE_LAB__ID = GENERIC__ID;
+  public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
+  public static final String STRUCTURE_LAB__POINTS_MULTIPLIER = "points_multiplier";
+  
   public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
   public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
   public static final String TASK_MAP_ELEMENT__X_POS = "x_pos";
