@@ -179,11 +179,11 @@ import com.lvl6.utils.DBConnection;
 			  int exp = calculateExp(maxLvlInfo, curLvl);
 			  nextLvlInfo.setCurLvlRequiredExp(exp);
 			  
-			  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == monsterId) {
-				  log.info(String.format(
-					  "hp=%s, exp=%s, currentLvl=%s",
-					  hp, exp, curLvl));
-			  }
+//			  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == monsterId) {
+//				  log.info(String.format(
+//					  "hp=%s, exp=%s, currentLvl=%s",
+//					  hp, exp, curLvl));
+//			  }
 			  
 			  allLvlToPartialInfo.put(curLvl, nextLvlInfo);
 		  }
