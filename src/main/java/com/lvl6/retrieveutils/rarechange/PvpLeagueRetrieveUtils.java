@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -37,74 +36,49 @@ public class PvpLeagueRetrieveUtils {
 	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE;
 	
 	//CONTROLLER LOGIC******************************************************************
-	
-	/**
-	 * @param elo 
-	 * 		Finds leagues where its minElo is less than or equal to this elo and its
-	 * 		maxElo is more than or equal to this elo. If elo < 0, elo will be set to 0.
-	 * 		league.minElo <= elo <= league.maxElo
-	 * 		However, if none exist then select highest or lowest league.
-	 * @param selectRandom
-	 * 	 	If true and multiple leagues exist for given elo, select randomly.
-	 * @param pvpLeagueId
-	 * 		If selectRandom is false, multiple leagues exist for given elo, and
-	 * 		pvpLeagueId is one of the multiple leagues, return pvpLeagueId;
-	 * @return
-	 * 		If selectRandom is false, multiple leagues exist, pvpLeagueId is not one
-	 * 		of the multiple leagues, then return league with lowest minElo;
-	 */
-	public static int getLeagueIdForElo(int elo, boolean selectRandom, int pvpLeagueId) {
-		List<PvpLeague> leagues = getLeaguesForElo(elo);
-		elo = Math.max(0, elo);
+	public static int getLeagueIdForElo(int elo, int curPvpLeagueId) {
+		PvpLeague cur = null;
+		if (pvpLeagueIdsToPvpLeagues.containsKey(curPvpLeagueId)) {
+			cur = pvpLeagueIdsToPvpLeagues.get(curPvpLeagueId);
+		}
 		
-		if (leagues.isEmpty()) {
-			log.error("no league for elo: " + elo + "\t selecting highest/lowest league");
+		int resultId = 0;
+		if (null != lowestLeague && elo < lowestLeague.getMinElo()) {
+			log.error(String.format("selecting lowest league=%s", lowestLeague));
+			resultId = lowestLeague.getId();
+
+		} else if (null != highestLeague && elo > highestLeague.getMinElo()) {
+			log.error(String.format("selecting highest league=%s", highestLeague));
+			resultId = highestLeague.getId();
+
+		} else {
+			log.error(String.format("there appears to be a gap between leagues. elo=%s, leagues=%s, choosing lowest league=%s",
+				elo, pvpLeagueIdsToPvpLeagues, lowestLeague));
+			resultId = lowestLeague.getId();
+		}
+
+		int iterations = pvpLeagueIdsToPvpLeagues.size();
+		PvpLeague pvpLeagueAtm = cur;
+		while ( iterations > 0 && null != pvpLeagueAtm ) {
+			int minElo = pvpLeagueAtm.getMinElo();
+			int maxElo = pvpLeagueAtm.getMaxElo();
+
+			if (minElo <= elo && elo <= maxElo) {
+				//minElo <= elo <= maxElo
+				resultId = curPvpLeagueId;
+				break;
+			} else if (elo < minElo) {
+				pvpLeagueAtm = pvpLeagueIdsToPvpLeagues.get(
+					pvpLeagueAtm.getPredecessorLeagueId());
+			} else if (elo > maxElo) {
+				pvpLeagueAtm = pvpLeagueIdsToPvpLeagues.get(
+					pvpLeagueAtm.getSuccessorLeagueId());
+			}
 			
-			if (null != lowestLeague && elo < lowestLeague.getMinElo()) {
-				log.error("selecting lowest league=" + lowestLeague);
-				return lowestLeague.getId();
-				
-			} else if (null != highestLeague && elo > highestLeague.getMinElo()) {
-				log.error("selecting highest league=" + highestLeague);
-				return highestLeague.getId();
-				
-			} else {
-				log.error("there appears to be a gap between leagues. elo=" + elo +
-						"leagues=" + pvpLeagueIdsToPvpLeagues + "choosing lowest league");
-				return lowestLeague.getId();
-			}
+			iterations--;
 		}
 		
-		int numLeagues = leagues.size();
-		if (1 == numLeagues) {
-			PvpLeague pl = leagues.get(0);
-			return pl.getId();
-		}
-		
-		//more than one league because leagues can have overlapping elo
-		if (selectRandom) {
-			int randIndex = random.nextInt(numLeagues);
-			PvpLeague pl = leagues.get(randIndex); 
-			log.info("asked to select random league: " + pl +
-					"\t for elo:" + elo);
-			return pl.getId();
-		}
-		
-		for (PvpLeague pl : leagues) {
-			if (pl.getId() == pvpLeagueId) {
-				log.info("multiple leagues but still in current pvpLeagueId=" +
-						pvpLeagueId);
-				return pvpLeagueId;
-			}
-		}
-		
-		//getting league with the lowest elo
-		Collections.sort(leagues, new PvpLeagueComparator());
-		int firstIndex = 0;
-		PvpLeague pl = leagues.get(firstIndex); 
-		log.info("multiple leagues. selecting league-with-lowest-minElo: " +
-				pl + "\t leagues=" + leagues + "\t for elo:" + elo);
-		return pl.getId();
+		return resultId;
 	}
 	
 	/**
@@ -149,7 +123,7 @@ public class PvpLeagueRetrieveUtils {
 		elo = Math.max(0, elo);
 		
 		if (pvpLeagueId <= 0) {
-			pvpLeagueId = getLeagueIdForElo(elo, false, pvpLeagueId);
+			pvpLeagueId = getLeagueIdForElo(elo, pvpLeagueId);
 		}
 		
 		PvpLeague pl = getPvpLeagueForLeagueId(pvpLeagueId);
@@ -158,9 +132,13 @@ public class PvpLeagueRetrieveUtils {
 			log.info("choosing random rank!!!!!!" + randRank);
 			return randRank;
 		}
-		//rank = (1 - ((user_elo - min_elo)/(max_elo - min_elo))) * num_ranks
 		
 		
+		//rank = (1 - ((user_elo - min_elo)/(max_elo - min_elo))) * 
+		//       (max_rank - min_rank) + min_rank
+		//     = (1 - eloRatio) * (rank_difference) + min_rank
+		
+		//calculate eloRatio
 		int minElo = pl.getMinElo();
 		log.info("minElo=" + minElo);
 		int maxElo = pl.getMaxElo();
@@ -170,16 +148,17 @@ public class PvpLeagueRetrieveUtils {
 		float maxEloDelta = maxElo - minElo;
 		log.info("maxEloDelta=" + maxEloDelta);
 		
-		int numRanks = pl.getNumRanks();
-		
 		//0 <= eloRatio <= 1
 		float eloRatio = userEloDelta / maxEloDelta;
 		log.info("eloRatio=" + eloRatio);
-		
 		float eloRatioComplement = 1F - eloRatio;
 		log.info("eloRatioComplement=" + eloRatioComplement);
 		
-		int rank = Math.round(eloRatioComplement * numRanks);
+		//calculate rank_difference
+		int numRanks = pl.getMaxRank() - pl.getMinRank();
+		
+		//calculate actual rank
+		int rank = Math.round(eloRatioComplement * numRanks) + pl.getMinRank();
 		log.info("rounded rank=" + rank);
 		
 		//atm, situation is 0 <= rank <= numRanks, but forcing 0 < rank <= numRanks
@@ -244,8 +223,8 @@ public class PvpLeagueRetrieveUtils {
 						rs.beforeFirst();
 						Map<Integer, PvpLeague> pvpLeagueIdsToPvpLeaguesTemp =
 								new HashMap<Integer, PvpLeague>();
-						lowestLeague = null;
-						highestLeague = null;
+						PvpLeague lowestLeagueTemp = null;
+						PvpLeague highestLeagueTemp = null;
 						//loop through each row and convert it into a java object
 						while(rs.next()) {  
 							PvpLeague pvpLeague = convertRSRowToPvpLeague(rs, random);
@@ -254,24 +233,26 @@ public class PvpLeagueRetrieveUtils {
 							pvpLeagueIdsToPvpLeaguesTemp.put(pvpLeagueId, pvpLeague);
 							
 							//setting the lowest and highest leagues
-							if (null == lowestLeague) {
-								lowestLeague = pvpLeague;
+							if (null == lowestLeagueTemp) {
+								lowestLeagueTemp = pvpLeague;
 							}
-							if (null == highestLeague) {
-								highestLeague = pvpLeague;
+							if (null == highestLeagueTemp) {
+								highestLeagueTemp = pvpLeague;
 								continue;
 							}
 							
-							if (pvpLeague.getMinElo() < lowestLeague.getMinElo()) {
-								lowestLeague = pvpLeague;
+							if (pvpLeague.getMinElo() < lowestLeagueTemp.getMinElo()) {
+								lowestLeagueTemp = pvpLeague;
 							}
-							if (pvpLeague.getMinElo() > highestLeague.getMinElo()) {
-								highestLeague = pvpLeague;
+							if (pvpLeague.getMinElo() > highestLeagueTemp.getMinElo()) {
+								highestLeagueTemp = pvpLeague;
 							}
 							
 						}
 
 						pvpLeagueIdsToPvpLeagues = pvpLeagueIdsToPvpLeaguesTemp;
+						lowestLeague = lowestLeagueTemp;
+						highestLeague = highestLeagueTemp;
 					} catch (SQLException e) {
 						log.error("problem with database call.", e);
 
@@ -293,20 +274,24 @@ public class PvpLeagueRetrieveUtils {
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
 	private static PvpLeague convertRSRowToPvpLeague(ResultSet rs, Random rand) throws SQLException {
-		int i = 1;
-		int id = rs.getInt(i++);
-		String leagueName = rs.getString(i++);
-		String imgPrefix = rs.getString(i++);
-		int numRanks = rs.getInt(i++);
-		String description = rs.getString(i++);
-		int minElo = rs.getInt(i++);
-		int maxElo = rs.getInt(i++);
+		int id = rs.getInt(DBConstants.PVP_LEAGUE__ID);
+		String leagueName = rs.getString(DBConstants.PVP_LEAGUE__LEAGUE_NAME);
+		String imgPrefix = rs.getString(DBConstants.PVP_LEAGUE__IMG_PREFIX);
+		String description = rs.getString(DBConstants.PVP_LEAGUE__DESCRIPTION);
+		int minElo = rs.getInt(DBConstants.PVP_LEAGUE__MIN_ELO);
+		int maxElo = rs.getInt(DBConstants.PVP_LEAGUE__MAX_ELO);
 		if (rs.wasNull()) {
 			log.warn("max elo not set. default elo=" + maxElo + " pvpLeagueId=" + id);
 		}
+		
+		int minRank = rs.getInt(DBConstants.PVP_LEAGUE__MIN_RANK);
+		int maxRank = rs.getInt(DBConstants.PVP_LEAGUE__MAX_RANK);
+		int predecessorLeagueId = rs.getInt(DBConstants.PVP_LEAGUE__PREDECESSOR_ID);
+		int successorLeagueId = rs.getInt(DBConstants.PVP_LEAGUE__SUCCESSOR_ID);
 
-		PvpLeague pvpLeague = new PvpLeague(id, leagueName,
-				imgPrefix, numRanks, description, minElo, maxElo);
+		PvpLeague pvpLeague = new PvpLeague(id, leagueName, imgPrefix,
+			description, minElo, maxElo, minRank, maxRank,
+			predecessorLeagueId, successorLeagueId);
 		return pvpLeague;
 	}
 	

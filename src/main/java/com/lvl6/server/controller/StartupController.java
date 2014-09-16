@@ -1135,7 +1135,7 @@ public class StartupController extends EventController {
 		  //update hazelcast map and ready arguments for pvp battle history
 		  int attackerCurElo = attackerPlfu.getElo() + eloAttackerLoses;
 		  attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
-				  attackerCurElo, false, attackerPrevLeague);
+				  attackerCurElo, attackerPrevLeague);
 		  attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(
 				  attackerCurElo, attackerCurLeague);
 		  
@@ -1166,7 +1166,7 @@ public class StartupController extends EventController {
 			  //update hazelcast map and ready arguments for pvp battle history
 			  int defenderCurElo = defenderEloBefore + eloDefenderWins;
 			  defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
-					  defenderCurElo, false, defenderPrevLeague);
+					  defenderCurElo, defenderPrevLeague);
 			  defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(
 					  defenderCurElo, defenderCurLeague);
 			  

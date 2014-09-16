@@ -32,6 +32,9 @@ message SkillProto {
 	optional int32 sucId = 7;
 	
 	repeated SkillPropertyProto properties = 8;
+	
+	optional string desc = 9;
+	optional string iconImgName = 10;
 }
 
 message SkillPropertyProto {
@@ -50,6 +53,12 @@ enum SkillType {
 	CAKE_DROP = 2;
 	JELLY = 3;
 	QUICK_ATTACK = 4;
+	
+	BOMBS = 5;
+	SHIELD = 6;
+	POISON = 7;
+	ROID_RAGE = 8; // 2x (or 1.5x) modifier for a next attack.
+	MOMENTUM = 9; // single passive offensive: Your damage increases by X% after each successive turn.
 }
 
 enum SkillActivationType {

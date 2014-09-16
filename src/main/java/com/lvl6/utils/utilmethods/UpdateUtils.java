@@ -1374,4 +1374,21 @@ public class UpdateUtils implements UpdateUtil {
 			
 			return numUpdated;
 		}
+		
+		public int updateItemForUser(int userId, int itemId, int quantityChange) {
+			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
+			conditionParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
+			
+			Map<String, Object> absoluteParams = null;
+			
+			Map<String, Object> relativeParams = new HashMap<String, Object>();
+			relativeParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, quantityChange);
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
 }

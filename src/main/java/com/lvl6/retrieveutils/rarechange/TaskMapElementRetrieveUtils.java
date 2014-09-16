@@ -20,6 +20,7 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, TaskMapElement> idToTaskMapElement;
+  private static Map<Integer, TaskMapElement> taskIdToTaskMapElement;
   
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_MAP_ELEMENT;
 
@@ -32,6 +33,17 @@ import com.lvl6.utils.DBConnection;
     return idToTaskMapElement;
   }
 
+  public static TaskMapElement getTaskMapElementForTaskId(int taskId) {
+	  log.debug(String.format("retrieve task map element for taskId=%s", taskId));
+	  if (null == idToTaskMapElement) {
+		  setStaticIdToTaskMapElement();
+	  }
+	  if (!taskIdToTaskMapElement.containsKey(taskId)) {
+		  log.error(String.format("no task map element for taskId=%s", taskId));
+		  return null;
+	  }
+	  return taskIdToTaskMapElement.get(taskId);
+  }
 
   private static void setStaticIdToTaskMapElement() {
     log.debug("setting static map of ids to TaskMapElement elements");
@@ -39,6 +51,8 @@ import com.lvl6.utils.DBConnection;
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     Map<Integer, TaskMapElement> idsToTaskMapElementsTemp =
+    	new HashMap<Integer, TaskMapElement>();
+    Map<Integer, TaskMapElement> taskIdsToTaskMapElementsTemp =
     	new HashMap<Integer, TaskMapElement>();
     try {
 			if (conn != null) {
@@ -57,6 +71,7 @@ import com.lvl6.utils.DBConnection;
 			        
 			        int id = taskMap.getId();
 			        idsToTaskMapElementsTemp.put(id, taskMap);
+			        taskIdsToTaskMapElementsTemp.put(taskMap.getTaskId(), taskMap);
 			      }
 			      
 			    } catch (SQLException e) {
@@ -71,6 +86,7 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
     idToTaskMapElement = idsToTaskMapElementsTemp;
+    taskIdToTaskMapElement = taskIdsToTaskMapElementsTemp;
   }
   
   public static void reload() {
@@ -90,9 +106,12 @@ import com.lvl6.utils.DBConnection;
     String bossImgName = rs.getString(DBConstants.TASK_MAP_ELEMENT__BOSS_IMG_NAME);
     int itemDropId = rs.getInt(DBConstants.TASK_MAP_ELEMENT__ITEM_DROP_ID); 
     String sectionName = rs.getString(DBConstants.TASK_MAP_ELEMENT__SECTION_NAME);
+    int cashReward = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CASH_REWARD);
+    int oilReward = rs.getInt(DBConstants.TASK_MAP_ELEMENT__OIL_REWARD);
         
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
-    	element, boss, bossImgName, itemDropId, sectionName);
+    	element, boss, bossImgName, itemDropId, sectionName, cashReward,
+    	oilReward);
         
     return taskMap;
   }

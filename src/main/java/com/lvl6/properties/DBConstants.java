@@ -709,6 +709,17 @@ public class DBConstants {
   public static final String MONSTER__BASE_OFFENSIVE_SKILL_ID = "base_offensive_skill_id";
   public static final String MONSTER__BASE_DEFENSIVE_SKILL_ID = "base_defensive_skill_id";
   
+  public static final String PVP_LEAGUE__ID = GENERIC__ID;
+  public static final String PVP_LEAGUE__LEAGUE_NAME = "league_name";
+  public static final String PVP_LEAGUE__IMG_PREFIX = "img_prefix";
+  public static final String PVP_LEAGUE__DESCRIPTION = "description";
+  public static final String PVP_LEAGUE__MIN_ELO = "min_elo";
+  public static final String PVP_LEAGUE__MAX_ELO = "max_elo";
+  public static final String PVP_LEAGUE__MIN_RANK = "min_rank";
+  public static final String PVP_LEAGUE__MAX_RANK = "max_rank";
+  public static final String PVP_LEAGUE__PREDECESSOR_ID = "predecessor_id";
+  public static final String PVP_LEAGUE__SUCCESSOR_ID = "successor_id";
+  
   public static final String SKILL__ID = GENERIC__ID;
   public static final String SKILL__NAME = "name";
   public static final String SKILL__ORB_COST = "orb_cost";
@@ -716,6 +727,8 @@ public class DBConstants {
   public static final String SKILL__ACTIVATION_TYPE = "activation_type";
   public static final String SKILL__PREDEC_ID = "predec_id";
   public static final String SKILL__SUCC_ID = "succ_id";
+  public static final String SKILL__DESC = "desc";
+  public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
   
   public static final String SKILL_PROPERTY__ID = GENERIC__ID;
   public static final String SKILL_PROPERTY__NAME = "name";
@@ -732,6 +745,8 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__BOSS_IMG_NAME = "boss_img_name";
   public static final String TASK_MAP_ELEMENT__ITEM_DROP_ID = "item_drop_id";
   public static final String TASK_MAP_ELEMENT__SECTION_NAME = "section_name";
+  public static final String TASK_MAP_ELEMENT__CASH_REWARD = "cash_reward";
+  public static final String TASK_MAP_ELEMENT__OIL_REWARD = "oil_reward";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

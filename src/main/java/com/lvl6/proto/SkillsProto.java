@@ -14,12 +14,22 @@ public final class SkillsProto {
     CAKE_DROP(1, 2),
     JELLY(2, 3),
     QUICK_ATTACK(3, 4),
+    BOMBS(4, 5),
+    SHIELD(5, 6),
+    POISON(6, 7),
+    ROID_RAGE(7, 8),
+    MOMENTUM(8, 9),
     ;
     
     public static final int NO_SKILL_VALUE = 1;
     public static final int CAKE_DROP_VALUE = 2;
     public static final int JELLY_VALUE = 3;
     public static final int QUICK_ATTACK_VALUE = 4;
+    public static final int BOMBS_VALUE = 5;
+    public static final int SHIELD_VALUE = 6;
+    public static final int POISON_VALUE = 7;
+    public static final int ROID_RAGE_VALUE = 8;
+    public static final int MOMENTUM_VALUE = 9;
     
     
     public final int getNumber() { return value; }
@@ -30,6 +40,11 @@ public final class SkillsProto {
         case 2: return CAKE_DROP;
         case 3: return JELLY;
         case 4: return QUICK_ATTACK;
+        case 5: return BOMBS;
+        case 6: return SHIELD;
+        case 7: return POISON;
+        case 8: return ROID_RAGE;
+        case 9: return MOMENTUM;
         default: return null;
       }
     }
@@ -60,7 +75,7 @@ public final class SkillsProto {
     }
     
     private static final SkillType[] VALUES = {
-      NO_SKILL, CAKE_DROP, JELLY, QUICK_ATTACK, 
+      NO_SKILL, CAKE_DROP, JELLY, QUICK_ATTACK, BOMBS, SHIELD, POISON, ROID_RAGE, MOMENTUM, 
     };
     
     public static SkillType valueOf(
@@ -195,6 +210,14 @@ public final class SkillsProto {
         getPropertiesOrBuilderList();
     com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder getPropertiesOrBuilder(
         int index);
+    
+    // optional string desc = 9;
+    boolean hasDesc();
+    String getDesc();
+    
+    // optional string iconImgName = 10;
+    boolean hasIconImgName();
+    String getIconImgName();
   }
   public static final class SkillProto extends
       com.google.protobuf.GeneratedMessage
@@ -338,6 +361,70 @@ public final class SkillsProto {
       return properties_.get(index);
     }
     
+    // optional string desc = 9;
+    public static final int DESC_FIELD_NUMBER = 9;
+    private java.lang.Object desc_;
+    public boolean hasDesc() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getDesc() {
+      java.lang.Object ref = desc_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          desc_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescBytes() {
+      java.lang.Object ref = desc_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        desc_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string iconImgName = 10;
+    public static final int ICONIMGNAME_FIELD_NUMBER = 10;
+    private java.lang.Object iconImgName_;
+    public boolean hasIconImgName() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public String getIconImgName() {
+      java.lang.Object ref = iconImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          iconImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getIconImgNameBytes() {
+      java.lang.Object ref = iconImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        iconImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       skillId_ = 0;
       name_ = "";
@@ -347,6 +434,8 @@ public final class SkillsProto {
       predecId_ = 0;
       sucId_ = 0;
       properties_ = java.util.Collections.emptyList();
+      desc_ = "";
+      iconImgName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -383,6 +472,12 @@ public final class SkillsProto {
       }
       for (int i = 0; i < properties_.size(); i++) {
         output.writeMessage(8, properties_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(9, getDescBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(10, getIconImgNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -424,6 +519,14 @@ public final class SkillsProto {
       for (int i = 0; i < properties_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, properties_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getDescBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getIconImgNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -570,6 +673,10 @@ public final class SkillsProto {
         } else {
           propertiesBuilder_.clear();
         }
+        desc_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        iconImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       
@@ -645,6 +752,14 @@ public final class SkillsProto {
         } else {
           result.properties_ = propertiesBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.desc_ = desc_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.iconImgName_ = iconImgName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -707,6 +822,12 @@ public final class SkillsProto {
               propertiesBuilder_.addAllMessages(other.properties_);
             }
           }
+        }
+        if (other.hasDesc()) {
+          setDesc(other.getDesc());
+        }
+        if (other.hasIconImgName()) {
+          setIconImgName(other.getIconImgName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -790,6 +911,16 @@ public final class SkillsProto {
               com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder subBuilder = com.lvl6.proto.SkillsProto.SkillPropertyProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addProperties(subBuilder.buildPartial());
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              desc_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              iconImgName_ = input.readBytes();
               break;
             }
           }
@@ -1150,6 +1281,78 @@ public final class SkillsProto {
           properties_ = null;
         }
         return propertiesBuilder_;
+      }
+      
+      // optional string desc = 9;
+      private java.lang.Object desc_ = "";
+      public boolean hasDesc() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getDesc() {
+        java.lang.Object ref = desc_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          desc_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDesc(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        desc_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDesc() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        desc_ = getDefaultInstance().getDesc();
+        onChanged();
+        return this;
+      }
+      void setDesc(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        desc_ = value;
+        onChanged();
+      }
+      
+      // optional string iconImgName = 10;
+      private java.lang.Object iconImgName_ = "";
+      public boolean hasIconImgName() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public String getIconImgName() {
+        java.lang.Object ref = iconImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          iconImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setIconImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        iconImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIconImgName() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        iconImgName_ = getDefaultInstance().getIconImgName();
+        onChanged();
+        return this;
+      }
+      void setIconImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000200;
+        iconImgName_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillProto)
@@ -1765,20 +1968,23 @@ public final class SkillsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Skill.proto\022\016com.lvl6.proto\"\373\001\n\nSkillP" +
+      "\n\013Skill.proto\022\016com.lvl6.proto\"\236\002\n\nSkillP" +
       "roto\022\017\n\007skillId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007o" +
       "rbCost\030\003 \001(\005\022\'\n\004type\030\004 \001(\0162\031.com.lvl6.pr" +
       "oto.SkillType\022;\n\016activationType\030\005 \001(\0162#." +
       "com.lvl6.proto.SkillActivationType\022\020\n\010pr" +
       "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
       "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
-      "oto\"d\n\022SkillPropertyProto\022\027\n\017skillProper" +
-      "tyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003" +
-      " \001(\002\022\023\n\013shorterName\030\004 \001(\t*E\n\tSkillType\022\014",
-      "\n\010NO_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020" +
-      "\n\014QUICK_ATTACK\020\004*J\n\023SkillActivationType\022" +
-      "\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022" +
-      "\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "oto\022\014\n\004desc\030\t \001(\t\022\023\n\013iconImgName\030\n \001(\t\"d" +
+      "\n\022SkillPropertyProto\022\027\n\017skillPropertyId\030" +
+      "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nskillValue\030\003 \001(\002\022",
+      "\023\n\013shorterName\030\004 \001(\t*\205\001\n\tSkillType\022\014\n\010NO" +
+      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QU" +
+      "ICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006P" +
+      "OISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t*J\n\023" +
+      "SkillActivationType\022\022\n\016USER_ACTIVATED\020\001\022" +
+      "\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Skil" +
+      "lsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1790,7 +1996,7 @@ public final class SkillsProto {
           internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SkillProto_descriptor,
-              new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", },
+              new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "IconImgName", },
               com.lvl6.proto.SkillsProto.SkillProto.class,
               com.lvl6.proto.SkillsProto.SkillProto.Builder.class);
           internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =

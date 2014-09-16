@@ -4,26 +4,42 @@ import java.io.Serializable;
 
 public class PvpLeague implements Serializable {
 
-	private static final long serialVersionUID = 4071892938955324752L;
+	private static final long serialVersionUID = -4851584695578561184L;
 	
 	private int id;
 	private String leagueName;
 	private String imgPrefix;
-	private int numRanks;
 	private String description;
 	private int minElo;
 	private int maxElo;
+	private int minRank;
+	private int maxRank;
+	private int predecessorLeagueId;
+	private int successorLeagueId;
 	
-	public PvpLeague(int id, String leagueName, String imgPrefix, int numRanks,
-			String description, int minElo, int maxElo) {
+	public PvpLeague(
+		int id,
+		String leagueName,
+		String imgPrefix,
+		String description,
+		int minElo,
+		int maxElo,
+		int minRank,
+		int maxRank,
+		int predecessorLeagueId,
+		int successorLeagueId )
+	{
 		super();
 		this.id = id;
 		this.leagueName = leagueName;
 		this.imgPrefix = imgPrefix;
-		this.numRanks = numRanks;
 		this.description = description;
 		this.minElo = minElo;
 		this.maxElo = maxElo;
+		this.minRank = minRank;
+		this.maxRank = maxRank;
+		this.predecessorLeagueId = predecessorLeagueId;
+		this.successorLeagueId = successorLeagueId;
 	}
 
 	public int getId() {
@@ -50,14 +66,6 @@ public class PvpLeague implements Serializable {
 		this.imgPrefix = imgPrefix;
 	}
 
-	public int getNumRanks() {
-		return numRanks;
-	}
-
-	public void setNumRanks(int numRanks) {
-		this.numRanks = numRanks;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -82,12 +90,70 @@ public class PvpLeague implements Serializable {
 		this.maxElo = maxElo;
 	}
 
-	@Override
-	public String toString() {
-		return "PvpLeague [id=" + id + ", leagueName=" + leagueName
-				+ ", imgPrefix=" + imgPrefix + ", numRanks=" + numRanks
-				+ ", description=" + description + ", minElo=" + minElo
-				+ ", maxElo=" + maxElo + "]";
+	public int getMinRank()
+	{
+		return minRank;
 	}
-	
+
+	public void setMinRank( int minRank )
+	{
+		this.minRank = minRank;
+	}
+
+	public int getMaxRank()
+	{
+		return maxRank;
+	}
+
+	public void setMaxRank( int maxRank )
+	{
+		this.maxRank = maxRank;
+	}
+
+	public int getPredecessorLeagueId()
+	{
+		return predecessorLeagueId;
+	}
+
+	public void setPredecessorLeagueId( int predecessorLeagueId )
+	{
+		this.predecessorLeagueId = predecessorLeagueId;
+	}
+
+	public int getSuccessorLeagueId()
+	{
+		return successorLeagueId;
+	}
+
+	public void setSuccessorLeagueId( int successorLeagueId )
+	{
+		this.successorLeagueId = successorLeagueId;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "PvpLeague [id="
+			+ id
+			+ ", leagueName="
+			+ leagueName
+			+ ", imgPrefix="
+			+ imgPrefix
+			+ ", description="
+			+ description
+			+ ", minElo="
+			+ minElo
+			+ ", maxElo="
+			+ maxElo
+			+ ", minRank="
+			+ minRank
+			+ ", maxRank="
+			+ maxRank
+			+ ", predecessorLeagueId="
+			+ predecessorLeagueId
+			+ ", successorLeagueId="
+			+ successorLeagueId
+			+ "]";
+	}
+
 }

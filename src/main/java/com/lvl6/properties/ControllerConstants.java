@@ -34,7 +34,7 @@ public class ControllerConstants {
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
 	public static final float MONSTER__ELEMENTAL_STRENGTH = 1.2F;
 	public static final float MONSTER__ELEMENTAL_WEAKNESS = 0.8F;
-  public static final float MONSTER__OIL_PER_MONSTER_LEVEL = 100f;
+  public static final float MONSTER__OIL_PER_MONSTER_LEVEL = 50f;
 	
 //	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 //	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
@@ -45,6 +45,7 @@ public class ControllerConstants {
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
 	public static final String MFUSOP__MINI_JOB = "miniJobId";
 	public static final String MFUSOP__QUEST = "questId"; 
+	public static final String MFUSOP__REDEEM_ITEM = "redeem itemId";
 	public static final String MFUSOP__USER_CREATE = "user create";
 	
 	//MFUDR = monster_for_user_delete_reasons

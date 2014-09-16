@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
 
-	private static final long serialVersionUID = 7214663032423732406L;
+	private static final long serialVersionUID = 6699395878806980800L;
 	
 	private int id;
 	private int taskId;
@@ -15,6 +15,8 @@ public class TaskMapElement implements Serializable {
 	private String bossImgName;
 	private int itemDropId;
 	private String sectionName; //groups a bunch of TaskMapElement
+	private int cashReward;
+	private int oilReward;
 
 	public TaskMapElement(
 		int id,
@@ -25,7 +27,9 @@ public class TaskMapElement implements Serializable {
 		boolean boss,
 		String bossImgName,
 		int itemDropId,
-		String sectionName )
+		String sectionName,
+		int cashReward,
+		int oilReward )
 	{
 		super();
 		this.id = id;
@@ -37,6 +41,8 @@ public class TaskMapElement implements Serializable {
 		this.bossImgName = bossImgName;
 		this.itemDropId = itemDropId;
 		this.sectionName = sectionName;
+		this.cashReward = cashReward;
+		this.oilReward = oilReward;
 	}
 
 	public int getId()
@@ -129,6 +135,26 @@ public class TaskMapElement implements Serializable {
 		this.sectionName = sectionName;
 	}
 
+	public int getCashReward()
+	{
+		return cashReward;
+	}
+
+	public void setCashReward( int cashReward )
+	{
+		this.cashReward = cashReward;
+	}
+
+	public int getOilReward()
+	{
+		return oilReward;
+	}
+
+	public void setOilReward( int oilReward )
+	{
+		this.oilReward = oilReward;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -150,6 +176,10 @@ public class TaskMapElement implements Serializable {
 			+ itemDropId
 			+ ", sectionName="
 			+ sectionName
+			+ ", cashReward="
+			+ cashReward
+			+ ", oilReward="
+			+ oilReward
 			+ "]";
 	}
 

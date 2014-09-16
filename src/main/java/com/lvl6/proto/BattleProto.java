@@ -2717,21 +2717,9 @@ public final class BattleProto {
     boolean hasImgPrefix();
     String getImgPrefix();
     
-    // optional int32 numRanks = 4;
-    boolean hasNumRanks();
-    int getNumRanks();
-    
     // optional string description = 5;
     boolean hasDescription();
     String getDescription();
-    
-    // optional int32 minElo = 6;
-    boolean hasMinElo();
-    int getMinElo();
-    
-    // optional int32 maxElo = 7;
-    boolean hasMaxElo();
-    int getMaxElo();
   }
   public static final class PvpLeagueProto extends
       com.google.protobuf.GeneratedMessage
@@ -2836,21 +2824,11 @@ public final class BattleProto {
       }
     }
     
-    // optional int32 numRanks = 4;
-    public static final int NUMRANKS_FIELD_NUMBER = 4;
-    private int numRanks_;
-    public boolean hasNumRanks() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getNumRanks() {
-      return numRanks_;
-    }
-    
     // optional string description = 5;
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private java.lang.Object description_;
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public String getDescription() {
       java.lang.Object ref = description_;
@@ -2878,34 +2856,11 @@ public final class BattleProto {
       }
     }
     
-    // optional int32 minElo = 6;
-    public static final int MINELO_FIELD_NUMBER = 6;
-    private int minElo_;
-    public boolean hasMinElo() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public int getMinElo() {
-      return minElo_;
-    }
-    
-    // optional int32 maxElo = 7;
-    public static final int MAXELO_FIELD_NUMBER = 7;
-    private int maxElo_;
-    public boolean hasMaxElo() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    public int getMaxElo() {
-      return maxElo_;
-    }
-    
     private void initFields() {
       leagueId_ = 0;
       leagueName_ = "";
       imgPrefix_ = "";
-      numRanks_ = 0;
       description_ = "";
-      minElo_ = 0;
-      maxElo_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2929,16 +2884,7 @@ public final class BattleProto {
         output.writeBytes(3, getImgPrefixBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, numRanks_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, minElo_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, maxElo_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2963,19 +2909,7 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, numRanks_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, minElo_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, maxElo_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3107,14 +3041,8 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         imgPrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        numRanks_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        minElo_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        maxElo_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -3168,19 +3096,7 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.numRanks_ = numRanks_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
         result.description_ = description_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.minElo_ = minElo_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.maxElo_ = maxElo_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3206,17 +3122,8 @@ public final class BattleProto {
         if (other.hasImgPrefix()) {
           setImgPrefix(other.getImgPrefix());
         }
-        if (other.hasNumRanks()) {
-          setNumRanks(other.getNumRanks());
-        }
         if (other.hasDescription()) {
           setDescription(other.getDescription());
-        }
-        if (other.hasMinElo()) {
-          setMinElo(other.getMinElo());
-        }
-        if (other.hasMaxElo()) {
-          setMaxElo(other.getMaxElo());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3264,24 +3171,9 @@ public final class BattleProto {
               imgPrefix_ = input.readBytes();
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              numRanks_ = input.readInt32();
-              break;
-            }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               description_ = input.readBytes();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              minElo_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              maxElo_ = input.readInt32();
               break;
             }
           }
@@ -3383,31 +3275,10 @@ public final class BattleProto {
         onChanged();
       }
       
-      // optional int32 numRanks = 4;
-      private int numRanks_ ;
-      public boolean hasNumRanks() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getNumRanks() {
-        return numRanks_;
-      }
-      public Builder setNumRanks(int value) {
-        bitField0_ |= 0x00000008;
-        numRanks_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearNumRanks() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        numRanks_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional string description = 5;
       private java.lang.Object description_ = "";
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public String getDescription() {
         java.lang.Object ref = description_;
@@ -3423,63 +3294,21 @@ public final class BattleProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         description_ = value;
         onChanged();
         return this;
       }
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         description_ = value;
         onChanged();
-      }
-      
-      // optional int32 minElo = 6;
-      private int minElo_ ;
-      public boolean hasMinElo() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public int getMinElo() {
-        return minElo_;
-      }
-      public Builder setMinElo(int value) {
-        bitField0_ |= 0x00000020;
-        minElo_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearMinElo() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        minElo_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 maxElo = 7;
-      private int maxElo_ ;
-      public boolean hasMaxElo() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      public int getMaxElo() {
-        return maxElo_;
-      }
-      public Builder setMaxElo(int value) {
-        bitField0_ |= 0x00000040;
-        maxElo_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearMaxElo() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        maxElo_ = 0;
-        onChanged();
-        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpLeagueProto)
@@ -3539,13 +3368,11 @@ public final class BattleProto {
       "pLeagueProto\022:\n\016defenderBefore\030\014 \001(\0132\".c",
       "om.lvl6.proto.UserPvpLeagueProto\0229\n\rdefe" +
       "nderAfter\030\r \001(\0132\".com.lvl6.proto.UserPvp" +
-      "LeagueProto\"\220\001\n\016PvpLeagueProto\022\020\n\010league" +
-      "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi" +
-      "x\030\003 \001(\t\022\020\n\010numRanks\030\004 \001(\005\022\023\n\013description" +
-      "\030\005 \001(\t\022\016\n\006minElo\030\006 \001(\005\022\016\n\006maxElo\030\007 \001(\005*E" +
-      "\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFE" +
-      "NDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleP" +
-      "roto"
+      "LeagueProto\"^\n\016PvpLeagueProto\022\020\n\010leagueI" +
+      "d\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefix" +
+      "\030\003 \001(\t\022\023\n\013description\030\005 \001(\t*E\n\014BattleRes" +
+      "ult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022" +
+      "\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3573,7 +3400,7 @@ public final class BattleProto {
           internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PvpLeagueProto_descriptor,
-              new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "NumRanks", "Description", "MinElo", "MaxElo", },
+              new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "Description", },
               com.lvl6.proto.BattleProto.PvpLeagueProto.class,
               com.lvl6.proto.BattleProto.PvpLeagueProto.Builder.class);
           return null;
