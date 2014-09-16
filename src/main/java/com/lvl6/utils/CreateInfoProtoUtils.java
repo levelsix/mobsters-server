@@ -481,15 +481,10 @@ public class CreateInfoProtoUtils {
 		  plpb.setImgPrefix(aStr);
 	  }
 	  
-	  plpb.setNumRanks(pl.getNumRanks());
-	  
 	  aStr = pl.getDescription();
 	  if (null != aStr) {
 		  plpb.setDescription(aStr);
 	  }
-	  
-	  plpb.setMinElo(pl.getMinElo());
-	  plpb.setMaxElo(pl.getMaxElo());
 	  
 	  return plpb.build();
   }
@@ -549,7 +544,7 @@ public class CreateInfoProtoUtils {
 	  UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
 	  uplpb.setUserId(userId);
 	  
-	  int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, true, 0);
+	  int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, 0);
 	  uplpb.setLeagueId(leagueId);
 	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
 	  uplpb.setRank(rank);

@@ -591,7 +591,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  int curElo = prevElo + attackerEloChange;
 	  int attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
-			  false, attackerPrevLeague);
+			  attackerPrevLeague);
 	  int attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(curElo,
 			  attackerCurLeague);
 	  
@@ -730,7 +730,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  int curElo = prevElo + defenderEloChange;
 	  int curPvpLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(curElo,
-			  false, prevPvpLeague);
+			  prevPvpLeague);
 	  int curRank = PvpLeagueRetrieveUtils.getRankForElo(curElo, curPvpLeague);
 
 	  //update pvp stuff: elo most likely changed, shields might have if attackerWon

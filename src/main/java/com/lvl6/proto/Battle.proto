@@ -73,10 +73,7 @@ message PvpLeagueProto {
 	optional int32 leagueId = 1;
 	optional string leagueName = 2;
 	optional string imgPrefix = 3;
-	optional int32 numRanks = 4;
 	optional string description = 5;
-	optional int32 minElo = 6;
-	optional int32 maxElo = 7;
 }
 
 //------------------------------------------------------------------------------------------
