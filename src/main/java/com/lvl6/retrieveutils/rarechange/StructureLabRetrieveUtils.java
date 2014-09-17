@@ -109,7 +109,7 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureLab convertRSRowToLab(ResultSet rs) throws SQLException {
-    int structId = rs.getInt(DBConstants.STRUCTURE_LAB__ID);
+    int structId = rs.getInt(DBConstants.STRUCTURE_LAB__STRUCT_ID);
     int queueSize = rs.getInt(DBConstants.STRUCTURE_LAB__QUEUE_SIZE);
     float pointsMultiplier = rs.getFloat(DBConstants.STRUCTURE_LAB__POINTS_MULTIPLIER);
     
