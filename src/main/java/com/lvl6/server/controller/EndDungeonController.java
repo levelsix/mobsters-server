@@ -414,23 +414,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Builder resBuilder, int userId, int itemId, int taskId,
 	  TaskMapElement tme)
   {
-
-	  if (itemId > 0) {
-		  int quantity = 1;
-		  int numInserted = InsertUtils.get()
-			  .insertIntoUpdateUserItem(userId, itemId, quantity);
-		  log.info(String.format(
-			  "numInserted into userItem: %s",
-			  numInserted));
-		  if (numInserted > 0) {
-			  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
-				  quantity));
-			  resBuilder.setTaskMapSectionName(tme.getSectionName());
-		  } else {
-			  log.error(String.format(
-				  "unable to award item specified in TaskMapElement=%s",
-				  tme));
-		  }
+	  log.info(String.format(
+		  "awarding item: itemId=%s, taskId=%s, TaskMapElement=%s",
+		  itemId, taskId, tme));
+	  if (itemId <= 0) {
+		  log.info("NOT!!!");
+		  return;
+	  }
+	  
+	  int quantity = 1;
+	  int numInserted = InsertUtils.get()
+		  .insertIntoUpdateUserItem(userId, itemId, quantity);
+	  log.info(String.format(
+		  "numInserted into userItem: %s",
+		  numInserted));
+	  if (numInserted > 0) {
+		  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
+			  quantity));
+		  resBuilder.setTaskMapSectionName(tme.getSectionName());
+	  } else {
+		  log.error(String.format(
+			  "unable to award item specified in TaskMapElement=%s",
+			  tme));
 	  }
 
   }
