@@ -198,22 +198,22 @@ import com.lvl6.utils.DBConnection;
 	  double base = ((double)(currentLvl-1))/(double)(max.getLevel()-1);
 	  double hpDiff = (max.getHp()-min.getHp());
 	  int hpOffset = (int) (hpDiff * Math.pow(base, max.getHpExponentBase()));
-	  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == min.getMonsterId()) {
+	  /*if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == min.getMonsterId()) {
 		  log.info(String.format(
 			  "minInfo=%s, maxInfo=%s, curLvl=%s, base=%s, hpDiff=%s, hpOffset=%s, minHp=%s",
 			  min, max, currentLvl, base, hpDiff, hpOffset, min.getHp()));
-	  }
+	  }*/
 	  return (min.getHp()+hpOffset);
   }
   
   private static int calculateExp(MonsterLevelInfo max, int currentLvl) {
 	  double base = ((double) (currentLvl-1))/((double) (max.getExpLvlDivisor()-1));
 	  double multiplicand = Math.pow(base, max.getExpLvlExponent()); 
-	  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == max.getMonsterId()) {
+	  /*if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == max.getMonsterId()) {
 		  log.info(String.format(
 			  "base=%s, resultMultiplicand=%s, currentLvl=%s",
 			  base, multiplicand, currentLvl));
-	  }
+	  }*/
 	  return  (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
   }
   

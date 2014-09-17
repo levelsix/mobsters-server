@@ -104,7 +104,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       TaskMapElement tme = null;
       int itemId = 0;
       if(legit) {
-
+    	  taskId = ut.getTaskId();
+    	  resBuilder.setTaskId(taskId);
+    	  
     	  if (firstTimeUserWonTask) {
     		  tme = TaskMapElementRetrieveUtils
     			  .getTaskMapElementForTaskId(taskId);
@@ -119,8 +121,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
     		  money, maxCash, maxOil, firstTimeUserWonTask, tme);
 
-    	  taskId = ut.getTaskId();
-    	  resBuilder.setTaskId(taskId);
       }
       if (successful) {
       	long taskForUserId = ut.getId(); 
