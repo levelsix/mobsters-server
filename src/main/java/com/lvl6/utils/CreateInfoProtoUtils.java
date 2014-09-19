@@ -507,6 +507,8 @@ public class CreateInfoProtoUtils {
 			  uplpb.setShieldEndTime(time);
 		  }
 		  
+		  uplpb.setMonsterDmgMultiplier(plfu.getMonsterDmgMultiplier());
+		  
 	  } else if (null != pu) {
 		  uplpb.setLeagueId(pu.getPvpLeagueId());
 		  uplpb.setRank(pu.getRank());
@@ -519,6 +521,9 @@ public class CreateInfoProtoUtils {
 			  long time = shieldEndTime.getTime();
 			  uplpb.setShieldEndTime(time);
 		  }
+		  
+		  uplpb.setMonsterDmgMultiplier(pu.getMonsterDmgMultiplier());
+		  
 	  }
 	  
 	  
@@ -548,6 +553,8 @@ public class CreateInfoProtoUtils {
 	  uplpb.setLeagueId(leagueId);
 	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
 	  uplpb.setRank(rank);
+	  
+	  uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 	  
 	  return uplpb.build();
   }

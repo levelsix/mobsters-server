@@ -747,6 +747,7 @@ public class MiscMethods {
 
     cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
+    cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
     cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);

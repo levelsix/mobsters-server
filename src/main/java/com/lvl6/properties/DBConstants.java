@@ -462,6 +462,7 @@ public class DBConstants {
   public static final String PVP_LEAGUE_FOR_USER__DEFENSES_WON = "defenses_won";
   public static final String PVP_LEAGUE_FOR_USER__ATTACKS_LOST = "attacks_lost";
   public static final String PVP_LEAGUE_FOR_USER__DEFENSES_LOST = "defenses_lost";
+  public static final String PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER = "monster_dmg_multiplier";
   
   /*QUEST FOR USER TABLE*/
   public static final String QUEST_FOR_USER__USER_ID = GENERIC__USER_ID;

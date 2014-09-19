@@ -187,6 +187,7 @@ public class PvpLeagueForUserRetrieveUtil {
 			ofu.setDefensesWon(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON));
 			ofu.setAttacksLost(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST));
 			ofu.setDefensesLost(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST));
+			ofu.setMonsterDmgMultiplier(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER));
 			return ofu;
 		}        
 		
@@ -204,6 +205,7 @@ public class PvpLeagueForUserRetrieveUtil {
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST);
 				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST);
+				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER);
 			}
 			return columnsSelected;
 		}
