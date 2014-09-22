@@ -2090,6 +2090,10 @@ public class CreateInfoProtoUtils {
 		  spb.setIconImgName(str);
 	  }
 	  
+	  str = s.getLogoImgName();
+	  if (null != str) {
+		  spb.setLogoImgName(str);
+	  }
 	  
 	  return spb.build();
   }

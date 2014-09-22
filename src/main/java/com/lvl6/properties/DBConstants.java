@@ -730,6 +730,7 @@ public class DBConstants {
   public static final String SKILL__SUCC_ID = "succ_id";
   public static final String SKILL__DESC = "desc";
   public static final String SKILL__ICON_IMG_NAME = "icon_img_name";
+  public static final String SKILL__LOGO_IMG_NAME = "logo_img_name";
   
   public static final String SKILL_PROPERTY__ID = GENERIC__ID;
   public static final String SKILL_PROPERTY__NAME = "name";

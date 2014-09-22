@@ -35,6 +35,7 @@ message SkillProto {
 	
 	optional string desc = 9;
 	optional string iconImgName = 10;
+	optional string logoImgName = 11;
 }
 
 message SkillPropertyProto {

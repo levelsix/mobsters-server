@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Skill implements Serializable {
 	
-	private static final long serialVersionUID = -2406732110892655927L;
+	private static final long serialVersionUID = 4765942258700594117L;
 	
 	private int id;
 	private String name;
@@ -15,6 +15,7 @@ public class Skill implements Serializable {
 	private int successorId;
 	private String desc;
 	private String iconImgName;
+	private String logoImgName;
 	
 	public Skill(
 		int id,
@@ -25,7 +26,8 @@ public class Skill implements Serializable {
 		int predecId,
 		int successorId,
 		String desc,
-		String iconImgName )
+		String iconImgName,
+		String logoImgName )
 	{
 		super();
 		this.id = id;
@@ -37,6 +39,7 @@ public class Skill implements Serializable {
 		this.successorId = successorId;
 		this.desc = desc;
 		this.iconImgName = iconImgName;
+		this.logoImgName = logoImgName;
 	}
 
 	public int getId()
@@ -129,6 +132,16 @@ public class Skill implements Serializable {
 		this.iconImgName = iconImgName;
 	}
 
+	public String getLogoImgName()
+	{
+		return logoImgName;
+	}
+
+	public void setLogoImgName( String logoImgName )
+	{
+		this.logoImgName = logoImgName;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -150,6 +163,8 @@ public class Skill implements Serializable {
 			+ desc
 			+ ", iconImgName="
 			+ iconImgName
+			+ ", logoImgName="
+			+ logoImgName
 			+ "]";
 	}
 
