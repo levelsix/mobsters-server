@@ -2625,19 +2625,14 @@ public class CreateInfoProtoUtils {
     	bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     }
     
-    //TODO: Find cleaner way of defaulting to skill in monster table
-    Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-    if (null != monzter) {
-    	bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
-    	
-    	//if development, default to monster defensive skill
-    	if (Globals.IS_SANDBOX()) {
-    		bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
-    	}
+    int defensiveSkillId = tsm.getDefensiveSkillId(); 
+    if ( defensiveSkillId > 0 ) {
+    	bldr.setDefensiveSkillId(defensiveSkillId);
     }
     
-    if (tsm.getDefensiveSkillId() > 0) {
-    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    int offensiveSkillId = tsm.getOffensiveSkillId();
+    if (offensiveSkillId > 0) {
+    	bldr.setOffensiveSkillId(offensiveSkillId);
     }
 
     int tsmId = tsm.getId();
@@ -2708,19 +2703,14 @@ public class CreateInfoProtoUtils {
 		  bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 	  }
 
-	  //TODO: Find cleaner way of defaulting to skill in monster table
-	  Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-	  if (null != monzter) {
-		  bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
-
-		  //if development, default to monster defensive skill
-		  if (Globals.IS_SANDBOX()) {
-			  bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
-		  }
+	  int defensiveSkillId = tsm.getDefensiveSkillId(); 
+	  if ( defensiveSkillId > 0 ) {
+		  bldr.setDefensiveSkillId(defensiveSkillId);
 	  }
-	  
-	  if (tsm.getDefensiveSkillId() > 0) {
-		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+
+	  int offensiveSkillId = tsm.getOffensiveSkillId();
+	  if (offensiveSkillId > 0) {
+		  bldr.setOffensiveSkillId(offensiveSkillId);
 	  }
 
 	  return bldr.build();

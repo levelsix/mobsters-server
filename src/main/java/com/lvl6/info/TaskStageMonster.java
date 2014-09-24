@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
 	
-	private static final long serialVersionUID = -8489223987733342120L;
+	private static final long serialVersionUID = -3323103890724969594L;
 	
 	private int id;
 	private int stageId;
@@ -24,6 +24,8 @@ public class TaskStageMonster implements Serializable {
 	private int monsterDropLvl; //the level of the monster that is dropped
 	private int defensiveSkillId;
   
+	//non persisted information
+	private int offensiveSkillId;
 	private Random rand;
 
 	public TaskStageMonster(
@@ -42,7 +44,8 @@ public class TaskStageMonster implements Serializable {
 		float dmgMultiplier,
 		int monsterIdDrop,
 		int monsterDropLvl,
-		int defensiveSkillId)
+		int defensiveSkillId,
+		int offensiveSkillId)
 	{
 		super();
 		this.id = id;
@@ -61,6 +64,7 @@ public class TaskStageMonster implements Serializable {
 		this.monsterIdDrop = monsterIdDrop;
 		this.monsterDropLvl = monsterDropLvl;
 		this.defensiveSkillId = defensiveSkillId;
+		this.offensiveSkillId = offensiveSkillId;
 	}
 
 //covenience methods--------------------------------------------------------
@@ -241,6 +245,16 @@ public class TaskStageMonster implements Serializable {
 	  this.defensiveSkillId = defensiveSkillId;
   }
 
+  public int getOffensiveSkillId()
+  {
+	  return offensiveSkillId;
+  }
+
+  public void setOffensiveSkillId( int offensiveSkillId )
+  {
+	  this.offensiveSkillId = offensiveSkillId;
+  }
+
   @Override
   public String toString()
   {
@@ -276,6 +290,8 @@ public class TaskStageMonster implements Serializable {
 		  + monsterDropLvl
 		  + ", defensiveSkillId="
 		  + defensiveSkillId
+		  + ", offensiveSkillId="
+		  + offensiveSkillId
 		  + "]";
   }
 

@@ -14,7 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.Monster;
 import com.lvl6.info.TaskStageMonster;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -26,6 +28,8 @@ public class TaskStageMonsterRetrieveUtils {
   private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
   private static Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonsters;
 
+  private static boolean reassignedSkills = false;
+  
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
   
   public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
@@ -33,6 +37,10 @@ public class TaskStageMonsterRetrieveUtils {
     if (null == taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();
     }
+    if (!reassignedSkills) {
+    	reassignSkills();
+    }
+    
     return taskStageIdsToTaskStageMonsters;
   }
   
@@ -40,6 +48,9 @@ public class TaskStageMonsterRetrieveUtils {
 	  log.debug("retrieve task stage monster for id=" + tsmId);
 	  if (null == taskStageMonsterIdsToTaskStageMonsters) {
 		  setStaticTaskStageIdsToTaskStageMonster();      
+	  }
+	  if (!reassignedSkills) {
+		  reassignSkills();
 	  }
 	  if (!taskStageMonsterIdsToTaskStageMonsters.containsKey(tsmId)) {
 		  log.error("no task stage monsters for tsm id=" + tsmId);
@@ -54,6 +65,10 @@ public class TaskStageMonsterRetrieveUtils {
     if (null == taskStageIdsToTaskStageMonsters) {
       setStaticTaskStageIdsToTaskStageMonster();      
     }
+    if (!reassignedSkills) {
+    	reassignSkills();
+    }
+    
     if (!taskStageIdsToTaskStageMonsters.containsKey(taskStageId)) {
     	log.error("no task stage monsters for task stage id=" + taskStageId);
     	return new ArrayList<TaskStageMonster>();
@@ -66,6 +81,10 @@ public class TaskStageMonsterRetrieveUtils {
   	if (null == taskStageMonsterIdsToTaskStageMonsters) {
   		setStaticTaskStageIdsToTaskStageMonster();
   	}
+    if (!reassignedSkills) {
+    	reassignSkills();
+    }
+    
   	Map<Integer, TaskStageMonster> returnMap = new HashMap<Integer, TaskStageMonster>();
   	
   	for (int id : ids) {
@@ -75,9 +94,47 @@ public class TaskStageMonsterRetrieveUtils {
   	return returnMap;
   }
 
+  private static void reassignSkills() {
+	  
+	  if (null == taskStageMonsterIdsToTaskStageMonsters) {
+		  return;
+	  }
+	  
+	  Map<Integer, Monster> idToMonster = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+	  if (null == idToMonster) {
+		  return;
+	  }
+	  
+	  boolean resetAllSkills = true;
+
+	  //for the TaskStageMonsters that have their defensive skill not set
+	  //reassign to the skill the monster has, also set the offensive skill
+	  for (TaskStageMonster tsm : taskStageMonsterIdsToTaskStageMonsters.values()) {
+		  Monster monzter = null;
+		  if (idToMonster.containsKey(tsm.getMonsterId())) {
+			  monzter = idToMonster.get(tsm.getMonsterId());
+		  }
+		  
+		  if (null == monzter) {
+			  resetAllSkills = false;
+			  continue;
+		  }
+		  
+		  tsm.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
+		  
+		  if (ControllerConstants.NOT_SET == tsm.getDefensiveSkillId()) {
+			  tsm.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
+		  }
+	  }
+	  
+	  reassignedSkills = resetAllSkills;
+  }
+  
   private static void setStaticTaskStageIdsToTaskStageMonster() {
     log.debug("setting static map of taskStage and taskStageMonster Ids to monsterIds");
-
+    
+    reassignedSkills = false;
+    
     Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -150,6 +207,11 @@ public class TaskStageMonsterRetrieveUtils {
     int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
     int defensiveSkillId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
     
+    if (rs.wasNull()) {
+    	//default to skill in task stage monster
+    	defensiveSkillId = ControllerConstants.NOT_SET;
+    }
+    
     if (null != monsterType) {
     	String newMonsterType = monsterType.trim().toUpperCase();
     	if (!monsterType.equals(newMonsterType)) {
@@ -181,7 +243,7 @@ public class TaskStageMonsterRetrieveUtils {
     TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
     		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
     		puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop,
-    		monsterDropLvl, defensiveSkillId);
+    		monsterDropLvl, defensiveSkillId, 0);
     
     if (null == monsterType) {
     	log.error("TaskStageMonster, monster type incorrect, offending tsm=" +
