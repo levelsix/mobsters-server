@@ -90,12 +90,11 @@ import com.lvl6.utils.DBConnection;
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
 	private static MonsterBattleDialogue convertRSRowToMonsterBattleDialogue(ResultSet rs) throws SQLException {
-		int i = 1;
-		int id = rs.getInt(i++);
-		int monsterId = rs.getInt(i++);
-		String dialogueType = rs.getString(i++);
-		String dialogue = rs.getString(i++);
-		float probabilityUttered = rs.getFloat(i++);
+		int id = rs.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__ID);
+		int monsterId = rs.getInt(DBConstants.MONSTER_BATTLE_DIALOGUE__MONSTER_ID);
+		String dialogueType = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE_TYPE);
+		String dialogue = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE);
+		float probabilityUttered = rs.getFloat(DBConstants.MONSTER_BATTLE_DIALOGUE__PROBABILITY_UTTERED);
 		
 		MonsterBattleDialogue monsterBattleDialogue = new MonsterBattleDialogue(id,
 				monsterId, dialogueType, dialogue, probabilityUttered);

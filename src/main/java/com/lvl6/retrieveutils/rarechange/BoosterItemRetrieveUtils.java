@@ -146,16 +146,15 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static BoosterItem convertRSRowToBoosterItem(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int boosterPackId = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
-    int numPieces = rs.getInt(i++);
-    boolean isComplete = rs.getBoolean(i++);
-    boolean isSpecial = rs.getBoolean(i++);
-    int gemReward = rs.getInt(i++);
-    int cashReward = rs.getInt(i++);
-    float chanceToAppear = rs.getFloat(i++);
+    int id = rs.getInt(DBConstants.BOOSTER_ITEM__ID);
+    int boosterPackId = rs.getInt(DBConstants.BOOSTER_ITEM__BOOSTER_PACK_ID);
+    int monsterId = rs.getInt(DBConstants.BOOSTER_ITEM__MONSTER_ID);
+    int numPieces = rs.getInt(DBConstants.BOOSTER_ITEM__NUM_PIECES);
+    boolean isComplete = rs.getBoolean(DBConstants.BOOSTER_ITEM__IS_COMPLETE);
+    boolean isSpecial = rs.getBoolean(DBConstants.BOOSTER_ITEM__IS_SPECIAL);
+    int gemReward = rs.getInt(DBConstants.BOOSTER_ITEM__GEM_REWARD);
+    int cashReward = rs.getInt(DBConstants.BOOSTER_ITEM__CASH_REWARD);
+    float chanceToAppear = rs.getFloat(DBConstants.BOOSTER_ITEM__CHANCE_TO_APPEAR);
     
     BoosterItem boosterItem = new BoosterItem(id, boosterPackId, monsterId,
     		numPieces, isComplete, isSpecial, gemReward, cashReward, chanceToAppear);

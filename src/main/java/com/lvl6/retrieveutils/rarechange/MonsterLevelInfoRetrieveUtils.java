@@ -14,7 +14,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MonsterLevelInfo;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -225,25 +224,24 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static MonsterLevelInfo convertRSRowToMonsterLevelInfo(ResultSet rs) throws SQLException {
-    int i = 1;
-    int monsterId = rs.getInt(i++);
-    int level = rs.getInt(i++);
-    int hp = rs.getInt(i++);
-//    int attack = rs.getInt(i++);
-    int curLvlRequiredExp = rs.getInt(i++);
-    int feederExp = rs.getInt(i++);
-    int fireDmg = rs.getInt(i++);
-    int grassDmg = rs.getInt(i++);
-    int waterDmg = rs.getInt(i++);
-    int lightningDmg = rs.getInt(i++);
-    int darknessDmg = rs.getInt(i++);
-    int rockDmg = rs.getInt(i++);
-    int speed = rs.getInt(i++);
-    float hpExponentBase = rs.getFloat(i++);
-    float dmgExponentBase = rs.getFloat(i++);
-    float expLvlDivisor = rs.getFloat(i++);
-    float expLvlExponent = rs.getFloat(i++);
-    int sellAmount = rs.getInt(i++);
+    int monsterId = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__MONSTER_ID);
+    int level = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__LEVEL);
+    int hp = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__HP);
+//    int attack = rs.getInt(DBConstants.);
+    int curLvlRequiredExp = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__CUR_LVL_REQUIRED_EXP);
+    int feederExp = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__FEEDER_EXP);
+    int fireDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__FIRE_DMG);
+    int grassDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__GRASS_DMG);
+    int waterDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__WATER_DMG);
+    int lightningDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__LIGHTNING_DMG);
+    int darknessDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__DARKNESS_DMG);
+    int rockDmg = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__ROCK_DMG);
+    int speed = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__SPEED);
+    float hpExponentBase = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__HP_EXPONENT_BASE);
+    float dmgExponentBase = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__DMG_EXPONENT_BASE);
+    float expLvlDivisor = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__EXP_LVL_DIVISOR);
+    float expLvlExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT);
+    int sellAmount = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__SELL_AMOUNT);
     
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
     		curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,

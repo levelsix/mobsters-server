@@ -181,17 +181,16 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static QuestJob convertRSRowToQuestJob(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int questId = rs.getInt(i++);
-    String questJobType = rs.getString(i++);
-    String description = rs.getString(i++);
-    int staticDataId = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
-    int priority = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.QUEST_JOB__ID);
+    int questId = rs.getInt(DBConstants.QUEST_JOB__QUEST_ID);
+    String questJobType = rs.getString(DBConstants.QUEST_JOB__QUEST_JOB_TYPE);
+    String description = rs.getString(DBConstants.QUEST_JOB__DESCRIPTION);
+    int staticDataId = rs.getInt(DBConstants.QUEST_JOB__STATIC_DATA_ID);
+    int quantity = rs.getInt(DBConstants.QUEST_JOB__QUANTITY);
+    int priority = rs.getInt(DBConstants.QUEST_JOB__PRIORITY);
     
-    int cityId = rs.getInt(i++);
-    int cityAssetNum = rs.getInt(i++);
+    int cityId = rs.getInt(DBConstants.QUEST_JOB__CITY_ID);
+    int cityAssetNum = rs.getInt(DBConstants.QUEST_JOB__CITY_ASSET_NUM);
     
     QuestJob quest = new QuestJob(id, questId, questJobType, description,
     		staticDataId, quantity, priority, cityId, cityAssetNum);

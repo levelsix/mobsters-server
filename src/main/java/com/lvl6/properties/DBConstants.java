@@ -118,12 +118,6 @@ public class DBConstants {
   public static final String ACHIEVEMENT_FOR_USER__TIME_COMPLETED = "time_completed";
   public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "time_redeemed";
   
-  /*ALERT ON STARTUP*/
-  public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
-  public static final String ALERT_ON_STARTUP__MESSAGE = "message";
-  public static final String ALERT_ON_STARTUP__IS_ACTIVE = "is_active";
-  
-  
   /*AVAILABLE REFERRAL CODES*/
   public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
   public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
@@ -673,11 +667,102 @@ public class DBConstants {
   
   /**************CONFIGURATION DATA TABLES*****************************/
   
+  public static final String ACHIEVEMENT__ID = GENERIC__ID;
+  public static final String ACHIEVEMENT__NAME = "name";
+  public static final String ACHIEVEMENT__DESCRIPTION = "description";
+  public static final String ACHIEVEMENT__GEM_REWARD = "gem_reward";
+  public static final String ACHIEVEMENT__LVL = "lvl";
+  public static final String ACHIEVEMENT__ACHIEVEMENT_TYPE = "achievement_type";
+  public static final String ACHIEVEMENT__RESOURCE_TYPE = "resource_type";
+  public static final String ACHIEVEMENT__MONSTER_ELEMENT = "monster_element";
+  public static final String ACHIEVEMENT__MONSTER_QUALITY = "monster_quality";
+  public static final String ACHIEVEMENT__STATIC_DATA_ID = "static_data_id";
+  public static final String ACHIEVEMENT__QUANTITY = "quantity";
+  public static final String ACHIEVEMENT__PRIORITY = "priority";
+  public static final String ACHIEVEMENT__PREREQUISITE_ID = "prerequisite_id";
+  public static final String ACHIEVEMENT__SUCCESSOR_ID = "successor_id";
+
+  /*ALERT ON STARTUP*/
+  public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
+  public static final String ALERT_ON_STARTUP__MESSAGE = "message";
+  public static final String ALERT_ON_STARTUP__IS_ACTIVE = "is_active";
+  
+  public static final String BANNED_USER__USER_ID = GENERIC__USER_ID;
+  
+  public static final String BOOSTER_DISPLAY_ITEM__ID = GENERIC__ID;
+  public static final String BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
+  public static final String BOOSTER_DISPLAY_ITEM__IS_MONSTER = "is_monster";
+  public static final String BOOSTER_DISPLAY_ITEM__IS_COMPLETE = "is_complete";
+  public static final String BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY = "monster_quality";
+  public static final String BOOSTER_DISPLAY_ITEM__GEM_REWARD = "gem_reward";
+  public static final String BOOSTER_DISPLAY_ITEM__QUANTITY = "quantity";
+  
+  public static final String BOOSTER_ITEM__ID = GENERIC__ID;
+  public static final String BOOSTER_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
+  public static final String BOOSTER_ITEM__MONSTER_ID = "monster_id";
+  public static final String BOOSTER_ITEM__NUM_PIECES = "num_pieces";
+  public static final String BOOSTER_ITEM__IS_COMPLETE = "is_complete";
+  public static final String BOOSTER_ITEM__IS_SPECIAL = "is_special";
+  public static final String BOOSTER_ITEM__GEM_REWARD = "gem_reward";
+  public static final String BOOSTER_ITEM__CASH_REWARD = "cash_reward";
+  public static final String BOOSTER_ITEM__CHANCE_TO_APPEAR = "chance_to_appear";
+  
+  public static final String BOOSTER_PACK__ID = GENERIC__ID;
+  public static final String BOOSTER_PACK__NAME = "name";
+  public static final String BOOSTER_PACK__GEM_PRICE = "gem_price";
+  public static final String BOOSTER_PACK__LIST_BACKGROUND_IMG_NAME = "list_background_img_name";
+  public static final String BOOSTER_PACK__LIST_DESCRIPTION = "list_description";
+  public static final String BOOSTER_PACK__NAV_BAR_IMG_NAME = "nav_bar_img_name";
+  public static final String BOOSTER_PACK__NAV_TITLE_IMG_NAME = "nav_title_img_name";
+  public static final String BOOSTER_PACK__MACHINE_IMG_NAME = "machine_img_name";
+  
+  public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
+  public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
+  public static final String CLAN_EVENT_PERSISTENT__START_HOUR = "start_hour";
+  public static final String CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES = "event_duration_minutes";
+  public static final String CLAN_EVENT_PERSISTENT__CLAN_RAID_ID = "clan_raid_id";
+  
+  public static final String CLAN_ICON__ID = GENERIC__ID;
+  public static final String CLAN_ICON__IMG_NAME = "img_name";
+  public static final String CLAN_ICON__IS_AVAILABLE = "is_available";
+  
+  public static final String EVENT_PERSISTENT__ID = GENERIC__ID;
+  public static final String EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week"; 
+  public static final String EVENT_PERSISTENT__START_HOUR = "start_hour";
+  public static final String EVENT_PERSISTENT__EVENT_DURATION_MINUTES = "event_duration_minutes";
+  public static final String EVENT_PERSISTENT__TASK_ID = "task_id";
+  public static final String EVENT_PERSISTENT__COOLDOWN_MINUTES = "cooldown_minutes";
+  public static final String EVENT_PERSISTENT__EVENT_TYPE = "event_type";
+  public static final String EVENT_PERSISTENT__MONSTER_ELEMENT = "monster_element";
+  
   public static final String ITEM__ID = GENERIC__ID;
   public static final String ITEM__NAME = "name";
   public static final String ITEM__IMG_NAME = "img_name";
   public static final String ITEM__ITEM_TYPE = "item_type";
   public static final String ITEM__STATIC_DATA_ID = "static_data_id";
+  
+  public static final String MINI_JOB__ID = GENERIC__ID;
+  public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id"; 
+  public static final String MINI_JOB__NAME = "name";
+  public static final String MINI_JOB__CASH_REWARD = "cash_reward";
+  public static final String MINI_JOB__OIL_REWARD = "oil_reward";
+  public static final String MINI_JOB__GEM_REWARD = "gem_reward";
+  public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
+  public static final String MINI_JOB__QUALITY = "quality";
+  public static final String MINI_JOB__MAX_NUM_MONSTERS_ALLOWED = "max_num_monsters_allowed";
+  public static final String MINI_JOB__CHANCE_TO_APPEAR = "chance_to_appear";
+  public static final String MINI_JOB__HP_REQUIRED = "hp_required";
+  public static final String MINI_JOB__ATK_REQUIRED = "atk_required";
+  public static final String MINI_JOB__MIN_DMG = "min_dmg";
+  public static final String MINI_JOB__MAX_DMG = "max_dmg";
+  public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
+  public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
+  
+  public static final String MONSTER_BATTLE_DIALOGUE__ID = GENERIC__ID;
+  public static final String MONSTER_BATTLE_DIALOGUE__MONSTER_ID = "monster_id";
+  public static final String MONSTER_BATTLE_DIALOGUE__DIALOGUE_TYPE = "dialogue_type";
+  public static final String MONSTER_BATTLE_DIALOGUE__DIALOGUE = "dialogue";
+  public static final String MONSTER_BATTLE_DIALOGUE__PROBABILITY_UTTERED = "probability_uttered";
   
   public static final String MONSTER__ID = GENERIC__ID;
   public static final String MONSTER__EVOLUTION_GROUP = "evolution_group";
@@ -710,6 +795,50 @@ public class DBConstants {
   public static final String MONSTER__BASE_OFFENSIVE_SKILL_ID = "base_offensive_skill_id";
   public static final String MONSTER__BASE_DEFENSIVE_SKILL_ID = "base_defensive_skill_id";
   
+  public static final String MONSTER_FOR_PVP__ID = GENERIC__ID;
+  public static final String MONSTER_FOR_PVP__MONSTER_ID = "monster_id";
+  public static final String MONSTER_FOR_PVP__MONSTER_LVL = "monster_lvl";
+  public static final String MONSTER_FOR_PVP__ELO = "elo";
+  public static final String MONSTER_FOR_PVP__MIN_CASH_REWARD = "min_cash_reward";
+  public static final String MONSTER_FOR_PVP__MAX_CASH_REWARD = "max_cash_reward";
+  public static final String MONSTER_FOR_PVP__MIN_OIL_REWARD = "min_oil_reward";
+  public static final String MONSTER_FOR_PVP__MAX_OIL_REWARD = "max_oil_reward";
+
+  public static final String MONSTER_LEVEL_INFO__MONSTER_ID = "monster_id";
+  public static final String MONSTER_LEVEL_INFO__LEVEL = "level";
+  public static final String MONSTER_LEVEL_INFO__HP = "hp";
+  public static final String MONSTER_LEVEL_INFO__CUR_LVL_REQUIRED_EXP = "cur_lvl_required_exp";
+  public static final String MONSTER_LEVEL_INFO__FEEDER_EXP = "feeder_exp";
+  public static final String MONSTER_LEVEL_INFO__FIRE_DMG = "fire_dmg";
+  public static final String MONSTER_LEVEL_INFO__GRASS_DMG = "grass_dmg";
+  public static final String MONSTER_LEVEL_INFO__WATER_DMG = "water_dmg";
+  public static final String MONSTER_LEVEL_INFO__LIGHTNING_DMG = "lightning_dmg";
+  public static final String MONSTER_LEVEL_INFO__DARKNESS_DMG = "darkness_dmg";
+  public static final String MONSTER_LEVEL_INFO__ROCK_DMG = "rock_dmg";
+  public static final String MONSTER_LEVEL_INFO__SPEED = "speed";
+  public static final String MONSTER_LEVEL_INFO__HP_EXPONENT_BASE = "hp_exponent_base";
+  public static final String MONSTER_LEVEL_INFO__DMG_EXPONENT_BASE = "dmg_exponent_base";
+  public static final String MONSTER_LEVEL_INFO__EXP_LVL_DIVISOR = "exp_lvl_divisor";
+  public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
+  public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
+  
+  public static final String OBSTACLE__ID = GENERIC__ID;
+  public static final String OBSTACLE__NAME = "name";
+  public static final String OBSTACLE__REMOVAL_COST_TYPE = "removal_cost_type";
+  public static final String OBSTACLE__COST = "cost";
+  public static final String OBSTACLE__SECONDS_TO_REMOVE = "seconds_to_remove";
+  public static final String OBSTACLE__WIDTH = "width";
+  public static final String OBSTACLE__HEIGHT = "height";
+  public static final String OBSTACLE__IMG_NAME = "img_name";
+  public static final String OBSTACLE__IMG_VERTICAL_PIXEL_OFFSET = "img_vertical_pixel_offset";
+  public static final String OBSTACLE__DESCRIPTION = "description";
+  public static final String OBSTACLE__CHANCE_TO_APPEAR = "chance_to_appear";
+  public static final String OBSTACLE__SHADOW_IMG_NAME = "shadow_img_name";
+  public static final String OBSTACLE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
+  public static final String OBSTACLE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
+  
+  public static final String PROFANITY__TERM = "term";
+  
   public static final String PVP_LEAGUE__ID = GENERIC__ID;
   public static final String PVP_LEAGUE__LEAGUE_NAME = "league_name";
   public static final String PVP_LEAGUE__IMG_PREFIX = "img_prefix";
@@ -720,6 +849,40 @@ public class DBConstants {
   public static final String PVP_LEAGUE__MAX_RANK = "max_rank";
   public static final String PVP_LEAGUE__PREDECESSOR_ID = "predecessor_id";
   public static final String PVP_LEAGUE__SUCCESSOR_ID = "successor_id";
+  
+  public static final String QUEST__ID = GENERIC__ID;
+  public static final String QUEST__QUEST_NAME = "quest_name";
+  public static final String QUEST__DESCRIPTION = "description";
+  public static final String QUEST__DONE_RESPONSE = "done_response";
+  public static final String QUEST__ACCEPT_DIALOGUE = "accept_dialogue";
+  public static final String QUEST__CASH_REWARD = "cash_reward";
+  public static final String QUEST__OIL_REWARD = "oil_reward";
+  public static final String QUEST__GEM_REWARD = "gem_reward";
+  public static final String QUEST__EXP_REWARD = "exp_reward";
+  public static final String QUEST__MONSTER_ID_REWARD = "monster_id_reward";
+  public static final String QUEST__IS_COMPLETE_MONSTER = "is_complete_monster";
+  public static final String QUEST__QUESTS_REQUIRED_FOR_THIS = "quests_required_for_this";
+  public static final String QUEST__QUEST_GIVER_NAME = "quest_giver_name";
+  public static final String QUEST__QUEST_GIVER_IMAGE_PREFIX = "quest_giver_image_prefix";
+  public static final String QUEST__PRIORITY = "priority";
+  public static final String QUEST__CARROT_ID = "carrot_id";
+  public static final String QUEST__MONSTER_ELEMENT = "monster_element";
+  
+  
+  public static final String QUEST_JOB__ID = GENERIC__ID;
+  public static final String QUEST_JOB__QUEST_ID = "quest_id";
+  public static final String QUEST_JOB__QUEST_JOB_TYPE = "quest_job_type";
+  public static final String QUEST_JOB__DESCRIPTION = "description";
+  public static final String QUEST_JOB__STATIC_DATA_ID = "static_data_id";
+  public static final String QUEST_JOB__QUANTITY = "quantity";
+  public static final String QUEST_JOB__PRIORITY = "priority";
+  public static final String QUEST_JOB__CITY_ID = "city_id";
+  public static final String QUEST_JOB__CITY_ASSET_NUM = "city_asset_num";
+  
+  public static final String QUEST_JOB_MONSTER_ITEM__QUEST_JOB_ID = "quest_job_id";
+  public static final String QUEST_JOB_MONSTER_ITEM__MONSTER_ID = "monster_id";
+  public static final String QUEST_JOB_MONSTER_ITEM__ITEM_ID = "item_id";
+  public static final String QUEST_JOB_MONSTER_ITEM__ITEM_DROP_RATE = "item_drop_rate";
   
   public static final String SKILL__ID = GENERIC__ID;
   public static final String SKILL__NAME = "name";
@@ -738,9 +901,87 @@ public class DBConstants {
   public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
   public static final String SKILL_PROPERTY__SHORT_NAME = "short_name";
   
+  public static final String STATIC_LEVEL_INFO__LEVEL_ID = "level_id";
+  public static final String STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE = "required_experience";
+
+  public static final String STRUCTURE__ID = "id";
+  public static final String STRUCTURE__NAME = "name";
+  public static final String STRUCTURE__LEVEL = "level";
+  public static final String STRUCTURE__STRUCT_TYPE = "struct_type";
+  public static final String STRUCTURE__BUILD_RESOURCE_TYPE = "build_resource_type";
+  public static final String STRUCTURE__BUILD_COST = "build_cost";
+  public static final String STRUCTURE__MINUTES_TO_BUILD = "minutes_to_build";
+  public static final String STRUCTURE__REQUIRED_TOWN_HALL_LVL = "required_town_hall_lvl";
+  public static final String STRUCTURE__WIDTH = "width";
+  public static final String STRUCTURE__HEIGHT = "height";
+  public static final String STRUCTURE__PREDECESSOR_STRUCT_ID = "predecessor_struct_id";
+  public static final String STRUCTURE__SUCCESSOR_STRUCT_ID = "successor_struct_id";
+  public static final String STRUCTURE__IMG_NAME = "img_name";
+  public static final String STRUCTURE__IMG_VERTICAL_PIXEL_OFFSET = "img_vertical_pixel_offset";
+  public static final String STRUCTURE__IMG_HORIZONTAL_PIXEL_OFFSET = "img_horizontal_pixel_offset";
+  public static final String STRUCTURE__DESCRIPTION = "description";
+  public static final String STRUCTURE__SHORT_DESCRIPTION = "short_description";
+  public static final String STRUCTURE__SHADOW_IMG_NAME = "shadow_img_name";
+  public static final String STRUCTURE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
+  public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
+  public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
+  
+  public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
+  
+  public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
+  public static final String STRUCTURE_HOSPITAL__HEALTH_PER_SECOND = "health_per_second";
+  
   public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
   public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
   public static final String STRUCTURE_LAB__POINTS_MULTIPLIER = "points_multiplier";
+  
+  public static final String STRUCTURE_MINI_JOB__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT = "generated_job_limit";
+  public static final String STRUCTURE_MINI_JOB__HOURS_BETWEEN_JOB_GENERATION = "hours_between_job_generation";
+  
+  public static final String STRUCTURE_RESIDENCE__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS = "num_monster_slots";
+  public static final String STRUCTURE_RESIDENCE__NUM_BONUS_MONSTER_SLOTS = "num_bonus_monster_slots";
+  public static final String STRUCTURE_RESIDENCE__NUM_GEMS_REQUIRED = "num_gems_required";
+  public static final String STRUCTURE_RESIDENCE__NUM_ACCEPETED_FB_INVITES = "num_accepeted_fb_invites";
+  public static final String STRUCTURE_RESIDENCE__OCCUPATION_NAME = "occupation_name";
+  public static final String STRUCTURE_RESIDENCE__IMG_SUFFIX = "img_suffix";
+  
+  public static final String STRUCTURE_RESOURCE_GENERATOR__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_RESOURCE_GENERATOR__RESOURCE_TYPE_GENERATED = "resource_type_generated";
+  public static final String STRUCTURE_RESOURCE_GENERATOR__PRODUCTION_RATE = "production_rate";
+  public static final String STRUCTURE_RESOURCE_GENERATOR__CAPACITY = "capacity";
+  
+  public static final String STRUCTURE_RESOURCE_STORAGE__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_RESOURCE_STORAGE__RESOURCE_TYPE_STORED = "resource_type_stored";
+  public static final String STRUCTURE_RESOURCE_STORAGE__CAPACITY = "capacity";
+  
+  public static final String STRUCTURE_TEAM_CENTER__STRUCT_ID  = "struct_id";
+  
+  public static final String STRUCTURE_TOWN_HALL__STRUCT_ID  = "struct_id";
+  public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_GENERATORS = "num_resource_one_generators";
+  public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_STORAGES = "num_resource_one_storages";
+  public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_TWO_GENERATORS = "num_resource_two_generators";
+  public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_TWO_STORAGES = "num_resource_two_storages";
+  public static final String STRUCTURE_TOWN_HALL__NUM_HOSPITALS = "num_hospitals";
+  public static final String STRUCTURE_TOWN_HALL__NUM_RESIDENCES = "num_residences";
+  public static final String STRUCTURE_TOWN_HALL__NUM_MONSTER_SLOTS = "num_monster_slots";
+  public static final String STRUCTURE_TOWN_HALL__NUM_LABS = "num_labs";
+  public static final String STRUCTURE_TOWN_HALL__PVP_QUEUE_CASH_COST = "pvp_queue_cash_cost";
+  public static final String STRUCTURE_TOWN_HALL__RESOURCE_CAPACITY = "resource_capacity";
+  public static final String STRUCTURE_TOWN_HALL__NUM_EVO_CHAMBERS = "num_evo_chambers";
+  
+  public static final String TASK__ID = "id"; 
+  public static final String TASK__GOOD_NAME = "good_name";
+  public static final String TASK__DESCRIPTION = "description";
+  public static final String TASK__CITY_ID = "city_id";
+  public static final String TASK__ASSET_NUM_WITHIN_CITY = "asset_num_within_city";
+  public static final String TASK__PREREQUISITE_TASK_ID = "prerequisite_task_id";
+  public static final String TASK__PREREQUISITE_QUEST_ID = "prerequisite_quest_id";
+  public static final String TASK__BOARD_WIDTH = "board_width";
+  public static final String TASK__BOARD_HEIGHT = "board_height";
+  public static final String TASK__GROUND_IMG_PREFIX = "ground_img_prefix";
   
   public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
   public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
@@ -770,5 +1011,9 @@ public class DBConstants {
   public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
   public static final String TASK_STAGE_MONSTER__MONSTER_DROP_LVL = "monster_drop_lvl";
   public static final String TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
+  
+  public static final String TASK_STAGE__ID = GENERIC__ID;
+  public static final String TASK_STAGE__TASK_ID = "task_id";
+  public static final String TASK_STAGE__STAGE_NUM = "stage_num";
   
 }

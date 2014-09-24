@@ -176,15 +176,14 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private MonsterForPvp convertRSRowToMonsterForPvp(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
-    int monsterLvl = rs.getInt(i++);
-    int elo = rs.getInt(i++);
-    int minCashReward = rs.getInt(i++);
-    int maxCashReward = rs.getInt(i++);
-    int minOilReward = rs.getInt(i++);
-    int maxOilReward = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.MONSTER_FOR_PVP__ID);
+    int monsterId = rs.getInt(DBConstants.MONSTER_FOR_PVP__MONSTER_ID);
+    int monsterLvl = rs.getInt(DBConstants.MONSTER_FOR_PVP__MONSTER_LVL);
+    int elo = rs.getInt(DBConstants.MONSTER_FOR_PVP__ELO);
+    int minCashReward = rs.getInt(DBConstants.MONSTER_FOR_PVP__MIN_CASH_REWARD);
+    int maxCashReward = rs.getInt(DBConstants.MONSTER_FOR_PVP__MAX_CASH_REWARD);
+    int minOilReward = rs.getInt(DBConstants.MONSTER_FOR_PVP__MIN_OIL_REWARD);
+    int maxOilReward = rs.getInt(DBConstants.MONSTER_FOR_PVP__MAX_OIL_REWARD);
     
     MonsterForPvp mfp = new MonsterForPvp(id, monsterId, monsterLvl, elo,
     		minCashReward, maxCashReward, minOilReward, maxOilReward);

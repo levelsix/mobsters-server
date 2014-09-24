@@ -109,8 +109,7 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_EVO__STRUCT_ID);
     
     return new StructureEvoChamber(structId);
   }

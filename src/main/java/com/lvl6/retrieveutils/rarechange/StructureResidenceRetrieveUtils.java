@@ -109,14 +109,13 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureResidence convertRSRowToResidence(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    int numMonsterSlots = rs.getInt(i++);
-    int numBonusMonsterSlots = rs.getInt(i++);
-    int numGemsRequired = rs.getInt(i++);
-    int numAcceptedFbInvites = rs.getInt(i++);
-    String occupationName = rs.getString(i++);
-    String imgSuffix = rs.getString(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__STRUCT_ID);
+    int numMonsterSlots = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__NUM_MONSTER_SLOTS);
+    int numBonusMonsterSlots = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__NUM_BONUS_MONSTER_SLOTS);
+    int numGemsRequired = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__NUM_GEMS_REQUIRED);
+    int numAcceptedFbInvites = rs.getInt(DBConstants.STRUCTURE_RESIDENCE__NUM_ACCEPETED_FB_INVITES);
+    String occupationName = rs.getString(DBConstants.STRUCTURE_RESIDENCE__OCCUPATION_NAME);
+    String imgSuffix = rs.getString(DBConstants.STRUCTURE_RESIDENCE__IMG_SUFFIX);
     
     return new StructureResidence(structId, numMonsterSlots, numBonusMonsterSlots,
     		numGemsRequired, numAcceptedFbInvites, occupationName, imgSuffix);

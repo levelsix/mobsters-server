@@ -95,10 +95,9 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureMiniJob convertRSRowToMiniJob(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    int generatedJobLimit = rs.getInt(i++);
-    int hoursBetweenJobGeneration = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_MINI_JOB__STRUCT_ID);
+    int generatedJobLimit = rs.getInt(DBConstants.STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT);
+    int hoursBetweenJobGeneration = rs.getInt(DBConstants.STRUCTURE_MINI_JOB__HOURS_BETWEEN_JOB_GENERATION);
     
     return new StructureMiniJob(structId, generatedJobLimit, hoursBetweenJobGeneration);
   }

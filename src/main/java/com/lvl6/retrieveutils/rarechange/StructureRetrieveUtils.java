@@ -134,28 +134,27 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Structure convertRSRowToStruct(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String name = rs.getString(i++);
-    int level = rs.getInt(i++);
-    String structType = rs.getString(i++);
-    String buildResourceType = rs.getString(i++);
-    int buildCost = rs.getInt(i++);
-    int minutesToBuild = rs.getInt(i++);
-    int requiredTownHallLvl = rs.getInt(i++);
-    int width = rs.getInt(i++);
-    int height = rs.getInt(i++);
-    int predecessorStructId = rs.getInt(i++);
-    int successorStructId = rs.getInt(i++);
-    String imgName = rs.getString(i++);
-    float imgVerticalPixelOffset = rs.getFloat(i++);
-    float imgHorizontalPixelOffset = rs.getFloat(i++);
-    String description = rs.getString(i++);
-    String shortDescription = rs.getString(i++);
-    String shadowImgName = rs.getString(i++);
-    float shadowVerticalOffset = rs.getFloat(i++);
-    float shadowHorizontalOffset = rs.getFloat(i++);
-    float shadowScale = rs.getFloat(i++);
+    int id = rs.getInt(DBConstants.STRUCTURE__ID);
+    String name = rs.getString(DBConstants.STRUCTURE__NAME);
+    int level = rs.getInt(DBConstants.STRUCTURE__LEVEL);
+    String structType = rs.getString(DBConstants.STRUCTURE__STRUCT_TYPE);
+    String buildResourceType = rs.getString(DBConstants.STRUCTURE__BUILD_RESOURCE_TYPE);
+    int buildCost = rs.getInt(DBConstants.STRUCTURE__BUILD_COST);
+    int minutesToBuild = rs.getInt(DBConstants.STRUCTURE__MINUTES_TO_BUILD);
+    int requiredTownHallLvl = rs.getInt(DBConstants.STRUCTURE__REQUIRED_TOWN_HALL_LVL);
+    int width = rs.getInt(DBConstants.STRUCTURE__WIDTH);
+    int height = rs.getInt(DBConstants.STRUCTURE__HEIGHT);
+    int predecessorStructId = rs.getInt(DBConstants.STRUCTURE__PREDECESSOR_STRUCT_ID);
+    int successorStructId = rs.getInt(DBConstants.STRUCTURE__SUCCESSOR_STRUCT_ID);
+    String imgName = rs.getString(DBConstants.STRUCTURE__IMG_NAME);
+    float imgVerticalPixelOffset = rs.getFloat(DBConstants.STRUCTURE__IMG_VERTICAL_PIXEL_OFFSET);
+    float imgHorizontalPixelOffset = rs.getFloat(DBConstants.STRUCTURE__IMG_HORIZONTAL_PIXEL_OFFSET);
+    String description = rs.getString(DBConstants.STRUCTURE__DESCRIPTION);
+    String shortDescription = rs.getString(DBConstants.STRUCTURE__SHORT_DESCRIPTION);
+    String shadowImgName = rs.getString(DBConstants.STRUCTURE__SHADOW_IMG_NAME);
+    float shadowVerticalOffset = rs.getFloat(DBConstants.STRUCTURE__SHADOW_VERTICAL_OFFSET);
+    float shadowHorizontalOffset = rs.getFloat(DBConstants.STRUCTURE__SHADOW_HORIZONTAL_OFFSET);
+    float shadowScale = rs.getFloat(DBConstants.STRUCTURE__SHADOW_SCALE);
     
     Structure s = new Structure(id, name, level, structType, buildResourceType,
     		buildCost, minutesToBuild, requiredTownHallLvl, width, height,

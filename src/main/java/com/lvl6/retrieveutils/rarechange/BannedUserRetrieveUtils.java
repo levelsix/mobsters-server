@@ -71,8 +71,7 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Integer convertRSRowToBannedUser(ResultSet rs) throws SQLException {
-    int i = 1;
-    Integer profanityTerm = rs.getInt(i++);
+    Integer profanityTerm = rs.getInt(DBConstants.BANNED_USER__USER_ID);
     
     return profanityTerm;
   }

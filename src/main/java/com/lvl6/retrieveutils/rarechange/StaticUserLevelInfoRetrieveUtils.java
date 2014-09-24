@@ -82,9 +82,8 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StaticUserLevelInfo convertRSRowToStaticLevelInfo(ResultSet rs) throws SQLException {
-    int i = 1;
-    int lvl = rs.getInt(i++);
-    int requiredExp = rs.getInt(i++);
+    int lvl = rs.getInt(DBConstants.STATIC_LEVEL_INFO__LEVEL_ID);
+    int requiredExp = rs.getInt(DBConstants.STATIC_LEVEL_INFO__LEVEL_ID);
     
     StaticUserLevelInfo sli = new StaticUserLevelInfo(lvl, requiredExp);
     return sli;

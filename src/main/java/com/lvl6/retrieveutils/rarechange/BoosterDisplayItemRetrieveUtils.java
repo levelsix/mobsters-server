@@ -149,14 +149,13 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static BoosterDisplayItem convertRSRowToBoosterDisplayItem(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int boosterPackId = rs.getInt(i++);
-    boolean isMonster = rs.getBoolean(i++);
-    boolean isComplete = rs.getBoolean(i++);
-    String monsterQuality = rs.getString(i++);
-    int gemReward = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__ID);
+    int boosterPackId = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__BOOSTER_PACK_ID);
+    boolean isMonster = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_MONSTER);
+    boolean isComplete = rs.getBoolean(DBConstants.BOOSTER_DISPLAY_ITEM__IS_COMPLETE);
+    String monsterQuality = rs.getString(DBConstants.BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY);
+    int gemReward = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__GEM_REWARD);
+    int quantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__QUANTITY);
     
     BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(id,
     		boosterPackId, isMonster, isComplete, monsterQuality, gemReward,

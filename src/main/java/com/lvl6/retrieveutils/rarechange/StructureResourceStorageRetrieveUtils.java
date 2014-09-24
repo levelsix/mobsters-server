@@ -109,10 +109,9 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureResourceStorage convertRSRowToResourceStorage(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    String resourceTypeStored = rs.getString(i++);
-    int capacity = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_RESOURCE_STORAGE__STRUCT_ID);
+    String resourceTypeStored = rs.getString(DBConstants.STRUCTURE_RESOURCE_STORAGE__RESOURCE_TYPE_STORED);
+    int capacity = rs.getInt(DBConstants.STRUCTURE_RESOURCE_STORAGE__CAPACITY);
     
     StructureResourceStorage srs = new StructureResourceStorage(structId,
     		resourceTypeStored, capacity);

@@ -161,28 +161,29 @@ import com.lvl6.utils.DBConnection;
   private static MiniJob convertRSRowToMiniJob(ResultSet rs,
 		  Random rand) throws SQLException {
 
-    int i = 1;
-    int id = rs.getInt(i++);
-    int requiredStructId = rs.getInt(i++);
-    String miniJobName = rs.getString(i++);
-    int cashReward = rs.getInt(i++);
-    int oilReward = rs.getInt(i++);
-    int gemReward = rs.getInt(i++);
-    int monsterIdReward = rs.getInt(i++);
-    String quality = rs.getString(i++);
-    int maxNumMonstersAllowed = rs.getInt(i++);
-    float chanceToAppear = rs.getFloat(i++);
-    int hpRequired = rs.getInt(i++);
-    int atkRequired = rs.getInt(i++);
-    int minDmgDealt = rs.getInt(i++);
-    int maxDmgDealt = rs.getInt(i++);
-    int durationMinMinutes = rs.getInt(i++);
-    int durationMaxMinutes = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.MINI_JOB__ID);
+    int requiredStructId = rs.getInt(DBConstants.MINI_JOB__REQUIRED_STRUCT_ID);
+    String miniJobName = rs.getString(DBConstants.MINI_JOB__NAME);
+    int cashReward = rs.getInt(DBConstants.MINI_JOB__CASH_REWARD);
+    int oilReward = rs.getInt(DBConstants.MINI_JOB__OIL_REWARD);
+    int gemReward = rs.getInt(DBConstants.MINI_JOB__GEM_REWARD);
+    int monsterIdReward = rs.getInt(DBConstants.MINI_JOB__MONSTER_ID_REWARD);
+    String quality = rs.getString(DBConstants.MINI_JOB__QUALITY);
+    int maxNumMonstersAllowed = rs.getInt(DBConstants.MINI_JOB__MAX_NUM_MONSTERS_ALLOWED);
+    float chanceToAppear = rs.getFloat(DBConstants.MINI_JOB__CHANCE_TO_APPEAR);
+    int hpRequired = rs.getInt(DBConstants.MINI_JOB__HP_REQUIRED);
+    int atkRequired = rs.getInt(DBConstants.MINI_JOB__ATK_REQUIRED);
+    int minDmgDealt = rs.getInt(DBConstants.MINI_JOB__MIN_DMG);
+    int maxDmgDealt = rs.getInt(DBConstants.MINI_JOB__MAX_DMG);
+    int durationMinMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MIN_MINUTES);
+    int durationMaxMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MAX_MINUTES);
     
     if (null != quality) {
     	String newQuality = quality.trim().toUpperCase();
     	if (!quality.equals(newQuality)) {
-    		log.error("quality incorrect: " + quality + "\t id=" + id);
+    		log.error(String.format(
+    			"quality incorrect: %s id=%s",
+    			quality, id));
     		quality = newQuality;
     	}
     }

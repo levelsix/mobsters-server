@@ -134,40 +134,39 @@ import com.lvl6.utils.QuestGraph;
   private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
     String delimiter = ",";
 
-    int i = 1;
-    int id = rs.getInt(i++);
-//    int cityId = rs.getInt(i++);
-    String questName = rs.getString(i++);
-    String description = rs.getString(i++);
-    String doneResponse = rs.getString(i++);
+    int id = rs.getInt(DBConstants.QUEST__ID);
+//    int cityId = rs.getInt(DBConstants.);
+    String questName = rs.getString(DBConstants.QUEST__QUEST_NAME);
+    String description = rs.getString(DBConstants.QUEST__DESCRIPTION);
+    String doneResponse = rs.getString(DBConstants.QUEST__DONE_RESPONSE);
 
-    String acceptDialogueBlob = rs.getString(i++);
+    String acceptDialogueBlob = rs.getString(DBConstants.QUEST__ACCEPT_DIALOGUE);
     Dialogue acceptDialogue = MiscMethods.createDialogue(acceptDialogueBlob);
 
-//    String questType = rs.getString(i++);
-//    String jobDescription = rs.getString(i++);
-//    int staticDataId = rs.getInt(i++);
-//    int quantity = rs.getInt(i++);
-    int cashReward = rs.getInt(i++);
-    int oilReward = rs.getInt(i++);
-    int gemReward = rs.getInt(i++);
-    int expReward = rs.getInt(i++);
-    int monsterIdReward = rs.getInt(i++);
-    boolean isCompleteMonster = rs.getBoolean(i++);
+//    String questType = rs.getString(DBConstants.);
+//    String jobDescription = rs.getString(DBConstants.);
+//    int staticDataId = rs.getInt(DBConstants.);
+//    int quantity = rs.getInt(DBConstants.);
+    int cashReward = rs.getInt(DBConstants.QUEST__CASH_REWARD);
+    int oilReward = rs.getInt(DBConstants.QUEST__OIL_REWARD);
+    int gemReward = rs.getInt(DBConstants.QUEST__GEM_REWARD);
+    int expReward = rs.getInt(DBConstants.QUEST__EXP_REWARD);
+    int monsterIdReward = rs.getInt(DBConstants.QUEST__MONSTER_ID_REWARD);
+    boolean isCompleteMonster = rs.getBoolean(DBConstants.QUEST__IS_COMPLETE_MONSTER);
     
-    String questsRequiredForThisString = rs.getString(i++);
+    String questsRequiredForThisString = rs.getString(DBConstants.QUEST__QUESTS_REQUIRED_FOR_THIS);
     List<Integer> questsRequiredForThis = new ArrayList<Integer>();
     if (questsRequiredForThisString != null) {
       MiscMethods.explodeIntoInts(questsRequiredForThisString,
       		delimiter, questsRequiredForThis);
     }
 
-    String questGiverName = rs.getString(i++);
-    String questGiverImagePrefix = rs.getString(i++);
-    int priority = rs.getInt(i++);
-    String carrotId = rs.getString(i++);
-//    boolean isAchievement = rs.getBoolean(i++);
-    String monsterElement = rs.getString(i++);
+    String questGiverName = rs.getString(DBConstants.QUEST__QUEST_GIVER_NAME);
+    String questGiverImagePrefix = rs.getString(DBConstants.QUEST__QUEST_GIVER_IMAGE_PREFIX);
+    int priority = rs.getInt(DBConstants.QUEST__PRIORITY);
+    String carrotId = rs.getString(DBConstants.QUEST__CARROT_ID);
+//    boolean isAchievement = rs.getBoolean(DBConstants.);
+    String monsterElement = rs.getString(DBConstants.QUEST__MONSTER_ELEMENT);
     
     Quest quest = new Quest(id, questName, description, doneResponse,
     		acceptDialogue, cashReward, oilReward, gemReward, expReward,

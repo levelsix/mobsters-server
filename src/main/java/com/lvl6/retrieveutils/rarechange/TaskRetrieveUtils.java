@@ -206,18 +206,17 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Task convertRSRowToTask(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String goodName = rs.getString(i++);
-    String description = rs.getString(i++);
-    int cityId = rs.getInt(i++);
-//    int energyCost = rs.getInt(i++);
-    int assetNumberWithinCity = rs.getInt(i++);
-    int prerequisiteTaskId = rs.getInt(i++);
-    int prerequisiteQuestId = rs.getInt(i++);
-    int boardWidth = rs.getInt(i++);
-    int boardHeight = rs.getInt(i++);
-    String groundImgPrefix = rs.getString(i++);
+    int id = rs.getInt(DBConstants.TASK__ID);
+    String goodName = rs.getString(DBConstants.TASK__GOOD_NAME);
+    String description = rs.getString(DBConstants.TASK__DESCRIPTION);
+    int cityId = rs.getInt(DBConstants.TASK__CITY_ID);
+//    int energyCost = rs.getInt(DBConstants.);
+    int assetNumberWithinCity = rs.getInt(DBConstants.TASK__ASSET_NUM_WITHIN_CITY);
+    int prerequisiteTaskId = rs.getInt(DBConstants.TASK__PREREQUISITE_TASK_ID);
+    int prerequisiteQuestId = rs.getInt(DBConstants.TASK__PREREQUISITE_QUEST_ID);
+    int boardWidth = rs.getInt(DBConstants.TASK__BOARD_WIDTH);
+    int boardHeight = rs.getInt(DBConstants.TASK__BOARD_HEIGHT);
+    String groundImgPrefix = rs.getString(DBConstants.TASK__GROUND_IMG_PREFIX);
     
     Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
     		prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight,

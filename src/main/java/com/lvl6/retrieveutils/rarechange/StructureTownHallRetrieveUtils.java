@@ -109,19 +109,18 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureTownHall convertRSRowToTownHall(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    int numResourceOneGenerators = rs.getInt(i++);
-    int numResourceOneStorages = rs.getInt(i++);
-    int numResourceTwoGenerators = rs.getInt(i++);
-    int numResourceTwoStorages = rs.getInt(i++);
-    int numHospitals = rs.getInt(i++);
-    int numResidences = rs.getInt(i++);
-    int numMonsterSlots = rs.getInt(i++);
-    int numLabs = rs.getInt(i++);
-    int pvpQueueCashCost = rs.getInt(i++);
-    int resourceCapacity = rs.getInt(i++);
-    int numEvoChambers = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__STRUCT_ID);
+    int numResourceOneGenerators = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_GENERATORS);
+    int numResourceOneStorages = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_STORAGES);
+    int numResourceTwoGenerators = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_RESOURCE_TWO_GENERATORS);
+    int numResourceTwoStorages = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_RESOURCE_TWO_STORAGES);
+    int numHospitals = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_HOSPITALS);
+    int numResidences = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_RESIDENCES);
+    int numMonsterSlots = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_MONSTER_SLOTS);
+    int numLabs = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_LABS);
+    int pvpQueueCashCost = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__PVP_QUEUE_CASH_COST);
+    int resourceCapacity = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__RESOURCE_CAPACITY);
+    int numEvoChambers = rs.getInt(DBConstants.STRUCTURE_TOWN_HALL__NUM_EVO_CHAMBERS);
     
     return new StructureTownHall(structId, numResourceOneGenerators,
     		numResourceOneStorages, numResourceTwoGenerators, numResourceTwoStorages,
