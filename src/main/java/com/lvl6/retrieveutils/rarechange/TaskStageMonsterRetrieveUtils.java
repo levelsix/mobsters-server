@@ -183,6 +183,7 @@ public class TaskStageMonsterRetrieveUtils {
 
   public static void reload() {
     setStaticTaskStageIdsToTaskStageMonster();
+    reassignSkills();
   }
 
   /*
