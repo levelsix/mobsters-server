@@ -83,7 +83,7 @@ import com.lvl6.utils.DBConnection;
    */
   private static StaticUserLevelInfo convertRSRowToStaticLevelInfo(ResultSet rs) throws SQLException {
     int lvl = rs.getInt(DBConstants.STATIC_LEVEL_INFO__LEVEL_ID);
-    int requiredExp = rs.getInt(DBConstants.STATIC_LEVEL_INFO__LEVEL_ID);
+    int requiredExp = rs.getInt(DBConstants.STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE);
     
     StaticUserLevelInfo sli = new StaticUserLevelInfo(lvl, requiredExp);
     return sli;
