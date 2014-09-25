@@ -10,6 +10,7 @@ option java_outer_classname = "TaskProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message TaskStageProto {
+	//not to be confused with stageNum, but seems to make more sense if it is
 	optional int32 stageId = 1;
 	repeated TaskStageMonsterProto stageMonsters = 2;
 }
@@ -42,7 +43,7 @@ message MinimumUserTaskProto {
 
 message TaskStageMonsterProto {
 	//the property that differentiates one taskStageMonster from another
-	optional int32 tsfuId = 15;
+	optional int64 tsfuId = 15;
 	
 	optional int32 tsmId = 11;
 	optional int32 monsterId = 1;
