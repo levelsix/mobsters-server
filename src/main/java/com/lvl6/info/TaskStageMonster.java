@@ -82,6 +82,11 @@ public class TaskStageMonster implements Serializable {
     //this means there are (10-5)+1 possible numbers
     
     int minMaxDiff = getMaxCashDrop() - getMinCashDrop();
+
+    if (minMaxDiff <= 0) {
+    	return 0;
+    }
+    
     int randCash = rand.nextInt(minMaxDiff + 1); 
 
     //number generated in [0, max-min] range, but need to transform
@@ -91,6 +96,11 @@ public class TaskStageMonster implements Serializable {
   
   public int getOilDrop() {
     int minMaxDiff = getMaxOilDrop() - getMinOilDrop();
+    
+    if (minMaxDiff <= 0) {
+    	return 0;
+    }
+    
     int randOil = rand.nextInt(minMaxDiff + 1); 
 
     //number generated in [0, max-min] range, but need to transform

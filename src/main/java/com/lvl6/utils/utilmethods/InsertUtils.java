@@ -20,6 +20,7 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -841,6 +842,7 @@ public class InsertUtils implements InsertUtil{
   	return numInserted;
   }
 
+  /*
 	@Override
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> tsmIds, List<String> monsterTypes, List<Integer> expsGained,
@@ -885,7 +887,31 @@ public class InsertUtils implements InsertUtil{
     
     return numInserted;
 	}
+	*/
 
+  	@Override
+  	public List<Long> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList) {
+  		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
+  		
+  		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+  		for (TaskStageForUser tsfu : tsfuList) {
+  			Map<String, Object> newRow = new HashMap<String, Object>();
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, tsfu.getStageNum());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsfu.getTaskStageMonsterId());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_TYPE, tsfu.getMonsterType());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, tsfu.getExpGained());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__CASH_GAINED, tsfu.getCashGained());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, tsfu.getOilGained());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, tsfu.isMonsterPieceDropped());
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, tsfu.getItemIdDropped());
+  		    
+  			newRows.add(newRow);
+  		}
+  		
+  		
+  		return DBConnection.get().insertIntoTableBasicReturnLongIds(tablename, newRows);
+  	}
+  
 	@Override
 	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
 			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,

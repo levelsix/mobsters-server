@@ -2493,6 +2493,7 @@ public class CreateInfoProtoUtils {
   }
   
   /**Task.proto*****************************************************/
+  /*
   //individualCash should always be set, could be 0 or more
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
       List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
@@ -2525,6 +2526,7 @@ public class CreateInfoProtoUtils {
 
     return tspb.build();
   }
+  */
   
   //going by stage number instead of id, maybe because it's human friendly
   //when looking at the db
@@ -2598,6 +2600,7 @@ public class CreateInfoProtoUtils {
   	return mutpb.build();
   }
 
+  /*
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
       int cashReward, int oilReward, boolean pieceDropped,
       Map<Integer, Integer> tsmIdToItemId) {
@@ -2651,6 +2654,7 @@ public class CreateInfoProtoUtils {
 
     return bldr.build();
   }
+  */
   
   public static TaskStageMonsterProto createTaskStageMonsterProto (
 		  TaskStageForUser tsfu) {
@@ -2670,6 +2674,7 @@ public class CreateInfoProtoUtils {
 	  }
 
 	  TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+	  bldr.setTsfuId(tsfu.getId());
 	  bldr.setTsmId(tsmId);
 	  bldr.setMonsterId(tsmMonsterId);
 	  String tsmMonsterType = tsfu.getMonsterType(); 

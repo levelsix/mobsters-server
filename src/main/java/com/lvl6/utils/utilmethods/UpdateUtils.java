@@ -1375,6 +1375,7 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 		
+		@Override
 		public int updateItemForUser(int userId, int itemId, int quantityChange) {
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
 			
@@ -1389,6 +1390,23 @@ public class UpdateUtils implements UpdateUtil {
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");
 			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateTaskStageForUserNoMonsterDrop(long droplessTsfuId) {
+			String tableName = DBConstants.TABLE_TASK_STAGE_FOR_USER;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.TASK_STAGE_FOR_USER__ID, droplessTsfuId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, false);
+
+			Map<String, Object> relativeParams = null;//new HashMap<String, Object>();
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+				absoluteParams, conditionParams, "and");
+
 			return numUpdated;
 		}
 }

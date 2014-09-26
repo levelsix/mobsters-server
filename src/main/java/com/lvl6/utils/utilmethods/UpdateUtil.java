@@ -174,4 +174,6 @@ public interface UpdateUtil {
   public abstract int updateUnrestrictUserMonsters( int userId, List<Long> userMonsterIdList );
   
   public abstract int updateItemForUser(int userId, int itemId, int quantityChange);
+
+int updateTaskStageForUserNoMonsterDrop( long droplessTsfuId );
 }

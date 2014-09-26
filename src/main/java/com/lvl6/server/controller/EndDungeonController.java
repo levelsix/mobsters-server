@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +70,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent)event).getEndDungeonRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
     
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
@@ -81,7 +83,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean firstTimeUserWonTask = reqProto.getFirstTimeUserWonTask();
     int maxCash = senderResourcesProto.getMaxCash();
     int maxOil = senderResourcesProto.getMaxOil();
-
+    
+    Set<Long> droplessTsfuIds = new HashSet<Long>();
+    if (null != reqProto.getDroplessTsfuIdsList()) {
+    		droplessTsfuIds.addAll(reqProto.getDroplessTsfuIdsList());
+    }
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderResourcesProto);
@@ -135,7 +141,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		new HashMap<Integer, Map<Integer, Integer>>();
       	//TODO: record  (items(?))
 //      	Map<Integer, Integer> itemIdToQuantity = new HashMap<Integer, Integer>();
-      	recordStageHistory(tsfuList, monsterIdToNumPieces, monsterIdToLvlToQuantity);
+      	recordStageHistory(tsfuList, droplessTsfuIds,
+      		monsterIdToNumPieces, monsterIdToLvlToQuantity);
       	
       	
       	if (userWon) {
@@ -287,8 +294,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   //
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
+	  	Set<Long> droplessTsfuIds,
   		Map<Integer, Integer> monsterIdToNumPieces,
-  		Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity) {
+  		Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity)
+  {
   	//keep track of how many pieces dropped and by which task stage monster
   	Map<Integer, Integer> tsmIdToQuantity =
   			new HashMap<Integer, Integer>();
@@ -321,6 +330,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		cashGained.add(tsfu.getCashGained());
   		oilGained.add(tsfu.getOilGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
+  		if (droplessTsfuIds.contains(tsfu.getId())) {
+  			dropped = false;
+  		}
+  		
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
   		
@@ -373,8 +386,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//task stage monster can drop something other than itself
   		int monsterId = monsterThatDropped.getMonsterIdDrop();
   		int monsterDropLvl = monsterThatDropped.getMonsterDropLvl();
-  		int numPiecesDroppedForMonster = tsmIdToQuantity.get(tsmId); 
-  		
   		
   		//if monster that drop has level higher than zero, it is a complete monster
   		if (monsterDropLvl > 0) {
@@ -397,6 +408,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			continue;
   		}
   		
+  		int numPiecesDroppedForMonster = tsmIdToQuantity.get(tsmId); 
   		//aggregate pieces based on monsterId, since assuming different task
   		//stage monsters can be the same monster
   		if (monsterIdToNumPieces.containsKey(monsterId)) {

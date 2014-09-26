@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = 556916370155015759L;
+	private static final long serialVersionUID = -2718007215209964130L;
 	
 	private long id;
 	private long userTaskId;
@@ -34,6 +34,8 @@ public class TaskStageForUser implements Serializable {
 		this.monsterPieceDropped = monsterPieceDropped;
 		this.itemIdDropped = itemIdDropped;
 	}
+
+	public TaskStageForUser() { }
 
 	public long getId() {
 		return id;

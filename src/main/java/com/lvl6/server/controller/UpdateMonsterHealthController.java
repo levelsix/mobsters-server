@@ -51,7 +51,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent)event).getUpdateMonsterHealthRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -63,6 +63,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     boolean isUpdateTaskStageForUser = reqProto.getIsUpdateTaskStageForUser();
     int nuTaskStageId = reqProto.getNuTaskStageId();
 
+    //make monsterPieceDropped to false in db
+    long droplessTsfuId = 0;
+    if (reqProto.hasDroplessTsfuId()) {
+    	droplessTsfuId = reqProto.getDroplessTsfuId();
+    }
+    
     //set some values to send to the client (the response proto)
     UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -78,7 +84,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean successful = false;
       if(legit) {
     	  successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth,
-    			  userTaskId, isUpdateTaskStageForUser, nuTaskStageId);
+    			  userTaskId, isUpdateTaskStageForUser, nuTaskStageId,
+    			  droplessTsfuId);
       }
       
       if (successful) {
@@ -152,13 +159,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 
   		Map<Long, Integer> userMonsterIdToExpectedHealth, long userTaskId,
-  		boolean isUpdateTaskStageForUser, int nuTaskStageId) {
+  		boolean isUpdateTaskStageForUser, int nuTaskStageId,
+  		long droplessTsfuId)
+  {
 	  //replace existing health for these user monsters with new values 
 	  if (!userMonsterIdToExpectedHealth.isEmpty()) {
 		  log.info("updating user's monsters' healths");
 		  int numUpdated = UpdateUtils.get()
 				  .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
-		  log.info("numUpdated=" + numUpdated);
+		  log.info(String.format(
+			  "numUpdated=%s", numUpdated));
 
 		  //number updated is based on INSERT ... ON DUPLICATE KEY UPDATE
 		  //so returns 2 if one row was updated, 1 if inserted
@@ -172,7 +182,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  if (isUpdateTaskStageForUser) {
 		  int numUpdated = UpdateUtils.get().updateUserTaskTsId(userTaskId, nuTaskStageId);
-		  log.info("task stage for user numUpdated=" + numUpdated);
+		  log.info(String.format(
+			  "task for user numUpdated=%s", numUpdated));
+	  }
+	
+	  if (droplessTsfuId > 0) {
+		  int numUpdated = UpdateUtils.get()
+			  .updateTaskStageForUserNoMonsterDrop(droplessTsfuId);
+		  log.info(String.format(
+			  "task stage for user numUpdated=%s", numUpdated));
 	  }
 	  
 	  return true;
