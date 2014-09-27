@@ -140,7 +140,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_RANK = 100;
 	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,  2, 2, 2,   2, 2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5};
 	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  { 2, 4,5, 10,23,24,  25,25,26,   3, 4,7,   8,18,20,  23,27,27,   2, 2, 7,   8,10,14,  23,27,28};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5, 25,27,19,   5,23,12,  16,25,9,  28,27, 6,  25, 9,23,  10,28,20,  13, 6,26,  23,16, 2};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5, 25,27,19,   4,23,12,  16,25,9,  28,27, 5,  25, 9,23,  10,28,20,  13, 6,26,  23,16, 2};
 	
 	
 	
