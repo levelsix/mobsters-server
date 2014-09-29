@@ -67,7 +67,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		EvolutionFinishedRequestProto reqProto = ((EvolutionFinishedRequestEvent)event)
 				.getEvolutionFinishedRequestProto();
 		
-		log.info("reqProto=" + reqProto);
+		log.info(String.format("reqProto=%s", reqProto));
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -94,8 +94,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	Map<Long, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
     			evolution);
     	
-    	log.info("evolution=" + evolution);
-    	log.info("existingUserMonsters=" + existingUserMonsters);
+    	log.info(String.format("evolution=%s", evolution));
+    	log.info(String.format("existingUserMonsters=%s", existingUserMonsters));
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, evolution,
 					existingUserMonsters, gemsSpent);
@@ -166,8 +166,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			int gemsSpent) {
 		if (null == u || null == evolution || null == existingUserMonsters ||
 				existingUserMonsters.isEmpty()) {
-			log.error("unexpected error: user, evolution, or existingMonsters is null. user=" +
-					u + ",\t evolution="+ evolution + "\t existingMonsters=" + existingUserMonsters);
+			log.error(String.format(
+				"user, evolution, or existingMonsters is null. user=%s, evolution=%s, existingMonsters=%s",
+					u, evolution, existingUserMonsters));
 			return false;
 		}
 		
@@ -196,9 +197,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			MonsterEvolvingForUser evolution) {
 		int userGems = u.getGems();
 		//if user's aggregate gems is < cost, don't allow transaction
-		if (userGems < gemsSpent) {
-			log.error("user error: user does not have enough gems. userGems=" + userGems +
-					"\t gemsSpent=" + gemsSpent + "\t evolution=" + evolution);
+		if (userGems < Math.abs(gemsSpent)) {
+			log.error(String.format(
+				"not enough gems. userGems=%s, gemsSpent=%s, evolution=%s",
+				userGems, gemsSpent, evolution));
 			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
@@ -239,12 +241,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		long uMonsterIdTwo = mefu.getMonsterForUserIdTwo();
 		userMonsterIds.add(uMonsterIdTwo);
 		int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
-		log.info("num monsterForUser deleted: " + num);
+		log.info(String.format("num monsterForUser deleted: %s", num));
 		
 		//delete the evolution
 		num = DeleteUtils.get().deleteMonsterEvolvingForUser(catalystUserMonsterId,
 				uMonsterIdOne, uMonsterIdTwo, uId);
-		log.info("num evolutions deleted: " + num);
+		log.info(String.format("num evolutions deleted: %s", num));
 		
 		//insert the COMPLETE evolved monster into monster for user
 		//get evolved version of monster
