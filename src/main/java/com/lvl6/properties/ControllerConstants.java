@@ -126,7 +126,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together
-	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     { 40,  80,   124,  140,  150,  170,  180};
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     { 40,  80,   120,  140,  150,  170,  180};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  20F,  25F,  15F,  15F};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  16F,  25F,  -5F,  17F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
