@@ -571,8 +571,16 @@ public void generateSpawnedMonsters(int tsId, int quantity,
 			
 			//aggregate to later be saved to db
 			List<TaskStageForUser> tsfuList = stageNumToStages.get(stageNum);
+			
+			//don't forget to set the taskForUserId 
+			for (TaskStageForUser tsfu : tsfuList) {
+				tsfu.setUserTaskId(userTaskId);
+			}
+			
 			allTsfu.addAll(tsfuList);
 		}
+		
+		log.info(String.format("userTaskStages=%s", allTsfu));
 		
 		//save to db
 		List<Long> tsfuIds = InsertUtils.get().insertIntoUserTaskStage(allTsfu);

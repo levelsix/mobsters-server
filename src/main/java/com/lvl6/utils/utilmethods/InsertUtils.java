@@ -896,6 +896,8 @@ public class InsertUtils implements InsertUtil{
   		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
   		for (TaskStageForUser tsfu : tsfuList) {
   			Map<String, Object> newRow = new HashMap<String, Object>();
+  			
+  			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, tsfu.getUserTaskId());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, tsfu.getStageNum());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsfu.getTaskStageMonsterId());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_TYPE, tsfu.getMonsterType());
