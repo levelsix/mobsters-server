@@ -64,7 +64,7 @@ public class SpawnMiniJobController extends EventController{
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		SpawnMiniJobRequestProto reqProto = ((SpawnMiniJobRequestEvent)event).getSpawnMiniJobRequestProto();
-		log.info("reqProto=" + reqProto);
+		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
