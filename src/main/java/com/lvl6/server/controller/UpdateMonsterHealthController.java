@@ -68,6 +68,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (reqProto.hasDroplessTsfuId()) {
     	droplessTsfuId = reqProto.getDroplessTsfuId();
     }
+
+    boolean changeDmgMultipier = reqProto.getChangeNuPvpDmgMultiplier();
+    float nuPvpDmgMultiplier = reqProto.getNuPvpDmgMultiplier();
     
     //set some values to send to the client (the response proto)
     UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
@@ -85,7 +88,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if(legit) {
     	  successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth,
     			  userTaskId, isUpdateTaskStageForUser, nuTaskStageId,
-    			  droplessTsfuId);
+    			  droplessTsfuId, changeDmgMultipier, nuPvpDmgMultiplier);
       }
       
       if (successful) {
@@ -160,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 
   		Map<Long, Integer> userMonsterIdToExpectedHealth, long userTaskId,
   		boolean isUpdateTaskStageForUser, int nuTaskStageId,
-  		long droplessTsfuId)
+  		long droplessTsfuId, boolean changeDmgMultipier, float nuPvpDmgMultiplier)
   {
 	  //replace existing health for these user monsters with new values 
 	  if (!userMonsterIdToExpectedHealth.isEmpty()) {
@@ -191,6 +194,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  .updateTaskStageForUserNoMonsterDrop(droplessTsfuId);
 		  log.info(String.format(
 			  "task stage for user numUpdated=%s", numUpdated));
+	  }
+	  
+	  if (changeDmgMultipier) {
+		  int numUpdated = UpdateUtils.get().updatePvpMonsterDmgMultiplier(uId, nuPvpDmgMultiplier);
+		  log.info(String.format(
+			  "pvp league for user numUpdated=%s", numUpdated));
 	  }
 	  
 	  return true;

@@ -1409,4 +1409,21 @@ public class UpdateUtils implements UpdateUtil {
 
 			return numUpdated;
 		}
+		
+		@Override
+		public int updatePvpMonsterDmgMultiplier(int userId, float monsterDmgMultiplier) {
+			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID, userId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER, monsterDmgMultiplier);
+			
+			Map<String, Object> relativeParams = null;//new HashMap<String, Object>();
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+				absoluteParams, conditionParams, "and");
+
+			return numUpdated;
+		}
 }
