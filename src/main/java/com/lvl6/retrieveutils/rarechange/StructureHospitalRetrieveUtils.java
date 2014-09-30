@@ -109,10 +109,9 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureHospital convertRSRowToHospital(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    int queueSize = rs.getInt(i++);
-    float healthPerSecond = rs.getFloat(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__STRUCT_ID);
+    int queueSize = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__QUEUE_SIZE);
+    float healthPerSecond = rs.getFloat(DBConstants.STRUCTURE_HOSPITAL__HEALTH_PER_SECOND);
     
     return new StructureHospital(structId, queueSize, healthPerSecond);
   }

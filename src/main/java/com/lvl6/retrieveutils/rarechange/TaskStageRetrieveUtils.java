@@ -185,10 +185,9 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static TaskStage convertRSRowToTaskStage(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    int taskId = rs.getInt(i++);
-    int stageNum = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.TASK_STAGE__ID);
+    int taskId = rs.getInt(DBConstants.TASK_STAGE__TASK_ID);
+    int stageNum = rs.getInt(DBConstants.TASK_STAGE__STAGE_NUM);
     
     TaskStage taskStage = new TaskStage(id, taskId, stageNum);
         

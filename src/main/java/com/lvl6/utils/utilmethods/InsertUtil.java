@@ -12,10 +12,10 @@ import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 
 public interface InsertUtil {
@@ -130,10 +130,14 @@ public interface InsertUtil {
 	public abstract int insertIntoTaskForUserCompleted(List<Integer> userIdList,
 			List<Integer> taskIdList, List<Timestamp> timeOfEntryList);
 	
+	/*
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
 			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			Map<Integer, Integer> taskStageMonsterIdToItemId);
+			*/
+	
+	public abstract List<Long> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList);
 	
 	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
 			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,

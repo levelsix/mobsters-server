@@ -92,6 +92,9 @@ public class ControllerConstants {
   public static final int PVP__SHIELD_DURATION_DAYS = 3; 
   public static final int PVP__LOST_BATTLE_SHIELD_DURATION_HOURS = 12;
   public static final int PVP__INITIAL_LEAGUE_ID = 1;
+  public static final float PVP__MONSTER_DMG_MULTIPLIER = 2F;
+  
+  
   
   //PVP BATTLE HISTORY
   public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
@@ -123,9 +126,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together
-	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140, 170, 180};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F, 12F, 5F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F, -5F, 11F};
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     { 40,  80,   120,  140,  150,  170,  180};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  20F,  25F,  15F,  15F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  16F,  25F,  -5F,  17F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
@@ -135,9 +138,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final int TUTORIAL__INIT_RANK = 100;
-	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = {2,2,2, 2, 2, 2,   4,4, 4, 4, 4, 4, 4,   5, 5, 5, 5, 5};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  {4,2,1, 17,21,12,  4,5, 20,15,22,2, 10,  4, 9, 21,22,18};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {8,2,20,3, 14,20,  4,19,5, 22,21,13,2,   15,21,2, 9, 20};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,  2, 2, 2,   2, 2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  { 2, 4,5, 10,23,24,  25,25,26,   3, 4,7,   8,18,20,  23,27,27,   2, 2, 7,   8,10,14,  23,27,28};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5, 25,27,19,   4,23,12,  16,25,9,  28,27, 5,  25, 9,23,  10,28,20,  13, 6,26,  23,16, 2};
 	
 	
 	

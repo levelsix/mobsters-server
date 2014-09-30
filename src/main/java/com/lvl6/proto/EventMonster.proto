@@ -171,11 +171,20 @@ message UpdateMonsterHealthRequestProto {
 	repeated UserMonsterCurrentHealthProto umchp = 2; //contains new health 
 	optional int64 clientTime = 3; //history, tracking purposes
 	
+	//TODO: Consider putting elsewhere----------------------------------------------------------------
 	//indicates to the server if a user's current task stage should be updated
 	//since server now keeps track of which task stage user is in for a task
 	optional int64 userTaskId = 4;
 	optional bool isUpdateTaskStageForUser = 5;
 	optional int32 nuTaskStageId = 6;
+	
+	//make monsterPieceDropped to false in db
+	optional int64 droplessTsfuId = 7;
+	//------------------------------------------------------------------------------------------------
+	
+	//TODO: Consider putting elsewhere----------------------------------------------------------------
+	optional bool changeNuPvpDmgMultiplier = 8;
+	optional float nuPvpDmgMultiplier = 9;
 }
 
 message UpdateMonsterHealthResponseProto {

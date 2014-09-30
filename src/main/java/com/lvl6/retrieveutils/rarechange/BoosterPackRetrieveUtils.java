@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -95,15 +94,14 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static BoosterPack convertRSRowToBoosterPack(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String name = rs.getString(i++);
-    int gemPrice = rs.getInt(i++);
-    String listBackgroundImgName = rs.getString(i++);
-    String listDescription = rs.getString(i++);
-    String navBarImgName = rs.getString(i++);
-    String navTitleImgName = rs.getString(i++);
-    String machineImgName = rs.getString(i++);
+    int id = rs.getInt(DBConstants.BOOSTER_PACK__ID);
+    String name = rs.getString(DBConstants.BOOSTER_PACK__NAME);
+    int gemPrice = rs.getInt(DBConstants.BOOSTER_PACK__GEM_PRICE);
+    String listBackgroundImgName = rs.getString(DBConstants.BOOSTER_PACK__LIST_BACKGROUND_IMG_NAME);
+    String listDescription = rs.getString(DBConstants.BOOSTER_PACK__LIST_DESCRIPTION);
+    String navBarImgName = rs.getString(DBConstants.BOOSTER_PACK__NAV_BAR_IMG_NAME);
+    String navTitleImgName = rs.getString(DBConstants.BOOSTER_PACK__NAV_TITLE_IMG_NAME);
+    String machineImgName = rs.getString(DBConstants.BOOSTER_PACK__MACHINE_IMG_NAME);
     
     BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
     		listBackgroundImgName, listDescription, navBarImgName,

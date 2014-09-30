@@ -125,11 +125,10 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static QuestJobMonsterItem convertRSRowToQuestMonsterItem(ResultSet rs) throws SQLException {
-    int i = 1;
-    int questJobId = rs.getInt(i++);
-    int monsterId = rs.getInt(i++);
-    int itemId = rs.getInt(i++);
-    float itemDropRate = rs.getFloat(i++);
+    int questJobId = rs.getInt(DBConstants.QUEST_JOB_MONSTER_ITEM__QUEST_JOB_ID);
+    int monsterId = rs.getInt(DBConstants.QUEST_JOB_MONSTER_ITEM__MONSTER_ID);
+    int itemId = rs.getInt(DBConstants.QUEST_JOB_MONSTER_ITEM__ITEM_ID);
+    float itemDropRate = rs.getFloat(DBConstants.QUEST_JOB_MONSTER_ITEM__ITEM_DROP_RATE);
     
     if (itemDropRate > 1F || itemDropRate < 0F) {
     	log.error("incorrect itemDropRate: " + itemDropRate +

@@ -10,6 +10,7 @@ option java_outer_classname = "TaskProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message TaskStageProto {
+	//not to be confused with stageNum, but seems to make more sense if it is
 	optional int32 stageId = 1;
 	repeated TaskStageMonsterProto stageMonsters = 2;
 }
@@ -42,6 +43,8 @@ message MinimumUserTaskProto {
 
 message TaskStageMonsterProto {
 	//the property that differentiates one taskStageMonster from another
+	optional int64 tsfuId = 15;
+	
 	optional int32 tsmId = 11;
 	optional int32 monsterId = 1;
 	optional MonsterType monsterType = 2;
@@ -67,11 +70,12 @@ message TaskStageMonsterProto {
 	optional int32 offensiveSkillId = 14;
 	
 	//The level of the monster that is dropped, if a monster does drop.
-	// Level 0 means a piece is dropped, and anything higher than one
+	// Level 0 means a piece is dropped, and anything higher than 0
 	// is complete monster.
 	optional int32 puzzlePieceMonsterDropLvl = 13;
 
 	//optional int32 offensiveSkillId = 14; defined above
+	//optional int32 tsfuId = 15; defined above
 
 	enum MonsterType {
 		REGULAR = 1;
@@ -120,4 +124,5 @@ message TaskMapElementProto {
 	optional string sectionName = 9;
 	optional int32 cashReward = 10;
 	optional int32 oilReward = 11;
+	optional string characterImgName = 12;
 } 

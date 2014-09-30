@@ -507,6 +507,8 @@ public class CreateInfoProtoUtils {
 			  uplpb.setShieldEndTime(time);
 		  }
 		  
+		  uplpb.setMonsterDmgMultiplier(plfu.getMonsterDmgMultiplier());
+		  
 	  } else if (null != pu) {
 		  uplpb.setLeagueId(pu.getPvpLeagueId());
 		  uplpb.setRank(pu.getRank());
@@ -519,6 +521,9 @@ public class CreateInfoProtoUtils {
 			  long time = shieldEndTime.getTime();
 			  uplpb.setShieldEndTime(time);
 		  }
+		  
+		  uplpb.setMonsterDmgMultiplier(pu.getMonsterDmgMultiplier());
+		  
 	  }
 	  
 	  
@@ -548,6 +553,8 @@ public class CreateInfoProtoUtils {
 	  uplpb.setLeagueId(leagueId);
 	  int rank = PvpLeagueRetrieveUtils.getRankForElo(elo, leagueId);
 	  uplpb.setRank(rank);
+	  
+	  uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 	  
 	  return uplpb.build();
   }
@@ -2083,6 +2090,10 @@ public class CreateInfoProtoUtils {
 		  spb.setIconImgName(str);
 	  }
 	  
+	  str = s.getLogoImgName();
+	  if (null != str) {
+		  spb.setLogoImgName(str);
+	  }
 	  
 	  return spb.build();
   }
@@ -2249,7 +2260,7 @@ public class CreateInfoProtoUtils {
     LabProto.Builder lpb = LabProto.newBuilder();
     lpb.setStructInfo(sip);
     lpb.setQueueSize(sl.getQueueSize());
-    lpb.setPointsPerSecond(sl.getPointsPerSecond());
+    lpb.setPointsMultiplier(sl.getPointsMultiplier());
 
     return lpb.build();
   }
@@ -2482,6 +2493,7 @@ public class CreateInfoProtoUtils {
   }
   
   /**Task.proto*****************************************************/
+  /*
   //individualCash should always be set, could be 0 or more
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
       List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
@@ -2514,6 +2526,7 @@ public class CreateInfoProtoUtils {
 
     return tspb.build();
   }
+  */
   
   //going by stage number instead of id, maybe because it's human friendly
   //when looking at the db
@@ -2587,6 +2600,7 @@ public class CreateInfoProtoUtils {
   	return mutpb.build();
   }
 
+  /*
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
       int cashReward, int oilReward, boolean pieceDropped,
       Map<Integer, Integer> tsmIdToItemId) {
@@ -2614,19 +2628,14 @@ public class CreateInfoProtoUtils {
     	bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
     }
     
-    //TODO: Find cleaner way of defaulting to skill in monster table
-    Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-    if (null != monzter) {
-    	bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
-    	
-    	//if development, default to monster defensive skill
-    	if (Globals.IS_SANDBOX()) {
-    		bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
-    	}
+    int defensiveSkillId = tsm.getDefensiveSkillId(); 
+    if ( defensiveSkillId > 0 ) {
+    	bldr.setDefensiveSkillId(defensiveSkillId);
     }
     
-    if (tsm.getDefensiveSkillId() > 0) {
-    	bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+    int offensiveSkillId = tsm.getOffensiveSkillId();
+    if (offensiveSkillId > 0) {
+    	bldr.setOffensiveSkillId(offensiveSkillId);
     }
 
     int tsmId = tsm.getId();
@@ -2645,6 +2654,7 @@ public class CreateInfoProtoUtils {
 
     return bldr.build();
   }
+  */
   
   public static TaskStageMonsterProto createTaskStageMonsterProto (
 		  TaskStageForUser tsfu) {
@@ -2664,6 +2674,7 @@ public class CreateInfoProtoUtils {
 	  }
 
 	  TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+	  bldr.setTsfuId(tsfu.getId());
 	  bldr.setTsmId(tsmId);
 	  bldr.setMonsterId(tsmMonsterId);
 	  String tsmMonsterType = tsfu.getMonsterType(); 
@@ -2697,19 +2708,14 @@ public class CreateInfoProtoUtils {
 		  bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 	  }
 
-	  //TODO: Find cleaner way of defaulting to skill in monster table
-	  Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(tsmMonsterId);
-	  if (null != monzter) {
-		  bldr.setOffensiveSkillId(monzter.getBaseOffensiveSkillId());
-
-		  //if development, default to monster defensive skill
-		  if (Globals.IS_SANDBOX()) {
-			  bldr.setDefensiveSkillId(monzter.getBaseDefensiveSkillId());
-		  }
+	  int defensiveSkillId = tsm.getDefensiveSkillId(); 
+	  if ( defensiveSkillId > 0 ) {
+		  bldr.setDefensiveSkillId(defensiveSkillId);
 	  }
-	  
-	  if (tsm.getDefensiveSkillId() > 0) {
-		  bldr.setDefensiveSkillId(tsm.getDefensiveSkillId());
+
+	  int offensiveSkillId = tsm.getOffensiveSkillId();
+	  if (offensiveSkillId > 0) {
+		  bldr.setOffensiveSkillId(offensiveSkillId);
 	  }
 
 	  return bldr.build();
@@ -2806,6 +2812,11 @@ public class CreateInfoProtoUtils {
 	  }
 	  tmepb.setCashReward(tme.getCashReward());
 	  tmepb.setOilReward(tme.getOilReward());
+	  
+	  str = tme.getCharacterImgName();
+	  if (null != str) {
+		  tmepb.setCharacterImgName(str);
+	  }
 	  
 	  return tmepb.build();
   }

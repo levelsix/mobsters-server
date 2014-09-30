@@ -109,11 +109,10 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureResourceGenerator convertRSRowToResourceGenerator(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
-    String resourceTypeGenerated = rs.getString(i++);
-    float productionRate = rs.getFloat(i++);
-    int capacity = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_RESOURCE_GENERATOR__STRUCT_ID);
+    String resourceTypeGenerated = rs.getString(DBConstants.STRUCTURE_RESOURCE_GENERATOR__RESOURCE_TYPE_GENERATED);
+    float productionRate = rs.getFloat(DBConstants.STRUCTURE_RESOURCE_GENERATOR__PRODUCTION_RATE);
+    int capacity = rs.getInt(DBConstants.STRUCTURE_RESOURCE_GENERATOR__CAPACITY);
     
     StructureResourceGenerator srg = new StructureResourceGenerator(structId,
     		resourceTypeGenerated, productionRate, capacity);

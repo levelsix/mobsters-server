@@ -150,4 +150,5 @@ message UserPvpLeagueProto {
 	optional int32 battlesWon = 5;
 	optional int32 battlesLost = 6;
 	optional int64 shieldEndTime = 7;
+	optional float monsterDmgMultiplier = 8;
 }

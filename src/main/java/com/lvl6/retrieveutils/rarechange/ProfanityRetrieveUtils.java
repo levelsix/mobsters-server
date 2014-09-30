@@ -71,8 +71,7 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static String convertRSRowToProfanity(ResultSet rs) throws SQLException {
-    int i = 1;
-    String profanityTerm = rs.getString(i++);
+    String profanityTerm = rs.getString(DBConstants.PROFANITY__TERM);
     
     return profanityTerm;
   }

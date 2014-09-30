@@ -105,21 +105,20 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Obstacle convertRSRowToObstacle(ResultSet rs, Random rand) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String name = rs.getString(i++);
-    String removalCostType = rs.getString(i++);
-    int cost = rs.getInt(i++);
-    int secondsToRemove = rs.getInt(i++);
-    int width = rs.getInt(i++);
-    int height = rs.getInt(i++);
-    String imgName = rs.getString(i++);
-    float imgVerticalPixelOffset = rs.getFloat(i++);
-    String description = rs.getString(i++);
-    float chanceToAppear = rs.getFloat(i++);
-    String shadowImgName = rs.getString(i++);
-    float shadowVerticalOffset = rs.getFloat(i++);
-    float shadowHorizontalOffset = rs.getFloat(i++);
+    int id = rs.getInt(DBConstants.OBSTACLE__ID);
+    String name = rs.getString(DBConstants.OBSTACLE__NAME);
+    String removalCostType = rs.getString(DBConstants.OBSTACLE__REMOVAL_COST_TYPE);
+    int cost = rs.getInt(DBConstants.OBSTACLE__COST);
+    int secondsToRemove = rs.getInt(DBConstants.OBSTACLE__SECONDS_TO_REMOVE);
+    int width = rs.getInt(DBConstants.OBSTACLE__WIDTH);
+    int height = rs.getInt(DBConstants.OBSTACLE__HEIGHT);
+    String imgName = rs.getString(DBConstants.OBSTACLE__IMG_NAME);
+    float imgVerticalPixelOffset = rs.getFloat(DBConstants.OBSTACLE__IMG_VERTICAL_PIXEL_OFFSET);
+    String description = rs.getString(DBConstants.OBSTACLE__DESCRIPTION);
+    float chanceToAppear = rs.getFloat(DBConstants.OBSTACLE__CHANCE_TO_APPEAR);
+    String shadowImgName = rs.getString(DBConstants.OBSTACLE__SHADOW_IMG_NAME);
+    float shadowVerticalOffset = rs.getFloat(DBConstants.OBSTACLE__SHADOW_VERTICAL_OFFSET);
+    float shadowHorizontalOffset = rs.getFloat(DBConstants.OBSTACLE__SHADOW_HORIZONTAL_OFFSET);
     
     
     Obstacle obstacle = new Obstacle(id, name, removalCostType, cost, secondsToRemove,

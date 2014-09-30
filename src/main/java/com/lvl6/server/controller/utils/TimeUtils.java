@@ -3,9 +3,11 @@ package com.lvl6.server.controller.utils;
 import java.util.Date;
 import java.util.TimeZone;
 
+//import org.elasticsearch.common.joda.time.Days;
+import org.joda.time.Days;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
+//import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.MutableDateTime;
 import org.joda.time.Period;
@@ -75,9 +77,31 @@ public class TimeUtils {
 	  DateTime dTwo = mdtTwo.toDateTime();
 	  */
 	  
-	  Period interim = new Period(new DateTime(d1), new DateTime(d2));
+//	  Period interim = new Period(new DateTime(d1), new DateTime(d2));
+//	  return interim.getDays();
+	  
+	  /* http://stackoverflow.com/questions/3802893/number-of-days-between-two-dates-in-joda-time
+	   	
+	   	Annoyingly, the withTimeAtStartOfDay answer is wrong, but only occasionally. You want:
 
-	  return interim.getDays();
+		Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays()
+		It turns out that "midnight/start of day" sometimes means 1am (daylight savings happen this way in some places), which Days.daysBetween doesn't handle properly.
+		
+		// 5am on the 20th to 1pm on the 21st, October 2013, Brazil
+		DateTimeZone BRAZIL = DateTimeZone.forID("America/Sao_Paulo");
+		DateTime start = new DateTime(2013, 10, 20, 5, 0, 0, BRAZIL);
+		DateTime end = new DateTime(2013, 10, 21, 13, 0, 0, BRAZIL);
+		System.out.println(daysBetween(start.withTimeAtStartOfDay(), end.withTimeAtStartOfDay()).getDays());
+		// prints 0
+		System.out.println(daysBetween(start.toLocalDate(), end.toLocalDate()).getDays());
+		// prints 1
+		 
+	   */
+	  Days days = Days.daysBetween(
+		  (new DateTime(d1)).toLocalDate(),
+		  (new DateTime(d2)).toLocalDate() );
+	  
+	  return days.getDays();
   }
   
   //not sure if DateTime works, as well.

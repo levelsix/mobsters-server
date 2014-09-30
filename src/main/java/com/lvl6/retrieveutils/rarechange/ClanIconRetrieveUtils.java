@@ -107,10 +107,9 @@ public class ClanIconRetrieveUtils {
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static ClanIcon convertRSRowToClanIcon(ResultSet rs, Random rand) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String imgName = rs.getString(i++);
-    boolean isAvailable = rs.getBoolean(i++);
+    int id = rs.getInt(DBConstants.CLAN_ICON__ID);
+    String imgName = rs.getString(DBConstants.CLAN_ICON__IMG_NAME);
+    boolean isAvailable = rs.getBoolean(DBConstants.CLAN_ICON__IS_AVAILABLE);
     
     ClanIcon clanIcon = new ClanIcon(id, imgName, isAvailable);
     return clanIcon;

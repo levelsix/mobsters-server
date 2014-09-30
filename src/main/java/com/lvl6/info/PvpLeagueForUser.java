@@ -7,7 +7,7 @@ import com.lvl6.pvp.PvpUser;
 
 public class PvpLeagueForUser implements Serializable {
 	
-	private static final long serialVersionUID = 7323773679114371729L;
+	private static final long serialVersionUID = 1903133289529345252L;
 	
 	private int userId;
 	private int pvpLeagueId;
@@ -22,6 +22,7 @@ public class PvpLeagueForUser implements Serializable {
 	private int attacksLost;
 	private int defensesLost;
 	private Date lastBattleNotificationTime;
+	private float monsterDmgMultiplier;
 	
 	public PvpLeagueForUser() {
 		super();
@@ -39,6 +40,7 @@ public class PvpLeagueForUser implements Serializable {
 		this.defensesWon = pu.getDefensesWon();
 		this.attacksLost = pu.getAttacksLost();
 		this.defensesLost = pu.getDefensesLost();
+		this.monsterDmgMultiplier = pu.getMonsterDmgMultiplier();
 	}
 	
 	public PvpLeagueForUser(PvpLeagueForUser plfu) {
@@ -54,12 +56,13 @@ public class PvpLeagueForUser implements Serializable {
 		this.attacksLost = plfu.getAttacksLost();
 		this.defensesLost = plfu.getDefensesLost();
 		this.lastBattleNotificationTime = plfu.getLastBattleNotificationTime();
+		this.monsterDmgMultiplier = plfu.getMonsterDmgMultiplier();
 	}
 	
 	public PvpLeagueForUser(int userId, int pvpLeagueId, int rank, int elo,
 			Date shieldEndTime, Date inBattleShieldEndTime, int attacksWon,
 			int defensesWon, int attacksLost, int defensesLost,
-			Date lastBattleNotificationTime) {
+			Date lastBattleNotificationTime, float monsterDmgMultiplier) {
 		super();
 		this.userId = userId;
 		this.pvpLeagueId = pvpLeagueId;
@@ -72,6 +75,7 @@ public class PvpLeagueForUser implements Serializable {
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
 		this.lastBattleNotificationTime = lastBattleNotificationTime;
+		this.monsterDmgMultiplier = monsterDmgMultiplier;
 	}
 
 
@@ -180,16 +184,44 @@ public class PvpLeagueForUser implements Serializable {
 		this.lastBattleNotificationTime = lastBattleNotificationTime;
 	}
 
+	public float getMonsterDmgMultiplier()
+	{
+		return monsterDmgMultiplier;
+	}
+
+	public void setMonsterDmgMultiplier( float monsterDmgMultiplier )
+	{
+		this.monsterDmgMultiplier = monsterDmgMultiplier;
+	}
+
 	@Override
-	public String toString() {
-		return "PvpLeagueForUser [userId=" + userId + ", pvpLeagueId="
-				+ pvpLeagueId + ", rank=" + rank + ", elo=" + elo
-				+ ", shieldEndTime=" + shieldEndTime
-				+ ", inBattleShieldEndTime=" + inBattleShieldEndTime
-				+ ", attacksWon=" + attacksWon + ", defensesWon=" + defensesWon
-				+ ", attacksLost=" + attacksLost + ", defensesLost="
-				+ defensesLost + ", lastBattleNotificationTime="
-				+ lastBattleNotificationTime + "]";
+	public String toString()
+	{
+		return "PvpLeagueForUser [userId="
+			+ userId
+			+ ", pvpLeagueId="
+			+ pvpLeagueId
+			+ ", rank="
+			+ rank
+			+ ", elo="
+			+ elo
+			+ ", shieldEndTime="
+			+ shieldEndTime
+			+ ", inBattleShieldEndTime="
+			+ inBattleShieldEndTime
+			+ ", attacksWon="
+			+ attacksWon
+			+ ", defensesWon="
+			+ defensesWon
+			+ ", attacksLost="
+			+ attacksLost
+			+ ", defensesLost="
+			+ defensesLost
+			+ ", lastBattleNotificationTime="
+			+ lastBattleNotificationTime
+			+ ", monsterDmgMultiplier="
+			+ monsterDmgMultiplier
+			+ "]";
 	}
 
 }

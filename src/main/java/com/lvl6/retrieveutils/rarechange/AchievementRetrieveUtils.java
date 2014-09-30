@@ -95,21 +95,20 @@ import com.lvl6.utils.DBConnection;
    */
   private static Achievement convertRSRowToAchievement(ResultSet rs) throws SQLException {
 
-    int i = 1;
-    int id = rs.getInt(i++);
-    String achievementName = rs.getString(i++);
-    String description = rs.getString(i++);
-    int gemReward = rs.getInt(i++);
-    int lvl = rs.getInt(i++);
-    String achievementType = rs.getString(i++);
-    String resourceType = rs.getString(i++);
-    String monsterElement = rs.getString(i++);
-    String monsterQuality = rs.getString(i++);
-    int staticDataId = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
-    int priority = rs.getInt(i++);
-    int prerequisiteId = rs.getInt(i++);
-    int successorId = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.ACHIEVEMENT__ID);
+    String achievementName = rs.getString(DBConstants.ACHIEVEMENT__NAME);
+    String description = rs.getString(DBConstants.ACHIEVEMENT__DESCRIPTION);
+    int gemReward = rs.getInt(DBConstants.ACHIEVEMENT__GEM_REWARD);
+    int lvl = rs.getInt(DBConstants.ACHIEVEMENT__LVL);
+    String achievementType = rs.getString(DBConstants.ACHIEVEMENT__ACHIEVEMENT_TYPE);
+    String resourceType = rs.getString(DBConstants.ACHIEVEMENT__RESOURCE_TYPE);
+    String monsterElement = rs.getString(DBConstants.ACHIEVEMENT__MONSTER_ELEMENT);
+    String monsterQuality = rs.getString(DBConstants.ACHIEVEMENT__MONSTER_QUALITY);
+    int staticDataId = rs.getInt(DBConstants.ACHIEVEMENT__STATIC_DATA_ID);
+    int quantity = rs.getInt(DBConstants.ACHIEVEMENT__QUANTITY);
+    int priority = rs.getInt(DBConstants.ACHIEVEMENT__PRIORITY);
+    int prerequisiteId = rs.getInt(DBConstants.ACHIEVEMENT__PREREQUISITE_ID);
+    int successorId = rs.getInt(DBConstants.ACHIEVEMENT__SUCCESSOR_ID);
     
     if (null != achievementType) {
     	String newAchievementType = achievementType.trim().toUpperCase();

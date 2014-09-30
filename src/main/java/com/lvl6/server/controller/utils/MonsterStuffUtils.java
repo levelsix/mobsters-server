@@ -336,7 +336,7 @@ public class MonsterStuffUtils {
   			Monster monzter = monsterIdsToMonsters.get(monsterId);
 
   			Map<Integer, Integer> lvlToQuantity = monsterIdToLvlToQuantity.get(monsterId);
-  			for (int lvl : lvlToQuantity.values()) {
+  			for (int lvl : lvlToQuantity.keySet()) {
 
   				List<MonsterForUser> newUserMonsters =
   					createLeveledMonsterForUserFromQuantity(userId, monzter,

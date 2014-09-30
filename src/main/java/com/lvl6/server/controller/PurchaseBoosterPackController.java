@@ -230,11 +230,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	Date lastFreeDate = aUser.getLastFreeBoosterPackTime();
     	if (null != lastFreeDate) {
     		if (!timeUtils.isFirstEarlierThanSecond(lastFreeDate, now)) {
+    			// lastFreeDate is not earlier than now
     			log.error(String.format(
     				"client incorrectly says time now=%s is before lastFreeBoosterPackDate=%s",
     				now, lastFreeDate));
     			return false;
-    		} else if ( timeUtils.getDayOfWeekPst(lastFreeDate) == timeUtils.getDayOfWeekPst(now)) {
+    			
+    		} else if ( Math.abs( timeUtils.numDaysDifference(lastFreeDate,now) ) == 0) {
+    			// lastFreeDate is earlier than now but
+    			// lastFreeDate is on same day as now 
     			
     			log.error(String.format(
     				"client already received free booster pack today. lastFreeBoosterPackDate=%s, now=%s",

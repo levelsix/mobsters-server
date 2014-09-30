@@ -151,7 +151,7 @@ public class CompleteMiniJobController extends EventController{
 						userId, userMiniJobIds);
 	
 		if (idToUserMiniJob.isEmpty()) {
-			log.error("no UserMiniJob exists with id=" + userMiniJobId);
+			log.error(String.format("no UserMiniJob exists with id=%s", userMiniJobId));
 			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
 			return false;
 		}
@@ -166,9 +166,9 @@ public class CompleteMiniJobController extends EventController{
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent) {
 	  	int userGems = u.getGems();
 	  	//if user's aggregate gems is < cost, don't allow transaction
-	  	if (userGems < gemsSpent) {
-	  		log.error("user error: user does not have enough gems. userGems=" + userGems +
-	  				"\t gemsSpent=" + gemsSpent);
+	  	if (userGems < Math.abs(gemsSpent)) {
+	  		log.error(String.format("user does not have enough gems. userGems=%s, gemsSpent=%s",
+	  			userGems, gemsSpent));
 	  		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_INSUFFICIENT_GEMS);
 	  		return false;
 	  	}

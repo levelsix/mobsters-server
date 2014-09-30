@@ -173,12 +173,11 @@ import com.lvl6.utils.DBConnection;
   }
   
   private static ClanEventPersistent convertRSRowToClanEventPersistent(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String dayOfWeek = rs.getString(i++);
-    int startHour = rs.getInt(i++);
-    int eventDurationMinutes = rs.getInt(i++);
-    int clanRaidId = rs.getInt(i++);
+    int id = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__ID);
+    String dayOfWeek = rs.getString(DBConstants.CLAN_EVENT_PERSISTENT__DAY_OF_WEEK);
+    int startHour = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__START_HOUR);
+    int eventDurationMinutes = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES);
+    int clanRaidId = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__CLAN_RAID_ID);
     
     ClanEventPersistent ep = new ClanEventPersistent(id, dayOfWeek, startHour,
     		eventDurationMinutes, clanRaidId);

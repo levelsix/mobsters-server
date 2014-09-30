@@ -79,6 +79,9 @@ message EndDungeonRequestProto {
 	
 	//used for determining if boss spawns
 	optional bool userBeatAllCityTasks = 6; //TODO: REMOVE
+	
+	//tsfuIds for monsters that don't drop pieces
+	repeated int64 droplessTsfuIds = 7;
 }
 
 message EndDungeonResponseProto {

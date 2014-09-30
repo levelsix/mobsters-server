@@ -68,7 +68,7 @@ public class BeginMiniJobController extends EventController{
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		BeginMiniJobRequestProto reqProto = ((BeginMiniJobRequestEvent)event).getBeginMiniJobRequestProto();
 		
-		log.info("reqProto=" + reqProto);
+		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -128,9 +128,9 @@ public class BeginMiniJobController extends EventController{
 		
 		//sanity check
 		if (userMonsterIds.isEmpty() || 0 == userMiniJobId) {
-			log.error("invalid userMonsterIds or userMiniJobId." +
-					" userMonsterIds=" + userMonsterIds +
-					"\t userMiniJobId=" + userMiniJobId);
+			log.error(String.format(
+				"invalid userMonsterIds or userMiniJobId. userMonsterIds=%s userMiniJobId=%s",
+				userMonsterIds, userMiniJobId));
 			return false;
 		}
 		

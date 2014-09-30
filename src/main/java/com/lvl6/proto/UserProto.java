@@ -7116,6 +7116,10 @@ public final class UserProto {
     // optional int64 shieldEndTime = 7;
     boolean hasShieldEndTime();
     long getShieldEndTime();
+    
+    // optional float monsterDmgMultiplier = 8;
+    boolean hasMonsterDmgMultiplier();
+    float getMonsterDmgMultiplier();
   }
   public static final class UserPvpLeagueProto extends
       com.google.protobuf.GeneratedMessage
@@ -7216,6 +7220,16 @@ public final class UserProto {
       return shieldEndTime_;
     }
     
+    // optional float monsterDmgMultiplier = 8;
+    public static final int MONSTERDMGMULTIPLIER_FIELD_NUMBER = 8;
+    private float monsterDmgMultiplier_;
+    public boolean hasMonsterDmgMultiplier() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public float getMonsterDmgMultiplier() {
+      return monsterDmgMultiplier_;
+    }
+    
     private void initFields() {
       userId_ = 0;
       leagueId_ = 0;
@@ -7224,6 +7238,7 @@ public final class UserProto {
       battlesWon_ = 0;
       battlesLost_ = 0;
       shieldEndTime_ = 0L;
+      monsterDmgMultiplier_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7257,6 +7272,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, shieldEndTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeFloat(8, monsterDmgMultiplier_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7294,6 +7312,10 @@ public final class UserProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, shieldEndTime_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(8, monsterDmgMultiplier_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7433,6 +7455,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         shieldEndTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
+        monsterDmgMultiplier_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -7499,6 +7523,10 @@ public final class UserProto {
           to_bitField0_ |= 0x00000040;
         }
         result.shieldEndTime_ = shieldEndTime_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.monsterDmgMultiplier_ = monsterDmgMultiplier_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7535,6 +7563,9 @@ public final class UserProto {
         }
         if (other.hasShieldEndTime()) {
           setShieldEndTime(other.getShieldEndTime());
+        }
+        if (other.hasMonsterDmgMultiplier()) {
+          setMonsterDmgMultiplier(other.getMonsterDmgMultiplier());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7600,6 +7631,11 @@ public final class UserProto {
             case 56: {
               bitField0_ |= 0x00000040;
               shieldEndTime_ = input.readInt64();
+              break;
+            }
+            case 69: {
+              bitField0_ |= 0x00000080;
+              monsterDmgMultiplier_ = input.readFloat();
               break;
             }
           }
@@ -7755,6 +7791,27 @@ public final class UserProto {
         return this;
       }
       
+      // optional float monsterDmgMultiplier = 8;
+      private float monsterDmgMultiplier_ ;
+      public boolean hasMonsterDmgMultiplier() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public float getMonsterDmgMultiplier() {
+        return monsterDmgMultiplier_;
+      }
+      public Builder setMonsterDmgMultiplier(float value) {
+        bitField0_ |= 0x00000080;
+        monsterDmgMultiplier_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterDmgMultiplier() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        monsterDmgMultiplier_ = 0F;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserPvpLeagueProto)
     }
     
@@ -7867,11 +7924,12 @@ public final class UserProto {
       "stNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 " +
       "\001(\t\022\033\n\023fbIdSetOnUserCreate\030, \001(\010\022\014\n\004udid" +
       "\030\r \001(\t\"E\n\030StaticUserLevelInfoProto\022\r\n\005le" +
-      "vel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\221\001" +
+      "vel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\"\257\001" +
       "\n\022UserPvpLeagueProto\022\016\n\006userId\030\001 \001(\005\022\020\n\010" +
       "leagueId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\013\n\003elo\030\004 \001(",
       "\005\022\022\n\nbattlesWon\030\005 \001(\005\022\023\n\013battlesLost\030\006 \001" +
-      "(\005\022\025\n\rshieldEndTime\030\007 \001(\003B\013B\tUserProto"
+      "(\005\022\025\n\rshieldEndTime\030\007 \001(\003\022\034\n\024monsterDmgM" +
+      "ultiplier\030\010 \001(\002B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7947,7 +8005,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_UserPvpLeagueProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserPvpLeagueProto_descriptor,
-              new java.lang.String[] { "UserId", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", "ShieldEndTime", },
+              new java.lang.String[] { "UserId", "LeagueId", "Rank", "Elo", "BattlesWon", "BattlesLost", "ShieldEndTime", "MonsterDmgMultiplier", },
               com.lvl6.proto.UserProto.UserPvpLeagueProto.class,
               com.lvl6.proto.UserProto.UserPvpLeagueProto.Builder.class);
           return null;

@@ -153,8 +153,10 @@ message StartupResponseProto {
 		optional MonsterConstants monsterConstants = 18;
 		
 		optional float minutesPerGem = 19; 
-		optional int32 pvpRequiredMinLvl = 20;
 		optional float gemsPerResource = 21;
+		
+		optional int32 pvpRequiredMinLvl = 20;
+		optional float monsterDmgMultiplier = 31;
 		
 		//(multiplies with cost to heal all battle team monsters while in dungeon)
 		optional float continueBattleGemCostMultiplier = 22;
@@ -172,6 +174,8 @@ message StartupResponseProto {
 		//optional float battleRunAwayBasePercent = 28; defined above
 		//optional float battleRunAwayIncrement = 29; defined above
 		optional int32 maxMinutesForFreeSpeedUp = 30;
+		
+		//optional float monsterDmgMultiplier = 31; defined above 
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

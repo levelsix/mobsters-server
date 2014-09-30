@@ -109,8 +109,7 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs) throws SQLException {
-    int i = 1;
-    int structId = rs.getInt(i++);
+    int structId = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__STRUCT_ID);
     
     return new StructureTeamCenter(structId);
   }

@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		EvolveMonsterRequestProto reqProto = ((EvolveMonsterRequestEvent)event)
 				.getEvolveMonsterRequestProto();
 
-		log.info("reqProto=" + reqProto); 
+		log.info(String.format("reqProto=%s", reqProto)); 
 		
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		newIds.add(catalystUserMonsterId);
     		newIds.addAll(evolvingUserMonsterIds);
     		existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
-    		log.info("retrieved user monsters. existingUserMonsters=" + existingUserMonsters);
+    		log.info(String.format("retrieved user monsters. existingUserMonsters=%s", existingUserMonsters));
     	}
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
 					alreadyEnhancing, alreadyHealing, alreadyEvolving, catalystUserMonsterId,
@@ -168,24 +168,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			Map<Long, MonsterEvolvingForUser> alreadyEvolving, long catalystUserMonsterId,
 			List<Long> userMonsterIds, int gemsSpent, int oilChange) {
 		if (null == u ) {
-			log.error("unexpected error: user is null. user=" + u + "\t catalystUserMonsterId="+
-					catalystUserMonsterId + "\t userMonsterIds=" + userMonsterIds);
+			log.error(String.format(
+				"user is null. user=%s, catalystUserMonsterId=%s, userMonsterIds=%s",
+				u, catalystUserMonsterId, userMonsterIds));
 			return false;
 		}
 		
 		//at the moment only 3 are required to evolve a monster
 		if (null == existingUserMonsters || existingUserMonsters.isEmpty() ||
 				3 != existingUserMonsters.size()) {
-			log.error("user trying to user nonexistent monster in evolution. existing=" +
-					existingUserMonsters + "\t catalyst=" + catalystUserMonsterId + "\t others=" +
-					userMonsterIds);
+			log.error(String.format(
+				"using nonexistent monster in evolution. existing=%s, catalyst=%s, others=%s",
+				existingUserMonsters, catalystUserMonsterId, userMonsterIds));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_NONEXISTENT_MONSTERS);
 			return false;
 		}
 		
 		//at the moment only one evolution is allowed going on at any one time
 		if (null != alreadyEvolving && !alreadyEvolving.isEmpty()) {
-			log.error("user already evolving monsters. monsters=" + alreadyEvolving);
+			log.error(String.format(
+				"user already evolving monsters. monsters=%s",
+				alreadyEvolving));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_MAX_NUM_EVOLUTIONS_REACHED);
 			return false;
 		}
@@ -217,7 +220,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		}
 		
 		if (0 == gemsSpent && 0 == oilChange) {
-			log.error("gemsSpent=" + gemsSpent + "\t oilChange=" + oilChange + "\t Not evolving.");
+			log.error(String.format(
+				"gemsSpent=%s, oilChange=%s. Not evolving.",
+				gemsSpent, oilChange));
 			return false;
 		}
 

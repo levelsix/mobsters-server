@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class StructureLab implements Serializable {
 
-	private static final long serialVersionUID = 1709205982691094635L;
+	private static final long serialVersionUID = 6577889949065041857L;
 	
 	private int structId;
 	private int queueSize;
-	private float pointsPerSecond;
+	private float pointsMultiplier;
 	
-	public StructureLab(int structId, int queueSize, float pointsPerSecond) {
+	public StructureLab(int structId, int queueSize, float pointsMultiplier) {
 		super();
 		this.structId = structId;
 		this.queueSize = queueSize;
-		this.pointsPerSecond = pointsPerSecond;
+		this.pointsMultiplier = pointsMultiplier;
 	}
 
 	public int getStructId() {
@@ -33,18 +33,18 @@ public class StructureLab implements Serializable {
 		this.queueSize = queueSize;
 	}
 
-	public float getPointsPerSecond() {
-		return pointsPerSecond;
+	public float getPointsMultiplier() {
+		return pointsMultiplier;
 	}
 
-	public void setPointsPerSecond(float pointsPerSecond) {
-		this.pointsPerSecond = pointsPerSecond;
+	public void setPointsMultiplier(float pointsMultiplier) {
+		this.pointsMultiplier = pointsMultiplier;
 	}
 
 	@Override
 	public String toString() {
 		return "StructureLab [structId=" + structId + ", queueSize="
-				+ queueSize + ", pointsPerSecond=" + pointsPerSecond + "]";
+				+ queueSize + ", pointsMultiplier=" + pointsMultiplier + "]";
 	}
 	
 }

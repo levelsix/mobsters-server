@@ -82,15 +82,14 @@ import com.lvl6.utils.DBConnection;
   }
   
   private static EventPersistent convertRSRowToEventPersistent(ResultSet rs) throws SQLException {
-    int i = 1;
-    int id = rs.getInt(i++);
-    String dayOfWeek = rs.getString(i++);
-    int startHour = rs.getInt(i++);
-    int eventDurationMinutes = rs.getInt(i++);
-    int taskId = rs.getInt(i++);
-    int cooldownMinutes = rs.getInt(i++);
-    String eventType = rs.getString(i++);
-    String monsterElemType = rs.getString(i++);
+    int id = rs.getInt(DBConstants.EVENT_PERSISTENT__ID);
+    String dayOfWeek = rs.getString(DBConstants.EVENT_PERSISTENT__DAY_OF_WEEK);
+    int startHour = rs.getInt(DBConstants.EVENT_PERSISTENT__START_HOUR);
+    int eventDurationMinutes = rs.getInt(DBConstants.EVENT_PERSISTENT__EVENT_DURATION_MINUTES);
+    int taskId = rs.getInt(DBConstants.EVENT_PERSISTENT__TASK_ID);
+    int cooldownMinutes = rs.getInt(DBConstants.EVENT_PERSISTENT__COOLDOWN_MINUTES);
+    String eventType = rs.getString(DBConstants.EVENT_PERSISTENT__EVENT_TYPE);
+    String monsterElemType = rs.getString(DBConstants.EVENT_PERSISTENT__MONSTER_ELEMENT);
     
     EventPersistent ep = new EventPersistent(id, dayOfWeek, startHour,
     		eventDurationMinutes, taskId, cooldownMinutes, eventType, monsterElemType);
