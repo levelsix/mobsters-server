@@ -124,4 +124,5 @@ message TaskMapElementProto {
 	optional string sectionName = 9;
 	optional int32 cashReward = 10;
 	optional int32 oilReward = 11;
+	optional string characterImgName = 12;
 } 

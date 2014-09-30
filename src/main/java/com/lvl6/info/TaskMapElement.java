@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
 
-	private static final long serialVersionUID = 6699395878806980800L;
+	private static final long serialVersionUID = 4110951747693016777L;
 	
 	private int id;
 	private int taskId;
@@ -17,6 +17,7 @@ public class TaskMapElement implements Serializable {
 	private String sectionName; //groups a bunch of TaskMapElement
 	private int cashReward;
 	private int oilReward;
+	private String characterImgName;
 
 	public TaskMapElement(
 		int id,
@@ -29,7 +30,8 @@ public class TaskMapElement implements Serializable {
 		int itemDropId,
 		String sectionName,
 		int cashReward,
-		int oilReward )
+		int oilReward,
+		String characterImgName )
 	{
 		super();
 		this.id = id;
@@ -43,6 +45,7 @@ public class TaskMapElement implements Serializable {
 		this.sectionName = sectionName;
 		this.cashReward = cashReward;
 		this.oilReward = oilReward;
+		this.characterImgName = characterImgName;
 	}
 
 	public int getId()
@@ -155,6 +158,16 @@ public class TaskMapElement implements Serializable {
 		this.oilReward = oilReward;
 	}
 
+	public String getCharacterImgName()
+	{
+		return characterImgName;
+	}
+
+	public void setCharacterImgName( String characterImgName )
+	{
+		this.characterImgName = characterImgName;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -180,6 +193,8 @@ public class TaskMapElement implements Serializable {
 			+ cashReward
 			+ ", oilReward="
 			+ oilReward
+			+ ", characterImgName="
+			+ characterImgName
 			+ "]";
 	}
 

@@ -2813,6 +2813,11 @@ public class CreateInfoProtoUtils {
 	  tmepb.setCashReward(tme.getCashReward());
 	  tmepb.setOilReward(tme.getOilReward());
 	  
+	  str = tme.getCharacterImgName();
+	  if (null != str) {
+		  tmepb.setCharacterImgName(str);
+	  }
+	  
 	  return tmepb.build();
   }
   

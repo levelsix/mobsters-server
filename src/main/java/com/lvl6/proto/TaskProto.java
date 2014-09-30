@@ -4638,6 +4638,10 @@ public final class TaskProto {
     // optional int32 oilReward = 11;
     boolean hasOilReward();
     int getOilReward();
+    
+    // optional string characterImgName = 12;
+    boolean hasCharacterImgName();
+    String getCharacterImgName();
   }
   public static final class TaskMapElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -4822,6 +4826,38 @@ public final class TaskProto {
       return oilReward_;
     }
     
+    // optional string characterImgName = 12;
+    public static final int CHARACTERIMGNAME_FIELD_NUMBER = 12;
+    private java.lang.Object characterImgName_;
+    public boolean hasCharacterImgName() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public String getCharacterImgName() {
+      java.lang.Object ref = characterImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          characterImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getCharacterImgNameBytes() {
+      java.lang.Object ref = characterImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        characterImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
@@ -4834,6 +4870,7 @@ public final class TaskProto {
       sectionName_ = "";
       cashReward_ = 0;
       oilReward_ = 0;
+      characterImgName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4879,6 +4916,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(11, oilReward_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, getCharacterImgNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4932,6 +4972,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(11, oilReward_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, getCharacterImgNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5079,6 +5123,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         oilReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
+        characterImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
       
@@ -5161,6 +5207,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000400;
         }
         result.oilReward_ = oilReward_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.characterImgName_ = characterImgName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5209,6 +5259,9 @@ public final class TaskProto {
         }
         if (other.hasOilReward()) {
           setOilReward(other.getOilReward());
+        }
+        if (other.hasCharacterImgName()) {
+          setCharacterImgName(other.getCharacterImgName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5300,6 +5353,11 @@ public final class TaskProto {
             case 88: {
               bitField0_ |= 0x00000400;
               oilReward_ = input.readInt32();
+              break;
+            }
+            case 98: {
+              bitField0_ |= 0x00000800;
+              characterImgName_ = input.readBytes();
               break;
             }
           }
@@ -5572,6 +5630,42 @@ public final class TaskProto {
         return this;
       }
       
+      // optional string characterImgName = 12;
+      private java.lang.Object characterImgName_ = "";
+      public boolean hasCharacterImgName() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public String getCharacterImgName() {
+        java.lang.Object ref = characterImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          characterImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setCharacterImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        characterImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCharacterImgName() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        characterImgName_ = getDefaultInstance().getCharacterImgName();
+        onChanged();
+        return this;
+      }
+      void setCharacterImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000800;
+        characterImgName_ = value;
+        onChanged();
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
     
@@ -5662,13 +5756,14 @@ public final class TaskProto {
       "tType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030Use" +
       "rPersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n" +
       "\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(" +
-      "\003\"\364\001\n\023TaskMapElementProto\022\024\n\014mapElementI" +
+      "\003\"\216\002\n\023TaskMapElementProto\022\024\n\014mapElementI" +
       "d\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n" +
       "\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.lvl6." +
       "proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgNa" +
       "me\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sectionN",
       "ame\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilRewa" +
-      "rd\030\013 \001(\005B\013B\tTaskProto"
+      "rd\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\tB\013B\tTa" +
+      "skProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5728,7 +5823,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", },
+              new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", },
               com.lvl6.proto.TaskProto.TaskMapElementProto.class,
               com.lvl6.proto.TaskProto.TaskMapElementProto.Builder.class);
           return null;
