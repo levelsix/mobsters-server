@@ -20,7 +20,7 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
-	public static final int CLAN__MAX_NUM_MEMBERS = 3;
+	public static final int CLAN__MAX_NUM_MEMBERS = 50;
 	
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
