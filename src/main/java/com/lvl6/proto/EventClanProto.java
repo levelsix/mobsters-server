@@ -15330,15 +15330,15 @@ public final class EventClanProto {
       FAIL_NOT_AUTHORIZED(2, 3),
       FAIL_NO_ACTIVE_CLAN_RAID(3, 4),
       FAIL_NO_MONSTERS_SENT(4, 5),
+      FAIL_OTHER(5, 6),
       ;
       
-      public static final BeginClanRaidStatus FAIL_OTHER = FAIL_NO_MONSTERS_SENT;
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_ALREADY_STARTED_VALUE = 2;
       public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
       public static final int FAIL_NO_ACTIVE_CLAN_RAID_VALUE = 4;
       public static final int FAIL_NO_MONSTERS_SENT_VALUE = 5;
-      public static final int FAIL_OTHER_VALUE = 5;
+      public static final int FAIL_OTHER_VALUE = 6;
       
       
       public final int getNumber() { return value; }
@@ -15350,6 +15350,7 @@ public final class EventClanProto {
           case 3: return FAIL_NOT_AUTHORIZED;
           case 4: return FAIL_NO_ACTIVE_CLAN_RAID;
           case 5: return FAIL_NO_MONSTERS_SENT;
+          case 6: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -25485,7 +25486,7 @@ public final class EventClanProto {
       "dStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_ALREADY_STA" +
       "RTED\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\034\n\030FAIL_" +
       "NO_ACTIVE_CLAN_RAID\020\004\022\031\n\025FAIL_NO_MONSTER" +
-      "S_SENT\020\005\022\016\n\nFAIL_OTHER\020\005\"\232\003\n!AttackClanR" +
+      "S_SENT\020\005\022\016\n\nFAIL_OTHER\020\006\"\232\003\n!AttackClanR" +
       "aidMonsterRequestProto\0220\n\006sender\030\001 \001(\0132 " +
       ".com.lvl6.proto.MinimumUserProto\022F\n\014even" +
       "tDetails\030\002 \001(\01320.com.lvl6.proto.Persiste" +
