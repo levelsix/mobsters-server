@@ -209,4 +209,7 @@ public interface InsertUtil {
 			List<MiniJobForUser> mjfuList); 
 	
 	public abstract int insertIntoUpdateUserItem(int userId, int itemId, int delta);
+	
+	public abstract long insertIntoClanHelpGetId(int clanId, int userId,
+		long userDataId, String helpType, Timestamp timeRequested, int maxHelpers);
 }

@@ -40,6 +40,7 @@ import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanHelp;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJobForUser;
@@ -68,6 +69,7 @@ import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
@@ -103,6 +105,7 @@ import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils;
+import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -206,6 +209,9 @@ public class StartupController extends EventController {
 
   @Autowired
   protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+  
+  @Autowired
+  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
   
   public StartupController() {
 	  numAllocatedThreads = 3;
@@ -336,6 +342,8 @@ public class StartupController extends EventController {
 			      setMiniJob(resBuilder, userId);
 			      log.info("{}ms at miniJobStuff", stopWatch.getTime());
 			      setUserItems(resBuilder, userId);
+			      setClanHelpings(resBuilder, userId, user);
+			      
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			      log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
@@ -1472,6 +1480,25 @@ public class StartupController extends EventController {
 	  resBuilder.addAllUserItems(uipList);
   }
   
+
+  private void setClanHelpings(Builder resBuilder, int userId, User user) {
+	  Map<Integer, List<ClanHelp>> clanHelpings = clanHelpRetrieveUtil
+		  .getUserIdToClanHelp(
+			  user.getClanId(),
+			  userId);
+	  
+	  for (Integer helperId : clanHelpings.keySet()) {
+		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
+			  
+		  for (ClanHelp aid : userHelpings) {
+			  ClanHelpProto chp = CreateInfoProtoUtils
+				  .createClanHelpProtoFromClanHelp(aid);
+			  
+			  resBuilder.addClanHelpings(chp);
+		  }
+	  }
+  }
+  
   
   
   
@@ -2347,6 +2374,15 @@ public class StartupController extends EventController {
   public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
   {
 	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+  }
+
+  public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
+  {
+	  return clanHelpRetrieveUtil;
+  }
+  public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
+  {
+	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
   }  
 
 }

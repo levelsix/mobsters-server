@@ -266,6 +266,72 @@ public final class SharedEnumConfigProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.Quality)
   }
   
+  public enum ClanHelpType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    NO_HELP(0, 1),
+    ;
+    
+    public static final int NO_HELP_VALUE = 1;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static ClanHelpType valueOf(int value) {
+      switch (value) {
+        case 1: return NO_HELP;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>() {
+            public ClanHelpType findValueByNumber(int number) {
+              return ClanHelpType.valueOf(number);
+            }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(3);
+    }
+    
+    private static final ClanHelpType[] VALUES = {
+      NO_HELP, 
+    };
+    
+    public static ClanHelpType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    
+    private final int index;
+    private final int value;
+    
+    private ClanHelpType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClanHelpType)
+  }
+  
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -284,7 +350,8 @@ public final class SharedEnumConfigProto {
       "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
-      "B\027B\025SharedEnumConfigProto"
+      "*\033\n\014ClanHelpType\022\013\n\007NO_HELP\020\001B\027B\025SharedE",
+      "numConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

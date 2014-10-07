@@ -1224,6 +1224,16 @@ public final class EventStartupProto {
         getUserItemsOrBuilderList();
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getUserItemsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;
+    java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> 
+        getClanHelpingsList();
+    com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index);
+    int getClanHelpingsCount();
+    java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+        getClanHelpingsOrBuilderList();
+    com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+        int index);
   }
   public static final class StartupResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -12434,6 +12444,27 @@ public final class EventStartupProto {
       return userItems_.get(index);
     }
     
+    // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;
+    public static final int CLANHELPINGS_FIELD_NUMBER = 41;
+    private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_;
+    public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
+      return clanHelpings_;
+    }
+    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+        getClanHelpingsOrBuilderList() {
+      return clanHelpings_;
+    }
+    public int getClanHelpingsCount() {
+      return clanHelpings_.size();
+    }
+    public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
+      return clanHelpings_.get(index);
+    }
+    public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+        int index) {
+      return clanHelpings_.get(index);
+    }
+    
     private void initFields() {
       serverTimeMillis_ = 0L;
       sender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -12475,6 +12506,7 @@ public final class EventStartupProto {
       userAchievements_ = java.util.Collections.emptyList();
       userMiniJobProtos_ = java.util.Collections.emptyList();
       userItems_ = java.util.Collections.emptyList();
+      clanHelpings_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12607,6 +12639,9 @@ public final class EventStartupProto {
       }
       for (int i = 0; i < userItems_.size(); i++) {
         output.writeMessage(40, userItems_.get(i));
+      }
+      for (int i = 0; i < clanHelpings_.size(); i++) {
+        output.writeMessage(41, clanHelpings_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -12797,6 +12832,10 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(40, userItems_.get(i));
       }
+      for (int i = 0; i < clanHelpings_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(41, clanHelpings_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -12941,6 +12980,7 @@ public final class EventStartupProto {
           getUserAchievementsFieldBuilder();
           getUserMiniJobProtosFieldBuilder();
           getUserItemsFieldBuilder();
+          getClanHelpingsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -13140,6 +13180,12 @@ public final class EventStartupProto {
           bitField1_ = (bitField1_ & ~0x00000080);
         } else {
           userItemsBuilder_.clear();
+        }
+        if (clanHelpingsBuilder_ == null) {
+          clanHelpings_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000100);
+        } else {
+          clanHelpingsBuilder_.clear();
         }
         return this;
       }
@@ -13476,6 +13522,15 @@ public final class EventStartupProto {
           result.userItems_ = userItems_;
         } else {
           result.userItems_ = userItemsBuilder_.build();
+        }
+        if (clanHelpingsBuilder_ == null) {
+          if (((bitField1_ & 0x00000100) == 0x00000100)) {
+            clanHelpings_ = java.util.Collections.unmodifiableList(clanHelpings_);
+            bitField1_ = (bitField1_ & ~0x00000100);
+          }
+          result.clanHelpings_ = clanHelpings_;
+        } else {
+          result.clanHelpings_ = clanHelpingsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -14101,6 +14156,32 @@ public final class EventStartupProto {
             }
           }
         }
+        if (clanHelpingsBuilder_ == null) {
+          if (!other.clanHelpings_.isEmpty()) {
+            if (clanHelpings_.isEmpty()) {
+              clanHelpings_ = other.clanHelpings_;
+              bitField1_ = (bitField1_ & ~0x00000100);
+            } else {
+              ensureClanHelpingsIsMutable();
+              clanHelpings_.addAll(other.clanHelpings_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clanHelpings_.isEmpty()) {
+            if (clanHelpingsBuilder_.isEmpty()) {
+              clanHelpingsBuilder_.dispose();
+              clanHelpingsBuilder_ = null;
+              clanHelpings_ = other.clanHelpings_;
+              bitField1_ = (bitField1_ & ~0x00000100);
+              clanHelpingsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getClanHelpingsFieldBuilder() : null;
+            } else {
+              clanHelpingsBuilder_.addAllMessages(other.clanHelpings_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -14421,6 +14502,12 @@ public final class EventStartupProto {
               com.lvl6.proto.ItemsProto.UserItemProto.Builder subBuilder = com.lvl6.proto.ItemsProto.UserItemProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUserItems(subBuilder.buildPartial());
+              break;
+            }
+            case 330: {
+              com.lvl6.proto.ClanProto.ClanHelpProto.Builder subBuilder = com.lvl6.proto.ClanProto.ClanHelpProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addClanHelpings(subBuilder.buildPartial());
               break;
             }
           }
@@ -19295,6 +19382,192 @@ public final class EventStartupProto {
         return userItemsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;
+      private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_ =
+        java.util.Collections.emptyList();
+      private void ensureClanHelpingsIsMutable() {
+        if (!((bitField1_ & 0x00000100) == 0x00000100)) {
+          clanHelpings_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpProto>(clanHelpings_);
+          bitField1_ |= 0x00000100;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> clanHelpingsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
+        if (clanHelpingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clanHelpings_);
+        } else {
+          return clanHelpingsBuilder_.getMessageList();
+        }
+      }
+      public int getClanHelpingsCount() {
+        if (clanHelpingsBuilder_ == null) {
+          return clanHelpings_.size();
+        } else {
+          return clanHelpingsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
+        if (clanHelpingsBuilder_ == null) {
+          return clanHelpings_.get(index);
+        } else {
+          return clanHelpingsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setClanHelpings(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
+        if (clanHelpingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.set(index, value);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setClanHelpings(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
+        if (clanHelpingsBuilder_ == null) {
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addClanHelpings(com.lvl6.proto.ClanProto.ClanHelpProto value) {
+        if (clanHelpingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.add(value);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addClanHelpings(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
+        if (clanHelpingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.add(index, value);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addClanHelpings(
+          com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
+        if (clanHelpingsBuilder_ == null) {
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addClanHelpings(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
+        if (clanHelpingsBuilder_ == null) {
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllClanHelpings(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
+        if (clanHelpingsBuilder_ == null) {
+          ensureClanHelpingsIsMutable();
+          super.addAll(values, clanHelpings_);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearClanHelpings() {
+        if (clanHelpingsBuilder_ == null) {
+          clanHelpings_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000100);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeClanHelpings(int index) {
+        if (clanHelpingsBuilder_ == null) {
+          ensureClanHelpingsIsMutable();
+          clanHelpings_.remove(index);
+          onChanged();
+        } else {
+          clanHelpingsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder getClanHelpingsBuilder(
+          int index) {
+        return getClanHelpingsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+          int index) {
+        if (clanHelpingsBuilder_ == null) {
+          return clanHelpings_.get(index);  } else {
+          return clanHelpingsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+           getClanHelpingsOrBuilderList() {
+        if (clanHelpingsBuilder_ != null) {
+          return clanHelpingsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clanHelpings_);
+        }
+      }
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder() {
+        return getClanHelpingsFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder(
+          int index) {
+        return getClanHelpingsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto.Builder> 
+           getClanHelpingsBuilderList() {
+        return getClanHelpingsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+          getClanHelpingsFieldBuilder() {
+        if (clanHelpingsBuilder_ == null) {
+          clanHelpingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder>(
+                  clanHelpings_,
+                  ((bitField1_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          clanHelpings_ = null;
+        }
+        return clanHelpingsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto)
     }
     
@@ -19833,7 +20106,7 @@ public final class EventStartupProto {
       "\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n" +
       "\nmacAddress\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022",
       "\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026" +
-      "\n\016isFreshRestart\030\010 \001(\010\"\314-\n\024StartupRespon" +
+      "\n\016isFreshRestart\030\010 \001(\010\"\201.\n\024StartupRespon" +
       "seProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-\n\006sen" +
       "der\030\002 \001(\0132\035.com.lvl6.proto.FullUserProto" +
       "\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6.proto" +
@@ -19891,97 +20164,99 @@ public final class EventStartupProto {
       "proto.UserAchievementProto\022;\n\021userMiniJo" +
       "bProtos\030\' \003(\0132 .com.lvl6.proto.UserMiniJ" +
       "obProto\0220\n\tuserItems\030( \003(\0132\035.com.lvl6.pr" +
-      "oto.UserItemProto\032\200\001\n\031AttackedNotificati",
-      "onProto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022\032\n\022battleCompleteTim" +
-      "e\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031Referra" +
-      "lNotificationProto\0222\n\010referred\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\023\n\013recrui" +
-      "tTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(" +
-      "\005\032\207\024\n\020StartupConstants\022H\n\025inAppPurchaseP" +
-      "ackages\030\001 \003(\0132).com.lvl6.proto.InAppPurc" +
-      "hasePackageProto\022\027\n\017maxLevelForUser\030\002 \001(" +
-      "\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025anima",
-      "tedSpriteOffsets\030\004 \003(\0132O.com.lvl6.proto." +
-      "StartupResponseProto.StartupConstants.An" +
-      "imatedSpriteOffsetProto\022\025\n\rminNameLength" +
-      "\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001(\005\022\035\n\025maxLeng" +
-      "thOfChatString\030\007 \001(\005\022Z\n\rclanConstants\030\010 " +
-      "\001(\0132C.com.lvl6.proto.StartupResponseProt" +
-      "o.StartupConstants.ClanConstants\022p\n\030down" +
-      "loadableNibConstants\030\t \001(\0132N.com.lvl6.pr" +
-      "oto.StartupResponseProto.StartupConstant" +
-      "s.DownloadableNibConstants\022\'\n\037numHoursBe",
-      "foreReshowingGoldSale\030\n \001(\005\022\036\n\026levelToSh" +
-      "owRateUsPopup\030\013 \001(\005\022e\n\022touramentConstant" +
-      "s\030\014 \001(\0132I.com.lvl6.proto.StartupResponse" +
-      "Proto.StartupConstants.TournamentConstan" +
-      "ts\022\037\n\027fbConnectRewardDiamonds\030\r \001(\005\022\023\n\013f" +
-      "aqFileName\030\016 \001(\t\022<\n\022adminChatUserProto\030\017" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\037" +
-      "\n\027numBeginnerSalesAllowed\030\020 \001(\005\022h\n\024userM" +
-      "onsterConstants\030\021 \001(\0132J.com.lvl6.proto.S" +
-      "tartupResponseProto.StartupConstants.Use",
-      "rMonsterConstants\022`\n\020monsterConstants\030\022 " +
-      "\001(\0132F.com.lvl6.proto.StartupResponseProt" +
-      "o.StartupConstants.MonsterConstants\022\025\n\rm" +
-      "inutesPerGem\030\023 \001(\002\022\027\n\017gemsPerResource\030\025 " +
-      "\001(\002\022\031\n\021pvpRequiredMinLvl\030\024 \001(\005\022\034\n\024monste" +
-      "rDmgMultiplier\030\037 \001(\002\022\'\n\037continueBattleGe" +
-      "mCostMultiplier\030\026 \001(\002\022 \n\030battleRunAwayBa" +
-      "sePercent\030\034 \001(\002\022\036\n\026battleRunAwayIncremen" +
-      "t\030\035 \001(\002\022\027\n\017addAllFbFriends\030\027 \001(\010\022]\n\010mini" +
-      "Tuts\030\030 \001(\0132K.com.lvl6.proto.StartupRespo",
-      "nseProto.StartupConstants.MiniTutorialCo" +
-      "nstants\022\024\n\014maxObstacles\030\031 \001(\005\022\032\n\022minutes" +
-      "PerObstacle\030\032 \001(\005\022`\n\020taskMapConstants\030\033 " +
-      "\001(\0132F.com.lvl6.proto.StartupResponseProt" +
-      "o.StartupConstants.TaskMapConstants\022 \n\030m" +
-      "axMinutesForFreeSpeedUp\030\036 \001(\005\032_\n\031Animate" +
-      "dSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n" +
-      "\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\032\257\001\n\rClanConstants\022\035\n\025coinPriceToC" +
-      "reateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanN",
-      "ame\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescrip" +
-      "tion\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 " +
-      "\001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n\030Downloadable" +
-      "NibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expa" +
-      "nsionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030" +
-      "\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeig" +
-      "ht\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesW" +
-      "eight\030\003 \001(\005\022#\n\033numHoursToShowAfterEventE" +
-      "nd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxN" +
-      "umTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonste",
-      "rLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cas" +
-      "hPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHealPe" +
-      "rHealthPoint\030\002 \001(\002\022\031\n\021elementalStrength\030" +
-      "\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilP" +
-      "erMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstant" +
-      "s\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023mapN" +
-      "umberOfSections\030\002 \001(\005\022\030\n\020mapSectionHeigh" +
-      "t\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTot" +
-      "alHeight\030\005 \001(\002\032K\n\025MiniTutorialConstants\022" +
-      "\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guideMons",
-      "terId\030\002 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021sta" +
-      "rtingMonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020" +
-      " \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMon" +
-      "sterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t " +
-      "\001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialS" +
-      "tructures\030\003 \003(\0132#.com.lvl6.proto.Tutoria" +
-      "lStructProto\022\036\n\026structureIdsToBeBuillt\030\004" +
-      " \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030" +
-      "\006 \003(\0132 .com.lvl6.proto.CityElementProto\022" +
-      "$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n",
-      "\035cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010" +
-      "cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsI" +
-      "nit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.c" +
-      "om.lvl6.proto.MinimumObstacleProto\"A\n\014Up" +
-      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
-      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016" +
-      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SE" +
-      "RVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResp" +
-      "onseProto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004" +
-      "udid\030\002 \001(\tB\023B\021EventStartupProto"
+      "oto.UserItemProto\0223\n\014clanHelpings\030) \003(\0132",
+      "\035.com.lvl6.proto.ClanHelpProto\032\200\001\n\031Attac" +
+      "kedNotificationProto\0222\n\010attacker\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\032\n\022batt" +
+      "leCompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(" +
+      "\005\032\202\001\n\031ReferralNotificationProto\0222\n\010refer" +
+      "red\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenTo" +
+      "Referrer\030\003 \001(\005\032\207\024\n\020StartupConstants\022H\n\025i" +
+      "nAppPurchasePackages\030\001 \003(\0132).com.lvl6.pr" +
+      "oto.InAppPurchasePackageProto\022\027\n\017maxLeve",
+      "lForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003" +
+      " \001(\005\022n\n\025animatedSpriteOffsets\030\004 \003(\0132O.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.AnimatedSpriteOffsetProto\022\025\n\r" +
+      "minNameLength\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001" +
+      "(\005\022\035\n\025maxLengthOfChatString\030\007 \001(\005\022Z\n\rcla" +
+      "nConstants\030\010 \001(\0132C.com.lvl6.proto.Startu" +
+      "pResponseProto.StartupConstants.ClanCons" +
+      "tants\022p\n\030downloadableNibConstants\030\t \001(\0132" +
+      "N.com.lvl6.proto.StartupResponseProto.St",
+      "artupConstants.DownloadableNibConstants\022" +
+      "\'\n\037numHoursBeforeReshowingGoldSale\030\n \001(\005" +
+      "\022\036\n\026levelToShowRateUsPopup\030\013 \001(\005\022e\n\022tour" +
+      "amentConstants\030\014 \001(\0132I.com.lvl6.proto.St" +
+      "artupResponseProto.StartupConstants.Tour" +
+      "namentConstants\022\037\n\027fbConnectRewardDiamon" +
+      "ds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022<\n\022adminCh" +
+      "atUserProto\030\017 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\037\n\027numBeginnerSalesAllowed\030\020" +
+      " \001(\005\022h\n\024userMonsterConstants\030\021 \001(\0132J.com",
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.UserMonsterConstants\022`\n\020monste" +
+      "rConstants\030\022 \001(\0132F.com.lvl6.proto.Startu" +
+      "pResponseProto.StartupConstants.MonsterC" +
+      "onstants\022\025\n\rminutesPerGem\030\023 \001(\002\022\027\n\017gemsP" +
+      "erResource\030\025 \001(\002\022\031\n\021pvpRequiredMinLvl\030\024 " +
+      "\001(\005\022\034\n\024monsterDmgMultiplier\030\037 \001(\002\022\'\n\037con" +
+      "tinueBattleGemCostMultiplier\030\026 \001(\002\022 \n\030ba" +
+      "ttleRunAwayBasePercent\030\034 \001(\002\022\036\n\026battleRu" +
+      "nAwayIncrement\030\035 \001(\002\022\027\n\017addAllFbFriends\030",
+      "\027 \001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6.proto" +
+      ".StartupResponseProto.StartupConstants.M" +
+      "iniTutorialConstants\022\024\n\014maxObstacles\030\031 \001" +
+      "(\005\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020taskMa" +
+      "pConstants\030\033 \001(\0132F.com.lvl6.proto.Startu" +
+      "pResponseProto.StartupConstants.TaskMapC" +
+      "onstants\022 \n\030maxMinutesForFreeSpeedUp\030\036 \001" +
+      "(\005\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timage" +
+      "Name\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.pr" +
+      "oto.CoordinateProto\032\257\001\n\rClanConstants\022\035\n",
+      "\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharL" +
+      "engthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthF" +
+      "orClanDescription\030\003 \001(\005\022\037\n\027maxCharLength" +
+      "ForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n" +
+      "\030DownloadableNibConstants\022\022\n\nmapNibName\030" +
+      "\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldS" +
+      "hoppeNibName\030\003 \001(\t\032y\n\023TournamentConstant" +
+      "s\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 " +
+      "\001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToSh" +
+      "owAfterEventEnd\030\004 \001(\005\032R\n\024UserMonsterCons",
+      "tants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initia" +
+      "lMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020MonsterCon" +
+      "stants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033se" +
+      "condsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021eleme" +
+      "ntalStrength\030\003 \001(\002\022\031\n\021elementalWeakness\030" +
+      "\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020Ta" +
+      "skMapConstants\022\035\n\025mapSectionImagePrefix\030" +
+      "\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n\020ma" +
+      "pSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 " +
+      "\001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniTutor",
+      "ialConstants\022\032\n\022miniTutorialTaskId\030\001 \001(\005" +
+      "\022\026\n\016guideMonsterId\030\002 \001(\005\032\234\004\n\021TutorialCon" +
+      "stants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016gui" +
+      "deMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(" +
+      "\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBos" +
+      "sMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005" +
+      "\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6." +
+      "proto.TutorialStructProto\022\036\n\026structureId" +
+      "sToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cit" +
+      "yOneElements\030\006 \003(\0132 .com.lvl6.proto.City",
+      "ElementProto\022$\n\034cityElementIdForFirstDun" +
+      "geon\030\007 \001(\005\022%\n\035cityElementIdForSecondDung" +
+      "eon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014" +
+      " \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstac" +
+      "les\030\016 \003(\0132$.com.lvl6.proto.MinimumObstac" +
+      "leProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020" +
+      "\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rSt" +
+      "artupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_" +
+      "IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030Fo" +
+      "rceLogoutResponseProto\022\031\n\021previousLoginT",
+      "ime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20001,7 +20276,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", },
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =

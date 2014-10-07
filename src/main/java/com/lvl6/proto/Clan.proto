@@ -202,3 +202,19 @@ message ClanIconProto {
 
 //------------------------------------------------------------------------------------------
 
+message ClanHelpProto {
+	optional int64 clanHelpId = 1;
+	optional int32 clanId = 2;
+	optional int32 userId = 3;
+	optional int64 userDataId = 4; //user's structure, monster, mini_job, etc
+	optional ClanHelpType helpType = 5;
+	optional int64 timeRequested = 6;
+	optional int32 maxHelpers = 7;
+	repeated int32 helperIds = 8;
+	optional bool open = 9; //whether or not clan mates, or one's self can still give help
+}
+
+message ClanHelpNoticeProto {
+	optional ClanHelpType helpType = 1;
+	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
+}

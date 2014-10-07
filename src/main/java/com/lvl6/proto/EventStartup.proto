@@ -112,6 +112,7 @@ message StartupResponseProto {
 	repeated UserMiniJobProto userMiniJobProtos = 39;
 	repeated UserItemProto userItems = 40;
 	
+	repeated ClanHelpProto clanHelpings = 41;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

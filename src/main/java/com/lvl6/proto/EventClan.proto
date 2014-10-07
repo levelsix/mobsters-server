@@ -2,6 +2,7 @@
 
 import "Clan.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -402,5 +403,62 @@ message PromoteDemoteClanMemberResponseProto {
 		FAIL_NOT_IN_CLAN = 2;
 		FAIL_NOT_AUTHORIZED = 3;
 		FAIL_OTHER = 4;		
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message SolicitClanHelpRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional ClanHelpNoticeProto notice = 2;
+	optional int64 clientTime = 4;
+	optional int32 maxHelpers = 5;
+}
+
+message SolicitClanHelpResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ClanHelpProto helpProto = 2;
+	optional SolicitClanHelpStatus status = 3; 
+	
+	//SEND TO ALL CLAN MEMBERS IF SUCCESS
+	
+	enum SolicitClanHelpStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message GiveClanHelpRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 clanHelpIds = 2;
+	
+}
+
+message GiveClanHelpResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional GiveClanHelpStatus status = 3; 
+	
+	enum GiveClanHelpStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message EndClanHelpRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 clanHelpIds = 2;
+}
+
+message EndClanHelpResponseProto {
+	optional MinimumUserProto sender = 1;
+	
+	enum EndClanHelpStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
 	}
 }
