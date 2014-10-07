@@ -127,8 +127,8 @@ public class ControllerConstants {
 	
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     { 40,  80,   120,  140,  150,  /*170,*/  180};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  20F,  25F,  /*15F,*/  15F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  16F,  25F,  /*-5F,*/  17F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  15F,  20F,  /*15F,*/  15F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  24F,  16F,  /*-5F,*/  17F};
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
@@ -138,9 +138,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final int TUTORIAL__INIT_RANK = 100;
-	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,  2, 2, 2,   2, 2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  { 2, 4,5, 10,23,24,  25,25,26,   3, 4,7,   8,18,20,  23,27,27,   2, 2, 7,   8,10,14,  23,27,28};
-	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5, 25,27,19,   4,23,12,  16,25,9,  28,27, 5,  25, 9,23,  10,28,20,  13, 6,26,  23,16, 2};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2,2,   2, 2, 2,   2, 2,   4, 4,4,   4, 4, 4,   4, 4, 4,   5, 5, 5,   5, 5, 5,   5, 5, 5,  5};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  { 2, 4,5,  10,22,25,  26,28,   3, 4,7,   8,17,20,  23,27,28,   2, 2, 7,   8,10,15,  20,25,27, 28};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {21,13,5,  25,21, 4,  12,27,  16,25,9,  28,22, 5,  28, 9,20,  10,28,20,  13, 6,22,  26,23,16,  2};
 	
 	
 	
