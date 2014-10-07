@@ -40,12 +40,12 @@ message StaticDataProto {
 	repeated ResourceStorageProto allStorages = 13;
 	repeated HospitalProto allHospitals = 14;
 	repeated ResidenceProto allResidences = 15;
-	repeated LabProto allLabs = 17;
 	repeated TownHallProto allTownHalls = 16;
-	//repeated LabProto allLabs = 17; //defined above
+	repeated LabProto allLabs = 17;
 	repeated MiniJobCenterProto allMiniJobCenters = 27;
 	repeated EvoChamberProto allEvoChambers = 29;
 	repeated TeamCenterProto allTeamCenters = 30;
+	repeated ClanHouseProto allClanHouses = 32;
 	
 	//the daily events where users can gain evolution and enhancement materials
 	repeated PersistentEventProto persistentEvents = 18;
@@ -66,5 +66,6 @@ message StaticDataProto {
 	//repeated TeamCenterProto allTeamCenters = 30; defined above
 	
 	repeated SkillProto skills = 31;
+	//repeated ClanHouseProto allClanHouses = 32; defined above
 }
 	

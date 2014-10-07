@@ -254,3 +254,10 @@ message EvoChamberProto {
 message TeamCenterProto {
 	optional StructureInfoProto structInfo = 1; 
 }
+
+//------------------------------------------------------------------------------------------
+
+message ClanHouseProto {
+	optional StructureInfoProto structInfo = 1; 
+}
+
