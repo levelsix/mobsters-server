@@ -67,6 +67,7 @@ import com.lvl6.info.Referral;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
@@ -160,6 +161,7 @@ import com.lvl6.proto.SkillsProto.SkillActivationType;
 import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillType;
+import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
@@ -2535,6 +2537,19 @@ public class CreateInfoProtoUtils {
 	  tcpb.setStructInfo(sip);
 	  
 	  return tcpb.build();
+  }
+  
+  public static ClanHouseProto  createClanHouseProto (Structure s,
+	  StructureInfoProto sip, StructureClanHouse sch)
+  {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+	  
+	  ClanHouseProto.Builder chpb = ClanHouseProto.newBuilder();
+	  chpb.setStructInfo(sip);
+	  
+	  return chpb.build();
   }
   
   /**Task.proto*****************************************************/

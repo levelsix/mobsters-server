@@ -75,6 +75,7 @@ public class DBConstants {
 	public static final String TABLE_SKILL_PROPERTY = "skill_property";
   public static final String TABLE_STATIC_LEVEL_INFO = "static_level_info";
   public static final String TABLE_STRUCTURE = "structure";
+  public static final String TABLE_STRUCTURE_CLAN_HOUSE = "structure_clan_house";
   public static final String TABLE_STRUCTURE_EVO_CHAMBER = "structure_evo_chamber";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
@@ -937,6 +938,8 @@ public class DBConstants {
   public static final String STRUCTURE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
   public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
   public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
+  
+  public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
   
