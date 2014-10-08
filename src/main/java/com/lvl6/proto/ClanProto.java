@@ -10728,6 +10728,1264 @@ public final class ClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanIconProto)
   }
   
+  public interface ClanHelpProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int64 clanHelpId = 1;
+    boolean hasClanHelpId();
+    long getClanHelpId();
+    
+    // optional int32 clanId = 2;
+    boolean hasClanId();
+    int getClanId();
+    
+    // optional int32 userId = 3;
+    boolean hasUserId();
+    int getUserId();
+    
+    // optional int64 userDataId = 4;
+    boolean hasUserDataId();
+    long getUserDataId();
+    
+    // optional .com.lvl6.proto.ClanHelpType helpType = 5;
+    boolean hasHelpType();
+    com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType();
+    
+    // optional int64 timeRequested = 6;
+    boolean hasTimeRequested();
+    long getTimeRequested();
+    
+    // optional int32 maxHelpers = 7;
+    boolean hasMaxHelpers();
+    int getMaxHelpers();
+    
+    // repeated int32 helperIds = 8;
+    java.util.List<java.lang.Integer> getHelperIdsList();
+    int getHelperIdsCount();
+    int getHelperIds(int index);
+    
+    // optional bool open = 9;
+    boolean hasOpen();
+    boolean getOpen();
+  }
+  public static final class ClanHelpProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ClanHelpProtoOrBuilder {
+    // Use ClanHelpProto.newBuilder() to construct.
+    private ClanHelpProto(Builder builder) {
+      super(builder);
+    }
+    private ClanHelpProto(boolean noInit) {}
+    
+    private static final ClanHelpProto defaultInstance;
+    public static ClanHelpProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ClanHelpProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int64 clanHelpId = 1;
+    public static final int CLANHELPID_FIELD_NUMBER = 1;
+    private long clanHelpId_;
+    public boolean hasClanHelpId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public long getClanHelpId() {
+      return clanHelpId_;
+    }
+    
+    // optional int32 clanId = 2;
+    public static final int CLANID_FIELD_NUMBER = 2;
+    private int clanId_;
+    public boolean hasClanId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getClanId() {
+      return clanId_;
+    }
+    
+    // optional int32 userId = 3;
+    public static final int USERID_FIELD_NUMBER = 3;
+    private int userId_;
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getUserId() {
+      return userId_;
+    }
+    
+    // optional int64 userDataId = 4;
+    public static final int USERDATAID_FIELD_NUMBER = 4;
+    private long userDataId_;
+    public boolean hasUserDataId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public long getUserDataId() {
+      return userDataId_;
+    }
+    
+    // optional .com.lvl6.proto.ClanHelpType helpType = 5;
+    public static final int HELPTYPE_FIELD_NUMBER = 5;
+    private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_;
+    public boolean hasHelpType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+      return helpType_;
+    }
+    
+    // optional int64 timeRequested = 6;
+    public static final int TIMEREQUESTED_FIELD_NUMBER = 6;
+    private long timeRequested_;
+    public boolean hasTimeRequested() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public long getTimeRequested() {
+      return timeRequested_;
+    }
+    
+    // optional int32 maxHelpers = 7;
+    public static final int MAXHELPERS_FIELD_NUMBER = 7;
+    private int maxHelpers_;
+    public boolean hasMaxHelpers() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getMaxHelpers() {
+      return maxHelpers_;
+    }
+    
+    // repeated int32 helperIds = 8;
+    public static final int HELPERIDS_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.Integer> helperIds_;
+    public java.util.List<java.lang.Integer>
+        getHelperIdsList() {
+      return helperIds_;
+    }
+    public int getHelperIdsCount() {
+      return helperIds_.size();
+    }
+    public int getHelperIds(int index) {
+      return helperIds_.get(index);
+    }
+    
+    // optional bool open = 9;
+    public static final int OPEN_FIELD_NUMBER = 9;
+    private boolean open_;
+    public boolean hasOpen() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public boolean getOpen() {
+      return open_;
+    }
+    
+    private void initFields() {
+      clanHelpId_ = 0L;
+      clanId_ = 0;
+      userId_ = 0;
+      userDataId_ = 0L;
+      helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      timeRequested_ = 0L;
+      maxHelpers_ = 0;
+      helperIds_ = java.util.Collections.emptyList();;
+      open_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, clanHelpId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, clanId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, userId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, userDataId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, helpType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, timeRequested_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, maxHelpers_);
+      }
+      for (int i = 0; i < helperIds_.size(); i++) {
+        output.writeInt32(8, helperIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBool(9, open_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, clanHelpId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, clanId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, userId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, userDataId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, helpType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, timeRequested_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, maxHelpers_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < helperIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(helperIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getHelperIdsList().size();
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, open_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanHelpProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.ClanProto.ClanHelpProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        clanHelpId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userDataId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        timeRequested_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        maxHelpers_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        helperIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        open_ = false;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ClanProto.ClanHelpProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpProto build() {
+        com.lvl6.proto.ClanProto.ClanHelpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.ClanProto.ClanHelpProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.ClanProto.ClanHelpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpProto buildPartial() {
+        com.lvl6.proto.ClanProto.ClanHelpProto result = new com.lvl6.proto.ClanProto.ClanHelpProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clanHelpId_ = clanHelpId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clanId_ = clanId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.userDataId_ = userDataId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.helpType_ = helpType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.timeRequested_ = timeRequested_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.maxHelpers_ = maxHelpers_;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          helperIds_ = java.util.Collections.unmodifiableList(helperIds_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.helperIds_ = helperIds_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.open_ = open_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ClanProto.ClanHelpProto) {
+          return mergeFrom((com.lvl6.proto.ClanProto.ClanHelpProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanHelpProto other) {
+        if (other == com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance()) return this;
+        if (other.hasClanHelpId()) {
+          setClanHelpId(other.getClanHelpId());
+        }
+        if (other.hasClanId()) {
+          setClanId(other.getClanId());
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasUserDataId()) {
+          setUserDataId(other.getUserDataId());
+        }
+        if (other.hasHelpType()) {
+          setHelpType(other.getHelpType());
+        }
+        if (other.hasTimeRequested()) {
+          setTimeRequested(other.getTimeRequested());
+        }
+        if (other.hasMaxHelpers()) {
+          setMaxHelpers(other.getMaxHelpers());
+        }
+        if (!other.helperIds_.isEmpty()) {
+          if (helperIds_.isEmpty()) {
+            helperIds_ = other.helperIds_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureHelperIdsIsMutable();
+            helperIds_.addAll(other.helperIds_);
+          }
+          onChanged();
+        }
+        if (other.hasOpen()) {
+          setOpen(other.getOpen());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              clanHelpId_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              clanId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              userId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              userDataId_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                helpType_ = value;
+              }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              timeRequested_ = input.readInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              maxHelpers_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              ensureHelperIdsIsMutable();
+              helperIds_.add(input.readInt32());
+              break;
+            }
+            case 66: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addHelperIds(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              open_ = input.readBool();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int64 clanHelpId = 1;
+      private long clanHelpId_ ;
+      public boolean hasClanHelpId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public long getClanHelpId() {
+        return clanHelpId_;
+      }
+      public Builder setClanHelpId(long value) {
+        bitField0_ |= 0x00000001;
+        clanHelpId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanHelpId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanHelpId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 clanId = 2;
+      private int clanId_ ;
+      public boolean hasClanId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getClanId() {
+        return clanId_;
+      }
+      public Builder setClanId(int value) {
+        bitField0_ |= 0x00000002;
+        clanId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clanId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 userId = 3;
+      private int userId_ ;
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getUserId() {
+        return userId_;
+      }
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000004;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 userDataId = 4;
+      private long userDataId_ ;
+      public boolean hasUserDataId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public long getUserDataId() {
+        return userDataId_;
+      }
+      public Builder setUserDataId(long value) {
+        bitField0_ |= 0x00000008;
+        userDataId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserDataId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userDataId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.ClanHelpType helpType = 5;
+      private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      public boolean hasHelpType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+        return helpType_;
+      }
+      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        helpType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHelpType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 timeRequested = 6;
+      private long timeRequested_ ;
+      public boolean hasTimeRequested() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public long getTimeRequested() {
+        return timeRequested_;
+      }
+      public Builder setTimeRequested(long value) {
+        bitField0_ |= 0x00000020;
+        timeRequested_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimeRequested() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        timeRequested_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 maxHelpers = 7;
+      private int maxHelpers_ ;
+      public boolean hasMaxHelpers() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getMaxHelpers() {
+        return maxHelpers_;
+      }
+      public Builder setMaxHelpers(int value) {
+        bitField0_ |= 0x00000040;
+        maxHelpers_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMaxHelpers() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        maxHelpers_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int32 helperIds = 8;
+      private java.util.List<java.lang.Integer> helperIds_ = java.util.Collections.emptyList();;
+      private void ensureHelperIdsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          helperIds_ = new java.util.ArrayList<java.lang.Integer>(helperIds_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getHelperIdsList() {
+        return java.util.Collections.unmodifiableList(helperIds_);
+      }
+      public int getHelperIdsCount() {
+        return helperIds_.size();
+      }
+      public int getHelperIds(int index) {
+        return helperIds_.get(index);
+      }
+      public Builder setHelperIds(
+          int index, int value) {
+        ensureHelperIdsIsMutable();
+        helperIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addHelperIds(int value) {
+        ensureHelperIdsIsMutable();
+        helperIds_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllHelperIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureHelperIdsIsMutable();
+        super.addAll(values, helperIds_);
+        onChanged();
+        return this;
+      }
+      public Builder clearHelperIds() {
+        helperIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+      
+      // optional bool open = 9;
+      private boolean open_ ;
+      public boolean hasOpen() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public boolean getOpen() {
+        return open_;
+      }
+      public Builder setOpen(boolean value) {
+        bitField0_ |= 0x00000100;
+        open_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOpen() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        open_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanHelpProto)
+    }
+    
+    static {
+      defaultInstance = new ClanHelpProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanHelpProto)
+  }
+  
+  public interface ClanHelpNoticeProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.ClanHelpType helpType = 1;
+    boolean hasHelpType();
+    com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType();
+    
+    // optional int64 userDataId = 2;
+    boolean hasUserDataId();
+    long getUserDataId();
+  }
+  public static final class ClanHelpNoticeProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ClanHelpNoticeProtoOrBuilder {
+    // Use ClanHelpNoticeProto.newBuilder() to construct.
+    private ClanHelpNoticeProto(Builder builder) {
+      super(builder);
+    }
+    private ClanHelpNoticeProto(boolean noInit) {}
+    
+    private static final ClanHelpNoticeProto defaultInstance;
+    public static ClanHelpNoticeProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ClanHelpNoticeProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpNoticeProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.ClanHelpType helpType = 1;
+    public static final int HELPTYPE_FIELD_NUMBER = 1;
+    private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_;
+    public boolean hasHelpType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+      return helpType_;
+    }
+    
+    // optional int64 userDataId = 2;
+    public static final int USERDATAID_FIELD_NUMBER = 2;
+    private long userDataId_;
+    public boolean hasUserDataId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getUserDataId() {
+      return userDataId_;
+    }
+    
+    private void initFields() {
+      helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      userDataId_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, helpType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, userDataId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, helpType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, userDataId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.ClanProto.ClanHelpNoticeProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ClanProto.ClanHelpNoticeProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ClanProto.internal_static_com_lvl6_proto_ClanHelpNoticeProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.ClanProto.ClanHelpNoticeProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userDataId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto build() {
+        com.lvl6.proto.ClanProto.ClanHelpNoticeProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.ClanProto.ClanHelpNoticeProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.ClanProto.ClanHelpNoticeProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto buildPartial() {
+        com.lvl6.proto.ClanProto.ClanHelpNoticeProto result = new com.lvl6.proto.ClanProto.ClanHelpNoticeProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.helpType_ = helpType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userDataId_ = userDataId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ClanProto.ClanHelpNoticeProto) {
+          return mergeFrom((com.lvl6.proto.ClanProto.ClanHelpNoticeProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.ClanProto.ClanHelpNoticeProto other) {
+        if (other == com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance()) return this;
+        if (other.hasHelpType()) {
+          setHelpType(other.getHelpType());
+        }
+        if (other.hasUserDataId()) {
+          setUserDataId(other.getUserDataId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                helpType_ = value;
+              }
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              userDataId_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.ClanHelpType helpType = 1;
+      private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      public boolean hasHelpType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+        return helpType_;
+      }
+      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        helpType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHelpType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 userDataId = 2;
+      private long userDataId_ ;
+      public boolean hasUserDataId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getUserDataId() {
+        return userDataId_;
+      }
+      public Builder setUserDataId(long value) {
+        bitField0_ |= 0x00000002;
+        userDataId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserDataId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userDataId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanHelpNoticeProto)
+    }
+    
+    static {
+      defaultInstance = new ClanHelpNoticeProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanHelpNoticeProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullClanProto_descriptor;
   private static
@@ -10803,6 +12061,16 @@ public final class ClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ClanIconProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ClanHelpProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ClanHelpProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ClanHelpNoticeProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10880,9 +12148,17 @@ public final class ClanProto {
       "serId\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030" +
       "\003 \001(\005\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001" +
       "(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010" +
-      "*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR" +
-      "_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nRE",
-      "QUESTING\020\nB\013B\tClanProto"
+      "\"\323\001\n\rClanHelpProto\022\022\n\nclanHelpId\030\001 \001(\003\022\016" +
+      "\n\006clanId\030\002 \001(\005\022\016\n\006userId\030\003 \001(\005\022\022\n\nuserDa",
+      "taId\030\004 \001(\003\022.\n\010helpType\030\005 \001(\0162\034.com.lvl6." +
+      "proto.ClanHelpType\022\025\n\rtimeRequested\030\006 \001(" +
+      "\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\021\n\thelperIds\030\010 \003(\005" +
+      "\022\014\n\004open\030\t \001(\010\"Y\n\023ClanHelpNoticeProto\022.\n" +
+      "\010helpType\030\001 \001(\0162\034.com.lvl6.proto.ClanHel" +
+      "pType\022\022\n\nuserDataId\030\002 \001(\003*X\n\016UserClanSta" +
+      "tus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CA" +
+      "PTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tC" +
+      "lanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11009,6 +12285,22 @@ public final class ClanProto {
               new java.lang.String[] { "ClanIconId", "ImgName", "IsAvailable", },
               com.lvl6.proto.ClanProto.ClanIconProto.class,
               com.lvl6.proto.ClanProto.ClanIconProto.Builder.class);
+          internal_static_com_lvl6_proto_ClanHelpProto_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_com_lvl6_proto_ClanHelpProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClanHelpProto_descriptor,
+              new java.lang.String[] { "ClanHelpId", "ClanId", "UserId", "UserDataId", "HelpType", "TimeRequested", "MaxHelpers", "HelperIds", "Open", },
+              com.lvl6.proto.ClanProto.ClanHelpProto.class,
+              com.lvl6.proto.ClanProto.ClanHelpProto.Builder.class);
+          internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor =
+            getDescriptor().getMessageTypes().get(16);
+          internal_static_com_lvl6_proto_ClanHelpNoticeProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor,
+              new java.lang.String[] { "HelpType", "UserDataId", },
+              com.lvl6.proto.ClanProto.ClanHelpNoticeProto.class,
+              com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder.class);
           return null;
         }
       };

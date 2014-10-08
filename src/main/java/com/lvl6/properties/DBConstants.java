@@ -23,6 +23,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_CLAN_HELP = "clan_help";
 	public static final String TABLE_CLAN_ICON = "clan_icon";
 	public static final String TABLE_CLAN_RAID = "clan_raid";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
@@ -74,6 +75,7 @@ public class DBConstants {
 	public static final String TABLE_SKILL_PROPERTY = "skill_property";
   public static final String TABLE_STATIC_LEVEL_INFO = "static_level_info";
   public static final String TABLE_STRUCTURE = "structure";
+  public static final String TABLE_STRUCTURE_CLAN_HOUSE = "structure_clan_house";
   public static final String TABLE_STRUCTURE_EVO_CHAMBER = "structure_evo_chamber";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
@@ -240,6 +242,17 @@ public class DBConstants {
   public static final String CLAN_FOR_USER__STATUS = "status";
   public static final String CLAN_FOR_USER__REQUEST_TIME = "request_time";
 
+  /*CLAN HELP*/
+  public static final String CLAN_HELP__ID = GENERIC__ID;
+  public static final String CLAN_HELP__USER_ID	= GENERIC__USER_ID;
+  public static final String CLAN_HELP__USER_DATA_ID = "user_data_id";
+  public static final String CLAN_HELP__HELP_TYPE = "help_type";
+  public static final String CLAN_HELP__CLAN_ID = "clan_id";
+  public static final String CLAN_HELP__TIME_OF_ENTRY = "time_of_entry";
+  public static final String CLAN_HELP__MAX_HELPERS = "max_helpers";
+  public static final String CLAN_HELP__HELPERS = "helpers";
+  public static final String CLAN_HELP__OPEN = "open";
+  
   /*EVENT PERSISTENT FOR USER*/
   public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
   public static final String EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID = "event_persistent_id";
@@ -925,6 +938,8 @@ public class DBConstants {
   public static final String STRUCTURE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
   public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
   public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
+  
+  public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
   

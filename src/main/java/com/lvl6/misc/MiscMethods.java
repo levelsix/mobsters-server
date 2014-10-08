@@ -55,6 +55,7 @@ import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureHospital;
 import com.lvl6.info.StructureLab;
@@ -101,6 +102,7 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
@@ -152,6 +154,7 @@ import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureClanHouseRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureEvoChamberRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
@@ -982,6 +985,7 @@ public class MiscMethods {
     SkillPropertyRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
+    StructureClanHouseRetrieveUtils.reload();
     StructureEvoChamberRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
     StructureLabRetrieveUtils.reload();
@@ -1962,6 +1966,7 @@ public class MiscMethods {
     setMiniJobCenters(sdpb, structs, structProtos);
     setEvoChambers(sdpb, structs, structProtos);
     setTeamCenters(sdpb, structs, structProtos);
+    setClanHouses(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -2097,6 +2102,24 @@ public class MiscMethods {
 		  TeamCenterProto tcp = CreateInfoProtoUtils
 			  .createTeamCenterProto(s, sip, stc);
 		  sdpb.addAllTeamCenters(tcp);
+	  }
+  }
+  
+  private static void setClanHouses(Builder sdpb,
+	  Map<Integer, Structure> structs,
+	  Map<Integer, StructureInfoProto> structProtos)
+  {
+	  Map<Integer, StructureClanHouse> idsToClanHouses =
+		  StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
+	  
+	  for (Integer structId : idsToClanHouses.keySet()) {
+		  Structure s = structs.get(structId);
+		  StructureInfoProto sip = structProtos.get(structId);
+		  StructureClanHouse stc = idsToClanHouses.get(structId);
+		  
+		  ClanHouseProto tcp = CreateInfoProtoUtils
+			  .createClanHouseProto(s, sip, stc);
+		  sdpb.addAllClanHouses(tcp);
 	  }
   }
 

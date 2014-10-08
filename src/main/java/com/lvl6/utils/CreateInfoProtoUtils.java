@@ -28,6 +28,7 @@ import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
@@ -66,6 +67,7 @@ import com.lvl6.info.Referral;
 import com.lvl6.info.Skill;
 import com.lvl6.info.SkillProperty;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureClanHouse;
 import com.lvl6.info.StructureEvoChamber;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
@@ -106,6 +108,7 @@ import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
+import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
@@ -150,6 +153,7 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
+import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
@@ -157,6 +161,7 @@ import com.lvl6.proto.SkillsProto.SkillActivationType;
 import com.lvl6.proto.SkillsProto.SkillPropertyProto;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.SkillsProto.SkillType;
+import com.lvl6.proto.StructureProto.ClanHouseProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.EvoChamberProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
@@ -1256,6 +1261,48 @@ public class CreateInfoProtoUtils {
 		cipb.setIsAvailable(isAvailable);
 		
   	return cipb.build();
+  }
+  
+  public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch) {
+	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
+	  chpb.setClanHelpId(ch.getId());
+	  chpb.setClanId(ch.getClanId());
+	  chpb.setUserId(ch.getUserId());
+	  chpb.setUserDataId(ch.getUserDataId());
+	  
+	  String helpType = ch.getHelpType();
+	  
+	  if ( null != helpType ) {
+		  try {
+			  ClanHelpType cht = ClanHelpType.valueOf(helpType);
+			  chpb.setHelpType(cht);
+			  
+		  } catch(Exception e) {
+			  log.info( String.format(
+				  "incorrect ClanHelpType. ClanHelp=%s", ch ));
+		  }
+	  }
+	  
+	  chpb.setMaxHelpers(ch.getMaxHelpers());
+	  chpb.addAllHelperIds(ch.getHelpers());
+	  chpb.setOpen(ch.isOpen());
+	  
+	  return chpb.build();
+  }
+  
+  public static ClanHelpProto createClanHelpProtoFromClanHelp(long clanHelpId,
+	  int clanId, int userId, long userDataId, ClanHelpType helpType,
+	  int maxHelpers, boolean open)
+  {
+	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
+	  chpb.setClanHelpId(clanHelpId);
+	  chpb.setClanId(clanId);
+	  chpb.setUserId(userId);
+	  chpb.setUserDataId(userDataId);
+	  chpb.setHelpType(helpType);
+	  chpb.setMaxHelpers(maxHelpers);
+	  chpb.setOpen(open);
+	  return chpb.build();
   }
   
   /**InAppPurchase.proto********************************************/
@@ -2490,6 +2537,19 @@ public class CreateInfoProtoUtils {
 	  tcpb.setStructInfo(sip);
 	  
 	  return tcpb.build();
+  }
+  
+  public static ClanHouseProto  createClanHouseProto (Structure s,
+	  StructureInfoProto sip, StructureClanHouse sch)
+  {
+	  if (null == sip) {
+		  sip = createStructureInfoProtoFromStructure(s);
+	  }
+	  
+	  ClanHouseProto.Builder chpb = ClanHouseProto.newBuilder();
+	  chpb.setStructInfo(sip);
+	  
+	  return chpb.build();
   }
   
   /**Task.proto*****************************************************/

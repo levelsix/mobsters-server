@@ -32,7 +32,6 @@ enum Element {
 	NO_ELEMENT = 7;
 }
 
-
 enum Quality {
 	NO_QUALITY = 1;
 	COMMON = 2;
@@ -44,4 +43,9 @@ enum Quality {
 	
 	EVO = 8; //MONSTERS USED FOR EVOLVING
 }
+
+enum ClanHelpType {
+	NO_HELP = 1;
+}
+
 // the ResourceType enum in Structure.proto, should be in here
