@@ -207,7 +207,7 @@ message ClanHelpProto {
 	optional int32 clanId = 2;
 	optional int32 userId = 3;
 	optional int64 userDataId = 4; //user's structure, monster, mini_job, etc
-	optional ClanHelpType helpType = 5;
+	optional ClanHelpType helpType = 5 [default = NO_HELP];
 	optional int64 timeRequested = 6;
 	optional int32 maxHelpers = 7;
 	repeated int32 helperIds = 8;
@@ -215,6 +215,6 @@ message ClanHelpProto {
 }
 
 message ClanHelpNoticeProto {
-	optional ClanHelpType helpType = 1;
+	optional ClanHelpType helpType = 1 [default = NO_HELP];
 	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
 }
