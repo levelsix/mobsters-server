@@ -218,4 +218,5 @@ message ClanHelpProto {
 message ClanHelpNoticeProto {
 	optional ClanHelpType helpType = 1;
 	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
+	optional int32 staticDataId = 3;
 }
