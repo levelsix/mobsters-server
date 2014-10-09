@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +12,17 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
+import com.lvl6.info.ClanHelp;
+import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.server.Locker;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class GiveClanHelpController extends EventController {
@@ -26,6 +31,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+   
 
   public GiveClanHelpController() {
     numAllocatedThreads = 4;
@@ -86,15 +95,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	success = writeChangesToDB(userId, clanId, clanHelpIds);
       }
 
-      if (success) {
-    	  resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
-      }
-      
       GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(userId);
       resEvent.setTag(event.getTag());
-      resEvent.setGiveClanHelpResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-
+      if (!success) {
+    	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	  
+      } else {
+    	  //only write to clan if success
+    	  //send back most up to date ClanHelps
+    	  //NOTE: Sending most up to date ClanHelps incurs a db read
+    	  setClanHelpings(resBuilder, clanId, userId);
+    	  resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
+    	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+    	  server.writeClanEvent(resEvent, clanId);
+      }
+      
     } catch (Exception e) {
       log.error("exception in GiveClanHelp processEvent", e);
       try {
@@ -136,6 +152,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     return true;
   }
+  
+  private void setClanHelpings(Builder resBuilder, int clanId, int userId) {
+	  Map<Integer, List<ClanHelp>> clanHelpings = clanHelpRetrieveUtil
+		  .getUserIdToClanHelp( clanId, userId );
+	  
+	  for (Integer helperId : clanHelpings.keySet()) {
+		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
+			  
+		  for (ClanHelp aid : userHelpings) {
+			  ClanHelpProto chp = CreateInfoProtoUtils
+				  .createClanHelpProtoFromClanHelp(aid);
+			  
+			  resBuilder.addClanHelps(chp);
+		  }
+	  }
+  }
 
   /*
   private void notifyClan(User aUser, Clan aClan) {
@@ -154,6 +186,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
+  {
+	  return clanHelpRetrieveUtil;
+  }
+
+  public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
+  {
+	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
   }
   
 }
