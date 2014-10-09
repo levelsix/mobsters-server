@@ -439,6 +439,7 @@ message GiveClanHelpRequestProto {
 
 message GiveClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
+	repeated ClanHelpProto clanHelps = 2;
 	optional GiveClanHelpStatus status = 3; 
 	
 	enum GiveClanHelpStatus {

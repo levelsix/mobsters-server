@@ -34,7 +34,7 @@ message LoadPlayerCityResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+/* GET RID OF THIS*/
 																					//DONE
 message PurchaseCityExpansionRequestProto {
     optional MinimumUserProto sender = 1;
@@ -58,9 +58,9 @@ message PurchaseCityExpansionResponseProto {
     	CLIENT_TOO_APART_FROM_SERVER_TIME = 5;
     }
 }
-
+/* */
 //------------------------------------------------------------------------------------------
-
+/* GET RID OF THIS*/
 message LoadCityRequestProto {
      optional MinimumUserProto sender = 1;
      optional int32 cityId = 2;    
@@ -80,6 +80,6 @@ message LoadCityResponseProto {
      	OTHER_FAIL = 3;
      }    
 }
-
+/**/
 //------------------------------------------------------------------------------------------
 			

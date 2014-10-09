@@ -8,859 +8,235 @@ public final class AchievementStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface AchievementProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 achievementId = 1;
+  public interface AchievementProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AchievementProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
     boolean hasAchievementId();
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
     int getAchievementId();
-    
-    // optional string name = 2;
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
     boolean hasName();
-    String getName();
-    
-    // optional string description = 3;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional string description = 3;</code>
+     */
     boolean hasDescription();
-    String getDescription();
-    
-    // optional int32 gemReward = 4;
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
+
+    /**
+     * <code>optional int32 gemReward = 4;</code>
+     */
     boolean hasGemReward();
+    /**
+     * <code>optional int32 gemReward = 4;</code>
+     */
     int getGemReward();
-    
-    // optional int32 lvl = 5;
+
+    /**
+     * <code>optional int32 lvl = 5;</code>
+     *
+     * <pre>
+     *max most likely = 3
+     * </pre>
+     */
     boolean hasLvl();
+    /**
+     * <code>optional int32 lvl = 5;</code>
+     *
+     * <pre>
+     *max most likely = 3
+     * </pre>
+     */
     int getLvl();
-    
-    // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
+
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+     */
     boolean hasAchievementType();
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+     */
     com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType();
-    
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
+
+    /**
+     * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     boolean hasResourceType();
+    /**
+     * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
-    
-    // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
+
+    /**
+     * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     boolean hasElement();
+    /**
+     * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     com.lvl6.proto.SharedEnumConfigProto.Element getElement();
-    
-    // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
+
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     boolean hasQuality();
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
     com.lvl6.proto.SharedEnumConfigProto.Quality getQuality();
-    
-    // optional int32 staticDataId = 10;
+
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *could be 0, as in not set
+     * </pre>
+     */
     boolean hasStaticDataId();
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *could be 0, as in not set
+     * </pre>
+     */
     int getStaticDataId();
-    
-    // optional int32 quantity = 11;
+
+    /**
+     * <code>optional int32 quantity = 11;</code>
+     */
     boolean hasQuantity();
+    /**
+     * <code>optional int32 quantity = 11;</code>
+     */
     int getQuantity();
-    
-    // optional int32 priority = 12;
+
+    /**
+     * <code>optional int32 priority = 12;</code>
+     */
     boolean hasPriority();
+    /**
+     * <code>optional int32 priority = 12;</code>
+     */
     int getPriority();
-    
-    // optional int32 prerequisiteId = 13;
+
+    /**
+     * <code>optional int32 prerequisiteId = 13;</code>
+     */
     boolean hasPrerequisiteId();
+    /**
+     * <code>optional int32 prerequisiteId = 13;</code>
+     */
     int getPrerequisiteId();
-    
-    // optional int32 successorId = 14;
+
+    /**
+     * <code>optional int32 successorId = 14;</code>
+     */
     boolean hasSuccessorId();
+    /**
+     * <code>optional int32 successorId = 14;</code>
+     */
     int getSuccessorId();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AchievementProto}
+   */
   public static final class AchievementProto extends
-      com.google.protobuf.GeneratedMessage
-      implements AchievementProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AchievementProto)
+      AchievementProtoOrBuilder {
     // Use AchievementProto.newBuilder() to construct.
-    private AchievementProto(Builder builder) {
+    private AchievementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private AchievementProto(boolean noInit) {}
-    
+    private AchievementProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final AchievementProto defaultInstance;
     public static AchievementProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public AchievementProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable;
-    }
-    
-    public enum AchievementType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      NO_ACHIEVEMENT(0, 17),
-      COLLECT_RESOURCE(1, 1),
-      CREATE_GRENADE(2, 2),
-      CREATE_RAINBOW(3, 3),
-      CREATE_ROCKET(4, 4),
-      DEFEAT_MONSTERS(5, 5),
-      DESTROY_ORBS(6, 6),
-      ENHANCE_POINTS(7, 7),
-      HEAL_MONSTERS(8, 8),
-      JOIN_LEAGUE(9, 9),
-      MAKE_COMBO(10, 10),
-      REMOVE_OBSTACLE(11, 11),
-      SELL_MONSTER(12, 12),
-      STEAL_RESOURCE(13, 13),
-      TAKE_DAMAGE(14, 14),
-      UPGRADE_BUILDING(15, 15),
-      WIN_PVP_BATTLE(16, 16),
-      ;
-      
-      public static final int NO_ACHIEVEMENT_VALUE = 17;
-      public static final int COLLECT_RESOURCE_VALUE = 1;
-      public static final int CREATE_GRENADE_VALUE = 2;
-      public static final int CREATE_RAINBOW_VALUE = 3;
-      public static final int CREATE_ROCKET_VALUE = 4;
-      public static final int DEFEAT_MONSTERS_VALUE = 5;
-      public static final int DESTROY_ORBS_VALUE = 6;
-      public static final int ENHANCE_POINTS_VALUE = 7;
-      public static final int HEAL_MONSTERS_VALUE = 8;
-      public static final int JOIN_LEAGUE_VALUE = 9;
-      public static final int MAKE_COMBO_VALUE = 10;
-      public static final int REMOVE_OBSTACLE_VALUE = 11;
-      public static final int SELL_MONSTER_VALUE = 12;
-      public static final int STEAL_RESOURCE_VALUE = 13;
-      public static final int TAKE_DAMAGE_VALUE = 14;
-      public static final int UPGRADE_BUILDING_VALUE = 15;
-      public static final int WIN_PVP_BATTLE_VALUE = 16;
-      
-      
-      public final int getNumber() { return value; }
-      
-      public static AchievementType valueOf(int value) {
-        switch (value) {
-          case 17: return NO_ACHIEVEMENT;
-          case 1: return COLLECT_RESOURCE;
-          case 2: return CREATE_GRENADE;
-          case 3: return CREATE_RAINBOW;
-          case 4: return CREATE_ROCKET;
-          case 5: return DEFEAT_MONSTERS;
-          case 6: return DESTROY_ORBS;
-          case 7: return ENHANCE_POINTS;
-          case 8: return HEAL_MONSTERS;
-          case 9: return JOIN_LEAGUE;
-          case 10: return MAKE_COMBO;
-          case 11: return REMOVE_OBSTACLE;
-          case 12: return SELL_MONSTER;
-          case 13: return STEAL_RESOURCE;
-          case 14: return TAKE_DAMAGE;
-          case 15: return UPGRADE_BUILDING;
-          case 16: return WIN_PVP_BATTLE;
-          default: return null;
-        }
-      }
-      
-      public static com.google.protobuf.Internal.EnumLiteMap<AchievementType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AchievementType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AchievementType>() {
-              public AchievementType findValueByNumber(int number) {
-                return AchievementType.valueOf(number);
-              }
-            };
-      
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.AchievementStuffProto.AchievementProto.getDescriptor().getEnumTypes().get(0);
-      }
-      
-      private static final AchievementType[] VALUES = {
-        NO_ACHIEVEMENT, COLLECT_RESOURCE, CREATE_GRENADE, CREATE_RAINBOW, CREATE_ROCKET, DEFEAT_MONSTERS, DESTROY_ORBS, ENHANCE_POINTS, HEAL_MONSTERS, JOIN_LEAGUE, MAKE_COMBO, REMOVE_OBSTACLE, SELL_MONSTER, STEAL_RESOURCE, TAKE_DAMAGE, UPGRADE_BUILDING, WIN_PVP_BATTLE, 
-      };
-      
-      public static AchievementType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-      
-      private final int index;
-      private final int value;
-      
-      private AchievementType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-      
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementProto.AchievementType)
-    }
-    
-    private int bitField0_;
-    // optional int32 achievementId = 1;
-    public static final int ACHIEVEMENTID_FIELD_NUMBER = 1;
-    private int achievementId_;
-    public boolean hasAchievementId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public int getAchievementId() {
-      return achievementId_;
-    }
-    
-    // optional string name = 2;
-    public static final int NAME_FIELD_NUMBER = 2;
-    private java.lang.Object name_;
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          name_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    
-    // optional string description = 3;
-    public static final int DESCRIPTION_FIELD_NUMBER = 3;
-    private java.lang.Object description_;
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    
-    // optional int32 gemReward = 4;
-    public static final int GEMREWARD_FIELD_NUMBER = 4;
-    private int gemReward_;
-    public boolean hasGemReward() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getGemReward() {
-      return gemReward_;
-    }
-    
-    // optional int32 lvl = 5;
-    public static final int LVL_FIELD_NUMBER = 5;
-    private int lvl_;
-    public boolean hasLvl() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    public int getLvl() {
-      return lvl_;
-    }
-    
-    // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
-    public static final int ACHIEVEMENTTYPE_FIELD_NUMBER = 6;
-    private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_;
-    public boolean hasAchievementType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType() {
-      return achievementType_;
-    }
-    
-    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
-    public static final int RESOURCETYPE_FIELD_NUMBER = 7;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
-    public boolean hasResourceType() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
-      return resourceType_;
-    }
-    
-    // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
-    public static final int ELEMENT_FIELD_NUMBER = 8;
-    private com.lvl6.proto.SharedEnumConfigProto.Element element_;
-    public boolean hasElement() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
-      return element_;
-    }
-    
-    // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
-    public static final int QUALITY_FIELD_NUMBER = 9;
-    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
-    public boolean hasQuality() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-      return quality_;
-    }
-    
-    // optional int32 staticDataId = 10;
-    public static final int STATICDATAID_FIELD_NUMBER = 10;
-    private int staticDataId_;
-    public boolean hasStaticDataId() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    public int getStaticDataId() {
-      return staticDataId_;
-    }
-    
-    // optional int32 quantity = 11;
-    public static final int QUANTITY_FIELD_NUMBER = 11;
-    private int quantity_;
-    public boolean hasQuantity() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    public int getQuantity() {
-      return quantity_;
-    }
-    
-    // optional int32 priority = 12;
-    public static final int PRIORITY_FIELD_NUMBER = 12;
-    private int priority_;
-    public boolean hasPriority() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    public int getPriority() {
-      return priority_;
-    }
-    
-    // optional int32 prerequisiteId = 13;
-    public static final int PREREQUISITEID_FIELD_NUMBER = 13;
-    private int prerequisiteId_;
-    public boolean hasPrerequisiteId() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
-    }
-    public int getPrerequisiteId() {
-      return prerequisiteId_;
-    }
-    
-    // optional int32 successorId = 14;
-    public static final int SUCCESSORID_FIELD_NUMBER = 14;
-    private int successorId_;
-    public boolean hasSuccessorId() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
-    }
-    public int getSuccessorId() {
-      return successorId_;
-    }
-    
-    private void initFields() {
-      achievementId_ = 0;
-      name_ = "";
-      description_ = "";
-      gemReward_ = 0;
-      lvl_ = 0;
-      achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-      element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      staticDataId_ = 0;
-      quantity_ = 0;
-      priority_ = 0;
-      prerequisiteId_ = 0;
-      successorId_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, achievementId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, gemReward_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, lvl_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeEnum(6, achievementType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeEnum(7, resourceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeEnum(8, element_.getNumber());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeEnum(9, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, staticDataId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, quantity_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(12, priority_);
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(13, prerequisiteId_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(14, successorId_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, achievementId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, gemReward_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, lvl_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, achievementType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, resourceType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, element_.getNumber());
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(9, quality_.getNumber());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, staticDataId_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, quantity_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, priority_);
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, prerequisiteId_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, successorId_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
     }
-    
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
+    private AchievementProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.AchievementStuffProto.AchievementProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.AchievementStuffProto.AchievementProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        achievementId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        gemReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        lvl_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        staticDataId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
-        quantity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
-        prerequisiteId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
-        successorId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00002000);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.AchievementStuffProto.AchievementProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.AchievementStuffProto.AchievementProto getDefaultInstanceForType() {
-        return com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.AchievementStuffProto.AchievementProto build() {
-        com.lvl6.proto.AchievementStuffProto.AchievementProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.AchievementStuffProto.AchievementProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.AchievementStuffProto.AchievementProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.AchievementStuffProto.AchievementProto buildPartial() {
-        com.lvl6.proto.AchievementStuffProto.AchievementProto result = new com.lvl6.proto.AchievementStuffProto.AchievementProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.achievementId_ = achievementId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.description_ = description_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.gemReward_ = gemReward_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.lvl_ = lvl_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.achievementType_ = achievementType_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.resourceType_ = resourceType_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.element_ = element_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.quality_ = quality_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.staticDataId_ = staticDataId_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.quantity_ = quantity_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
-        }
-        result.priority_ = priority_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00001000;
-        }
-        result.prerequisiteId_ = prerequisiteId_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
-          to_bitField0_ |= 0x00002000;
-        }
-        result.successorId_ = successorId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.AchievementStuffProto.AchievementProto) {
-          return mergeFrom((com.lvl6.proto.AchievementStuffProto.AchievementProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.AchievementStuffProto.AchievementProto other) {
-        if (other == com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance()) return this;
-        if (other.hasAchievementId()) {
-          setAchievementId(other.getAchievementId());
-        }
-        if (other.hasName()) {
-          setName(other.getName());
-        }
-        if (other.hasDescription()) {
-          setDescription(other.getDescription());
-        }
-        if (other.hasGemReward()) {
-          setGemReward(other.getGemReward());
-        }
-        if (other.hasLvl()) {
-          setLvl(other.getLvl());
-        }
-        if (other.hasAchievementType()) {
-          setAchievementType(other.getAchievementType());
-        }
-        if (other.hasResourceType()) {
-          setResourceType(other.getResourceType());
-        }
-        if (other.hasElement()) {
-          setElement(other.getElement());
-        }
-        if (other.hasQuality()) {
-          setQuality(other.getQuality());
-        }
-        if (other.hasStaticDataId()) {
-          setStaticDataId(other.getStaticDataId());
-        }
-        if (other.hasQuantity()) {
-          setQuantity(other.getQuantity());
-        }
-        if (other.hasPriority()) {
-          setPriority(other.getPriority());
-        }
-        if (other.hasPrerequisiteId()) {
-          setPrerequisiteId(other.getPrerequisiteId());
-        }
-        if (other.hasSuccessorId()) {
-          setSuccessorId(other.getSuccessorId());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
+              done = true;
+              break;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
+                done = true;
               }
               break;
             }
@@ -870,13 +246,15 @@ public final class AchievementStuffProto {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              description_ = input.readBytes();
+              description_ = bs;
               break;
             }
             case 32: {
@@ -960,460 +338,611 @@ public final class AchievementStuffProto {
             }
           }
         }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
       }
-      
-      private int bitField0_;
-      
-      // optional int32 achievementId = 1;
-      private int achievementId_ ;
-      public boolean hasAchievementId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public int getAchievementId() {
-        return achievementId_;
-      }
-      public Builder setAchievementId(int value) {
-        bitField0_ |= 0x00000001;
-        achievementId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearAchievementId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        achievementId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional string name = 2;
-      private java.lang.Object name_ = "";
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      public Builder setName(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      void setName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-      }
-      
-      // optional string description = 3;
-      private java.lang.Object description_ = "";
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          description_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      public Builder setDescription(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
-        description_ = value;
-        onChanged();
-      }
-      
-      // optional int32 gemReward = 4;
-      private int gemReward_ ;
-      public boolean hasGemReward() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getGemReward() {
-        return gemReward_;
-      }
-      public Builder setGemReward(int value) {
-        bitField0_ |= 0x00000008;
-        gemReward_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearGemReward() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        gemReward_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 lvl = 5;
-      private int lvl_ ;
-      public boolean hasLvl() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      public int getLvl() {
-        return lvl_;
-      }
-      public Builder setLvl(int value) {
-        bitField0_ |= 0x00000010;
-        lvl_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLvl() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        lvl_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;
-      private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
-      public boolean hasAchievementType() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType() {
-        return achievementType_;
-      }
-      public Builder setAchievementType(com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000020;
-        achievementType_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearAchievementType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-      public boolean hasResourceType() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
-        return resourceType_;
-      }
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000040;
-        resourceType_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearResourceType() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];
-      private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-      public boolean hasElement() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
-        return element_;
-      }
-      public Builder setElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000080;
-        element_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElement() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];
-      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-      public boolean hasQuality() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
-        return quality_;
-      }
-      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000100;
-        quality_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 staticDataId = 10;
-      private int staticDataId_ ;
-      public boolean hasStaticDataId() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      public int getStaticDataId() {
-        return staticDataId_;
-      }
-      public Builder setStaticDataId(int value) {
-        bitField0_ |= 0x00000200;
-        staticDataId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearStaticDataId() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        staticDataId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 quantity = 11;
-      private int quantity_ ;
-      public boolean hasQuantity() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      public int getQuantity() {
-        return quantity_;
-      }
-      public Builder setQuantity(int value) {
-        bitField0_ |= 0x00000400;
-        quantity_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        quantity_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 priority = 12;
-      private int priority_ ;
-      public boolean hasPriority() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      public int getPriority() {
-        return priority_;
-      }
-      public Builder setPriority(int value) {
-        bitField0_ |= 0x00000800;
-        priority_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        priority_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 prerequisiteId = 13;
-      private int prerequisiteId_ ;
-      public boolean hasPrerequisiteId() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
-      }
-      public int getPrerequisiteId() {
-        return prerequisiteId_;
-      }
-      public Builder setPrerequisiteId(int value) {
-        bitField0_ |= 0x00001000;
-        prerequisiteId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearPrerequisiteId() {
-        bitField0_ = (bitField0_ & ~0x00001000);
-        prerequisiteId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 successorId = 14;
-      private int successorId_ ;
-      public boolean hasSuccessorId() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
-      }
-      public int getSuccessorId() {
-        return successorId_;
-      }
-      public Builder setSuccessorId(int value) {
-        bitField0_ |= 0x00002000;
-        successorId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSuccessorId() {
-        bitField0_ = (bitField0_ & ~0x00002000);
-        successorId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProto)
     }
-    
-    static {
-      defaultInstance = new AchievementProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProto)
-  }
-  
-  public interface UserAchievementProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 achievementId = 1;
-    boolean hasAchievementId();
-    int getAchievementId();
-    
-    // optional int32 progress = 2;
-    boolean hasProgress();
-    int getProgress();
-    
-    // optional bool isComplete = 3;
-    boolean hasIsComplete();
-    boolean getIsComplete();
-    
-    // optional bool isRedeemed = 4;
-    boolean hasIsRedeemed();
-    boolean getIsRedeemed();
-  }
-  public static final class UserAchievementProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserAchievementProtoOrBuilder {
-    // Use UserAchievementProto.newBuilder() to construct.
-    private UserAchievementProto(Builder builder) {
-      super(builder);
-    }
-    private UserAchievementProto(boolean noInit) {}
-    
-    private static final UserAchievementProto defaultInstance;
-    public static UserAchievementProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public UserAchievementProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
+      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable;
+      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.AchievementStuffProto.AchievementProto.class, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<AchievementProto> PARSER =
+        new com.google.protobuf.AbstractParser<AchievementProto>() {
+      public AchievementProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AchievementProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AchievementProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.AchievementProto.AchievementType}
+     *
+     * <pre>
+     *anything with static data id should have quantity value of at least 1
+     * </pre>
+     */
+    public enum AchievementType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>NO_ACHIEVEMENT = 17;</code>
+       */
+      NO_ACHIEVEMENT(0, 17),
+      /**
+       * <code>COLLECT_RESOURCE = 1;</code>
+       */
+      COLLECT_RESOURCE(1, 1),
+      /**
+       * <code>CREATE_GRENADE = 2;</code>
+       */
+      CREATE_GRENADE(2, 2),
+      /**
+       * <code>CREATE_RAINBOW = 3;</code>
+       */
+      CREATE_RAINBOW(3, 3),
+      /**
+       * <code>CREATE_ROCKET = 4;</code>
+       */
+      CREATE_ROCKET(4, 4),
+      /**
+       * <code>DEFEAT_MONSTERS = 5;</code>
+       */
+      DEFEAT_MONSTERS(5, 5),
+      /**
+       * <code>DESTROY_ORBS = 6;</code>
+       */
+      DESTROY_ORBS(6, 6),
+      /**
+       * <code>ENHANCE_POINTS = 7;</code>
+       */
+      ENHANCE_POINTS(7, 7),
+      /**
+       * <code>HEAL_MONSTERS = 8;</code>
+       */
+      HEAL_MONSTERS(8, 8),
+      /**
+       * <code>JOIN_LEAGUE = 9;</code>
+       *
+       * <pre>
+       *quantity should be 1
+       * </pre>
+       */
+      JOIN_LEAGUE(9, 9),
+      /**
+       * <code>MAKE_COMBO = 10;</code>
+       */
+      MAKE_COMBO(10, 10),
+      /**
+       * <code>REMOVE_OBSTACLE = 11;</code>
+       */
+      REMOVE_OBSTACLE(11, 11),
+      /**
+       * <code>SELL_MONSTER = 12;</code>
+       */
+      SELL_MONSTER(12, 12),
+      /**
+       * <code>STEAL_RESOURCE = 13;</code>
+       */
+      STEAL_RESOURCE(13, 13),
+      /**
+       * <code>TAKE_DAMAGE = 14;</code>
+       */
+      TAKE_DAMAGE(14, 14),
+      /**
+       * <code>UPGRADE_BUILDING = 15;</code>
+       *
+       * <pre>
+       *quantity should be 1
+       * </pre>
+       */
+      UPGRADE_BUILDING(15, 15),
+      /**
+       * <code>WIN_PVP_BATTLE = 16;</code>
+       */
+      WIN_PVP_BATTLE(16, 16),
+      ;
+
+      /**
+       * <code>NO_ACHIEVEMENT = 17;</code>
+       */
+      public static final int NO_ACHIEVEMENT_VALUE = 17;
+      /**
+       * <code>COLLECT_RESOURCE = 1;</code>
+       */
+      public static final int COLLECT_RESOURCE_VALUE = 1;
+      /**
+       * <code>CREATE_GRENADE = 2;</code>
+       */
+      public static final int CREATE_GRENADE_VALUE = 2;
+      /**
+       * <code>CREATE_RAINBOW = 3;</code>
+       */
+      public static final int CREATE_RAINBOW_VALUE = 3;
+      /**
+       * <code>CREATE_ROCKET = 4;</code>
+       */
+      public static final int CREATE_ROCKET_VALUE = 4;
+      /**
+       * <code>DEFEAT_MONSTERS = 5;</code>
+       */
+      public static final int DEFEAT_MONSTERS_VALUE = 5;
+      /**
+       * <code>DESTROY_ORBS = 6;</code>
+       */
+      public static final int DESTROY_ORBS_VALUE = 6;
+      /**
+       * <code>ENHANCE_POINTS = 7;</code>
+       */
+      public static final int ENHANCE_POINTS_VALUE = 7;
+      /**
+       * <code>HEAL_MONSTERS = 8;</code>
+       */
+      public static final int HEAL_MONSTERS_VALUE = 8;
+      /**
+       * <code>JOIN_LEAGUE = 9;</code>
+       *
+       * <pre>
+       *quantity should be 1
+       * </pre>
+       */
+      public static final int JOIN_LEAGUE_VALUE = 9;
+      /**
+       * <code>MAKE_COMBO = 10;</code>
+       */
+      public static final int MAKE_COMBO_VALUE = 10;
+      /**
+       * <code>REMOVE_OBSTACLE = 11;</code>
+       */
+      public static final int REMOVE_OBSTACLE_VALUE = 11;
+      /**
+       * <code>SELL_MONSTER = 12;</code>
+       */
+      public static final int SELL_MONSTER_VALUE = 12;
+      /**
+       * <code>STEAL_RESOURCE = 13;</code>
+       */
+      public static final int STEAL_RESOURCE_VALUE = 13;
+      /**
+       * <code>TAKE_DAMAGE = 14;</code>
+       */
+      public static final int TAKE_DAMAGE_VALUE = 14;
+      /**
+       * <code>UPGRADE_BUILDING = 15;</code>
+       *
+       * <pre>
+       *quantity should be 1
+       * </pre>
+       */
+      public static final int UPGRADE_BUILDING_VALUE = 15;
+      /**
+       * <code>WIN_PVP_BATTLE = 16;</code>
+       */
+      public static final int WIN_PVP_BATTLE_VALUE = 16;
+
+
+      public final int getNumber() { return value; }
+
+      public static AchievementType valueOf(int value) {
+        switch (value) {
+          case 17: return NO_ACHIEVEMENT;
+          case 1: return COLLECT_RESOURCE;
+          case 2: return CREATE_GRENADE;
+          case 3: return CREATE_RAINBOW;
+          case 4: return CREATE_ROCKET;
+          case 5: return DEFEAT_MONSTERS;
+          case 6: return DESTROY_ORBS;
+          case 7: return ENHANCE_POINTS;
+          case 8: return HEAL_MONSTERS;
+          case 9: return JOIN_LEAGUE;
+          case 10: return MAKE_COMBO;
+          case 11: return REMOVE_OBSTACLE;
+          case 12: return SELL_MONSTER;
+          case 13: return STEAL_RESOURCE;
+          case 14: return TAKE_DAMAGE;
+          case 15: return UPGRADE_BUILDING;
+          case 16: return WIN_PVP_BATTLE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<AchievementType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<AchievementType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<AchievementType>() {
+              public AchievementType findValueByNumber(int number) {
+                return AchievementType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.AchievementStuffProto.AchievementProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final AchievementType[] VALUES = values();
+
+      public static AchievementType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private AchievementType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementProto.AchievementType)
+    }
+
     private int bitField0_;
-    // optional int32 achievementId = 1;
     public static final int ACHIEVEMENTID_FIELD_NUMBER = 1;
     private int achievementId_;
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
     public boolean hasAchievementId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
     public int getAchievementId() {
       return achievementId_;
     }
-    
-    // optional int32 progress = 2;
-    public static final int PROGRESS_FIELD_NUMBER = 2;
-    private int progress_;
-    public boolean hasProgress() {
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getProgress() {
-      return progress_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
     }
-    
-    // optional bool isComplete = 3;
-    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
-    private boolean isComplete_;
-    public boolean hasIsComplete() {
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DESCRIPTION_FIELD_NUMBER = 3;
+    private java.lang.Object description_;
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    public boolean hasDescription() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public boolean getIsComplete() {
-      return isComplete_;
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          description_ = s;
+        }
+        return s;
+      }
     }
-    
-    // optional bool isRedeemed = 4;
-    public static final int ISREDEEMED_FIELD_NUMBER = 4;
-    private boolean isRedeemed_;
-    public boolean hasIsRedeemed() {
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GEMREWARD_FIELD_NUMBER = 4;
+    private int gemReward_;
+    /**
+     * <code>optional int32 gemReward = 4;</code>
+     */
+    public boolean hasGemReward() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public boolean getIsRedeemed() {
-      return isRedeemed_;
+    /**
+     * <code>optional int32 gemReward = 4;</code>
+     */
+    public int getGemReward() {
+      return gemReward_;
     }
-    
+
+    public static final int LVL_FIELD_NUMBER = 5;
+    private int lvl_;
+    /**
+     * <code>optional int32 lvl = 5;</code>
+     *
+     * <pre>
+     *max most likely = 3
+     * </pre>
+     */
+    public boolean hasLvl() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 lvl = 5;</code>
+     *
+     * <pre>
+     *max most likely = 3
+     * </pre>
+     */
+    public int getLvl() {
+      return lvl_;
+    }
+
+    public static final int ACHIEVEMENTTYPE_FIELD_NUMBER = 6;
+    private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_;
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+     */
+    public boolean hasAchievementType() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+     */
+    public com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType() {
+      return achievementType_;
+    }
+
+    public static final int RESOURCETYPE_FIELD_NUMBER = 7;
+    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    /**
+     * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public boolean hasResourceType() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      return resourceType_;
+    }
+
+    public static final int ELEMENT_FIELD_NUMBER = 8;
+    private com.lvl6.proto.SharedEnumConfigProto.Element element_;
+    /**
+     * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public boolean hasElement() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
+      return element_;
+    }
+
+    public static final int QUALITY_FIELD_NUMBER = 9;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality quality_;
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public boolean hasQuality() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+     *
+     * <pre>
+     *could be null
+     * </pre>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+      return quality_;
+    }
+
+    public static final int STATICDATAID_FIELD_NUMBER = 10;
+    private int staticDataId_;
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *could be 0, as in not set
+     * </pre>
+     */
+    public boolean hasStaticDataId() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *could be 0, as in not set
+     * </pre>
+     */
+    public int getStaticDataId() {
+      return staticDataId_;
+    }
+
+    public static final int QUANTITY_FIELD_NUMBER = 11;
+    private int quantity_;
+    /**
+     * <code>optional int32 quantity = 11;</code>
+     */
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 quantity = 11;</code>
+     */
+    public int getQuantity() {
+      return quantity_;
+    }
+
+    public static final int PRIORITY_FIELD_NUMBER = 12;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 12;</code>
+     */
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional int32 priority = 12;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
+    public static final int PREREQUISITEID_FIELD_NUMBER = 13;
+    private int prerequisiteId_;
+    /**
+     * <code>optional int32 prerequisiteId = 13;</code>
+     */
+    public boolean hasPrerequisiteId() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional int32 prerequisiteId = 13;</code>
+     */
+    public int getPrerequisiteId() {
+      return prerequisiteId_;
+    }
+
+    public static final int SUCCESSORID_FIELD_NUMBER = 14;
+    private int successorId_;
+    /**
+     * <code>optional int32 successorId = 14;</code>
+     */
+    public boolean hasSuccessorId() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional int32 successorId = 14;</code>
+     */
+    public int getSuccessorId() {
+      return successorId_;
+    }
+
     private void initFields() {
       achievementId_ = 0;
-      progress_ = 0;
-      isComplete_ = false;
-      isRedeemed_ = false;
+      name_ = "";
+      description_ = "";
+      gemReward_ = 0;
+      lvl_ = 0;
+      achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+      quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      staticDataId_ = 0;
+      quantity_ = 0;
+      priority_ = 0;
+      prerequisiteId_ = 0;
+      successorId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1421,22 +950,52 @@ public final class AchievementStuffProto {
         output.writeInt32(1, achievementId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, progress_);
+        output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBool(3, isComplete_);
+        output.writeBytes(3, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBool(4, isRedeemed_);
+        output.writeInt32(4, gemReward_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, lvl_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(6, achievementType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeEnum(7, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeEnum(8, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeEnum(9, quality_.getNumber());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, staticDataId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, quantity_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(12, priority_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt32(13, prerequisiteId_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(14, successorId_);
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1444,127 +1003,160 @@ public final class AchievementStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, progress_);
+          .computeBytesSize(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, isComplete_);
+          .computeBytesSize(3, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, isRedeemed_);
+          .computeInt32Size(4, gemReward_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, lvl_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, achievementType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(8, element_.getNumber());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(9, quality_.getNumber());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, staticDataId_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, quantity_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, priority_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, prerequisiteId_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(14, successorId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(byte[] data)
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseDelimitedFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+    public static com.lvl6.proto.AchievementStuffProto.AchievementProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.AchievementStuffProto.UserAchievementProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.AchievementStuffProto.AchievementProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AchievementProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AchievementProto)
+        com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable;
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.AchievementStuffProto.AchievementProto.class, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder.class);
       }
-      
-      // Construct using com.lvl6.proto.AchievementStuffProto.UserAchievementProto.newBuilder()
+
+      // Construct using com.lvl6.proto.AchievementStuffProto.AchievementProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1575,53 +1167,63 @@ public final class AchievementStuffProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         achievementId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        progress_ = 0;
+        name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        isComplete_ = false;
+        description_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        isRedeemed_ = false;
+        gemReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        lvl_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        staticDataId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        quantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        priority_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        prerequisiteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        successorId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDescriptor();
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_AchievementProto_descriptor;
       }
-      
-      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getDefaultInstanceForType() {
-        return com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance();
+
+      public com.lvl6.proto.AchievementStuffProto.AchievementProto getDefaultInstanceForType() {
+        return com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance();
       }
-      
-      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto build() {
-        com.lvl6.proto.AchievementStuffProto.UserAchievementProto result = buildPartial();
+
+      public com.lvl6.proto.AchievementStuffProto.AchievementProto build() {
+        com.lvl6.proto.AchievementStuffProto.AchievementProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
-      
-      private com.lvl6.proto.AchievementStuffProto.UserAchievementProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.AchievementStuffProto.UserAchievementProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto buildPartial() {
-        com.lvl6.proto.AchievementStuffProto.UserAchievementProto result = new com.lvl6.proto.AchievementStuffProto.UserAchievementProto(this);
+
+      public com.lvl6.proto.AchievementStuffProto.AchievementProto buildPartial() {
+        com.lvl6.proto.AchievementStuffProto.AchievementProto result = new com.lvl6.proto.AchievementStuffProto.AchievementProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1631,71 +1233,872 @@ public final class AchievementStuffProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.progress_ = progress_;
+        result.name_ = name_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.isComplete_ = isComplete_;
+        result.description_ = description_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.isRedeemed_ = isRedeemed_;
+        result.gemReward_ = gemReward_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.lvl_ = lvl_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.achievementType_ = achievementType_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.resourceType_ = resourceType_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.element_ = element_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.quality_ = quality_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.staticDataId_ = staticDataId_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.quantity_ = quantity_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.prerequisiteId_ = prerequisiteId_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.successorId_ = successorId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.AchievementStuffProto.UserAchievementProto) {
-          return mergeFrom((com.lvl6.proto.AchievementStuffProto.UserAchievementProto)other);
+        if (other instanceof com.lvl6.proto.AchievementStuffProto.AchievementProto) {
+          return mergeFrom((com.lvl6.proto.AchievementStuffProto.AchievementProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
-      
-      public Builder mergeFrom(com.lvl6.proto.AchievementStuffProto.UserAchievementProto other) {
-        if (other == com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance()) return this;
+
+      public Builder mergeFrom(com.lvl6.proto.AchievementStuffProto.AchievementProto other) {
+        if (other == com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance()) return this;
         if (other.hasAchievementId()) {
           setAchievementId(other.getAchievementId());
         }
-        if (other.hasProgress()) {
-          setProgress(other.getProgress());
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
         }
-        if (other.hasIsComplete()) {
-          setIsComplete(other.getIsComplete());
+        if (other.hasDescription()) {
+          bitField0_ |= 0x00000004;
+          description_ = other.description_;
+          onChanged();
         }
-        if (other.hasIsRedeemed()) {
-          setIsRedeemed(other.getIsRedeemed());
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
+        }
+        if (other.hasLvl()) {
+          setLvl(other.getLvl());
+        }
+        if (other.hasAchievementType()) {
+          setAchievementType(other.getAchievementType());
+        }
+        if (other.hasResourceType()) {
+          setResourceType(other.getResourceType());
+        }
+        if (other.hasElement()) {
+          setElement(other.getElement());
+        }
+        if (other.hasQuality()) {
+          setQuality(other.getQuality());
+        }
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
+        }
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
+        }
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
+        }
+        if (other.hasPrerequisiteId()) {
+          setPrerequisiteId(other.getPrerequisiteId());
+        }
+        if (other.hasSuccessorId()) {
+          setSuccessorId(other.getSuccessorId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
+        com.lvl6.proto.AchievementStuffProto.AchievementProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.AchievementStuffProto.AchievementProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int achievementId_ ;
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
+      public boolean hasAchievementId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
+      public int getAchievementId() {
+        return achievementId_;
+      }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
+      public Builder setAchievementId(int value) {
+        bitField0_ |= 0x00000001;
+        achievementId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
+      public Builder clearAchievementId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        achievementId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public java.lang.String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            description_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescriptionBytes() {
+        java.lang.Object ref = description_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          description_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public Builder setDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public Builder setDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int gemReward_ ;
+      /**
+       * <code>optional int32 gemReward = 4;</code>
+       */
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 gemReward = 4;</code>
+       */
+      public int getGemReward() {
+        return gemReward_;
+      }
+      /**
+       * <code>optional int32 gemReward = 4;</code>
+       */
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000008;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gemReward = 4;</code>
+       */
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int lvl_ ;
+      /**
+       * <code>optional int32 lvl = 5;</code>
+       *
+       * <pre>
+       *max most likely = 3
+       * </pre>
+       */
+      public boolean hasLvl() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 lvl = 5;</code>
+       *
+       * <pre>
+       *max most likely = 3
+       * </pre>
+       */
+      public int getLvl() {
+        return lvl_;
+      }
+      /**
+       * <code>optional int32 lvl = 5;</code>
+       *
+       * <pre>
+       *max most likely = 3
+       * </pre>
+       */
+      public Builder setLvl(int value) {
+        bitField0_ |= 0x00000010;
+        lvl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 lvl = 5;</code>
+       *
+       * <pre>
+       *max most likely = 3
+       * </pre>
+       */
+      public Builder clearLvl() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        lvl_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+       */
+      public boolean hasAchievementType() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+       */
+      public com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType getAchievementType() {
+        return achievementType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+       */
+      public Builder setAchievementType(com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        achievementType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.AchievementProto.AchievementType achievementType = 6;</code>
+       */
+      public Builder clearAchievementType() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      /**
+       * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public boolean hasResourceType() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+        return resourceType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        resourceType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder clearResourceType() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Element element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+      /**
+       * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public boolean hasElement() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Element getElement() {
+        return element_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder setElement(com.lvl6.proto.SharedEnumConfigProto.Element value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000080;
+        element_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder clearElement() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Quality quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public boolean hasQuality() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getQuality() {
+        return quality_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder setQuality(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000100;
+        quality_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality quality = 9 [default = NO_QUALITY];</code>
+       *
+       * <pre>
+       *could be null
+       * </pre>
+       */
+      public Builder clearQuality() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        onChanged();
+        return this;
+      }
+
+      private int staticDataId_ ;
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *could be 0, as in not set
+       * </pre>
+       */
+      public boolean hasStaticDataId() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *could be 0, as in not set
+       * </pre>
+       */
+      public int getStaticDataId() {
+        return staticDataId_;
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *could be 0, as in not set
+       * </pre>
+       */
+      public Builder setStaticDataId(int value) {
+        bitField0_ |= 0x00000200;
+        staticDataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *could be 0, as in not set
+       * </pre>
+       */
+      public Builder clearStaticDataId() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        staticDataId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int quantity_ ;
+      /**
+       * <code>optional int32 quantity = 11;</code>
+       */
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 quantity = 11;</code>
+       */
+      public int getQuantity() {
+        return quantity_;
+      }
+      /**
+       * <code>optional int32 quantity = 11;</code>
+       */
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000400;
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 quantity = 11;</code>
+       */
+      public Builder clearQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        quantity_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 12;</code>
+       */
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional int32 priority = 12;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 12;</code>
+       */
+      public Builder setPriority(int value) {
+        bitField0_ |= 0x00000800;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 12;</code>
+       */
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        priority_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int prerequisiteId_ ;
+      /**
+       * <code>optional int32 prerequisiteId = 13;</code>
+       */
+      public boolean hasPrerequisiteId() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int32 prerequisiteId = 13;</code>
+       */
+      public int getPrerequisiteId() {
+        return prerequisiteId_;
+      }
+      /**
+       * <code>optional int32 prerequisiteId = 13;</code>
+       */
+      public Builder setPrerequisiteId(int value) {
+        bitField0_ |= 0x00001000;
+        prerequisiteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 prerequisiteId = 13;</code>
+       */
+      public Builder clearPrerequisiteId() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        prerequisiteId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int successorId_ ;
+      /**
+       * <code>optional int32 successorId = 14;</code>
+       */
+      public boolean hasSuccessorId() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional int32 successorId = 14;</code>
+       */
+      public int getSuccessorId() {
+        return successorId_;
+      }
+      /**
+       * <code>optional int32 successorId = 14;</code>
+       */
+      public Builder setSuccessorId(int value) {
+        bitField0_ |= 0x00002000;
+        successorId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 successorId = 14;</code>
+       */
+      public Builder clearSuccessorId() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        successorId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AchievementProto)
+    }
+
+    static {
+      defaultInstance = new AchievementProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AchievementProto)
+  }
+
+  public interface UserAchievementProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserAchievementProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
+    boolean hasAchievementId();
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
+    int getAchievementId();
+
+    /**
+     * <code>optional int32 progress = 2;</code>
+     */
+    boolean hasProgress();
+    /**
+     * <code>optional int32 progress = 2;</code>
+     */
+    int getProgress();
+
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
+    boolean hasIsComplete();
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
+    boolean getIsComplete();
+
+    /**
+     * <code>optional bool isRedeemed = 4;</code>
+     */
+    boolean hasIsRedeemed();
+    /**
+     * <code>optional bool isRedeemed = 4;</code>
+     */
+    boolean getIsRedeemed();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserAchievementProto}
+   */
+  public static final class UserAchievementProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserAchievementProto)
+      UserAchievementProtoOrBuilder {
+    // Use UserAchievementProto.newBuilder() to construct.
+    private UserAchievementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserAchievementProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserAchievementProto defaultInstance;
+    public static UserAchievementProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserAchievementProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserAchievementProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
+              done = true;
+              break;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
+                done = true;
               }
               break;
             }
@@ -1721,116 +2124,534 @@ public final class AchievementStuffProto {
             }
           }
         }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
       }
-      
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.AchievementStuffProto.UserAchievementProto.class, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserAchievementProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserAchievementProto>() {
+      public UserAchievementProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserAchievementProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserAchievementProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int ACHIEVEMENTID_FIELD_NUMBER = 1;
+    private int achievementId_;
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
+    public boolean hasAchievementId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 achievementId = 1;</code>
+     */
+    public int getAchievementId() {
+      return achievementId_;
+    }
+
+    public static final int PROGRESS_FIELD_NUMBER = 2;
+    private int progress_;
+    /**
+     * <code>optional int32 progress = 2;</code>
+     */
+    public boolean hasProgress() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 progress = 2;</code>
+     */
+    public int getProgress() {
+      return progress_;
+    }
+
+    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
+    private boolean isComplete_;
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
+    public boolean hasIsComplete() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
+    public boolean getIsComplete() {
+      return isComplete_;
+    }
+
+    public static final int ISREDEEMED_FIELD_NUMBER = 4;
+    private boolean isRedeemed_;
+    /**
+     * <code>optional bool isRedeemed = 4;</code>
+     */
+    public boolean hasIsRedeemed() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bool isRedeemed = 4;</code>
+     */
+    public boolean getIsRedeemed() {
+      return isRedeemed_;
+    }
+
+    private void initFields() {
+      achievementId_ = 0;
+      progress_ = 0;
+      isComplete_ = false;
+      isRedeemed_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, achievementId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, progress_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isComplete_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBool(4, isRedeemed_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, achievementId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, progress_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isComplete_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, isRedeemed_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.AchievementStuffProto.UserAchievementProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.AchievementStuffProto.UserAchievementProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserAchievementProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserAchievementProto)
+        com.lvl6.proto.AchievementStuffProto.UserAchievementProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.AchievementStuffProto.UserAchievementProto.class, com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.AchievementStuffProto.UserAchievementProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        achievementId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        progress_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isRedeemed_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.AchievementStuffProto.internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
+      }
+
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto getDefaultInstanceForType() {
+        return com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto build() {
+        com.lvl6.proto.AchievementStuffProto.UserAchievementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.AchievementStuffProto.UserAchievementProto buildPartial() {
+        com.lvl6.proto.AchievementStuffProto.UserAchievementProto result = new com.lvl6.proto.AchievementStuffProto.UserAchievementProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.achievementId_ = achievementId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.progress_ = progress_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.isRedeemed_ = isRedeemed_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.AchievementStuffProto.UserAchievementProto) {
+          return mergeFrom((com.lvl6.proto.AchievementStuffProto.UserAchievementProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.AchievementStuffProto.UserAchievementProto other) {
+        if (other == com.lvl6.proto.AchievementStuffProto.UserAchievementProto.getDefaultInstance()) return this;
+        if (other.hasAchievementId()) {
+          setAchievementId(other.getAchievementId());
+        }
+        if (other.hasProgress()) {
+          setProgress(other.getProgress());
+        }
+        if (other.hasIsComplete()) {
+          setIsComplete(other.getIsComplete());
+        }
+        if (other.hasIsRedeemed()) {
+          setIsRedeemed(other.getIsRedeemed());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.AchievementStuffProto.UserAchievementProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.AchievementStuffProto.UserAchievementProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
       private int bitField0_;
-      
-      // optional int32 achievementId = 1;
+
       private int achievementId_ ;
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
       public boolean hasAchievementId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
       public int getAchievementId() {
         return achievementId_;
       }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
       public Builder setAchievementId(int value) {
         bitField0_ |= 0x00000001;
         achievementId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 achievementId = 1;</code>
+       */
       public Builder clearAchievementId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         achievementId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 progress = 2;
+
       private int progress_ ;
+      /**
+       * <code>optional int32 progress = 2;</code>
+       */
       public boolean hasProgress() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 progress = 2;</code>
+       */
       public int getProgress() {
         return progress_;
       }
+      /**
+       * <code>optional int32 progress = 2;</code>
+       */
       public Builder setProgress(int value) {
         bitField0_ |= 0x00000002;
         progress_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 progress = 2;</code>
+       */
       public Builder clearProgress() {
         bitField0_ = (bitField0_ & ~0x00000002);
         progress_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional bool isComplete = 3;
+
       private boolean isComplete_ ;
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public boolean hasIsComplete() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public boolean getIsComplete() {
         return isComplete_;
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public Builder setIsComplete(boolean value) {
         bitField0_ |= 0x00000004;
         isComplete_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public Builder clearIsComplete() {
         bitField0_ = (bitField0_ & ~0x00000004);
         isComplete_ = false;
         onChanged();
         return this;
       }
-      
-      // optional bool isRedeemed = 4;
+
       private boolean isRedeemed_ ;
+      /**
+       * <code>optional bool isRedeemed = 4;</code>
+       */
       public boolean hasIsRedeemed() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional bool isRedeemed = 4;</code>
+       */
       public boolean getIsRedeemed() {
         return isRedeemed_;
       }
+      /**
+       * <code>optional bool isRedeemed = 4;</code>
+       */
       public Builder setIsRedeemed(boolean value) {
         bitField0_ |= 0x00000008;
         isRedeemed_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional bool isRedeemed = 4;</code>
+       */
       public Builder clearIsRedeemed() {
         bitField0_ = (bitField0_ & ~0x00000008);
         isRedeemed_ = false;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserAchievementProto)
     }
-    
+
     static {
       defaultInstance = new UserAchievementProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserAchievementProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_AchievementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserAchievementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -1868,29 +2689,13 @@ public final class AchievementStuffProto {
       "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_AchievementProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_AchievementProto_descriptor,
-              new java.lang.String[] { "AchievementId", "Name", "Description", "GemReward", "Lvl", "AchievementType", "ResourceType", "Element", "Quality", "StaticDataId", "Quantity", "Priority", "PrerequisiteId", "SuccessorId", },
-              com.lvl6.proto.AchievementStuffProto.AchievementProto.class,
-              com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder.class);
-          internal_static_com_lvl6_proto_UserAchievementProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
-              new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", },
-              com.lvl6.proto.AchievementStuffProto.UserAchievementProto.class,
-              com.lvl6.proto.AchievementStuffProto.UserAchievementProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -1898,7 +2703,22 @@ public final class AchievementStuffProto {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_AchievementProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_AchievementProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AchievementProto_descriptor,
+        new java.lang.String[] { "AchievementId", "Name", "Description", "GemReward", "Lvl", "AchievementType", "ResourceType", "Element", "Quality", "StaticDataId", "Quantity", "Priority", "PrerequisiteId", "SuccessorId", });
+    internal_static_com_lvl6_proto_UserAchievementProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_UserAchievementProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
+        new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", });
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

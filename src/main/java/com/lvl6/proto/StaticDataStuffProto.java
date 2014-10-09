@@ -8,986 +8,2529 @@ public final class StaticDataStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface StaticDataProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+  public interface StaticDataProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StaticDataProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> 
         getExpansionCostsList();
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     int getExpansionCostsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
         getExpansionCostsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.FullCityProto allCities = 3;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     java.util.List<com.lvl6.proto.CityProto.FullCityProto> 
         getAllCitiesList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     com.lvl6.proto.CityProto.FullCityProto getAllCities(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     int getAllCitiesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
         getAllCitiesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.FullTaskProto allTasks = 4;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> 
         getAllTasksList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     int getAllTasksCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
         getAllTasksOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;
+
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto> 
         getAllTaskMapElementsList();
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     com.lvl6.proto.TaskProto.TaskMapElementProto getAllTaskMapElements(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     int getAllTaskMapElementsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     java.util.List<? extends com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder> 
         getAllTaskMapElementsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder getAllTaskMapElementsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.MonsterProto allMonsters = 5;
+
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> 
         getAllMonstersList();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     int getAllMonstersCount();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
         getAllMonstersOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;
+
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> 
         getSlipList();
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     int getSlipCount();
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
         getSlipOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
         getInProgressQuestsList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     int getInProgressQuestsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getInProgressQuestsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
         getUnredeemedQuestsList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     int getUnredeemedQuestsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getUnredeemedQuestsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
         getAvailableQuestsList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     int getAvailableQuestsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getAvailableQuestsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;
+
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> 
         getBoosterPacksList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto getBoosterPacks(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     int getBoosterPacksCount();
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder> 
         getBoosterPacksOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder getBoosterPacksOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto> 
         getAllGeneratorsList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     com.lvl6.proto.StructureProto.ResourceGeneratorProto getAllGenerators(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     int getAllGeneratorsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder> 
         getAllGeneratorsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder getAllGeneratorsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto> 
         getAllStoragesList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     com.lvl6.proto.StructureProto.ResourceStorageProto getAllStorages(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     int getAllStoragesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder> 
         getAllStoragesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder getAllStoragesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.HospitalProto allHospitals = 14;
+
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.HospitalProto> 
         getAllHospitalsList();
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     com.lvl6.proto.StructureProto.HospitalProto getAllHospitals(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     int getAllHospitalsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.HospitalProtoOrBuilder> 
         getAllHospitalsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     com.lvl6.proto.StructureProto.HospitalProtoOrBuilder getAllHospitalsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ResidenceProto allResidences = 15;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.ResidenceProto> 
         getAllResidencesList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     com.lvl6.proto.StructureProto.ResidenceProto getAllResidences(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     int getAllResidencesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder> 
         getAllResidencesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder getAllResidencesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
+
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.TownHallProto> 
         getAllTownHallsList();
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     com.lvl6.proto.StructureProto.TownHallProto getAllTownHalls(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     int getAllTownHallsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.TownHallProtoOrBuilder> 
         getAllTownHallsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     com.lvl6.proto.StructureProto.TownHallProtoOrBuilder getAllTownHallsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.LabProto allLabs = 17;
+
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.LabProto> 
         getAllLabsList();
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     com.lvl6.proto.StructureProto.LabProto getAllLabs(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     int getAllLabsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
         getAllLabsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;
+
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto> 
         getAllMiniJobCentersList();
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     com.lvl6.proto.StructureProto.MiniJobCenterProto getAllMiniJobCenters(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     int getAllMiniJobCentersCount();
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder> 
         getAllMiniJobCentersOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder getAllMiniJobCentersOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;
+
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto> 
         getAllEvoChambersList();
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     com.lvl6.proto.StructureProto.EvoChamberProto getAllEvoChambers(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     int getAllEvoChambersCount();
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder> 
         getAllEvoChambersOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder getAllEvoChambersOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> 
         getAllTeamCentersList();
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     int getAllTeamCentersCount();
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
         getAllTeamCentersOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto> 
         getAllClanHousesList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     com.lvl6.proto.StructureProto.ClanHouseProto getAllClanHouses(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     int getAllClanHousesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder> 
         getAllClanHousesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder getAllClanHousesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
+
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> 
         getPersistentEventsList();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     com.lvl6.proto.TaskProto.PersistentEventProto getPersistentEvents(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     int getPersistentEventsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
         getPersistentEventsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getPersistentEventsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> 
         getMbdsList();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     int getMbdsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
         getMbdsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> 
         getRaidsList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     com.lvl6.proto.ClanProto.ClanRaidProto getRaids(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     int getRaidsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder> 
         getRaidsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;
+
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> 
         getPersistentClanEventsList();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     com.lvl6.proto.ClanProto.PersistentClanEventProto getPersistentClanEvents(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     int getPersistentClanEventsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder> 
         getPersistentClanEventsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder getPersistentClanEventsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ItemProto items = 22;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     java.util.List<com.lvl6.proto.ItemsProto.ItemProto> 
         getItemsList();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     com.lvl6.proto.ItemsProto.ItemProto getItems(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     int getItemsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     java.util.List<? extends com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> 
         getItemsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> 
         getObstaclesList();
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     int getObstaclesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
         getObstaclesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> 
         getClanIconsList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     int getClanIconsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
         getClanIconsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> 
         getLeaguesList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     int getLeaguesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
         getLeaguesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.AchievementProto achievements = 26;
+
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> 
         getAchievementsList();
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     com.lvl6.proto.AchievementStuffProto.AchievementProto getAchievements(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     int getAchievementsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     java.util.List<? extends com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder> 
         getAchievementsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder getAchievementsOrBuilder(
         int index);
-    
-    // repeated .com.lvl6.proto.SkillProto skills = 31;
+
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.SkillsProto.SkillProto> 
         getSkillsList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     com.lvl6.proto.SkillsProto.SkillProto getSkills(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     int getSkillsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
         getSkillsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
         int index);
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.StaticDataProto}
+   */
   public static final class StaticDataProto extends
-      com.google.protobuf.GeneratedMessage
-      implements StaticDataProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.StaticDataProto)
+      StaticDataProtoOrBuilder {
     // Use StaticDataProto.newBuilder() to construct.
-    private StaticDataProto(Builder builder) {
+    private StaticDataProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private StaticDataProto(boolean noInit) {}
-    
+    private StaticDataProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final StaticDataProto defaultInstance;
     public static StaticDataProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public StaticDataProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private StaticDataProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                expansionCosts_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityExpansionCostProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              expansionCosts_.add(input.readMessage(com.lvl6.proto.CityProto.CityExpansionCostProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                allCities_ = new java.util.ArrayList<com.lvl6.proto.CityProto.FullCityProto>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              allCities_.add(input.readMessage(com.lvl6.proto.CityProto.FullCityProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                allTasks_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.FullTaskProto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              allTasks_.add(input.readMessage(com.lvl6.proto.TaskProto.FullTaskProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                allMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterProto>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              allMonsters_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.MonsterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                slip_ = new java.util.ArrayList<com.lvl6.proto.UserProto.StaticUserLevelInfoProto>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              slip_.add(input.readMessage(com.lvl6.proto.UserProto.StaticUserLevelInfoProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                inProgressQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              inProgressQuests_.add(input.readMessage(com.lvl6.proto.QuestProto.FullQuestProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                unredeemedQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              unredeemedQuests_.add(input.readMessage(com.lvl6.proto.QuestProto.FullQuestProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                availableQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              availableQuests_.add(input.readMessage(com.lvl6.proto.QuestProto.FullQuestProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                boosterPacks_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto>();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              boosterPacks_.add(input.readMessage(com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                allGenerators_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ResourceGeneratorProto>();
+                mutable_bitField0_ |= 0x00000800;
+              }
+              allGenerators_.add(input.readMessage(com.lvl6.proto.StructureProto.ResourceGeneratorProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                allStorages_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ResourceStorageProto>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              allStorages_.add(input.readMessage(com.lvl6.proto.StructureProto.ResourceStorageProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 114: {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                allHospitals_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.HospitalProto>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              allHospitals_.add(input.readMessage(com.lvl6.proto.StructureProto.HospitalProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 122: {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                allResidences_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ResidenceProto>();
+                mutable_bitField0_ |= 0x00004000;
+              }
+              allResidences_.add(input.readMessage(com.lvl6.proto.StructureProto.ResidenceProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 130: {
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+                allTownHalls_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TownHallProto>();
+                mutable_bitField0_ |= 0x00008000;
+              }
+              allTownHalls_.add(input.readMessage(com.lvl6.proto.StructureProto.TownHallProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 138: {
+              if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+                allLabs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.LabProto>();
+                mutable_bitField0_ |= 0x00010000;
+              }
+              allLabs_.add(input.readMessage(com.lvl6.proto.StructureProto.LabProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 146: {
+              if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
+                persistentEvents_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.PersistentEventProto>();
+                mutable_bitField0_ |= 0x00200000;
+              }
+              persistentEvents_.add(input.readMessage(com.lvl6.proto.TaskProto.PersistentEventProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 154: {
+              if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+                mbds_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto>();
+                mutable_bitField0_ |= 0x00400000;
+              }
+              mbds_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 162: {
+              if (!((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+                raids_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidProto>();
+                mutable_bitField0_ |= 0x00800000;
+              }
+              raids_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanRaidProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 170: {
+              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+                persistentClanEvents_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventProto>();
+                mutable_bitField0_ |= 0x01000000;
+              }
+              persistentClanEvents_.add(input.readMessage(com.lvl6.proto.ClanProto.PersistentClanEventProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 178: {
+              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+                items_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemProto>();
+                mutable_bitField0_ |= 0x02000000;
+              }
+              items_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 186: {
+              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+                obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ObstacleProto>();
+                mutable_bitField0_ |= 0x04000000;
+              }
+              obstacles_.add(input.readMessage(com.lvl6.proto.StructureProto.ObstacleProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 194: {
+              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+                clanIcons_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanIconProto>();
+                mutable_bitField0_ |= 0x08000000;
+              }
+              clanIcons_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanIconProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 202: {
+              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+                leagues_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpLeagueProto>();
+                mutable_bitField0_ |= 0x10000000;
+              }
+              leagues_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpLeagueProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 210: {
+              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+                achievements_ = new java.util.ArrayList<com.lvl6.proto.AchievementStuffProto.AchievementProto>();
+                mutable_bitField0_ |= 0x20000000;
+              }
+              achievements_.add(input.readMessage(com.lvl6.proto.AchievementStuffProto.AchievementProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 218: {
+              if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
+                allMiniJobCenters_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MiniJobCenterProto>();
+                mutable_bitField0_ |= 0x00020000;
+              }
+              allMiniJobCenters_.add(input.readMessage(com.lvl6.proto.StructureProto.MiniJobCenterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 226: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                allTaskMapElements_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.TaskMapElementProto>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              allTaskMapElements_.add(input.readMessage(com.lvl6.proto.TaskProto.TaskMapElementProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 234: {
+              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+                allEvoChambers_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.EvoChamberProto>();
+                mutable_bitField0_ |= 0x00040000;
+              }
+              allEvoChambers_.add(input.readMessage(com.lvl6.proto.StructureProto.EvoChamberProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 242: {
+              if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+                allTeamCenters_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TeamCenterProto>();
+                mutable_bitField0_ |= 0x00080000;
+              }
+              allTeamCenters_.add(input.readMessage(com.lvl6.proto.StructureProto.TeamCenterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 250: {
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+                skills_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillProto>();
+                mutable_bitField0_ |= 0x40000000;
+              }
+              skills_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 258: {
+              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+                allClanHouses_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ClanHouseProto>();
+                mutable_bitField0_ |= 0x00100000;
+              }
+              allClanHouses_.add(input.readMessage(com.lvl6.proto.StructureProto.ClanHouseProto.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          expansionCosts_ = java.util.Collections.unmodifiableList(expansionCosts_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          allCities_ = java.util.Collections.unmodifiableList(allCities_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          allTasks_ = java.util.Collections.unmodifiableList(allTasks_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          allMonsters_ = java.util.Collections.unmodifiableList(allMonsters_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          slip_ = java.util.Collections.unmodifiableList(slip_);
+        }
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          inProgressQuests_ = java.util.Collections.unmodifiableList(inProgressQuests_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          unredeemedQuests_ = java.util.Collections.unmodifiableList(unredeemedQuests_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          availableQuests_ = java.util.Collections.unmodifiableList(availableQuests_);
+        }
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          boosterPacks_ = java.util.Collections.unmodifiableList(boosterPacks_);
+        }
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+          allGenerators_ = java.util.Collections.unmodifiableList(allGenerators_);
+        }
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          allStorages_ = java.util.Collections.unmodifiableList(allStorages_);
+        }
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          allHospitals_ = java.util.Collections.unmodifiableList(allHospitals_);
+        }
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+          allResidences_ = java.util.Collections.unmodifiableList(allResidences_);
+        }
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+          allTownHalls_ = java.util.Collections.unmodifiableList(allTownHalls_);
+        }
+        if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
+          allLabs_ = java.util.Collections.unmodifiableList(allLabs_);
+        }
+        if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
+          persistentEvents_ = java.util.Collections.unmodifiableList(persistentEvents_);
+        }
+        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+          mbds_ = java.util.Collections.unmodifiableList(mbds_);
+        }
+        if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+          raids_ = java.util.Collections.unmodifiableList(raids_);
+        }
+        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+          persistentClanEvents_ = java.util.Collections.unmodifiableList(persistentClanEvents_);
+        }
+        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+          items_ = java.util.Collections.unmodifiableList(items_);
+        }
+        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+          obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
+        }
+        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+          clanIcons_ = java.util.Collections.unmodifiableList(clanIcons_);
+        }
+        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+          leagues_ = java.util.Collections.unmodifiableList(leagues_);
+        }
+        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+          achievements_ = java.util.Collections.unmodifiableList(achievements_);
+        }
+        if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
+          allMiniJobCenters_ = java.util.Collections.unmodifiableList(allMiniJobCenters_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          allTaskMapElements_ = java.util.Collections.unmodifiableList(allTaskMapElements_);
+        }
+        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+          allEvoChambers_ = java.util.Collections.unmodifiableList(allEvoChambers_);
+        }
+        if (((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+          allTeamCenters_ = java.util.Collections.unmodifiableList(allTeamCenters_);
+        }
+        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+          skills_ = java.util.Collections.unmodifiableList(skills_);
+        }
+        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+          allClanHouses_ = java.util.Collections.unmodifiableList(allClanHouses_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable;
+      return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<StaticDataProto> PARSER =
+        new com.google.protobuf.AbstractParser<StaticDataProto>() {
+      public StaticDataProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new StaticDataProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<StaticDataProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+
     public static final int EXPANSIONCOSTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_;
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> getExpansionCostsList() {
       return expansionCosts_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
         getExpansionCostsOrBuilderList() {
       return expansionCosts_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     public int getExpansionCostsCount() {
       return expansionCosts_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     public com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index) {
       return expansionCosts_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+     */
     public com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
         int index) {
       return expansionCosts_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.FullCityProto allCities = 3;
+
     public static final int ALLCITIES_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.CityProto.FullCityProto> allCities_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getAllCitiesList() {
       return allCities_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
         getAllCitiesOrBuilderList() {
       return allCities_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     public int getAllCitiesCount() {
       return allCities_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     public com.lvl6.proto.CityProto.FullCityProto getAllCities(int index) {
       return allCities_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+     */
     public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
         int index) {
       return allCities_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.FullTaskProto allTasks = 4;
+
     public static final int ALLTASKS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> allTasks_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getAllTasksList() {
       return allTasks_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
         getAllTasksOrBuilderList() {
       return allTasks_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     public int getAllTasksCount() {
       return allTasks_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     public com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index) {
       return allTasks_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+     */
     public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
         int index) {
       return allTasks_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;
+
     public static final int ALLTASKMAPELEMENTS_FIELD_NUMBER = 28;
     private java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto> allTaskMapElements_;
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     public java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto> getAllTaskMapElementsList() {
       return allTaskMapElements_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder> 
         getAllTaskMapElementsOrBuilderList() {
       return allTaskMapElements_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     public int getAllTaskMapElementsCount() {
       return allTaskMapElements_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     public com.lvl6.proto.TaskProto.TaskMapElementProto getAllTaskMapElements(int index) {
       return allTaskMapElements_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+     */
     public com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder getAllTaskMapElementsOrBuilder(
         int index) {
       return allTaskMapElements_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.MonsterProto allMonsters = 5;
+
     public static final int ALLMONSTERS_FIELD_NUMBER = 5;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> allMonsters_;
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> getAllMonstersList() {
       return allMonsters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
         getAllMonstersOrBuilderList() {
       return allMonsters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     public int getAllMonstersCount() {
       return allMonsters_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index) {
       return allMonsters_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
         int index) {
       return allMonsters_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;
+
     public static final int SLIP_FIELD_NUMBER = 6;
     private java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> slip_;
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> getSlipList() {
       return slip_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
         getSlipOrBuilderList() {
       return slip_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     public int getSlipCount() {
       return slip_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     public com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index) {
       return slip_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+     */
     public com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
         int index) {
       return slip_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
+
     public static final int INPROGRESSQUESTS_FIELD_NUMBER = 7;
     private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
       return inProgressQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getInProgressQuestsOrBuilderList() {
       return inProgressQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     public int getInProgressQuestsCount() {
       return inProgressQuests_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
       return inProgressQuests_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+     *
+     * <pre>
+     *has not been completed
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
         int index) {
       return inProgressQuests_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
+
     public static final int UNREDEEMEDQUESTS_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
       return unredeemedQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getUnredeemedQuestsOrBuilderList() {
       return unredeemedQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     public int getUnredeemedQuestsCount() {
       return unredeemedQuests_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
       return unredeemedQuests_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+     *
+     * <pre>
+     *is complete
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
         int index) {
       return unredeemedQuests_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
+
     public static final int AVAILABLEQUESTS_FIELD_NUMBER = 9;
     private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> availableQuests_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getAvailableQuestsList() {
       return availableQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getAvailableQuestsOrBuilderList() {
       return availableQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     public int getAvailableQuestsCount() {
       return availableQuests_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index) {
       return availableQuests_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
         int index) {
       return availableQuests_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;
+
     public static final int BOOSTERPACKS_FIELD_NUMBER = 11;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> boosterPacks_;
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> getBoosterPacksList() {
       return boosterPacks_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder> 
         getBoosterPacksOrBuilderList() {
       return boosterPacks_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     public int getBoosterPacksCount() {
       return boosterPacks_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto getBoosterPacks(int index) {
       return boosterPacks_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+     *
+     * <pre>
+     *optional RetrieveStaticDataStatus status = 10; //defined near the end
+     * </pre>
+     */
     public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder getBoosterPacksOrBuilder(
         int index) {
       return boosterPacks_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;
+
     public static final int ALLGENERATORS_FIELD_NUMBER = 12;
     private java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto> allGenerators_;
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto> getAllGeneratorsList() {
       return allGenerators_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder> 
         getAllGeneratorsOrBuilderList() {
       return allGenerators_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     public int getAllGeneratorsCount() {
       return allGenerators_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     public com.lvl6.proto.StructureProto.ResourceGeneratorProto getAllGenerators(int index) {
       return allGenerators_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+     */
     public com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder getAllGeneratorsOrBuilder(
         int index) {
       return allGenerators_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;
+
     public static final int ALLSTORAGES_FIELD_NUMBER = 13;
     private java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto> allStorages_;
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto> getAllStoragesList() {
       return allStorages_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder> 
         getAllStoragesOrBuilderList() {
       return allStorages_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     public int getAllStoragesCount() {
       return allStorages_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     public com.lvl6.proto.StructureProto.ResourceStorageProto getAllStorages(int index) {
       return allStorages_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+     */
     public com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder getAllStoragesOrBuilder(
         int index) {
       return allStorages_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.HospitalProto allHospitals = 14;
+
     public static final int ALLHOSPITALS_FIELD_NUMBER = 14;
     private java.util.List<com.lvl6.proto.StructureProto.HospitalProto> allHospitals_;
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.HospitalProto> getAllHospitalsList() {
       return allHospitals_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.HospitalProtoOrBuilder> 
         getAllHospitalsOrBuilderList() {
       return allHospitals_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     public int getAllHospitalsCount() {
       return allHospitals_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     public com.lvl6.proto.StructureProto.HospitalProto getAllHospitals(int index) {
       return allHospitals_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+     */
     public com.lvl6.proto.StructureProto.HospitalProtoOrBuilder getAllHospitalsOrBuilder(
         int index) {
       return allHospitals_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ResidenceProto allResidences = 15;
+
     public static final int ALLRESIDENCES_FIELD_NUMBER = 15;
     private java.util.List<com.lvl6.proto.StructureProto.ResidenceProto> allResidences_;
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.ResidenceProto> getAllResidencesList() {
       return allResidences_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder> 
         getAllResidencesOrBuilderList() {
       return allResidences_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     public int getAllResidencesCount() {
       return allResidences_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     public com.lvl6.proto.StructureProto.ResidenceProto getAllResidences(int index) {
       return allResidences_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+     */
     public com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder getAllResidencesOrBuilder(
         int index) {
       return allResidences_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
+
     public static final int ALLTOWNHALLS_FIELD_NUMBER = 16;
     private java.util.List<com.lvl6.proto.StructureProto.TownHallProto> allTownHalls_;
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.TownHallProto> getAllTownHallsList() {
       return allTownHalls_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.TownHallProtoOrBuilder> 
         getAllTownHallsOrBuilderList() {
       return allTownHalls_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     public int getAllTownHallsCount() {
       return allTownHalls_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     public com.lvl6.proto.StructureProto.TownHallProto getAllTownHalls(int index) {
       return allTownHalls_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+     */
     public com.lvl6.proto.StructureProto.TownHallProtoOrBuilder getAllTownHallsOrBuilder(
         int index) {
       return allTownHalls_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.LabProto allLabs = 17;
+
     public static final int ALLLABS_FIELD_NUMBER = 17;
     private java.util.List<com.lvl6.proto.StructureProto.LabProto> allLabs_;
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.LabProto> getAllLabsList() {
       return allLabs_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
         getAllLabsOrBuilderList() {
       return allLabs_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     public int getAllLabsCount() {
       return allLabs_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     public com.lvl6.proto.StructureProto.LabProto getAllLabs(int index) {
       return allLabs_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+     */
     public com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
         int index) {
       return allLabs_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;
+
     public static final int ALLMINIJOBCENTERS_FIELD_NUMBER = 27;
     private java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto> allMiniJobCenters_;
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto> getAllMiniJobCentersList() {
       return allMiniJobCenters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder> 
         getAllMiniJobCentersOrBuilderList() {
       return allMiniJobCenters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     public int getAllMiniJobCentersCount() {
       return allMiniJobCenters_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     public com.lvl6.proto.StructureProto.MiniJobCenterProto getAllMiniJobCenters(int index) {
       return allMiniJobCenters_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+     */
     public com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder getAllMiniJobCentersOrBuilder(
         int index) {
       return allMiniJobCenters_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;
+
     public static final int ALLEVOCHAMBERS_FIELD_NUMBER = 29;
     private java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto> allEvoChambers_;
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto> getAllEvoChambersList() {
       return allEvoChambers_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder> 
         getAllEvoChambersOrBuilderList() {
       return allEvoChambers_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     public int getAllEvoChambersCount() {
       return allEvoChambers_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     public com.lvl6.proto.StructureProto.EvoChamberProto getAllEvoChambers(int index) {
       return allEvoChambers_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+     */
     public com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder getAllEvoChambersOrBuilder(
         int index) {
       return allEvoChambers_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+
     public static final int ALLTEAMCENTERS_FIELD_NUMBER = 30;
     private java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> allTeamCenters_;
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> getAllTeamCentersList() {
       return allTeamCenters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
         getAllTeamCentersOrBuilderList() {
       return allTeamCenters_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     public int getAllTeamCentersCount() {
       return allTeamCenters_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     public com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index) {
       return allTeamCenters_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+     */
     public com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
         int index) {
       return allTeamCenters_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;
+
     public static final int ALLCLANHOUSES_FIELD_NUMBER = 32;
     private java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto> allClanHouses_;
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto> getAllClanHousesList() {
       return allClanHouses_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder> 
         getAllClanHousesOrBuilderList() {
       return allClanHouses_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     public int getAllClanHousesCount() {
       return allClanHouses_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     public com.lvl6.proto.StructureProto.ClanHouseProto getAllClanHouses(int index) {
       return allClanHouses_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+     */
     public com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder getAllClanHousesOrBuilder(
         int index) {
       return allClanHouses_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
+
     public static final int PERSISTENTEVENTS_FIELD_NUMBER = 18;
     private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_;
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> getPersistentEventsList() {
       return persistentEvents_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
         getPersistentEventsOrBuilderList() {
       return persistentEvents_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     public int getPersistentEventsCount() {
       return persistentEvents_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     public com.lvl6.proto.TaskProto.PersistentEventProto getPersistentEvents(int index) {
       return persistentEvents_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+     *
+     * <pre>
+     *the daily events where users can gain evolution and enhancement materials
+     * </pre>
+     */
     public com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getPersistentEventsOrBuilder(
         int index) {
       return persistentEvents_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+
     public static final int MBDS_FIELD_NUMBER = 19;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_;
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> getMbdsList() {
       return mbds_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
         getMbdsOrBuilderList() {
       return mbds_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     public int getMbdsCount() {
       return mbds_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index) {
       return mbds_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
         int index) {
       return mbds_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+
     public static final int RAIDS_FIELD_NUMBER = 20;
     private java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> raids_;
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> getRaidsList() {
       return raids_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder> 
         getRaidsOrBuilderList() {
       return raids_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     public int getRaidsCount() {
       return raids_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     public com.lvl6.proto.ClanProto.ClanRaidProto getRaids(int index) {
       return raids_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+     *
+     * <pre>
+     *these contains the stages. the stages contain the monsters and the rewards  
+     * </pre>
+     */
     public com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
         int index) {
       return raids_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;
+
     public static final int PERSISTENTCLANEVENTS_FIELD_NUMBER = 21;
     private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> persistentClanEvents_;
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> getPersistentClanEventsList() {
       return persistentClanEvents_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder> 
         getPersistentClanEventsOrBuilderList() {
       return persistentClanEvents_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     public int getPersistentClanEventsCount() {
       return persistentClanEvents_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     public com.lvl6.proto.ClanProto.PersistentClanEventProto getPersistentClanEvents(int index) {
       return persistentClanEvents_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+     */
     public com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder getPersistentClanEventsOrBuilder(
         int index) {
       return persistentClanEvents_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ItemProto items = 22;
+
     public static final int ITEMS_FIELD_NUMBER = 22;
     private java.util.List<com.lvl6.proto.ItemsProto.ItemProto> items_;
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     public java.util.List<com.lvl6.proto.ItemsProto.ItemProto> getItemsList() {
       return items_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> 
         getItemsOrBuilderList() {
       return items_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     public int getItemsCount() {
       return items_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     public com.lvl6.proto.ItemsProto.ItemProto getItems(int index) {
       return items_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+     */
     public com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemsOrBuilder(
         int index) {
       return items_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+
     public static final int OBSTACLES_FIELD_NUMBER = 23;
     private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_;
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> getObstaclesList() {
       return obstacles_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
         getObstaclesOrBuilderList() {
       return obstacles_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     public int getObstaclesCount() {
       return obstacles_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     public com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index) {
       return obstacles_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+     *
+     * <pre>
+     *might generate gems for user upon removal
+     * </pre>
+     */
     public com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
         int index) {
       return obstacles_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+
     public static final int CLANICONS_FIELD_NUMBER = 24;
     private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_;
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> getClanIconsList() {
       return clanIcons_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
         getClanIconsOrBuilderList() {
       return clanIcons_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     public int getClanIconsCount() {
       return clanIcons_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     public com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index) {
       return clanIcons_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+     */
     public com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
         int index) {
       return clanIcons_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+
     public static final int LEAGUES_FIELD_NUMBER = 25;
     private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_;
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> getLeaguesList() {
       return leagues_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
         getLeaguesOrBuilderList() {
       return leagues_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     public int getLeaguesCount() {
       return leagues_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     public com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index) {
       return leagues_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+     */
     public com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
         int index) {
       return leagues_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.AchievementProto achievements = 26;
+
     public static final int ACHIEVEMENTS_FIELD_NUMBER = 26;
     private java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> achievements_;
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     public java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> getAchievementsList() {
       return achievements_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder> 
         getAchievementsOrBuilderList() {
       return achievements_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     public int getAchievementsCount() {
       return achievements_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     public com.lvl6.proto.AchievementStuffProto.AchievementProto getAchievements(int index) {
       return achievements_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+     */
     public com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder getAchievementsOrBuilder(
         int index) {
       return achievements_.get(index);
     }
-    
-    // repeated .com.lvl6.proto.SkillProto skills = 31;
+
     public static final int SKILLS_FIELD_NUMBER = 31;
     private java.util.List<com.lvl6.proto.SkillsProto.SkillProto> skills_;
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.SkillsProto.SkillProto> getSkillsList() {
       return skills_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
         getSkillsOrBuilderList() {
       return skills_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     public int getSkillsCount() {
       return skills_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     public com.lvl6.proto.SkillsProto.SkillProto getSkills(int index) {
       return skills_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
     public com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
         int index) {
       return skills_.get(index);
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -1024,12 +2567,13 @@ public final class StaticDataStuffProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1128,12 +2672,12 @@ public final class StaticDataStuffProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1263,113 +2807,106 @@ public final class StaticDataStuffProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.StaticDataStuffProto.StaticDataProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.StaticDataStuffProto.StaticDataProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.StaticDataProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StaticDataProto)
+        com.lvl6.proto.StaticDataStuffProto.StaticDataProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable;
+        return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class, com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.StaticDataStuffProto.StaticDataProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1411,7 +2948,7 @@ public final class StaticDataStuffProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -1602,20 +3139,20 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDescriptor();
+        return com.lvl6.proto.StaticDataStuffProto.internal_static_com_lvl6_proto_StaticDataProto_descriptor;
       }
-      
+
       public com.lvl6.proto.StaticDataStuffProto.StaticDataProto getDefaultInstanceForType() {
         return com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.StaticDataStuffProto.StaticDataProto build() {
         com.lvl6.proto.StaticDataStuffProto.StaticDataProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -1623,17 +3160,7 @@ public final class StaticDataStuffProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.StaticDataStuffProto.StaticDataProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.StaticDataStuffProto.StaticDataProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.StaticDataStuffProto.StaticDataProto buildPartial() {
         com.lvl6.proto.StaticDataStuffProto.StaticDataProto result = new com.lvl6.proto.StaticDataStuffProto.StaticDataProto(this);
         int from_bitField0_ = bitField0_;
@@ -1920,7 +3447,7 @@ public final class StaticDataStuffProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.StaticDataStuffProto.StaticDataProto) {
           return mergeFrom((com.lvl6.proto.StaticDataStuffProto.StaticDataProto)other);
@@ -1929,7 +3456,7 @@ public final class StaticDataStuffProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.StaticDataStuffProto.StaticDataProto other) {
         if (other == com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -2718,236 +4245,42 @@ public final class StaticDataStuffProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.CityProto.CityExpansionCostProto.Builder subBuilder = com.lvl6.proto.CityProto.CityExpansionCostProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addExpansionCosts(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.CityProto.FullCityProto.Builder subBuilder = com.lvl6.proto.CityProto.FullCityProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllCities(subBuilder.buildPartial());
-              break;
-            }
-            case 34: {
-              com.lvl6.proto.TaskProto.FullTaskProto.Builder subBuilder = com.lvl6.proto.TaskProto.FullTaskProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllTasks(subBuilder.buildPartial());
-              break;
-            }
-            case 42: {
-              com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllMonsters(subBuilder.buildPartial());
-              break;
-            }
-            case 50: {
-              com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder subBuilder = com.lvl6.proto.UserProto.StaticUserLevelInfoProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addSlip(subBuilder.buildPartial());
-              break;
-            }
-            case 58: {
-              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addInProgressQuests(subBuilder.buildPartial());
-              break;
-            }
-            case 66: {
-              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addUnredeemedQuests(subBuilder.buildPartial());
-              break;
-            }
-            case 74: {
-              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAvailableQuests(subBuilder.buildPartial());
-              break;
-            }
-            case 90: {
-              com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addBoosterPacks(subBuilder.buildPartial());
-              break;
-            }
-            case 98: {
-              com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder subBuilder = com.lvl6.proto.StructureProto.ResourceGeneratorProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllGenerators(subBuilder.buildPartial());
-              break;
-            }
-            case 106: {
-              com.lvl6.proto.StructureProto.ResourceStorageProto.Builder subBuilder = com.lvl6.proto.StructureProto.ResourceStorageProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllStorages(subBuilder.buildPartial());
-              break;
-            }
-            case 114: {
-              com.lvl6.proto.StructureProto.HospitalProto.Builder subBuilder = com.lvl6.proto.StructureProto.HospitalProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllHospitals(subBuilder.buildPartial());
-              break;
-            }
-            case 122: {
-              com.lvl6.proto.StructureProto.ResidenceProto.Builder subBuilder = com.lvl6.proto.StructureProto.ResidenceProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllResidences(subBuilder.buildPartial());
-              break;
-            }
-            case 130: {
-              com.lvl6.proto.StructureProto.TownHallProto.Builder subBuilder = com.lvl6.proto.StructureProto.TownHallProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllTownHalls(subBuilder.buildPartial());
-              break;
-            }
-            case 138: {
-              com.lvl6.proto.StructureProto.LabProto.Builder subBuilder = com.lvl6.proto.StructureProto.LabProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllLabs(subBuilder.buildPartial());
-              break;
-            }
-            case 146: {
-              com.lvl6.proto.TaskProto.PersistentEventProto.Builder subBuilder = com.lvl6.proto.TaskProto.PersistentEventProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addPersistentEvents(subBuilder.buildPartial());
-              break;
-            }
-            case 154: {
-              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addMbds(subBuilder.buildPartial());
-              break;
-            }
-            case 162: {
-              com.lvl6.proto.ClanProto.ClanRaidProto.Builder subBuilder = com.lvl6.proto.ClanProto.ClanRaidProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addRaids(subBuilder.buildPartial());
-              break;
-            }
-            case 170: {
-              com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addPersistentClanEvents(subBuilder.buildPartial());
-              break;
-            }
-            case 178: {
-              com.lvl6.proto.ItemsProto.ItemProto.Builder subBuilder = com.lvl6.proto.ItemsProto.ItemProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addItems(subBuilder.buildPartial());
-              break;
-            }
-            case 186: {
-              com.lvl6.proto.StructureProto.ObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.ObstacleProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addObstacles(subBuilder.buildPartial());
-              break;
-            }
-            case 194: {
-              com.lvl6.proto.ClanProto.ClanIconProto.Builder subBuilder = com.lvl6.proto.ClanProto.ClanIconProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addClanIcons(subBuilder.buildPartial());
-              break;
-            }
-            case 202: {
-              com.lvl6.proto.BattleProto.PvpLeagueProto.Builder subBuilder = com.lvl6.proto.BattleProto.PvpLeagueProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addLeagues(subBuilder.buildPartial());
-              break;
-            }
-            case 210: {
-              com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder subBuilder = com.lvl6.proto.AchievementStuffProto.AchievementProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAchievements(subBuilder.buildPartial());
-              break;
-            }
-            case 218: {
-              com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder subBuilder = com.lvl6.proto.StructureProto.MiniJobCenterProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllMiniJobCenters(subBuilder.buildPartial());
-              break;
-            }
-            case 226: {
-              com.lvl6.proto.TaskProto.TaskMapElementProto.Builder subBuilder = com.lvl6.proto.TaskProto.TaskMapElementProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllTaskMapElements(subBuilder.buildPartial());
-              break;
-            }
-            case 234: {
-              com.lvl6.proto.StructureProto.EvoChamberProto.Builder subBuilder = com.lvl6.proto.StructureProto.EvoChamberProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllEvoChambers(subBuilder.buildPartial());
-              break;
-            }
-            case 242: {
-              com.lvl6.proto.StructureProto.TeamCenterProto.Builder subBuilder = com.lvl6.proto.StructureProto.TeamCenterProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllTeamCenters(subBuilder.buildPartial());
-              break;
-            }
-            case 250: {
-              com.lvl6.proto.SkillsProto.SkillProto.Builder subBuilder = com.lvl6.proto.SkillsProto.SkillProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addSkills(subBuilder.buildPartial());
-              break;
-            }
-            case 258: {
-              com.lvl6.proto.StructureProto.ClanHouseProto.Builder subBuilder = com.lvl6.proto.StructureProto.ClanHouseProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAllClanHouses(subBuilder.buildPartial());
-              break;
-            }
+        com.lvl6.proto.StaticDataStuffProto.StaticDataProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.StaticDataStuffProto.StaticDataProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -2955,6 +4288,9 @@ public final class StaticDataStuffProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -2968,6 +4304,9 @@ public final class StaticDataStuffProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -2979,6 +4318,9 @@ public final class StaticDataStuffProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -2995,6 +4337,9 @@ public final class StaticDataStuffProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -3005,11 +4350,17 @@ public final class StaticDataStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -3017,21 +4368,23 @@ public final class StaticDataStuffProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+
       private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_ =
         java.util.Collections.emptyList();
       private void ensureExpansionCostsIsMutable() {
@@ -3040,10 +4393,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000002;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.CityProto.CityExpansionCostProto, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder, com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> expansionCostsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> getExpansionCostsList() {
         if (expansionCostsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(expansionCosts_);
@@ -3051,6 +4407,9 @@ public final class StaticDataStuffProto {
           return expansionCostsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public int getExpansionCostsCount() {
         if (expansionCostsBuilder_ == null) {
           return expansionCosts_.size();
@@ -3058,6 +4417,9 @@ public final class StaticDataStuffProto {
           return expansionCostsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index) {
         if (expansionCostsBuilder_ == null) {
           return expansionCosts_.get(index);
@@ -3065,6 +4427,9 @@ public final class StaticDataStuffProto {
           return expansionCostsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder setExpansionCosts(
           int index, com.lvl6.proto.CityProto.CityExpansionCostProto value) {
         if (expansionCostsBuilder_ == null) {
@@ -3079,6 +4444,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder setExpansionCosts(
           int index, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
         if (expansionCostsBuilder_ == null) {
@@ -3090,6 +4458,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder addExpansionCosts(com.lvl6.proto.CityProto.CityExpansionCostProto value) {
         if (expansionCostsBuilder_ == null) {
           if (value == null) {
@@ -3103,6 +4474,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder addExpansionCosts(
           int index, com.lvl6.proto.CityProto.CityExpansionCostProto value) {
         if (expansionCostsBuilder_ == null) {
@@ -3117,6 +4491,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder addExpansionCosts(
           com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
         if (expansionCostsBuilder_ == null) {
@@ -3128,6 +4505,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder addExpansionCosts(
           int index, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
         if (expansionCostsBuilder_ == null) {
@@ -3139,17 +4519,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder addAllExpansionCosts(
           java.lang.Iterable<? extends com.lvl6.proto.CityProto.CityExpansionCostProto> values) {
         if (expansionCostsBuilder_ == null) {
           ensureExpansionCostsIsMutable();
-          super.addAll(values, expansionCosts_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, expansionCosts_);
           onChanged();
         } else {
           expansionCostsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder clearExpansionCosts() {
         if (expansionCostsBuilder_ == null) {
           expansionCosts_ = java.util.Collections.emptyList();
@@ -3160,6 +4547,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public Builder removeExpansionCosts(int index) {
         if (expansionCostsBuilder_ == null) {
           ensureExpansionCostsIsMutable();
@@ -3170,10 +4560,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder getExpansionCostsBuilder(
           int index) {
         return getExpansionCostsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
           int index) {
         if (expansionCostsBuilder_ == null) {
@@ -3181,6 +4577,9 @@ public final class StaticDataStuffProto {
           return expansionCostsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
            getExpansionCostsOrBuilderList() {
         if (expansionCostsBuilder_ != null) {
@@ -3189,15 +4588,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(expansionCosts_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder addExpansionCostsBuilder() {
         return getExpansionCostsFieldBuilder().addBuilder(
             com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder addExpansionCostsBuilder(
           int index) {
         return getExpansionCostsFieldBuilder().addBuilder(
             index, com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;</code>
+       */
       public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto.Builder> 
            getExpansionCostsBuilderList() {
         return getExpansionCostsFieldBuilder().getBuilderList();
@@ -3216,8 +4624,7 @@ public final class StaticDataStuffProto {
         }
         return expansionCostsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullCityProto allCities = 3;
+
       private java.util.List<com.lvl6.proto.CityProto.FullCityProto> allCities_ =
         java.util.Collections.emptyList();
       private void ensureAllCitiesIsMutable() {
@@ -3226,10 +4633,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000004;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder> allCitiesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getAllCitiesList() {
         if (allCitiesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allCities_);
@@ -3237,6 +4647,9 @@ public final class StaticDataStuffProto {
           return allCitiesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public int getAllCitiesCount() {
         if (allCitiesBuilder_ == null) {
           return allCities_.size();
@@ -3244,6 +4657,9 @@ public final class StaticDataStuffProto {
           return allCitiesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public com.lvl6.proto.CityProto.FullCityProto getAllCities(int index) {
         if (allCitiesBuilder_ == null) {
           return allCities_.get(index);
@@ -3251,6 +4667,9 @@ public final class StaticDataStuffProto {
           return allCitiesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder setAllCities(
           int index, com.lvl6.proto.CityProto.FullCityProto value) {
         if (allCitiesBuilder_ == null) {
@@ -3265,6 +4684,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder setAllCities(
           int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
         if (allCitiesBuilder_ == null) {
@@ -3276,6 +4698,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder addAllCities(com.lvl6.proto.CityProto.FullCityProto value) {
         if (allCitiesBuilder_ == null) {
           if (value == null) {
@@ -3289,6 +4714,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder addAllCities(
           int index, com.lvl6.proto.CityProto.FullCityProto value) {
         if (allCitiesBuilder_ == null) {
@@ -3303,6 +4731,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder addAllCities(
           com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
         if (allCitiesBuilder_ == null) {
@@ -3314,6 +4745,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder addAllCities(
           int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
         if (allCitiesBuilder_ == null) {
@@ -3325,17 +4759,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder addAllAllCities(
           java.lang.Iterable<? extends com.lvl6.proto.CityProto.FullCityProto> values) {
         if (allCitiesBuilder_ == null) {
           ensureAllCitiesIsMutable();
-          super.addAll(values, allCities_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allCities_);
           onChanged();
         } else {
           allCitiesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder clearAllCities() {
         if (allCitiesBuilder_ == null) {
           allCities_ = java.util.Collections.emptyList();
@@ -3346,6 +4787,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public Builder removeAllCities(int index) {
         if (allCitiesBuilder_ == null) {
           ensureAllCitiesIsMutable();
@@ -3356,10 +4800,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public com.lvl6.proto.CityProto.FullCityProto.Builder getAllCitiesBuilder(
           int index) {
         return getAllCitiesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
           int index) {
         if (allCitiesBuilder_ == null) {
@@ -3367,6 +4817,9 @@ public final class StaticDataStuffProto {
           return allCitiesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
            getAllCitiesOrBuilderList() {
         if (allCitiesBuilder_ != null) {
@@ -3375,15 +4828,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allCities_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public com.lvl6.proto.CityProto.FullCityProto.Builder addAllCitiesBuilder() {
         return getAllCitiesFieldBuilder().addBuilder(
             com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public com.lvl6.proto.CityProto.FullCityProto.Builder addAllCitiesBuilder(
           int index) {
         return getAllCitiesFieldBuilder().addBuilder(
             index, com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullCityProto allCities = 3;</code>
+       */
       public java.util.List<com.lvl6.proto.CityProto.FullCityProto.Builder> 
            getAllCitiesBuilderList() {
         return getAllCitiesFieldBuilder().getBuilderList();
@@ -3402,8 +4864,7 @@ public final class StaticDataStuffProto {
         }
         return allCitiesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullTaskProto allTasks = 4;
+
       private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> allTasks_ =
         java.util.Collections.emptyList();
       private void ensureAllTasksIsMutable() {
@@ -3412,10 +4873,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000008;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> allTasksBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getAllTasksList() {
         if (allTasksBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allTasks_);
@@ -3423,6 +4887,9 @@ public final class StaticDataStuffProto {
           return allTasksBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public int getAllTasksCount() {
         if (allTasksBuilder_ == null) {
           return allTasks_.size();
@@ -3430,6 +4897,9 @@ public final class StaticDataStuffProto {
           return allTasksBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index) {
         if (allTasksBuilder_ == null) {
           return allTasks_.get(index);
@@ -3437,6 +4907,9 @@ public final class StaticDataStuffProto {
           return allTasksBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder setAllTasks(
           int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
         if (allTasksBuilder_ == null) {
@@ -3451,6 +4924,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder setAllTasks(
           int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
         if (allTasksBuilder_ == null) {
@@ -3462,6 +4938,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder addAllTasks(com.lvl6.proto.TaskProto.FullTaskProto value) {
         if (allTasksBuilder_ == null) {
           if (value == null) {
@@ -3475,6 +4954,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder addAllTasks(
           int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
         if (allTasksBuilder_ == null) {
@@ -3489,6 +4971,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder addAllTasks(
           com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
         if (allTasksBuilder_ == null) {
@@ -3500,6 +4985,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder addAllTasks(
           int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
         if (allTasksBuilder_ == null) {
@@ -3511,17 +4999,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder addAllAllTasks(
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.FullTaskProto> values) {
         if (allTasksBuilder_ == null) {
           ensureAllTasksIsMutable();
-          super.addAll(values, allTasks_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allTasks_);
           onChanged();
         } else {
           allTasksBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder clearAllTasks() {
         if (allTasksBuilder_ == null) {
           allTasks_ = java.util.Collections.emptyList();
@@ -3532,6 +5027,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public Builder removeAllTasks(int index) {
         if (allTasksBuilder_ == null) {
           ensureAllTasksIsMutable();
@@ -3542,10 +5040,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public com.lvl6.proto.TaskProto.FullTaskProto.Builder getAllTasksBuilder(
           int index) {
         return getAllTasksFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
           int index) {
         if (allTasksBuilder_ == null) {
@@ -3553,6 +5057,9 @@ public final class StaticDataStuffProto {
           return allTasksBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
            getAllTasksOrBuilderList() {
         if (allTasksBuilder_ != null) {
@@ -3561,15 +5068,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allTasks_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public com.lvl6.proto.TaskProto.FullTaskProto.Builder addAllTasksBuilder() {
         return getAllTasksFieldBuilder().addBuilder(
             com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public com.lvl6.proto.TaskProto.FullTaskProto.Builder addAllTasksBuilder(
           int index) {
         return getAllTasksFieldBuilder().addBuilder(
             index, com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullTaskProto allTasks = 4;</code>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto.Builder> 
            getAllTasksBuilderList() {
         return getAllTasksFieldBuilder().getBuilderList();
@@ -3588,8 +5104,7 @@ public final class StaticDataStuffProto {
         }
         return allTasksBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;
+
       private java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto> allTaskMapElements_ =
         java.util.Collections.emptyList();
       private void ensureAllTaskMapElementsIsMutable() {
@@ -3598,10 +5113,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000010;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.TaskProto.TaskMapElementProto, com.lvl6.proto.TaskProto.TaskMapElementProto.Builder, com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder> allTaskMapElementsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto> getAllTaskMapElementsList() {
         if (allTaskMapElementsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allTaskMapElements_);
@@ -3609,6 +5127,9 @@ public final class StaticDataStuffProto {
           return allTaskMapElementsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public int getAllTaskMapElementsCount() {
         if (allTaskMapElementsBuilder_ == null) {
           return allTaskMapElements_.size();
@@ -3616,6 +5137,9 @@ public final class StaticDataStuffProto {
           return allTaskMapElementsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public com.lvl6.proto.TaskProto.TaskMapElementProto getAllTaskMapElements(int index) {
         if (allTaskMapElementsBuilder_ == null) {
           return allTaskMapElements_.get(index);
@@ -3623,6 +5147,9 @@ public final class StaticDataStuffProto {
           return allTaskMapElementsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder setAllTaskMapElements(
           int index, com.lvl6.proto.TaskProto.TaskMapElementProto value) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3637,6 +5164,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder setAllTaskMapElements(
           int index, com.lvl6.proto.TaskProto.TaskMapElementProto.Builder builderForValue) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3648,6 +5178,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder addAllTaskMapElements(com.lvl6.proto.TaskProto.TaskMapElementProto value) {
         if (allTaskMapElementsBuilder_ == null) {
           if (value == null) {
@@ -3661,6 +5194,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder addAllTaskMapElements(
           int index, com.lvl6.proto.TaskProto.TaskMapElementProto value) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3675,6 +5211,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder addAllTaskMapElements(
           com.lvl6.proto.TaskProto.TaskMapElementProto.Builder builderForValue) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3686,6 +5225,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder addAllTaskMapElements(
           int index, com.lvl6.proto.TaskProto.TaskMapElementProto.Builder builderForValue) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3697,17 +5239,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder addAllAllTaskMapElements(
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.TaskMapElementProto> values) {
         if (allTaskMapElementsBuilder_ == null) {
           ensureAllTaskMapElementsIsMutable();
-          super.addAll(values, allTaskMapElements_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allTaskMapElements_);
           onChanged();
         } else {
           allTaskMapElementsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder clearAllTaskMapElements() {
         if (allTaskMapElementsBuilder_ == null) {
           allTaskMapElements_ = java.util.Collections.emptyList();
@@ -3718,6 +5267,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public Builder removeAllTaskMapElements(int index) {
         if (allTaskMapElementsBuilder_ == null) {
           ensureAllTaskMapElementsIsMutable();
@@ -3728,10 +5280,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public com.lvl6.proto.TaskProto.TaskMapElementProto.Builder getAllTaskMapElementsBuilder(
           int index) {
         return getAllTaskMapElementsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder getAllTaskMapElementsOrBuilder(
           int index) {
         if (allTaskMapElementsBuilder_ == null) {
@@ -3739,6 +5297,9 @@ public final class StaticDataStuffProto {
           return allTaskMapElementsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.TaskProto.TaskMapElementProtoOrBuilder> 
            getAllTaskMapElementsOrBuilderList() {
         if (allTaskMapElementsBuilder_ != null) {
@@ -3747,15 +5308,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allTaskMapElements_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public com.lvl6.proto.TaskProto.TaskMapElementProto.Builder addAllTaskMapElementsBuilder() {
         return getAllTaskMapElementsFieldBuilder().addBuilder(
             com.lvl6.proto.TaskProto.TaskMapElementProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public com.lvl6.proto.TaskProto.TaskMapElementProto.Builder addAllTaskMapElementsBuilder(
           int index) {
         return getAllTaskMapElementsFieldBuilder().addBuilder(
             index, com.lvl6.proto.TaskProto.TaskMapElementProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TaskMapElementProto allTaskMapElements = 28;</code>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.TaskMapElementProto.Builder> 
            getAllTaskMapElementsBuilderList() {
         return getAllTaskMapElementsFieldBuilder().getBuilderList();
@@ -3774,8 +5344,7 @@ public final class StaticDataStuffProto {
         }
         return allTaskMapElementsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.MonsterProto allMonsters = 5;
+
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> allMonsters_ =
         java.util.Collections.emptyList();
       private void ensureAllMonstersIsMutable() {
@@ -3784,10 +5353,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000020;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.MonsterProto, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> allMonstersBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> getAllMonstersList() {
         if (allMonstersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allMonsters_);
@@ -3795,6 +5367,9 @@ public final class StaticDataStuffProto {
           return allMonstersBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public int getAllMonstersCount() {
         if (allMonstersBuilder_ == null) {
           return allMonsters_.size();
@@ -3802,6 +5377,9 @@ public final class StaticDataStuffProto {
           return allMonstersBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index) {
         if (allMonstersBuilder_ == null) {
           return allMonsters_.get(index);
@@ -3809,6 +5387,9 @@ public final class StaticDataStuffProto {
           return allMonstersBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder setAllMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
         if (allMonstersBuilder_ == null) {
@@ -3823,6 +5404,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder setAllMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
         if (allMonstersBuilder_ == null) {
@@ -3834,6 +5418,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder addAllMonsters(com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
         if (allMonstersBuilder_ == null) {
           if (value == null) {
@@ -3847,6 +5434,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder addAllMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
         if (allMonstersBuilder_ == null) {
@@ -3861,6 +5451,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder addAllMonsters(
           com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
         if (allMonstersBuilder_ == null) {
@@ -3872,6 +5465,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder addAllMonsters(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
         if (allMonstersBuilder_ == null) {
@@ -3883,17 +5479,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder addAllAllMonsters(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MonsterProto> values) {
         if (allMonstersBuilder_ == null) {
           ensureAllMonstersIsMutable();
-          super.addAll(values, allMonsters_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allMonsters_);
           onChanged();
         } else {
           allMonstersBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder clearAllMonsters() {
         if (allMonstersBuilder_ == null) {
           allMonsters_ = java.util.Collections.emptyList();
@@ -3904,6 +5507,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public Builder removeAllMonsters(int index) {
         if (allMonstersBuilder_ == null) {
           ensureAllMonstersIsMutable();
@@ -3914,10 +5520,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder getAllMonstersBuilder(
           int index) {
         return getAllMonstersFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
           int index) {
         if (allMonstersBuilder_ == null) {
@@ -3925,6 +5537,9 @@ public final class StaticDataStuffProto {
           return allMonstersBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
            getAllMonstersOrBuilderList() {
         if (allMonstersBuilder_ != null) {
@@ -3933,15 +5548,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allMonsters_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder addAllMonstersBuilder() {
         return getAllMonstersFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.MonsterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder addAllMonstersBuilder(
           int index) {
         return getAllMonstersFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.MonsterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterProto allMonsters = 5;</code>
+       */
       public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder> 
            getAllMonstersBuilderList() {
         return getAllMonstersFieldBuilder().getBuilderList();
@@ -3960,8 +5584,7 @@ public final class StaticDataStuffProto {
         }
         return allMonstersBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;
+
       private java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> slip_ =
         java.util.Collections.emptyList();
       private void ensureSlipIsMutable() {
@@ -3970,10 +5593,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000040;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.UserProto.StaticUserLevelInfoProto, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> slipBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> getSlipList() {
         if (slipBuilder_ == null) {
           return java.util.Collections.unmodifiableList(slip_);
@@ -3981,6 +5607,9 @@ public final class StaticDataStuffProto {
           return slipBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public int getSlipCount() {
         if (slipBuilder_ == null) {
           return slip_.size();
@@ -3988,6 +5617,9 @@ public final class StaticDataStuffProto {
           return slipBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index) {
         if (slipBuilder_ == null) {
           return slip_.get(index);
@@ -3995,6 +5627,9 @@ public final class StaticDataStuffProto {
           return slipBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder setSlip(
           int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
         if (slipBuilder_ == null) {
@@ -4009,6 +5644,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder setSlip(
           int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
         if (slipBuilder_ == null) {
@@ -4020,6 +5658,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder addSlip(com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
         if (slipBuilder_ == null) {
           if (value == null) {
@@ -4033,6 +5674,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder addSlip(
           int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
         if (slipBuilder_ == null) {
@@ -4047,6 +5691,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder addSlip(
           com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
         if (slipBuilder_ == null) {
@@ -4058,6 +5705,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder addSlip(
           int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
         if (slipBuilder_ == null) {
@@ -4069,17 +5719,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder addAllSlip(
           java.lang.Iterable<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProto> values) {
         if (slipBuilder_ == null) {
           ensureSlipIsMutable();
-          super.addAll(values, slip_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, slip_);
           onChanged();
         } else {
           slipBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder clearSlip() {
         if (slipBuilder_ == null) {
           slip_ = java.util.Collections.emptyList();
@@ -4090,6 +5747,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public Builder removeSlip(int index) {
         if (slipBuilder_ == null) {
           ensureSlipIsMutable();
@@ -4100,10 +5760,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder getSlipBuilder(
           int index) {
         return getSlipFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
           int index) {
         if (slipBuilder_ == null) {
@@ -4111,6 +5777,9 @@ public final class StaticDataStuffProto {
           return slipBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
            getSlipOrBuilderList() {
         if (slipBuilder_ != null) {
@@ -4119,15 +5788,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(slip_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder addSlipBuilder() {
         return getSlipFieldBuilder().addBuilder(
             com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder addSlipBuilder(
           int index) {
         return getSlipFieldBuilder().addBuilder(
             index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 6;</code>
+       */
       public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder> 
            getSlipBuilderList() {
         return getSlipFieldBuilder().getBuilderList();
@@ -4146,8 +5824,7 @@ public final class StaticDataStuffProto {
         }
         return slipBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
+
       private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_ =
         java.util.Collections.emptyList();
       private void ensureInProgressQuestsIsMutable() {
@@ -4156,10 +5833,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000080;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> inProgressQuestsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
         if (inProgressQuestsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(inProgressQuests_);
@@ -4167,6 +5851,13 @@ public final class StaticDataStuffProto {
           return inProgressQuestsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public int getInProgressQuestsCount() {
         if (inProgressQuestsBuilder_ == null) {
           return inProgressQuests_.size();
@@ -4174,6 +5865,13 @@ public final class StaticDataStuffProto {
           return inProgressQuestsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
         if (inProgressQuestsBuilder_ == null) {
           return inProgressQuests_.get(index);
@@ -4181,6 +5879,13 @@ public final class StaticDataStuffProto {
           return inProgressQuestsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder setInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4195,6 +5900,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder setInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4206,6 +5918,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder addInProgressQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (inProgressQuestsBuilder_ == null) {
           if (value == null) {
@@ -4219,6 +5938,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder addInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4233,6 +5959,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder addInProgressQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4244,6 +5977,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder addInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4255,17 +5995,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder addAllInProgressQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
         if (inProgressQuestsBuilder_ == null) {
           ensureInProgressQuestsIsMutable();
-          super.addAll(values, inProgressQuests_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, inProgressQuests_);
           onChanged();
         } else {
           inProgressQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder clearInProgressQuests() {
         if (inProgressQuestsBuilder_ == null) {
           inProgressQuests_ = java.util.Collections.emptyList();
@@ -4276,6 +6031,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public Builder removeInProgressQuests(int index) {
         if (inProgressQuestsBuilder_ == null) {
           ensureInProgressQuestsIsMutable();
@@ -4286,10 +6048,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder getInProgressQuestsBuilder(
           int index) {
         return getInProgressQuestsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
           int index) {
         if (inProgressQuestsBuilder_ == null) {
@@ -4297,6 +6073,13 @@ public final class StaticDataStuffProto {
           return inProgressQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
            getInProgressQuestsOrBuilderList() {
         if (inProgressQuestsBuilder_ != null) {
@@ -4305,15 +6088,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(inProgressQuests_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder() {
         return getInProgressQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder(
           int index) {
         return getInProgressQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;</code>
+       *
+       * <pre>
+       *has not been completed
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
            getInProgressQuestsBuilderList() {
         return getInProgressQuestsFieldBuilder().getBuilderList();
@@ -4332,8 +6136,7 @@ public final class StaticDataStuffProto {
         }
         return inProgressQuestsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
+
       private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_ =
         java.util.Collections.emptyList();
       private void ensureUnredeemedQuestsIsMutable() {
@@ -4342,10 +6145,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000100;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> unredeemedQuestsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
         if (unredeemedQuestsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(unredeemedQuests_);
@@ -4353,6 +6163,13 @@ public final class StaticDataStuffProto {
           return unredeemedQuestsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public int getUnredeemedQuestsCount() {
         if (unredeemedQuestsBuilder_ == null) {
           return unredeemedQuests_.size();
@@ -4360,6 +6177,13 @@ public final class StaticDataStuffProto {
           return unredeemedQuestsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
         if (unredeemedQuestsBuilder_ == null) {
           return unredeemedQuests_.get(index);
@@ -4367,6 +6191,13 @@ public final class StaticDataStuffProto {
           return unredeemedQuestsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder setUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4381,6 +6212,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder setUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4392,6 +6230,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder addUnredeemedQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (unredeemedQuestsBuilder_ == null) {
           if (value == null) {
@@ -4405,6 +6250,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder addUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4419,6 +6271,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder addUnredeemedQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4430,6 +6289,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder addUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4441,17 +6307,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder addAllUnredeemedQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
         if (unredeemedQuestsBuilder_ == null) {
           ensureUnredeemedQuestsIsMutable();
-          super.addAll(values, unredeemedQuests_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, unredeemedQuests_);
           onChanged();
         } else {
           unredeemedQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder clearUnredeemedQuests() {
         if (unredeemedQuestsBuilder_ == null) {
           unredeemedQuests_ = java.util.Collections.emptyList();
@@ -4462,6 +6343,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public Builder removeUnredeemedQuests(int index) {
         if (unredeemedQuestsBuilder_ == null) {
           ensureUnredeemedQuestsIsMutable();
@@ -4472,10 +6360,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder getUnredeemedQuestsBuilder(
           int index) {
         return getUnredeemedQuestsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
           int index) {
         if (unredeemedQuestsBuilder_ == null) {
@@ -4483,6 +6385,13 @@ public final class StaticDataStuffProto {
           return unredeemedQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
            getUnredeemedQuestsOrBuilderList() {
         if (unredeemedQuestsBuilder_ != null) {
@@ -4491,15 +6400,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(unredeemedQuests_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder() {
         return getUnredeemedQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder(
           int index) {
         return getUnredeemedQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;</code>
+       *
+       * <pre>
+       *is complete
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
            getUnredeemedQuestsBuilderList() {
         return getUnredeemedQuestsFieldBuilder().getBuilderList();
@@ -4518,8 +6448,7 @@ public final class StaticDataStuffProto {
         }
         return unredeemedQuestsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
+
       private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> availableQuests_ =
         java.util.Collections.emptyList();
       private void ensureAvailableQuestsIsMutable() {
@@ -4528,10 +6457,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000200;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> availableQuestsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getAvailableQuestsList() {
         if (availableQuestsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(availableQuests_);
@@ -4539,6 +6471,9 @@ public final class StaticDataStuffProto {
           return availableQuestsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public int getAvailableQuestsCount() {
         if (availableQuestsBuilder_ == null) {
           return availableQuests_.size();
@@ -4546,6 +6481,9 @@ public final class StaticDataStuffProto {
           return availableQuestsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index) {
         if (availableQuestsBuilder_ == null) {
           return availableQuests_.get(index);
@@ -4553,6 +6491,9 @@ public final class StaticDataStuffProto {
           return availableQuestsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder setAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (availableQuestsBuilder_ == null) {
@@ -4567,6 +6508,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder setAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (availableQuestsBuilder_ == null) {
@@ -4578,6 +6522,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder addAvailableQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (availableQuestsBuilder_ == null) {
           if (value == null) {
@@ -4591,6 +6538,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder addAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (availableQuestsBuilder_ == null) {
@@ -4605,6 +6555,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder addAvailableQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (availableQuestsBuilder_ == null) {
@@ -4616,6 +6569,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder addAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (availableQuestsBuilder_ == null) {
@@ -4627,17 +6583,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder addAllAvailableQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
         if (availableQuestsBuilder_ == null) {
           ensureAvailableQuestsIsMutable();
-          super.addAll(values, availableQuests_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, availableQuests_);
           onChanged();
         } else {
           availableQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder clearAvailableQuests() {
         if (availableQuestsBuilder_ == null) {
           availableQuests_ = java.util.Collections.emptyList();
@@ -4648,6 +6611,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public Builder removeAvailableQuests(int index) {
         if (availableQuestsBuilder_ == null) {
           ensureAvailableQuestsIsMutable();
@@ -4658,10 +6624,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder getAvailableQuestsBuilder(
           int index) {
         return getAvailableQuestsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
           int index) {
         if (availableQuestsBuilder_ == null) {
@@ -4669,6 +6641,9 @@ public final class StaticDataStuffProto {
           return availableQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
            getAvailableQuestsOrBuilderList() {
         if (availableQuestsBuilder_ != null) {
@@ -4677,15 +6652,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(availableQuests_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addAvailableQuestsBuilder() {
         return getAvailableQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addAvailableQuestsBuilder(
           int index) {
         return getAvailableQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;</code>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
            getAvailableQuestsBuilderList() {
         return getAvailableQuestsFieldBuilder().getBuilderList();
@@ -4704,8 +6688,7 @@ public final class StaticDataStuffProto {
         }
         return availableQuestsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;
+
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> boosterPacks_ =
         java.util.Collections.emptyList();
       private void ensureBoosterPacksIsMutable() {
@@ -4714,10 +6697,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000400;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder> boosterPacksBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> getBoosterPacksList() {
         if (boosterPacksBuilder_ == null) {
           return java.util.Collections.unmodifiableList(boosterPacks_);
@@ -4725,6 +6715,13 @@ public final class StaticDataStuffProto {
           return boosterPacksBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public int getBoosterPacksCount() {
         if (boosterPacksBuilder_ == null) {
           return boosterPacks_.size();
@@ -4732,6 +6729,13 @@ public final class StaticDataStuffProto {
           return boosterPacksBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto getBoosterPacks(int index) {
         if (boosterPacksBuilder_ == null) {
           return boosterPacks_.get(index);
@@ -4739,6 +6743,13 @@ public final class StaticDataStuffProto {
           return boosterPacksBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder setBoosterPacks(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto value) {
         if (boosterPacksBuilder_ == null) {
@@ -4753,6 +6764,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder setBoosterPacks(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder builderForValue) {
         if (boosterPacksBuilder_ == null) {
@@ -4764,6 +6782,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder addBoosterPacks(com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto value) {
         if (boosterPacksBuilder_ == null) {
           if (value == null) {
@@ -4777,6 +6802,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder addBoosterPacks(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto value) {
         if (boosterPacksBuilder_ == null) {
@@ -4791,6 +6823,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder addBoosterPacks(
           com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder builderForValue) {
         if (boosterPacksBuilder_ == null) {
@@ -4802,6 +6841,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder addBoosterPacks(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder builderForValue) {
         if (boosterPacksBuilder_ == null) {
@@ -4813,17 +6859,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder addAllBoosterPacks(
           java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto> values) {
         if (boosterPacksBuilder_ == null) {
           ensureBoosterPacksIsMutable();
-          super.addAll(values, boosterPacks_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, boosterPacks_);
           onChanged();
         } else {
           boosterPacksBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder clearBoosterPacks() {
         if (boosterPacksBuilder_ == null) {
           boosterPacks_ = java.util.Collections.emptyList();
@@ -4834,6 +6895,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public Builder removeBoosterPacks(int index) {
         if (boosterPacksBuilder_ == null) {
           ensureBoosterPacksIsMutable();
@@ -4844,10 +6912,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder getBoosterPacksBuilder(
           int index) {
         return getBoosterPacksFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder getBoosterPacksOrBuilder(
           int index) {
         if (boosterPacksBuilder_ == null) {
@@ -4855,6 +6937,13 @@ public final class StaticDataStuffProto {
           return boosterPacksBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterPackProtoOrBuilder> 
            getBoosterPacksOrBuilderList() {
         if (boosterPacksBuilder_ != null) {
@@ -4863,15 +6952,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(boosterPacks_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder addBoosterPacksBuilder() {
         return getBoosterPacksFieldBuilder().addBuilder(
             com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder addBoosterPacksBuilder(
           int index) {
         return getBoosterPacksFieldBuilder().addBuilder(
             index, com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.BoosterPackProto boosterPacks = 11;</code>
+       *
+       * <pre>
+       *optional RetrieveStaticDataStatus status = 10; //defined near the end
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder> 
            getBoosterPacksBuilderList() {
         return getBoosterPacksFieldBuilder().getBuilderList();
@@ -4890,8 +7000,7 @@ public final class StaticDataStuffProto {
         }
         return boosterPacksBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;
+
       private java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto> allGenerators_ =
         java.util.Collections.emptyList();
       private void ensureAllGeneratorsIsMutable() {
@@ -4900,10 +7009,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00000800;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.ResourceGeneratorProto, com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder, com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder> allGeneratorsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto> getAllGeneratorsList() {
         if (allGeneratorsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allGenerators_);
@@ -4911,6 +7023,9 @@ public final class StaticDataStuffProto {
           return allGeneratorsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public int getAllGeneratorsCount() {
         if (allGeneratorsBuilder_ == null) {
           return allGenerators_.size();
@@ -4918,6 +7033,9 @@ public final class StaticDataStuffProto {
           return allGeneratorsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceGeneratorProto getAllGenerators(int index) {
         if (allGeneratorsBuilder_ == null) {
           return allGenerators_.get(index);
@@ -4925,6 +7043,9 @@ public final class StaticDataStuffProto {
           return allGeneratorsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder setAllGenerators(
           int index, com.lvl6.proto.StructureProto.ResourceGeneratorProto value) {
         if (allGeneratorsBuilder_ == null) {
@@ -4939,6 +7060,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder setAllGenerators(
           int index, com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder builderForValue) {
         if (allGeneratorsBuilder_ == null) {
@@ -4950,6 +7074,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder addAllGenerators(com.lvl6.proto.StructureProto.ResourceGeneratorProto value) {
         if (allGeneratorsBuilder_ == null) {
           if (value == null) {
@@ -4963,6 +7090,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder addAllGenerators(
           int index, com.lvl6.proto.StructureProto.ResourceGeneratorProto value) {
         if (allGeneratorsBuilder_ == null) {
@@ -4977,6 +7107,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder addAllGenerators(
           com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder builderForValue) {
         if (allGeneratorsBuilder_ == null) {
@@ -4988,6 +7121,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder addAllGenerators(
           int index, com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder builderForValue) {
         if (allGeneratorsBuilder_ == null) {
@@ -4999,17 +7135,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder addAllAllGenerators(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ResourceGeneratorProto> values) {
         if (allGeneratorsBuilder_ == null) {
           ensureAllGeneratorsIsMutable();
-          super.addAll(values, allGenerators_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allGenerators_);
           onChanged();
         } else {
           allGeneratorsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder clearAllGenerators() {
         if (allGeneratorsBuilder_ == null) {
           allGenerators_ = java.util.Collections.emptyList();
@@ -5020,6 +7163,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public Builder removeAllGenerators(int index) {
         if (allGeneratorsBuilder_ == null) {
           ensureAllGeneratorsIsMutable();
@@ -5030,10 +7176,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder getAllGeneratorsBuilder(
           int index) {
         return getAllGeneratorsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder getAllGeneratorsOrBuilder(
           int index) {
         if (allGeneratorsBuilder_ == null) {
@@ -5041,6 +7193,9 @@ public final class StaticDataStuffProto {
           return allGeneratorsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.ResourceGeneratorProtoOrBuilder> 
            getAllGeneratorsOrBuilderList() {
         if (allGeneratorsBuilder_ != null) {
@@ -5049,15 +7204,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allGenerators_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder addAllGeneratorsBuilder() {
         return getAllGeneratorsFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.ResourceGeneratorProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder addAllGeneratorsBuilder(
           int index) {
         return getAllGeneratorsFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.ResourceGeneratorProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceGeneratorProto allGenerators = 12;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder> 
            getAllGeneratorsBuilderList() {
         return getAllGeneratorsFieldBuilder().getBuilderList();
@@ -5076,8 +7240,7 @@ public final class StaticDataStuffProto {
         }
         return allGeneratorsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;
+
       private java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto> allStorages_ =
         java.util.Collections.emptyList();
       private void ensureAllStoragesIsMutable() {
@@ -5086,10 +7249,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00001000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.ResourceStorageProto, com.lvl6.proto.StructureProto.ResourceStorageProto.Builder, com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder> allStoragesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto> getAllStoragesList() {
         if (allStoragesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allStorages_);
@@ -5097,6 +7263,9 @@ public final class StaticDataStuffProto {
           return allStoragesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public int getAllStoragesCount() {
         if (allStoragesBuilder_ == null) {
           return allStorages_.size();
@@ -5104,6 +7273,9 @@ public final class StaticDataStuffProto {
           return allStoragesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceStorageProto getAllStorages(int index) {
         if (allStoragesBuilder_ == null) {
           return allStorages_.get(index);
@@ -5111,6 +7283,9 @@ public final class StaticDataStuffProto {
           return allStoragesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder setAllStorages(
           int index, com.lvl6.proto.StructureProto.ResourceStorageProto value) {
         if (allStoragesBuilder_ == null) {
@@ -5125,6 +7300,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder setAllStorages(
           int index, com.lvl6.proto.StructureProto.ResourceStorageProto.Builder builderForValue) {
         if (allStoragesBuilder_ == null) {
@@ -5136,6 +7314,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder addAllStorages(com.lvl6.proto.StructureProto.ResourceStorageProto value) {
         if (allStoragesBuilder_ == null) {
           if (value == null) {
@@ -5149,6 +7330,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder addAllStorages(
           int index, com.lvl6.proto.StructureProto.ResourceStorageProto value) {
         if (allStoragesBuilder_ == null) {
@@ -5163,6 +7347,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder addAllStorages(
           com.lvl6.proto.StructureProto.ResourceStorageProto.Builder builderForValue) {
         if (allStoragesBuilder_ == null) {
@@ -5174,6 +7361,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder addAllStorages(
           int index, com.lvl6.proto.StructureProto.ResourceStorageProto.Builder builderForValue) {
         if (allStoragesBuilder_ == null) {
@@ -5185,17 +7375,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder addAllAllStorages(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ResourceStorageProto> values) {
         if (allStoragesBuilder_ == null) {
           ensureAllStoragesIsMutable();
-          super.addAll(values, allStorages_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allStorages_);
           onChanged();
         } else {
           allStoragesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder clearAllStorages() {
         if (allStoragesBuilder_ == null) {
           allStorages_ = java.util.Collections.emptyList();
@@ -5206,6 +7403,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public Builder removeAllStorages(int index) {
         if (allStoragesBuilder_ == null) {
           ensureAllStoragesIsMutable();
@@ -5216,10 +7416,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceStorageProto.Builder getAllStoragesBuilder(
           int index) {
         return getAllStoragesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder getAllStoragesOrBuilder(
           int index) {
         if (allStoragesBuilder_ == null) {
@@ -5227,6 +7433,9 @@ public final class StaticDataStuffProto {
           return allStoragesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.ResourceStorageProtoOrBuilder> 
            getAllStoragesOrBuilderList() {
         if (allStoragesBuilder_ != null) {
@@ -5235,15 +7444,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allStorages_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceStorageProto.Builder addAllStoragesBuilder() {
         return getAllStoragesFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.ResourceStorageProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public com.lvl6.proto.StructureProto.ResourceStorageProto.Builder addAllStoragesBuilder(
           int index) {
         return getAllStoragesFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.ResourceStorageProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResourceStorageProto allStorages = 13;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResourceStorageProto.Builder> 
            getAllStoragesBuilderList() {
         return getAllStoragesFieldBuilder().getBuilderList();
@@ -5262,8 +7480,7 @@ public final class StaticDataStuffProto {
         }
         return allStoragesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.HospitalProto allHospitals = 14;
+
       private java.util.List<com.lvl6.proto.StructureProto.HospitalProto> allHospitals_ =
         java.util.Collections.emptyList();
       private void ensureAllHospitalsIsMutable() {
@@ -5272,10 +7489,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00002000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.HospitalProto, com.lvl6.proto.StructureProto.HospitalProto.Builder, com.lvl6.proto.StructureProto.HospitalProtoOrBuilder> allHospitalsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.HospitalProto> getAllHospitalsList() {
         if (allHospitalsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allHospitals_);
@@ -5283,6 +7503,9 @@ public final class StaticDataStuffProto {
           return allHospitalsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public int getAllHospitalsCount() {
         if (allHospitalsBuilder_ == null) {
           return allHospitals_.size();
@@ -5290,6 +7513,9 @@ public final class StaticDataStuffProto {
           return allHospitalsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public com.lvl6.proto.StructureProto.HospitalProto getAllHospitals(int index) {
         if (allHospitalsBuilder_ == null) {
           return allHospitals_.get(index);
@@ -5297,6 +7523,9 @@ public final class StaticDataStuffProto {
           return allHospitalsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder setAllHospitals(
           int index, com.lvl6.proto.StructureProto.HospitalProto value) {
         if (allHospitalsBuilder_ == null) {
@@ -5311,6 +7540,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder setAllHospitals(
           int index, com.lvl6.proto.StructureProto.HospitalProto.Builder builderForValue) {
         if (allHospitalsBuilder_ == null) {
@@ -5322,6 +7554,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder addAllHospitals(com.lvl6.proto.StructureProto.HospitalProto value) {
         if (allHospitalsBuilder_ == null) {
           if (value == null) {
@@ -5335,6 +7570,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder addAllHospitals(
           int index, com.lvl6.proto.StructureProto.HospitalProto value) {
         if (allHospitalsBuilder_ == null) {
@@ -5349,6 +7587,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder addAllHospitals(
           com.lvl6.proto.StructureProto.HospitalProto.Builder builderForValue) {
         if (allHospitalsBuilder_ == null) {
@@ -5360,6 +7601,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder addAllHospitals(
           int index, com.lvl6.proto.StructureProto.HospitalProto.Builder builderForValue) {
         if (allHospitalsBuilder_ == null) {
@@ -5371,17 +7615,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder addAllAllHospitals(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.HospitalProto> values) {
         if (allHospitalsBuilder_ == null) {
           ensureAllHospitalsIsMutable();
-          super.addAll(values, allHospitals_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allHospitals_);
           onChanged();
         } else {
           allHospitalsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder clearAllHospitals() {
         if (allHospitalsBuilder_ == null) {
           allHospitals_ = java.util.Collections.emptyList();
@@ -5392,6 +7643,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public Builder removeAllHospitals(int index) {
         if (allHospitalsBuilder_ == null) {
           ensureAllHospitalsIsMutable();
@@ -5402,10 +7656,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public com.lvl6.proto.StructureProto.HospitalProto.Builder getAllHospitalsBuilder(
           int index) {
         return getAllHospitalsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public com.lvl6.proto.StructureProto.HospitalProtoOrBuilder getAllHospitalsOrBuilder(
           int index) {
         if (allHospitalsBuilder_ == null) {
@@ -5413,6 +7673,9 @@ public final class StaticDataStuffProto {
           return allHospitalsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.HospitalProtoOrBuilder> 
            getAllHospitalsOrBuilderList() {
         if (allHospitalsBuilder_ != null) {
@@ -5421,15 +7684,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allHospitals_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public com.lvl6.proto.StructureProto.HospitalProto.Builder addAllHospitalsBuilder() {
         return getAllHospitalsFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.HospitalProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public com.lvl6.proto.StructureProto.HospitalProto.Builder addAllHospitalsBuilder(
           int index) {
         return getAllHospitalsFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.HospitalProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.HospitalProto allHospitals = 14;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.HospitalProto.Builder> 
            getAllHospitalsBuilderList() {
         return getAllHospitalsFieldBuilder().getBuilderList();
@@ -5448,8 +7720,7 @@ public final class StaticDataStuffProto {
         }
         return allHospitalsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ResidenceProto allResidences = 15;
+
       private java.util.List<com.lvl6.proto.StructureProto.ResidenceProto> allResidences_ =
         java.util.Collections.emptyList();
       private void ensureAllResidencesIsMutable() {
@@ -5458,10 +7729,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00004000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.ResidenceProto, com.lvl6.proto.StructureProto.ResidenceProto.Builder, com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder> allResidencesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResidenceProto> getAllResidencesList() {
         if (allResidencesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allResidences_);
@@ -5469,6 +7743,9 @@ public final class StaticDataStuffProto {
           return allResidencesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public int getAllResidencesCount() {
         if (allResidencesBuilder_ == null) {
           return allResidences_.size();
@@ -5476,6 +7753,9 @@ public final class StaticDataStuffProto {
           return allResidencesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public com.lvl6.proto.StructureProto.ResidenceProto getAllResidences(int index) {
         if (allResidencesBuilder_ == null) {
           return allResidences_.get(index);
@@ -5483,6 +7763,9 @@ public final class StaticDataStuffProto {
           return allResidencesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder setAllResidences(
           int index, com.lvl6.proto.StructureProto.ResidenceProto value) {
         if (allResidencesBuilder_ == null) {
@@ -5497,6 +7780,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder setAllResidences(
           int index, com.lvl6.proto.StructureProto.ResidenceProto.Builder builderForValue) {
         if (allResidencesBuilder_ == null) {
@@ -5508,6 +7794,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder addAllResidences(com.lvl6.proto.StructureProto.ResidenceProto value) {
         if (allResidencesBuilder_ == null) {
           if (value == null) {
@@ -5521,6 +7810,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder addAllResidences(
           int index, com.lvl6.proto.StructureProto.ResidenceProto value) {
         if (allResidencesBuilder_ == null) {
@@ -5535,6 +7827,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder addAllResidences(
           com.lvl6.proto.StructureProto.ResidenceProto.Builder builderForValue) {
         if (allResidencesBuilder_ == null) {
@@ -5546,6 +7841,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder addAllResidences(
           int index, com.lvl6.proto.StructureProto.ResidenceProto.Builder builderForValue) {
         if (allResidencesBuilder_ == null) {
@@ -5557,17 +7855,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder addAllAllResidences(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ResidenceProto> values) {
         if (allResidencesBuilder_ == null) {
           ensureAllResidencesIsMutable();
-          super.addAll(values, allResidences_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allResidences_);
           onChanged();
         } else {
           allResidencesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder clearAllResidences() {
         if (allResidencesBuilder_ == null) {
           allResidences_ = java.util.Collections.emptyList();
@@ -5578,6 +7883,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public Builder removeAllResidences(int index) {
         if (allResidencesBuilder_ == null) {
           ensureAllResidencesIsMutable();
@@ -5588,10 +7896,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public com.lvl6.proto.StructureProto.ResidenceProto.Builder getAllResidencesBuilder(
           int index) {
         return getAllResidencesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder getAllResidencesOrBuilder(
           int index) {
         if (allResidencesBuilder_ == null) {
@@ -5599,6 +7913,9 @@ public final class StaticDataStuffProto {
           return allResidencesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder> 
            getAllResidencesOrBuilderList() {
         if (allResidencesBuilder_ != null) {
@@ -5607,15 +7924,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allResidences_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public com.lvl6.proto.StructureProto.ResidenceProto.Builder addAllResidencesBuilder() {
         return getAllResidencesFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.ResidenceProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public com.lvl6.proto.StructureProto.ResidenceProto.Builder addAllResidencesBuilder(
           int index) {
         return getAllResidencesFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.ResidenceProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ResidenceProto allResidences = 15;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ResidenceProto.Builder> 
            getAllResidencesBuilderList() {
         return getAllResidencesFieldBuilder().getBuilderList();
@@ -5634,8 +7960,7 @@ public final class StaticDataStuffProto {
         }
         return allResidencesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
+
       private java.util.List<com.lvl6.proto.StructureProto.TownHallProto> allTownHalls_ =
         java.util.Collections.emptyList();
       private void ensureAllTownHallsIsMutable() {
@@ -5644,10 +7969,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00008000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.TownHallProto, com.lvl6.proto.StructureProto.TownHallProto.Builder, com.lvl6.proto.StructureProto.TownHallProtoOrBuilder> allTownHallsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.TownHallProto> getAllTownHallsList() {
         if (allTownHallsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allTownHalls_);
@@ -5655,6 +7983,9 @@ public final class StaticDataStuffProto {
           return allTownHallsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public int getAllTownHallsCount() {
         if (allTownHallsBuilder_ == null) {
           return allTownHalls_.size();
@@ -5662,6 +7993,9 @@ public final class StaticDataStuffProto {
           return allTownHallsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public com.lvl6.proto.StructureProto.TownHallProto getAllTownHalls(int index) {
         if (allTownHallsBuilder_ == null) {
           return allTownHalls_.get(index);
@@ -5669,6 +8003,9 @@ public final class StaticDataStuffProto {
           return allTownHallsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder setAllTownHalls(
           int index, com.lvl6.proto.StructureProto.TownHallProto value) {
         if (allTownHallsBuilder_ == null) {
@@ -5683,6 +8020,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder setAllTownHalls(
           int index, com.lvl6.proto.StructureProto.TownHallProto.Builder builderForValue) {
         if (allTownHallsBuilder_ == null) {
@@ -5694,6 +8034,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder addAllTownHalls(com.lvl6.proto.StructureProto.TownHallProto value) {
         if (allTownHallsBuilder_ == null) {
           if (value == null) {
@@ -5707,6 +8050,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder addAllTownHalls(
           int index, com.lvl6.proto.StructureProto.TownHallProto value) {
         if (allTownHallsBuilder_ == null) {
@@ -5721,6 +8067,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder addAllTownHalls(
           com.lvl6.proto.StructureProto.TownHallProto.Builder builderForValue) {
         if (allTownHallsBuilder_ == null) {
@@ -5732,6 +8081,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder addAllTownHalls(
           int index, com.lvl6.proto.StructureProto.TownHallProto.Builder builderForValue) {
         if (allTownHallsBuilder_ == null) {
@@ -5743,17 +8095,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder addAllAllTownHalls(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.TownHallProto> values) {
         if (allTownHallsBuilder_ == null) {
           ensureAllTownHallsIsMutable();
-          super.addAll(values, allTownHalls_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allTownHalls_);
           onChanged();
         } else {
           allTownHallsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder clearAllTownHalls() {
         if (allTownHallsBuilder_ == null) {
           allTownHalls_ = java.util.Collections.emptyList();
@@ -5764,6 +8123,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public Builder removeAllTownHalls(int index) {
         if (allTownHallsBuilder_ == null) {
           ensureAllTownHallsIsMutable();
@@ -5774,10 +8136,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public com.lvl6.proto.StructureProto.TownHallProto.Builder getAllTownHallsBuilder(
           int index) {
         return getAllTownHallsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public com.lvl6.proto.StructureProto.TownHallProtoOrBuilder getAllTownHallsOrBuilder(
           int index) {
         if (allTownHallsBuilder_ == null) {
@@ -5785,6 +8153,9 @@ public final class StaticDataStuffProto {
           return allTownHallsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.TownHallProtoOrBuilder> 
            getAllTownHallsOrBuilderList() {
         if (allTownHallsBuilder_ != null) {
@@ -5793,15 +8164,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allTownHalls_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public com.lvl6.proto.StructureProto.TownHallProto.Builder addAllTownHallsBuilder() {
         return getAllTownHallsFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.TownHallProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public com.lvl6.proto.StructureProto.TownHallProto.Builder addAllTownHallsBuilder(
           int index) {
         return getAllTownHallsFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.TownHallProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.TownHallProto.Builder> 
            getAllTownHallsBuilderList() {
         return getAllTownHallsFieldBuilder().getBuilderList();
@@ -5820,8 +8200,7 @@ public final class StaticDataStuffProto {
         }
         return allTownHallsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.LabProto allLabs = 17;
+
       private java.util.List<com.lvl6.proto.StructureProto.LabProto> allLabs_ =
         java.util.Collections.emptyList();
       private void ensureAllLabsIsMutable() {
@@ -5830,10 +8209,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00010000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.LabProto, com.lvl6.proto.StructureProto.LabProto.Builder, com.lvl6.proto.StructureProto.LabProtoOrBuilder> allLabsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.LabProto> getAllLabsList() {
         if (allLabsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allLabs_);
@@ -5841,6 +8223,9 @@ public final class StaticDataStuffProto {
           return allLabsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public int getAllLabsCount() {
         if (allLabsBuilder_ == null) {
           return allLabs_.size();
@@ -5848,6 +8233,9 @@ public final class StaticDataStuffProto {
           return allLabsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public com.lvl6.proto.StructureProto.LabProto getAllLabs(int index) {
         if (allLabsBuilder_ == null) {
           return allLabs_.get(index);
@@ -5855,6 +8243,9 @@ public final class StaticDataStuffProto {
           return allLabsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder setAllLabs(
           int index, com.lvl6.proto.StructureProto.LabProto value) {
         if (allLabsBuilder_ == null) {
@@ -5869,6 +8260,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder setAllLabs(
           int index, com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
         if (allLabsBuilder_ == null) {
@@ -5880,6 +8274,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder addAllLabs(com.lvl6.proto.StructureProto.LabProto value) {
         if (allLabsBuilder_ == null) {
           if (value == null) {
@@ -5893,6 +8290,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder addAllLabs(
           int index, com.lvl6.proto.StructureProto.LabProto value) {
         if (allLabsBuilder_ == null) {
@@ -5907,6 +8307,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder addAllLabs(
           com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
         if (allLabsBuilder_ == null) {
@@ -5918,6 +8321,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder addAllLabs(
           int index, com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
         if (allLabsBuilder_ == null) {
@@ -5929,17 +8335,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder addAllAllLabs(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.LabProto> values) {
         if (allLabsBuilder_ == null) {
           ensureAllLabsIsMutable();
-          super.addAll(values, allLabs_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allLabs_);
           onChanged();
         } else {
           allLabsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder clearAllLabs() {
         if (allLabsBuilder_ == null) {
           allLabs_ = java.util.Collections.emptyList();
@@ -5950,6 +8363,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public Builder removeAllLabs(int index) {
         if (allLabsBuilder_ == null) {
           ensureAllLabsIsMutable();
@@ -5960,10 +8376,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public com.lvl6.proto.StructureProto.LabProto.Builder getAllLabsBuilder(
           int index) {
         return getAllLabsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
           int index) {
         if (allLabsBuilder_ == null) {
@@ -5971,6 +8393,9 @@ public final class StaticDataStuffProto {
           return allLabsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
            getAllLabsOrBuilderList() {
         if (allLabsBuilder_ != null) {
@@ -5979,15 +8404,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allLabs_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public com.lvl6.proto.StructureProto.LabProto.Builder addAllLabsBuilder() {
         return getAllLabsFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.LabProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public com.lvl6.proto.StructureProto.LabProto.Builder addAllLabsBuilder(
           int index) {
         return getAllLabsFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.LabProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.LabProto allLabs = 17;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.LabProto.Builder> 
            getAllLabsBuilderList() {
         return getAllLabsFieldBuilder().getBuilderList();
@@ -6006,8 +8440,7 @@ public final class StaticDataStuffProto {
         }
         return allLabsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;
+
       private java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto> allMiniJobCenters_ =
         java.util.Collections.emptyList();
       private void ensureAllMiniJobCentersIsMutable() {
@@ -6016,10 +8449,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00020000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.MiniJobCenterProto, com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder, com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder> allMiniJobCentersBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto> getAllMiniJobCentersList() {
         if (allMiniJobCentersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allMiniJobCenters_);
@@ -6027,6 +8463,9 @@ public final class StaticDataStuffProto {
           return allMiniJobCentersBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public int getAllMiniJobCentersCount() {
         if (allMiniJobCentersBuilder_ == null) {
           return allMiniJobCenters_.size();
@@ -6034,6 +8473,9 @@ public final class StaticDataStuffProto {
           return allMiniJobCentersBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public com.lvl6.proto.StructureProto.MiniJobCenterProto getAllMiniJobCenters(int index) {
         if (allMiniJobCentersBuilder_ == null) {
           return allMiniJobCenters_.get(index);
@@ -6041,6 +8483,9 @@ public final class StaticDataStuffProto {
           return allMiniJobCentersBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder setAllMiniJobCenters(
           int index, com.lvl6.proto.StructureProto.MiniJobCenterProto value) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6055,6 +8500,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder setAllMiniJobCenters(
           int index, com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder builderForValue) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6066,6 +8514,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder addAllMiniJobCenters(com.lvl6.proto.StructureProto.MiniJobCenterProto value) {
         if (allMiniJobCentersBuilder_ == null) {
           if (value == null) {
@@ -6079,6 +8530,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder addAllMiniJobCenters(
           int index, com.lvl6.proto.StructureProto.MiniJobCenterProto value) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6093,6 +8547,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder addAllMiniJobCenters(
           com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder builderForValue) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6104,6 +8561,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder addAllMiniJobCenters(
           int index, com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder builderForValue) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6115,17 +8575,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder addAllAllMiniJobCenters(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MiniJobCenterProto> values) {
         if (allMiniJobCentersBuilder_ == null) {
           ensureAllMiniJobCentersIsMutable();
-          super.addAll(values, allMiniJobCenters_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allMiniJobCenters_);
           onChanged();
         } else {
           allMiniJobCentersBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder clearAllMiniJobCenters() {
         if (allMiniJobCentersBuilder_ == null) {
           allMiniJobCenters_ = java.util.Collections.emptyList();
@@ -6136,6 +8603,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public Builder removeAllMiniJobCenters(int index) {
         if (allMiniJobCentersBuilder_ == null) {
           ensureAllMiniJobCentersIsMutable();
@@ -6146,10 +8616,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder getAllMiniJobCentersBuilder(
           int index) {
         return getAllMiniJobCentersFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder getAllMiniJobCentersOrBuilder(
           int index) {
         if (allMiniJobCentersBuilder_ == null) {
@@ -6157,6 +8633,9 @@ public final class StaticDataStuffProto {
           return allMiniJobCentersBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.MiniJobCenterProtoOrBuilder> 
            getAllMiniJobCentersOrBuilderList() {
         if (allMiniJobCentersBuilder_ != null) {
@@ -6165,15 +8644,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allMiniJobCenters_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder addAllMiniJobCentersBuilder() {
         return getAllMiniJobCentersFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.MiniJobCenterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder addAllMiniJobCentersBuilder(
           int index) {
         return getAllMiniJobCentersFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.MiniJobCenterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MiniJobCenterProto allMiniJobCenters = 27;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.MiniJobCenterProto.Builder> 
            getAllMiniJobCentersBuilderList() {
         return getAllMiniJobCentersFieldBuilder().getBuilderList();
@@ -6192,8 +8680,7 @@ public final class StaticDataStuffProto {
         }
         return allMiniJobCentersBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;
+
       private java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto> allEvoChambers_ =
         java.util.Collections.emptyList();
       private void ensureAllEvoChambersIsMutable() {
@@ -6202,10 +8689,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00040000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.EvoChamberProto, com.lvl6.proto.StructureProto.EvoChamberProto.Builder, com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder> allEvoChambersBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto> getAllEvoChambersList() {
         if (allEvoChambersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allEvoChambers_);
@@ -6213,6 +8703,9 @@ public final class StaticDataStuffProto {
           return allEvoChambersBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public int getAllEvoChambersCount() {
         if (allEvoChambersBuilder_ == null) {
           return allEvoChambers_.size();
@@ -6220,6 +8713,9 @@ public final class StaticDataStuffProto {
           return allEvoChambersBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public com.lvl6.proto.StructureProto.EvoChamberProto getAllEvoChambers(int index) {
         if (allEvoChambersBuilder_ == null) {
           return allEvoChambers_.get(index);
@@ -6227,6 +8723,9 @@ public final class StaticDataStuffProto {
           return allEvoChambersBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder setAllEvoChambers(
           int index, com.lvl6.proto.StructureProto.EvoChamberProto value) {
         if (allEvoChambersBuilder_ == null) {
@@ -6241,6 +8740,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder setAllEvoChambers(
           int index, com.lvl6.proto.StructureProto.EvoChamberProto.Builder builderForValue) {
         if (allEvoChambersBuilder_ == null) {
@@ -6252,6 +8754,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder addAllEvoChambers(com.lvl6.proto.StructureProto.EvoChamberProto value) {
         if (allEvoChambersBuilder_ == null) {
           if (value == null) {
@@ -6265,6 +8770,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder addAllEvoChambers(
           int index, com.lvl6.proto.StructureProto.EvoChamberProto value) {
         if (allEvoChambersBuilder_ == null) {
@@ -6279,6 +8787,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder addAllEvoChambers(
           com.lvl6.proto.StructureProto.EvoChamberProto.Builder builderForValue) {
         if (allEvoChambersBuilder_ == null) {
@@ -6290,6 +8801,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder addAllEvoChambers(
           int index, com.lvl6.proto.StructureProto.EvoChamberProto.Builder builderForValue) {
         if (allEvoChambersBuilder_ == null) {
@@ -6301,17 +8815,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder addAllAllEvoChambers(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.EvoChamberProto> values) {
         if (allEvoChambersBuilder_ == null) {
           ensureAllEvoChambersIsMutable();
-          super.addAll(values, allEvoChambers_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allEvoChambers_);
           onChanged();
         } else {
           allEvoChambersBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder clearAllEvoChambers() {
         if (allEvoChambersBuilder_ == null) {
           allEvoChambers_ = java.util.Collections.emptyList();
@@ -6322,6 +8843,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public Builder removeAllEvoChambers(int index) {
         if (allEvoChambersBuilder_ == null) {
           ensureAllEvoChambersIsMutable();
@@ -6332,10 +8856,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public com.lvl6.proto.StructureProto.EvoChamberProto.Builder getAllEvoChambersBuilder(
           int index) {
         return getAllEvoChambersFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder getAllEvoChambersOrBuilder(
           int index) {
         if (allEvoChambersBuilder_ == null) {
@@ -6343,6 +8873,9 @@ public final class StaticDataStuffProto {
           return allEvoChambersBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.EvoChamberProtoOrBuilder> 
            getAllEvoChambersOrBuilderList() {
         if (allEvoChambersBuilder_ != null) {
@@ -6351,15 +8884,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allEvoChambers_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public com.lvl6.proto.StructureProto.EvoChamberProto.Builder addAllEvoChambersBuilder() {
         return getAllEvoChambersFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.EvoChamberProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public com.lvl6.proto.StructureProto.EvoChamberProto.Builder addAllEvoChambersBuilder(
           int index) {
         return getAllEvoChambersFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.EvoChamberProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.EvoChamberProto allEvoChambers = 29;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.EvoChamberProto.Builder> 
            getAllEvoChambersBuilderList() {
         return getAllEvoChambersFieldBuilder().getBuilderList();
@@ -6378,8 +8920,7 @@ public final class StaticDataStuffProto {
         }
         return allEvoChambersBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;
+
       private java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> allTeamCenters_ =
         java.util.Collections.emptyList();
       private void ensureAllTeamCentersIsMutable() {
@@ -6388,10 +8929,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00080000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.TeamCenterProto, com.lvl6.proto.StructureProto.TeamCenterProto.Builder, com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> allTeamCentersBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto> getAllTeamCentersList() {
         if (allTeamCentersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allTeamCenters_);
@@ -6399,6 +8943,9 @@ public final class StaticDataStuffProto {
           return allTeamCentersBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public int getAllTeamCentersCount() {
         if (allTeamCentersBuilder_ == null) {
           return allTeamCenters_.size();
@@ -6406,6 +8953,9 @@ public final class StaticDataStuffProto {
           return allTeamCentersBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public com.lvl6.proto.StructureProto.TeamCenterProto getAllTeamCenters(int index) {
         if (allTeamCentersBuilder_ == null) {
           return allTeamCenters_.get(index);
@@ -6413,6 +8963,9 @@ public final class StaticDataStuffProto {
           return allTeamCentersBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder setAllTeamCenters(
           int index, com.lvl6.proto.StructureProto.TeamCenterProto value) {
         if (allTeamCentersBuilder_ == null) {
@@ -6427,6 +8980,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder setAllTeamCenters(
           int index, com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
         if (allTeamCentersBuilder_ == null) {
@@ -6438,6 +8994,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder addAllTeamCenters(com.lvl6.proto.StructureProto.TeamCenterProto value) {
         if (allTeamCentersBuilder_ == null) {
           if (value == null) {
@@ -6451,6 +9010,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder addAllTeamCenters(
           int index, com.lvl6.proto.StructureProto.TeamCenterProto value) {
         if (allTeamCentersBuilder_ == null) {
@@ -6465,6 +9027,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder addAllTeamCenters(
           com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
         if (allTeamCentersBuilder_ == null) {
@@ -6476,6 +9041,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder addAllTeamCenters(
           int index, com.lvl6.proto.StructureProto.TeamCenterProto.Builder builderForValue) {
         if (allTeamCentersBuilder_ == null) {
@@ -6487,17 +9055,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder addAllAllTeamCenters(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.TeamCenterProto> values) {
         if (allTeamCentersBuilder_ == null) {
           ensureAllTeamCentersIsMutable();
-          super.addAll(values, allTeamCenters_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allTeamCenters_);
           onChanged();
         } else {
           allTeamCentersBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder clearAllTeamCenters() {
         if (allTeamCentersBuilder_ == null) {
           allTeamCenters_ = java.util.Collections.emptyList();
@@ -6508,6 +9083,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public Builder removeAllTeamCenters(int index) {
         if (allTeamCentersBuilder_ == null) {
           ensureAllTeamCentersIsMutable();
@@ -6518,10 +9096,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public com.lvl6.proto.StructureProto.TeamCenterProto.Builder getAllTeamCentersBuilder(
           int index) {
         return getAllTeamCentersFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder getAllTeamCentersOrBuilder(
           int index) {
         if (allTeamCentersBuilder_ == null) {
@@ -6529,6 +9113,9 @@ public final class StaticDataStuffProto {
           return allTeamCentersBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.TeamCenterProtoOrBuilder> 
            getAllTeamCentersOrBuilderList() {
         if (allTeamCentersBuilder_ != null) {
@@ -6537,15 +9124,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allTeamCenters_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public com.lvl6.proto.StructureProto.TeamCenterProto.Builder addAllTeamCentersBuilder() {
         return getAllTeamCentersFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public com.lvl6.proto.StructureProto.TeamCenterProto.Builder addAllTeamCentersBuilder(
           int index) {
         return getAllTeamCentersFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.TeamCenterProto allTeamCenters = 30;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.TeamCenterProto.Builder> 
            getAllTeamCentersBuilderList() {
         return getAllTeamCentersFieldBuilder().getBuilderList();
@@ -6564,8 +9160,7 @@ public final class StaticDataStuffProto {
         }
         return allTeamCentersBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;
+
       private java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto> allClanHouses_ =
         java.util.Collections.emptyList();
       private void ensureAllClanHousesIsMutable() {
@@ -6574,10 +9169,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00100000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.ClanHouseProto, com.lvl6.proto.StructureProto.ClanHouseProto.Builder, com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder> allClanHousesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto> getAllClanHousesList() {
         if (allClanHousesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(allClanHouses_);
@@ -6585,6 +9183,9 @@ public final class StaticDataStuffProto {
           return allClanHousesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public int getAllClanHousesCount() {
         if (allClanHousesBuilder_ == null) {
           return allClanHouses_.size();
@@ -6592,6 +9193,9 @@ public final class StaticDataStuffProto {
           return allClanHousesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public com.lvl6.proto.StructureProto.ClanHouseProto getAllClanHouses(int index) {
         if (allClanHousesBuilder_ == null) {
           return allClanHouses_.get(index);
@@ -6599,6 +9203,9 @@ public final class StaticDataStuffProto {
           return allClanHousesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder setAllClanHouses(
           int index, com.lvl6.proto.StructureProto.ClanHouseProto value) {
         if (allClanHousesBuilder_ == null) {
@@ -6613,6 +9220,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder setAllClanHouses(
           int index, com.lvl6.proto.StructureProto.ClanHouseProto.Builder builderForValue) {
         if (allClanHousesBuilder_ == null) {
@@ -6624,6 +9234,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder addAllClanHouses(com.lvl6.proto.StructureProto.ClanHouseProto value) {
         if (allClanHousesBuilder_ == null) {
           if (value == null) {
@@ -6637,6 +9250,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder addAllClanHouses(
           int index, com.lvl6.proto.StructureProto.ClanHouseProto value) {
         if (allClanHousesBuilder_ == null) {
@@ -6651,6 +9267,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder addAllClanHouses(
           com.lvl6.proto.StructureProto.ClanHouseProto.Builder builderForValue) {
         if (allClanHousesBuilder_ == null) {
@@ -6662,6 +9281,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder addAllClanHouses(
           int index, com.lvl6.proto.StructureProto.ClanHouseProto.Builder builderForValue) {
         if (allClanHousesBuilder_ == null) {
@@ -6673,17 +9295,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder addAllAllClanHouses(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ClanHouseProto> values) {
         if (allClanHousesBuilder_ == null) {
           ensureAllClanHousesIsMutable();
-          super.addAll(values, allClanHouses_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, allClanHouses_);
           onChanged();
         } else {
           allClanHousesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder clearAllClanHouses() {
         if (allClanHousesBuilder_ == null) {
           allClanHouses_ = java.util.Collections.emptyList();
@@ -6694,6 +9323,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public Builder removeAllClanHouses(int index) {
         if (allClanHousesBuilder_ == null) {
           ensureAllClanHousesIsMutable();
@@ -6704,10 +9336,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public com.lvl6.proto.StructureProto.ClanHouseProto.Builder getAllClanHousesBuilder(
           int index) {
         return getAllClanHousesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder getAllClanHousesOrBuilder(
           int index) {
         if (allClanHousesBuilder_ == null) {
@@ -6715,6 +9353,9 @@ public final class StaticDataStuffProto {
           return allClanHousesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.ClanHouseProtoOrBuilder> 
            getAllClanHousesOrBuilderList() {
         if (allClanHousesBuilder_ != null) {
@@ -6723,15 +9364,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(allClanHouses_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public com.lvl6.proto.StructureProto.ClanHouseProto.Builder addAllClanHousesBuilder() {
         return getAllClanHousesFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.ClanHouseProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public com.lvl6.proto.StructureProto.ClanHouseProto.Builder addAllClanHousesBuilder(
           int index) {
         return getAllClanHousesFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.ClanHouseProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHouseProto allClanHouses = 32;</code>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ClanHouseProto.Builder> 
            getAllClanHousesBuilderList() {
         return getAllClanHousesFieldBuilder().getBuilderList();
@@ -6750,8 +9400,7 @@ public final class StaticDataStuffProto {
         }
         return allClanHousesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;
+
       private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> persistentEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentEventsIsMutable() {
@@ -6760,10 +9409,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00200000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> persistentEventsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> getPersistentEventsList() {
         if (persistentEventsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(persistentEvents_);
@@ -6771,6 +9427,13 @@ public final class StaticDataStuffProto {
           return persistentEventsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public int getPersistentEventsCount() {
         if (persistentEventsBuilder_ == null) {
           return persistentEvents_.size();
@@ -6778,6 +9441,13 @@ public final class StaticDataStuffProto {
           return persistentEventsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public com.lvl6.proto.TaskProto.PersistentEventProto getPersistentEvents(int index) {
         if (persistentEventsBuilder_ == null) {
           return persistentEvents_.get(index);
@@ -6785,6 +9455,13 @@ public final class StaticDataStuffProto {
           return persistentEventsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder setPersistentEvents(
           int index, com.lvl6.proto.TaskProto.PersistentEventProto value) {
         if (persistentEventsBuilder_ == null) {
@@ -6799,6 +9476,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder setPersistentEvents(
           int index, com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
         if (persistentEventsBuilder_ == null) {
@@ -6810,6 +9494,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder addPersistentEvents(com.lvl6.proto.TaskProto.PersistentEventProto value) {
         if (persistentEventsBuilder_ == null) {
           if (value == null) {
@@ -6823,6 +9514,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder addPersistentEvents(
           int index, com.lvl6.proto.TaskProto.PersistentEventProto value) {
         if (persistentEventsBuilder_ == null) {
@@ -6837,6 +9535,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder addPersistentEvents(
           com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
         if (persistentEventsBuilder_ == null) {
@@ -6848,6 +9553,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder addPersistentEvents(
           int index, com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
         if (persistentEventsBuilder_ == null) {
@@ -6859,17 +9571,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder addAllPersistentEvents(
           java.lang.Iterable<? extends com.lvl6.proto.TaskProto.PersistentEventProto> values) {
         if (persistentEventsBuilder_ == null) {
           ensurePersistentEventsIsMutable();
-          super.addAll(values, persistentEvents_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, persistentEvents_);
           onChanged();
         } else {
           persistentEventsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder clearPersistentEvents() {
         if (persistentEventsBuilder_ == null) {
           persistentEvents_ = java.util.Collections.emptyList();
@@ -6880,6 +9607,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public Builder removePersistentEvents(int index) {
         if (persistentEventsBuilder_ == null) {
           ensurePersistentEventsIsMutable();
@@ -6890,10 +9624,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public com.lvl6.proto.TaskProto.PersistentEventProto.Builder getPersistentEventsBuilder(
           int index) {
         return getPersistentEventsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getPersistentEventsOrBuilder(
           int index) {
         if (persistentEventsBuilder_ == null) {
@@ -6901,6 +9649,13 @@ public final class StaticDataStuffProto {
           return persistentEventsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
            getPersistentEventsOrBuilderList() {
         if (persistentEventsBuilder_ != null) {
@@ -6909,15 +9664,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(persistentEvents_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public com.lvl6.proto.TaskProto.PersistentEventProto.Builder addPersistentEventsBuilder() {
         return getPersistentEventsFieldBuilder().addBuilder(
             com.lvl6.proto.TaskProto.PersistentEventProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public com.lvl6.proto.TaskProto.PersistentEventProto.Builder addPersistentEventsBuilder(
           int index) {
         return getPersistentEventsFieldBuilder().addBuilder(
             index, com.lvl6.proto.TaskProto.PersistentEventProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentEventProto persistentEvents = 18;</code>
+       *
+       * <pre>
+       *the daily events where users can gain evolution and enhancement materials
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto.Builder> 
            getPersistentEventsBuilderList() {
         return getPersistentEventsFieldBuilder().getBuilderList();
@@ -6936,8 +9712,7 @@ public final class StaticDataStuffProto {
         }
         return persistentEventsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_ =
         java.util.Collections.emptyList();
       private void ensureMbdsIsMutable() {
@@ -6946,10 +9721,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00400000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> mbdsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> getMbdsList() {
         if (mbdsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(mbds_);
@@ -6957,6 +9735,9 @@ public final class StaticDataStuffProto {
           return mbdsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public int getMbdsCount() {
         if (mbdsBuilder_ == null) {
           return mbds_.size();
@@ -6964,6 +9745,9 @@ public final class StaticDataStuffProto {
           return mbdsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index) {
         if (mbdsBuilder_ == null) {
           return mbds_.get(index);
@@ -6971,6 +9755,9 @@ public final class StaticDataStuffProto {
           return mbdsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder setMbds(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
         if (mbdsBuilder_ == null) {
@@ -6985,6 +9772,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder setMbds(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
         if (mbdsBuilder_ == null) {
@@ -6996,6 +9786,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder addMbds(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
         if (mbdsBuilder_ == null) {
           if (value == null) {
@@ -7009,6 +9802,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder addMbds(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
         if (mbdsBuilder_ == null) {
@@ -7023,6 +9819,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder addMbds(
           com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
         if (mbdsBuilder_ == null) {
@@ -7034,6 +9833,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder addMbds(
           int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
         if (mbdsBuilder_ == null) {
@@ -7045,17 +9847,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder addAllMbds(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> values) {
         if (mbdsBuilder_ == null) {
           ensureMbdsIsMutable();
-          super.addAll(values, mbds_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, mbds_);
           onChanged();
         } else {
           mbdsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder clearMbds() {
         if (mbdsBuilder_ == null) {
           mbds_ = java.util.Collections.emptyList();
@@ -7066,6 +9875,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public Builder removeMbds(int index) {
         if (mbdsBuilder_ == null) {
           ensureMbdsIsMutable();
@@ -7076,10 +9888,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder getMbdsBuilder(
           int index) {
         return getMbdsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
           int index) {
         if (mbdsBuilder_ == null) {
@@ -7087,6 +9905,9 @@ public final class StaticDataStuffProto {
           return mbdsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
            getMbdsOrBuilderList() {
         if (mbdsBuilder_ != null) {
@@ -7095,15 +9916,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(mbds_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder addMbdsBuilder() {
         return getMbdsFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder addMbdsBuilder(
           int index) {
         return getMbdsFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;</code>
+       */
       public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder> 
            getMbdsBuilderList() {
         return getMbdsFieldBuilder().getBuilderList();
@@ -7122,8 +9952,7 @@ public final class StaticDataStuffProto {
         }
         return mbdsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+
       private java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> raids_ =
         java.util.Collections.emptyList();
       private void ensureRaidsIsMutable() {
@@ -7132,10 +9961,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x00800000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ClanProto.ClanRaidProto, com.lvl6.proto.ClanProto.ClanRaidProto.Builder, com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder> raidsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto> getRaidsList() {
         if (raidsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(raids_);
@@ -7143,6 +9979,13 @@ public final class StaticDataStuffProto {
           return raidsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public int getRaidsCount() {
         if (raidsBuilder_ == null) {
           return raids_.size();
@@ -7150,6 +9993,13 @@ public final class StaticDataStuffProto {
           return raidsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public com.lvl6.proto.ClanProto.ClanRaidProto getRaids(int index) {
         if (raidsBuilder_ == null) {
           return raids_.get(index);
@@ -7157,6 +10007,13 @@ public final class StaticDataStuffProto {
           return raidsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder setRaids(
           int index, com.lvl6.proto.ClanProto.ClanRaidProto value) {
         if (raidsBuilder_ == null) {
@@ -7171,6 +10028,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder setRaids(
           int index, com.lvl6.proto.ClanProto.ClanRaidProto.Builder builderForValue) {
         if (raidsBuilder_ == null) {
@@ -7182,6 +10046,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder addRaids(com.lvl6.proto.ClanProto.ClanRaidProto value) {
         if (raidsBuilder_ == null) {
           if (value == null) {
@@ -7195,6 +10066,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder addRaids(
           int index, com.lvl6.proto.ClanProto.ClanRaidProto value) {
         if (raidsBuilder_ == null) {
@@ -7209,6 +10087,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder addRaids(
           com.lvl6.proto.ClanProto.ClanRaidProto.Builder builderForValue) {
         if (raidsBuilder_ == null) {
@@ -7220,6 +10105,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder addRaids(
           int index, com.lvl6.proto.ClanProto.ClanRaidProto.Builder builderForValue) {
         if (raidsBuilder_ == null) {
@@ -7231,17 +10123,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder addAllRaids(
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanRaidProto> values) {
         if (raidsBuilder_ == null) {
           ensureRaidsIsMutable();
-          super.addAll(values, raids_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, raids_);
           onChanged();
         } else {
           raidsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder clearRaids() {
         if (raidsBuilder_ == null) {
           raids_ = java.util.Collections.emptyList();
@@ -7252,6 +10159,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public Builder removeRaids(int index) {
         if (raidsBuilder_ == null) {
           ensureRaidsIsMutable();
@@ -7262,10 +10176,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public com.lvl6.proto.ClanProto.ClanRaidProto.Builder getRaidsBuilder(
           int index) {
         return getRaidsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
           int index) {
         if (raidsBuilder_ == null) {
@@ -7273,6 +10201,13 @@ public final class StaticDataStuffProto {
           return raidsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.ClanProto.ClanRaidProtoOrBuilder> 
            getRaidsOrBuilderList() {
         if (raidsBuilder_ != null) {
@@ -7281,15 +10216,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(raids_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public com.lvl6.proto.ClanProto.ClanRaidProto.Builder addRaidsBuilder() {
         return getRaidsFieldBuilder().addBuilder(
             com.lvl6.proto.ClanProto.ClanRaidProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public com.lvl6.proto.ClanProto.ClanRaidProto.Builder addRaidsBuilder(
           int index) {
         return getRaidsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ClanProto.ClanRaidProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanRaidProto raids = 20;</code>
+       *
+       * <pre>
+       *these contains the stages. the stages contain the monsters and the rewards  
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.ClanRaidProto.Builder> 
            getRaidsBuilderList() {
         return getRaidsFieldBuilder().getBuilderList();
@@ -7308,8 +10264,7 @@ public final class StaticDataStuffProto {
         }
         return raidsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;
+
       private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> persistentClanEvents_ =
         java.util.Collections.emptyList();
       private void ensurePersistentClanEventsIsMutable() {
@@ -7318,10 +10273,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x01000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ClanProto.PersistentClanEventProto, com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder> persistentClanEventsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto> getPersistentClanEventsList() {
         if (persistentClanEventsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(persistentClanEvents_);
@@ -7329,6 +10287,9 @@ public final class StaticDataStuffProto {
           return persistentClanEventsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public int getPersistentClanEventsCount() {
         if (persistentClanEventsBuilder_ == null) {
           return persistentClanEvents_.size();
@@ -7336,6 +10297,9 @@ public final class StaticDataStuffProto {
           return persistentClanEventsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public com.lvl6.proto.ClanProto.PersistentClanEventProto getPersistentClanEvents(int index) {
         if (persistentClanEventsBuilder_ == null) {
           return persistentClanEvents_.get(index);
@@ -7343,6 +10307,9 @@ public final class StaticDataStuffProto {
           return persistentClanEventsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder setPersistentClanEvents(
           int index, com.lvl6.proto.ClanProto.PersistentClanEventProto value) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7357,6 +10324,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder setPersistentClanEvents(
           int index, com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder builderForValue) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7368,6 +10338,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder addPersistentClanEvents(com.lvl6.proto.ClanProto.PersistentClanEventProto value) {
         if (persistentClanEventsBuilder_ == null) {
           if (value == null) {
@@ -7381,6 +10354,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder addPersistentClanEvents(
           int index, com.lvl6.proto.ClanProto.PersistentClanEventProto value) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7395,6 +10371,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder addPersistentClanEvents(
           com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder builderForValue) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7406,6 +10385,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder addPersistentClanEvents(
           int index, com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder builderForValue) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7417,17 +10399,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder addAllPersistentClanEvents(
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventProto> values) {
         if (persistentClanEventsBuilder_ == null) {
           ensurePersistentClanEventsIsMutable();
-          super.addAll(values, persistentClanEvents_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, persistentClanEvents_);
           onChanged();
         } else {
           persistentClanEventsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder clearPersistentClanEvents() {
         if (persistentClanEventsBuilder_ == null) {
           persistentClanEvents_ = java.util.Collections.emptyList();
@@ -7438,6 +10427,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public Builder removePersistentClanEvents(int index) {
         if (persistentClanEventsBuilder_ == null) {
           ensurePersistentClanEventsIsMutable();
@@ -7448,10 +10440,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder getPersistentClanEventsBuilder(
           int index) {
         return getPersistentClanEventsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder getPersistentClanEventsOrBuilder(
           int index) {
         if (persistentClanEventsBuilder_ == null) {
@@ -7459,6 +10457,9 @@ public final class StaticDataStuffProto {
           return persistentClanEventsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder> 
            getPersistentClanEventsOrBuilderList() {
         if (persistentClanEventsBuilder_ != null) {
@@ -7467,15 +10468,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(persistentClanEvents_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder addPersistentClanEventsBuilder() {
         return getPersistentClanEventsFieldBuilder().addBuilder(
             com.lvl6.proto.ClanProto.PersistentClanEventProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder addPersistentClanEventsBuilder(
           int index) {
         return getPersistentClanEventsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ClanProto.PersistentClanEventProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PersistentClanEventProto persistentClanEvents = 21;</code>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder> 
            getPersistentClanEventsBuilderList() {
         return getPersistentClanEventsFieldBuilder().getBuilderList();
@@ -7494,8 +10504,7 @@ public final class StaticDataStuffProto {
         }
         return persistentClanEventsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ItemProto items = 22;
+
       private java.util.List<com.lvl6.proto.ItemsProto.ItemProto> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
@@ -7504,10 +10513,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x02000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ItemsProto.ItemProto, com.lvl6.proto.ItemsProto.ItemProto.Builder, com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> itemsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public java.util.List<com.lvl6.proto.ItemsProto.ItemProto> getItemsList() {
         if (itemsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(items_);
@@ -7515,6 +10527,9 @@ public final class StaticDataStuffProto {
           return itemsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public int getItemsCount() {
         if (itemsBuilder_ == null) {
           return items_.size();
@@ -7522,6 +10537,9 @@ public final class StaticDataStuffProto {
           return itemsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public com.lvl6.proto.ItemsProto.ItemProto getItems(int index) {
         if (itemsBuilder_ == null) {
           return items_.get(index);
@@ -7529,6 +10547,9 @@ public final class StaticDataStuffProto {
           return itemsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder setItems(
           int index, com.lvl6.proto.ItemsProto.ItemProto value) {
         if (itemsBuilder_ == null) {
@@ -7543,6 +10564,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder setItems(
           int index, com.lvl6.proto.ItemsProto.ItemProto.Builder builderForValue) {
         if (itemsBuilder_ == null) {
@@ -7554,6 +10578,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder addItems(com.lvl6.proto.ItemsProto.ItemProto value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
@@ -7567,6 +10594,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder addItems(
           int index, com.lvl6.proto.ItemsProto.ItemProto value) {
         if (itemsBuilder_ == null) {
@@ -7581,6 +10611,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder addItems(
           com.lvl6.proto.ItemsProto.ItemProto.Builder builderForValue) {
         if (itemsBuilder_ == null) {
@@ -7592,6 +10625,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder addItems(
           int index, com.lvl6.proto.ItemsProto.ItemProto.Builder builderForValue) {
         if (itemsBuilder_ == null) {
@@ -7603,17 +10639,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder addAllItems(
           java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.ItemProto> values) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
-          super.addAll(values, items_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, items_);
           onChanged();
         } else {
           itemsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
@@ -7624,6 +10667,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public Builder removeItems(int index) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
@@ -7634,10 +10680,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public com.lvl6.proto.ItemsProto.ItemProto.Builder getItemsBuilder(
           int index) {
         return getItemsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public com.lvl6.proto.ItemsProto.ItemProtoOrBuilder getItemsOrBuilder(
           int index) {
         if (itemsBuilder_ == null) {
@@ -7645,6 +10697,9 @@ public final class StaticDataStuffProto {
           return itemsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.ItemsProto.ItemProtoOrBuilder> 
            getItemsOrBuilderList() {
         if (itemsBuilder_ != null) {
@@ -7653,15 +10708,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(items_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public com.lvl6.proto.ItemsProto.ItemProto.Builder addItemsBuilder() {
         return getItemsFieldBuilder().addBuilder(
             com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public com.lvl6.proto.ItemsProto.ItemProto.Builder addItemsBuilder(
           int index) {
         return getItemsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ItemsProto.ItemProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ItemProto items = 22;</code>
+       */
       public java.util.List<com.lvl6.proto.ItemsProto.ItemProto.Builder> 
            getItemsBuilderList() {
         return getItemsFieldBuilder().getBuilderList();
@@ -7680,8 +10744,7 @@ public final class StaticDataStuffProto {
         }
         return itemsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+
       private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_ =
         java.util.Collections.emptyList();
       private void ensureObstaclesIsMutable() {
@@ -7690,10 +10753,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x04000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> obstaclesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> getObstaclesList() {
         if (obstaclesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(obstacles_);
@@ -7701,6 +10771,13 @@ public final class StaticDataStuffProto {
           return obstaclesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public int getObstaclesCount() {
         if (obstaclesBuilder_ == null) {
           return obstacles_.size();
@@ -7708,6 +10785,13 @@ public final class StaticDataStuffProto {
           return obstaclesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index) {
         if (obstaclesBuilder_ == null) {
           return obstacles_.get(index);
@@ -7715,6 +10799,13 @@ public final class StaticDataStuffProto {
           return obstaclesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder setObstacles(
           int index, com.lvl6.proto.StructureProto.ObstacleProto value) {
         if (obstaclesBuilder_ == null) {
@@ -7729,6 +10820,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder setObstacles(
           int index, com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
         if (obstaclesBuilder_ == null) {
@@ -7740,6 +10838,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder addObstacles(com.lvl6.proto.StructureProto.ObstacleProto value) {
         if (obstaclesBuilder_ == null) {
           if (value == null) {
@@ -7753,6 +10858,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder addObstacles(
           int index, com.lvl6.proto.StructureProto.ObstacleProto value) {
         if (obstaclesBuilder_ == null) {
@@ -7767,6 +10879,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder addObstacles(
           com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
         if (obstaclesBuilder_ == null) {
@@ -7778,6 +10897,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder addObstacles(
           int index, com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
         if (obstaclesBuilder_ == null) {
@@ -7789,17 +10915,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder addAllObstacles(
           java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ObstacleProto> values) {
         if (obstaclesBuilder_ == null) {
           ensureObstaclesIsMutable();
-          super.addAll(values, obstacles_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, obstacles_);
           onChanged();
         } else {
           obstaclesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder clearObstacles() {
         if (obstaclesBuilder_ == null) {
           obstacles_ = java.util.Collections.emptyList();
@@ -7810,6 +10951,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public Builder removeObstacles(int index) {
         if (obstaclesBuilder_ == null) {
           ensureObstaclesIsMutable();
@@ -7820,10 +10968,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public com.lvl6.proto.StructureProto.ObstacleProto.Builder getObstaclesBuilder(
           int index) {
         return getObstaclesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
           int index) {
         if (obstaclesBuilder_ == null) {
@@ -7831,6 +10993,13 @@ public final class StaticDataStuffProto {
           return obstaclesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
            getObstaclesOrBuilderList() {
         if (obstaclesBuilder_ != null) {
@@ -7839,15 +11008,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(obstacles_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public com.lvl6.proto.StructureProto.ObstacleProto.Builder addObstaclesBuilder() {
         return getObstaclesFieldBuilder().addBuilder(
             com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public com.lvl6.proto.StructureProto.ObstacleProto.Builder addObstaclesBuilder(
           int index) {
         return getObstaclesFieldBuilder().addBuilder(
             index, com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ObstacleProto obstacles = 23;</code>
+       *
+       * <pre>
+       *might generate gems for user upon removal
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto.Builder> 
            getObstaclesBuilderList() {
         return getObstaclesFieldBuilder().getBuilderList();
@@ -7866,8 +11056,7 @@ public final class StaticDataStuffProto {
         }
         return obstaclesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+
       private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_ =
         java.util.Collections.emptyList();
       private void ensureClanIconsIsMutable() {
@@ -7876,10 +11065,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x08000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> clanIconsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> getClanIconsList() {
         if (clanIconsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(clanIcons_);
@@ -7887,6 +11079,9 @@ public final class StaticDataStuffProto {
           return clanIconsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public int getClanIconsCount() {
         if (clanIconsBuilder_ == null) {
           return clanIcons_.size();
@@ -7894,6 +11089,9 @@ public final class StaticDataStuffProto {
           return clanIconsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index) {
         if (clanIconsBuilder_ == null) {
           return clanIcons_.get(index);
@@ -7901,6 +11099,9 @@ public final class StaticDataStuffProto {
           return clanIconsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder setClanIcons(
           int index, com.lvl6.proto.ClanProto.ClanIconProto value) {
         if (clanIconsBuilder_ == null) {
@@ -7915,6 +11116,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder setClanIcons(
           int index, com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
         if (clanIconsBuilder_ == null) {
@@ -7926,6 +11130,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder addClanIcons(com.lvl6.proto.ClanProto.ClanIconProto value) {
         if (clanIconsBuilder_ == null) {
           if (value == null) {
@@ -7939,6 +11146,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder addClanIcons(
           int index, com.lvl6.proto.ClanProto.ClanIconProto value) {
         if (clanIconsBuilder_ == null) {
@@ -7953,6 +11163,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder addClanIcons(
           com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
         if (clanIconsBuilder_ == null) {
@@ -7964,6 +11177,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder addClanIcons(
           int index, com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
         if (clanIconsBuilder_ == null) {
@@ -7975,17 +11191,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder addAllClanIcons(
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanIconProto> values) {
         if (clanIconsBuilder_ == null) {
           ensureClanIconsIsMutable();
-          super.addAll(values, clanIcons_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, clanIcons_);
           onChanged();
         } else {
           clanIconsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder clearClanIcons() {
         if (clanIconsBuilder_ == null) {
           clanIcons_ = java.util.Collections.emptyList();
@@ -7996,6 +11219,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public Builder removeClanIcons(int index) {
         if (clanIconsBuilder_ == null) {
           ensureClanIconsIsMutable();
@@ -8006,10 +11232,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public com.lvl6.proto.ClanProto.ClanIconProto.Builder getClanIconsBuilder(
           int index) {
         return getClanIconsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
           int index) {
         if (clanIconsBuilder_ == null) {
@@ -8017,6 +11249,9 @@ public final class StaticDataStuffProto {
           return clanIconsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
            getClanIconsOrBuilderList() {
         if (clanIconsBuilder_ != null) {
@@ -8025,15 +11260,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(clanIcons_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public com.lvl6.proto.ClanProto.ClanIconProto.Builder addClanIconsBuilder() {
         return getClanIconsFieldBuilder().addBuilder(
             com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public com.lvl6.proto.ClanProto.ClanIconProto.Builder addClanIconsBuilder(
           int index) {
         return getClanIconsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;</code>
+       */
       public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto.Builder> 
            getClanIconsBuilderList() {
         return getClanIconsFieldBuilder().getBuilderList();
@@ -8052,8 +11296,7 @@ public final class StaticDataStuffProto {
         }
         return clanIconsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;
+
       private java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> leagues_ =
         java.util.Collections.emptyList();
       private void ensureLeaguesIsMutable() {
@@ -8062,10 +11305,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x10000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.BattleProto.PvpLeagueProto, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder, com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> leaguesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto> getLeaguesList() {
         if (leaguesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(leagues_);
@@ -8073,6 +11319,9 @@ public final class StaticDataStuffProto {
           return leaguesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public int getLeaguesCount() {
         if (leaguesBuilder_ == null) {
           return leagues_.size();
@@ -8080,6 +11329,9 @@ public final class StaticDataStuffProto {
           return leaguesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public com.lvl6.proto.BattleProto.PvpLeagueProto getLeagues(int index) {
         if (leaguesBuilder_ == null) {
           return leagues_.get(index);
@@ -8087,6 +11339,9 @@ public final class StaticDataStuffProto {
           return leaguesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder setLeagues(
           int index, com.lvl6.proto.BattleProto.PvpLeagueProto value) {
         if (leaguesBuilder_ == null) {
@@ -8101,6 +11356,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder setLeagues(
           int index, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
         if (leaguesBuilder_ == null) {
@@ -8112,6 +11370,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder addLeagues(com.lvl6.proto.BattleProto.PvpLeagueProto value) {
         if (leaguesBuilder_ == null) {
           if (value == null) {
@@ -8125,6 +11386,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder addLeagues(
           int index, com.lvl6.proto.BattleProto.PvpLeagueProto value) {
         if (leaguesBuilder_ == null) {
@@ -8139,6 +11403,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder addLeagues(
           com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
         if (leaguesBuilder_ == null) {
@@ -8150,6 +11417,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder addLeagues(
           int index, com.lvl6.proto.BattleProto.PvpLeagueProto.Builder builderForValue) {
         if (leaguesBuilder_ == null) {
@@ -8161,17 +11431,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder addAllLeagues(
           java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpLeagueProto> values) {
         if (leaguesBuilder_ == null) {
           ensureLeaguesIsMutable();
-          super.addAll(values, leagues_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, leagues_);
           onChanged();
         } else {
           leaguesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder clearLeagues() {
         if (leaguesBuilder_ == null) {
           leagues_ = java.util.Collections.emptyList();
@@ -8182,6 +11459,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public Builder removeLeagues(int index) {
         if (leaguesBuilder_ == null) {
           ensureLeaguesIsMutable();
@@ -8192,10 +11472,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder getLeaguesBuilder(
           int index) {
         return getLeaguesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder getLeaguesOrBuilder(
           int index) {
         if (leaguesBuilder_ == null) {
@@ -8203,6 +11489,9 @@ public final class StaticDataStuffProto {
           return leaguesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.BattleProto.PvpLeagueProtoOrBuilder> 
            getLeaguesOrBuilderList() {
         if (leaguesBuilder_ != null) {
@@ -8211,15 +11500,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(leagues_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder addLeaguesBuilder() {
         return getLeaguesFieldBuilder().addBuilder(
             com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public com.lvl6.proto.BattleProto.PvpLeagueProto.Builder addLeaguesBuilder(
           int index) {
         return getLeaguesFieldBuilder().addBuilder(
             index, com.lvl6.proto.BattleProto.PvpLeagueProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpLeagueProto leagues = 25;</code>
+       */
       public java.util.List<com.lvl6.proto.BattleProto.PvpLeagueProto.Builder> 
            getLeaguesBuilderList() {
         return getLeaguesFieldBuilder().getBuilderList();
@@ -8238,8 +11536,7 @@ public final class StaticDataStuffProto {
         }
         return leaguesBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.AchievementProto achievements = 26;
+
       private java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> achievements_ =
         java.util.Collections.emptyList();
       private void ensureAchievementsIsMutable() {
@@ -8248,10 +11545,13 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x20000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.AchievementStuffProto.AchievementProto, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder, com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder> achievementsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto> getAchievementsList() {
         if (achievementsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(achievements_);
@@ -8259,6 +11559,9 @@ public final class StaticDataStuffProto {
           return achievementsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public int getAchievementsCount() {
         if (achievementsBuilder_ == null) {
           return achievements_.size();
@@ -8266,6 +11569,9 @@ public final class StaticDataStuffProto {
           return achievementsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public com.lvl6.proto.AchievementStuffProto.AchievementProto getAchievements(int index) {
         if (achievementsBuilder_ == null) {
           return achievements_.get(index);
@@ -8273,6 +11579,9 @@ public final class StaticDataStuffProto {
           return achievementsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder setAchievements(
           int index, com.lvl6.proto.AchievementStuffProto.AchievementProto value) {
         if (achievementsBuilder_ == null) {
@@ -8287,6 +11596,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder setAchievements(
           int index, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder builderForValue) {
         if (achievementsBuilder_ == null) {
@@ -8298,6 +11610,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder addAchievements(com.lvl6.proto.AchievementStuffProto.AchievementProto value) {
         if (achievementsBuilder_ == null) {
           if (value == null) {
@@ -8311,6 +11626,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder addAchievements(
           int index, com.lvl6.proto.AchievementStuffProto.AchievementProto value) {
         if (achievementsBuilder_ == null) {
@@ -8325,6 +11643,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder addAchievements(
           com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder builderForValue) {
         if (achievementsBuilder_ == null) {
@@ -8336,6 +11657,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder addAchievements(
           int index, com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder builderForValue) {
         if (achievementsBuilder_ == null) {
@@ -8347,17 +11671,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder addAllAchievements(
           java.lang.Iterable<? extends com.lvl6.proto.AchievementStuffProto.AchievementProto> values) {
         if (achievementsBuilder_ == null) {
           ensureAchievementsIsMutable();
-          super.addAll(values, achievements_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, achievements_);
           onChanged();
         } else {
           achievementsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder clearAchievements() {
         if (achievementsBuilder_ == null) {
           achievements_ = java.util.Collections.emptyList();
@@ -8368,6 +11699,9 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public Builder removeAchievements(int index) {
         if (achievementsBuilder_ == null) {
           ensureAchievementsIsMutable();
@@ -8378,10 +11712,16 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder getAchievementsBuilder(
           int index) {
         return getAchievementsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder getAchievementsOrBuilder(
           int index) {
         if (achievementsBuilder_ == null) {
@@ -8389,6 +11729,9 @@ public final class StaticDataStuffProto {
           return achievementsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.AchievementStuffProto.AchievementProtoOrBuilder> 
            getAchievementsOrBuilderList() {
         if (achievementsBuilder_ != null) {
@@ -8397,15 +11740,24 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(achievements_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder addAchievementsBuilder() {
         return getAchievementsFieldBuilder().addBuilder(
             com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder addAchievementsBuilder(
           int index) {
         return getAchievementsFieldBuilder().addBuilder(
             index, com.lvl6.proto.AchievementStuffProto.AchievementProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.AchievementProto achievements = 26;</code>
+       */
       public java.util.List<com.lvl6.proto.AchievementStuffProto.AchievementProto.Builder> 
            getAchievementsBuilderList() {
         return getAchievementsFieldBuilder().getBuilderList();
@@ -8424,8 +11776,7 @@ public final class StaticDataStuffProto {
         }
         return achievementsBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.SkillProto skills = 31;
+
       private java.util.List<com.lvl6.proto.SkillsProto.SkillProto> skills_ =
         java.util.Collections.emptyList();
       private void ensureSkillsIsMutable() {
@@ -8434,10 +11785,17 @@ public final class StaticDataStuffProto {
           bitField0_ |= 0x40000000;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.SkillsProto.SkillProto, com.lvl6.proto.SkillsProto.SkillProto.Builder, com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> skillsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillProto> getSkillsList() {
         if (skillsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(skills_);
@@ -8445,6 +11803,13 @@ public final class StaticDataStuffProto {
           return skillsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public int getSkillsCount() {
         if (skillsBuilder_ == null) {
           return skills_.size();
@@ -8452,6 +11817,13 @@ public final class StaticDataStuffProto {
           return skillsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillProto getSkills(int index) {
         if (skillsBuilder_ == null) {
           return skills_.get(index);
@@ -8459,6 +11831,13 @@ public final class StaticDataStuffProto {
           return skillsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder setSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto value) {
         if (skillsBuilder_ == null) {
@@ -8473,6 +11852,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder setSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
         if (skillsBuilder_ == null) {
@@ -8484,6 +11870,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder addSkills(com.lvl6.proto.SkillsProto.SkillProto value) {
         if (skillsBuilder_ == null) {
           if (value == null) {
@@ -8497,6 +11890,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder addSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto value) {
         if (skillsBuilder_ == null) {
@@ -8511,6 +11911,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder addSkills(
           com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
         if (skillsBuilder_ == null) {
@@ -8522,6 +11929,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder addSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
         if (skillsBuilder_ == null) {
@@ -8533,17 +11947,32 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder addAllSkills(
           java.lang.Iterable<? extends com.lvl6.proto.SkillsProto.SkillProto> values) {
         if (skillsBuilder_ == null) {
           ensureSkillsIsMutable();
-          super.addAll(values, skills_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, skills_);
           onChanged();
         } else {
           skillsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder clearSkills() {
         if (skillsBuilder_ == null) {
           skills_ = java.util.Collections.emptyList();
@@ -8554,6 +11983,13 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public Builder removeSkills(int index) {
         if (skillsBuilder_ == null) {
           ensureSkillsIsMutable();
@@ -8564,10 +12000,24 @@ public final class StaticDataStuffProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder getSkillsBuilder(
           int index) {
         return getSkillsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
           int index) {
         if (skillsBuilder_ == null) {
@@ -8575,6 +12025,13 @@ public final class StaticDataStuffProto {
           return skillsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
            getSkillsOrBuilderList() {
         if (skillsBuilder_ != null) {
@@ -8583,15 +12040,36 @@ public final class StaticDataStuffProto {
           return java.util.Collections.unmodifiableList(skills_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder addSkillsBuilder() {
         return getSkillsFieldBuilder().addBuilder(
             com.lvl6.proto.SkillsProto.SkillProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder addSkillsBuilder(
           int index) {
         return getSkillsFieldBuilder().addBuilder(
             index, com.lvl6.proto.SkillsProto.SkillProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillProto.Builder> 
            getSkillsBuilderList() {
         return getSkillsFieldBuilder().getBuilderList();
@@ -8610,24 +12088,24 @@ public final class StaticDataStuffProto {
         }
         return skillsBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
-    
+
     static {
       defaultInstance = new StaticDataProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.StaticDataProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StaticDataProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -8688,21 +12166,13 @@ public final class StaticDataStuffProto {
       "fProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_StaticDataProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", },
-              com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
-              com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -8719,7 +12189,25 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.TaskProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_StaticDataProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_StaticDataProto_descriptor,
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", });
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.ClanProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.SkillsProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.TaskProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

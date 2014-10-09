@@ -8,422 +8,104 @@ public final class CityProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface UserCityExpansionDataProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 userId = 1;
+  public interface UserCityExpansionDataProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserCityExpansionDataProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 userId = 1;</code>
+     */
     boolean hasUserId();
+    /**
+     * <code>optional int32 userId = 1;</code>
+     */
     int getUserId();
-    
-    // optional sint32 xPosition = 2;
+
+    /**
+     * <code>optional sint32 xPosition = 2;</code>
+     */
     boolean hasXPosition();
+    /**
+     * <code>optional sint32 xPosition = 2;</code>
+     */
     int getXPosition();
-    
-    // optional sint32 yPosition = 3;
+
+    /**
+     * <code>optional sint32 yPosition = 3;</code>
+     */
     boolean hasYPosition();
+    /**
+     * <code>optional sint32 yPosition = 3;</code>
+     */
     int getYPosition();
-    
-    // optional bool isExpanding = 4;
+
+    /**
+     * <code>optional bool isExpanding = 4;</code>
+     */
     boolean hasIsExpanding();
+    /**
+     * <code>optional bool isExpanding = 4;</code>
+     */
     boolean getIsExpanding();
-    
-    // optional int64 expandStartTime = 5;
+
+    /**
+     * <code>optional int64 expandStartTime = 5;</code>
+     */
     boolean hasExpandStartTime();
+    /**
+     * <code>optional int64 expandStartTime = 5;</code>
+     */
     long getExpandStartTime();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserCityExpansionDataProto}
+   */
   public static final class UserCityExpansionDataProto extends
-      com.google.protobuf.GeneratedMessage
-      implements UserCityExpansionDataProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserCityExpansionDataProto)
+      UserCityExpansionDataProtoOrBuilder {
     // Use UserCityExpansionDataProto.newBuilder() to construct.
-    private UserCityExpansionDataProto(Builder builder) {
+    private UserCityExpansionDataProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private UserCityExpansionDataProto(boolean noInit) {}
-    
+    private UserCityExpansionDataProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final UserCityExpansionDataProto defaultInstance;
     public static UserCityExpansionDataProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public UserCityExpansionDataProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional int32 userId = 1;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public int getUserId() {
-      return userId_;
-    }
-    
-    // optional sint32 xPosition = 2;
-    public static final int XPOSITION_FIELD_NUMBER = 2;
-    private int xPosition_;
-    public boolean hasXPosition() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getXPosition() {
-      return xPosition_;
-    }
-    
-    // optional sint32 yPosition = 3;
-    public static final int YPOSITION_FIELD_NUMBER = 3;
-    private int yPosition_;
-    public boolean hasYPosition() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getYPosition() {
-      return yPosition_;
-    }
-    
-    // optional bool isExpanding = 4;
-    public static final int ISEXPANDING_FIELD_NUMBER = 4;
-    private boolean isExpanding_;
-    public boolean hasIsExpanding() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public boolean getIsExpanding() {
-      return isExpanding_;
-    }
-    
-    // optional int64 expandStartTime = 5;
-    public static final int EXPANDSTARTTIME_FIELD_NUMBER = 5;
-    private long expandStartTime_;
-    public boolean hasExpandStartTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    public long getExpandStartTime() {
-      return expandStartTime_;
-    }
-    
-    private void initFields() {
-      userId_ = 0;
-      xPosition_ = 0;
-      yPosition_ = 0;
-      isExpanding_ = false;
-      expandStartTime_ = 0L;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeSInt32(2, xPosition_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeSInt32(3, yPosition_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBool(4, isExpanding_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, expandStartTime_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(2, xPosition_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(3, yPosition_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, isExpanding_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, expandStartTime_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
     }
-    
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
+    private UserCityExpansionDataProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.CityProto.UserCityExpansionDataProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.CityProto.UserCityExpansionDataProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        xPosition_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        yPosition_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        isExpanding_ = false;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        expandStartTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.CityProto.UserCityExpansionDataProto getDefaultInstanceForType() {
-        return com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.CityProto.UserCityExpansionDataProto build() {
-        com.lvl6.proto.CityProto.UserCityExpansionDataProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.CityProto.UserCityExpansionDataProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.CityProto.UserCityExpansionDataProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.CityProto.UserCityExpansionDataProto buildPartial() {
-        com.lvl6.proto.CityProto.UserCityExpansionDataProto result = new com.lvl6.proto.CityProto.UserCityExpansionDataProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.xPosition_ = xPosition_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.yPosition_ = yPosition_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.isExpanding_ = isExpanding_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.expandStartTime_ = expandStartTime_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.CityProto.UserCityExpansionDataProto) {
-          return mergeFrom((com.lvl6.proto.CityProto.UserCityExpansionDataProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.CityProto.UserCityExpansionDataProto other) {
-        if (other == com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasXPosition()) {
-          setXPosition(other.getXPosition());
-        }
-        if (other.hasYPosition()) {
-          setYPosition(other.getYPosition());
-        }
-        if (other.hasIsExpanding()) {
-          setIsExpanding(other.getIsExpanding());
-        }
-        if (other.hasExpandStartTime()) {
-          setExpandStartTime(other.getExpandStartTime());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
+              done = true;
+              break;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
+                done = true;
               }
               break;
             }
@@ -454,358 +136,287 @@ public final class CityProto {
             }
           }
         }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
       }
-      
-      private int bitField0_;
-      
-      // optional int32 userId = 1;
-      private int userId_ ;
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public int getUserId() {
-        return userId_;
-      }
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional sint32 xPosition = 2;
-      private int xPosition_ ;
-      public boolean hasXPosition() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public int getXPosition() {
-        return xPosition_;
-      }
-      public Builder setXPosition(int value) {
-        bitField0_ |= 0x00000002;
-        xPosition_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearXPosition() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        xPosition_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional sint32 yPosition = 3;
-      private int yPosition_ ;
-      public boolean hasYPosition() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getYPosition() {
-        return yPosition_;
-      }
-      public Builder setYPosition(int value) {
-        bitField0_ |= 0x00000004;
-        yPosition_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearYPosition() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        yPosition_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional bool isExpanding = 4;
-      private boolean isExpanding_ ;
-      public boolean hasIsExpanding() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public boolean getIsExpanding() {
-        return isExpanding_;
-      }
-      public Builder setIsExpanding(boolean value) {
-        bitField0_ |= 0x00000008;
-        isExpanding_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearIsExpanding() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        isExpanding_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional int64 expandStartTime = 5;
-      private long expandStartTime_ ;
-      public boolean hasExpandStartTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      public long getExpandStartTime() {
-        return expandStartTime_;
-      }
-      public Builder setExpandStartTime(long value) {
-        bitField0_ |= 0x00000010;
-        expandStartTime_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearExpandStartTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        expandStartTime_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserCityExpansionDataProto)
     }
-    
-    static {
-      defaultInstance = new UserCityExpansionDataProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserCityExpansionDataProto)
-  }
-  
-  public interface CityExpansionCostProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 expansionNum = 1;
-    boolean hasExpansionNum();
-    int getExpansionNum();
-    
-    // optional int32 expansionCostCash = 2;
-    boolean hasExpansionCostCash();
-    int getExpansionCostCash();
-    
-    // optional int32 numMinutesToExpand = 3;
-    boolean hasNumMinutesToExpand();
-    int getNumMinutesToExpand();
-  }
-  public static final class CityExpansionCostProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CityExpansionCostProtoOrBuilder {
-    // Use CityExpansionCostProto.newBuilder() to construct.
-    private CityExpansionCostProto(Builder builder) {
-      super(builder);
-    }
-    private CityExpansionCostProto(boolean noInit) {}
-    
-    private static final CityExpansionCostProto defaultInstance;
-    public static CityExpansionCostProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public CityExpansionCostProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable;
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.CityProto.UserCityExpansionDataProto.class, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<UserCityExpansionDataProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserCityExpansionDataProto>() {
+      public UserCityExpansionDataProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserCityExpansionDataProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserCityExpansionDataProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional int32 expansionNum = 1;
-    public static final int EXPANSIONNUM_FIELD_NUMBER = 1;
-    private int expansionNum_;
-    public boolean hasExpansionNum() {
+    public static final int USERID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>optional int32 userId = 1;</code>
+     */
+    public boolean hasUserId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getExpansionNum() {
-      return expansionNum_;
+    /**
+     * <code>optional int32 userId = 1;</code>
+     */
+    public int getUserId() {
+      return userId_;
     }
-    
-    // optional int32 expansionCostCash = 2;
-    public static final int EXPANSIONCOSTCASH_FIELD_NUMBER = 2;
-    private int expansionCostCash_;
-    public boolean hasExpansionCostCash() {
+
+    public static final int XPOSITION_FIELD_NUMBER = 2;
+    private int xPosition_;
+    /**
+     * <code>optional sint32 xPosition = 2;</code>
+     */
+    public boolean hasXPosition() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getExpansionCostCash() {
-      return expansionCostCash_;
+    /**
+     * <code>optional sint32 xPosition = 2;</code>
+     */
+    public int getXPosition() {
+      return xPosition_;
     }
-    
-    // optional int32 numMinutesToExpand = 3;
-    public static final int NUMMINUTESTOEXPAND_FIELD_NUMBER = 3;
-    private int numMinutesToExpand_;
-    public boolean hasNumMinutesToExpand() {
+
+    public static final int YPOSITION_FIELD_NUMBER = 3;
+    private int yPosition_;
+    /**
+     * <code>optional sint32 yPosition = 3;</code>
+     */
+    public boolean hasYPosition() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getNumMinutesToExpand() {
-      return numMinutesToExpand_;
+    /**
+     * <code>optional sint32 yPosition = 3;</code>
+     */
+    public int getYPosition() {
+      return yPosition_;
     }
-    
+
+    public static final int ISEXPANDING_FIELD_NUMBER = 4;
+    private boolean isExpanding_;
+    /**
+     * <code>optional bool isExpanding = 4;</code>
+     */
+    public boolean hasIsExpanding() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bool isExpanding = 4;</code>
+     */
+    public boolean getIsExpanding() {
+      return isExpanding_;
+    }
+
+    public static final int EXPANDSTARTTIME_FIELD_NUMBER = 5;
+    private long expandStartTime_;
+    /**
+     * <code>optional int64 expandStartTime = 5;</code>
+     */
+    public boolean hasExpandStartTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 expandStartTime = 5;</code>
+     */
+    public long getExpandStartTime() {
+      return expandStartTime_;
+    }
+
     private void initFields() {
-      expansionNum_ = 0;
-      expansionCostCash_ = 0;
-      numMinutesToExpand_ = 0;
+      userId_ = 0;
+      xPosition_ = 0;
+      yPosition_ = 0;
+      isExpanding_ = false;
+      expandStartTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, expansionNum_);
+        output.writeInt32(1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, expansionCostCash_);
+        output.writeSInt32(2, xPosition_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, numMinutesToExpand_);
+        output.writeSInt32(3, yPosition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBool(4, isExpanding_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, expandStartTime_);
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, expansionNum_);
+          .computeInt32Size(1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, expansionCostCash_);
+          .computeSInt32Size(2, xPosition_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, numMinutesToExpand_);
+          .computeSInt32Size(3, yPosition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, isExpanding_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, expandStartTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(byte[] data)
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseDelimitedFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+    public static com.lvl6.proto.CityProto.UserCityExpansionDataProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.CityProto.CityExpansionCostProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.CityProto.UserCityExpansionDataProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserCityExpansionDataProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserCityExpansionDataProto)
+        com.lvl6.proto.CityProto.UserCityExpansionDataProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable;
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.CityProto.UserCityExpansionDataProto.class, com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder.class);
       }
-      
-      // Construct using com.lvl6.proto.CityProto.CityExpansionCostProto.newBuilder()
+
+      // Construct using com.lvl6.proto.CityProto.UserCityExpansionDataProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -816,118 +427,384 @@ public final class CityProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
-        expansionNum_ = 0;
+        userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        expansionCostCash_ = 0;
+        xPosition_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        numMinutesToExpand_ = 0;
+        yPosition_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        isExpanding_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        expandStartTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.CityProto.CityExpansionCostProto.getDescriptor();
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
       }
-      
-      public com.lvl6.proto.CityProto.CityExpansionCostProto getDefaultInstanceForType() {
-        return com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance();
+
+      public com.lvl6.proto.CityProto.UserCityExpansionDataProto getDefaultInstanceForType() {
+        return com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance();
       }
-      
-      public com.lvl6.proto.CityProto.CityExpansionCostProto build() {
-        com.lvl6.proto.CityProto.CityExpansionCostProto result = buildPartial();
+
+      public com.lvl6.proto.CityProto.UserCityExpansionDataProto build() {
+        com.lvl6.proto.CityProto.UserCityExpansionDataProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
-      
-      private com.lvl6.proto.CityProto.CityExpansionCostProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.CityProto.CityExpansionCostProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.CityProto.CityExpansionCostProto buildPartial() {
-        com.lvl6.proto.CityProto.CityExpansionCostProto result = new com.lvl6.proto.CityProto.CityExpansionCostProto(this);
+
+      public com.lvl6.proto.CityProto.UserCityExpansionDataProto buildPartial() {
+        com.lvl6.proto.CityProto.UserCityExpansionDataProto result = new com.lvl6.proto.CityProto.UserCityExpansionDataProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.expansionNum_ = expansionNum_;
+        result.userId_ = userId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.expansionCostCash_ = expansionCostCash_;
+        result.xPosition_ = xPosition_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.numMinutesToExpand_ = numMinutesToExpand_;
+        result.yPosition_ = yPosition_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.isExpanding_ = isExpanding_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.expandStartTime_ = expandStartTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.CityProto.CityExpansionCostProto) {
-          return mergeFrom((com.lvl6.proto.CityProto.CityExpansionCostProto)other);
+        if (other instanceof com.lvl6.proto.CityProto.UserCityExpansionDataProto) {
+          return mergeFrom((com.lvl6.proto.CityProto.UserCityExpansionDataProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
-      
-      public Builder mergeFrom(com.lvl6.proto.CityProto.CityExpansionCostProto other) {
-        if (other == com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance()) return this;
-        if (other.hasExpansionNum()) {
-          setExpansionNum(other.getExpansionNum());
+
+      public Builder mergeFrom(com.lvl6.proto.CityProto.UserCityExpansionDataProto other) {
+        if (other == com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
         }
-        if (other.hasExpansionCostCash()) {
-          setExpansionCostCash(other.getExpansionCostCash());
+        if (other.hasXPosition()) {
+          setXPosition(other.getXPosition());
         }
-        if (other.hasNumMinutesToExpand()) {
-          setNumMinutesToExpand(other.getNumMinutesToExpand());
+        if (other.hasYPosition()) {
+          setYPosition(other.getYPosition());
+        }
+        if (other.hasIsExpanding()) {
+          setIsExpanding(other.getIsExpanding());
+        }
+        if (other.hasExpandStartTime()) {
+          setExpandStartTime(other.getExpandStartTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
+        com.lvl6.proto.CityProto.UserCityExpansionDataProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.CityProto.UserCityExpansionDataProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>optional int32 userId = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 userId = 1;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>optional int32 userId = 1;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userId = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int xPosition_ ;
+      /**
+       * <code>optional sint32 xPosition = 2;</code>
+       */
+      public boolean hasXPosition() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional sint32 xPosition = 2;</code>
+       */
+      public int getXPosition() {
+        return xPosition_;
+      }
+      /**
+       * <code>optional sint32 xPosition = 2;</code>
+       */
+      public Builder setXPosition(int value) {
+        bitField0_ |= 0x00000002;
+        xPosition_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional sint32 xPosition = 2;</code>
+       */
+      public Builder clearXPosition() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        xPosition_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int yPosition_ ;
+      /**
+       * <code>optional sint32 yPosition = 3;</code>
+       */
+      public boolean hasYPosition() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional sint32 yPosition = 3;</code>
+       */
+      public int getYPosition() {
+        return yPosition_;
+      }
+      /**
+       * <code>optional sint32 yPosition = 3;</code>
+       */
+      public Builder setYPosition(int value) {
+        bitField0_ |= 0x00000004;
+        yPosition_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional sint32 yPosition = 3;</code>
+       */
+      public Builder clearYPosition() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        yPosition_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean isExpanding_ ;
+      /**
+       * <code>optional bool isExpanding = 4;</code>
+       */
+      public boolean hasIsExpanding() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bool isExpanding = 4;</code>
+       */
+      public boolean getIsExpanding() {
+        return isExpanding_;
+      }
+      /**
+       * <code>optional bool isExpanding = 4;</code>
+       */
+      public Builder setIsExpanding(boolean value) {
+        bitField0_ |= 0x00000008;
+        isExpanding_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isExpanding = 4;</code>
+       */
+      public Builder clearIsExpanding() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        isExpanding_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long expandStartTime_ ;
+      /**
+       * <code>optional int64 expandStartTime = 5;</code>
+       */
+      public boolean hasExpandStartTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 expandStartTime = 5;</code>
+       */
+      public long getExpandStartTime() {
+        return expandStartTime_;
+      }
+      /**
+       * <code>optional int64 expandStartTime = 5;</code>
+       */
+      public Builder setExpandStartTime(long value) {
+        bitField0_ |= 0x00000010;
+        expandStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 expandStartTime = 5;</code>
+       */
+      public Builder clearExpandStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        expandStartTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserCityExpansionDataProto)
+    }
+
+    static {
+      defaultInstance = new UserCityExpansionDataProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserCityExpansionDataProto)
+  }
+
+  public interface CityExpansionCostProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CityExpansionCostProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 expansionNum = 1;</code>
+     *
+     * <pre>
+     *first, second,...or nth expansion
+     * </pre>
+     */
+    boolean hasExpansionNum();
+    /**
+     * <code>optional int32 expansionNum = 1;</code>
+     *
+     * <pre>
+     *first, second,...or nth expansion
+     * </pre>
+     */
+    int getExpansionNum();
+
+    /**
+     * <code>optional int32 expansionCostCash = 2;</code>
+     */
+    boolean hasExpansionCostCash();
+    /**
+     * <code>optional int32 expansionCostCash = 2;</code>
+     */
+    int getExpansionCostCash();
+
+    /**
+     * <code>optional int32 numMinutesToExpand = 3;</code>
+     */
+    boolean hasNumMinutesToExpand();
+    /**
+     * <code>optional int32 numMinutesToExpand = 3;</code>
+     */
+    int getNumMinutesToExpand();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CityExpansionCostProto}
+   */
+  public static final class CityExpansionCostProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CityExpansionCostProto)
+      CityExpansionCostProtoOrBuilder {
+    // Use CityExpansionCostProto.newBuilder() to construct.
+    private CityExpansionCostProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CityExpansionCostProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CityExpansionCostProto defaultInstance;
+    public static CityExpansionCostProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CityExpansionCostProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CityExpansionCostProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
+              done = true;
+              break;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
+                done = true;
               }
               break;
             }
@@ -948,169 +825,797 @@ public final class CityProto {
             }
           }
         }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
       }
-      
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.CityProto.CityExpansionCostProto.class, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CityExpansionCostProto> PARSER =
+        new com.google.protobuf.AbstractParser<CityExpansionCostProto>() {
+      public CityExpansionCostProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CityExpansionCostProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CityExpansionCostProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int EXPANSIONNUM_FIELD_NUMBER = 1;
+    private int expansionNum_;
+    /**
+     * <code>optional int32 expansionNum = 1;</code>
+     *
+     * <pre>
+     *first, second,...or nth expansion
+     * </pre>
+     */
+    public boolean hasExpansionNum() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 expansionNum = 1;</code>
+     *
+     * <pre>
+     *first, second,...or nth expansion
+     * </pre>
+     */
+    public int getExpansionNum() {
+      return expansionNum_;
+    }
+
+    public static final int EXPANSIONCOSTCASH_FIELD_NUMBER = 2;
+    private int expansionCostCash_;
+    /**
+     * <code>optional int32 expansionCostCash = 2;</code>
+     */
+    public boolean hasExpansionCostCash() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 expansionCostCash = 2;</code>
+     */
+    public int getExpansionCostCash() {
+      return expansionCostCash_;
+    }
+
+    public static final int NUMMINUTESTOEXPAND_FIELD_NUMBER = 3;
+    private int numMinutesToExpand_;
+    /**
+     * <code>optional int32 numMinutesToExpand = 3;</code>
+     */
+    public boolean hasNumMinutesToExpand() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 numMinutesToExpand = 3;</code>
+     */
+    public int getNumMinutesToExpand() {
+      return numMinutesToExpand_;
+    }
+
+    private void initFields() {
+      expansionNum_ = 0;
+      expansionCostCash_ = 0;
+      numMinutesToExpand_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, expansionNum_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, expansionCostCash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, numMinutesToExpand_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, expansionNum_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, expansionCostCash_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, numMinutesToExpand_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.CityProto.CityExpansionCostProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.CityProto.CityExpansionCostProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CityExpansionCostProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CityExpansionCostProto)
+        com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.CityProto.CityExpansionCostProto.class, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.CityProto.CityExpansionCostProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        expansionNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        expansionCostCash_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        numMinutesToExpand_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
+      }
+
+      public com.lvl6.proto.CityProto.CityExpansionCostProto getDefaultInstanceForType() {
+        return com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.CityProto.CityExpansionCostProto build() {
+        com.lvl6.proto.CityProto.CityExpansionCostProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.CityProto.CityExpansionCostProto buildPartial() {
+        com.lvl6.proto.CityProto.CityExpansionCostProto result = new com.lvl6.proto.CityProto.CityExpansionCostProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.expansionNum_ = expansionNum_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.expansionCostCash_ = expansionCostCash_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.numMinutesToExpand_ = numMinutesToExpand_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.CityProto.CityExpansionCostProto) {
+          return mergeFrom((com.lvl6.proto.CityProto.CityExpansionCostProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.CityProto.CityExpansionCostProto other) {
+        if (other == com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance()) return this;
+        if (other.hasExpansionNum()) {
+          setExpansionNum(other.getExpansionNum());
+        }
+        if (other.hasExpansionCostCash()) {
+          setExpansionCostCash(other.getExpansionCostCash());
+        }
+        if (other.hasNumMinutesToExpand()) {
+          setNumMinutesToExpand(other.getNumMinutesToExpand());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.CityProto.CityExpansionCostProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.CityProto.CityExpansionCostProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
       private int bitField0_;
-      
-      // optional int32 expansionNum = 1;
+
       private int expansionNum_ ;
+      /**
+       * <code>optional int32 expansionNum = 1;</code>
+       *
+       * <pre>
+       *first, second,...or nth expansion
+       * </pre>
+       */
       public boolean hasExpansionNum() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 expansionNum = 1;</code>
+       *
+       * <pre>
+       *first, second,...or nth expansion
+       * </pre>
+       */
       public int getExpansionNum() {
         return expansionNum_;
       }
+      /**
+       * <code>optional int32 expansionNum = 1;</code>
+       *
+       * <pre>
+       *first, second,...or nth expansion
+       * </pre>
+       */
       public Builder setExpansionNum(int value) {
         bitField0_ |= 0x00000001;
         expansionNum_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 expansionNum = 1;</code>
+       *
+       * <pre>
+       *first, second,...or nth expansion
+       * </pre>
+       */
       public Builder clearExpansionNum() {
         bitField0_ = (bitField0_ & ~0x00000001);
         expansionNum_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 expansionCostCash = 2;
+
       private int expansionCostCash_ ;
+      /**
+       * <code>optional int32 expansionCostCash = 2;</code>
+       */
       public boolean hasExpansionCostCash() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 expansionCostCash = 2;</code>
+       */
       public int getExpansionCostCash() {
         return expansionCostCash_;
       }
+      /**
+       * <code>optional int32 expansionCostCash = 2;</code>
+       */
       public Builder setExpansionCostCash(int value) {
         bitField0_ |= 0x00000002;
         expansionCostCash_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 expansionCostCash = 2;</code>
+       */
       public Builder clearExpansionCostCash() {
         bitField0_ = (bitField0_ & ~0x00000002);
         expansionCostCash_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 numMinutesToExpand = 3;
+
       private int numMinutesToExpand_ ;
+      /**
+       * <code>optional int32 numMinutesToExpand = 3;</code>
+       */
       public boolean hasNumMinutesToExpand() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional int32 numMinutesToExpand = 3;</code>
+       */
       public int getNumMinutesToExpand() {
         return numMinutesToExpand_;
       }
+      /**
+       * <code>optional int32 numMinutesToExpand = 3;</code>
+       */
       public Builder setNumMinutesToExpand(int value) {
         bitField0_ |= 0x00000004;
         numMinutesToExpand_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 numMinutesToExpand = 3;</code>
+       */
       public Builder clearNumMinutesToExpand() {
         bitField0_ = (bitField0_ & ~0x00000004);
         numMinutesToExpand_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CityExpansionCostProto)
     }
-    
+
     static {
       defaultInstance = new CityExpansionCostProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CityExpansionCostProto)
   }
-  
-  public interface CityElementProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 cityId = 1;
+
+  public interface CityElementProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CityElementProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     boolean hasCityId();
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     int getCityId();
-    
-    // optional int32 assetId = 2;
+
+    /**
+     * <code>optional int32 assetId = 2;</code>
+     */
     boolean hasAssetId();
+    /**
+     * <code>optional int32 assetId = 2;</code>
+     */
     int getAssetId();
-    
-    // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
+
+    /**
+     * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+     *
+     * <pre>
+     *optional string name = 3;
+     * </pre>
+     */
     boolean hasType();
+    /**
+     * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+     *
+     * <pre>
+     *optional string name = 3;
+     * </pre>
+     */
     com.lvl6.proto.CityProto.CityElementProto.CityElemType getType();
-    
-    // optional .com.lvl6.proto.CoordinateProto coords = 5;
+
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     boolean hasCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProto getCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordsOrBuilder();
-    
-    // optional float xLength = 6;
+
+    /**
+     * <code>optional float xLength = 6;</code>
+     */
     boolean hasXLength();
+    /**
+     * <code>optional float xLength = 6;</code>
+     */
     float getXLength();
-    
-    // optional float yLength = 7;
+
+    /**
+     * <code>optional float yLength = 7;</code>
+     */
     boolean hasYLength();
+    /**
+     * <code>optional float yLength = 7;</code>
+     */
     float getYLength();
-    
-    // optional string imgId = 8;
+
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
     boolean hasImgId();
-    String getImgId();
-    
-    // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
+    java.lang.String getImgId();
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getImgIdBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+     */
     boolean hasOrientation();
+    /**
+     * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+     */
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
-    
-    // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     boolean hasSpriteCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CityElementProto}
+   */
   public static final class CityElementProto extends
-      com.google.protobuf.GeneratedMessage
-      implements CityElementProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CityElementProto)
+      CityElementProtoOrBuilder {
     // Use CityElementProto.newBuilder() to construct.
-    private CityElementProto(Builder builder) {
+    private CityElementProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private CityElementProto(boolean noInit) {}
-    
+    private CityElementProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final CityElementProto defaultInstance;
     public static CityElementProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public CityElementProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CityElementProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              cityId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              assetId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.CityProto.CityElementProto.CityElemType value = com.lvl6.proto.CityProto.CityElementProto.CityElemType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                type_ = value;
+              }
+              break;
+            }
+            case 42: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = coords_.toBuilder();
+              }
+              coords_ = input.readMessage(com.lvl6.proto.StructureProto.CoordinateProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(coords_);
+                coords_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 53: {
+              bitField0_ |= 0x00000010;
+              xLength_ = input.readFloat();
+              break;
+            }
+            case 61: {
+              bitField0_ |= 0x00000020;
+              yLength_ = input.readFloat();
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              imgId_ = bs;
+              break;
+            }
+            case 72: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.StructOrientation value = com.lvl6.proto.StructureProto.StructOrientation.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(9, rawValue);
+              } else {
+                bitField0_ |= 0x00000080;
+                orientation_ = value;
+              }
+              break;
+            }
+            case 82: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = spriteCoords_.toBuilder();
+              }
+              spriteCoords_ = input.readMessage(com.lvl6.proto.StructureProto.CoordinateProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(spriteCoords_);
+                spriteCoords_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable;
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.CityProto.CityElementProto.class, com.lvl6.proto.CityProto.CityElementProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<CityElementProto> PARSER =
+        new com.google.protobuf.AbstractParser<CityElementProto>() {
+      public CityElementProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CityElementProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CityElementProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.CityElementProto.CityElemType}
+     */
     public enum CityElemType
         implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>BUILDING = 1;</code>
+       */
       BUILDING(0, 1),
+      /**
+       * <code>DECORATION = 2;</code>
+       */
       DECORATION(1, 2),
+      /**
+       * <code>PERSON_NEUTRAL_ENEMY = 3;</code>
+       */
       PERSON_NEUTRAL_ENEMY(2, 3),
+      /**
+       * <code>BOSS = 4;</code>
+       */
       BOSS(3, 4),
       ;
-      
+
+      /**
+       * <code>BUILDING = 1;</code>
+       */
       public static final int BUILDING_VALUE = 1;
+      /**
+       * <code>DECORATION = 2;</code>
+       */
       public static final int DECORATION_VALUE = 2;
+      /**
+       * <code>PERSON_NEUTRAL_ENEMY = 3;</code>
+       */
       public static final int PERSON_NEUTRAL_ENEMY_VALUE = 3;
+      /**
+       * <code>BOSS = 4;</code>
+       */
       public static final int BOSS_VALUE = 4;
-      
-      
+
+
       public final int getNumber() { return value; }
-      
+
       public static CityElemType valueOf(int value) {
         switch (value) {
           case 1: return BUILDING;
@@ -1120,7 +1625,7 @@ public final class CityProto {
           default: return null;
         }
       }
-      
+
       public static com.google.protobuf.Internal.EnumLiteMap<CityElemType>
           internalGetValueMap() {
         return internalValueMap;
@@ -1132,7 +1637,7 @@ public final class CityProto {
                 return CityElemType.valueOf(number);
               }
             };
-      
+
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         return getDescriptor().getValues().get(index);
@@ -1145,11 +1650,9 @@ public final class CityProto {
           getDescriptor() {
         return com.lvl6.proto.CityProto.CityElementProto.getDescriptor().getEnumTypes().get(0);
       }
-      
-      private static final CityElemType[] VALUES = {
-        BUILDING, DECORATION, PERSON_NEUTRAL_ENEMY, BOSS, 
-      };
-      
+
+      private static final CityElemType[] VALUES = values();
+
       public static CityElemType valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
@@ -1158,137 +1661,201 @@ public final class CityProto {
         }
         return VALUES[desc.getIndex()];
       }
-      
+
       private final int index;
       private final int value;
-      
+
       private CityElemType(int index, int value) {
         this.index = index;
         this.value = value;
       }
-      
+
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CityElementProto.CityElemType)
     }
-    
+
     private int bitField0_;
-    // optional int32 cityId = 1;
     public static final int CITYID_FIELD_NUMBER = 1;
     private int cityId_;
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     public boolean hasCityId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     public int getCityId() {
       return cityId_;
     }
-    
-    // optional int32 assetId = 2;
+
     public static final int ASSETID_FIELD_NUMBER = 2;
     private int assetId_;
+    /**
+     * <code>optional int32 assetId = 2;</code>
+     */
     public boolean hasAssetId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional int32 assetId = 2;</code>
+     */
     public int getAssetId() {
       return assetId_;
     }
-    
-    // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
+
     public static final int TYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.CityProto.CityElementProto.CityElemType type_;
+    /**
+     * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+     *
+     * <pre>
+     *optional string name = 3;
+     * </pre>
+     */
     public boolean hasType() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+     *
+     * <pre>
+     *optional string name = 3;
+     * </pre>
+     */
     public com.lvl6.proto.CityProto.CityElementProto.CityElemType getType() {
       return type_;
     }
-    
-    // optional .com.lvl6.proto.CoordinateProto coords = 5;
+
     public static final int COORDS_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.CoordinateProto coords_;
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     public boolean hasCoords() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProto getCoords() {
       return coords_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordsOrBuilder() {
       return coords_;
     }
-    
-    // optional float xLength = 6;
+
     public static final int XLENGTH_FIELD_NUMBER = 6;
     private float xLength_;
+    /**
+     * <code>optional float xLength = 6;</code>
+     */
     public boolean hasXLength() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
+    /**
+     * <code>optional float xLength = 6;</code>
+     */
     public float getXLength() {
       return xLength_;
     }
-    
-    // optional float yLength = 7;
+
     public static final int YLENGTH_FIELD_NUMBER = 7;
     private float yLength_;
+    /**
+     * <code>optional float yLength = 7;</code>
+     */
     public boolean hasYLength() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
+    /**
+     * <code>optional float yLength = 7;</code>
+     */
     public float getYLength() {
       return yLength_;
     }
-    
-    // optional string imgId = 8;
+
     public static final int IMGID_FIELD_NUMBER = 8;
     private java.lang.Object imgId_;
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
     public boolean hasImgId() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public String getImgId() {
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
+    public java.lang.String getImgId() {
       java.lang.Object ref = imgId_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           imgId_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getImgIdBytes() {
+    /**
+     * <code>optional string imgId = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getImgIdBytes() {
       java.lang.Object ref = imgId_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         imgId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
+
     public static final int ORIENTATION_FIELD_NUMBER = 9;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
+    /**
+     * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+     */
     public boolean hasOrientation() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
+    /**
+     * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+     */
     public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
       return orientation_;
     }
-    
-    // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+
     public static final int SPRITECOORDS_FIELD_NUMBER = 10;
     private com.lvl6.proto.StructureProto.CoordinateProto spriteCoords_;
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     public boolean hasSpriteCoords() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords() {
       return spriteCoords_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder() {
       return spriteCoords_;
     }
-    
+
     private void initFields() {
       cityId_ = 0;
       assetId_ = 0;
@@ -1303,12 +1870,13 @@ public final class CityProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1341,12 +1909,12 @@ public final class CityProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1388,113 +1956,106 @@ public final class CityProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.CityProto.CityElementProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.CityProto.CityElementProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CityElementProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.CityProto.CityElementProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CityElementProto)
+        com.lvl6.proto.CityProto.CityElementProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable;
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.CityProto.CityElementProto.class, com.lvl6.proto.CityProto.CityElementProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.CityProto.CityElementProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1507,7 +2068,7 @@ public final class CityProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         cityId_ = 0;
@@ -1538,20 +2099,20 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.CityProto.CityElementProto.getDescriptor();
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_descriptor;
       }
-      
+
       public com.lvl6.proto.CityProto.CityElementProto getDefaultInstanceForType() {
         return com.lvl6.proto.CityProto.CityElementProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.CityProto.CityElementProto build() {
         com.lvl6.proto.CityProto.CityElementProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -1559,17 +2120,7 @@ public final class CityProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.CityProto.CityElementProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.CityProto.CityElementProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.CityProto.CityElementProto buildPartial() {
         com.lvl6.proto.CityProto.CityElementProto result = new com.lvl6.proto.CityProto.CityElementProto(this);
         int from_bitField0_ = bitField0_;
@@ -1622,7 +2173,7 @@ public final class CityProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.CityProto.CityElementProto) {
           return mergeFrom((com.lvl6.proto.CityProto.CityElementProto)other);
@@ -1631,7 +2182,7 @@ public final class CityProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.CityProto.CityElementProto other) {
         if (other == com.lvl6.proto.CityProto.CityElementProto.getDefaultInstance()) return this;
         if (other.hasCityId()) {
@@ -1653,7 +2204,9 @@ public final class CityProto {
           setYLength(other.getYLength());
         }
         if (other.hasImgId()) {
-          setImgId(other.getImgId());
+          bitField0_ |= 0x00000040;
+          imgId_ = other.imgId_;
+          onChanged();
         }
         if (other.hasOrientation()) {
           setOrientation(other.getOrientation());
@@ -1664,155 +2217,122 @@ public final class CityProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              cityId_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              assetId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.CityProto.CityElementProto.CityElemType value = com.lvl6.proto.CityProto.CityElementProto.CityElemType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                type_ = value;
-              }
-              break;
-            }
-            case 42: {
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-              if (hasCoords()) {
-                subBuilder.mergeFrom(getCoords());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setCoords(subBuilder.buildPartial());
-              break;
-            }
-            case 53: {
-              bitField0_ |= 0x00000010;
-              xLength_ = input.readFloat();
-              break;
-            }
-            case 61: {
-              bitField0_ |= 0x00000020;
-              yLength_ = input.readFloat();
-              break;
-            }
-            case 66: {
-              bitField0_ |= 0x00000040;
-              imgId_ = input.readBytes();
-              break;
-            }
-            case 72: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.StructOrientation value = com.lvl6.proto.StructureProto.StructOrientation.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(9, rawValue);
-              } else {
-                bitField0_ |= 0x00000080;
-                orientation_ = value;
-              }
-              break;
-            }
-            case 82: {
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-              if (hasSpriteCoords()) {
-                subBuilder.mergeFrom(getSpriteCoords());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSpriteCoords(subBuilder.buildPartial());
-              break;
-            }
+        com.lvl6.proto.CityProto.CityElementProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.CityProto.CityElementProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional int32 cityId = 1;
+
       private int cityId_ ;
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public boolean hasCityId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public int getCityId() {
         return cityId_;
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public Builder setCityId(int value) {
         bitField0_ |= 0x00000001;
         cityId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public Builder clearCityId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         cityId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 assetId = 2;
+
       private int assetId_ ;
+      /**
+       * <code>optional int32 assetId = 2;</code>
+       */
       public boolean hasAssetId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 assetId = 2;</code>
+       */
       public int getAssetId() {
         return assetId_;
       }
+      /**
+       * <code>optional int32 assetId = 2;</code>
+       */
       public Builder setAssetId(int value) {
         bitField0_ |= 0x00000002;
         assetId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 assetId = 2;</code>
+       */
       public Builder clearAssetId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         assetId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
+
       private com.lvl6.proto.CityProto.CityElementProto.CityElemType type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
+      /**
+       * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+       *
+       * <pre>
+       *optional string name = 3;
+       * </pre>
+       */
       public boolean hasType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+       *
+       * <pre>
+       *optional string name = 3;
+       * </pre>
+       */
       public com.lvl6.proto.CityProto.CityElementProto.CityElemType getType() {
         return type_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+       *
+       * <pre>
+       *optional string name = 3;
+       * </pre>
+       */
       public Builder setType(com.lvl6.proto.CityProto.CityElementProto.CityElemType value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1822,20 +2342,32 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;</code>
+       *
+       * <pre>
+       *optional string name = 3;
+       * </pre>
+       */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000004);
         type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.CoordinateProto coords = 5;
+
       private com.lvl6.proto.StructureProto.CoordinateProto coords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public boolean hasCoords() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto getCoords() {
         if (coordsBuilder_ == null) {
           return coords_;
@@ -1843,6 +2375,9 @@ public final class CityProto {
           return coordsBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public Builder setCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (coordsBuilder_ == null) {
           if (value == null) {
@@ -1856,6 +2391,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public Builder setCoords(
           com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
         if (coordsBuilder_ == null) {
@@ -1867,6 +2405,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public Builder mergeCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (coordsBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
@@ -1883,6 +2424,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public Builder clearCoords() {
         if (coordsBuilder_ == null) {
           coords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -1893,11 +2437,17 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto.Builder getCoordsBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getCoordsFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordsOrBuilder() {
         if (coordsBuilder_ != null) {
           return coordsBuilder_.getMessageOrBuilder();
@@ -1905,78 +2455,132 @@ public final class CityProto {
           return coords_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto coords = 5;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
           getCoordsFieldBuilder() {
         if (coordsBuilder_ == null) {
           coordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  coords_,
+                  getCoords(),
                   getParentForChildren(),
                   isClean());
           coords_ = null;
         }
         return coordsBuilder_;
       }
-      
-      // optional float xLength = 6;
+
       private float xLength_ ;
+      /**
+       * <code>optional float xLength = 6;</code>
+       */
       public boolean hasXLength() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional float xLength = 6;</code>
+       */
       public float getXLength() {
         return xLength_;
       }
+      /**
+       * <code>optional float xLength = 6;</code>
+       */
       public Builder setXLength(float value) {
         bitField0_ |= 0x00000010;
         xLength_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional float xLength = 6;</code>
+       */
       public Builder clearXLength() {
         bitField0_ = (bitField0_ & ~0x00000010);
         xLength_ = 0F;
         onChanged();
         return this;
       }
-      
-      // optional float yLength = 7;
+
       private float yLength_ ;
+      /**
+       * <code>optional float yLength = 7;</code>
+       */
       public boolean hasYLength() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>optional float yLength = 7;</code>
+       */
       public float getYLength() {
         return yLength_;
       }
+      /**
+       * <code>optional float yLength = 7;</code>
+       */
       public Builder setYLength(float value) {
         bitField0_ |= 0x00000020;
         yLength_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional float yLength = 7;</code>
+       */
       public Builder clearYLength() {
         bitField0_ = (bitField0_ & ~0x00000020);
         yLength_ = 0F;
         onChanged();
         return this;
       }
-      
-      // optional string imgId = 8;
+
       private java.lang.Object imgId_ = "";
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
       public boolean hasImgId() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public String getImgId() {
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
+      public java.lang.String getImgId() {
         java.lang.Object ref = imgId_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          imgId_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            imgId_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setImgId(String value) {
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getImgIdBytes() {
+        java.lang.Object ref = imgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          imgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
+      public Builder setImgId(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1985,26 +2589,45 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
       public Builder clearImgId() {
         bitField0_ = (bitField0_ & ~0x00000040);
         imgId_ = getDefaultInstance().getImgId();
         onChanged();
         return this;
       }
-      void setImgId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000040;
+      /**
+       * <code>optional string imgId = 8;</code>
+       */
+      public Builder setImgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
         imgId_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
+
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      /**
+       * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+       */
       public boolean hasOrientation() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
+      /**
+       * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+       */
       public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
         return orientation_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+       */
       public Builder setOrientation(com.lvl6.proto.StructureProto.StructOrientation value) {
         if (value == null) {
           throw new NullPointerException();
@@ -2014,20 +2637,28 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];</code>
+       */
       public Builder clearOrientation() {
         bitField0_ = (bitField0_ & ~0x00000080);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+
       private com.lvl6.proto.StructureProto.CoordinateProto spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> spriteCoordsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public boolean hasSpriteCoords() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords() {
         if (spriteCoordsBuilder_ == null) {
           return spriteCoords_;
@@ -2035,6 +2666,9 @@ public final class CityProto {
           return spriteCoordsBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public Builder setSpriteCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (spriteCoordsBuilder_ == null) {
           if (value == null) {
@@ -2048,6 +2682,9 @@ public final class CityProto {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public Builder setSpriteCoords(
           com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
         if (spriteCoordsBuilder_ == null) {
@@ -2059,6 +2696,9 @@ public final class CityProto {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public Builder mergeSpriteCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (spriteCoordsBuilder_ == null) {
           if (((bitField0_ & 0x00000100) == 0x00000100) &&
@@ -2075,6 +2715,9 @@ public final class CityProto {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public Builder clearSpriteCoords() {
         if (spriteCoordsBuilder_ == null) {
           spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -2085,11 +2728,17 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto.Builder getSpriteCoordsBuilder() {
         bitField0_ |= 0x00000100;
         onChanged();
         return getSpriteCoordsFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder() {
         if (spriteCoordsBuilder_ != null) {
           return spriteCoordsBuilder_.getMessageOrBuilder();
@@ -2097,312 +2746,622 @@ public final class CityProto {
           return spriteCoords_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
           getSpriteCoordsFieldBuilder() {
         if (spriteCoordsBuilder_ == null) {
           spriteCoordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  spriteCoords_,
+                  getSpriteCoords(),
                   getParentForChildren(),
                   isClean());
           spriteCoords_ = null;
         }
         return spriteCoordsBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CityElementProto)
     }
-    
+
     static {
       defaultInstance = new CityElementProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.CityElementProto)
   }
-  
-  public interface FullCityProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 cityId = 1;
+
+  public interface FullCityProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.FullCityProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     boolean hasCityId();
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     int getCityId();
-    
-    // optional string name = 2;
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
     boolean hasName();
-    String getName();
-    
-    // optional string mapImgName = 3;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
     boolean hasMapImgName();
-    String getMapImgName();
-    
-    // optional .com.lvl6.proto.CoordinateProto center = 4;
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
+    java.lang.String getMapImgName();
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getMapImgNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     boolean hasCenter();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProto getCenter();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCenterOrBuilder();
-    
-    // optional string roadImgName = 5;
+
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
     boolean hasRoadImgName();
-    String getRoadImgName();
-    
-    // optional string mapTmxName = 6;
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
+    java.lang.String getRoadImgName();
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getRoadImgNameBytes();
+
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
     boolean hasMapTmxName();
-    String getMapTmxName();
-    
-    // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
+    java.lang.String getMapTmxName();
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getMapTmxNameBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     boolean hasRoadImgCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords();
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder();
-    
-    // repeated int32 taskIds = 8;
+
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     java.util.List<java.lang.Integer> getTaskIdsList();
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     int getTaskIdsCount();
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     int getTaskIds(int index);
-    
-    // optional string attackMapLabelImgName = 9;
+
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
     boolean hasAttackMapLabelImgName();
-    String getAttackMapLabelImgName();
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
+    java.lang.String getAttackMapLabelImgName();
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getAttackMapLabelImgNameBytes();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.FullCityProto}
+   */
   public static final class FullCityProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FullCityProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.FullCityProto)
+      FullCityProtoOrBuilder {
     // Use FullCityProto.newBuilder() to construct.
-    private FullCityProto(Builder builder) {
+    private FullCityProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private FullCityProto(boolean noInit) {}
-    
+    private FullCityProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final FullCityProto defaultInstance;
     public static FullCityProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public FullCityProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FullCityProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              cityId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              mapImgName_ = bs;
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = center_.toBuilder();
+              }
+              center_ = input.readMessage(com.lvl6.proto.StructureProto.CoordinateProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(center_);
+                center_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              roadImgName_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              mapTmxName_ = bs;
+              break;
+            }
+            case 58: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = roadImgCoords_.toBuilder();
+              }
+              roadImgCoords_ = input.readMessage(com.lvl6.proto.StructureProto.CoordinateProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(roadImgCoords_);
+                roadImgCoords_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                taskIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              taskIds_.add(input.readInt32());
+              break;
+            }
+            case 66: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
+                taskIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                taskIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              attackMapLabelImgName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          taskIds_ = java.util.Collections.unmodifiableList(taskIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable;
+      return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.CityProto.FullCityProto.class, com.lvl6.proto.CityProto.FullCityProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<FullCityProto> PARSER =
+        new com.google.protobuf.AbstractParser<FullCityProto>() {
+      public FullCityProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FullCityProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FullCityProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional int32 cityId = 1;
     public static final int CITYID_FIELD_NUMBER = 1;
     private int cityId_;
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     public boolean hasCityId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 cityId = 1;</code>
+     */
     public int getCityId() {
       return cityId_;
     }
-    
-    // optional string name = 2;
+
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
     public boolean hasName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getName() {
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           name_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getNameBytes() {
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional string mapImgName = 3;
+
     public static final int MAPIMGNAME_FIELD_NUMBER = 3;
     private java.lang.Object mapImgName_;
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
     public boolean hasMapImgName() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public String getMapImgName() {
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
+    public java.lang.String getMapImgName() {
       java.lang.Object ref = mapImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           mapImgName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getMapImgNameBytes() {
+    /**
+     * <code>optional string mapImgName = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMapImgNameBytes() {
       java.lang.Object ref = mapImgName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         mapImgName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional .com.lvl6.proto.CoordinateProto center = 4;
+
     public static final int CENTER_FIELD_NUMBER = 4;
     private com.lvl6.proto.StructureProto.CoordinateProto center_;
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     public boolean hasCenter() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProto getCenter() {
       return center_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCenterOrBuilder() {
       return center_;
     }
-    
-    // optional string roadImgName = 5;
+
     public static final int ROADIMGNAME_FIELD_NUMBER = 5;
     private java.lang.Object roadImgName_;
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
     public boolean hasRoadImgName() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public String getRoadImgName() {
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
+    public java.lang.String getRoadImgName() {
       java.lang.Object ref = roadImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           roadImgName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getRoadImgNameBytes() {
+    /**
+     * <code>optional string roadImgName = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRoadImgNameBytes() {
       java.lang.Object ref = roadImgName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         roadImgName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional string mapTmxName = 6;
+
     public static final int MAPTMXNAME_FIELD_NUMBER = 6;
     private java.lang.Object mapTmxName_;
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
     public boolean hasMapTmxName() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
-    public String getMapTmxName() {
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
+    public java.lang.String getMapTmxName() {
       java.lang.Object ref = mapTmxName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           mapTmxName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getMapTmxNameBytes() {
+    /**
+     * <code>optional string mapTmxName = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMapTmxNameBytes() {
       java.lang.Object ref = mapTmxName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         mapTmxName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+
     public static final int ROADIMGCOORDS_FIELD_NUMBER = 7;
     private com.lvl6.proto.StructureProto.CoordinateProto roadImgCoords_;
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     public boolean hasRoadImgCoords() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords() {
       return roadImgCoords_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+     */
     public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder() {
       return roadImgCoords_;
     }
-    
-    // repeated int32 taskIds = 8;
+
     public static final int TASKIDS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Integer> taskIds_;
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     public java.util.List<java.lang.Integer>
         getTaskIdsList() {
       return taskIds_;
     }
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     public int getTaskIdsCount() {
       return taskIds_.size();
     }
+    /**
+     * <code>repeated int32 taskIds = 8;</code>
+     */
     public int getTaskIds(int index) {
       return taskIds_.get(index);
     }
-    
-    // optional string attackMapLabelImgName = 9;
+
     public static final int ATTACKMAPLABELIMGNAME_FIELD_NUMBER = 9;
     private java.lang.Object attackMapLabelImgName_;
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
     public boolean hasAttackMapLabelImgName() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
-    public String getAttackMapLabelImgName() {
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
+    public java.lang.String getAttackMapLabelImgName() {
       java.lang.Object ref = attackMapLabelImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           attackMapLabelImgName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getAttackMapLabelImgNameBytes() {
+    /**
+     * <code>optional string attackMapLabelImgName = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAttackMapLabelImgNameBytes() {
       java.lang.Object ref = attackMapLabelImgName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         attackMapLabelImgName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       cityId_ = 0;
       name_ = "";
@@ -2411,18 +3370,19 @@ public final class CityProto {
       roadImgName_ = "";
       mapTmxName_ = "";
       roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      taskIds_ = java.util.Collections.emptyList();;
+      taskIds_ = java.util.Collections.emptyList();
       attackMapLabelImgName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -2455,12 +3415,12 @@ public final class CityProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2507,113 +3467,106 @@ public final class CityProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.CityProto.FullCityProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.CityProto.FullCityProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.FullCityProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.CityProto.FullCityProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.FullCityProto)
+        com.lvl6.proto.CityProto.FullCityProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable;
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.CityProto.FullCityProto.class, com.lvl6.proto.CityProto.FullCityProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.CityProto.FullCityProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2626,7 +3579,7 @@ public final class CityProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         cityId_ = 0;
@@ -2651,26 +3604,26 @@ public final class CityProto {
           roadImgCoordsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
-        taskIds_ = java.util.Collections.emptyList();;
+        taskIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000080);
         attackMapLabelImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.CityProto.FullCityProto.getDescriptor();
+        return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_FullCityProto_descriptor;
       }
-      
+
       public com.lvl6.proto.CityProto.FullCityProto getDefaultInstanceForType() {
         return com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.CityProto.FullCityProto build() {
         com.lvl6.proto.CityProto.FullCityProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -2678,17 +3631,7 @@ public final class CityProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.CityProto.FullCityProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.CityProto.FullCityProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.CityProto.FullCityProto buildPartial() {
         com.lvl6.proto.CityProto.FullCityProto result = new com.lvl6.proto.CityProto.FullCityProto(this);
         int from_bitField0_ = bitField0_;
@@ -2742,7 +3685,7 @@ public final class CityProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.CityProto.FullCityProto) {
           return mergeFrom((com.lvl6.proto.CityProto.FullCityProto)other);
@@ -2751,26 +3694,34 @@ public final class CityProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.CityProto.FullCityProto other) {
         if (other == com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance()) return this;
         if (other.hasCityId()) {
           setCityId(other.getCityId());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
         }
         if (other.hasMapImgName()) {
-          setMapImgName(other.getMapImgName());
+          bitField0_ |= 0x00000004;
+          mapImgName_ = other.mapImgName_;
+          onChanged();
         }
         if (other.hasCenter()) {
           mergeCenter(other.getCenter());
         }
         if (other.hasRoadImgName()) {
-          setRoadImgName(other.getRoadImgName());
+          bitField0_ |= 0x00000010;
+          roadImgName_ = other.roadImgName_;
+          onChanged();
         }
         if (other.hasMapTmxName()) {
-          setMapTmxName(other.getMapTmxName());
+          bitField0_ |= 0x00000020;
+          mapTmxName_ = other.mapTmxName_;
+          onChanged();
         }
         if (other.hasRoadImgCoords()) {
           mergeRoadImgCoords(other.getRoadImgCoords());
@@ -2786,144 +3737,114 @@ public final class CityProto {
           onChanged();
         }
         if (other.hasAttackMapLabelImgName()) {
-          setAttackMapLabelImgName(other.getAttackMapLabelImgName());
+          bitField0_ |= 0x00000100;
+          attackMapLabelImgName_ = other.attackMapLabelImgName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              cityId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              mapImgName_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-              if (hasCenter()) {
-                subBuilder.mergeFrom(getCenter());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setCenter(subBuilder.buildPartial());
-              break;
-            }
-            case 42: {
-              bitField0_ |= 0x00000010;
-              roadImgName_ = input.readBytes();
-              break;
-            }
-            case 50: {
-              bitField0_ |= 0x00000020;
-              mapTmxName_ = input.readBytes();
-              break;
-            }
-            case 58: {
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-              if (hasRoadImgCoords()) {
-                subBuilder.mergeFrom(getRoadImgCoords());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setRoadImgCoords(subBuilder.buildPartial());
-              break;
-            }
-            case 64: {
-              ensureTaskIdsIsMutable();
-              taskIds_.add(input.readInt32());
-              break;
-            }
-            case 66: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addTaskIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 74: {
-              bitField0_ |= 0x00000100;
-              attackMapLabelImgName_ = input.readBytes();
-              break;
-            }
+        com.lvl6.proto.CityProto.FullCityProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.CityProto.FullCityProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional int32 cityId = 1;
+
       private int cityId_ ;
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public boolean hasCityId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public int getCityId() {
         return cityId_;
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public Builder setCityId(int value) {
         bitField0_ |= 0x00000001;
         cityId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 cityId = 1;</code>
+       */
       public Builder clearCityId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         cityId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional string name = 2;
+
       private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getName() {
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
         java.lang.Object ref = name_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          name_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setName(String value) {
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2932,34 +3853,74 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string name = 2;</code>
+       */
       public Builder clearName() {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
-      void setName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         name_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional string mapImgName = 3;
+
       private java.lang.Object mapImgName_ = "";
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
       public boolean hasMapImgName() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public String getMapImgName() {
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
+      public java.lang.String getMapImgName() {
         java.lang.Object ref = mapImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          mapImgName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            mapImgName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setMapImgName(String value) {
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMapImgNameBytes() {
+        java.lang.Object ref = mapImgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mapImgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
+      public Builder setMapImgName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2968,25 +3929,41 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
       public Builder clearMapImgName() {
         bitField0_ = (bitField0_ & ~0x00000004);
         mapImgName_ = getDefaultInstance().getMapImgName();
         onChanged();
         return this;
       }
-      void setMapImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
+      /**
+       * <code>optional string mapImgName = 3;</code>
+       */
+      public Builder setMapImgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
         mapImgName_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional .com.lvl6.proto.CoordinateProto center = 4;
+
       private com.lvl6.proto.StructureProto.CoordinateProto center_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> centerBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public boolean hasCenter() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto getCenter() {
         if (centerBuilder_ == null) {
           return center_;
@@ -2994,6 +3971,9 @@ public final class CityProto {
           return centerBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public Builder setCenter(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (centerBuilder_ == null) {
           if (value == null) {
@@ -3007,6 +3987,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public Builder setCenter(
           com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
         if (centerBuilder_ == null) {
@@ -3018,6 +4001,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public Builder mergeCenter(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (centerBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
@@ -3034,6 +4020,9 @@ public final class CityProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public Builder clearCenter() {
         if (centerBuilder_ == null) {
           center_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -3044,11 +4033,17 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto.Builder getCenterBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getCenterFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCenterOrBuilder() {
         if (centerBuilder_ != null) {
           return centerBuilder_.getMessageOrBuilder();
@@ -3056,36 +4051,68 @@ public final class CityProto {
           return center_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto center = 4;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
           getCenterFieldBuilder() {
         if (centerBuilder_ == null) {
           centerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  center_,
+                  getCenter(),
                   getParentForChildren(),
                   isClean());
           center_ = null;
         }
         return centerBuilder_;
       }
-      
-      // optional string roadImgName = 5;
+
       private java.lang.Object roadImgName_ = "";
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
       public boolean hasRoadImgName() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      public String getRoadImgName() {
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
+      public java.lang.String getRoadImgName() {
         java.lang.Object ref = roadImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          roadImgName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            roadImgName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setRoadImgName(String value) {
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRoadImgNameBytes() {
+        java.lang.Object ref = roadImgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          roadImgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
+      public Builder setRoadImgName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3094,34 +4121,74 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
       public Builder clearRoadImgName() {
         bitField0_ = (bitField0_ & ~0x00000010);
         roadImgName_ = getDefaultInstance().getRoadImgName();
         onChanged();
         return this;
       }
-      void setRoadImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+      /**
+       * <code>optional string roadImgName = 5;</code>
+       */
+      public Builder setRoadImgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
         roadImgName_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional string mapTmxName = 6;
+
       private java.lang.Object mapTmxName_ = "";
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
       public boolean hasMapTmxName() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      public String getMapTmxName() {
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
+      public java.lang.String getMapTmxName() {
         java.lang.Object ref = mapTmxName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          mapTmxName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            mapTmxName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setMapTmxName(String value) {
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMapTmxNameBytes() {
+        java.lang.Object ref = mapTmxName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mapTmxName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
+      public Builder setMapTmxName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3130,25 +4197,41 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
       public Builder clearMapTmxName() {
         bitField0_ = (bitField0_ & ~0x00000020);
         mapTmxName_ = getDefaultInstance().getMapTmxName();
         onChanged();
         return this;
       }
-      void setMapTmxName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000020;
+      /**
+       * <code>optional string mapTmxName = 6;</code>
+       */
+      public Builder setMapTmxNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
         mapTmxName_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+
       private com.lvl6.proto.StructureProto.CoordinateProto roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> roadImgCoordsBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public boolean hasRoadImgCoords() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords() {
         if (roadImgCoordsBuilder_ == null) {
           return roadImgCoords_;
@@ -3156,6 +4239,9 @@ public final class CityProto {
           return roadImgCoordsBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public Builder setRoadImgCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (roadImgCoordsBuilder_ == null) {
           if (value == null) {
@@ -3169,6 +4255,9 @@ public final class CityProto {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public Builder setRoadImgCoords(
           com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
         if (roadImgCoordsBuilder_ == null) {
@@ -3180,6 +4269,9 @@ public final class CityProto {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public Builder mergeRoadImgCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
         if (roadImgCoordsBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
@@ -3196,6 +4288,9 @@ public final class CityProto {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public Builder clearRoadImgCoords() {
         if (roadImgCoordsBuilder_ == null) {
           roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -3206,11 +4301,17 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProto.Builder getRoadImgCoordsBuilder() {
         bitField0_ |= 0x00000040;
         onChanged();
         return getRoadImgCoordsFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder() {
         if (roadImgCoordsBuilder_ != null) {
           return roadImgCoordsBuilder_.getMessageOrBuilder();
@@ -3218,38 +4319,52 @@ public final class CityProto {
           return roadImgCoords_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
           getRoadImgCoordsFieldBuilder() {
         if (roadImgCoordsBuilder_ == null) {
           roadImgCoordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  roadImgCoords_,
+                  getRoadImgCoords(),
                   getParentForChildren(),
                   isClean());
           roadImgCoords_ = null;
         }
         return roadImgCoordsBuilder_;
       }
-      
-      // repeated int32 taskIds = 8;
-      private java.util.List<java.lang.Integer> taskIds_ = java.util.Collections.emptyList();;
+
+      private java.util.List<java.lang.Integer> taskIds_ = java.util.Collections.emptyList();
       private void ensureTaskIdsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           taskIds_ = new java.util.ArrayList<java.lang.Integer>(taskIds_);
           bitField0_ |= 0x00000080;
          }
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public java.util.List<java.lang.Integer>
           getTaskIdsList() {
         return java.util.Collections.unmodifiableList(taskIds_);
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public int getTaskIdsCount() {
         return taskIds_.size();
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public int getTaskIds(int index) {
         return taskIds_.get(index);
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public Builder setTaskIds(
           int index, int value) {
         ensureTaskIdsIsMutable();
@@ -3257,42 +4372,81 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public Builder addTaskIds(int value) {
         ensureTaskIdsIsMutable();
         taskIds_.add(value);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public Builder addAllTaskIds(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureTaskIdsIsMutable();
-        super.addAll(values, taskIds_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, taskIds_);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int32 taskIds = 8;</code>
+       */
       public Builder clearTaskIds() {
-        taskIds_ = java.util.Collections.emptyList();;
+        taskIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
-      
-      // optional string attackMapLabelImgName = 9;
+
       private java.lang.Object attackMapLabelImgName_ = "";
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
       public boolean hasAttackMapLabelImgName() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
-      public String getAttackMapLabelImgName() {
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
+      public java.lang.String getAttackMapLabelImgName() {
         java.lang.Object ref = attackMapLabelImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          attackMapLabelImgName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            attackMapLabelImgName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setAttackMapLabelImgName(String value) {
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAttackMapLabelImgNameBytes() {
+        java.lang.Object ref = attackMapLabelImgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          attackMapLabelImgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
+      public Builder setAttackMapLabelImgName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3301,50 +4455,61 @@ public final class CityProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
       public Builder clearAttackMapLabelImgName() {
         bitField0_ = (bitField0_ & ~0x00000100);
         attackMapLabelImgName_ = getDefaultInstance().getAttackMapLabelImgName();
         onChanged();
         return this;
       }
-      void setAttackMapLabelImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000100;
+      /**
+       * <code>optional string attackMapLabelImgName = 9;</code>
+       */
+      public Builder setAttackMapLabelImgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
         attackMapLabelImgName_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullCityProto)
     }
-    
+
     static {
       defaultInstance = new FullCityProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullCityProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CityElementProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullCityProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -3380,52 +4545,46 @@ public final class CityProto {
       "gName\030\t \001(\tB\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor,
-              new java.lang.String[] { "UserId", "XPosition", "YPosition", "IsExpanding", "ExpandStartTime", },
-              com.lvl6.proto.CityProto.UserCityExpansionDataProto.class,
-              com.lvl6.proto.CityProto.UserCityExpansionDataProto.Builder.class);
-          internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor,
-              new java.lang.String[] { "ExpansionNum", "ExpansionCostCash", "NumMinutesToExpand", },
-              com.lvl6.proto.CityProto.CityExpansionCostProto.class,
-              com.lvl6.proto.CityProto.CityExpansionCostProto.Builder.class);
-          internal_static_com_lvl6_proto_CityElementProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_CityElementProto_descriptor,
-              new java.lang.String[] { "CityId", "AssetId", "Type", "Coords", "XLength", "YLength", "ImgId", "Orientation", "SpriteCoords", },
-              com.lvl6.proto.CityProto.CityElementProto.class,
-              com.lvl6.proto.CityProto.CityElementProto.Builder.class);
-          internal_static_com_lvl6_proto_FullCityProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullCityProto_descriptor,
-              new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", "AttackMapLabelImgName", },
-              com.lvl6.proto.CityProto.FullCityProto.class,
-              com.lvl6.proto.CityProto.FullCityProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor,
+        new java.lang.String[] { "UserId", "XPosition", "YPosition", "IsExpanding", "ExpandStartTime", });
+    internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor,
+        new java.lang.String[] { "ExpansionNum", "ExpansionCostCash", "NumMinutesToExpand", });
+    internal_static_com_lvl6_proto_CityElementProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CityElementProto_descriptor,
+        new java.lang.String[] { "CityId", "AssetId", "Type", "Coords", "XLength", "YLength", "ImgId", "Orientation", "SpriteCoords", });
+    internal_static_com_lvl6_proto_FullCityProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_FullCityProto_descriptor,
+        new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", "AttackMapLabelImgName", });
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

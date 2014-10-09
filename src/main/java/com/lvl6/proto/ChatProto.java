@@ -8,18 +8,33 @@ public final class ChatProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.lvl6.proto.GroupChatScope}
+   */
   public enum GroupChatScope
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CLAN = 1;</code>
+     */
     CLAN(0, 1),
+    /**
+     * <code>GLOBAL = 2;</code>
+     */
     GLOBAL(1, 2),
     ;
-    
+
+    /**
+     * <code>CLAN = 1;</code>
+     */
     public static final int CLAN_VALUE = 1;
+    /**
+     * <code>GLOBAL = 2;</code>
+     */
     public static final int GLOBAL_VALUE = 2;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static GroupChatScope valueOf(int value) {
       switch (value) {
         case 1: return CLAN;
@@ -27,7 +42,7 @@ public final class ChatProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<GroupChatScope>
         internalGetValueMap() {
       return internalValueMap;
@@ -39,7 +54,7 @@ public final class ChatProto {
               return GroupChatScope.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -52,11 +67,9 @@ public final class ChatProto {
         getDescriptor() {
       return com.lvl6.proto.ChatProto.getDescriptor().getEnumTypes().get(0);
     }
-    
-    private static final GroupChatScope[] VALUES = {
-      CLAN, GLOBAL, 
-    };
-    
+
+    private static final GroupChatScope[] VALUES = values();
+
     public static GroupChatScope valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -65,150 +78,328 @@ public final class ChatProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private GroupChatScope(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GroupChatScope)
   }
-  
-  public interface PrivateChatPostProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 privateChatPostId = 1;
+
+  public interface PrivateChatPostProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PrivateChatPostProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 privateChatPostId = 1;</code>
+     */
     boolean hasPrivateChatPostId();
+    /**
+     * <code>optional int32 privateChatPostId = 1;</code>
+     */
     int getPrivateChatPostId();
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     boolean hasPoster();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder();
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     boolean hasRecipient();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder();
-    
-    // optional int64 timeOfPost = 4;
+
+    /**
+     * <code>optional int64 timeOfPost = 4;</code>
+     */
     boolean hasTimeOfPost();
+    /**
+     * <code>optional int64 timeOfPost = 4;</code>
+     */
     long getTimeOfPost();
-    
-    // optional string content = 5;
+
+    /**
+     * <code>optional string content = 5;</code>
+     */
     boolean hasContent();
-    String getContent();
+    /**
+     * <code>optional string content = 5;</code>
+     */
+    java.lang.String getContent();
+    /**
+     * <code>optional string content = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentBytes();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.PrivateChatPostProto}
+   */
   public static final class PrivateChatPostProto extends
-      com.google.protobuf.GeneratedMessage
-      implements PrivateChatPostProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PrivateChatPostProto)
+      PrivateChatPostProtoOrBuilder {
     // Use PrivateChatPostProto.newBuilder() to construct.
-    private PrivateChatPostProto(Builder builder) {
+    private PrivateChatPostProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private PrivateChatPostProto(boolean noInit) {}
-    
+    private PrivateChatPostProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final PrivateChatPostProto defaultInstance;
     public static PrivateChatPostProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public PrivateChatPostProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PrivateChatPostProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              privateChatPostId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = poster_.toBuilder();
+              }
+              poster_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(poster_);
+                poster_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = recipient_.toBuilder();
+              }
+              recipient_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(recipient_);
+                recipient_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              timeOfPost_ = input.readInt64();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              content_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable;
+      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ChatProto.PrivateChatPostProto.class, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<PrivateChatPostProto> PARSER =
+        new com.google.protobuf.AbstractParser<PrivateChatPostProto>() {
+      public PrivateChatPostProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PrivateChatPostProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PrivateChatPostProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional int32 privateChatPostId = 1;
     public static final int PRIVATECHATPOSTID_FIELD_NUMBER = 1;
     private int privateChatPostId_;
+    /**
+     * <code>optional int32 privateChatPostId = 1;</code>
+     */
     public boolean hasPrivateChatPostId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 privateChatPostId = 1;</code>
+     */
     public int getPrivateChatPostId() {
       return privateChatPostId_;
     }
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
+
     public static final int POSTER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     public boolean hasPoster() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster() {
       return poster_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder() {
       return poster_;
     }
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
+
     public static final int RECIPIENT_FIELD_NUMBER = 3;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     public boolean hasRecipient() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient() {
       return recipient_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder() {
       return recipient_;
     }
-    
-    // optional int64 timeOfPost = 4;
+
     public static final int TIMEOFPOST_FIELD_NUMBER = 4;
     private long timeOfPost_;
+    /**
+     * <code>optional int64 timeOfPost = 4;</code>
+     */
     public boolean hasTimeOfPost() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional int64 timeOfPost = 4;</code>
+     */
     public long getTimeOfPost() {
       return timeOfPost_;
     }
-    
-    // optional string content = 5;
+
     public static final int CONTENT_FIELD_NUMBER = 5;
     private java.lang.Object content_;
+    /**
+     * <code>optional string content = 5;</code>
+     */
     public boolean hasContent() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public String getContent() {
+    /**
+     * <code>optional string content = 5;</code>
+     */
+    public java.lang.String getContent() {
       java.lang.Object ref = content_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           content_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getContentBytes() {
+    /**
+     * <code>optional string content = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentBytes() {
       java.lang.Object ref = content_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         content_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       privateChatPostId_ = 0;
       poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
@@ -219,12 +410,13 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -245,12 +437,12 @@ public final class ChatProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -276,113 +468,106 @@ public final class ChatProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.ChatProto.PrivateChatPostProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.ChatProto.PrivateChatPostProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.PrivateChatPostProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PrivateChatPostProto)
+        com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable;
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ChatProto.PrivateChatPostProto.class, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.ChatProto.PrivateChatPostProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -395,7 +580,7 @@ public final class ChatProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         privateChatPostId_ = 0;
@@ -418,20 +603,20 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.ChatProto.PrivateChatPostProto.getDescriptor();
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
       }
-      
+
       public com.lvl6.proto.ChatProto.PrivateChatPostProto getDefaultInstanceForType() {
         return com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.ChatProto.PrivateChatPostProto build() {
         com.lvl6.proto.ChatProto.PrivateChatPostProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -439,17 +624,7 @@ public final class ChatProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.ChatProto.PrivateChatPostProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.ChatProto.PrivateChatPostProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.ChatProto.PrivateChatPostProto buildPartial() {
         com.lvl6.proto.ChatProto.PrivateChatPostProto result = new com.lvl6.proto.ChatProto.PrivateChatPostProto(this);
         int from_bitField0_ = bitField0_;
@@ -486,7 +661,7 @@ public final class ChatProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.ChatProto.PrivateChatPostProto) {
           return mergeFrom((com.lvl6.proto.ChatProto.PrivateChatPostProto)other);
@@ -495,7 +670,7 @@ public final class ChatProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.ChatProto.PrivateChatPostProto other) {
         if (other == com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance()) return this;
         if (other.hasPrivateChatPostId()) {
@@ -511,106 +686,81 @@ public final class ChatProto {
           setTimeOfPost(other.getTimeOfPost());
         }
         if (other.hasContent()) {
-          setContent(other.getContent());
+          bitField0_ |= 0x00000010;
+          content_ = other.content_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              privateChatPostId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder();
-              if (hasPoster()) {
-                subBuilder.mergeFrom(getPoster());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setPoster(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder();
-              if (hasRecipient()) {
-                subBuilder.mergeFrom(getRecipient());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setRecipient(subBuilder.buildPartial());
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              timeOfPost_ = input.readInt64();
-              break;
-            }
-            case 42: {
-              bitField0_ |= 0x00000010;
-              content_ = input.readBytes();
-              break;
-            }
+        com.lvl6.proto.ChatProto.PrivateChatPostProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ChatProto.PrivateChatPostProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional int32 privateChatPostId = 1;
+
       private int privateChatPostId_ ;
+      /**
+       * <code>optional int32 privateChatPostId = 1;</code>
+       */
       public boolean hasPrivateChatPostId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 privateChatPostId = 1;</code>
+       */
       public int getPrivateChatPostId() {
         return privateChatPostId_;
       }
+      /**
+       * <code>optional int32 privateChatPostId = 1;</code>
+       */
       public Builder setPrivateChatPostId(int value) {
         bitField0_ |= 0x00000001;
         privateChatPostId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 privateChatPostId = 1;</code>
+       */
       public Builder clearPrivateChatPostId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         privateChatPostId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;
+
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> posterBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public boolean hasPoster() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getPoster() {
         if (posterBuilder_ == null) {
           return poster_;
@@ -618,6 +768,9 @@ public final class ChatProto {
           return posterBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public Builder setPoster(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (posterBuilder_ == null) {
           if (value == null) {
@@ -631,6 +784,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public Builder setPoster(
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
         if (posterBuilder_ == null) {
@@ -642,6 +798,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public Builder mergePoster(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (posterBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
@@ -658,6 +817,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public Builder clearPoster() {
         if (posterBuilder_ == null) {
           poster_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
@@ -668,11 +830,17 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getPosterBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getPosterFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getPosterOrBuilder() {
         if (posterBuilder_ != null) {
           return posterBuilder_.getMessageOrBuilder();
@@ -680,27 +848,35 @@ public final class ChatProto {
           return poster_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel poster = 2;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
           getPosterFieldBuilder() {
         if (posterBuilder_ == null) {
           posterBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  poster_,
+                  getPoster(),
                   getParentForChildren(),
                   isClean());
           poster_ = null;
         }
         return posterBuilder_;
       }
-      
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;
+
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> recipientBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public boolean hasRecipient() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getRecipient() {
         if (recipientBuilder_ == null) {
           return recipient_;
@@ -708,6 +884,9 @@ public final class ChatProto {
           return recipientBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public Builder setRecipient(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (recipientBuilder_ == null) {
           if (value == null) {
@@ -721,6 +900,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public Builder setRecipient(
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
         if (recipientBuilder_ == null) {
@@ -732,6 +914,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public Builder mergeRecipient(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (recipientBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
@@ -748,6 +933,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public Builder clearRecipient() {
         if (recipientBuilder_ == null) {
           recipient_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
@@ -758,11 +946,17 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getRecipientBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getRecipientFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getRecipientOrBuilder() {
         if (recipientBuilder_ != null) {
           return recipientBuilder_.getMessageOrBuilder();
@@ -770,57 +964,100 @@ public final class ChatProto {
           return recipient_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel recipient = 3;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
           getRecipientFieldBuilder() {
         if (recipientBuilder_ == null) {
           recipientBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  recipient_,
+                  getRecipient(),
                   getParentForChildren(),
                   isClean());
           recipient_ = null;
         }
         return recipientBuilder_;
       }
-      
-      // optional int64 timeOfPost = 4;
+
       private long timeOfPost_ ;
+      /**
+       * <code>optional int64 timeOfPost = 4;</code>
+       */
       public boolean hasTimeOfPost() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional int64 timeOfPost = 4;</code>
+       */
       public long getTimeOfPost() {
         return timeOfPost_;
       }
+      /**
+       * <code>optional int64 timeOfPost = 4;</code>
+       */
       public Builder setTimeOfPost(long value) {
         bitField0_ |= 0x00000008;
         timeOfPost_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int64 timeOfPost = 4;</code>
+       */
       public Builder clearTimeOfPost() {
         bitField0_ = (bitField0_ & ~0x00000008);
         timeOfPost_ = 0L;
         onChanged();
         return this;
       }
-      
-      // optional string content = 5;
+
       private java.lang.Object content_ = "";
+      /**
+       * <code>optional string content = 5;</code>
+       */
       public boolean hasContent() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      public String getContent() {
+      /**
+       * <code>optional string content = 5;</code>
+       */
+      public java.lang.String getContent() {
         java.lang.Object ref = content_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          content_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            content_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setContent(String value) {
+      /**
+       * <code>optional string content = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes() {
+        java.lang.Object ref = content_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          content_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 5;</code>
+       */
+      public Builder setContent(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -829,383 +1066,120 @@ public final class ChatProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string content = 5;</code>
+       */
       public Builder clearContent() {
         bitField0_ = (bitField0_ & ~0x00000010);
         content_ = getDefaultInstance().getContent();
         onChanged();
         return this;
       }
-      void setContent(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+      /**
+       * <code>optional string content = 5;</code>
+       */
+      public Builder setContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
         content_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PrivateChatPostProto)
     }
-    
+
     static {
       defaultInstance = new PrivateChatPostProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PrivateChatPostProto)
   }
-  
-  public interface ColorProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 red = 1;
+
+  public interface ColorProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ColorProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 red = 1;</code>
+     */
     boolean hasRed();
+    /**
+     * <code>optional int32 red = 1;</code>
+     */
     int getRed();
-    
-    // optional int32 green = 2;
+
+    /**
+     * <code>optional int32 green = 2;</code>
+     */
     boolean hasGreen();
+    /**
+     * <code>optional int32 green = 2;</code>
+     */
     int getGreen();
-    
-    // optional int32 blue = 3;
+
+    /**
+     * <code>optional int32 blue = 3;</code>
+     */
     boolean hasBlue();
+    /**
+     * <code>optional int32 blue = 3;</code>
+     */
     int getBlue();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.ColorProto}
+   */
   public static final class ColorProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ColorProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ColorProto)
+      ColorProtoOrBuilder {
     // Use ColorProto.newBuilder() to construct.
-    private ColorProto(Builder builder) {
+    private ColorProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private ColorProto(boolean noInit) {}
-    
+    private ColorProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final ColorProto defaultInstance;
     public static ColorProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public ColorProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional int32 red = 1;
-    public static final int RED_FIELD_NUMBER = 1;
-    private int red_;
-    public boolean hasRed() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public int getRed() {
-      return red_;
-    }
-    
-    // optional int32 green = 2;
-    public static final int GREEN_FIELD_NUMBER = 2;
-    private int green_;
-    public boolean hasGreen() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getGreen() {
-      return green_;
-    }
-    
-    // optional int32 blue = 3;
-    public static final int BLUE_FIELD_NUMBER = 3;
-    private int blue_;
-    public boolean hasBlue() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getBlue() {
-      return blue_;
-    }
-    
-    private void initFields() {
-      red_ = 0;
-      green_ = 0;
-      blue_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, red_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, green_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, blue_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, red_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, green_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, blue_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
     }
-    
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+    private ColorProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.ChatProto.ColorProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.ColorProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.ChatProto.ColorProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        red_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        green_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        blue_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.ChatProto.ColorProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.ChatProto.ColorProto getDefaultInstanceForType() {
-        return com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.ChatProto.ColorProto build() {
-        com.lvl6.proto.ChatProto.ColorProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.ChatProto.ColorProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.ChatProto.ColorProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.ChatProto.ColorProto buildPartial() {
-        com.lvl6.proto.ChatProto.ColorProto result = new com.lvl6.proto.ChatProto.ColorProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.red_ = red_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.green_ = green_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.blue_ = blue_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.ChatProto.ColorProto) {
-          return mergeFrom((com.lvl6.proto.ChatProto.ColorProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.ChatProto.ColorProto other) {
-        if (other == com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance()) return this;
-        if (other.hasRed()) {
-          setRed(other.getRed());
-        }
-        if (other.hasGreen()) {
-          setGreen(other.getGreen());
-        }
-        if (other.hasBlue()) {
-          setBlue(other.getBlue());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
+              done = true;
+              break;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
+                done = true;
               }
               break;
             }
@@ -1226,212 +1200,751 @@ public final class ChatProto {
             }
           }
         }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
       }
-      
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ChatProto.ColorProto.class, com.lvl6.proto.ChatProto.ColorProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ColorProto> PARSER =
+        new com.google.protobuf.AbstractParser<ColorProto>() {
+      public ColorProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ColorProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ColorProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RED_FIELD_NUMBER = 1;
+    private int red_;
+    /**
+     * <code>optional int32 red = 1;</code>
+     */
+    public boolean hasRed() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 red = 1;</code>
+     */
+    public int getRed() {
+      return red_;
+    }
+
+    public static final int GREEN_FIELD_NUMBER = 2;
+    private int green_;
+    /**
+     * <code>optional int32 green = 2;</code>
+     */
+    public boolean hasGreen() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 green = 2;</code>
+     */
+    public int getGreen() {
+      return green_;
+    }
+
+    public static final int BLUE_FIELD_NUMBER = 3;
+    private int blue_;
+    /**
+     * <code>optional int32 blue = 3;</code>
+     */
+    public boolean hasBlue() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 blue = 3;</code>
+     */
+    public int getBlue() {
+      return blue_;
+    }
+
+    private void initFields() {
+      red_ = 0;
+      green_ = 0;
+      blue_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, red_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, green_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, blue_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, red_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, green_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, blue_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ChatProto.ColorProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ChatProto.ColorProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.ColorProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ColorProto)
+        com.lvl6.proto.ChatProto.ColorProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ChatProto.ColorProto.class, com.lvl6.proto.ChatProto.ColorProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ChatProto.ColorProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        red_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        green_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        blue_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_ColorProto_descriptor;
+      }
+
+      public com.lvl6.proto.ChatProto.ColorProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ChatProto.ColorProto build() {
+        com.lvl6.proto.ChatProto.ColorProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ChatProto.ColorProto buildPartial() {
+        com.lvl6.proto.ChatProto.ColorProto result = new com.lvl6.proto.ChatProto.ColorProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.red_ = red_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.green_ = green_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.blue_ = blue_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ChatProto.ColorProto) {
+          return mergeFrom((com.lvl6.proto.ChatProto.ColorProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ChatProto.ColorProto other) {
+        if (other == com.lvl6.proto.ChatProto.ColorProto.getDefaultInstance()) return this;
+        if (other.hasRed()) {
+          setRed(other.getRed());
+        }
+        if (other.hasGreen()) {
+          setGreen(other.getGreen());
+        }
+        if (other.hasBlue()) {
+          setBlue(other.getBlue());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ChatProto.ColorProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ChatProto.ColorProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
       private int bitField0_;
-      
-      // optional int32 red = 1;
+
       private int red_ ;
+      /**
+       * <code>optional int32 red = 1;</code>
+       */
       public boolean hasRed() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 red = 1;</code>
+       */
       public int getRed() {
         return red_;
       }
+      /**
+       * <code>optional int32 red = 1;</code>
+       */
       public Builder setRed(int value) {
         bitField0_ |= 0x00000001;
         red_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 red = 1;</code>
+       */
       public Builder clearRed() {
         bitField0_ = (bitField0_ & ~0x00000001);
         red_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 green = 2;
+
       private int green_ ;
+      /**
+       * <code>optional int32 green = 2;</code>
+       */
       public boolean hasGreen() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 green = 2;</code>
+       */
       public int getGreen() {
         return green_;
       }
+      /**
+       * <code>optional int32 green = 2;</code>
+       */
       public Builder setGreen(int value) {
         bitField0_ |= 0x00000002;
         green_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 green = 2;</code>
+       */
       public Builder clearGreen() {
         bitField0_ = (bitField0_ & ~0x00000002);
         green_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 blue = 3;
+
       private int blue_ ;
+      /**
+       * <code>optional int32 blue = 3;</code>
+       */
       public boolean hasBlue() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional int32 blue = 3;</code>
+       */
       public int getBlue() {
         return blue_;
       }
+      /**
+       * <code>optional int32 blue = 3;</code>
+       */
       public Builder setBlue(int value) {
         bitField0_ |= 0x00000004;
         blue_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 blue = 3;</code>
+       */
       public Builder clearBlue() {
         bitField0_ = (bitField0_ & ~0x00000004);
         blue_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ColorProto)
     }
-    
+
     static {
       defaultInstance = new ColorProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ColorProto)
   }
-  
-  public interface GroupChatMessageProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
+
+  public interface GroupChatMessageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.GroupChatMessageProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder();
-    
-    // optional int64 timeOfChat = 2;
+
+    /**
+     * <code>optional int64 timeOfChat = 2;</code>
+     */
     boolean hasTimeOfChat();
+    /**
+     * <code>optional int64 timeOfChat = 2;</code>
+     */
     long getTimeOfChat();
-    
-    // optional string content = 3;
+
+    /**
+     * <code>optional string content = 3;</code>
+     */
     boolean hasContent();
-    String getContent();
-    
-    // optional bool isAdmin = 4;
+    /**
+     * <code>optional string content = 3;</code>
+     */
+    java.lang.String getContent();
+    /**
+     * <code>optional string content = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentBytes();
+
+    /**
+     * <code>optional bool isAdmin = 4;</code>
+     */
     boolean hasIsAdmin();
+    /**
+     * <code>optional bool isAdmin = 4;</code>
+     */
     boolean getIsAdmin();
-    
-    // optional int32 chatId = 5;
+
+    /**
+     * <code>optional int32 chatId = 5;</code>
+     */
     boolean hasChatId();
+    /**
+     * <code>optional int32 chatId = 5;</code>
+     */
     int getChatId();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.GroupChatMessageProto}
+   */
   public static final class GroupChatMessageProto extends
-      com.google.protobuf.GeneratedMessage
-      implements GroupChatMessageProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.GroupChatMessageProto)
+      GroupChatMessageProtoOrBuilder {
     // Use GroupChatMessageProto.newBuilder() to construct.
-    private GroupChatMessageProto(Builder builder) {
+    private GroupChatMessageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private GroupChatMessageProto(boolean noInit) {}
-    
+    private GroupChatMessageProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final GroupChatMessageProto defaultInstance;
     public static GroupChatMessageProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public GroupChatMessageProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GroupChatMessageProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              timeOfChat_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              content_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              isAdmin_ = input.readBool();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              chatId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable;
+      return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ChatProto.GroupChatMessageProto.class, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<GroupChatMessageProto> PARSER =
+        new com.google.protobuf.AbstractParser<GroupChatMessageProto>() {
+      public GroupChatMessageProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GroupChatMessageProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GroupChatMessageProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional int64 timeOfChat = 2;
+
     public static final int TIMEOFCHAT_FIELD_NUMBER = 2;
     private long timeOfChat_;
+    /**
+     * <code>optional int64 timeOfChat = 2;</code>
+     */
     public boolean hasTimeOfChat() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional int64 timeOfChat = 2;</code>
+     */
     public long getTimeOfChat() {
       return timeOfChat_;
     }
-    
-    // optional string content = 3;
+
     public static final int CONTENT_FIELD_NUMBER = 3;
     private java.lang.Object content_;
+    /**
+     * <code>optional string content = 3;</code>
+     */
     public boolean hasContent() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public String getContent() {
+    /**
+     * <code>optional string content = 3;</code>
+     */
+    public java.lang.String getContent() {
       java.lang.Object ref = content_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           content_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getContentBytes() {
+    /**
+     * <code>optional string content = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentBytes() {
       java.lang.Object ref = content_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         content_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional bool isAdmin = 4;
+
     public static final int ISADMIN_FIELD_NUMBER = 4;
     private boolean isAdmin_;
+    /**
+     * <code>optional bool isAdmin = 4;</code>
+     */
     public boolean hasIsAdmin() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional bool isAdmin = 4;</code>
+     */
     public boolean getIsAdmin() {
       return isAdmin_;
     }
-    
-    // optional int32 chatId = 5;
+
     public static final int CHATID_FIELD_NUMBER = 5;
     private int chatId_;
+    /**
+     * <code>optional int32 chatId = 5;</code>
+     */
     public boolean hasChatId() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
+    /**
+     * <code>optional int32 chatId = 5;</code>
+     */
     public int getChatId() {
       return chatId_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       timeOfChat_ = 0L;
@@ -1442,12 +1955,13 @@ public final class ChatProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1468,12 +1982,12 @@ public final class ChatProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1499,113 +2013,106 @@ public final class ChatProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.ChatProto.GroupChatMessageProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.ChatProto.GroupChatMessageProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.GroupChatMessageProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.GroupChatMessageProto)
+        com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable;
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ChatProto.GroupChatMessageProto.class, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.ChatProto.GroupChatMessageProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1617,7 +2124,7 @@ public final class ChatProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -1636,20 +2143,20 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.ChatProto.GroupChatMessageProto.getDescriptor();
+        return com.lvl6.proto.ChatProto.internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
       }
-      
+
       public com.lvl6.proto.ChatProto.GroupChatMessageProto getDefaultInstanceForType() {
         return com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.ChatProto.GroupChatMessageProto build() {
         com.lvl6.proto.ChatProto.GroupChatMessageProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -1657,17 +2164,7 @@ public final class ChatProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.ChatProto.GroupChatMessageProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.ChatProto.GroupChatMessageProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.ChatProto.GroupChatMessageProto buildPartial() {
         com.lvl6.proto.ChatProto.GroupChatMessageProto result = new com.lvl6.proto.ChatProto.GroupChatMessageProto(this);
         int from_bitField0_ = bitField0_;
@@ -1700,7 +2197,7 @@ public final class ChatProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.ChatProto.GroupChatMessageProto) {
           return mergeFrom((com.lvl6.proto.ChatProto.GroupChatMessageProto)other);
@@ -1709,7 +2206,7 @@ public final class ChatProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.ChatProto.GroupChatMessageProto other) {
         if (other == com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -1719,7 +2216,9 @@ public final class ChatProto {
           setTimeOfChat(other.getTimeOfChat());
         }
         if (other.hasContent()) {
-          setContent(other.getContent());
+          bitField0_ |= 0x00000004;
+          content_ = other.content_;
+          onChanged();
         }
         if (other.hasIsAdmin()) {
           setIsAdmin(other.getIsAdmin());
@@ -1730,76 +2229,42 @@ public final class ChatProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              timeOfChat_ = input.readInt64();
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              content_ = input.readBytes();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              isAdmin_ = input.readBool();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              chatId_ = input.readInt32();
-              break;
-            }
+        com.lvl6.proto.ChatProto.GroupChatMessageProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ChatProto.GroupChatMessageProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -1807,6 +2272,9 @@ public final class ChatProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -1820,6 +2288,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -1831,6 +2302,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -1847,6 +2321,9 @@ public final class ChatProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
@@ -1857,11 +2334,17 @@ public final class ChatProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -1869,57 +2352,100 @@ public final class ChatProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional int64 timeOfChat = 2;
+
       private long timeOfChat_ ;
+      /**
+       * <code>optional int64 timeOfChat = 2;</code>
+       */
       public boolean hasTimeOfChat() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int64 timeOfChat = 2;</code>
+       */
       public long getTimeOfChat() {
         return timeOfChat_;
       }
+      /**
+       * <code>optional int64 timeOfChat = 2;</code>
+       */
       public Builder setTimeOfChat(long value) {
         bitField0_ |= 0x00000002;
         timeOfChat_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int64 timeOfChat = 2;</code>
+       */
       public Builder clearTimeOfChat() {
         bitField0_ = (bitField0_ & ~0x00000002);
         timeOfChat_ = 0L;
         onChanged();
         return this;
       }
-      
-      // optional string content = 3;
+
       private java.lang.Object content_ = "";
+      /**
+       * <code>optional string content = 3;</code>
+       */
       public boolean hasContent() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public String getContent() {
+      /**
+       * <code>optional string content = 3;</code>
+       */
+      public java.lang.String getContent() {
         java.lang.Object ref = content_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          content_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            content_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setContent(String value) {
+      /**
+       * <code>optional string content = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes() {
+        java.lang.Object ref = content_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          content_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 3;</code>
+       */
+      public Builder setContent(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1928,87 +2454,120 @@ public final class ChatProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string content = 3;</code>
+       */
       public Builder clearContent() {
         bitField0_ = (bitField0_ & ~0x00000004);
         content_ = getDefaultInstance().getContent();
         onChanged();
         return this;
       }
-      void setContent(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
+      /**
+       * <code>optional string content = 3;</code>
+       */
+      public Builder setContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
         content_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional bool isAdmin = 4;
+
       private boolean isAdmin_ ;
+      /**
+       * <code>optional bool isAdmin = 4;</code>
+       */
       public boolean hasIsAdmin() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional bool isAdmin = 4;</code>
+       */
       public boolean getIsAdmin() {
         return isAdmin_;
       }
+      /**
+       * <code>optional bool isAdmin = 4;</code>
+       */
       public Builder setIsAdmin(boolean value) {
         bitField0_ |= 0x00000008;
         isAdmin_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional bool isAdmin = 4;</code>
+       */
       public Builder clearIsAdmin() {
         bitField0_ = (bitField0_ & ~0x00000008);
         isAdmin_ = false;
         onChanged();
         return this;
       }
-      
-      // optional int32 chatId = 5;
+
       private int chatId_ ;
+      /**
+       * <code>optional int32 chatId = 5;</code>
+       */
       public boolean hasChatId() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional int32 chatId = 5;</code>
+       */
       public int getChatId() {
         return chatId_;
       }
+      /**
+       * <code>optional int32 chatId = 5;</code>
+       */
       public Builder setChatId(int value) {
         bitField0_ |= 0x00000010;
         chatId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 chatId = 5;</code>
+       */
       public Builder clearChatId() {
         bitField0_ = (bitField0_ & ~0x00000010);
         chatId_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.GroupChatMessageProto)
     }
-    
+
     static {
       defaultInstance = new GroupChatMessageProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GroupChatMessageProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ColorProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -2032,43 +2591,38 @@ public final class ChatProto {
       "\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002B\013B\tChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor,
-              new java.lang.String[] { "PrivateChatPostId", "Poster", "Recipient", "TimeOfPost", "Content", },
-              com.lvl6.proto.ChatProto.PrivateChatPostProto.class,
-              com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder.class);
-          internal_static_com_lvl6_proto_ColorProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ColorProto_descriptor,
-              new java.lang.String[] { "Red", "Green", "Blue", },
-              com.lvl6.proto.ChatProto.ColorProto.class,
-              com.lvl6.proto.ChatProto.ColorProto.Builder.class);
-          internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor,
-              new java.lang.String[] { "Sender", "TimeOfChat", "Content", "IsAdmin", "ChatId", },
-              com.lvl6.proto.ChatProto.GroupChatMessageProto.class,
-              com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_PrivateChatPostProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PrivateChatPostProto_descriptor,
+        new java.lang.String[] { "PrivateChatPostId", "Poster", "Recipient", "TimeOfPost", "Content", });
+    internal_static_com_lvl6_proto_ColorProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_ColorProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ColorProto_descriptor,
+        new java.lang.String[] { "Red", "Green", "Blue", });
+    internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_GroupChatMessageProto_descriptor,
+        new java.lang.String[] { "Sender", "TimeOfChat", "Content", "IsAdmin", "ChatId", });
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

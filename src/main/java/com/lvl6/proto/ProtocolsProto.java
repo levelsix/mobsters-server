@@ -8,178 +8,705 @@ public final class ProtocolsProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.lvl6.proto.EventProtocolRequest}
+   */
   public enum EventProtocolRequest
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>C_STARTUP_EVENT = 1;</code>
+     */
     C_STARTUP_EVENT(0, 1),
+    /**
+     * <code>C_IN_APP_PURCHASE_EVENT = 2;</code>
+     */
     C_IN_APP_PURCHASE_EVENT(1, 2),
+    /**
+     * <code>C_PURCHASE_NORM_STRUCTURE_EVENT = 3;</code>
+     */
     C_PURCHASE_NORM_STRUCTURE_EVENT(2, 3),
+    /**
+     * <code>C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT = 4;</code>
+     */
     C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT(3, 4),
+    /**
+     * <code>C_SET_FACEBOOK_ID_EVENT = 5;</code>
+     */
     C_SET_FACEBOOK_ID_EVENT(4, 5),
+    /**
+     * <code>C_UPGRADE_NORM_STRUCTURE_EVENT = 6;</code>
+     */
     C_UPGRADE_NORM_STRUCTURE_EVENT(5, 6),
+    /**
+     * <code>C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT = 7;</code>
+     */
     C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT(6, 7),
+    /**
+     * <code>C_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT = 8;</code>
+     */
     C_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT(7, 8),
+    /**
+     * <code>C_NORM_STRUCT_WAIT_COMPLETE_EVENT = 9;</code>
+     */
     C_NORM_STRUCT_WAIT_COMPLETE_EVENT(8, 9),
+    /**
+     * <code>C_LOAD_PLAYER_CITY_EVENT = 10;</code>
+     */
     C_LOAD_PLAYER_CITY_EVENT(9, 10),
+    /**
+     * <code>C_EXCHANGE_GEMS_FOR_RESOURCES_EVENT = 11;</code>
+     */
     C_EXCHANGE_GEMS_FOR_RESOURCES_EVENT(10, 11),
+    /**
+     * <code>C_QUEST_ACCEPT_EVENT = 12;</code>
+     */
     C_QUEST_ACCEPT_EVENT(11, 12),
+    /**
+     * <code>C_QUEST_PROGRESS_EVENT = 13;</code>
+     */
     C_QUEST_PROGRESS_EVENT(12, 13),
+    /**
+     * <code>C_QUEST_REDEEM_EVENT = 14;</code>
+     */
     C_QUEST_REDEEM_EVENT(13, 14),
+    /**
+     * <code>C_PURCHASE_CITY_EXPANSION_EVENT = 15;</code>
+     */
     C_PURCHASE_CITY_EXPANSION_EVENT(14, 15),
+    /**
+     * <code>C_EXPANSION_WAIT_COMPLETE_EVENT = 16;</code>
+     */
     C_EXPANSION_WAIT_COMPLETE_EVENT(15, 16),
+    /**
+     * <code>C_LEVEL_UP_EVENT = 17;</code>
+     */
     C_LEVEL_UP_EVENT(16, 17),
+    /**
+     * <code>C_ENABLE_APNS_EVENT = 18;</code>
+     */
     C_ENABLE_APNS_EVENT(17, 18),
+    /**
+     * <code>C_USER_CREATE_EVENT = 19;</code>
+     */
     C_USER_CREATE_EVENT(18, 19),
+    /**
+     * <code>C_LOAD_CITY_EVENT = 20;</code>
+     */
     C_LOAD_CITY_EVENT(19, 20),
+    /**
+     * <code>C_RETRIEVE_USERS_FOR_USER_IDS_EVENT = 21;</code>
+     */
     C_RETRIEVE_USERS_FOR_USER_IDS_EVENT(20, 21),
+    /**
+     * <code>C_EARN_FREE_DIAMONDS_EVENT = 22;</code>
+     */
     C_EARN_FREE_DIAMONDS_EVENT(21, 22),
+    /**
+     * <code>C_SEND_GROUP_CHAT_EVENT = 23;</code>
+     */
     C_SEND_GROUP_CHAT_EVENT(22, 23),
+    /**
+     * <code>C_CREATE_CLAN_EVENT = 24;</code>
+     */
     C_CREATE_CLAN_EVENT(23, 24),
+    /**
+     * <code>C_LEAVE_CLAN_EVENT = 25;</code>
+     */
     C_LEAVE_CLAN_EVENT(24, 25),
+    /**
+     * <code>C_REQUEST_JOIN_CLAN_EVENT = 26;</code>
+     */
     C_REQUEST_JOIN_CLAN_EVENT(25, 26),
+    /**
+     * <code>C_RETRACT_REQUEST_JOIN_CLAN_EVENT = 27;</code>
+     */
     C_RETRACT_REQUEST_JOIN_CLAN_EVENT(26, 27),
+    /**
+     * <code>C_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT = 28;</code>
+     */
     C_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT(27, 28),
+    /**
+     * <code>C_TRANSFER_CLAN_OWNERSHIP = 29;</code>
+     */
     C_TRANSFER_CLAN_OWNERSHIP(28, 29),
+    /**
+     * <code>C_RETRIEVE_CLAN_INFO_EVENT = 30;</code>
+     */
     C_RETRIEVE_CLAN_INFO_EVENT(29, 30),
+    /**
+     * <code>C_CHANGE_CLAN_SETTINGS_EVENT = 31;</code>
+     *
+     * <pre>
+     *C_CHANGE_CLAN_DESCRIPTION_EVENT = 31;
+     * </pre>
+     */
     C_CHANGE_CLAN_SETTINGS_EVENT(30, 31),
+    /**
+     * <code>C_BOOT_PLAYER_FROM_CLAN_EVENT = 32;</code>
+     */
     C_BOOT_PLAYER_FROM_CLAN_EVENT(31, 32),
+    /**
+     * <code>C_PICK_LOCK_BOX_EVENT = 33;</code>
+     */
     C_PICK_LOCK_BOX_EVENT(32, 33),
+    /**
+     * <code>C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT = 34;</code>
+     */
     C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT(33, 34),
+    /**
+     * <code>C_SUBMIT_MONSTER_ENHANCEMENT_EVENT = 35;</code>
+     */
     C_SUBMIT_MONSTER_ENHANCEMENT_EVENT(34, 35),
+    /**
+     * <code>C_EVOLVE_MONSTER_EVENT = 36;</code>
+     */
     C_EVOLVE_MONSTER_EVENT(35, 36),
+    /**
+     * <code>C_PURCHASE_BOOSTER_PACK_EVENT = 37;</code>
+     */
     C_PURCHASE_BOOSTER_PACK_EVENT(36, 37),
+    /**
+     * <code>C_EVOLUTION_FINISHED_EVENT = 38;</code>
+     */
     C_EVOLUTION_FINISHED_EVENT(37, 38),
+    /**
+     * <code>C_ACHIEVEMENT_PROGRESS_EVENT = 39;</code>
+     *
+     * <pre>
+     *C_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+     * </pre>
+     */
     C_ACHIEVEMENT_PROGRESS_EVENT(38, 39),
+    /**
+     * <code>C_PRIVATE_CHAT_POST_EVENT = 40;</code>
+     */
     C_PRIVATE_CHAT_POST_EVENT(39, 40),
+    /**
+     * <code>C_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;</code>
+     */
     C_RETRIEVE_PRIVATE_CHAT_POST_EVENT(40, 41),
+    /**
+     * <code>C_REDEEM_USER_LOCK_BOX_ITEMS_EVENT = 42;</code>
+     */
     C_REDEEM_USER_LOCK_BOX_ITEMS_EVENT(41, 42),
+    /**
+     * <code>C_BEGIN_DUNGEON_EVENT = 43;</code>
+     */
     C_BEGIN_DUNGEON_EVENT(42, 43),
+    /**
+     * <code>C_END_DUNGEON_EVENT = 44;</code>
+     */
     C_END_DUNGEON_EVENT(43, 44),
+    /**
+     * <code>C_REVIVE_IN_DUNGEON_EVENT = 45;</code>
+     */
     C_REVIVE_IN_DUNGEON_EVENT(44, 45),
+    /**
+     * <code>C_QUEUE_UP_EVENT = 46;</code>
+     */
     C_QUEUE_UP_EVENT(45, 46),
+    /**
+     * <code>C_UPDATE_MONSTER_HEALTH_EVENT = 47;</code>
+     */
     C_UPDATE_MONSTER_HEALTH_EVENT(46, 47),
+    /**
+     * <code>C_HEAL_MONSTER_EVENT = 48;</code>
+     */
     C_HEAL_MONSTER_EVENT(47, 48),
+    /**
+     * <code>C_ACHIEVEMENT_REDEEM_EVENT = 49;</code>
+     *
+     * <pre>
+     *C_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+     * </pre>
+     */
     C_ACHIEVEMENT_REDEEM_EVENT(48, 49),
+    /**
+     * <code>C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;</code>
+     */
     C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT(49, 50),
+    /**
+     * <code>C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;</code>
+     */
     C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT(50, 51),
+    /**
+     * <code>C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT = 52;</code>
+     */
     C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT(51, 52),
+    /**
+     * <code>C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT = 53;</code>
+     */
     C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT(52, 53),
+    /**
+     * <code>C_COMBINE_USER_MONSTER_PIECES_EVENT = 54;</code>
+     */
     C_COMBINE_USER_MONSTER_PIECES_EVENT(53, 54),
+    /**
+     * <code>C_SELL_USER_MONSTER_EVENT = 55;</code>
+     */
     C_SELL_USER_MONSTER_EVENT(54, 55),
+    /**
+     * <code>C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;</code>
+     */
     C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT(55, 56),
+    /**
+     * <code>C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;</code>
+     */
     C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT(56, 57),
+    /**
+     * <code>C_UPDATE_USER_CURRENCY_EVENT = 59;</code>
+     */
     C_UPDATE_USER_CURRENCY_EVENT(57, 59),
+    /**
+     * <code>C_BEGIN_PVP_BATTLE_EVENT = 60;</code>
+     */
     C_BEGIN_PVP_BATTLE_EVENT(58, 60),
+    /**
+     * <code>C_END_PVP_BATTLE_EVENT = 61;</code>
+     */
     C_END_PVP_BATTLE_EVENT(59, 61),
+    /**
+     * <code>C_BEGIN_CLAN_RAID_EVENT = 62;</code>
+     */
     C_BEGIN_CLAN_RAID_EVENT(60, 62),
+    /**
+     * <code>C_ATTACK_CLAN_RAID_MONSTER_EVENT = 63;</code>
+     */
     C_ATTACK_CLAN_RAID_MONSTER_EVENT(61, 63),
+    /**
+     * <code>C_RECORD_CLAN_RAID_STATS_EVENT = 64;</code>
+     */
     C_RECORD_CLAN_RAID_STATS_EVENT(62, 64),
+    /**
+     * <code>C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT = 65;</code>
+     */
     C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT(63, 65),
+    /**
+     * <code>C_SET_GAME_CENTER_ID_EVENT = 66;</code>
+     */
     C_SET_GAME_CENTER_ID_EVENT(64, 66),
+    /**
+     * <code>C_SPAWN_OBSTACLE_EVENT = 67;</code>
+     */
     C_SPAWN_OBSTACLE_EVENT(65, 67),
+    /**
+     * <code>C_BEGIN_OBSTACLE_REMOVAL_EVENT = 68;</code>
+     */
     C_BEGIN_OBSTACLE_REMOVAL_EVENT(66, 68),
+    /**
+     * <code>C_OBSTACLE_REMOVAL_COMPLETE_EVENT = 69;</code>
+     */
     C_OBSTACLE_REMOVAL_COMPLETE_EVENT(67, 69),
+    /**
+     * <code>C_SPAWN_MINI_JOB_EVENT = 70;</code>
+     */
     C_SPAWN_MINI_JOB_EVENT(68, 70),
+    /**
+     * <code>C_BEGIN_MINI_JOB_EVENT = 71;</code>
+     */
     C_BEGIN_MINI_JOB_EVENT(69, 71),
+    /**
+     * <code>C_COMPLETE_MINI_JOB_EVENT = 72;</code>
+     */
     C_COMPLETE_MINI_JOB_EVENT(70, 72),
+    /**
+     * <code>C_REDEEM_MINI_JOB_EVENT = 73;</code>
+     */
     C_REDEEM_MINI_JOB_EVENT(71, 73),
+    /**
+     * <code>C_SET_AVATAR_MONSTER_EVENT = 74;</code>
+     */
     C_SET_AVATAR_MONSTER_EVENT(72, 74),
+    /**
+     * <code>C_RESTRICT_USER_MONSTER_EVENT = 75;</code>
+     */
     C_RESTRICT_USER_MONSTER_EVENT(73, 75),
+    /**
+     * <code>C_UNRESTRICT_USER_MONSTER_EVENT = 76;</code>
+     */
     C_UNRESTRICT_USER_MONSTER_EVENT(74, 76),
+    /**
+     * <code>C_ENHANCE_MONSTER_EVENT = 77;</code>
+     */
     C_ENHANCE_MONSTER_EVENT(75, 77),
+    /**
+     * <code>C_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;</code>
+     */
     C_TRADE_ITEM_FOR_BOOSTER_EVENT(76, 78),
+    /**
+     * <code>C_SOLICIT_CAN_HELP_EVENT = 79;</code>
+     */
     C_SOLICIT_CAN_HELP_EVENT(77, 79),
+    /**
+     * <code>C_GIVE_CLAN_HELP_EVENT = 80;</code>
+     */
     C_GIVE_CLAN_HELP_EVENT(78, 80),
+    /**
+     * <code>C_END_CLAN_HELP_EVENT = 81;</code>
+     */
     C_END_CLAN_HELP_EVENT(79, 81),
+    /**
+     * <code>C_LOGOUT_EVENT = 101;</code>
+     *
+     * <pre>
+     *STOP AT 99, SKIP TO 200
+     * </pre>
+     */
     C_LOGOUT_EVENT(80, 101),
+    /**
+     * <code>C_DEV_EVENT = 200;</code>
+     */
     C_DEV_EVENT(81, 200),
     ;
-    
+
+    /**
+     * <code>C_STARTUP_EVENT = 1;</code>
+     */
     public static final int C_STARTUP_EVENT_VALUE = 1;
+    /**
+     * <code>C_IN_APP_PURCHASE_EVENT = 2;</code>
+     */
     public static final int C_IN_APP_PURCHASE_EVENT_VALUE = 2;
+    /**
+     * <code>C_PURCHASE_NORM_STRUCTURE_EVENT = 3;</code>
+     */
     public static final int C_PURCHASE_NORM_STRUCTURE_EVENT_VALUE = 3;
+    /**
+     * <code>C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT = 4;</code>
+     */
     public static final int C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT_VALUE = 4;
+    /**
+     * <code>C_SET_FACEBOOK_ID_EVENT = 5;</code>
+     */
     public static final int C_SET_FACEBOOK_ID_EVENT_VALUE = 5;
+    /**
+     * <code>C_UPGRADE_NORM_STRUCTURE_EVENT = 6;</code>
+     */
     public static final int C_UPGRADE_NORM_STRUCTURE_EVENT_VALUE = 6;
+    /**
+     * <code>C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT = 7;</code>
+     */
     public static final int C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT_VALUE = 7;
+    /**
+     * <code>C_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT = 8;</code>
+     */
     public static final int C_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT_VALUE = 8;
+    /**
+     * <code>C_NORM_STRUCT_WAIT_COMPLETE_EVENT = 9;</code>
+     */
     public static final int C_NORM_STRUCT_WAIT_COMPLETE_EVENT_VALUE = 9;
+    /**
+     * <code>C_LOAD_PLAYER_CITY_EVENT = 10;</code>
+     */
     public static final int C_LOAD_PLAYER_CITY_EVENT_VALUE = 10;
+    /**
+     * <code>C_EXCHANGE_GEMS_FOR_RESOURCES_EVENT = 11;</code>
+     */
     public static final int C_EXCHANGE_GEMS_FOR_RESOURCES_EVENT_VALUE = 11;
+    /**
+     * <code>C_QUEST_ACCEPT_EVENT = 12;</code>
+     */
     public static final int C_QUEST_ACCEPT_EVENT_VALUE = 12;
+    /**
+     * <code>C_QUEST_PROGRESS_EVENT = 13;</code>
+     */
     public static final int C_QUEST_PROGRESS_EVENT_VALUE = 13;
+    /**
+     * <code>C_QUEST_REDEEM_EVENT = 14;</code>
+     */
     public static final int C_QUEST_REDEEM_EVENT_VALUE = 14;
+    /**
+     * <code>C_PURCHASE_CITY_EXPANSION_EVENT = 15;</code>
+     */
     public static final int C_PURCHASE_CITY_EXPANSION_EVENT_VALUE = 15;
+    /**
+     * <code>C_EXPANSION_WAIT_COMPLETE_EVENT = 16;</code>
+     */
     public static final int C_EXPANSION_WAIT_COMPLETE_EVENT_VALUE = 16;
+    /**
+     * <code>C_LEVEL_UP_EVENT = 17;</code>
+     */
     public static final int C_LEVEL_UP_EVENT_VALUE = 17;
+    /**
+     * <code>C_ENABLE_APNS_EVENT = 18;</code>
+     */
     public static final int C_ENABLE_APNS_EVENT_VALUE = 18;
+    /**
+     * <code>C_USER_CREATE_EVENT = 19;</code>
+     */
     public static final int C_USER_CREATE_EVENT_VALUE = 19;
+    /**
+     * <code>C_LOAD_CITY_EVENT = 20;</code>
+     */
     public static final int C_LOAD_CITY_EVENT_VALUE = 20;
+    /**
+     * <code>C_RETRIEVE_USERS_FOR_USER_IDS_EVENT = 21;</code>
+     */
     public static final int C_RETRIEVE_USERS_FOR_USER_IDS_EVENT_VALUE = 21;
+    /**
+     * <code>C_EARN_FREE_DIAMONDS_EVENT = 22;</code>
+     */
     public static final int C_EARN_FREE_DIAMONDS_EVENT_VALUE = 22;
+    /**
+     * <code>C_SEND_GROUP_CHAT_EVENT = 23;</code>
+     */
     public static final int C_SEND_GROUP_CHAT_EVENT_VALUE = 23;
+    /**
+     * <code>C_CREATE_CLAN_EVENT = 24;</code>
+     */
     public static final int C_CREATE_CLAN_EVENT_VALUE = 24;
+    /**
+     * <code>C_LEAVE_CLAN_EVENT = 25;</code>
+     */
     public static final int C_LEAVE_CLAN_EVENT_VALUE = 25;
+    /**
+     * <code>C_REQUEST_JOIN_CLAN_EVENT = 26;</code>
+     */
     public static final int C_REQUEST_JOIN_CLAN_EVENT_VALUE = 26;
+    /**
+     * <code>C_RETRACT_REQUEST_JOIN_CLAN_EVENT = 27;</code>
+     */
     public static final int C_RETRACT_REQUEST_JOIN_CLAN_EVENT_VALUE = 27;
+    /**
+     * <code>C_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT = 28;</code>
+     */
     public static final int C_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT_VALUE = 28;
+    /**
+     * <code>C_TRANSFER_CLAN_OWNERSHIP = 29;</code>
+     */
     public static final int C_TRANSFER_CLAN_OWNERSHIP_VALUE = 29;
+    /**
+     * <code>C_RETRIEVE_CLAN_INFO_EVENT = 30;</code>
+     */
     public static final int C_RETRIEVE_CLAN_INFO_EVENT_VALUE = 30;
+    /**
+     * <code>C_CHANGE_CLAN_SETTINGS_EVENT = 31;</code>
+     *
+     * <pre>
+     *C_CHANGE_CLAN_DESCRIPTION_EVENT = 31;
+     * </pre>
+     */
     public static final int C_CHANGE_CLAN_SETTINGS_EVENT_VALUE = 31;
+    /**
+     * <code>C_BOOT_PLAYER_FROM_CLAN_EVENT = 32;</code>
+     */
     public static final int C_BOOT_PLAYER_FROM_CLAN_EVENT_VALUE = 32;
+    /**
+     * <code>C_PICK_LOCK_BOX_EVENT = 33;</code>
+     */
     public static final int C_PICK_LOCK_BOX_EVENT_VALUE = 33;
+    /**
+     * <code>C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT = 34;</code>
+     */
     public static final int C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT_VALUE = 34;
+    /**
+     * <code>C_SUBMIT_MONSTER_ENHANCEMENT_EVENT = 35;</code>
+     */
     public static final int C_SUBMIT_MONSTER_ENHANCEMENT_EVENT_VALUE = 35;
+    /**
+     * <code>C_EVOLVE_MONSTER_EVENT = 36;</code>
+     */
     public static final int C_EVOLVE_MONSTER_EVENT_VALUE = 36;
+    /**
+     * <code>C_PURCHASE_BOOSTER_PACK_EVENT = 37;</code>
+     */
     public static final int C_PURCHASE_BOOSTER_PACK_EVENT_VALUE = 37;
+    /**
+     * <code>C_EVOLUTION_FINISHED_EVENT = 38;</code>
+     */
     public static final int C_EVOLUTION_FINISHED_EVENT_VALUE = 38;
+    /**
+     * <code>C_ACHIEVEMENT_PROGRESS_EVENT = 39;</code>
+     *
+     * <pre>
+     *C_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+     * </pre>
+     */
     public static final int C_ACHIEVEMENT_PROGRESS_EVENT_VALUE = 39;
+    /**
+     * <code>C_PRIVATE_CHAT_POST_EVENT = 40;</code>
+     */
     public static final int C_PRIVATE_CHAT_POST_EVENT_VALUE = 40;
+    /**
+     * <code>C_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;</code>
+     */
     public static final int C_RETRIEVE_PRIVATE_CHAT_POST_EVENT_VALUE = 41;
+    /**
+     * <code>C_REDEEM_USER_LOCK_BOX_ITEMS_EVENT = 42;</code>
+     */
     public static final int C_REDEEM_USER_LOCK_BOX_ITEMS_EVENT_VALUE = 42;
+    /**
+     * <code>C_BEGIN_DUNGEON_EVENT = 43;</code>
+     */
     public static final int C_BEGIN_DUNGEON_EVENT_VALUE = 43;
+    /**
+     * <code>C_END_DUNGEON_EVENT = 44;</code>
+     */
     public static final int C_END_DUNGEON_EVENT_VALUE = 44;
+    /**
+     * <code>C_REVIVE_IN_DUNGEON_EVENT = 45;</code>
+     */
     public static final int C_REVIVE_IN_DUNGEON_EVENT_VALUE = 45;
+    /**
+     * <code>C_QUEUE_UP_EVENT = 46;</code>
+     */
     public static final int C_QUEUE_UP_EVENT_VALUE = 46;
+    /**
+     * <code>C_UPDATE_MONSTER_HEALTH_EVENT = 47;</code>
+     */
     public static final int C_UPDATE_MONSTER_HEALTH_EVENT_VALUE = 47;
+    /**
+     * <code>C_HEAL_MONSTER_EVENT = 48;</code>
+     */
     public static final int C_HEAL_MONSTER_EVENT_VALUE = 48;
+    /**
+     * <code>C_ACHIEVEMENT_REDEEM_EVENT = 49;</code>
+     *
+     * <pre>
+     *C_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+     * </pre>
+     */
     public static final int C_ACHIEVEMENT_REDEEM_EVENT_VALUE = 49;
+    /**
+     * <code>C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;</code>
+     */
     public static final int C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT_VALUE = 50;
+    /**
+     * <code>C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;</code>
+     */
     public static final int C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT_VALUE = 51;
+    /**
+     * <code>C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT = 52;</code>
+     */
     public static final int C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT_VALUE = 52;
+    /**
+     * <code>C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT = 53;</code>
+     */
     public static final int C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT_VALUE = 53;
+    /**
+     * <code>C_COMBINE_USER_MONSTER_PIECES_EVENT = 54;</code>
+     */
     public static final int C_COMBINE_USER_MONSTER_PIECES_EVENT_VALUE = 54;
+    /**
+     * <code>C_SELL_USER_MONSTER_EVENT = 55;</code>
+     */
     public static final int C_SELL_USER_MONSTER_EVENT_VALUE = 55;
+    /**
+     * <code>C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;</code>
+     */
     public static final int C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT_VALUE = 56;
+    /**
+     * <code>C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;</code>
+     */
     public static final int C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT_VALUE = 57;
+    /**
+     * <code>C_UPDATE_USER_CURRENCY_EVENT = 59;</code>
+     */
     public static final int C_UPDATE_USER_CURRENCY_EVENT_VALUE = 59;
+    /**
+     * <code>C_BEGIN_PVP_BATTLE_EVENT = 60;</code>
+     */
     public static final int C_BEGIN_PVP_BATTLE_EVENT_VALUE = 60;
+    /**
+     * <code>C_END_PVP_BATTLE_EVENT = 61;</code>
+     */
     public static final int C_END_PVP_BATTLE_EVENT_VALUE = 61;
+    /**
+     * <code>C_BEGIN_CLAN_RAID_EVENT = 62;</code>
+     */
     public static final int C_BEGIN_CLAN_RAID_EVENT_VALUE = 62;
+    /**
+     * <code>C_ATTACK_CLAN_RAID_MONSTER_EVENT = 63;</code>
+     */
     public static final int C_ATTACK_CLAN_RAID_MONSTER_EVENT_VALUE = 63;
+    /**
+     * <code>C_RECORD_CLAN_RAID_STATS_EVENT = 64;</code>
+     */
     public static final int C_RECORD_CLAN_RAID_STATS_EVENT_VALUE = 64;
+    /**
+     * <code>C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT = 65;</code>
+     */
     public static final int C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT_VALUE = 65;
+    /**
+     * <code>C_SET_GAME_CENTER_ID_EVENT = 66;</code>
+     */
     public static final int C_SET_GAME_CENTER_ID_EVENT_VALUE = 66;
+    /**
+     * <code>C_SPAWN_OBSTACLE_EVENT = 67;</code>
+     */
     public static final int C_SPAWN_OBSTACLE_EVENT_VALUE = 67;
+    /**
+     * <code>C_BEGIN_OBSTACLE_REMOVAL_EVENT = 68;</code>
+     */
     public static final int C_BEGIN_OBSTACLE_REMOVAL_EVENT_VALUE = 68;
+    /**
+     * <code>C_OBSTACLE_REMOVAL_COMPLETE_EVENT = 69;</code>
+     */
     public static final int C_OBSTACLE_REMOVAL_COMPLETE_EVENT_VALUE = 69;
+    /**
+     * <code>C_SPAWN_MINI_JOB_EVENT = 70;</code>
+     */
     public static final int C_SPAWN_MINI_JOB_EVENT_VALUE = 70;
+    /**
+     * <code>C_BEGIN_MINI_JOB_EVENT = 71;</code>
+     */
     public static final int C_BEGIN_MINI_JOB_EVENT_VALUE = 71;
+    /**
+     * <code>C_COMPLETE_MINI_JOB_EVENT = 72;</code>
+     */
     public static final int C_COMPLETE_MINI_JOB_EVENT_VALUE = 72;
+    /**
+     * <code>C_REDEEM_MINI_JOB_EVENT = 73;</code>
+     */
     public static final int C_REDEEM_MINI_JOB_EVENT_VALUE = 73;
+    /**
+     * <code>C_SET_AVATAR_MONSTER_EVENT = 74;</code>
+     */
     public static final int C_SET_AVATAR_MONSTER_EVENT_VALUE = 74;
+    /**
+     * <code>C_RESTRICT_USER_MONSTER_EVENT = 75;</code>
+     */
     public static final int C_RESTRICT_USER_MONSTER_EVENT_VALUE = 75;
+    /**
+     * <code>C_UNRESTRICT_USER_MONSTER_EVENT = 76;</code>
+     */
     public static final int C_UNRESTRICT_USER_MONSTER_EVENT_VALUE = 76;
+    /**
+     * <code>C_ENHANCE_MONSTER_EVENT = 77;</code>
+     */
     public static final int C_ENHANCE_MONSTER_EVENT_VALUE = 77;
+    /**
+     * <code>C_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;</code>
+     */
     public static final int C_TRADE_ITEM_FOR_BOOSTER_EVENT_VALUE = 78;
+    /**
+     * <code>C_SOLICIT_CAN_HELP_EVENT = 79;</code>
+     */
     public static final int C_SOLICIT_CAN_HELP_EVENT_VALUE = 79;
+    /**
+     * <code>C_GIVE_CLAN_HELP_EVENT = 80;</code>
+     */
     public static final int C_GIVE_CLAN_HELP_EVENT_VALUE = 80;
+    /**
+     * <code>C_END_CLAN_HELP_EVENT = 81;</code>
+     */
     public static final int C_END_CLAN_HELP_EVENT_VALUE = 81;
+    /**
+     * <code>C_LOGOUT_EVENT = 101;</code>
+     *
+     * <pre>
+     *STOP AT 99, SKIP TO 200
+     * </pre>
+     */
     public static final int C_LOGOUT_EVENT_VALUE = 101;
+    /**
+     * <code>C_DEV_EVENT = 200;</code>
+     */
     public static final int C_DEV_EVENT_VALUE = 200;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static EventProtocolRequest valueOf(int value) {
       switch (value) {
         case 1: return C_STARTUP_EVENT;
@@ -267,7 +794,7 @@ public final class ProtocolsProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<EventProtocolRequest>
         internalGetValueMap() {
       return internalValueMap;
@@ -279,7 +806,7 @@ public final class ProtocolsProto {
               return EventProtocolRequest.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -292,11 +819,9 @@ public final class ProtocolsProto {
         getDescriptor() {
       return com.lvl6.proto.ProtocolsProto.getDescriptor().getEnumTypes().get(0);
     }
-    
-    private static final EventProtocolRequest[] VALUES = {
-      C_STARTUP_EVENT, C_IN_APP_PURCHASE_EVENT, C_PURCHASE_NORM_STRUCTURE_EVENT, C_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT, C_SET_FACEBOOK_ID_EVENT, C_UPGRADE_NORM_STRUCTURE_EVENT, C_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT, C_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT, C_NORM_STRUCT_WAIT_COMPLETE_EVENT, C_LOAD_PLAYER_CITY_EVENT, C_EXCHANGE_GEMS_FOR_RESOURCES_EVENT, C_QUEST_ACCEPT_EVENT, C_QUEST_PROGRESS_EVENT, C_QUEST_REDEEM_EVENT, C_PURCHASE_CITY_EXPANSION_EVENT, C_EXPANSION_WAIT_COMPLETE_EVENT, C_LEVEL_UP_EVENT, C_ENABLE_APNS_EVENT, C_USER_CREATE_EVENT, C_LOAD_CITY_EVENT, C_RETRIEVE_USERS_FOR_USER_IDS_EVENT, C_EARN_FREE_DIAMONDS_EVENT, C_SEND_GROUP_CHAT_EVENT, C_CREATE_CLAN_EVENT, C_LEAVE_CLAN_EVENT, C_REQUEST_JOIN_CLAN_EVENT, C_RETRACT_REQUEST_JOIN_CLAN_EVENT, C_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT, C_TRANSFER_CLAN_OWNERSHIP, C_RETRIEVE_CLAN_INFO_EVENT, C_CHANGE_CLAN_SETTINGS_EVENT, C_BOOT_PLAYER_FROM_CLAN_EVENT, C_PICK_LOCK_BOX_EVENT, C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT, C_SUBMIT_MONSTER_ENHANCEMENT_EVENT, C_EVOLVE_MONSTER_EVENT, C_PURCHASE_BOOSTER_PACK_EVENT, C_EVOLUTION_FINISHED_EVENT, C_ACHIEVEMENT_PROGRESS_EVENT, C_PRIVATE_CHAT_POST_EVENT, C_RETRIEVE_PRIVATE_CHAT_POST_EVENT, C_REDEEM_USER_LOCK_BOX_ITEMS_EVENT, C_BEGIN_DUNGEON_EVENT, C_END_DUNGEON_EVENT, C_REVIVE_IN_DUNGEON_EVENT, C_QUEUE_UP_EVENT, C_UPDATE_MONSTER_HEALTH_EVENT, C_HEAL_MONSTER_EVENT, C_ACHIEVEMENT_REDEEM_EVENT, C_ADD_MONSTER_TO_BATTLE_TEAM_EVENT, C_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT, C_INCREASE_MONSTER_INVENTORY_SLOT_EVENT, C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT, C_COMBINE_USER_MONSTER_PIECES_EVENT, C_SELL_USER_MONSTER_EVENT, C_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT, C_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT, C_UPDATE_USER_CURRENCY_EVENT, C_BEGIN_PVP_BATTLE_EVENT, C_END_PVP_BATTLE_EVENT, C_BEGIN_CLAN_RAID_EVENT, C_ATTACK_CLAN_RAID_MONSTER_EVENT, C_RECORD_CLAN_RAID_STATS_EVENT, C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT, C_SET_GAME_CENTER_ID_EVENT, C_SPAWN_OBSTACLE_EVENT, C_BEGIN_OBSTACLE_REMOVAL_EVENT, C_OBSTACLE_REMOVAL_COMPLETE_EVENT, C_SPAWN_MINI_JOB_EVENT, C_BEGIN_MINI_JOB_EVENT, C_COMPLETE_MINI_JOB_EVENT, C_REDEEM_MINI_JOB_EVENT, C_SET_AVATAR_MONSTER_EVENT, C_RESTRICT_USER_MONSTER_EVENT, C_UNRESTRICT_USER_MONSTER_EVENT, C_ENHANCE_MONSTER_EVENT, C_TRADE_ITEM_FOR_BOOSTER_EVENT, C_SOLICIT_CAN_HELP_EVENT, C_GIVE_CLAN_HELP_EVENT, C_END_CLAN_HELP_EVENT, C_LOGOUT_EVENT, C_DEV_EVENT, 
-    };
-    
+
+    private static final EventProtocolRequest[] VALUES = values();
+
     public static EventProtocolRequest valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -305,206 +830,781 @@ public final class ProtocolsProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private EventProtocolRequest(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EventProtocolRequest)
   }
-  
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.EventProtocolResponse}
+   */
   public enum EventProtocolResponse
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>S_STARTUP_EVENT = 1;</code>
+     */
     S_STARTUP_EVENT(0, 1),
+    /**
+     * <code>S_IN_APP_PURCHASE_EVENT = 2;</code>
+     */
     S_IN_APP_PURCHASE_EVENT(1, 2),
+    /**
+     * <code>S_PURCHASE_NORM_STRUCTURE_EVENT = 3;</code>
+     */
     S_PURCHASE_NORM_STRUCTURE_EVENT(2, 3),
+    /**
+     * <code>S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT = 4;</code>
+     */
     S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT(3, 4),
+    /**
+     * <code>S_SET_FACEBOOK_ID_EVENT = 5;</code>
+     */
     S_SET_FACEBOOK_ID_EVENT(4, 5),
+    /**
+     * <code>S_UPGRADE_NORM_STRUCTURE_EVENT = 6;</code>
+     */
     S_UPGRADE_NORM_STRUCTURE_EVENT(5, 6),
+    /**
+     * <code>S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT = 7;</code>
+     */
     S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT(6, 7),
+    /**
+     * <code>S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT = 8;</code>
+     */
     S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT(7, 8),
+    /**
+     * <code>S_NORM_STRUCT_WAIT_COMPLETE_EVENT = 9;</code>
+     */
     S_NORM_STRUCT_WAIT_COMPLETE_EVENT(8, 9),
+    /**
+     * <code>S_LOAD_PLAYER_CITY_EVENT = 10;</code>
+     */
     S_LOAD_PLAYER_CITY_EVENT(9, 10),
+    /**
+     * <code>S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT = 11;</code>
+     */
     S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT(10, 11),
+    /**
+     * <code>S_QUEST_ACCEPT_EVENT = 12;</code>
+     */
     S_QUEST_ACCEPT_EVENT(11, 12),
+    /**
+     * <code>S_QUEST_PROGRESS_EVENT = 13;</code>
+     */
     S_QUEST_PROGRESS_EVENT(12, 13),
+    /**
+     * <code>S_QUEST_REDEEM_EVENT = 14;</code>
+     */
     S_QUEST_REDEEM_EVENT(13, 14),
+    /**
+     * <code>S_PURCHASE_CITY_EXPANSION_EVENT = 15;</code>
+     */
     S_PURCHASE_CITY_EXPANSION_EVENT(14, 15),
+    /**
+     * <code>S_EXPANSION_WAIT_COMPLETE_EVENT = 16;</code>
+     */
     S_EXPANSION_WAIT_COMPLETE_EVENT(15, 16),
+    /**
+     * <code>S_LEVEL_UP_EVENT = 17;</code>
+     */
     S_LEVEL_UP_EVENT(16, 17),
+    /**
+     * <code>S_ENABLE_APNS_EVENT = 18;</code>
+     */
     S_ENABLE_APNS_EVENT(17, 18),
+    /**
+     * <code>S_USER_CREATE_EVENT = 19;</code>
+     */
     S_USER_CREATE_EVENT(18, 19),
+    /**
+     * <code>S_LOAD_CITY_EVENT = 20;</code>
+     */
     S_LOAD_CITY_EVENT(19, 20),
+    /**
+     * <code>S_RETRIEVE_USERS_FOR_USER_IDS_EVENT = 21;</code>
+     */
     S_RETRIEVE_USERS_FOR_USER_IDS_EVENT(20, 21),
+    /**
+     * <code>S_EARN_FREE_DIAMONDS_EVENT = 22;</code>
+     */
     S_EARN_FREE_DIAMONDS_EVENT(21, 22),
+    /**
+     * <code>S_SEND_GROUP_CHAT_EVENT = 23;</code>
+     */
     S_SEND_GROUP_CHAT_EVENT(22, 23),
+    /**
+     * <code>S_CREATE_CLAN_EVENT = 24;</code>
+     */
     S_CREATE_CLAN_EVENT(23, 24),
+    /**
+     * <code>S_LEAVE_CLAN_EVENT = 25;</code>
+     */
     S_LEAVE_CLAN_EVENT(24, 25),
+    /**
+     * <code>S_REQUEST_JOIN_CLAN_EVENT = 26;</code>
+     */
     S_REQUEST_JOIN_CLAN_EVENT(25, 26),
+    /**
+     * <code>S_RETRACT_REQUEST_JOIN_CLAN_EVENT = 27;</code>
+     */
     S_RETRACT_REQUEST_JOIN_CLAN_EVENT(26, 27),
+    /**
+     * <code>S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT = 28;</code>
+     */
     S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT(27, 28),
+    /**
+     * <code>S_TRANSFER_CLAN_OWNERSHIP = 29;</code>
+     */
     S_TRANSFER_CLAN_OWNERSHIP(28, 29),
+    /**
+     * <code>S_RETRIEVE_CLAN_INFO_EVENT = 30;</code>
+     */
     S_RETRIEVE_CLAN_INFO_EVENT(29, 30),
+    /**
+     * <code>S_CHANGE_CLAN_SETTINGS_EVENT = 31;</code>
+     *
+     * <pre>
+     *S_CHANGE_CLAN_DESCRIPTION_EVENT = 31;
+     * </pre>
+     */
     S_CHANGE_CLAN_SETTINGS_EVENT(30, 31),
+    /**
+     * <code>S_BOOT_PLAYER_FROM_CLAN_EVENT = 32;</code>
+     */
     S_BOOT_PLAYER_FROM_CLAN_EVENT(31, 32),
+    /**
+     * <code>S_PICK_LOCK_BOX_EVENT = 33;</code>
+     */
     S_PICK_LOCK_BOX_EVENT(32, 33),
+    /**
+     * <code>S_RETRIEVE_TOURNAMENT_RANKINGS_EVENT = 34;</code>
+     */
     S_RETRIEVE_TOURNAMENT_RANKINGS_EVENT(33, 34),
+    /**
+     * <code>S_SUBMIT_MONSTER_ENHANCEMENT_EVENT = 35;</code>
+     */
     S_SUBMIT_MONSTER_ENHANCEMENT_EVENT(34, 35),
+    /**
+     * <code>S_EVOLVE_MONSTER_EVENT = 36;</code>
+     */
     S_EVOLVE_MONSTER_EVENT(35, 36),
+    /**
+     * <code>S_PURCHASE_BOOSTER_PACK_EVENT = 37;</code>
+     */
     S_PURCHASE_BOOSTER_PACK_EVENT(36, 37),
+    /**
+     * <code>S_EVOLUTION_FINISHED_EVENT = 38;</code>
+     */
     S_EVOLUTION_FINISHED_EVENT(37, 38),
+    /**
+     * <code>S_ACHIEVEMENT_PROGRESS_EVENT = 39;</code>
+     *
+     * <pre>
+     *S_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+     * </pre>
+     */
     S_ACHIEVEMENT_PROGRESS_EVENT(38, 39),
+    /**
+     * <code>S_PRIVATE_CHAT_POST_EVENT = 40;</code>
+     */
     S_PRIVATE_CHAT_POST_EVENT(39, 40),
+    /**
+     * <code>S_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;</code>
+     */
     S_RETRIEVE_PRIVATE_CHAT_POST_EVENT(40, 41),
+    /**
+     * <code>S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT = 42;</code>
+     */
     S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT(41, 42),
+    /**
+     * <code>S_BEGIN_DUNGEON_EVENT = 43;</code>
+     */
     S_BEGIN_DUNGEON_EVENT(42, 43),
+    /**
+     * <code>S_END_DUNGEON_EVENT = 44;</code>
+     */
     S_END_DUNGEON_EVENT(43, 44),
+    /**
+     * <code>S_REVIVE_IN_DUNGEON_EVENT = 45;</code>
+     */
     S_REVIVE_IN_DUNGEON_EVENT(44, 45),
+    /**
+     * <code>S_QUEUE_UP_EVENT = 46;</code>
+     */
     S_QUEUE_UP_EVENT(45, 46),
+    /**
+     * <code>S_UPDATE_MONSTER_HEALTH_EVENT = 47;</code>
+     */
     S_UPDATE_MONSTER_HEALTH_EVENT(46, 47),
+    /**
+     * <code>S_HEAL_MONSTER_EVENT = 48;</code>
+     */
     S_HEAL_MONSTER_EVENT(47, 48),
+    /**
+     * <code>S_ACHIEVEMENT_REDEEM_EVENT = 49;</code>
+     *
+     * <pre>
+     *S_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+     * </pre>
+     */
     S_ACHIEVEMENT_REDEEM_EVENT(48, 49),
+    /**
+     * <code>S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;</code>
+     */
     S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT(49, 50),
+    /**
+     * <code>S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;</code>
+     */
     S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT(50, 51),
+    /**
+     * <code>S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT = 52;</code>
+     */
     S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT(51, 52),
+    /**
+     * <code>S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT = 53;</code>
+     */
     S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT(52, 53),
+    /**
+     * <code>S_COMBINE_USER_MONSTER_PIECES_EVENT = 54;</code>
+     */
     S_COMBINE_USER_MONSTER_PIECES_EVENT(53, 54),
+    /**
+     * <code>S_SELL_USER_MONSTER_EVENT = 55;</code>
+     */
     S_SELL_USER_MONSTER_EVENT(54, 55),
+    /**
+     * <code>S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;</code>
+     */
     S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT(55, 56),
+    /**
+     * <code>S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;</code>
+     */
     S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT(56, 57),
+    /**
+     * <code>S_UPDATE_USER_CURRENCY_EVENT = 59;</code>
+     */
     S_UPDATE_USER_CURRENCY_EVENT(57, 59),
+    /**
+     * <code>S_BEGIN_PVP_BATTLE_EVENT = 60;</code>
+     */
     S_BEGIN_PVP_BATTLE_EVENT(58, 60),
+    /**
+     * <code>S_END_PVP_BATTLE_EVENT = 61;</code>
+     */
     S_END_PVP_BATTLE_EVENT(59, 61),
+    /**
+     * <code>S_BEGIN_CLAN_RAID_EVENT = 62;</code>
+     */
     S_BEGIN_CLAN_RAID_EVENT(60, 62),
+    /**
+     * <code>S_ATTACK_CLAN_RAID_MONSTER_EVENT = 63;</code>
+     */
     S_ATTACK_CLAN_RAID_MONSTER_EVENT(61, 63),
+    /**
+     * <code>S_RECORD_CLAN_RAID_STATS_EVENT = 64;</code>
+     */
     S_RECORD_CLAN_RAID_STATS_EVENT(62, 64),
+    /**
+     * <code>S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT = 65;</code>
+     */
     S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT(63, 65),
+    /**
+     * <code>S_SET_GAME_CENTER_ID_EVENT = 66;</code>
+     */
     S_SET_GAME_CENTER_ID_EVENT(64, 66),
+    /**
+     * <code>S_SPAWN_OBSTACLE_EVENT = 67;</code>
+     */
     S_SPAWN_OBSTACLE_EVENT(65, 67),
+    /**
+     * <code>S_BEGIN_OBSTACLE_REMOVAL_EVENT = 68;</code>
+     */
     S_BEGIN_OBSTACLE_REMOVAL_EVENT(66, 68),
+    /**
+     * <code>S_OBSTACLE_REMOVAL_COMPLETE_EVENT = 69;</code>
+     */
     S_OBSTACLE_REMOVAL_COMPLETE_EVENT(67, 69),
+    /**
+     * <code>S_SPAWN_MINI_JOB_EVENT = 70;</code>
+     */
     S_SPAWN_MINI_JOB_EVENT(68, 70),
+    /**
+     * <code>S_BEGIN_MINI_JOB_EVENT = 71;</code>
+     */
     S_BEGIN_MINI_JOB_EVENT(69, 71),
+    /**
+     * <code>S_COMPLETE_MINI_JOB_EVENT = 72;</code>
+     */
     S_COMPLETE_MINI_JOB_EVENT(70, 72),
+    /**
+     * <code>S_REDEEM_MINI_JOB_EVENT = 73;</code>
+     */
     S_REDEEM_MINI_JOB_EVENT(71, 73),
+    /**
+     * <code>S_SET_AVATAR_MONSTER_EVENT = 74;</code>
+     */
     S_SET_AVATAR_MONSTER_EVENT(72, 74),
+    /**
+     * <code>S_RESTRICT_USER_MONSTER_EVENT = 75;</code>
+     */
     S_RESTRICT_USER_MONSTER_EVENT(73, 75),
+    /**
+     * <code>S_UNRESTRICT_USER_MONSTER_EVENT = 76;</code>
+     */
     S_UNRESTRICT_USER_MONSTER_EVENT(74, 76),
+    /**
+     * <code>S_ENHANCE_MONSTER_EVENT = 77;</code>
+     */
     S_ENHANCE_MONSTER_EVENT(75, 77),
+    /**
+     * <code>S_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;</code>
+     */
     S_TRADE_ITEM_FOR_BOOSTER_EVENT(76, 78),
+    /**
+     * <code>S_SOLICIT_CLAN_HELP_EVENT = 79;</code>
+     */
     S_SOLICIT_CLAN_HELP_EVENT(77, 79),
+    /**
+     * <code>S_GIVE_CLAN_HELP_EVENT = 80;</code>
+     */
     S_GIVE_CLAN_HELP_EVENT(78, 80),
+    /**
+     * <code>S_END_CLAN_HELP_EVENT = 81;</code>
+     */
     S_END_CLAN_HELP_EVENT(79, 81),
+    /**
+     * <code>S_UPDATE_CLIENT_USER_EVENT = 101;</code>
+     *
+     * <pre>
+     *STOP AT 99, SKIP TO 200
+     * </pre>
+     */
     S_UPDATE_CLIENT_USER_EVENT(80, 101),
+    /**
+     * <code>S_REFERRAL_CODE_USED_EVENT = 102;</code>
+     */
     S_REFERRAL_CODE_USED_EVENT(81, 102),
+    /**
+     * <code>S_PURGE_STATIC_DATA_EVENT = 103;</code>
+     */
     S_PURGE_STATIC_DATA_EVENT(82, 103),
+    /**
+     * <code>S_RECEIVED_GROUP_CHAT_EVENT = 104;</code>
+     */
     S_RECEIVED_GROUP_CHAT_EVENT(83, 104),
+    /**
+     * <code>S_SEND_ADMIN_MESSAGE_EVENT = 105;</code>
+     */
     S_SEND_ADMIN_MESSAGE_EVENT(84, 105),
+    /**
+     * <code>S_GENERAL_NOTIFICATION_EVENT = 106;</code>
+     */
     S_GENERAL_NOTIFICATION_EVENT(85, 106),
+    /**
+     * <code>S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT = 107;</code>
+     */
     S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT(86, 107),
+    /**
+     * <code>S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT = 108;</code>
+     */
     S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT(87, 108),
+    /**
+     * <code>S_FORCE_LOGOUT_EVENT = 109;</code>
+     */
     S_FORCE_LOGOUT_EVENT(88, 109),
+    /**
+     * <code>S_DEV_EVENT = 200;</code>
+     */
     S_DEV_EVENT(89, 200),
     ;
-    
+
+    /**
+     * <code>S_STARTUP_EVENT = 1;</code>
+     */
     public static final int S_STARTUP_EVENT_VALUE = 1;
+    /**
+     * <code>S_IN_APP_PURCHASE_EVENT = 2;</code>
+     */
     public static final int S_IN_APP_PURCHASE_EVENT_VALUE = 2;
+    /**
+     * <code>S_PURCHASE_NORM_STRUCTURE_EVENT = 3;</code>
+     */
     public static final int S_PURCHASE_NORM_STRUCTURE_EVENT_VALUE = 3;
+    /**
+     * <code>S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT = 4;</code>
+     */
     public static final int S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT_VALUE = 4;
+    /**
+     * <code>S_SET_FACEBOOK_ID_EVENT = 5;</code>
+     */
     public static final int S_SET_FACEBOOK_ID_EVENT_VALUE = 5;
+    /**
+     * <code>S_UPGRADE_NORM_STRUCTURE_EVENT = 6;</code>
+     */
     public static final int S_UPGRADE_NORM_STRUCTURE_EVENT_VALUE = 6;
+    /**
+     * <code>S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT = 7;</code>
+     */
     public static final int S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT_VALUE = 7;
+    /**
+     * <code>S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT = 8;</code>
+     */
     public static final int S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT_VALUE = 8;
+    /**
+     * <code>S_NORM_STRUCT_WAIT_COMPLETE_EVENT = 9;</code>
+     */
     public static final int S_NORM_STRUCT_WAIT_COMPLETE_EVENT_VALUE = 9;
+    /**
+     * <code>S_LOAD_PLAYER_CITY_EVENT = 10;</code>
+     */
     public static final int S_LOAD_PLAYER_CITY_EVENT_VALUE = 10;
+    /**
+     * <code>S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT = 11;</code>
+     */
     public static final int S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT_VALUE = 11;
+    /**
+     * <code>S_QUEST_ACCEPT_EVENT = 12;</code>
+     */
     public static final int S_QUEST_ACCEPT_EVENT_VALUE = 12;
+    /**
+     * <code>S_QUEST_PROGRESS_EVENT = 13;</code>
+     */
     public static final int S_QUEST_PROGRESS_EVENT_VALUE = 13;
+    /**
+     * <code>S_QUEST_REDEEM_EVENT = 14;</code>
+     */
     public static final int S_QUEST_REDEEM_EVENT_VALUE = 14;
+    /**
+     * <code>S_PURCHASE_CITY_EXPANSION_EVENT = 15;</code>
+     */
     public static final int S_PURCHASE_CITY_EXPANSION_EVENT_VALUE = 15;
+    /**
+     * <code>S_EXPANSION_WAIT_COMPLETE_EVENT = 16;</code>
+     */
     public static final int S_EXPANSION_WAIT_COMPLETE_EVENT_VALUE = 16;
+    /**
+     * <code>S_LEVEL_UP_EVENT = 17;</code>
+     */
     public static final int S_LEVEL_UP_EVENT_VALUE = 17;
+    /**
+     * <code>S_ENABLE_APNS_EVENT = 18;</code>
+     */
     public static final int S_ENABLE_APNS_EVENT_VALUE = 18;
+    /**
+     * <code>S_USER_CREATE_EVENT = 19;</code>
+     */
     public static final int S_USER_CREATE_EVENT_VALUE = 19;
+    /**
+     * <code>S_LOAD_CITY_EVENT = 20;</code>
+     */
     public static final int S_LOAD_CITY_EVENT_VALUE = 20;
+    /**
+     * <code>S_RETRIEVE_USERS_FOR_USER_IDS_EVENT = 21;</code>
+     */
     public static final int S_RETRIEVE_USERS_FOR_USER_IDS_EVENT_VALUE = 21;
+    /**
+     * <code>S_EARN_FREE_DIAMONDS_EVENT = 22;</code>
+     */
     public static final int S_EARN_FREE_DIAMONDS_EVENT_VALUE = 22;
+    /**
+     * <code>S_SEND_GROUP_CHAT_EVENT = 23;</code>
+     */
     public static final int S_SEND_GROUP_CHAT_EVENT_VALUE = 23;
+    /**
+     * <code>S_CREATE_CLAN_EVENT = 24;</code>
+     */
     public static final int S_CREATE_CLAN_EVENT_VALUE = 24;
+    /**
+     * <code>S_LEAVE_CLAN_EVENT = 25;</code>
+     */
     public static final int S_LEAVE_CLAN_EVENT_VALUE = 25;
+    /**
+     * <code>S_REQUEST_JOIN_CLAN_EVENT = 26;</code>
+     */
     public static final int S_REQUEST_JOIN_CLAN_EVENT_VALUE = 26;
+    /**
+     * <code>S_RETRACT_REQUEST_JOIN_CLAN_EVENT = 27;</code>
+     */
     public static final int S_RETRACT_REQUEST_JOIN_CLAN_EVENT_VALUE = 27;
+    /**
+     * <code>S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT = 28;</code>
+     */
     public static final int S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT_VALUE = 28;
+    /**
+     * <code>S_TRANSFER_CLAN_OWNERSHIP = 29;</code>
+     */
     public static final int S_TRANSFER_CLAN_OWNERSHIP_VALUE = 29;
+    /**
+     * <code>S_RETRIEVE_CLAN_INFO_EVENT = 30;</code>
+     */
     public static final int S_RETRIEVE_CLAN_INFO_EVENT_VALUE = 30;
+    /**
+     * <code>S_CHANGE_CLAN_SETTINGS_EVENT = 31;</code>
+     *
+     * <pre>
+     *S_CHANGE_CLAN_DESCRIPTION_EVENT = 31;
+     * </pre>
+     */
     public static final int S_CHANGE_CLAN_SETTINGS_EVENT_VALUE = 31;
+    /**
+     * <code>S_BOOT_PLAYER_FROM_CLAN_EVENT = 32;</code>
+     */
     public static final int S_BOOT_PLAYER_FROM_CLAN_EVENT_VALUE = 32;
+    /**
+     * <code>S_PICK_LOCK_BOX_EVENT = 33;</code>
+     */
     public static final int S_PICK_LOCK_BOX_EVENT_VALUE = 33;
+    /**
+     * <code>S_RETRIEVE_TOURNAMENT_RANKINGS_EVENT = 34;</code>
+     */
     public static final int S_RETRIEVE_TOURNAMENT_RANKINGS_EVENT_VALUE = 34;
+    /**
+     * <code>S_SUBMIT_MONSTER_ENHANCEMENT_EVENT = 35;</code>
+     */
     public static final int S_SUBMIT_MONSTER_ENHANCEMENT_EVENT_VALUE = 35;
+    /**
+     * <code>S_EVOLVE_MONSTER_EVENT = 36;</code>
+     */
     public static final int S_EVOLVE_MONSTER_EVENT_VALUE = 36;
+    /**
+     * <code>S_PURCHASE_BOOSTER_PACK_EVENT = 37;</code>
+     */
     public static final int S_PURCHASE_BOOSTER_PACK_EVENT_VALUE = 37;
+    /**
+     * <code>S_EVOLUTION_FINISHED_EVENT = 38;</code>
+     */
     public static final int S_EVOLUTION_FINISHED_EVENT_VALUE = 38;
+    /**
+     * <code>S_ACHIEVEMENT_PROGRESS_EVENT = 39;</code>
+     *
+     * <pre>
+     *S_CHANGE_CLAN_JOIN_TYPE_EVENT = 39;
+     * </pre>
+     */
     public static final int S_ACHIEVEMENT_PROGRESS_EVENT_VALUE = 39;
+    /**
+     * <code>S_PRIVATE_CHAT_POST_EVENT = 40;</code>
+     */
     public static final int S_PRIVATE_CHAT_POST_EVENT_VALUE = 40;
+    /**
+     * <code>S_RETRIEVE_PRIVATE_CHAT_POST_EVENT = 41;</code>
+     */
     public static final int S_RETRIEVE_PRIVATE_CHAT_POST_EVENT_VALUE = 41;
+    /**
+     * <code>S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT = 42;</code>
+     */
     public static final int S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT_VALUE = 42;
+    /**
+     * <code>S_BEGIN_DUNGEON_EVENT = 43;</code>
+     */
     public static final int S_BEGIN_DUNGEON_EVENT_VALUE = 43;
+    /**
+     * <code>S_END_DUNGEON_EVENT = 44;</code>
+     */
     public static final int S_END_DUNGEON_EVENT_VALUE = 44;
+    /**
+     * <code>S_REVIVE_IN_DUNGEON_EVENT = 45;</code>
+     */
     public static final int S_REVIVE_IN_DUNGEON_EVENT_VALUE = 45;
+    /**
+     * <code>S_QUEUE_UP_EVENT = 46;</code>
+     */
     public static final int S_QUEUE_UP_EVENT_VALUE = 46;
+    /**
+     * <code>S_UPDATE_MONSTER_HEALTH_EVENT = 47;</code>
+     */
     public static final int S_UPDATE_MONSTER_HEALTH_EVENT_VALUE = 47;
+    /**
+     * <code>S_HEAL_MONSTER_EVENT = 48;</code>
+     */
     public static final int S_HEAL_MONSTER_EVENT_VALUE = 48;
+    /**
+     * <code>S_ACHIEVEMENT_REDEEM_EVENT = 49;</code>
+     *
+     * <pre>
+     *S_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT = 49;
+     * </pre>
+     */
     public static final int S_ACHIEVEMENT_REDEEM_EVENT_VALUE = 49;
+    /**
+     * <code>S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT = 50;</code>
+     */
     public static final int S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT_VALUE = 50;
+    /**
+     * <code>S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT = 51;</code>
+     */
     public static final int S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT_VALUE = 51;
+    /**
+     * <code>S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT = 52;</code>
+     */
     public static final int S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT_VALUE = 52;
+    /**
+     * <code>S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT = 53;</code>
+     */
     public static final int S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT_VALUE = 53;
+    /**
+     * <code>S_COMBINE_USER_MONSTER_PIECES_EVENT = 54;</code>
+     */
     public static final int S_COMBINE_USER_MONSTER_PIECES_EVENT_VALUE = 54;
+    /**
+     * <code>S_SELL_USER_MONSTER_EVENT = 55;</code>
+     */
     public static final int S_SELL_USER_MONSTER_EVENT_VALUE = 55;
+    /**
+     * <code>S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT = 56;</code>
+     */
     public static final int S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT_VALUE = 56;
+    /**
+     * <code>S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT = 57;</code>
+     */
     public static final int S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT_VALUE = 57;
+    /**
+     * <code>S_UPDATE_USER_CURRENCY_EVENT = 59;</code>
+     */
     public static final int S_UPDATE_USER_CURRENCY_EVENT_VALUE = 59;
+    /**
+     * <code>S_BEGIN_PVP_BATTLE_EVENT = 60;</code>
+     */
     public static final int S_BEGIN_PVP_BATTLE_EVENT_VALUE = 60;
+    /**
+     * <code>S_END_PVP_BATTLE_EVENT = 61;</code>
+     */
     public static final int S_END_PVP_BATTLE_EVENT_VALUE = 61;
+    /**
+     * <code>S_BEGIN_CLAN_RAID_EVENT = 62;</code>
+     */
     public static final int S_BEGIN_CLAN_RAID_EVENT_VALUE = 62;
+    /**
+     * <code>S_ATTACK_CLAN_RAID_MONSTER_EVENT = 63;</code>
+     */
     public static final int S_ATTACK_CLAN_RAID_MONSTER_EVENT_VALUE = 63;
+    /**
+     * <code>S_RECORD_CLAN_RAID_STATS_EVENT = 64;</code>
+     */
     public static final int S_RECORD_CLAN_RAID_STATS_EVENT_VALUE = 64;
+    /**
+     * <code>S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT = 65;</code>
+     */
     public static final int S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT_VALUE = 65;
+    /**
+     * <code>S_SET_GAME_CENTER_ID_EVENT = 66;</code>
+     */
     public static final int S_SET_GAME_CENTER_ID_EVENT_VALUE = 66;
+    /**
+     * <code>S_SPAWN_OBSTACLE_EVENT = 67;</code>
+     */
     public static final int S_SPAWN_OBSTACLE_EVENT_VALUE = 67;
+    /**
+     * <code>S_BEGIN_OBSTACLE_REMOVAL_EVENT = 68;</code>
+     */
     public static final int S_BEGIN_OBSTACLE_REMOVAL_EVENT_VALUE = 68;
+    /**
+     * <code>S_OBSTACLE_REMOVAL_COMPLETE_EVENT = 69;</code>
+     */
     public static final int S_OBSTACLE_REMOVAL_COMPLETE_EVENT_VALUE = 69;
+    /**
+     * <code>S_SPAWN_MINI_JOB_EVENT = 70;</code>
+     */
     public static final int S_SPAWN_MINI_JOB_EVENT_VALUE = 70;
+    /**
+     * <code>S_BEGIN_MINI_JOB_EVENT = 71;</code>
+     */
     public static final int S_BEGIN_MINI_JOB_EVENT_VALUE = 71;
+    /**
+     * <code>S_COMPLETE_MINI_JOB_EVENT = 72;</code>
+     */
     public static final int S_COMPLETE_MINI_JOB_EVENT_VALUE = 72;
+    /**
+     * <code>S_REDEEM_MINI_JOB_EVENT = 73;</code>
+     */
     public static final int S_REDEEM_MINI_JOB_EVENT_VALUE = 73;
+    /**
+     * <code>S_SET_AVATAR_MONSTER_EVENT = 74;</code>
+     */
     public static final int S_SET_AVATAR_MONSTER_EVENT_VALUE = 74;
+    /**
+     * <code>S_RESTRICT_USER_MONSTER_EVENT = 75;</code>
+     */
     public static final int S_RESTRICT_USER_MONSTER_EVENT_VALUE = 75;
+    /**
+     * <code>S_UNRESTRICT_USER_MONSTER_EVENT = 76;</code>
+     */
     public static final int S_UNRESTRICT_USER_MONSTER_EVENT_VALUE = 76;
+    /**
+     * <code>S_ENHANCE_MONSTER_EVENT = 77;</code>
+     */
     public static final int S_ENHANCE_MONSTER_EVENT_VALUE = 77;
+    /**
+     * <code>S_TRADE_ITEM_FOR_BOOSTER_EVENT = 78;</code>
+     */
     public static final int S_TRADE_ITEM_FOR_BOOSTER_EVENT_VALUE = 78;
+    /**
+     * <code>S_SOLICIT_CLAN_HELP_EVENT = 79;</code>
+     */
     public static final int S_SOLICIT_CLAN_HELP_EVENT_VALUE = 79;
+    /**
+     * <code>S_GIVE_CLAN_HELP_EVENT = 80;</code>
+     */
     public static final int S_GIVE_CLAN_HELP_EVENT_VALUE = 80;
+    /**
+     * <code>S_END_CLAN_HELP_EVENT = 81;</code>
+     */
     public static final int S_END_CLAN_HELP_EVENT_VALUE = 81;
+    /**
+     * <code>S_UPDATE_CLIENT_USER_EVENT = 101;</code>
+     *
+     * <pre>
+     *STOP AT 99, SKIP TO 200
+     * </pre>
+     */
     public static final int S_UPDATE_CLIENT_USER_EVENT_VALUE = 101;
+    /**
+     * <code>S_REFERRAL_CODE_USED_EVENT = 102;</code>
+     */
     public static final int S_REFERRAL_CODE_USED_EVENT_VALUE = 102;
+    /**
+     * <code>S_PURGE_STATIC_DATA_EVENT = 103;</code>
+     */
     public static final int S_PURGE_STATIC_DATA_EVENT_VALUE = 103;
+    /**
+     * <code>S_RECEIVED_GROUP_CHAT_EVENT = 104;</code>
+     */
     public static final int S_RECEIVED_GROUP_CHAT_EVENT_VALUE = 104;
+    /**
+     * <code>S_SEND_ADMIN_MESSAGE_EVENT = 105;</code>
+     */
     public static final int S_SEND_ADMIN_MESSAGE_EVENT_VALUE = 105;
+    /**
+     * <code>S_GENERAL_NOTIFICATION_EVENT = 106;</code>
+     */
     public static final int S_GENERAL_NOTIFICATION_EVENT_VALUE = 106;
+    /**
+     * <code>S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT = 107;</code>
+     */
     public static final int S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT_VALUE = 107;
+    /**
+     * <code>S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT = 108;</code>
+     */
     public static final int S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT_VALUE = 108;
+    /**
+     * <code>S_FORCE_LOGOUT_EVENT = 109;</code>
+     */
     public static final int S_FORCE_LOGOUT_EVENT_VALUE = 109;
+    /**
+     * <code>S_DEV_EVENT = 200;</code>
+     */
     public static final int S_DEV_EVENT_VALUE = 200;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static EventProtocolResponse valueOf(int value) {
       switch (value) {
         case 1: return S_STARTUP_EVENT;
@@ -600,7 +1700,7 @@ public final class ProtocolsProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<EventProtocolResponse>
         internalGetValueMap() {
       return internalValueMap;
@@ -612,7 +1712,7 @@ public final class ProtocolsProto {
               return EventProtocolResponse.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -625,11 +1725,9 @@ public final class ProtocolsProto {
         getDescriptor() {
       return com.lvl6.proto.ProtocolsProto.getDescriptor().getEnumTypes().get(1);
     }
-    
-    private static final EventProtocolResponse[] VALUES = {
-      S_STARTUP_EVENT, S_IN_APP_PURCHASE_EVENT, S_PURCHASE_NORM_STRUCTURE_EVENT, S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT, S_SET_FACEBOOK_ID_EVENT, S_UPGRADE_NORM_STRUCTURE_EVENT, S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT, S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT, S_NORM_STRUCT_WAIT_COMPLETE_EVENT, S_LOAD_PLAYER_CITY_EVENT, S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT, S_QUEST_ACCEPT_EVENT, S_QUEST_PROGRESS_EVENT, S_QUEST_REDEEM_EVENT, S_PURCHASE_CITY_EXPANSION_EVENT, S_EXPANSION_WAIT_COMPLETE_EVENT, S_LEVEL_UP_EVENT, S_ENABLE_APNS_EVENT, S_USER_CREATE_EVENT, S_LOAD_CITY_EVENT, S_RETRIEVE_USERS_FOR_USER_IDS_EVENT, S_EARN_FREE_DIAMONDS_EVENT, S_SEND_GROUP_CHAT_EVENT, S_CREATE_CLAN_EVENT, S_LEAVE_CLAN_EVENT, S_REQUEST_JOIN_CLAN_EVENT, S_RETRACT_REQUEST_JOIN_CLAN_EVENT, S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT, S_TRANSFER_CLAN_OWNERSHIP, S_RETRIEVE_CLAN_INFO_EVENT, S_CHANGE_CLAN_SETTINGS_EVENT, S_BOOT_PLAYER_FROM_CLAN_EVENT, S_PICK_LOCK_BOX_EVENT, S_RETRIEVE_TOURNAMENT_RANKINGS_EVENT, S_SUBMIT_MONSTER_ENHANCEMENT_EVENT, S_EVOLVE_MONSTER_EVENT, S_PURCHASE_BOOSTER_PACK_EVENT, S_EVOLUTION_FINISHED_EVENT, S_ACHIEVEMENT_PROGRESS_EVENT, S_PRIVATE_CHAT_POST_EVENT, S_RETRIEVE_PRIVATE_CHAT_POST_EVENT, S_REDEEM_USER_LOCK_BOX_ITEMS_EVENT, S_BEGIN_DUNGEON_EVENT, S_END_DUNGEON_EVENT, S_REVIVE_IN_DUNGEON_EVENT, S_QUEUE_UP_EVENT, S_UPDATE_MONSTER_HEALTH_EVENT, S_HEAL_MONSTER_EVENT, S_ACHIEVEMENT_REDEEM_EVENT, S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT, S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT, S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT, S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT, S_COMBINE_USER_MONSTER_PIECES_EVENT, S_SELL_USER_MONSTER_EVENT, S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT, S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT, S_UPDATE_USER_CURRENCY_EVENT, S_BEGIN_PVP_BATTLE_EVENT, S_END_PVP_BATTLE_EVENT, S_BEGIN_CLAN_RAID_EVENT, S_ATTACK_CLAN_RAID_MONSTER_EVENT, S_RECORD_CLAN_RAID_STATS_EVENT, S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT, S_SET_GAME_CENTER_ID_EVENT, S_SPAWN_OBSTACLE_EVENT, S_BEGIN_OBSTACLE_REMOVAL_EVENT, S_OBSTACLE_REMOVAL_COMPLETE_EVENT, S_SPAWN_MINI_JOB_EVENT, S_BEGIN_MINI_JOB_EVENT, S_COMPLETE_MINI_JOB_EVENT, S_REDEEM_MINI_JOB_EVENT, S_SET_AVATAR_MONSTER_EVENT, S_RESTRICT_USER_MONSTER_EVENT, S_UNRESTRICT_USER_MONSTER_EVENT, S_ENHANCE_MONSTER_EVENT, S_TRADE_ITEM_FOR_BOOSTER_EVENT, S_SOLICIT_CLAN_HELP_EVENT, S_GIVE_CLAN_HELP_EVENT, S_END_CLAN_HELP_EVENT, S_UPDATE_CLIENT_USER_EVENT, S_REFERRAL_CODE_USED_EVENT, S_PURGE_STATIC_DATA_EVENT, S_RECEIVED_GROUP_CHAT_EVENT, S_SEND_ADMIN_MESSAGE_EVENT, S_GENERAL_NOTIFICATION_EVENT, S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT, S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT, S_FORCE_LOGOUT_EVENT, S_DEV_EVENT, 
-    };
-    
+
+    private static final EventProtocolResponse[] VALUES = values();
+
     public static EventProtocolResponse valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -638,19 +1736,19 @@ public final class ProtocolsProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private EventProtocolResponse(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EventProtocolResponse)
   }
-  
-  
+
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -825,13 +1923,13 @@ public final class ProtocolsProto {
       "\020\n\013S_DEV_EVENT\020\310\001B\020B\016ProtocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -875,7 +1973,46 @@ public final class ProtocolsProto {
           com.lvl6.proto.TournamentStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
+    com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.ClanProto.getDescriptor();
+    com.lvl6.proto.DevProto.getDescriptor();
+    com.lvl6.proto.EventAchievementProto.getDescriptor();
+    com.lvl6.proto.EventApnsProto.getDescriptor();
+    com.lvl6.proto.EventBoosterPackProto.getDescriptor();
+    com.lvl6.proto.EventChatProto.getDescriptor();
+    com.lvl6.proto.EventCityProto.getDescriptor();
+    com.lvl6.proto.EventClanProto.getDescriptor();
+    com.lvl6.proto.EventDevProto.getDescriptor();
+    com.lvl6.proto.EventDungeonProto.getDescriptor();
+    com.lvl6.proto.EventInAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.EventItemProto.getDescriptor();
+    com.lvl6.proto.EventMiniJobProto.getDescriptor();
+    com.lvl6.proto.EventMonsterProto.getDescriptor();
+    com.lvl6.proto.EventPvpProto.getDescriptor();
+    com.lvl6.proto.EventQuestProto.getDescriptor();
+    com.lvl6.proto.EventReferralProto.getDescriptor();
+    com.lvl6.proto.EventStartupProto.getDescriptor();
+    com.lvl6.proto.EventStaticDataProto.getDescriptor();
+    com.lvl6.proto.EventStructureProto.getDescriptor();
+    com.lvl6.proto.EventTournamentProto.getDescriptor();
+    com.lvl6.proto.EventUserProto.getDescriptor();
+    com.lvl6.proto.InAppPurchaseProto.getDescriptor();
+    com.lvl6.proto.ItemsProto.getDescriptor();
+    com.lvl6.proto.MiniJobConfigProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
+    com.lvl6.proto.SkillsProto.getDescriptor();
+    com.lvl6.proto.StaticDataStuffProto.getDescriptor();
+    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.TaskProto.getDescriptor();
+    com.lvl6.proto.TournamentStuffProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

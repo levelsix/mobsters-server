@@ -8,88 +8,225 @@ public final class EventReferralProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface ReferralCodeUsedResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+  public interface ReferralCodeUsedResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.ReferralCodeUsedResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     boolean hasReferredPlayer();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getReferredPlayer();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getReferredPlayerOrBuilder();
-    
-    // optional int32 coinsGivenToReferrer = 3;
+
+    /**
+     * <code>optional int32 coinsGivenToReferrer = 3;</code>
+     */
     boolean hasCoinsGivenToReferrer();
+    /**
+     * <code>optional int32 coinsGivenToReferrer = 3;</code>
+     */
     int getCoinsGivenToReferrer();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.ReferralCodeUsedResponseProto}
+   */
   public static final class ReferralCodeUsedResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements ReferralCodeUsedResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.ReferralCodeUsedResponseProto)
+      ReferralCodeUsedResponseProtoOrBuilder {
     // Use ReferralCodeUsedResponseProto.newBuilder() to construct.
-    private ReferralCodeUsedResponseProto(Builder builder) {
+    private ReferralCodeUsedResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private ReferralCodeUsedResponseProto(boolean noInit) {}
-    
+    private ReferralCodeUsedResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final ReferralCodeUsedResponseProto defaultInstance;
     public static ReferralCodeUsedResponseProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public ReferralCodeUsedResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ReferralCodeUsedResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = referredPlayer_.toBuilder();
+              }
+              referredPlayer_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(referredPlayer_);
+                referredPlayer_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              coinsGivenToReferrer_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.class, com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<ReferralCodeUsedResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<ReferralCodeUsedResponseProto>() {
+      public ReferralCodeUsedResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ReferralCodeUsedResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ReferralCodeUsedResponseProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;
+
     public static final int REFERREDPLAYER_FIELD_NUMBER = 2;
     private com.lvl6.proto.UserProto.MinimumUserProto referredPlayer_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     public boolean hasReferredPlayer() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getReferredPlayer() {
       return referredPlayer_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getReferredPlayerOrBuilder() {
       return referredPlayer_;
     }
-    
-    // optional int32 coinsGivenToReferrer = 3;
+
     public static final int COINSGIVENTOREFERRER_FIELD_NUMBER = 3;
     private int coinsGivenToReferrer_;
+    /**
+     * <code>optional int32 coinsGivenToReferrer = 3;</code>
+     */
     public boolean hasCoinsGivenToReferrer() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional int32 coinsGivenToReferrer = 3;</code>
+     */
     public int getCoinsGivenToReferrer() {
       return coinsGivenToReferrer_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       referredPlayer_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -98,12 +235,13 @@ public final class EventReferralProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -118,12 +256,12 @@ public final class EventReferralProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -141,113 +279,106 @@ public final class EventReferralProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.ReferralCodeUsedResponseProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.ReferralCodeUsedResponseProto)
+        com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.class, com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -260,7 +391,7 @@ public final class EventReferralProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -279,20 +410,20 @@ public final class EventReferralProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.getDescriptor();
+        return com.lvl6.proto.EventReferralProto.internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto build() {
         com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -300,17 +431,7 @@ public final class EventReferralProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto buildPartial() {
         com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto result = new com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto(this);
         int from_bitField0_ = bitField0_;
@@ -339,7 +460,7 @@ public final class EventReferralProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto) {
           return mergeFrom((com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto)other);
@@ -348,7 +469,7 @@ public final class EventReferralProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto other) {
         if (other == com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -363,70 +484,42 @@ public final class EventReferralProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasReferredPlayer()) {
-                subBuilder.mergeFrom(getReferredPlayer());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setReferredPlayer(subBuilder.buildPartial());
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              coinsGivenToReferrer_ = input.readInt32();
-              break;
-            }
+        com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -434,6 +527,9 @@ public final class EventReferralProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -447,6 +543,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -458,6 +557,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -474,6 +576,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -484,11 +589,17 @@ public final class EventReferralProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -496,27 +607,35 @@ public final class EventReferralProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;
+
       private com.lvl6.proto.UserProto.MinimumUserProto referredPlayer_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> referredPlayerBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public boolean hasReferredPlayer() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getReferredPlayer() {
         if (referredPlayerBuilder_ == null) {
           return referredPlayer_;
@@ -524,6 +643,9 @@ public final class EventReferralProto {
           return referredPlayerBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public Builder setReferredPlayer(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (referredPlayerBuilder_ == null) {
           if (value == null) {
@@ -537,6 +659,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public Builder setReferredPlayer(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (referredPlayerBuilder_ == null) {
@@ -548,6 +673,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public Builder mergeReferredPlayer(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (referredPlayerBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
@@ -564,6 +692,9 @@ public final class EventReferralProto {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public Builder clearReferredPlayer() {
         if (referredPlayerBuilder_ == null) {
           referredPlayer_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -574,11 +705,17 @@ public final class EventReferralProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getReferredPlayerBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getReferredPlayerFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getReferredPlayerOrBuilder() {
         if (referredPlayerBuilder_ != null) {
           return referredPlayerBuilder_.getMessageOrBuilder();
@@ -586,58 +723,72 @@ public final class EventReferralProto {
           return referredPlayer_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto referredPlayer = 2;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getReferredPlayerFieldBuilder() {
         if (referredPlayerBuilder_ == null) {
           referredPlayerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  referredPlayer_,
+                  getReferredPlayer(),
                   getParentForChildren(),
                   isClean());
           referredPlayer_ = null;
         }
         return referredPlayerBuilder_;
       }
-      
-      // optional int32 coinsGivenToReferrer = 3;
+
       private int coinsGivenToReferrer_ ;
+      /**
+       * <code>optional int32 coinsGivenToReferrer = 3;</code>
+       */
       public boolean hasCoinsGivenToReferrer() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional int32 coinsGivenToReferrer = 3;</code>
+       */
       public int getCoinsGivenToReferrer() {
         return coinsGivenToReferrer_;
       }
+      /**
+       * <code>optional int32 coinsGivenToReferrer = 3;</code>
+       */
       public Builder setCoinsGivenToReferrer(int value) {
         bitField0_ |= 0x00000004;
         coinsGivenToReferrer_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 coinsGivenToReferrer = 3;</code>
+       */
       public Builder clearCoinsGivenToReferrer() {
         bitField0_ = (bitField0_ & ~0x00000004);
         coinsGivenToReferrer_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ReferralCodeUsedResponseProto)
     }
-    
+
     static {
       defaultInstance = new ReferralCodeUsedResponseProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReferralCodeUsedResponseProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -655,27 +806,26 @@ public final class EventReferralProto {
       "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "ReferredPlayer", "CoinsGivenToReferrer", },
-              com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.class,
-              com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_ReferralCodeUsedResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "ReferredPlayer", "CoinsGivenToReferrer", });
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

@@ -8,30 +8,81 @@ public final class SharedEnumConfigProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.lvl6.proto.DayOfWeek}
+   */
   public enum DayOfWeek
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>SUNDAY = 1;</code>
+     */
     SUNDAY(0, 1),
+    /**
+     * <code>MONDAY = 2;</code>
+     */
     MONDAY(1, 2),
+    /**
+     * <code>TUESDAY = 3;</code>
+     */
     TUESDAY(2, 3),
+    /**
+     * <code>WEDNESDAY = 4;</code>
+     */
     WEDNESDAY(3, 4),
+    /**
+     * <code>THURSDAY = 5;</code>
+     */
     THURSDAY(4, 5),
+    /**
+     * <code>FRIDAY = 6;</code>
+     */
     FRIDAY(5, 6),
+    /**
+     * <code>SATURDAY = 7;</code>
+     */
     SATURDAY(6, 7),
+    /**
+     * <code>NO_DAY_OF_WEEK = 8;</code>
+     */
     NO_DAY_OF_WEEK(7, 8),
     ;
-    
+
+    /**
+     * <code>SUNDAY = 1;</code>
+     */
     public static final int SUNDAY_VALUE = 1;
+    /**
+     * <code>MONDAY = 2;</code>
+     */
     public static final int MONDAY_VALUE = 2;
+    /**
+     * <code>TUESDAY = 3;</code>
+     */
     public static final int TUESDAY_VALUE = 3;
+    /**
+     * <code>WEDNESDAY = 4;</code>
+     */
     public static final int WEDNESDAY_VALUE = 4;
+    /**
+     * <code>THURSDAY = 5;</code>
+     */
     public static final int THURSDAY_VALUE = 5;
+    /**
+     * <code>FRIDAY = 6;</code>
+     */
     public static final int FRIDAY_VALUE = 6;
+    /**
+     * <code>SATURDAY = 7;</code>
+     */
     public static final int SATURDAY_VALUE = 7;
+    /**
+     * <code>NO_DAY_OF_WEEK = 8;</code>
+     */
     public static final int NO_DAY_OF_WEEK_VALUE = 8;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static DayOfWeek valueOf(int value) {
       switch (value) {
         case 1: return SUNDAY;
@@ -45,7 +96,7 @@ public final class SharedEnumConfigProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
         internalGetValueMap() {
       return internalValueMap;
@@ -57,7 +108,7 @@ public final class SharedEnumConfigProto {
               return DayOfWeek.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -70,11 +121,9 @@ public final class SharedEnumConfigProto {
         getDescriptor() {
       return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(0);
     }
-    
-    private static final DayOfWeek[] VALUES = {
-      SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, NO_DAY_OF_WEEK, 
-    };
-    
+
+    private static final DayOfWeek[] VALUES = values();
+
     public static DayOfWeek valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -83,40 +132,133 @@ public final class SharedEnumConfigProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private DayOfWeek(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DayOfWeek)
   }
-  
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.Element}
+   */
   public enum Element
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>FIRE = 1;</code>
+     *
+     * <pre>
+     *beats earth
+     * </pre>
+     */
     FIRE(0, 1),
+    /**
+     * <code>EARTH = 2;</code>
+     *
+     * <pre>
+     *beats water
+     * </pre>
+     */
     EARTH(1, 2),
+    /**
+     * <code>WATER = 3;</code>
+     *
+     * <pre>
+     *beats fire
+     * </pre>
+     */
     WATER(2, 3),
+    /**
+     * <code>LIGHT = 4;</code>
+     *
+     * <pre>
+     *beats dark
+     * </pre>
+     */
     LIGHT(3, 4),
+    /**
+     * <code>DARK = 5;</code>
+     *
+     * <pre>
+     *beats light
+     * </pre>
+     */
     DARK(4, 5),
+    /**
+     * <code>ROCK = 6;</code>
+     *
+     * <pre>
+     *damages everything
+     * </pre>
+     */
     ROCK(5, 6),
+    /**
+     * <code>NO_ELEMENT = 7;</code>
+     */
     NO_ELEMENT(6, 7),
     ;
-    
+
+    /**
+     * <code>FIRE = 1;</code>
+     *
+     * <pre>
+     *beats earth
+     * </pre>
+     */
     public static final int FIRE_VALUE = 1;
+    /**
+     * <code>EARTH = 2;</code>
+     *
+     * <pre>
+     *beats water
+     * </pre>
+     */
     public static final int EARTH_VALUE = 2;
+    /**
+     * <code>WATER = 3;</code>
+     *
+     * <pre>
+     *beats fire
+     * </pre>
+     */
     public static final int WATER_VALUE = 3;
+    /**
+     * <code>LIGHT = 4;</code>
+     *
+     * <pre>
+     *beats dark
+     * </pre>
+     */
     public static final int LIGHT_VALUE = 4;
+    /**
+     * <code>DARK = 5;</code>
+     *
+     * <pre>
+     *beats light
+     * </pre>
+     */
     public static final int DARK_VALUE = 5;
+    /**
+     * <code>ROCK = 6;</code>
+     *
+     * <pre>
+     *damages everything
+     * </pre>
+     */
     public static final int ROCK_VALUE = 6;
+    /**
+     * <code>NO_ELEMENT = 7;</code>
+     */
     public static final int NO_ELEMENT_VALUE = 7;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static Element valueOf(int value) {
       switch (value) {
         case 1: return FIRE;
@@ -129,7 +271,7 @@ public final class SharedEnumConfigProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<Element>
         internalGetValueMap() {
       return internalValueMap;
@@ -141,7 +283,7 @@ public final class SharedEnumConfigProto {
               return Element.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -154,11 +296,9 @@ public final class SharedEnumConfigProto {
         getDescriptor() {
       return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(1);
     }
-    
-    private static final Element[] VALUES = {
-      FIRE, EARTH, WATER, LIGHT, DARK, ROCK, NO_ELEMENT, 
-    };
-    
+
+    private static final Element[] VALUES = values();
+
     public static Element valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -167,42 +307,101 @@ public final class SharedEnumConfigProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private Element(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.Element)
   }
-  
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.Quality}
+   */
   public enum Quality
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NO_QUALITY = 1;</code>
+     */
     NO_QUALITY(0, 1),
+    /**
+     * <code>COMMON = 2;</code>
+     */
     COMMON(1, 2),
+    /**
+     * <code>RARE = 3;</code>
+     */
     RARE(2, 3),
+    /**
+     * <code>SUPER = 4;</code>
+     */
     SUPER(3, 4),
+    /**
+     * <code>ULTRA = 5;</code>
+     */
     ULTRA(4, 5),
+    /**
+     * <code>EPIC = 6;</code>
+     */
     EPIC(5, 6),
+    /**
+     * <code>LEGENDARY = 7;</code>
+     */
     LEGENDARY(6, 7),
+    /**
+     * <code>EVO = 8;</code>
+     *
+     * <pre>
+     *MONSTERS USED FOR EVOLVING
+     * </pre>
+     */
     EVO(7, 8),
     ;
-    
+
+    /**
+     * <code>NO_QUALITY = 1;</code>
+     */
     public static final int NO_QUALITY_VALUE = 1;
+    /**
+     * <code>COMMON = 2;</code>
+     */
     public static final int COMMON_VALUE = 2;
+    /**
+     * <code>RARE = 3;</code>
+     */
     public static final int RARE_VALUE = 3;
+    /**
+     * <code>SUPER = 4;</code>
+     */
     public static final int SUPER_VALUE = 4;
+    /**
+     * <code>ULTRA = 5;</code>
+     */
     public static final int ULTRA_VALUE = 5;
+    /**
+     * <code>EPIC = 6;</code>
+     */
     public static final int EPIC_VALUE = 6;
+    /**
+     * <code>LEGENDARY = 7;</code>
+     */
     public static final int LEGENDARY_VALUE = 7;
+    /**
+     * <code>EVO = 8;</code>
+     *
+     * <pre>
+     *MONSTERS USED FOR EVOLVING
+     * </pre>
+     */
     public static final int EVO_VALUE = 8;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static Quality valueOf(int value) {
       switch (value) {
         case 1: return NO_QUALITY;
@@ -216,7 +415,7 @@ public final class SharedEnumConfigProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<Quality>
         internalGetValueMap() {
       return internalValueMap;
@@ -228,7 +427,7 @@ public final class SharedEnumConfigProto {
               return Quality.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -241,11 +440,9 @@ public final class SharedEnumConfigProto {
         getDescriptor() {
       return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(2);
     }
-    
-    private static final Quality[] VALUES = {
-      NO_QUALITY, COMMON, RARE, SUPER, ULTRA, EPIC, LEGENDARY, EVO, 
-    };
-    
+
+    private static final Quality[] VALUES = values();
+
     public static Quality valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -254,35 +451,44 @@ public final class SharedEnumConfigProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private Quality(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.Quality)
   }
-  
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.ClanHelpType}
+   */
   public enum ClanHelpType
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NO_HELP = 1;</code>
+     */
     NO_HELP(0, 1),
     ;
-    
+
+    /**
+     * <code>NO_HELP = 1;</code>
+     */
     public static final int NO_HELP_VALUE = 1;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static ClanHelpType valueOf(int value) {
       switch (value) {
         case 1: return NO_HELP;
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>
         internalGetValueMap() {
       return internalValueMap;
@@ -294,7 +500,7 @@ public final class SharedEnumConfigProto {
               return ClanHelpType.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -307,11 +513,9 @@ public final class SharedEnumConfigProto {
         getDescriptor() {
       return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(3);
     }
-    
-    private static final ClanHelpType[] VALUES = {
-      NO_HELP, 
-    };
-    
+
+    private static final ClanHelpType[] VALUES = values();
+
     public static ClanHelpType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -320,19 +524,19 @@ public final class SharedEnumConfigProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private ClanHelpType(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClanHelpType)
   }
-  
-  
+
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -354,18 +558,18 @@ public final class SharedEnumConfigProto {
       "numConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }
