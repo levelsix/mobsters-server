@@ -55,6 +55,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent)event)
     	.getSolicitClanHelpRequestProto();
 
+    log.info(String.format("reqProto=%s", reqProto));
+    
     MinimumUserProto senderProto = reqProto.getSender();
     ClanHelpNoticeProto chnp = reqProto.getNotice();
     int userId = senderProto.getUserId();
@@ -140,7 +142,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     if (user.getClanId() <= 0) {
       resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
-      log.error("user's clanId=%s", user.getClanId());
+      log.error(String.format(
+    	  "user's clanId=%s",
+    	  user.getClanId()));
       return false;
     }
 
