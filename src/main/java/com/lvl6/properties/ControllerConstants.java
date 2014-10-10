@@ -478,11 +478,11 @@ public class ControllerConstants {
   public static final int BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK = 3;
   
   // MAP
-  public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "mapsection";
-  public static final int TASK_MAP__NUMBER_OF_SECTIONS = 14;
+  public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "1mapsection";
+  public static final int TASK_MAP__NUMBER_OF_SECTIONS = 15;
   public static final float TASK_MAP__SECTION_HEIGHT = 328;
   public static final float TASK_MAP__TOTAL_WIDTH = 328;
-  public static final float TASK_MAP__TOTAL_HEIGHT = 4412;
+  public static final float TASK_MAP__TOTAL_HEIGHT = 4819;
   
   public static final AnimatedSpriteOffset[] STARTUP__ANIMATED_SPRITE_OFFSETS = {
     new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),
