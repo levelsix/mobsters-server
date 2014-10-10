@@ -511,7 +511,11 @@ public class MiscMethods {
       String delimiter, List<Integer> returnValue) {
     StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
     while (st.hasMoreTokens()) {
-      returnValue.add(Integer.parseInt(st.nextToken()));
+    	String tok = st.nextToken().trim();
+    	if (tok.isEmpty()) {
+    		continue;
+    	}
+    	returnValue.add(Integer.parseInt(tok));
     }
   }
 
