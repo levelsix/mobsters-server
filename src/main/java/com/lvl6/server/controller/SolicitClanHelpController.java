@@ -183,6 +183,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  ch.setHelpType(
 			  chnp.getHelpType()
 			  .name());
+		  
+		  solicitations.add(ch);
 	  }
 
 	  List<Long> clanHelpIds = InsertUtils.get().insertIntoClanHelpGetId(solicitations);
