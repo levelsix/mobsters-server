@@ -1493,6 +1493,7 @@ public class InsertUtils implements InsertUtil{
 						.getTime()));
 				newRow.put(DBConstants.CLAN_HELP__MAX_HELPERS, ch.getMaxHelpers());
 				newRow.put(DBConstants.CLAN_HELP__OPEN, true);
+				newRow.put(DBConstants.CLAN_HELP__STATIC_DATA_ID, ch.getStaticDataId());
 
 				newRows.add(newRow);
 			}
