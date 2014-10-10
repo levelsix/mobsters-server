@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -7797133509771235886L;
+	private static final long serialVersionUID = -5697714546871498556L;
 	
 	private int id;
 	private String name;
@@ -51,6 +51,7 @@ public class User implements Serializable {
 	private Date lastMiniJobGeneratedTime;
 	private int avatarMonsterId;
 	private Date lastFreeBoosterPackTime;
+	private int clanHelps;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
@@ -64,7 +65,7 @@ public class User implements Serializable {
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
-			int avatarMonsterId, Date lastFreeBoosterPackTime) {
+			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -102,6 +103,7 @@ public class User implements Serializable {
 		this.lastMiniJobGeneratedTime = lastMiniJobGeneratedTime;
 		this.avatarMonsterId = avatarMonsterId;
 		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
+		this.clanHelps = clanHelps;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -846,6 +848,30 @@ public class User implements Serializable {
 
 	}
 
+	public boolean updateClanHelps( int delta ) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+
+		if (delta != 0) {
+			relativeParams.put(DBConstants.USER__CLAN_HELPS, delta);
+		}
+		
+		if (relativeParams.isEmpty()) {
+			return false;
+		}
+
+		Map <String, Object> absoluteParams = null;
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.clanHelps += delta;
+			return true;
+		}
+		return false;
+	}
 	
 	public int getId() {
 		return id;
@@ -1137,6 +1163,16 @@ public class User implements Serializable {
 		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
 	}
 
+	public int getClanHelps()
+	{
+		return clanHelps;
+	}
+
+	public void setClanHelps( int clanHelps )
+	{
+		this.clanHelps = clanHelps;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -1210,6 +1246,8 @@ public class User implements Serializable {
 			+ avatarMonsterId
 			+ ", lastFreeBoosterPackTime="
 			+ lastFreeBoosterPackTime
+			+ ", clanHelps="
+			+ clanHelps
 			+ "]";
 	}
 

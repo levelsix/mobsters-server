@@ -3087,6 +3087,9 @@ public class CreateInfoProtoUtils {
     
     //add new columns above here, not below the if. if case for is fake
 
+    int numClanHelps = u.getClanHelps();
+    builder.setNumClanHelps(numClanHelps);
+    
     if (u.isFake()) {
 
     }

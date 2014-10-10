@@ -153,6 +153,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info(String.format(
     	"numUpdated=%s", numUpdated));
     
+    User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+    boolean updated = user.updateClanHelps(clanHelpIds.size());
+    log.info(String.format( "updated=%s", updated ));
+    
+    
     return true;
   }
   
