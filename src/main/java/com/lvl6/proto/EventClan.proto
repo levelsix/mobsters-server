@@ -442,6 +442,8 @@ message GiveClanHelpResponseProto {
 	repeated ClanHelpProto clanHelps = 2;
 	optional GiveClanHelpStatus status = 3; 
 	
+	//SEND TO ALL CLAN MEMBERS ON SUCCESS
+	
 	enum GiveClanHelpStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
@@ -457,6 +459,8 @@ message EndClanHelpRequestProto {
 
 message EndClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
+	repeated int64 clanHelpIds = 2;
+	//SEND TO ALL CLAN MEMBERS ON SUCCESS
 	
 	enum EndClanHelpStatus {
 		SUCCESS = 1;

@@ -32966,6 +32966,31 @@ public final class EventClanProto {
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    java.util.List<java.lang.Long> getClanHelpIdsList();
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    int getClanHelpIdsCount();
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    long getClanHelpIds(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndClanHelpResponseProto}
@@ -33032,6 +33057,27 @@ public final class EventClanProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                clanHelpIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              clanHelpIds_.add(input.readInt64());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                clanHelpIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                clanHelpIds_.add(input.readInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -33040,6 +33086,9 @@ public final class EventClanProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          clanHelpIds_ = java.util.Collections.unmodifiableList(clanHelpIds_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -33175,8 +33224,43 @@ public final class EventClanProto {
       return sender_;
     }
 
+    public static final int CLANHELPIDS_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Long> clanHelpIds_;
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    public java.util.List<java.lang.Long>
+        getClanHelpIdsList() {
+      return clanHelpIds_;
+    }
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    public int getClanHelpIdsCount() {
+      return clanHelpIds_.size();
+    }
+    /**
+     * <code>repeated int64 clanHelpIds = 2;</code>
+     *
+     * <pre>
+     *SEND TO ALL CLAN MEMBERS ON SUCCESS
+     * </pre>
+     */
+    public long getClanHelpIds(int index) {
+      return clanHelpIds_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clanHelpIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -33194,6 +33278,9 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
+      for (int i = 0; i < clanHelpIds_.size(); i++) {
+        output.writeInt64(2, clanHelpIds_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -33206,6 +33293,15 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < clanHelpIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt64SizeNoTag(clanHelpIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getClanHelpIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -33331,6 +33427,8 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        clanHelpIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -33367,6 +33465,11 @@ public final class EventClanProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanHelpIds_ = java.util.Collections.unmodifiableList(clanHelpIds_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.clanHelpIds_ = clanHelpIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -33385,6 +33488,16 @@ public final class EventClanProto {
         if (other == com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (!other.clanHelpIds_.isEmpty()) {
+          if (clanHelpIds_.isEmpty()) {
+            clanHelpIds_ = other.clanHelpIds_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureClanHelpIdsIsMutable();
+            clanHelpIds_.addAll(other.clanHelpIds_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -33527,6 +33640,100 @@ public final class EventClanProto {
           sender_ = null;
         }
         return senderBuilder_;
+      }
+
+      private java.util.List<java.lang.Long> clanHelpIds_ = java.util.Collections.emptyList();
+      private void ensureClanHelpIdsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanHelpIds_ = new java.util.ArrayList<java.lang.Long>(clanHelpIds_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public java.util.List<java.lang.Long>
+          getClanHelpIdsList() {
+        return java.util.Collections.unmodifiableList(clanHelpIds_);
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public int getClanHelpIdsCount() {
+        return clanHelpIds_.size();
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public long getClanHelpIds(int index) {
+        return clanHelpIds_.get(index);
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public Builder setClanHelpIds(
+          int index, long value) {
+        ensureClanHelpIdsIsMutable();
+        clanHelpIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public Builder addClanHelpIds(long value) {
+        ensureClanHelpIdsIsMutable();
+        clanHelpIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public Builder addAllClanHelpIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureClanHelpIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, clanHelpIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 clanHelpIds = 2;</code>
+       *
+       * <pre>
+       *SEND TO ALL CLAN MEMBERS ON SUCCESS
+       * </pre>
+       */
+      public Builder clearClanHelpIds() {
+        clanHelpIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndClanHelpResponseProto)
@@ -33947,11 +34154,11 @@ public final class EventClanProto {
       "lanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
       "\020\002\"`\n\027EndClanHelpRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\023\n\013clanHelpIds\030\002 \003(\003\"~\n\030EndClanHelpRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\"0\n\021EndClanHelpStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventCla" +
-      "nProto"
+      "\023\n\013clanHelpIds\030\002 \003(\003\"\223\001\n\030EndClanHelpResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\023\n\013clanHelpIds\030\002 \003(\003" +
+      "\"0\n\021EndClanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
+      "IL_OTHER\020\002B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -34166,7 +34373,7 @@ public final class EventClanProto {
     internal_static_com_lvl6_proto_EndClanHelpResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndClanHelpResponseProto_descriptor,
-        new java.lang.String[] { "Sender", });
+        new java.lang.String[] { "Sender", "ClanHelpIds", });
     com.lvl6.proto.ClanProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
