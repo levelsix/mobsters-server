@@ -15899,13 +15899,13 @@ public final class StructureProto {
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
 
     /**
-     * <code>optional int32 maxSolicitations = 2;</code>
+     * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
-    boolean hasMaxSolicitations();
+    boolean hasMaxHelpersPerSolicitation();
     /**
-     * <code>optional int32 maxSolicitations = 2;</code>
+     * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
-    int getMaxSolicitations();
+    int getMaxHelpersPerSolicitation();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHouseProto}
@@ -15974,7 +15974,7 @@ public final class StructureProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              maxSolicitations_ = input.readInt32();
+              maxHelpersPerSolicitation_ = input.readInt32();
               break;
             }
           }
@@ -16038,24 +16038,24 @@ public final class StructureProto {
       return structInfo_;
     }
 
-    public static final int MAXSOLICITATIONS_FIELD_NUMBER = 2;
-    private int maxSolicitations_;
+    public static final int MAXHELPERSPERSOLICITATION_FIELD_NUMBER = 2;
+    private int maxHelpersPerSolicitation_;
     /**
-     * <code>optional int32 maxSolicitations = 2;</code>
+     * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
-    public boolean hasMaxSolicitations() {
+    public boolean hasMaxHelpersPerSolicitation() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 maxSolicitations = 2;</code>
+     * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
      */
-    public int getMaxSolicitations() {
-      return maxSolicitations_;
+    public int getMaxHelpersPerSolicitation() {
+      return maxHelpersPerSolicitation_;
     }
 
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      maxSolicitations_ = 0;
+      maxHelpersPerSolicitation_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16074,7 +16074,7 @@ public final class StructureProto {
         output.writeMessage(1, structInfo_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, maxSolicitations_);
+        output.writeInt32(2, maxHelpersPerSolicitation_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -16091,7 +16091,7 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, maxSolicitations_);
+          .computeInt32Size(2, maxHelpersPerSolicitation_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16217,7 +16217,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        maxSolicitations_ = 0;
+        maxHelpersPerSolicitation_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -16258,7 +16258,7 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.maxSolicitations_ = maxSolicitations_;
+        result.maxHelpersPerSolicitation_ = maxHelpersPerSolicitation_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16278,8 +16278,8 @@ public final class StructureProto {
         if (other.hasStructInfo()) {
           mergeStructInfo(other.getStructInfo());
         }
-        if (other.hasMaxSolicitations()) {
-          setMaxSolicitations(other.getMaxSolicitations());
+        if (other.hasMaxHelpersPerSolicitation()) {
+          setMaxHelpersPerSolicitation(other.getMaxHelpersPerSolicitation());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16424,34 +16424,34 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      private int maxSolicitations_ ;
+      private int maxHelpersPerSolicitation_ ;
       /**
-       * <code>optional int32 maxSolicitations = 2;</code>
+       * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
        */
-      public boolean hasMaxSolicitations() {
+      public boolean hasMaxHelpersPerSolicitation() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 maxSolicitations = 2;</code>
+       * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
        */
-      public int getMaxSolicitations() {
-        return maxSolicitations_;
+      public int getMaxHelpersPerSolicitation() {
+        return maxHelpersPerSolicitation_;
       }
       /**
-       * <code>optional int32 maxSolicitations = 2;</code>
+       * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
        */
-      public Builder setMaxSolicitations(int value) {
+      public Builder setMaxHelpersPerSolicitation(int value) {
         bitField0_ |= 0x00000002;
-        maxSolicitations_ = value;
+        maxHelpersPerSolicitation_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 maxSolicitations = 2;</code>
+       * <code>optional int32 maxHelpersPerSolicitation = 2;</code>
        */
-      public Builder clearMaxSolicitations() {
+      public Builder clearMaxHelpersPerSolicitation() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        maxSolicitations_ = 0;
+        maxHelpersPerSolicitation_ = 0;
         onChanged();
         return this;
       }
@@ -16646,14 +16646,14 @@ public final class StructureProto {
       "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
       "om.lvl6.proto.StructureInfoProto\"I\n\017Team" +
       "CenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lv" +
-      "l6.proto.StructureInfoProto\"b\n\016ClanHouse" +
+      "l6.proto.StructureInfoProto\"k\n\016ClanHouse" +
       "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
-      "to.StructureInfoProto\022\030\n\020maxSolicitation" +
-      "s\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004" +
-      "\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER",
-      "\020\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATIO" +
-      "N\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016S" +
-      "tructureProto"
+      "to.StructureInfoProto\022!\n\031maxHelpersPerSo" +
+      "licitation\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_R" +
+      "ESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013",
+      "\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016NO_O" +
+      "RIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION" +
+      "_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16768,7 +16768,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
-        new java.lang.String[] { "StructInfo", "MaxSolicitations", });
+        new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

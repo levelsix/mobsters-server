@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class StructureClanHouse implements Serializable {
 
-	private static final long serialVersionUID = 8658559364312847443L;
+	private static final long serialVersionUID = 9044869383817373202L;
 	
 	private int structId;
-	private int solicitationLimit;
+	private int maxHelpersPerSolicitation;
 	
 	public StructureClanHouse()
 	{
 		super();
 	}
 
-	public StructureClanHouse( int structId, int solicitationLimit )
+	public StructureClanHouse( int structId, int maxHelpersPerSolicitation )
 	{
 		super();
 		this.structId = structId;
-		this.solicitationLimit = solicitationLimit;
+		this.maxHelpersPerSolicitation = maxHelpersPerSolicitation;
 	}
 
 	public int getStructId() {
@@ -29,14 +29,14 @@ public class StructureClanHouse implements Serializable {
 		this.structId = structId;
 	}
 
-	public int getSolicitationLimit()
+	public int getMaxHelpersPerSolicitation()
 	{
-		return solicitationLimit;
+		return maxHelpersPerSolicitation;
 	}
 
-	public void setSolicitationLimit( int solicitationLimit )
+	public void setMaxHelpersPerSolicitation( int maxHelpersPerSolicitation )
 	{
-		this.solicitationLimit = solicitationLimit;
+		this.maxHelpersPerSolicitation = maxHelpersPerSolicitation;
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public class StructureClanHouse implements Serializable {
 	{
 		return "StructureClanHouse [structId="
 			+ structId
-			+ ", solicitationLimit="
-			+ solicitationLimit
+			+ ", maxHelpersPerSolicitation="
+			+ maxHelpersPerSolicitation
 			+ "]";
 	}
 

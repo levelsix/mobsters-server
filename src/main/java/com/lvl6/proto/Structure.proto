@@ -260,6 +260,6 @@ message TeamCenterProto {
 
 message ClanHouseProto {
 	optional StructureInfoProto structInfo = 1;
-	optional int32 maxSolicitations = 2; 
+	optional int32 maxHelpersPerSolicitation = 2; 
 }
 

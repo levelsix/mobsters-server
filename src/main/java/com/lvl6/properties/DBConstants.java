@@ -941,7 +941,7 @@ public class DBConstants {
   public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
   
   public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
-  public static final String STRUCTURE_CLAN_HOUSE__SOLICITATION_LIMIT = "solicitation_limit";
+  public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
   
