@@ -472,12 +472,44 @@ public final class SharedEnumConfigProto {
      * <code>NO_HELP = 1;</code>
      */
     NO_HELP(0, 1),
+    /**
+     * <code>UPGRADE_STURCT = 2;</code>
+     */
+    UPGRADE_STURCT(1, 2),
+    /**
+     * <code>HEAL = 3;</code>
+     */
+    HEAL(2, 3),
+    /**
+     * <code>EVOLVE = 4;</code>
+     */
+    EVOLVE(3, 4),
+    /**
+     * <code>MINI_JOB = 5;</code>
+     */
+    MINI_JOB(4, 5),
     ;
 
     /**
      * <code>NO_HELP = 1;</code>
      */
     public static final int NO_HELP_VALUE = 1;
+    /**
+     * <code>UPGRADE_STURCT = 2;</code>
+     */
+    public static final int UPGRADE_STURCT_VALUE = 2;
+    /**
+     * <code>HEAL = 3;</code>
+     */
+    public static final int HEAL_VALUE = 3;
+    /**
+     * <code>EVOLVE = 4;</code>
+     */
+    public static final int EVOLVE_VALUE = 4;
+    /**
+     * <code>MINI_JOB = 5;</code>
+     */
+    public static final int MINI_JOB_VALUE = 5;
 
 
     public final int getNumber() { return value; }
@@ -485,6 +517,10 @@ public final class SharedEnumConfigProto {
     public static ClanHelpType valueOf(int value) {
       switch (value) {
         case 1: return NO_HELP;
+        case 2: return UPGRADE_STURCT;
+        case 3: return HEAL;
+        case 4: return EVOLVE;
+        case 5: return MINI_JOB;
         default: return null;
       }
     }
@@ -554,8 +590,9 @@ public final class SharedEnumConfigProto {
       "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
-      "*\033\n\014ClanHelpType\022\013\n\007NO_HELP\020\001B\027B\025SharedE",
-      "numConfigProto"
+      "*S\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
+      "_STURCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
+      "JOB\020\005B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

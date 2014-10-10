@@ -46,6 +46,10 @@ enum Quality {
 
 enum ClanHelpType {
 	NO_HELP = 1;
+	UPGRADE_STURCT = 2;
+	HEAL = 3;
+	EVOLVE = 4;
+	MINI_JOB = 5;
 }
 
 // the ResourceType enum in Structure.proto, should be in here
