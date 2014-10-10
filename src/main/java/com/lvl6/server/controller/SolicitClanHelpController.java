@@ -194,8 +194,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  Long clanHelpId = clanHelpIds.get(index);
 		  ch.setId(clanHelpId);
 	  }
+	  log.info(String.format("new clanHelps: %s", solicitations));
 
-	  if ( null != clanHelpIds && clanHelpIds.isEmpty() ) {
+	  if ( null != clanHelpIds && !clanHelpIds.isEmpty() ) {
 		  clanHelpStore.addAll(solicitations);
 		  return true;
 	  }
