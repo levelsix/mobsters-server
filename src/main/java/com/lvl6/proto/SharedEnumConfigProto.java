@@ -473,9 +473,9 @@ public final class SharedEnumConfigProto {
      */
     NO_HELP(0, 1),
     /**
-     * <code>UPGRADE_STURCT = 2;</code>
+     * <code>UPGRADE_STRUCT = 2;</code>
      */
-    UPGRADE_STURCT(1, 2),
+    UPGRADE_STRUCT(1, 2),
     /**
      * <code>HEAL = 3;</code>
      */
@@ -495,9 +495,9 @@ public final class SharedEnumConfigProto {
      */
     public static final int NO_HELP_VALUE = 1;
     /**
-     * <code>UPGRADE_STURCT = 2;</code>
+     * <code>UPGRADE_STRUCT = 2;</code>
      */
-    public static final int UPGRADE_STURCT_VALUE = 2;
+    public static final int UPGRADE_STRUCT_VALUE = 2;
     /**
      * <code>HEAL = 3;</code>
      */
@@ -517,7 +517,7 @@ public final class SharedEnumConfigProto {
     public static ClanHelpType valueOf(int value) {
       switch (value) {
         case 1: return NO_HELP;
-        case 2: return UPGRADE_STURCT;
+        case 2: return UPGRADE_STRUCT;
         case 3: return HEAL;
         case 4: return EVOLVE;
         case 5: return MINI_JOB;
@@ -591,7 +591,7 @@ public final class SharedEnumConfigProto {
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
       "*S\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
-      "_STURCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
+      "_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
       "JOB\020\005B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
