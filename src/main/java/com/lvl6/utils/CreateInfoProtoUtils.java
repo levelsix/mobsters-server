@@ -1288,7 +1288,7 @@ public class CreateInfoProtoUtils {
 				  "incorrect ClanHelpType. ClanHelp=%s", ch ));
 		  }
 	  }
-	  
+	  chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
 	  chpb.setMaxHelpers(ch.getMaxHelpers());
 	  chpb.addAllHelperIds(ch.getHelpers());
 	  chpb.setOpen(ch.isOpen());

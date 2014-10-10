@@ -183,7 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  ch.setHelpType(
 			  chnp.getHelpType()
 			  .name());
-		  
+		  ch.setOpen(true);
 		  solicitations.add(ch);
 	  }
 
