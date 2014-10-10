@@ -259,6 +259,7 @@ message TeamCenterProto {
 //------------------------------------------------------------------------------------------
 
 message ClanHouseProto {
-	optional StructureInfoProto structInfo = 1; 
+	optional StructureInfoProto structInfo = 1;
+	optional int32 maxHelps = 2; 
 }
 
