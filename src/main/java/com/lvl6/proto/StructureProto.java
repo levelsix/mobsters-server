@@ -15897,6 +15897,15 @@ public final class StructureProto {
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional int32 maxSolicitations = 2;</code>
+     */
+    boolean hasMaxSolicitations();
+    /**
+     * <code>optional int32 maxSolicitations = 2;</code>
+     */
+    int getMaxSolicitations();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHouseProto}
@@ -15963,6 +15972,11 @@ public final class StructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              maxSolicitations_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -16024,8 +16038,24 @@ public final class StructureProto {
       return structInfo_;
     }
 
+    public static final int MAXSOLICITATIONS_FIELD_NUMBER = 2;
+    private int maxSolicitations_;
+    /**
+     * <code>optional int32 maxSolicitations = 2;</code>
+     */
+    public boolean hasMaxSolicitations() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 maxSolicitations = 2;</code>
+     */
+    public int getMaxSolicitations() {
+      return maxSolicitations_;
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      maxSolicitations_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16043,6 +16073,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, structInfo_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, maxSolicitations_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -16055,6 +16088,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, maxSolicitations_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16180,6 +16217,8 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        maxSolicitations_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -16216,6 +16255,10 @@ public final class StructureProto {
         } else {
           result.structInfo_ = structInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.maxSolicitations_ = maxSolicitations_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16234,6 +16277,9 @@ public final class StructureProto {
         if (other == com.lvl6.proto.StructureProto.ClanHouseProto.getDefaultInstance()) return this;
         if (other.hasStructInfo()) {
           mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasMaxSolicitations()) {
+          setMaxSolicitations(other.getMaxSolicitations());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16376,6 +16422,38 @@ public final class StructureProto {
           structInfo_ = null;
         }
         return structInfoBuilder_;
+      }
+
+      private int maxSolicitations_ ;
+      /**
+       * <code>optional int32 maxSolicitations = 2;</code>
+       */
+      public boolean hasMaxSolicitations() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 maxSolicitations = 2;</code>
+       */
+      public int getMaxSolicitations() {
+        return maxSolicitations_;
+      }
+      /**
+       * <code>optional int32 maxSolicitations = 2;</code>
+       */
+      public Builder setMaxSolicitations(int value) {
+        bitField0_ |= 0x00000002;
+        maxSolicitations_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 maxSolicitations = 2;</code>
+       */
+      public Builder clearMaxSolicitations() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        maxSolicitations_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanHouseProto)
@@ -16568,13 +16646,14 @@ public final class StructureProto {
       "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
       "om.lvl6.proto.StructureInfoProto\"I\n\017Team" +
       "CenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lv" +
-      "l6.proto.StructureInfoProto\"H\n\016ClanHouse" +
+      "l6.proto.StructureInfoProto\"b\n\016ClanHouse" +
       "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
-      "to.StructureInfoProto*I\n\014ResourceType\022\017\n" +
-      "\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEM" +
-      "S\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n",
-      "\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOS" +
-      "ITION_2\020\002B\020B\016StructureProto"
+      "to.StructureInfoProto\022\030\n\020maxSolicitation" +
+      "s\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004" +
+      "\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER",
+      "\020\024*G\n\021StructOrientation\022\022\n\016NO_ORIENTATIO" +
+      "N\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016S" +
+      "tructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16689,7 +16768,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
-        new java.lang.String[] { "StructInfo", });
+        new java.lang.String[] { "StructInfo", "MaxSolicitations", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

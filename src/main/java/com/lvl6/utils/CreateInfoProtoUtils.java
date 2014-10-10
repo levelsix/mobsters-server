@@ -2540,6 +2540,7 @@ public class CreateInfoProtoUtils {
 	  
 	  ClanHouseProto.Builder chpb = ClanHouseProto.newBuilder();
 	  chpb.setStructInfo(sip);
+	  chpb.setMaxSolicitations(sch.getSolicitationLimit());
 	  
 	  return chpb.build();
   }

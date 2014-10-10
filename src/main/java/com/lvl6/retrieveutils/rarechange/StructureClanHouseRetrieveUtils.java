@@ -110,6 +110,7 @@ import com.lvl6.utils.DBConnection;
    */
   private static StructureClanHouse convertRSRowToClanHouse(ResultSet rs) throws SQLException {
     int structId = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__STRUCT_ID);
+    int solicitationLimit = rs.getInt(DBConstants.STRUCTURE_CLAN_HOUSE__SOLICITATION_LIMIT);
     
     return new StructureClanHouse(structId);
   }
