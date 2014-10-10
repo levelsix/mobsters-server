@@ -1290,7 +1290,10 @@ public class CreateInfoProtoUtils {
 	  }
 	  chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
 	  chpb.setMaxHelpers(ch.getMaxHelpers());
-	  chpb.addAllHelperIds(ch.getHelpers());
+	  
+	  if (null != ch.getHelpers()) {
+		  chpb.addAllHelperIds(ch.getHelpers());
+	  }
 	  chpb.setOpen(ch.isOpen());
 	  chpb.setStaticDataId(ch.getStaticDataId());
 	  

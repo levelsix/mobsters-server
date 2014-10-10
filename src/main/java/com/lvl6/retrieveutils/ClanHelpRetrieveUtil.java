@@ -143,6 +143,7 @@ public class ClanHelpRetrieveUtil {
 			}
 			ch.setHelpers(helpers);
 			
+			ch.setOpen(rs.getBoolean(DBConstants.CLAN_HELP__OPEN));
 			ch.setStaticDataId(rs.getInt(DBConstants.CLAN_HELP__STATIC_DATA_ID));
 			
 			return ch;
