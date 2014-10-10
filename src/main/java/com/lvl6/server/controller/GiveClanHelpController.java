@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
 import com.lvl6.info.ClanHelp;
+import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto;
@@ -23,6 +25,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class GiveClanHelpController extends EventController {
@@ -153,16 +156,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
   
+  //Copy pasted from StartupController
   private void setClanHelpings(Builder resBuilder, int clanId, int userId) {
-	  Map<Integer, List<ClanHelp>> clanHelpings = clanHelpRetrieveUtil
+	  Map<Integer, List<ClanHelp>> allSolicitations = clanHelpRetrieveUtil
 		  .getUserIdToClanHelp( clanId, userId );
 	  
-	  for (Integer helperId : clanHelpings.keySet()) {
-		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
+	  Map<Integer, User> solicitors = RetrieveUtils.userRetrieveUtils()
+		  .getUsersByIds(allSolicitations.keySet());                                
+	  
+	  //convert all solicitors into MinimumUserProtos
+	  Map<Integer, MinimumUserProto> mupSolicitors = new HashMap<Integer, MinimumUserProto>();
+	  for (Integer solicitorId : solicitors.keySet()) {
+		  User moocher = solicitors.get(solicitorId);
+		  MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(moocher);
+		  mupSolicitors.put(solicitorId, mup);
+	  }
+	  
+	  
+	  for (Integer solicitorId : allSolicitations.keySet()) {
+		  List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
 			  
-		  for (ClanHelp aid : userHelpings) {
+		  User solicitor = solicitors.get( solicitorId );
+		  MinimumUserProto mup = mupSolicitors.get( solicitorId );
+		  
+		  for (ClanHelp aid : solicitations) {
+			  
 			  ClanHelpProto chp = CreateInfoProtoUtils
-				  .createClanHelpProtoFromClanHelp(aid);
+				  .createClanHelpProtoFromClanHelp(aid, solicitor, mup);
 			  
 			  resBuilder.addClanHelps(chp);
 		  }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ClanHelp implements Serializable {
 	
-	private static final long serialVersionUID = 3928951416077703182L;
+	private static final long serialVersionUID = 2752721561844734596L;
 	
 	private long id;
 	private int userId;
@@ -17,6 +17,7 @@ public class ClanHelp implements Serializable {
 	private int maxHelpers; 
 	private List<Integer> helpers;
 	private boolean open;
+	private int staticDataId;
 	
 	public ClanHelp() {
 		super();
@@ -31,7 +32,8 @@ public class ClanHelp implements Serializable {
 		Date timeOfEntry,
 		int maxHelpers,
 		List<Integer> helpers,
-		boolean open )
+		boolean open,
+		int staticDataId )
 	{
 		super();
 		this.id = id;
@@ -43,7 +45,9 @@ public class ClanHelp implements Serializable {
 		this.maxHelpers = maxHelpers;
 		this.helpers = helpers;
 		this.open = open;
+		this.staticDataId = staticDataId;
 	}
+
 
 	public long getId()
 	{
@@ -135,6 +139,16 @@ public class ClanHelp implements Serializable {
 		this.open = open;
 	}
 
+	public int getStaticDataId()
+	{
+		return staticDataId;
+	}
+
+	public void setStaticDataId( int staticDataId )
+	{
+		this.staticDataId = staticDataId;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -156,6 +170,8 @@ public class ClanHelp implements Serializable {
 			+ helpers
 			+ ", open="
 			+ open
+			+ ", staticDataId="
+			+ staticDataId
 			+ "]";
 	}
 

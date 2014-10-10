@@ -16,6 +16,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
@@ -1473,30 +1474,36 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public long insertIntoClanHelpGetId(int clanId, int userId, long userDataId,
-			String helpType, Timestamp timeRequested, int maxHelpers)
+		public List<Long> insertIntoClanHelpGetId( List<ClanHelp> solicitations )
 		{
 			String tableName = DBConstants.TABLE_CLAN_HELP;
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
-			Map<String, Object> newRow = new HashMap<String, Object>();
-			newRow.put(DBConstants.CLAN_HELP__CLAN_ID, clanId);    
-			newRow.put(DBConstants.CLAN_HELP__USER_ID, userId);                                                                   
-			newRow.put(DBConstants.CLAN_HELP__USER_DATA_ID, userDataId);      
-			newRow.put(DBConstants.CLAN_HELP__HELP_TYPE, helpType);
-			newRow.put(DBConstants.CLAN_HELP__TIME_OF_ENTRY, timeRequested);
-			newRow.put(DBConstants.CLAN_HELP__MAX_HELPERS, maxHelpers);
-			newRow.put(DBConstants.CLAN_HELP__OPEN, true);
+			for (ClanHelp ch : solicitations) {
 
-			newRows.add(newRow);
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.CLAN_HELP__CLAN_ID, ch.getClanId());    
+				newRow.put(DBConstants.CLAN_HELP__USER_ID, ch.getUserId());                                                                   
+				newRow.put(DBConstants.CLAN_HELP__USER_DATA_ID, ch.getUserDataId());      
+				newRow.put(DBConstants.CLAN_HELP__HELP_TYPE, ch.getHelpType());
+				newRow.put(DBConstants.CLAN_HELP__TIME_OF_ENTRY, 
+					new Timestamp(
+						ch.getTimeOfEntry()
+						.getTime()));
+				newRow.put(DBConstants.CLAN_HELP__MAX_HELPERS, ch.getMaxHelpers());
+				newRow.put(DBConstants.CLAN_HELP__OPEN, true);
+
+				newRows.add(newRow);
+			}
+			
 			List<Long> ids = DBConnection.get()
 				.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
 
-			if (null != ids && ids.size() >= 1) {
-				return ids.get(0);
+			if (null != ids) {
+				return ids;
 			} else {
-				return 0;       
+				return new ArrayList<Long>();       
 			}
 		}
 }

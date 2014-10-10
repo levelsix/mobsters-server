@@ -1263,11 +1263,17 @@ public class CreateInfoProtoUtils {
   	return cipb.build();
   }
   
-  public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch) {
+  public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch,
+	  User u, MinimumUserProto mup)
+  {
 	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
 	  chpb.setClanHelpId(ch.getId());
 	  chpb.setClanId(ch.getClanId());
-	  chpb.setUserId(ch.getUserId());
+	  
+	  if (null == mup) {
+		  mup = createMinimumUserProtoFromUser(u);
+	  }
+	  chpb.setMup(mup);
 	  chpb.setUserDataId(ch.getUserDataId());
 	  
 	  String helpType = ch.getHelpType();
@@ -1286,22 +1292,8 @@ public class CreateInfoProtoUtils {
 	  chpb.setMaxHelpers(ch.getMaxHelpers());
 	  chpb.addAllHelperIds(ch.getHelpers());
 	  chpb.setOpen(ch.isOpen());
+	  chpb.setStaticDataId(ch.getStaticDataId());
 	  
-	  return chpb.build();
-  }
-  
-  public static ClanHelpProto createClanHelpProtoFromClanHelp(long clanHelpId,
-	  int clanId, int userId, long userDataId, ClanHelpType helpType,
-	  int maxHelpers, boolean open)
-  {
-	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
-	  chpb.setClanHelpId(clanHelpId);
-	  chpb.setClanId(clanId);
-	  chpb.setUserId(userId);
-	  chpb.setUserDataId(userDataId);
-	  chpb.setHelpType(helpType);
-	  chpb.setMaxHelpers(maxHelpers);
-	  chpb.setOpen(open);
 	  return chpb.build();
   }
   

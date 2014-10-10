@@ -28535,17 +28535,28 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
-    boolean hasNotice();
+    java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> 
+        getNoticeList();
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice();
+    com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice(int index);
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder();
+    int getNoticeCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> 
+        getNoticeOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder(
+        int index);
 
     /**
      * <code>optional int64 clientTime = 4;</code>
@@ -28631,25 +28642,20 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = notice_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                notice_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpNoticeProto>();
+                mutable_bitField0_ |= 0x00000002;
               }
-              notice_ = input.readMessage(com.lvl6.proto.ClanProto.ClanHelpNoticeProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(notice_);
-                notice_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
+              notice_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanHelpNoticeProto.PARSER, extensionRegistry));
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               clientTime_ = input.readInt64();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               maxHelpers_ = input.readInt32();
               break;
             }
@@ -28661,6 +28667,9 @@ public final class EventClanProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          notice_ = java.util.Collections.unmodifiableList(notice_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -28715,24 +28724,38 @@ public final class EventClanProto {
     }
 
     public static final int NOTICE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ClanProto.ClanHelpNoticeProto notice_;
+    private java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> notice_;
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
-    public boolean hasNotice() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
-     */
-    public com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice() {
+    public java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> getNoticeList() {
       return notice_;
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> 
+        getNoticeOrBuilderList() {
       return notice_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     */
+    public int getNoticeCount() {
+      return notice_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice(int index) {
+      return notice_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder(
+        int index) {
+      return notice_.get(index);
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 4;
@@ -28741,7 +28764,7 @@ public final class EventClanProto {
      * <code>optional int64 clientTime = 4;</code>
      */
     public boolean hasClientTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional int64 clientTime = 4;</code>
@@ -28756,7 +28779,7 @@ public final class EventClanProto {
      * <code>optional int32 maxHelpers = 5;</code>
      */
     public boolean hasMaxHelpers() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional int32 maxHelpers = 5;</code>
@@ -28767,7 +28790,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      notice_ = com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance();
+      notice_ = java.util.Collections.emptyList();
       clientTime_ = 0L;
       maxHelpers_ = 0;
     }
@@ -28787,13 +28810,13 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, notice_);
+      for (int i = 0; i < notice_.size(); i++) {
+        output.writeMessage(2, notice_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(4, clientTime_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(5, maxHelpers_);
       }
       getUnknownFields().writeTo(output);
@@ -28809,15 +28832,15 @@ public final class EventClanProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      for (int i = 0; i < notice_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, notice_);
+          .computeMessageSize(2, notice_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, clientTime_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, maxHelpers_);
       }
@@ -28947,11 +28970,11 @@ public final class EventClanProto {
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (noticeBuilder_ == null) {
-          notice_ = com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance();
+          notice_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           noticeBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
         maxHelpers_ = 0;
@@ -28992,20 +29015,21 @@ public final class EventClanProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         if (noticeBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            notice_ = java.util.Collections.unmodifiableList(notice_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
           result.notice_ = notice_;
         } else {
           result.notice_ = noticeBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
+          to_bitField0_ |= 0x00000002;
         }
         result.clientTime_ = clientTime_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
+          to_bitField0_ |= 0x00000004;
         }
         result.maxHelpers_ = maxHelpers_;
         result.bitField0_ = to_bitField0_;
@@ -29027,8 +29051,31 @@ public final class EventClanProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasNotice()) {
-          mergeNotice(other.getNotice());
+        if (noticeBuilder_ == null) {
+          if (!other.notice_.isEmpty()) {
+            if (notice_.isEmpty()) {
+              notice_ = other.notice_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureNoticeIsMutable();
+              notice_.addAll(other.notice_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.notice_.isEmpty()) {
+            if (noticeBuilder_.isEmpty()) {
+              noticeBuilder_.dispose();
+              noticeBuilder_ = null;
+              notice_ = other.notice_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              noticeBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNoticeFieldBuilder() : null;
+            } else {
+              noticeBuilder_.addAllMessages(other.notice_);
+            }
+          }
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
@@ -29179,115 +29226,239 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ClanProto.ClanHelpNoticeProto notice_ = com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanHelpNoticeProto, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder, com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> noticeBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
-       */
-      public boolean hasNotice() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      private java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> notice_ =
+        java.util.Collections.emptyList();
+      private void ensureNoticeIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          notice_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpNoticeProto>(notice_);
+          bitField0_ |= 0x00000002;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanHelpNoticeProto, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder, com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> noticeBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice() {
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto> getNoticeList() {
         if (noticeBuilder_ == null) {
-          return notice_;
+          return java.util.Collections.unmodifiableList(notice_);
         } else {
-          return noticeBuilder_.getMessage();
+          return noticeBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      public Builder setNotice(com.lvl6.proto.ClanProto.ClanHelpNoticeProto value) {
+      public int getNoticeCount() {
+        if (noticeBuilder_ == null) {
+          return notice_.size();
+        } else {
+          return noticeBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto getNotice(int index) {
+        if (noticeBuilder_ == null) {
+          return notice_.get(index);
+        } else {
+          return noticeBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public Builder setNotice(
+          int index, com.lvl6.proto.ClanProto.ClanHelpNoticeProto value) {
         if (noticeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          notice_ = value;
+          ensureNoticeIsMutable();
+          notice_.set(index, value);
           onChanged();
         } else {
-          noticeBuilder_.setMessage(value);
+          noticeBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
       public Builder setNotice(
+          int index, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder builderForValue) {
+        if (noticeBuilder_ == null) {
+          ensureNoticeIsMutable();
+          notice_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          noticeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public Builder addNotice(com.lvl6.proto.ClanProto.ClanHelpNoticeProto value) {
+        if (noticeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNoticeIsMutable();
+          notice_.add(value);
+          onChanged();
+        } else {
+          noticeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public Builder addNotice(
+          int index, com.lvl6.proto.ClanProto.ClanHelpNoticeProto value) {
+        if (noticeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNoticeIsMutable();
+          notice_.add(index, value);
+          onChanged();
+        } else {
+          noticeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public Builder addNotice(
           com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder builderForValue) {
         if (noticeBuilder_ == null) {
-          notice_ = builderForValue.build();
+          ensureNoticeIsMutable();
+          notice_.add(builderForValue.build());
           onChanged();
         } else {
-          noticeBuilder_.setMessage(builderForValue.build());
+          noticeBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      public Builder mergeNotice(com.lvl6.proto.ClanProto.ClanHelpNoticeProto value) {
+      public Builder addNotice(
+          int index, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder builderForValue) {
         if (noticeBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              notice_ != com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance()) {
-            notice_ =
-              com.lvl6.proto.ClanProto.ClanHelpNoticeProto.newBuilder(notice_).mergeFrom(value).buildPartial();
-          } else {
-            notice_ = value;
-          }
+          ensureNoticeIsMutable();
+          notice_.add(index, builderForValue.build());
           onChanged();
         } else {
-          noticeBuilder_.mergeFrom(value);
+          noticeBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public Builder addAllNotice(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpNoticeProto> values) {
+        if (noticeBuilder_ == null) {
+          ensureNoticeIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, notice_);
+          onChanged();
+        } else {
+          noticeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
       public Builder clearNotice() {
         if (noticeBuilder_ == null) {
-          notice_ = com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance();
+          notice_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           noticeBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder getNoticeBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getNoticeFieldBuilder().getBuilder();
+      public Builder removeNotice(int index) {
+        if (noticeBuilder_ == null) {
+          ensureNoticeIsMutable();
+          notice_.remove(index);
+          onChanged();
+        } else {
+          noticeBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder() {
-        if (noticeBuilder_ != null) {
-          return noticeBuilder_.getMessageOrBuilder();
-        } else {
-          return notice_;
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder getNoticeBuilder(
+          int index) {
+        return getNoticeFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder getNoticeOrBuilder(
+          int index) {
+        if (noticeBuilder_ == null) {
+          return notice_.get(index);  } else {
+          return noticeBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> 
+           getNoticeOrBuilderList() {
+        if (noticeBuilder_ != null) {
+          return noticeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(notice_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder addNoticeBuilder() {
+        return getNoticeFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder addNoticeBuilder(
+          int index) {
+        return getNoticeFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpNoticeProto notice = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder> 
+           getNoticeBuilderList() {
+        return getNoticeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ClanProto.ClanHelpNoticeProto, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder, com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder> 
           getNoticeFieldBuilder() {
         if (noticeBuilder_ == null) {
-          noticeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          noticeBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanHelpNoticeProto, com.lvl6.proto.ClanProto.ClanHelpNoticeProto.Builder, com.lvl6.proto.ClanProto.ClanHelpNoticeProtoOrBuilder>(
-                  getNotice(),
+                  notice_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           notice_ = null;
@@ -29388,17 +29559,28 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
-    boolean hasHelpProto();
+    java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> 
+        getHelpProtoList();
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto();
+    com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto(int index);
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder();
+    int getHelpProtoCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+        getHelpProtoOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder(
+        int index);
 
     /**
      * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
@@ -29475,16 +29657,11 @@ public final class EventClanProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.ClanProto.ClanHelpProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = helpProto_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                helpProto_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpProto>();
+                mutable_bitField0_ |= 0x00000002;
               }
-              helpProto_ = input.readMessage(com.lvl6.proto.ClanProto.ClanHelpProto.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(helpProto_);
-                helpProto_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
+              helpProto_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanHelpProto.PARSER, extensionRegistry));
               break;
             }
             case 24: {
@@ -29493,7 +29670,7 @@ public final class EventClanProto {
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000002;
                 status_ = value;
               }
               break;
@@ -29506,6 +29683,9 @@ public final class EventClanProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          helpProto_ = java.util.Collections.unmodifiableList(helpProto_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -29651,24 +29831,38 @@ public final class EventClanProto {
     }
 
     public static final int HELPPROTO_FIELD_NUMBER = 2;
-    private com.lvl6.proto.ClanProto.ClanHelpProto helpProto_;
+    private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> helpProto_;
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
-    public boolean hasHelpProto() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
-     */
-    public com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto() {
+    public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getHelpProtoList() {
       return helpProto_;
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
      */
-    public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder() {
+    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+        getHelpProtoOrBuilderList() {
       return helpProto_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     */
+    public int getHelpProtoCount() {
+      return helpProto_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto(int index) {
+      return helpProto_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder(
+        int index) {
+      return helpProto_.get(index);
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
@@ -29677,7 +29871,7 @@ public final class EventClanProto {
      * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
      */
     public boolean hasStatus() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
@@ -29688,7 +29882,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      helpProto_ = com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance();
+      helpProto_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -29707,10 +29901,10 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, helpProto_);
+      for (int i = 0; i < helpProto_.size(); i++) {
+        output.writeMessage(2, helpProto_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(3, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
@@ -29726,11 +29920,11 @@ public final class EventClanProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      for (int i = 0; i < helpProto_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, helpProto_);
+          .computeMessageSize(2, helpProto_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, status_.getNumber());
       }
@@ -29860,11 +30054,11 @@ public final class EventClanProto {
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         if (helpProtoBuilder_ == null) {
-          helpProto_ = com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance();
+          helpProto_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           helpProtoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
@@ -29903,16 +30097,17 @@ public final class EventClanProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         if (helpProtoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            helpProto_ = java.util.Collections.unmodifiableList(helpProto_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
           result.helpProto_ = helpProto_;
         } else {
           result.helpProto_ = helpProtoBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
+          to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
         result.bitField0_ = to_bitField0_;
@@ -29934,8 +30129,31 @@ public final class EventClanProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasHelpProto()) {
-          mergeHelpProto(other.getHelpProto());
+        if (helpProtoBuilder_ == null) {
+          if (!other.helpProto_.isEmpty()) {
+            if (helpProto_.isEmpty()) {
+              helpProto_ = other.helpProto_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureHelpProtoIsMutable();
+              helpProto_.addAll(other.helpProto_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.helpProto_.isEmpty()) {
+            if (helpProtoBuilder_.isEmpty()) {
+              helpProtoBuilder_.dispose();
+              helpProtoBuilder_ = null;
+              helpProto_ = other.helpProto_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              helpProtoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHelpProtoFieldBuilder() : null;
+            } else {
+              helpProtoBuilder_.addAllMessages(other.helpProto_);
+            }
+          }
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
@@ -30083,115 +30301,239 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.ClanProto.ClanHelpProto helpProto_ = com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> helpProtoBuilder_;
-      /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
-       */
-      public boolean hasHelpProto() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> helpProto_ =
+        java.util.Collections.emptyList();
+      private void ensureHelpProtoIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          helpProto_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanHelpProto>(helpProto_);
+          bitField0_ |= 0x00000002;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> helpProtoBuilder_;
+
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto() {
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getHelpProtoList() {
         if (helpProtoBuilder_ == null) {
-          return helpProto_;
+          return java.util.Collections.unmodifiableList(helpProto_);
         } else {
-          return helpProtoBuilder_.getMessage();
+          return helpProtoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      public Builder setHelpProto(com.lvl6.proto.ClanProto.ClanHelpProto value) {
+      public int getHelpProtoCount() {
+        if (helpProtoBuilder_ == null) {
+          return helpProto_.size();
+        } else {
+          return helpProtoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpProto getHelpProto(int index) {
+        if (helpProtoBuilder_ == null) {
+          return helpProto_.get(index);
+        } else {
+          return helpProtoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public Builder setHelpProto(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
         if (helpProtoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          helpProto_ = value;
+          ensureHelpProtoIsMutable();
+          helpProto_.set(index, value);
           onChanged();
         } else {
-          helpProtoBuilder_.setMessage(value);
+          helpProtoBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
       public Builder setHelpProto(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
+        if (helpProtoBuilder_ == null) {
+          ensureHelpProtoIsMutable();
+          helpProto_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          helpProtoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public Builder addHelpProto(com.lvl6.proto.ClanProto.ClanHelpProto value) {
+        if (helpProtoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHelpProtoIsMutable();
+          helpProto_.add(value);
+          onChanged();
+        } else {
+          helpProtoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public Builder addHelpProto(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
+        if (helpProtoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHelpProtoIsMutable();
+          helpProto_.add(index, value);
+          onChanged();
+        } else {
+          helpProtoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public Builder addHelpProto(
           com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
         if (helpProtoBuilder_ == null) {
-          helpProto_ = builderForValue.build();
+          ensureHelpProtoIsMutable();
+          helpProto_.add(builderForValue.build());
           onChanged();
         } else {
-          helpProtoBuilder_.setMessage(builderForValue.build());
+          helpProtoBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      public Builder mergeHelpProto(com.lvl6.proto.ClanProto.ClanHelpProto value) {
+      public Builder addHelpProto(
+          int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
         if (helpProtoBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              helpProto_ != com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance()) {
-            helpProto_ =
-              com.lvl6.proto.ClanProto.ClanHelpProto.newBuilder(helpProto_).mergeFrom(value).buildPartial();
-          } else {
-            helpProto_ = value;
-          }
+          ensureHelpProtoIsMutable();
+          helpProto_.add(index, builderForValue.build());
           onChanged();
         } else {
-          helpProtoBuilder_.mergeFrom(value);
+          helpProtoBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public Builder addAllHelpProto(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
+        if (helpProtoBuilder_ == null) {
+          ensureHelpProtoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, helpProto_);
+          onChanged();
+        } else {
+          helpProtoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
       public Builder clearHelpProto() {
         if (helpProtoBuilder_ == null) {
-          helpProto_ = com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance();
+          helpProto_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           helpProtoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder getHelpProtoBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getHelpProtoFieldBuilder().getBuilder();
+      public Builder removeHelpProto(int index) {
+        if (helpProtoBuilder_ == null) {
+          ensureHelpProtoIsMutable();
+          helpProto_.remove(index);
+          onChanged();
+        } else {
+          helpProtoBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder() {
-        if (helpProtoBuilder_ != null) {
-          return helpProtoBuilder_.getMessageOrBuilder();
-        } else {
-          return helpProto_;
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder getHelpProtoBuilder(
+          int index) {
+        return getHelpProtoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getHelpProtoOrBuilder(
+          int index) {
+        if (helpProtoBuilder_ == null) {
+          return helpProto_.get(index);  } else {
+          return helpProtoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+           getHelpProtoOrBuilderList() {
+        if (helpProtoBuilder_ != null) {
+          return helpProtoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(helpProto_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addHelpProtoBuilder() {
+        return getHelpProtoFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addHelpProtoBuilder(
+          int index) {
+        return getHelpProtoFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ClanHelpProto helpProto = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto.Builder> 
+           getHelpProtoBuilderList() {
+        return getHelpProtoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
           getHelpProtoFieldBuilder() {
         if (helpProtoBuilder_ == null) {
-          helpProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          helpProtoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder>(
-                  getHelpProto(),
+                  helpProto_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           helpProto_ = null;
@@ -33584,12 +33926,12 @@ public final class EventClanProto {
       "L_NOT_IN_CLAN\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003",
       "\022\016\n\nFAIL_OTHER\020\004\"\254\001\n\033SolicitClanHelpRequ" +
       "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\0223\n\006notice\030\002 \001(\0132#.com" +
+      "o.MinimumUserProto\0223\n\006notice\030\002 \003(\0132#.com" +
       ".lvl6.proto.ClanHelpNoticeProto\022\022\n\nclien" +
       "tTime\030\004 \001(\003\022\022\n\nmaxHelpers\030\005 \001(\005\"\242\002\n\034Soli" +
       "citClanHelpResponseProto\0220\n\006sender\030\001 \001(\013" +
       "2 .com.lvl6.proto.MinimumUserProto\0220\n\the" +
-      "lpProto\030\002 \001(\0132\035.com.lvl6.proto.ClanHelpP" +
+      "lpProto\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpP" +
       "roto\022R\n\006status\030\003 \001(\0162B.com.lvl6.proto.So" +
       "licitClanHelpResponseProto.SolicitClanHe",
       "lpStatus\"J\n\025SolicitClanHelpStatus\022\013\n\007SUC" +

@@ -14797,13 +14797,17 @@ public final class ClanProto {
     int getClanId();
 
     /**
-     * <code>optional int32 userId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
      */
-    boolean hasUserId();
+    boolean hasMup();
     /**
-     * <code>optional int32 userId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
      */
-    int getUserId();
+    com.lvl6.proto.UserProto.MinimumUserProto getMup();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
 
     /**
      * <code>optional int64 userDataId = 4;</code>
@@ -14878,6 +14882,15 @@ public final class ClanProto {
      * </pre>
      */
     boolean getOpen();
+
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     */
+    boolean hasStaticDataId();
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     */
+    int getStaticDataId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHelpProto}
@@ -14941,9 +14954,17 @@ public final class ClanProto {
               clanId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = mup_.toBuilder();
+              }
+              mup_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(mup_);
+                mup_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              userId_ = input.readInt32();
               break;
             }
             case 32: {
@@ -14996,6 +15017,11 @@ public final class ClanProto {
             case 72: {
               bitField0_ |= 0x00000080;
               open_ = input.readBool();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000100;
+              staticDataId_ = input.readInt32();
               break;
             }
           }
@@ -15071,19 +15097,25 @@ public final class ClanProto {
       return clanId_;
     }
 
-    public static final int USERID_FIELD_NUMBER = 3;
-    private int userId_;
+    public static final int MUP_FIELD_NUMBER = 3;
+    private com.lvl6.proto.UserProto.MinimumUserProto mup_;
     /**
-     * <code>optional int32 userId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasMup() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 userId = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
+      return mup_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
+      return mup_;
     }
 
     public static final int USERDATAID_FIELD_NUMBER = 4;
@@ -15199,16 +15231,32 @@ public final class ClanProto {
       return open_;
     }
 
+    public static final int STATICDATAID_FIELD_NUMBER = 10;
+    private int staticDataId_;
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     */
+    public boolean hasStaticDataId() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional int32 staticDataId = 10;</code>
+     */
+    public int getStaticDataId() {
+      return staticDataId_;
+    }
+
     private void initFields() {
       clanHelpId_ = 0L;
       clanId_ = 0;
-      userId_ = 0;
+      mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userDataId_ = 0L;
       helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
       timeRequested_ = 0L;
       maxHelpers_ = 0;
       helperIds_ = java.util.Collections.emptyList();
       open_ = false;
+      staticDataId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -15230,7 +15278,7 @@ public final class ClanProto {
         output.writeInt32(2, clanId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, userId_);
+        output.writeMessage(3, mup_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, userDataId_);
@@ -15249,6 +15297,9 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBool(9, open_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(10, staticDataId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -15269,7 +15320,7 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, userId_);
+          .computeMessageSize(3, mup_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -15299,6 +15350,10 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(9, open_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, staticDataId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15409,6 +15464,7 @@ public final class ClanProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMupFieldBuilder();
         }
       }
       private static Builder create() {
@@ -15421,7 +15477,11 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         clanId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
+        if (mupBuilder_ == null) {
+          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          mupBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
         userDataId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -15435,6 +15495,8 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         open_ = false;
         bitField0_ = (bitField0_ & ~0x00000100);
+        staticDataId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -15474,7 +15536,11 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userId_ = userId_;
+        if (mupBuilder_ == null) {
+          result.mup_ = mup_;
+        } else {
+          result.mup_ = mupBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -15500,6 +15566,10 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000080;
         }
         result.open_ = open_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.staticDataId_ = staticDataId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15522,8 +15592,8 @@ public final class ClanProto {
         if (other.hasClanId()) {
           setClanId(other.getClanId());
         }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasMup()) {
+          mergeMup(other.getMup());
         }
         if (other.hasUserDataId()) {
           setUserDataId(other.getUserDataId());
@@ -15549,6 +15619,9 @@ public final class ClanProto {
         }
         if (other.hasOpen()) {
           setOpen(other.getOpen());
+        }
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15641,36 +15714,120 @@ public final class ClanProto {
         return this;
       }
 
-      private int userId_ ;
+      private com.lvl6.proto.UserProto.MinimumUserProto mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
       /**
-       * <code>optional int32 userId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasMup() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 userId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
+        if (mupBuilder_ == null) {
+          return mup_;
+        } else {
+          return mupBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 userId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
        */
-      public Builder setUserId(int value) {
+      public Builder setMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (mupBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          mup_ = value;
+          onChanged();
+        } else {
+          mupBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        userId_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
        */
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        userId_ = 0;
-        onChanged();
+      public Builder setMup(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (mupBuilder_ == null) {
+          mup_ = builderForValue.build();
+          onChanged();
+        } else {
+          mupBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
         return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+       */
+      public Builder mergeMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (mupBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              mup_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            mup_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(mup_).mergeFrom(value).buildPartial();
+          } else {
+            mup_ = value;
+          }
+          onChanged();
+        } else {
+          mupBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+       */
+      public Builder clearMup() {
+        if (mupBuilder_ == null) {
+          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          mupBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMupBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getMupFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
+        if (mupBuilder_ != null) {
+          return mupBuilder_.getMessageOrBuilder();
+        } else {
+          return mup_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getMupFieldBuilder() {
+        if (mupBuilder_ == null) {
+          mupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getMup(),
+                  getParentForChildren(),
+                  isClean());
+          mup_ = null;
+        }
+        return mupBuilder_;
       }
 
       private long userDataId_ ;
@@ -15934,6 +16091,38 @@ public final class ClanProto {
         return this;
       }
 
+      private int staticDataId_ ;
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       */
+      public boolean hasStaticDataId() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       */
+      public int getStaticDataId() {
+        return staticDataId_;
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       */
+      public Builder setStaticDataId(int value) {
+        bitField0_ |= 0x00000200;
+        staticDataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 staticDataId = 10;</code>
+       */
+      public Builder clearStaticDataId() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        staticDataId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanHelpProto)
     }
 
@@ -15974,6 +16163,15 @@ public final class ClanProto {
      * </pre>
      */
     long getUserDataId();
+
+    /**
+     * <code>optional int32 staticDataId = 3;</code>
+     */
+    boolean hasStaticDataId();
+    /**
+     * <code>optional int32 staticDataId = 3;</code>
+     */
+    int getStaticDataId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHelpNoticeProto}
@@ -16041,6 +16239,11 @@ public final class ClanProto {
             case 16: {
               bitField0_ |= 0x00000002;
               userDataId_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              staticDataId_ = input.readInt32();
               break;
             }
           }
@@ -16121,9 +16324,25 @@ public final class ClanProto {
       return userDataId_;
     }
 
+    public static final int STATICDATAID_FIELD_NUMBER = 3;
+    private int staticDataId_;
+    /**
+     * <code>optional int32 staticDataId = 3;</code>
+     */
+    public boolean hasStaticDataId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 staticDataId = 3;</code>
+     */
+    public int getStaticDataId() {
+      return staticDataId_;
+    }
+
     private void initFields() {
       helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
       userDataId_ = 0L;
+      staticDataId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16144,6 +16363,9 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, userDataId_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, staticDataId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -16160,6 +16382,10 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, userDataId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, staticDataId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16282,6 +16508,8 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userDataId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
+        staticDataId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -16318,6 +16546,10 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000002;
         }
         result.userDataId_ = userDataId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.staticDataId_ = staticDataId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16339,6 +16571,9 @@ public final class ClanProto {
         }
         if (other.hasUserDataId()) {
           setUserDataId(other.getUserDataId());
+        }
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16446,6 +16681,38 @@ public final class ClanProto {
       public Builder clearUserDataId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         userDataId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int staticDataId_ ;
+      /**
+       * <code>optional int32 staticDataId = 3;</code>
+       */
+      public boolean hasStaticDataId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 staticDataId = 3;</code>
+       */
+      public int getStaticDataId() {
+        return staticDataId_;
+      }
+      /**
+       * <code>optional int32 staticDataId = 3;</code>
+       */
+      public Builder setStaticDataId(int value) {
+        bitField0_ |= 0x00000004;
+        staticDataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 staticDataId = 3;</code>
+       */
+      public Builder clearStaticDataId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        staticDataId_ = 0;
         onChanged();
         return this;
       }
@@ -16623,17 +16890,19 @@ public final class ClanProto {
       "serId\030\001 \001(\005\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030" +
       "\003 \001(\005\"I\n\rClanIconProto\022\022\n\nclanIconId\030\001 \001" +
       "(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010" +
-      "\"\323\001\n\rClanHelpProto\022\022\n\nclanHelpId\030\001 \001(\003\022\016" +
-      "\n\006clanId\030\002 \001(\005\022\016\n\006userId\030\003 \001(\005\022\022\n\nuserDa",
-      "taId\030\004 \001(\003\022.\n\010helpType\030\005 \001(\0162\034.com.lvl6." +
-      "proto.ClanHelpType\022\025\n\rtimeRequested\030\006 \001(" +
-      "\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\021\n\thelperIds\030\010 \003(\005" +
-      "\022\014\n\004open\030\t \001(\010\"Y\n\023ClanHelpNoticeProto\022.\n" +
-      "\010helpType\030\001 \001(\0162\034.com.lvl6.proto.ClanHel" +
-      "pType\022\022\n\nuserDataId\030\002 \001(\003*X\n\016UserClanSta" +
-      "tus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CA" +
-      "PTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tC" +
-      "lanProto"
+      "\"\210\002\n\rClanHelpProto\022\022\n\nclanHelpId\030\001 \001(\003\022\016" +
+      "\n\006clanId\030\002 \001(\005\022-\n\003mup\030\003 \001(\0132 .com.lvl6.p",
+      "roto.MinimumUserProto\022\022\n\nuserDataId\030\004 \001(" +
+      "\003\022.\n\010helpType\030\005 \001(\0162\034.com.lvl6.proto.Cla" +
+      "nHelpType\022\025\n\rtimeRequested\030\006 \001(\003\022\022\n\nmaxH" +
+      "elpers\030\007 \001(\005\022\021\n\thelperIds\030\010 \003(\005\022\014\n\004open\030" +
+      "\t \001(\010\022\024\n\014staticDataId\030\n \001(\005\"o\n\023ClanHelpN" +
+      "oticeProto\022.\n\010helpType\030\001 \001(\0162\034.com.lvl6." +
+      "proto.ClanHelpType\022\022\n\nuserDataId\030\002 \001(\003\022\024" +
+      "\n\014staticDataId\030\003 \001(\005*X\n\016UserClanStatus\022\n" +
+      "\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN" +
+      "\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanPr",
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16748,13 +17017,13 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanHelpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHelpProto_descriptor,
-        new java.lang.String[] { "ClanHelpId", "ClanId", "UserId", "UserDataId", "HelpType", "TimeRequested", "MaxHelpers", "HelperIds", "Open", });
+        new java.lang.String[] { "ClanHelpId", "ClanId", "Mup", "UserDataId", "HelpType", "TimeRequested", "MaxHelpers", "HelperIds", "Open", "StaticDataId", });
     internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_com_lvl6_proto_ClanHelpNoticeProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHelpNoticeProto_descriptor,
-        new java.lang.String[] { "HelpType", "UserDataId", });
+        new java.lang.String[] { "HelpType", "UserDataId", "StaticDataId", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();

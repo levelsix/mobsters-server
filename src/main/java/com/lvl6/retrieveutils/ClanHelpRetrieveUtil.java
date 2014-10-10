@@ -143,6 +143,8 @@ public class ClanHelpRetrieveUtil {
 			}
 			ch.setHelpers(helpers);
 			
+			ch.setStaticDataId(rs.getInt(DBConstants.CLAN_HELP__STATIC_DATA_ID));
+			
 			return ch;
 		}        
 
@@ -158,6 +160,7 @@ public class ClanHelpRetrieveUtil {
 				columnsSelected.add(DBConstants.CLAN_HELP__MAX_HELPERS);
 				columnsSelected.add(DBConstants.CLAN_HELP__HELPERS);
 				columnsSelected.add(DBConstants.CLAN_HELP__OPEN);
+				columnsSelected.add(DBConstants.CLAN_HELP__STATIC_DATA_ID);
 			}
 			return columnsSelected;
 		}

@@ -252,6 +252,7 @@ public class DBConstants {
   public static final String CLAN_HELP__MAX_HELPERS = "max_helpers";
   public static final String CLAN_HELP__HELPERS = "helpers";
   public static final String CLAN_HELP__OPEN = "open";
+  public static final String CLAN_HELP__STATIC_DATA_ID = "static_data_id";
   
   /*EVENT PERSISTENT FOR USER*/
   public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";

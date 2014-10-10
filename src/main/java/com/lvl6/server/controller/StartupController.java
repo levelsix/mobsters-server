@@ -94,6 +94,7 @@ import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -1482,17 +1483,43 @@ public class StartupController extends EventController {
   
 
   private void setClanHelpings(Builder resBuilder, int userId, User user) {
-	  Map<Integer, List<ClanHelp>> clanHelpings = clanHelpRetrieveUtil
+	  Map<Integer, List<ClanHelp>> allSolicitations = clanHelpRetrieveUtil
 		  .getUserIdToClanHelp(
 			  user.getClanId(),
 			  userId);
 	  
-	  for (Integer helperId : clanHelpings.keySet()) {
-		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
+//	  Set<Integer> userIds = new HashSet<Integer>();
+//	  for (Integer helperId : clanHelpings.keySet()) {
+//		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
+//		  
+//		  for (ClanHelp aid : userHelpings) {
+//			  userIds.addAll(aid.getHelpers());
+//		  }
+//	  }
+//	  //TODO: ANOTHER QUERY TO USER TABLE, GET RID OF THIS
+//	  Map<Integer, User> users = RetrieveUtils.userRetrieveUtils()
+//		  .getUsersByIds(userIds);
+//	  
+	  Map<Integer, User> solicitors = RetrieveUtils.userRetrieveUtils()
+		  .getUsersByIds(allSolicitations.keySet());                                
+	  
+	  //convert all solicitors into MinimumUserProtos
+	  Map<Integer, MinimumUserProto> mupSolicitors = new HashMap<Integer, MinimumUserProto>();
+	  for (Integer solicitorId : solicitors.keySet()) {
+		  User moocher = solicitors.get(solicitorId);
+		  MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(moocher);
+		  mupSolicitors.put(solicitorId, mup);
+	  }
+	  
+	  for (Integer solicitorId : allSolicitations.keySet()) {
+		  List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
 			  
-		  for (ClanHelp aid : userHelpings) {
+		  User solicitor = solicitors.get( solicitorId );
+		  MinimumUserProto mup = mupSolicitors.get( solicitorId );
+		  
+		  for (ClanHelp aid : solicitations) {
 			  ClanHelpProto chp = CreateInfoProtoUtils
-				  .createClanHelpProtoFromClanHelp(aid);
+				  .createClanHelpProtoFromClanHelp(aid, solicitor, mup);
 			  
 			  resBuilder.addClanHelpings(chp);
 		  }
