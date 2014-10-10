@@ -460,6 +460,8 @@ message EndClanHelpRequestProto {
 message EndClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated int64 clanHelpIds = 2;
+	
+	optional EndClanHelpStatus status = 3;
 	//SEND TO ALL CLAN MEMBERS ON SUCCESS
 	
 	enum EndClanHelpStatus {

@@ -55,5 +55,6 @@ public interface DeleteUtil {
   public abstract int deleteObstacleForUser(int userObstacleId);
   
   public abstract int deleteMiniJobForUser(long userMiniJobId);
-  
+ 
+  public abstract int deleteClanHelp(int userId, List<Long> clanHelpIdList);
 }

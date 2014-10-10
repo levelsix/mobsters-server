@@ -48,7 +48,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_SOLICIT_CAN_HELP_EVENT;
+    return EventProtocolRequest.C_SOLICIT_CLAN_HELP_EVENT;
   }
 
   @Override

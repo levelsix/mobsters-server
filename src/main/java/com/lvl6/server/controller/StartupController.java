@@ -1487,6 +1487,7 @@ public class StartupController extends EventController {
 		  .getUserIdToClanHelp(
 			  user.getClanId(),
 			  userId);
+	  log.info(String.format("allSolicitations=%s", allSolicitations));
 	  
 //	  Set<Integer> userIds = new HashSet<Integer>();
 //	  for (Integer helperId : clanHelpings.keySet()) {
