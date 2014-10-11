@@ -2874,6 +2874,9 @@ public class CreateInfoProtoUtils {
 		  tmepb.setCharacterImgName(str);
 	  }
 	  
+	  tmepb.setCharImgVertPixelOffset(tme.getCharImgVertPixelOffset());
+	  tmepb.setCharImgHorizPixelOffset(tme.getCharImgHorizPixelOffset());
+	  
 	  return tmepb.build();
   }
   

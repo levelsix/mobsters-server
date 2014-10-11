@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
 
-	private static final long serialVersionUID = 4110951747693016777L;
+	private static final long serialVersionUID = 5263799799118723687L;
 	
 	private int id;
 	private int taskId;
@@ -18,6 +18,8 @@ public class TaskMapElement implements Serializable {
 	private int cashReward;
 	private int oilReward;
 	private String characterImgName;
+	private int charImgVertPixelOffset;
+	private int charImgHorizPixelOffset;
 
 	public TaskMapElement(
 		int id,
@@ -31,7 +33,9 @@ public class TaskMapElement implements Serializable {
 		String sectionName,
 		int cashReward,
 		int oilReward,
-		String characterImgName )
+		String characterImgName,
+		int charImgVertPixelOffset,
+		int charImgHorizPixelOffset )
 	{
 		super();
 		this.id = id;
@@ -46,6 +50,8 @@ public class TaskMapElement implements Serializable {
 		this.cashReward = cashReward;
 		this.oilReward = oilReward;
 		this.characterImgName = characterImgName;
+		this.charImgVertPixelOffset = charImgVertPixelOffset;
+		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
 	}
 
 	public int getId()
@@ -168,6 +174,26 @@ public class TaskMapElement implements Serializable {
 		this.characterImgName = characterImgName;
 	}
 
+	public int getCharImgVertPixelOffset()
+	{
+		return charImgVertPixelOffset;
+	}
+
+	public void setCharImgVertPixelOffset( int charImgVertPixelOffset )
+	{
+		this.charImgVertPixelOffset = charImgVertPixelOffset;
+	}
+
+	public int getCharImgHorizPixelOffset()
+	{
+		return charImgHorizPixelOffset;
+	}
+
+	public void setCharImgHorizPixelOffset( int charImgHorizPixelOffset )
+	{
+		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -195,6 +221,10 @@ public class TaskMapElement implements Serializable {
 			+ oilReward
 			+ ", characterImgName="
 			+ characterImgName
+			+ ", charImgVertPixelOffset="
+			+ charImgVertPixelOffset
+			+ ", charImgHorizPixelOffset="
+			+ charImgHorizPixelOffset
 			+ "]";
 	}
 
