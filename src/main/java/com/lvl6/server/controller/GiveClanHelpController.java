@@ -1,8 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,9 +104,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  
       } else {
     	  //only write to clan if success
-    	  //send back most up to date ClanHelps
+    	  //send back most up to date ClanHelps that changed
     	  //NOTE: Sending most up to date ClanHelps incurs a db read
-    	  setClanHelpings(resBuilder, clanId, userId);
+    	  setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
     	  resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
     	  resEvent.setGiveClanHelpResponseProto(resBuilder.build());
     	  server.writeClanEvent(resEvent, clanId);
@@ -161,36 +159,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
   
-  //Copy pasted from StartupController
-  private void setClanHelpings(Builder resBuilder, int clanId, int userId) {
-	  Map<Integer, List<ClanHelp>> allSolicitations = clanHelpRetrieveUtil
-		  .getUserIdToClanHelp( clanId, userId );
+  private void setClanHelpings(Builder resBuilder, User solicitor,
+	  MinimumUserProto mup, List<Long> clanHelpIds)
+  {
+	  List<ClanHelp> modifiedSolicitations = clanHelpRetrieveUtil
+		  .getClanHelpsForIds( clanHelpIds );
 	  
-	  Map<Integer, User> solicitors = RetrieveUtils.userRetrieveUtils()
-		  .getUsersByIds(allSolicitations.keySet());                                
-	  
-	  //convert all solicitors into MinimumUserProtos
-	  Map<Integer, MinimumUserProto> mupSolicitors = new HashMap<Integer, MinimumUserProto>();
-	  for (Integer solicitorId : solicitors.keySet()) {
-		  User moocher = solicitors.get(solicitorId);
-		  MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(moocher);
-		  mupSolicitors.put(solicitorId, mup);
-	  }
-	  
-	  
-	  for (Integer solicitorId : allSolicitations.keySet()) {
-		  List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
-			  
-		  User solicitor = solicitors.get( solicitorId );
-		  MinimumUserProto mup = mupSolicitors.get( solicitorId );
-		  
-		  for (ClanHelp aid : solicitations) {
-			  
-			  ClanHelpProto chp = CreateInfoProtoUtils
-				  .createClanHelpProtoFromClanHelp(aid, solicitor, mup);
-			  
-			  resBuilder.addClanHelps(chp);
-		  }
+	  for (ClanHelp aid : modifiedSolicitations) {
+
+		  ClanHelpProto chp = CreateInfoProtoUtils
+			  .createClanHelpProtoFromClanHelp(aid, solicitor, mup);
+
+		  resBuilder.addClanHelps(chp);
 	  }
   }
 
