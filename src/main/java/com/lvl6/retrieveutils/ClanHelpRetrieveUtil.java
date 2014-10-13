@@ -2,6 +2,7 @@ package com.lvl6.retrieveutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -172,7 +173,8 @@ public class ClanHelpRetrieveUtil {
 			ch.setUserDataId(rs.getLong(DBConstants.CLAN_HELP__USER_DATA_ID));
 			ch.setHelpType(rs.getString(DBConstants.CLAN_HELP__HELP_TYPE));
 			ch.setClanId(rs.getInt(DBConstants.CLAN_HELP__CLAN_ID));
-			ch.setTimeOfEntry(rs.getDate(DBConstants.CLAN_HELP__TIME_OF_ENTRY));
+			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_HELP__TIME_OF_ENTRY);
+			ch.setTimeOfEntry(new Date(ts.getTime()));
 			ch.setMaxHelpers(rs.getInt(DBConstants.CLAN_HELP__MAX_HELPERS));
 			
 			String helperIds = rs.getString(DBConstants.CLAN_HELP__HELPERS); 
