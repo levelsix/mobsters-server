@@ -180,4 +180,6 @@ public interface UpdateUtil {
   public int updatePvpMonsterDmgMultiplier( int userId, float monsterDmgMultiplier );
   
   public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds);
+  
+  public int closeClanHelp(int userId, int clanId);
 }
