@@ -234,7 +234,7 @@ message StartupResponseProto {
 			optional int32 guideMonsterId = 2;
 		}
 		message ClanHelpConstants {
-			optional ClanHelpType helpType = 1;
+			optional ClanHelpType helpType = 1 [default = NO_HELP];
 			
 			//of the two, client should use the
 			//one that benefits the user the most
