@@ -4973,6 +4973,30 @@ public final class EventStartupProto {
        * </pre>
        */
       int getMaxMinutesForFreeSpeedUp();
+
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> 
+          getClanHelpConstantsList();
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants getClanHelpConstants(int index);
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      int getClanHelpConstantsCount();
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder> 
+          getClanHelpConstantsOrBuilderList();
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder getClanHelpConstantsOrBuilder(
+          int index);
     }
     /**
      * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants}
@@ -5252,6 +5276,14 @@ public final class EventStartupProto {
                 monsterDmgMultiplier_ = input.readFloat();
                 break;
               }
+              case 258: {
+                if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+                  clanHelpConstants_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants>();
+                  mutable_bitField0_ |= 0x80000000;
+                }
+                clanHelpConstants_.add(input.readMessage(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.PARSER, extensionRegistry));
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5265,6 +5297,9 @@ public final class EventStartupProto {
           }
           if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
             animatedSpriteOffsets_ = java.util.Collections.unmodifiableList(animatedSpriteOffsets_);
+          }
+          if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+            clanHelpConstants_ = java.util.Collections.unmodifiableList(clanHelpConstants_);
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -10539,6 +10574,648 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
       }
 
+      public interface ClanHelpConstantsOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+         */
+        boolean hasHelpType();
+        /**
+         * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+         */
+        com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType();
+
+        /**
+         * <code>optional int32 amountRemovedPerHelp = 2;</code>
+         *
+         * <pre>
+         *Ex. User heals 200 hp monster; user has 1 help
+         * amountRemovedPerHelp = 2;
+         * percentRemovedPerHelp = 2%
+         * 2% * 200 = 4
+         * client should use percentRemovedPerHelp since
+         * the user would have to wait for 196 hp instead
+         * of 198 hp to be healed
+         * </pre>
+         */
+        boolean hasAmountRemovedPerHelp();
+        /**
+         * <code>optional int32 amountRemovedPerHelp = 2;</code>
+         *
+         * <pre>
+         *Ex. User heals 200 hp monster; user has 1 help
+         * amountRemovedPerHelp = 2;
+         * percentRemovedPerHelp = 2%
+         * 2% * 200 = 4
+         * client should use percentRemovedPerHelp since
+         * the user would have to wait for 196 hp instead
+         * of 198 hp to be healed
+         * </pre>
+         */
+        int getAmountRemovedPerHelp();
+
+        /**
+         * <code>optional float percentRemovedPerHelp = 3;</code>
+         */
+        boolean hasPercentRemovedPerHelp();
+        /**
+         * <code>optional float percentRemovedPerHelp = 3;</code>
+         */
+        float getPercentRemovedPerHelp();
+      }
+      /**
+       * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants}
+       */
+      public static final class ClanHelpConstants extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
+          ClanHelpConstantsOrBuilder {
+        // Use ClanHelpConstants.newBuilder() to construct.
+        private ClanHelpConstants(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+          super(builder);
+          this.unknownFields = builder.getUnknownFields();
+        }
+        private ClanHelpConstants(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+        private static final ClanHelpConstants defaultInstance;
+        public static ClanHelpConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+
+        public ClanHelpConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+
+        private final com.google.protobuf.UnknownFieldSet unknownFields;
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+            getUnknownFields() {
+          return this.unknownFields;
+        }
+        private ClanHelpConstants(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          initFields();
+          int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 8: {
+                  int rawValue = input.readEnum();
+                  com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.valueOf(rawValue);
+                  if (value == null) {
+                    unknownFields.mergeVarintField(1, rawValue);
+                  } else {
+                    bitField0_ |= 0x00000001;
+                    helpType_ = value;
+                  }
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  amountRemovedPerHelp_ = input.readInt32();
+                  break;
+                }
+                case 29: {
+                  bitField0_ |= 0x00000004;
+                  percentRemovedPerHelp_ = input.readFloat();
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.class, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder.class);
+        }
+
+        public static com.google.protobuf.Parser<ClanHelpConstants> PARSER =
+            new com.google.protobuf.AbstractParser<ClanHelpConstants>() {
+          public ClanHelpConstants parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new ClanHelpConstants(input, extensionRegistry);
+          }
+        };
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<ClanHelpConstants> getParserForType() {
+          return PARSER;
+        }
+
+        private int bitField0_;
+        public static final int HELPTYPE_FIELD_NUMBER = 1;
+        private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_;
+        /**
+         * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+         */
+        public boolean hasHelpType() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+         */
+        public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+          return helpType_;
+        }
+
+        public static final int AMOUNTREMOVEDPERHELP_FIELD_NUMBER = 2;
+        private int amountRemovedPerHelp_;
+        /**
+         * <code>optional int32 amountRemovedPerHelp = 2;</code>
+         *
+         * <pre>
+         *Ex. User heals 200 hp monster; user has 1 help
+         * amountRemovedPerHelp = 2;
+         * percentRemovedPerHelp = 2%
+         * 2% * 200 = 4
+         * client should use percentRemovedPerHelp since
+         * the user would have to wait for 196 hp instead
+         * of 198 hp to be healed
+         * </pre>
+         */
+        public boolean hasAmountRemovedPerHelp() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional int32 amountRemovedPerHelp = 2;</code>
+         *
+         * <pre>
+         *Ex. User heals 200 hp monster; user has 1 help
+         * amountRemovedPerHelp = 2;
+         * percentRemovedPerHelp = 2%
+         * 2% * 200 = 4
+         * client should use percentRemovedPerHelp since
+         * the user would have to wait for 196 hp instead
+         * of 198 hp to be healed
+         * </pre>
+         */
+        public int getAmountRemovedPerHelp() {
+          return amountRemovedPerHelp_;
+        }
+
+        public static final int PERCENTREMOVEDPERHELP_FIELD_NUMBER = 3;
+        private float percentRemovedPerHelp_;
+        /**
+         * <code>optional float percentRemovedPerHelp = 3;</code>
+         */
+        public boolean hasPercentRemovedPerHelp() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional float percentRemovedPerHelp = 3;</code>
+         */
+        public float getPercentRemovedPerHelp() {
+          return percentRemovedPerHelp_;
+        }
+
+        private void initFields() {
+          helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+          amountRemovedPerHelp_ = 0;
+          percentRemovedPerHelp_ = 0F;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeEnum(1, helpType_.getNumber());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, amountRemovedPerHelp_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeFloat(3, percentRemovedPerHelp_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeEnumSize(1, helpType_.getNumber());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, amountRemovedPerHelp_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(3, percentRemovedPerHelp_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseDelimitedFrom(input, extensionRegistry);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input);
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return PARSER.parseFrom(input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.class, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder.class);
+          }
+
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+
+          public Builder clear() {
+            super.clear();
+            helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            amountRemovedPerHelp_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            percentRemovedPerHelp_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            return this;
+          }
+
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.getDefaultInstance();
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.helpType_ = helpType_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.amountRemovedPerHelp_ = amountRemovedPerHelp_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.percentRemovedPerHelp_ = percentRemovedPerHelp_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.getDefaultInstance()) return this;
+            if (other.hasHelpType()) {
+              setHelpType(other.getHelpType());
+            }
+            if (other.hasAmountRemovedPerHelp()) {
+              setAmountRemovedPerHelp(other.getAmountRemovedPerHelp());
+            }
+            if (other.hasPercentRemovedPerHelp()) {
+              setPercentRemovedPerHelp(other.getPercentRemovedPerHelp());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants) e.getUnfinishedMessage();
+              throw e;
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+          /**
+           * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+           */
+          public boolean hasHelpType() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          /**
+           * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+           */
+          public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+            return helpType_;
+          }
+          /**
+           * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+           */
+          public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000001;
+            helpType_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+           */
+          public Builder clearHelpType() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+            onChanged();
+            return this;
+          }
+
+          private int amountRemovedPerHelp_ ;
+          /**
+           * <code>optional int32 amountRemovedPerHelp = 2;</code>
+           *
+           * <pre>
+           *Ex. User heals 200 hp monster; user has 1 help
+           * amountRemovedPerHelp = 2;
+           * percentRemovedPerHelp = 2%
+           * 2% * 200 = 4
+           * client should use percentRemovedPerHelp since
+           * the user would have to wait for 196 hp instead
+           * of 198 hp to be healed
+           * </pre>
+           */
+          public boolean hasAmountRemovedPerHelp() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          /**
+           * <code>optional int32 amountRemovedPerHelp = 2;</code>
+           *
+           * <pre>
+           *Ex. User heals 200 hp monster; user has 1 help
+           * amountRemovedPerHelp = 2;
+           * percentRemovedPerHelp = 2%
+           * 2% * 200 = 4
+           * client should use percentRemovedPerHelp since
+           * the user would have to wait for 196 hp instead
+           * of 198 hp to be healed
+           * </pre>
+           */
+          public int getAmountRemovedPerHelp() {
+            return amountRemovedPerHelp_;
+          }
+          /**
+           * <code>optional int32 amountRemovedPerHelp = 2;</code>
+           *
+           * <pre>
+           *Ex. User heals 200 hp monster; user has 1 help
+           * amountRemovedPerHelp = 2;
+           * percentRemovedPerHelp = 2%
+           * 2% * 200 = 4
+           * client should use percentRemovedPerHelp since
+           * the user would have to wait for 196 hp instead
+           * of 198 hp to be healed
+           * </pre>
+           */
+          public Builder setAmountRemovedPerHelp(int value) {
+            bitField0_ |= 0x00000002;
+            amountRemovedPerHelp_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 amountRemovedPerHelp = 2;</code>
+           *
+           * <pre>
+           *Ex. User heals 200 hp monster; user has 1 help
+           * amountRemovedPerHelp = 2;
+           * percentRemovedPerHelp = 2%
+           * 2% * 200 = 4
+           * client should use percentRemovedPerHelp since
+           * the user would have to wait for 196 hp instead
+           * of 198 hp to be healed
+           * </pre>
+           */
+          public Builder clearAmountRemovedPerHelp() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            amountRemovedPerHelp_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private float percentRemovedPerHelp_ ;
+          /**
+           * <code>optional float percentRemovedPerHelp = 3;</code>
+           */
+          public boolean hasPercentRemovedPerHelp() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          /**
+           * <code>optional float percentRemovedPerHelp = 3;</code>
+           */
+          public float getPercentRemovedPerHelp() {
+            return percentRemovedPerHelp_;
+          }
+          /**
+           * <code>optional float percentRemovedPerHelp = 3;</code>
+           */
+          public Builder setPercentRemovedPerHelp(float value) {
+            bitField0_ |= 0x00000004;
+            percentRemovedPerHelp_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional float percentRemovedPerHelp = 3;</code>
+           */
+          public Builder clearPercentRemovedPerHelp() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            percentRemovedPerHelp_ = 0F;
+            onChanged();
+            return this;
+          }
+
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
+        }
+
+        static {
+          defaultInstance = new ClanHelpConstants(true);
+          defaultInstance.initFields();
+        }
+
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants)
+      }
+
       private int bitField0_;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
       private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_;
@@ -11146,6 +11823,41 @@ public final class EventStartupProto {
         return maxMinutesForFreeSpeedUp_;
       }
 
+      public static final int CLANHELPCONSTANTS_FIELD_NUMBER = 32;
+      private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> clanHelpConstants_;
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> getClanHelpConstantsList() {
+        return clanHelpConstants_;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder> 
+          getClanHelpConstantsOrBuilderList() {
+        return clanHelpConstants_;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      public int getClanHelpConstantsCount() {
+        return clanHelpConstants_.size();
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants getClanHelpConstants(int index) {
+        return clanHelpConstants_.get(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+       */
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder getClanHelpConstantsOrBuilder(
+          int index) {
+        return clanHelpConstants_.get(index);
+      }
+
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -11178,6 +11890,7 @@ public final class EventStartupProto {
         minutesPerObstacle_ = 0;
         taskMapConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants.getDefaultInstance();
         maxMinutesForFreeSpeedUp_ = 0;
+        clanHelpConstants_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -11284,6 +11997,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00080000) == 0x00080000)) {
           output.writeFloat(31, monsterDmgMultiplier_);
+        }
+        for (int i = 0; i < clanHelpConstants_.size(); i++) {
+          output.writeMessage(32, clanHelpConstants_.get(i));
         }
         getUnknownFields().writeTo(output);
       }
@@ -11418,6 +12134,10 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeFloatSize(31, monsterDmgMultiplier_);
         }
+        for (int i = 0; i < clanHelpConstants_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(32, clanHelpConstants_.get(i));
+        }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
         return size;
@@ -11537,6 +12257,7 @@ public final class EventStartupProto {
             getMonsterConstantsFieldBuilder();
             getMiniTutsFieldBuilder();
             getTaskMapConstantsFieldBuilder();
+            getClanHelpConstantsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -11647,6 +12368,12 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x20000000);
           maxMinutesForFreeSpeedUp_ = 0;
           bitField0_ = (bitField0_ & ~0x40000000);
+          if (clanHelpConstantsBuilder_ == null) {
+            clanHelpConstants_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x80000000);
+          } else {
+            clanHelpConstantsBuilder_.clear();
+          }
           return this;
         }
 
@@ -11841,6 +12568,15 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x10000000;
           }
           result.maxMinutesForFreeSpeedUp_ = maxMinutesForFreeSpeedUp_;
+          if (clanHelpConstantsBuilder_ == null) {
+            if (((bitField0_ & 0x80000000) == 0x80000000)) {
+              clanHelpConstants_ = java.util.Collections.unmodifiableList(clanHelpConstants_);
+              bitField0_ = (bitField0_ & ~0x80000000);
+            }
+            result.clanHelpConstants_ = clanHelpConstants_;
+          } else {
+            result.clanHelpConstants_ = clanHelpConstantsBuilder_.build();
+          }
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -11997,6 +12733,32 @@ public final class EventStartupProto {
           }
           if (other.hasMaxMinutesForFreeSpeedUp()) {
             setMaxMinutesForFreeSpeedUp(other.getMaxMinutesForFreeSpeedUp());
+          }
+          if (clanHelpConstantsBuilder_ == null) {
+            if (!other.clanHelpConstants_.isEmpty()) {
+              if (clanHelpConstants_.isEmpty()) {
+                clanHelpConstants_ = other.clanHelpConstants_;
+                bitField0_ = (bitField0_ & ~0x80000000);
+              } else {
+                ensureClanHelpConstantsIsMutable();
+                clanHelpConstants_.addAll(other.clanHelpConstants_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.clanHelpConstants_.isEmpty()) {
+              if (clanHelpConstantsBuilder_.isEmpty()) {
+                clanHelpConstantsBuilder_.dispose();
+                clanHelpConstantsBuilder_ = null;
+                clanHelpConstants_ = other.clanHelpConstants_;
+                bitField0_ = (bitField0_ & ~0x80000000);
+                clanHelpConstantsBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getClanHelpConstantsFieldBuilder() : null;
+              } else {
+                clanHelpConstantsBuilder_.addAllMessages(other.clanHelpConstants_);
+              }
+            }
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -14199,6 +14961,246 @@ public final class EventStartupProto {
           maxMinutesForFreeSpeedUp_ = 0;
           onChanged();
           return this;
+        }
+
+        private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> clanHelpConstants_ =
+          java.util.Collections.emptyList();
+        private void ensureClanHelpConstantsIsMutable() {
+          if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+            clanHelpConstants_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants>(clanHelpConstants_);
+            bitField0_ |= 0x80000000;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder> clanHelpConstantsBuilder_;
+
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> getClanHelpConstantsList() {
+          if (clanHelpConstantsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(clanHelpConstants_);
+          } else {
+            return clanHelpConstantsBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public int getClanHelpConstantsCount() {
+          if (clanHelpConstantsBuilder_ == null) {
+            return clanHelpConstants_.size();
+          } else {
+            return clanHelpConstantsBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants getClanHelpConstants(int index) {
+          if (clanHelpConstantsBuilder_ == null) {
+            return clanHelpConstants_.get(index);
+          } else {
+            return clanHelpConstantsBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder setClanHelpConstants(
+            int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants value) {
+          if (clanHelpConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.set(index, value);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder setClanHelpConstants(
+            int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder builderForValue) {
+          if (clanHelpConstantsBuilder_ == null) {
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder addClanHelpConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants value) {
+          if (clanHelpConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.add(value);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder addClanHelpConstants(
+            int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants value) {
+          if (clanHelpConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.add(index, value);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder addClanHelpConstants(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder builderForValue) {
+          if (clanHelpConstantsBuilder_ == null) {
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.add(builderForValue.build());
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder addClanHelpConstants(
+            int index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder builderForValue) {
+          if (clanHelpConstantsBuilder_ == null) {
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder addAllClanHelpConstants(
+            java.lang.Iterable<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants> values) {
+          if (clanHelpConstantsBuilder_ == null) {
+            ensureClanHelpConstantsIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, clanHelpConstants_);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder clearClanHelpConstants() {
+          if (clanHelpConstantsBuilder_ == null) {
+            clanHelpConstants_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x80000000);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public Builder removeClanHelpConstants(int index) {
+          if (clanHelpConstantsBuilder_ == null) {
+            ensureClanHelpConstantsIsMutable();
+            clanHelpConstants_.remove(index);
+            onChanged();
+          } else {
+            clanHelpConstantsBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder getClanHelpConstantsBuilder(
+            int index) {
+          return getClanHelpConstantsFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder getClanHelpConstantsOrBuilder(
+            int index) {
+          if (clanHelpConstantsBuilder_ == null) {
+            return clanHelpConstants_.get(index);  } else {
+            return clanHelpConstantsBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public java.util.List<? extends com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder> 
+             getClanHelpConstantsOrBuilderList() {
+          if (clanHelpConstantsBuilder_ != null) {
+            return clanHelpConstantsBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(clanHelpConstants_);
+          }
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder addClanHelpConstantsBuilder() {
+          return getClanHelpConstantsFieldBuilder().addBuilder(
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder addClanHelpConstantsBuilder(
+            int index) {
+          return getClanHelpConstantsFieldBuilder().addBuilder(
+              index, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanHelpConstants clanHelpConstants = 32;</code>
+         */
+        public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder> 
+             getClanHelpConstantsBuilderList() {
+          return getClanHelpConstantsFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder> 
+            getClanHelpConstantsFieldBuilder() {
+          if (clanHelpConstantsBuilder_ == null) {
+            clanHelpConstantsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstantsOrBuilder>(
+                    clanHelpConstants_,
+                    ((bitField0_ & 0x80000000) == 0x80000000),
+                    getParentForChildren(),
+                    isClean());
+            clanHelpConstants_ = null;
+          }
+          return clanHelpConstantsBuilder_;
         }
 
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -28137,6 +29139,11 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -28160,163 +29167,169 @@ public final class EventStartupProto {
       "terPackStuff.proto\032\nChat.proto\032\nCity.pro" +
       "to\032\nClan.proto\032\023InAppPurchase.proto\032\nIte" +
       "m.proto\032\023MiniJobConfig.proto\032\022MonsterStu" +
-      "ff.proto\032\013Quest.proto\032\020StaticData.proto\032" +
-      "\017Structure.proto\032\nTask.proto\032\nUser.proto" +
-      "\"\263\001\n\023StartupRequestProto\022\014\n\004udid\030\001 \001(\t\022\022" +
-      "\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n" +
-      "\nmacAddress\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022",
-      "\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026" +
-      "\n\016isFreshRestart\030\010 \001(\010\"\201.\n\024StartupRespon" +
-      "seProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-\n\006sen" +
-      "der\030\002 \001(\0132\035.com.lvl6.proto.FullUserProto" +
-      "\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6.proto" +
-      ".StartupResponseProto.StartupStatus\022G\n\014u" +
-      "pdateStatus\030\004 \001(\01621.com.lvl6.proto.Start" +
-      "upResponseProto.UpdateStatus\022O\n\020startupC" +
-      "onstants\030\005 \001(\01325.com.lvl6.proto.StartupR" +
-      "esponseProto.StartupConstants\022Q\n\021tutoria",
-      "lConstants\030\" \001(\01326.com.lvl6.proto.Startu" +
-      "pResponseProto.TutorialConstants\0226\n\nuser" +
-      "Quests\030\006 \003(\0132\".com.lvl6.proto.FullUserQu" +
-      "estProto\022\030\n\020redeemedQuestIds\030\033 \003(\005\0227\n\014us" +
-      "erClanInfo\030\007 \003(\0132!.com.lvl6.proto.FullUs" +
-      "erClanProto\022\030\n\020completedTaskIds\030\010 \003(\005\022\023\n" +
-      "\013appStoreURL\030\t \001(\t\022\025\n\rreviewPageURL\030\n \001(" +
-      "\t\022%\n\035reviewPageConfirmationMessage\030\013 \001(\t" +
-      "\022$\n\034playerHasBoughtInAppPurchase\030\014 \001(\010\022[" +
-      "\n\023attackNotifications\030\r \003(\0132>.com.lvl6.p",
-      "roto.StartupResponseProto.AttackedNotifi" +
-      "cationProto\022]\n\025referralNotifications\030\016 \003" +
-      "(\0132>.com.lvl6.proto.StartupResponseProto" +
-      ".ReferralNotificationProto\022\030\n\020noticesToP" +
-      "layers\030\017 \003(\t\022:\n\013globalChats\030\020 \003(\0132%.com." +
-      "lvl6.proto.GroupChatMessageProto\0228\n\tclan" +
-      "Chats\030\021 \003(\0132%.com.lvl6.proto.GroupChatMe" +
-      "ssageProto\0222\n\004pcpp\030\022 \003(\0132$.com.lvl6.prot" +
-      "o.PrivateChatPostProto\022;\n\rusersMonsters\030" +
-      "\023 \003(\0132$.com.lvl6.proto.FullUserMonsterPr",
-      "oto\022@\n\017monstersHealing\030\024 \003(\0132\'.com.lvl6." +
-      "proto.UserMonsterHealingProto\022:\n\014enhance" +
-      "ments\030\025 \001(\0132$.com.lvl6.proto.UserEnhance" +
-      "mentProto\022<\n\tevolution\030\035 \001(\0132).com.lvl6." +
-      "proto.UserMonsterEvolutionProto\022F\n\024rareB" +
-      "oosterPurchases\030\026 \003(\0132(.com.lvl6.proto.R" +
-      "areBoosterPurchaseProto\022\021\n\tkabamNaid\030\027 \001" +
-      "(\t\022K\n\023invitesToMeForSlots\030\030 \003(\0132..com.lv" +
-      "l6.proto.UserFacebookInviteForSlotProto\022" +
-      "M\n\025invitesFromMeForSlots\030\031 \003(\0132..com.lvl",
-      "6.proto.UserFacebookInviteForSlotProto\022=" +
-      "\n\024staticDataStuffProto\030\032 \001(\0132\037.com.lvl6." +
-      "proto.StaticDataProto\022 \n\030taskIdForCurren" +
-      "tCityBoss\030\034 \003(\005\022<\n\nuserEvents\030\036 \003(\0132(.co" +
-      "m.lvl6.proto.UserPersistentEventProto\022I\n" +
-      "\017curRaidClanInfo\030\037 \001(\01320.com.lvl6.proto." +
-      "PersistentClanEventClanInfoProto\022M\n\023curR" +
-      "aidClanUserInfo\030  \003(\01320.com.lvl6.proto.P" +
-      "ersistentClanEventUserInfoProto\022R\n\020raidS" +
-      "tageHistory\030! \003(\01328.com.lvl6.proto.Persi",
-      "stentClanEventRaidStageHistoryProto\0227\n\016r" +
-      "ecentNBattles\030# \003(\0132\037.com.lvl6.proto.Pvp" +
-      "HistoryProto\0225\n\007curTask\030$ \001(\0132$.com.lvl6" +
-      ".proto.MinimumUserTaskProto\0225\n\rcurTaskSt" +
-      "ages\030% \003(\0132\036.com.lvl6.proto.TaskStagePro" +
-      "to\022>\n\020userAchievements\030& \003(\0132$.com.lvl6." +
-      "proto.UserAchievementProto\022;\n\021userMiniJo" +
-      "bProtos\030\' \003(\0132 .com.lvl6.proto.UserMiniJ" +
-      "obProto\0220\n\tuserItems\030( \003(\0132\035.com.lvl6.pr" +
-      "oto.UserItemProto\0223\n\014clanHelpings\030) \003(\0132",
-      "\035.com.lvl6.proto.ClanHelpProto\032\200\001\n\031Attac" +
-      "kedNotificationProto\0222\n\010attacker\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\032\n\022batt" +
-      "leCompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(" +
-      "\005\032\202\001\n\031ReferralNotificationProto\0222\n\010refer" +
-      "red\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenTo" +
-      "Referrer\030\003 \001(\005\032\207\024\n\020StartupConstants\022H\n\025i" +
-      "nAppPurchasePackages\030\001 \003(\0132).com.lvl6.pr" +
-      "oto.InAppPurchasePackageProto\022\027\n\017maxLeve",
-      "lForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003" +
-      " \001(\005\022n\n\025animatedSpriteOffsets\030\004 \003(\0132O.co" +
-      "m.lvl6.proto.StartupResponseProto.Startu" +
-      "pConstants.AnimatedSpriteOffsetProto\022\025\n\r" +
-      "minNameLength\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001" +
-      "(\005\022\035\n\025maxLengthOfChatString\030\007 \001(\005\022Z\n\rcla" +
-      "nConstants\030\010 \001(\0132C.com.lvl6.proto.Startu" +
-      "pResponseProto.StartupConstants.ClanCons" +
-      "tants\022p\n\030downloadableNibConstants\030\t \001(\0132" +
-      "N.com.lvl6.proto.StartupResponseProto.St",
-      "artupConstants.DownloadableNibConstants\022" +
-      "\'\n\037numHoursBeforeReshowingGoldSale\030\n \001(\005" +
-      "\022\036\n\026levelToShowRateUsPopup\030\013 \001(\005\022e\n\022tour" +
-      "amentConstants\030\014 \001(\0132I.com.lvl6.proto.St" +
-      "artupResponseProto.StartupConstants.Tour" +
-      "namentConstants\022\037\n\027fbConnectRewardDiamon" +
-      "ds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022<\n\022adminCh" +
-      "atUserProto\030\017 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\037\n\027numBeginnerSalesAllowed\030\020" +
-      " \001(\005\022h\n\024userMonsterConstants\030\021 \001(\0132J.com",
-      ".lvl6.proto.StartupResponseProto.Startup" +
-      "Constants.UserMonsterConstants\022`\n\020monste" +
-      "rConstants\030\022 \001(\0132F.com.lvl6.proto.Startu" +
-      "pResponseProto.StartupConstants.MonsterC" +
-      "onstants\022\025\n\rminutesPerGem\030\023 \001(\002\022\027\n\017gemsP" +
-      "erResource\030\025 \001(\002\022\031\n\021pvpRequiredMinLvl\030\024 " +
-      "\001(\005\022\034\n\024monsterDmgMultiplier\030\037 \001(\002\022\'\n\037con" +
-      "tinueBattleGemCostMultiplier\030\026 \001(\002\022 \n\030ba" +
-      "ttleRunAwayBasePercent\030\034 \001(\002\022\036\n\026battleRu" +
-      "nAwayIncrement\030\035 \001(\002\022\027\n\017addAllFbFriends\030",
-      "\027 \001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6.proto" +
-      ".StartupResponseProto.StartupConstants.M" +
-      "iniTutorialConstants\022\024\n\014maxObstacles\030\031 \001" +
-      "(\005\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020taskMa" +
-      "pConstants\030\033 \001(\0132F.com.lvl6.proto.Startu" +
-      "pResponseProto.StartupConstants.TaskMapC" +
-      "onstants\022 \n\030maxMinutesForFreeSpeedUp\030\036 \001" +
-      "(\005\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timage" +
-      "Name\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\032\257\001\n\rClanConstants\022\035\n",
-      "\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharL" +
-      "engthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthF" +
-      "orClanDescription\030\003 \001(\005\022\037\n\027maxCharLength" +
-      "ForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n" +
-      "\030DownloadableNibConstants\022\022\n\nmapNibName\030" +
-      "\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldS" +
-      "hoppeNibName\030\003 \001(\t\032y\n\023TournamentConstant" +
-      "s\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 " +
-      "\001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToSh" +
-      "owAfterEventEnd\030\004 \001(\005\032R\n\024UserMonsterCons",
-      "tants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initia" +
-      "lMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020MonsterCon" +
-      "stants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033se" +
-      "condsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021eleme" +
-      "ntalStrength\030\003 \001(\002\022\031\n\021elementalWeakness\030" +
-      "\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001\n\020Ta" +
-      "skMapConstants\022\035\n\025mapSectionImagePrefix\030" +
-      "\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030\n\020ma" +
-      "pSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 " +
-      "\001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniTutor",
-      "ialConstants\022\032\n\022miniTutorialTaskId\030\001 \001(\005" +
-      "\022\026\n\016guideMonsterId\030\002 \001(\005\032\234\004\n\021TutorialCon" +
-      "stants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016gui" +
-      "deMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(" +
-      "\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBos" +
-      "sMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005" +
-      "\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6." +
-      "proto.TutorialStructProto\022\036\n\026structureId" +
-      "sToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cit" +
-      "yOneElements\030\006 \003(\0132 .com.lvl6.proto.City",
-      "ElementProto\022$\n\034cityElementIdForFirstDun" +
-      "geon\030\007 \001(\005\022%\n\035cityElementIdForSecondDung" +
-      "eon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014" +
-      " \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstac" +
-      "les\030\016 \003(\0132$.com.lvl6.proto.MinimumObstac" +
-      "leProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020" +
-      "\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rSt" +
-      "artupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_" +
-      "IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030Fo" +
-      "rceLogoutResponseProto\022\031\n\021previousLoginT",
-      "ime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupP" +
-      "roto"
+      "ff.proto\032\013Quest.proto\032\026SharedEnumConfig." +
+      "proto\032\020StaticData.proto\032\017Structure.proto" +
+      "\032\nTask.proto\032\nUser.proto\"\263\001\n\023StartupRequ" +
+      "estProto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001" +
+      "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
+      "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
+      "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
+      "\030\010 \001(\010\"\350/\n\024StartupResponseProto\022\030\n\020serve" +
+      "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
+      "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
+      "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
+      "Proto.StartupStatus\022G\n\014updateStatus\030\004 \001(" +
+      "\01621.com.lvl6.proto.StartupResponseProto." +
+      "UpdateStatus\022O\n\020startupConstants\030\005 \001(\01325" +
+      ".com.lvl6.proto.StartupResponseProto.Sta",
+      "rtupConstants\022Q\n\021tutorialConstants\030\" \001(\013" +
+      "26.com.lvl6.proto.StartupResponseProto.T" +
+      "utorialConstants\0226\n\nuserQuests\030\006 \003(\0132\".c" +
+      "om.lvl6.proto.FullUserQuestProto\022\030\n\020rede" +
+      "emedQuestIds\030\033 \003(\005\0227\n\014userClanInfo\030\007 \003(\013" +
+      "2!.com.lvl6.proto.FullUserClanProto\022\030\n\020c" +
+      "ompletedTaskIds\030\010 \003(\005\022\023\n\013appStoreURL\030\t \001" +
+      "(\t\022\025\n\rreviewPageURL\030\n \001(\t\022%\n\035reviewPageC" +
+      "onfirmationMessage\030\013 \001(\t\022$\n\034playerHasBou" +
+      "ghtInAppPurchase\030\014 \001(\010\022[\n\023attackNotifica",
+      "tions\030\r \003(\0132>.com.lvl6.proto.StartupResp" +
+      "onseProto.AttackedNotificationProto\022]\n\025r" +
+      "eferralNotifications\030\016 \003(\0132>.com.lvl6.pr" +
+      "oto.StartupResponseProto.ReferralNotific" +
+      "ationProto\022\030\n\020noticesToPlayers\030\017 \003(\t\022:\n\013" +
+      "globalChats\030\020 \003(\0132%.com.lvl6.proto.Group" +
+      "ChatMessageProto\0228\n\tclanChats\030\021 \003(\0132%.co" +
+      "m.lvl6.proto.GroupChatMessageProto\0222\n\004pc" +
+      "pp\030\022 \003(\0132$.com.lvl6.proto.PrivateChatPos" +
+      "tProto\022;\n\rusersMonsters\030\023 \003(\0132$.com.lvl6",
+      ".proto.FullUserMonsterProto\022@\n\017monstersH" +
+      "ealing\030\024 \003(\0132\'.com.lvl6.proto.UserMonste" +
+      "rHealingProto\022:\n\014enhancements\030\025 \001(\0132$.co" +
+      "m.lvl6.proto.UserEnhancementProto\022<\n\tevo" +
+      "lution\030\035 \001(\0132).com.lvl6.proto.UserMonste" +
+      "rEvolutionProto\022F\n\024rareBoosterPurchases\030" +
+      "\026 \003(\0132(.com.lvl6.proto.RareBoosterPurcha" +
+      "seProto\022\021\n\tkabamNaid\030\027 \001(\t\022K\n\023invitesToM" +
+      "eForSlots\030\030 \003(\0132..com.lvl6.proto.UserFac" +
+      "ebookInviteForSlotProto\022M\n\025invitesFromMe",
+      "ForSlots\030\031 \003(\0132..com.lvl6.proto.UserFace" +
+      "bookInviteForSlotProto\022=\n\024staticDataStuf" +
+      "fProto\030\032 \001(\0132\037.com.lvl6.proto.StaticData" +
+      "Proto\022 \n\030taskIdForCurrentCityBoss\030\034 \003(\005\022" +
+      "<\n\nuserEvents\030\036 \003(\0132(.com.lvl6.proto.Use" +
+      "rPersistentEventProto\022I\n\017curRaidClanInfo" +
+      "\030\037 \001(\01320.com.lvl6.proto.PersistentClanEv" +
+      "entClanInfoProto\022M\n\023curRaidClanUserInfo\030" +
+      "  \003(\01320.com.lvl6.proto.PersistentClanEve" +
+      "ntUserInfoProto\022R\n\020raidStageHistory\030! \003(",
+      "\01328.com.lvl6.proto.PersistentClanEventRa" +
+      "idStageHistoryProto\0227\n\016recentNBattles\030# " +
+      "\003(\0132\037.com.lvl6.proto.PvpHistoryProto\0225\n\007" +
+      "curTask\030$ \001(\0132$.com.lvl6.proto.MinimumUs" +
+      "erTaskProto\0225\n\rcurTaskStages\030% \003(\0132\036.com" +
+      ".lvl6.proto.TaskStageProto\022>\n\020userAchiev" +
+      "ements\030& \003(\0132$.com.lvl6.proto.UserAchiev" +
+      "ementProto\022;\n\021userMiniJobProtos\030\' \003(\0132 ." +
+      "com.lvl6.proto.UserMiniJobProto\0220\n\tuserI" +
+      "tems\030( \003(\0132\035.com.lvl6.proto.UserItemProt",
+      "o\0223\n\014clanHelpings\030) \003(\0132\035.com.lvl6.proto" +
+      ".ClanHelpProto\032\200\001\n\031AttackedNotificationP" +
+      "roto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\032\n\022battleCompleteTime\030\002" +
+      " \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNo" +
+      "tificationProto\0222\n\010referred\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022\023\n\013recruitTi" +
+      "me\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\356" +
+      "\025\n\020StartupConstants\022H\n\025inAppPurchasePack" +
+      "ages\030\001 \003(\0132).com.lvl6.proto.InAppPurchas",
+      "ePackageProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034" +
+      "\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025animated" +
+      "SpriteOffsets\030\004 \003(\0132O.com.lvl6.proto.Sta" +
+      "rtupResponseProto.StartupConstants.Anima" +
+      "tedSpriteOffsetProto\022\025\n\rminNameLength\030\005 " +
+      "\001(\005\022\025\n\rmaxNameLength\030\006 \001(\005\022\035\n\025maxLengthO" +
+      "fChatString\030\007 \001(\005\022Z\n\rclanConstants\030\010 \001(\013" +
+      "2C.com.lvl6.proto.StartupResponseProto.S" +
+      "tartupConstants.ClanConstants\022p\n\030downloa" +
+      "dableNibConstants\030\t \001(\0132N.com.lvl6.proto",
+      ".StartupResponseProto.StartupConstants.D" +
+      "ownloadableNibConstants\022\'\n\037numHoursBefor" +
+      "eReshowingGoldSale\030\n \001(\005\022\036\n\026levelToShowR" +
+      "ateUsPopup\030\013 \001(\005\022e\n\022touramentConstants\030\014" +
+      " \001(\0132I.com.lvl6.proto.StartupResponsePro" +
+      "to.StartupConstants.TournamentConstants\022" +
+      "\037\n\027fbConnectRewardDiamonds\030\r \001(\005\022\023\n\013faqF" +
+      "ileName\030\016 \001(\t\022<\n\022adminChatUserProto\030\017 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\037\n\027n" +
+      "umBeginnerSalesAllowed\030\020 \001(\005\022h\n\024userMons",
+      "terConstants\030\021 \001(\0132J.com.lvl6.proto.Star" +
+      "tupResponseProto.StartupConstants.UserMo" +
+      "nsterConstants\022`\n\020monsterConstants\030\022 \001(\013" +
+      "2F.com.lvl6.proto.StartupResponseProto.S" +
+      "tartupConstants.MonsterConstants\022\025\n\rminu" +
+      "tesPerGem\030\023 \001(\002\022\027\n\017gemsPerResource\030\025 \001(\002" +
+      "\022\031\n\021pvpRequiredMinLvl\030\024 \001(\005\022\034\n\024monsterDm" +
+      "gMultiplier\030\037 \001(\002\022\'\n\037continueBattleGemCo" +
+      "stMultiplier\030\026 \001(\002\022 \n\030battleRunAwayBaseP" +
+      "ercent\030\034 \001(\002\022\036\n\026battleRunAwayIncrement\030\035",
+      " \001(\002\022\027\n\017addAllFbFriends\030\027 \001(\010\022]\n\010miniTut" +
+      "s\030\030 \001(\0132K.com.lvl6.proto.StartupResponse" +
+      "Proto.StartupConstants.MiniTutorialConst" +
+      "ants\022\024\n\014maxObstacles\030\031 \001(\005\022\032\n\022minutesPer" +
+      "Obstacle\030\032 \001(\005\022`\n\020taskMapConstants\030\033 \001(\013" +
+      "2F.com.lvl6.proto.StartupResponseProto.S" +
+      "tartupConstants.TaskMapConstants\022 \n\030maxM" +
+      "inutesForFreeSpeedUp\030\036 \001(\005\022b\n\021clanHelpCo" +
+      "nstants\030  \003(\0132G.com.lvl6.proto.StartupRe" +
+      "sponseProto.StartupConstants.ClanHelpCon",
+      "stants\032_\n\031AnimatedSpriteOffsetProto\022\021\n\ti" +
+      "mageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\032\257\001\n\rClanConstant" +
+      "s\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxC" +
+      "harLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLen" +
+      "gthForClanDescription\030\003 \001(\005\022\037\n\027maxCharLe" +
+      "ngthForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(" +
+      "\005\032c\n\030DownloadableNibConstants\022\022\n\nmapNibN" +
+      "ame\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021g" +
+      "oldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCons",
+      "tants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeigh" +
+      "t\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHours" +
+      "ToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonster" +
+      "Constants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031in" +
+      "itialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Monste" +
+      "rConstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#" +
+      "\n\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021e" +
+      "lementalStrength\030\003 \001(\002\022\031\n\021elementalWeakn" +
+      "ess\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001" +
+      "\n\020TaskMapConstants\022\035\n\025mapSectionImagePre",
+      "fix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030" +
+      "\n\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidt" +
+      "h\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniT" +
+      "utorialConstants\022\032\n\022miniTutorialTaskId\030\001" +
+      " \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\032\200\001\n\021ClanHel" +
+      "pConstants\022.\n\010helpType\030\001 \001(\0162\034.com.lvl6." +
+      "proto.ClanHelpType\022\034\n\024amountRemovedPerHe" +
+      "lp\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(\002\032" +
+      "\234\004\n\021TutorialConstants\022\031\n\021startingMonster" +
+      "Id\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enem",
+      "yMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 " +
+      "\001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZ" +
+      "MonsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 " +
+      "\003(\0132#.com.lvl6.proto.TutorialStructProto" +
+      "\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006city" +
+      "Id\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com." +
+      "lvl6.proto.CityElementProto\022$\n\034cityEleme" +
+      "ntIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElement" +
+      "IdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001" +
+      "(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n",
+      "\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.prot" +
+      "o.MinimumObstacleProto\"A\n\014UpdateStatus\022\r" +
+      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
+      "_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
+      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAIN" +
+      "TENANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n" +
+      "\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023" +
+      "B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -28340,6 +29353,7 @@ public final class EventStartupProto {
           com.lvl6.proto.MiniJobConfigProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StaticDataStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
@@ -28374,7 +29388,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", });
+        new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "GemsPerResource", "PvpRequiredMinLvl", "MonsterDmgMultiplier", "ContinueBattleGemCostMultiplier", "BattleRunAwayBasePercent", "BattleRunAwayIncrement", "AddAllFbFriends", "MiniTuts", "MaxObstacles", "MinutesPerObstacle", "TaskMapConstants", "MaxMinutesForFreeSpeedUp", "ClanHelpConstants", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
@@ -28423,6 +29437,12 @@ public final class EventStartupProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
         new java.lang.String[] { "MiniTutorialTaskId", "GuideMonsterId", });
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor =
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(8);
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanHelpConstants_descriptor,
+        new java.lang.String[] { "HelpType", "AmountRemovedPerHelp", "PercentRemovedPerHelp", });
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
@@ -28446,6 +29466,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MiniJobConfigProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StaticDataStuffProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.TaskProto.getDescriptor();

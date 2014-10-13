@@ -2,6 +2,7 @@ package com.lvl6.properties;
 
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 
 public class ControllerConstants {
 
@@ -25,6 +26,25 @@ public class ControllerConstants {
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
+	
+	//CLAN HELP
+//	public static final int   CLAN_HELP__EVOLVE_AMOUNT_REMOVED = 1;
+//	public static final float CLAN_HELP__EVOLVE_PERCENT_REMOVED = 0.01F;
+//	public static final int   CLAN_HELP__HEAL_AMOUNT_REMOVED = 5;
+//	public static final float CLAN_HELP__HEAL_PERCENT_REMOVED = 0.01F;
+//	public static final int   CLAN_HELP__MINI_JOB_AMOUNT_REMOVED = 1;
+//	public static final float CLAN_HELP__MINI_JOB_PERCENT_REMOVED = 0.01F;
+//	public static final int   CLAN_HELP__UPGRADE_STRUCT_AMOUNT_REMOVED = 1;
+//	public static final float CLAN_HELP__UPGRADE_STRUCT_PERCENT_REMOVED = 0.01F;
+	
+	public static final String[] CLAN_HELP__HELP_TYPE = {
+			ClanHelpType.EVOLVE.name(),
+			ClanHelpType.HEAL.name(),
+			ClanHelpType.MINI_JOB.name(),
+			ClanHelpType.UPGRADE_STRUCT.name()
+	};
+	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,        5,      1,          1};
+	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,    0.01F,  0.01F,      0.01F};
 	
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
@@ -240,23 +260,6 @@ public class ControllerConstants {
   public static final int BATTLE__ELO_USER_LIMIT_THREE = 3;  
   public static final int BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND = 600000; //10 MINUTES
   
-  //revamped boss constants
-  //ublic static final int SOLO_BOSS__ATTACK_COST = 1;
-  //public static final int SOLO_BOSS__SUPER_ATTACK_COST = 3;
-  //public static final double SOLO_BOSS__SUPER_ATTACK_DAMGE_MULTIPLIER = 1.5; 
-  
-  //new revamped boss constants
-  public static final double SOLO_BOSS__CRITICAL_HIT_CHANCE = 0.15;
-  public static final double SOLO_BOSS__CRITICAL_HIT_DAMAGE_MULTIPLIER = 1.6;
-  public static final int SOLO_BOSS__MAX_HEALTH_MULTIPLIER = 15;
-  public static final int SOLO_BOSS__LONGEST_GEMLESS_STREAK = 5;
-  public static final int SOLO_BOSS__MAX_REDEEMS_WITH_GUARANTEED_DROP = 15;
-  public static final int SOLO_BOSS__NUM_REDEEMS_LEVEL_TWO_CAP = 30;
-  public static final float SOLO_BOSS__NUM_REDEEMS_LEVEL_TWO_DROP_RATE = 0.1f;
-  public static final int SOLO_BOSS__NUM_REDEEMS_LEVEL_THREE_CAP = 45;
-  public static final float SOLO_BOSS__NUM_REDEEMS_LEVEL_THREE_DROP_RATE = 0.05f;
-  public static final float SOLO_BOSS__ABOVE_LEVEL_THREE_DROP_RATE = 0.02f;
-  
   //--------------------------------------------------------------------------------------------------------------------------
 
   //TUTORIAL CONSTANTS
@@ -286,8 +289,7 @@ public class ControllerConstants {
   
   //STARTUP
   public static final int STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND = 20;
-  public static final int STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND = 24*2;
-  public static final int STARTUP__APPROX_NUM_ALLIES_TO_SEND = 20;
+//  public static final int STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND = 24*2;
   public static final int STARTUP__DAILY_BONUS_MAX_CONSECUTIVE_DAYS = 5;
   //public static final int STARTUP__DAILY_BONUS_TIME_REQ_BETWEEN_CONSEC_DAYS = 1; //in days
   //public static final int STARTUP__DAILY_BONUS_SMALL_BONUS_COIN_QUANTITY = 2;
@@ -327,10 +329,6 @@ public class ControllerConstants {
   //PURCHASE NORM STRUCTURE
   public static final int PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE = 3;
 
-  //SPEEDUP NORM STRUCTURE CONSTANT
-  public static final double BUILD_LATE_SPEEDUP_CONSTANT = 0.5;
-  public static final double UPGRADE_LATE_SPEEDUP_CONSTANT = 0.5;
-  
   //UPGRADE NORM STRUCTURE
   public static final int UPGRADE_NORM_STRUCTURE__MAX_STRUCT_LEVEL = 5;
   
@@ -383,19 +381,6 @@ public class ControllerConstants {
   public static final int CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 958 : 148;
   public static final int CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB = 50;
   
-  
-  //LOCK BOXES
-  public static final int LOCK_BOXES__GOLD_COST_TO_PICK = 10;
-  public static final int LOCK_BOXES__SILVER_COST_TO_PICK = 500;
-  public static final float LOCK_BOXES__GOLD_CHANCE_TO_PICK = 1.f;
-  public static final float LOCK_BOXES__SILVER_CHANCE_TO_PICK = 0.25f;
-  public static final float LOCK_BOXES__FREE_CHANCE_TO_PICK = 0.15f;
-  public static final int LOCK_BOXES__NUM_MINUTES_TO_REPICK = 60;
-  public static final int LOCK_BOXES__GOLD_COST_TO_RESET_PICK = 10;
-  public static final float LOCK_BOXES__CHANCE_TO_ACQUIRE_FROM_TASK_BASE = 0.03f;
-  public static final float LOCK_BOXES__CHANCE_TO_ACQUIRE_FROM_TASK_MAX = 1.f;
-  public static final float LOCK_BOXES__CHANCE_TO_ACQUIRE_FROM_BATTLE = 0.25f;
-  public static final int LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS = 3;
   
   //TIME BEFORE RESHOWING MENUS
   public static final int NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE = 24;
@@ -471,11 +456,7 @@ public class ControllerConstants {
   
   //BOOSTER PACKS
   //amount of booster packs user can buy at one time
-  public static final int BOOSTER_PACK__PURCHASE_OPTION_ONE_NUM_BOOSTER_ITEMS = 1;
-  public static final int BOOSTER_PACK__PURCHASE_OPTION_TWO_NUM_BOOSTER_ITEMS = 10;
   public static final String BOOSTER_PACK__INFO_IMAGE_NAME = "howchestswork.png";
-  public static final int BOOSTER_PACK__NUM_TIMES_TO_BUY_STARTER_PACK = 4;
-  public static final int BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK = 3;
   
   // MAP
   public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "1mapsection";
@@ -508,7 +489,6 @@ public class ControllerConstants {
   
   
   public static final int STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL = 326;
-  public static final int[] STARTUP__QUEST_IDS_FOR_GUARANTEED_WIN = {325};
   public static final String STARTUP__FAQ_FILE_NAME = "FAQ.3.txt";
 
   public static final String NIB_NAME__LOCK_BOX = "LockBox.4";

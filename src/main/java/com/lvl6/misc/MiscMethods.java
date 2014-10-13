@@ -86,6 +86,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanHelpConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
@@ -99,6 +100,7 @@ import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
@@ -778,6 +780,24 @@ public class MiscMethods {
     
     cb.setMaxMinutesForFreeSpeedUp(ControllerConstants.MAX_MINUTES_FOR_FREE_SPEED_UP);
     
+    for (int index = 0; index < ControllerConstants.CLAN_HELP__HELP_TYPE.length; index++) {
+    	ClanHelpConstants.Builder chcb = ClanHelpConstants.newBuilder();
+    	String helpType = ControllerConstants.CLAN_HELP__HELP_TYPE[index];
+    	try {
+    		chcb.setHelpType(ClanHelpType.valueOf(helpType));
+    	} catch (Exception e) {
+    		log.error(String.format("invalid ClanHelpType: %s, not using it", helpType),
+    			e);
+    		continue;
+    	}
+    	int amount = ControllerConstants.CLAN_HELP__AMOUNT_REMOVED[index];
+    	chcb.setAmountRemovedPerHelp(amount);
+    	float percent = ControllerConstants.CLAN_HELP__PERCENT_REMOVED[index];
+    	chcb.setPercentRemovedPerHelp(percent);
+    	
+    	cb.addClanHelpConstants(chcb.build());
+    }
+    
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -854,31 +874,10 @@ public class MiscMethods {
     //    cb = cb.setLeaderboardConstants(lec);
     //    
     //    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
-    //        .setPurchaseOptionOneNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_ONE_NUM_BOOSTER_ITEMS)
-    //        .setPurchaseOptionTwoNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_TWO_NUM_BOOSTER_ITEMS)
     //        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
-    //        .setNumTimesToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_TIMES_TO_BUY_STARTER_PACK)
-    //        .setNumDaysToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK)
     //        .build();
     //    cb = cb.setBoosterPackConstants(bpc);
     //
-    //    List<Integer> questIdsGuaranteedWin = new ArrayList<Integer>();
-    //    int[] questIdsForWin = ControllerConstants.STARTUP__QUEST_IDS_FOR_GUARANTEED_WIN; 
-    //    for(int i = 0; i < questIdsForWin.length; i++) {
-    //      questIdsGuaranteedWin.add(questIdsForWin[i]);
-    //    }
-
-
-
-
-    //    BossConstants.Builder bc = BossConstants.newBuilder();
-    //    bc.setMaxHealthMultiplier(ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER);
-    //    cb.setBossConstants(bc.build());
-
-    //    SpeedupConstants.Builder scb = SpeedupConstants.newBuilder();
-    //    scb.setBuildLateSpeedupConstant(ControllerConstants.BUILD_LATE_SPEEDUP_CONSTANT);
-    //    scb.setUpgradeLateSpeedupConstant(ControllerConstants.UPGRADE_LATE_SPEEDUP_CONSTANT);
-    //    cb.setSpeedupConstants(scb.build());
 
     return cb.build();  
   }
@@ -890,37 +889,6 @@ public class MiscMethods {
   	
   	return mtcb.build();
   }
-
-  /*public static List<LockBoxEventProto> currentLockBoxEvents() {
-    Map<Integer, LockBoxEvent> events = LockBoxEventRetrieveUtils.getLockBoxEventIdsToLockBoxEvents();
-    long curTime = new Date().getTime();
-    List<LockBoxEventProto> toReturn = new ArrayList<LockBoxEventProto>();
-
-    for (LockBoxEvent event : events.values()) {
-      // Send all events that are not yet over
-      long delay = 1000 * 60 * 60 * 24 *
-          ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS;
-
-      if ((event.getEndDate().getTime() + delay) > curTime) {
-        toReturn.add(CreateInfoProtoUtils.createLockBoxEventProtoFromLockBoxEvent(event));
-      }
-    }
-    return toReturn;
-  }
-
-  public static List<BossEventProto> currentBossEvents() {
-    Map<Integer, BossEvent> events = BossEventRetrieveUtils.getIdsToBossEvents();
-    long curTime = new Date().getTime();
-    List<BossEventProto> toReturn = new ArrayList<BossEventProto>();
-
-    for (BossEvent event : events.values()) {
-      // Send all events that are not yet over
-      if (event.getEndDate().getTime() > curTime) {
-        toReturn.add(CreateInfoProtoUtils.createBossEventProtoFromBossEvent(event));
-      }
-    }
-    return toReturn;
-  }*/
 
   public static List<TournamentEventProto> currentTournamentEventProtos() {
     Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);

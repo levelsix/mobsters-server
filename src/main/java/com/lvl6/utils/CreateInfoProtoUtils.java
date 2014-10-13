@@ -910,7 +910,8 @@ public class CreateInfoProtoUtils {
     	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
     	fucpb.setStatus(ucs);
     } catch (Exception e) {
-    	log.error("incorrect user clan status. userClan=" + uc);
+    	log.error(String.format(
+    		"incorrect user clan status. userClan=%s", uc));
     }
     
     Date aTime = uc.getRequestTime();
@@ -2011,7 +2012,9 @@ public class CreateInfoProtoUtils {
 		  FullUserQuestProto.Builder builder = FullUserQuestProto.newBuilder();
 
 		  if (null == quest) {
-			  log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
+			  log.error(String.format(
+				  "no quest with id=%s, userQuest=%s",
+				  userQuest.getQuestId(), userQuest));
 		  }
 		  
 		  if (null != quest) {
@@ -2040,9 +2043,10 @@ public class CreateInfoProtoUtils {
 	  
 	  if (!questIdToUserQuestJobs.containsKey(questId)) {
 		  //should never go in here!
-		  log.error("user has quest but no quest_jobs for said quest." +
-		  		" questId=" + questId + "\t user's quest jobs are:" +
-				  questIdToUserQuestJobs);
+		  log.error(String.format(
+			  "user has Quest but no QuestJobs. questId=%s. User's quest jobs:%s",
+			  questId, questIdToUserQuestJobs));
+		  
 		  return userQuestJobProtoList;
 	  }
 	  
@@ -2823,16 +2827,16 @@ public class CreateInfoProtoUtils {
   public static UserPersistentEventProto createUserPersistentEventProto(
       EventPersistentForUser epfu) {
     UserPersistentEventProto.Builder upepb = UserPersistentEventProto.newBuilder();
-
-    int userId = epfu.getUserId();
-    int eventId = epfu.getEventPersistentId();
     Date timeOfEntry = epfu.getTimeOfEntry();
 
-    upepb.setUserId(userId);
-    upepb.setEventId(eventId);
+    upepb.setUserId(
+    	epfu.getUserId());
+    upepb.setEventId(
+    	epfu.getEventPersistentId());
 
     if (null != timeOfEntry) {
-      upepb.setCoolDownStartTime(timeOfEntry.getTime());
+      upepb.setCoolDownStartTime(
+    	  timeOfEntry.getTime());
     }
 
     return upepb.build();
