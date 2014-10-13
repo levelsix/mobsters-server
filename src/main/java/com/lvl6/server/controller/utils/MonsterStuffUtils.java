@@ -564,7 +564,9 @@ public class MonsterStuffUtils {
   		if (userMonsterPieces > numPiecesToBeWhole) {
   			log.warn("userMonster has more than the max num pieces. userMonster=" +
   					mfu + "\t monster=" + monzter);
-  		} else if (userMonsterPieces == numPiecesToBeWhole) {
+  		} 
+
+  		if (userMonsterPieces >= numPiecesToBeWhole) {
   			wholeUserMonsterIds.add(userMonsterId);
   		}
   	}
