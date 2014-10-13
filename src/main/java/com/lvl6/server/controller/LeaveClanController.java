@@ -27,6 +27,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class LeaveClanController extends EventController {
 
@@ -186,6 +187,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         log.error("problem with making clanid for user null");
       }
     }
+    
+    int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
+    log.info(String.format("num ClanHelps closed: %s", numUpdated));
+    
     return true;
   }
 

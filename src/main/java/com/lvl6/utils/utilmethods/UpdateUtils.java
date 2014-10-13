@@ -1451,4 +1451,22 @@ public class UpdateUtils implements UpdateUtil {
 			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 			return numUpdated;
 		}
+		
+		@Override
+		public int closeClanHelp(int userId, int clanId) {
+			String tableName = DBConstants.TABLE_CLAN_HELP;
+
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_HELP__USER_ID, userId);
+			conditionParams.put(DBConstants.CLAN_HELP__CLAN_ID, clanId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_HELP__OPEN, false);
+			
+			Map<String, Object> relativeParams = null;//new HashMap<String, Object>();
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+				absoluteParams, conditionParams, "and");
+
+			return numUpdated;
+		}
 }

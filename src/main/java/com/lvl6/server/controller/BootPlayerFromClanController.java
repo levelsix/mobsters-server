@@ -27,6 +27,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class BootPlayerFromClanController extends EventController {
 
@@ -161,12 +162,18 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   }
 
   private boolean writeChangesToDB(User user, User playerToBoot) {
-    if (!DeleteUtils.get().deleteUserClan(playerToBoot.getId(), playerToBoot.getClanId())) {
+	  int userId = playerToBoot.getId();
+	  int clanId = playerToBoot.getClanId();
+    if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
       log.error("problem with deleting user clan info for playerToBoot with id " + playerToBoot.getId() + " and clan id " + playerToBoot.getClanId()); 
     }
     if (!playerToBoot.updateRelativeCoinsAbsoluteClan(0, null)) {
       log.error("problem with change playerToBoot " + playerToBoot + " clan id to nothing");
     }
+
+    int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
+    log.info(String.format("num ClanHelps closed: %s", numUpdated));
+    
     return true;
   }
   
