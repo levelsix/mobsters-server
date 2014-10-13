@@ -357,5 +357,28 @@ public class DeleteUtils implements DeleteUtil {
 		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
 		return numDeleted;
 	}
+
+	@Override
+	public int deleteClanHelp( int userId, List<Long> clanHelpIdList )
+	{
+		String tableName = DBConstants.TABLE_CLAN_HELP;
+		
+		int size = clanHelpIdList.size();
+	    List<String> questions = Collections.nCopies(size, "?");
+	    String questionMarks = StringUtils.csvList(questions);
+	    
+	    String query = String.format(
+	    	"DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+	    	tableName, DBConstants.CLAN_HELP__ID, questionMarks,
+	    	DBConstants.CLAN_HELP__USER_ID);
+	    
+	    List<Object> values = new ArrayList<Object>();
+	    values.addAll(clanHelpIdList);
+	    values.add(userId);
+	    
+	    int numDeleted = DBConnection.get()
+	    	.deleteDirectQueryNaive(query, values);
+	    return numDeleted;
+	}
 	
 }

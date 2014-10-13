@@ -410,14 +410,14 @@ message PromoteDemoteClanMemberResponseProto {
 
 message SolicitClanHelpRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional ClanHelpNoticeProto notice = 2;
+	repeated ClanHelpNoticeProto notice = 2;
 	optional int64 clientTime = 4;
 	optional int32 maxHelpers = 5;
 }
 
 message SolicitClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ClanHelpProto helpProto = 2;
+	repeated ClanHelpProto helpProto = 2;
 	optional SolicitClanHelpStatus status = 3; 
 	
 	//SEND TO ALL CLAN MEMBERS IF SUCCESS
@@ -439,7 +439,10 @@ message GiveClanHelpRequestProto {
 
 message GiveClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
+	repeated ClanHelpProto clanHelps = 2;
 	optional GiveClanHelpStatus status = 3; 
+	
+	//SEND TO ALL CLAN MEMBERS ON SUCCESS
 	
 	enum GiveClanHelpStatus {
 		SUCCESS = 1;
@@ -456,6 +459,10 @@ message EndClanHelpRequestProto {
 
 message EndClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
+	repeated int64 clanHelpIds = 2;
+	
+	optional EndClanHelpStatus status = 3;
+	//SEND TO ALL CLAN MEMBERS ON SUCCESS
 	
 	enum EndClanHelpStatus {
 		SUCCESS = 1;

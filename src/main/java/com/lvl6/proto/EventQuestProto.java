@@ -8,70 +8,178 @@ public final class EventQuestProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface QuestAcceptRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+  public interface QuestAcceptRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestAcceptRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional int32 questId = 2;
+
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     boolean hasQuestId();
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     int getQuestId();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestAcceptRequestProto}
+   */
   public static final class QuestAcceptRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestAcceptRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestAcceptRequestProto)
+      QuestAcceptRequestProtoOrBuilder {
     // Use QuestAcceptRequestProto.newBuilder() to construct.
-    private QuestAcceptRequestProto(Builder builder) {
+    private QuestAcceptRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestAcceptRequestProto(boolean noInit) {}
-    
+    private QuestAcceptRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestAcceptRequestProto defaultInstance;
     public static QuestAcceptRequestProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestAcceptRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestAcceptRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              questId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.class, com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestAcceptRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestAcceptRequestProto>() {
+      public QuestAcceptRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestAcceptRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestAcceptRequestProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional int32 questId = 2;
+
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public boolean hasQuestId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public int getQuestId() {
       return questId_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       questId_ = 0;
@@ -79,12 +187,13 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -96,12 +205,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -115,113 +224,106 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestAcceptRequestProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestAcceptRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestAcceptRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestAcceptRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.class, com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -233,7 +335,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -246,20 +348,20 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto build() {
         com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -267,17 +369,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto result = new com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto(this);
         int from_bitField0_ = bitField0_;
@@ -298,7 +390,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto)other);
@@ -307,7 +399,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -319,61 +411,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              questId_ = input.readInt32();
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -381,6 +454,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -394,6 +470,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -405,6 +484,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -421,6 +503,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -431,11 +516,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -443,108 +534,254 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional int32 questId = 2;
+
       private int questId_ ;
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public boolean hasQuestId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public int getQuestId() {
         return questId_;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder setQuestId(int value) {
         bitField0_ |= 0x00000002;
         questId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder clearQuestId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         questId_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestAcceptRequestProto)
     }
-    
+
     static {
       defaultInstance = new QuestAcceptRequestProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestAcceptRequestProto)
   }
-  
-  public interface QuestAcceptResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
+  public interface QuestAcceptResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestAcceptResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
+
+    /**
+     * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+     */
     boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+     */
     com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus getStatus();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestAcceptResponseProto}
+   *
+   * <pre>
+   *DONE
+   * </pre>
+   */
   public static final class QuestAcceptResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestAcceptResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestAcceptResponseProto)
+      QuestAcceptResponseProtoOrBuilder {
     // Use QuestAcceptResponseProto.newBuilder() to construct.
-    private QuestAcceptResponseProto(Builder builder) {
+    private QuestAcceptResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestAcceptResponseProto(boolean noInit) {}
-    
+    private QuestAcceptResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestAcceptResponseProto defaultInstance;
     public static QuestAcceptResponseProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestAcceptResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestAcceptResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus value = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.class, com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestAcceptResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestAcceptResponseProto>() {
+      public QuestAcceptResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestAcceptResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestAcceptResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus}
+     */
     public enum QuestAcceptStatus
         implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       SUCCESS(0, 1),
+      /**
+       * <code>FAIL_NOT_AVAIL_TO_USER = 2;</code>
+       */
       FAIL_NOT_AVAIL_TO_USER(1, 2),
+      /**
+       * <code>FAIL_ALREADY_ACCEPTED = 3;</code>
+       */
       FAIL_ALREADY_ACCEPTED(2, 3),
+      /**
+       * <code>FAIL_OTHER = 4;</code>
+       */
       FAIL_OTHER(3, 4),
       ;
-      
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_NOT_AVAIL_TO_USER = 2;</code>
+       */
       public static final int FAIL_NOT_AVAIL_TO_USER_VALUE = 2;
+      /**
+       * <code>FAIL_ALREADY_ACCEPTED = 3;</code>
+       */
       public static final int FAIL_ALREADY_ACCEPTED_VALUE = 3;
+      /**
+       * <code>FAIL_OTHER = 4;</code>
+       */
       public static final int FAIL_OTHER_VALUE = 4;
-      
-      
+
+
       public final int getNumber() { return value; }
-      
+
       public static QuestAcceptStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
@@ -554,7 +791,7 @@ public final class EventQuestProto {
           default: return null;
         }
       }
-      
+
       public static com.google.protobuf.Internal.EnumLiteMap<QuestAcceptStatus>
           internalGetValueMap() {
         return internalValueMap;
@@ -566,7 +803,7 @@ public final class EventQuestProto {
                 return QuestAcceptStatus.valueOf(number);
               }
             };
-      
+
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         return getDescriptor().getValues().get(index);
@@ -579,11 +816,9 @@ public final class EventQuestProto {
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.getDescriptor().getEnumTypes().get(0);
       }
-      
-      private static final QuestAcceptStatus[] VALUES = {
-        SUCCESS, FAIL_NOT_AVAIL_TO_USER, FAIL_ALREADY_ACCEPTED, FAIL_OTHER, 
-      };
-      
+
+      private static final QuestAcceptStatus[] VALUES = values();
+
       public static QuestAcceptStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
@@ -592,42 +827,55 @@ public final class EventQuestProto {
         }
         return VALUES[desc.getIndex()];
       }
-      
+
       private final int index;
       private final int value;
-      
+
       private QuestAcceptStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
-      
+
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus)
     }
-    
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
+
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+     */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+     */
     public com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus getStatus() {
       return status_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
@@ -635,12 +883,13 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -652,12 +901,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -671,113 +920,110 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestAcceptResponseProto}
+     *
+     * <pre>
+     *DONE
+     * </pre>
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestAcceptResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestAcceptResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestAcceptResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.class, com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -789,7 +1035,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -802,20 +1048,20 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto build() {
         com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -823,17 +1069,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto result = new com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto(this);
         int from_bitField0_ = bitField0_;
@@ -854,7 +1090,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto)other);
@@ -863,7 +1099,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -875,67 +1111,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus value = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                status_ = value;
-              }
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -943,6 +1154,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -956,6 +1170,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -967,6 +1184,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -983,6 +1203,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -993,11 +1216,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -1005,28 +1234,39 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;
+
       private com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+       */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+       */
       public com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus getStatus() {
         return status_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+       */
       public Builder setStatus(com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1036,168 +1276,459 @@ public final class EventQuestProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestAcceptResponseProto.QuestAcceptStatus status = 2;</code>
+       */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.QuestAcceptStatus.SUCCESS;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestAcceptResponseProto)
     }
-    
+
     static {
       defaultInstance = new QuestAcceptResponseProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestAcceptResponseProto)
   }
-  
-  public interface QuestProgressRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
+  public interface QuestProgressRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestProgressRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional int32 questId = 2;
+
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     boolean hasQuestId();
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     int getQuestId();
-    
-    // optional bool isComplete = 3;
+
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
     boolean hasIsComplete();
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
     boolean getIsComplete();
-    
-    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> 
         getUserQuestJobsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     int getUserQuestJobsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
         getUserQuestJobsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
         int index);
-    
-    // repeated int64 deleteUserMonsterIds = 5;
+
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     java.util.List<java.lang.Long> getDeleteUserMonsterIdsList();
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     int getDeleteUserMonsterIdsCount();
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     long getDeleteUserMonsterIds(int index);
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestProgressRequestProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   *event to update questJob status or quest status
+   * </pre>
+   */
   public static final class QuestProgressRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestProgressRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestProgressRequestProto)
+      QuestProgressRequestProtoOrBuilder {
     // Use QuestProgressRequestProto.newBuilder() to construct.
-    private QuestProgressRequestProto(Builder builder) {
+    private QuestProgressRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestProgressRequestProto(boolean noInit) {}
-    
+    private QuestProgressRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestProgressRequestProto defaultInstance;
     public static QuestProgressRequestProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestProgressRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestProgressRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              questId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isComplete_ = input.readBool();
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                userQuestJobs_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.UserQuestJobProto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              userQuestJobs_.add(input.readMessage(com.lvl6.proto.QuestProto.UserQuestJobProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              deleteUserMonsterIds_.add(input.readInt64());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                deleteUserMonsterIds_.add(input.readInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          userQuestJobs_ = java.util.Collections.unmodifiableList(userQuestJobs_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          deleteUserMonsterIds_ = java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.class, com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestProgressRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestProgressRequestProto>() {
+      public QuestProgressRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestProgressRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestProgressRequestProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional int32 questId = 2;
+
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public boolean hasQuestId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public int getQuestId() {
       return questId_;
     }
-    
-    // optional bool isComplete = 3;
+
     public static final int ISCOMPLETE_FIELD_NUMBER = 3;
     private boolean isComplete_;
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
     public boolean hasIsComplete() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional bool isComplete = 3;</code>
+     */
     public boolean getIsComplete() {
       return isComplete_;
     }
-    
-    // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+
     public static final int USERQUESTJOBS_FIELD_NUMBER = 4;
     private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> getUserQuestJobsList() {
       return userQuestJobs_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     public java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
         getUserQuestJobsOrBuilderList() {
       return userQuestJobs_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     public int getUserQuestJobsCount() {
       return userQuestJobs_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index) {
       return userQuestJobs_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+     *
+     * <pre>
+     *if this quest job is the last one for the quest and the user finishes
+     *it, then the boolean above, isComplete, would also be set
+     * </pre>
+     */
     public com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
         int index) {
       return userQuestJobs_.get(index);
     }
-    
-    // repeated int64 deleteUserMonsterIds = 5;
+
     public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Long> deleteUserMonsterIds_;
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     public java.util.List<java.lang.Long>
         getDeleteUserMonsterIdsList() {
       return deleteUserMonsterIds_;
     }
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     public int getDeleteUserMonsterIdsCount() {
       return deleteUserMonsterIds_.size();
     }
+    /**
+     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
     public long getDeleteUserMonsterIds(int index) {
       return deleteUserMonsterIds_.get(index);
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       questId_ = 0;
       isComplete_ = false;
       userQuestJobs_ = java.util.Collections.emptyList();
-      deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+      deleteUserMonsterIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1218,12 +1749,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1254,113 +1785,111 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestProgressRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestProgressRequestProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     *event to update questJob status or quest status
+     * </pre>
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestProgressRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestProgressRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestProgressRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.class, com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1373,7 +1902,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -1392,24 +1921,24 @@ public final class EventQuestProto {
         } else {
           userQuestJobsBuilder_.clear();
         }
-        deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+        deleteUserMonsterIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressRequestProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressRequestProto build() {
         com.lvl6.proto.EventQuestProto.QuestProgressRequestProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -1417,17 +1946,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestProgressRequestProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestProgressRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressRequestProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestProgressRequestProto result = new com.lvl6.proto.EventQuestProto.QuestProgressRequestProto(this);
         int from_bitField0_ = bitField0_;
@@ -1466,7 +1985,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestProgressRequestProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestProgressRequestProto)other);
@@ -1475,7 +1994,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestProgressRequestProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -1526,86 +2045,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              questId_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              isComplete_ = input.readBool();
-              break;
-            }
-            case 34: {
-              com.lvl6.proto.QuestProto.UserQuestJobProto.Builder subBuilder = com.lvl6.proto.QuestProto.UserQuestJobProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addUserQuestJobs(subBuilder.buildPartial());
-              break;
-            }
-            case 40: {
-              ensureDeleteUserMonsterIdsIsMutable();
-              deleteUserMonsterIds_.add(input.readInt64());
-              break;
-            }
-            case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addDeleteUserMonsterIds(input.readInt64());
-              }
-              input.popLimit(limit);
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestProgressRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestProgressRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -1613,6 +2088,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -1626,6 +2104,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -1637,6 +2118,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -1653,6 +2137,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -1663,11 +2150,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -1675,63 +2168,87 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional int32 questId = 2;
+
       private int questId_ ;
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public boolean hasQuestId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public int getQuestId() {
         return questId_;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder setQuestId(int value) {
         bitField0_ |= 0x00000002;
         questId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder clearQuestId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         questId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional bool isComplete = 3;
+
       private boolean isComplete_ ;
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public boolean hasIsComplete() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public boolean getIsComplete() {
         return isComplete_;
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public Builder setIsComplete(boolean value) {
         bitField0_ |= 0x00000004;
         isComplete_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional bool isComplete = 3;</code>
+       */
       public Builder clearIsComplete() {
         bitField0_ = (bitField0_ & ~0x00000004);
         isComplete_ = false;
         onChanged();
         return this;
       }
-      
-      // repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;
+
       private java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> userQuestJobs_ =
         java.util.Collections.emptyList();
       private void ensureUserQuestJobsIsMutable() {
@@ -1740,10 +2257,18 @@ public final class EventQuestProto {
           bitField0_ |= 0x00000008;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.UserQuestJobProto, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder, com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> userQuestJobsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto> getUserQuestJobsList() {
         if (userQuestJobsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(userQuestJobs_);
@@ -1751,6 +2276,14 @@ public final class EventQuestProto {
           return userQuestJobsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public int getUserQuestJobsCount() {
         if (userQuestJobsBuilder_ == null) {
           return userQuestJobs_.size();
@@ -1758,6 +2291,14 @@ public final class EventQuestProto {
           return userQuestJobsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.UserQuestJobProto getUserQuestJobs(int index) {
         if (userQuestJobsBuilder_ == null) {
           return userQuestJobs_.get(index);
@@ -1765,6 +2306,14 @@ public final class EventQuestProto {
           return userQuestJobsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder setUserQuestJobs(
           int index, com.lvl6.proto.QuestProto.UserQuestJobProto value) {
         if (userQuestJobsBuilder_ == null) {
@@ -1779,6 +2328,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder setUserQuestJobs(
           int index, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
         if (userQuestJobsBuilder_ == null) {
@@ -1790,6 +2347,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder addUserQuestJobs(com.lvl6.proto.QuestProto.UserQuestJobProto value) {
         if (userQuestJobsBuilder_ == null) {
           if (value == null) {
@@ -1803,6 +2368,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder addUserQuestJobs(
           int index, com.lvl6.proto.QuestProto.UserQuestJobProto value) {
         if (userQuestJobsBuilder_ == null) {
@@ -1817,6 +2390,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder addUserQuestJobs(
           com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
         if (userQuestJobsBuilder_ == null) {
@@ -1828,6 +2409,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder addUserQuestJobs(
           int index, com.lvl6.proto.QuestProto.UserQuestJobProto.Builder builderForValue) {
         if (userQuestJobsBuilder_ == null) {
@@ -1839,17 +2428,34 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder addAllUserQuestJobs(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.UserQuestJobProto> values) {
         if (userQuestJobsBuilder_ == null) {
           ensureUserQuestJobsIsMutable();
-          super.addAll(values, userQuestJobs_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userQuestJobs_);
           onChanged();
         } else {
           userQuestJobsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder clearUserQuestJobs() {
         if (userQuestJobsBuilder_ == null) {
           userQuestJobs_ = java.util.Collections.emptyList();
@@ -1860,6 +2466,14 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public Builder removeUserQuestJobs(int index) {
         if (userQuestJobsBuilder_ == null) {
           ensureUserQuestJobsIsMutable();
@@ -1870,10 +2484,26 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder getUserQuestJobsBuilder(
           int index) {
         return getUserQuestJobsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder getUserQuestJobsOrBuilder(
           int index) {
         if (userQuestJobsBuilder_ == null) {
@@ -1881,6 +2511,14 @@ public final class EventQuestProto {
           return userQuestJobsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public java.util.List<? extends com.lvl6.proto.QuestProto.UserQuestJobProtoOrBuilder> 
            getUserQuestJobsOrBuilderList() {
         if (userQuestJobsBuilder_ != null) {
@@ -1889,15 +2527,39 @@ public final class EventQuestProto {
           return java.util.Collections.unmodifiableList(userQuestJobs_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder addUserQuestJobsBuilder() {
         return getUserQuestJobsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.UserQuestJobProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public com.lvl6.proto.QuestProto.UserQuestJobProto.Builder addUserQuestJobsBuilder(
           int index) {
         return getUserQuestJobsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.UserQuestJobProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.UserQuestJobProto userQuestJobs = 4;</code>
+       *
+       * <pre>
+       *if this quest job is the last one for the quest and the user finishes
+       *it, then the boolean above, isComplete, would also be set
+       * </pre>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.UserQuestJobProto.Builder> 
            getUserQuestJobsBuilderList() {
         return getUserQuestJobsFieldBuilder().getBuilderList();
@@ -1916,25 +2578,56 @@ public final class EventQuestProto {
         }
         return userQuestJobsBuilder_;
       }
-      
-      // repeated int64 deleteUserMonsterIds = 5;
-      private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+
+      private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();
       private void ensureDeleteUserMonsterIdsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>(deleteUserMonsterIds_);
           bitField0_ |= 0x00000010;
          }
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public java.util.List<java.lang.Long>
           getDeleteUserMonsterIdsList() {
         return java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public int getDeleteUserMonsterIdsCount() {
         return deleteUserMonsterIds_.size();
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public long getDeleteUserMonsterIds(int index) {
         return deleteUserMonsterIds_.get(index);
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public Builder setDeleteUserMonsterIds(
           int index, long value) {
         ensureDeleteUserMonsterIdsIsMutable();
@@ -1942,99 +2635,282 @@ public final class EventQuestProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public Builder addDeleteUserMonsterIds(long value) {
         ensureDeleteUserMonsterIdsIsMutable();
         deleteUserMonsterIds_.add(value);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public Builder addAllDeleteUserMonsterIds(
           java.lang.Iterable<? extends java.lang.Long> values) {
         ensureDeleteUserMonsterIdsIsMutable();
-        super.addAll(values, deleteUserMonsterIds_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, deleteUserMonsterIds_);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
       public Builder clearDeleteUserMonsterIds() {
-        deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+        deleteUserMonsterIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestProgressRequestProto)
     }
-    
+
     static {
       defaultInstance = new QuestProgressRequestProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestProgressRequestProto)
   }
-  
-  public interface QuestProgressResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
+  public interface QuestProgressResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestProgressResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
+
+    /**
+     * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+     */
     boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+     */
     com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus getStatus();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestProgressResponseProto}
+   *
+   * <pre>
+   *DONE
+   * </pre>
+   */
   public static final class QuestProgressResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestProgressResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestProgressResponseProto)
+      QuestProgressResponseProtoOrBuilder {
     // Use QuestProgressResponseProto.newBuilder() to construct.
-    private QuestProgressResponseProto(Builder builder) {
+    private QuestProgressResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestProgressResponseProto(boolean noInit) {}
-    
+    private QuestProgressResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestProgressResponseProto defaultInstance;
     public static QuestProgressResponseProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestProgressResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestProgressResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus value = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.class, com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestProgressResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestProgressResponseProto>() {
+      public QuestProgressResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestProgressResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestProgressResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus}
+     */
     public enum QuestProgressStatus
         implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       SUCCESS(0, 1),
+      /**
+       * <code>FAIL_NO_QUEST_EXISTS = 2;</code>
+       */
       FAIL_NO_QUEST_EXISTS(1, 2),
+      /**
+       * <code>FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST = 3;</code>
+       */
       FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST(2, 3),
+      /**
+       * <code>FAIL_NONEXISTENT_USER_MONSTERS = 4;</code>
+       */
       FAIL_NONEXISTENT_USER_MONSTERS(3, 4),
+      /**
+       * <code>FAIL_INCOMPLETE_USER_MONSTERS = 5;</code>
+       */
       FAIL_INCOMPLETE_USER_MONSTERS(4, 5),
+      /**
+       * <code>FAIL_QUEST_JOB_INCOMPLETE = 7;</code>
+       */
       FAIL_QUEST_JOB_INCOMPLETE(5, 7),
+      /**
+       * <code>FAIL_OTHER = 6;</code>
+       *
+       * <pre>
+       *FAIL_QUEST_JOB_INCOMPLETE = 7; //DEFINED ABOVE
+       * </pre>
+       */
       FAIL_OTHER(6, 6),
       ;
-      
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_NO_QUEST_EXISTS = 2;</code>
+       */
       public static final int FAIL_NO_QUEST_EXISTS_VALUE = 2;
+      /**
+       * <code>FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST = 3;</code>
+       */
       public static final int FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST_VALUE = 3;
+      /**
+       * <code>FAIL_NONEXISTENT_USER_MONSTERS = 4;</code>
+       */
       public static final int FAIL_NONEXISTENT_USER_MONSTERS_VALUE = 4;
+      /**
+       * <code>FAIL_INCOMPLETE_USER_MONSTERS = 5;</code>
+       */
       public static final int FAIL_INCOMPLETE_USER_MONSTERS_VALUE = 5;
+      /**
+       * <code>FAIL_QUEST_JOB_INCOMPLETE = 7;</code>
+       */
       public static final int FAIL_QUEST_JOB_INCOMPLETE_VALUE = 7;
+      /**
+       * <code>FAIL_OTHER = 6;</code>
+       *
+       * <pre>
+       *FAIL_QUEST_JOB_INCOMPLETE = 7; //DEFINED ABOVE
+       * </pre>
+       */
       public static final int FAIL_OTHER_VALUE = 6;
-      
-      
+
+
       public final int getNumber() { return value; }
-      
+
       public static QuestProgressStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
@@ -2047,7 +2923,7 @@ public final class EventQuestProto {
           default: return null;
         }
       }
-      
+
       public static com.google.protobuf.Internal.EnumLiteMap<QuestProgressStatus>
           internalGetValueMap() {
         return internalValueMap;
@@ -2059,7 +2935,7 @@ public final class EventQuestProto {
                 return QuestProgressStatus.valueOf(number);
               }
             };
-      
+
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         return getDescriptor().getValues().get(index);
@@ -2072,11 +2948,9 @@ public final class EventQuestProto {
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.getDescriptor().getEnumTypes().get(0);
       }
-      
-      private static final QuestProgressStatus[] VALUES = {
-        SUCCESS, FAIL_NO_QUEST_EXISTS, FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST, FAIL_NONEXISTENT_USER_MONSTERS, FAIL_INCOMPLETE_USER_MONSTERS, FAIL_QUEST_JOB_INCOMPLETE, FAIL_OTHER, 
-      };
-      
+
+      private static final QuestProgressStatus[] VALUES = values();
+
       public static QuestProgressStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
@@ -2085,42 +2959,55 @@ public final class EventQuestProto {
         }
         return VALUES[desc.getIndex()];
       }
-      
+
       private final int index;
       private final int value;
-      
+
       private QuestProgressStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
-      
+
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus)
     }
-    
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
+
     public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+     */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+     */
     public com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus getStatus() {
       return status_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.SUCCESS;
@@ -2128,12 +3015,13 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -2145,12 +3033,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2164,113 +3052,110 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestProgressResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestProgressResponseProto}
+     *
+     * <pre>
+     *DONE
+     * </pre>
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestProgressResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestProgressResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestProgressResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.class, com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2282,7 +3167,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -2295,20 +3180,20 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressResponseProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressResponseProto build() {
         com.lvl6.proto.EventQuestProto.QuestProgressResponseProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -2316,17 +3201,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestProgressResponseProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestProgressResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestProgressResponseProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestProgressResponseProto result = new com.lvl6.proto.EventQuestProto.QuestProgressResponseProto(this);
         int from_bitField0_ = bitField0_;
@@ -2347,7 +3222,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestProgressResponseProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestProgressResponseProto)other);
@@ -2356,7 +3231,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestProgressResponseProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -2368,67 +3243,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus value = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                status_ = value;
-              }
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestProgressResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestProgressResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -2436,6 +3286,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -2449,6 +3302,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -2460,6 +3316,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -2476,6 +3335,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -2486,11 +3348,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -2498,28 +3366,39 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;
+
       private com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus status_ = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+       */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+       */
       public com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus getStatus() {
         return status_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+       */
       public Builder setStatus(com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus value) {
         if (value == null) {
           throw new NullPointerException();
@@ -2529,88 +3408,199 @@ public final class EventQuestProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestProgressResponseProto.QuestProgressStatus status = 2;</code>
+       */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressStatus.SUCCESS;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestProgressResponseProto)
     }
-    
+
     static {
       defaultInstance = new QuestProgressResponseProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestProgressResponseProto)
   }
-  
-  public interface QuestRedeemRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+
+  public interface QuestRedeemRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestRedeemRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
-    
-    // optional int32 questId = 2;
+
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     boolean hasQuestId();
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     int getQuestId();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestRedeemRequestProto}
+   */
   public static final class QuestRedeemRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestRedeemRequestProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestRedeemRequestProto)
+      QuestRedeemRequestProtoOrBuilder {
     // Use QuestRedeemRequestProto.newBuilder() to construct.
-    private QuestRedeemRequestProto(Builder builder) {
+    private QuestRedeemRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestRedeemRequestProto(boolean noInit) {}
-    
+    private QuestRedeemRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestRedeemRequestProto defaultInstance;
     public static QuestRedeemRequestProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestRedeemRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestRedeemRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              questId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.class, com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestRedeemRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestRedeemRequestProto>() {
+      public QuestRedeemRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestRedeemRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestRedeemRequestProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // optional int32 questId = 2;
+
     public static final int QUESTID_FIELD_NUMBER = 2;
     private int questId_;
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public boolean hasQuestId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional int32 questId = 2;</code>
+     */
     public int getQuestId() {
       return questId_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       questId_ = 0;
@@ -2618,12 +3608,13 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -2635,12 +3626,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2654,113 +3645,106 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestRedeemRequestProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestRedeemRequestProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestRedeemRequestProto)
+        com.lvl6.proto.EventQuestProto.QuestRedeemRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.class, com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2772,7 +3756,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -2785,20 +3769,20 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto build() {
         com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -2806,17 +3790,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto result = new com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto(this);
         int from_bitField0_ = bitField0_;
@@ -2837,7 +3811,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto)other);
@@ -2846,7 +3820,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -2858,61 +3832,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              questId_ = input.readInt32();
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -2920,6 +3875,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -2933,6 +3891,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -2944,6 +3905,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -2960,6 +3924,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
@@ -2970,11 +3937,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -2982,125 +3955,321 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // optional int32 questId = 2;
+
       private int questId_ ;
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public boolean hasQuestId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public int getQuestId() {
         return questId_;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder setQuestId(int value) {
         bitField0_ |= 0x00000002;
         questId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 questId = 2;</code>
+       */
       public Builder clearQuestId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         questId_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestRedeemRequestProto)
     }
-    
+
     static {
       defaultInstance = new QuestRedeemRequestProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestRedeemRequestProto)
   }
-  
-  public interface QuestRedeemResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+
+  public interface QuestRedeemResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.QuestRedeemResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
-    
-    // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
         getNewlyAvailableQuestsList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     com.lvl6.proto.QuestProto.FullQuestProto getNewlyAvailableQuests(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     int getNewlyAvailableQuestsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getNewlyAvailableQuestsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getNewlyAvailableQuestsOrBuilder(
         int index);
-    
-    // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
+
+    /**
+     * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+     */
     boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+     */
     com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus getStatus();
-    
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     boolean hasFump();
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump();
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
-    
-    // optional int32 questId = 5;
+
+    /**
+     * <code>optional int32 questId = 5;</code>
+     */
     boolean hasQuestId();
+    /**
+     * <code>optional int32 questId = 5;</code>
+     */
     int getQuestId();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.QuestRedeemResponseProto}
+   *
+   * <pre>
+   *DONE
+   * </pre>
+   */
   public static final class QuestRedeemResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements QuestRedeemResponseProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.QuestRedeemResponseProto)
+      QuestRedeemResponseProtoOrBuilder {
     // Use QuestRedeemResponseProto.newBuilder() to construct.
-    private QuestRedeemResponseProto(Builder builder) {
+    private QuestRedeemResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private QuestRedeemResponseProto(boolean noInit) {}
-    
+    private QuestRedeemResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final QuestRedeemResponseProto defaultInstance;
     public static QuestRedeemResponseProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public QuestRedeemResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestRedeemResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                newlyAvailableQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              newlyAvailableQuests_.add(input.readMessage(com.lvl6.proto.QuestProto.FullQuestProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus value = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = fump_.toBuilder();
+              }
+              fump_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(fump_);
+                fump_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              questId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          newlyAvailableQuests_ = java.util.Collections.unmodifiableList(newlyAvailableQuests_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.class, com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<QuestRedeemResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<QuestRedeemResponseProto>() {
+      public QuestRedeemResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestRedeemResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestRedeemResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus}
+     */
     public enum QuestRedeemStatus
         implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       SUCCESS(0, 1),
+      /**
+       * <code>FAIL_NOT_COMPLETE = 2;</code>
+       */
       FAIL_NOT_COMPLETE(1, 2),
+      /**
+       * <code>FAIL_OTHER = 3;</code>
+       */
       FAIL_OTHER(2, 3),
       ;
-      
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
       public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_NOT_COMPLETE = 2;</code>
+       */
       public static final int FAIL_NOT_COMPLETE_VALUE = 2;
+      /**
+       * <code>FAIL_OTHER = 3;</code>
+       */
       public static final int FAIL_OTHER_VALUE = 3;
-      
-      
+
+
       public final int getNumber() { return value; }
-      
+
       public static QuestRedeemStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
@@ -3109,7 +4278,7 @@ public final class EventQuestProto {
           default: return null;
         }
       }
-      
+
       public static com.google.protobuf.Internal.EnumLiteMap<QuestRedeemStatus>
           internalGetValueMap() {
         return internalValueMap;
@@ -3121,7 +4290,7 @@ public final class EventQuestProto {
                 return QuestRedeemStatus.valueOf(number);
               }
             };
-      
+
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         return getDescriptor().getValues().get(index);
@@ -3134,11 +4303,9 @@ public final class EventQuestProto {
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.getDescriptor().getEnumTypes().get(0);
       }
-      
-      private static final QuestRedeemStatus[] VALUES = {
-        SUCCESS, FAIL_NOT_COMPLETE, FAIL_OTHER, 
-      };
-      
+
+      private static final QuestRedeemStatus[] VALUES = values();
+
       public static QuestRedeemStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
@@ -3147,86 +4314,126 @@ public final class EventQuestProto {
         }
         return VALUES[desc.getIndex()];
       }
-      
+
       private final int index;
       private final int value;
-      
+
       private QuestRedeemStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
-      
+
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus)
     }
-    
+
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
-    
-    // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
+
     public static final int NEWLYAVAILABLEQUESTS_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> newlyAvailableQuests_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getNewlyAvailableQuestsList() {
       return newlyAvailableQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
         getNewlyAvailableQuestsOrBuilderList() {
       return newlyAvailableQuests_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     public int getNewlyAvailableQuestsCount() {
       return newlyAvailableQuests_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProto getNewlyAvailableQuests(int index) {
       return newlyAvailableQuests_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+     */
     public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getNewlyAvailableQuestsOrBuilder(
         int index) {
       return newlyAvailableQuests_.get(index);
     }
-    
-    // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
+
     public static final int STATUS_FIELD_NUMBER = 3;
     private com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+     */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+     */
     public com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus getStatus() {
       return status_;
     }
-    
-    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+
     public static final int FUMP_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     public boolean hasFump() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
       return fump_;
     }
+    /**
+     * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+     */
     public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
       return fump_;
     }
-    
-    // optional int32 questId = 5;
+
     public static final int QUESTID_FIELD_NUMBER = 5;
     private int questId_;
+    /**
+     * <code>optional int32 questId = 5;</code>
+     */
     public boolean hasQuestId() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional int32 questId = 5;</code>
+     */
     public int getQuestId() {
       return questId_;
     }
-    
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       newlyAvailableQuests_ = java.util.Collections.emptyList();
@@ -3237,12 +4444,13 @@ public final class EventQuestProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -3263,12 +4471,12 @@ public final class EventQuestProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3294,113 +4502,110 @@ public final class EventQuestProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.QuestRedeemResponseProto}
+     *
+     * <pre>
+     *DONE
+     * </pre>
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventQuestProto.QuestRedeemResponseProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.QuestRedeemResponseProto)
+        com.lvl6.proto.EventQuestProto.QuestRedeemResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.class, com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3414,7 +4619,7 @@ public final class EventQuestProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
@@ -3441,20 +4646,20 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.getDescriptor();
+        return com.lvl6.proto.EventQuestProto.internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto getDefaultInstanceForType() {
         return com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto build() {
         com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -3462,17 +4667,7 @@ public final class EventQuestProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto buildPartial() {
         com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto result = new com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto(this);
         int from_bitField0_ = bitField0_;
@@ -3514,7 +4709,7 @@ public final class EventQuestProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto) {
           return mergeFrom((com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto)other);
@@ -3523,7 +4718,7 @@ public final class EventQuestProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto other) {
         if (other == com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
@@ -3567,87 +4762,42 @@ public final class EventQuestProto {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addNewlyAvailableQuests(subBuilder.buildPartial());
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus value = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                status_ = value;
-              }
-              break;
-            }
-            case 34: {
-              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
-              if (hasFump()) {
-                subBuilder.mergeFrom(getFump());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setFump(subBuilder.buildPartial());
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              questId_ = input.readInt32();
-              break;
-            }
+        com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+
       private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
@@ -3655,6 +4805,9 @@ public final class EventQuestProto {
           return senderBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
@@ -3668,6 +4821,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
@@ -3679,6 +4835,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
@@ -3695,6 +4854,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000001;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
@@ -3705,11 +4867,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
@@ -3717,21 +4885,23 @@ public final class EventQuestProto {
           return sender_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
-                  sender_,
+                  getSender(),
                   getParentForChildren(),
                   isClean());
           sender_ = null;
         }
         return senderBuilder_;
       }
-      
-      // repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;
+
       private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> newlyAvailableQuests_ =
         java.util.Collections.emptyList();
       private void ensureNewlyAvailableQuestsIsMutable() {
@@ -3740,10 +4910,13 @@ public final class EventQuestProto {
           bitField0_ |= 0x00000002;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> newlyAvailableQuestsBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getNewlyAvailableQuestsList() {
         if (newlyAvailableQuestsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(newlyAvailableQuests_);
@@ -3751,6 +4924,9 @@ public final class EventQuestProto {
           return newlyAvailableQuestsBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public int getNewlyAvailableQuestsCount() {
         if (newlyAvailableQuestsBuilder_ == null) {
           return newlyAvailableQuests_.size();
@@ -3758,6 +4934,9 @@ public final class EventQuestProto {
           return newlyAvailableQuestsBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto getNewlyAvailableQuests(int index) {
         if (newlyAvailableQuestsBuilder_ == null) {
           return newlyAvailableQuests_.get(index);
@@ -3765,6 +4944,9 @@ public final class EventQuestProto {
           return newlyAvailableQuestsBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder setNewlyAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3779,6 +4961,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder setNewlyAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3790,6 +4975,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder addNewlyAvailableQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (newlyAvailableQuestsBuilder_ == null) {
           if (value == null) {
@@ -3803,6 +4991,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder addNewlyAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3817,6 +5008,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder addNewlyAvailableQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3828,6 +5022,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder addNewlyAvailableQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3839,17 +5036,24 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder addAllNewlyAvailableQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
         if (newlyAvailableQuestsBuilder_ == null) {
           ensureNewlyAvailableQuestsIsMutable();
-          super.addAll(values, newlyAvailableQuests_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, newlyAvailableQuests_);
           onChanged();
         } else {
           newlyAvailableQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder clearNewlyAvailableQuests() {
         if (newlyAvailableQuestsBuilder_ == null) {
           newlyAvailableQuests_ = java.util.Collections.emptyList();
@@ -3860,6 +5064,9 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public Builder removeNewlyAvailableQuests(int index) {
         if (newlyAvailableQuestsBuilder_ == null) {
           ensureNewlyAvailableQuestsIsMutable();
@@ -3870,10 +5077,16 @@ public final class EventQuestProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder getNewlyAvailableQuestsBuilder(
           int index) {
         return getNewlyAvailableQuestsFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getNewlyAvailableQuestsOrBuilder(
           int index) {
         if (newlyAvailableQuestsBuilder_ == null) {
@@ -3881,6 +5094,9 @@ public final class EventQuestProto {
           return newlyAvailableQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
            getNewlyAvailableQuestsOrBuilderList() {
         if (newlyAvailableQuestsBuilder_ != null) {
@@ -3889,15 +5105,24 @@ public final class EventQuestProto {
           return java.util.Collections.unmodifiableList(newlyAvailableQuests_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addNewlyAvailableQuestsBuilder() {
         return getNewlyAvailableQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public com.lvl6.proto.QuestProto.FullQuestProto.Builder addNewlyAvailableQuestsBuilder(
           int index) {
         return getNewlyAvailableQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.FullQuestProto newlyAvailableQuests = 2;</code>
+       */
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
            getNewlyAvailableQuestsBuilderList() {
         return getNewlyAvailableQuestsFieldBuilder().getBuilderList();
@@ -3916,15 +5141,23 @@ public final class EventQuestProto {
         }
         return newlyAvailableQuestsBuilder_;
       }
-      
-      // optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;
+
       private com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+       */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+       */
       public com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus getStatus() {
         return status_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+       */
       public Builder setStatus(com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus value) {
         if (value == null) {
           throw new NullPointerException();
@@ -3934,20 +5167,28 @@ public final class EventQuestProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.QuestRedeemResponseProto.QuestRedeemStatus status = 3;</code>
+       */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
         status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+
       private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public boolean hasFump() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
         if (fumpBuilder_ == null) {
           return fump_;
@@ -3955,6 +5196,9 @@ public final class EventQuestProto {
           return fumpBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public Builder setFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fumpBuilder_ == null) {
           if (value == null) {
@@ -3968,6 +5212,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public Builder setFump(
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fumpBuilder_ == null) {
@@ -3979,6 +5226,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public Builder mergeFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fumpBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
@@ -3995,6 +5245,9 @@ public final class EventQuestProto {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public Builder clearFump() {
         if (fumpBuilder_ == null) {
           fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
@@ -4005,11 +5258,17 @@ public final class EventQuestProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumpBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getFumpFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
         if (fumpBuilder_ != null) {
           return fumpBuilder_.getMessageOrBuilder();
@@ -4017,83 +5276,97 @@ public final class EventQuestProto {
           return fump_;
         }
       }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserMonsterProto fump = 4;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
           getFumpFieldBuilder() {
         if (fumpBuilder_ == null) {
           fumpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  fump_,
+                  getFump(),
                   getParentForChildren(),
                   isClean());
           fump_ = null;
         }
         return fumpBuilder_;
       }
-      
-      // optional int32 questId = 5;
+
       private int questId_ ;
+      /**
+       * <code>optional int32 questId = 5;</code>
+       */
       public boolean hasQuestId() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional int32 questId = 5;</code>
+       */
       public int getQuestId() {
         return questId_;
       }
+      /**
+       * <code>optional int32 questId = 5;</code>
+       */
       public Builder setQuestId(int value) {
         bitField0_ |= 0x00000010;
         questId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 questId = 5;</code>
+       */
       public Builder clearQuestId() {
         bitField0_ = (bitField0_ & ~0x00000010);
         questId_ = 0;
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestRedeemResponseProto)
     }
-    
+
     static {
       defaultInstance = new QuestRedeemResponseProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.QuestRedeemResponseProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -4143,61 +5416,13 @@ public final class EventQuestProto {
       "\020\003B\021B\017EventQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", },
-              com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.class,
-              com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.class,
-              com.lvl6.proto.EventQuestProto.QuestAcceptResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterIds", },
-              com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.class,
-              com.lvl6.proto.EventQuestProto.QuestProgressRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.class,
-              com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "QuestId", },
-              com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.class,
-              com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", },
-              com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.class,
-              com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
@@ -4206,7 +5431,47 @@ public final class EventQuestProto {
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
+    internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_QuestAcceptRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestAcceptRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", });
+    internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_QuestAcceptResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestAcceptResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterIds", });
+    internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_QuestRedeemRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestRedeemRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "QuestId", });
+    internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", });
+    com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
+    com.lvl6.proto.UserProto.getDescriptor();
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

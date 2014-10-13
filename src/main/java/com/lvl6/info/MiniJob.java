@@ -64,7 +64,11 @@ public class MiniJob implements Serializable {
 		//[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
 		//this means there are (10-5)+1 possible numbers
 
-		int minMaxDiff = getMaxDmgDealt() - getMinDmgDealt();
+		int minMaxDiff = maxDmgDealt - minDmgDealt;
+		if (minMaxDiff <= 0) {
+			return Math.max(minDmgDealt, maxDmgDealt);
+		}
+		
 		int randDmg = rand.nextInt(minMaxDiff + 1); 
 
 		//number generated in [0, max-min] range, but need to transform
@@ -73,7 +77,12 @@ public class MiniJob implements Serializable {
 	}
 	
 	public int getDurationMinutes() {
-		int minMaxDiff = getDurationMaxMinutes() - getDurationMinMinutes();
+		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
+		
+		if (minMaxDiff <= 0) {
+			return Math.max(durationMinMinutes, durationMaxMinutes);
+		}
+		
 		int randMinutes = rand.nextInt(minMaxDiff + 1);
 		
 		return randMinutes + getDurationMinMinutes();

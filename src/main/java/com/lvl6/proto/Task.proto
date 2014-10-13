@@ -125,4 +125,6 @@ message TaskMapElementProto {
 	optional int32 cashReward = 10;
 	optional int32 oilReward = 11;
 	optional string characterImgName = 12;
+	optional int32 charImgVertPixelOffset = 13;
+	optional int32 charImgHorizPixelOffset = 14;
 } 

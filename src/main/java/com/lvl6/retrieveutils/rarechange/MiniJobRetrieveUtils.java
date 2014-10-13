@@ -194,10 +194,16 @@ import com.lvl6.utils.DBConnection;
     	chanceToAppear = Math.max(0F, chanceToAppear);
     }
     
+    
     MiniJob miniJob = new MiniJob(id, requiredStructId, miniJobName,
     		cashReward, oilReward, gemReward, monsterIdReward, quality,
     		maxNumMonstersAllowed, chanceToAppear, hpRequired, atkRequired,
     		minDmgDealt, maxDmgDealt, durationMinMinutes, durationMaxMinutes);
+    
+    if (maxDmgDealt < minDmgDealt || durationMaxMinutes < durationMinMinutes) {
+    	log.error(String.format(
+    		"FUCKED UP MiniJob!!! %s", miniJob));
+    }
     
     miniJob.setRand(rand);
     return miniJob;

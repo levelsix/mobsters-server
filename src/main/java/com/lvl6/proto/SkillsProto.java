@@ -8,32 +8,105 @@ public final class SkillsProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.lvl6.proto.SkillType}
+   */
   public enum SkillType
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NO_SKILL = 1;</code>
+     */
     NO_SKILL(0, 1),
+    /**
+     * <code>CAKE_DROP = 2;</code>
+     */
     CAKE_DROP(1, 2),
+    /**
+     * <code>JELLY = 3;</code>
+     */
     JELLY(2, 3),
+    /**
+     * <code>QUICK_ATTACK = 4;</code>
+     */
     QUICK_ATTACK(3, 4),
+    /**
+     * <code>BOMBS = 5;</code>
+     */
     BOMBS(4, 5),
+    /**
+     * <code>SHIELD = 6;</code>
+     */
     SHIELD(5, 6),
+    /**
+     * <code>POISON = 7;</code>
+     */
     POISON(6, 7),
+    /**
+     * <code>ROID_RAGE = 8;</code>
+     *
+     * <pre>
+     * 2x (or 1.5x) modifier for a next attack.
+     * </pre>
+     */
     ROID_RAGE(7, 8),
+    /**
+     * <code>MOMENTUM = 9;</code>
+     *
+     * <pre>
+     * single passive offensive: Your damage increases by X% after each successive turn.
+     * </pre>
+     */
     MOMENTUM(8, 9),
     ;
-    
+
+    /**
+     * <code>NO_SKILL = 1;</code>
+     */
     public static final int NO_SKILL_VALUE = 1;
+    /**
+     * <code>CAKE_DROP = 2;</code>
+     */
     public static final int CAKE_DROP_VALUE = 2;
+    /**
+     * <code>JELLY = 3;</code>
+     */
     public static final int JELLY_VALUE = 3;
+    /**
+     * <code>QUICK_ATTACK = 4;</code>
+     */
     public static final int QUICK_ATTACK_VALUE = 4;
+    /**
+     * <code>BOMBS = 5;</code>
+     */
     public static final int BOMBS_VALUE = 5;
+    /**
+     * <code>SHIELD = 6;</code>
+     */
     public static final int SHIELD_VALUE = 6;
+    /**
+     * <code>POISON = 7;</code>
+     */
     public static final int POISON_VALUE = 7;
+    /**
+     * <code>ROID_RAGE = 8;</code>
+     *
+     * <pre>
+     * 2x (or 1.5x) modifier for a next attack.
+     * </pre>
+     */
     public static final int ROID_RAGE_VALUE = 8;
+    /**
+     * <code>MOMENTUM = 9;</code>
+     *
+     * <pre>
+     * single passive offensive: Your damage increases by X% after each successive turn.
+     * </pre>
+     */
     public static final int MOMENTUM_VALUE = 9;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static SkillType valueOf(int value) {
       switch (value) {
         case 1: return NO_SKILL;
@@ -48,7 +121,7 @@ public final class SkillsProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<SkillType>
         internalGetValueMap() {
       return internalValueMap;
@@ -60,7 +133,7 @@ public final class SkillsProto {
               return SkillType.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -73,11 +146,9 @@ public final class SkillsProto {
         getDescriptor() {
       return com.lvl6.proto.SkillsProto.getDescriptor().getEnumTypes().get(0);
     }
-    
-    private static final SkillType[] VALUES = {
-      NO_SKILL, CAKE_DROP, JELLY, QUICK_ATTACK, BOMBS, SHIELD, POISON, ROID_RAGE, MOMENTUM, 
-    };
-    
+
+    private static final SkillType[] VALUES = values();
+
     public static SkillType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -86,32 +157,61 @@ public final class SkillsProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private SkillType(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SkillType)
   }
-  
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.SkillActivationType}
+   */
   public enum SkillActivationType
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>USER_ACTIVATED = 1;</code>
+     */
     USER_ACTIVATED(0, 1),
+    /**
+     * <code>AUTO_ACTIVATED = 2;</code>
+     */
     AUTO_ACTIVATED(1, 2),
+    /**
+     * <code>PASSIVE = 3;</code>
+     *
+     * <pre>
+     *think this should be always active
+     * </pre>
+     */
     PASSIVE(2, 3),
     ;
-    
+
+    /**
+     * <code>USER_ACTIVATED = 1;</code>
+     */
     public static final int USER_ACTIVATED_VALUE = 1;
+    /**
+     * <code>AUTO_ACTIVATED = 2;</code>
+     */
     public static final int AUTO_ACTIVATED_VALUE = 2;
+    /**
+     * <code>PASSIVE = 3;</code>
+     *
+     * <pre>
+     *think this should be always active
+     * </pre>
+     */
     public static final int PASSIVE_VALUE = 3;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static SkillActivationType valueOf(int value) {
       switch (value) {
         case 1: return USER_ACTIVATED;
@@ -120,7 +220,7 @@ public final class SkillsProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<SkillActivationType>
         internalGetValueMap() {
       return internalValueMap;
@@ -132,7 +232,7 @@ public final class SkillsProto {
               return SkillActivationType.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -145,11 +245,9 @@ public final class SkillsProto {
         getDescriptor() {
       return com.lvl6.proto.SkillsProto.getDescriptor().getEnumTypes().get(1);
     }
-    
-    private static final SkillActivationType[] VALUES = {
-      USER_ACTIVATED, AUTO_ACTIVATED, PASSIVE, 
-    };
-    
+
+    private static final SkillActivationType[] VALUES = values();
+
     public static SkillActivationType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -158,309 +256,702 @@ public final class SkillsProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private SkillActivationType(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SkillActivationType)
   }
-  
-  public interface SkillProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 skillId = 1;
+
+  public interface SkillProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SkillProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 skillId = 1;</code>
+     */
     boolean hasSkillId();
+    /**
+     * <code>optional int32 skillId = 1;</code>
+     */
     int getSkillId();
-    
-    // optional string name = 2;
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
     boolean hasName();
-    String getName();
-    
-    // optional int32 orbCost = 3;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional int32 orbCost = 3;</code>
+     */
     boolean hasOrbCost();
+    /**
+     * <code>optional int32 orbCost = 3;</code>
+     */
     int getOrbCost();
-    
-    // optional .com.lvl6.proto.SkillType type = 4;
+
+    /**
+     * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+     *
+     * <pre>
+     *this is what separates a grouping of skills from another grouping
+     *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+     *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+     *then groupA and groupB's SkillType 'type' would be different
+     * </pre>
+     */
     boolean hasType();
+    /**
+     * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+     *
+     * <pre>
+     *this is what separates a grouping of skills from another grouping
+     *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+     *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+     *then groupA and groupB's SkillType 'type' would be different
+     * </pre>
+     */
     com.lvl6.proto.SkillsProto.SkillType getType();
-    
-    // optional .com.lvl6.proto.SkillActivationType activationType = 5;
+
+    /**
+     * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+     *
+     * <pre>
+     *this is whether a skill requires user input to use (user_activated), or
+     *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+     *the skill is always active(?) passive
+     * </pre>
+     */
     boolean hasActivationType();
+    /**
+     * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+     *
+     * <pre>
+     *this is whether a skill requires user input to use (user_activated), or
+     *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+     *the skill is always active(?) passive
+     * </pre>
+     */
     com.lvl6.proto.SkillsProto.SkillActivationType getActivationType();
-    
-    // optional int32 predecId = 6;
+
+    /**
+     * <code>optional int32 predecId = 6;</code>
+     *
+     * <pre>
+     *the skill that is weaker than this skill in the grouping of skills
+     * </pre>
+     */
     boolean hasPredecId();
+    /**
+     * <code>optional int32 predecId = 6;</code>
+     *
+     * <pre>
+     *the skill that is weaker than this skill in the grouping of skills
+     * </pre>
+     */
     int getPredecId();
-    
-    // optional int32 sucId = 7;
+
+    /**
+     * <code>optional int32 sucId = 7;</code>
+     *
+     * <pre>
+     *the skill that is stronger than this skill in the grouping of skills
+     * </pre>
+     */
     boolean hasSucId();
+    /**
+     * <code>optional int32 sucId = 7;</code>
+     *
+     * <pre>
+     *the skill that is stronger than this skill in the grouping of skills
+     * </pre>
+     */
     int getSucId();
-    
-    // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
+
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> 
         getPropertiesList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     com.lvl6.proto.SkillsProto.SkillPropertyProto getProperties(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     int getPropertiesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     java.util.List<? extends com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder> 
         getPropertiesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder getPropertiesOrBuilder(
         int index);
-    
-    // optional string desc = 9;
+
+    /**
+     * <code>optional string desc = 9;</code>
+     */
     boolean hasDesc();
-    String getDesc();
-    
-    // optional string iconImgName = 10;
+    /**
+     * <code>optional string desc = 9;</code>
+     */
+    java.lang.String getDesc();
+    /**
+     * <code>optional string desc = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescBytes();
+
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
     boolean hasIconImgName();
-    String getIconImgName();
-    
-    // optional string logoImgName = 11;
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
+    java.lang.String getIconImgName();
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getIconImgNameBytes();
+
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
     boolean hasLogoImgName();
-    String getLogoImgName();
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
+    java.lang.String getLogoImgName();
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getLogoImgNameBytes();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.SkillProto}
+   */
   public static final class SkillProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SkillProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SkillProto)
+      SkillProtoOrBuilder {
     // Use SkillProto.newBuilder() to construct.
-    private SkillProto(Builder builder) {
+    private SkillProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private SkillProto(boolean noInit) {}
-    
+    private SkillProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final SkillProto defaultInstance;
     public static SkillProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public SkillProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SkillProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              skillId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              orbCost_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SkillsProto.SkillType value = com.lvl6.proto.SkillsProto.SkillType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                type_ = value;
+              }
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SkillsProto.SkillActivationType value = com.lvl6.proto.SkillsProto.SkillActivationType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                activationType_ = value;
+              }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              predecId_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              sucId_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                properties_ = new java.util.ArrayList<com.lvl6.proto.SkillsProto.SkillPropertyProto>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              properties_.add(input.readMessage(com.lvl6.proto.SkillsProto.SkillPropertyProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              desc_ = bs;
+              break;
+            }
+            case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              iconImgName_ = bs;
+              break;
+            }
+            case 90: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000200;
+              logoImgName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          properties_ = java.util.Collections.unmodifiableList(properties_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable;
+      return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.SkillsProto.SkillProto.class, com.lvl6.proto.SkillsProto.SkillProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<SkillProto> PARSER =
+        new com.google.protobuf.AbstractParser<SkillProto>() {
+      public SkillProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SkillProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SkillProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional int32 skillId = 1;
     public static final int SKILLID_FIELD_NUMBER = 1;
     private int skillId_;
+    /**
+     * <code>optional int32 skillId = 1;</code>
+     */
     public boolean hasSkillId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 skillId = 1;</code>
+     */
     public int getSkillId() {
       return skillId_;
     }
-    
-    // optional string name = 2;
+
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
     public boolean hasName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getName() {
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           name_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getNameBytes() {
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional int32 orbCost = 3;
+
     public static final int ORBCOST_FIELD_NUMBER = 3;
     private int orbCost_;
+    /**
+     * <code>optional int32 orbCost = 3;</code>
+     */
     public boolean hasOrbCost() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional int32 orbCost = 3;</code>
+     */
     public int getOrbCost() {
       return orbCost_;
     }
-    
-    // optional .com.lvl6.proto.SkillType type = 4;
+
     public static final int TYPE_FIELD_NUMBER = 4;
     private com.lvl6.proto.SkillsProto.SkillType type_;
+    /**
+     * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+     *
+     * <pre>
+     *this is what separates a grouping of skills from another grouping
+     *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+     *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+     *then groupA and groupB's SkillType 'type' would be different
+     * </pre>
+     */
     public boolean hasType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+     *
+     * <pre>
+     *this is what separates a grouping of skills from another grouping
+     *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+     *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+     *then groupA and groupB's SkillType 'type' would be different
+     * </pre>
+     */
     public com.lvl6.proto.SkillsProto.SkillType getType() {
       return type_;
     }
-    
-    // optional .com.lvl6.proto.SkillActivationType activationType = 5;
+
     public static final int ACTIVATIONTYPE_FIELD_NUMBER = 5;
     private com.lvl6.proto.SkillsProto.SkillActivationType activationType_;
+    /**
+     * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+     *
+     * <pre>
+     *this is whether a skill requires user input to use (user_activated), or
+     *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+     *the skill is always active(?) passive
+     * </pre>
+     */
     public boolean hasActivationType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
+    /**
+     * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+     *
+     * <pre>
+     *this is whether a skill requires user input to use (user_activated), or
+     *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+     *the skill is always active(?) passive
+     * </pre>
+     */
     public com.lvl6.proto.SkillsProto.SkillActivationType getActivationType() {
       return activationType_;
     }
-    
-    // optional int32 predecId = 6;
+
     public static final int PREDECID_FIELD_NUMBER = 6;
     private int predecId_;
+    /**
+     * <code>optional int32 predecId = 6;</code>
+     *
+     * <pre>
+     *the skill that is weaker than this skill in the grouping of skills
+     * </pre>
+     */
     public boolean hasPredecId() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
+    /**
+     * <code>optional int32 predecId = 6;</code>
+     *
+     * <pre>
+     *the skill that is weaker than this skill in the grouping of skills
+     * </pre>
+     */
     public int getPredecId() {
       return predecId_;
     }
-    
-    // optional int32 sucId = 7;
+
     public static final int SUCID_FIELD_NUMBER = 7;
     private int sucId_;
+    /**
+     * <code>optional int32 sucId = 7;</code>
+     *
+     * <pre>
+     *the skill that is stronger than this skill in the grouping of skills
+     * </pre>
+     */
     public boolean hasSucId() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
+    /**
+     * <code>optional int32 sucId = 7;</code>
+     *
+     * <pre>
+     *the skill that is stronger than this skill in the grouping of skills
+     * </pre>
+     */
     public int getSucId() {
       return sucId_;
     }
-    
-    // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
+
     public static final int PROPERTIES_FIELD_NUMBER = 8;
     private java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> properties_;
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     public java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> getPropertiesList() {
       return properties_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder> 
         getPropertiesOrBuilderList() {
       return properties_;
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     public int getPropertiesCount() {
       return properties_.size();
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     public com.lvl6.proto.SkillsProto.SkillPropertyProto getProperties(int index) {
       return properties_.get(index);
     }
+    /**
+     * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+     */
     public com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder getPropertiesOrBuilder(
         int index) {
       return properties_.get(index);
     }
-    
-    // optional string desc = 9;
+
     public static final int DESC_FIELD_NUMBER = 9;
     private java.lang.Object desc_;
+    /**
+     * <code>optional string desc = 9;</code>
+     */
     public boolean hasDesc() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
-    public String getDesc() {
+    /**
+     * <code>optional string desc = 9;</code>
+     */
+    public java.lang.String getDesc() {
       java.lang.Object ref = desc_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           desc_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getDescBytes() {
+    /**
+     * <code>optional string desc = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescBytes() {
       java.lang.Object ref = desc_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         desc_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional string iconImgName = 10;
+
     public static final int ICONIMGNAME_FIELD_NUMBER = 10;
     private java.lang.Object iconImgName_;
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
     public boolean hasIconImgName() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
-    public String getIconImgName() {
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
+    public java.lang.String getIconImgName() {
       java.lang.Object ref = iconImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           iconImgName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getIconImgNameBytes() {
+    /**
+     * <code>optional string iconImgName = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIconImgNameBytes() {
       java.lang.Object ref = iconImgName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         iconImgName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional string logoImgName = 11;
+
     public static final int LOGOIMGNAME_FIELD_NUMBER = 11;
     private java.lang.Object logoImgName_;
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
     public boolean hasLogoImgName() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
-    public String getLogoImgName() {
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
+    public java.lang.String getLogoImgName() {
       java.lang.Object ref = logoImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           logoImgName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getLogoImgNameBytes() {
+    /**
+     * <code>optional string logoImgName = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLogoImgNameBytes() {
       java.lang.Object ref = logoImgName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         logoImgName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       skillId_ = 0;
       name_ = "";
@@ -477,12 +968,13 @@ public final class SkillsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -521,12 +1013,12 @@ public final class SkillsProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -576,113 +1068,106 @@ public final class SkillsProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.SkillsProto.SkillProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.SkillProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SkillsProto.SkillProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SkillProto)
+        com.lvl6.proto.SkillsProto.SkillProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable;
+        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.SkillsProto.SkillProto.class, com.lvl6.proto.SkillsProto.SkillProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.SkillsProto.SkillProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -694,7 +1179,7 @@ public final class SkillsProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         skillId_ = 0;
@@ -725,20 +1210,20 @@ public final class SkillsProto {
         bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.SkillsProto.SkillProto.getDescriptor();
+        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillProto_descriptor;
       }
-      
+
       public com.lvl6.proto.SkillsProto.SkillProto getDefaultInstanceForType() {
         return com.lvl6.proto.SkillsProto.SkillProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.SkillsProto.SkillProto build() {
         com.lvl6.proto.SkillsProto.SkillProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -746,17 +1231,7 @@ public final class SkillsProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.SkillsProto.SkillProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.SkillsProto.SkillProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.SkillsProto.SkillProto buildPartial() {
         com.lvl6.proto.SkillsProto.SkillProto result = new com.lvl6.proto.SkillsProto.SkillProto(this);
         int from_bitField0_ = bitField0_;
@@ -814,7 +1289,7 @@ public final class SkillsProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.SkillsProto.SkillProto) {
           return mergeFrom((com.lvl6.proto.SkillsProto.SkillProto)other);
@@ -823,14 +1298,16 @@ public final class SkillsProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.SkillsProto.SkillProto other) {
         if (other == com.lvl6.proto.SkillsProto.SkillProto.getDefaultInstance()) return this;
         if (other.hasSkillId()) {
           setSkillId(other.getSkillId());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
         }
         if (other.hasOrbCost()) {
           setOrbCost(other.getOrbCost());
@@ -874,156 +1351,124 @@ public final class SkillsProto {
           }
         }
         if (other.hasDesc()) {
-          setDesc(other.getDesc());
+          bitField0_ |= 0x00000100;
+          desc_ = other.desc_;
+          onChanged();
         }
         if (other.hasIconImgName()) {
-          setIconImgName(other.getIconImgName());
+          bitField0_ |= 0x00000200;
+          iconImgName_ = other.iconImgName_;
+          onChanged();
         }
         if (other.hasLogoImgName()) {
-          setLogoImgName(other.getLogoImgName());
+          bitField0_ |= 0x00000400;
+          logoImgName_ = other.logoImgName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              skillId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              orbCost_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SkillsProto.SkillType value = com.lvl6.proto.SkillsProto.SkillType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                type_ = value;
-              }
-              break;
-            }
-            case 40: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.SkillsProto.SkillActivationType value = com.lvl6.proto.SkillsProto.SkillActivationType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(5, rawValue);
-              } else {
-                bitField0_ |= 0x00000010;
-                activationType_ = value;
-              }
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              predecId_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              sucId_ = input.readInt32();
-              break;
-            }
-            case 66: {
-              com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder subBuilder = com.lvl6.proto.SkillsProto.SkillPropertyProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addProperties(subBuilder.buildPartial());
-              break;
-            }
-            case 74: {
-              bitField0_ |= 0x00000100;
-              desc_ = input.readBytes();
-              break;
-            }
-            case 82: {
-              bitField0_ |= 0x00000200;
-              iconImgName_ = input.readBytes();
-              break;
-            }
-            case 90: {
-              bitField0_ |= 0x00000400;
-              logoImgName_ = input.readBytes();
-              break;
-            }
+        com.lvl6.proto.SkillsProto.SkillProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.SkillsProto.SkillProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional int32 skillId = 1;
+
       private int skillId_ ;
+      /**
+       * <code>optional int32 skillId = 1;</code>
+       */
       public boolean hasSkillId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 skillId = 1;</code>
+       */
       public int getSkillId() {
         return skillId_;
       }
+      /**
+       * <code>optional int32 skillId = 1;</code>
+       */
       public Builder setSkillId(int value) {
         bitField0_ |= 0x00000001;
         skillId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 skillId = 1;</code>
+       */
       public Builder clearSkillId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         skillId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional string name = 2;
+
       private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getName() {
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
         java.lang.Object ref = name_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          name_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setName(String value) {
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1032,47 +1477,98 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string name = 2;</code>
+       */
       public Builder clearName() {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
-      void setName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         name_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional int32 orbCost = 3;
+
       private int orbCost_ ;
+      /**
+       * <code>optional int32 orbCost = 3;</code>
+       */
       public boolean hasOrbCost() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional int32 orbCost = 3;</code>
+       */
       public int getOrbCost() {
         return orbCost_;
       }
+      /**
+       * <code>optional int32 orbCost = 3;</code>
+       */
       public Builder setOrbCost(int value) {
         bitField0_ |= 0x00000004;
         orbCost_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 orbCost = 3;</code>
+       */
       public Builder clearOrbCost() {
         bitField0_ = (bitField0_ & ~0x00000004);
         orbCost_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.SkillType type = 4;
+
       private com.lvl6.proto.SkillsProto.SkillType type_ = com.lvl6.proto.SkillsProto.SkillType.NO_SKILL;
+      /**
+       * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+       *
+       * <pre>
+       *this is what separates a grouping of skills from another grouping
+       *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+       *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+       *then groupA and groupB's SkillType 'type' would be different
+       * </pre>
+       */
       public boolean hasType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+       *
+       * <pre>
+       *this is what separates a grouping of skills from another grouping
+       *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+       *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+       *then groupA and groupB's SkillType 'type' would be different
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillType getType() {
         return type_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+       *
+       * <pre>
+       *this is what separates a grouping of skills from another grouping
+       *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+       *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+       *then groupA and groupB's SkillType 'type' would be different
+       * </pre>
+       */
       public Builder setType(com.lvl6.proto.SkillsProto.SkillType value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1082,21 +1578,57 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillType type = 4;</code>
+       *
+       * <pre>
+       *this is what separates a grouping of skills from another grouping
+       *let's say a grouping of skills groupA is concerned with buffing a monster's attack
+       *and another grouping of skills groupB is concerned with dealing a one shot dmg to enemy
+       *then groupA and groupB's SkillType 'type' would be different
+       * </pre>
+       */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000008);
         type_ = com.lvl6.proto.SkillsProto.SkillType.NO_SKILL;
         onChanged();
         return this;
       }
-      
-      // optional .com.lvl6.proto.SkillActivationType activationType = 5;
+
       private com.lvl6.proto.SkillsProto.SkillActivationType activationType_ = com.lvl6.proto.SkillsProto.SkillActivationType.USER_ACTIVATED;
+      /**
+       * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+       *
+       * <pre>
+       *this is whether a skill requires user input to use (user_activated), or
+       *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+       *the skill is always active(?) passive
+       * </pre>
+       */
       public boolean hasActivationType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+       *
+       * <pre>
+       *this is whether a skill requires user input to use (user_activated), or
+       *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+       *the skill is always active(?) passive
+       * </pre>
+       */
       public com.lvl6.proto.SkillsProto.SkillActivationType getActivationType() {
         return activationType_;
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+       *
+       * <pre>
+       *this is whether a skill requires user input to use (user_activated), or
+       *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+       *the skill is always active(?) passive
+       * </pre>
+       */
       public Builder setActivationType(com.lvl6.proto.SkillsProto.SkillActivationType value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1106,56 +1638,118 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional .com.lvl6.proto.SkillActivationType activationType = 5;</code>
+       *
+       * <pre>
+       *this is whether a skill requires user input to use (user_activated), or
+       *the skill is used when a user triggers some number of destruction of orbs (auto_activated), or
+       *the skill is always active(?) passive
+       * </pre>
+       */
       public Builder clearActivationType() {
         bitField0_ = (bitField0_ & ~0x00000010);
         activationType_ = com.lvl6.proto.SkillsProto.SkillActivationType.USER_ACTIVATED;
         onChanged();
         return this;
       }
-      
-      // optional int32 predecId = 6;
+
       private int predecId_ ;
+      /**
+       * <code>optional int32 predecId = 6;</code>
+       *
+       * <pre>
+       *the skill that is weaker than this skill in the grouping of skills
+       * </pre>
+       */
       public boolean hasPredecId() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>optional int32 predecId = 6;</code>
+       *
+       * <pre>
+       *the skill that is weaker than this skill in the grouping of skills
+       * </pre>
+       */
       public int getPredecId() {
         return predecId_;
       }
+      /**
+       * <code>optional int32 predecId = 6;</code>
+       *
+       * <pre>
+       *the skill that is weaker than this skill in the grouping of skills
+       * </pre>
+       */
       public Builder setPredecId(int value) {
         bitField0_ |= 0x00000020;
         predecId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 predecId = 6;</code>
+       *
+       * <pre>
+       *the skill that is weaker than this skill in the grouping of skills
+       * </pre>
+       */
       public Builder clearPredecId() {
         bitField0_ = (bitField0_ & ~0x00000020);
         predecId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional int32 sucId = 7;
+
       private int sucId_ ;
+      /**
+       * <code>optional int32 sucId = 7;</code>
+       *
+       * <pre>
+       *the skill that is stronger than this skill in the grouping of skills
+       * </pre>
+       */
       public boolean hasSucId() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>optional int32 sucId = 7;</code>
+       *
+       * <pre>
+       *the skill that is stronger than this skill in the grouping of skills
+       * </pre>
+       */
       public int getSucId() {
         return sucId_;
       }
+      /**
+       * <code>optional int32 sucId = 7;</code>
+       *
+       * <pre>
+       *the skill that is stronger than this skill in the grouping of skills
+       * </pre>
+       */
       public Builder setSucId(int value) {
         bitField0_ |= 0x00000040;
         sucId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 sucId = 7;</code>
+       *
+       * <pre>
+       *the skill that is stronger than this skill in the grouping of skills
+       * </pre>
+       */
       public Builder clearSucId() {
         bitField0_ = (bitField0_ & ~0x00000040);
         sucId_ = 0;
         onChanged();
         return this;
       }
-      
-      // repeated .com.lvl6.proto.SkillPropertyProto properties = 8;
+
       private java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> properties_ =
         java.util.Collections.emptyList();
       private void ensurePropertiesIsMutable() {
@@ -1164,10 +1758,13 @@ public final class SkillsProto {
           bitField0_ |= 0x00000080;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.SkillsProto.SkillPropertyProto, com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder, com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder> propertiesBuilder_;
-      
+
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto> getPropertiesList() {
         if (propertiesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(properties_);
@@ -1175,6 +1772,9 @@ public final class SkillsProto {
           return propertiesBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public int getPropertiesCount() {
         if (propertiesBuilder_ == null) {
           return properties_.size();
@@ -1182,6 +1782,9 @@ public final class SkillsProto {
           return propertiesBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public com.lvl6.proto.SkillsProto.SkillPropertyProto getProperties(int index) {
         if (propertiesBuilder_ == null) {
           return properties_.get(index);
@@ -1189,6 +1792,9 @@ public final class SkillsProto {
           return propertiesBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder setProperties(
           int index, com.lvl6.proto.SkillsProto.SkillPropertyProto value) {
         if (propertiesBuilder_ == null) {
@@ -1203,6 +1809,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder setProperties(
           int index, com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
@@ -1214,6 +1823,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder addProperties(com.lvl6.proto.SkillsProto.SkillPropertyProto value) {
         if (propertiesBuilder_ == null) {
           if (value == null) {
@@ -1227,6 +1839,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder addProperties(
           int index, com.lvl6.proto.SkillsProto.SkillPropertyProto value) {
         if (propertiesBuilder_ == null) {
@@ -1241,6 +1856,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder addProperties(
           com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
@@ -1252,6 +1870,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder addProperties(
           int index, com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder builderForValue) {
         if (propertiesBuilder_ == null) {
@@ -1263,17 +1884,24 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder addAllProperties(
           java.lang.Iterable<? extends com.lvl6.proto.SkillsProto.SkillPropertyProto> values) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
-          super.addAll(values, properties_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, properties_);
           onChanged();
         } else {
           propertiesBuilder_.addAllMessages(values);
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder clearProperties() {
         if (propertiesBuilder_ == null) {
           properties_ = java.util.Collections.emptyList();
@@ -1284,6 +1912,9 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public Builder removeProperties(int index) {
         if (propertiesBuilder_ == null) {
           ensurePropertiesIsMutable();
@@ -1294,10 +1925,16 @@ public final class SkillsProto {
         }
         return this;
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder getPropertiesBuilder(
           int index) {
         return getPropertiesFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder getPropertiesOrBuilder(
           int index) {
         if (propertiesBuilder_ == null) {
@@ -1305,6 +1942,9 @@ public final class SkillsProto {
           return propertiesBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder> 
            getPropertiesOrBuilderList() {
         if (propertiesBuilder_ != null) {
@@ -1313,15 +1953,24 @@ public final class SkillsProto {
           return java.util.Collections.unmodifiableList(properties_);
         }
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder addPropertiesBuilder() {
         return getPropertiesFieldBuilder().addBuilder(
             com.lvl6.proto.SkillsProto.SkillPropertyProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder addPropertiesBuilder(
           int index) {
         return getPropertiesFieldBuilder().addBuilder(
             index, com.lvl6.proto.SkillsProto.SkillPropertyProto.getDefaultInstance());
       }
+      /**
+       * <code>repeated .com.lvl6.proto.SkillPropertyProto properties = 8;</code>
+       */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder> 
            getPropertiesBuilderList() {
         return getPropertiesFieldBuilder().getBuilderList();
@@ -1340,23 +1989,52 @@ public final class SkillsProto {
         }
         return propertiesBuilder_;
       }
-      
-      // optional string desc = 9;
+
       private java.lang.Object desc_ = "";
+      /**
+       * <code>optional string desc = 9;</code>
+       */
       public boolean hasDesc() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
-      public String getDesc() {
+      /**
+       * <code>optional string desc = 9;</code>
+       */
+      public java.lang.String getDesc() {
         java.lang.Object ref = desc_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          desc_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            desc_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setDesc(String value) {
+      /**
+       * <code>optional string desc = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescBytes() {
+        java.lang.Object ref = desc_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          desc_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string desc = 9;</code>
+       */
+      public Builder setDesc(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1365,34 +2043,74 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string desc = 9;</code>
+       */
       public Builder clearDesc() {
         bitField0_ = (bitField0_ & ~0x00000100);
         desc_ = getDefaultInstance().getDesc();
         onChanged();
         return this;
       }
-      void setDesc(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000100;
+      /**
+       * <code>optional string desc = 9;</code>
+       */
+      public Builder setDescBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
         desc_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional string iconImgName = 10;
+
       private java.lang.Object iconImgName_ = "";
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
       public boolean hasIconImgName() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
-      public String getIconImgName() {
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
+      public java.lang.String getIconImgName() {
         java.lang.Object ref = iconImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          iconImgName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            iconImgName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setIconImgName(String value) {
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIconImgNameBytes() {
+        java.lang.Object ref = iconImgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          iconImgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
+      public Builder setIconImgName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1401,34 +2119,74 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
       public Builder clearIconImgName() {
         bitField0_ = (bitField0_ & ~0x00000200);
         iconImgName_ = getDefaultInstance().getIconImgName();
         onChanged();
         return this;
       }
-      void setIconImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000200;
+      /**
+       * <code>optional string iconImgName = 10;</code>
+       */
+      public Builder setIconImgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
         iconImgName_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional string logoImgName = 11;
+
       private java.lang.Object logoImgName_ = "";
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
       public boolean hasLogoImgName() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
-      public String getLogoImgName() {
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
+      public java.lang.String getLogoImgName() {
         java.lang.Object ref = logoImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          logoImgName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            logoImgName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setLogoImgName(String value) {
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLogoImgNameBytes() {
+        java.lang.Object ref = logoImgName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          logoImgName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
+      public Builder setLogoImgName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1437,161 +2195,362 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
       public Builder clearLogoImgName() {
         bitField0_ = (bitField0_ & ~0x00000400);
         logoImgName_ = getDefaultInstance().getLogoImgName();
         onChanged();
         return this;
       }
-      void setLogoImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000400;
+      /**
+       * <code>optional string logoImgName = 11;</code>
+       */
+      public Builder setLogoImgNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
         logoImgName_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillProto)
     }
-    
+
     static {
       defaultInstance = new SkillProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SkillProto)
   }
-  
-  public interface SkillPropertyProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 skillPropertyId = 1;
+
+  public interface SkillPropertyProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.SkillPropertyProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 skillPropertyId = 1;</code>
+     */
     boolean hasSkillPropertyId();
+    /**
+     * <code>optional int32 skillPropertyId = 1;</code>
+     */
     int getSkillPropertyId();
-    
-    // optional string name = 2;
+
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
     boolean hasName();
-    String getName();
-    
-    // optional float skillValue = 3;
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional float skillValue = 3;</code>
+     *
+     * <pre>
+     *Do not use the word 'value'
+     *this could be a non number like string
+     * </pre>
+     */
     boolean hasSkillValue();
+    /**
+     * <code>optional float skillValue = 3;</code>
+     *
+     * <pre>
+     *Do not use the word 'value'
+     *this could be a non number like string
+     * </pre>
+     */
     float getSkillValue();
-    
-    // optional string shorterName = 4;
+
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
     boolean hasShorterName();
-    String getShorterName();
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
+    java.lang.String getShorterName();
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getShorterNameBytes();
   }
+  /**
+   * Protobuf type {@code com.lvl6.proto.SkillPropertyProto}
+   */
   public static final class SkillPropertyProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SkillPropertyProtoOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.SkillPropertyProto)
+      SkillPropertyProtoOrBuilder {
     // Use SkillPropertyProto.newBuilder() to construct.
-    private SkillPropertyProto(Builder builder) {
+    private SkillPropertyProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private SkillPropertyProto(boolean noInit) {}
-    
+    private SkillPropertyProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final SkillPropertyProto defaultInstance;
     public static SkillPropertyProto getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public SkillPropertyProto getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SkillPropertyProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              skillPropertyId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 29: {
+              bitField0_ |= 0x00000004;
+              skillValue_ = input.readFloat();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              shorterName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable;
+      return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.SkillsProto.SkillPropertyProto.class, com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<SkillPropertyProto> PARSER =
+        new com.google.protobuf.AbstractParser<SkillPropertyProto>() {
+      public SkillPropertyProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SkillPropertyProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SkillPropertyProto> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
-    // optional int32 skillPropertyId = 1;
     public static final int SKILLPROPERTYID_FIELD_NUMBER = 1;
     private int skillPropertyId_;
+    /**
+     * <code>optional int32 skillPropertyId = 1;</code>
+     */
     public boolean hasSkillPropertyId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>optional int32 skillPropertyId = 1;</code>
+     */
     public int getSkillPropertyId() {
       return skillPropertyId_;
     }
-    
-    // optional string name = 2;
+
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
     public boolean hasName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getName() {
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
+    public java.lang.String getName() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           name_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getNameBytes() {
+    /**
+     * <code>optional string name = 2;</code>
+     *
+     * <pre>
+     *TODO: should be an enum later on
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
       java.lang.Object ref = name_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
-    // optional float skillValue = 3;
+
     public static final int SKILLVALUE_FIELD_NUMBER = 3;
     private float skillValue_;
+    /**
+     * <code>optional float skillValue = 3;</code>
+     *
+     * <pre>
+     *Do not use the word 'value'
+     *this could be a non number like string
+     * </pre>
+     */
     public boolean hasSkillValue() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>optional float skillValue = 3;</code>
+     *
+     * <pre>
+     *Do not use the word 'value'
+     *this could be a non number like string
+     * </pre>
+     */
     public float getSkillValue() {
       return skillValue_;
     }
-    
-    // optional string shorterName = 4;
+
     public static final int SHORTERNAME_FIELD_NUMBER = 4;
     private java.lang.Object shorterName_;
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
     public boolean hasShorterName() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public String getShorterName() {
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
+    public java.lang.String getShorterName() {
       java.lang.Object ref = shorterName_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           shorterName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getShorterNameBytes() {
+    /**
+     * <code>optional string shorterName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getShorterNameBytes() {
       java.lang.Object ref = shorterName_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         shorterName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       skillPropertyId_ = 0;
       name_ = "";
@@ -1601,12 +2560,13 @@ public final class SkillsProto {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -1624,12 +2584,12 @@ public final class SkillsProto {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1651,113 +2611,106 @@ public final class SkillsProto {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static com.lvl6.proto.SkillsProto.SkillPropertyProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(com.lvl6.proto.SkillsProto.SkillPropertyProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code com.lvl6.proto.SkillPropertyProto}
+     */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.SkillPropertyProto)
+        com.lvl6.proto.SkillsProto.SkillPropertyProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable;
+        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.SkillsProto.SkillPropertyProto.class, com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder.class);
       }
-      
+
       // Construct using com.lvl6.proto.SkillsProto.SkillPropertyProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1768,7 +2721,7 @@ public final class SkillsProto {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         skillPropertyId_ = 0;
@@ -1781,20 +2734,20 @@ public final class SkillsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.SkillsProto.SkillPropertyProto.getDescriptor();
+        return com.lvl6.proto.SkillsProto.internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
       }
-      
+
       public com.lvl6.proto.SkillsProto.SkillPropertyProto getDefaultInstanceForType() {
         return com.lvl6.proto.SkillsProto.SkillPropertyProto.getDefaultInstance();
       }
-      
+
       public com.lvl6.proto.SkillsProto.SkillPropertyProto build() {
         com.lvl6.proto.SkillsProto.SkillPropertyProto result = buildPartial();
         if (!result.isInitialized()) {
@@ -1802,17 +2755,7 @@ public final class SkillsProto {
         }
         return result;
       }
-      
-      private com.lvl6.proto.SkillsProto.SkillPropertyProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.SkillsProto.SkillPropertyProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public com.lvl6.proto.SkillsProto.SkillPropertyProto buildPartial() {
         com.lvl6.proto.SkillsProto.SkillPropertyProto result = new com.lvl6.proto.SkillsProto.SkillPropertyProto(this);
         int from_bitField0_ = bitField0_;
@@ -1837,7 +2780,7 @@ public final class SkillsProto {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.lvl6.proto.SkillsProto.SkillPropertyProto) {
           return mergeFrom((com.lvl6.proto.SkillsProto.SkillPropertyProto)other);
@@ -1846,115 +2789,145 @@ public final class SkillsProto {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(com.lvl6.proto.SkillsProto.SkillPropertyProto other) {
         if (other == com.lvl6.proto.SkillsProto.SkillPropertyProto.getDefaultInstance()) return this;
         if (other.hasSkillPropertyId()) {
           setSkillPropertyId(other.getSkillPropertyId());
         }
         if (other.hasName()) {
-          setName(other.getName());
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
         }
         if (other.hasSkillValue()) {
           setSkillValue(other.getSkillValue());
         }
         if (other.hasShorterName()) {
-          setShorterName(other.getShorterName());
+          bitField0_ |= 0x00000008;
+          shorterName_ = other.shorterName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              skillPropertyId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              name_ = input.readBytes();
-              break;
-            }
-            case 29: {
-              bitField0_ |= 0x00000004;
-              skillValue_ = input.readFloat();
-              break;
-            }
-            case 34: {
-              bitField0_ |= 0x00000008;
-              shorterName_ = input.readBytes();
-              break;
-            }
+        com.lvl6.proto.SkillsProto.SkillPropertyProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.SkillsProto.SkillPropertyProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
-      // optional int32 skillPropertyId = 1;
+
       private int skillPropertyId_ ;
+      /**
+       * <code>optional int32 skillPropertyId = 1;</code>
+       */
       public boolean hasSkillPropertyId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+      /**
+       * <code>optional int32 skillPropertyId = 1;</code>
+       */
       public int getSkillPropertyId() {
         return skillPropertyId_;
       }
+      /**
+       * <code>optional int32 skillPropertyId = 1;</code>
+       */
       public Builder setSkillPropertyId(int value) {
         bitField0_ |= 0x00000001;
         skillPropertyId_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional int32 skillPropertyId = 1;</code>
+       */
       public Builder clearSkillPropertyId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         skillPropertyId_ = 0;
         onChanged();
         return this;
       }
-      
-      // optional string name = 2;
+
       private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getName() {
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
+      public java.lang.String getName() {
         java.lang.Object ref = name_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          name_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setName(String value) {
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
+      public Builder setName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1963,55 +2936,134 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
       public Builder clearName() {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
-      void setName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>optional string name = 2;</code>
+       *
+       * <pre>
+       *TODO: should be an enum later on
+       * </pre>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         name_ = value;
         onChanged();
+        return this;
       }
-      
-      // optional float skillValue = 3;
+
       private float skillValue_ ;
+      /**
+       * <code>optional float skillValue = 3;</code>
+       *
+       * <pre>
+       *Do not use the word 'value'
+       *this could be a non number like string
+       * </pre>
+       */
       public boolean hasSkillValue() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>optional float skillValue = 3;</code>
+       *
+       * <pre>
+       *Do not use the word 'value'
+       *this could be a non number like string
+       * </pre>
+       */
       public float getSkillValue() {
         return skillValue_;
       }
+      /**
+       * <code>optional float skillValue = 3;</code>
+       *
+       * <pre>
+       *Do not use the word 'value'
+       *this could be a non number like string
+       * </pre>
+       */
       public Builder setSkillValue(float value) {
         bitField0_ |= 0x00000004;
         skillValue_ = value;
         onChanged();
         return this;
       }
+      /**
+       * <code>optional float skillValue = 3;</code>
+       *
+       * <pre>
+       *Do not use the word 'value'
+       *this could be a non number like string
+       * </pre>
+       */
       public Builder clearSkillValue() {
         bitField0_ = (bitField0_ & ~0x00000004);
         skillValue_ = 0F;
         onChanged();
         return this;
       }
-      
-      // optional string shorterName = 4;
+
       private java.lang.Object shorterName_ = "";
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
       public boolean hasShorterName() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public String getShorterName() {
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
+      public java.lang.String getShorterName() {
         java.lang.Object ref = shorterName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          shorterName_ = s;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            shorterName_ = s;
+          }
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setShorterName(String value) {
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getShorterNameBytes() {
+        java.lang.Object ref = shorterName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          shorterName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
+      public Builder setShorterName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2020,40 +3072,51 @@ public final class SkillsProto {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
       public Builder clearShorterName() {
         bitField0_ = (bitField0_ & ~0x00000008);
         shorterName_ = getDefaultInstance().getShorterName();
         onChanged();
         return this;
       }
-      void setShorterName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000008;
+      /**
+       * <code>optional string shorterName = 4;</code>
+       */
+      public Builder setShorterNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
         shorterName_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillPropertyProto)
     }
-    
+
     static {
       defaultInstance = new SkillPropertyProto(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.SkillPropertyProto)
   }
-  
-  private static com.google.protobuf.Descriptors.Descriptor
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SkillProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SkillPropertyProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -2081,34 +3144,30 @@ public final class SkillsProto {
       "\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_com_lvl6_proto_SkillProto_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SkillProto_descriptor,
-              new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "IconImgName", "LogoImgName", },
-              com.lvl6.proto.SkillsProto.SkillProto.class,
-              com.lvl6.proto.SkillsProto.SkillProto.Builder.class);
-          internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
-              new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", "ShorterName", },
-              com.lvl6.proto.SkillsProto.SkillPropertyProto.class,
-              com.lvl6.proto.SkillsProto.SkillPropertyProto.Builder.class);
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_com_lvl6_proto_SkillProto_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_lvl6_proto_SkillProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SkillProto_descriptor,
+        new java.lang.String[] { "SkillId", "Name", "OrbCost", "Type", "ActivationType", "PredecId", "SucId", "Properties", "Desc", "IconImgName", "LogoImgName", });
+    internal_static_com_lvl6_proto_SkillPropertyProto_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
+        new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", "ShorterName", });
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

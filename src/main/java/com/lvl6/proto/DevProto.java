@@ -8,26 +8,65 @@ public final class DevProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.lvl6.proto.DevRequest}
+   */
   public enum DevRequest
       implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>RESET_ACCOUNT = 1;</code>
+     */
     RESET_ACCOUNT(0, 1),
+    /**
+     * <code>GET_MONZTER = 2;</code>
+     */
     GET_MONZTER(1, 2),
+    /**
+     * <code>F_B_GET_CASH = 3;</code>
+     */
     F_B_GET_CASH(2, 3),
+    /**
+     * <code>F_B_GET_OIL = 4;</code>
+     */
     F_B_GET_OIL(3, 4),
+    /**
+     * <code>F_B_GET_GEMS = 5;</code>
+     */
     F_B_GET_GEMS(4, 5),
+    /**
+     * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
+     */
     F_B_GET_CASH_OIL_GEMS(5, 6),
     ;
-    
+
+    /**
+     * <code>RESET_ACCOUNT = 1;</code>
+     */
     public static final int RESET_ACCOUNT_VALUE = 1;
+    /**
+     * <code>GET_MONZTER = 2;</code>
+     */
     public static final int GET_MONZTER_VALUE = 2;
+    /**
+     * <code>F_B_GET_CASH = 3;</code>
+     */
     public static final int F_B_GET_CASH_VALUE = 3;
+    /**
+     * <code>F_B_GET_OIL = 4;</code>
+     */
     public static final int F_B_GET_OIL_VALUE = 4;
+    /**
+     * <code>F_B_GET_GEMS = 5;</code>
+     */
     public static final int F_B_GET_GEMS_VALUE = 5;
+    /**
+     * <code>F_B_GET_CASH_OIL_GEMS = 6;</code>
+     */
     public static final int F_B_GET_CASH_OIL_GEMS_VALUE = 6;
-    
-    
+
+
     public final int getNumber() { return value; }
-    
+
     public static DevRequest valueOf(int value) {
       switch (value) {
         case 1: return RESET_ACCOUNT;
@@ -39,7 +78,7 @@ public final class DevProto {
         default: return null;
       }
     }
-    
+
     public static com.google.protobuf.Internal.EnumLiteMap<DevRequest>
         internalGetValueMap() {
       return internalValueMap;
@@ -51,7 +90,7 @@ public final class DevProto {
               return DevRequest.valueOf(number);
             }
           };
-    
+
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       return getDescriptor().getValues().get(index);
@@ -64,11 +103,9 @@ public final class DevProto {
         getDescriptor() {
       return com.lvl6.proto.DevProto.getDescriptor().getEnumTypes().get(0);
     }
-    
-    private static final DevRequest[] VALUES = {
-      RESET_ACCOUNT, GET_MONZTER, F_B_GET_CASH, F_B_GET_OIL, F_B_GET_GEMS, F_B_GET_CASH_OIL_GEMS, 
-    };
-    
+
+    private static final DevRequest[] VALUES = values();
+
     public static DevRequest valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
@@ -77,19 +114,19 @@ public final class DevProto {
       }
       return VALUES[desc.getIndex()];
     }
-    
+
     private final int index;
     private final int value;
-    
+
     private DevRequest(int index, int value) {
       this.index = index;
       this.value = value;
     }
-    
+
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DevRequest)
   }
-  
-  
+
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -105,18 +142,18 @@ public final class DevProto {
       "B\010DevProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

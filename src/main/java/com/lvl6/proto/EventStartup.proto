@@ -12,6 +12,7 @@ import "Item.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "SharedEnumConfig.proto";
 import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
@@ -178,6 +179,8 @@ message StartupResponseProto {
 		
 		//optional float monsterDmgMultiplier = 31; defined above 
 		
+		repeated ClanHelpConstants clanHelpConstants = 32;
+		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;
@@ -230,7 +233,22 @@ message StartupResponseProto {
 			optional int32 miniTutorialTaskId = 1;
 			optional int32 guideMonsterId = 2;
 		}
-		
+		message ClanHelpConstants {
+			optional ClanHelpType helpType = 1;
+			
+			//of the two, client should use the
+			//one that benefits the user the most
+			
+			//Ex. User heals 200 hp monster; user has 1 help
+			// amountRemovedPerHelp = 2;
+			// percentRemovedPerHelp = 2%
+			// 2% * 200 = 4
+			// client should use percentRemovedPerHelp since
+			// the user would have to wait for 196 hp instead
+			// of 198 hp to be healed
+			optional int32 amountRemovedPerHelp = 2;
+			optional float percentRemovedPerHelp = 3;
+		}
 	}
 	
 	message TutorialConstants {

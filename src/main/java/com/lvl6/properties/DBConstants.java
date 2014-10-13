@@ -252,6 +252,7 @@ public class DBConstants {
   public static final String CLAN_HELP__MAX_HELPERS = "max_helpers";
   public static final String CLAN_HELP__HELPERS = "helpers";
   public static final String CLAN_HELP__OPEN = "open";
+  public static final String CLAN_HELP__STATIC_DATA_ID = "static_data_id";
   
   /*EVENT PERSISTENT FOR USER*/
   public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
@@ -626,6 +627,7 @@ public class DBConstants {
   public static final String USER__EMAIL = "email";
   public static final String USER__FB_DATA = "fb_data";
   public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
+  public static final String USER__CLAN_HELPS = "clan_helps";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -940,6 +942,7 @@ public class DBConstants {
   public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
   
   public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
   
@@ -1010,6 +1013,8 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__CASH_REWARD = "cash_reward";
   public static final String TASK_MAP_ELEMENT__OIL_REWARD = "oil_reward";
   public static final String TASK_MAP_ELEMENT__CHARACTER_IMG_NAME = "character_img_name";
+  public static final String TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET = "char_vert_pixel_offset";
+  public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

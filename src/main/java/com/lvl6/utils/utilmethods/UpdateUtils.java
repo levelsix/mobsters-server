@@ -49,8 +49,11 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public void updateNullifyDeviceTokens(Set<String> deviceTokens) {
 		if (deviceTokens != null && deviceTokens.size() > 0) {
-			String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__DEVICE_TOKEN 
-					+ "=? where ";
+//			String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__DEVICE_TOKEN 
+//					+ "=? where ";
+			String query = String.format(
+				"update %s set %s=? where ",
+				DBConstants.TABLE_USER, DBConstants.USER__DEVICE_TOKEN);
 			List<Object> values = new ArrayList<Object>();
 			values.add(null);
 			List<String> condClauses = new ArrayList<String>();
@@ -1424,6 +1427,28 @@ public class UpdateUtils implements UpdateUtil {
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 				absoluteParams, conditionParams, "and");
 
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds) {
+			//for every ClanHelp with clanId and clanHelpId
+			//append userId to the helpers property
+			String tableName = DBConstants.TABLE_CLAN_HELP;
+			String helpers = DBConstants.CLAN_HELP__HELPERS;
+			List<String> questions = Collections.nCopies(clanHelpIds.size(), "?");
+			String questionMarks = StringUtils.implode(questions, ",");
+			
+			String query = String.format(
+				"UPDATE %s	SET %s=CONCAT(%s, ',%s')	WHERE %s=%s AND %s IN (%s)",
+				tableName, helpers, helpers, userId,
+				DBConstants.CLAN_HELP__CLAN_ID, clanId,
+				DBConstants.CLAN_HELP__ID, questionMarks);
+
+			List<Object> values = new ArrayList<Object>();
+			values.addAll(clanHelpIds);
+			
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 			return numUpdated;
 		}
 }

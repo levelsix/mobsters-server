@@ -502,6 +502,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("last_free_booster_pack_time null...?", e);
     }
     
+    int numClanHelps = rs.getInt(DBConstants.USER__CLAN_HELPS);
+    
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, referralCode, numReferrals, udidForHistory,
     		lastLogin, lastLogout, deviceToken, numBadges, isFake, createTime,
@@ -510,7 +512,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastWallPostNotificationTime, hasReceivedfbReward,
     		numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
     		gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
-    		lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime);
+    		lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
+    		numClanHelps);
     return user;
   }
  

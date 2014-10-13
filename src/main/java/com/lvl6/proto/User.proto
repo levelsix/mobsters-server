@@ -118,6 +118,8 @@ message FullUserProto {
 	//optional int32 avatarMonsterId = 51; //defined above
 	optional int64 lastFreeBoosterPackTime = 52;
 
+	optional int32 numClanHelps = 53;
+
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
 	optional string udidForHistory = 46;

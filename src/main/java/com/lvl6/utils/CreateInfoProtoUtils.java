@@ -910,7 +910,8 @@ public class CreateInfoProtoUtils {
     	UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
     	fucpb.setStatus(ucs);
     } catch (Exception e) {
-    	log.error("incorrect user clan status. userClan=" + uc);
+    	log.error(String.format(
+    		"incorrect user clan status. userClan=%s", uc));
     }
     
     Date aTime = uc.getRequestTime();
@@ -1263,11 +1264,17 @@ public class CreateInfoProtoUtils {
   	return cipb.build();
   }
   
-  public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch) {
+  public static ClanHelpProto createClanHelpProtoFromClanHelp(ClanHelp ch,
+	  User u, MinimumUserProto mup)
+  {
 	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
 	  chpb.setClanHelpId(ch.getId());
 	  chpb.setClanId(ch.getClanId());
-	  chpb.setUserId(ch.getUserId());
+	  
+	  if (null == mup) {
+		  mup = createMinimumUserProtoFromUser(u);
+	  }
+	  chpb.setMup(mup);
 	  chpb.setUserDataId(ch.getUserDataId());
 	  
 	  String helpType = ch.getHelpType();
@@ -1282,26 +1289,18 @@ public class CreateInfoProtoUtils {
 				  "incorrect ClanHelpType. ClanHelp=%s", ch ));
 		  }
 	  }
+	  chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
+//	  log.info(String.format(
+//			"ClanHelp=%s TimeOfEntry=%s", ch, ch.getTimeOfEntry()));
 	  
 	  chpb.setMaxHelpers(ch.getMaxHelpers());
-	  chpb.addAllHelperIds(ch.getHelpers());
-	  chpb.setOpen(ch.isOpen());
 	  
-	  return chpb.build();
-  }
-  
-  public static ClanHelpProto createClanHelpProtoFromClanHelp(long clanHelpId,
-	  int clanId, int userId, long userDataId, ClanHelpType helpType,
-	  int maxHelpers, boolean open)
-  {
-	  ClanHelpProto.Builder chpb = ClanHelpProto.newBuilder();
-	  chpb.setClanHelpId(clanHelpId);
-	  chpb.setClanId(clanId);
-	  chpb.setUserId(userId);
-	  chpb.setUserDataId(userDataId);
-	  chpb.setHelpType(helpType);
-	  chpb.setMaxHelpers(maxHelpers);
-	  chpb.setOpen(open);
+	  if (null != ch.getHelpers()) {
+		  chpb.addAllHelperIds(ch.getHelpers());
+	  }
+	  chpb.setOpen(ch.isOpen());
+	  chpb.setStaticDataId(ch.getStaticDataId());
+	  
 	  return chpb.build();
   }
   
@@ -2016,7 +2015,9 @@ public class CreateInfoProtoUtils {
 		  FullUserQuestProto.Builder builder = FullUserQuestProto.newBuilder();
 
 		  if (null == quest) {
-			  log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
+			  log.error(String.format(
+				  "no quest with id=%s, userQuest=%s",
+				  userQuest.getQuestId(), userQuest));
 		  }
 		  
 		  if (null != quest) {
@@ -2045,9 +2046,10 @@ public class CreateInfoProtoUtils {
 	  
 	  if (!questIdToUserQuestJobs.containsKey(questId)) {
 		  //should never go in here!
-		  log.error("user has quest but no quest_jobs for said quest." +
-		  		" questId=" + questId + "\t user's quest jobs are:" +
-				  questIdToUserQuestJobs);
+		  log.error(String.format(
+			  "user has Quest but no QuestJobs. questId=%s. User's quest jobs:%s",
+			  questId, questIdToUserQuestJobs));
+		  
 		  return userQuestJobProtoList;
 	  }
 	  
@@ -2548,6 +2550,7 @@ public class CreateInfoProtoUtils {
 	  
 	  ClanHouseProto.Builder chpb = ClanHouseProto.newBuilder();
 	  chpb.setStructInfo(sip);
+	  chpb.setMaxHelpersPerSolicitation(sch.getMaxHelpersPerSolicitation());
 	  
 	  return chpb.build();
   }
@@ -2827,16 +2830,16 @@ public class CreateInfoProtoUtils {
   public static UserPersistentEventProto createUserPersistentEventProto(
       EventPersistentForUser epfu) {
     UserPersistentEventProto.Builder upepb = UserPersistentEventProto.newBuilder();
-
-    int userId = epfu.getUserId();
-    int eventId = epfu.getEventPersistentId();
     Date timeOfEntry = epfu.getTimeOfEntry();
 
-    upepb.setUserId(userId);
-    upepb.setEventId(eventId);
+    upepb.setUserId(
+    	epfu.getUserId());
+    upepb.setEventId(
+    	epfu.getEventPersistentId());
 
     if (null != timeOfEntry) {
-      upepb.setCoolDownStartTime(timeOfEntry.getTime());
+      upepb.setCoolDownStartTime(
+    	  timeOfEntry.getTime());
     }
 
     return upepb.build();
@@ -2877,6 +2880,9 @@ public class CreateInfoProtoUtils {
 	  if (null != str) {
 		  tmepb.setCharacterImgName(str);
 	  }
+	  
+	  tmepb.setCharImgVertPixelOffset(tme.getCharImgVertPixelOffset());
+	  tmepb.setCharImgHorizPixelOffset(tme.getCharImgHorizPixelOffset());
 	  
 	  return tmepb.build();
   }
@@ -3091,6 +3097,9 @@ public class CreateInfoProtoUtils {
     
     //add new columns above here, not below the if. if case for is fake
 
+    int numClanHelps = u.getClanHelps();
+    builder.setNumClanHelps(numClanHelps);
+    
     if (u.isFake()) {
 
     }

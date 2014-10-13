@@ -176,7 +176,7 @@ public class SpawnMiniJobController extends EventController{
 				.getMiniJobProbabilitySumForStructId(structId);
 		Random rand = new Random();
 		log.info("probabilitySum=" + probabilitySum);
-		log.info("miniJobIdToMiniJob=" + miniJobIdToMiniJob);
+//		log.info("miniJobIdToMiniJob=" + miniJobIdToMiniJob);
 		
 		int numToSpawnCopy = numToSpawn;
 		while (numToSpawnCopy > 0) {

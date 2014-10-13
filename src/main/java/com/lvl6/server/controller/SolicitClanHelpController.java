@@ -1,7 +1,7 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +14,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitClanHelpRequestEvent;
 import com.lvl6.events.response.SolicitClanHelpResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanHelp;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanHelpNoticeProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
@@ -47,7 +48,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_SOLICIT_CAN_HELP_EVENT;
+    return EventProtocolRequest.C_SOLICIT_CLAN_HELP_EVENT;
   }
 
   @Override
@@ -55,15 +56,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent)event)
     	.getSolicitClanHelpRequestProto();
 
+    log.info(String.format("reqProto=%s", reqProto));
+    
     MinimumUserProto senderProto = reqProto.getSender();
-    ClanHelpNoticeProto chnp = reqProto.getNotice();
+    List<ClanHelpNoticeProto> chnpList = reqProto.getNoticeList();
     int userId = senderProto.getUserId();
-    Timestamp clientDate = new Timestamp(reqProto.getClientTime());
+    Date clientDate = new Date(reqProto.getClientTime());
     int maxHelpers = reqProto.getMaxHelpers();
 
     SolicitClanHelpResponseProto.Builder resBuilder = SolicitClanHelpResponseProto.newBuilder();
     resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
+
+    int clanId = 0;
+
+    if (null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
 
     /*int clanId = 0;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
@@ -84,10 +93,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean legitLeave = checkLegitLeave(resBuilder, user);
       
       boolean success = false;
-      List<Long> clanHelpIdStore = new ArrayList<Long>();
+      List<ClanHelp> clanHelpStore = new ArrayList<ClanHelp>();
       if (legitLeave) {
-      	success = writeChangesToDB(userId, user, chnp, clientDate,
-      		maxHelpers, clanHelpIdStore);
+      	success = writeChangesToDB(userId, user, clanId, chnpList,
+      		clientDate, maxHelpers, clanHelpStore);
       }
 
       SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(userId);
@@ -98,19 +107,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	server.writeEvent(resEvent);
       	
       } else {
-      	//only write to clan if success
-    	int clanId = user.getClanId();
-    	long clanHelpId = clanHelpIdStore.get(0);
-    	ClanHelpProto chp = CreateInfoProtoUtils.createClanHelpProtoFromClanHelp(
-    		clanHelpId, clanId, userId, chnp.getUserDataId(), chnp.getHelpType(),
-    		maxHelpers, true);
-    	resBuilder.setHelpProto(chp);
-        resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
-        resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
-      	server.writeClanEvent(resEvent, clanId);
-        //this works for other clan members, but not for the person 
-        //who left (they see the message when they join a clan, reenter clan house
-        //notifyClan(user, clan);
+    	  //only write to clan if success
+    	  for (ClanHelp ch : clanHelpStore) {
+    		  ClanHelpProto chp = CreateInfoProtoUtils
+    			  .createClanHelpProtoFromClanHelp(ch, user, senderProto);
+    		  resBuilder.addHelpProto(chp);
+    	  }
+
+    	  resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
+    	  resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+    	  server.writeClanEvent(resEvent, clanId);
+    	  //this works for other clan members, but not for the person 
+    	  //who left (they see the message when they join a clan, reenter clan house
+    	  //notifyClan(user, clan);
       }
     } catch (Exception e) {
       log.error("exception in SolicitClanHelp processEvent", e);
@@ -140,7 +149,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     if (user.getClanId() <= 0) {
       resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
-      log.error("user's clanId=%s", user.getClanId());
+      log.error(String.format(
+    	  "user's clanId=%s",
+    	  user.getClanId()));
       return false;
     }
 
@@ -154,21 +165,42 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(int userId, User user,
-	  ClanHelpNoticeProto chnp, Timestamp clientDate, int maxHelpers,
-	  List<Long> clanHelpIdStore)
+  private boolean writeChangesToDB(int userId, User user, int clanId,
+	  List<ClanHelpNoticeProto> chnpList, Date clientDate, int maxHelpers,
+	  List<ClanHelp> clanHelpStore)
   {
-    int clanId = user.getId();
-    
-    long clanHelpId = InsertUtils.get().insertIntoClanHelpGetId(clanId,
-    	userId, chnp.getUserDataId(), chnp.getHelpType().name(), clientDate,
-    	maxHelpers);
-    
-    if ( clanHelpId > 0 ) {
-    	clanHelpIdStore.add(clanHelpId);
-    	return true;
-    }
-    return false;
+	  List<ClanHelp> solicitations = new ArrayList<ClanHelp>();
+	  for (ClanHelpNoticeProto chnp : chnpList) {
+		  ClanHelp ch = new ClanHelp();
+		  ch.setClanId(clanId);
+		  ch.setUserId(userId);
+		  ch.setMaxHelpers(maxHelpers);
+		  ch.setTimeOfEntry(clientDate);
+		  ch.setUserDataId(
+			  chnp.getUserDataId());
+		  ch.setStaticDataId(
+			  chnp.getStaticDataId());
+		  ch.setHelpType(
+			  chnp.getHelpType()
+			  .name());
+		  ch.setOpen(true);
+		  solicitations.add(ch);
+	  }
+
+	  List<Long> clanHelpIds = InsertUtils.get().insertIntoClanHelpGetId(solicitations);
+
+	  for (int index = 0; index < clanHelpIds.size(); index++) {
+		  ClanHelp ch = solicitations.get(index);
+		  Long clanHelpId = clanHelpIds.get(index);
+		  ch.setId(clanHelpId);
+	  }
+	  log.info(String.format("new clanHelps: %s", solicitations));
+
+	  if ( null != clanHelpIds && !clanHelpIds.isEmpty() ) {
+		  clanHelpStore.addAll(solicitations);
+		  return true;
+	  }
+	  return false;
   }
 
   /*

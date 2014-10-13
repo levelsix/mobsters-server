@@ -2,8 +2,10 @@ package com.lvl6.retrieveutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,44 @@ public class ClanHelpRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
+	public List<ClanHelp> getClanHelpsForIds(List<Long> clanHelpIds)
+	{
+		List<ClanHelp> clanHelps = null;
+		try {
+			List<String> columnsToSelect = ClanHelpForClientMapper
+					.getColumnsSelected();
+
+			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
+			inConditions.put(DBConstants.CLAN_HELP__ID, clanHelpIds);
+			
+			String conditionDelimiter = getQueryConstructionUtil().getOr();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryInConditions(columnsToSelect, TABLE_NAME,
+						inConditions, conditionDelimiter, values, preparedStatement);
+			log.info(String.format(
+				"getUserIdToClanHelpForClanId() query=%s", query));
+			
+			clanHelps = this.jdbcTemplate
+					.query(query, new ClanHelpForClientMapper());
+			
+		} catch (Exception e) {
+			log.error(String.format(
+				"could not retrieve clan help for clanHelpId=%s", clanHelpIds),
+				e);
+			clanHelps =
+					new ArrayList<ClanHelp>();
+		}
+		
+		return clanHelps;
+	}
+	
 	public Map<Integer, List<ClanHelp>> getUserIdToClanHelp(
 		int clanId, int userId )
 	{
@@ -133,7 +173,8 @@ public class ClanHelpRetrieveUtil {
 			ch.setUserDataId(rs.getLong(DBConstants.CLAN_HELP__USER_DATA_ID));
 			ch.setHelpType(rs.getString(DBConstants.CLAN_HELP__HELP_TYPE));
 			ch.setClanId(rs.getInt(DBConstants.CLAN_HELP__CLAN_ID));
-			ch.setTimeOfEntry(rs.getDate(DBConstants.CLAN_HELP__TIME_OF_ENTRY));
+			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_HELP__TIME_OF_ENTRY);
+			ch.setTimeOfEntry(new Date(ts.getTime()));
 			ch.setMaxHelpers(rs.getInt(DBConstants.CLAN_HELP__MAX_HELPERS));
 			
 			String helperIds = rs.getString(DBConstants.CLAN_HELP__HELPERS); 
@@ -143,6 +184,11 @@ public class ClanHelpRetrieveUtil {
 			}
 			ch.setHelpers(helpers);
 			
+			ch.setOpen(rs.getBoolean(DBConstants.CLAN_HELP__OPEN));
+			ch.setStaticDataId(rs.getInt(DBConstants.CLAN_HELP__STATIC_DATA_ID));
+			
+//			log.info(String.format(
+//				"ClanHelp=%s TimeOfEntry=%s", ch, ts));
 			return ch;
 		}        
 
@@ -158,6 +204,7 @@ public class ClanHelpRetrieveUtil {
 				columnsSelected.add(DBConstants.CLAN_HELP__MAX_HELPERS);
 				columnsSelected.add(DBConstants.CLAN_HELP__HELPERS);
 				columnsSelected.add(DBConstants.CLAN_HELP__OPEN);
+				columnsSelected.add(DBConstants.CLAN_HELP__STATIC_DATA_ID);
 			}
 			return columnsSelected;
 		}

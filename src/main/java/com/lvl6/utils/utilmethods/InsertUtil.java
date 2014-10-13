@@ -11,6 +11,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
@@ -210,6 +211,5 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUpdateUserItem(int userId, int itemId, int delta);
 	
-	public abstract long insertIntoClanHelpGetId(int clanId, int userId,
-		long userDataId, String helpType, Timestamp timeRequested, int maxHelpers);
+	public abstract List<Long> insertIntoClanHelpGetId(List<ClanHelp> solicitations);
 }
