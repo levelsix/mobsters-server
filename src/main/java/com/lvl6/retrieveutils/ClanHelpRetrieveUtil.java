@@ -187,6 +187,8 @@ public class ClanHelpRetrieveUtil {
 			ch.setOpen(rs.getBoolean(DBConstants.CLAN_HELP__OPEN));
 			ch.setStaticDataId(rs.getInt(DBConstants.CLAN_HELP__STATIC_DATA_ID));
 			
+			log.info(String.format(
+				"ClanHelp=%s TimeOfEntry=%s", ch, ts));
 			return ch;
 		}        
 

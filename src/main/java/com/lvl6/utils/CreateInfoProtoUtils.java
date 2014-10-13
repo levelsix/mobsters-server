@@ -1290,6 +1290,9 @@ public class CreateInfoProtoUtils {
 		  }
 	  }
 	  chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
+	  log.info(String.format(
+			"ClanHelp=%s TimeOfEntry=%s", ch, ch.getTimeOfEntry()));
+	  
 	  chpb.setMaxHelpers(ch.getMaxHelpers());
 	  
 	  if (null != ch.getHelpers()) {
