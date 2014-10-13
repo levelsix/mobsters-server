@@ -82,6 +82,7 @@ message MonsterLevelInfoProto {
 	optional float expLvlDivisor = 14;
 	optional float expLvlExponent = 15;
 	optional int32 sellAmount = 16;
+	optional int32 alphaness = 17;
 }
 
 //------------------------------------------------------------------------------------------
