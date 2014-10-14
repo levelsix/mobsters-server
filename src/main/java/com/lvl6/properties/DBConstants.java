@@ -396,6 +396,7 @@ public class DBConstants {
 //  public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
   public static final String MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS = "health_progress";
   public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
+  public static final String MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS = "elapsed_seconds";
   
   
   /*MONSTER HEALING HISTORY*/

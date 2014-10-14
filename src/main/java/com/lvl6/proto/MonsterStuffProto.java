@@ -7876,6 +7876,15 @@ public final class MonsterStuffProto {
      * </pre>
      */
     int getPriority();
+
+    /**
+     * <code>optional float elapsedSeconds = 7;</code>
+     */
+    boolean hasElapsedSeconds();
+    /**
+     * <code>optional float elapsedSeconds = 7;</code>
+     */
+    float getElapsedSeconds();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserMonsterHealingProto}
@@ -7957,6 +7966,11 @@ public final class MonsterStuffProto {
             case 48: {
               bitField0_ |= 0x00000010;
               priority_ = input.readInt32();
+              break;
+            }
+            case 61: {
+              bitField0_ |= 0x00000020;
+              elapsedSeconds_ = input.readFloat();
               break;
             }
           }
@@ -8098,12 +8112,28 @@ public final class MonsterStuffProto {
       return priority_;
     }
 
+    public static final int ELAPSEDSECONDS_FIELD_NUMBER = 7;
+    private float elapsedSeconds_;
+    /**
+     * <code>optional float elapsedSeconds = 7;</code>
+     */
+    public boolean hasElapsedSeconds() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional float elapsedSeconds = 7;</code>
+     */
+    public float getElapsedSeconds() {
+      return elapsedSeconds_;
+    }
+
     private void initFields() {
       userId_ = 0;
       userMonsterId_ = 0L;
       queuedTimeMillis_ = 0L;
       healthProgress_ = 0F;
       priority_ = 0;
+      elapsedSeconds_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8133,6 +8163,9 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(6, priority_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeFloat(7, elapsedSeconds_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8161,6 +8194,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, priority_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(7, elapsedSeconds_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8294,6 +8331,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         priority_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        elapsedSeconds_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -8342,6 +8381,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000010;
         }
         result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.elapsedSeconds_ = elapsedSeconds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8372,6 +8415,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasPriority()) {
           setPriority(other.getPriority());
+        }
+        if (other.hasElapsedSeconds()) {
+          setElapsedSeconds(other.getElapsedSeconds());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8604,6 +8650,38 @@ public final class MonsterStuffProto {
       public Builder clearPriority() {
         bitField0_ = (bitField0_ & ~0x00000010);
         priority_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float elapsedSeconds_ ;
+      /**
+       * <code>optional float elapsedSeconds = 7;</code>
+       */
+      public boolean hasElapsedSeconds() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional float elapsedSeconds = 7;</code>
+       */
+      public float getElapsedSeconds() {
+        return elapsedSeconds_;
+      }
+      /**
+       * <code>optional float elapsedSeconds = 7;</code>
+       */
+      public Builder setElapsedSeconds(float value) {
+        bitField0_ |= 0x00000020;
+        elapsedSeconds_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float elapsedSeconds = 7;</code>
+       */
+      public Builder clearElapsedSeconds() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        elapsedSeconds_ = 0F;
         onChanged();
         return this;
       }
@@ -14292,36 +14370,36 @@ public final class MonsterStuffProto {
       "Num\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\022\030\n\020offens" +
       "iveSkillId\030\r \001(\005\022\030\n\020defensiveSkillId\030\016 \001" +
       "(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmonster" +
-      "Id\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001\n\027UserMon" +
+      "Id\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\234\001\n\027UserMon" +
       "sterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruser" +
       "MonsterId\030\002 \001(\003\022\030\n\020queuedTimeMillis\030\003 \001(" +
       "\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priority\030\006 " +
-      "\001(\005\"M\n\035UserMonsterCurrentHealthProto\022\025\n\r",
-      "userMonsterId\030\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001" +
-      "(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006userId\030\001 " +
-      "\001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.prot" +
-      "o.UserEnhancementItemProto\0229\n\007feeders\030\003 " +
-      "\003(\0132(.com.lvl6.proto.UserEnhancementItem" +
-      "Proto\"i\n\030UserEnhancementItemProto\022\025\n\ruse" +
-      "rMonsterId\030\001 \001(\003\022\037\n\027expectedStartTimeMil" +
-      "lis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"z\n\032User" +
-      "MonsterCurrentExpProto\022\025\n\ruserMonsterId\030" +
-      "\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexp",
-      "ectedLevel\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"H\n\033" +
-      "MinimumUserMonsterSellProto\022\025\n\ruserMonst" +
-      "erId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCu" +
-      "rrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n" +
-      "\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Full" +
-      "UserMonsterProto\"e\n\031UserMonsterEvolution" +
-      "Proto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016" +
-      "userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003\"" +
-      "\337\001\n\032MonsterBattleDialogueProto\022\021\n\tmonste" +
-      "rId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.lv",
-      "l6.proto.MonsterBattleDialogueProto.Dial" +
-      "ogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabilit" +
-      "yUttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DIA" +
-      "LOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterStuf" +
-      "fProto"
+      "\001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"M\n\035UserMonst",
+      "erCurrentHealthProto\022\025\n\ruserMonsterId\030\001 " +
+      "\001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhan" +
+      "cementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonst" +
+      "er\030\002 \001(\0132(.com.lvl6.proto.UserEnhancemen" +
+      "tItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.p" +
+      "roto.UserEnhancementItemProto\"i\n\030UserEnh" +
+      "ancementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
+      "\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renh" +
+      "ancingCost\030\003 \001(\005\"z\n\032UserMonsterCurrentEx" +
+      "pProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expecte",
+      "dExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005" +
+      "\022\022\n\nexpectedHp\030\004 \001(\005\"H\n\033MinimumUserMonst" +
+      "erSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\nca" +
+      "shAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeam" +
+      "Proto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003" +
+      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
+      "\"e\n\031UserMonsterEvolutionProto\022\035\n\025catalys" +
+      "tUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002" +
+      " \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterBattl" +
+      "eDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dia",
+      "logueType\030\003 \001(\01627.com.lvl6.proto.Monster" +
+      "BattleDialogueProto.DialogueType\022\020\n\010dial" +
+      "ogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001(\002\"1" +
+      "\n\014DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER" +
+      "_BATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14365,7 +14443,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
-        new java.lang.String[] { "UserId", "UserMonsterId", "QueuedTimeMillis", "HealthProgress", "Priority", });
+        new java.lang.String[] { "UserId", "UserMonsterId", "QueuedTimeMillis", "HealthProgress", "Priority", "ElapsedSeconds", });
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new

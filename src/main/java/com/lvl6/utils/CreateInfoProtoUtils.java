@@ -1757,6 +1757,7 @@ public class CreateInfoProtoUtils {
     //  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
     umhpb.setHealthProgress(mhfu.getHealthProgress());
     umhpb.setPriority(mhfu.getPriority());
+    umhpb.setElapsedSeconds(mhfu.getElapsedSeconds());
 
     return umhpb.build();
   }
