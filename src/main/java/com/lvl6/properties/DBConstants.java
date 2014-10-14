@@ -836,6 +836,7 @@ public class DBConstants {
   public static final String MONSTER_LEVEL_INFO__EXP_LVL_DIVISOR = "exp_lvl_divisor";
   public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
   public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
+  public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
   
   public static final String OBSTACLE__ID = GENERIC__ID;
   public static final String OBSTACLE__NAME = "name";
@@ -976,6 +977,7 @@ public class DBConstants {
   public static final String STRUCTURE_RESOURCE_STORAGE__CAPACITY = "capacity";
   
   public static final String STRUCTURE_TEAM_CENTER__STRUCT_ID  = "struct_id";
+  public static final String STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT = "team_cost_limit";
   
   public static final String STRUCTURE_TOWN_HALL__STRUCT_ID  = "struct_id";
   public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_GENERATORS = "num_resource_one_generators";

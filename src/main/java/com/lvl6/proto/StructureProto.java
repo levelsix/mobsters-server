@@ -15389,6 +15389,15 @@ public final class StructureProto {
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional int32 teamCostLimit = 2;</code>
+     */
+    boolean hasTeamCostLimit();
+    /**
+     * <code>optional int32 teamCostLimit = 2;</code>
+     */
+    int getTeamCostLimit();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TeamCenterProto}
@@ -15455,6 +15464,11 @@ public final class StructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              teamCostLimit_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -15516,8 +15530,24 @@ public final class StructureProto {
       return structInfo_;
     }
 
+    public static final int TEAMCOSTLIMIT_FIELD_NUMBER = 2;
+    private int teamCostLimit_;
+    /**
+     * <code>optional int32 teamCostLimit = 2;</code>
+     */
+    public boolean hasTeamCostLimit() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 teamCostLimit = 2;</code>
+     */
+    public int getTeamCostLimit() {
+      return teamCostLimit_;
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      teamCostLimit_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -15535,6 +15565,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, structInfo_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, teamCostLimit_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -15547,6 +15580,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, teamCostLimit_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15672,6 +15709,8 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        teamCostLimit_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -15708,6 +15747,10 @@ public final class StructureProto {
         } else {
           result.structInfo_ = structInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.teamCostLimit_ = teamCostLimit_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15726,6 +15769,9 @@ public final class StructureProto {
         if (other == com.lvl6.proto.StructureProto.TeamCenterProto.getDefaultInstance()) return this;
         if (other.hasStructInfo()) {
           mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasTeamCostLimit()) {
+          setTeamCostLimit(other.getTeamCostLimit());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15868,6 +15914,38 @@ public final class StructureProto {
           structInfo_ = null;
         }
         return structInfoBuilder_;
+      }
+
+      private int teamCostLimit_ ;
+      /**
+       * <code>optional int32 teamCostLimit = 2;</code>
+       */
+      public boolean hasTeamCostLimit() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 teamCostLimit = 2;</code>
+       */
+      public int getTeamCostLimit() {
+        return teamCostLimit_;
+      }
+      /**
+       * <code>optional int32 teamCostLimit = 2;</code>
+       */
+      public Builder setTeamCostLimit(int value) {
+        bitField0_ |= 0x00000002;
+        teamCostLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 teamCostLimit = 2;</code>
+       */
+      public Builder clearTeamCostLimit() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        teamCostLimit_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TeamCenterProto)
@@ -16644,16 +16722,17 @@ public final class StructureProto {
       "rientation\030\005 \001(\0162!.com.lvl6.proto.Struct" +
       "Orientation\022\030\n\020removalStartTime\030\006 \001(\003\"I\n" +
       "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\"I\n\017Team" +
+      "om.lvl6.proto.StructureInfoProto\"`\n\017Team" +
       "CenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lv" +
-      "l6.proto.StructureInfoProto\"k\n\016ClanHouse" +
-      "Proto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.pro" +
-      "to.StructureInfoProto\022!\n\031maxHelpersPerSo" +
-      "licitation\030\002 \001(\005*I\n\014ResourceType\022\017\n\013NO_R" +
-      "ESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013",
-      "\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016NO_O" +
-      "RIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION" +
-      "_2\020\002B\020B\016StructureProto"
+      "l6.proto.StructureInfoProto\022\025\n\rteamCostL" +
+      "imit\030\002 \001(\005\"k\n\016ClanHouseProto\0226\n\nstructIn" +
+      "fo\030\001 \001(\0132\".com.lvl6.proto.StructureInfoP" +
+      "roto\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005*" +
+      "I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH",
+      "\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021St" +
+      "ructOrientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nP" +
+      "OSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016Structure" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16762,7 +16841,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TeamCenterProto_descriptor,
-        new java.lang.String[] { "StructInfo", });
+        new java.lang.String[] { "StructInfo", "TeamCostLimit", });
     internal_static_com_lvl6_proto_ClanHouseProto_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_com_lvl6_proto_ClanHouseProto_fieldAccessorTable = new

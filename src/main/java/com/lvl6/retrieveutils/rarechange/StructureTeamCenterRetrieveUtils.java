@@ -110,7 +110,8 @@ import com.lvl6.utils.DBConnection;
    */
   private static StructureTeamCenter convertRSRowToTeamCenter(ResultSet rs) throws SQLException {
     int structId = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__STRUCT_ID);
+    int teamCostLimit = rs.getInt(DBConstants.STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT);
     
-    return new StructureTeamCenter(structId);
+    return new StructureTeamCenter(structId, teamCostLimit);
   }
 }
