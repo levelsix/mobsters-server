@@ -14881,6 +14881,24 @@ public final class StructureProto {
      * <code>optional .com.lvl6.proto.StructureInfoProto structInfo = 1;</code>
      */
     com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructInfoOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     */
+    boolean hasQualityUnlocked();
+    /**
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked();
+
+    /**
+     * <code>optional int32 evoTierUnlocked = 3;</code>
+     */
+    boolean hasEvoTierUnlocked();
+    /**
+     * <code>optional int32 evoTierUnlocked = 3;</code>
+     */
+    int getEvoTierUnlocked();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EvoChamberProto}
@@ -14947,6 +14965,22 @@ public final class StructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.Quality value = com.lvl6.proto.SharedEnumConfigProto.Quality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                qualityUnlocked_ = value;
+              }
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              evoTierUnlocked_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -15008,8 +15042,40 @@ public final class StructureProto {
       return structInfo_;
     }
 
+    public static final int QUALITYUNLOCKED_FIELD_NUMBER = 2;
+    private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_;
+    /**
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     */
+    public boolean hasQualityUnlocked() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked() {
+      return qualityUnlocked_;
+    }
+
+    public static final int EVOTIERUNLOCKED_FIELD_NUMBER = 3;
+    private int evoTierUnlocked_;
+    /**
+     * <code>optional int32 evoTierUnlocked = 3;</code>
+     */
+    public boolean hasEvoTierUnlocked() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 evoTierUnlocked = 3;</code>
+     */
+    public int getEvoTierUnlocked() {
+      return evoTierUnlocked_;
+    }
+
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      evoTierUnlocked_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -15027,6 +15093,12 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, structInfo_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, qualityUnlocked_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, evoTierUnlocked_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -15039,6 +15111,14 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, structInfo_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, qualityUnlocked_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, evoTierUnlocked_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15164,6 +15244,10 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        evoTierUnlocked_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -15200,6 +15284,14 @@ public final class StructureProto {
         } else {
           result.structInfo_ = structInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.qualityUnlocked_ = qualityUnlocked_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.evoTierUnlocked_ = evoTierUnlocked_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15218,6 +15310,12 @@ public final class StructureProto {
         if (other == com.lvl6.proto.StructureProto.EvoChamberProto.getDefaultInstance()) return this;
         if (other.hasStructInfo()) {
           mergeStructInfo(other.getStructInfo());
+        }
+        if (other.hasQualityUnlocked()) {
+          setQualityUnlocked(other.getQualityUnlocked());
+        }
+        if (other.hasEvoTierUnlocked()) {
+          setEvoTierUnlocked(other.getEvoTierUnlocked());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15360,6 +15458,73 @@ public final class StructureProto {
           structInfo_ = null;
         }
         return structInfoBuilder_;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.Quality qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+      /**
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       */
+      public boolean hasQualityUnlocked() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.Quality getQualityUnlocked() {
+        return qualityUnlocked_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       */
+      public Builder setQualityUnlocked(com.lvl6.proto.SharedEnumConfigProto.Quality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        qualityUnlocked_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.Quality qualityUnlocked = 2;</code>
+       */
+      public Builder clearQualityUnlocked() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        qualityUnlocked_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
+        onChanged();
+        return this;
+      }
+
+      private int evoTierUnlocked_ ;
+      /**
+       * <code>optional int32 evoTierUnlocked = 3;</code>
+       */
+      public boolean hasEvoTierUnlocked() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 evoTierUnlocked = 3;</code>
+       */
+      public int getEvoTierUnlocked() {
+        return evoTierUnlocked_;
+      }
+      /**
+       * <code>optional int32 evoTierUnlocked = 3;</code>
+       */
+      public Builder setEvoTierUnlocked(int value) {
+        bitField0_ |= 0x00000004;
+        evoTierUnlocked_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 evoTierUnlocked = 3;</code>
+       */
+      public Builder clearEvoTierUnlocked() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        evoTierUnlocked_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EvoChamberProto)
@@ -16639,100 +16804,102 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\202\006\n\022St" +
-      "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
-      "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
-      "StructType\0227\n\021buildResourceType\030\005 \001(\0162\034." +
-      "com.lvl6.proto.ResourceType\022\021\n\tbuildCost" +
-      "\030\006 \001(\005\022\026\n\016minutesToBuild\030\007 \001(\005\022\037\n\027prereq" +
-      "uisiteTownHallLvl\030\010 \001(\005\022\r\n\005width\030\t \001(\005\022\016" +
-      "\n\006height\030\n \001(\005\022\033\n\023predecessorStructId\030\014 " +
-      "\001(\005\022\031\n\021successorStructId\030\r \001(\005\022\017\n\007imgNam",
-      "e\030\016 \001(\t\022\036\n\026imgVerticalPixelOffset\030\017 \001(\002\022" +
-      " \n\030imgHorizontalPixelOffset\030\022 \001(\002\022\023\n\013des" +
-      "cription\030\020 \001(\t\022\030\n\020shortDescription\030\021 \001(\t" +
-      "\022\025\n\rshadowImgName\030\023 \001(\t\022\034\n\024shadowVertica" +
-      "lOffset\030\024 \001(\002\022\037\n\027shadowHorizontalOfffset" +
-      "\030\025 \001(\002\022\023\n\013shadowScale\030\026 \001(\002\"\260\001\n\nStructTy" +
-      "pe\022\r\n\tNO_STRUCT\020\010\022\026\n\022RESOURCE_GENERATOR\020" +
-      "\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n" +
-      "\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003" +
-      "EVO\020\007\022\014\n\010MINI_JOB\020\t\022\017\n\013TEAM_CENTER\020\n\022\010\n\004",
-      "CLAN\020\013\"\256\001\n\026ResourceGeneratorProto\0226\n\nstr" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\032\026Share" +
+      "dEnumConfig.proto\"\202\006\n\022StructureInfoProto" +
+      "\022\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005leve" +
+      "l\030\003 \001(\005\022A\n\nstructType\030\004 \001(\0162-.com.lvl6.p" +
+      "roto.StructureInfoProto.StructType\0227\n\021bu" +
+      "ildResourceType\030\005 \001(\0162\034.com.lvl6.proto.R" +
+      "esourceType\022\021\n\tbuildCost\030\006 \001(\005\022\026\n\016minute" +
+      "sToBuild\030\007 \001(\005\022\037\n\027prerequisiteTownHallLv" +
+      "l\030\010 \001(\005\022\r\n\005width\030\t \001(\005\022\016\n\006height\030\n \001(\005\022\033" +
+      "\n\023predecessorStructId\030\014 \001(\005\022\031\n\021successor",
+      "StructId\030\r \001(\005\022\017\n\007imgName\030\016 \001(\t\022\036\n\026imgVe" +
+      "rticalPixelOffset\030\017 \001(\002\022 \n\030imgHorizontal" +
+      "PixelOffset\030\022 \001(\002\022\023\n\013description\030\020 \001(\t\022\030" +
+      "\n\020shortDescription\030\021 \001(\t\022\025\n\rshadowImgNam" +
+      "e\030\023 \001(\t\022\034\n\024shadowVerticalOffset\030\024 \001(\002\022\037\n" +
+      "\027shadowHorizontalOfffset\030\025 \001(\002\022\023\n\013shadow" +
+      "Scale\030\026 \001(\002\"\260\001\n\nStructType\022\r\n\tNO_STRUCT\020" +
+      "\010\022\026\n\022RESOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_ST" +
+      "ORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\t" +
+      "TOWN_HALL\020\005\022\007\n\003LAB\020\006\022\007\n\003EVO\020\007\022\014\n\010MINI_JO",
+      "B\020\t\022\017\n\013TEAM_CENTER\020\n\022\010\n\004CLAN\020\013\"\256\001\n\026Resou" +
+      "rceGeneratorProto\0226\n\nstructInfo\030\001 \001(\0132\"." +
+      "com.lvl6.proto.StructureInfoProto\0222\n\014res" +
+      "ourceType\030\002 \001(\0162\034.com.lvl6.proto.Resourc" +
+      "eType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010capacit" +
+      "y\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstru" +
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl" +
+      "6.proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"s" +
+      "\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
+      "m.lvl6.proto.StructureInfoProto\022\021\n\tqueue" +
+      "Size\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(\002\"\210\001\n\010" +
+      "LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
+      "proto.StructureInfoProto\022\021\n\tqueueSize\030\002 " +
+      "\001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020pointsMu" +
+      "ltiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstr" +
       "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
-      "InfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lv" +
-      "l6.proto.ResourceType\022\026\n\016productionRate\030" +
-      "\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024ResourceStor" +
-      "ageProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
-      "proto.StructureInfoProto\0222\n\014resourceType" +
-      "\030\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\020\n\010" +
-      "capacity\030\003 \001(\005\"s\n\rHospitalProto\0226\n\nstruc" +
-      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn",
-      "foProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerS" +
-      "econd\030\003 \001(\002\"\210\001\n\010LabProto\0226\n\nstructInfo\030\001" +
-      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003" +
-      " \001(\002\022\030\n\020pointsMultiplier\030\004 \001(\002\"\341\001\n\016Resid" +
-      "enceProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
-      ".proto.StructureInfoProto\022\027\n\017numMonsterS" +
-      "lots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 \001(\005" +
-      "\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAccepted" +
-      "FbInvites\030\005 \001(\005\022\026\n\016occupationName\030\006 \001(\t\022",
-      "\021\n\timgSuffix\030\007 \001(\t\"\356\002\n\rTownHallProto\0226\n\n" +
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
-      "ureInfoProto\022 \n\030numResourceOneGenerators" +
-      "\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 " +
-      "\n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n\026numR" +
-      "esourceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals" +
-      "\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMons" +
-      "terSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQu" +
-      "eueCashCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 " +
-      "\001(\005\022\026\n\016numEvoChambers\030\014 \001(\005\"\212\001\n\022MiniJobC",
-      "enterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
-      "6.proto.StructureInfoProto\022\031\n\021generatedJ" +
-      "obLimit\030\002 \001(\005\022!\n\031hoursBetweenJobGenerati" +
-      "on\030\003 \001(\005\"\232\002\n\026FullUserStructureProto\022\024\n\014u" +
-      "serStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010str" +
-      "uctId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014pu" +
-      "rchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013" +
-      "coordinates\030\007 \001(\0132\037.com.lvl6.proto.Coord" +
-      "inateProto\0226\n\013orientation\030\010 \001(\0162!.com.lv" +
-      "l6.proto.StructOrientation\022\031\n\021fbInviteSt",
-      "ructLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 " +
-      "\001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n" +
-      "\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.co" +
-      "m.lvl6.proto.CoordinateProto\"\342\002\n\rObstacl" +
-      "eProto\022\022\n\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
-      "\0225\n\017removalCostType\030\003 \001(\0162\034.com.lvl6.pro" +
-      "to.ResourceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017seconds" +
-      "ToRemove\030\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030" +
-      "\007 \001(\005\022\017\n\007imgName\030\010 \001(\t\022\036\n\026imgVerticalPix" +
-      "elOffset\030\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016c",
-      "hanceToAppear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001" +
-      "(\t\022\034\n\024shadowVerticalOffset\030\r \001(\002\022\037\n\027shad" +
-      "owHorizontalOfffset\030\016 \001(\002\"\227\001\n\024MinimumObs" +
-      "tacleProto\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordi" +
-      "nate\030\002 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot" +
-      "o.StructOrientation\"\327\001\n\021UserObstacleProt" +
-      "o\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n\006userId\030\002 \001(" +
-      "\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001" +
-      "(\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013o",
-      "rientation\030\005 \001(\0162!.com.lvl6.proto.Struct" +
-      "Orientation\022\030\n\020removalStartTime\030\006 \001(\003\"I\n" +
-      "\017EvoChamberProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\"`\n\017Team" +
-      "CenterProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lv" +
-      "l6.proto.StructureInfoProto\022\025\n\rteamCostL" +
-      "imit\030\002 \001(\005\"k\n\016ClanHouseProto\0226\n\nstructIn" +
-      "fo\030\001 \001(\0132\".com.lvl6.proto.StructureInfoP" +
-      "roto\022!\n\031maxHelpersPerSolicitation\030\002 \001(\005*" +
-      "I\n\014ResourceType\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH",
-      "\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021St" +
-      "ructOrientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nP" +
-      "OSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016Structure" +
-      "Proto"
+      "InfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024nu" +
+      "mBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequi" +
+      "red\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022",
+      "\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001" +
+      "(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001(\013" +
+      "2\".com.lvl6.proto.StructureInfoProto\022 \n\030" +
+      "numResourceOneGenerators\030\002 \001(\005\022\036\n\026numRes" +
+      "ourceOneStorages\030\003 \001(\005\022 \n\030numResourceTwo" +
+      "Generators\030\004 \001(\005\022\036\n\026numResourceTwoStorag" +
+      "es\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumRes" +
+      "idences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017" +
+      "\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(" +
+      "\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCha",
+      "mbers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nst" +
+      "ructInfo\030\001 \001(\0132\".com.lvl6.proto.Structur" +
+      "eInfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n" +
+      "\031hoursBetweenJobGeneration\030\003 \001(\005\"\232\002\n\026Ful" +
+      "lUserStructureProto\022\024\n\014userStructId\030\001 \001(" +
+      "\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rl" +
+      "astRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003" +
+      "\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(" +
+      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
+      "ientation\030\010 \001(\0162!.com.lvl6.proto.StructO",
+      "rientation\022\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n" +
+      "\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\" +
+      "\n\023TutorialStructProto\022\020\n\010structId\030\001 \001(\005\022" +
+      "3\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\"\342\002\n\rObstacleProto\022\022\n\nobstac" +
+      "leId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCostT" +
+      "ype\030\003 \001(\0162\034.com.lvl6.proto.ResourceType\022" +
+      "\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r" +
+      "\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName" +
+      "\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001(\002\022\023",
+      "\n\013description\030\n \001(\t\022\026\n\016chanceToAppear\030\013 " +
+      "\001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowVert" +
+      "icalOffset\030\r \001(\002\022\037\n\027shadowHorizontalOfff" +
+      "set\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n\nob" +
+      "stacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
+      ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
+      "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
+      "ion\"\327\001\n\021UserObstacleProto\022\026\n\016userObstacl" +
+      "eId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobstacleId\030" +
+      "\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl6.pr",
+      "oto.CoordinateProto\0226\n\013orientation\030\005 \001(\016" +
+      "2!.com.lvl6.proto.StructOrientation\022\030\n\020r" +
+      "emovalStartTime\030\006 \001(\003\"\224\001\n\017EvoChamberProt" +
+      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
+      "tructureInfoProto\0220\n\017qualityUnlocked\030\002 \001" +
+      "(\0162\027.com.lvl6.proto.Quality\022\027\n\017evoTierUn" +
+      "locked\030\003 \001(\005\"`\n\017TeamCenterProto\0226\n\nstruc" +
+      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
+      "foProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k\n\016ClanHo" +
+      "useProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.",
+      "proto.StructureInfoProto\022!\n\031maxHelpersPe" +
+      "rSolicitation\030\002 \001(\005*I\n\014ResourceType\022\017\n\013N" +
+      "O_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020" +
+      "\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016N" +
+      "O_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSIT" +
+      "ION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16745,6 +16912,7 @@ public final class StructureProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -16835,7 +17003,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EvoChamberProto_descriptor,
-        new java.lang.String[] { "StructInfo", });
+        new java.lang.String[] { "StructInfo", "QualityUnlocked", "EvoTierUnlocked", });
     internal_static_com_lvl6_proto_TeamCenterProto_descriptor =
       getDescriptor().getMessageTypes().get(15);
     internal_static_com_lvl6_proto_TeamCenterProto_fieldAccessorTable = new
@@ -16848,6 +17016,7 @@ public final class StructureProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanHouseProto_descriptor,
         new java.lang.String[] { "StructInfo", "MaxHelpersPerSolicitation", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

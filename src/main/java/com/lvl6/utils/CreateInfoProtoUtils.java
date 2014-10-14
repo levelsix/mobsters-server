@@ -2501,15 +2501,18 @@ public class CreateInfoProtoUtils {
   	uopb.setCoordinates(cproto);
   	
   	String orientation = ofu.getOrientation();
-  	try {
-  		StructOrientation so = StructOrientation.valueOf(orientation);
-  		uopb.setOrientation(so);
-  	} catch (Exception e) {
-  		log.error("incorrect struct orientation=" + orientation + "\t ofu=" + ofu);
+  	if (null != orientation) {
+  		try {
+  			StructOrientation so = StructOrientation.valueOf(orientation);
+  			uopb.setOrientation(so);
+  		} catch (Exception e) {
+  			log.error(String.format(
+  				"incorrect struct orientation=%s, ofu=%s",
+  				orientation, ofu));
+  		}
   	}
   	
   	Date removalStartTime = ofu.getRemovalTime();
-  	
   	if (null != removalStartTime) {
   		uopb.setRemovalStartTime(removalStartTime.getTime());
   	}
@@ -2526,6 +2529,19 @@ public class CreateInfoProtoUtils {
 	  
 	  EvoChamberProto.Builder ecpb = EvoChamberProto.newBuilder();
 	  ecpb.setStructInfo(sip);
+	  
+	  String str = sec.getQualityUnlocked();
+	  if (null != str) {
+		  try {
+			  Quality quality = Quality.valueOf(str);
+			  ecpb.setQualityUnlocked(quality);
+		} catch (Exception e) {
+			log.error(String.format(
+  				"incorrect QualityUnlocked=%s",
+  				str));
+		}
+	  }
+	  ecpb.setEvoTierUnlocked(sec.getEvoTierUnlocked());
 	  
 	  return ecpb.build();
   }

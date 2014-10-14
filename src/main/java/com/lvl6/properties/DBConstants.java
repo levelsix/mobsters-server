@@ -947,6 +947,8 @@ public class DBConstants {
   public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_EVO__QUALITY_UNLOCKED = "quality_unlocked";
+  public static final String STRUCTURE_EVO__EVO_TIER_UNLOCKED = "evo_tier_unlocked";
   
   public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
   public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
