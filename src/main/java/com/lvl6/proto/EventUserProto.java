@@ -8833,9 +8833,10 @@ public final class EventUserProto {
      * <code>optional sint32 cashSpent = 2;</code>
      *
      * <pre>
-     *positive numbers which the server will then make negative
-     *server just adds this number to the user's currency
-     *however if user is an admin, use it however you want :)
+     *1) positive numbers which the server will then make negative
+     *2) server then adds this negative number to the user's currency
+     *3) however if user is an admin, use it however you want :)
+     *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
      * </pre>
      */
     boolean hasCashSpent();
@@ -8843,9 +8844,10 @@ public final class EventUserProto {
      * <code>optional sint32 cashSpent = 2;</code>
      *
      * <pre>
-     *positive numbers which the server will then make negative
-     *server just adds this number to the user's currency
-     *however if user is an admin, use it however you want :)
+     *1) positive numbers which the server will then make negative
+     *2) server then adds this negative number to the user's currency
+     *3) however if user is an admin, use it however you want :)
+     *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
      * </pre>
      */
     int getCashSpent();
@@ -9089,9 +9091,10 @@ public final class EventUserProto {
      * <code>optional sint32 cashSpent = 2;</code>
      *
      * <pre>
-     *positive numbers which the server will then make negative
-     *server just adds this number to the user's currency
-     *however if user is an admin, use it however you want :)
+     *1) positive numbers which the server will then make negative
+     *2) server then adds this negative number to the user's currency
+     *3) however if user is an admin, use it however you want :)
+     *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
      * </pre>
      */
     public boolean hasCashSpent() {
@@ -9101,9 +9104,10 @@ public final class EventUserProto {
      * <code>optional sint32 cashSpent = 2;</code>
      *
      * <pre>
-     *positive numbers which the server will then make negative
-     *server just adds this number to the user's currency
-     *however if user is an admin, use it however you want :)
+     *1) positive numbers which the server will then make negative
+     *2) server then adds this negative number to the user's currency
+     *3) however if user is an admin, use it however you want :)
+     *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
      * </pre>
      */
     public int getCashSpent() {
@@ -9724,9 +9728,10 @@ public final class EventUserProto {
        * <code>optional sint32 cashSpent = 2;</code>
        *
        * <pre>
-       *positive numbers which the server will then make negative
-       *server just adds this number to the user's currency
-       *however if user is an admin, use it however you want :)
+       *1) positive numbers which the server will then make negative
+       *2) server then adds this negative number to the user's currency
+       *3) however if user is an admin, use it however you want :)
+       *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
        * </pre>
        */
       public boolean hasCashSpent() {
@@ -9736,9 +9741,10 @@ public final class EventUserProto {
        * <code>optional sint32 cashSpent = 2;</code>
        *
        * <pre>
-       *positive numbers which the server will then make negative
-       *server just adds this number to the user's currency
-       *however if user is an admin, use it however you want :)
+       *1) positive numbers which the server will then make negative
+       *2) server then adds this negative number to the user's currency
+       *3) however if user is an admin, use it however you want :)
+       *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
        * </pre>
        */
       public int getCashSpent() {
@@ -9748,9 +9754,10 @@ public final class EventUserProto {
        * <code>optional sint32 cashSpent = 2;</code>
        *
        * <pre>
-       *positive numbers which the server will then make negative
-       *server just adds this number to the user's currency
-       *however if user is an admin, use it however you want :)
+       *1) positive numbers which the server will then make negative
+       *2) server then adds this negative number to the user's currency
+       *3) however if user is an admin, use it however you want :)
+       *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
        * </pre>
        */
       public Builder setCashSpent(int value) {
@@ -9763,9 +9770,10 @@ public final class EventUserProto {
        * <code>optional sint32 cashSpent = 2;</code>
        *
        * <pre>
-       *positive numbers which the server will then make negative
-       *server just adds this number to the user's currency
-       *however if user is an admin, use it however you want :)
+       *1) positive numbers which the server will then make negative
+       *2) server then adds this negative number to the user's currency
+       *3) however if user is an admin, use it however you want :)
+       *NOTE: Ignore 2 and 3. For 3, use DevRequest/Response instead.
        * </pre>
        */
       public Builder clearCashSpent() {

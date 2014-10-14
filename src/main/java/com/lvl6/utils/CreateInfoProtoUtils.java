@@ -1629,6 +1629,7 @@ public class CreateInfoProtoUtils {
       mlipb.setExpLvlDivisor(info.getExpLvlDivisor());
       mlipb.setExpLvlExponent(info.getExpLvlExponent());
       mlipb.setSellAmount(info.getSellAmount());
+      mlipb.setTeamCost(info.getTeamCost());
       
       lvlInfoProtos.add(mlipb.build());
     }
@@ -2537,6 +2538,7 @@ public class CreateInfoProtoUtils {
 	  
 	  TeamCenterProto.Builder tcpb = TeamCenterProto.newBuilder();
 	  tcpb.setStructInfo(sip);
+	  tcpb.setTeamCostLimit(sec.getTeamCostLimit());
 	  
 	  return tcpb.build();
   }

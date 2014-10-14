@@ -242,11 +242,13 @@ import com.lvl6.utils.DBConnection;
     float expLvlDivisor = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__EXP_LVL_DIVISOR);
     float expLvlExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT);
     int sellAmount = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__SELL_AMOUNT);
+    int teamCost = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__TEAM_COST);
     
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
     		curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,
     		lightningDmg, darknessDmg, rockDmg, speed, hpExponentBase,
-    		dmgExponentBase, expLvlDivisor, expLvlExponent, sellAmount);
+    		dmgExponentBase, expLvlDivisor, expLvlExponent, sellAmount,
+    		teamCost);
     
     return srs;
   }
