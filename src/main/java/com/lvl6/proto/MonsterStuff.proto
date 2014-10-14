@@ -126,6 +126,7 @@ message UserMonsterHealingProto {
 	optional float healthProgress = 5;
 	//incrementing number (starts back at one(?) when healing a monster and it's the first one)
 	optional int32 priority = 6;
+	optional float elapsedSeconds = 7; 
 }
 
 //------------------------------------------------------------------------------------------
