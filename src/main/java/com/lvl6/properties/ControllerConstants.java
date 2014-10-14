@@ -149,7 +149,7 @@ public class ControllerConstants {
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS =     {200,  400,  600,  700,  800,  /*170,*/ 1000};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {20F,  10F,  14F,  15F,  20F,  /*15F,*/  15F};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F,  16F,  11F,  24F,  16F,  /*-5F,*/  17F};
-	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
+	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 100, 300};
 	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
 	public static final int TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON = 5; 
