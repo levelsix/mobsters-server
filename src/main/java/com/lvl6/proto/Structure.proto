@@ -254,7 +254,7 @@ message EvoChamberProto {
 
 message TeamCenterProto {
 	optional StructureInfoProto structInfo = 1; 
-	optional int32 maxAlphaness = 2;
+	optional int32 teamCostLimit = 2;
 }
 
 //------------------------------------------------------------------------------------------
