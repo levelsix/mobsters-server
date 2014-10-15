@@ -65,6 +65,8 @@ public class CompleteMiniJobController extends EventController{
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent)event).getCompleteMiniJobRequestProto();
 
+		log.info(String.format("reqProto=%s", reqProto));
+		
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
