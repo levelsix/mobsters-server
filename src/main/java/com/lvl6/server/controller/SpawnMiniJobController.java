@@ -190,8 +190,8 @@ public class SpawnMiniJobController extends EventController{
 				probabilitySoFar += chanceToAppear;
 				float normalizedProb = probabilitySoFar / probabilitySum;
 				
-				log.info("probabilitySoFar=" + probabilitySoFar);
-				log.info("normalizedProb=" + normalizedProb);
+//				log.info("probabilitySoFar=" + probabilitySoFar);
+//				log.info("normalizedProb=" + normalizedProb);
 				if (randFloat > normalizedProb) {
 					continue;
 				}
