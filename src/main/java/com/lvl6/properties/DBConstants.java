@@ -1020,6 +1020,7 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__CHARACTER_IMG_NAME = "character_img_name";
   public static final String TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET = "char_vert_pixel_offset";
   public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
+  public static final String TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR = "char_scale_factor";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
