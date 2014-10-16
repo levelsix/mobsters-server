@@ -300,14 +300,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int gemsForSpeedup, Map<String, Integer> moneyForSpeedup,
 		  Map<String, Integer> changeMap, int maxCash) {
 
-  	log.info("cashChange=" + cashChange);
-  	log.info("gemCost=" + gemCost);
-  	log.info("deleteMap=" + protoDeleteMap);
-  	log.info("updateMap=" + protoUpdateMap);
-  	log.info("newMap=" + protoNewMap);
-  	log.info("gemCostForHealing=" + gemCostForHealing);
-  	log.info("isSpeedup=" + isSpeedup);
-  	log.info("gemsForSpedup" + gemsForSpeedup);
+  	log.info(String.format("cashChange=%s", cashChange));
+  	log.info(String.format("gemCost=%s", gemCost));
+  	log.info(String.format("deleteMap=%s", protoDeleteMap));
+  	log.info(String.format("updateMap=%s", protoUpdateMap));
+  	log.info(String.format("newMap=%s", protoNewMap));
+  	log.info(String.format("gemCostForHealing=%s", gemCostForHealing));
+  	log.info(String.format("isSpeedup=%s", isSpeedup));
+  	log.info(String.format("gemsForSpedup%s", gemsForSpeedup));
   	
   	int oilChange = 0;
   	int gemChange = -1 * gemCost;
@@ -315,9 +315,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//if user is getting cash back, make sure it doesn't exceed his limit
   	if (cashChange > 0) {
   		int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash.
-  		log.info("curCash=" + curCash);
+  		log.info(String.format("curCash=%s", curCash));
   		int maxCashUserCanGain = maxCash - curCash;
-  		log.info("maxCashUserCanGain=" + maxCashUserCanGain);
+  		log.info(String.format("maxCashUserCanGain=%s", maxCashUserCanGain));
   		cashChange = Math.min(cashChange, maxCashUserCanGain);
   	}
   	
@@ -373,13 +373,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  updateAndNew.addAll(updateList);
 	  updateAndNew.addAll(newList);
 	  
-	  log.info("updated and new monsters for healing: " + updateAndNew);
+	  log.info(String.format(
+		  "updated and new monsters for healing: %s", updateAndNew));
 	  
 	  //client could have deleted one item from two item queue, or added at least one item
 	  if (!updateAndNew.isEmpty()) {
 	  	//update and insert the new monsters
 	  	int num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNew);
-	  	log.info("updated monster healing rows. numUpdated/inserted=" + num);
+	  	log.info(String.format(
+	  		"updated monster healing rows. numUpdated/inserted=%s", num));
 	  }
 	  
 	  //don't unequip the monsters

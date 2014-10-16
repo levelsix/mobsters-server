@@ -82,6 +82,7 @@ message MonsterLevelInfoProto {
 	optional float expLvlDivisor = 14;
 	optional float expLvlExponent = 15;
 	optional int32 sellAmount = 16;
+	optional int32 teamCost = 17;
 }
 
 //------------------------------------------------------------------------------------------
@@ -125,6 +126,7 @@ message UserMonsterHealingProto {
 	optional float healthProgress = 5;
 	//incrementing number (starts back at one(?) when healing a monster and it's the first one)
 	optional int32 priority = 6;
+	optional float elapsedSeconds = 7; 
 }
 
 //------------------------------------------------------------------------------------------

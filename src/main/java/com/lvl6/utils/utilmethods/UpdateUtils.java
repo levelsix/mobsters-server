@@ -671,10 +671,12 @@ public class UpdateUtils implements UpdateUtil {
 			
 //			int userStructHospitalId = mhfu.getUserStructHospitalId();
 //			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID, userStructHospitalId);
-			float healthProgress = mhfu.getHealthProgress();
-			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS, healthProgress);
-			int priority = mhfu.getPriority();
-			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY, priority);
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS,
+				mhfu.getHealthProgress());
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY,
+				mhfu.getPriority());
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS,
+				mhfu.getElapsedSeconds());
 			
 			newRows.add(aRow);
 		}

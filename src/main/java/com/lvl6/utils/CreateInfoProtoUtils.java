@@ -1629,6 +1629,7 @@ public class CreateInfoProtoUtils {
       mlipb.setExpLvlDivisor(info.getExpLvlDivisor());
       mlipb.setExpLvlExponent(info.getExpLvlExponent());
       mlipb.setSellAmount(info.getSellAmount());
+      mlipb.setTeamCost(info.getTeamCost());
       
       lvlInfoProtos.add(mlipb.build());
     }
@@ -1756,6 +1757,7 @@ public class CreateInfoProtoUtils {
     //  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
     umhpb.setHealthProgress(mhfu.getHealthProgress());
     umhpb.setPriority(mhfu.getPriority());
+    umhpb.setElapsedSeconds(mhfu.getElapsedSeconds());
 
     return umhpb.build();
   }
@@ -2499,15 +2501,18 @@ public class CreateInfoProtoUtils {
   	uopb.setCoordinates(cproto);
   	
   	String orientation = ofu.getOrientation();
-  	try {
-  		StructOrientation so = StructOrientation.valueOf(orientation);
-  		uopb.setOrientation(so);
-  	} catch (Exception e) {
-  		log.error("incorrect struct orientation=" + orientation + "\t ofu=" + ofu);
+  	if (null != orientation) {
+  		try {
+  			StructOrientation so = StructOrientation.valueOf(orientation);
+  			uopb.setOrientation(so);
+  		} catch (Exception e) {
+  			log.error(String.format(
+  				"incorrect struct orientation=%s, ofu=%s",
+  				orientation, ofu));
+  		}
   	}
   	
   	Date removalStartTime = ofu.getRemovalTime();
-  	
   	if (null != removalStartTime) {
   		uopb.setRemovalStartTime(removalStartTime.getTime());
   	}
@@ -2525,6 +2530,19 @@ public class CreateInfoProtoUtils {
 	  EvoChamberProto.Builder ecpb = EvoChamberProto.newBuilder();
 	  ecpb.setStructInfo(sip);
 	  
+	  String str = sec.getQualityUnlocked();
+	  if (null != str) {
+		  try {
+			  Quality quality = Quality.valueOf(str);
+			  ecpb.setQualityUnlocked(quality);
+		} catch (Exception e) {
+			log.error(String.format(
+  				"incorrect QualityUnlocked=%s",
+  				str));
+		}
+	  }
+	  ecpb.setEvoTierUnlocked(sec.getEvoTierUnlocked());
+	  
 	  return ecpb.build();
   }
   
@@ -2537,6 +2555,7 @@ public class CreateInfoProtoUtils {
 	  
 	  TeamCenterProto.Builder tcpb = TeamCenterProto.newBuilder();
 	  tcpb.setStructInfo(sip);
+	  tcpb.setTeamCostLimit(sec.getTeamCostLimit());
 	  
 	  return tcpb.build();
   }
@@ -2883,6 +2902,8 @@ public class CreateInfoProtoUtils {
 	  
 	  tmepb.setCharImgVertPixelOffset(tme.getCharImgVertPixelOffset());
 	  tmepb.setCharImgHorizPixelOffset(tme.getCharImgHorizPixelOffset());
+	  tmepb.setCharImgScaleFactor(tme.getCharImgScaleFactor());
+	  
 	  
 	  return tmepb.build();
   }

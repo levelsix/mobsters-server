@@ -1,6 +1,8 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "SharedEnumConfig.proto";
+
 package com.lvl6.proto;
 
 option java_outer_classname = "StructureProto";
@@ -248,12 +250,15 @@ message UserObstacleProto {
 
 message EvoChamberProto {
 	optional StructureInfoProto structInfo = 1; 
+	optional Quality qualityUnlocked = 2;
+	optional int32 evoTierUnlocked = 3;
 }
 
 //------------------------------------------------------------------------------------------
 
 message TeamCenterProto {
 	optional StructureInfoProto structInfo = 1; 
+	optional int32 teamCostLimit = 2;
 }
 
 //------------------------------------------------------------------------------------------

@@ -5,22 +5,31 @@ import java.util.Date;
 
 public class MonsterHealingForUser implements Serializable {
 
-	private static final long serialVersionUID = -2979320446074707533L;
+	private static final long serialVersionUID = -1710714770808323548L;
+	
 	private int userId;
 	private long monsterForUserId;
 	private Date queuedTime;
 //	private int userStructHospitalId;
 	private float healthProgress;
 	private int priority;
-  
-	public MonsterHealingForUser(int userId, long monsterForUserId,
-			Date queuedTime, float healthProgress, int priority) {
+	private float elapsedSeconds;
+
+	public MonsterHealingForUser(
+		int userId,
+		long monsterForUserId,
+		Date queuedTime,
+		float healthProgress,
+		int priority,
+		float elapsedSeconds )
+	{
 		super();
 		this.userId = userId;
 		this.monsterForUserId = monsterForUserId;
 		this.queuedTime = queuedTime;
 		this.healthProgress = healthProgress;
 		this.priority = priority;
+		this.elapsedSeconds = elapsedSeconds;
 	}
 
 	public int getUserId() {
@@ -63,11 +72,32 @@ public class MonsterHealingForUser implements Serializable {
 		this.priority = priority;
 	}
 
-	@Override
-	public String toString() {
-		return "MonsterHealingForUser [userId=" + userId + ", monsterForUserId="
-				+ monsterForUserId + ", queuedTime=" + queuedTime + ", healthProgress="
-				+ healthProgress + ", priority=" + priority + "]";
+	public float getElapsedSeconds()
+	{
+		return elapsedSeconds;
 	}
-  
+
+	public void setElapsedSeconds( float elapsedSeconds )
+	{
+		this.elapsedSeconds = elapsedSeconds;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "MonsterHealingForUser [userId="
+			+ userId
+			+ ", monsterForUserId="
+			+ monsterForUserId
+			+ ", queuedTime="
+			+ queuedTime
+			+ ", healthProgress="
+			+ healthProgress
+			+ ", priority="
+			+ priority
+			+ ", elapsedSeconds="
+			+ elapsedSeconds
+			+ "]";
+	}
+
 }

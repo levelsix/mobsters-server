@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = 6880997712330999431L;
+	private static final long serialVersionUID = -4118884141391026194L;
 	
 	private int monsterId;
 	private int level;
@@ -23,18 +23,33 @@ public class MonsterLevelInfo implements Serializable {
 	private float expLvlDivisor;
 	private float expLvlExponent;
 	private int sellAmount;
-
+	private int teamCost;
 
 	public MonsterLevelInfo()
 	{
-		// TODO Auto-generated constructor stub
+		super();
 	}
-	
-	public MonsterLevelInfo(int monsterId, int level, int hp,
-			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,
-			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg,
-			int speed, float hpExponentBase, float dmgExponentBase,
-			float expLvlDivisor, float expLvlExponent, int sellAmount) {
+
+	public MonsterLevelInfo(
+		int monsterId,
+		int level,
+		int hp,
+		int curLvlRequiredExp,
+		int feederExp,
+		int fireDmg,
+		int grassDmg,
+		int waterDmg,
+		int lightningDmg,
+		int darknessDmg,
+		int rockDmg,
+		int speed,
+		float hpExponentBase,
+		float dmgExponentBase,
+		float expLvlDivisor,
+		float expLvlExponent,
+		int sellAmount,
+		int teamCost )
+	{
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -53,6 +68,7 @@ public class MonsterLevelInfo implements Serializable {
 		this.expLvlDivisor = expLvlDivisor;
 		this.expLvlExponent = expLvlExponent;
 		this.sellAmount = sellAmount;
+		this.teamCost = teamCost;
 	}
 
 	public int getMonsterId() {
@@ -191,18 +207,56 @@ public class MonsterLevelInfo implements Serializable {
 		this.sellAmount = sellAmount;
 	}
 
+	public int getTeamCost()
+	{
+		return teamCost;
+	}
+
+	public void setTeamCost( int teamCost )
+	{
+		this.teamCost = teamCost;
+	}
+
 	@Override
-	public String toString() {
-		return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
-				+ ", hp=" + hp + ", curLvlRequiredExp=" + curLvlRequiredExp
-				+ ", feederExp=" + feederExp + ", fireDmg=" + fireDmg
-				+ ", grassDmg=" + grassDmg + ", waterDmg=" + waterDmg
-				+ ", lightningDmg=" + lightningDmg + ", darknessDmg="
-				+ darknessDmg + ", rockDmg=" + rockDmg + ", speed=" + speed
-				+ ", hpExponentBase=" + hpExponentBase + ", dmgExponentBase="
-				+ dmgExponentBase + ", expLvlDivisor=" + expLvlDivisor
-				+ ", expLvlExponent=" + expLvlExponent + ", sellAmount="
-				+ sellAmount + "]";
+	public String toString()
+	{
+		return "MonsterLevelInfo [monsterId="
+			+ monsterId
+			+ ", level="
+			+ level
+			+ ", hp="
+			+ hp
+			+ ", curLvlRequiredExp="
+			+ curLvlRequiredExp
+			+ ", feederExp="
+			+ feederExp
+			+ ", fireDmg="
+			+ fireDmg
+			+ ", grassDmg="
+			+ grassDmg
+			+ ", waterDmg="
+			+ waterDmg
+			+ ", lightningDmg="
+			+ lightningDmg
+			+ ", darknessDmg="
+			+ darknessDmg
+			+ ", rockDmg="
+			+ rockDmg
+			+ ", speed="
+			+ speed
+			+ ", hpExponentBase="
+			+ hpExponentBase
+			+ ", dmgExponentBase="
+			+ dmgExponentBase
+			+ ", expLvlDivisor="
+			+ expLvlDivisor
+			+ ", expLvlExponent="
+			+ expLvlExponent
+			+ ", sellAmount="
+			+ sellAmount
+			+ ", teamCost="
+			+ teamCost
+			+ "]";
 	}
 
 }

@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class MonsterHealingForUserRetrieveUtils {
 
@@ -104,7 +99,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static MonsterHealingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
-    int i = 1;
     int userId = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__USER_ID);
     long monsterForUserId = rs.getLong(DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID);
     
@@ -121,9 +115,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     int healthProgress = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS);
     int priority = rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY);
+    float elapsedSeconds = rs.getFloat(DBConstants.MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS);
     
     MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
-    		monsterForUserId, queuedTime, healthProgress, priority);
+    		monsterForUserId, queuedTime, healthProgress, priority, elapsedSeconds);
     return userMonster;
   }
 

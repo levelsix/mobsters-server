@@ -396,6 +396,7 @@ public class DBConstants {
 //  public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
   public static final String MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS = "health_progress";
   public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
+  public static final String MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS = "elapsed_seconds";
   
   
   /*MONSTER HEALING HISTORY*/
@@ -836,6 +837,7 @@ public class DBConstants {
   public static final String MONSTER_LEVEL_INFO__EXP_LVL_DIVISOR = "exp_lvl_divisor";
   public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
   public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
+  public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
   
   public static final String OBSTACLE__ID = GENERIC__ID;
   public static final String OBSTACLE__NAME = "name";
@@ -945,6 +947,8 @@ public class DBConstants {
   public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_EVO__QUALITY_UNLOCKED = "quality_unlocked";
+  public static final String STRUCTURE_EVO__EVO_TIER_UNLOCKED = "evo_tier_unlocked";
   
   public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
   public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
@@ -976,6 +980,7 @@ public class DBConstants {
   public static final String STRUCTURE_RESOURCE_STORAGE__CAPACITY = "capacity";
   
   public static final String STRUCTURE_TEAM_CENTER__STRUCT_ID  = "struct_id";
+  public static final String STRUCTURE_TEAM_CENTER__TEAM_COST_LIMIT = "team_cost_limit";
   
   public static final String STRUCTURE_TOWN_HALL__STRUCT_ID  = "struct_id";
   public static final String STRUCTURE_TOWN_HALL__NUM_RESOURCE_ONE_GENERATORS = "num_resource_one_generators";
@@ -1015,6 +1020,7 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__CHARACTER_IMG_NAME = "character_img_name";
   public static final String TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET = "char_vert_pixel_offset";
   public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
+  public static final String TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR = "char_scale_factor";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
