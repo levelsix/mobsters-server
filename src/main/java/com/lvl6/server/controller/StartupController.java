@@ -234,7 +234,7 @@ public class StartupController extends EventController {
 		stopWatch.start();
 		StartupRequestProto reqProto = ((StartupRequestEvent) event).getStartupRequestProto();
 		log.info(String.format(
-			"Processing startup request event:%s", event));
+			"Processing startup request reqProto:%s", reqProto));
 		UpdateStatus updateStatus;
 		String udid = reqProto.getUdid();
 		String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
