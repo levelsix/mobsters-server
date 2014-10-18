@@ -44,11 +44,14 @@ public class StartUpResource
 		
 		if (!userIds.isEmpty() && facebookIds.isEmpty()) {
 			userIdsToUsers = ur.getUsersByIds(userIds);
-		} else {
+			
+		} else if (!userIds.isEmpty() || !facebookIds.isEmpty()) {
 			userIdsToUsers = ur.getUsersForFacebookIdsOrUserIds(
 				new ArrayList<String>(facebookIds),
 				new ArrayList<Integer>(userIds));
+			
 		}
+		
 		if (null == userIdsToUsers) {
 			userIdsToUsers = new HashMap<Integer, User>();
 		}
@@ -60,7 +63,11 @@ public class StartUpResource
 			clanIds.add(clanId);
 		}
 		
-		clanIdsToClans = ClanRetrieveUtils.getClansByIds(clanIds);
+		if (!clanIds.isEmpty()) {
+			clanIdsToClans = ClanRetrieveUtils.getClansByIds(clanIds);
+		} else {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
 	}
 	
 	public Map<Integer, User> getUserIdsToUsers() {
