@@ -156,13 +156,13 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	@Override
 	public void execute( StartUpResource useMe )
 	{
-		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers();
-		if (userIdsToUsers.isEmpty() || userIdsToUsers.size() == 1) {
+		if (userIds.isEmpty()) {
 			log.error(String.format(
-				"perhaps user talked to himself. postsUserReceved=%s, postsUserSent=%s, aUser=%s",
+				"user never private msged. postsUserReceved=%s, postsUserSent=%s, aUser=%s",
 				postsUserReceived, postsUserSent, user));
 			return;
 		}
+		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
 		
 		//get all the clans for the users (a map: clanId->set(userId))
 		//put the clanless users in the second argument: clanlessUserUserIds
