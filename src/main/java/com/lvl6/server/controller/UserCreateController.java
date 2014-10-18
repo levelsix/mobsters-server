@@ -471,8 +471,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
           }
           ReferralCodeUsedResponseEvent resEvent = new ReferralCodeUsedResponseEvent(referrer.getId());
           ReferralCodeUsedResponseProto resProto = ReferralCodeUsedResponseProto.newBuilder()
-              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUser(referrer))
-              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUser(user))
+              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(referrer, null))
+              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
               .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
           resEvent.setReferralCodeUsedResponseProto(resProto);
           server.writeAPNSNotificationOrEvent(resEvent);

@@ -166,11 +166,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  .getClanHelpsForIds( clanHelpIds );
 	  
 	  for (ClanHelp aid : modifiedSolicitations) {
-		  
+		  //only need the name
 		  MinimumUserProto mup2 = MinimumUserProto.newBuilder().setUserId(aid.getUserId()).build();
 
+		  //only need name not clan
 		  ClanHelpProto chp = CreateInfoProtoUtils
-			  .createClanHelpProtoFromClanHelp(aid, solicitor, mup2);
+			  .createClanHelpProtoFromClanHelp(aid, solicitor, null, mup2);
 
 		  resBuilder.addClanHelps(chp);
 	  }

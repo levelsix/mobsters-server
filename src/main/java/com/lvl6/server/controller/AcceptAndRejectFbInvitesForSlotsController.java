@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AcceptAndRejectFbInviteForSlotsRequestEvent;
 import com.lvl6.events.response.AcceptAndRejectFbInviteForSlotsResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestProto;
@@ -28,6 +30,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -112,17 +115,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	Collection<UserFacebookInviteForSlot> invites = idsToInvitesInDb.values(); 
       	List<Integer> userIds = getInviterIds(invites);
       	Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+      	Map<Integer, Clan> clanIdsToClans = getClans(idsToInviters);
       	
       	for (UserFacebookInviteForSlot invite : invites) {
       		invite.setTimeAccepted(acceptTime);
       		
       		int inviterId = invite.getInviterUserId();
       		User inviter = idsToInviters.get(inviterId);
+      		int clanId = inviter.getClanId();
+      		Clan clan = null;
+      		if (clanIdsToClans.containsKey(clanId)) {
+      			clan = clanIdsToClans.get(clanId);
+      		}
       		MinimumUserProtoWithFacebookId inviterProto = null;
       		
       		//create the proto for the invites
+      		
       		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
-      				.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter, inviterProto);
+      				.createUserFacebookInviteForSlotProtoFromInvite(invite,
+      					inviter, clan, inviterProto);
       		
       		resBuilder.addAcceptedInvites(inviteProto);
       	}
@@ -344,6 +355,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		inviterIds.add(inviterId);
   	}
   	return inviterIds;
+  }
+  
+  private Map<Integer, Clan> getClans(Map<Integer, User> idsToInviters) {
+	  Set<Integer> clanIds = new HashSet<Integer>();
+	  
+	  for (User u : idsToInviters.values()) {
+		  int clanId = u.getClanId();
+		  if (clanId > 0) {
+			  clanIds.add(clanId);
+		  }
+	  }
+
+	  if (!clanIds.isEmpty()) {
+		  return ClanRetrieveUtils.getClansByIds(
+			  new ArrayList<Integer>(clanIds));
+	  }
+	  return new HashMap<Integer, Clan>();
   }
 
   public Locker getLocker() {

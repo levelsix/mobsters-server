@@ -74,34 +74,35 @@ public class RetrieveTournamentRankingsController extends EventController {
     resBuilder.setSender(senderProto);
     resBuilder.setEventId(eventId);
     resBuilder.setAfterThisRank(afterThisRank);
+    resBuilder.setStatus(RetrieveTournamentStatus.OTHER_FAIL);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int userId = user.getId();
-      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user,	eventId);
-      Map<Integer, UserRankScore> lurs = null;
-      if (legitRetrieval) {
-        int rank = (int) leader.getRankForEventAndUser(eventId, userId);
-        double score = leader.getScoreForEventAndUser(eventId, userId);
-
-        resBuilder.setRetriever(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(
-            user,  rank, score));
-
-        //TODO: FIX THIS IMPLEMENTATION
-        lurs = getUsersAfterThisRank(eventId, afterThisRank);
-
-        if (lurs != null) {
-          List<User> resultUsers = new ArrayList<User>(RetrieveUtils.userRetrieveUtils().getUsersByIds(new ArrayList<Integer>(lurs.keySet())).values());
-          log.debug("Populating leaderboard results for event: "+eventId+" after this rank: "+afterThisRank+" found results: "+resultUsers.size());
-          for (User u : resultUsers) {
-            UserRankScore urs = lurs.get(u.getId());
-            resBuilder.addResultPlayers(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(u, urs.rank, urs.score));
-            //null PvpLeagueFromUser means will pull from hazelcast instead
-            resBuilder.addFullUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(u, null));
-          }
-        }
-      }
+//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+//      int userId = user.getId();
+//      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user,	eventId);
+//      Map<Integer, UserRankScore> lurs = null;
+//      if (legitRetrieval) {
+//        int rank = (int) leader.getRankForEventAndUser(eventId, userId);
+//        double score = leader.getScoreForEventAndUser(eventId, userId);
+//
+//        resBuilder.setRetriever(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(
+//            user,  rank, score));
+//
+//        //TODO: FIX THIS IMPLEMENTATION
+//        lurs = getUsersAfterThisRank(eventId, afterThisRank);
+//
+//        if (lurs != null) {
+//          List<User> resultUsers = new ArrayList<User>(RetrieveUtils.userRetrieveUtils().getUsersByIds(new ArrayList<Integer>(lurs.keySet())).values());
+//          log.debug("Populating leaderboard results for event: "+eventId+" after this rank: "+afterThisRank+" found results: "+resultUsers.size());
+//          for (User u : resultUsers) {
+//            UserRankScore urs = lurs.get(u.getId());
+//            resBuilder.addResultPlayers(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(u, urs.rank, urs.score));
+//            //null PvpLeagueFromUser means will pull from hazelcast instead
+//            resBuilder.addFullUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(u, null));
+//          }
+//        }
+//      }
 
       RetrieveTournamentRankingsResponseProto resProto = resBuilder.build();
       RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserId());
@@ -113,8 +114,8 @@ public class RetrieveTournamentRankingsController extends EventController {
       log.error(
           "exception in RetrieveTournamentController processEvent",
           e);
-    } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    } finally {
+//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
 
   }

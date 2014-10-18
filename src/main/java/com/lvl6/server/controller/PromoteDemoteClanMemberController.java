@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PromoteDemoteClanMemberRequestEvent;
 import com.lvl6.events.response.PromoteDemoteClanMemberResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -22,6 +23,7 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Builde
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -112,10 +114,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	server.writeEvent(resEvent);
       	
       } else {
+    	  //TODO: Is clan needed here?
       	//only write to clan if success
         resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
         User victim = users.get(victimId);
-        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(victim);
+        Clan victimClan = ClanRetrieveUtils.getClanWithId(clanId);
+        MinimumUserProto mup = CreateInfoProtoUtils
+        	.createMinimumUserProtoFromUserAndClan(victim, victimClan);
         resBuilder.setVictim(mup);
         
       	resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());

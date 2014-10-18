@@ -35,12 +35,9 @@ import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CepfuRaidStageHistory;
-import com.lvl6.info.Clan;
-import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
-import com.lvl6.info.ClanHelp;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniJobForUser;
@@ -48,9 +45,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
-import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
-import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -59,17 +54,13 @@ import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
-import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.PrivateChatPostProto;
-import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
@@ -94,20 +85,14 @@ import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
-import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -117,7 +102,6 @@ import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
@@ -125,12 +109,17 @@ import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
+import com.lvl6.server.controller.actionobjects.SetGroupChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
+import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.spring.AppContext;
@@ -150,18 +139,6 @@ public class StartupController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private static final class GroupChatComparator implements Comparator<GroupChatMessageProto> {
-		@Override
-		public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-			if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-				return -1;
-			} else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-				return 1;
-			} else {
-				return 0;
-			}
-		}
-	}
 	@Resource(name = "goodEquipsRecievedFromBoosterPacks")
 	protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
 	public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
@@ -238,14 +215,14 @@ public class StartupController extends EventController {
 		UpdateStatus updateStatus;
 		String udid = reqProto.getUdid();
 		String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
-		String fbId = reqProto.getFbId();
-		boolean freshRestart = reqProto.getIsFreshRestart();
 
+		int playerId = 0;
 		MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 		log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
+
 		double tempClientVersionNum = reqProto.getVersionNum() * 10;
 		double tempLatestVersionNum = GameServer.clientVersionNumber * 10;
-
+		
 		// Check version number
 		if ((int) tempClientVersionNum < (int) tempLatestVersionNum && tempClientVersionNum > 12.5) {
 			updateStatus = UpdateStatus.MAJOR_UPDATE;
@@ -256,13 +233,13 @@ public class StartupController extends EventController {
 			updateStatus = UpdateStatus.NO_UPDATE;
 		}
 
-		StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
+		Builder resBuilder = StartupResponseProto.newBuilder();
 		resBuilder.setUpdateStatus(updateStatus);
 		resBuilder.setAppStoreURL(Globals.APP_STORE_URL());
 		resBuilder.setReviewPageURL(Globals.REVIEW_PAGE_URL());
 		resBuilder.setReviewPageConfirmationMessage(Globals.REVIEW_PAGE_CONFIRMATION_MESSAGE);
-
-		User user = null;
+		StartupResponseEvent resEvent = new StartupResponseEvent(udid);
+	    resEvent.setTag(event.getTag());
 
 		// Don't fill in other fields if it is a major update
 		StartupStatus startupStatus = StartupStatus.USER_NOT_IN_DB;
@@ -270,7 +247,9 @@ public class StartupController extends EventController {
 		Date nowDate = new Date();
 		nowDate = getTimeUtils().createDateTruncateMillis(nowDate);
 		Timestamp now = new Timestamp(nowDate.getTime());
-		boolean isLogin = true;
+		User user = null;
+		String fbId = reqProto.getFbId();
+		boolean freshRestart = reqProto.getIsFreshRestart();
 
 		int newNumConsecutiveDaysLoggedIn = 0;
 		log.info("{}ms at start of logic", stopWatch.getTime());
@@ -278,141 +257,37 @@ public class StartupController extends EventController {
 			if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
 				List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
 				user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
+				
+				boolean isLogin = true;
+				boolean goingThroughTutorial = false;
+				boolean userIdSet = true;
+				
 				if (user != null) {
-					int userId = user.getId();
+					playerId = user.getId();
 					//if can't lock player, exception will be thrown
-					getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+					getLocker().lockPlayer(playerId, this.getClass().getSimpleName());
 					log.info("{}ms at got lock", stopWatch.getTime());
-					try {
-						//force other devices on this account to logout
-						ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
-						//login value before it is overwritten with current time
-						logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
-						logoutResponse.setUdid(udid);
-						ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
-						logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
-						//to take care of two devices using the same udid amqp queue (not very common)
-						//only if a device is already on and then another one comes on and somehow
-						//switches to the existing user account, no fbId though
-						getEventWriter().processPreDBResponseEvent(logoutEvent, udid);
-						log.info("{}ms at processPreDBResponseEvent", stopWatch.getTime());
-						//to take care of one device already logged on (lot more common than above)
-						getEventWriter().handleEvent(logoutEvent);
-						//to take care of both the above, but when user is logged in via facebook id
-						if (null != fbId && !fbId.isEmpty()) {
-							getEventWriter().processPreDBFacebookEvent(logoutEvent, fbId);
-						}
-
-
-						startupStatus = StartupStatus.USER_IN_DB;
-						log.info("No major update... getting user info");
-						//          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
-						setInProgressAndAvailableQuests(resBuilder, userId);
-						log.info("{}ms at setInProgressAndAvailableQuests", stopWatch.getTime());
-						setUserClanInfos(resBuilder, userId);
-						log.info("{}ms at setUserClanInfos", stopWatch.getTime());
-						setNotifications(resBuilder, user);
-						log.info("{}ms at setNotifications", stopWatch.getTime());
-						setNoticesToPlayers(resBuilder);
-						log.info("{}ms at setNoticesToPlayers", stopWatch.getTime());
-						setGroupChatMessages(resBuilder, user);
-						log.info("{}ms at groupChatMessages", stopWatch.getTime());
-						setPrivateChatPosts(resBuilder, user, userId);
-						log.info("{}ms at privateChatPosts", stopWatch.getTime());
-						setUserMonsterStuff(resBuilder, userId);
-						log.info("{}ms at setUserMonsterStuff", stopWatch.getTime());
-						setBoosterPurchases(resBuilder);
-						log.info("{}ms at boosterPurchases", stopWatch.getTime());
-						setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
-						log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
-						setTaskStuff(resBuilder, userId);
-						log.info("{}ms at task stuff", stopWatch.getTime());
-						setAllStaticData(resBuilder, userId, true);
-						log.info("{}ms at static data", stopWatch.getTime());
-						setEventStuff(resBuilder, userId);
-						log.info("{}ms at eventStuff", stopWatch.getTime());
-						//if server sees that the user is in a pvp battle, decrement user's elo
-						PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user,
-							userId, freshRestart, now);
-						log.info("{}ms at pvpBattleStuff", stopWatch.getTime());
-						pvpBattleHistoryStuff(resBuilder, user, userId);
-						log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
-						setClanRaidStuff(resBuilder, user, userId, now);
-						log.info("{}ms at clanRaidStuff", stopWatch.getTime());
-						setAchievementStuff(resBuilder, userId);
-						log.info("{}ms at achivementStuff", stopWatch.getTime());
-						setMiniJob(resBuilder, userId);
-						log.info("{}ms at miniJobStuff", stopWatch.getTime());
-						setUserItems(resBuilder, userId);
-						setClanHelpings(resBuilder, userId, user);
-
-
-						setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
-						log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
-						setUnhandledForgeAttempts(resBuilder, user);
-						log.info("{}ms at unhandleForgeAttempts", stopWatch.getTime());
-						setLockBoxEvents(resBuilder, user);
-						log.info("{}ms at lockBoxEvents", stopWatch.getTime());
-						//          setLeaderboardEventStuff(resBuilder);
-						setAllies(resBuilder, user);
-						log.info("{}ms at Allies", stopWatch.getTime());
-						//          setAllBosses(resBuilder, user.getType());
-
-						//OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
-						//log.info("before last login change, user=" + user);
-						user.setLastLogin(nowDate);
-						//log.info("after last login change, user=" + user);
-
-						FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(
-							user, plfu);
-						//log.info("fup=" + fup);
-						resBuilder.setSender(fup);
-
-						boolean isNewUser = false;
-						InsertUtils.get().insertIntoLoginHistory(udid, user.getId(), now, isLogin, isNewUser);
-						log.info("{}ms at InsertIntoLoginHistory", stopWatch.getTime());
-					} catch (Exception e) {
-						log.error("exception in StartupController processEvent", e);
-					} finally {
-						// server.unlockClanTowersTable();
-						getLocker().unlockPlayer(user.getId(), this.getClass().getSimpleName());
-						log.info("{}ms at unlock", stopWatch.getTime());
-					}
+					startupStatus = StartupStatus.USER_IN_DB;
+					log.info("No major update... getting user info");
+					
+					loginExistingUser(stopWatch, udid, playerId, resBuilder,
+						nowDate, now, user, fbId, freshRestart);
+					
 				} else {
-					log.info("tutorial player with udid " + udid);
+					log.info(String.format(
+						"tutorial player with udid=%s", udid));
 
-					TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
-					resBuilder.setTutorialConstants(tc);
-					setAllStaticData(resBuilder, 0, false);
-
-					boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
-					int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
-					boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
-					boolean isFirstTimeUser = false;
-					// log.info("userLoggedIn=" + userLoggedIn + ", numOldAccounts="
-					// + numOldAccounts
-					// + ", alreadyInFirstTimeUsers=" + alreadyInFirstTimeUsers);
-					if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
-						isFirstTimeUser = true;
-					}
-
-					log.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts=" +
-						numOldAccounts + "\t alreadyInFirstTimeUsers=" +
-						alreadyInFirstTimeUsers + "\t isFirstTimeUser=" + isFirstTimeUser);
-
-					if (isFirstTimeUser) {
-						log.info("new player with udid " + udid);
-						InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
-							reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
-					}
-
-					if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
-						sendOfferChartInstall(now, reqProto.getAdvertiserId());
-					}
-
-					boolean goingThroughTutorial = true;
-					InsertUtils.get().insertIntoLoginHistory(udid, 0, now, isLogin, goingThroughTutorial);
+					goingThroughTutorial = true;
+					userIdSet = false;
+					tutorialUserAccounting(reqProto, udid, now);
 				}
+				
+				InsertUtils.get().insertIntoLoginHistory(udid, playerId, now, isLogin, goingThroughTutorial);
+				log.info("{}ms at InsertIntoLoginHistory", stopWatch.getTime());
+				
+				setAllStaticData(resBuilder, playerId, userIdSet);
+				log.info("{}ms at static data", stopWatch.getTime());
+				
 				resBuilder.setStartupStatus(startupStatus);
 				setConstants(resBuilder, startupStatus);
 			}
@@ -421,12 +296,12 @@ public class StartupController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
-				StartupResponseEvent resEvent = new StartupResponseEvent(udid);
-				resEvent.setTag(event.getTag());
+//				resEvent = new StartupResponseEvent(udid);
+//				resEvent.setTag(event.getTag());
 				resEvent.setStartupResponseProto(resBuilder.build());
 				getEventWriter().processPreDBResponseEvent(resEvent, udid);
 			} catch (Exception e2) {
-				log.error("exception2 in UpdateUserCurrencyController processEvent", e);
+				log.error("exception2 in StartupController processEvent", e);
 			}
 		}
 
@@ -438,14 +313,12 @@ public class StartupController extends EventController {
     }*/
 
 		//startup time
-		resBuilder.setServerTimeMillis((new Date()).getTime());
-		StartupResponseProto resProto = resBuilder.build();
-		StartupResponseEvent resEvent = new StartupResponseEvent(udid);
-		resEvent.setTag(event.getTag());
-		resEvent.setStartupResponseProto(resProto);
-
-		// log.info("Sending struct");
-		// sendAllStructs(udid, user);
+		resBuilder.setServerTimeMillis(
+			( new Date() ).getTime() );
+//		resEvent = new StartupResponseEvent(udid);
+//		resEvent.setTag(event.getTag());
+		
+		resEvent.setStartupResponseProto( resBuilder.build() );
 
 		log.debug("Writing event response: " + resEvent);
 		server.writePreDBEvent(resEvent, udid);
@@ -460,7 +333,7 @@ public class StartupController extends EventController {
 		updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
 		//log.info("user after change user login via db. user=" + user);
 	}
-
+	
 	//priority of user returned is 
 	//user with specified fbId
 	//user with specified udid
@@ -495,9 +368,186 @@ public class StartupController extends EventController {
 		return udidUser;
 	}
 
+	private void tutorialUserAccounting(
+		StartupRequestProto reqProto,
+		String udid,
+		Timestamp now )
+	{
+		boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
+		//TODO: Retrieve from user table
+		int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
+		boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
+		boolean isFirstTimeUser = false;
+		if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
+			isFirstTimeUser = true;
+		}
+
+		log.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts=" +
+			numOldAccounts + "\t alreadyInFirstTimeUsers=" +
+			alreadyInFirstTimeUsers + "\t isFirstTimeUser=" + isFirstTimeUser);
+
+		if (isFirstTimeUser) {
+			log.info("new player with udid " + udid);
+			InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
+				reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
+		}
+
+		if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
+			sendOfferChartInstall(now, reqProto.getAdvertiserId());
+		}
+	}
+
+	private void loginExistingUser(
+		StopWatch stopWatch,
+		String udid,
+		int playerId,
+		Builder resBuilder,
+		Date nowDate,
+		Timestamp now,
+		User user,
+		String fbId,
+		boolean freshRestart )
+	{
+		try {
+			//force other devices on this account to logout
+			forceLogOutOthers(stopWatch, udid, playerId, user, fbId);
+
+			//Doesn't send a read request to user table
+			log.info("No major update... getting user info");
+			//          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
+			setInProgressAndAvailableQuests(resBuilder, playerId);
+			log.info("{}ms at setInProgressAndAvailableQuests", stopWatch.getTime());
+			setUserClanInfos(resBuilder, playerId);
+			log.info("{}ms at setUserClanInfos", stopWatch.getTime());
+			setNoticesToPlayers(resBuilder);
+			log.info("{}ms at setNoticesToPlayers", stopWatch.getTime());
+			setUserMonsterStuff(resBuilder, playerId);
+			log.info("{}ms at setUserMonsterStuff", stopWatch.getTime());
+			setBoosterPurchases(resBuilder);
+			log.info("{}ms at boosterPurchases", stopWatch.getTime());
+			setTaskStuff(resBuilder, playerId);
+			log.info("{}ms at task stuff", stopWatch.getTime());
+			setEventStuff(resBuilder, playerId);
+			log.info("{}ms at eventStuff", stopWatch.getTime());
+			//if server sees that the user is in a pvp battle, decrement user's elo
+			PvpLeagueForUser plfu = pvpBattleStuff(resBuilder, user,
+				playerId, freshRestart, now);
+			log.info("{}ms at pvpBattleStuff", stopWatch.getTime());
+			setAchievementStuff(resBuilder, playerId);
+			log.info("{}ms at achivementStuff", stopWatch.getTime());
+			setMiniJob(resBuilder, playerId);
+			log.info("{}ms at miniJobStuff", stopWatch.getTime());
+			setUserItems(resBuilder, playerId);
+			log.info("{}ms at setUserItems", stopWatch.getTime());
+			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
+			log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
+			
+			//db request for user monsters
+			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
+			log.info("{}ms at clanRaidStuff", stopWatch.getTime());
+			
+			//Sends a read request to user table
+			StartUpResource fillMe = new StartUpResource(
+				RetrieveUtils.userRetrieveUtils());
+			
+			//setGroupChatMessages(resBuilder, user);
+			SetGroupChatMessageAction sgcma = new SetGroupChatMessageAction(resBuilder, user, chatMessages);
+			sgcma.setUp(fillMe);
+			log.info("{}ms at groupChatMessages", stopWatch.getTime());
+			
+//			setPrivateChatPosts(resBuilder, user, playerId);
+			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
+				resBuilder, user, playerId);
+			spcma.setUp(fillMe);
+			log.info("{}ms at privateChatPosts", stopWatch.getTime());
+			
+//			setFacebookAndExtraSlotsStuff(resBuilder, user, playerId);
+			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(resBuilder, user, playerId);
+			sfesa.setUp(fillMe);
+			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
+			
+			//pvpBattleHistoryStuff(resBuilder, user, playerId);
+			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
+				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, hazelcastPvpUtil);
+			spbha.setUp(fillMe);
+			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
+			
+			//setClanHelpings(resBuilder, playerId, user);
+			SetClanHelpingsAction scha = new SetClanHelpingsAction(resBuilder, user, playerId, clanHelpRetrieveUtil);
+			scha.setUp(fillMe);
+			log.info("{}ms at setClanHelpings", stopWatch.getTime());
+
+			//Now since all the ids of resources are known, get them from db
+			fillMe.fetch();
+			log.info("{}ms at fillMe.fetch()", stopWatch.getTime());
+
+			sgcma.execute(fillMe);
+			log.info("{}ms at groupChatMessages", stopWatch.getTime());
+			spcma.execute(fillMe);
+			log.info("{}ms at privateChatPosts", stopWatch.getTime());
+			sfesa.execute(fillMe);
+			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
+			spbha.execute(fillMe);
+			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
+			scha.execute(fillMe);
+			log.info("{}ms at setClanHelpings", stopWatch.getTime());
+
+			//          setLeaderboardEventStuff(resBuilder);
+
+			//OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
+			//log.info("before last login change, user=" + user);
+			user.setLastLogin(nowDate);
+			//log.info("after last login change, user=" + user);
+
+			FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(
+				user, plfu);
+			//log.info("fup=" + fup);
+			resBuilder.setSender(fup);
+
+		} catch (Exception e) {
+			log.error("exception in StartupController processEvent", e);
+		} finally {
+			getLocker().unlockPlayer(playerId, this.getClass().getSimpleName());
+			log.info("{}ms at unlock", stopWatch.getTime());
+		}
+	}
+	
+	private void forceLogOutOthers(
+		StopWatch stopWatch,
+		String udid,
+		int playerId,
+		User user,
+		String fbId )
+	{
+		ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
+		//login value before it is overwritten with current time
+		logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
+		logoutResponse.setUdid(udid);
+		ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(playerId);
+		logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
+		//to take care of two devices using the same udid amqp queue (not very common)
+		//only if a device is already on and then another one comes on and somehow
+		//switches to the existing user account, no fbId though
+		getEventWriter().processPreDBResponseEvent(logoutEvent, udid);
+		log.info("{}ms at processPreDBResponseEvent", stopWatch.getTime());
+		//to take care of one device already logged on (lot more common than above)
+		getEventWriter().handleEvent(logoutEvent);
+		//to take care of both the above, but when user is logged in via facebook id
+		if (null != fbId && !fbId.isEmpty()) {
+			getEventWriter().processPreDBFacebookEvent(logoutEvent, fbId);
+		}
+	}
+	
 	private void setInProgressAndAvailableQuests(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
 		List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
 			.getUserQuestsForUser(userId);
+		
+		if (null == inProgressAndRedeemedUserQuests ||
+			inProgressAndRedeemedUserQuests.isEmpty()) {
+			return;
+		}
+		
 		//  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
 
 		List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
@@ -506,17 +556,20 @@ public class StartupController extends EventController {
 
 		Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
 		for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
-
+			int questId = uq.getQuestId();
+			
 			if (!uq.isRedeemed()) {
 				//unredeemed quest section
 				inProgressQuests.add(uq);
+				questIds.add(questId);
+				
 			} else {
-				int questId = uq.getQuestId();
 				redeemedQuestIds.add(questId);
 			}
 		}
 
 		// TODO: get the QuestJobForUser for ONLY the inProgressQuests
+		/*NOTE: DB CALL*/
 		Map<Integer, Collection<QuestJobForUser>> questIdToUserQuestJobs =
 			getQuestJobForUserRetrieveUtil()
 			.getSpecificOrAllQuestIdToQuestJobsForUserId(userId, questIds);
@@ -532,6 +585,7 @@ public class StartupController extends EventController {
 	}
 
 	private void setUserClanInfos(StartupResponseProto.Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
 		List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToUser(
 			userId);
 		for (UserClan uc : userClans) {
@@ -539,32 +593,8 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setNotifications(Builder resBuilder, User user) {
-		//    List<Integer> userIds = new ArrayList<Integer>();
-
-		//    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
-		//        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
-		//
-		//    List<ClanChatPost> clanChatPosts = null;
-		//    if (user.getClanId() > 0) {
-		//      clanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-		//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-		//      for (ClanChatPost p : clanChatPosts) {
-		//        userIds.add(p.getPosterId());
-		//      }
-		//    }
-		//
-		//    Map<Integer, User> usersByIds = null;
-		//    if (userIds.size() > 0) {
-		//      usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-		//    }
-		//
-		//    if (clanChatPosts != null && clanChatPosts.size() > 0) {
-		//
-		//    }
-	}
-
 	private void setNoticesToPlayers(Builder resBuilder) {
+		/*NOTE: DB CALL*/
 		List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
 		if (null != notices) {
 			for (String notice : notices) {
@@ -574,6 +604,624 @@ public class StartupController extends EventController {
 
 	}
 
+	private void setUserMonsterStuff(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
+			.getMonstersForUser(userId);
+
+		if (null != userMonsters && !userMonsters.isEmpty()) {
+			for (MonsterForUser mfu : userMonsters) {
+				FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
+				resBuilder.addUsersMonsters(fump);
+			}
+		}
+
+		/*NOTE: DB CALL*/
+		//monsters in healing
+		Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
+			.getMonstersForUser(userId);
+		if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
+
+			Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
+			for (MonsterHealingForUser mhfu : healingMonsters) {
+				UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+				resBuilder.addMonstersHealing(umhp);
+			}
+		}
+
+		/*NOTE: DB CALL*/
+		//enhancing monsters
+		Map<Long, MonsterEnhancingForUser> userMonstersEnhancing = MonsterEnhancingForUserRetrieveUtils
+			.getMonstersForUser(userId);
+		if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
+			//find the monster that is being enhanced
+			Collection<MonsterEnhancingForUser> enhancingMonsters = userMonstersEnhancing.values();
+			UserEnhancementItemProto baseMonster = null;
+
+			List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
+			for (MonsterEnhancingForUser mefu : enhancingMonsters) {
+				UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu);
+
+				//TODO: if user has no monsters with null start time
+				//(if user has all monsters with a start time), or if user has more than one
+				//monster with a null start time
+				//STORE THEM AND DELETE THEM OR SOMETHING
+
+				//search for the monster that is being enhanced, the one with null start time
+				Date startTime = mefu.getExpectedStartTime();
+				if(null == startTime) {
+					//found him
+					baseMonster = ueip;
+				} else {
+					//just a feeder, add him to the list
+					feeders.add(ueip);
+				}
+			}
+
+			UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+				userId, baseMonster, feeders);
+
+			resBuilder.setEnhancements(uep);
+		}
+
+		/*NOTE: DB CALL*/
+		//evolving monsters
+		Map<Long, MonsterEvolvingForUser> userMonsterEvolving = MonsterEvolvingForUserRetrieveUtils
+			.getCatalystIdsToEvolutionsForUser(userId);
+		if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
+
+			for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
+				UserMonsterEvolutionProto uep = CreateInfoProtoUtils
+					.createUserEvolutionProtoFromEvolution(mefu);
+
+				//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
+				//CALL NEEDS TO CHANGE
+				resBuilder.setEvolution(uep);
+			}
+		}
+	}
+
+	private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
+		Iterator<RareBoosterPurchaseProto> it = goodEquipsRecievedFromBoosterPacks.iterator();
+		List<RareBoosterPurchaseProto> boosterPurchases = new ArrayList<RareBoosterPurchaseProto>();
+		while (it.hasNext()) {
+			boosterPurchases.add(it.next());
+		}
+
+		Comparator<RareBoosterPurchaseProto> c = new Comparator<RareBoosterPurchaseProto>() {
+			@Override
+			public int compare(RareBoosterPurchaseProto o1, RareBoosterPurchaseProto o2) {
+				if (o1.getTimeOfPurchase() < o2.getTimeOfPurchase()) {
+					return -1;
+				} else if (o1.getTimeOfPurchase() > o2.getTimeOfPurchase()) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		};
+		Collections.sort(boosterPurchases, c);
+		// Need to add them in reverse order
+		for (int i = 0; i < boosterPurchases.size(); i++) {
+			resBuilder.addRareBoosterPurchases(boosterPurchases.get(i));
+		}
+	}
+
+	private void setTaskStuff(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
+			.getAllTaskIdsForUser(userId);
+		resBuilder.addAllCompletedTaskIds(taskIds);
+
+		/*NOTE: DB CALL*/
+		TaskForUserOngoing aTaskForUser = TaskForUserOngoingRetrieveUtils
+			.getUserTaskForUserId(userId);
+		if(null != aTaskForUser) {
+			log.warn(String.format(
+				"user has incompleted task userTask=%s", aTaskForUser));
+			setOngoingTask(resBuilder, userId, aTaskForUser);
+		}
+	}
+
+	private void setEventStuff(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		List<EventPersistentForUser> events = EventPersistentForUserRetrieveUtils
+			.getUserPersistentEventForUserId(userId);
+
+		for (EventPersistentForUser epfu : events) {
+			UserPersistentEventProto upep = CreateInfoProtoUtils.createUserPersistentEventProto(epfu);
+			resBuilder.addUserEvents(upep);
+		}
+
+	}
+
+	private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, int userId,
+		boolean isFreshRestart, Timestamp battleEndTime) {
+
+		//	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
+		/*NOTE: DB CALL*/
+		//TODO: should I be doing this?
+		PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
+			.getUserPvpLeagueForId(userId);
+
+		PvpUser pu = new PvpUser(plfu);
+		getHazelcastPvpUtil().replacePvpUser(pu, userId);
+
+		if (!isFreshRestart) {
+			log.info("not fresh restart, so not deleting pvp battle stuff");
+			return plfu;
+		}
+
+		/*NOTE: DB CALL*/
+		//if bool isFreshRestart is true, then deduct user's elo by amount specified in
+		//the table (pvp_battle_for_user), since user auto loses
+		PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
+			.getPvpBattleForUserForAttacker(userId);
+
+		if (null == battle) {
+			return plfu;
+		}
+		Timestamp battleStartTime = new Timestamp(battle.getBattleStartTime().getTime());
+		//capping max elo attacker loses
+		int eloAttackerLoses = battle.getAttackerLoseEloChange();
+		if (plfu.getElo() + eloAttackerLoses < 0) {
+			eloAttackerLoses = -1 * plfu.getElo();
+		}
+
+		int defenderId = battle.getDefenderId();
+		int eloDefenderWins = battle.getDefenderLoseEloChange();
+
+		//user has unfinished battle, reward defender and penalize attacker
+		penalizeUserForLeavingGameWhileInPvp(userId, user, plfu, defenderId,
+			eloAttackerLoses, eloDefenderWins, battleEndTime, battleStartTime, battle);
+		return plfu;
+	}
+
+	private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, 
+		PvpLeagueForUser attackerPlfu, int defenderId,
+		int eloAttackerLoses, int eloDefenderWins, Timestamp battleEndTime,
+		Timestamp battleStartTime, PvpBattleForUser battle) {
+		//NOTE: this lock ordering might result in a temp deadlock
+		//doesn't reeeally matter if can't penalize defender...
+
+		//only lock real users
+		if (0 != defenderId) {
+			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
+		}
+		try {
+			int attackerEloBefore = attackerPlfu.getElo();
+			int defenderEloBefore = 0;
+			int attackerPrevLeague = attackerPlfu.getPvpLeagueId();
+			int attackerCurLeague = 0;
+			int defenderPrevLeague = 0;
+			int defenderCurLeague = 0;
+			int attackerPrevRank = attackerPlfu.getRank();
+			int attackerCurRank = 0;
+			int defenderPrevRank = 0;
+			int defenderCurRank = 0;
+
+			//update hazelcast map and ready arguments for pvp battle history
+			int attackerCurElo = attackerPlfu.getElo() + eloAttackerLoses;
+			attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+				attackerCurElo, attackerPrevLeague);
+			attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+				attackerCurElo, attackerCurLeague);
+
+			int attacksLost = attackerPlfu.getAttacksLost() + 1;
+
+			//update attacker
+			//don't update his shields, just elo
+			int numUpdated = UpdateUtils.get().updatePvpLeagueForUser(userId,
+				attackerCurLeague, attackerCurRank, eloAttackerLoses,
+				null, null, 0, 0, 1, 0);
+
+			log.info(String.format(
+				"num updated when changing attacker's elo because of reset=%s",
+				numUpdated));
+			attackerPlfu.setElo(attackerCurElo);
+			attackerPlfu.setPvpLeagueId(attackerCurLeague);
+			attackerPlfu.setRank(attackerCurRank);
+			attackerPlfu.setAttacksLost(attacksLost);
+			PvpUser attackerPu = new PvpUser(attackerPlfu);
+			getHazelcastPvpUtil().replacePvpUser(attackerPu, userId);
+
+			//update defender if real, TODO: might need to cap defenderElo
+			if (0 != defenderId) {
+				PvpLeagueForUser defenderPlfu = getPvpLeagueForUserRetrieveUtil()
+					.getUserPvpLeagueForId(defenderId);
+
+				defenderEloBefore = defenderPlfu.getElo();
+				defenderPrevLeague = defenderPlfu.getPvpLeagueId();
+				defenderPrevRank = defenderPlfu.getRank(); 
+				//update hazelcast map and ready arguments for pvp battle history
+				int defenderCurElo = defenderEloBefore + eloDefenderWins;
+				defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
+					defenderCurElo, defenderPrevLeague);
+				defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(
+					defenderCurElo, defenderCurLeague);
+
+				int defensesWon = defenderPlfu.getDefensesWon() + 1;
+
+				numUpdated = UpdateUtils.get().updatePvpLeagueForUser(defenderId,
+					defenderCurLeague, defenderCurRank, eloDefenderWins,
+					null, null, 0, 1, 0, 0);
+				log.info(String.format(
+					"num updated when changing defender's elo because of reset=%s",
+					numUpdated));
+
+
+				defenderPlfu.setElo(defenderCurElo);
+				defenderPlfu.setPvpLeagueId(defenderCurLeague);
+				defenderPlfu.setRank(defenderCurRank);
+				defenderPlfu.setDefensesWon(defensesWon);
+				PvpUser defenderPu = new PvpUser(defenderPlfu);
+				getHazelcastPvpUtil().replacePvpUser(defenderPu, defenderId);
+			}
+
+			boolean attackerWon = false;
+			boolean cancelled = false;
+			boolean defenderGotRevenge = false;
+			boolean displayToDefender = true;
+			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId,
+				defenderId, battleEndTime, battleStartTime, eloAttackerLoses,
+				attackerEloBefore, eloDefenderWins, defenderEloBefore,
+				attackerPrevLeague, attackerCurLeague, defenderPrevLeague,
+				defenderCurLeague, attackerPrevRank, attackerCurRank,
+				defenderPrevRank, defenderCurRank, 0, 0, 0, 0, attackerWon,
+				cancelled, defenderGotRevenge, displayToDefender);
+
+			log.info(String.format(
+				"numInserted into battle history=%s", numInserted));
+			//delete that this battle occurred
+			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
+			log.info(String.format("successfully penalized, rewarded attacker and defender respectively. battle=%s, numDeleted=%s",
+				battle, numDeleted));
+
+		} catch (Exception e){
+			log.error(
+				String.format(
+					"tried to penalize, reward attacker and defender respectively. battle=%s",
+					battle),
+				e);
+		} finally {
+			if (0 != defenderId) {
+				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
+			}
+		}
+	}
+
+	private void setOngoingTask(Builder resBuilder, int userId,
+		TaskForUserOngoing aTaskForUser) {
+		try {
+			MinimumUserTaskProto mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(
+				userId, aTaskForUser);
+			resBuilder.setCurTask(mutp);
+
+			//create protos for stages
+			long userTaskId = aTaskForUser.getId();
+			/*NOTE: DB CALL*/
+			List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
+				.getTaskStagesForUserWithTaskForUserId(userTaskId);
+
+			//group taskStageForUsers by stage nums because more than one
+			//taskStageForUser with the same stage num means this stage
+			//has more than one monster
+			Map<Integer, List<TaskStageForUser>> stageNumToTsfu =
+				new HashMap<Integer, List<TaskStageForUser>>();
+			for (TaskStageForUser tsfu : taskStages) {
+				int stageNum = tsfu.getStageNum();
+
+				if (!stageNumToTsfu.containsKey(stageNum)) {
+					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>(); 
+					stageNumToTsfu.put(stageNum, a);
+				}
+
+				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
+				tsfuList.add(tsfu);
+			}
+
+			//now that we have grouped all the monsters in their corresponding
+			//task stages, protofy them
+			int taskId = aTaskForUser.getTaskId();
+			for (Integer stageNum : stageNumToTsfu.keySet()) {
+				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
+
+				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
+					taskId, stageNum, monsters);
+				resBuilder.addCurTaskStages(tsp);
+			}
+
+
+		} catch (Exception e) {
+			log.error("could not create existing user task, letting it get deleted when user starts another task.", e);
+		}
+	}
+
+	private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
+		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet);
+
+		resBuilder.setStaticDataStuffProto(sdp);
+	}
+
+	/*
+	private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
+		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
+
+		//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
+		List<PvpBattleHistory> historyList = getPvpBattleHistoryRetrieveUtil()
+			.getRecentNBattlesForDefenderId(userId, n);
+		log.info(String.format(
+			"historyList=%s", historyList));
+
+		Set<Integer> attackerIds = getPvpBattleHistoryRetrieveUtil()
+			.getAttackerIdsFromHistory(historyList);
+		log.info(String.format(
+			"attackerIds=%s", attackerIds));
+
+		if (null == attackerIds || attackerIds.isEmpty()) {
+			log.info("no valid 10 pvp battles for user. ");
+			return;
+		}
+		//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
+		Map<Integer, User> idsToAttackers = RetrieveUtils.userRetrieveUtils()
+			.getUsersByIds(attackerIds);
+		log.info(String.format(
+			"idsToAttackers=%s", idsToAttackers));
+
+		List<Integer> attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
+		Map<Integer, List<MonsterForUser>> attackerIdToCurTeam = selectMonstersForUsers(
+			attackerIdsList);
+		log.info(String.format(
+			"history monster teams=%s", attackerIdToCurTeam));
+
+		Map<Integer, Integer> attackerIdsToProspectiveCashWinnings =
+			new HashMap<Integer, Integer>();
+		Map<Integer, Integer> attackerIdsToProspectiveOilWinnings =
+			new HashMap<Integer, Integer>();
+		PvpUser attackerPu = getHazelcastPvpUtil().getPvpUser(userId);
+		calculateCashOilRewardFromPvpUsers(userId, attackerPu.getElo(),
+			idsToAttackers, attackerIdsToProspectiveCashWinnings,
+			attackerIdsToProspectiveOilWinnings);
+
+		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
+				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
+
+		//  	log.info("historyProtoList=" + historyProtoList);
+		resBuilder.addAllRecentNBattles(historyProtoList);
+	}
+
+	//Similar logic to calculateCashOilRewards in QueueUpController
+	private void calculateCashOilRewardFromPvpUsers( int attackerId,
+		int attackerElo, Map<Integer, User> userIdsToUsers,
+		Map<Integer, Integer> userIdToCashStolen,
+		Map<Integer, Integer> userIdToOilStolen )
+	{
+		Collection<Integer> userIdz = userIdsToUsers.keySet() ;
+		Map<String, PvpUser> idsToPvpUsers = getHazelcastPvpUtil()
+			.getPvpUsers(userIdz);
+
+		for (Integer defenderId : userIdz) {
+			String defenderEyed = defenderId.toString();
+
+			User defender = userIdsToUsers.get(defenderId);
+			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
+
+			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
+				attackerId, attackerElo, defenderId, defenderPu.getElo(),
+				defender.getCash(), defender.getOil());
+
+			userIdToCashStolen.put(defenderId, 
+				potentialResult.getUnsignedCashAttackerWins());
+			userIdToOilStolen.put(defenderId, 
+				potentialResult.getUnsignedOilAttackerWins());
+		}
+	}
+
+	//SOOOOOO DISGUSTING.............ALL THIS FUCKING CODE. SO GROSS.
+	//COPIED FROM QueueUpController;
+	//given users, get the 3 monsters for each user
+	private Map<Integer, List<MonsterForUser>> selectMonstersForUsers(
+		List<Integer> userIdList) {
+
+		//return value
+		Map<Integer, List<MonsterForUser>> userIdsToUserMonsters =
+			new HashMap<Integer, List<MonsterForUser>>();
+
+		//for all these users, get all their complete monsters
+		Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = RetrieveUtils
+			.monsterForUserRetrieveUtils().getCompleteMonstersForUser(userIdList);
+
+
+		for (int index = 0; index < userIdList.size(); index++) {
+			//extract a user's monsters
+			int defenderId = userIdList.get(index);
+			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
+
+			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
+				log.error("WTF!!!!!!!! user has no monsters!!!!! userId=" + defenderId +
+					"\t will move on to next guy.");
+				continue;
+			}
+			//try to select at most 3 monsters for this user
+			List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
+
+			//if the user still doesn't have 3 monsters, then too bad
+			userIdsToUserMonsters.put(defenderId, defenderMonsters);
+		}
+
+		return userIdsToUserMonsters;
+	}
+	private List<MonsterForUser> selectMonstersForUser(Map<Long, MonsterForUser> mfuIdsToMonsters) {
+
+		//get all the monsters the user has on a team (at the moment, max is 3)
+		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
+
+		//so users can have no monsters equipped, so just choose one fucking monster for him
+		if (defenderMonsters.isEmpty()) {
+			List<MonsterForUser> randMonsters = new ArrayList<MonsterForUser>(
+				mfuIdsToMonsters.values());
+			defenderMonsters.add(randMonsters.get(0));
+		}
+
+		return defenderMonsters;
+	}
+	private List<MonsterForUser> getEquippedMonsters(Map<Long, MonsterForUser> userMonsters) {
+		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
+
+		for (MonsterForUser mfu : userMonsters.values()) {
+			if (mfu.getTeamSlotNum() <= 0) {
+				//only want equipped monsters
+				continue;
+			}
+			equipped.add(mfu);
+
+		}
+		return equipped;
+	}
+	*/
+
+	private void setAchievementStuff(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		Map<Integer, AchievementForUser> achievementIdToUserAchievements =
+			getAchievementForUserRetrieveUtil()
+			.getSpecificOrAllAchievementIdToAchievementForUserId(
+				userId, null);
+
+		for (AchievementForUser afu : achievementIdToUserAchievements.values()) {
+			UserAchievementProto uap = CreateInfoProtoUtils
+				.createUserAchievementProto(afu);
+			resBuilder.addUserAchievements(uap);
+		}
+	}
+
+	private void setMiniJob(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs =
+			getMiniJobForUserRetrieveUtil()
+			.getSpecificOrAllIdToMiniJobForUser(userId, null);
+
+		if (miniJobIdToUserMiniJobs.isEmpty()) {
+			return;
+		}
+
+		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
+			miniJobIdToUserMiniJobs.values());
+		List<UserMiniJobProto> umjpList = CreateInfoProtoUtils
+			.createUserMiniJobProtos(mjfuList, null);
+
+		resBuilder.addAllUserMiniJobProtos(umjpList);
+	}
+
+	private void setUserItems(Builder resBuilder, int userId) {
+		/*NOTE: DB CALL*/
+		Map<Integer, ItemForUser> itemIdToUserItems =
+			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
+				userId, null);
+
+		if (itemIdToUserItems.isEmpty()) {
+			return;
+		}
+
+		List<UserItemProto> uipList = CreateInfoProtoUtils
+			.createUserItemProtosFromUserItems(
+				new ArrayList<ItemForUser>(
+					itemIdToUserItems.values()));
+
+		resBuilder.addAllUserItems(uipList);
+	}
+
+	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder, User user) {
+		/*NOTE: DB CALL*/
+		boolean hasPurchased = IAPHistoryRetrieveUtils.checkIfUserHasPurchased(user.getId());
+		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
+	}
+
+	private void setClanRaidStuff(Builder resBuilder, User user, int userId, Timestamp now) {
+		Date nowDate = new Date(now.getTime());
+		int clanId = user.getClanId();
+
+		if (clanId <= 0) {
+			return;
+		}
+		/*NOTE: DB CALL*/
+		//get the clan raid information for the clan
+		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+			.getPersistentEventForClanId(clanId);
+
+		if (null == cepfc) {
+			log.info(String.format(
+				"no clan raid stuff existing for clan=%s, user=%s", clanId, user));
+			return;
+		}
+
+		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+			.createPersistentClanEventClanInfoProto(cepfc);
+		resBuilder.setCurRaidClanInfo(pcecip);
+
+		/*NOTE: DB CALL*/
+		//get the clan raid information for all the clan users
+		//shouldn't be null (per the retrieveUtils)
+		Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
+			.getPersistentEventUserInfoForClanId(clanId);
+		log.info(String.format(
+			"the users involved in clan raid:%s", userIdToCepfu));
+
+		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+			log.info(String.format(
+				"no users involved in clan raid. clanRaid=%s", cepfc));
+			return;
+		}
+
+		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+
+		/*NOTE: DB CALL*/
+		//TODO: when retrieving clan info, and user's current teams, maybe query for 
+		//these monsters as well
+		Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+			.getSpecificUserMonsters(userMonsterIds);
+
+		for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+			PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+			resBuilder.addCurRaidClanUserInfo(pceuip);
+		}
+
+		setClanRaidHistoryStuff(resBuilder, userId, nowDate);
+
+	}
+
+	private void setClanRaidHistoryStuff(Builder resBuilder, int userId, Date nowDate) {
+
+		/*NOTE: DB CALL*/
+		//the raid stage and reward history for past 7 days
+		int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY; 
+		Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory =
+			CepfuRaidStageHistoryRetrieveUtils.getRaidStageHistoryForPastNDaysForUserId(
+				userId, nDays, nowDate, timeUtils);
+
+		/*NOTE: DB CALL*/
+		Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards =
+			ClanEventPersistentUserRewardRetrieveUtils.getCepUserRewardForPastNDaysForUserId(
+				userId, nDays, nowDate, timeUtils);
+
+		//possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage
+		for (Date aDate : timesToRaidStageHistory.keySet()) {
+			CepfuRaidStageHistory cepfursh = timesToRaidStageHistory.get(aDate);
+			List<ClanEventPersistentUserReward> rewards = null; 
+
+			if (timesToUserRewards.containsKey(aDate)) {
+				rewards = timesToUserRewards.get(aDate);
+			}
+
+			PersistentClanEventRaidStageHistoryProto stageProto =
+				CreateInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
+
+			resBuilder.addRaidStageHistory(stageProto);
+		}
+	}
+
+	/*
 	private void setGroupChatMessages(StartupResponseProto.Builder resBuilder, User user) {
 		Iterator<GroupChatMessageProto> it = chatMessages.iterator();
 		List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
@@ -592,19 +1240,20 @@ public class StartupController extends EventController {
   	        return 0;
   	      }
   	    }
-  	  };*/
+  	  };*//*
 		Collections.sort(globalChats, new GroupChatComparator());
 		// Need to add them in reverse order
 		for (int i = 0; i < globalChats.size(); i++) {
 			resBuilder.addGlobalChats(globalChats.get(i));
 		}
+		int clanId = user.getClanId(); 
 
-		if (user.getClanId() <= 0) {
+		if (clanId <= 0) {
 			return;
 		}
 		int limit = ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP;
 		List<ClanChatPost> activeClanChatPosts = ClanChatPostRetrieveUtils
-			.getMostRecentClanChatPostsForClan(limit , user.getClanId());
+			.getMostRecentClanChatPostsForClan(limit , clanId);
 
 		if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
 			return;
@@ -624,8 +1273,9 @@ public class StartupController extends EventController {
 						usersByIds.get(pwp.getPosterId())));
 			}
 		}
-	}
+	}*/
 
+	/*
 	private void setPrivateChatPosts(Builder resBuilder, User aUser, int userId) {
 		boolean isRecipient = true;
 		Map<Integer, Integer> userIdsToPrivateChatPostIds = null;
@@ -775,109 +1425,9 @@ public class StartupController extends EventController {
 		}
 		return clanIdsToUserIdSet;
 	}
+	*/
 
-
-	private void setUserMonsterStuff(Builder resBuilder, int userId) {
-		List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
-			.getMonstersForUser(userId);
-
-		if (null != userMonsters && !userMonsters.isEmpty()) {
-			for (MonsterForUser mfu : userMonsters) {
-				FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
-				resBuilder.addUsersMonsters(fump);
-			}
-		}
-
-		//monsters in healing
-		Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
-			.getMonstersForUser(userId);
-		if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
-
-			Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
-			for (MonsterHealingForUser mhfu : healingMonsters) {
-				UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
-				resBuilder.addMonstersHealing(umhp);
-			}
-		}
-
-		//enhancing monsters
-		Map<Long, MonsterEnhancingForUser> userMonstersEnhancing = MonsterEnhancingForUserRetrieveUtils
-			.getMonstersForUser(userId);
-		if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
-			//find the monster that is being enhanced
-			Collection<MonsterEnhancingForUser> enhancingMonsters = userMonstersEnhancing.values();
-			UserEnhancementItemProto baseMonster = null;
-
-			List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
-			for (MonsterEnhancingForUser mefu : enhancingMonsters) {
-				UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu);
-
-				//TODO: if user has no monsters with null start time
-				//(if user has all monsters with a start time), or if user has more than one
-				//monster with a null start time
-				//STORE THEM AND DELETE THEM OR SOMETHING
-
-				//search for the monster that is being enhanced, the one with null start time
-				Date startTime = mefu.getExpectedStartTime();
-				if(null == startTime) {
-					//found him
-					baseMonster = ueip;
-				} else {
-					//just a feeder, add him to the list
-					feeders.add(ueip);
-				}
-			}
-
-			UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
-				userId, baseMonster, feeders);
-
-			resBuilder.setEnhancements(uep);
-		}
-
-		//evolving monsters
-		Map<Long, MonsterEvolvingForUser> userMonsterEvolving = MonsterEvolvingForUserRetrieveUtils
-			.getCatalystIdsToEvolutionsForUser(userId);
-		if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
-
-			for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
-				UserMonsterEvolutionProto uep = CreateInfoProtoUtils
-					.createUserEvolutionProtoFromEvolution(mefu);
-
-				//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
-				//CALL NEEDS TO CHANGE
-				resBuilder.setEvolution(uep);
-			}
-		}
-
-
-	}
-
-	private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
-		Iterator<RareBoosterPurchaseProto> it = goodEquipsRecievedFromBoosterPacks.iterator();
-		List<RareBoosterPurchaseProto> boosterPurchases = new ArrayList<RareBoosterPurchaseProto>();
-		while (it.hasNext()) {
-			boosterPurchases.add(it.next());
-		}
-
-		Comparator<RareBoosterPurchaseProto> c = new Comparator<RareBoosterPurchaseProto>() {
-			@Override
-			public int compare(RareBoosterPurchaseProto o1, RareBoosterPurchaseProto o2) {
-				if (o1.getTimeOfPurchase() < o2.getTimeOfPurchase()) {
-					return -1;
-				} else if (o1.getTimeOfPurchase() > o2.getTimeOfPurchase()) {
-					return 1;
-				} else {
-					return 0;
-				}
-			}
-		};
-		Collections.sort(boosterPurchases, c);
-		// Need to add them in reverse order
-		for (int i = 0; i < boosterPurchases.size(); i++) {
-			resBuilder.addRareBoosterPurchases(boosterPurchases.get(i));
-		}
-	}  
-
+	/*
 	private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User thisUser, int userId) {
 		//gather up data so as to make only one user retrieval query
 
@@ -1000,490 +1550,9 @@ public class StartupController extends EventController {
 			}
 		}
 
-	}
+	}*/
 
-
-	private void setTaskStuff(Builder resBuilder, int userId) {
-		List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
-			.getAllTaskIdsForUser(userId);
-		resBuilder.addAllCompletedTaskIds(taskIds);
-
-		TaskForUserOngoing aTaskForUser = TaskForUserOngoingRetrieveUtils
-			.getUserTaskForUserId(userId);
-		if(null != aTaskForUser) {
-			log.warn("user has incompleted task userTask=" + aTaskForUser);
-			setOngoingTask(resBuilder, userId, aTaskForUser);
-		}
-	}
-
-	private void setOngoingTask(Builder resBuilder, int userId,
-		TaskForUserOngoing aTaskForUser) {
-		try {
-			MinimumUserTaskProto mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(
-				userId, aTaskForUser);
-			resBuilder.setCurTask(mutp);
-
-			//create protos for stages
-			long userTaskId = aTaskForUser.getId();
-			List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
-				.getTaskStagesForUserWithTaskForUserId(userTaskId);
-
-			//group taskStageForUsers by stage nums because more than one
-			//taskStageForUser with the same stage num means this stage
-			//has more than one monster
-			Map<Integer, List<TaskStageForUser>> stageNumToTsfu =
-				new HashMap<Integer, List<TaskStageForUser>>();
-			for (TaskStageForUser tsfu : taskStages) {
-				int stageNum = tsfu.getStageNum();
-
-				if (!stageNumToTsfu.containsKey(stageNum)) {
-					List<TaskStageForUser> a = new ArrayList<TaskStageForUser>(); 
-					stageNumToTsfu.put(stageNum, a);
-				}
-
-				List<TaskStageForUser> tsfuList = stageNumToTsfu.get(stageNum);
-				tsfuList.add(tsfu);
-			}
-
-			//now that we have grouped all the monsters in their corresponding
-			//task stages, protofy them
-			int taskId = aTaskForUser.getTaskId();
-			for (Integer stageNum : stageNumToTsfu.keySet()) {
-				List<TaskStageForUser> monsters = stageNumToTsfu.get(stageNum);
-
-				TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(
-					taskId, stageNum, monsters);
-				resBuilder.addCurTaskStages(tsp);
-			}
-
-
-		} catch (Exception e) {
-			log.error("could not create existing user task, letting it get" +
-				" deleted when user starts another task.", e);
-		}
-	}
-
-	private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
-		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet);
-
-		resBuilder.setStaticDataStuffProto(sdp);
-	}
-
-	private void setEventStuff(Builder resBuilder, int userId) {
-		List<EventPersistentForUser> events = EventPersistentForUserRetrieveUtils
-			.getUserPersistentEventForUserId(userId);
-
-		for (EventPersistentForUser epfu : events) {
-			UserPersistentEventProto upep = CreateInfoProtoUtils.createUserPersistentEventProto(epfu);
-			resBuilder.addUserEvents(upep);
-		}
-
-	}
-
-	private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, int userId,
-		boolean isFreshRestart, Timestamp battleEndTime) {
-
-		//	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
-		//TODO: should I be doing this?
-		PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
-			.getUserPvpLeagueForId(userId);
-
-		PvpUser pu = new PvpUser(plfu);
-		getHazelcastPvpUtil().replacePvpUser(pu, userId);
-
-		if (!isFreshRestart) {
-			log.info("not fresh restart, so not deleting pvp battle stuff");
-			return plfu;
-		}
-
-		//if bool isFreshRestart is true, then deduct user's elo by amount specified in
-		//the table (pvp_battle_for_user), since user auto loses
-		PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
-			.getPvpBattleForUserForAttacker(userId);
-
-		if (null == battle) {
-			return plfu;
-		}
-		Timestamp battleStartTime = new Timestamp(battle.getBattleStartTime().getTime());
-		//capping max elo attacker loses
-		int eloAttackerLoses = battle.getAttackerLoseEloChange();
-		if (plfu.getElo() + eloAttackerLoses < 0) {
-			eloAttackerLoses = -1 * plfu.getElo();
-		}
-
-		int defenderId = battle.getDefenderId();
-		int eloDefenderWins = battle.getDefenderLoseEloChange();
-
-		//user has unfinished battle, reward defender and penalize attacker
-		penalizeUserForLeavingGameWhileInPvp(userId, user, plfu, defenderId,
-			eloAttackerLoses, eloDefenderWins, battleEndTime, battleStartTime, battle);
-		return plfu;
-	}
-
-	private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, 
-		PvpLeagueForUser attackerPlfu, int defenderId,
-		int eloAttackerLoses, int eloDefenderWins, Timestamp battleEndTime,
-		Timestamp battleStartTime, PvpBattleForUser battle) {
-		//NOTE: this lock ordering might result in a temp deadlock
-		//doesn't reeeally matter if can't penalize defender...
-
-		//only lock real users
-		if (0 != defenderId) {
-			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
-		}
-		try {
-			int attackerEloBefore = attackerPlfu.getElo();
-			int defenderEloBefore = 0;
-			int attackerPrevLeague = attackerPlfu.getPvpLeagueId();
-			int attackerCurLeague = 0;
-			int defenderPrevLeague = 0;
-			int defenderCurLeague = 0;
-			int attackerPrevRank = attackerPlfu.getRank();
-			int attackerCurRank = 0;
-			int defenderPrevRank = 0;
-			int defenderCurRank = 0;
-
-			//update hazelcast map and ready arguments for pvp battle history
-			int attackerCurElo = attackerPlfu.getElo() + eloAttackerLoses;
-			attackerCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
-				attackerCurElo, attackerPrevLeague);
-			attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(
-				attackerCurElo, attackerCurLeague);
-
-			int attacksLost = attackerPlfu.getAttacksLost() + 1;
-
-			//update attacker
-			//don't update his shields, just elo
-			int numUpdated = UpdateUtils.get().updatePvpLeagueForUser(userId,
-				attackerCurLeague, attackerCurRank, eloAttackerLoses,
-				null, null, 0, 0, 1, 0);
-
-			log.info("num updated when changing attacker's elo because of reset=" + numUpdated);
-			attackerPlfu.setElo(attackerCurElo);
-			attackerPlfu.setPvpLeagueId(attackerCurLeague);
-			attackerPlfu.setRank(attackerCurRank);
-			attackerPlfu.setAttacksLost(attacksLost);
-			PvpUser attackerPu = new PvpUser(attackerPlfu);
-			getHazelcastPvpUtil().replacePvpUser(attackerPu, userId);
-
-			//update defender if real, TODO: might need to cap defenderElo
-			if (0 != defenderId) {
-				PvpLeagueForUser defenderPlfu = getPvpLeagueForUserRetrieveUtil()
-					.getUserPvpLeagueForId(defenderId);
-
-				defenderEloBefore = defenderPlfu.getElo();
-				defenderPrevLeague = defenderPlfu.getPvpLeagueId();
-				defenderPrevRank = defenderPlfu.getRank(); 
-				//update hazelcast map and ready arguments for pvp battle history
-				int defenderCurElo = defenderEloBefore + eloDefenderWins;
-				defenderCurLeague = PvpLeagueRetrieveUtils.getLeagueIdForElo(
-					defenderCurElo, defenderPrevLeague);
-				defenderCurRank = PvpLeagueRetrieveUtils.getRankForElo(
-					defenderCurElo, defenderCurLeague);
-
-				int defensesWon = defenderPlfu.getDefensesWon() + 1;
-
-				numUpdated = UpdateUtils.get().updatePvpLeagueForUser(defenderId,
-					defenderCurLeague, defenderCurRank, eloDefenderWins,
-					null, null, 0, 1, 0, 0);
-				log.info("num updated when changing defender's elo because of reset=" + numUpdated);
-
-
-				defenderPlfu.setElo(defenderCurElo);
-				defenderPlfu.setPvpLeagueId(defenderCurLeague);
-				defenderPlfu.setRank(defenderCurRank);
-				defenderPlfu.setDefensesWon(defensesWon);
-				PvpUser defenderPu = new PvpUser(defenderPlfu);
-				getHazelcastPvpUtil().replacePvpUser(defenderPu, defenderId);
-			}
-
-			boolean attackerWon = false;
-			boolean cancelled = false;
-			boolean defenderGotRevenge = false;
-			boolean displayToDefender = true;
-			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId,
-				defenderId, battleEndTime, battleStartTime, eloAttackerLoses,
-				attackerEloBefore, eloDefenderWins, defenderEloBefore,
-				attackerPrevLeague, attackerCurLeague, defenderPrevLeague,
-				defenderCurLeague, attackerPrevRank, attackerCurRank,
-				defenderPrevRank, defenderCurRank, 0, 0, 0, 0, attackerWon,
-				cancelled, defenderGotRevenge, displayToDefender);
-
-			log.info("numInserted into battle history=" + numInserted);
-			//delete that this battle occurred
-			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
-			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
-				battle + "\t numDeleted=" + numDeleted);
-
-		} catch (Exception e){
-			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
-				battle, e);
-		} finally {
-			if (0 != defenderId) {
-				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
-			}
-		}
-	}
-
-	private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
-		int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
-
-		//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
-		List<PvpBattleHistory> historyList = getPvpBattleHistoryRetrieveUtil()
-			.getRecentNBattlesForDefenderId(userId, n);
-		log.info("historyList=" + historyList);
-
-		Set<Integer> attackerIds = getPvpBattleHistoryRetrieveUtil()
-			.getAttackerIdsFromHistory(historyList);
-		log.info("attackerIds=" + attackerIds);
-
-		if (null == attackerIds || attackerIds.isEmpty()) {
-			log.info("no valid 10 pvp battles for user. ");
-			return;
-		}
-		//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
-		Map<Integer, User> idsToAttackers = RetrieveUtils.userRetrieveUtils()
-			.getUsersByIds(attackerIds);
-		log.info("idsToAttackers=" + idsToAttackers);
-
-		List<Integer> attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
-		Map<Integer, List<MonsterForUser>> attackerIdToCurTeam = selectMonstersForUsers(
-			attackerIdsList);
-		log.info("history monster teams=" + attackerIdToCurTeam);
-
-		Map<Integer, Integer> attackerIdsToProspectiveCashWinnings =
-			new HashMap<Integer, Integer>();
-		Map<Integer, Integer> attackerIdsToProspectiveOilWinnings =
-			new HashMap<Integer, Integer>();
-		PvpUser attackerPu = getHazelcastPvpUtil().getPvpUser(userId);
-		calculateCashOilRewardFromPvpUsers(userId, attackerPu.getElo(),
-			idsToAttackers, attackerIdsToProspectiveCashWinnings,
-			attackerIdsToProspectiveOilWinnings);
-
-		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
-				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
-
-		//  	log.info("historyProtoList=" + historyProtoList);
-		resBuilder.addAllRecentNBattles(historyProtoList);
-	}
-
-	//Similar logic to calculateCashOilRewards in QueueUpController
-	private void calculateCashOilRewardFromPvpUsers( int attackerId,
-		int attackerElo, Map<Integer, User> userIdsToUsers,
-		Map<Integer, Integer> userIdToCashStolen,
-		Map<Integer, Integer> userIdToOilStolen )
-	{
-		Collection<Integer> userIdz = userIdsToUsers.keySet() ;
-		Map<String, PvpUser> idsToPvpUsers = getHazelcastPvpUtil()
-			.getPvpUsers(userIdz);
-
-		for (Integer defenderId : userIdz) {
-			String defenderEyed = defenderId.toString();
-
-			User defender = userIdsToUsers.get(defenderId);
-			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
-
-			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
-				attackerId, attackerElo, defenderId, defenderPu.getElo(),
-				defender.getCash(), defender.getOil());
-
-			userIdToCashStolen.put(defenderId, 
-				potentialResult.getUnsignedCashAttackerWins());
-			userIdToOilStolen.put(defenderId, 
-				potentialResult.getUnsignedOilAttackerWins());
-		}
-	}
-
-	//SOOOOOO DISGUSTING.............ALL THIS FUCKING CODE. SO GROSS.
-	//COPIED FROM QueueUpController;
-	//given users, get the 3 monsters for each user
-	private Map<Integer, List<MonsterForUser>> selectMonstersForUsers(
-		List<Integer> userIdList) {
-
-		//return value
-		Map<Integer, List<MonsterForUser>> userIdsToUserMonsters =
-			new HashMap<Integer, List<MonsterForUser>>();
-
-		//for all these users, get all their complete monsters
-		Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = RetrieveUtils
-			.monsterForUserRetrieveUtils().getCompleteMonstersForUser(userIdList);
-
-
-		for (int index = 0; index < userIdList.size(); index++) {
-			//extract a user's monsters
-			int defenderId = userIdList.get(index);
-			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
-
-			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
-				log.error("WTF!!!!!!!! user has no monsters!!!!! userId=" + defenderId +
-					"\t will move on to next guy.");
-				continue;
-			}
-			//try to select at most 3 monsters for this user
-			List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
-
-			//if the user still doesn't have 3 monsters, then too bad
-			userIdsToUserMonsters.put(defenderId, defenderMonsters);
-		}
-
-		return userIdsToUserMonsters;
-	}
-	private List<MonsterForUser> selectMonstersForUser(Map<Long, MonsterForUser> mfuIdsToMonsters) {
-
-		//get all the monsters the user has on a team (at the moment, max is 3)
-		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
-
-		//so users can have no monsters equipped, so just choose one fucking monster for him
-		if (defenderMonsters.isEmpty()) {
-			List<MonsterForUser> randMonsters = new ArrayList<MonsterForUser>(
-				mfuIdsToMonsters.values());
-			defenderMonsters.add(randMonsters.get(0));
-		}
-
-		return defenderMonsters;
-	}
-	private List<MonsterForUser> getEquippedMonsters(Map<Long, MonsterForUser> userMonsters) {
-		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
-
-		for (MonsterForUser mfu : userMonsters.values()) {
-			if (mfu.getTeamSlotNum() <= 0) {
-				//only want equipped monsters
-				continue;
-			}
-			equipped.add(mfu);
-
-		}
-		return equipped;
-	}
-
-
-
-
-	private void setClanRaidStuff(Builder resBuilder, User user, int userId, Timestamp now) {
-		Date nowDate = new Date(now.getTime());
-		int clanId = user.getClanId();
-
-		if (clanId <= 0) {
-			return;
-		}
-		//get the clan raid information for the clan
-		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
-			.getPersistentEventForClanId(clanId);
-
-		if (null == cepfc) {
-			log.info("no clan raid stuff existing for clan=" + clanId + "\t user=" + user);
-			return;
-		}
-
-		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
-			.createPersistentClanEventClanInfoProto(cepfc);
-		resBuilder.setCurRaidClanInfo(pcecip);
-
-		//get the clan raid information for all the clan users
-		//shouldn't be null (per the retrieveUtils)
-		Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
-			.getPersistentEventUserInfoForClanId(clanId);
-		log.info("the users involved in clan raid:" + userIdToCepfu);
-
-		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
-			log.info("no users involved in clan raid. clanRaid=" + cepfc);
-			return;
-		}
-
-		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
-
-		//TODO: when retrieving clan info, and user's current teams, maybe query for 
-		//these monsters as well
-		Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-			.getSpecificUserMonsters(userMonsterIds);
-
-		for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-			PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
-				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
-			resBuilder.addCurRaidClanUserInfo(pceuip);
-		}
-
-		setClanRaidHistoryStuff(resBuilder, userId, nowDate);
-
-	}
-
-	private void setClanRaidHistoryStuff(Builder resBuilder, int userId, Date nowDate) {
-
-		//the raid stage and reward history for past 7 days
-		int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY; 
-		Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory =
-			CepfuRaidStageHistoryRetrieveUtils.getRaidStageHistoryForPastNDaysForUserId(
-				userId, nDays, nowDate, timeUtils);
-
-		Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards =
-			ClanEventPersistentUserRewardRetrieveUtils.getCepUserRewardForPastNDaysForUserId(
-				userId, nDays, nowDate, timeUtils);
-
-		//possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage
-		for (Date aDate : timesToRaidStageHistory.keySet()) {
-			CepfuRaidStageHistory cepfursh = timesToRaidStageHistory.get(aDate);
-			List<ClanEventPersistentUserReward> rewards = null; 
-
-			if (timesToUserRewards.containsKey(aDate)) {
-				rewards = timesToUserRewards.get(aDate);
-			}
-
-			PersistentClanEventRaidStageHistoryProto stageProto =
-				CreateInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
-
-			resBuilder.addRaidStageHistory(stageProto);
-		}
-	}
-
-	private void setAchievementStuff(Builder resBuilder, int userId) {
-		Map<Integer, AchievementForUser> achievementIdToUserAchievements =
-			getAchievementForUserRetrieveUtil()
-			.getSpecificOrAllAchievementIdToAchievementForUserId(
-				userId, null);
-
-		for (AchievementForUser afu : achievementIdToUserAchievements.values()) {
-			UserAchievementProto uap = CreateInfoProtoUtils
-				.createUserAchievementProto(afu);
-			resBuilder.addUserAchievements(uap);
-		}
-	}
-
-	private void setMiniJob(Builder resBuilder, int userId) {
-		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs =
-			getMiniJobForUserRetrieveUtil()
-			.getSpecificOrAllIdToMiniJobForUser(userId, null);
-
-		if (miniJobIdToUserMiniJobs.isEmpty()) {
-			return;
-		}
-
-		List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>(
-			miniJobIdToUserMiniJobs.values());
-		List<UserMiniJobProto> umjpList = CreateInfoProtoUtils
-			.createUserMiniJobProtos(mjfuList, null);
-
-		resBuilder.addAllUserMiniJobProtos(umjpList);
-	}
-
-	private void setUserItems(Builder resBuilder, int userId) {
-		Map<Integer, ItemForUser> itemIdToUserItems =
-			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
-				userId, null);
-
-		if (itemIdToUserItems.isEmpty()) {
-			return;
-		}
-
-		List<UserItemProto> uipList = CreateInfoProtoUtils
-			.createUserItemProtosFromUserItems(
-				new ArrayList<ItemForUser>(
-					itemIdToUserItems.values()));
-
-		resBuilder.addAllUserItems(uipList);
-	}
-
-
+	/*
 	private void setClanHelpings(Builder resBuilder, int userId, User user) {
 		Map<Integer, List<ClanHelp>> allSolicitations = clanHelpRetrieveUtil
 			.getUserIdToClanHelp(
@@ -1503,6 +1572,10 @@ public class StartupController extends EventController {
 		//	  Map<Integer, User> users = RetrieveUtils.userRetrieveUtils()
 		//		  .getUsersByIds(userIds);
 		//	  
+		
+		if (null == allSolicitations || allSolicitations.isEmpty()) {
+			return;
+		}
 		Map<Integer, User> solicitors = RetrieveUtils.userRetrieveUtils()
 			.getUsersByIds(allSolicitations.keySet());                                
 
@@ -1528,7 +1601,7 @@ public class StartupController extends EventController {
 			}
 		}
 	}
-
+	*/
 
 
 
@@ -1636,19 +1709,6 @@ public class StartupController extends EventController {
     return "";
   }*/
 
-	private void setLockBoxEvents(StartupResponseProto.Builder resBuilder, User user) {
-		//    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
-		//    Map<Integer, UserLockBoxEvent> map = UserLockBoxEventRetrieveUtils
-		//        .getLockBoxEventIdsToLockBoxEventsForUser(user.getId());
-		//    for (LockBoxEventProto p : resBuilder.getLockBoxEventsList()) {
-		//      UserLockBoxEvent e = map.get(p.getLockBoxEventId());
-		//      if (e != null) {
-		//        resBuilder.addUserLockBoxEvents(CreateInfoProtoUtils.createUserLockBoxEventProto(e,
-		//            user.getType()));
-		//      }
-		//    }
-	}
-
 	protected void updateLeaderboard(String apsalarId, User user, Timestamp now,
 		int newNumConsecutiveDaysLoggedIn) {
 		if (user != null) {
@@ -1659,42 +1719,6 @@ public class StartupController extends EventController {
 			//null PvpLeagueFromUser means will pull from hazelcast instead
 			leaderboard.updateLeaderboardForUser(user, null);
 		}
-	}
-
-
-	private void setUnhandledForgeAttempts(Builder resBuilder, User user) {
-		//    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = 
-		//        UnhandledBlacksmithAttemptRetrieveUtils.getUnhandledBlacksmithAttemptsForUser(user.getId());
-		//    int numEquipsBeingForged = blacksmithIdToBlacksmithAttempt.size();
-		//    int numEquipsUserCanForge = ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS
-		//        + user.getNumAdditionalForgeSlots();
-		//
-		//    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged <= numEquipsUserCanForge) {
-		//      for (BlacksmithAttempt ba : blacksmithIdToBlacksmithAttempt.values()) {
-		//
-		//        int baId = ba.getId();
-		//        resBuilder.addUnhandledForgeAttempt(
-		//            CreateInfoProtoUtils.createUnhandledBlacksmithAttemptProtoFromBlacksmithAttempt(
-		//                blacksmithIdToBlacksmithAttempt.get(baId))
-		//            );
-		//
-		//        int equipId = ba.getEquipId();
-		//        Equipment e = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipId);
-		//        resBuilder.addForgeAttemptEquip(
-		//            CreateInfoProtoUtils.createFullEquipProtoFromEquip(e)
-		//            );
-		//      }
-		//    }
-		//
-		//    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged > numEquipsUserCanForge) {
-		//      log.error("user has too many blacksmith attempts, should only have " + numEquipsUserCanForge + 
-		//          ". blacksmith attempts = " + blacksmithIdToBlacksmithAttempt);
-		//    }
-	}
-
-	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder, User user) {
-		boolean hasPurchased = IAPHistoryRetrieveUtils.checkIfUserHasPurchased(user.getId());
-		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
 	}
 
 	// returns the total number of consecutive days the user logged in,
@@ -2127,184 +2151,12 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setAllies(Builder resBuilder, User user) {
-		//    boolean realPlayersOnly = false;
-		//    boolean fakePlayersOnly = false;
-		//    boolean offlinePlayersOnly = false; //does not include fake players
-		//    boolean inactiveShield = false;
-		//    List<Integer> forbiddenUserIds = new ArrayList<Integer>();
-		//    forbiddenUserIds.add(user.getId());
-		//
-		//    List<User> allies = RetrieveUtils.userRetrieveUtils().getUsers(
-		//        ControllerConstants.STARTUP__APPROX_NUM_ALLIES_TO_SEND, user.getLevel(),
-		//        user.getId(), false, realPlayersOnly,
-		//        fakePlayersOnly, offlinePlayersOnly,
-		//        inactiveShield, forbiddenUserIds);
-		//    if (allies != null && allies.size() > 0) {
-		//      for (User ally : allies) {
-		//        resBuilder.addAllies(CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(ally));
-		//      }
-		//    }
-	}
-
-
 	private void setConstants(Builder startupBuilder, StartupStatus startupStatus) {
 		startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto(globals));
 		if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
-			setTutorialConstants(startupBuilder);
+			TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+			startupBuilder.setTutorialConstants(tc);
 		}
-	}
-
-	private void setTutorialConstants(Builder resBuilder) {
-		//    Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-		//
-		//    UserType aGoodType = UserType.GOOD_ARCHER;
-		//    UserType aBadType = UserType.BAD_ARCHER;
-		//
-		//    Task task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
-		////    task.setPotentialLootEquipIds(new ArrayList<Integer>());
-		//    
-		//    FullTaskProto ftpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
-		//    FullTaskProto ftpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
-		//
-		//    task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
-		////    task.setPotentialLootEquipIds(new ArrayList<Integer>());
-		//    FullTaskProto questFtpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
-		//    FullTaskProto questFtpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
-		//
-		//    Dialogue goodAcceptDialogue = MiscMethods
-		//        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_ACCEPT_DIALOGUE);
-		//    Dialogue badAcceptDialogue = MiscMethods
-		//        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_ACCEPT_DIALOGUE);
-		//
-		//    FullTutorialQuestProto tqbp = FullTutorialQuestProto
-		//        .newBuilder()
-		//        .setGoodName(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_NAME)
-		//        .setBadName(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_NAME)
-		//        .setGoodDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DESCRIPTION)
-		//        .setBadDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DESCRIPTION)
-		//        .setGoodDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE)
-		//        .setBadDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE)
-		//        .setGoodAcceptDialogue(
-		//            CreateInfoProtoUtils.createDialogueProtoFromDialogue(goodAcceptDialogue))
-		//            .setBadAcceptDialogue(CreateInfoProtoUtils.createDialogueProtoFromDialogue(badAcceptDialogue))
-		//            .setAssetNumWithinCity(ControllerConstants.TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY)
-		//            .setCoinsGained(ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED)
-		//            .setExpGained(ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED)
-		//            .setTaskGood(questFtpGood)
-		//            .setTaskBad(questFtpBad)
-		////            .setTaskCompleteCoinGain(MiscMethods.calculateCoinsGainedFromTutorialTask(task))
-		//            .setEquipReward(
-		//                CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//                    .get(ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID))).build();
-		//
-		//    PlayerWallPost pwp = new PlayerWallPost(-1,
-		//        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL, -1, new Date(),
-		//        ControllerConstants.USER_CREATE__FIRST_WALL_POST_TEXT);
-		//    User poster = RetrieveUtils.userRetrieveUtils().getUserById(
-		//        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		//
-		//    String name = "";
-		//    int syllablesInName = (Math.random() < .5) ? syllablesInName1 : syllablesInName2;
-		//    name = nameGeneratorElven.compose(syllablesInName);
-		//
-		//
-		//    TutorialConstants.Builder builder = TutorialConstants
-		//    		.newBuilder();
-		//    builder.setInitEnergy(ControllerConstants.TUTORIAL__INIT_ENERGY);
-		//    builder.setInitStamina(ControllerConstants.TUTORIAL__INIT_STAMINA)
-		//    .setInitHealth(ControllerConstants.TUTORIAL__INIT_HEALTH);
-		//    builder.setStructToBuild(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD);
-		//    builder.setDiamondCostToInstabuildFirstStruct(ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT);
-		//    builder.setArcherInitAttack(ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK);
-		//    builder.setArcherInitDefense(ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE);
-		//    FullEquipProto fep = CreateInfoProtoUtils.createFullEquipProtoFromEquip(
-		//    		equipmentIdsToEquipment.get(ControllerConstants.TUTORIAL__ARCHER_INIT_WEAPON_ID));
-		//    builder.setArcherInitWeapon(fep);
-		//    builder.setArcherInitArmor(
-		//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//    				.get(ControllerConstants.TUTORIAL__ARCHER_INIT_ARMOR_ID)));
-		//    builder.setMageInitAttack(ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK);
-		//    builder.setMageInitDefense(ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE);
-		//    builder.setMageInitWeapon(
-		//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_WEAPON_ID)));
-		//    builder.setMageInitArmor(
-		//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_ARMOR_ID)));
-		//    builder.setWarriorInitAttack(ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK);
-		//    builder.setWarriorInitDefense(ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE);
-		//    builder.setWarriorInitWeapon(
-		//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_WEAPON_ID)));
-		//    builder.setWarriorInitArmor(
-		//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-		//    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_ARMOR_ID)));
-		//    builder.setTutorialQuest(tqbp);
-		//    builder.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
-		//    builder.setTutorialQuest(tqbp);
-		//    builder.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
-		//    builder.setCoinRewardForBeingReferred(
-		//    		ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED);
-		//    builder.setInitDiamonds(Globals.INITIAL_DIAMONDS());
-		//    builder.setInitCoins(ControllerConstants.TUTORIAL__INIT_COINS);
-		//    builder.setFirstBattleCoinGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN);
-		//    builder.setFirstBattleExpGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN);
-		//    builder.setFirstTaskGood(ftpGood);
-		//    builder.setFirstTaskBad(ftpBad);
-		//    builder.setExpRequiredForLevelTwo(
-		//    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(2));
-		//    builder.setExpRequiredForLevelThree(
-		//    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(3));
-		//    builder.setFirstWallPost(
-		//    		CreateInfoProtoUtils.createPlayerWallPostProtoFromPlayerWallPost(pwp, poster));
-		//    builder.setDefaultName(name);
-		//    builder.setCostToSpeedUpForge(ControllerConstants.TUTORIAL__COST_TO_SPEED_UP_FORGE);
-		//
-		//
-		//    List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils
-		//    		.getNeutralCityElementsForCity(ControllerConstants.TUTORIAL__FIRST_NEUTRAL_CITY_ID);
-		//    if (neutralCityElements != null) {
-		//    	for (NeutralCityElement nce : neutralCityElements) {
-		//        builder.addFirstCityElementsForGood(CreateInfoProtoUtils
-		//            .createNeutralCityElementProtoFromNeutralCityElement(nce, aGoodType));
-		//        builder.addFirstCityElementsForBad(CreateInfoProtoUtils
-		//            .createNeutralCityElementProtoFromNeutralCityElement(nce, aBadType));
-		//      }
-		//    }
-		//
-		//    Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
-		//    for (Structure struct : structIdsToStructs.values()) {
-		//      if (struct != null) {
-		//        FullStructureProto fsp = CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct);
-		//        builder.addCarpenterStructs(fsp);
-		//        if (struct.getMinLevel() == 2) {
-		//          builder.addNewlyAvailableStructsAfterLevelup(CreateInfoProtoUtils
-		//              .createFullStructureProtoFromStructure(struct));
-		//        }
-		//      }
-		//    }
-		//
-		//    List<City> availCities = MiscMethods
-		//        .getCitiesAvailableForUserLevel(ControllerConstants.USER_CREATE__START_LEVEL);
-		//    for (City city : availCities) {
-		//      if (city.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL) {
-		//        builder.addCitiesNewlyAvailableToUserAfterLevelup(CreateInfoProtoUtils
-		//            .createFullCityProtoFromCity(city));
-		//      }
-		//    }
-		//
-		//    Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-		//    if (equipIdToEquips != null) {
-		//      for (Equipment e : equipIdToEquips.values()) {
-		//        if (e != null && e.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL
-		//            && (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
-		//          builder.addNewlyEquippableEpicsAndLegendariesForAllClassesAfterLevelup(CreateInfoProtoUtils
-		//              .createFullEquipProtoFromEquip(e));
-		//        }
-		//      }
-		//    }
-		//    resBuilder.setTutorialConstants(builder.build());
 	}
 
 	//TODO: FIX THIS

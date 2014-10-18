@@ -234,7 +234,7 @@ public class AchievementTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		
 		//create UserAchievementProto
 		AchievementForUser afu = new AchievementForUser();
@@ -261,7 +261,7 @@ public class AchievementTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		
 		AchievementProgressRequestProto.Builder aprpb =

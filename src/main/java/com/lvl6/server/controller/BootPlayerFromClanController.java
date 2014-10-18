@@ -87,7 +87,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (success) {
-      	MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(playerToBoot);
+      	MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(playerToBoot, null);
       	resBuilder.setPlayerToBoot(mup);
       }
       

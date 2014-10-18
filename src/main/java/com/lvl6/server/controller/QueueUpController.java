@@ -20,6 +20,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -36,6 +37,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -256,7 +258,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			numWanted = numWanted - queuedOpponentIdsList.size();
 			
 			//GENERATE THE FAKE DEFENDER AND MONSTERS, not enough enemies, get fake ones
-			log.info("no valid users for attacker=" + attacker);
+			log.info(String.format(
+				"no valid users for attacker=%s", attacker));
 			log.info("generating fake users.");
 			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
 					retrievePvpMonsters(minElo, maxElo);
@@ -271,8 +274,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		if (null != queuedOpponents && !queuedOpponents.isEmpty()) {
 			log.info("there are people to attack!");
-			log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
-			log.info("queuedOpponents:" + queuedOpponents);
+			log.info(String.format(
+				"queuedOpponentIdsList=%s", queuedOpponentIdsList));
+			log.info(String.format(
+				"queuedOpponents:%s", queuedOpponents));
+			
+			Map<Integer, Clan> userIdToClan = getClans(queuedOpponents);
 			
 			/*
 			Map<Integer, PvpLeagueForUser> userIdToPvpLeagueInfo = 
@@ -293,7 +300,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 			//create the protos for all this
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
-					queuedOpponents, null, userIdToPvpUser, userIdToUserMonsters,
+					queuedOpponents, userIdToClan, null, userIdToPvpUser, userIdToUserMonsters,
 					userIdToProspectiveCashReward, userIdToProspectiveOilReward);
 			
 			//user should see real people before fake ones
@@ -302,6 +309,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.addAllDefenderInfoList(pvpProtoList);
 		log.info("pvpProtoList=" + pvpProtoList);
 		
+	}
+	
+	//TODO: Is getting clans necessary?
+	//given bunch o users, get their clans and pair them up
+	private Map<Integer, Clan> getClans(List<User> queuedOpponents) {
+		Set<Integer> clanIds = new HashSet<Integer>();
+		
+		for (User u : queuedOpponents) {
+			int clanId = u.getClanId();
+			
+			if (clanId > 0) {
+				clanIds.add(clanId);
+			}
+		}
+		
+		Map<Integer, Clan> clanIdToClan = ClanRetrieveUtils.getClansByIds(clanIds);
+		
+		//pair up user and clan
+		Map<Integer, Clan> userIdsToClans = new HashMap<Integer, Clan>();
+		for (User u : queuedOpponents) {
+			int clanId = u.getClanId();
+			
+			if (clanIdToClan.containsKey(clanId)) {
+				userIdsToClans.put( u.getId(), clanIdToClan.get(clanId) );
+			}
+		}
+		return userIdsToClans;
 	}
 	
 	/*

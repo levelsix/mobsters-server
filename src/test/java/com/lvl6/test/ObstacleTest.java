@@ -90,7 +90,7 @@ public class ObstacleTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + unitTester,
 				null != unitTester);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(unitTester);
+				.createMinimumUserProtoFromUserAndClan(unitTester, null);
 		
 		//create obstacle proto
     	MinimumObstacleProto mop = createTestObstacleProto();
@@ -176,7 +176,7 @@ public class ObstacleTest extends TestCase {
 		int userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(unitTester);
+				.createMinimumUserProtoFromUserAndClan(unitTester, null);
 		
 		//check the user obstacle exists
 		List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
@@ -277,7 +277,7 @@ public class ObstacleTest extends TestCase {
 				.getLastObstacleSpawnedTime();
 		
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(unitTester);
+				.createMinimumUserProtoFromUserAndClan(unitTester, null);
 		
 		//calculate when obstacle is done being removed ten minutes from now
     	Date nowDate = new Date();
@@ -350,7 +350,7 @@ public class ObstacleTest extends TestCase {
 				.getLastObstacleSpawnedTime();
 		
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(unitTester);
+				.createMinimumUserProtoFromUserAndClan(unitTester, null);
 		
 		//calculate when obstacle is done being removed ten minutes from now
     	Date nowDate = new Date();

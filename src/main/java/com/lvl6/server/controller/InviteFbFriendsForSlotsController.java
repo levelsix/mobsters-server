@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InviteFbFriendsForSlotsRequestEvent;
 import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
@@ -108,13 +109,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
       if (successful) {
+    	  Clan inviterClan = null;
+    	  
       	Map<Integer, UserFacebookInviteForSlot> newIdsToInvites =
       			UserFacebookInviteForSlotRetrieveUtils.getInviteForId(inviteIds);
       	//client needs to know what the new invites are;
       	for (Integer id : newIdsToInvites.keySet()) {
       		UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
       		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
-      				.createUserFacebookInviteForSlotProtoFromInvite(invite, aUser, senderProto);
+      				.createUserFacebookInviteForSlotProtoFromInvite(
+      					invite, aUser, inviterClan, senderProto);
       		resBuilder.addInvitesNew(inviteProto);
       	}
     	  resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);

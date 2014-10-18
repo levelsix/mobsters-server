@@ -23,6 +23,7 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
+import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
@@ -31,6 +32,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
@@ -200,6 +202,19 @@ public class ControllerTest extends TestCase {
 //		deleteUserById(userId);
 //		deleteUserLoginHistory(userId, udid);
 //		deleteFirstTimeUsers(udid);
+		
+		//just to see if optimizations from commit  worked
+//		String udid = "9e5b867694b25f351b6df28fe050693cf00d2f7e";
+//		float versionNum = 1.0F;
+//		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
+//		srpb.setUdid(udid);
+//		srpb.setVersionNum(versionNum);
+//		
+//		StartupRequestEvent sre = new StartupRequestEvent();
+//		sre.setStartupRequestProto(srpb.build());
+//		
+//		startupController.handleEvent(sre);
+//		log.info("done");
 	}
 	
 	
@@ -534,7 +549,7 @@ public class ControllerTest extends TestCase {
 	private static int expectedEnhancedMonsterExpLvlHp = 1;
 	private Long submitEnhanceMonsterRequest(User aUser, Map<Long, MonsterForUser> mfuMap) {
 		//create the arguments for the event
-		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
+		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(aUser, null);
 		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
 		
 		for (MonsterForUser mfu: mfuMap.values()) {
@@ -595,7 +610,7 @@ public class ControllerTest extends TestCase {
 		//build arguments
 		DevRequestProto.Builder drpb = DevRequestProto.newBuilder();
 		drpb.setSender(
-			CreateInfoProtoUtils.createMinimumUserProtoFromUser(unitTester));
+			CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(unitTester, null));
 		drpb.setDevRequest(DevRequest.GET_MONZTER);
 		drpb.setNum(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
 		

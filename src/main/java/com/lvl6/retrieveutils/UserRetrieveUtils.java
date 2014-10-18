@@ -115,7 +115,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		}
   	
   	String query = querySb.toString();
-  	log.info("query=" + query + "\t values=" + params);
+  	log.info(String.format(
+  		"query=%s, values=%s", query, params));
   	Connection conn = null;
   	ResultSet rs = null;
   	Map<Integer, User> userMap = null;
@@ -222,6 +223,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	log.error("user retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
+    	userIdToUserMap = new HashMap<Integer, User>();
     }
     return userIdToUserMap;
   }

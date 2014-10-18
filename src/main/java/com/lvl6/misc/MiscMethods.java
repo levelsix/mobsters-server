@@ -733,9 +733,11 @@ public class MiscMethods {
 
     cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
     cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
-    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
-    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-    cb.setAdminChatUserProto(adminChatUserProto);
+    
+//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
+//    cb.setAdminChatUserProto(adminChatUserProto);
+    
     cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
 
     UserMonsterConstants.Builder umcb = UserMonsterConstants.newBuilder();

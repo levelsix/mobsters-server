@@ -79,8 +79,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	lockedClan = getLocker().lockClan(clanId);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      User requester = RetrieveUtils.userRetrieveUtils().getUserById(requesterId);
+    	Set<Integer> userIds = new HashSet<Integer>();
+    	userIds.add(userId);
+    	userIds.add(requesterId);
+    	Map<Integer, User> idsToUsers = RetrieveUtils.
+    		userRetrieveUtils().getUsersByIds(userIds);
+    	
+      User user = null;//RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User requester = null;//RetrieveUtils.userRetrieveUtils().getUserById(requesterId);
+      
+      if (idsToUsers.containsKey(userId)) {
+    	  user = idsToUsers.get(userId);
+      }
+      if (idsToUsers.containsKey(requesterId)) {
+    	  requester = idsToUsers.get(requesterId);
+      }
 
       List<Integer> clanSizeList = new ArrayList<Integer>();
       boolean legitDecision = checkLegitDecision(resBuilder, lockedClan, user, requester,
@@ -93,9 +106,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       if (success) {
       	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
-      	setResponseBuilderStuff(resBuilder, clanId, clanSizeList);
+      	Clan clan = null;
+      	
+      	if (accept) {
+      		clan = ClanRetrieveUtils.getClanWithId(clanId);
+      	}
+      	
+      	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
       	MinimumUserProto requestMup = CreateInfoProtoUtils
-      			.createMinimumUserProtoFromUser(requester);
+      			.createMinimumUserProtoFromUserAndClan(requester, clan);
       	resBuilder.setRequester(requestMup);
       }
       
@@ -136,6 +155,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
+  //TODO: Issue one call to clan_for_user table instead of, atm, three 
   private boolean checkLegitDecision(Builder resBuilder, boolean lockedClan, User user,
   		User requester, boolean accept, List<Integer> clanSizeList) {
   	
@@ -230,9 +250,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   }
   
-  private void setResponseBuilderStuff(Builder resBuilder, int clanId,
+  private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 		  List<Integer> clanSizeList) {
-  	Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+  	
     resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
 
     int size = clanSizeList.get(0);
