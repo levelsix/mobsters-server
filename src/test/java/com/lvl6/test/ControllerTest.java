@@ -204,7 +204,7 @@ public class ControllerTest extends TestCase {
 //		deleteFirstTimeUsers(udid);
 		
 		//just to see if optimizations from commit  worked
-//		String udid = "9e5b867694b25f351b6df28fe050693cf00d2f7e";
+//		String udid = "6AA96003-E8F5-514E-BD09-CBD15F7D344B";
 //		float versionNum = 1.0F;
 //		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
 //		srpb.setUdid(udid);
