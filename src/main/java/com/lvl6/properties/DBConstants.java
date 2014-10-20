@@ -307,7 +307,8 @@ public class DBConstants {
   public static final String MINI_JOB_FOR_USER__USER_ID = "user_id";
   public static final String MINI_JOB_FOR_USER__MINI_JOB_ID = "mini_job_id";
   public static final String MINI_JOB_FOR_USER__BASE_DMG_RECEIVED = "base_dmg_received";
-  public static final String MINI_JOB_FOR_USER__DURATION_MINUTES = "duration_minutes";
+//  public static final String MINI_JOB_FOR_USER__DURATION_MINUTES = "duration_minutes";
+  public static final String MINI_JOB_FOR_USER__DURATION_SECONDS = "duration_seconds";
   public static final String MINI_JOB_FOR_USER__TIME_STARTED = "time_started";
   public static final String MINI_JOB_FOR_USER__USER_MONSTER_IDS = "user_monster_ids";
   public static final String MINI_JOB_FOR_USER__TIME_COMPLETED = "time_completed";

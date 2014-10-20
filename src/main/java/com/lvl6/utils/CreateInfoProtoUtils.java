@@ -1445,6 +1445,8 @@ public class CreateInfoProtoUtils {
 	  umjpb.setUserMiniJobId(mjfu.getId());
 	  umjpb.setBaseDmgReceived(mjfu.getBaseDmgReceived());
 	  umjpb.setDurationMinutes(mjfu.getDurationMinutes());
+	  umjpb.setDurationSeconds(mjfu.getDurationSeconds());
+	  
 	  Date time = mjfu.getTimeStarted();
 	  if (null != time) {
 		  umjpb.setTimeStarted(time.getTime());
