@@ -65,7 +65,7 @@ public class SetClanHelpingsAction implements StartUpAction
 		}
 		Map<Integer, User> solicitors = useMe.getUserIdsToUsers(allSolicitations.keySet());
 		
-		if (solicitors.isEmpty()) {
+		if (null == solicitors || solicitors.isEmpty()) {
 			return;
 		}
 		

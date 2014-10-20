@@ -99,6 +99,9 @@ public class SetGroupChatMessageAction implements StartUpAction
 	@Override
 	public void execute( StartUpResource useMe )
 	{
+		if (userIds.isEmpty()) {
+			return;
+		}
 		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
 		if (userIdsToUsers.isEmpty()) {
 			return;

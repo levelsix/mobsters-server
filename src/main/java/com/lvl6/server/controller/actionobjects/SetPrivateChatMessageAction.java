@@ -40,7 +40,6 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	}
 	
 	private Set<Integer> userIds;
-	boolean isRecipient;
 	private Map<Integer, PrivateChatPost> postsUserReceived;
 	private Map<Integer, PrivateChatPost> postsUserSent;
 	private Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts;
@@ -55,7 +54,7 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	@Override
 	public void setUp(StartUpResource fillMe)
 	{
-		isRecipient = true;
+		boolean isRecipient = true;
 		
 		//get all the most recent posts sent to this user
 		postsUserReceived =  PrivateChatPostRetrieveUtils
@@ -68,6 +67,8 @@ public class SetPrivateChatMessageAction implements StartUpAction
 			.getMostRecentPrivateChatPostsByOrToUser(
 				userId, isRecipient, ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT);
 
+		userIds = new HashSet<Integer>();
+		
 		if ((null == postsUserReceived || postsUserReceived.isEmpty()) &&
 			(null == postsUserSent || postsUserSent.isEmpty()) ) {
 			log.info(String.format(
@@ -82,7 +83,6 @@ public class SetPrivateChatMessageAction implements StartUpAction
 
 		if (null != userIdsToPrivateChatPostIds && !userIdsToPrivateChatPostIds.isEmpty()) {
 			//retrieve all users
-			userIds = new HashSet<Integer>();
 			userIds.addAll(userIdsToPrivateChatPostIds.keySet());
 			userIds.add(userId); //userIdsToPrivateChatPostIds contains userIds other than 'this' userId
 			
@@ -156,7 +156,7 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	@Override
 	public void execute( StartUpResource useMe )
 	{
-		if (userIds.isEmpty()) {
+		if (null == userIds || userIds.isEmpty()) {
 			log.error(String.format(
 				"user never private msged. postsUserReceved=%s, postsUserSent=%s, aUser=%s",
 				postsUserReceived, postsUserSent, user));
