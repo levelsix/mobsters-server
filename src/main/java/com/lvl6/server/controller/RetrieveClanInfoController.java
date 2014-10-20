@@ -70,6 +70,8 @@ import com.lvl6.utils.RetrieveUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent)event).getRetrieveClanInfoRequestProto();
 
+    log.info(String.format("reqProto=%s", reqProto));
+    
     MinimumUserProto senderProto = reqProto.getSender();
     int clanId = reqProto.getClanId();
     String clanName = reqProto.getClanName();

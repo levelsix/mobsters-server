@@ -23,21 +23,24 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
-import com.lvl6.events.request.StartupRequestEvent;
+import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.DevProto.DevRequest;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
-import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
@@ -47,6 +50,7 @@ import com.lvl6.server.controller.DevController;
 import com.lvl6.server.controller.EnhanceMonsterController;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
 import com.lvl6.server.controller.QuestProgressController;
+import com.lvl6.server.controller.RetrieveClanInfoController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
 import com.lvl6.server.controller.UserCreateController;
@@ -86,6 +90,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	DevController devController;
+	
+	@Autowired
+	RetrieveClanInfoController retrieveClanInfoController;
 	
 	@Autowired
 	TimeUtils timeUtils;
@@ -632,6 +639,29 @@ public class ControllerTest extends TestCase {
 		DeleteUtils.get().deleteMonsterForUser(mfuListTwo.get(0).getId());
 	}
 	
+//	@Test
+//	public void testRetrieveClanInfo() {
+//		int errorId = 1098;
+//		User error = getUserRetrieveUtils().getUserById(errorId);
+//		int clanId = 66;
+//		Clan c = ClanRetrieveUtils.getClanWithId(clanId);
+//		boolean isForBrowsingList = false;
+//		ClanInfoGrabType cigt = ClanInfoGrabType.ALL;
+//		
+//		RetrieveClanInfoRequestProto.Builder rcirpb = RetrieveClanInfoRequestProto.newBuilder();
+//		rcirpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(error, c));
+//		rcirpb.setClanId(clanId);
+//		rcirpb.setGrabType(cigt);
+//		rcirpb.setIsForBrowsingList(isForBrowsingList);
+//		
+//		RetrieveClanInfoRequestEvent rcire = new RetrieveClanInfoRequestEvent();
+//		rcire.setTag(1);
+//		rcire.setRetrieveClanInfoRequestProto(rcirpb.build());
+//		
+//		retrieveClanInfoController.handleEvent(rcire);
+//		log.info("Done");
+//	}
+	
 	private int getUnitTesterId() {
 		return 11;
 	}
@@ -701,6 +731,17 @@ public class ControllerTest extends TestCase {
 	public void setDevController( DevController devController )
 	{
 		this.devController = devController;
+	}
+
+	public RetrieveClanInfoController getRetrieveClanInfoController()
+	{
+		return retrieveClanInfoController;
+	}
+
+
+	public void setRetrieveClanInfoController( RetrieveClanInfoController retrieveClanInfoController )
+	{
+		this.retrieveClanInfoController = retrieveClanInfoController;
 	}
 
 

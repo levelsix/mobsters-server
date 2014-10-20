@@ -220,10 +220,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
 			userIdToUserMap = convertRSToUserIdToUsersMap(rs);
 		} catch (Exception e) {
-    	log.error("user retrieve db error.", e);
+			log.error("user retrieve db error.", e);
+			userIdToUserMap = new HashMap<Integer, User>();
     } finally {
     	DBConnection.get().close(rs, null, conn);
-    	userIdToUserMap = new HashMap<Integer, User>();
     }
     return userIdToUserMap;
   }
@@ -242,7 +242,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, DBConstants.TABLE_USER);
 			usersList = convertRSToUsers(rs);
 		} catch (Exception e) {
-    	log.error("user retrieve db error.", e);
+			log.error("user retrieve db error.", e);
+			usersList = new ArrayList<User>();
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }

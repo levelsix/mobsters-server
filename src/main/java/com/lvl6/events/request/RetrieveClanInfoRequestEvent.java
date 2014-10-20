@@ -31,4 +31,11 @@ public class RetrieveClanInfoRequestEvent extends RequestEvent {
   public RetrieveClanInfoRequestProto getRetrieveClanInfoRequestProto() {
     return retrieveClanInfoRequestProto;
   }
+
+  public void setRetrieveClanInfoRequestProto(
+	  RetrieveClanInfoRequestProto retrieveClanInfoRequestProto )
+  {
+	  this.retrieveClanInfoRequestProto = retrieveClanInfoRequestProto;
+  }
+
 }
