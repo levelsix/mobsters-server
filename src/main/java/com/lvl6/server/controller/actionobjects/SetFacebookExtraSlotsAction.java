@@ -53,15 +53,6 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 	{
 		getAllFbInvites();
 
-		//case where user never did any invites
-//		if (idsToInvitesToMe.isEmpty() && idsToInvitesFromMe.isEmpty()) {
-//			return;
-//		}
-//		
-//		if (recipientFacebookIds.isEmpty() && inviterUserIds.isEmpty()) {
-//			return;
-//		}
-		
 		getRecipientFbIds();
 
 		//to make it easier later on, get the inviter ids for these invites and

@@ -62,6 +62,7 @@ public class SetGroupChatMessageAction implements StartUpAction
 	@Override
 	public void setUp(StartUpResource fillMe)
 	{
+		userIds = new HashSet<Integer>();
 		
 		Iterator<GroupChatMessageProto> it = chatMessages.iterator();
 		List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
@@ -88,7 +89,6 @@ public class SetGroupChatMessageAction implements StartUpAction
 			return;
 		}  		
 		
-		userIds = new HashSet<Integer>();
 		for (ClanChatPost p : activeClanChatPosts) {
 			userIds.add(p.getPosterId());
 		}
@@ -99,7 +99,7 @@ public class SetGroupChatMessageAction implements StartUpAction
 	@Override
 	public void execute( StartUpResource useMe )
 	{
-		if (userIds.isEmpty()) {
+		if (null == userIds || userIds.isEmpty()) {
 			return;
 		}
 		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
