@@ -164,6 +164,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 
 	private void getInviterIds() {
 		inviterUserIds = new HashSet<Integer>(); 
+		inviterIdsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
 		for (UserFacebookInviteForSlot invite : idsToInvitesToMe.values()) {
 			int userId = invite.getInviterUserId();
 			inviterUserIds.add(userId);
