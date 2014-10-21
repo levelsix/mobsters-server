@@ -925,7 +925,6 @@ public class DBConstants {
   public static final String SKILL_PROPERTY__NAME = "name";
   public static final String SKILL_PROPERTY__VALUE = "value";
   public static final String SKILL_PROPERTY__SKILL_ID = "skill_id";
-  public static final String SKILL_PROPERTY__SHORT_NAME = "short_name";
   
   public static final String STATIC_LEVEL_INFO__LEVEL_ID = "level_id";
   public static final String STATIC_LEVEL_INFO__REQUIRED_EXPERIENCE = "required_experience";

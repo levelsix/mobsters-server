@@ -2215,11 +2215,6 @@ public class CreateInfoProtoUtils {
 	  //TODO: Account for non number values
 	  sppb.setSkillValue(property.getValue());
 	  
-	  str = property.getShortName();
-	  if (null != str) {
-		  sppb.setShorterName(str);
-	  }
-	  
 	  return sppb.build();
   }
   

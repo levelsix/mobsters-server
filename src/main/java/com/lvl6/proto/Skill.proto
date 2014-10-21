@@ -44,7 +44,7 @@ message SkillPropertyProto {
 	//Do not use the word 'value'
 	//this could be a non number like string
 	optional float skillValue = 3; 
-	optional string shorterName = 4;
+	
 }
 
 
