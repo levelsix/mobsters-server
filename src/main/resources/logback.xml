@@ -6,15 +6,7 @@
 			<pattern>%d | %-5p | %X{playerId}%X{udid} | %t | %c{1} - %m%n</pattern>
 		</encoder>
 	</appender>
- 
-	<appender name="elasticsearch"
-		class="com.lvl6.elasticsearch.LogBackElasticSearchAppender">
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>WARN</level>
-		</filter>
-		<elasticHosts>${lvl6.elastic.search.hosts}</elasticHosts>
-		<elasticCluster>${lvl6.elastic.search.cluster.name}</elasticCluster>
-	</appender>
+
 
 	<appender name="file"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -68,6 +60,5 @@
 		<appender-ref ref="console" />
 		<appender-ref ref="file" />
 		<appender-ref ref="errorfile" />
-		<!-- <appender-ref ref="elasticsearch" />  -->
 	</root>
 </configuration>

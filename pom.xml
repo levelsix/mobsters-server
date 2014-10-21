@@ -127,6 +127,7 @@
 		<ec2.instance.count.maximum>10</ec2.instance.count.maximum>
 		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
+		<ec2.region>us-west-2</ec2.region>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<spring.security.version>3.1.1.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
@@ -146,37 +147,6 @@
 	</properties>
 
 	<profiles>
-		<!-- <profile> <id>lvl6prod</id> <build> <plugins> <plugin> <artifactId>maven-antrun-plugin</artifactId> 
-			<executions> <execution> <phase>generate-resources</phase> <goals> <goal>run</goal> 
-			</goals> <configuration> <tasks> <delete file="src/main/resources/${apns.path.to.cert}" 
-			/> <copy tofile="src/main/resources/${apns.path.to.cert}" file="/root/${apns.path.to.cert}" 
-			/> </tasks> </configuration> </execution> </executions> </plugin> </plugins> 
-			</build> </profile> -->
-		<profile>
-			<id>kellyrobot</id>
-			<properties>
-				<lvl6.server.log.location>/root/kelly/tomcat7/logs/kingdom</lvl6.server.log.location>
-				<server.port>10002</server.port>
-				<hazelcast.group>kelly</hazelcast.group>
-				<hazelcast.pass>lvl6</hazelcast.pass>
-				<hazelcast.config>dev</hazelcast.config>
-				<hazelcast.port>6702</hazelcast.port>
-				<lvl6.cassandra.hosts>localhost</lvl6.cassandra.hosts>
-				<hazelcast.dev.ips>5.9.28.212</hazelcast.dev.ips>
-			</properties>
-		</profile>
-		<profile>
-			<id>kellylocal</id>
-			<properties>
-				<lvl6.server.log.location>/tmp/kingdom</lvl6.server.log.location>
-				<server.port>10001</server.port>
-				<hazelcast.group>kelly1</hazelcast.group>
-				<hazelcast.pass>lvl6</hazelcast.pass>
-				<hazelcast.config>dev</hazelcast.config>
-				<hazelcast.port>6702</hazelcast.port>
-				<hazelcast.dev.ips>192.168.5.101</hazelcast.dev.ips>
-			</properties>
-		</profile>
 		<profile>
 			<id>ashwinlocal</id>
 			<properties>
@@ -211,18 +181,11 @@
 				<plugin>
 					<groupId>br.com.ingenieux</groupId>
 					<artifactId>beanstalk-maven-plugin</artifactId>
-					<version>0.2.7-RC5</version>
+					<version>1.3.5</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
-				<version>2.4.2</version> <executions> <execution> <id>default-copy-resources</id> 
-				<phase>process-resources</phase> <goals> <goal>copy-resources</goal> </goals> 
-				<configuration> <overwrite>true</overwrite> <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory> 
-				<resources> <resource> <directory>${project.basedir}/src/main/resources/</directory> 
-				<includes> <include>logback.xml</include> </includes> </resource> </resources> 
-				</configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -262,123 +225,124 @@
 				<artifactId>beanstalk-maven-plugin</artifactId>
 				<configuration>
 					<applicationName>${application.release.name}</applicationName>
-					<environmentName>${application.release.name}-${maven.build.timestamp}</environmentName>
+					<environmentName>mp-${maven.build.timestamp}</environmentName>
 					<defaultEnvironmentName>default</defaultEnvironmentName>
 					<cnamePrefix>${application.release.name}-${maven.build.timestamp}</cnamePrefix>
 					<timeoutMins>80</timeoutMins>
+					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
-					<!-- <configurationTemplate>lvl6prod-${maven.build.timestamp}</configurationTemplate> -->
-					<!-- <templateName>lvl6prod-${maven.build.timestamp}</templateName> -->
-					<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
-					<optionSettings>
-						<optionSetting>
-							<namespace>aws:autoscaling:launchconfiguration</namespace>
-							<optionName>EC2KeyName</optionName>
-							<value>lvl6-us-east</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elasticbeanstalk:application</namespace>
-							<optionName>Application Healthcheck URL</optionName>
-							<value>/index.html</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-							<optionName>Xms</optionName>
-							<value>${ec2.tomcat.memory}</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-							<optionName>Xmx</optionName>
-							<value>${ec2.tomcat.memory}</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
-							<optionName>XX:MaxPermSize</optionName>
-							<value>${ec2.tomcat.max.permsize}</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:launchconfiguration</namespace>
-							<optionName>SecurityGroups</optionName>
-							<value>elasticbeanstalk-default</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:asg</namespace>
-							<optionName>MinSize</optionName>
-							<value>${ec2.instance.count.minimum}</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:asg</namespace>
-							<optionName>MaxSize</optionName>
-							<value>${ec2.instance.count.maximum}</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:asg</namespace>
-							<optionName>Availability Zones</optionName>
-							<value>Any 2</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>Period</optionName>
-							<value>5</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>Statistic</optionName>
-							<value>Average</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>MeasureName</optionName>
-							<value>NetworkOut</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>Unit</optionName>
-							<value>Bytes</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>UpperThreshold</optionName>
-							<value>12000000</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:trigger</namespace>
-							<optionName>LowerThreshold</optionName>
-							<value>2000000</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elb:loadbalancer</namespace>
-							<optionName>LoadBalancerHTTPPort</optionName>
-							<value>80</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elb:policies</namespace>
-							<optionName>Stickiness Cookie Expiration</optionName>
-							<value>0</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elb:policies</namespace>
-							<optionName>Stickiness Policy</optionName>
-							<value>true</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:elasticbeanstalk:hostmanager</namespace>
-							<optionName>LogPublicationControl</optionName>
-							<value>true</value>
-						</optionSetting>
-						<optionSetting>
-							<namespace>aws:autoscaling:launchconfiguration</namespace>
-							<optionName>InstanceType</optionName>
-							<value>${ec2.instance.size}</value>
-						</optionSetting>
-					</optionSettings>
-					<!-- <configurationTemplates> -->
-					<!-- <configurationTemplate> -->
-					<!-- <id>lvl6prod-${maven.build.timestamp}</id> -->
-
-					<!-- </configurationTemplate> -->
-					<!-- </configurationTemplates> -->
+					<configurationTemplate>mobsters-prod-2014-10-21</configurationTemplate>
+					<templateName>mobsters-prod-2014-10-21</templateName> 
+					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7 Java 7</solutionStack>
+					<configurationTemplates>
+						<configurationTemplate>
+							<id>mobsters-prod-1</id>
+							<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
+							<optionSettings>
+								<optionSetting>
+									<namespace>aws:autoscaling:launchconfiguration</namespace>
+									<optionName>EC2KeyName</optionName>
+									<value>MobstersProdInstances</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elasticbeanstalk:application</namespace>
+									<optionName>Application Healthcheck URL</optionName>
+									<value>/index.html</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+									<optionName>Xms</optionName>
+									<value>${ec2.tomcat.memory}</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+									<optionName>Xmx</optionName>
+									<value>${ec2.tomcat.memory}</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+									<optionName>XX:MaxPermSize</optionName>
+									<value>${ec2.tomcat.max.permsize}</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:launchconfiguration</namespace>
+									<optionName>SecurityGroups</optionName>
+									<value>elasticbeanstalk-default</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:asg</namespace>
+									<optionName>MinSize</optionName>
+									<value>${ec2.instance.count.minimum}</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:asg</namespace>
+									<optionName>MaxSize</optionName>
+									<value>${ec2.instance.count.maximum}</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:asg</namespace>
+									<optionName>Availability Zones</optionName>
+									<value>Any 1</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>Period</optionName>
+									<value>5</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>Statistic</optionName>
+									<value>Average</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>MeasureName</optionName>
+									<value>NetworkOut</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>Unit</optionName>
+									<value>Bytes</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>UpperThreshold</optionName>
+									<value>12000000</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:trigger</namespace>
+									<optionName>LowerThreshold</optionName>
+									<value>2000000</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elb:loadbalancer</namespace>
+									<optionName>LoadBalancerHTTPPort</optionName>
+									<value>80</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elb:policies</namespace>
+									<optionName>Stickiness Cookie Expiration</optionName>
+									<value>0</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elb:policies</namespace>
+									<optionName>Stickiness Policy</optionName>
+									<value>true</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:elasticbeanstalk:hostmanager</namespace>
+									<optionName>LogPublicationControl</optionName>
+									<value>true</value>
+								</optionSetting>
+								<optionSetting>
+									<namespace>aws:autoscaling:launchconfiguration</namespace>
+									<optionName>InstanceType</optionName>
+									<value>${ec2.instance.size}</value>
+								</optionSetting>
+							</optionSettings>
+						</configurationTemplate>
+					</configurationTemplates>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -937,7 +901,7 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.0</version>
 		</dependency>
-		
+
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
 			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
 			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
