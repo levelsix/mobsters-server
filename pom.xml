@@ -127,6 +127,7 @@
 		<ec2.instance.count.maximum>10</ec2.instance.count.maximum>
 		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
+		<ec2.region>us-west-2</ec2.region>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<spring.security.version>3.1.1.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
@@ -228,6 +229,7 @@
 					<defaultEnvironmentName>default</defaultEnvironmentName>
 					<cnamePrefix>${application.release.name}-${maven.build.timestamp}</cnamePrefix>
 					<timeoutMins>80</timeoutMins>
+					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
 					<configurationTemplate>mobsters-prod-1</configurationTemplate>
