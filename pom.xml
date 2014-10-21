@@ -232,9 +232,9 @@
 					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
-					<configurationTemplate>mobsters-prod-1</configurationTemplate>
-					<templateName>mobsters-prod-1</templateName> 
-					<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
+					<configurationTemplate>mobsters-prod-2014-10-21</configurationTemplate>
+					<templateName>mobsters-prod-2014-10-21</templateName> 
+					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7 Java 7</solutionStack>
 					<configurationTemplates>
 						<configurationTemplate>
 							<id>mobsters-prod-1</id>
