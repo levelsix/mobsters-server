@@ -42,6 +42,7 @@ message UserMiniJobProto {
 	
 	optional MiniJobProto miniJob = 6;
 	//optional int32 durationMinutes = 7; defined above
+	optional int32 durationSeconds = 8; //overwrites durationMinutes
 }
 
 //------------------------------------------------------------------------------------------

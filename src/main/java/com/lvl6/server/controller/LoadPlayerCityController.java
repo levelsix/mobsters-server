@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadPlayerCityRequestEvent;
 import com.lvl6.events.response.LoadPlayerCityResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.StructureForUser;
@@ -24,6 +25,7 @@ import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityS
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.ExpansionPurchaseForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
 import com.lvl6.server.Locker;
@@ -59,6 +61,7 @@ import com.lvl6.utils.RetrieveUtils;
     LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent)event).getLoadPlayerCityRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int cityOwnerId = reqProto.getCityOwnerId();
 
     LoadPlayerCityResponseProto.Builder resBuilder = LoadPlayerCityResponseProto.newBuilder();
@@ -86,16 +89,26 @@ import com.lvl6.utils.RetrieveUtils;
       }
 
       if (owner == null) {
-        log.error("owner is null for ownerId = "+cityOwnerId);
-      } else {
-        resBuilder.setCityOwner(CreateInfoProtoUtils.createMinimumUserProtoFromUser(owner));
-
-        LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(senderProto.getUserId());
-        resEvent.setTag(event.getTag());
-        resEvent.setLoadPlayerCityResponseProto(resBuilder.build());  
-        server.writeEvent(resEvent);
-
+        log.error(String.format(
+        	"owner is null for ownerId=%s", cityOwnerId));
+      } else if (cityOwnerId == userId) {
+    	  resBuilder.setCityOwner(senderProto);
       }
+      else {
+    	  int clanId = owner.getClanId(); 
+    	  Clan clan = null;
+    	  if (clanId > 0 ) {
+    		  clan = ClanRetrieveUtils.getClanWithId(clanId);
+    	  }
+    	  resBuilder.setCityOwner(CreateInfoProtoUtils
+    		  .createMinimumUserProtoFromUserAndClan(owner, clan));
+      }
+      
+      LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(senderProto.getUserId());
+      resEvent.setTag(event.getTag());
+      resEvent.setLoadPlayerCityResponseProto(resBuilder.build());  
+      server.writeEvent(resEvent);
+      
     } catch (Exception e) {
       log.error("exception in LoadPlayerCity processEvent", e);
     } finally {

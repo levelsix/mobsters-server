@@ -110,7 +110,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  //only write to clan if success
     	  for (ClanHelp ch : clanHelpStore) {
     		  ClanHelpProto chp = CreateInfoProtoUtils
-    			  .createClanHelpProtoFromClanHelp(ch, user, senderProto);
+    			  .createClanHelpProtoFromClanHelp(ch, user, null, senderProto);
     		  resBuilder.addHelpProto(chp);
     	  }
 

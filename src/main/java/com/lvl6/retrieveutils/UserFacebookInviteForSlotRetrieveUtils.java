@@ -30,14 +30,24 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private static final String TABLE_NAME = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
   
   public static UserFacebookInviteForSlot getInviteForId(int inviteId) {
-    Connection conn = DBConnection.get().getConnection();
-    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID, inviteId);
-    
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
-    UserFacebookInviteForSlot invite = convertRSToInvite(rs);
-    DBConnection.get().close(rs, null, conn);
-    return invite;
+	  Connection conn = null;
+	  ResultSet rs = null;
+	  UserFacebookInviteForSlot invite = null;
+	  
+	  try {
+		  conn = DBConnection.get().getConnection();
+		  Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+		  absoluteConditionParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID, inviteId);
+
+		  rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
+		  invite = convertRSToInvite(rs);
+	  } catch (Exception e) {
+		  log.error("getInviteForId retrieve db error.", e);
+	  } finally {
+		  DBConnection.get().close(rs, null, conn);
+	  }
+
+	  return invite;
   }
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteForId(List<Integer> inviteIds) {
@@ -58,11 +68,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append(");");
 
   	String query = querySb.toString();
-  	log.info("query=" + query + "\t values=" + params);
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
-  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
-  	DBConnection.get().close(rs, null, conn);
+  	log.info(String.format(
+  		"query=%s, values=%s", query, params));
+  	
+  	Connection conn = null;
+	ResultSet rs = null;
+	Map<Integer, UserFacebookInviteForSlot> idsToInvites = null;
+	try {
+		conn = DBConnection.get().getConnection();
+		rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
+		idsToInvites = convertRSToInviteIdsToInvites(rs);
+	} catch (Exception e) {
+		log.error("getInviteForId(collection) retrieve db error.", e);
+		idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
+	} finally {
+		DBConnection.get().close(rs, null, conn);
+	}
+	
   	return idsToInvites;
   }
   
@@ -80,7 +102,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   	//if user didn't give any userStructIds then get all the user's structs
   	if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
-  		log.debug("retrieving UserFacebookInviteForSlot with ids " + specificInviteIds);
+  		log.debug(String.format(
+  			"retrieving UserFacebookInviteForSlot with ids %s", specificInviteIds));
   		querySb.append(" AND ");
   		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
   		querySb.append(" IN (");
@@ -113,12 +136,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	querySb.append("NULL");
     }
   	String query = querySb.toString();
-  	log.info("query=" + query + "\t values=" + values);
+  	log.info(String.format(
+  		"query=%s, values=%s", query, values));
 
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
-  	DBConnection.get().close(rs, null, conn);
+  	Connection conn = null;
+	ResultSet rs = null;
+	Map<Integer, UserFacebookInviteForSlot> idsToInvites = null;
+	try {
+		conn = DBConnection.get().getConnection();
+		rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+		idsToInvites = convertRSToInviteIdsToInvites(rs);
+	} catch (Exception e) {
+		log.error("getSpecificOrAllInvitesForInviter retrieve db error.", e);
+		idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
+	} finally {
+		DBConnection.get().close(rs, null, conn);
+	}
+	
   	return idsToInvites;
   }
   
@@ -138,7 +172,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     //if user didn't give any userStructIds then get all the user's structs
     if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
-    	log.debug("retrieving UserFacebookInviteForSlot with ids " + specificInviteIds);
+    	log.debug(String.format(
+    		"retrieving UserFacebookInviteForSlot with ids %s", specificInviteIds));
     	querySb.append(" AND ");
     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
     	querySb.append(" IN (");
@@ -173,12 +208,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 
     String query = querySb.toString();
-    log.info("query=" + query + "\t values=" + values);
+    log.info(String.format(
+    	"query=%s, values=", query, values));
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+	ResultSet rs = null;
+	Map<Integer, UserFacebookInviteForSlot> idsToInvites = null;
+	try {
+		conn = DBConnection.get().getConnection();
+		rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+		idsToInvites = convertRSToInviteIdsToInvites(rs);
+	} catch (Exception e) {
+		log.error("getSpecificOrAllInvitesForRecipient retrieve db error.", e);
+		idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
+	} finally {
+		DBConnection.get().close(rs, null, conn);
+	}
+	
     return idsToInvites;
   }
   
@@ -240,11 +286,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	
   	String query = querySb.toString();
   	
-  	log.info("query=" + query);
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-  	List<Integer> userIds = convertRSToInts(rs);
-    DBConnection.get().close(rs, null, conn);
+  	log.info(String.format(
+  		"query=%s, values=%s", query, facebookId));
+  	
+  	Connection conn = null;
+	ResultSet rs = null;
+	List<Integer> userIds = null;
+	try {
+		conn = DBConnection.get().getConnection();
+		rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+		userIds = convertRSToInts(rs);
+	} catch (Exception e) {
+		log.error("getUniqueInviterUserIdsForRequesterId retrieve db error.", e);
+		userIds = new ArrayList<Integer>();
+	} finally {
+		DBConnection.get().close(rs, null, conn);
+	}
+	
     Set<Integer> uniqUserIds = new HashSet<Integer>(userIds);
   	return uniqUserIds;
   }

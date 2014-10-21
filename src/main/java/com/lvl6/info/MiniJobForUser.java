@@ -6,13 +6,13 @@ import java.util.List;
 
 public class MiniJobForUser implements Serializable {
 	
-	private static final long serialVersionUID = -7377306943664515125L;
+	private static final long serialVersionUID = 5935675161654042334L;
 	
 	private long id;
 	private int userId;
 	private int miniJobId;
 	private int baseDmgReceived;
-	private int durationMinutes;
+	private int durationSeconds;
 	private Date timeStarted;
 	private List<Long> userMonsterIds;
 	private String userMonsterIdStr;
@@ -23,7 +23,7 @@ public class MiniJobForUser implements Serializable {
 	}
 
 	public MiniJobForUser(long id, int userId, int miniJobId,
-			int baseDmgReceived, int durationMinutes, Date timeStarted,
+			int baseDmgReceived, int durationSeconds, Date timeStarted,
 			List<Long> userMonsterIds, String userMonsterIdStr,
 			Date timeCompleted) {
 		super();
@@ -31,7 +31,7 @@ public class MiniJobForUser implements Serializable {
 		this.userId = userId;
 		this.miniJobId = miniJobId;
 		this.baseDmgReceived = baseDmgReceived;
-		this.durationMinutes = durationMinutes;
+		this.durationSeconds = durationSeconds;
 		this.timeStarted = timeStarted;
 		this.userMonsterIds = userMonsterIds;
 		this.userMonsterIdStr = userMonsterIdStr;
@@ -70,12 +70,12 @@ public class MiniJobForUser implements Serializable {
 		this.baseDmgReceived = baseDmgReceived;
 	}
 
-	public int getDurationMinutes() {
-		return durationMinutes;
+	public int getDurationSeconds() {
+		return durationSeconds;
 	}
 
-	public void setDurationMinutes(int durationMinutes) {
-		this.durationMinutes = durationMinutes;
+	public void setDurationSeconds(int durationSeconds) {
+		this.durationSeconds = durationSeconds;
 	}
 
 	public Date getTimeStarted() {
@@ -110,11 +110,16 @@ public class MiniJobForUser implements Serializable {
 		this.timeCompleted = timeCompleted;
 	}
 
+	public int getDurationMinutes()
+	{
+		return durationSeconds / 60;
+	}
+
 	@Override
 	public String toString() {
 		return "MiniJobForUser [id=" + id + ", userId=" + userId
 				+ ", miniJobId=" + miniJobId + ", baseDmgReceived="
-				+ baseDmgReceived + ", durationMinutes=" + durationMinutes
+				+ baseDmgReceived + ", durationSeconds=" + durationSeconds
 				+ ", timeStarted=" + timeStarted + ", userMonsterIds="
 				+ userMonsterIds + ", userMonsterIdStr=" + userMonsterIdStr
 				+ ", timeCompleted=" + timeCompleted + "]";

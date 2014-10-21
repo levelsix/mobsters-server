@@ -126,7 +126,9 @@ import com.lvl6.utils.RetrieveUtils;
   private boolean checkLegitRequest(Builder resBuilder, User user, String newFbId,
   		Map<Integer, User> userMap) {
   	if (newFbId == null || newFbId.isEmpty() || user == null) { 
-  		log.error("fbId not set or user is null. fbId='" + newFbId + "'\t user=" + user);
+  		log.error(String.format(
+  			"fbId not set or user is null. fbId='%s', user=%s",
+  			newFbId, user));
   		return false;
   	}
 
@@ -134,8 +136,9 @@ import com.lvl6.utils.RetrieveUtils;
   	boolean existingFbIdSet = existingFbId != null && !existingFbId.isEmpty();
 
   	if (existingFbIdSet) {
-  		log.error("fbId already set for user. existingFbId='" + existingFbId + "'\t user=" +
-  				user + "\t newFbId=" + newFbId);
+  		log.error(String.format(
+  			"fbId already set for user. existingFbId='%s', user=%s, newFbId=%s",
+  			existingFbId, user, newFbId));
   		resBuilder.setStatus(SetFacebookIdStatus.FAIL_USER_FB_ID_ALREADY_SET);
   		return false;
   	}
@@ -145,7 +148,9 @@ import com.lvl6.utils.RetrieveUtils;
   	
   	if (userMap.size() > 1) {
   		//queried for a userId and a facebook id
-  		log.error("fbId already taken. fbId='" + newFbId + "'\t usersInDb=" + userMap);
+  		log.error(String.format(
+  			"fbId already taken. fbId='%s', usersInDb=%s",
+  			newFbId, userMap));
   		resBuilder.setStatus(SetFacebookIdStatus.FAIL_FB_ID_EXISTS);
 
   		//client wants the user who has the facebook id
@@ -156,7 +161,7 @@ import com.lvl6.utils.RetrieveUtils;
   			}
   			
   			MinimumUserProto existingProto = CreateInfoProtoUtils
-  					.createMinimumUserProtoFromUser(u);
+  					.createMinimumUserProtoFromUserAndClan(u, null);
   			resBuilder.setExisting(existingProto);
   			break;
   		}

@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PrivateChatPostRequestEvent;
 import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.info.AdminChatPost;
+import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -28,6 +30,7 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -109,8 +112,33 @@ public class PrivateChatPostController extends EventController {
 							timeOfPost, censoredContent);
 					User poster = users.get(posterId);
 					User recipient = users.get(recipientId);
+					
+					Clan posterClan = null;
+					Clan recipientClan = null;
+					
+					//TODO: not sure if necessary to get the clans
+					Set<Integer> clanIds = new HashSet<Integer>();
+					int posterClanId = poster.getClanId();
+					int recipientClanId = recipient.getClanId();
+					if (0 != posterClanId) {
+						clanIds.add(posterClanId);
+					}
+					if (0 != recipientClanId) {
+						clanIds.add(recipientClanId);
+					}
+					if (!clanIds.isEmpty()) {
+						Map<Integer, Clan> clanIdsToClans = ClanRetrieveUtils
+							.getClansByIds(clanIds);
+						if (clanIdsToClans.containsKey(posterClanId)) {
+							posterClan = clanIdsToClans.get(posterClanId); 
+						}
+						if (clanIdsToClans.containsKey(recipientClanId)) {
+							recipientClan = clanIdsToClans.get(recipientClanId);
+						}
+					}
 					PrivateChatPostProto pcpp = CreateInfoProtoUtils
-							.createPrivateChatPostProtoFromPrivateChatPost(pwp, poster, recipient);
+							.createPrivateChatPostProtoFromPrivateChatPost(
+								pwp, poster, posterClan, recipient, recipientClan);
 					resBuilder.setPost(pcpp);
 
 					// send to recipient of the private chat post

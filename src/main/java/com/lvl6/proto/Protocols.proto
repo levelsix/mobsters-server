@@ -31,6 +31,7 @@ import "InAppPurchase.proto";
 import "Item.proto";
 import "MiniJobConfig.proto";
 import "MonsterStuff.proto";
+import "Prerequisite.proto";
 import "Quest.proto";
 import "SharedEnumConfig.proto";
 import "Skill.proto";

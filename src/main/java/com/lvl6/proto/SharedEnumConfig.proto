@@ -52,4 +52,11 @@ enum ClanHelpType {
 	MINI_JOB = 5;
 }
 
+enum GameType {
+	NO_TYPE = 1;
+	STRUCTURE = 2;
+	RESEARCH = 3;
+	SKILL = 4;
+}
+
 // the ResourceType enum in Structure.proto, should be in here

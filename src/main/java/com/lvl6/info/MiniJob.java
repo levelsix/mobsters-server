@@ -25,6 +25,8 @@ public class MiniJob implements Serializable {
 	private int durationMaxMinutes;
 	
 	private Random rand;
+	private int durationMinSeconds;
+	private int durationMaxSeconds;
 
 	public MiniJob(int id, int requiredStructId, String name, int cashReward,
 			int oilReward, int gemReward, int monsterIdReward, String quality,
@@ -48,6 +50,9 @@ public class MiniJob implements Serializable {
 		this.maxDmgDealt = maxDmgDealt;
 		this.durationMinMinutes = durationMinMinutes;
 		this.durationMaxMinutes = durationMaxMinutes;
+		
+		this.durationMinSeconds = durationMinMinutes * 60;
+		this.durationMaxSeconds = durationMaxMinutes * 60;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -76,16 +81,28 @@ public class MiniJob implements Serializable {
 		return randDmg + getMinDmgDealt();
 	}
 	
-	public int getDurationMinutes() {
-		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
+//	public int getDurationMinutes() {
+//		int minMaxDiff = durationMaxMinutes - durationMinMinutes;
+//		
+//		if (minMaxDiff <= 0) {
+//			return Math.max(durationMinMinutes, durationMaxMinutes);
+//		}
+//		
+//		int randMinutes = rand.nextInt(minMaxDiff + 1);
+//		
+//		return randMinutes + getDurationMinMinutes();
+//	}
+	
+	public int getDurationSeconds() {
+		int minMaxDiff = durationMaxSeconds - durationMinSeconds;
 		
 		if (minMaxDiff <= 0) {
-			return Math.max(durationMinMinutes, durationMaxMinutes);
+			return Math.max(durationMinSeconds, durationMaxSeconds);
 		}
 		
-		int randMinutes = rand.nextInt(minMaxDiff + 1);
+		int randSeconds = rand.nextInt(minMaxDiff + 1);
 		
-		return randMinutes + getDurationMinMinutes();
+		return randSeconds + durationMinSeconds;
 	}
 	
 	//end covenience methods--------------------------------------------------------

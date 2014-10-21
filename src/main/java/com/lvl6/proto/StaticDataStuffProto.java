@@ -843,46 +843,70 @@ public final class StaticDataStuffProto {
 
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     java.util.List<com.lvl6.proto.SkillsProto.SkillProto> 
         getSkillsList();
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     com.lvl6.proto.SkillsProto.SkillProto getSkills(int index);
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     int getSkillsCount();
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
         getSkillsOrBuilderList();
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     */
+    com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
      *
      * <pre>
      *repeated ClanHouseProto allClanHouses = 32; defined above
      * </pre>
      */
-    com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
+    java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> 
+        getPrereqsList();
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    com.lvl6.proto.PrerequisiteProto.PrereqProto getPrereqs(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    int getPrereqsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder> 
+        getPrereqsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder getPrereqsOrBuilder(
         int index);
   }
   /**
@@ -1190,6 +1214,14 @@ public final class StaticDataStuffProto {
               allClanHouses_.add(input.readMessage(com.lvl6.proto.StructureProto.ClanHouseProto.PARSER, extensionRegistry));
               break;
             }
+            case 266: {
+              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+                prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>();
+                mutable_bitField0_ |= 0x80000000;
+              }
+              prereqs_.add(input.readMessage(com.lvl6.proto.PrerequisiteProto.PrereqProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1287,6 +1319,9 @@ public final class StaticDataStuffProto {
         }
         if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
           allClanHouses_ = java.util.Collections.unmodifiableList(allClanHouses_);
+        }
+        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+          prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2480,20 +2515,12 @@ public final class StaticDataStuffProto {
     private java.util.List<com.lvl6.proto.SkillsProto.SkillProto> skills_;
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     public java.util.List<com.lvl6.proto.SkillsProto.SkillProto> getSkillsList() {
       return skills_;
     }
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
         getSkillsOrBuilderList() {
@@ -2501,34 +2528,77 @@ public final class StaticDataStuffProto {
     }
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     public int getSkillsCount() {
       return skills_.size();
     }
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-     *
-     * <pre>
-     *repeated ClanHouseProto allClanHouses = 32; defined above
-     * </pre>
      */
     public com.lvl6.proto.SkillsProto.SkillProto getSkills(int index) {
       return skills_.get(index);
     }
     /**
      * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
+     */
+    public com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
+        int index) {
+      return skills_.get(index);
+    }
+
+    public static final int PREREQS_FIELD_NUMBER = 33;
+    private java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> prereqs_;
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
      *
      * <pre>
      *repeated ClanHouseProto allClanHouses = 32; defined above
      * </pre>
      */
-    public com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
+    public java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> getPrereqsList() {
+      return prereqs_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder> 
+        getPrereqsOrBuilderList() {
+      return prereqs_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    public int getPrereqsCount() {
+      return prereqs_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    public com.lvl6.proto.PrerequisiteProto.PrereqProto getPrereqs(int index) {
+      return prereqs_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+     *
+     * <pre>
+     *repeated ClanHouseProto allClanHouses = 32; defined above
+     * </pre>
+     */
+    public com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder getPrereqsOrBuilder(
         int index) {
-      return skills_.get(index);
+      return prereqs_.get(index);
     }
 
     private void initFields() {
@@ -2563,6 +2633,7 @@ public final class StaticDataStuffProto {
       leagues_ = java.util.Collections.emptyList();
       achievements_ = java.util.Collections.emptyList();
       skills_ = java.util.Collections.emptyList();
+      prereqs_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2669,6 +2740,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < allClanHouses_.size(); i++) {
         output.writeMessage(32, allClanHouses_.get(i));
+      }
+      for (int i = 0; i < prereqs_.size(); i++) {
+        output.writeMessage(33, prereqs_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2802,6 +2876,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < allClanHouses_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(32, allClanHouses_.get(i));
+      }
+      for (int i = 0; i < prereqs_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(33, prereqs_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2943,6 +3021,7 @@ public final class StaticDataStuffProto {
           getLeaguesFieldBuilder();
           getAchievementsFieldBuilder();
           getSkillsFieldBuilder();
+          getPrereqsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3136,6 +3215,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x40000000);
         } else {
           skillsBuilder_.clear();
+        }
+        if (prereqsBuilder_ == null) {
+          prereqs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x80000000);
+        } else {
+          prereqsBuilder_.clear();
         }
         return this;
       }
@@ -3442,6 +3527,15 @@ public final class StaticDataStuffProto {
           result.skills_ = skills_;
         } else {
           result.skills_ = skillsBuilder_.build();
+        }
+        if (prereqsBuilder_ == null) {
+          if (((bitField0_ & 0x80000000) == 0x80000000)) {
+            prereqs_ = java.util.Collections.unmodifiableList(prereqs_);
+            bitField0_ = (bitField0_ & ~0x80000000);
+          }
+          result.prereqs_ = prereqs_;
+        } else {
+          result.prereqs_ = prereqsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4239,6 +4333,32 @@ public final class StaticDataStuffProto {
                    getSkillsFieldBuilder() : null;
             } else {
               skillsBuilder_.addAllMessages(other.skills_);
+            }
+          }
+        }
+        if (prereqsBuilder_ == null) {
+          if (!other.prereqs_.isEmpty()) {
+            if (prereqs_.isEmpty()) {
+              prereqs_ = other.prereqs_;
+              bitField0_ = (bitField0_ & ~0x80000000);
+            } else {
+              ensurePrereqsIsMutable();
+              prereqs_.addAll(other.prereqs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.prereqs_.isEmpty()) {
+            if (prereqsBuilder_.isEmpty()) {
+              prereqsBuilder_.dispose();
+              prereqsBuilder_ = null;
+              prereqs_ = other.prereqs_;
+              bitField0_ = (bitField0_ & ~0x80000000);
+              prereqsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPrereqsFieldBuilder() : null;
+            } else {
+              prereqsBuilder_.addAllMessages(other.prereqs_);
             }
           }
         }
@@ -11791,10 +11911,6 @@ public final class StaticDataStuffProto {
 
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillProto> getSkillsList() {
         if (skillsBuilder_ == null) {
@@ -11805,10 +11921,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public int getSkillsCount() {
         if (skillsBuilder_ == null) {
@@ -11819,10 +11931,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public com.lvl6.proto.SkillsProto.SkillProto getSkills(int index) {
         if (skillsBuilder_ == null) {
@@ -11833,10 +11941,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder setSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto value) {
@@ -11854,10 +11958,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder setSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
@@ -11872,10 +11972,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder addSkills(com.lvl6.proto.SkillsProto.SkillProto value) {
         if (skillsBuilder_ == null) {
@@ -11892,10 +11988,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder addSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto value) {
@@ -11913,10 +12005,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder addSkills(
           com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
@@ -11931,10 +12019,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder addSkills(
           int index, com.lvl6.proto.SkillsProto.SkillProto.Builder builderForValue) {
@@ -11949,10 +12033,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder addAllSkills(
           java.lang.Iterable<? extends com.lvl6.proto.SkillsProto.SkillProto> values) {
@@ -11968,10 +12048,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder clearSkills() {
         if (skillsBuilder_ == null) {
@@ -11985,10 +12061,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public Builder removeSkills(int index) {
         if (skillsBuilder_ == null) {
@@ -12002,10 +12074,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder getSkillsBuilder(
           int index) {
@@ -12013,10 +12081,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public com.lvl6.proto.SkillsProto.SkillProtoOrBuilder getSkillsOrBuilder(
           int index) {
@@ -12027,10 +12091,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public java.util.List<? extends com.lvl6.proto.SkillsProto.SkillProtoOrBuilder> 
            getSkillsOrBuilderList() {
@@ -12042,10 +12102,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder addSkillsBuilder() {
         return getSkillsFieldBuilder().addBuilder(
@@ -12053,10 +12109,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public com.lvl6.proto.SkillsProto.SkillProto.Builder addSkillsBuilder(
           int index) {
@@ -12065,10 +12117,6 @@ public final class StaticDataStuffProto {
       }
       /**
        * <code>repeated .com.lvl6.proto.SkillProto skills = 31;</code>
-       *
-       * <pre>
-       *repeated ClanHouseProto allClanHouses = 32; defined above
-       * </pre>
        */
       public java.util.List<com.lvl6.proto.SkillsProto.SkillProto.Builder> 
            getSkillsBuilderList() {
@@ -12087,6 +12135,318 @@ public final class StaticDataStuffProto {
           skills_ = null;
         }
         return skillsBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> prereqs_ =
+        java.util.Collections.emptyList();
+      private void ensurePrereqsIsMutable() {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+          prereqs_ = new java.util.ArrayList<com.lvl6.proto.PrerequisiteProto.PrereqProto>(prereqs_);
+          bitField0_ |= 0x80000000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.PrerequisiteProto.PrereqProto, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder, com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder> prereqsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto> getPrereqsList() {
+        if (prereqsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(prereqs_);
+        } else {
+          return prereqsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public int getPrereqsCount() {
+        if (prereqsBuilder_ == null) {
+          return prereqs_.size();
+        } else {
+          return prereqsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public com.lvl6.proto.PrerequisiteProto.PrereqProto getPrereqs(int index) {
+        if (prereqsBuilder_ == null) {
+          return prereqs_.get(index);
+        } else {
+          return prereqsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder setPrereqs(
+          int index, com.lvl6.proto.PrerequisiteProto.PrereqProto value) {
+        if (prereqsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePrereqsIsMutable();
+          prereqs_.set(index, value);
+          onChanged();
+        } else {
+          prereqsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder setPrereqs(
+          int index, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder builderForValue) {
+        if (prereqsBuilder_ == null) {
+          ensurePrereqsIsMutable();
+          prereqs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          prereqsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder addPrereqs(com.lvl6.proto.PrerequisiteProto.PrereqProto value) {
+        if (prereqsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePrereqsIsMutable();
+          prereqs_.add(value);
+          onChanged();
+        } else {
+          prereqsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder addPrereqs(
+          int index, com.lvl6.proto.PrerequisiteProto.PrereqProto value) {
+        if (prereqsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePrereqsIsMutable();
+          prereqs_.add(index, value);
+          onChanged();
+        } else {
+          prereqsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder addPrereqs(
+          com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder builderForValue) {
+        if (prereqsBuilder_ == null) {
+          ensurePrereqsIsMutable();
+          prereqs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          prereqsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder addPrereqs(
+          int index, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder builderForValue) {
+        if (prereqsBuilder_ == null) {
+          ensurePrereqsIsMutable();
+          prereqs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          prereqsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder addAllPrereqs(
+          java.lang.Iterable<? extends com.lvl6.proto.PrerequisiteProto.PrereqProto> values) {
+        if (prereqsBuilder_ == null) {
+          ensurePrereqsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, prereqs_);
+          onChanged();
+        } else {
+          prereqsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder clearPrereqs() {
+        if (prereqsBuilder_ == null) {
+          prereqs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x80000000);
+          onChanged();
+        } else {
+          prereqsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public Builder removePrereqs(int index) {
+        if (prereqsBuilder_ == null) {
+          ensurePrereqsIsMutable();
+          prereqs_.remove(index);
+          onChanged();
+        } else {
+          prereqsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder getPrereqsBuilder(
+          int index) {
+        return getPrereqsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder getPrereqsOrBuilder(
+          int index) {
+        if (prereqsBuilder_ == null) {
+          return prereqs_.get(index);  } else {
+          return prereqsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder> 
+           getPrereqsOrBuilderList() {
+        if (prereqsBuilder_ != null) {
+          return prereqsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(prereqs_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder addPrereqsBuilder() {
+        return getPrereqsFieldBuilder().addBuilder(
+            com.lvl6.proto.PrerequisiteProto.PrereqProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder addPrereqsBuilder(
+          int index) {
+        return getPrereqsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.PrerequisiteProto.PrereqProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PrereqProto prereqs = 33;</code>
+       *
+       * <pre>
+       *repeated ClanHouseProto allClanHouses = 32; defined above
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder> 
+           getPrereqsBuilderList() {
+        return getPrereqsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.PrerequisiteProto.PrereqProto, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder, com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder> 
+          getPrereqsFieldBuilder() {
+        if (prereqsBuilder_ == null) {
+          prereqsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.PrerequisiteProto.PrereqProto, com.lvl6.proto.PrerequisiteProto.PrereqProto.Builder, com.lvl6.proto.PrerequisiteProto.PrereqProtoOrBuilder>(
+                  prereqs_,
+                  ((bitField0_ & 0x80000000) == 0x80000000),
+                  getParentForChildren(),
+                  isClean());
+          prereqs_ = null;
+        }
+        return prereqsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
@@ -12117,53 +12477,54 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Achi" +
       "evementStuff.proto\032\014Battle.proto\032\026Booste" +
       "rPackStuff.proto\032\nCity.proto\032\nClan.proto" +
-      "\032\nItem.proto\032\022MonsterStuff.proto\032\013Quest." +
-      "proto\032\013Skill.proto\032\017Structure.proto\032\nTas" +
-      "k.proto\032\nUser.proto\"\270\r\n\017StaticDataProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022>\n\016expansionCosts\030\002 \003(\0132&.com." +
-      "lvl6.proto.CityExpansionCostProto\0220\n\tall" +
-      "Cities\030\003 \003(\0132\035.com.lvl6.proto.FullCityPr",
-      "oto\022/\n\010allTasks\030\004 \003(\0132\035.com.lvl6.proto.F" +
-      "ullTaskProto\022?\n\022allTaskMapElements\030\034 \003(\013" +
-      "2#.com.lvl6.proto.TaskMapElementProto\0221\n" +
-      "\013allMonsters\030\005 \003(\0132\034.com.lvl6.proto.Mons" +
-      "terProto\0226\n\004slip\030\006 \003(\0132(.com.lvl6.proto." +
-      "StaticUserLevelInfoProto\0228\n\020inProgressQu" +
-      "ests\030\007 \003(\0132\036.com.lvl6.proto.FullQuestPro" +
-      "to\0228\n\020unredeemedQuests\030\010 \003(\0132\036.com.lvl6." +
-      "proto.FullQuestProto\0227\n\017availableQuests\030" +
-      "\t \003(\0132\036.com.lvl6.proto.FullQuestProto\0226\n",
-      "\014boosterPacks\030\013 \003(\0132 .com.lvl6.proto.Boo" +
-      "sterPackProto\022=\n\rallGenerators\030\014 \003(\0132&.c" +
-      "om.lvl6.proto.ResourceGeneratorProto\0229\n\013" +
-      "allStorages\030\r \003(\0132$.com.lvl6.proto.Resou" +
-      "rceStorageProto\0223\n\014allHospitals\030\016 \003(\0132\035." +
-      "com.lvl6.proto.HospitalProto\0225\n\rallResid" +
-      "ences\030\017 \003(\0132\036.com.lvl6.proto.ResidencePr" +
-      "oto\0223\n\014allTownHalls\030\020 \003(\0132\035.com.lvl6.pro" +
-      "to.TownHallProto\022)\n\007allLabs\030\021 \003(\0132\030.com." +
-      "lvl6.proto.LabProto\022=\n\021allMiniJobCenters",
-      "\030\033 \003(\0132\".com.lvl6.proto.MiniJobCenterPro" +
-      "to\0227\n\016allEvoChambers\030\035 \003(\0132\037.com.lvl6.pr" +
-      "oto.EvoChamberProto\0227\n\016allTeamCenters\030\036 " +
-      "\003(\0132\037.com.lvl6.proto.TeamCenterProto\0225\n\r" +
-      "allClanHouses\030  \003(\0132\036.com.lvl6.proto.Cla" +
-      "nHouseProto\022>\n\020persistentEvents\030\022 \003(\0132$." +
-      "com.lvl6.proto.PersistentEventProto\0228\n\004m" +
-      "bds\030\023 \003(\0132*.com.lvl6.proto.MonsterBattle" +
-      "DialogueProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6." +
-      "proto.ClanRaidProto\022F\n\024persistentClanEve",
-      "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
-      "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr" +
-      "oto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.l" +
-      "vl6.proto.ObstacleProto\0220\n\tclanIcons\030\030 \003" +
-      "(\0132\035.com.lvl6.proto.ClanIconProto\022/\n\007lea" +
-      "gues\030\031 \003(\0132\036.com.lvl6.proto.PvpLeaguePro" +
-      "to\0226\n\014achievements\030\032 \003(\0132 .com.lvl6.prot" +
-      "o.AchievementProto\022*\n\006skills\030\037 \003(\0132\032.com" +
-      ".lvl6.proto.SkillProtoB\026B\024StaticDataStuf" +
-      "fProto"
+      "\032\nItem.proto\032\022MonsterStuff.proto\032\022Prereq" +
+      "uisite.proto\032\013Quest.proto\032\013Skill.proto\032\017" +
+      "Structure.proto\032\nTask.proto\032\nUser.proto\"" +
+      "\346\r\n\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022>\n\016expansi" +
+      "onCosts\030\002 \003(\0132&.com.lvl6.proto.CityExpan" +
+      "sionCostProto\0220\n\tallCities\030\003 \003(\0132\035.com.l",
+      "vl6.proto.FullCityProto\022/\n\010allTasks\030\004 \003(" +
+      "\0132\035.com.lvl6.proto.FullTaskProto\022?\n\022allT" +
+      "askMapElements\030\034 \003(\0132#.com.lvl6.proto.Ta" +
+      "skMapElementProto\0221\n\013allMonsters\030\005 \003(\0132\034" +
+      ".com.lvl6.proto.MonsterProto\0226\n\004slip\030\006 \003" +
+      "(\0132(.com.lvl6.proto.StaticUserLevelInfoP" +
+      "roto\0228\n\020inProgressQuests\030\007 \003(\0132\036.com.lvl" +
+      "6.proto.FullQuestProto\0228\n\020unredeemedQues" +
+      "ts\030\010 \003(\0132\036.com.lvl6.proto.FullQuestProto" +
+      "\0227\n\017availableQuests\030\t \003(\0132\036.com.lvl6.pro",
+      "to.FullQuestProto\0226\n\014boosterPacks\030\013 \003(\0132" +
+      " .com.lvl6.proto.BoosterPackProto\022=\n\rall" +
+      "Generators\030\014 \003(\0132&.com.lvl6.proto.Resour" +
+      "ceGeneratorProto\0229\n\013allStorages\030\r \003(\0132$." +
+      "com.lvl6.proto.ResourceStorageProto\0223\n\014a" +
+      "llHospitals\030\016 \003(\0132\035.com.lvl6.proto.Hospi" +
+      "talProto\0225\n\rallResidences\030\017 \003(\0132\036.com.lv" +
+      "l6.proto.ResidenceProto\0223\n\014allTownHalls\030" +
+      "\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022)\n\007" +
+      "allLabs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\022",
+      "=\n\021allMiniJobCenters\030\033 \003(\0132\".com.lvl6.pr" +
+      "oto.MiniJobCenterProto\0227\n\016allEvoChambers" +
+      "\030\035 \003(\0132\037.com.lvl6.proto.EvoChamberProto\022" +
+      "7\n\016allTeamCenters\030\036 \003(\0132\037.com.lvl6.proto" +
+      ".TeamCenterProto\0225\n\rallClanHouses\030  \003(\0132" +
+      "\036.com.lvl6.proto.ClanHouseProto\022>\n\020persi" +
+      "stentEvents\030\022 \003(\0132$.com.lvl6.proto.Persi" +
+      "stentEventProto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6" +
+      ".proto.MonsterBattleDialogueProto\022,\n\005rai" +
+      "ds\030\024 \003(\0132\035.com.lvl6.proto.ClanRaidProto\022",
+      "F\n\024persistentClanEvents\030\025 \003(\0132(.com.lvl6" +
+      ".proto.PersistentClanEventProto\022(\n\005items" +
+      "\030\026 \003(\0132\031.com.lvl6.proto.ItemProto\0220\n\tobs" +
+      "tacles\030\027 \003(\0132\035.com.lvl6.proto.ObstaclePr" +
+      "oto\0220\n\tclanIcons\030\030 \003(\0132\035.com.lvl6.proto." +
+      "ClanIconProto\022/\n\007leagues\030\031 \003(\0132\036.com.lvl" +
+      "6.proto.PvpLeagueProto\0226\n\014achievements\030\032" +
+      " \003(\0132 .com.lvl6.proto.AchievementProto\022*" +
+      "\n\006skills\030\037 \003(\0132\032.com.lvl6.proto.SkillPro" +
+      "to\022,\n\007prereqs\030! \003(\0132\033.com.lvl6.proto.Pre",
+      "reqProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12183,6 +12544,7 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.ClanProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.PrerequisiteProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.SkillsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
@@ -12194,7 +12556,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "Prereqs", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
@@ -12202,6 +12564,7 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.ClanProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.PrerequisiteProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.SkillsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrievePrivateChatPostsRequestEvent;
 import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -23,6 +24,7 @@ import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.Retri
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -86,7 +88,8 @@ import com.lvl6.utils.RetrieveUtils;
             
             //for not hitting the db for every private chat post
             Map<Integer, MinimumUserProtoWithLevel> userIdsToMups =
-                generateUserIdsToMupsWithLevel(usersByIds, userId, otherUserId);
+                generateUserIdsToMupsWithLevel(usersByIds, userId,
+                	senderProto, otherUserId);
             
             //convert private chat post to group chat message proto
             for (PrivateChatPost pwp : recentPrivateChatPosts) {
@@ -131,16 +134,23 @@ import com.lvl6.utils.RetrieveUtils;
   }
   
   private Map<Integer, MinimumUserProtoWithLevel> generateUserIdsToMupsWithLevel(Map<Integer, User> usersByIds,
-      int userId, int otherUserId) {
+      int userId, MinimumUserProto userMup, int otherUserId) {
     Map<Integer, MinimumUserProtoWithLevel> userIdsToMups = new HashMap<Integer, MinimumUserProtoWithLevel>();
     
     User aUser = usersByIds.get(userId);
     User otherUser = usersByIds.get(otherUserId);
     
-    MinimumUserProtoWithLevel mup1 = CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(aUser);
+    MinimumUserProtoWithLevel mup1 = CreateInfoProtoUtils.createMinimumUserProtoWithLevel(
+    	aUser, null, userMup);
     userIdsToMups.put(userId, mup1);
     
-    MinimumUserProtoWithLevel mup2 = CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(otherUser);
+    Clan otherUserClan = null;
+    if (otherUser.getClanId() > 0) {
+    	otherUserClan = ClanRetrieveUtils.getClanWithId(otherUser.getClanId());
+    }
+    
+    MinimumUserProtoWithLevel mup2 = CreateInfoProtoUtils.createMinimumUserProtoWithLevel(
+    	otherUser, otherUserClan, null);
     userIdsToMups.put(otherUserId, mup2);
     
     return userIdsToMups;
