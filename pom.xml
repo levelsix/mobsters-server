@@ -238,6 +238,7 @@
 					<configurationTemplates>
 						<configurationTemplate>
 							<id>mobsters-prod-1</id>
+							<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
 							<optionSettings>
 								<optionSetting>
 									<namespace>aws:autoscaling:launchconfiguration</namespace>
