@@ -110,7 +110,7 @@ public class SendGroupChatController extends EventController {
             .newBuilder();
         chatProto.setChatMessage(censoredChatMessage);
         MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
-        		.createMinimumUserProtoWithLevelFromUser(user);
+        		.createMinimumUserProtoWithLevel(user, null, senderProto);
         chatProto.setSender(mupWithLvl);
         chatProto.setScope(scope);
         if (scope == GroupChatScope.GLOBAL) {

@@ -60,6 +60,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     int newClanOwnerId = reqProto.getClanOwnerIdNew();
     List<Integer> userIds = new ArrayList<Integer>();
+    //order matters
     userIds.add(userId);
     userIds.add(newClanOwnerId);
 
@@ -89,6 +90,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (legitTransfer) {
       	List<UserClanStatus> statuses = new ArrayList<UserClanStatus>();
+      	//order matters
       	statuses.add(UserClanStatus.JUNIOR_LEADER);
       	statuses.add(UserClanStatus.LEADER);
         writeChangesToDB(clanId, userIds, statuses);
@@ -178,8 +180,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//update clan for user table
   	
   	int numUpdated = UpdateUtils.get().updateUserClanStatuses(clanId, userIdList, statuses); 
-  	log.info("num clan_for_user updated=" + numUpdated + " userIdList=" + userIdList +
-  			" statuses=" + statuses);
+  	log.info(String.format(
+  		"num clan_for_user updated=%s, userIdList=%s, statuses=%s",
+  		numUpdated, userIdList, statuses));
   }
   
   private void setResponseBuilderStuff(Builder resBuilder, int clanId, User newClanOwner) {
@@ -199,7 +202,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int size = clanIdToSize.get(clanId);
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
     
-    MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(newClanOwner);
+    MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(newClanOwner, clan);
     resBuilder.setClanOwnerNew(mup);
   }
   

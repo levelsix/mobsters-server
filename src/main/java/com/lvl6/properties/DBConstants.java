@@ -58,6 +58,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
   public static final String TABLE_OBSTACLE = "obstacle";
   public static final String TABLE_OBSTACLE_FOR_USER = "obstacle_for_user";
+  public static final String TABLE_PREREQUISITE = "prerequisite";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
   public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
@@ -307,7 +308,8 @@ public class DBConstants {
   public static final String MINI_JOB_FOR_USER__USER_ID = "user_id";
   public static final String MINI_JOB_FOR_USER__MINI_JOB_ID = "mini_job_id";
   public static final String MINI_JOB_FOR_USER__BASE_DMG_RECEIVED = "base_dmg_received";
-  public static final String MINI_JOB_FOR_USER__DURATION_MINUTES = "duration_minutes";
+//  public static final String MINI_JOB_FOR_USER__DURATION_MINUTES = "duration_minutes";
+  public static final String MINI_JOB_FOR_USER__DURATION_SECONDS = "duration_seconds";
   public static final String MINI_JOB_FOR_USER__TIME_STARTED = "time_started";
   public static final String MINI_JOB_FOR_USER__USER_MONSTER_IDS = "user_monster_ids";
   public static final String MINI_JOB_FOR_USER__TIME_COMPLETED = "time_completed";
@@ -854,6 +856,13 @@ public class DBConstants {
   public static final String OBSTACLE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
   public static final String OBSTACLE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
   
+  public static final String PREREQUISITE__ID = GENERIC__ID;
+  public static final String PREREQUISITE__GAME_TYPE = "game_type";
+  public static final String PREREQUISITE__GAME_ENTITY_ID = "game_entity_id";
+  public static final String PREREQUISITE__PREREQ_GAME_TYPE = "prereq_game_type";
+  public static final String PREREQUISITE__PREREQ_GAME_ENTITY_ID = "prereq_game_entity_id";
+  public static final String PREREQUISITE__QUANTITY = "quantity";
+  
   public static final String PROFANITY__TERM = "term";
   
   public static final String PVP_LEAGUE__ID = GENERIC__ID;
@@ -947,6 +956,8 @@ public class DBConstants {
   public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
   
   public static final String STRUCTURE_EVO__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_EVO__QUALITY_UNLOCKED = "quality_unlocked";
+  public static final String STRUCTURE_EVO__EVO_TIER_UNLOCKED = "evo_tier_unlocked";
   
   public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
   public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
@@ -1018,6 +1029,7 @@ public class DBConstants {
   public static final String TASK_MAP_ELEMENT__CHARACTER_IMG_NAME = "character_img_name";
   public static final String TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET = "char_vert_pixel_offset";
   public static final String TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET = "char_horiz_pixel_offset";
+  public static final String TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR = "char_scale_factor";
 
   public static final String TASK_STAGE_MONSTER__ID = GENERIC__ID;
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

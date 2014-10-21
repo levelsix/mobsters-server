@@ -127,4 +127,5 @@ message TaskMapElementProto {
 	optional string characterImgName = 12;
 	optional int32 charImgVertPixelOffset = 13;
 	optional int32 charImgHorizPixelOffset = 14;
+	optional float charImgScaleFactor = 15;
 } 

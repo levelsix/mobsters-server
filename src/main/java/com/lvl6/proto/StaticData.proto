@@ -8,6 +8,7 @@ import "City.proto";
 import "Clan.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
+import "Prerequisite.proto";
 import "Quest.proto";
 import "Skill.proto";
 import "Structure.proto";
@@ -67,5 +68,6 @@ message StaticDataProto {
 	
 	repeated SkillProto skills = 31;
 	//repeated ClanHouseProto allClanHouses = 32; defined above
+	repeated PrereqProto prereqs = 33;
 }
 	

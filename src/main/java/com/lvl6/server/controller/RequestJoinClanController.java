@@ -104,22 +104,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (legitRequest) {
     	  requestToJoinRequired = clan.isRequestToJoinRequired();
     	  int battlesWon = getPvpLeagueForUserRetrieveUtil()
-    			  .getPvpBattlesWonForUser(userId);
-    	  
-        //setting minimum user proto for clans based on clan join type
-        if (requestToJoinRequired) {
-        	//clan raid contribution stuff
-          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
-        		  .createMinimumUserProtoForClans(user,
-        				  UserClanStatus.REQUESTING, 0F, battlesWon);
-          resBuilder.setRequester(mupfc);
-        } else {
-        	//clan raid contribution stuff
-          MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
-        		  .createMinimumUserProtoForClans(
-        				  user, UserClanStatus.MEMBER, 0F, battlesWon);
-          resBuilder.setRequester(mupfc);
-        }
+    		  .getPvpBattlesWonForUser(userId);
+
+    	  //setting minimum user proto for clans based on clan join type
+    	  if (requestToJoinRequired) {
+    		  //clan raid contribution stuff
+    		  MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+    			  .createMinimumUserProtoForClans(
+    				  user, null, UserClanStatus.REQUESTING, 0F, battlesWon);
+    		  resBuilder.setRequester(mupfc);
+    	  } else {
+    		  //clan raid contribution stuff
+    		  MinimumUserProtoForClans mupfc = CreateInfoProtoUtils
+    			  .createMinimumUserProtoForClans(
+    				  user, clan, UserClanStatus.MEMBER, 0F, battlesWon);
+    		  resBuilder.setRequester(mupfc);
+    	  }
         successful = writeChangesToDB(resBuilder, user, clan);
       }
       

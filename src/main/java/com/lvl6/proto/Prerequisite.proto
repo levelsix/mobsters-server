@@ -1,0 +1,17 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
+import "SharedEnumConfig.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "PrerequisiteProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message PrereqProto {
+	optional int32 prereqId = 1;
+	optional GameType gameType = 2; //(the type of the object that has a prerequisite, e.g. structure, research, skill)
+	optional int32 gameEntityId = 3; //(the id of the object that has a prerequisite, e.g. id of structure in structure table)
+	optional GameType prereqGameType = 4; //(what the user needs to be have before the object can be built/acquired)
+	optional int32 prereqGameEntityId = 5;
+	optional int32 quantity = 6;
+}

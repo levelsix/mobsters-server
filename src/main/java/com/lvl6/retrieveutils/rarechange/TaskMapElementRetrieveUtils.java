@@ -111,10 +111,12 @@ import com.lvl6.utils.DBConnection;
     String characterImgName = rs.getString(DBConstants.TASK_MAP_ELEMENT__CHARACTER_IMG_NAME);
     int charImgVertPixelOffset = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CHAR_VERT_PIXEL_OFFSET);
     int charImgHorizPixelOffset = rs.getInt(DBConstants.TASK_MAP_ELEMENT__CHAR_HORIZ_PIXEL_OFFSET);
+    float charImgScaleFactor = rs.getFloat(DBConstants.TASK_MAP_ELEMENT__CHAR_SCALE_FACTOR);
         
     TaskMapElement taskMap = new TaskMapElement(id, taskId, xPos, yPos,
     	element, boss, bossImgName, itemDropId, sectionName, cashReward,
-    	oilReward, characterImgName, charImgVertPixelOffset, charImgHorizPixelOffset);
+    	oilReward, characterImgName, charImgVertPixelOffset,
+    	charImgHorizPixelOffset, charImgScaleFactor);
         
     return taskMap;
   }

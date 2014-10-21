@@ -47,6 +47,7 @@ import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
+import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.Quest;
@@ -99,6 +100,7 @@ import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
+import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SkillsProto.SkillProto;
@@ -122,7 +124,6 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
@@ -147,6 +148,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.PrerequisiteRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobMonsterItemRetrieveUtils;
@@ -733,9 +735,11 @@ public class MiscMethods {
 
     cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
     cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
-    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
-    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-    cb.setAdminChatUserProto(adminChatUserProto);
+    
+//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
+//    cb.setAdminChatUserProto(adminChatUserProto);
+    
     cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
 
     UserMonsterConstants.Builder umcb = UserMonsterConstants.newBuilder();
@@ -948,6 +952,7 @@ public class MiscMethods {
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     ObstacleRetrieveUtils.reload();
+    PrerequisiteRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     PvpLeagueRetrieveUtils.reload();
     QuestJobRetrieveUtils.reload();
@@ -1775,6 +1780,7 @@ public class MiscMethods {
     setPvpLeagueStuff(sdpb);
     setAchievementStuff(sdpb);
     setSkillStuff(sdpb);
+    setPrereqs(sdpb);
 
     return sdpb.build();
   }
@@ -2245,4 +2251,20 @@ public class MiscMethods {
 	  
   }
   
+  private static void setPrereqs(Builder sdpb) {
+	  Map<Integer, Prerequisite> idsToPrereqs = 
+		 PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
+	  
+	  if (null == idsToPrereqs || idsToPrereqs.isEmpty()) {
+		  log.warn("setPrereqs() no prerequisites");
+		  return;
+	  }
+	  
+	  for (Integer prereqId : idsToPrereqs.keySet()) {
+		  Prerequisite prereq = idsToPrereqs.get(prereqId);
+		  
+		  PrereqProto pp = CreateInfoProtoUtils.createPrerequisiteProto(prereq);
+		  sdpb.addPrereqs(pp);
+	  }
+  }
 }

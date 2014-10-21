@@ -6310,6 +6310,15 @@ public final class TaskProto {
      * <code>optional int32 charImgHorizPixelOffset = 14;</code>
      */
     int getCharImgHorizPixelOffset();
+
+    /**
+     * <code>optional float charImgScaleFactor = 15;</code>
+     */
+    boolean hasCharImgScaleFactor();
+    /**
+     * <code>optional float charImgScaleFactor = 15;</code>
+     */
+    float getCharImgScaleFactor();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TaskMapElementProto}
@@ -6440,6 +6449,11 @@ public final class TaskProto {
             case 112: {
               bitField0_ |= 0x00002000;
               charImgHorizPixelOffset_ = input.readInt32();
+              break;
+            }
+            case 125: {
+              bitField0_ |= 0x00004000;
+              charImgScaleFactor_ = input.readFloat();
               break;
             }
           }
@@ -6773,6 +6787,21 @@ public final class TaskProto {
       return charImgHorizPixelOffset_;
     }
 
+    public static final int CHARIMGSCALEFACTOR_FIELD_NUMBER = 15;
+    private float charImgScaleFactor_;
+    /**
+     * <code>optional float charImgScaleFactor = 15;</code>
+     */
+    public boolean hasCharImgScaleFactor() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional float charImgScaleFactor = 15;</code>
+     */
+    public float getCharImgScaleFactor() {
+      return charImgScaleFactor_;
+    }
+
     private void initFields() {
       mapElementId_ = 0;
       taskId_ = 0;
@@ -6788,6 +6817,7 @@ public final class TaskProto {
       characterImgName_ = "";
       charImgVertPixelOffset_ = 0;
       charImgHorizPixelOffset_ = 0;
+      charImgScaleFactor_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6843,6 +6873,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(14, charImgHorizPixelOffset_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeFloat(15, charImgScaleFactor_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6908,6 +6941,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(14, charImgHorizPixelOffset_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(15, charImgScaleFactor_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7054,6 +7091,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00001000);
         charImgHorizPixelOffset_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
+        charImgScaleFactor_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -7138,6 +7177,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00002000;
         }
         result.charImgHorizPixelOffset_ = charImgHorizPixelOffset_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.charImgScaleFactor_ = charImgScaleFactor_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7201,6 +7244,9 @@ public final class TaskProto {
         }
         if (other.hasCharImgHorizPixelOffset()) {
           setCharImgHorizPixelOffset(other.getCharImgHorizPixelOffset());
+        }
+        if (other.hasCharImgScaleFactor()) {
+          setCharImgScaleFactor(other.getCharImgScaleFactor());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7812,6 +7858,38 @@ public final class TaskProto {
         return this;
       }
 
+      private float charImgScaleFactor_ ;
+      /**
+       * <code>optional float charImgScaleFactor = 15;</code>
+       */
+      public boolean hasCharImgScaleFactor() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional float charImgScaleFactor = 15;</code>
+       */
+      public float getCharImgScaleFactor() {
+        return charImgScaleFactor_;
+      }
+      /**
+       * <code>optional float charImgScaleFactor = 15;</code>
+       */
+      public Builder setCharImgScaleFactor(float value) {
+        bitField0_ |= 0x00004000;
+        charImgScaleFactor_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float charImgScaleFactor = 15;</code>
+       */
+      public Builder clearCharImgScaleFactor() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        charImgScaleFactor_ = 0F;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskMapElementProto)
     }
 
@@ -7902,7 +7980,7 @@ public final class TaskProto {
       "tType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030Use" +
       "rPersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n" +
       "\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(" +
-      "\003\"\317\002\n\023TaskMapElementProto\022\024\n\014mapElementI" +
+      "\003\"\353\002\n\023TaskMapElementProto\022\024\n\014mapElementI" +
       "d\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n" +
       "\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.lvl6." +
       "proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgNa" +
@@ -7910,7 +7988,8 @@ public final class TaskProto {
       "ame\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilRewa" +
       "rd\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026ch" +
       "arImgVertPixelOffset\030\r \001(\005\022\037\n\027charImgHor" +
-      "izPixelOffset\030\016 \001(\005B\013B\tTaskProto"
+      "izPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleFacto" +
+      "r\030\017 \001(\002B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7967,7 +8046,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
-        new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", });
+        new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }

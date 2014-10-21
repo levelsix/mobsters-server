@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,13 +66,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	
   
-  public static Map<Integer, Clan> getClansByIds(List<Integer> clanIds) {
+  public static Map<Integer, Clan> getClansByIds(Collection<Integer> clanIds) {
     log.debug("retrieving clans with ids " + clanIds);
     
     if (clanIds == null || clanIds.size() <= 0 ) {
       return new HashMap<Integer, Clan>();
     }
 
+    /*
     String query = "select * from " + TABLE_NAME + " where (";
     List<String> condClauses = new ArrayList<String>();
     List <Object> values = new ArrayList<Object>();
@@ -80,7 +82,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
       values.add(clanId);
     }
     query += StringUtils.getListInString(condClauses, "or") + ")";
-
+    */
+    List<Object> values = new ArrayList<Object>();
+    values.addAll(clanIds);
+    
+    List<String> questions = Collections.nCopies(clanIds.size(), "?");
+    String csQuestions = StringUtils.getListInString(questions, ",");
+    String query = String.format(
+    	"SELECT * FROM %s WHERE %s IN (%s)",
+    	TABLE_NAME, DBConstants.CLANS__ID, csQuestions);
+    
     Connection conn = null;
 		ResultSet rs = null;
 		Map<Integer, Clan> clanIdToClanMap = new HashMap<Integer, Clan>();
@@ -98,7 +109,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static List<Clan> getClansWithSimilarNameOrTag(String name, String tag) {
-    log.debug("retrieving clan with name " + name);
+    log.debug(String.format(
+    	"retrieving clan with name=%s, tag=%s",
+    	name, tag));
     
     TreeMap <String, Object> likeParams = new TreeMap<String, Object>();
     likeParams.put(DBConstants.CLANS__NAME, "%"+name+"%");
@@ -120,7 +133,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static Clan getClanWithNameOrTag(String name, String tag) {
-    log.debug("retrieving clan with name " + name);
+	  log.debug(String.format(
+	    	"retrieving clan with name=%s, tag=%s",
+	    	name, tag));
     
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
     absoluteParams.put(DBConstants.CLANS__NAME, name);
@@ -235,8 +250,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private static Clan convertRSRowToClan(ResultSet rs) throws SQLException {
-    int i = 1;
-
     int id = rs.getInt(DBConstants.CLANS__ID);
 //    int ownerId = rs.getInt(i++);
     String name = rs.getString(DBConstants.CLANS__NAME);

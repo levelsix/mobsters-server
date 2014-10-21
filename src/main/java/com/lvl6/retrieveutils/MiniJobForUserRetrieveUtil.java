@@ -117,7 +117,7 @@ public class MiniJobForUserRetrieveUtil {
 			mjfu.setId(rs.getLong(DBConstants.MINI_JOB_FOR_USER__ID));
 			mjfu.setMiniJobId(rs.getInt(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID));
 			mjfu.setBaseDmgReceived(rs.getInt(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED));
-			mjfu.setDurationMinutes(rs.getInt(DBConstants.MINI_JOB_FOR_USER__DURATION_MINUTES));
+			mjfu.setDurationSeconds(rs.getInt(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS));
 			
 			try {
 				Timestamp time = rs.getTimestamp(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
@@ -158,7 +158,7 @@ public class MiniJobForUserRetrieveUtil {
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__ID);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED);
-				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__DURATION_MINUTES);
+				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__TIME_STARTED);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS);
 				columnsSelected.add(DBConstants.MINI_JOB_FOR_USER__TIME_COMPLETED);

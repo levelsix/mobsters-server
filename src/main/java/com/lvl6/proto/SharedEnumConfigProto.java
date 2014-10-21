@@ -572,6 +572,106 @@ public final class SharedEnumConfigProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClanHelpType)
   }
 
+  /**
+   * Protobuf enum {@code com.lvl6.proto.GameType}
+   */
+  public enum GameType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NO_TYPE = 1;</code>
+     */
+    NO_TYPE(0, 1),
+    /**
+     * <code>STRUCTURE = 2;</code>
+     */
+    STRUCTURE(1, 2),
+    /**
+     * <code>RESEARCH = 3;</code>
+     */
+    RESEARCH(2, 3),
+    /**
+     * <code>SKILL = 4;</code>
+     */
+    SKILL(3, 4),
+    ;
+
+    /**
+     * <code>NO_TYPE = 1;</code>
+     */
+    public static final int NO_TYPE_VALUE = 1;
+    /**
+     * <code>STRUCTURE = 2;</code>
+     */
+    public static final int STRUCTURE_VALUE = 2;
+    /**
+     * <code>RESEARCH = 3;</code>
+     */
+    public static final int RESEARCH_VALUE = 3;
+    /**
+     * <code>SKILL = 4;</code>
+     */
+    public static final int SKILL_VALUE = 4;
+
+
+    public final int getNumber() { return value; }
+
+    public static GameType valueOf(int value) {
+      switch (value) {
+        case 1: return NO_TYPE;
+        case 2: return STRUCTURE;
+        case 3: return RESEARCH;
+        case 4: return SKILL;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<GameType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<GameType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<GameType>() {
+            public GameType findValueByNumber(int number) {
+              return GameType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(4);
+    }
+
+    private static final GameType[] VALUES = values();
+
+    public static GameType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private GameType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GameType)
+  }
+
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -592,7 +692,9 @@ public final class SharedEnumConfigProto {
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
       "*S\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
       "_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
-      "JOB\020\005B\027B\025SharedEnumConfigProto"
+      "JOB\020\005*?\n\010GameType\022\013\n\007NO_TYPE\020\001\022\r\n\tSTRUCT" +
+      "URE\020\002\022\014\n\010RESEARCH\020\003\022\t\n\005SKILL\020\004B\027B\025Shared" +
+      "EnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

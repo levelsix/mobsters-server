@@ -3,8 +3,8 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class TaskMapElement implements Serializable {
-
-	private static final long serialVersionUID = 5263799799118723687L;
+	
+	private static final long serialVersionUID = -2908955455491317104L;
 	
 	private int id;
 	private int taskId;
@@ -20,6 +20,7 @@ public class TaskMapElement implements Serializable {
 	private String characterImgName;
 	private int charImgVertPixelOffset;
 	private int charImgHorizPixelOffset;
+	private float charImgScaleFactor;
 
 	public TaskMapElement(
 		int id,
@@ -35,7 +36,8 @@ public class TaskMapElement implements Serializable {
 		int oilReward,
 		String characterImgName,
 		int charImgVertPixelOffset,
-		int charImgHorizPixelOffset )
+		int charImgHorizPixelOffset,
+		float charImgScaleFactor )
 	{
 		super();
 		this.id = id;
@@ -52,6 +54,7 @@ public class TaskMapElement implements Serializable {
 		this.characterImgName = characterImgName;
 		this.charImgVertPixelOffset = charImgVertPixelOffset;
 		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
+		this.charImgScaleFactor = charImgScaleFactor;
 	}
 
 	public int getId()
@@ -194,6 +197,16 @@ public class TaskMapElement implements Serializable {
 		this.charImgHorizPixelOffset = charImgHorizPixelOffset;
 	}
 
+	public float getCharImgScaleFactor()
+	{
+		return charImgScaleFactor;
+	}
+
+	public void setCharImgScaleFactor( float charImgScaleFactor )
+	{
+		this.charImgScaleFactor = charImgScaleFactor;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -225,7 +238,9 @@ public class TaskMapElement implements Serializable {
 			+ charImgVertPixelOffset
 			+ ", charImgHorizPixelOffset="
 			+ charImgHorizPixelOffset
+			+ ", charImgScaleFactor="
+			+ charImgScaleFactor
 			+ "]";
 	}
-
+	
 }

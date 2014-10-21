@@ -29,7 +29,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_FOR_USER;
 
   public List<StructureForUser> getUserStructsForUser(int userId) {
-    log.debug("retrieving user structs for userId " + userId);
+    log.debug(String.format(
+    	"retrieving user structs for userId %s", userId));
     
     Connection conn = null;
 		ResultSet rs = null;

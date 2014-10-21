@@ -190,8 +190,8 @@ public class SpawnMiniJobController extends EventController{
 				probabilitySoFar += chanceToAppear;
 				float normalizedProb = probabilitySoFar / probabilitySum;
 				
-				log.info("probabilitySoFar=" + probabilitySoFar);
-				log.info("normalizedProb=" + normalizedProb);
+//				log.info("probabilitySoFar=" + probabilitySoFar);
+//				log.info("normalizedProb=" + normalizedProb);
 				if (randFloat > normalizedProb) {
 					continue;
 				}
@@ -222,12 +222,13 @@ public class SpawnMiniJobController extends EventController{
 			
 			int miniJobId = mj.getId();
 			int dmgDealt = mj.getDmgDealt();
-			int durationMinutes = mj.getDurationMinutes();
+			int durationSeconds = mj.getDurationSeconds();
 			
 			mjfu.setUserId(userId);
 			mjfu.setMiniJobId(miniJobId);
 			mjfu.setBaseDmgReceived(dmgDealt);
-			mjfu.setDurationMinutes(durationMinutes);
+			mjfu.setDurationSeconds(durationSeconds);
+			
 			userMiniJobs.add(mjfu);
 		}
 		

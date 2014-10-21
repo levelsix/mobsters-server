@@ -110,7 +110,9 @@ import com.lvl6.utils.DBConnection;
    */
   private static StructureEvoChamber convertRSRowToEvoChamber(ResultSet rs) throws SQLException {
     int structId = rs.getInt(DBConstants.STRUCTURE_EVO__STRUCT_ID);
+    String qualityUnlocked = rs.getString(DBConstants.STRUCTURE_EVO__QUALITY_UNLOCKED);
+    int evoTierUnlocked = rs.getInt(DBConstants.STRUCTURE_EVO__EVO_TIER_UNLOCKED);
     
-    return new StructureEvoChamber(structId);
+    return new StructureEvoChamber(structId, qualityUnlocked, evoTierUnlocked);
   }
 }

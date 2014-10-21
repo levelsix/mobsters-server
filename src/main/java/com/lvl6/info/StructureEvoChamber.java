@@ -3,14 +3,19 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class StructureEvoChamber implements Serializable {
-
-	private static final long serialVersionUID = -1713126465250585021L;
+	
+	private static final long serialVersionUID = 4207004739133603011L;
 	
 	private int structId;
+	private String qualityUnlocked;
+	private int evoTierUnlocked;
 	
-	public StructureEvoChamber(int structId) {
+	public StructureEvoChamber( int structId, String qualityUnlocked, int evoTierUnlocked )
+	{
 		super();
 		this.structId = structId;
+		this.qualityUnlocked = qualityUnlocked;
+		this.evoTierUnlocked = evoTierUnlocked;
 	}
 
 	public int getStructId() {
@@ -21,11 +26,35 @@ public class StructureEvoChamber implements Serializable {
 		this.structId = structId;
 	}
 
+	public String getQualityUnlocked()
+	{
+		return qualityUnlocked;
+	}
+
+	public void setQualityUnlocked( String qualityUnlocked )
+	{
+		this.qualityUnlocked = qualityUnlocked;
+	}
+
+	public int getEvoTierUnlocked()
+	{
+		return evoTierUnlocked;
+	}
+
+	public void setEvoTierUnlocked( int evoTierUnlocked )
+	{
+		this.evoTierUnlocked = evoTierUnlocked;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "StructureEvoChamber [structId="
 			+ structId
+			+ ", qualityUnlocked="
+			+ qualityUnlocked
+			+ ", evoTierUnlocked="
+			+ evoTierUnlocked
 			+ "]";
 	}
 

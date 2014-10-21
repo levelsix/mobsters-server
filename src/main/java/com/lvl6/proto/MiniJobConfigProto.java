@@ -1727,28 +1727,33 @@ public final class MiniJobConfigProto {
 
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
      */
     boolean hasMiniJob();
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
      */
     com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob();
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+     */
+    com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
+
+    /**
+     * <code>optional int32 durationSeconds = 8;</code>
      *
      * <pre>
      *optional int32 durationMinutes = 7; defined above
      * </pre>
      */
-    com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder();
+    boolean hasDurationSeconds();
+    /**
+     * <code>optional int32 durationSeconds = 8;</code>
+     *
+     * <pre>
+     *optional int32 durationMinutes = 7; defined above
+     * </pre>
+     */
+    int getDurationSeconds();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserMiniJobProto}
@@ -1864,6 +1869,11 @@ public final class MiniJobConfigProto {
             case 56: {
               bitField0_ |= 0x00000010;
               durationMinutes_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              durationSeconds_ = input.readInt32();
               break;
             }
           }
@@ -2010,33 +2020,44 @@ public final class MiniJobConfigProto {
     private com.lvl6.proto.MiniJobConfigProto.MiniJobProto miniJob_;
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
      */
     public boolean hasMiniJob() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-     *
-     * <pre>
-     *optional int32 durationMinutes = 7; defined above
-     * </pre>
      */
     public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
       return miniJob_;
     }
     /**
      * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
+     */
+    public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
+      return miniJob_;
+    }
+
+    public static final int DURATIONSECONDS_FIELD_NUMBER = 8;
+    private int durationSeconds_;
+    /**
+     * <code>optional int32 durationSeconds = 8;</code>
      *
      * <pre>
      *optional int32 durationMinutes = 7; defined above
      * </pre>
      */
-    public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
-      return miniJob_;
+    public boolean hasDurationSeconds() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 durationSeconds = 8;</code>
+     *
+     * <pre>
+     *optional int32 durationMinutes = 7; defined above
+     * </pre>
+     */
+    public int getDurationSeconds() {
+      return durationSeconds_;
     }
 
     private void initFields() {
@@ -2047,6 +2068,7 @@ public final class MiniJobConfigProto {
       timeCompleted_ = 0L;
       durationMinutes_ = 0;
       miniJob_ = com.lvl6.proto.MiniJobConfigProto.MiniJobProto.getDefaultInstance();
+      durationSeconds_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2081,6 +2103,9 @@ public final class MiniJobConfigProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(7, durationMinutes_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, durationSeconds_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2123,6 +2148,10 @@ public final class MiniJobConfigProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, durationMinutes_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, durationSeconds_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2265,6 +2294,8 @@ public final class MiniJobConfigProto {
           miniJobBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
+        durationSeconds_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -2326,6 +2357,10 @@ public final class MiniJobConfigProto {
         } else {
           result.miniJob_ = miniJobBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.durationSeconds_ = durationSeconds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2369,6 +2404,9 @@ public final class MiniJobConfigProto {
         }
         if (other.hasMiniJob()) {
           mergeMiniJob(other.getMiniJob());
+        }
+        if (other.hasDurationSeconds()) {
+          setDurationSeconds(other.getDurationSeconds());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2628,20 +2666,12 @@ public final class MiniJobConfigProto {
           com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> miniJobBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public boolean hasMiniJob() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public com.lvl6.proto.MiniJobConfigProto.MiniJobProto getMiniJob() {
         if (miniJobBuilder_ == null) {
@@ -2652,10 +2682,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public Builder setMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
         if (miniJobBuilder_ == null) {
@@ -2672,10 +2698,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public Builder setMiniJob(
           com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder builderForValue) {
@@ -2690,10 +2712,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public Builder mergeMiniJob(com.lvl6.proto.MiniJobConfigProto.MiniJobProto value) {
         if (miniJobBuilder_ == null) {
@@ -2713,10 +2731,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public Builder clearMiniJob() {
         if (miniJobBuilder_ == null) {
@@ -2730,10 +2744,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder getMiniJobBuilder() {
         bitField0_ |= 0x00000040;
@@ -2742,10 +2752,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       public com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder getMiniJobOrBuilder() {
         if (miniJobBuilder_ != null) {
@@ -2756,10 +2762,6 @@ public final class MiniJobConfigProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MiniJobProto miniJob = 6;</code>
-       *
-       * <pre>
-       *optional int32 durationMinutes = 7; defined above
-       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MiniJobConfigProto.MiniJobProto, com.lvl6.proto.MiniJobConfigProto.MiniJobProto.Builder, com.lvl6.proto.MiniJobConfigProto.MiniJobProtoOrBuilder> 
@@ -2773,6 +2775,54 @@ public final class MiniJobConfigProto {
           miniJob_ = null;
         }
         return miniJobBuilder_;
+      }
+
+      private int durationSeconds_ ;
+      /**
+       * <code>optional int32 durationSeconds = 8;</code>
+       *
+       * <pre>
+       *optional int32 durationMinutes = 7; defined above
+       * </pre>
+       */
+      public boolean hasDurationSeconds() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 durationSeconds = 8;</code>
+       *
+       * <pre>
+       *optional int32 durationMinutes = 7; defined above
+       * </pre>
+       */
+      public int getDurationSeconds() {
+        return durationSeconds_;
+      }
+      /**
+       * <code>optional int32 durationSeconds = 8;</code>
+       *
+       * <pre>
+       *optional int32 durationMinutes = 7; defined above
+       * </pre>
+       */
+      public Builder setDurationSeconds(int value) {
+        bitField0_ |= 0x00000080;
+        durationSeconds_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 durationSeconds = 8;</code>
+       *
+       * <pre>
+       *optional int32 durationMinutes = 7; defined above
+       * </pre>
+       */
+      public Builder clearDurationSeconds() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        durationSeconds_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniJobProto)
@@ -2817,13 +2867,14 @@ public final class MiniJobConfigProto {
       "\030\n \001(\002\022\022\n\nhpRequired\030\013 \001(\005\022\023\n\013atkRequire",
       "d\030\014 \001(\005\022\023\n\013minDmgDealt\030\r \001(\005\022\023\n\013maxDmgDe" +
       "alt\030\016 \001(\005\022\032\n\022durationMinMinutes\030\017 \001(\005\022\032\n" +
-      "\022durationMaxMinutes\030\020 \001(\005\"\316\001\n\020UserMiniJo" +
+      "\022durationMaxMinutes\030\020 \001(\005\"\347\001\n\020UserMiniJo" +
       "bProto\022\025\n\ruserMiniJobId\030\001 \001(\003\022\027\n\017baseDmg" +
       "Received\030\002 \001(\005\022\023\n\013timeStarted\030\003 \001(\003\022\026\n\016u" +
       "serMonsterIds\030\004 \003(\003\022\025\n\rtimeCompleted\030\005 \001" +
       "(\003\022\027\n\017durationMinutes\030\007 \001(\005\022-\n\007miniJob\030\006" +
-      " \001(\0132\034.com.lvl6.proto.MiniJobProtoB\024B\022Mi" +
-      "niJobConfigProto"
+      " \001(\0132\034.com.lvl6.proto.MiniJobProto\022\027\n\017du" +
+      "rationSeconds\030\010 \001(\005B\024B\022MiniJobConfigProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2851,7 +2902,7 @@ public final class MiniJobConfigProto {
     internal_static_com_lvl6_proto_UserMiniJobProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniJobProto_descriptor,
-        new java.lang.String[] { "UserMiniJobId", "BaseDmgReceived", "TimeStarted", "UserMonsterIds", "TimeCompleted", "DurationMinutes", "MiniJob", });
+        new java.lang.String[] { "UserMiniJobId", "BaseDmgReceived", "TimeStarted", "UserMonsterIds", "TimeCompleted", "DurationMinutes", "MiniJob", "DurationSeconds", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();

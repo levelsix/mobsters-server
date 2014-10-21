@@ -495,7 +495,7 @@ public class MiniJobTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		
 		SpawnMiniJobRequestProto.Builder smjrpb =
 				SpawnMiniJobRequestProto.newBuilder();
@@ -526,7 +526,7 @@ public class MiniJobTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		
 		BeginMiniJobRequestProto.Builder bmjrpb =
 				BeginMiniJobRequestProto.newBuilder();
@@ -558,7 +558,7 @@ public class MiniJobTest extends TestCase {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		
 		CompleteMiniJobRequestProto.Builder cmjrpb =
 				CompleteMiniJobRequestProto.newBuilder();
@@ -597,7 +597,7 @@ public class MiniJobTest extends TestCase {
 		int oilReward = mj.getOilReward();
 		
 		MinimumUserProto mup = CreateInfoProtoUtils
-				.createMinimumUserProtoFromUser(user);
+				.createMinimumUserProtoFromUserAndClan(user, null);
 		
 		MinimumUserProtoWithMaxResources.Builder mupwmrb =
 				MinimumUserProtoWithMaxResources.newBuilder();

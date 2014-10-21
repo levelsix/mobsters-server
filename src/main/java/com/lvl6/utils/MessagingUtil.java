@@ -52,12 +52,12 @@ public class MessagingUtil {
 	
 	public MinimumUserProto getAlexUserProto() {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return CreateInfoProtoUtils.createMinimumUserProtoFromUser(alex);
+		return CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(alex, null);
 	}
 	
 	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		return CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(alex);
+		return CreateInfoProtoUtils.createMinimumUserProtoWithLevel(alex, null, null);
 	}
 	
 	
