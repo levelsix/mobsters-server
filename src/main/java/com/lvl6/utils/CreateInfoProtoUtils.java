@@ -55,6 +55,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.Prerequisite;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.PvpLeague;
@@ -144,6 +145,7 @@ import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
+import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
@@ -154,6 +156,7 @@ import com.lvl6.proto.QuestProto.UserQuestJobProto;
 import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.GameType;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.SkillsProto.SkillActivationType;
 import com.lvl6.proto.SkillsProto.SkillPropertyProto;
@@ -1843,7 +1846,8 @@ public class CreateInfoProtoUtils {
       DialogueType type = DialogueType.valueOf(aStr);
       mbdpb.setDialogueType(type);
     } catch (Exception e) {
-      log.error("could not create DialogueType enum", e);
+      log.error(String.format(
+    	  "could not create DialogueType enum %s", aStr), e);
     }
 
     mbdpb.setDialogue(mbd.getDialogue());
@@ -1861,6 +1865,43 @@ public class CreateInfoProtoUtils {
 	  umchpb.setCurrentHealth(mfu.getCurrentHealth());
 	  
 	  return umchpb.build();
+  }
+  
+  /**Prerequisite.proto****************************************************/
+  public static PrereqProto createPrerequisiteProto (Prerequisite prereq) {
+	  PrereqProto.Builder ppb = PrereqProto.newBuilder();
+	  ppb.setPrereqId(prereq.getId());
+	  
+	  String str = prereq.getGameType();
+	  if (null != str) {
+		  try {
+			  GameType type = GameType.valueOf(str);
+			  ppb.setGameType(type);
+		  } catch (Exception e) {
+			  log.error(String.format(
+				  "could not create GameType enum %s", str), e);
+		  }
+
+	  }
+	  
+	  ppb.setGameEntityId(prereq.getGameEntityId());
+	  
+	  str = prereq.getPrereqGameType();
+	  if (null != str) {
+		  try {
+			  GameType type = GameType.valueOf(str);
+			  ppb.setPrereqGameType(type);
+		  } catch (Exception e) {
+			  log.error(String.format(
+				  "could not create prereq GameType enum %s", str), e);
+		  }
+
+	  }
+	  
+	  ppb.setPrereqGameEntityId(prereq.getPrereqGameEntityId());
+	  ppb.setQuantity(prereq.getQuantity());
+	  
+	  return ppb.build();
   }
   
   /**Quest.proto****************************************************/
