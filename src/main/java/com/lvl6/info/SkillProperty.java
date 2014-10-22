@@ -4,24 +4,20 @@ import java.io.Serializable;
 
 public class SkillProperty implements Serializable {
 	
-	
-	private static final long serialVersionUID = 7357820566608901324L;
+	private static final long serialVersionUID = -1259249952780141148L;
 	
 	private int id;
 	private String name;
 	private float value;
 	private int skillId;
-	private String shortName;
 	
-	public SkillProperty( int id, String name, float value, int skillId,
-		String shortName)
+	public SkillProperty( int id, String name, float value, int skillId )
 	{
 		super();
 		this.id = id;
 		this.name = name;
 		this.value = value;
 		this.skillId = skillId;
-		this.shortName = shortName;
 	}
 
 	public int getId()
@@ -64,16 +60,6 @@ public class SkillProperty implements Serializable {
 		this.skillId = skillId;
 	}
 	
-	public String getShortName()
-	{
-		return shortName;
-	}
-
-	public void setShortName( String shortName )
-	{
-		this.shortName = shortName;
-	}
-
 	@Override
 	public String toString()
 	{
@@ -85,8 +71,6 @@ public class SkillProperty implements Serializable {
 			+ value
 			+ ", skillId="
 			+ skillId
-			+ ", shortName="
-			+ shortName
 			+ "]";
 	}
 

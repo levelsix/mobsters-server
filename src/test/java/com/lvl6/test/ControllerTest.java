@@ -23,24 +23,21 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
-import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
-import com.lvl6.info.Clan;
+import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.DevProto.DevRequest;
-import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
-import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
@@ -211,11 +208,13 @@ public class ControllerTest extends TestCase {
 //		deleteFirstTimeUsers(udid);
 		
 		//just to see if optimizations from commit  worked
-//		String udid = "6AA96003-E8F5-514E-BD09-CBD15F7D344B";
+//		String udid = "73b8876e68099e7582b6b5e12f63dadd725bda12";
 //		float versionNum = 1.0F;
+//		String fbId = "2500169137658";
 //		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
 //		srpb.setUdid(udid);
 //		srpb.setVersionNum(versionNum);
+//		srpb.setFbId(fbId);
 //		
 //		StartupRequestEvent sre = new StartupRequestEvent();
 //		sre.setStartupRequestProto(srpb.build());
