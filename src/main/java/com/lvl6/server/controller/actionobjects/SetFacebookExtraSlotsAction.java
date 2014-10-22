@@ -54,6 +54,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		getAllFbInvites();
 
 		getRecipientFbIds();
+		fillMe.addFacebookId(recipientFacebookIds);
 
 		//to make it easier later on, get the inviter ids for these invites and
 		//map inviter id to an invite
@@ -61,8 +62,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 //			new HashMap<Integer, UserFacebookInviteForSlot>();
 		//inviterIdsToInvites will be populated by getInviterIds(...)
 		getInviterIds();
-
-
+		fillMe.addUserId(inviterUserIds);
 		//execute is next();
 	}
 	

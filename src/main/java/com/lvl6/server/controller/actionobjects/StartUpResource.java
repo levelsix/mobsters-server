@@ -40,6 +40,13 @@ public class StartUpResource
 		userIds.addAll(nuUserIds);
 	}
 	
+	public void addFacebookId(String fbId) {
+		facebookIds.add(fbId);
+	}
+	public void addFacebookId(Collection<String> fbIds) {
+		facebookIds.addAll(fbIds);
+	}
+	
 	public void fetch() {
 		
 		if (!userIds.isEmpty() && facebookIds.isEmpty()) {
