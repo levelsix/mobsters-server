@@ -2041,9 +2041,11 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static DialogueProto createDialogueProtoFromDialogue(Dialogue d) {
-		if (d == null) return null;
 
 		DialogueProto.Builder dp = DialogueProto.newBuilder();
+		if (d == null) {
+			return dp.build();
+		}
 
 		List<String> speakerTexts = d.getSpeakerTexts();
 		List<String> speakers = d.getSpeakers();
@@ -2711,6 +2713,11 @@ public class CreateInfoProtoUtils {
 			builder.setGroundImgPrefix(groundImgPrefix);
 		}
 
+		Dialogue initDefeatedD = task.getInitDefeatedD();
+		if (null != initDefeatedD) {
+			builder.setInitialDefeatedDialogue(createDialogueProtoFromDialogue(initDefeatedD));
+		}
+		
 		return builder.build();
 	}
 
@@ -2847,6 +2854,15 @@ public class CreateInfoProtoUtils {
 			bldr.setOffensiveSkillId(offensiveSkillId);
 		}
 
+		Dialogue initD = tsm.getInitD();
+		if (null != initD) {
+			bldr.setInitialD(createDialogueProtoFromDialogue(initD));
+		}
+		Dialogue defaultD = tsm.getDefaultD();
+		if (null != defaultD) {
+			bldr.setDefaultD(createDialogueProtoFromDialogue(defaultD));
+		}
+		
 		return bldr.build();
 	}
 

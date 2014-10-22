@@ -1013,7 +1013,8 @@ public class DBConstants {
 	public static final String TASK__BOARD_WIDTH = "board_width";
 	public static final String TASK__BOARD_HEIGHT = "board_height";
 	public static final String TASK__GROUND_IMG_PREFIX = "ground_img_prefix";
-
+	public static final String TASK__INIT_DEFEATED_DIALOGUE = "init_defeated_dialogue";
+	
 	public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
 	public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
 	public static final String TASK_MAP_ELEMENT__X_POS = "x_pos";
@@ -1046,6 +1047,8 @@ public class DBConstants {
 	public static final String TASK_STAGE_MONSTER__MONSTER_ID_DROP = "monster_id_drop";
 	public static final String TASK_STAGE_MONSTER__MONSTER_DROP_LVL = "monster_drop_lvl";
 	public static final String TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
+	public static final String TASK_STAGE_MONSTER__INIT_DIALOGUE = "init_dialogue";
+	public static final String TASK_STAGE_MONSTER__DEFAULT_DIALOGUE = "default_dialogue";
 
 	public static final String TASK_STAGE__ID = GENERIC__ID;
 	public static final String TASK_STAGE__TASK_ID = "task_id";

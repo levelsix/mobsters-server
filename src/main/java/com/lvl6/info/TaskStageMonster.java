@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
 
-	private static final long serialVersionUID = -3323103890724969594L;
-
+	private static final long serialVersionUID = 2948530539491033163L;
+	
 	private int id;
 	private int stageId;
 	private int monsterId;
@@ -23,9 +23,14 @@ public class TaskStageMonster implements Serializable {
 	private int monsterIdDrop;
 	private int monsterDropLvl; //the level of the monster that is dropped
 	private int defensiveSkillId;
+	private String initDialogue;
+	private String defaultDialogue;
 
 	//non persisted information
 	private int offensiveSkillId;
+	private Dialogue initD;
+	private Dialogue defaultD;
+	
 	private Random rand;
 
 	public TaskStageMonster(
@@ -45,7 +50,11 @@ public class TaskStageMonster implements Serializable {
 		int monsterIdDrop,
 		int monsterDropLvl,
 		int defensiveSkillId,
-		int offensiveSkillId)
+		int offensiveSkillId,
+		String initDialogue,
+		String defaultDialogue,
+		Dialogue initD,
+		Dialogue defaultD )
 	{
 		super();
 		this.id = id;
@@ -64,7 +73,11 @@ public class TaskStageMonster implements Serializable {
 		this.monsterIdDrop = monsterIdDrop;
 		this.monsterDropLvl = monsterDropLvl;
 		this.defensiveSkillId = defensiveSkillId;
+		this.initDialogue = initDialogue;
+		this.defaultDialogue = defaultDialogue;
 		this.offensiveSkillId = offensiveSkillId;
+		this.initD = initD;
+		this.defaultD = defaultD;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -265,6 +278,46 @@ public class TaskStageMonster implements Serializable {
 		this.offensiveSkillId = offensiveSkillId;
 	}
 
+	public String getInitDialogue()
+	{
+		return initDialogue;
+	}
+
+	public void setInitDialogue( String initDialogue )
+	{
+		this.initDialogue = initDialogue;
+	}
+
+	public String getDefaultDialogue()
+	{
+		return defaultDialogue;
+	}
+
+	public void setDefaultDialogue( String defaultDialogue )
+	{
+		this.defaultDialogue = defaultDialogue;
+	}
+
+	public Dialogue getInitD()
+	{
+		return initD;
+	}
+
+	public void setInitD( Dialogue initD )
+	{
+		this.initD = initD;
+	}
+
+	public Dialogue getDefaultD()
+	{
+		return defaultD;
+	}
+
+	public void setDefaultD( Dialogue defaultD )
+	{
+		this.defaultD = defaultD;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -300,8 +353,16 @@ public class TaskStageMonster implements Serializable {
 			+ monsterDropLvl
 			+ ", defensiveSkillId="
 			+ defensiveSkillId
+			+ ", initDialogue="
+			+ initDialogue
+			+ ", defaultDialogue="
+			+ defaultDialogue
 			+ ", offensiveSkillId="
 			+ offensiveSkillId
+			+ ", initD="
+			+ initD
+			+ ", defaultD="
+			+ defaultD
 			+ "]";
 	}
 

@@ -14,8 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.Dialogue;
 import com.lvl6.info.Monster;
 import com.lvl6.info.TaskStageMonster;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
@@ -207,6 +209,8 @@ public class TaskStageMonsterRetrieveUtils {
 		int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
 		int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
 		int defensiveSkillId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
+		String initDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__INIT_DIALOGUE);
+		String defaultDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
 
 		if (rs.wasNull()) {
 			//default to skill in task stage monster
@@ -216,39 +220,54 @@ public class TaskStageMonsterRetrieveUtils {
 		if (null != monsterType) {
 			String newMonsterType = monsterType.trim().toUpperCase();
 			if (!monsterType.equals(newMonsterType)) {
-				log.error("monster type incorrect: " + monsterType + "\t tsmId=" + id);
+				log.error(String.format(
+					"monster type incorrect: %s, tsmId=%s",
+					monsterType, id));
 				monsterType = newMonsterType;
 			}
 		}
 
 		if (puzzlePieceDropRate > 1F || puzzlePieceDropRate < 0F) {
-			log.error("incorrect puzzlePieceDropRate: " + puzzlePieceDropRate +
-				". Forcing it to be in [0,1] inclusive. id=" + id);
+			log.error(String.format(
+				"incorrect puzzlePieceDropRate: %s. Forcing it to be in [0,1] inclusive. id=%s",
+				puzzlePieceDropRate, id));
 			puzzlePieceDropRate = Math.min(1F, puzzlePieceDropRate);
 			puzzlePieceDropRate = Math.max(0F, puzzlePieceDropRate);
 		}
 
 		if (chanceToAppear < 0F) {
-			log.error("incorrect chanceToAppear: " + chanceToAppear +
-				". Forcing it to be at/above 0. id=" + id);
+			log.error(String.format(
+				"incorrect chanceToAppear: %s. Forcing it to be at/above 0. id=%s",
+				chanceToAppear, id));
 			chanceToAppear = Math.max(0F, chanceToAppear);
 		}
 
 		if (dmgMultiplier < 0F) {
-			log.error("incorrect dmgMultiplier: " + dmgMultiplier +
-				". Forcing it to be at/above 0. id=" + id);
+			log.error(String.format(
+				"incorrect dmgMultiplier: %s. Forcing it to be at/above 0. id=%s",
+				dmgMultiplier, id));
 			dmgMultiplier = Math.max(0F, dmgMultiplier);
 		}
 
+		Dialogue initD = null;
+		if (null != initDialogue && !initDialogue.isEmpty()) {
+			initD = MiscMethods.createDialogue(initDialogue);
+		}
+		Dialogue defaultD = null;
+		if (null != defaultDialogue && !defaultDialogue.isEmpty()) {
+			defaultD = MiscMethods.createDialogue(defaultDialogue);
+		}
 
 		TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
 			monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
 			puzzlePieceDropRate, level, chanceToAppear, dmgMultiplier, monsterIdDrop,
-			monsterDropLvl, defensiveSkillId, 0);
+			monsterDropLvl, defensiveSkillId, 0, initDialogue, defaultDialogue,
+			initD, defaultD);
 
 		if (null == monsterType) {
-			log.error("TaskStageMonster, monster type incorrect, offending tsm=" +
-				taskStageMonster);
+			log.error(String.format(
+				"TaskStageMonster, monster type incorrect, offending tsm=%s",
+				taskStageMonster));
 		}
 
 		taskStageMonster.setRand(rand);

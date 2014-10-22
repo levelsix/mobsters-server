@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-	private static final long serialVersionUID = -1210759832572232693L;
-
+	private static final long serialVersionUID = -1472436081434830839L;
+	
 	private int id;
 	private String goodName;
 	private String description;
@@ -16,11 +16,24 @@ public class Task implements Serializable {
 	private int boardWidth;
 	private int boardHeight;
 	private String groundImgPrefix;
+	private String initDefeatedDialogue;
+	
+	//non persisted information
+	private Dialogue initDefeatedD;
 
-	public Task(int id, String goodName, String description, int cityId,
-		int assetNumberWithinCity, int prerequisiteTaskId,
-		int prerequisiteQuestId, int boardWidth, int boardHeight,
-		String groundImgPrefix)
+	public Task(
+		int id,
+		String goodName,
+		String description,
+		int cityId,
+		int assetNumberWithinCity,
+		int prerequisiteTaskId,
+		int prerequisiteQuestId,
+		int boardWidth,
+		int boardHeight,
+		String groundImgPrefix,
+		String initDefeatedDialogue,
+		Dialogue initDefeatedD )
 	{
 		super();
 		this.id = id;
@@ -33,8 +46,10 @@ public class Task implements Serializable {
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
 		this.groundImgPrefix = groundImgPrefix;
+		this.initDefeatedDialogue = initDefeatedDialogue;
+		this.initDefeatedD = initDefeatedD;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -108,6 +123,26 @@ public class Task implements Serializable {
 		this.groundImgPrefix = groundImgPrefix;
 	}
 
+	public String getInitDefeatedDialogue()
+	{
+		return initDefeatedDialogue;
+	}
+
+	public void setInitDefeatedDialogue( String initDefeatedDialogue )
+	{
+		this.initDefeatedDialogue = initDefeatedDialogue;
+	}
+
+	public Dialogue getInitDefeatedD()
+	{
+		return initDefeatedD;
+	}
+
+	public void setInitDefeatedD( Dialogue initDefeatedD )
+	{
+		this.initDefeatedD = initDefeatedD;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -131,6 +166,10 @@ public class Task implements Serializable {
 			+ boardHeight
 			+ ", groundImgPrefix="
 			+ groundImgPrefix
+			+ ", initDefeatedDialogue="
+			+ initDefeatedDialogue
+			+ ", initDefeatedD="
+			+ initDefeatedD
 			+ "]";
 	}
 

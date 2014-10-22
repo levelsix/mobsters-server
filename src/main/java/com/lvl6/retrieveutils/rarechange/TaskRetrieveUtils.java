@@ -15,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.Dialogue;
 import com.lvl6.info.Task;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -217,10 +219,17 @@ import com.lvl6.utils.DBConnection;
 		int boardWidth = rs.getInt(DBConstants.TASK__BOARD_WIDTH);
 		int boardHeight = rs.getInt(DBConstants.TASK__BOARD_HEIGHT);
 		String groundImgPrefix = rs.getString(DBConstants.TASK__GROUND_IMG_PREFIX);
+		String initDefeatedD =  rs.getString(DBConstants.TASK__INIT_DEFEATED_DIALOGUE);
+		
+		Dialogue initD = null;
+		if (null != initDefeatedD && !initDefeatedD.isEmpty()) {
+			initD = MiscMethods.createDialogue(initDefeatedD);
+		}
+		
 
 		Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
 			prerequisiteTaskId, prerequisiteQuestId, boardWidth, boardHeight,
-			groundImgPrefix);
+			groundImgPrefix, initDefeatedD, initD);
 		return task;
 	}
 }
