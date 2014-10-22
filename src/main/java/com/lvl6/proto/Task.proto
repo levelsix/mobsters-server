@@ -79,7 +79,7 @@ message TaskStageMonsterProto {
 	//optional int32 offensiveSkillId = 14; defined above
 	//optional int32 tsfuId = 15; defined above
 
-	optional DialogueProto intialD = 16; //:D
+	optional DialogueProto initialD = 16; //:D
 	optional DialogueProto defaultD = 17;
 
 	enum MonsterType {
