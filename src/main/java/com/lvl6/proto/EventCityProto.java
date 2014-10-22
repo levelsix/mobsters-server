@@ -6006,46 +6006,46 @@ public final class EventCityProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventCity.proto\022\016com.lvl6.proto\032\nCity." +
-      "proto\032\013Quest.proto\032\017Structure.proto\032\nUse" +
-      "r.proto\"c\n\032LoadPlayerCityRequestProto\0220\n" +
+      "proto\032\017Structure.proto\032\nUser.proto\"c\n\032Lo" +
+      "adPlayerCityRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\023\n\013ci" +
+      "tyOwnerId\030\002 \001(\005\"\360\003\n\033LoadPlayerCityRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\0223\n\tcityOwner\030\002 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022P\n\006status" +
+      "\030\003 \001(\0162@.com.lvl6.proto.LoadPlayerCityRe" +
+      "sponseProto.LoadPlayerCityStatus\022@\n\020owne",
+      "rNormStructs\030\004 \003(\0132&.com.lvl6.proto.Full" +
+      "UserStructureProto\022R\n\036userCityExpansionD" +
+      "ataProtoList\030\005 \003(\0132*.com.lvl6.proto.User" +
+      "CityExpansionDataProto\0224\n\tobstacles\030\006 \003(" +
+      "\0132!.com.lvl6.proto.UserObstacleProto\"L\n\024" +
+      "LoadPlayerCityStatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAI" +
+      "L_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_OTHER\020\003\"\223\001\n!P" +
+      "urchaseCityExpansionRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021",
+      "\022\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseCit" +
+      "yExpansionResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022^\n\006sta" +
+      "tus\030\002 \001(\0162N.com.lvl6.proto.PurchaseCityE" +
+      "xpansionResponseProto.PurchaseCityExpans" +
+      "ionStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.prot" +
+      "o.UserCityExpansionDataProto\"\216\001\n\033Purchas" +
+      "eCityExpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020NOT" +
+      "_ENOUGH_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003\022\016" +
+      "\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_",
+      "SERVER_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\023\n\013cityOwnerId\030\002 \001(\005\"\360\003\n\033LoadPla" +
-      "yerCityResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\0223\n\tcityOw" +
-      "ner\030\002 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022P\n\006status\030\003 \001(\0162@.com.lvl6.proto.Loa" +
-      "dPlayerCityResponseProto.LoadPlayerCityS",
-      "tatus\022@\n\020ownerNormStructs\030\004 \003(\0132&.com.lv" +
-      "l6.proto.FullUserStructureProto\022R\n\036userC" +
-      "ityExpansionDataProtoList\030\005 \003(\0132*.com.lv" +
-      "l6.proto.UserCityExpansionDataProto\0224\n\to" +
-      "bstacles\030\006 \003(\0132!.com.lvl6.proto.UserObst" +
-      "acleProto\"L\n\024LoadPlayerCityStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\027\n\023FAIL_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_" +
-      "OTHER\020\003\"\223\001\n!PurchaseCityExpansionRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyP",
-      "osition\030\003 \001(\021\022\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003" +
-      "\n\"PurchaseCityExpansionResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto." +
-      "PurchaseCityExpansionResponseProto.Purch" +
-      "aseCityExpansionStatus\0229\n\005ucedp\030\003 \001(\0132*." +
-      "com.lvl6.proto.UserCityExpansionDataProt" +
-      "o\"\216\001\n\033PurchaseCityExpansionStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\024\n\020NOT_ENOUGH_COINS\020\002\022\025\n\021ALREADY_" +
-      "EXPANDING\020\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TO",
-      "O_APART_FROM_SERVER_TIME\020\005\"X\n\024LoadCityRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\016\n\006cityId\030\002 \001(\005\"\242\002\n" +
-      "\025LoadCityResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022D\n\006stat" +
-      "us\030\002 \001(\01624.com.lvl6.proto.LoadCityRespon" +
-      "seProto.LoadCityStatus\0226\n\014cityElements\030\003" +
-      " \003(\0132 .com.lvl6.proto.CityElementProto\022\016" +
-      "\n\006cityId\030\004 \001(\005\"I\n\016LoadCityStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\032\n\026NOT_ACCESSIBLE_TO_USER\020\002\022\016\n\nOTH",
-      "ER_FAIL\020\003B\020B\016EventCityProto"
+      "erProto\022\016\n\006cityId\030\002 \001(\005\"\242\002\n\025LoadCityResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022D\n\006status\030\002 \001(\01624.co" +
+      "m.lvl6.proto.LoadCityResponseProto.LoadC" +
+      "ityStatus\0226\n\014cityElements\030\003 \003(\0132 .com.lv" +
+      "l6.proto.CityElementProto\022\016\n\006cityId\030\004 \001(" +
+      "\005\"I\n\016LoadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_" +
+      "ACCESSIBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016",
+      "EventCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6059,7 +6059,6 @@ public final class EventCityProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.CityProto.getDescriptor(),
-          com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -6100,7 +6099,6 @@ public final class EventCityProto {
         internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", "CityElements", "CityId", });
     com.lvl6.proto.CityProto.getDescriptor();
-    com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

@@ -2661,32 +2661,31 @@ public final class AchievementStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026AchievementStuff.proto\022\016com.lvl6.proto" +
-      "\032\022MonsterStuff.proto\032\026SharedEnumConfig.p" +
-      "roto\032\017Structure.proto\"\251\006\n\020AchievementPro" +
-      "to\022\025\n\rachievementId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022" +
-      "\023\n\013description\030\003 \001(\t\022\021\n\tgemReward\030\004 \001(\005\022" +
-      "\013\n\003lvl\030\005 \001(\005\022I\n\017achievementType\030\006 \001(\01620." +
-      "com.lvl6.proto.AchievementProto.Achievem" +
-      "entType\022?\n\014resourceType\030\007 \001(\0162\034.com.lvl6" +
-      ".proto.ResourceType:\013NO_RESOURCE\0224\n\007elem" +
-      "ent\030\010 \001(\0162\027.com.lvl6.proto.Element:\nNO_E",
-      "LEMENT\0224\n\007quality\030\t \001(\0162\027.com.lvl6.proto" +
-      ".Quality:\nNO_QUALITY\022\024\n\014staticDataId\030\n \001" +
-      "(\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010priority\030\014 \001(\005\022\026" +
-      "\n\016prerequisiteId\030\r \001(\005\022\023\n\013successorId\030\016 " +
-      "\001(\005\"\333\002\n\017AchievementType\022\022\n\016NO_ACHIEVEMEN" +
-      "T\020\021\022\024\n\020COLLECT_RESOURCE\020\001\022\022\n\016CREATE_GREN" +
-      "ADE\020\002\022\022\n\016CREATE_RAINBOW\020\003\022\021\n\rCREATE_ROCK" +
-      "ET\020\004\022\023\n\017DEFEAT_MONSTERS\020\005\022\020\n\014DESTROY_ORB" +
-      "S\020\006\022\022\n\016ENHANCE_POINTS\020\007\022\021\n\rHEAL_MONSTERS" +
-      "\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nMAKE_COMBO\020\n\022\023\n\017R",
-      "EMOVE_OBSTACLE\020\013\022\020\n\014SELL_MONSTER\020\014\022\022\n\016ST" +
-      "EAL_RESOURCE\020\r\022\017\n\013TAKE_DAMAGE\020\016\022\024\n\020UPGRA" +
-      "DE_BUILDING\020\017\022\022\n\016WIN_PVP_BATTLE\020\020\"g\n\024Use" +
-      "rAchievementProto\022\025\n\rachievementId\030\001 \001(\005" +
-      "\022\020\n\010progress\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\022\022" +
-      "\n\nisRedeemed\030\004 \001(\010B\027B\025AchievementStuffPr" +
-      "oto"
+      "\032\026SharedEnumConfig.proto\032\017Structure.prot" +
+      "o\"\251\006\n\020AchievementProto\022\025\n\rachievementId\030" +
+      "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t" +
+      "\022\021\n\tgemReward\030\004 \001(\005\022\013\n\003lvl\030\005 \001(\005\022I\n\017achi" +
+      "evementType\030\006 \001(\01620.com.lvl6.proto.Achie" +
+      "vementProto.AchievementType\022?\n\014resourceT" +
+      "ype\030\007 \001(\0162\034.com.lvl6.proto.ResourceType:" +
+      "\013NO_RESOURCE\0224\n\007element\030\010 \001(\0162\027.com.lvl6" +
+      ".proto.Element:\nNO_ELEMENT\0224\n\007quality\030\t ",
+      "\001(\0162\027.com.lvl6.proto.Quality:\nNO_QUALITY" +
+      "\022\024\n\014staticDataId\030\n \001(\005\022\020\n\010quantity\030\013 \001(\005" +
+      "\022\020\n\010priority\030\014 \001(\005\022\026\n\016prerequisiteId\030\r \001" +
+      "(\005\022\023\n\013successorId\030\016 \001(\005\"\333\002\n\017AchievementT" +
+      "ype\022\022\n\016NO_ACHIEVEMENT\020\021\022\024\n\020COLLECT_RESOU" +
+      "RCE\020\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAIN" +
+      "BOW\020\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MONST" +
+      "ERS\020\005\022\020\n\014DESTROY_ORBS\020\006\022\022\n\016ENHANCE_POINT" +
+      "S\020\007\022\021\n\rHEAL_MONSTERS\020\010\022\017\n\013JOIN_LEAGUE\020\t\022" +
+      "\016\n\nMAKE_COMBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014",
+      "SELL_MONSTER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TA" +
+      "KE_DAMAGE\020\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN" +
+      "_PVP_BATTLE\020\020\"g\n\024UserAchievementProto\022\025\n" +
+      "\rachievementId\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022" +
+      "\n\nisComplete\030\003 \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027" +
+      "B\025AchievementStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2699,7 +2698,6 @@ public final class AchievementStuffProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
@@ -2715,7 +2713,6 @@ public final class AchievementStuffProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
         new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", });
-    com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
   }

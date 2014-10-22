@@ -1,7 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "City.proto";
-import "Quest.proto";
+//import "Quest.proto";
 import "Structure.proto";
 import "User.proto";
 

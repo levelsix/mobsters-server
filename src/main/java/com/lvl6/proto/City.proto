@@ -1,7 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Structure.proto";
-import "User.proto";
+//import "User.proto";
 
 package com.lvl6.proto;
 

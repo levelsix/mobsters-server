@@ -4519,30 +4519,30 @@ public final class CityProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nCity.proto\022\016com.lvl6.proto\032\017Structure." +
-      "proto\032\nUser.proto\"\200\001\n\032UserCityExpansionD" +
-      "ataProto\022\016\n\006userId\030\001 \001(\005\022\021\n\txPosition\030\002 " +
-      "\001(\021\022\021\n\tyPosition\030\003 \001(\021\022\023\n\013isExpanding\030\004 " +
-      "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"e\n\026CityExpa" +
-      "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\031\n\021" +
-      "expansionCostCash\030\002 \001(\005\022\032\n\022numMinutesToE" +
-      "xpand\030\003 \001(\005\"\237\003\n\020CityElementProto\022\016\n\006city" +
-      "Id\030\001 \001(\005\022\017\n\007assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162" +
-      "-.com.lvl6.proto.CityElementProto.CityEl",
-      "emType\022/\n\006coords\030\005 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\022\017\n\007xLength\030\006 \001(\002\022\017\n\007yLen" +
-      "gth\030\007 \001(\002\022\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030" +
-      "\t \001(\0162!.com.lvl6.proto.StructOrientation" +
-      ":\nPOSITION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com" +
-      ".lvl6.proto.CoordinateProto\"P\n\014CityElemT" +
-      "ype\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PER" +
-      "SON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\002\n\rFullCi" +
-      "tyProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n" +
-      "\nmapImgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.",
-      "lvl6.proto.CoordinateProto\022\023\n\013roadImgNam" +
-      "e\030\005 \001(\t\022\022\n\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCo" +
-      "ords\030\007 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\022\017\n\007taskIds\030\010 \003(\005\022\035\n\025attackMapLabelIm" +
-      "gName\030\t \001(\tB\013B\tCityProto"
+      "proto\"\200\001\n\032UserCityExpansionDataProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosi" +
+      "tion\030\003 \001(\021\022\023\n\013isExpanding\030\004 \001(\010\022\027\n\017expan" +
+      "dStartTime\030\005 \001(\003\"e\n\026CityExpansionCostPro" +
+      "to\022\024\n\014expansionNum\030\001 \001(\005\022\031\n\021expansionCos" +
+      "tCash\030\002 \001(\005\022\032\n\022numMinutesToExpand\030\003 \001(\005\"" +
+      "\237\003\n\020CityElementProto\022\016\n\006cityId\030\001 \001(\005\022\017\n\007" +
+      "assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162-.com.lvl6.p" +
+      "roto.CityElementProto.CityElemType\022/\n\006co",
+      "ords\030\005 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
+      "oto\022\017\n\007xLength\030\006 \001(\002\022\017\n\007yLength\030\007 \001(\002\022\r\n" +
+      "\005imgId\030\010 \001(\t\022B\n\013orientation\030\t \001(\0162!.com." +
+      "lvl6.proto.StructOrientation:\nPOSITION_1" +
+      "\0225\n\014spriteCoords\030\n \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\"P\n\014CityElemType\022\014\n\010BUILD" +
+      "ING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NEUTRAL_" +
+      "ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\002\n\rFullCityProto\022\016\n\006c" +
+      "ityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapImgName\030" +
+      "\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6.proto.C",
+      "oordinateProto\022\023\n\013roadImgName\030\005 \001(\t\022\022\n\nm" +
+      "apTmxName\030\006 \001(\t\0226\n\rroadImgCoords\030\007 \001(\0132\037" +
+      ".com.lvl6.proto.CoordinateProto\022\017\n\007taskI" +
+      "ds\030\010 \003(\005\022\035\n\025attackMapLabelImgName\030\t \001(\tB" +
+      "\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4556,7 +4556,6 @@ public final class CityProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.StructureProto.getDescriptor(),
-          com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -4583,7 +4582,6 @@ public final class CityProto {
         internal_static_com_lvl6_proto_FullCityProto_descriptor,
         new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", "AttackMapLabelImgName", });
     com.lvl6.proto.StructureProto.getDescriptor();
-    com.lvl6.proto.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
