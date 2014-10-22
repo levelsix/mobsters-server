@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = -1210759832572232693L;
-	
+
 	private int id;
 	private String goodName;
 	private String description;
@@ -16,11 +16,11 @@ public class Task implements Serializable {
 	private int boardWidth;
 	private int boardHeight;
 	private String groundImgPrefix;
-	
+
 	public Task(int id, String goodName, String description, int cityId,
-			int assetNumberWithinCity, int prerequisiteTaskId,
-			int prerequisiteQuestId, int boardWidth, int boardHeight,
-			String groundImgPrefix)
+		int assetNumberWithinCity, int prerequisiteTaskId,
+		int prerequisiteQuestId, int boardWidth, int boardHeight,
+		String groundImgPrefix)
 	{
 		super();
 		this.id = id;
@@ -34,7 +34,7 @@ public class Task implements Serializable {
 		this.boardHeight = boardHeight;
 		this.groundImgPrefix = groundImgPrefix;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
-	
+
 	private static final long serialVersionUID = -3323103890724969594L;
-	
+
 	private int id;
 	private int stageId;
 	private int monsterId;
@@ -23,7 +23,7 @@ public class TaskStageMonster implements Serializable {
 	private int monsterIdDrop;
 	private int monsterDropLvl; //the level of the monster that is dropped
 	private int defensiveSkillId;
-  
+
 	//non persisted information
 	private int offensiveSkillId;
 	private Random rand;
@@ -67,242 +67,242 @@ public class TaskStageMonster implements Serializable {
 		this.offensiveSkillId = offensiveSkillId;
 	}
 
-//covenience methods--------------------------------------------------------
-  public Random getRand() {
-    return rand;
-  }
+	//covenience methods--------------------------------------------------------
+	public Random getRand() {
+		return rand;
+	}
 
-  public void setRand(Random rand) {
-    this.rand = rand;
-  }
-  
-  public int getCashDrop() {
-    //example goal: [min,max]=[5, 10], transform range to start at 0.
-    //[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
-    //this means there are (10-5)+1 possible numbers
-    
-    int minMaxDiff = getMaxCashDrop() - getMinCashDrop();
+	public void setRand(Random rand) {
+		this.rand = rand;
+	}
 
-    if (minMaxDiff <= 0) {
-    	return 0;
-    }
-    
-    int randCash = rand.nextInt(minMaxDiff + 1); 
+	public int getCashDrop() {
+		//example goal: [min,max]=[5, 10], transform range to start at 0.
+		//[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
+		//this means there are (10-5)+1 possible numbers
 
-    //number generated in [0, max-min] range, but need to transform
-    //back to original range [min, max]. so add min. [0+min, max-min+min]
-    return randCash + getMinCashDrop();
-  }
-  
-  public int getOilDrop() {
-    int minMaxDiff = getMaxOilDrop() - getMinOilDrop();
-    
-    if (minMaxDiff <= 0) {
-    	return 0;
-    }
-    
-    int randOil = rand.nextInt(minMaxDiff + 1); 
+		int minMaxDiff = getMaxCashDrop() - getMinCashDrop();
 
-    //number generated in [0, max-min] range, but need to transform
-    //back to original range [min, max]. so add min. [0+min, max-min+min]
-    return randOil + getMinOilDrop();
-  }  
+		if (minMaxDiff <= 0) {
+			return 0;
+		}
 
-  public boolean didPuzzlePieceDrop() {
-    float randFloat = getRand().nextFloat();
-    
-    if (randFloat < getPuzzlePieceDropRate()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  //end covenience methods--------------------------------------------------------
+		int randCash = rand.nextInt(minMaxDiff + 1); 
 
-  public int getId() {
-	  return id;
-  }
+		//number generated in [0, max-min] range, but need to transform
+		//back to original range [min, max]. so add min. [0+min, max-min+min]
+		return randCash + getMinCashDrop();
+	}
 
-  public void setId(int id) {
-	  this.id = id;
-  }
+	public int getOilDrop() {
+		int minMaxDiff = getMaxOilDrop() - getMinOilDrop();
 
-  public int getStageId() {
-	  return stageId;
-  }
+		if (minMaxDiff <= 0) {
+			return 0;
+		}
 
-  public void setStageId(int stageId) {
-	  this.stageId = stageId;
-  }
+		int randOil = rand.nextInt(minMaxDiff + 1); 
 
-  public int getMonsterId() {
-	  return monsterId;
-  }
+		//number generated in [0, max-min] range, but need to transform
+		//back to original range [min, max]. so add min. [0+min, max-min+min]
+		return randOil + getMinOilDrop();
+	}  
 
-  public void setMonsterId(int monsterId) {
-	  this.monsterId = monsterId;
-  }
+	public boolean didPuzzlePieceDrop() {
+		float randFloat = getRand().nextFloat();
 
-  public String getMonsterType() {
-	  return monsterType;
-  }
+		if (randFloat < getPuzzlePieceDropRate()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//end covenience methods--------------------------------------------------------
 
-  public void setMonsterType(String monsterType) {
-	  this.monsterType = monsterType;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public int getExpReward() {
-	  return expReward;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public void setExpReward(int expReward) {
-	  this.expReward = expReward;
-  }
+	public int getStageId() {
+		return stageId;
+	}
 
-  public int getMinCashDrop() {
-	  return minCashDrop;
-  }
+	public void setStageId(int stageId) {
+		this.stageId = stageId;
+	}
 
-  public void setMinCashDrop(int minCashDrop) {
-	  this.minCashDrop = minCashDrop;
-  }
+	public int getMonsterId() {
+		return monsterId;
+	}
 
-  public int getMaxCashDrop() {
-	  return maxCashDrop;
-  }
+	public void setMonsterId(int monsterId) {
+		this.monsterId = monsterId;
+	}
 
-  public void setMaxCashDrop(int maxCashDrop) {
-	  this.maxCashDrop = maxCashDrop;
-  }
+	public String getMonsterType() {
+		return monsterType;
+	}
 
-  public int getMinOilDrop() {
-	  return minOilDrop;
-  }
+	public void setMonsterType(String monsterType) {
+		this.monsterType = monsterType;
+	}
 
-  public void setMinOilDrop(int minOilDrop) {
-	  this.minOilDrop = minOilDrop;
-  }
+	public int getExpReward() {
+		return expReward;
+	}
 
-  public int getMaxOilDrop() {
-	  return maxOilDrop;
-  }
+	public void setExpReward(int expReward) {
+		this.expReward = expReward;
+	}
 
-  public void setMaxOilDrop(int maxOilDrop) {
-	  this.maxOilDrop = maxOilDrop;
-  }
+	public int getMinCashDrop() {
+		return minCashDrop;
+	}
 
-  public float getPuzzlePieceDropRate() {
-	  return puzzlePieceDropRate;
-  }
+	public void setMinCashDrop(int minCashDrop) {
+		this.minCashDrop = minCashDrop;
+	}
 
-  public void setPuzzlePieceDropRate(float puzzlePieceDropRate) {
-	  this.puzzlePieceDropRate = puzzlePieceDropRate;
-  }
+	public int getMaxCashDrop() {
+		return maxCashDrop;
+	}
 
-  public int getLevel() {
-	  return level;
-  }
+	public void setMaxCashDrop(int maxCashDrop) {
+		this.maxCashDrop = maxCashDrop;
+	}
 
-  public void setLevel(int level) {
-	  this.level = level;
-  }
+	public int getMinOilDrop() {
+		return minOilDrop;
+	}
 
-  public float getChanceToAppear() {
-	  return chanceToAppear;
-  }
+	public void setMinOilDrop(int minOilDrop) {
+		this.minOilDrop = minOilDrop;
+	}
 
-  public void setChanceToAppear(float chanceToAppear) {
-	  this.chanceToAppear = chanceToAppear;
-  }
+	public int getMaxOilDrop() {
+		return maxOilDrop;
+	}
 
-  public float getDmgMultiplier()
-  {
-	  return dmgMultiplier;
-  }
+	public void setMaxOilDrop(int maxOilDrop) {
+		this.maxOilDrop = maxOilDrop;
+	}
 
-  public void setDmgMultiplier( float dmgMultiplier )
-  {
-	  this.dmgMultiplier = dmgMultiplier;
-  }
+	public float getPuzzlePieceDropRate() {
+		return puzzlePieceDropRate;
+	}
 
-  public int getMonsterIdDrop()
-  {
-	  return monsterIdDrop;
-  }
+	public void setPuzzlePieceDropRate(float puzzlePieceDropRate) {
+		this.puzzlePieceDropRate = puzzlePieceDropRate;
+	}
 
-  public void setMonsterIdDrop( int monsterIdDrop )
-  {
-	  this.monsterIdDrop = monsterIdDrop;
-  }
+	public int getLevel() {
+		return level;
+	}
 
-  public int getMonsterDropLvl()
-  {
-	  return monsterDropLvl;
-  }
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
-  public void setMonsterDropLvl( int monsterDropLvl )
-  {
-	  this.monsterDropLvl = monsterDropLvl;
-  }
+	public float getChanceToAppear() {
+		return chanceToAppear;
+	}
 
-  public int getDefensiveSkillId()
-  {
-	  return defensiveSkillId;
-  }
+	public void setChanceToAppear(float chanceToAppear) {
+		this.chanceToAppear = chanceToAppear;
+	}
 
-  public void setDefensiveSkillId( int defensiveSkillId )
-  {
-	  this.defensiveSkillId = defensiveSkillId;
-  }
+	public float getDmgMultiplier()
+	{
+		return dmgMultiplier;
+	}
 
-  public int getOffensiveSkillId()
-  {
-	  return offensiveSkillId;
-  }
+	public void setDmgMultiplier( float dmgMultiplier )
+	{
+		this.dmgMultiplier = dmgMultiplier;
+	}
 
-  public void setOffensiveSkillId( int offensiveSkillId )
-  {
-	  this.offensiveSkillId = offensiveSkillId;
-  }
+	public int getMonsterIdDrop()
+	{
+		return monsterIdDrop;
+	}
 
-  @Override
-  public String toString()
-  {
-	  return "TaskStageMonster [id="
-		  + id
-		  + ", stageId="
-		  + stageId
-		  + ", monsterId="
-		  + monsterId
-		  + ", monsterType="
-		  + monsterType
-		  + ", expReward="
-		  + expReward
-		  + ", minCashDrop="
-		  + minCashDrop
-		  + ", maxCashDrop="
-		  + maxCashDrop
-		  + ", minOilDrop="
-		  + minOilDrop
-		  + ", maxOilDrop="
-		  + maxOilDrop
-		  + ", puzzlePieceDropRate="
-		  + puzzlePieceDropRate
-		  + ", level="
-		  + level
-		  + ", chanceToAppear="
-		  + chanceToAppear
-		  + ", dmgMultiplier="
-		  + dmgMultiplier
-		  + ", monsterIdDrop="
-		  + monsterIdDrop
-		  + ", monsterDropLvl="
-		  + monsterDropLvl
-		  + ", defensiveSkillId="
-		  + defensiveSkillId
-		  + ", offensiveSkillId="
-		  + offensiveSkillId
-		  + "]";
-  }
+	public void setMonsterIdDrop( int monsterIdDrop )
+	{
+		this.monsterIdDrop = monsterIdDrop;
+	}
+
+	public int getMonsterDropLvl()
+	{
+		return monsterDropLvl;
+	}
+
+	public void setMonsterDropLvl( int monsterDropLvl )
+	{
+		this.monsterDropLvl = monsterDropLvl;
+	}
+
+	public int getDefensiveSkillId()
+	{
+		return defensiveSkillId;
+	}
+
+	public void setDefensiveSkillId( int defensiveSkillId )
+	{
+		this.defensiveSkillId = defensiveSkillId;
+	}
+
+	public int getOffensiveSkillId()
+	{
+		return offensiveSkillId;
+	}
+
+	public void setOffensiveSkillId( int offensiveSkillId )
+	{
+		this.offensiveSkillId = offensiveSkillId;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "TaskStageMonster [id="
+			+ id
+			+ ", stageId="
+			+ stageId
+			+ ", monsterId="
+			+ monsterId
+			+ ", monsterType="
+			+ monsterType
+			+ ", expReward="
+			+ expReward
+			+ ", minCashDrop="
+			+ minCashDrop
+			+ ", maxCashDrop="
+			+ maxCashDrop
+			+ ", minOilDrop="
+			+ minOilDrop
+			+ ", maxOilDrop="
+			+ maxOilDrop
+			+ ", puzzlePieceDropRate="
+			+ puzzlePieceDropRate
+			+ ", level="
+			+ level
+			+ ", chanceToAppear="
+			+ chanceToAppear
+			+ ", dmgMultiplier="
+			+ dmgMultiplier
+			+ ", monsterIdDrop="
+			+ monsterIdDrop
+			+ ", monsterDropLvl="
+			+ monsterDropLvl
+			+ ", defensiveSkillId="
+			+ defensiveSkillId
+			+ ", offensiveSkillId="
+			+ offensiveSkillId
+			+ "]";
+	}
 
 }

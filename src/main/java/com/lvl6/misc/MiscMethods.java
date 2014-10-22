@@ -187,180 +187,180 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 public class MiscMethods {
 
-  private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
-  public static final String cash = "cash";
-  public static final String gems = "gems";
-  public static final String oil = "oil";
-  public static final String boosterPackId = "boosterPackId";
+	private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
+	public static final String cash = "cash";
+	public static final String gems = "gems";
+	public static final String oil = "oil";
+	public static final String boosterPackId = "boosterPackId";
 
-  public static final String CASH = "CASH";
-  public static final String OIL = "OIL";
-  public static final String MONSTER = "MONSTER";
-  
-  
-  	//METHODS FOR CAPPING USER RESOURCE
-  	public static int capResourceGain(int currentAmt, int delta, int maxAmt) {
-  		currentAmt = Math.min(currentAmt, maxAmt); //in case user resource is more than max
-  		int maxResourceUserCanGain = maxAmt - currentAmt;
-  		return Math.min(delta, maxResourceUserCanGain);
-  	}
+	public static final String CASH = "CASH";
+	public static final String OIL = "OIL";
+	public static final String MONSTER = "MONSTER";
 
-  	//METHODS FOR PICKING A BOOSTER PACK
-  
-  	//no arguments are modified
-  	public static List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
-  		Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
-  		//return value
-  		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
-  		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId.values();
-  		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-  		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId.values());    
+	//METHODS FOR CAPPING USER RESOURCE
+	public static int capResourceGain(int currentAmt, int delta, int maxAmt) {
+		currentAmt = Math.min(currentAmt, maxAmt); //in case user resource is more than max
+		int maxResourceUserCanGain = maxAmt - currentAmt;
+		return Math.min(delta, maxResourceUserCanGain);
+	}
 
-  		//selecting items at random with replacement
-  		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-  			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
-  			if (null == bi) {
-  				continue;
-  			}
-  			itemsUserReceives.add(bi);
-  		}
+	//METHODS FOR PICKING A BOOSTER PACK
 
-  		return itemsUserReceives;
-  	}
+	//no arguments are modified
+	public static List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
+		Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
+		//return value
+		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
-    private static float sumProbabilities(Collection<BoosterItem> boosterItems) {
-    	float sumOfProbabilities = 0.0f;
-    	for (BoosterItem bi : boosterItems) {
-    		sumOfProbabilities += bi.getChanceToAppear();
-    	}
-    	return sumOfProbabilities;
-    }
-    
-    private static BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
-    		float sumOfProbabilities) {
-    	Random rand = new Random();
-    	float unnormalizedProbabilitySoFar = 0f;
-      float randFloat = rand.nextFloat();
-      
-      log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
-      		"\t randFloat=" + randFloat);
-      
-      int size = itemsList.size();
-      //for each item, normalize before seeing if it is selected
-      for(int i = 0; i < size; i++) {
-        BoosterItem item = itemsList.get(i);
-        
-        //normalize probability
-        unnormalizedProbabilitySoFar += item.getChanceToAppear();
-        float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
-        
-        log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
-        		normalizedProbabilitySoFar);
-        
-        if(randFloat < normalizedProbabilitySoFar) {
-          //we have a winner! current boosterItem is what the user gets
-          return item;
-        }
-      }
+		Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId.values();
+		List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
+		float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId.values());    
 
-      log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
-      return null;
-    }
-  	
+		//selecting items at random with replacement
+		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
+			BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
+			if (null == bi) {
+				continue;
+			}
+			itemsUserReceives.add(bi);
+		}
 
-    //purpose of this method is to discover if the booster items that contain
-    //monsters as rewards, if the monster ids are valid 
-    public static boolean checkIfMonstersExist(List<BoosterItem> itemsUserReceives) {
-    	boolean monstersExist = true;
-    	
-    	Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
-    	for (BoosterItem bi : itemsUserReceives) {
-    		int monsterId = bi.getMonsterId();
-    		
-    		if (0 == monsterId) {
-    			//this booster item does not contain a monster reward
-    			continue;
-    		} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
-    			log.error("This booster item contains nonexistent monsterId. item=" + bi);
-    			monstersExist = false;
-    		}
-    	}
-    	return monstersExist;
-    }
-    
+		return itemsUserReceives;
+	}
 
-    public static int determineGemReward(List<BoosterItem> boosterItems) {
-    	int gemReward = 0;
-    	for (BoosterItem bi : boosterItems) {
-    		gemReward += bi.getGemReward();
-    	}
-    	
-    	return gemReward;
-    }
-    
-    //monsterIdsToNumPieces or completeUserMonsters will be populated
-    public static String createUpdateUserMonsterArguments(int userId, int boosterPackId,
-    		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
-    		List<MonsterForUser> completeUserMonsters, Date now) {
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
-    	sb.append(" ");
-    	sb.append(boosterPackId);
-    	sb.append(" boosterItemIds ");
-    	
-    	List<Integer> boosterItemIds = new ArrayList<Integer>();
-    	for (BoosterItem item : boosterItems) {
-    		Integer id = item.getId();
-    		Integer monsterId = item.getMonsterId();
-    		
-    		//only keep track of the booster item ids that are a monster reward
-    		if (monsterId <= 0) {
-    			continue;
-    		}
-    		if (item.isComplete()) {
-    			//create a "complete" user monster
-    			boolean hasAllPieces = true;
-    			boolean isComplete = true;
-    			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
-    			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
-    					userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
+	private static float sumProbabilities(Collection<BoosterItem> boosterItems) {
+		float sumOfProbabilities = 0.0f;
+		for (BoosterItem bi : boosterItems) {
+			sumOfProbabilities += bi.getChanceToAppear();
+		}
+		return sumOfProbabilities;
+	}
 
-    			//return this monster in the argument list completeUserMonsters, so caller
-    			//can use it
-    			completeUserMonsters.add(newUserMonster);
+	private static BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
+		float sumOfProbabilities) {
+		Random rand = new Random();
+		float unnormalizedProbabilitySoFar = 0f;
+		float randFloat = rand.nextFloat();
 
-    		} else {
-    			monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
-    		}
-    		boosterItemIds.add(id);
-    	}
-    	if (!boosterItemIds.isEmpty()) {
-    		String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-    		sb.append(boosterItemIdsStr);
-    	}
-    	
-    	return sb.toString();
-    }
-    
+		log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
+			"\t randFloat=" + randFloat);
 
-    public static List<FullUserMonsterProto> createFullUserMonsterProtos(
-    		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
-      List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
-      
-      for(int i = 0; i < userMonsterIds.size(); i++) {
-        long mfuId = userMonsterIds.get(i);
-        MonsterForUser mfu = mfuList.get(i);
-        mfu.setId(mfuId);
-        FullUserMonsterProto fump = CreateInfoProtoUtils
-        		.createFullUserMonsterProtoFromUserMonster(mfu);
-        protos.add(fump);
-      }
-      
-      return protos;
-    }
-    
-  	
+		int size = itemsList.size();
+		//for each item, normalize before seeing if it is selected
+		for(int i = 0; i < size; i++) {
+			BoosterItem item = itemsList.get(i);
+
+			//normalize probability
+			unnormalizedProbabilitySoFar += item.getChanceToAppear();
+			float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
+
+			log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
+				normalizedProbabilitySoFar);
+
+			if(randFloat < normalizedProbabilitySoFar) {
+				//we have a winner! current boosterItem is what the user gets
+				return item;
+			}
+		}
+
+		log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
+		return null;
+	}
+
+
+	//purpose of this method is to discover if the booster items that contain
+	//monsters as rewards, if the monster ids are valid 
+	public static boolean checkIfMonstersExist(List<BoosterItem> itemsUserReceives) {
+		boolean monstersExist = true;
+
+		Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+		for (BoosterItem bi : itemsUserReceives) {
+			int monsterId = bi.getMonsterId();
+
+			if (0 == monsterId) {
+				//this booster item does not contain a monster reward
+				continue;
+			} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
+				log.error("This booster item contains nonexistent monsterId. item=" + bi);
+				monstersExist = false;
+			}
+		}
+		return monstersExist;
+	}
+
+
+	public static int determineGemReward(List<BoosterItem> boosterItems) {
+		int gemReward = 0;
+		for (BoosterItem bi : boosterItems) {
+			gemReward += bi.getGemReward();
+		}
+
+		return gemReward;
+	}
+
+	//monsterIdsToNumPieces or completeUserMonsters will be populated
+	public static String createUpdateUserMonsterArguments(int userId, int boosterPackId,
+		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
+		List<MonsterForUser> completeUserMonsters, Date now) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
+		sb.append(" ");
+		sb.append(boosterPackId);
+		sb.append(" boosterItemIds ");
+
+		List<Integer> boosterItemIds = new ArrayList<Integer>();
+		for (BoosterItem item : boosterItems) {
+			Integer id = item.getId();
+			Integer monsterId = item.getMonsterId();
+
+			//only keep track of the booster item ids that are a monster reward
+			if (monsterId <= 0) {
+				continue;
+			}
+			if (item.isComplete()) {
+				//create a "complete" user monster
+				boolean hasAllPieces = true;
+				boolean isComplete = true;
+				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+				MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
+					userId, monzter.getNumPuzzlePieces(), monzter, now, hasAllPieces, isComplete);
+
+				//return this monster in the argument list completeUserMonsters, so caller
+				//can use it
+				completeUserMonsters.add(newUserMonster);
+
+			} else {
+				monsterIdsToNumPieces.put(monsterId, item.getNumPieces());
+			}
+			boosterItemIds.add(id);
+		}
+		if (!boosterItemIds.isEmpty()) {
+			String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
+			sb.append(boosterItemIdsStr);
+		}
+
+		return sb.toString();
+	}
+
+
+	public static List<FullUserMonsterProto> createFullUserMonsterProtos(
+		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
+		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
+
+		for(int i = 0; i < userMonsterIds.size(); i++) {
+			long mfuId = userMonsterIds.get(i);
+			MonsterForUser mfu = mfuList.get(i);
+			mfu.setId(mfuId);
+			FullUserMonsterProto fump = CreateInfoProtoUtils
+				.createFullUserMonsterProtoFromUserMonster(mfu);
+			protos.add(fump);
+		}
+
+		return protos;
+	}
+
+
 	//METHODS FOR MATCH MAKING
 
 	public static final double ELO__RANDOM_VAR_MIN = 0.1D;
@@ -368,7 +368,7 @@ public class MiscMethods {
 	public static final double ELO__ICND_MEAN = -0.2D;
 	public static final double ELO__ICND_STANDARD_DEVIATION = 0.608D;
 	public static final double ELO__MAX_RANGE = 0.4D;
-	
+
 	/*
 	 * randVal (aka eloAddend) = [Max Range] x Player's Score x ICND( Random( 0.1, 0.9 ), [Bias], 0.608 )
 	 * Recommended Max Range: 40.0%
@@ -384,16 +384,16 @@ public class MiscMethods {
 	 */
 	public static Map.Entry<Integer, Integer> getMinAndMaxElo(double playerElo) {
 		double randVar = ELO__RANDOM_VAR_MIN + (Math.random() * (ELO__RANDOM_VAR_MAX - ELO__RANDOM_VAR_MIN));
-		
+
 		double computedElo = getProspectiveOpponentElo(randVar, playerElo);
-		
-		
+
+
 		int minElo = (int) (0.95D * computedElo);
 		int maxElo = (int) (1.05D * computedElo);
 		log.info(String.format(
 			"computedElo=%f, minElo=%d, maxElo=%d",
 			computedElo, minElo, maxElo));
-		
+
 		//the minimum elo to be searched for is 1000, er PVP__DEFAULT_MIN_ELO
 		//TODO: Fix up this hackiness: ensuring DEFAULT MIN ELO is between min (inclusive) and max elo (inclusive)
 		minElo = Math.max(ControllerConstants.PVP__DEFAULT_MIN_ELO - 1, minElo);
@@ -401,1276 +401,1276 @@ public class MiscMethods {
 		log.info(String.format(
 			"after capping minElo. computedElo=%f, minElo=%d, maxElo=%d",
 			computedElo, minElo, maxElo));
-		
+
 		//poor man's pair
 		return new AbstractMap.SimpleEntry<Integer, Integer>(minElo,maxElo);
 	}
-	
+
 	public static double getProspectiveOpponentElo(
 		double randVar, double playerElo)
 	{
 		NormalDistribution eloRangeFunc = new NormalDistribution(
 			ELO__ICND_MEAN, ELO__ICND_STANDARD_DEVIATION);
-		
+
 		double cndVal = eloRangeFunc.inverseCumulativeProbability(randVar);
 		double eloAddend = ELO__MAX_RANGE * playerElo * cndVal; 
 		log.info(String.format(
 			"cndVal=%f, playerElo=%f, randVar=%f, eloAddend=%f",
 			cndVal, playerElo, randVar, eloAddend));
-		
+
 		return playerElo + eloAddend;
-//		eloAddend = Math.max(eloAddend, ControllerConstants.PVP__DEFAULT_MIN_ELO);
-		
+		//		eloAddend = Math.max(eloAddend, ControllerConstants.PVP__DEFAULT_MIN_ELO);
+
 	}
-  
-  /*
+
+	/*
   public static int calculateCashRewardFromPvpUser(User queuedOpponent) {
 		int cash = queuedOpponent.getCash();
 		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
-		
+
 //		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
-		
+
 		return cashLost;
 	}
-  
+
   //given bunch of users, calculate how much can be stolen from each user
   public static Map<Integer, Integer> calculateCashRewardFromPvpUsers(
   		Map<Integer, User> userIdsToUsers) {
-  	
+
   	Map<Integer, Integer> userIdToCashReward = new HashMap<Integer, Integer>();
-  	
+
   	for (Integer userId : userIdsToUsers.keySet()) {
   		User user = userIdsToUsers.get(userId);
   		int cashReward = calculateCashRewardFromPvpUser(user);
-  		
+
   		userIdToCashReward.put(userId, cashReward);
   	}
-  	
+
   	return userIdToCashReward;
   }
-  
-  
+
+
   public static int calculateOilRewardFromPvpUser(User queuedOpponent) {
 		int oil = queuedOpponent.getOil();
 		int oilLost = (int) (ControllerConstants.PVP__PERCENT_OIL_LOST * oil);
-		
+
 //		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
-		
+
 		return oilLost;
 	}
-  
+
   //given bunch of users, calculate how much can be stolen from each user
   public static Map<Integer, Integer> calculateOilRewardFromPvpUsers(
   		Map<Integer, User> userIdsToUsers) {
-  	
+
   	Map<Integer, Integer> userIdToOilReward = new HashMap<Integer, Integer>();
-  	
+
   	for (Integer userId : userIdsToUsers.keySet()) {
   		User user = userIdsToUsers.get(userId);
   		int cashReward = calculateOilRewardFromPvpUser(user);
-  		
+
   		userIdToOilReward.put(userId, cashReward);
   	}
-  	
+
   	return userIdToOilReward;
   }
-*/
-
-  public static Dialogue createDialogue(String dialogueBlob) {
-    if (dialogueBlob != null && dialogueBlob.length() > 0) { 
-      StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
-
-      List<Boolean> isLeftSides = new ArrayList<Boolean>();
-      List<String> speakers = new ArrayList<String>();
-      List<String> speakerImages = new ArrayList<String>();
-      List<String> speakerTexts = new ArrayList<String>();
-
-      try {
-        while (st.hasMoreTokens()) {
-          String tok = st.nextToken();
-          CSVReader reader = new CSVReader(new StringReader(tok), '.');
-          String[] strs = reader.readNext();
-          if (strs.length == 4) {
-            Boolean isLeftSide = strs[0].toUpperCase().equals("L");
-            String speaker = strs[1];
-            String speakerImage = strs[2];
-            String speakerText = strs[3];
-            if (speakerText != null) {
-              isLeftSides.add(isLeftSide);
-              speakers.add(speaker);
-              speakerImages.add(speakerImage);
-              speakerTexts.add(speakerText);
-            }
-          }
-        }
-      } catch (Exception e) {
-        log.error("problem with creating dialogue object for this dialogueblob: {}", dialogueBlob, e);
-      }
-      return new Dialogue(speakers, speakerImages, speakerTexts, isLeftSides);
-    }
-    return null;
-  }
-
-  public static void explodeIntoInts(String stringToExplode, 
-      String delimiter, List<Integer> returnValue) {
-    StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
-    while (st.hasMoreTokens()) {
-    	String tok = st.nextToken().trim();
-    	if (tok.isEmpty()) {
-    		continue;
-    	}
-    	returnValue.add(Integer.parseInt(tok));
-    }
-  }
-
-  public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
-    ConnectedPlayer player = null;
-    if (playerId != null && playerId > 0) {
-      player = server.getPlayerById(playerId); 
-      if (player != null) {
-        return player.getIp_connection_id();
-      }
-    }
-    if (udid != null) {
-      player = server.getPlayerByUdId(udid);
-      if (player != null) {
-        return player.getIp_connection_id();
-      }
-    }
-    return null;
-  }
-
-  public static void purgeMDCProperties(){
-    MDC.remove(MDCKeys.UDID);
-    MDC.remove(MDCKeys.PLAYER_ID);
-    MDC.remove(MDCKeys.IP);
-  }
-
-  public static void setMDCProperties(String udid, Integer playerId, String ip) {
-    purgeMDCProperties();
-    if (udid != null) MDC.put(MDCKeys.UDID, udid);
-    if (ip != null) MDC.put(MDCKeys.IP, ip);
-    if (playerId != null && playerId > 0) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
-  }
-
-  public static int calculateCoinsGivenToReferrer(User referrer) {
-    return Math.min(ControllerConstants.USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER, (int)(Math.ceil(
-        (referrer.getCash()) * 
-        ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
-  }
-
-
-  public static boolean checkClientTimeAroundApproximateNow(Timestamp clientTime) {
-    if (clientTime.getTime() < new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000 && 
-        clientTime.getTime() > new Date().getTime() - Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000) {
-      return true;
-    }
-    return false;
-  }
-
-  public static List<City> getCitiesAvailableForUserLevel(int userLevel) {
-    List<City> availCities = new ArrayList<City>();
-    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-    for (Integer cityId : cities.keySet()) {
-      City city = cities.get(cityId);
-      availCities.add(city);
-    }
-    return availCities;
-  }
-
-  public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
-		  User user, PvpLeagueForUser plfu) {
-    try {
-      if (!user.isFake()) {
-        LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
-        leaderboard.updateLeaderboardForUser(user, plfu);
-      }
-    } catch (Exception e) {
-      log.error("Failed to update leaderboard.");
-    }
-
-    UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(user.getId());
-    UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto.newBuilder()
-        .setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu))
-        .setTimeOfUserUpdate(new Date().getTime()).build();
-    resEvent.setUpdateClientUserResponseProto(resProto);
-    return resEvent;
-  }
-
-
-  public static int getRowCount(ResultSet set) {
-    int rowCount;
-    int currentRow;
-    try {
-      currentRow = set.getRow();
-      rowCount = set.last() ? set.getRow() : 0; 
-      if (currentRow == 0)          
-        set.beforeFirst(); 
-      else      
-        set.absolute(currentRow);
-      return rowCount;
-    } catch (SQLException e) {
-      log.error("getRowCount error.", e);
-      return -1;
-    }     
-
-  }
-
-  public static TutorialConstants createTutorialConstantsProto() {
-    TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
-
-    tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
-    tcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
-    tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_ONE);
-    tcb.setEnemyMonsterIdTwo(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_TWO);
-    tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
-    tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
-    
-    for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
-
-      int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
-      float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
-      float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
-
-      TutorialStructProto tsp = CreateInfoProtoUtils.createTutorialStructProto(structId, posX, posY);
-      tcb.addTutorialStructures(tsp);
-    }
-
-    List<Integer> structureIdsToBeBuilt = 
-        Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
-    tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
-
-    int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
-    tcb.setCityId(cityId);
-    List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
-    for (CityElement ce : cityElements) {
-      CityElementProto cep = CreateInfoProtoUtils
-          .createCityElementProtoFromCityElement(ce);
-      tcb.addCityOneElements(cep);
-    }
-
-    tcb.setCityElementIdForFirstDungeon(
-        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
-    tcb.setCityElementIdForSecondDungeon(
-        ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
-    
-
-    tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
-    tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
-    tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
-    
-//    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
-    
-    int orientation = 1;
-    for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
-    	int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
-    	float posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
-    	float posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
-    	
-    	MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
-    			obstacleId, posX, posY, orientation);
-    	tcb.addTutorialObstacles(mopb);
-//    	log.info("mopb=" + mopb);
-    }
-    
-    return tcb.build();
-  }
-
-
-  public static StartupConstants createStartupConstantsProto(Globals globals) {
-    StartupConstants.Builder cb = StartupConstants.newBuilder();
-
-    for (String id : IAPValues.iapPackageNames) {
-      InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
-      iapb.setImageName(IAPValues.getImageNameForPackageName(id));
-      iapb.setIapPackageId(id);
-
-      int diamondAmt = IAPValues.getDiamondsForPackageName(id);
-      if (diamondAmt > 0) {
-        iapb.setCurrencyAmount(diamondAmt);
-      } else {
-        int coinAmt = IAPValues.getCoinsForPackageName(id);
-        iapb.setCurrencyAmount(coinAmt);
-      }
-      cb.addInAppPurchasePackages(iapb.build());
-    }
-
-    cb.setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
-    cb.setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE);
-
-    if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
-      for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
-        AnimatedSpriteOffset aso = ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS[i];
-        cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
-      }
-    }
-
-    cb.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
-    cb.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
-    cb.setMaxLengthOfChatString(ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING);
-
-    ClanConstants.Builder clanConstantsBuilder = ClanConstants.newBuilder();
-    clanConstantsBuilder.setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
-    clanConstantsBuilder.setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME);
-    clanConstantsBuilder.setCoinPriceToCreateClan(ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
-    clanConstantsBuilder.setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG);
-    clanConstantsBuilder.setMaxClanSize(ControllerConstants.CLAN__MAX_NUM_MEMBERS);
-    cb.setClanConstants(clanConstantsBuilder.build());
-
-
-    DownloadableNibConstants.Builder dncb = DownloadableNibConstants.newBuilder();
-    dncb.setMapNibName(ControllerConstants.NIB_NAME__TRAVELING_MAP);
-    dncb.setExpansionNibName(ControllerConstants.NIB_NAME__EXPANSION);
-    dncb.setGoldShoppeNibName(ControllerConstants.NIB_NAME__GOLD_SHOPPE);
-    cb.setDownloadableNibConstants(dncb.build());
-
-    cb.setNumHoursBeforeReshowingGoldSale(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE);
-    cb.setLevelToShowRateUsPopup(ControllerConstants.LEVEL_TO_SHOW_RATE_US_POPUP);
-    //        .setHoursInAttackedByOneProtectionPeriod(ControllerConstants.BATTLE__HOURS_IN_ATTACKED_BY_ONE_PROTECTION_PERIOD)
-    //        .setMaxNumTimesAttackedByOneInProtectionPeriod(ControllerConstants.BATTLE__MAX_NUM_TIMES_ATTACKED_BY_ONE_IN_PROTECTION_PERIOD)
-    //        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
-    //        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
-
-    //SET TOURNAMENT CONSTANTS HERE 
-
-    cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
-    cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
-    
-//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
-//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-//    cb.setAdminChatUserProto(adminChatUserProto);
-    
-    cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
-
-    UserMonsterConstants.Builder umcb = UserMonsterConstants.newBuilder();
-    umcb.setMaxNumTeamSlots(ControllerConstants.MONSTER_FOR_USER__MAX_TEAM_SIZE);
-    umcb.setInitialMaxNumMonsterLimit(ControllerConstants.MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT);
-    //    umcb.setMonsterInventoryIncrementAmount(ControllerConstants.MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT);
-    //    umcb.setGemPricePerSlot(ControllerConstants.MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT);
-    //    umcb.setNumFriendsToRecruitToIncreaseInventory(ControllerConstants.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS);
-    cb.setUserMonsterConstants(umcb.build());
-
-    MonsterConstants.Builder mcb = MonsterConstants.newBuilder();
-    mcb.setCashPerHealthPoint(ControllerConstants.MONSTER__CASH_PER_HEALTH_POINT);
-    mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
-    mcb.setElementalStrength(ControllerConstants.MONSTER__ELEMENTAL_STRENGTH);
-    mcb.setElementalWeakness(ControllerConstants.MONSTER__ELEMENTAL_WEAKNESS);
-    mcb.setOilPerMonsterLevel(ControllerConstants.MONSTER__OIL_PER_MONSTER_LEVEL);
-    cb.setMonsterConstants(mcb.build());
-
-    cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
-    cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
-    cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
-    cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
-    cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
-    cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
-    cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
-
-    cb.setAddAllFbFriends(globals.isAddAllFbFriends());
-    
-    MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
-    cb.setMiniTuts(miniTuts);
-    
-    cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
-    cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
-    
-    TaskMapConstants.Builder mapConstants = TaskMapConstants.newBuilder();
-    mapConstants.setMapSectionImagePrefix(ControllerConstants.TASK_MAP__SECTION_IMAGE_PREFIX);
-    mapConstants.setMapNumberOfSections(ControllerConstants.TASK_MAP__NUMBER_OF_SECTIONS);
-    mapConstants.setMapSectionHeight(ControllerConstants.TASK_MAP__SECTION_HEIGHT);
-    mapConstants.setMapTotalHeight(ControllerConstants.TASK_MAP__TOTAL_HEIGHT);
-    mapConstants.setMapTotalWidth(ControllerConstants.TASK_MAP__TOTAL_WIDTH);
-    cb.setTaskMapConstants(mapConstants.build());
-    
-    cb.setMaxMinutesForFreeSpeedUp(ControllerConstants.MAX_MINUTES_FOR_FREE_SPEED_UP);
-    
-    for (int index = 0; index < ControllerConstants.CLAN_HELP__HELP_TYPE.length; index++) {
-    	ClanHelpConstants.Builder chcb = ClanHelpConstants.newBuilder();
-    	String helpType = ControllerConstants.CLAN_HELP__HELP_TYPE[index];
-    	try {
-    		chcb.setHelpType(ClanHelpType.valueOf(helpType));
-    	} catch (Exception e) {
-    		log.error(String.format("invalid ClanHelpType: %s, not using it", helpType),
-    			e);
-    		continue;
-    	}
-    	int amount = ControllerConstants.CLAN_HELP__AMOUNT_REMOVED[index];
-    	chcb.setAmountRemovedPerHelp(amount);
-    	float percent = ControllerConstants.CLAN_HELP__PERCENT_REMOVED[index];
-    	chcb.setPercentRemovedPerHelp(percent);
-    	
-    	cb.addClanHelpConstants(chcb.build());
-    }
-    
-    //set more properties above
-    //    BattleConstants battleConstants = BattleConstants.newBuilder()
-    //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
-    //        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)
-    //        .setBattleWeightGivenToAttackEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_EQUIP_SUM)
-    //        .setBattleWeightGivenToDefenseStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_STAT)
-    //        .setBattleWeightGivenToDefenseEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_EQUIP_SUM)
-    //        .setBattleWeightGivenToLevel(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_LEVEL)
-    //        .setBattlePerfectPercentThreshold(ControllerConstants.BATTLE_PERFECT_PERCENT_THRESHOLD)
-    //        .setBattleGreatPercentThreshold(ControllerConstants.BATTLE_GREAT_PERCENT_THRESHOLD)
-    //        .setBattleGoodPercentThreshold(ControllerConstants.BATTLE_GOOD_PERCENT_THRESHOLD)
-    //        .setBattlePerfectMultiplier(ControllerConstants.BATTLE_PERFECT_MULTIPLIER)
-    //        .setBattleGreatMultiplier(ControllerConstants.BATTLE_GREAT_MULTIPLIER)
-    //        .setBattleGoodMultiplier(ControllerConstants.BATTLE_GOOD_MULTIPLIER)
-    //        .setBattleImbalancePercent(ControllerConstants.BATTLE_IMBALANCE_PERCENT)
-    //        .setBattlePerfectLikelihood(ControllerConstants.BATTLE_PERFECT_LIKELIHOOD)
-    //        .setBattleGreatLikelihood(ControllerConstants.BATTLE_GREAT_LIKELIHOOD)
-    //        .setBattleGoodLikelihood(ControllerConstants.BATTLE_GOOD_LIKELIHOOD)
-    //        .setBattleMissLikelihood(ControllerConstants.BATTLE_MISS_LIKELIHOOD)
-    //        .setBattleHitAttackerPercentOfHealth(ControllerConstants.BATTLE__HIT_ATTACKER_PERCENT_OF_HEALTH)
-    //        .setBattleHitDefenderPercentOfHealth(ControllerConstants.BATTLE__HIT_DEFENDER_PERCENT_OF_HEALTH)
-    //        .setBattlePercentOfWeapon(ControllerConstants.BATTLE__PERCENT_OF_WEAPON)
-    //        .setBattlePercentOfArmor(ControllerConstants.BATTLE__PERCENT_OF_ARMOR)
-    //        .setBattlePercentOfAmulet(ControllerConstants.BATTLE__PERCENT_OF_AMULET)
-    //        .setBattlePercentOfPlayerStats(ControllerConstants.BATTLE__PERCENT_OF_PLAYER_STATS)
-    //        .setBattleAttackExpoMultiplier(ControllerConstants.BATTLE__ATTACK_EXPO_MULTIPLIER)
-    //        .setBattlePercentOfEquipment(ControllerConstants.BATTLE__PERCENT_OF_EQUIPMENT)
-    //        .setBattleIndividualEquipAttackCap(ControllerConstants.BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP)
-    //        .setBattleEquipAndStatsWeight(ControllerConstants.BATTLE__EQUIP_AND_STATS_WEIGHT)
-    //        .build();
-    //
-    //    cb = cb.setBattleConstants(battleConstants);
-
-    //    LockBoxConstants lbc = LockBoxConstants.newBuilder()
-    //        .setFreeChanceToPickLockBox(ControllerConstants.LOCK_BOXES__FREE_CHANCE_TO_PICK)
-    //        .setGoldChanceToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_CHANCE_TO_PICK)
-    //        .setNumMinutesToRepickLockBox(ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK)
-    //        .setGoldCostToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK)
-    //        .setGoldCostToResetPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK)
-    //        .setCashChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
-    //        .setCashCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
-    //        .setNumDaysToShowAfterEventEnded(ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS)
-    //        .build();
-    //
-    //    cb = cb.setLockBoxConstants(lbc);
-
-
-    //    EnhancementConstants enc = EnhancementConstants.newBuilder()
-    //        .setMaxEnhancementLevel(ControllerConstants.MAX_ENHANCEMENT_LEVEL)
-    //        .setEnhanceLevelExponentBase(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE)
-    //        .setEnhancePercentPerLevel(ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL)
-    //        .setEnhanceTimeConstantA(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_A)
-    //        .setEnhanceTimeConstantB(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_B)
-    //        .setEnhanceTimeConstantC(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_C)
-    //        .setEnhanceTimeConstantD(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_D)
-    //        .setEnhanceTimeConstantE(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_E)
-    //        .setEnhanceTimeConstantF(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_F)
-    //        .setEnhanceTimeConstantG(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_G)
-    //        .setEnhancePercentConstantA(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A)
-    //        .setEnhancePercentConstantB(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B)
-    //        .setDefaultSecondsToEnhance(ControllerConstants.ENHANCEMENT__DEFAULT_SECONDS_TO_ENHANCE)
-    //        .setEnhancingCost(ControllerConstants.ENHANCEMENT__COST_CONSTANT)
-    //        .build();
-    //
-    //    cb = cb.setEnhanceConstants(enc);
-
-
-    //    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
-    //        .setWinsWeight(ControllerConstants.TOURNAMENT_EVENT__WINS_WEIGHT)
-    //        .setLossesWeight(ControllerConstants.TOURNAMENT_EVENT__LOSSES_WEIGHT)
-    //        .setFleesWeight(ControllerConstants.TOURNAMENT_EVENT__FLEES_WEIGHT)
-    //        .setNumHoursToShowAfterEventEnd(ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END)
-    //        .build();
-    //    cb = cb.setLeaderboardConstants(lec);
-    //    
-    //    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
-    //        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
-    //        .build();
-    //    cb = cb.setBoosterPackConstants(bpc);
-    //
-
-    return cb.build();  
-  }
-  
-  public static MiniTutorialConstants createMiniTutorialConstantsProto() {
-  	MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
-  	mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
-  	mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
-  	
-  	return mtcb.build();
-  }
-
-  public static List<TournamentEventProto> currentTournamentEventProtos() {
-    Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
-    long curTime = (new Date()).getTime();
-    List<Integer> activeEventIds = new ArrayList<Integer>();
-
-    //return value
-    List<TournamentEventProto> protos = new ArrayList<TournamentEventProto>();
-
-    //get the ids of active leader board events
-    for(TournamentEvent e : idsToEvents.values()) {
-      if (e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
-        activeEventIds.add(e.getId());
-      }
-    }
-
-    //get all the rewards for all the current leaderboard events
-    Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
-        TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
-
-    //create the protos
-    for(Integer i: activeEventIds) {
-      TournamentEvent e = idsToEvents.get(i);
-      List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
-
-      protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
-    }
-    return protos;
-  }
-
-  public static void reloadAllRareChangeStaticData() {
-    log.info("Reloading rare change static data");
-    AchievementRetrieveUtils.reload();
-    BannedUserRetrieveUtils.reload();
-    BoosterDisplayItemRetrieveUtils.reload();
-    BoosterItemRetrieveUtils.reload();
-    BoosterPackRetrieveUtils.reload();
-    //    CityBossRetrieveUtils.reload();
-    CityElementsRetrieveUtils.reload(); 
-    CityRetrieveUtils.reload();
-    //    ClanBossRetrieveUtils.reload();
-    //    ClanBossRewardRetrieveUtils.reload();
-    ClanIconRetrieveUtils.reload();
-    ClanEventPersistentRetrieveUtils.reload();
-    ClanRaidRetrieveUtils.reload();
-    ClanRaidStageRetrieveUtils.reload();
-    ClanRaidStageMonsterRetrieveUtils.reload();
-    ClanRaidStageRewardRetrieveUtils.reload();
-    EventPersistentRetrieveUtils.reload();
-    ExpansionCostRetrieveUtils.reload();
-    GoldSaleRetrieveUtils.reload();
-    ItemRetrieveUtils.reload();
-    LockBoxEventRetrieveUtils.reload();
-//    MonsterForPvpRetrieveUtils.staticReload();
-    MiniJobRetrieveUtils.reload();
-    MonsterBattleDialogueRetrieveUtils.reload();
-    MonsterLevelInfoRetrieveUtils.reload();
-    MonsterRetrieveUtils.reload();
-    ObstacleRetrieveUtils.reload();
-    PrerequisiteRetrieveUtils.reload();
-    ProfanityRetrieveUtils.reload();
-    PvpLeagueRetrieveUtils.reload();
-    QuestJobRetrieveUtils.reload();
-    QuestJobMonsterItemRetrieveUtils.reload();
-    QuestRetrieveUtils.reload();
-    SkillRetrieveUtils.reload();
-    SkillPropertyRetrieveUtils.reload();
-    StartupStuffRetrieveUtils.reload();
-    StaticUserLevelInfoRetrieveUtils.reload();
-    StructureClanHouseRetrieveUtils.reload();
-    StructureEvoChamberRetrieveUtils.reload();
-    StructureHospitalRetrieveUtils.reload();
-    StructureLabRetrieveUtils.reload();
-    StructureMiniJobRetrieveUtils.reload();
-    StructureResidenceRetrieveUtils.reload();
-    StructureResourceGeneratorRetrieveUtils.reload();
-    StructureResourceStorageRetrieveUtils.reload();
-    StructureRetrieveUtils.reload();
-    StructureTeamCenterRetrieveUtils.reload();
-    StructureTownHallRetrieveUtils.reload();
-    TaskMapElementRetrieveUtils.reload();
-    TaskRetrieveUtils.reload();
-    TaskStageMonsterRetrieveUtils.reload();
-    TaskStageRetrieveUtils.reload();
-    TournamentEventRetrieveUtils.reload();
-    TournamentEventRewardRetrieveUtils.reload();
-  }
-
-
-  //  //returns the clan towers that changed
-  //  public static void sendClanTowerWarNotEnoughMembersNotification(
-  //      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
-  //      List<Integer> towersOwned, Clan aClan, TaskExecutor executor, 
-  //      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
-  //
-  //    if(null != clanTowerIdsToClanTowers && !clanTowerIdsToClanTowers.isEmpty()) {
-  //
-  //      List<Notification> notificationsToSend = new ArrayList<Notification>();
-  //      //make notifications for the towers the clan was attacking
-  //      boolean attackerWon = false;
-  //      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers, 
-  //          notificationsToSend, attackerWon, onlinePlayers, server);
-  //
-  //      //make notifications for the towers the clan owned
-  //      attackerWon = true;
-  //      generateClanTowerNotEnoughMembersNotification(aClan, towersOwned, clanTowerIdsToClanTowers,
-  //          notificationsToSend, attackerWon, onlinePlayers, server);
-  //
-  //      for(Notification n: notificationsToSend) {
-  //        writeGlobalNotification(n, server);
-  //      }
-  //      return;
-  //    }
-  //    log.info("no towers changed");
-  //    return;
-  //  }
-
-  //  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
-  //      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
-  //      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
-  //
-  //    //for each tower make a notification for it
-  //    for(Integer towerId: towerIds) {
-  //      ClanTower aTower = clanTowerIdsToClanTowers.get(towerId);
-  //      String towerName = aTower.getTowerName();
-  //      Notification clanTowerWarNotification = new Notification ();
-  //      Clan losingClan;
-  //      Clan winningClan;
-  //      String losingClanName;
-  //      String winningClanName;
-  //
-  //      losingClan = aClan;
-  //      winningClan = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
-  //
-  //      losingClanName = losingClan.getName();
-  //      winningClanName = winningClan != null ? winningClan.getName() : null;
-  //      clanTowerWarNotification.setAsClanTowerWarClanConceded(
-  //          losingClanName, winningClanName, towerName);
-  //      notificationsToSend.add(clanTowerWarNotification);
-  //    }
-  //  }
-
-  public static void writeGlobalNotification(Notification n, GameServer server) {
-    GeneralNotificationResponseProto.Builder notificationProto = 
-        n.generateNotificationBuilder();
-
-    GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
-    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
-    server.writeGlobalEvent(aNotification);
-  }
-
-  public static void writeClanApnsNotification(Notification n, GameServer server, int clanId) {
-    GeneralNotificationResponseProto.Builder notificationProto =
-        n.generateNotificationBuilder();
-
-    GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
-    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
-    server.writeApnsClanEvent(aNotification, clanId);
-  }
-
-  public static void writeNotificationToUser(Notification aNote, GameServer server, int userId) {
-    GeneralNotificationResponseProto.Builder notificationProto =
-        aNote.generateNotificationBuilder();
-    GeneralNotificationResponseEvent aNotification =
-        new GeneralNotificationResponseEvent(userId);
-    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
-
-    server.writeAPNSNotificationOrEvent(aNotification);
-  }
-
-  //Simple (inefficient) word by word censor. If a word appears in 
-  //a blacklist then that word is replaced by a number of asterisks 
-  //equal to the word's length, e.g. fuck => ****
-  //Not sure whether to use String or StringBuilder, so going with latter.
-  public static String censorUserInput(String userContent) {
-    StringBuilder toReturn = new StringBuilder(userContent.length());
-    Set<String> blackList = ProfanityRetrieveUtils.getAllProfanity();
-
-    String[] words = userContent.split(" ");
-    String space = " "; //split by space, need to add them back in
-    String w = "";
-
-    for(int i = 0; i < words.length; i++) {
-      w = words[i];
-
-      //if at the last word, don't add a space after "censoring" it
-      if ((words.length - 1) == i) {
-        space = "";
-      }
-      //get rid of all punctuation
-      String wWithNoPunctuation = w.replaceAll("\\p{Punct}", "");
-
-      //the profanity table only holds lower case one word profanities
-      if(blackList.contains(wWithNoPunctuation.toLowerCase())) {
-        toReturn.append(asteriskify(w) + space);
-      } else {
-        toReturn.append(w + space);
-      }
-    }
-
-    return toReturn.toString();
-  }
-
-  //average length of word is 4 characters. So based on this, not using
-  //StringBuilder
-  public static String asteriskify(String wordToAskerify) {
-    int len = wordToAskerify.length();
-    String s = "";
-
-    for(int i = 0; i < len; i++) {
-      s += "*";
-    }
-    return s;
-  }
-  
-  public static void writeToUserCurrencyUsers(List<Integer> userIds,
-		  Timestamp thyme, Map<Integer, Map<String, Integer>> changeMap,
-		  Map<Integer, Map<String, Integer>> previousCurrencyMap,
-		  Map<Integer, Map<String, Integer>> currentCurrencyMap,
-		  Map<Integer, Map<String, String>> changeReasonsMap,
-		  Map<Integer, Map<String, String>> detailsMap) {
-	  try {
-		  List<Integer> allUserIds = new ArrayList<Integer>();
-	      List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 
-	      List<String> allResourceTypes = new ArrayList<String>();
-	      List<Integer> allCurrencyChanges = new ArrayList<Integer>();
-	      List<Integer> allPreviousCurrencies = new ArrayList<Integer>();
-	      List<Integer> allCurrentCurrencies = new ArrayList<Integer>();
-	      List<String> allReasonsForChanges = new ArrayList<String>();
-	      List<String> allDetails = new ArrayList<String>();
-	      
-		  //for each user, accrue up the values to store to the db
-		  for (Integer userId : userIds) {
-			  Map<String, Integer> oneUserChangeMap = changeMap.get(userId);
-			  Map<String, Integer> oneUserPrevCurrency =
-					  previousCurrencyMap.get(userId);
-			  Map<String, Integer> oneUserCurCurrency =
-					  currentCurrencyMap.get(userId);
-			  Map<String, String> oneUserChangeReasons =
-					  changeReasonsMap.get(userId);
-			  Map<String, String> oneUserDetails = detailsMap.get(userId);
-			
-			  //aggregate all the data across all the users into db friendly
-			  //arguments
-			  writeToUserCurrencyUsersHelper(userId, thyme, oneUserChangeMap,
-					  oneUserPrevCurrency, oneUserCurCurrency,
-					  oneUserChangeReasons, oneUserDetails, allUserIds,
-					  allTimestamps, allResourceTypes, allCurrencyChanges,
-					  allPreviousCurrencies, allCurrentCurrencies,
-					  allReasonsForChanges, allDetails);
-		  }
-		  
-		  int numInserted = InsertUtils.get()
-				  .insertIntoUserCurrencyHistoryMultipleRows(
-						  allUserIds, allTimestamps, allResourceTypes,
-						  allCurrencyChanges, allPreviousCurrencies,
-						  allCurrentCurrencies, allReasonsForChanges,
-						  allDetails);
-
-		  log.info("numInserted into currency history: " + numInserted);
-		  
-	  } catch (Exception e) {
-		  log.error("error updating user_curency_history; userIds=" +
-				  userIds + ", reasonsForChanges=" + changeMap +
-				  ", changeReasonsMap=" + changeReasonsMap +
-				  ", detailsMap=" + detailsMap, e);
-	  }
-  }
-  
-  protected static void writeToUserCurrencyUsersHelper(Integer userId,
-		  Timestamp thyme, Map<String, Integer> changeMap,
-		  Map<String, Integer> previousCurrencyMap,
-		  Map<String, Integer> currentCurrencyMap,
-		  Map<String, String> changeReasonsMap, Map<String, String> detailsMap,
-		  List<Integer> userIds, List<Timestamp> timestamps,
-		  List<String> resourceTypes, List<Integer> currencyChanges,
-		  List<Integer> previousCurrencies, List<Integer> currentCurrencies,
-		  List<String> reasonsForChanges, List<String> details) {
-	  
-	  Map<String, Integer> changeMapTemp =
-			  new HashMap<String, Integer>(changeMap);
-	  Map<String, Integer> previousCurrencyMapTemp =
-			  new HashMap<String, Integer>(previousCurrencyMap);
-	  Map<String, Integer> currentCurrencyMapTemp =
-			  new HashMap<String, Integer>(currentCurrencyMap);
-	  Map<String, String> changeReasonsMapTemp =
-			  new HashMap<String, String>(changeReasonsMap);
-	  Map<String, String> detailsMapTemp =
-			  new HashMap<String, String>(detailsMap);
-	  
-	  //getting rid of changes that are 0
-	  Set<String> keys = new HashSet<String>(changeMapTemp.keySet());
-	  for (String key : keys) {
-		  Integer change = changeMap.get(key);
-		  if (0 == change) {
-			  changeMapTemp.remove(key);
-			  previousCurrencyMapTemp.remove(key);
-			  currentCurrencyMapTemp.remove(key);
-			  changeReasonsMapTemp.remove(key);
-			  detailsMapTemp.remove(key);
-		  }
-	  }
-	  
-	  int amount = changeMap.size();
-	  if (0 == amount) {
-		  return;
-	  }
-	  
-	  List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
-      List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
-      List<String> resourceTypesTemp =
-    		  new ArrayList<String>(changeMap.keySet());
-      List<Integer> currencyChangesTemp =
-    		  getValsInOrder(resourceTypes, changeMap);
-      List<Integer> previousCurrenciesTemp =
-    		  getValsInOrder(resourceTypes, previousCurrencyMap);
-      List<Integer> currentCurrenciesTemp =
-    		  getValsInOrder(resourceTypes, currentCurrencyMap);
-      List<String> reasonsForChangesTemp =
-    		  getValsInOrder(resourceTypes, changeReasonsMap);
-      List<String> detailsTemp = getValsInOrder(resourceTypes, detailsMap);
-      
-      userIds.addAll(userIdsTemp);
-      timestamps.addAll(timestampsTemp);
-      resourceTypes.addAll(resourceTypesTemp);
-      currencyChanges.addAll(currencyChangesTemp);
-      previousCurrencies.addAll(previousCurrenciesTemp);
-      currentCurrencies.addAll(currentCurrenciesTemp);
-      reasonsForChanges.addAll(reasonsForChangesTemp);
-      details.addAll(detailsTemp);
-  }
-
-  //currencyChange should represent how much user's currency increased or decreased and
-  //this should be called after the user is updated
-  //arguments are modified!!!
-  public static void writeToUserCurrencyOneUser(int userId, Timestamp thyme,
-      Map<String,Integer> changeMap, Map<String, Integer> previousCurrencyMap,
-      Map<String, Integer> currentCurrencyMap, Map<String, String> changeReasonsMap,
-      Map<String, String> detailsMap) {
-    try {
-
-      //getting rid of changes that are 0
-      Set<String> keys = new HashSet<String>(changeMap.keySet());
-      for (String key : keys) {
-        Integer change = changeMap.get(key);
-        if (0 == change) {
-          changeMap.remove(key);
-          previousCurrencyMap.remove(key);
-          currentCurrencyMap.remove(key);
-          changeReasonsMap.remove(key);
-          detailsMap.remove(key);
-        }
-      }
-      
-      int amount = changeMap.size();
-
-      List<Integer> userIds = Collections.nCopies(amount, userId);
-      List<Timestamp> timestamps = Collections.nCopies(amount, thyme); 
-      List<String> resourceTypes = new ArrayList<String>(changeMap.keySet());
-      List<Integer> currencyChanges = getValsInOrder(resourceTypes, changeMap);
-      List<Integer> previousCurrencies = getValsInOrder(resourceTypes, previousCurrencyMap);
-      List<Integer> currentCurrencies = getValsInOrder(resourceTypes, currentCurrencyMap);
-      List<String> reasonsForChanges = getValsInOrder(resourceTypes, changeReasonsMap);
-      List<String> details = getValsInOrder(resourceTypes, detailsMap);
-
-      if (currencyChanges.isEmpty() || previousCurrencies.isEmpty() ||
-          currentCurrencies.isEmpty() || reasonsForChanges.isEmpty()) {
-        return;
-      }
-
-      int numInserted = InsertUtils.get()
-    		  .insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
-    				  resourceTypes, currencyChanges, previousCurrencies,
-    				  currentCurrencies, reasonsForChanges, details);
-      log.info("(expected 1) numInserted into currency history: " +
-    		  numInserted);
-
-    } catch(Exception e) {
-      log.error("error updating user_curency_history; reasonsForChanges=" +
-    		  changeReasonsMap, e);
-    }
-  }
-
-  public static <T> List<T> getValsInOrder(List<String> keys, Map<String, T> keysToVals) {
-    List<T> valsInOrder = new ArrayList<T>();
-    for (String key : keys) {
-      T val = keysToVals.get(key);
-      valsInOrder.add(val);
-    }
-    return valsInOrder;
-  }
-
-  //  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
-  //    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
-  //    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
-  //        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
-  //
-  //    return currentEnhancementLevel >= maxEnhancementLevel;
-  //  }
-
-  public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
-    int d = winner.getLevel()-loser.getLevel();
-    int pts;
-    if (d > 10) {
-      pts = 1;
-    } else if (d < -8) {
-      pts = 100;
-    } else {
-      pts = (int)Math.round((-0.0997*Math.pow(d, 3)+1.4051*Math.pow(d, 2)-14.252*d+90.346)/10.);
-    }
-    return Math.min(100, Math.max(1, pts));
-  }
-
-  public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
-    int id = 0;
-    Date startDate = user.getCreateTime();
-    Date endDate = new Date(startDate.getTime()+(long)(ControllerConstants.NUM_DAYS_FOR_NEW_USER_GOLD_SALE*24*60*60*1000));
-
-    if (endDate.getTime() < new Date().getTime()) {
-      return null;
-    }
-
-    String package1SaleIdentifier = IAPValues.PACKAGE1BSALE;
-    String package2SaleIdentifier = IAPValues.PACKAGE2BSALE;
-    String package3SaleIdentifier = IAPValues.PACKAGE3BSALE;
-    String package4SaleIdentifier = null;
-    String package5SaleIdentifier = null;
-    String packageS1SaleIdentifier = IAPValues.PACKAGES1BSALE;
-    String packageS2SaleIdentifier = IAPValues.PACKAGES2BSALE;
-    String packageS3SaleIdentifier = IAPValues.PACKAGES3BSALE;
-    String packageS4SaleIdentifier = null;
-    String packageS5SaleIdentifier = null;
-
-    String gemsShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
-    String gemsBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
-
-    GoldSale sale = new GoldSale(id, startDate, endDate, gemsShoppeImageName, gemsBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
-        packageS1SaleIdentifier, packageS2SaleIdentifier, packageS3SaleIdentifier, packageS4SaleIdentifier, packageS5SaleIdentifier, true);
-
-    return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
-  }
-
-  //  public static int dateDifferenceInDays(Date start, Date end) {
-  //    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
-  //    DateMidnight current = (new DateTime(end)).toDateMidnight();
-  //    int days = Days.daysBetween(previous, current).getDays();
-  //    return days;
-  //  }
-
-
-  //  private static List<Integer> getRaritiesCollected(
-  //      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
-  //    List<Integer> raritiesCollected = new ArrayList<Integer>();
-  //    
-  //    Map<Integer, Equipment> equipIdsToEquips = 
-  //        EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-  //    int rarityOne = 0;
-  //    int rarityTwo = 0;
-  //    int rarityThree = 0;
-  //    for (BoosterItem bi : itemsUserReceives) {
-  //      int equipId = bi.getEquipId();
-  //      Equipment tempEquip = null;
-  //      if (equipIdsToEquips.containsKey(equipId)) {
-  //        equipIds.add(equipId); //returning what equipIds this was
-  //        tempEquip = equipIdsToEquips.get(equipId);
-  //      } else {
-  //        log.error("No equiment exists for equipId=" + equipId
-  //            + ". BoosterItem has invalid equipId, boosterItem=" + bi);
-  //        continue;
-  //      }
-  //      Rarity equipRarity = tempEquip.getRarity();
-  //      if (isRarityOne(equipRarity)) {
-  //        rarityOne++;
-  //      } else if (isRarityTwo(equipRarity)) {
-  //        rarityTwo++;
-  //      } else if (isRarityThree(equipRarity)) {
-  //        rarityThree++;
-  //      } else {
-  //        log.error("unexpected_error: booster item has unknown equip rarity. " +
-  //        		"booster item=" + bi + ".  Equip rarity=" + equipRarity);
-  //      }
-  //    }
-  //    raritiesCollected.add(rarityOne);
-  //    raritiesCollected.add(rarityTwo);
-  //    raritiesCollected.add(rarityThree);
-  //    return raritiesCollected;
-  //  }
-  //  
-  //  private static boolean isRarityOne(Rarity equipRarity) {
-  //    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
-  //      return true;
-  //    } else {
-  //      return false;
-  //    }
-  //  }
-  //  
-  //  private static boolean isRarityTwo(Rarity equipRarity) {
-  //    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
-  //      return true;
-  //    } else {
-  //      return false;
-  //    }
-  //  }
-  //  
-  //  private static boolean isRarityThree(Rarity equipRarity) {
-  //    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
-  //      return true;
-  //    } else {
-  //      return false;
-  //    }
-  //  }
-  //  
-  //csi: comma separated ints
-  public static List<Integer> unCsvStringIntoIntList(String csi) {
-    List<Integer> ints = new ArrayList<Integer>();
-    if (null != csi) {
-      StringTokenizer st = new StringTokenizer(csi, ", ");
-      while (st.hasMoreTokens()) {
-        ints.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-    return ints;
-  }
-
-  public static int getRandomIntFromList(List<Integer> numList) {
-    int upperBound = numList.size();
-    Random rand = new Random();
-    int randInt = rand.nextInt(upperBound);
-
-    int returnValue = numList.get(randInt);
-    return returnValue;
-  }
-
-  public static Map<Integer, Integer> getRandomValues(List<Integer> domain, int quantity) {
-    Map<Integer, Integer> domainValuesToQuantities = new HashMap<Integer, Integer>();
-    int upperBound = domain.size();
-    Random rand = new Random();
-
-    for (int i = 0; i < quantity; i++) {
-      int quantitySoFar = 0;
-
-      int randIndex = rand.nextInt(upperBound);
-      int domainValue = domain.get(randIndex);
-      //running sum
-      if (domainValuesToQuantities.containsKey(domainValue)) {
-        quantitySoFar += domainValuesToQuantities.get(domainValue);
-      }
-      quantitySoFar++;
-      domainValuesToQuantities.put(domainValue, quantitySoFar);
-    }
-    return domainValuesToQuantities;
-  }
-
-
-  /*cut out from purchase booster pack controller*/
-  //populates ids, quantitiesInStock; determines the remaining booster items the user can get
-  //  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-  //      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
-  //      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
-  //    //max number randon number can go
-  //    int sumQuantitiesInStock = 0;
-  //
-  //    //determine how many BoosterItems are left that user can get
-  //    for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
-  //      BoosterItem potentialEquip = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-  //      int quantityLimit = potentialEquip.getQuantity();
-  //      int quantityPurchasedPreviously = ControllerConstants.NOT_SET;
-  //
-  //      if (boosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-  //        quantityPurchasedPreviously = boosterItemIdsToNumCollected.get(boosterItemId);
-  //      }
-  //
-  //      if(ControllerConstants.NOT_SET == quantityPurchasedPreviously) {
-  //        //user has never bought this BoosterItem before
-  //        boosterItemIdsUserCanGet.add(boosterItemId);
-  //        quantitiesInStock.add(quantityLimit);
-  //        sumQuantitiesInStock += quantityLimit;
-  //      } else if (quantityPurchasedPreviously < quantityLimit) {
-  //        //user bought before, but has not reached the limit
-  //        int numLeftInStock = quantityLimit - quantityPurchasedPreviously;
-  //        boosterItemIdsUserCanGet.add(boosterItemId);
-  //        quantitiesInStock.add(numLeftInStock);
-  //        sumQuantitiesInStock += numLeftInStock;
-  //      } else if (quantityPurchasedPreviously == quantityLimit) {
-  //        continue;
-  //      } else {//will this ever be reached?
-  //        log.error("somehow user has bought more than the allowed limit for a booster item for a booster pack. "
-  //            + "quantityLimit: " + quantityLimit + ", quantityPurchasedPreviously: " + quantityPurchasedPreviously
-  //            + ", userId: " + aUser.getId() + ", boosterItem: " + potentialEquip + ", boosterPackId: " + boosterPackId);
-  //      }
-  //    }
-  //
-  //    return sumQuantitiesInStock;
-  //  }
-
-  //  /*cut out from purchase booster pack controller*/
-  //  //no arguments are modified
-  //  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
-  //      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
-  //      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
-  //    //return value
-  //    List<BoosterItem> returnValue = new ArrayList<BoosterItem>();
-  //    if (0 == amountUserWantsToPurchase) {
-  //      return returnValue;
-  //    } else if (3 != amountUserWantsToPurchase) {
-  //      log.error("unexpected error: buying " + amountUserWantsToPurchase + " more equips instead of 3.");
-  //      return returnValue; 
-  //    } else if (0 != (sumOfQuantitiesInStock % 3)) {
-  //      log.error("unexpected error: num remaining equips, " + sumOfQuantitiesInStock
-  //          + ", for this chest is not a multiple of 3");
-  //      return returnValue;
-  //    }
-  //    
-  //    Map<Integer, Equipment> allEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-  //    Set<EquipType> receivedEquipTypes = new HashSet<EquipType>();
-  //    
-  //    //loop through equips user can get; select one weapon, one armor, one amulet
-  //    for (int boosterItemId : boosterItemIdsUserCanGet) {
-  //      BoosterItem bi = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-  //      int equipId = bi.getEquipId();
-  //      Equipment equip = allEquips.get(equipId);
-  //      EquipType eType = equip.getType();
-  //      
-  //      if (receivedEquipTypes.contains(eType)) {
-  //        //user already got this equip type
-  //        continue;
-  //      } else {
-  //        //record user got a new equip type
-  //        returnValue.add(bi);
-  //        receivedEquipTypes.add(eType);
-  //      }
-  //    }
-  //    
-  //    if (3 != returnValue.size()) {
-  //      log.error("unexpected error: user did not receive one type of each equip."
-  //          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue) 
-  //          + ". Chest either intialized improperly or code assigns equips incorrectly.");
-  //      return new ArrayList<BoosterItem>();
-  //    }
-  //    return returnValue;
-  //  }
-
-  /*cut out from purchase booster pack controller*/
-  //no arguments are modified
-  private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
-      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
-      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
-    //return value
-    List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-
-    Random rand = new Random();
-    List<Integer> newBoosterItemIdsUserCanGet = new ArrayList<Integer>(boosterItemIdsUserCanGet);
-    List<Integer> newQuantitiesInStock = new ArrayList<Integer>(quantitiesInStock);
-    int newSumOfQuantities = sumOfQuantitiesInStock;
-
-    //selects one of the ids at random without replacement
-    for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-      int sumSoFar = 0;
-      int randomNum = rand.nextInt(newSumOfQuantities) + 1; //range [1, newSumOfQuantities]
-
-      for(int i = 0; i < newBoosterItemIdsUserCanGet.size(); i++) {
-        int bItemId = newBoosterItemIdsUserCanGet.get(i);
-        int quantity = newQuantitiesInStock.get(i);
-
-        sumSoFar += quantity;
-
-        if(randomNum <= sumSoFar) {
-          //we have a winner! current boosterItemId is what the user gets
-          BoosterItem selectedBoosterItem = allBoosterItemIdsToBoosterItems.get(bItemId);
-          itemsUserReceives.add(selectedBoosterItem);
-
-          //preparation for next BoosterItem to be selected
-          if (1 == quantity) {
-            newBoosterItemIdsUserCanGet.remove(i);
-            newQuantitiesInStock.remove(i);
-          } else if (1 < quantity){
-            //booster item id has more than one quantity
-            int decrementedQuantity = newQuantitiesInStock.remove(i) - 1;
-            newQuantitiesInStock.add(i, decrementedQuantity);
-          } else {
-            //ignore those with quantity of 0
-            continue;
-          }
-
-          newSumOfQuantities -= 1;
-          break;
-        }
-      }
-    }
-
-    return itemsUserReceives;
-  }
-  //  /*cut out from purchase booster pack controller*/
-  //  public static List<Long> insertNewUserEquips(int userId,
-  //      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
-  //    int amount = itemsUserReceives.size();
-  //    int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-  //    int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
-  //    List<Integer> equipIds = new ArrayList<Integer>();
-  //    List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
-  //    List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
-  //    
-  //    for(BoosterItem bi : itemsUserReceives) {
-  //      int equipId = bi.getEquipId();
-  //      equipIds.add(equipId);
-  //    }
-  //    
-  //    return InsertUtils.get().insertUserEquips(userId, equipIds, levels,
-  //        enhancement, now, reason);
-  //  }
-  /*cut out from purchase booster pack controller*/
-  //  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
-  //      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
-  //      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
-  //    
-  //    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
-  //    int numCollectedBeforeReset = 0;
-  //
-  //    //for each booster item received record it in the map above, and record how many
-  //    //booster items user has in aggregate
-  //    for (int i = 0; i < itemsUserReceives.size(); i++) {
-  //      boolean beforeReset = collectedBeforeReset.get(i);
-  //      if (!beforeReset) {
-  //        BoosterItem received = itemsUserReceives.get(i);
-  //        int boosterItemId = received.getId();
-  //        
-  //        //default quantity user gets if user has no quantity of specific boosterItem
-  //        int newQuantity = 1; 
-  //        if(newBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-  //          newQuantity = newBoosterItemIdsToNumCollected.get(boosterItemId) + 1;
-  //        }
-  //        changedBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
-  //        newBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
-  //      } else {
-  //        numCollectedBeforeReset++;
-  //      }
-  //    }
-  //    
-  //    //loop through newBoosterItemIdsToNumCollected and make sure the quantities
-  //    //collected is itemsUserReceives.size() amount more than boosterItemIdsToNumCollected
-  //    int changeInCollectedQuantity = 0;
-  //    for (int id : changedBoosterItemIdsToNumCollected.keySet()) {
-  //      int newAmount = newBoosterItemIdsToNumCollected.get(id);
-  //      int oldAmount = 0;
-  //      if (boosterItemIdsToNumCollected.containsKey(id)) {
-  //        oldAmount = boosterItemIdsToNumCollected.get(id);
-  //      }
-  //      changeInCollectedQuantity += newAmount - oldAmount;
-  //    }
-  //    //for when user buys out a pack and then some
-  //    changeInCollectedQuantity += numCollectedBeforeReset;
-  //    if (itemsUserReceives.size() != changeInCollectedQuantity) {
-  //      log.error("quantities of booster items do not match how many items user receives. "
-  //          + "amount user receives that is recorded (user_booster_items table): " + changeInCollectedQuantity
-  //          + ", amount user receives (unrecorded): " + itemsUserReceives.size());
-  //      return false;
-  //    }
-  //
-  //    recordBoosterItemsThatReset(changedBoosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, resetOccurred);
-  //    
-  //    return UpdateUtils.get().updateUserBoosterItemsForOneUser(userId, changedBoosterItemIdsToNumCollected);
-  //  }
-  /*cut out from purchase booster pack controller*/
-  //if the user has bought out the whole deck, then for the booster items
-  //the user did not get, record in the db that the user has 0 of them collected
-  private static void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
-      Map<Integer, Integer> newBoosterItemIdsToNumCollected, boolean refilled) {
-    if (refilled) {
-      for (int boosterItemId : newBoosterItemIdsToNumCollected.keySet()) {
-        if (!changedBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-          int value = newBoosterItemIdsToNumCollected.get(boosterItemId);
-          changedBoosterItemIdsToNumCollected.put(boosterItemId, value);
-        }
-      }
-    }
-  }
-
-  /* public static Set<Long> getEquippedEquips(User aUser) {
+	 */
+
+	public static Dialogue createDialogue(String dialogueBlob) {
+		if (dialogueBlob != null && dialogueBlob.length() > 0) { 
+			StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
+
+			List<Boolean> isLeftSides = new ArrayList<Boolean>();
+			List<String> speakers = new ArrayList<String>();
+			List<String> speakerImages = new ArrayList<String>();
+			List<String> speakerTexts = new ArrayList<String>();
+
+			try {
+				while (st.hasMoreTokens()) {
+					String tok = st.nextToken();
+					CSVReader reader = new CSVReader(new StringReader(tok), '.');
+					String[] strs = reader.readNext();
+					if (strs.length == 4) {
+						Boolean isLeftSide = strs[0].toUpperCase().equals("L");
+						String speaker = strs[1];
+						String speakerImage = strs[2];
+						String speakerText = strs[3];
+						if (speakerText != null) {
+							isLeftSides.add(isLeftSide);
+							speakers.add(speaker);
+							speakerImages.add(speakerImage);
+							speakerTexts.add(speakerText);
+						}
+					}
+				}
+			} catch (Exception e) {
+				log.error("problem with creating dialogue object for this dialogueblob: {}", dialogueBlob, e);
+			}
+			return new Dialogue(speakers, speakerImages, speakerTexts, isLeftSides);
+		}
+		return null;
+	}
+
+	public static void explodeIntoInts(String stringToExplode, 
+		String delimiter, List<Integer> returnValue) {
+		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
+		while (st.hasMoreTokens()) {
+			String tok = st.nextToken().trim();
+			if (tok.isEmpty()) {
+				continue;
+			}
+			returnValue.add(Integer.parseInt(tok));
+		}
+	}
+
+	public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
+		ConnectedPlayer player = null;
+		if (playerId != null && playerId > 0) {
+			player = server.getPlayerById(playerId); 
+			if (player != null) {
+				return player.getIp_connection_id();
+			}
+		}
+		if (udid != null) {
+			player = server.getPlayerByUdId(udid);
+			if (player != null) {
+				return player.getIp_connection_id();
+			}
+		}
+		return null;
+	}
+
+	public static void purgeMDCProperties(){
+		MDC.remove(MDCKeys.UDID);
+		MDC.remove(MDCKeys.PLAYER_ID);
+		MDC.remove(MDCKeys.IP);
+	}
+
+	public static void setMDCProperties(String udid, Integer playerId, String ip) {
+		purgeMDCProperties();
+		if (udid != null) MDC.put(MDCKeys.UDID, udid);
+		if (ip != null) MDC.put(MDCKeys.IP, ip);
+		if (playerId != null && playerId > 0) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
+	}
+
+	public static int calculateCoinsGivenToReferrer(User referrer) {
+		return Math.min(ControllerConstants.USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER, (int)(Math.ceil(
+			(referrer.getCash()) * 
+			ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
+	}
+
+
+	public static boolean checkClientTimeAroundApproximateNow(Timestamp clientTime) {
+		if (clientTime.getTime() < new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000 && 
+			clientTime.getTime() > new Date().getTime() - Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000) {
+			return true;
+		}
+		return false;
+	}
+
+	public static List<City> getCitiesAvailableForUserLevel(int userLevel) {
+		List<City> availCities = new ArrayList<City>();
+		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+		for (Integer cityId : cities.keySet()) {
+			City city = cities.get(cityId);
+			availCities.add(city);
+		}
+		return availCities;
+	}
+
+	public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
+		User user, PvpLeagueForUser plfu) {
+		try {
+			if (!user.isFake()) {
+				LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+				leaderboard.updateLeaderboardForUser(user, plfu);
+			}
+		} catch (Exception e) {
+			log.error("Failed to update leaderboard.");
+		}
+
+		UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(user.getId());
+		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto.newBuilder()
+			.setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu))
+			.setTimeOfUserUpdate(new Date().getTime()).build();
+		resEvent.setUpdateClientUserResponseProto(resProto);
+		return resEvent;
+	}
+
+
+	public static int getRowCount(ResultSet set) {
+		int rowCount;
+		int currentRow;
+		try {
+			currentRow = set.getRow();
+			rowCount = set.last() ? set.getRow() : 0; 
+			if (currentRow == 0)          
+				set.beforeFirst(); 
+			else      
+				set.absolute(currentRow);
+			return rowCount;
+		} catch (SQLException e) {
+			log.error("getRowCount error.", e);
+			return -1;
+		}     
+
+	}
+
+	public static TutorialConstants createTutorialConstantsProto() {
+		TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
+
+		tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+		tcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+		tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_ONE);
+		tcb.setEnemyMonsterIdTwo(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID_TWO);
+		tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
+		tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+
+		for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
+
+			int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
+			float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
+			float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
+
+			TutorialStructProto tsp = CreateInfoProtoUtils.createTutorialStructProto(structId, posX, posY);
+			tcb.addTutorialStructures(tsp);
+		}
+
+		List<Integer> structureIdsToBeBuilt = 
+			Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
+		tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
+
+		int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
+		tcb.setCityId(cityId);
+		List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
+		for (CityElement ce : cityElements) {
+			CityElementProto cep = CreateInfoProtoUtils
+				.createCityElementProtoFromCityElement(ce);
+			tcb.addCityOneElements(cep);
+		}
+
+		tcb.setCityElementIdForFirstDungeon(
+			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
+		tcb.setCityElementIdForSecondDungeon(
+			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
+
+
+		tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
+		tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
+		tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+
+		//    log.info("setting the tutorial minimum obstacle proto list!!!!!!!!!!");
+
+		int orientation = 1;
+		for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
+			int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
+			float posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
+			float posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
+
+			MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
+				obstacleId, posX, posY, orientation);
+			tcb.addTutorialObstacles(mopb);
+			//    	log.info("mopb=" + mopb);
+		}
+
+		return tcb.build();
+	}
+
+
+	public static StartupConstants createStartupConstantsProto(Globals globals) {
+		StartupConstants.Builder cb = StartupConstants.newBuilder();
+
+		for (String id : IAPValues.iapPackageNames) {
+			InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
+			iapb.setImageName(IAPValues.getImageNameForPackageName(id));
+			iapb.setIapPackageId(id);
+
+			int diamondAmt = IAPValues.getDiamondsForPackageName(id);
+			if (diamondAmt > 0) {
+				iapb.setCurrencyAmount(diamondAmt);
+			} else {
+				int coinAmt = IAPValues.getCoinsForPackageName(id);
+				iapb.setCurrencyAmount(coinAmt);
+			}
+			cb.addInAppPurchasePackages(iapb.build());
+		}
+
+		cb.setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
+		cb.setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE);
+
+		if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
+			for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
+				AnimatedSpriteOffset aso = ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS[i];
+				cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
+			}
+		}
+
+		cb.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
+		cb.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
+		cb.setMaxLengthOfChatString(ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING);
+
+		ClanConstants.Builder clanConstantsBuilder = ClanConstants.newBuilder();
+		clanConstantsBuilder.setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
+		clanConstantsBuilder.setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME);
+		clanConstantsBuilder.setCoinPriceToCreateClan(ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
+		clanConstantsBuilder.setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG);
+		clanConstantsBuilder.setMaxClanSize(ControllerConstants.CLAN__MAX_NUM_MEMBERS);
+		cb.setClanConstants(clanConstantsBuilder.build());
+
+
+		DownloadableNibConstants.Builder dncb = DownloadableNibConstants.newBuilder();
+		dncb.setMapNibName(ControllerConstants.NIB_NAME__TRAVELING_MAP);
+		dncb.setExpansionNibName(ControllerConstants.NIB_NAME__EXPANSION);
+		dncb.setGoldShoppeNibName(ControllerConstants.NIB_NAME__GOLD_SHOPPE);
+		cb.setDownloadableNibConstants(dncb.build());
+
+		cb.setNumHoursBeforeReshowingGoldSale(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE);
+		cb.setLevelToShowRateUsPopup(ControllerConstants.LEVEL_TO_SHOW_RATE_US_POPUP);
+		//        .setHoursInAttackedByOneProtectionPeriod(ControllerConstants.BATTLE__HOURS_IN_ATTACKED_BY_ONE_PROTECTION_PERIOD)
+		//        .setMaxNumTimesAttackedByOneInProtectionPeriod(ControllerConstants.BATTLE__MAX_NUM_TIMES_ATTACKED_BY_ONE_IN_PROTECTION_PERIOD)
+		//        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
+		//        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
+
+		//SET TOURNAMENT CONSTANTS HERE 
+
+		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
+		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
+
+		//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+		//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
+		//    cb.setAdminChatUserProto(adminChatUserProto);
+
+		cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
+
+		UserMonsterConstants.Builder umcb = UserMonsterConstants.newBuilder();
+		umcb.setMaxNumTeamSlots(ControllerConstants.MONSTER_FOR_USER__MAX_TEAM_SIZE);
+		umcb.setInitialMaxNumMonsterLimit(ControllerConstants.MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT);
+		//    umcb.setMonsterInventoryIncrementAmount(ControllerConstants.MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT);
+		//    umcb.setGemPricePerSlot(ControllerConstants.MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT);
+		//    umcb.setNumFriendsToRecruitToIncreaseInventory(ControllerConstants.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS);
+		cb.setUserMonsterConstants(umcb.build());
+
+		MonsterConstants.Builder mcb = MonsterConstants.newBuilder();
+		mcb.setCashPerHealthPoint(ControllerConstants.MONSTER__CASH_PER_HEALTH_POINT);
+		mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
+		mcb.setElementalStrength(ControllerConstants.MONSTER__ELEMENTAL_STRENGTH);
+		mcb.setElementalWeakness(ControllerConstants.MONSTER__ELEMENTAL_WEAKNESS);
+		mcb.setOilPerMonsterLevel(ControllerConstants.MONSTER__OIL_PER_MONSTER_LEVEL);
+		cb.setMonsterConstants(mcb.build());
+
+		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
+		cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
+		cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
+		cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
+		cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
+		cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
+		cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
+
+		cb.setAddAllFbFriends(globals.isAddAllFbFriends());
+
+		MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
+		cb.setMiniTuts(miniTuts);
+
+		cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
+		cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
+
+		TaskMapConstants.Builder mapConstants = TaskMapConstants.newBuilder();
+		mapConstants.setMapSectionImagePrefix(ControllerConstants.TASK_MAP__SECTION_IMAGE_PREFIX);
+		mapConstants.setMapNumberOfSections(ControllerConstants.TASK_MAP__NUMBER_OF_SECTIONS);
+		mapConstants.setMapSectionHeight(ControllerConstants.TASK_MAP__SECTION_HEIGHT);
+		mapConstants.setMapTotalHeight(ControllerConstants.TASK_MAP__TOTAL_HEIGHT);
+		mapConstants.setMapTotalWidth(ControllerConstants.TASK_MAP__TOTAL_WIDTH);
+		cb.setTaskMapConstants(mapConstants.build());
+
+		cb.setMaxMinutesForFreeSpeedUp(ControllerConstants.MAX_MINUTES_FOR_FREE_SPEED_UP);
+
+		for (int index = 0; index < ControllerConstants.CLAN_HELP__HELP_TYPE.length; index++) {
+			ClanHelpConstants.Builder chcb = ClanHelpConstants.newBuilder();
+			String helpType = ControllerConstants.CLAN_HELP__HELP_TYPE[index];
+			try {
+				chcb.setHelpType(ClanHelpType.valueOf(helpType));
+			} catch (Exception e) {
+				log.error(String.format("invalid ClanHelpType: %s, not using it", helpType),
+					e);
+				continue;
+			}
+			int amount = ControllerConstants.CLAN_HELP__AMOUNT_REMOVED[index];
+			chcb.setAmountRemovedPerHelp(amount);
+			float percent = ControllerConstants.CLAN_HELP__PERCENT_REMOVED[index];
+			chcb.setPercentRemovedPerHelp(percent);
+
+			cb.addClanHelpConstants(chcb.build());
+		}
+
+		//set more properties above
+		//    BattleConstants battleConstants = BattleConstants.newBuilder()
+		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
+		//        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)
+		//        .setBattleWeightGivenToAttackEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_EQUIP_SUM)
+		//        .setBattleWeightGivenToDefenseStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_STAT)
+		//        .setBattleWeightGivenToDefenseEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_EQUIP_SUM)
+		//        .setBattleWeightGivenToLevel(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_LEVEL)
+		//        .setBattlePerfectPercentThreshold(ControllerConstants.BATTLE_PERFECT_PERCENT_THRESHOLD)
+		//        .setBattleGreatPercentThreshold(ControllerConstants.BATTLE_GREAT_PERCENT_THRESHOLD)
+		//        .setBattleGoodPercentThreshold(ControllerConstants.BATTLE_GOOD_PERCENT_THRESHOLD)
+		//        .setBattlePerfectMultiplier(ControllerConstants.BATTLE_PERFECT_MULTIPLIER)
+		//        .setBattleGreatMultiplier(ControllerConstants.BATTLE_GREAT_MULTIPLIER)
+		//        .setBattleGoodMultiplier(ControllerConstants.BATTLE_GOOD_MULTIPLIER)
+		//        .setBattleImbalancePercent(ControllerConstants.BATTLE_IMBALANCE_PERCENT)
+		//        .setBattlePerfectLikelihood(ControllerConstants.BATTLE_PERFECT_LIKELIHOOD)
+		//        .setBattleGreatLikelihood(ControllerConstants.BATTLE_GREAT_LIKELIHOOD)
+		//        .setBattleGoodLikelihood(ControllerConstants.BATTLE_GOOD_LIKELIHOOD)
+		//        .setBattleMissLikelihood(ControllerConstants.BATTLE_MISS_LIKELIHOOD)
+		//        .setBattleHitAttackerPercentOfHealth(ControllerConstants.BATTLE__HIT_ATTACKER_PERCENT_OF_HEALTH)
+		//        .setBattleHitDefenderPercentOfHealth(ControllerConstants.BATTLE__HIT_DEFENDER_PERCENT_OF_HEALTH)
+		//        .setBattlePercentOfWeapon(ControllerConstants.BATTLE__PERCENT_OF_WEAPON)
+		//        .setBattlePercentOfArmor(ControllerConstants.BATTLE__PERCENT_OF_ARMOR)
+		//        .setBattlePercentOfAmulet(ControllerConstants.BATTLE__PERCENT_OF_AMULET)
+		//        .setBattlePercentOfPlayerStats(ControllerConstants.BATTLE__PERCENT_OF_PLAYER_STATS)
+		//        .setBattleAttackExpoMultiplier(ControllerConstants.BATTLE__ATTACK_EXPO_MULTIPLIER)
+		//        .setBattlePercentOfEquipment(ControllerConstants.BATTLE__PERCENT_OF_EQUIPMENT)
+		//        .setBattleIndividualEquipAttackCap(ControllerConstants.BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP)
+		//        .setBattleEquipAndStatsWeight(ControllerConstants.BATTLE__EQUIP_AND_STATS_WEIGHT)
+		//        .build();
+		//
+		//    cb = cb.setBattleConstants(battleConstants);
+
+		//    LockBoxConstants lbc = LockBoxConstants.newBuilder()
+		//        .setFreeChanceToPickLockBox(ControllerConstants.LOCK_BOXES__FREE_CHANCE_TO_PICK)
+		//        .setGoldChanceToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_CHANCE_TO_PICK)
+		//        .setNumMinutesToRepickLockBox(ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK)
+		//        .setGoldCostToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK)
+		//        .setGoldCostToResetPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK)
+		//        .setCashChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
+		//        .setCashCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
+		//        .setNumDaysToShowAfterEventEnded(ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS)
+		//        .build();
+		//
+		//    cb = cb.setLockBoxConstants(lbc);
+
+
+		//    EnhancementConstants enc = EnhancementConstants.newBuilder()
+		//        .setMaxEnhancementLevel(ControllerConstants.MAX_ENHANCEMENT_LEVEL)
+		//        .setEnhanceLevelExponentBase(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE)
+		//        .setEnhancePercentPerLevel(ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL)
+		//        .setEnhanceTimeConstantA(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_A)
+		//        .setEnhanceTimeConstantB(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_B)
+		//        .setEnhanceTimeConstantC(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_C)
+		//        .setEnhanceTimeConstantD(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_D)
+		//        .setEnhanceTimeConstantE(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_E)
+		//        .setEnhanceTimeConstantF(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_F)
+		//        .setEnhanceTimeConstantG(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_G)
+		//        .setEnhancePercentConstantA(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A)
+		//        .setEnhancePercentConstantB(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B)
+		//        .setDefaultSecondsToEnhance(ControllerConstants.ENHANCEMENT__DEFAULT_SECONDS_TO_ENHANCE)
+		//        .setEnhancingCost(ControllerConstants.ENHANCEMENT__COST_CONSTANT)
+		//        .build();
+		//
+		//    cb = cb.setEnhanceConstants(enc);
+
+
+		//    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
+		//        .setWinsWeight(ControllerConstants.TOURNAMENT_EVENT__WINS_WEIGHT)
+		//        .setLossesWeight(ControllerConstants.TOURNAMENT_EVENT__LOSSES_WEIGHT)
+		//        .setFleesWeight(ControllerConstants.TOURNAMENT_EVENT__FLEES_WEIGHT)
+		//        .setNumHoursToShowAfterEventEnd(ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END)
+		//        .build();
+		//    cb = cb.setLeaderboardConstants(lec);
+		//    
+		//    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
+		//        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
+		//        .build();
+		//    cb = cb.setBoosterPackConstants(bpc);
+		//
+
+		return cb.build();  
+	}
+
+	public static MiniTutorialConstants createMiniTutorialConstantsProto() {
+		MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
+		mtcb.setMiniTutorialTaskId(ControllerConstants.MINI_TUTORIAL__GUARANTEED_MONSTER_DROP_TASK_ID);
+		mtcb.setGuideMonsterId(ControllerConstants.TUTORIAL__GUIDE_MONSTER_ID);
+
+		return mtcb.build();
+	}
+
+	public static List<TournamentEventProto> currentTournamentEventProtos() {
+		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
+		long curTime = (new Date()).getTime();
+		List<Integer> activeEventIds = new ArrayList<Integer>();
+
+		//return value
+		List<TournamentEventProto> protos = new ArrayList<TournamentEventProto>();
+
+		//get the ids of active leader board events
+		for(TournamentEvent e : idsToEvents.values()) {
+			if (e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
+				activeEventIds.add(e.getId());
+			}
+		}
+
+		//get all the rewards for all the current leaderboard events
+		Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
+			TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
+
+		//create the protos
+		for(Integer i: activeEventIds) {
+			TournamentEvent e = idsToEvents.get(i);
+			List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
+
+			protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
+		}
+		return protos;
+	}
+
+	public static void reloadAllRareChangeStaticData() {
+		log.info("Reloading rare change static data");
+		AchievementRetrieveUtils.reload();
+		BannedUserRetrieveUtils.reload();
+		BoosterDisplayItemRetrieveUtils.reload();
+		BoosterItemRetrieveUtils.reload();
+		BoosterPackRetrieveUtils.reload();
+		//    CityBossRetrieveUtils.reload();
+		CityElementsRetrieveUtils.reload(); 
+		CityRetrieveUtils.reload();
+		//    ClanBossRetrieveUtils.reload();
+		//    ClanBossRewardRetrieveUtils.reload();
+		ClanIconRetrieveUtils.reload();
+		ClanEventPersistentRetrieveUtils.reload();
+		ClanRaidRetrieveUtils.reload();
+		ClanRaidStageRetrieveUtils.reload();
+		ClanRaidStageMonsterRetrieveUtils.reload();
+		ClanRaidStageRewardRetrieveUtils.reload();
+		EventPersistentRetrieveUtils.reload();
+		ExpansionCostRetrieveUtils.reload();
+		GoldSaleRetrieveUtils.reload();
+		ItemRetrieveUtils.reload();
+		LockBoxEventRetrieveUtils.reload();
+		//    MonsterForPvpRetrieveUtils.staticReload();
+		MiniJobRetrieveUtils.reload();
+		MonsterBattleDialogueRetrieveUtils.reload();
+		MonsterLevelInfoRetrieveUtils.reload();
+		MonsterRetrieveUtils.reload();
+		ObstacleRetrieveUtils.reload();
+		PrerequisiteRetrieveUtils.reload();
+		ProfanityRetrieveUtils.reload();
+		PvpLeagueRetrieveUtils.reload();
+		QuestJobRetrieveUtils.reload();
+		QuestJobMonsterItemRetrieveUtils.reload();
+		QuestRetrieveUtils.reload();
+		SkillRetrieveUtils.reload();
+		SkillPropertyRetrieveUtils.reload();
+		StartupStuffRetrieveUtils.reload();
+		StaticUserLevelInfoRetrieveUtils.reload();
+		StructureClanHouseRetrieveUtils.reload();
+		StructureEvoChamberRetrieveUtils.reload();
+		StructureHospitalRetrieveUtils.reload();
+		StructureLabRetrieveUtils.reload();
+		StructureMiniJobRetrieveUtils.reload();
+		StructureResidenceRetrieveUtils.reload();
+		StructureResourceGeneratorRetrieveUtils.reload();
+		StructureResourceStorageRetrieveUtils.reload();
+		StructureRetrieveUtils.reload();
+		StructureTeamCenterRetrieveUtils.reload();
+		StructureTownHallRetrieveUtils.reload();
+		TaskMapElementRetrieveUtils.reload();
+		TaskRetrieveUtils.reload();
+		TaskStageMonsterRetrieveUtils.reload();
+		TaskStageRetrieveUtils.reload();
+		TournamentEventRetrieveUtils.reload();
+		TournamentEventRewardRetrieveUtils.reload();
+	}
+
+
+	//  //returns the clan towers that changed
+	//  public static void sendClanTowerWarNotEnoughMembersNotification(
+	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
+	//      List<Integer> towersOwned, Clan aClan, TaskExecutor executor, 
+	//      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
+	//
+	//    if(null != clanTowerIdsToClanTowers && !clanTowerIdsToClanTowers.isEmpty()) {
+	//
+	//      List<Notification> notificationsToSend = new ArrayList<Notification>();
+	//      //make notifications for the towers the clan was attacking
+	//      boolean attackerWon = false;
+	//      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers, 
+	//          notificationsToSend, attackerWon, onlinePlayers, server);
+	//
+	//      //make notifications for the towers the clan owned
+	//      attackerWon = true;
+	//      generateClanTowerNotEnoughMembersNotification(aClan, towersOwned, clanTowerIdsToClanTowers,
+	//          notificationsToSend, attackerWon, onlinePlayers, server);
+	//
+	//      for(Notification n: notificationsToSend) {
+	//        writeGlobalNotification(n, server);
+	//      }
+	//      return;
+	//    }
+	//    log.info("no towers changed");
+	//    return;
+	//  }
+
+	//  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
+	//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
+	//      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
+	//
+	//    //for each tower make a notification for it
+	//    for(Integer towerId: towerIds) {
+	//      ClanTower aTower = clanTowerIdsToClanTowers.get(towerId);
+	//      String towerName = aTower.getTowerName();
+	//      Notification clanTowerWarNotification = new Notification ();
+	//      Clan losingClan;
+	//      Clan winningClan;
+	//      String losingClanName;
+	//      String winningClanName;
+	//
+	//      losingClan = aClan;
+	//      winningClan = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
+	//
+	//      losingClanName = losingClan.getName();
+	//      winningClanName = winningClan != null ? winningClan.getName() : null;
+	//      clanTowerWarNotification.setAsClanTowerWarClanConceded(
+	//          losingClanName, winningClanName, towerName);
+	//      notificationsToSend.add(clanTowerWarNotification);
+	//    }
+	//  }
+
+	public static void writeGlobalNotification(Notification n, GameServer server) {
+		GeneralNotificationResponseProto.Builder notificationProto = 
+			n.generateNotificationBuilder();
+
+		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
+		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
+		server.writeGlobalEvent(aNotification);
+	}
+
+	public static void writeClanApnsNotification(Notification n, GameServer server, int clanId) {
+		GeneralNotificationResponseProto.Builder notificationProto =
+			n.generateNotificationBuilder();
+
+		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
+		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
+		server.writeApnsClanEvent(aNotification, clanId);
+	}
+
+	public static void writeNotificationToUser(Notification aNote, GameServer server, int userId) {
+		GeneralNotificationResponseProto.Builder notificationProto =
+			aNote.generateNotificationBuilder();
+		GeneralNotificationResponseEvent aNotification =
+			new GeneralNotificationResponseEvent(userId);
+		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
+
+		server.writeAPNSNotificationOrEvent(aNotification);
+	}
+
+	//Simple (inefficient) word by word censor. If a word appears in 
+	//a blacklist then that word is replaced by a number of asterisks 
+	//equal to the word's length, e.g. fuck => ****
+	//Not sure whether to use String or StringBuilder, so going with latter.
+	public static String censorUserInput(String userContent) {
+		StringBuilder toReturn = new StringBuilder(userContent.length());
+		Set<String> blackList = ProfanityRetrieveUtils.getAllProfanity();
+
+		String[] words = userContent.split(" ");
+		String space = " "; //split by space, need to add them back in
+		String w = "";
+
+		for(int i = 0; i < words.length; i++) {
+			w = words[i];
+
+			//if at the last word, don't add a space after "censoring" it
+			if ((words.length - 1) == i) {
+				space = "";
+			}
+			//get rid of all punctuation
+			String wWithNoPunctuation = w.replaceAll("\\p{Punct}", "");
+
+			//the profanity table only holds lower case one word profanities
+			if(blackList.contains(wWithNoPunctuation.toLowerCase())) {
+				toReturn.append(asteriskify(w) + space);
+			} else {
+				toReturn.append(w + space);
+			}
+		}
+
+		return toReturn.toString();
+	}
+
+	//average length of word is 4 characters. So based on this, not using
+	//StringBuilder
+	public static String asteriskify(String wordToAskerify) {
+		int len = wordToAskerify.length();
+		String s = "";
+
+		for(int i = 0; i < len; i++) {
+			s += "*";
+		}
+		return s;
+	}
+
+	public static void writeToUserCurrencyUsers(List<Integer> userIds,
+		Timestamp thyme, Map<Integer, Map<String, Integer>> changeMap,
+		Map<Integer, Map<String, Integer>> previousCurrencyMap,
+		Map<Integer, Map<String, Integer>> currentCurrencyMap,
+		Map<Integer, Map<String, String>> changeReasonsMap,
+		Map<Integer, Map<String, String>> detailsMap) {
+		try {
+			List<Integer> allUserIds = new ArrayList<Integer>();
+			List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 
+			List<String> allResourceTypes = new ArrayList<String>();
+			List<Integer> allCurrencyChanges = new ArrayList<Integer>();
+			List<Integer> allPreviousCurrencies = new ArrayList<Integer>();
+			List<Integer> allCurrentCurrencies = new ArrayList<Integer>();
+			List<String> allReasonsForChanges = new ArrayList<String>();
+			List<String> allDetails = new ArrayList<String>();
+
+			//for each user, accrue up the values to store to the db
+			for (Integer userId : userIds) {
+				Map<String, Integer> oneUserChangeMap = changeMap.get(userId);
+				Map<String, Integer> oneUserPrevCurrency =
+					previousCurrencyMap.get(userId);
+				Map<String, Integer> oneUserCurCurrency =
+					currentCurrencyMap.get(userId);
+				Map<String, String> oneUserChangeReasons =
+					changeReasonsMap.get(userId);
+				Map<String, String> oneUserDetails = detailsMap.get(userId);
+
+				//aggregate all the data across all the users into db friendly
+				//arguments
+				writeToUserCurrencyUsersHelper(userId, thyme, oneUserChangeMap,
+					oneUserPrevCurrency, oneUserCurCurrency,
+					oneUserChangeReasons, oneUserDetails, allUserIds,
+					allTimestamps, allResourceTypes, allCurrencyChanges,
+					allPreviousCurrencies, allCurrentCurrencies,
+					allReasonsForChanges, allDetails);
+			}
+
+			int numInserted = InsertUtils.get()
+				.insertIntoUserCurrencyHistoryMultipleRows(
+					allUserIds, allTimestamps, allResourceTypes,
+					allCurrencyChanges, allPreviousCurrencies,
+					allCurrentCurrencies, allReasonsForChanges,
+					allDetails);
+
+			log.info("numInserted into currency history: " + numInserted);
+
+		} catch (Exception e) {
+			log.error("error updating user_curency_history; userIds=" +
+				userIds + ", reasonsForChanges=" + changeMap +
+				", changeReasonsMap=" + changeReasonsMap +
+				", detailsMap=" + detailsMap, e);
+		}
+	}
+
+	protected static void writeToUserCurrencyUsersHelper(Integer userId,
+		Timestamp thyme, Map<String, Integer> changeMap,
+		Map<String, Integer> previousCurrencyMap,
+		Map<String, Integer> currentCurrencyMap,
+		Map<String, String> changeReasonsMap, Map<String, String> detailsMap,
+		List<Integer> userIds, List<Timestamp> timestamps,
+		List<String> resourceTypes, List<Integer> currencyChanges,
+		List<Integer> previousCurrencies, List<Integer> currentCurrencies,
+		List<String> reasonsForChanges, List<String> details) {
+
+		Map<String, Integer> changeMapTemp =
+			new HashMap<String, Integer>(changeMap);
+		Map<String, Integer> previousCurrencyMapTemp =
+			new HashMap<String, Integer>(previousCurrencyMap);
+		Map<String, Integer> currentCurrencyMapTemp =
+			new HashMap<String, Integer>(currentCurrencyMap);
+		Map<String, String> changeReasonsMapTemp =
+			new HashMap<String, String>(changeReasonsMap);
+		Map<String, String> detailsMapTemp =
+			new HashMap<String, String>(detailsMap);
+
+		//getting rid of changes that are 0
+		Set<String> keys = new HashSet<String>(changeMapTemp.keySet());
+		for (String key : keys) {
+			Integer change = changeMap.get(key);
+			if (0 == change) {
+				changeMapTemp.remove(key);
+				previousCurrencyMapTemp.remove(key);
+				currentCurrencyMapTemp.remove(key);
+				changeReasonsMapTemp.remove(key);
+				detailsMapTemp.remove(key);
+			}
+		}
+
+		int amount = changeMap.size();
+		if (0 == amount) {
+			return;
+		}
+
+		List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
+		List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
+		List<String> resourceTypesTemp =
+			new ArrayList<String>(changeMap.keySet());
+		List<Integer> currencyChangesTemp =
+			getValsInOrder(resourceTypes, changeMap);
+		List<Integer> previousCurrenciesTemp =
+			getValsInOrder(resourceTypes, previousCurrencyMap);
+		List<Integer> currentCurrenciesTemp =
+			getValsInOrder(resourceTypes, currentCurrencyMap);
+		List<String> reasonsForChangesTemp =
+			getValsInOrder(resourceTypes, changeReasonsMap);
+		List<String> detailsTemp = getValsInOrder(resourceTypes, detailsMap);
+
+		userIds.addAll(userIdsTemp);
+		timestamps.addAll(timestampsTemp);
+		resourceTypes.addAll(resourceTypesTemp);
+		currencyChanges.addAll(currencyChangesTemp);
+		previousCurrencies.addAll(previousCurrenciesTemp);
+		currentCurrencies.addAll(currentCurrenciesTemp);
+		reasonsForChanges.addAll(reasonsForChangesTemp);
+		details.addAll(detailsTemp);
+	}
+
+	//currencyChange should represent how much user's currency increased or decreased and
+	//this should be called after the user is updated
+	//arguments are modified!!!
+	public static void writeToUserCurrencyOneUser(int userId, Timestamp thyme,
+		Map<String,Integer> changeMap, Map<String, Integer> previousCurrencyMap,
+		Map<String, Integer> currentCurrencyMap, Map<String, String> changeReasonsMap,
+		Map<String, String> detailsMap) {
+		try {
+
+			//getting rid of changes that are 0
+			Set<String> keys = new HashSet<String>(changeMap.keySet());
+			for (String key : keys) {
+				Integer change = changeMap.get(key);
+				if (0 == change) {
+					changeMap.remove(key);
+					previousCurrencyMap.remove(key);
+					currentCurrencyMap.remove(key);
+					changeReasonsMap.remove(key);
+					detailsMap.remove(key);
+				}
+			}
+
+			int amount = changeMap.size();
+
+			List<Integer> userIds = Collections.nCopies(amount, userId);
+			List<Timestamp> timestamps = Collections.nCopies(amount, thyme); 
+			List<String> resourceTypes = new ArrayList<String>(changeMap.keySet());
+			List<Integer> currencyChanges = getValsInOrder(resourceTypes, changeMap);
+			List<Integer> previousCurrencies = getValsInOrder(resourceTypes, previousCurrencyMap);
+			List<Integer> currentCurrencies = getValsInOrder(resourceTypes, currentCurrencyMap);
+			List<String> reasonsForChanges = getValsInOrder(resourceTypes, changeReasonsMap);
+			List<String> details = getValsInOrder(resourceTypes, detailsMap);
+
+			if (currencyChanges.isEmpty() || previousCurrencies.isEmpty() ||
+				currentCurrencies.isEmpty() || reasonsForChanges.isEmpty()) {
+				return;
+			}
+
+			int numInserted = InsertUtils.get()
+				.insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
+					resourceTypes, currencyChanges, previousCurrencies,
+					currentCurrencies, reasonsForChanges, details);
+			log.info("(expected 1) numInserted into currency history: " +
+				numInserted);
+
+		} catch(Exception e) {
+			log.error("error updating user_curency_history; reasonsForChanges=" +
+				changeReasonsMap, e);
+		}
+	}
+
+	public static <T> List<T> getValsInOrder(List<String> keys, Map<String, T> keysToVals) {
+		List<T> valsInOrder = new ArrayList<T>();
+		for (String key : keys) {
+			T val = keysToVals.get(key);
+			valsInOrder.add(val);
+		}
+		return valsInOrder;
+	}
+
+	//  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
+	//    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
+	//    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
+	//        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
+	//
+	//    return currentEnhancementLevel >= maxEnhancementLevel;
+	//  }
+
+	public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
+		int d = winner.getLevel()-loser.getLevel();
+		int pts;
+		if (d > 10) {
+			pts = 1;
+		} else if (d < -8) {
+			pts = 100;
+		} else {
+			pts = (int)Math.round((-0.0997*Math.pow(d, 3)+1.4051*Math.pow(d, 2)-14.252*d+90.346)/10.);
+		}
+		return Math.min(100, Math.max(1, pts));
+	}
+
+	public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
+		int id = 0;
+		Date startDate = user.getCreateTime();
+		Date endDate = new Date(startDate.getTime()+(long)(ControllerConstants.NUM_DAYS_FOR_NEW_USER_GOLD_SALE*24*60*60*1000));
+
+		if (endDate.getTime() < new Date().getTime()) {
+			return null;
+		}
+
+		String package1SaleIdentifier = IAPValues.PACKAGE1BSALE;
+		String package2SaleIdentifier = IAPValues.PACKAGE2BSALE;
+		String package3SaleIdentifier = IAPValues.PACKAGE3BSALE;
+		String package4SaleIdentifier = null;
+		String package5SaleIdentifier = null;
+		String packageS1SaleIdentifier = IAPValues.PACKAGES1BSALE;
+		String packageS2SaleIdentifier = IAPValues.PACKAGES2BSALE;
+		String packageS3SaleIdentifier = IAPValues.PACKAGES3BSALE;
+		String packageS4SaleIdentifier = null;
+		String packageS5SaleIdentifier = null;
+
+		String gemsShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
+		String gemsBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
+
+		GoldSale sale = new GoldSale(id, startDate, endDate, gemsShoppeImageName, gemsBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
+			packageS1SaleIdentifier, packageS2SaleIdentifier, packageS3SaleIdentifier, packageS4SaleIdentifier, packageS5SaleIdentifier, true);
+
+		return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
+	}
+
+	//  public static int dateDifferenceInDays(Date start, Date end) {
+	//    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
+	//    DateMidnight current = (new DateTime(end)).toDateMidnight();
+	//    int days = Days.daysBetween(previous, current).getDays();
+	//    return days;
+	//  }
+
+
+	//  private static List<Integer> getRaritiesCollected(
+	//      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
+	//    List<Integer> raritiesCollected = new ArrayList<Integer>();
+	//    
+	//    Map<Integer, Equipment> equipIdsToEquips = 
+	//        EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+	//    int rarityOne = 0;
+	//    int rarityTwo = 0;
+	//    int rarityThree = 0;
+	//    for (BoosterItem bi : itemsUserReceives) {
+	//      int equipId = bi.getEquipId();
+	//      Equipment tempEquip = null;
+	//      if (equipIdsToEquips.containsKey(equipId)) {
+	//        equipIds.add(equipId); //returning what equipIds this was
+	//        tempEquip = equipIdsToEquips.get(equipId);
+	//      } else {
+	//        log.error("No equiment exists for equipId=" + equipId
+	//            + ". BoosterItem has invalid equipId, boosterItem=" + bi);
+	//        continue;
+	//      }
+	//      Rarity equipRarity = tempEquip.getRarity();
+	//      if (isRarityOne(equipRarity)) {
+	//        rarityOne++;
+	//      } else if (isRarityTwo(equipRarity)) {
+	//        rarityTwo++;
+	//      } else if (isRarityThree(equipRarity)) {
+	//        rarityThree++;
+	//      } else {
+	//        log.error("unexpected_error: booster item has unknown equip rarity. " +
+	//        		"booster item=" + bi + ".  Equip rarity=" + equipRarity);
+	//      }
+	//    }
+	//    raritiesCollected.add(rarityOne);
+	//    raritiesCollected.add(rarityTwo);
+	//    raritiesCollected.add(rarityThree);
+	//    return raritiesCollected;
+	//  }
+	//  
+	//  private static boolean isRarityOne(Rarity equipRarity) {
+	//    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
+	//      return true;
+	//    } else {
+	//      return false;
+	//    }
+	//  }
+	//  
+	//  private static boolean isRarityTwo(Rarity equipRarity) {
+	//    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
+	//      return true;
+	//    } else {
+	//      return false;
+	//    }
+	//  }
+	//  
+	//  private static boolean isRarityThree(Rarity equipRarity) {
+	//    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
+	//      return true;
+	//    } else {
+	//      return false;
+	//    }
+	//  }
+	//  
+	//csi: comma separated ints
+	public static List<Integer> unCsvStringIntoIntList(String csi) {
+		List<Integer> ints = new ArrayList<Integer>();
+		if (null != csi) {
+			StringTokenizer st = new StringTokenizer(csi, ", ");
+			while (st.hasMoreTokens()) {
+				ints.add(Integer.parseInt(st.nextToken()));
+			}
+		}
+		return ints;
+	}
+
+	public static int getRandomIntFromList(List<Integer> numList) {
+		int upperBound = numList.size();
+		Random rand = new Random();
+		int randInt = rand.nextInt(upperBound);
+
+		int returnValue = numList.get(randInt);
+		return returnValue;
+	}
+
+	public static Map<Integer, Integer> getRandomValues(List<Integer> domain, int quantity) {
+		Map<Integer, Integer> domainValuesToQuantities = new HashMap<Integer, Integer>();
+		int upperBound = domain.size();
+		Random rand = new Random();
+
+		for (int i = 0; i < quantity; i++) {
+			int quantitySoFar = 0;
+
+			int randIndex = rand.nextInt(upperBound);
+			int domainValue = domain.get(randIndex);
+			//running sum
+			if (domainValuesToQuantities.containsKey(domainValue)) {
+				quantitySoFar += domainValuesToQuantities.get(domainValue);
+			}
+			quantitySoFar++;
+			domainValuesToQuantities.put(domainValue, quantitySoFar);
+		}
+		return domainValuesToQuantities;
+	}
+
+
+	/*cut out from purchase booster pack controller*/
+	//populates ids, quantitiesInStock; determines the remaining booster items the user can get
+	//  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
+	//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
+	//      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
+	//    //max number randon number can go
+	//    int sumQuantitiesInStock = 0;
+	//
+	//    //determine how many BoosterItems are left that user can get
+	//    for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
+	//      BoosterItem potentialEquip = allBoosterItemIdsToBoosterItems.get(boosterItemId);
+	//      int quantityLimit = potentialEquip.getQuantity();
+	//      int quantityPurchasedPreviously = ControllerConstants.NOT_SET;
+	//
+	//      if (boosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+	//        quantityPurchasedPreviously = boosterItemIdsToNumCollected.get(boosterItemId);
+	//      }
+	//
+	//      if(ControllerConstants.NOT_SET == quantityPurchasedPreviously) {
+	//        //user has never bought this BoosterItem before
+	//        boosterItemIdsUserCanGet.add(boosterItemId);
+	//        quantitiesInStock.add(quantityLimit);
+	//        sumQuantitiesInStock += quantityLimit;
+	//      } else if (quantityPurchasedPreviously < quantityLimit) {
+	//        //user bought before, but has not reached the limit
+	//        int numLeftInStock = quantityLimit - quantityPurchasedPreviously;
+	//        boosterItemIdsUserCanGet.add(boosterItemId);
+	//        quantitiesInStock.add(numLeftInStock);
+	//        sumQuantitiesInStock += numLeftInStock;
+	//      } else if (quantityPurchasedPreviously == quantityLimit) {
+	//        continue;
+	//      } else {//will this ever be reached?
+	//        log.error("somehow user has bought more than the allowed limit for a booster item for a booster pack. "
+	//            + "quantityLimit: " + quantityLimit + ", quantityPurchasedPreviously: " + quantityPurchasedPreviously
+	//            + ", userId: " + aUser.getId() + ", boosterItem: " + potentialEquip + ", boosterPackId: " + boosterPackId);
+	//      }
+	//    }
+	//
+	//    return sumQuantitiesInStock;
+	//  }
+
+	//  /*cut out from purchase booster pack controller*/
+	//  //no arguments are modified
+	//  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+	//      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
+	//      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
+	//    //return value
+	//    List<BoosterItem> returnValue = new ArrayList<BoosterItem>();
+	//    if (0 == amountUserWantsToPurchase) {
+	//      return returnValue;
+	//    } else if (3 != amountUserWantsToPurchase) {
+	//      log.error("unexpected error: buying " + amountUserWantsToPurchase + " more equips instead of 3.");
+	//      return returnValue; 
+	//    } else if (0 != (sumOfQuantitiesInStock % 3)) {
+	//      log.error("unexpected error: num remaining equips, " + sumOfQuantitiesInStock
+	//          + ", for this chest is not a multiple of 3");
+	//      return returnValue;
+	//    }
+	//    
+	//    Map<Integer, Equipment> allEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+	//    Set<EquipType> receivedEquipTypes = new HashSet<EquipType>();
+	//    
+	//    //loop through equips user can get; select one weapon, one armor, one amulet
+	//    for (int boosterItemId : boosterItemIdsUserCanGet) {
+	//      BoosterItem bi = allBoosterItemIdsToBoosterItems.get(boosterItemId);
+	//      int equipId = bi.getEquipId();
+	//      Equipment equip = allEquips.get(equipId);
+	//      EquipType eType = equip.getType();
+	//      
+	//      if (receivedEquipTypes.contains(eType)) {
+	//        //user already got this equip type
+	//        continue;
+	//      } else {
+	//        //record user got a new equip type
+	//        returnValue.add(bi);
+	//        receivedEquipTypes.add(eType);
+	//      }
+	//    }
+	//    
+	//    if (3 != returnValue.size()) {
+	//      log.error("unexpected error: user did not receive one type of each equip."
+	//          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue) 
+	//          + ". Chest either intialized improperly or code assigns equips incorrectly.");
+	//      return new ArrayList<BoosterItem>();
+	//    }
+	//    return returnValue;
+	//  }
+
+	/*cut out from purchase booster pack controller*/
+	//no arguments are modified
+	private static List<BoosterItem> determineBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+		List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
+		Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
+		//return value
+		List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
+
+		Random rand = new Random();
+		List<Integer> newBoosterItemIdsUserCanGet = new ArrayList<Integer>(boosterItemIdsUserCanGet);
+		List<Integer> newQuantitiesInStock = new ArrayList<Integer>(quantitiesInStock);
+		int newSumOfQuantities = sumOfQuantitiesInStock;
+
+		//selects one of the ids at random without replacement
+		for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
+			int sumSoFar = 0;
+			int randomNum = rand.nextInt(newSumOfQuantities) + 1; //range [1, newSumOfQuantities]
+
+			for(int i = 0; i < newBoosterItemIdsUserCanGet.size(); i++) {
+				int bItemId = newBoosterItemIdsUserCanGet.get(i);
+				int quantity = newQuantitiesInStock.get(i);
+
+				sumSoFar += quantity;
+
+				if(randomNum <= sumSoFar) {
+					//we have a winner! current boosterItemId is what the user gets
+					BoosterItem selectedBoosterItem = allBoosterItemIdsToBoosterItems.get(bItemId);
+					itemsUserReceives.add(selectedBoosterItem);
+
+					//preparation for next BoosterItem to be selected
+					if (1 == quantity) {
+						newBoosterItemIdsUserCanGet.remove(i);
+						newQuantitiesInStock.remove(i);
+					} else if (1 < quantity){
+						//booster item id has more than one quantity
+						int decrementedQuantity = newQuantitiesInStock.remove(i) - 1;
+						newQuantitiesInStock.add(i, decrementedQuantity);
+					} else {
+						//ignore those with quantity of 0
+						continue;
+					}
+
+					newSumOfQuantities -= 1;
+					break;
+				}
+			}
+		}
+
+		return itemsUserReceives;
+	}
+	//  /*cut out from purchase booster pack controller*/
+	//  public static List<Long> insertNewUserEquips(int userId,
+	//      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
+	//    int amount = itemsUserReceives.size();
+	//    int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
+	//    int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
+	//    List<Integer> equipIds = new ArrayList<Integer>();
+	//    List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
+	//    List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
+	//    
+	//    for(BoosterItem bi : itemsUserReceives) {
+	//      int equipId = bi.getEquipId();
+	//      equipIds.add(equipId);
+	//    }
+	//    
+	//    return InsertUtils.get().insertUserEquips(userId, equipIds, levels,
+	//        enhancement, now, reason);
+	//  }
+	/*cut out from purchase booster pack controller*/
+	//  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
+	//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
+	//      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
+	//    
+	//    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
+	//    int numCollectedBeforeReset = 0;
+	//
+	//    //for each booster item received record it in the map above, and record how many
+	//    //booster items user has in aggregate
+	//    for (int i = 0; i < itemsUserReceives.size(); i++) {
+	//      boolean beforeReset = collectedBeforeReset.get(i);
+	//      if (!beforeReset) {
+	//        BoosterItem received = itemsUserReceives.get(i);
+	//        int boosterItemId = received.getId();
+	//        
+	//        //default quantity user gets if user has no quantity of specific boosterItem
+	//        int newQuantity = 1; 
+	//        if(newBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+	//          newQuantity = newBoosterItemIdsToNumCollected.get(boosterItemId) + 1;
+	//        }
+	//        changedBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
+	//        newBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
+	//      } else {
+	//        numCollectedBeforeReset++;
+	//      }
+	//    }
+	//    
+	//    //loop through newBoosterItemIdsToNumCollected and make sure the quantities
+	//    //collected is itemsUserReceives.size() amount more than boosterItemIdsToNumCollected
+	//    int changeInCollectedQuantity = 0;
+	//    for (int id : changedBoosterItemIdsToNumCollected.keySet()) {
+	//      int newAmount = newBoosterItemIdsToNumCollected.get(id);
+	//      int oldAmount = 0;
+	//      if (boosterItemIdsToNumCollected.containsKey(id)) {
+	//        oldAmount = boosterItemIdsToNumCollected.get(id);
+	//      }
+	//      changeInCollectedQuantity += newAmount - oldAmount;
+	//    }
+	//    //for when user buys out a pack and then some
+	//    changeInCollectedQuantity += numCollectedBeforeReset;
+	//    if (itemsUserReceives.size() != changeInCollectedQuantity) {
+	//      log.error("quantities of booster items do not match how many items user receives. "
+	//          + "amount user receives that is recorded (user_booster_items table): " + changeInCollectedQuantity
+	//          + ", amount user receives (unrecorded): " + itemsUserReceives.size());
+	//      return false;
+	//    }
+	//
+	//    recordBoosterItemsThatReset(changedBoosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, resetOccurred);
+	//    
+	//    return UpdateUtils.get().updateUserBoosterItemsForOneUser(userId, changedBoosterItemIdsToNumCollected);
+	//  }
+	/*cut out from purchase booster pack controller*/
+	//if the user has bought out the whole deck, then for the booster items
+	//the user did not get, record in the db that the user has 0 of them collected
+	private static void recordBoosterItemsThatReset(Map<Integer, Integer> changedBoosterItemIdsToNumCollected,
+		Map<Integer, Integer> newBoosterItemIdsToNumCollected, boolean refilled) {
+		if (refilled) {
+			for (int boosterItemId : newBoosterItemIdsToNumCollected.keySet()) {
+				if (!changedBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+					int value = newBoosterItemIdsToNumCollected.get(boosterItemId);
+					changedBoosterItemIdsToNumCollected.put(boosterItemId, value);
+				}
+			}
+		}
+	}
+
+	/* public static Set<Long> getEquippedEquips(User aUser) {
     Set<Long> equippedUserEquipIds = new HashSet<Long>();
     equippedUserEquipIds.add(aUser.getAmuletEquippedUserEquipId());
     equippedUserEquipIds.add(aUser.getAmuletTwoEquippedUserEquipId());
@@ -1684,587 +1684,587 @@ public class MiscMethods {
     return equippedUserEquipIds;
   }*/
 
-  //arguments don't take into account the 1 forge slot the user has by default
-  //  public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
-  //      int currentNumAdditionalForgeSlots) {
-  //    int goalNumForgeSlots = goalNumAdditionalForgeSlots + ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS;
-  //    log.info("goalNumForgeSlots=" + goalNumForgeSlots);
-  //    if (2 == goalNumForgeSlots) {
-  //      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_TWO;
-  //    } else if (3 == goalNumForgeSlots) {
-  //      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_THREE;
-  //    } else {
-  //      log.error("unexpected error: goalNumForgeSlots=" + goalNumForgeSlots);
-  //      return 500;
-  //    }
-  //  }
+	//arguments don't take into account the 1 forge slot the user has by default
+	//  public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
+	//      int currentNumAdditionalForgeSlots) {
+	//    int goalNumForgeSlots = goalNumAdditionalForgeSlots + ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS;
+	//    log.info("goalNumForgeSlots=" + goalNumForgeSlots);
+	//    if (2 == goalNumForgeSlots) {
+	//      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_TWO;
+	//    } else if (3 == goalNumForgeSlots) {
+	//      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_THREE;
+	//    } else {
+	//      log.error("unexpected error: goalNumForgeSlots=" + goalNumForgeSlots);
+	//      return 500;
+	//    }
+	//  }
 
-  public static int sumMapValues(Map<?, Integer> idToNum) {
-    int sumSoFar = 0;
+	public static int sumMapValues(Map<?, Integer> idToNum) {
+		int sumSoFar = 0;
 
-    for (int value : idToNum.values()) {
-      sumSoFar += value;
-    }
-    return sumSoFar;
-  }
+		for (int value : idToNum.values()) {
+			sumSoFar += value;
+		}
+		return sumSoFar;
+	}
 
-  public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
-    int sum = 0;
-    for (int i : aMap.keySet()) {
+	public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
+		int sum = 0;
+		for (int i : aMap.keySet()) {
 
-      for (Integer value : aMap.get(i)) {
-        sum += value;
-      }
-    }
-    return sum;
-  }
+			for (Integer value : aMap.get(i)) {
+				sum += value;
+			}
+		}
+		return sum;
+	}
 
-  public static void calculateEloChangeAfterBattle(PvpLeagueForUser attacker,
-		  PvpLeagueForUser defender, boolean attackerWon) {
-    double probabilityOfAttackerWin = 1/(1+Math.pow(10, (defender.getElo() - attacker.getElo())/400));
-    double probabilityOfDefenderWin = 1 - probabilityOfAttackerWin;
-    int kFactor = 0;
+	public static void calculateEloChangeAfterBattle(PvpLeagueForUser attacker,
+		PvpLeagueForUser defender, boolean attackerWon) {
+		double probabilityOfAttackerWin = 1/(1+Math.pow(10, (defender.getElo() - attacker.getElo())/400));
+		double probabilityOfDefenderWin = 1 - probabilityOfAttackerWin;
+		int kFactor = 0;
 
-    if(attacker.getElo() < 1900 || defender.getElo() < 2500) {
-      kFactor = 32;
-    }
-    else if(attacker.getElo() < 2400 || defender.getElo() < 3500) {
-      kFactor = 24;
-    }
-    else kFactor = 16;
+		if(attacker.getElo() < 1900 || defender.getElo() < 2500) {
+			kFactor = 32;
+		}
+		else if(attacker.getElo() < 2400 || defender.getElo() < 3500) {
+			kFactor = 24;
+		}
+		else kFactor = 16;
 
-    int newAttackerElo, newDefenderElo;
-    //calculate change in elo
-    if(attackerWon) {
-      newAttackerElo = (int)(attacker.getElo() + kFactor*(1-probabilityOfAttackerWin));
-      newDefenderElo = (int)(defender.getElo() + kFactor*(0-probabilityOfDefenderWin));
-    }
-    else {
-      newAttackerElo = (int)(attacker.getElo() + kFactor*(0-probabilityOfAttackerWin));
-      newDefenderElo = (int)(defender.getElo() + kFactor*(1-probabilityOfDefenderWin));
-    }
-    attacker.setElo(newAttackerElo);
-    defender.setElo(newDefenderElo);
+		int newAttackerElo, newDefenderElo;
+		//calculate change in elo
+		if(attackerWon) {
+			newAttackerElo = (int)(attacker.getElo() + kFactor*(1-probabilityOfAttackerWin));
+			newDefenderElo = (int)(defender.getElo() + kFactor*(0-probabilityOfDefenderWin));
+		}
+		else {
+			newAttackerElo = (int)(attacker.getElo() + kFactor*(0-probabilityOfAttackerWin));
+			newDefenderElo = (int)(defender.getElo() + kFactor*(1-probabilityOfDefenderWin));
+		}
+		attacker.setElo(newAttackerElo);
+		defender.setElo(newDefenderElo);
 
-  }
+	}
 
-  public static int speedupCostOverTime(int cost, long startTimeMillis, 
-      long durationInSeconds, long curTimeMillis) {
+	public static int speedupCostOverTime(int cost, long startTimeMillis, 
+		long durationInSeconds, long curTimeMillis) {
 
-    long timePassedSeconds = (curTimeMillis = startTimeMillis)/1000;
-    long timeRemainingSeconds = durationInSeconds - timePassedSeconds;
+		long timePassedSeconds = (curTimeMillis = startTimeMillis)/1000;
+		long timeRemainingSeconds = durationInSeconds - timePassedSeconds;
 
-    double percentRemaining = timeRemainingSeconds/(double)(durationInSeconds);
+		double percentRemaining = timeRemainingSeconds/(double)(durationInSeconds);
 
-    int newCost = (int)Math.ceil(cost * percentRemaining);
-    return newCost;
-  }
+		int newCost = (int)Math.ceil(cost * percentRemaining);
+		return newCost;
+	}
 
-  public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
-    StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
+	public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
+		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
 
-    setPlayerCityExpansions(sdpb);
-    setCities(sdpb);
-    setTasks(sdpb);
-    setMonsters(sdpb);
-    setUserLevelStuff(sdpb);
-    setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
-    setBoosterPackStuff(sdpb);
-    setStructures(sdpb);
-    setEvents(sdpb);
-    setMonsterDialogue(sdpb);
-    setClanRaidStuff(sdpb);
-    setItemStuff(sdpb);
-    setObstacleStuff(sdpb);
-    setClanIconStuff(sdpb);
-    setPvpLeagueStuff(sdpb);
-    setAchievementStuff(sdpb);
-    setSkillStuff(sdpb);
-    setPrereqs(sdpb);
+		setPlayerCityExpansions(sdpb);
+		setCities(sdpb);
+		setTasks(sdpb);
+		setMonsters(sdpb);
+		setUserLevelStuff(sdpb);
+		setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
+		setBoosterPackStuff(sdpb);
+		setStructures(sdpb);
+		setEvents(sdpb);
+		setMonsterDialogue(sdpb);
+		setClanRaidStuff(sdpb);
+		setItemStuff(sdpb);
+		setObstacleStuff(sdpb);
+		setClanIconStuff(sdpb);
+		setPvpLeagueStuff(sdpb);
+		setAchievementStuff(sdpb);
+		setSkillStuff(sdpb);
+		setPrereqs(sdpb);
 
-    return sdpb.build();
-  }
-  private static void setPlayerCityExpansions(Builder sdpb) {
-    //Player city expansions
-    Map<Integer, ExpansionCost> expansionCosts =
-        ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-    for (ExpansionCost cec : expansionCosts.values()) {
-      CityExpansionCostProto cecp = CreateInfoProtoUtils
-          .createCityExpansionCostProtoFromCityExpansionCost(cec);
-      sdpb.addExpansionCosts(cecp);
-    }
-  }
-  private static void setCities(Builder sdpb) {
-    //Cities
-    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-    for (Integer cityId : cities.keySet()) {
-      City city = cities.get(cityId);
-      sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-    }
-  }
-  private static void setTasks(Builder sdpb) {
-    //Tasks
-    Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
-    for (Task aTask : taskIdsToTasks.values()) {
-      FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
-      sdpb.addAllTasks(ftp);
-    }
-    
-    Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils.getTaskMapElement();
-    for (TaskMapElement tme : idsToMapElement.values()) {
-    	TaskMapElementProto tmep = CreateInfoProtoUtils.createTaskMapElementProto(tme);
-    	sdpb.addAllTaskMapElements(tmep);
-    }
-    
-  }
-  //TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
-  //ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
-  private static void setMonsters(Builder sdpb) {
-    //Monsters
-    Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
-    for (Monster monster : monsters.values()) {
+		return sdpb.build();
+	}
+	private static void setPlayerCityExpansions(Builder sdpb) {
+		//Player city expansions
+		Map<Integer, ExpansionCost> expansionCosts =
+			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+		for (ExpansionCost cec : expansionCosts.values()) {
+			CityExpansionCostProto cecp = CreateInfoProtoUtils
+				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+			sdpb.addExpansionCosts(cecp);
+		}
+	}
+	private static void setCities(Builder sdpb) {
+		//Cities
+		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+		for (Integer cityId : cities.keySet()) {
+			City city = cities.get(cityId);
+			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+		}
+	}
+	private static void setTasks(Builder sdpb) {
+		//Tasks
+		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
+		for (Task aTask : taskIdsToTasks.values()) {
+			FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
+			sdpb.addAllTasks(ftp);
+		}
 
-      //get the level info for this monster
-      int monsterId = monster.getId();
-      Map<Integer, MonsterLevelInfo> monsterLvlInfo = MonsterLevelInfoRetrieveUtils
-          .getMonsterLevelInfoForMonsterId(monsterId);
+		Map<Integer, TaskMapElement> idsToMapElement = TaskMapElementRetrieveUtils.getTaskMapElement();
+		for (TaskMapElement tme : idsToMapElement.values()) {
+			TaskMapElementProto tmep = CreateInfoProtoUtils.createTaskMapElementProto(tme);
+			sdpb.addAllTaskMapElements(tmep);
+		}
 
-      sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
-    }
-  }
-  private static void setUserLevelStuff(Builder sdpb) {
-    //User level stuff
-    Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
-        StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
-    for (int lvl : levelToStaticUserLevelInfo.keySet())  {
-      StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
-      int exp = sli.getRequiredExp();
+	}
+	//TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
+	//ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
+	private static void setMonsters(Builder sdpb) {
+		//Monsters
+		Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+		for (Monster monster : monsters.values()) {
 
-      StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
-      slipb.setLevel(lvl);
-      slipb.setRequiredExperience(exp);
-      sdpb.addSlip(slipb.build());
-    }
-  }
-  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
-      boolean userIdSet) {
-    if (!userIdSet) {
-      return;
-    }
-    List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
-        .getUserQuestsForUser(userId);
+			//get the level info for this monster
+			int monsterId = monster.getId();
+			Map<Integer, MonsterLevelInfo> monsterLvlInfo = MonsterLevelInfoRetrieveUtils
+				.getMonsterLevelInfoForMonsterId(monsterId);
 
+			sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
+		}
+	}
+	private static void setUserLevelStuff(Builder sdpb) {
+		//User level stuff
+		Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
+			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
+		for (int lvl : levelToStaticUserLevelInfo.keySet())  {
+			StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
+			int exp = sli.getRequiredExp();
 
-    List<Integer> inProgressQuestIds = new ArrayList<Integer>();
-    List<Integer> redeemedQuestIds = new ArrayList<Integer>();
-
-    Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-    for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
-
-      if (uq.isRedeemed()) {
-        redeemedQuestIds.add(uq.getQuestId());
-
-      } else {
-        //unredeemed quest section
-        Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
-        FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
-
-        inProgressQuestIds.add(uq.getQuestId());
-        if (uq.isComplete()) { 
-          //complete and unredeemed userQuest, so quest goes in unredeemedQuest
-          sdpb.addUnredeemedQuests(questProto);
-        } else {
-          //incomplete and unredeemed userQuest, so quest goes in inProgressQuest
-          sdpb.addInProgressQuests(questProto);
-        }
-      }
-    }
-
-    List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
-        inProgressQuestIds);
-    if (availableQuestIds == null) {
-      return;
-    }
-
-    //from the available quest ids generate the available quest protos
-    for (Integer questId : availableQuestIds) {
-      FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-          questIdToQuests.get(questId));
-      sdpb.addAvailableQuests(fqp);
-    }
-  }
-  private static void setBoosterPackStuff(Builder sdpb) {
-    //Booster pack stuff
-    Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
-        .getBoosterPackIdsToBoosterPacks();
-    Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
-        BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
-    Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
-        BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
-
-    for (Integer bpackId : idsToBoosterPacks.keySet()) {
-      BoosterPack bp = idsToBoosterPacks.get(bpackId);
-
-      //get the booster items associated with this booster pack
-      Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
-      Collection<BoosterItem> items = null;
-      if (null != itemIdsToItems) {
-        items = itemIdsToItems.values();
-      }
-
-      //get the booster display items for this booster pack
-      Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
-          packIdToDisplayIdsToDisplayItems.get(bpackId);
-      Collection<BoosterDisplayItem> displayItems = null;
-      if (null != displayIdsToDisplayItems) {
-        displayItems = displayIdsToDisplayItems.values();
-      }
-
-      BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
-          bp, items, displayItems);
-      sdpb.addBoosterPacks(bpProto);
-    }
-  }
-  private static void setStructures(Builder sdpb) {
-    //Structures
-    Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
-    Map<Integer, StructureInfoProto> structProtos = new HashMap<Integer, StructureInfoProto>();
-    for (Integer structId : structs.keySet()) {
-      Structure struct = structs.get(structId);
-      StructureInfoProto sip = CreateInfoProtoUtils.createStructureInfoProtoFromStructure(struct);
-      structProtos.put(structId, sip);
-    }
-
-    setGenerators(sdpb, structs, structProtos);
-    setStorages(sdpb, structs, structProtos);
-    setHospitals(sdpb, structs, structProtos);
-    setResidences(sdpb, structs, structProtos);
-    setTownHalls(sdpb, structs, structProtos);
-    setLabs(sdpb, structs, structProtos);
-    setMiniJobCenters(sdpb, structs, structProtos);
-    setEvoChambers(sdpb, structs, structProtos);
-    setTeamCenters(sdpb, structs, structProtos);
-    setClanHouses(sdpb, structs, structProtos);
-  }
-  //resource generator
-  private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureResourceGenerator> idsToGenerators = 
-        StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
-    for (Integer structId : idsToGenerators.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureResourceGenerator srg = idsToGenerators.get(structId);
-
-      ResourceGeneratorProto rgp = CreateInfoProtoUtils.createResourceGeneratorProto(s, sip, srg);
-      sdpb.addAllGenerators(rgp);
-    }
-  }
-  //resource storage
-  private static void setStorages(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureResourceStorage> idsToStorages = 
-        StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
-    for (Integer structId : idsToStorages.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureResourceStorage srg = idsToStorages.get(structId);
-
-      ResourceStorageProto rgp = CreateInfoProtoUtils.createResourceStorageProto(s, sip, srg);
-      sdpb.addAllStorages(rgp);
-    }
-  }
-  //hospitals
-  private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureHospital> idsToHospitals = 
-        StructureHospitalRetrieveUtils.getStructIdsToHospitals();
-    for (Integer structId : idsToHospitals.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureHospital srg = idsToHospitals.get(structId);
-
-      HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s, sip, srg);
-      sdpb.addAllHospitals(rgp);
-    }
-  }
-  //residences
-  private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureResidence> idsToResidences = 
-        StructureResidenceRetrieveUtils.getStructIdsToResidences();
-    for (Integer structId : idsToResidences.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureResidence srg = idsToResidences.get(structId);
-
-      ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s, sip, srg);
-      sdpb.addAllResidences(rgp);
-    }
-  }
-  //town hall
-  private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureTownHall> idsToTownHalls = 
-        StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
-    for (Integer structId : idsToTownHalls.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureTownHall srg = idsToTownHalls.get(structId);
-
-      TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s, sip, srg);
-      sdpb.addAllTownHalls(rgp);
-    }
-  }
-  //lab
-  private static void setLabs(Builder sdpb, Map<Integer, Structure> structs,
-      Map<Integer, StructureInfoProto> structProtos) {
-    Map<Integer, StructureLab> idsToLabs = StructureLabRetrieveUtils
-        .getStructIdsToLabs();
-    for (Integer structId : idsToLabs.keySet()) {
-      Structure s = structs.get(structId);
-      StructureInfoProto sip = structProtos.get(structId);
-      StructureLab srg = idsToLabs.get(structId);
-
-      LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
-      sdpb.addAllLabs(rgp);
-    }		
-  }
-  //mini job center
-  private static void setMiniJobCenters(Builder sdpb,
-		  Map<Integer, Structure> structs,
-	      Map<Integer, StructureInfoProto> structProtos) {
-	  Map<Integer, StructureMiniJob> idsToMiniJobs =
-			  StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
-	  for (Integer structId : idsToMiniJobs.keySet()) {
-		  Structure s = structs.get(structId);
-		  StructureInfoProto sip = structProtos.get(structId);
-		  StructureMiniJob smj = idsToMiniJobs.get(structId);
-		  
-		  MiniJobCenterProto mjcp = CreateInfoProtoUtils
-				  .createMiniJobCenterProto(s, sip, smj);
-		  sdpb.addAllMiniJobCenters(mjcp);
-	  }
-  }
-  
-  private static void setEvoChambers(Builder sdpb,
-	  Map<Integer, Structure> structs,
-	  Map<Integer, StructureInfoProto> structProtos)
-  {
-	  Map<Integer, StructureEvoChamber> idsToEvoChambers =
-		  StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
-	  
-	  for (Integer structId : idsToEvoChambers.keySet()) {
-		  Structure s = structs.get(structId);
-		  StructureInfoProto sip = structProtos.get(structId);
-		  StructureEvoChamber sec = idsToEvoChambers.get(structId);
-		  
-		  EvoChamberProto ecp = CreateInfoProtoUtils
-			  .createEvoChamberProto(s, sip, sec);
-		  sdpb.addAllEvoChambers(ecp);
-	  }
-  }
-  
-  private static void setTeamCenters(Builder sdpb,
-	  Map<Integer, Structure> structs,
-	  Map<Integer, StructureInfoProto> structProtos)
-  {
-	  Map<Integer, StructureTeamCenter> idsToTeamCenters =
-		  StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
-	  
-	  for (Integer structId : idsToTeamCenters.keySet()) {
-		  Structure s = structs.get(structId);
-		  StructureInfoProto sip = structProtos.get(structId);
-		  StructureTeamCenter stc = idsToTeamCenters.get(structId);
-		  
-		  TeamCenterProto tcp = CreateInfoProtoUtils
-			  .createTeamCenterProto(s, sip, stc);
-		  sdpb.addAllTeamCenters(tcp);
-	  }
-  }
-  
-  private static void setClanHouses(Builder sdpb,
-	  Map<Integer, Structure> structs,
-	  Map<Integer, StructureInfoProto> structProtos)
-  {
-	  Map<Integer, StructureClanHouse> idsToClanHouses =
-		  StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
-	  
-	  for (Integer structId : idsToClanHouses.keySet()) {
-		  Structure s = structs.get(structId);
-		  StructureInfoProto sip = structProtos.get(structId);
-		  StructureClanHouse stc = idsToClanHouses.get(structId);
-		  
-		  ClanHouseProto tcp = CreateInfoProtoUtils
-			  .createClanHouseProto(s, sip, stc);
-		  sdpb.addAllClanHouses(tcp);
-	  }
-  }
-
-  private static void setEvents(Builder sdpb) {
-    Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
-        .getAllEventIdsToEvents();
-    for (Integer eventId: idsToEvents.keySet()) {
-      EventPersistent event  = idsToEvents.get(eventId);
-      PersistentEventProto eventProto = CreateInfoProtoUtils
-          .createPersistentEventProtoFromEvent(event);
-      sdpb.addPersistentEvents(eventProto);
-    }
-  }
-
-  private static void setMonsterDialogue(Builder sdpb) {
-    Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
-        MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
-
-    List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
-    for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
-
-      for (MonsterBattleDialogue mbd : dialogue) {
-        MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
-            .createMonsterBattleDialogueProto(mbd);
-        dialogueList.add(dialogueProto);
-      }
-    }
-
-    sdpb.addAllMbds(dialogueList);
-  }
-
-  private static void setClanRaidStuff(Builder sdpb) {
-    Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
-    List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
-    for (ClanRaid cr : idsToClanRaid.values()) {
-      ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
-      raidList.add(crProto);
-    }
-    sdpb.addAllRaids(raidList);
+			StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
+			slipb.setLevel(lvl);
+			slipb.setRequiredExperience(exp);
+			sdpb.addSlip(slipb.build());
+		}
+	}
+	private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
+		boolean userIdSet) {
+		if (!userIdSet) {
+			return;
+		}
+		List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+			.getUserQuestsForUser(userId);
 
 
-    //protofy clan events
-    List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
-    Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
-        ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
-    for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
-      PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
-      clanEventProtos.add(pcep);
-    }
-    sdpb.addAllPersistentClanEvents(clanEventProtos);
-  }
-  
-  private static void setItemStuff(Builder sdpb) {
-  	Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
-  	
-  	if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
-  		log.warn("no items");
-  		return;
-  	}
-  	
-  	for (Item i : itemIdsToItems.values()) {
-  		ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
-  		sdpb.addItems(itemProto);
-  	}
-  	
-  }
+		List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+		List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
-  private static void setObstacleStuff(Builder sdpb) {
-  	Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
-  			.getObstacleIdsToObstacles();
-  	if (null == idsToObstacles || idsToObstacles.isEmpty()) {
-  		log.warn("no obstacles");
-  		return;
-  	}
-  	
-  	for (Obstacle o : idsToObstacles.values()) {
-  		ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
-  		sdpb.addObstacles(op);
-  	}
-  }
-  
-  private static void setClanIconStuff(Builder sdpb) {
-  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
-  	
-  	if (null == clanIconIdsToClanIcons || clanIconIdsToClanIcons.isEmpty()) {
-  		log.warn("no clan_icons");
-  		return;
-  	}
-  	
-  	for (ClanIcon ci : clanIconIdsToClanIcons.values()) {
-  		ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
-  		sdpb.addClanIcons(cip);
-  	}
-  }
-  
-  private static void setPvpLeagueStuff(Builder sdpb) {
-	  Map<Integer, PvpLeague> idToPvpLeague = PvpLeagueRetrieveUtils
-			  .getPvpLeagueIdsToPvpLeagues();
-	  
-	  if (null == idToPvpLeague || idToPvpLeague.isEmpty()) {
-		  log.warn("no pvp_leagues");
-		  return;
-	  }
-	  
-	  for (PvpLeague pl : idToPvpLeague.values()) {
-		  PvpLeagueProto plp = CreateInfoProtoUtils.createPvpLeagueProto(pl);
-		  sdpb.addLeagues(plp);
-	  }
-  }
-  
-  private static void setAchievementStuff(Builder sdpb) {
-	  Map<Integer, Achievement> achievementIdsToAchievements =
-			  AchievementRetrieveUtils.getAchievementIdsToAchievements();
-	  if (null == achievementIdsToAchievements ||
-			  achievementIdsToAchievements.isEmpty()) {
-		  log.warn("setAchievementStuff() no achievements");
-		  return;
-	  }
-	  for (Achievement a : achievementIdsToAchievements.values()) {
-		  AchievementProto ap = CreateInfoProtoUtils.createAchievementProto(a);
-		  sdpb.addAchievements(ap);
-	  }
-  }
+		Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+		for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
 
-  private static void setSkillStuff(Builder sdpb) {
-	  Map<Integer, Skill> skillz =
-		  SkillRetrieveUtils.getIdsToSkills();
-	  Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
-		  SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
-	  
-	  if (null == skillz || skillz.isEmpty()) {
-		  log.warn("setSkillStuff() no skillz");
-		  return;
-	  }
-	  
-	  //get id and then manually get Skill
-	  //could also get Skill, but then manually get id
-	  for (Integer skillId : skillz.keySet())
-	  {
-		  Skill skil = skillz.get(skillId);
-		  
-		  //skill can have no properties
-		  Map<Integer, SkillProperty> propertyz = null;
-		  if (skillPropertyz.containsKey(skillId)) {
-			  propertyz = skillPropertyz.get(skillId);
-		  }
-		  
-		  SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
-		  sdpb.addSkills(sp);
-	  }
-	  
-  }
-  
-  private static void setPrereqs(Builder sdpb) {
-	  Map<Integer, Prerequisite> idsToPrereqs = 
-		 PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
-	  
-	  if (null == idsToPrereqs || idsToPrereqs.isEmpty()) {
-		  log.warn("setPrereqs() no prerequisites");
-		  return;
-	  }
-	  
-	  for (Integer prereqId : idsToPrereqs.keySet()) {
-		  Prerequisite prereq = idsToPrereqs.get(prereqId);
-		  
-		  PrereqProto pp = CreateInfoProtoUtils.createPrerequisiteProto(prereq);
-		  sdpb.addPrereqs(pp);
-	  }
-  }
+			if (uq.isRedeemed()) {
+				redeemedQuestIds.add(uq.getQuestId());
+
+			} else {
+				//unredeemed quest section
+				Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
+				FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
+
+				inProgressQuestIds.add(uq.getQuestId());
+				if (uq.isComplete()) { 
+					//complete and unredeemed userQuest, so quest goes in unredeemedQuest
+					sdpb.addUnredeemedQuests(questProto);
+				} else {
+					//incomplete and unredeemed userQuest, so quest goes in inProgressQuest
+					sdpb.addInProgressQuests(questProto);
+				}
+			}
+		}
+
+		List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
+			inProgressQuestIds);
+		if (availableQuestIds == null) {
+			return;
+		}
+
+		//from the available quest ids generate the available quest protos
+		for (Integer questId : availableQuestIds) {
+			FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+				questIdToQuests.get(questId));
+			sdpb.addAvailableQuests(fqp);
+		}
+	}
+	private static void setBoosterPackStuff(Builder sdpb) {
+		//Booster pack stuff
+		Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
+			.getBoosterPackIdsToBoosterPacks();
+		Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
+			BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+		Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
+			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
+
+		for (Integer bpackId : idsToBoosterPacks.keySet()) {
+			BoosterPack bp = idsToBoosterPacks.get(bpackId);
+
+			//get the booster items associated with this booster pack
+			Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
+			Collection<BoosterItem> items = null;
+			if (null != itemIdsToItems) {
+				items = itemIdsToItems.values();
+			}
+
+			//get the booster display items for this booster pack
+			Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
+				packIdToDisplayIdsToDisplayItems.get(bpackId);
+			Collection<BoosterDisplayItem> displayItems = null;
+			if (null != displayIdsToDisplayItems) {
+				displayItems = displayIdsToDisplayItems.values();
+			}
+
+			BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
+				bp, items, displayItems);
+			sdpb.addBoosterPacks(bpProto);
+		}
+	}
+	private static void setStructures(Builder sdpb) {
+		//Structures
+		Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
+		Map<Integer, StructureInfoProto> structProtos = new HashMap<Integer, StructureInfoProto>();
+		for (Integer structId : structs.keySet()) {
+			Structure struct = structs.get(structId);
+			StructureInfoProto sip = CreateInfoProtoUtils.createStructureInfoProtoFromStructure(struct);
+			structProtos.put(structId, sip);
+		}
+
+		setGenerators(sdpb, structs, structProtos);
+		setStorages(sdpb, structs, structProtos);
+		setHospitals(sdpb, structs, structProtos);
+		setResidences(sdpb, structs, structProtos);
+		setTownHalls(sdpb, structs, structProtos);
+		setLabs(sdpb, structs, structProtos);
+		setMiniJobCenters(sdpb, structs, structProtos);
+		setEvoChambers(sdpb, structs, structProtos);
+		setTeamCenters(sdpb, structs, structProtos);
+		setClanHouses(sdpb, structs, structProtos);
+	}
+	//resource generator
+	private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureResourceGenerator> idsToGenerators = 
+			StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
+		for (Integer structId : idsToGenerators.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureResourceGenerator srg = idsToGenerators.get(structId);
+
+			ResourceGeneratorProto rgp = CreateInfoProtoUtils.createResourceGeneratorProto(s, sip, srg);
+			sdpb.addAllGenerators(rgp);
+		}
+	}
+	//resource storage
+	private static void setStorages(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureResourceStorage> idsToStorages = 
+			StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
+		for (Integer structId : idsToStorages.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureResourceStorage srg = idsToStorages.get(structId);
+
+			ResourceStorageProto rgp = CreateInfoProtoUtils.createResourceStorageProto(s, sip, srg);
+			sdpb.addAllStorages(rgp);
+		}
+	}
+	//hospitals
+	private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureHospital> idsToHospitals = 
+			StructureHospitalRetrieveUtils.getStructIdsToHospitals();
+		for (Integer structId : idsToHospitals.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureHospital srg = idsToHospitals.get(structId);
+
+			HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s, sip, srg);
+			sdpb.addAllHospitals(rgp);
+		}
+	}
+	//residences
+	private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureResidence> idsToResidences = 
+			StructureResidenceRetrieveUtils.getStructIdsToResidences();
+		for (Integer structId : idsToResidences.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureResidence srg = idsToResidences.get(structId);
+
+			ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s, sip, srg);
+			sdpb.addAllResidences(rgp);
+		}
+	}
+	//town hall
+	private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureTownHall> idsToTownHalls = 
+			StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
+		for (Integer structId : idsToTownHalls.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureTownHall srg = idsToTownHalls.get(structId);
+
+			TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s, sip, srg);
+			sdpb.addAllTownHalls(rgp);
+		}
+	}
+	//lab
+	private static void setLabs(Builder sdpb, Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureLab> idsToLabs = StructureLabRetrieveUtils
+			.getStructIdsToLabs();
+		for (Integer structId : idsToLabs.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureLab srg = idsToLabs.get(structId);
+
+			LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
+			sdpb.addAllLabs(rgp);
+		}		
+	}
+	//mini job center
+	private static void setMiniJobCenters(Builder sdpb,
+		Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos) {
+		Map<Integer, StructureMiniJob> idsToMiniJobs =
+			StructureMiniJobRetrieveUtils.getStructIdsToMiniJobs();
+		for (Integer structId : idsToMiniJobs.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureMiniJob smj = idsToMiniJobs.get(structId);
+
+			MiniJobCenterProto mjcp = CreateInfoProtoUtils
+				.createMiniJobCenterProto(s, sip, smj);
+			sdpb.addAllMiniJobCenters(mjcp);
+		}
+	}
+
+	private static void setEvoChambers(Builder sdpb,
+		Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos)
+	{
+		Map<Integer, StructureEvoChamber> idsToEvoChambers =
+			StructureEvoChamberRetrieveUtils.getStructIdsToEvoChambers();
+
+		for (Integer structId : idsToEvoChambers.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureEvoChamber sec = idsToEvoChambers.get(structId);
+
+			EvoChamberProto ecp = CreateInfoProtoUtils
+				.createEvoChamberProto(s, sip, sec);
+			sdpb.addAllEvoChambers(ecp);
+		}
+	}
+
+	private static void setTeamCenters(Builder sdpb,
+		Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos)
+	{
+		Map<Integer, StructureTeamCenter> idsToTeamCenters =
+			StructureTeamCenterRetrieveUtils.getStructIdsToTeamCenters();
+
+		for (Integer structId : idsToTeamCenters.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureTeamCenter stc = idsToTeamCenters.get(structId);
+
+			TeamCenterProto tcp = CreateInfoProtoUtils
+				.createTeamCenterProto(s, sip, stc);
+			sdpb.addAllTeamCenters(tcp);
+		}
+	}
+
+	private static void setClanHouses(Builder sdpb,
+		Map<Integer, Structure> structs,
+		Map<Integer, StructureInfoProto> structProtos)
+	{
+		Map<Integer, StructureClanHouse> idsToClanHouses =
+			StructureClanHouseRetrieveUtils.getStructIdsToClanHouses();
+
+		for (Integer structId : idsToClanHouses.keySet()) {
+			Structure s = structs.get(structId);
+			StructureInfoProto sip = structProtos.get(structId);
+			StructureClanHouse stc = idsToClanHouses.get(structId);
+
+			ClanHouseProto tcp = CreateInfoProtoUtils
+				.createClanHouseProto(s, sip, stc);
+			sdpb.addAllClanHouses(tcp);
+		}
+	}
+
+	private static void setEvents(Builder sdpb) {
+		Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
+			.getAllEventIdsToEvents();
+		for (Integer eventId: idsToEvents.keySet()) {
+			EventPersistent event  = idsToEvents.get(eventId);
+			PersistentEventProto eventProto = CreateInfoProtoUtils
+				.createPersistentEventProtoFromEvent(event);
+			sdpb.addPersistentEvents(eventProto);
+		}
+	}
+
+	private static void setMonsterDialogue(Builder sdpb) {
+		Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
+			MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
+
+		List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
+		for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
+
+			for (MonsterBattleDialogue mbd : dialogue) {
+				MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
+					.createMonsterBattleDialogueProto(mbd);
+				dialogueList.add(dialogueProto);
+			}
+		}
+
+		sdpb.addAllMbds(dialogueList);
+	}
+
+	private static void setClanRaidStuff(Builder sdpb) {
+		Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
+		List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
+		for (ClanRaid cr : idsToClanRaid.values()) {
+			ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
+			raidList.add(crProto);
+		}
+		sdpb.addAllRaids(raidList);
+
+
+		//protofy clan events
+		List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
+		Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
+			ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+		for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
+			PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
+			clanEventProtos.add(pcep);
+		}
+		sdpb.addAllPersistentClanEvents(clanEventProtos);
+	}
+
+	private static void setItemStuff(Builder sdpb) {
+		Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
+
+		if (null == itemIdsToItems || itemIdsToItems.isEmpty()) {
+			log.warn("no items");
+			return;
+		}
+
+		for (Item i : itemIdsToItems.values()) {
+			ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
+			sdpb.addItems(itemProto);
+		}
+
+	}
+
+	private static void setObstacleStuff(Builder sdpb) {
+		Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
+			.getObstacleIdsToObstacles();
+		if (null == idsToObstacles || idsToObstacles.isEmpty()) {
+			log.warn("no obstacles");
+			return;
+		}
+
+		for (Obstacle o : idsToObstacles.values()) {
+			ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
+			sdpb.addObstacles(op);
+		}
+	}
+
+	private static void setClanIconStuff(Builder sdpb) {
+		Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
+
+		if (null == clanIconIdsToClanIcons || clanIconIdsToClanIcons.isEmpty()) {
+			log.warn("no clan_icons");
+			return;
+		}
+
+		for (ClanIcon ci : clanIconIdsToClanIcons.values()) {
+			ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
+			sdpb.addClanIcons(cip);
+		}
+	}
+
+	private static void setPvpLeagueStuff(Builder sdpb) {
+		Map<Integer, PvpLeague> idToPvpLeague = PvpLeagueRetrieveUtils
+			.getPvpLeagueIdsToPvpLeagues();
+
+		if (null == idToPvpLeague || idToPvpLeague.isEmpty()) {
+			log.warn("no pvp_leagues");
+			return;
+		}
+
+		for (PvpLeague pl : idToPvpLeague.values()) {
+			PvpLeagueProto plp = CreateInfoProtoUtils.createPvpLeagueProto(pl);
+			sdpb.addLeagues(plp);
+		}
+	}
+
+	private static void setAchievementStuff(Builder sdpb) {
+		Map<Integer, Achievement> achievementIdsToAchievements =
+			AchievementRetrieveUtils.getAchievementIdsToAchievements();
+		if (null == achievementIdsToAchievements ||
+			achievementIdsToAchievements.isEmpty()) {
+			log.warn("setAchievementStuff() no achievements");
+			return;
+		}
+		for (Achievement a : achievementIdsToAchievements.values()) {
+			AchievementProto ap = CreateInfoProtoUtils.createAchievementProto(a);
+			sdpb.addAchievements(ap);
+		}
+	}
+
+	private static void setSkillStuff(Builder sdpb) {
+		Map<Integer, Skill> skillz =
+			SkillRetrieveUtils.getIdsToSkills();
+		Map<Integer, Map<Integer, SkillProperty>> skillPropertyz =
+			SkillPropertyRetrieveUtils.getSkillIdsToIdsToSkillPropertys();
+
+		if (null == skillz || skillz.isEmpty()) {
+			log.warn("setSkillStuff() no skillz");
+			return;
+		}
+
+		//get id and then manually get Skill
+		//could also get Skill, but then manually get id
+		for (Integer skillId : skillz.keySet())
+		{
+			Skill skil = skillz.get(skillId);
+
+			//skill can have no properties
+			Map<Integer, SkillProperty> propertyz = null;
+			if (skillPropertyz.containsKey(skillId)) {
+				propertyz = skillPropertyz.get(skillId);
+			}
+
+			SkillProto sp = CreateInfoProtoUtils.createSkillProtoFromSkill(skil, propertyz);
+			sdpb.addSkills(sp);
+		}
+
+	}
+
+	private static void setPrereqs(Builder sdpb) {
+		Map<Integer, Prerequisite> idsToPrereqs = 
+			PrerequisiteRetrieveUtils.getPrerequisiteIdsToPrerequisites();
+
+		if (null == idsToPrereqs || idsToPrereqs.isEmpty()) {
+			log.warn("setPrereqs() no prerequisites");
+			return;
+		}
+
+		for (Integer prereqId : idsToPrereqs.keySet()) {
+			Prerequisite prereq = idsToPrereqs.get(prereqId);
+
+			PrereqProto pp = CreateInfoProtoUtils.createPrerequisiteProto(prereq);
+			sdpb.addPrereqs(pp);
+		}
+	}
 }
