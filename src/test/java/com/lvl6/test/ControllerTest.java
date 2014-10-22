@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.DevController;
 import com.lvl6.server.controller.EnhanceMonsterController;
@@ -659,6 +660,12 @@ public class ControllerTest extends TestCase {
 //		
 //		retrieveClanInfoController.handleEvent(rcire);
 //		log.info("Done");
+//	}
+	
+//	@Test
+//	public void testDialogueCreation() {
+//		TaskRetrieveUtils.getTaskIdsToTasks();
+//		
 //	}
 	
 	private int getUnitTesterId() {

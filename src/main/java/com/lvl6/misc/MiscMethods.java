@@ -1,5 +1,6 @@
 package com.lvl6.misc;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -485,10 +486,11 @@ public class MiscMethods {
 			List<String> speakerImages = new ArrayList<String>();
 			List<String> speakerTexts = new ArrayList<String>();
 
+			CSVReader reader = null;
 			try {
 				while (st.hasMoreTokens()) {
 					String tok = st.nextToken();
-					CSVReader reader = new CSVReader(new StringReader(tok), '.');
+					reader = new CSVReader(new StringReader(tok), '.');
 					String[] strs = reader.readNext();
 					if (strs.length == 4) {
 						Boolean isLeftSide = strs[0].toUpperCase().equals("L");
@@ -505,6 +507,14 @@ public class MiscMethods {
 				}
 			} catch (Exception e) {
 				log.error("problem with creating dialogue object for this dialogueblob: {}", dialogueBlob, e);
+			} finally {
+				if (null != reader) {
+					try {
+						reader.close();
+					} catch (IOException e) {
+						log.error("error trying to close CSVReader", e);
+					}
+				}
 			}
 			return new Dialogue(speakers, speakerImages, speakerTexts, isLeftSides);
 		}
