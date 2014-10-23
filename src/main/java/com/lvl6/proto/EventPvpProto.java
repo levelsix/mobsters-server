@@ -3913,6 +3913,23 @@ public final class EventPvpProto {
      * </pre>
      */
     int getCashChange();
+
+    /**
+     * <code>optional float nuPvpDmgMultiplier = 8;</code>
+     *
+     * <pre>
+     *Note for server, if &lt;= 0 then don't update db.
+     * </pre>
+     */
+    boolean hasNuPvpDmgMultiplier();
+    /**
+     * <code>optional float nuPvpDmgMultiplier = 8;</code>
+     *
+     * <pre>
+     *Note for server, if &lt;= 0 then don't update db.
+     * </pre>
+     */
+    float getNuPvpDmgMultiplier();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto}
@@ -4007,6 +4024,11 @@ public final class EventPvpProto {
             case 56: {
               bitField0_ |= 0x00000040;
               cashChange_ = input.readInt32();
+              break;
+            }
+            case 69: {
+              bitField0_ |= 0x00000080;
+              nuPvpDmgMultiplier_ = input.readFloat();
               break;
             }
           }
@@ -4204,6 +4226,29 @@ public final class EventPvpProto {
       return cashChange_;
     }
 
+    public static final int NUPVPDMGMULTIPLIER_FIELD_NUMBER = 8;
+    private float nuPvpDmgMultiplier_;
+    /**
+     * <code>optional float nuPvpDmgMultiplier = 8;</code>
+     *
+     * <pre>
+     *Note for server, if &lt;= 0 then don't update db.
+     * </pre>
+     */
+    public boolean hasNuPvpDmgMultiplier() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional float nuPvpDmgMultiplier = 8;</code>
+     *
+     * <pre>
+     *Note for server, if &lt;= 0 then don't update db.
+     * </pre>
+     */
+    public float getNuPvpDmgMultiplier() {
+      return nuPvpDmgMultiplier_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderId_ = 0;
@@ -4212,6 +4257,7 @@ public final class EventPvpProto {
       clientTime_ = 0L;
       oilChange_ = 0;
       cashChange_ = 0;
+      nuPvpDmgMultiplier_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4246,6 +4292,9 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, cashChange_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeFloat(8, nuPvpDmgMultiplier_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4283,6 +4332,10 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, cashChange_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(8, nuPvpDmgMultiplier_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4420,6 +4473,8 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         cashChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        nuPvpDmgMultiplier_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -4480,6 +4535,10 @@ public final class EventPvpProto {
           to_bitField0_ |= 0x00000040;
         }
         result.cashChange_ = cashChange_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.nuPvpDmgMultiplier_ = nuPvpDmgMultiplier_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4516,6 +4575,9 @@ public final class EventPvpProto {
         }
         if (other.hasCashChange()) {
           setCashChange(other.getCashChange());
+        }
+        if (other.hasNuPvpDmgMultiplier()) {
+          setNuPvpDmgMultiplier(other.getNuPvpDmgMultiplier());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4936,6 +4998,54 @@ public final class EventPvpProto {
       public Builder clearCashChange() {
         bitField0_ = (bitField0_ & ~0x00000040);
         cashChange_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float nuPvpDmgMultiplier_ ;
+      /**
+       * <code>optional float nuPvpDmgMultiplier = 8;</code>
+       *
+       * <pre>
+       *Note for server, if &lt;= 0 then don't update db.
+       * </pre>
+       */
+      public boolean hasNuPvpDmgMultiplier() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional float nuPvpDmgMultiplier = 8;</code>
+       *
+       * <pre>
+       *Note for server, if &lt;= 0 then don't update db.
+       * </pre>
+       */
+      public float getNuPvpDmgMultiplier() {
+        return nuPvpDmgMultiplier_;
+      }
+      /**
+       * <code>optional float nuPvpDmgMultiplier = 8;</code>
+       *
+       * <pre>
+       *Note for server, if &lt;= 0 then don't update db.
+       * </pre>
+       */
+      public Builder setNuPvpDmgMultiplier(float value) {
+        bitField0_ |= 0x00000080;
+        nuPvpDmgMultiplier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float nuPvpDmgMultiplier = 8;</code>
+       *
+       * <pre>
+       *Note for server, if &lt;= 0 then don't update db.
+       * </pre>
+       */
+      public Builder clearNuPvpDmgMultiplier() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        nuPvpDmgMultiplier_ = 0F;
         onChanged();
         return this;
       }
@@ -5933,21 +6043,22 @@ public final class EventPvpProto {
       "tatus\030\002 \001(\0162@.com.lvl6.proto.BeginPvpBat" +
       "tleResponseProto.BeginPvpBattleStatus\"O\n" +
       "\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
-      "IL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\322" +
+      "IL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\356" +
       "\001\n\030EndPvpBattleRequestProto\022@\n\006sender\030\001 " +
       "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
       "hMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\024\n\014use" +
       "rAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\nclie" +
       "ntTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncashC" +
-      "hange\030\007 \001(\005\"\300\002\n\031EndPvpBattleResponseProt",
-      "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
-      "umUserProtoWithMaxResources\022\022\n\ndefenderI" +
-      "d\030\002 \001(\005\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013att" +
-      "ackerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl" +
-      "6.proto.EndPvpBattleResponseProto.EndPvp" +
-      "BattleStatus\"P\n\022EndPvpBattleStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_T" +
-      "OOK_TOO_LONG\020\003B\017B\rEventPvpProto"
+      "hange\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 \001(\002\"",
+      "\300\002\n\031EndPvpBattleResponseProto\022@\n\006sender\030" +
+      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
+      "ithMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\030\n\020a" +
+      "ttackerAttacked\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001" +
+      "(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto.EndP" +
+      "vpBattleResponseProto.EndPvpBattleStatus" +
+      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
+      "\020\003B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5992,7 +6103,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderId", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", });
+        new java.lang.String[] { "Sender", "DefenderId", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new

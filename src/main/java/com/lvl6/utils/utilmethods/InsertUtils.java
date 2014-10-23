@@ -1339,8 +1339,9 @@ public class InsertUtils implements InsertUtil{
 				int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
 				int defenderPrevRank, int defenderCurRank, int attackerOilChange,
 				int defenderOilChange, int attackerCashChange, int defenderCashChange,
-				boolean attackerWon, boolean cancelled, boolean gotRevenge,
-				boolean displayToDefender) {
+				float nuPvpDmgMultiplier,  boolean attackerWon, boolean cancelled,
+				boolean gotRevenge, boolean displayToDefender) {
+			
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			
 			Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -1387,6 +1388,7 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
 
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER, nuPvpDmgMultiplier);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);

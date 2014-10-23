@@ -25,6 +25,7 @@ public class DBConstants {
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
 	public static final String TABLE_CLAN_HELP = "clan_help";
 	public static final String TABLE_CLAN_ICON = "clan_icon";
+	//public static final String TABLE_CLAN_INVITE = "clan_invite";
 	public static final String TABLE_CLAN_RAID = "clan_raid";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER = "clan_raid_stage_monster";
@@ -255,6 +256,13 @@ public class DBConstants {
 	public static final String CLAN_HELP__OPEN = "open";
 	public static final String CLAN_HELP__STATIC_DATA_ID = "static_data_id";
 
+	/*CLAN INVITE*/
+//	public static final String CLAN_INVITE__ID = GENERIC__ID;
+//	public static final String CLAN_INVITE__USER_ID = GENERIC__USER_ID;
+//	public static final String CLAN_INVITE__INVITER_ID = "inviter_id";
+//	public static final String CLAN_INVITE__CLAN_ID = "clan_id";
+//	public static final String CLAN_INVITE__TIME_OF_INVITE = "time_of_invite";
+	
 	/*EVENT PERSISTENT FOR USER*/
 	public static final String EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
 	public static final String EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID = "event_persistent_id";
@@ -456,6 +464,7 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE = "defender_cash_change";
 	public static final String PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE = "attacker_oil_change";
 	public static final String PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE = "defender_oil_change";
+	public static final String PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER = "pvp_dmg_multiplier";
 	public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
 	public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";

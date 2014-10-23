@@ -114,6 +114,7 @@ message StartupResponseProto {
 	repeated UserItemProto userItems = 40;
 	
 	repeated ClanHelpProto clanHelpings = 41;
+	repeated ClanInviteProto clanInvites = 42;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -157,8 +158,10 @@ message StartupResponseProto {
 		optional float minutesPerGem = 19; 
 		optional float gemsPerResource = 21;
 		
+		//TODO:GET RID OF THESE****************************************
 		optional int32 pvpRequiredMinLvl = 20;
 		optional float monsterDmgMultiplier = 31;
+		//****************************************
 		
 		//(multiplies with cost to heal all battle team monsters while in dungeon)
 		optional float continueBattleGemCostMultiplier = 22;
@@ -180,6 +183,8 @@ message StartupResponseProto {
 		//optional float monsterDmgMultiplier = 31; defined above 
 		
 		repeated ClanHelpConstants clanHelpConstants = 32;
+		optional PvpConstants pvpConstant = 33;
+		
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -248,6 +253,18 @@ message StartupResponseProto {
 			// of 198 hp to be healed
 			optional int32 amountRemovedPerHelp = 2;
 			optional float percentRemovedPerHelp = 3;
+		}
+		message PvpConstants {
+			//(how many damages in pvp to record)
+			optional int32 pvpDmgsWindowSize = 1;
+			
+			//(used to compute the lowest dmg multiplier the user will do in pvp)
+			optional float minPvpDmgDelta = 2;
+			
+			//(used to compute the highest dmg multiplier the user will do in pvp)
+			optional float maxPvpDmgDelta = 3;
+			
+			optional int32 pvpRequiredMinLvl = 4;
 		}
 	}
 	

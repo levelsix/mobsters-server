@@ -813,7 +813,7 @@ public class StartupController extends EventController {
 			//don't update his shields, just elo
 			int numUpdated = UpdateUtils.get().updatePvpLeagueForUser(userId,
 				attackerCurLeague, attackerCurRank, eloAttackerLoses,
-				null, null, 0, 0, 1, 0);
+				null, null, 0, 0, 1, 0, -1);
 
 			log.info(String.format(
 				"num updated when changing attacker's elo because of reset=%s",
@@ -844,7 +844,7 @@ public class StartupController extends EventController {
 
 				numUpdated = UpdateUtils.get().updatePvpLeagueForUser(defenderId,
 					defenderCurLeague, defenderCurRank, eloDefenderWins,
-					null, null, 0, 1, 0, 0);
+					null, null, 0, 1, 0, 0, -1);
 				log.info(String.format(
 					"num updated when changing defender's elo because of reset=%s",
 					numUpdated));
@@ -867,7 +867,7 @@ public class StartupController extends EventController {
 				attackerEloBefore, eloDefenderWins, defenderEloBefore,
 				attackerPrevLeague, attackerCurLeague, defenderPrevLeague,
 				defenderCurLeague, attackerPrevRank, attackerCurRank,
-				defenderPrevRank, defenderCurRank, 0, 0, 0, 0, attackerWon,
+				defenderPrevRank, defenderCurRank, 0, 0, 0, 0, -1, attackerWon,
 				cancelled, defenderGotRevenge, displayToDefender);
 
 			log.info(String.format(

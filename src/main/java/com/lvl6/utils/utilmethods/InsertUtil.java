@@ -200,8 +200,8 @@ public interface InsertUtil {
 			int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
 			int defenderPrevRank, int defenderCurRank, int attackerOilChange,
 			int defenderOilChange, int attackerCashChange, int defenderCashChange,
-			boolean attackerWon, boolean cancelled, boolean gotRevenge,
-			boolean displayToDefender);
+			float nuPvpDmgMultiplier, boolean attackerWon, boolean cancelled,
+			boolean gotRevenge, boolean displayToDefender);
 	
 	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
 			List<ObstacleForUser> ofuList);

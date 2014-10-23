@@ -92,6 +92,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Cl
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
@@ -769,8 +770,10 @@ public class MiscMethods {
 		cb.setMonsterConstants(mcb.build());
 
 		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
+		//TODO: GET RID OF
 		cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
 		cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
+		//*****************************************************************
 		cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
 		cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
 		cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
@@ -812,6 +815,12 @@ public class MiscMethods {
 			cb.addClanHelpConstants(chcb.build());
 		}
 
+		PvpConstants.Builder pcb = PvpConstants.newBuilder();
+		pcb.setPvpDmgsWindowSize(ControllerConstants.PVP__DMGS_WINDOW_SIZE);
+		pcb.setMinPvpDmgDelta(ControllerConstants.PVP__MIN_DMG_DELTA);
+		pcb.setMaxPvpDmgDelta(ControllerConstants.PVP__MAX_DMG_DELTA);
+		pcb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
+		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()
 		//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)

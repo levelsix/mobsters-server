@@ -1213,7 +1213,8 @@ public class UpdateUtils implements UpdateUtil {
 		public int updatePvpLeagueForUser(int userId, int newPvpLeagueId,
 				int newRank, int eloChange, Timestamp shieldEndTime,
 				Timestamp inBattleEndTime, int attacksWonDelta,
-				int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
+				int defensesWonDelta, int attacksLostDelta,
+				int defensesLostDelta, float nuPvpDmgMultiplier) {
 			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1241,7 +1242,6 @@ public class UpdateUtils implements UpdateUtil {
 						defensesLostDelta);
 			}
 			
-			
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID,
 					newPvpLeagueId);
@@ -1253,6 +1253,10 @@ public class UpdateUtils implements UpdateUtil {
 			if (null != inBattleEndTime) {
 				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME,
 						shieldEndTime);
+			}
+			if (nuPvpDmgMultiplier > 0) {
+				absoluteParams.put(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER,
+					nuPvpDmgMultiplier);
 			}
 			
 			

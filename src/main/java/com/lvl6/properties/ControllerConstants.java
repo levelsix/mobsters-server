@@ -113,7 +113,10 @@ public class ControllerConstants {
   public static final int PVP__LOST_BATTLE_SHIELD_DURATION_HOURS = 12;
   public static final int PVP__INITIAL_LEAGUE_ID = 1;
   public static final float PVP__MONSTER_DMG_MULTIPLIER = 2F;
-  
+  //(how many damages in pvp to record)
+  public static final int PVP__DMGS_WINDOW_SIZE = 50;
+  public static final float PVP__MIN_DMG_DELTA = 0.5F;
+  public static final float PVP__MAX_DMG_DELTA = 0.3F;
   
   
   //PVP BATTLE HISTORY

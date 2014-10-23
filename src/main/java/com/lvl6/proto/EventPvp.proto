@@ -109,6 +109,8 @@ message EndPvpBattleRequestProto {
 	optional int32 oilChange = 6; //should be named amount stolen
 	optional int32 cashChange = 7; //should be named amount stolen
 	
+	//Note for server, if <= 0 then don't update db.
+	optional float nuPvpDmgMultiplier = 8;
 }
 
 message EndPvpBattleResponseProto {
