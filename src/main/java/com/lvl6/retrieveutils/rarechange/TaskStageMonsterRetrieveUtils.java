@@ -208,15 +208,18 @@ public class TaskStageMonsterRetrieveUtils {
 		float dmgMultiplier = rs.getFloat(DBConstants.TASK_STAGE_MONSTER__DMG_MULTIPLIER);
 		int monsterIdDrop = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_ID_DROP);
 		int monsterDropLvl = rs.getInt(DBConstants.TASK_STAGE_MONSTER__MONSTER_DROP_LVL);
+		
 		int defensiveSkillId = rs.getInt(DBConstants.TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID);
-		String initDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__INIT_DIALOGUE);
-		String defaultDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
-
+		//if defensiveSkillId was null
 		if (rs.wasNull()) {
 			//default to skill in task stage monster
 			defensiveSkillId = ControllerConstants.NOT_SET;
 		}
+		String initDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__INIT_DIALOGUE);
+		String defaultDialogue = rs.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
 
+		//continue putting new properties above here
+		
 		if (null != monsterType) {
 			String newMonsterType = monsterType.trim().toUpperCase();
 			if (!monsterType.equals(newMonsterType)) {
@@ -269,7 +272,6 @@ public class TaskStageMonsterRetrieveUtils {
 				"TaskStageMonster, monster type incorrect, offending tsm=%s",
 				taskStageMonster));
 		}
-
 		taskStageMonster.setRand(rand);
 		return taskStageMonster;
 	}
