@@ -23,29 +23,33 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
-import com.lvl6.events.request.StartupRequestEvent;
+import com.lvl6.events.request.InviteToClanRequestEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanInvite;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.DevProto.DevRequest;
+import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
-import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.DevController;
 import com.lvl6.server.controller.EnhanceMonsterController;
+import com.lvl6.server.controller.InviteToClanController;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
 import com.lvl6.server.controller.QuestProgressController;
 import com.lvl6.server.controller.RetrieveClanInfoController;
@@ -93,6 +97,9 @@ public class ControllerTest extends TestCase {
 	RetrieveClanInfoController retrieveClanInfoController;
 	
 	@Autowired
+	InviteToClanController inviteToClanController;
+	
+	@Autowired
 	TimeUtils timeUtils;
 	
 	@Autowired
@@ -100,6 +107,9 @@ public class ControllerTest extends TestCase {
 	
 	@Autowired
 	MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
+	
+	@Autowired
+	ClanInviteRetrieveUtil clanInviteRetrieveUtil;
 	
 	@Autowired
 	GameServer server;
@@ -668,6 +678,33 @@ public class ControllerTest extends TestCase {
 //		
 //	}
 	
+	@Test
+	public void testClanInvite() {
+		int jackMayHoff = 1110;
+		User jmh = userRetrieveUtils.getUserById(jackMayHoff);
+		Clan c = ClanRetrieveUtils.getClanWithId(jmh.getClanId());
+		int prospectiveMemberId = getUnitTesterId();
+		ClanInvite ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+		assertNull(ci);
+		
+		InviteToClanRequestProto.Builder itcrpb = InviteToClanRequestProto.newBuilder();
+		itcrpb.setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(jmh, c));
+		itcrpb.setProspectiveMember(prospectiveMemberId);
+		itcrpb.setClientTime((new Date()).getTime());
+		
+		InviteToClanRequestEvent icre = new InviteToClanRequestEvent();
+		icre.setTag(1);
+		icre.setInviteToClanRequestProto(itcrpb.build());
+		
+		inviteToClanController.handleEvent(icre);
+		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+		assertNotNull(ci);
+		
+		DeleteUtils.get().deleteClanInvite(prospectiveMemberId, null);
+		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+		assertNull(ci);
+	}
+	
 	private int getUnitTesterId() {
 		return 11;
 	}
@@ -676,7 +713,6 @@ public class ControllerTest extends TestCase {
 	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
 		return purchaseCityExpansionController;
 	}
-
 	public void setPurchaseCityExpansionController(
 			PurchaseCityExpansionController purchaseCityExpansionController) {
 		this.purchaseCityExpansionController = purchaseCityExpansionController;
@@ -685,7 +721,6 @@ public class ControllerTest extends TestCase {
 	public StartupController getStartupController() {
 		return startupController;
 	}
-
 	public void setStartupController(StartupController startupController) {
 		this.startupController = startupController;
 	}
@@ -693,7 +728,6 @@ public class ControllerTest extends TestCase {
 	public UserCreateController getUserCreateController() {
 		return userCreateController;
 	}
-
 	public void setUserCreateController(UserCreateController userCreateController) {
 		this.userCreateController = userCreateController;
 	}
@@ -702,7 +736,6 @@ public class ControllerTest extends TestCase {
 	{
 		return transferClanOwnershipController;
 	}
-
 	public void setTransferClanOwnershipController(
 		TransferClanOwnershipController transferClanOwnershipController )
 	{
@@ -722,7 +755,6 @@ public class ControllerTest extends TestCase {
 	{
 		return enhanceMonsterController;
 	}
-
 	public void setEnhanceMonsterController( EnhanceMonsterController enhanceMonsterController )
 	{
 		this.enhanceMonsterController = enhanceMonsterController;
@@ -732,8 +764,6 @@ public class ControllerTest extends TestCase {
 	{
 		return devController;
 	}
-
-
 	public void setDevController( DevController devController )
 	{
 		this.devController = devController;
@@ -743,14 +773,22 @@ public class ControllerTest extends TestCase {
 	{
 		return retrieveClanInfoController;
 	}
-
-
 	public void setRetrieveClanInfoController( RetrieveClanInfoController retrieveClanInfoController )
 	{
 		this.retrieveClanInfoController = retrieveClanInfoController;
 	}
 
+	public InviteToClanController getInviteToClanController()
+	{
+		return inviteToClanController;
+	}
+	public void setInviteToClanController( InviteToClanController inviteToClanController )
+	{
+		this.inviteToClanController = inviteToClanController;
+	}
 
+
+	
 	public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
@@ -776,6 +814,17 @@ public class ControllerTest extends TestCase {
 		MonsterForUserRetrieveUtils monsterForUserRetrieveUtils )
 	{
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
+
+	public ClanInviteRetrieveUtil getClanInviteRetrieveUtil()
+	{
+		return clanInviteRetrieveUtil;
+	}
+
+
+	public void setClanInviteRetrieveUtil( ClanInviteRetrieveUtil clanInviteRetrieveUtil )
+	{
+		this.clanInviteRetrieveUtil = clanInviteRetrieveUtil;
 	}
 
 

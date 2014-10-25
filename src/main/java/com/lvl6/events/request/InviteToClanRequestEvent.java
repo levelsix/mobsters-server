@@ -31,4 +31,9 @@ public class InviteToClanRequestEvent extends RequestEvent {
   public InviteToClanRequestProto getInviteToClanRequestProto() {
     return inviteToClanRequestProto;
   }
+
+  public void setInviteToClanRequestProto( InviteToClanRequestProto inviteToClanRequestProto )
+  {
+	  this.inviteToClanRequestProto = inviteToClanRequestProto;
+  }
 }

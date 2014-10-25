@@ -37,7 +37,9 @@ public class InviteToClanAction
 		this.inviterId = inviterId;
 		this.prospectiveMemberId = prospectiveMemberId;
 		this.clanId = clanId;
+		this.inviteTime = inviteTime;
 		this.insertUtil = insertUtil;
+		this.clanInviteRetrieveUtil = clanInviteRetrieveUtil;
 	}
 	
 //	//encapsulates the return value from this Action Object
