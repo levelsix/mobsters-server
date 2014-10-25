@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1509,4 +1511,36 @@ public class InsertUtils implements InsertUtil{
 				return new ArrayList<Long>();       
 			}
 		}
+		
+		@Override
+		public int insertIntoUpdateClanInvite(int userId,
+			int inviterId, int clanId, Timestamp timeOfInvite)
+		{
+			String tableName = DBConstants.TABLE_CLAN_INVITE;
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.CLAN_INVITE__USER_ID, userId);
+			newRow.put(DBConstants.CLAN_INVITE__INVITER_ID,
+				inviterId);
+			newRow.put(DBConstants.CLAN_INVITE__CLAN_ID,
+				clanId);
+			newRow.put(DBConstants.CLAN_INVITE__TIME_OF_INVITE,
+				timeOfInvite);
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			newRows.add(newRow);
+			
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
+			
+			//just in case there are remnants of old invites
+			replaceTheseColumns.add(DBConstants.CLAN_INVITE__CLAN_ID);
+
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
+
 }

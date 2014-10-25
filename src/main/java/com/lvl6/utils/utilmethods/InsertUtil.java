@@ -212,4 +212,7 @@ public interface InsertUtil {
 	public abstract int insertIntoUpdateUserItem(int userId, int itemId, int delta);
 	
 	public abstract List<Long> insertIntoClanHelpGetId(List<ClanHelp> solicitations);
+	
+	public abstract int insertIntoUpdateClanInvite(int userId,
+		int inviterId, int clanId, Timestamp timeOfInvite);
 }

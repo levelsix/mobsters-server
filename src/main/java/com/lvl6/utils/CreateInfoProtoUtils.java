@@ -30,6 +30,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanIcon;
+import com.lvl6.info.ClanInvite;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
@@ -110,6 +111,7 @@ import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
+import com.lvl6.proto.ClanProto.ClanInviteProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageProto;
@@ -1314,6 +1316,22 @@ public class CreateInfoProtoUtils {
 		chpb.setStaticDataId(ch.getStaticDataId());
 
 		return chpb.build();
+	}
+	
+	public static ClanInviteProto createClanInviteProto(ClanInvite invite) {
+		ClanInviteProto.Builder cipb = ClanInviteProto.newBuilder();
+		cipb.setInviteId(
+			invite.getId());
+		cipb.setUserId(
+			invite.getUserId());
+		cipb.setInviterId(
+			invite.getInviterId());
+		cipb.setClanId(
+			invite.getClanId());
+		cipb.setTimeOfInvite(
+			invite.getTimeOfInvite().getTime());
+		
+		return cipb.build();
 	}
 
 	/**InAppPurchase.proto********************************************/

@@ -225,7 +225,7 @@ message ClanHelpNoticeProto {
 
 message ClanInviteProto {
 	optional int32 inviteId = 1; 
-	optional int32 userId = 2;
+	optional int32 userId = 2; //prospective member id
 	optional int32 inviterId = 3;
 	optional int32 clanId = 4;
 	optional int64 timeOfInvite = 5;
