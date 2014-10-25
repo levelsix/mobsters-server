@@ -578,7 +578,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  }
 	  
 	  log.info(String.format(
-		  "attacker PvpLeagueForUser before battle outcome: %s" +
+		  "attacker PvpLeagueForUser before battle outcome: %s",
 			  attackerPlfu));
 	  int prevElo = attackerPlfu.getElo();
 	  int attackerPrevLeague = attackerPlfu.getPvpLeagueId();
