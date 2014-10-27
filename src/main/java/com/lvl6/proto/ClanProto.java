@@ -16743,10 +16743,18 @@ public final class ClanProto {
 
     /**
      * <code>optional int32 userId = 2;</code>
+     *
+     * <pre>
+     *prospective member id
+     * </pre>
      */
     boolean hasUserId();
     /**
      * <code>optional int32 userId = 2;</code>
+     *
+     * <pre>
+     *prospective member id
+     * </pre>
      */
     int getUserId();
 
@@ -16913,12 +16921,20 @@ public final class ClanProto {
     private int userId_;
     /**
      * <code>optional int32 userId = 2;</code>
+     *
+     * <pre>
+     *prospective member id
+     * </pre>
      */
     public boolean hasUserId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional int32 userId = 2;</code>
+     *
+     * <pre>
+     *prospective member id
+     * </pre>
      */
     public int getUserId() {
       return userId_;
@@ -17301,18 +17317,30 @@ public final class ClanProto {
       private int userId_ ;
       /**
        * <code>optional int32 userId = 2;</code>
+       *
+       * <pre>
+       *prospective member id
+       * </pre>
        */
       public boolean hasUserId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional int32 userId = 2;</code>
+       *
+       * <pre>
+       *prospective member id
+       * </pre>
        */
       public int getUserId() {
         return userId_;
       }
       /**
        * <code>optional int32 userId = 2;</code>
+       *
+       * <pre>
+       *prospective member id
+       * </pre>
        */
       public Builder setUserId(int value) {
         bitField0_ |= 0x00000002;
@@ -17322,6 +17350,10 @@ public final class ClanProto {
       }
       /**
        * <code>optional int32 userId = 2;</code>
+       *
+       * <pre>
+       *prospective member id
+       * </pre>
        */
       public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000002);

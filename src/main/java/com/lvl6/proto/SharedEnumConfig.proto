@@ -50,6 +50,7 @@ enum ClanHelpType {
 	HEAL = 3;
 	EVOLVE = 4;
 	MINI_JOB = 5;
+	ENHANCE_TIME = 6;
 }
 
 enum GameType {

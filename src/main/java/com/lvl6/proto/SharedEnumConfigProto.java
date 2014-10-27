@@ -488,6 +488,10 @@ public final class SharedEnumConfigProto {
      * <code>MINI_JOB = 5;</code>
      */
     MINI_JOB(4, 5),
+    /**
+     * <code>ENHANCE_TIME = 6;</code>
+     */
+    ENHANCE_TIME(5, 6),
     ;
 
     /**
@@ -510,6 +514,10 @@ public final class SharedEnumConfigProto {
      * <code>MINI_JOB = 5;</code>
      */
     public static final int MINI_JOB_VALUE = 5;
+    /**
+     * <code>ENHANCE_TIME = 6;</code>
+     */
+    public static final int ENHANCE_TIME_VALUE = 6;
 
 
     public final int getNumber() { return value; }
@@ -521,6 +529,7 @@ public final class SharedEnumConfigProto {
         case 3: return HEAL;
         case 4: return EVOLVE;
         case 5: return MINI_JOB;
+        case 6: return ENHANCE_TIME;
         default: return null;
       }
     }
@@ -690,11 +699,11 @@ public final class SharedEnumConfigProto {
       "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
-      "*S\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
+      "*e\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
       "_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
-      "JOB\020\005*?\n\010GameType\022\013\n\007NO_TYPE\020\001\022\r\n\tSTRUCT" +
-      "URE\020\002\022\014\n\010RESEARCH\020\003\022\t\n\005SKILL\020\004B\027B\025Shared" +
-      "EnumConfigProto"
+      "JOB\020\005\022\020\n\014ENHANCE_TIME\020\006*?\n\010GameType\022\013\n\007N" +
+      "O_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022\t\n" +
+      "\005SKILL\020\004B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

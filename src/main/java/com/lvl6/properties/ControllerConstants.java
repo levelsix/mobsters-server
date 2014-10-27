@@ -41,10 +41,12 @@ public class ControllerConstants {
 			ClanHelpType.EVOLVE.name(),
 			ClanHelpType.HEAL.name(),
 			ClanHelpType.MINI_JOB.name(),
-			ClanHelpType.UPGRADE_STRUCT.name()
+			ClanHelpType.UPGRADE_STRUCT.name(),
+			ClanHelpType.ENHANCE_TIME.name()
+			
 	};
-	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,        5,      1,          1};
-	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,    0.01F,  0.01F,      0.01F};
+	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		5,		1,		1,		1};
+	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,	0.01F,	0.01F,	0.01F,	0.01F};
 	
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
