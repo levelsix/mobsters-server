@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1339,8 +1341,9 @@ public class InsertUtils implements InsertUtil{
 				int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
 				int defenderPrevRank, int defenderCurRank, int attackerOilChange,
 				int defenderOilChange, int attackerCashChange, int defenderCashChange,
-				boolean attackerWon, boolean cancelled, boolean gotRevenge,
-				boolean displayToDefender) {
+				float nuPvpDmgMultiplier,  boolean attackerWon, boolean cancelled,
+				boolean gotRevenge, boolean displayToDefender) {
+			
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			
 			Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -1387,6 +1390,7 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
 
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__PVP_DMG_MULTIPLIER, nuPvpDmgMultiplier);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
@@ -1507,4 +1511,36 @@ public class InsertUtils implements InsertUtil{
 				return new ArrayList<Long>();       
 			}
 		}
+		
+		@Override
+		public int insertIntoUpdateClanInvite(int userId,
+			int inviterId, int clanId, Timestamp timeOfInvite)
+		{
+			String tableName = DBConstants.TABLE_CLAN_INVITE;
+
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.CLAN_INVITE__USER_ID, userId);
+			newRow.put(DBConstants.CLAN_INVITE__INVITER_ID,
+				inviterId);
+			newRow.put(DBConstants.CLAN_INVITE__CLAN_ID,
+				clanId);
+			newRow.put(DBConstants.CLAN_INVITE__TIME_OF_INVITE,
+				timeOfInvite);
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			newRows.add(newRow);
+			
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
+			
+			//just in case there are remnants of old invites
+			replaceTheseColumns.add(DBConstants.CLAN_INVITE__CLAN_ID);
+
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
+
 }

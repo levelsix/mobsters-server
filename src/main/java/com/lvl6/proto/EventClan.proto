@@ -2,7 +2,7 @@
 
 import "Clan.proto";
 import "MonsterStuff.proto";
-import "SharedEnumConfig.proto";
+//import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -469,3 +469,46 @@ message EndClanHelpResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message InviteToClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 prospectiveMember = 2;
+	optional int64 clientTime = 3;
+}
+
+message InviteToClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional InviteToClanStatus status = 2;
+	optional ClanInviteProto invite = 3;
+	
+	enum InviteToClanStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+message AcceptOrRejectClanInviteRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//NOTE: only really need inviteId, but would like clanId as well
+	optional ClanInviteProto accepted = 2;
+	repeated ClanInviteProto rejected = 3;
+}
+
+message AcceptOrRejectClanInviteResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional AcceptOrRejectClanInviteStatus status = 2;
+	optional FullClanProtoWithClanSize fullClan = 3;
+	 
+	//send to clan only if accept
+	
+	enum AcceptOrRejectClanInviteStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+

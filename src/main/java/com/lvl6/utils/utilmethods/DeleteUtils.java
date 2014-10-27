@@ -381,4 +381,36 @@ public class DeleteUtils implements DeleteUtil {
 	    return numDeleted;
 	}
 	
+	@Override
+	public int deleteClanInvite(int userId, List<Integer> clanInviteIdList) {
+		String tableName = DBConstants.TABLE_CLAN_INVITE;
+
+		String query = null;
+		List<Object> values = new ArrayList<Object>();
+		if (null == clanInviteIdList || clanInviteIdList.isEmpty()) {
+			query = String.format(
+				"DELETE FROM %s WHERE %s=?",
+				tableName, DBConstants.CLAN_INVITE__USER_ID);
+			values.add(userId);
+			
+			
+		} else {
+			int size = clanInviteIdList.size();
+			List<String> questions = Collections.nCopies(size, "?");
+			String questionMarks = StringUtils.csvList(questions);
+
+			query = String.format(
+				"DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+				tableName, DBConstants.CLAN_INVITE__ID, questionMarks,
+				DBConstants.CLAN_INVITE__USER_ID);
+
+			values.addAll(clanInviteIdList);
+			values.add(userId);
+
+		}
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
+	
 }

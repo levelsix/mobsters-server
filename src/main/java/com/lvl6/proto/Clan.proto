@@ -1,10 +1,10 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
-import "Battle.proto";
+//import "Battle.proto";
 import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
 import "Structure.proto";
-import "Task.proto";
+//import "Task.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -219,4 +219,14 @@ message ClanHelpNoticeProto {
 	optional ClanHelpType helpType = 1 [default = NO_HELP];
 	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
 	optional int32 staticDataId = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ClanInviteProto {
+	optional int32 inviteId = 1; 
+	optional int32 userId = 2; //prospective member id
+	optional int32 inviterId = 3;
+	optional int32 clanId = 4;
+	optional int64 timeOfInvite = 5;
 }

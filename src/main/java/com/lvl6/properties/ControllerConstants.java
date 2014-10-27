@@ -41,10 +41,12 @@ public class ControllerConstants {
 			ClanHelpType.EVOLVE.name(),
 			ClanHelpType.HEAL.name(),
 			ClanHelpType.MINI_JOB.name(),
-			ClanHelpType.UPGRADE_STRUCT.name()
+			ClanHelpType.UPGRADE_STRUCT.name(),
+			ClanHelpType.ENHANCE_TIME.name()
+			
 	};
-	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,        5,      1,          1};
-	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,    0.01F,  0.01F,      0.01F};
+	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		5,		1,		1,		1};
+	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,	0.01F,	0.01F,	0.01F,	0.01F};
 	
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
@@ -113,7 +115,10 @@ public class ControllerConstants {
   public static final int PVP__LOST_BATTLE_SHIELD_DURATION_HOURS = 12;
   public static final int PVP__INITIAL_LEAGUE_ID = 1;
   public static final float PVP__MONSTER_DMG_MULTIPLIER = 2F;
-  
+  //(how many damages in pvp to record)
+  public static final int PVP__DMGS_WINDOW_SIZE = 50;
+  public static final float PVP__MIN_DMG_DELTA = 0.5F;
+  public static final float PVP__MAX_DMG_DELTA = 0.3F;
   
   
   //PVP BATTLE HISTORY
@@ -142,7 +147,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__GUIDE_MONSTER_ID = 1000;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_ONE = 2010;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID_TWO = 1003;
-	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 1002;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 2001;
 	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together

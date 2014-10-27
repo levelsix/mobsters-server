@@ -5375,45 +5375,45 @@ public final class EventQuestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020EventQuest.proto\022\016com.lvl6.proto\032\nCity" +
-      ".proto\032\022MonsterStuff.proto\032\013Quest.proto\032" +
-      "\nUser.proto\"\\\n\027QuestAcceptRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\017\n\007questId\030\002 \001(\005\"\201\002\n\030QuestAccep" +
-      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022J\n\006status\030\002 \001(\016" +
-      "2:.com.lvl6.proto.QuestAcceptResponsePro" +
-      "to.QuestAcceptStatus\"g\n\021QuestAcceptStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER",
-      "\020\002\022\031\n\025FAIL_ALREADY_ACCEPTED\020\003\022\016\n\nFAIL_OT" +
-      "HER\020\004\"\312\001\n\031QuestProgressRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\017\n\007questId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001" +
-      "(\010\0228\n\ruserQuestJobs\030\004 \003(\0132!.com.lvl6.pro" +
-      "to.UserQuestJobProto\022\034\n\024deleteUserMonste" +
-      "rIds\030\005 \003(\003\"\200\003\n\032QuestProgressResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.p" +
-      "roto.QuestProgressResponseProto.QuestPro",
-      "gressStatus\"\337\001\n\023QuestProgressStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\030\n\024FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FA" +
-      "IL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST\020\003\022" +
-      "\"\n\036FAIL_NONEXISTENT_USER_MONSTERS\020\004\022!\n\035F" +
-      "AIL_INCOMPLETE_USER_MONSTERS\020\005\022\035\n\031FAIL_Q" +
-      "UEST_JOB_INCOMPLETE\020\007\022\016\n\nFAIL_OTHER\020\006\"l\n" +
-      "\027QuestRedeemRequestProto\022@\n\006sender\030\001 \001(\013" +
-      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
-      "xResources\022\017\n\007questId\030\002 \001(\005\"\364\002\n\030QuestRed" +
-      "eemResponseProto\022@\n\006sender\030\001 \001(\01320.com.l",
-      "vl6.proto.MinimumUserProtoWithMaxResourc" +
-      "es\022<\n\024newlyAvailableQuests\030\002 \003(\0132\036.com.l" +
-      "vl6.proto.FullQuestProto\022J\n\006status\030\003 \001(\016" +
-      "2:.com.lvl6.proto.QuestRedeemResponsePro" +
-      "to.QuestRedeemStatus\0222\n\004fump\030\004 \001(\0132$.com" +
-      ".lvl6.proto.FullUserMonsterProto\022\017\n\007ques" +
-      "tId\030\005 \001(\005\"G\n\021QuestRedeemStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER" +
-      "\020\003B\021B\017EventQuestProto"
+      "\n\020EventQuest.proto\022\016com.lvl6.proto\032\022Mons" +
+      "terStuff.proto\032\013Quest.proto\032\nUser.proto\"" +
+      "\\\n\027QuestAcceptRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007" +
+      "questId\030\002 \001(\005\"\201\002\n\030QuestAcceptResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022J\n\006status\030\002 \001(\0162:.com.lvl6." +
+      "proto.QuestAcceptResponseProto.QuestAcce" +
+      "ptStatus\"g\n\021QuestAcceptStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER\020\002\022\031\n\025FAIL_A",
+      "LREADY_ACCEPTED\020\003\022\016\n\nFAIL_OTHER\020\004\"\312\001\n\031Qu" +
+      "estProgressRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\017\n\007que" +
+      "stId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\0228\n\ruserQu" +
+      "estJobs\030\004 \003(\0132!.com.lvl6.proto.UserQuest" +
+      "JobProto\022\034\n\024deleteUserMonsterIds\030\005 \003(\003\"\200" +
+      "\003\n\032QuestProgressResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "N\n\006status\030\002 \001(\0162>.com.lvl6.proto.QuestPr" +
+      "ogressResponseProto.QuestProgressStatus\"",
+      "\337\001\n\023QuestProgressStatus\022\013\n\007SUCCESS\020\001\022\030\n\024" +
+      "FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FAIL_DELETE_AM" +
+      "OUNT_DOES_NOT_MATCH_QUEST\020\003\022\"\n\036FAIL_NONE" +
+      "XISTENT_USER_MONSTERS\020\004\022!\n\035FAIL_INCOMPLE" +
+      "TE_USER_MONSTERS\020\005\022\035\n\031FAIL_QUEST_JOB_INC" +
+      "OMPLETE\020\007\022\016\n\nFAIL_OTHER\020\006\"l\n\027QuestRedeem" +
+      "RequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
+      "proto.MinimumUserProtoWithMaxResources\022\017" +
+      "\n\007questId\030\002 \001(\005\"\364\002\n\030QuestRedeemResponseP" +
+      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi",
+      "nimumUserProtoWithMaxResources\022<\n\024newlyA" +
+      "vailableQuests\030\002 \003(\0132\036.com.lvl6.proto.Fu" +
+      "llQuestProto\022J\n\006status\030\003 \001(\0162:.com.lvl6." +
+      "proto.QuestRedeemResponseProto.QuestRede" +
+      "emStatus\0222\n\004fump\030\004 \001(\0132$.com.lvl6.proto." +
+      "FullUserMonsterProto\022\017\n\007questId\030\005 \001(\005\"G\n" +
+      "\021QuestRedeemStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_" +
+      "NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003B\021B\017EventQ" +
+      "uestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5426,7 +5426,6 @@ public final class EventQuestProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.CityProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
@@ -5467,7 +5466,6 @@ public final class EventQuestProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
         new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", });
-    com.lvl6.proto.CityProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();

@@ -905,6 +905,19 @@ public final class TaskProto {
      */
     com.google.protobuf.ByteString
         getGroundImgPrefixBytes();
+
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    boolean hasInitialDefeatedDialogue();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    com.lvl6.proto.QuestProto.DialogueProto getInitialDefeatedDialogue();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDefeatedDialogueOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FullTaskProto}
@@ -1009,6 +1022,19 @@ public final class TaskProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
               groundImgPrefix_ = bs;
+              break;
+            }
+            case 90: {
+              com.lvl6.proto.QuestProto.DialogueProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                subBuilder = initialDefeatedDialogue_.toBuilder();
+              }
+              initialDefeatedDialogue_ = input.readMessage(com.lvl6.proto.QuestProto.DialogueProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(initialDefeatedDialogue_);
+                initialDefeatedDialogue_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000400;
               break;
             }
           }
@@ -1282,6 +1308,27 @@ public final class TaskProto {
       }
     }
 
+    public static final int INITIALDEFEATEDDIALOGUE_FIELD_NUMBER = 11;
+    private com.lvl6.proto.QuestProto.DialogueProto initialDefeatedDialogue_;
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    public boolean hasInitialDefeatedDialogue() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProto getInitialDefeatedDialogue() {
+      return initialDefeatedDialogue_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDefeatedDialogueOrBuilder() {
+      return initialDefeatedDialogue_;
+    }
+
     private void initFields() {
       taskId_ = 0;
       name_ = "";
@@ -1293,6 +1340,7 @@ public final class TaskProto {
       boardWidth_ = 0;
       boardHeight_ = 0;
       groundImgPrefix_ = "";
+      initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1336,6 +1384,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getGroundImgPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(11, initialDefeatedDialogue_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1385,6 +1436,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getGroundImgPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, initialDefeatedDialogue_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1495,6 +1550,7 @@ public final class TaskProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getInitialDefeatedDialogueFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1523,6 +1579,12 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         groundImgPrefix_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
+        if (initialDefeatedDialogueBuilder_ == null) {
+          initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+        } else {
+          initialDefeatedDialogueBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1591,6 +1653,14 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000200;
         }
         result.groundImgPrefix_ = groundImgPrefix_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        if (initialDefeatedDialogueBuilder_ == null) {
+          result.initialDefeatedDialogue_ = initialDefeatedDialogue_;
+        } else {
+          result.initialDefeatedDialogue_ = initialDefeatedDialogueBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1642,6 +1712,9 @@ public final class TaskProto {
           bitField0_ |= 0x00000200;
           groundImgPrefix_ = other.groundImgPrefix_;
           onChanged();
+        }
+        if (other.hasInitialDefeatedDialogue()) {
+          mergeInitialDefeatedDialogue(other.getInitialDefeatedDialogue());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2120,6 +2193,122 @@ public final class TaskProto {
         groundImgPrefix_ = value;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.QuestProto.DialogueProto initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> initialDefeatedDialogueBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public boolean hasInitialDefeatedDialogue() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto getInitialDefeatedDialogue() {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          return initialDefeatedDialogue_;
+        } else {
+          return initialDefeatedDialogueBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public Builder setInitialDefeatedDialogue(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          initialDefeatedDialogue_ = value;
+          onChanged();
+        } else {
+          initialDefeatedDialogueBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public Builder setInitialDefeatedDialogue(
+          com.lvl6.proto.QuestProto.DialogueProto.Builder builderForValue) {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          initialDefeatedDialogue_ = builderForValue.build();
+          onChanged();
+        } else {
+          initialDefeatedDialogueBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public Builder mergeInitialDefeatedDialogue(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              initialDefeatedDialogue_ != com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance()) {
+            initialDefeatedDialogue_ =
+              com.lvl6.proto.QuestProto.DialogueProto.newBuilder(initialDefeatedDialogue_).mergeFrom(value).buildPartial();
+          } else {
+            initialDefeatedDialogue_ = value;
+          }
+          onChanged();
+        } else {
+          initialDefeatedDialogueBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public Builder clearInitialDefeatedDialogue() {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          initialDefeatedDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          initialDefeatedDialogueBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto.Builder getInitialDefeatedDialogueBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getInitialDefeatedDialogueFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDefeatedDialogueOrBuilder() {
+        if (initialDefeatedDialogueBuilder_ != null) {
+          return initialDefeatedDialogueBuilder_.getMessageOrBuilder();
+        } else {
+          return initialDefeatedDialogue_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialDefeatedDialogue = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> 
+          getInitialDefeatedDialogueFieldBuilder() {
+        if (initialDefeatedDialogueBuilder_ == null) {
+          initialDefeatedDialogueBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
+                  getInitialDefeatedDialogue(),
+                  getParentForChildren(),
+                  isClean());
+          initialDefeatedDialogue_ = null;
+        }
+        return initialDefeatedDialogueBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullTaskProto)
@@ -2954,6 +3143,44 @@ public final class TaskProto {
      * </pre>
      */
     int getPuzzlePieceMonsterDropLvl();
+
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    boolean hasInitialD();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    com.lvl6.proto.QuestProto.DialogueProto getInitialD();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    boolean hasDefaultD();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    com.lvl6.proto.QuestProto.DialogueProto getDefaultD();
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getDefaultDOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TaskStageMonsterProto}
@@ -3086,6 +3313,32 @@ public final class TaskProto {
             case 120: {
               bitField0_ |= 0x00000001;
               tsfuId_ = input.readInt64();
+              break;
+            }
+            case 130: {
+              com.lvl6.proto.QuestProto.DialogueProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00008000) == 0x00008000)) {
+                subBuilder = initialD_.toBuilder();
+              }
+              initialD_ = input.readMessage(com.lvl6.proto.QuestProto.DialogueProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(initialD_);
+                initialD_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00008000;
+              break;
+            }
+            case 138: {
+              com.lvl6.proto.QuestProto.DialogueProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00010000) == 0x00010000)) {
+                subBuilder = defaultD_.toBuilder();
+              }
+              defaultD_ = input.readMessage(com.lvl6.proto.QuestProto.DialogueProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(defaultD_);
+                defaultD_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00010000;
               break;
             }
           }
@@ -3496,6 +3749,60 @@ public final class TaskProto {
       return puzzlePieceMonsterDropLvl_;
     }
 
+    public static final int INITIALD_FIELD_NUMBER = 16;
+    private com.lvl6.proto.QuestProto.DialogueProto initialD_;
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    public boolean hasInitialD() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProto getInitialD() {
+      return initialD_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+     *
+     * <pre>
+     *:D
+     * </pre>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDOrBuilder() {
+      return initialD_;
+    }
+
+    public static final int DEFAULTD_FIELD_NUMBER = 17;
+    private com.lvl6.proto.QuestProto.DialogueProto defaultD_;
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    public boolean hasDefaultD() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProto getDefaultD() {
+      return defaultD_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+     */
+    public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getDefaultDOrBuilder() {
+      return defaultD_;
+    }
+
     private void initFields() {
       tsfuId_ = 0L;
       tsmId_ = 0;
@@ -3512,6 +3819,8 @@ public final class TaskProto {
       defensiveSkillId_ = 0;
       offensiveSkillId_ = 0;
       puzzlePieceMonsterDropLvl_ = 0;
+      initialD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+      defaultD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3570,6 +3879,12 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(15, tsfuId_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeMessage(16, initialD_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeMessage(17, defaultD_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3639,6 +3954,14 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(15, tsfuId_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(16, initialD_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(17, defaultD_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3749,6 +4072,8 @@ public final class TaskProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getInitialDFieldBuilder();
+          getDefaultDFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3787,6 +4112,18 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00002000);
         puzzlePieceMonsterDropLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
+        if (initialDBuilder_ == null) {
+          initialD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+        } else {
+          initialDBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00008000);
+        if (defaultDBuilder_ == null) {
+          defaultD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+        } else {
+          defaultDBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -3875,6 +4212,22 @@ public final class TaskProto {
           to_bitField0_ |= 0x00004000;
         }
         result.puzzlePieceMonsterDropLvl_ = puzzlePieceMonsterDropLvl_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        if (initialDBuilder_ == null) {
+          result.initialD_ = initialD_;
+        } else {
+          result.initialD_ = initialDBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        if (defaultDBuilder_ == null) {
+          result.defaultD_ = defaultD_;
+        } else {
+          result.defaultD_ = defaultDBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3935,6 +4288,12 @@ public final class TaskProto {
         }
         if (other.hasPuzzlePieceMonsterDropLvl()) {
           setPuzzlePieceMonsterDropLvl(other.getPuzzlePieceMonsterDropLvl());
+        }
+        if (other.hasInitialD()) {
+          mergeInitialD(other.getInitialD());
+        }
+        if (other.hasDefaultD()) {
+          mergeDefaultD(other.getDefaultD());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4548,6 +4907,274 @@ public final class TaskProto {
         puzzlePieceMonsterDropLvl_ = 0;
         onChanged();
         return this;
+      }
+
+      private com.lvl6.proto.QuestProto.DialogueProto initialD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> initialDBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public boolean hasInitialD() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto getInitialD() {
+        if (initialDBuilder_ == null) {
+          return initialD_;
+        } else {
+          return initialDBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public Builder setInitialD(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (initialDBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          initialD_ = value;
+          onChanged();
+        } else {
+          initialDBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00008000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public Builder setInitialD(
+          com.lvl6.proto.QuestProto.DialogueProto.Builder builderForValue) {
+        if (initialDBuilder_ == null) {
+          initialD_ = builderForValue.build();
+          onChanged();
+        } else {
+          initialDBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00008000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public Builder mergeInitialD(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (initialDBuilder_ == null) {
+          if (((bitField0_ & 0x00008000) == 0x00008000) &&
+              initialD_ != com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance()) {
+            initialD_ =
+              com.lvl6.proto.QuestProto.DialogueProto.newBuilder(initialD_).mergeFrom(value).buildPartial();
+          } else {
+            initialD_ = value;
+          }
+          onChanged();
+        } else {
+          initialDBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00008000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public Builder clearInitialD() {
+        if (initialDBuilder_ == null) {
+          initialD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          initialDBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00008000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto.Builder getInitialDBuilder() {
+        bitField0_ |= 0x00008000;
+        onChanged();
+        return getInitialDFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getInitialDOrBuilder() {
+        if (initialDBuilder_ != null) {
+          return initialDBuilder_.getMessageOrBuilder();
+        } else {
+          return initialD_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto initialD = 16;</code>
+       *
+       * <pre>
+       *:D
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> 
+          getInitialDFieldBuilder() {
+        if (initialDBuilder_ == null) {
+          initialDBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
+                  getInitialD(),
+                  getParentForChildren(),
+                  isClean());
+          initialD_ = null;
+        }
+        return initialDBuilder_;
+      }
+
+      private com.lvl6.proto.QuestProto.DialogueProto defaultD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> defaultDBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public boolean hasDefaultD() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto getDefaultD() {
+        if (defaultDBuilder_ == null) {
+          return defaultD_;
+        } else {
+          return defaultDBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public Builder setDefaultD(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (defaultDBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defaultD_ = value;
+          onChanged();
+        } else {
+          defaultDBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00010000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public Builder setDefaultD(
+          com.lvl6.proto.QuestProto.DialogueProto.Builder builderForValue) {
+        if (defaultDBuilder_ == null) {
+          defaultD_ = builderForValue.build();
+          onChanged();
+        } else {
+          defaultDBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00010000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public Builder mergeDefaultD(com.lvl6.proto.QuestProto.DialogueProto value) {
+        if (defaultDBuilder_ == null) {
+          if (((bitField0_ & 0x00010000) == 0x00010000) &&
+              defaultD_ != com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance()) {
+            defaultD_ =
+              com.lvl6.proto.QuestProto.DialogueProto.newBuilder(defaultD_).mergeFrom(value).buildPartial();
+          } else {
+            defaultD_ = value;
+          }
+          onChanged();
+        } else {
+          defaultDBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00010000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public Builder clearDefaultD() {
+        if (defaultDBuilder_ == null) {
+          defaultD_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defaultDBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00010000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProto.Builder getDefaultDBuilder() {
+        bitField0_ |= 0x00010000;
+        onChanged();
+        return getDefaultDFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      public com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getDefaultDOrBuilder() {
+        if (defaultDBuilder_ != null) {
+          return defaultDBuilder_.getMessageOrBuilder();
+        } else {
+          return defaultD_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.DialogueProto defaultD = 17;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> 
+          getDefaultDFieldBuilder() {
+        if (defaultDBuilder_ == null) {
+          defaultDBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder>(
+                  getDefaultD(),
+                  getParentForChildren(),
+                  isClean());
+          defaultD_ = null;
+        }
+        return defaultDBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TaskStageMonsterProto)
@@ -7946,50 +8573,54 @@ public final class TaskProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nTask.proto\022\016com.lvl6.proto\032\022MonsterStu" +
-      "ff.proto\032\026SharedEnumConfig.proto\"_\n\016Task" +
-      "StageProto\022\017\n\007stageId\030\001 \001(\005\022<\n\rstageMons" +
-      "ters\030\002 \003(\0132%.com.lvl6.proto.TaskStageMon" +
-      "sterProto\"\351\001\n\rFullTaskProto\022\016\n\006taskId\030\001 " +
-      "\001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\016" +
-      "\n\006cityId\030\004 \001(\005\022\032\n\022assetNumWithinCity\030\005 \001" +
-      "(\005\022\032\n\022prerequisiteTaskId\030\006 \001(\005\022\033\n\023prereq" +
-      "uisiteQuestId\030\007 \001(\005\022\022\n\nboardWidth\030\010 \001(\005\022" +
-      "\023\n\013boardHeight\030\t \001(\005\022\027\n\017groundImgPrefix\030",
-      "\n \001(\t\"b\n\024MinimumUserTaskProto\022\016\n\006userId\030" +
-      "\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030" +
-      "\003 \001(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\307\003\n\025TaskStageM" +
-      "onsterProto\022\016\n\006tsfuId\030\017 \001(\003\022\r\n\005tsmId\030\013 \001" +
-      "(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001" +
-      "(\01621.com.lvl6.proto.TaskStageMonsterProt" +
-      "o.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpRewar" +
-      "d\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilReward" +
-      "\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n\024pu" +
-      "zzlePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 \001(\005",
-      "\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveSkil" +
-      "lId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!\n\031p" +
-      "uzzlePieceMonsterDropLvl\030\r \001(\005\"3\n\013Monste" +
-      "rType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOS" +
-      "S\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventId\030" +
-      "\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.prot" +
-      "o.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034" +
-      "\n\024eventDurationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005" +
-      " \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005\022<\n\004type\030\007 " +
-      "\001(\0162..com.lvl6.proto.PersistentEventProt",
-      "o.EventType\022;\n\016monsterElement\030\010 \001(\0162\027.co" +
-      "m.lvl6.proto.Element:\nNO_ELEMENT\"\'\n\tEven" +
-      "tType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030Use" +
-      "rPersistentEventProto\022\016\n\006userId\030\001 \001(\005\022\017\n" +
-      "\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030\003 \001(" +
-      "\003\"\353\002\n\023TaskMapElementProto\022\024\n\014mapElementI" +
-      "d\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n" +
-      "\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.lvl6." +
-      "proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossImgNa" +
-      "me\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sectionN",
-      "ame\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toilRewa" +
-      "rd\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036\n\026ch" +
-      "arImgVertPixelOffset\030\r \001(\005\022\037\n\027charImgHor" +
-      "izPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleFacto" +
-      "r\030\017 \001(\002B\013B\tTaskProto"
+      "ff.proto\032\013Quest.proto\032\026SharedEnumConfig." +
+      "proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 \001(\005" +
+      "\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.proto" +
+      ".TaskStageMonsterProto\"\251\002\n\rFullTaskProto" +
+      "\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013descri" +
+      "ption\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNumW" +
+      "ithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId\030\006 " +
+      "\001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\022\022\n\nboar" +
+      "dWidth\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017gro",
+      "undImgPrefix\030\n \001(\t\022>\n\027initialDefeatedDia" +
+      "logue\030\013 \001(\0132\035.com.lvl6.proto.DialoguePro" +
+      "to\"b\n\024MinimumUserTaskProto\022\016\n\006userId\030\001 \001" +
+      "(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003 \001" +
+      "(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\251\004\n\025TaskStageMons" +
+      "terProto\022\016\n\006tsfuId\030\017 \001(\003\022\r\n\005tsmId\030\013 \001(\005\022" +
+      "\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001(\0162" +
+      "1.com.lvl6.proto.TaskStageMonsterProto.M" +
+      "onsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpReward\030\003" +
+      " \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilReward\030\010 ",
+      "\001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n\024puzzl" +
+      "ePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n" +
+      "\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveSkillId" +
+      "\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!\n\031puzz" +
+      "lePieceMonsterDropLvl\030\r \001(\005\022/\n\010initialD\030" +
+      "\020 \001(\0132\035.com.lvl6.proto.DialogueProto\022/\n\010" +
+      "defaultD\030\021 \001(\0132\035.com.lvl6.proto.Dialogue" +
+      "Proto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMIN" +
+      "I_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEventPr" +
+      "oto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162",
+      "\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tst" +
+      "artHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 " +
+      "\001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006" +
+      " \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Pers" +
+      "istentEventProto.EventType\022;\n\016monsterEle" +
+      "ment\030\010 \001(\0162\027.com.lvl6.proto.Element:\nNO_" +
+      "ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVO" +
+      "LUTION\020\002\"V\n\030UserPersistentEventProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDow" +
+      "nStartTime\030\003 \001(\003\"\353\002\n\023TaskMapElementProto",
+      "\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014" +
+      "\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 " +
+      "\001(\0162\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001" +
+      "(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\nitemDropId\030\010 " +
+      "\001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\ncashReward\030\n" +
+      " \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020characterImgN" +
+      "ame\030\014 \001(\t\022\036\n\026charImgVertPixelOffset\030\r \001(" +
+      "\005\022\037\n\027charImgHorizPixelOffset\030\016 \001(\005\022\032\n\022ch" +
+      "arImgScaleFactor\030\017 \001(\002B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8003,6 +8634,7 @@ public final class TaskProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_TaskStageProto_descriptor =
@@ -8016,7 +8648,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-        new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", });
+        new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", "BoardWidth", "BoardHeight", "GroundImgPrefix", "InitialDefeatedDialogue", });
     internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
@@ -8028,7 +8660,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-        new java.lang.String[] { "TsfuId", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", });
+        new java.lang.String[] { "TsfuId", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
     internal_static_com_lvl6_proto_PersistentEventProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
@@ -8048,6 +8680,7 @@ public final class TaskProto {
         internal_static_com_lvl6_proto_TaskMapElementProto_descriptor,
         new java.lang.String[] { "MapElementId", "TaskId", "XPos", "YPos", "Element", "Boss", "BossImgName", "ItemDropId", "SectionName", "CashReward", "OilReward", "CharacterImgName", "CharImgVertPixelOffset", "CharImgHorizPixelOffset", "CharImgScaleFactor", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

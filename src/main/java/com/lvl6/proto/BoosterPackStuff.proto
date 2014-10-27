@@ -1,6 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
-import "MonsterStuff.proto";
+//import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
 import "User.proto";
 

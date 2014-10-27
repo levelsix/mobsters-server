@@ -2286,20 +2286,6 @@ public final class SkillsProto {
      * </pre>
      */
     float getSkillValue();
-
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    boolean hasShorterName();
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    java.lang.String getShorterName();
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getShorterNameBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SkillPropertyProto}
@@ -2367,12 +2353,6 @@ public final class SkillsProto {
             case 29: {
               bitField0_ |= 0x00000004;
               skillValue_ = input.readFloat();
-              break;
-            }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              shorterName_ = bs;
               break;
             }
           }
@@ -2509,53 +2489,10 @@ public final class SkillsProto {
       return skillValue_;
     }
 
-    public static final int SHORTERNAME_FIELD_NUMBER = 4;
-    private java.lang.Object shorterName_;
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    public boolean hasShorterName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    public java.lang.String getShorterName() {
-      java.lang.Object ref = shorterName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          shorterName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string shorterName = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getShorterNameBytes() {
-      java.lang.Object ref = shorterName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        shorterName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       skillPropertyId_ = 0;
       name_ = "";
       skillValue_ = 0F;
-      shorterName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2579,9 +2516,6 @@ public final class SkillsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeFloat(3, skillValue_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getShorterNameBytes());
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2602,10 +2536,6 @@ public final class SkillsProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(3, skillValue_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getShorterNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2730,8 +2660,6 @@ public final class SkillsProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         skillValue_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
-        shorterName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -2772,10 +2700,6 @@ public final class SkillsProto {
           to_bitField0_ |= 0x00000004;
         }
         result.skillValue_ = skillValue_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.shorterName_ = shorterName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2802,11 +2726,6 @@ public final class SkillsProto {
         }
         if (other.hasSkillValue()) {
           setSkillValue(other.getSkillValue());
-        }
-        if (other.hasShorterName()) {
-          bitField0_ |= 0x00000008;
-          shorterName_ = other.shorterName_;
-          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3019,82 +2938,6 @@ public final class SkillsProto {
         return this;
       }
 
-      private java.lang.Object shorterName_ = "";
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public boolean hasShorterName() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public java.lang.String getShorterName() {
-        java.lang.Object ref = shorterName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            shorterName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getShorterNameBytes() {
-        java.lang.Object ref = shorterName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          shorterName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public Builder setShorterName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        shorterName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public Builder clearShorterName() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        shorterName_ = getDefaultInstance().getShorterName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string shorterName = 4;</code>
-       */
-      public Builder setShorterNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        shorterName_ = value;
-        onChanged();
-        return this;
-      }
-
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SkillPropertyProto)
     }
 
@@ -3133,15 +2976,15 @@ public final class SkillsProto {
       "edecId\030\006 \001(\005\022\r\n\005sucId\030\007 \001(\005\0226\n\npropertie" +
       "s\030\010 \003(\0132\".com.lvl6.proto.SkillPropertyPr" +
       "oto\022\014\n\004desc\030\t \001(\t\022\023\n\013iconImgName\030\n \001(\t\022\023" +
-      "\n\013logoImgName\030\013 \001(\t\"d\n\022SkillPropertyProt" +
+      "\n\013logoImgName\030\013 \001(\t\"O\n\022SkillPropertyProt" +
       "o\022\027\n\017skillPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t",
-      "\022\022\n\nskillValue\030\003 \001(\002\022\023\n\013shorterName\030\004 \001(" +
-      "\t*\205\001\n\tSkillType\022\014\n\010NO_SKILL\020\001\022\r\n\tCAKE_DR" +
-      "OP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QUICK_ATTACK\020\004\022\t\n\005BOM" +
-      "BS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006POISON\020\007\022\r\n\tROID_RAG" +
-      "E\020\010\022\014\n\010MOMENTUM\020\t*J\n\023SkillActivationType" +
-      "\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002" +
-      "\022\013\n\007PASSIVE\020\003B\rB\013SkillsProto"
+      "\022\022\n\nskillValue\030\003 \001(\002*\205\001\n\tSkillType\022\014\n\010NO" +
+      "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QU" +
+      "ICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006P" +
+      "OISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t*J\n\023" +
+      "SkillActivationType\022\022\n\016USER_ACTIVATED\020\001\022" +
+      "\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013Skil" +
+      "lsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3166,7 +3009,7 @@ public final class SkillsProto {
     internal_static_com_lvl6_proto_SkillPropertyProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SkillPropertyProto_descriptor,
-        new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", "ShorterName", });
+        new java.lang.String[] { "SkillPropertyId", "Name", "SkillValue", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -161,7 +161,7 @@ public interface UpdateUtil {
   public abstract int updatePvpLeagueForUser(int userId, int newPvpLeagueId, 
 		  int newRank, int eloChange, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
-		  int attacksLostDelta, int defensesLostDelta);
+		  int attacksLostDelta, int defensesLostDelta, float nuPvpDmgMultiplier);
   
   public abstract int updateMiniJobForUser(int userId, long userMiniJobId,
 		  String userMonsterIdStr, Timestamp now);
