@@ -794,7 +794,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, true);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		return numUpdated;
 	}
