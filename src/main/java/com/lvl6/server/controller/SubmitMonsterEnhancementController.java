@@ -397,19 +397,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //	  		uId, protoUpdateMap);
 //		log.info(String.format("updateMap=%s", updateMap));
 //		
-//	  List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
-//	  		uId, protoNewMap);
-//	  log.info(String.format("newMap=%s", newMap));
-//	  
-//	  List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
+		List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
+			uId, protoNewMap);
+		log.info(String.format("newMap=%s", newMap));
+
+		List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
 //	  updateAndNew.addAll(updateMap);
-//	  updateAndNew.addAll(newMap);
-//		//update everything in enhancing table that is in update and new map
-//		if (null != updateAndNew && !updateAndNew.isEmpty()) {
-//			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
-//			log.info(String.format(
-//				"updated monster enhancing rows. numInserted=%s", num));
-//		}
+		updateAndNew.addAll(newMap);
+		//update everything in enhancing table that is in update and new map
+		if (null != updateAndNew && !updateAndNew.isEmpty()) {
+			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
+			log.info(String.format(
+				"updated monster enhancing rows. numInserted=%s", num));
+		}
 		
 		//for the new monsters, ensure that the monsters are "unequipped"
 	  if (null != protoNewMap && !protoNewMap.isEmpty()) {

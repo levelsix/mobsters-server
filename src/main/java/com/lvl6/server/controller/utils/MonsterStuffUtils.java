@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
@@ -169,7 +170,7 @@ public class MonsterStuffUtils {
   	
   	return nonProtos;
   }
-  /*
+  
   public static List<MonsterEnhancingForUser> convertToMonsterEnhancingForUser(
   		int userId, Map<Long, UserEnhancementItemProto> protos) {
   	
@@ -187,15 +188,15 @@ public class MonsterStuffUtils {
   		}
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		int enhancingCost = ueip.getEnhancingCost();
+  		boolean enhancingFinished = ueip.getEnhancingComplete();
   		
   		MonsterEnhancingForUser mefu = new MonsterEnhancingForUser(userId,
-  				monsterForUserId, expectedStartTime, enhancingCost);//, queuedTime);
+  				monsterForUserId, expectedStartTime, enhancingCost, enhancingFinished);//, queuedTime);
   		nonProtos.add(mefu);
   	}
   	
   	return nonProtos;
   }
-  */
   
   // ASSUMPTION: WHATEVER MONSTER ID EXISTS IN  monsterIdToIncompleteUserMonster
   // THERE IS A CORRESPONDING ENTRY IN monsterIdToQuantity

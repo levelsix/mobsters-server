@@ -751,7 +751,7 @@ public class UpdateUtils implements UpdateUtil {
 		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		
-		log.info("monsters enhancing for user=" + monsters);
+		log.info(String.format("monsters enhancing for user=%s", monsters));
 
 		for (MonsterEnhancingForUser mhfu : monsters) {
 			Map <String, Object> aRow = new HashMap<String, Object>();
