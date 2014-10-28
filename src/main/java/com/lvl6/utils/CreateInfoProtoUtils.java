@@ -2379,6 +2379,7 @@ public class CreateInfoProtoUtils {
 		lpb.setStructInfo(sip);
 		lpb.setQueueSize(sl.getQueueSize());
 		lpb.setPointsMultiplier(sl.getPointsMultiplier());
+		lpb.setPointsPerSecond(sl.getPointsPerSecond());
 
 		return lpb.build();
 	}

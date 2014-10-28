@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
 import com.lvl6.events.response.EnhanceMonsterResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -68,22 +66,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
-    UserEnhancementProto uep = reqProto.getUep();
+    /*UserEnhancementProto uep = reqProto.getUep();
     UserMonsterCurrentExpProto result = reqProto.getEnhancingResult();
     int gemsSpent = reqProto.getGemsSpent();
     int oilChange = reqProto.getOilChange();
     
     //user monster ids that will be deleted from monster enhancing for user table
     Timestamp curTime = new Timestamp((new Date()).getTime());
-
+	*/
     //set some values to send to the client (the response proto)
     EnhanceMonsterResponseProto.Builder resBuilder = EnhanceMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(EnhanceMonsterStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-    	int previousGems = 0;
+    	/*int previousGems = 0;
 
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -103,13 +101,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     	if (successful) {
     		setResponseBuilder(resBuilder);
-    	}
+    	}*/
 
     	EnhanceMonsterResponseEvent resEvent = new EnhanceMonsterResponseEvent(userId);
     	resEvent.setTag(event.getTag());
     	resEvent.setEnhanceMonsterResponseProto(resBuilder.build());
     	server.writeEvent(resEvent);
 
+    	/*
     	if (successful) {
     		//tell the client to update user because user's funds most likely changed
     		//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -120,7 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //    		writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
     		writeToUserCurrencyHistory(aUser, curTime, result.getUserMonsterId(), money, previousGems);
-    	}
+    	}*/
     } catch (Exception e) {
     	log.error("exception in EnhanceMonsterController processEvent", e);
     	//don't let the client hang
@@ -134,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in EnhanceMonsterController processEvent", e);
     	}
     } finally {
-    	getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    	getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
   

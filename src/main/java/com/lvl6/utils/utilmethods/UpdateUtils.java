@@ -751,7 +751,7 @@ public class UpdateUtils implements UpdateUtil {
 		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		
-		log.info("monsters enhancing for user=" + monsters);
+		log.info(String.format("monsters enhancing for user=%s", monsters));
 
 		for (MonsterEnhancingForUser mhfu : monsters) {
 			Map <String, Object> aRow = new HashMap<String, Object>();
@@ -776,16 +776,31 @@ public class UpdateUtils implements UpdateUtil {
 			newRows.add(aRow);
 		}
 		
-		log.info("newRows=" + newRows);
+		log.info(String.format("newRows=%s", newRows));
 		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
 
-		log.info("num monster_enhancing updated: " + numUpdated 
-				+ ". Number of monster_enhancing: " + monsters.size());
+		log.info(String.format(
+			"num monster_enhancing updated: %s. Number of monster_enhancing: %s",
+			numUpdated, monsters.size()));
 		return numUpdated;
 	}
 	
-//	update a user equip after enhancing
-		@Override
+	@Override
+	public int updateCompleteEnhancing(int userId, long curEnhancingMfuId) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userId);
+		conditionParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, curEnhancingMfuId);
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE, true);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER, null, absoluteParams, 
+				conditionParams, "and");
+		return numUpdated;
+	}
+	
+//	update a user monster after enhancing
+	@Override
 	public int updateUserMonsterExpAndLvl(long userEquipId, int newExp, int newLvl, int newHp) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);

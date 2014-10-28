@@ -474,6 +474,7 @@ public class ControllerTest extends TestCase {
 	}
 	*/
 	
+	/*
 	@Test
 	public void testEnhanceMonster() {
 		int unitTesterId = getUnitTesterId();
@@ -527,6 +528,7 @@ public class ControllerTest extends TestCase {
 		//delete it
 		DeleteUtils.get().deleteMonsterForUser(enhancedMonster.getId());
 	}
+	*/
 	
 	private Map<Long, MonsterForUser> createCompleteMonsters(int userId,
 		Date now) {

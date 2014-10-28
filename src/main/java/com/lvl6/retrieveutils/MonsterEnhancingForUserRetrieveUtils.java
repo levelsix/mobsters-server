@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class MonsterEnhancingForUserRetrieveUtils {
 
@@ -104,7 +99,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
 	private static MonsterEnhancingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
-		int i = 1;
 		int userId = rs.getInt(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID);
 		long monsterForUserId = rs.getLong(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID);
 
@@ -124,9 +118,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		//    }
 		
 		int enhancingCost = rs.getInt(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST);
+		boolean enhancingComplete = rs.getBoolean(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE);
 
 		MonsterEnhancingForUser userMonster = new MonsterEnhancingForUser(userId,
-				monsterForUserId, expectedStartTime, enhancingCost);//, queuedTime);
+				monsterForUserId, expectedStartTime, enhancingCost, enhancingComplete);//, queuedTime);
 		return userMonster;
 	}
 

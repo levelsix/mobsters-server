@@ -188,9 +188,10 @@ public class MonsterStuffUtils {
   		}
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		int enhancingCost = ueip.getEnhancingCost();
+  		boolean enhancingFinished = ueip.getEnhancingComplete();
   		
   		MonsterEnhancingForUser mefu = new MonsterEnhancingForUser(userId,
-  				monsterForUserId, expectedStartTime, enhancingCost);//, queuedTime);
+  				monsterForUserId, expectedStartTime, enhancingCost, enhancingFinished);//, queuedTime);
   		nonProtos.add(mefu);
   	}
   	

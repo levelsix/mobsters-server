@@ -335,6 +335,7 @@ public class DBConstants {
 	public static final String MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
 	public static final String MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 	public static final String MONSTER_ENHANCING_FOR_USER__ENHANCING_COST = "enhancing_cost";
+	public static final String MONSTER_ENHANCING_FOR_USER__ENHANCING_COMPLETE = "enhancing_complete";
 
 	/*MONSTER ENHANCING HISTORY*/
 	public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
@@ -974,6 +975,7 @@ public class DBConstants {
 	public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
 	public static final String STRUCTURE_LAB__POINTS_MULTIPLIER = "points_multiplier";
+	public static final String STRUCTURE_LAB__POINTS_PER_SECOND = "points_per_second";
 
 	public static final String STRUCTURE_MINI_JOB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_MINI_JOB__GENERATED_JOB_LIMIT = "generated_job_limit";

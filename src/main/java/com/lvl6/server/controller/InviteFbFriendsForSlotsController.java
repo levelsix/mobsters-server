@@ -61,6 +61,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent)event).getInviteFbFriendsForSlotsRequestProto();
 
+    log.info(String.format("reqProto=%s", reqProto));
+    
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
     int userId = senderProto.getMinUserProto().getUserId();

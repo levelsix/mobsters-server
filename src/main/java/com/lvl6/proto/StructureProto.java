@@ -5141,7 +5141,7 @@ public final class StructureProto {
      * <code>optional float pointsPerSecond = 3;</code>
      *
      * <pre>
-     *TODO: get rid of this since enhancing is instantaneous
+     *IGNORE	//TODO: get rid of this since enhancing is instantaneous
      *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
      *for a main monster to be enhanced with all those points
      * </pre>
@@ -5151,7 +5151,7 @@ public final class StructureProto {
      * <code>optional float pointsPerSecond = 3;</code>
      *
      * <pre>
-     *TODO: get rid of this since enhancing is instantaneous
+     *IGNORE	//TODO: get rid of this since enhancing is instantaneous
      *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
      *for a main monster to be enhanced with all those points
      * </pre>
@@ -5333,7 +5333,7 @@ public final class StructureProto {
      * <code>optional float pointsPerSecond = 3;</code>
      *
      * <pre>
-     *TODO: get rid of this since enhancing is instantaneous
+     *IGNORE	//TODO: get rid of this since enhancing is instantaneous
      *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
      *for a main monster to be enhanced with all those points
      * </pre>
@@ -5345,7 +5345,7 @@ public final class StructureProto {
      * <code>optional float pointsPerSecond = 3;</code>
      *
      * <pre>
-     *TODO: get rid of this since enhancing is instantaneous
+     *IGNORE	//TODO: get rid of this since enhancing is instantaneous
      *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
      *for a main monster to be enhanced with all those points
      * </pre>
@@ -5815,7 +5815,7 @@ public final class StructureProto {
        * <code>optional float pointsPerSecond = 3;</code>
        *
        * <pre>
-       *TODO: get rid of this since enhancing is instantaneous
+       *IGNORE	//TODO: get rid of this since enhancing is instantaneous
        *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
        *for a main monster to be enhanced with all those points
        * </pre>
@@ -5827,7 +5827,7 @@ public final class StructureProto {
        * <code>optional float pointsPerSecond = 3;</code>
        *
        * <pre>
-       *TODO: get rid of this since enhancing is instantaneous
+       *IGNORE	//TODO: get rid of this since enhancing is instantaneous
        *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
        *for a main monster to be enhanced with all those points
        * </pre>
@@ -5839,7 +5839,7 @@ public final class StructureProto {
        * <code>optional float pointsPerSecond = 3;</code>
        *
        * <pre>
-       *TODO: get rid of this since enhancing is instantaneous
+       *IGNORE	//TODO: get rid of this since enhancing is instantaneous
        *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
        *for a main monster to be enhanced with all those points
        * </pre>
@@ -5854,7 +5854,7 @@ public final class StructureProto {
        * <code>optional float pointsPerSecond = 3;</code>
        *
        * <pre>
-       *TODO: get rid of this since enhancing is instantaneous
+       *IGNORE	//TODO: get rid of this since enhancing is instantaneous
        *maybe convert monsters to points and it will take (points)(second/points)='x' seconds
        *for a main monster to be enhanced with all those points
        * </pre>

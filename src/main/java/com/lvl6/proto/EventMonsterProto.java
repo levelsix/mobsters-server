@@ -3287,71 +3287,71 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> 
+    @java.lang.Deprecated java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> 
         getUeipDeleteList();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index);
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index);
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    int getUeipDeleteCount();
+    @java.lang.Deprecated int getUeipDeleteCount();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+    @java.lang.Deprecated java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
         getUeipDeleteOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> 
+    @java.lang.Deprecated java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> 
         getUeipUpdateList();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index);
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index);
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    int getUeipUpdateCount();
+    @java.lang.Deprecated int getUeipUpdateCount();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+    @java.lang.Deprecated java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
         getUeipUpdateOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
         int index);
 
     /**
@@ -3422,11 +3422,6 @@ public final class EventMonsterProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementRequestProto}
-   *
-   * <pre>
-   *------------------------------------------------------------------------------------------
-   *TODO: Get rid of this***********
-   * </pre>
    */
   public static final class SubmitMonsterEnhancementRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -3597,54 +3592,54 @@ public final class EventMonsterProto {
     public static final int UEIPDELETE_FIELD_NUMBER = 2;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipDelete_;
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipDeleteList() {
+    @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipDeleteList() {
       return ueipDelete_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
         getUeipDeleteOrBuilderList() {
       return ueipDelete_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    public int getUeipDeleteCount() {
+    @java.lang.Deprecated public int getUeipDeleteCount() {
       return ueipDelete_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index) {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index) {
       return ueipDelete_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
         int index) {
       return ueipDelete_.get(index);
     }
@@ -3652,34 +3647,34 @@ public final class EventMonsterProto {
     public static final int UEIPUPDATE_FIELD_NUMBER = 3;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> ueipUpdate_;
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipUpdateList() {
+    @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipUpdateList() {
       return ueipUpdate_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
         getUeipUpdateOrBuilderList() {
       return ueipUpdate_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    public int getUeipUpdateCount() {
+    @java.lang.Deprecated public int getUeipUpdateCount() {
       return ueipUpdate_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index) {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index) {
       return ueipUpdate_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+     * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
         int index) {
       return ueipUpdate_.get(index);
     }
@@ -3925,11 +3920,6 @@ public final class EventMonsterProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementRequestProto}
-     *
-     * <pre>
-     *------------------------------------------------------------------------------------------
-     *TODO: Get rid of this***********
-     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -4329,13 +4319,13 @@ public final class EventMonsterProto {
           com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> ueipDeleteBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipDeleteList() {
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipDeleteList() {
         if (ueipDeleteBuilder_ == null) {
           return java.util.Collections.unmodifiableList(ueipDelete_);
         } else {
@@ -4343,13 +4333,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public int getUeipDeleteCount() {
+      @java.lang.Deprecated public int getUeipDeleteCount() {
         if (ueipDeleteBuilder_ == null) {
           return ueipDelete_.size();
         } else {
@@ -4357,13 +4347,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index) {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipDelete(int index) {
         if (ueipDeleteBuilder_ == null) {
           return ueipDelete_.get(index);
         } else {
@@ -4371,13 +4361,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder setUeipDelete(
+      @java.lang.Deprecated public Builder setUeipDelete(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipDeleteBuilder_ == null) {
           if (value == null) {
@@ -4392,13 +4382,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder setUeipDelete(
+      @java.lang.Deprecated public Builder setUeipDelete(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
@@ -4410,13 +4400,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder addUeipDelete(com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
+      @java.lang.Deprecated public Builder addUeipDelete(com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipDeleteBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4430,13 +4420,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder addUeipDelete(
+      @java.lang.Deprecated public Builder addUeipDelete(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipDeleteBuilder_ == null) {
           if (value == null) {
@@ -4451,13 +4441,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder addUeipDelete(
+      @java.lang.Deprecated public Builder addUeipDelete(
           com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
@@ -4469,13 +4459,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder addUeipDelete(
+      @java.lang.Deprecated public Builder addUeipDelete(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
@@ -4487,13 +4477,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder addAllUeipDelete(
+      @java.lang.Deprecated public Builder addAllUeipDelete(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> values) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
@@ -4506,13 +4496,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder clearUeipDelete() {
+      @java.lang.Deprecated public Builder clearUeipDelete() {
         if (ueipDeleteBuilder_ == null) {
           ueipDelete_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -4523,13 +4513,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public Builder removeUeipDelete(int index) {
+      @java.lang.Deprecated public Builder removeUeipDelete(int index) {
         if (ueipDeleteBuilder_ == null) {
           ensureUeipDeleteIsMutable();
           ueipDelete_.remove(index);
@@ -4540,24 +4530,24 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder getUeipDeleteBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder getUeipDeleteBuilder(
           int index) {
         return getUeipDeleteFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipDeleteOrBuilder(
           int index) {
         if (ueipDeleteBuilder_ == null) {
           return ueipDelete_.get(index);  } else {
@@ -4565,13 +4555,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+      @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
            getUeipDeleteOrBuilderList() {
         if (ueipDeleteBuilder_ != null) {
           return ueipDeleteBuilder_.getMessageOrBuilderList();
@@ -4580,36 +4570,36 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipDeleteBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipDeleteBuilder() {
         return getUeipDeleteFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipDeleteBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipDeleteBuilder(
           int index) {
         return getUeipDeleteFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2 [deprecated = true];</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
        * </pre>
        */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder> 
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder> 
            getUeipDeleteBuilderList() {
         return getUeipDeleteFieldBuilder().getBuilderList();
       }
@@ -4641,9 +4631,9 @@ public final class EventMonsterProto {
           com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> ueipUpdateBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipUpdateList() {
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> getUeipUpdateList() {
         if (ueipUpdateBuilder_ == null) {
           return java.util.Collections.unmodifiableList(ueipUpdate_);
         } else {
@@ -4651,9 +4641,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public int getUeipUpdateCount() {
+      @java.lang.Deprecated public int getUeipUpdateCount() {
         if (ueipUpdateBuilder_ == null) {
           return ueipUpdate_.size();
         } else {
@@ -4661,9 +4651,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index) {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto getUeipUpdate(int index) {
         if (ueipUpdateBuilder_ == null) {
           return ueipUpdate_.get(index);
         } else {
@@ -4671,9 +4661,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder setUeipUpdate(
+      @java.lang.Deprecated public Builder setUeipUpdate(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipUpdateBuilder_ == null) {
           if (value == null) {
@@ -4688,9 +4678,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder setUeipUpdate(
+      @java.lang.Deprecated public Builder setUeipUpdate(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
@@ -4702,9 +4692,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder addUeipUpdate(com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
+      @java.lang.Deprecated public Builder addUeipUpdate(com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipUpdateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4718,9 +4708,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder addUeipUpdate(
+      @java.lang.Deprecated public Builder addUeipUpdate(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto value) {
         if (ueipUpdateBuilder_ == null) {
           if (value == null) {
@@ -4735,9 +4725,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder addUeipUpdate(
+      @java.lang.Deprecated public Builder addUeipUpdate(
           com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
@@ -4749,9 +4739,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder addUeipUpdate(
+      @java.lang.Deprecated public Builder addUeipUpdate(
           int index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder builderForValue) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
@@ -4763,9 +4753,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder addAllUeipUpdate(
+      @java.lang.Deprecated public Builder addAllUeipUpdate(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> values) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
@@ -4778,9 +4768,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder clearUeipUpdate() {
+      @java.lang.Deprecated public Builder clearUeipUpdate() {
         if (ueipUpdateBuilder_ == null) {
           ueipUpdate_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -4791,9 +4781,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public Builder removeUeipUpdate(int index) {
+      @java.lang.Deprecated public Builder removeUeipUpdate(int index) {
         if (ueipUpdateBuilder_ == null) {
           ensureUeipUpdateIsMutable();
           ueipUpdate_.remove(index);
@@ -4804,16 +4794,16 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder getUeipUpdateBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder getUeipUpdateBuilder(
           int index) {
         return getUeipUpdateFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipUpdateOrBuilder(
           int index) {
         if (ueipUpdateBuilder_ == null) {
           return ueipUpdate_.get(index);  } else {
@@ -4821,9 +4811,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
+      @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder> 
            getUeipUpdateOrBuilderList() {
         if (ueipUpdateBuilder_ != null) {
           return ueipUpdateBuilder_.getMessageOrBuilderList();
@@ -4832,24 +4822,24 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipUpdateBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipUpdateBuilder() {
         return getUeipUpdateFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipUpdateBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder addUeipUpdateBuilder(
           int index) {
         return getUeipUpdateFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3;</code>
+       * <code>repeated .com.lvl6.proto.UserEnhancementItemProto ueipUpdate = 3 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder> 
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder> 
            getUeipUpdateBuilderList() {
         return getUeipUpdateFieldBuilder().getBuilderList();
       }
@@ -5986,61 +5976,74 @@ public final class EventMonsterProto {
     int getGemsForSpeedup();
 
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    boolean hasUmcep();
+    @java.lang.Deprecated boolean hasUmcep();
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep();
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep();
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    @java.lang.Deprecated java.util.List<java.lang.Long> getUserMonsterIdsList();
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    int getUserMonsterIdsCount();
+    @java.lang.Deprecated int getUserMonsterIdsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    long getUserMonsterIds(int index);
+    @java.lang.Deprecated long getUserMonsterIds(int index);
+
+    /**
+     * <code>optional int64 userMonsterId = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    boolean hasUserMonsterId();
+    /**
+     * <code>optional int64 userMonsterId = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    long getUserMonsterId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
-   *
-   * <pre>
-   *TODO: Get rid of this***********
-   * </pre>
    */
   public static final class EnhancementWaitTimeCompleteRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -6146,6 +6149,11 @@ public final class EventMonsterProto {
                 userMonsterIds_.add(input.readInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              userMonsterId_ = input.readInt64();
               break;
             }
           }
@@ -6261,68 +6269,91 @@ public final class EventMonsterProto {
     public static final int UMCEP_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_;
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    public boolean hasUmcep() {
+    @java.lang.Deprecated public boolean hasUmcep() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
       return umcep_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
      *
      * <pre>
      *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
       return umcep_;
     }
 
     public static final int USERMONSTERIDS_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Long> userMonsterIds_;
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public java.util.List<java.lang.Long>
+    @java.lang.Deprecated public java.util.List<java.lang.Long>
         getUserMonsterIdsList() {
       return userMonsterIds_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public int getUserMonsterIdsCount() {
+    @java.lang.Deprecated public int getUserMonsterIdsCount() {
       return userMonsterIds_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 5;</code>
+     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public long getUserMonsterIds(int index) {
+    @java.lang.Deprecated public long getUserMonsterIds(int index) {
       return userMonsterIds_.get(index);
+    }
+
+    public static final int USERMONSTERID_FIELD_NUMBER = 6;
+    private long userMonsterId_;
+    /**
+     * <code>optional int64 userMonsterId = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    public boolean hasUserMonsterId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 userMonsterId = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    public long getUserMonsterId() {
+      return userMonsterId_;
     }
 
     private void initFields() {
@@ -6331,6 +6362,7 @@ public final class EventMonsterProto {
       gemsForSpeedup_ = 0;
       umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       userMonsterIds_ = java.util.Collections.emptyList();
+      userMonsterId_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6359,6 +6391,9 @@ public final class EventMonsterProto {
       }
       for (int i = 0; i < userMonsterIds_.size(); i++) {
         output.writeInt64(5, userMonsterIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(6, userMonsterId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6393,6 +6428,10 @@ public final class EventMonsterProto {
         }
         size += dataSize;
         size += 1 * getUserMonsterIdsList().size();
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, userMonsterId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6474,10 +6513,6 @@ public final class EventMonsterProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
-     *
-     * <pre>
-     *TODO: Get rid of this***********
-     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -6535,6 +6570,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         userMonsterIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
+        userMonsterId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -6592,6 +6629,10 @@ public final class EventMonsterProto {
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.userMonsterIds_ = userMonsterIds_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.userMonsterId_ = userMonsterId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6629,6 +6670,9 @@ public final class EventMonsterProto {
             userMonsterIds_.addAll(other.userMonsterIds_);
           }
           onChanged();
+        }
+        if (other.hasUserMonsterId()) {
+          setUserMonsterId(other.getUserMonsterId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6873,23 +6917,23 @@ public final class EventMonsterProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> umcepBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public boolean hasUmcep() {
+      @java.lang.Deprecated public boolean hasUmcep() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
         if (umcepBuilder_ == null) {
           return umcep_;
         } else {
@@ -6897,13 +6941,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public Builder setUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+      @java.lang.Deprecated public Builder setUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
         if (umcepBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6917,13 +6961,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public Builder setUmcep(
+      @java.lang.Deprecated public Builder setUmcep(
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder builderForValue) {
         if (umcepBuilder_ == null) {
           umcep_ = builderForValue.build();
@@ -6935,13 +6979,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public Builder mergeUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+      @java.lang.Deprecated public Builder mergeUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
         if (umcepBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               umcep_ != com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance()) {
@@ -6958,13 +7002,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public Builder clearUmcep() {
+      @java.lang.Deprecated public Builder clearUmcep() {
         if (umcepBuilder_ == null) {
           umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
           onChanged();
@@ -6975,25 +7019,25 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder getUmcepBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder getUmcepBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getUmcepFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
         if (umcepBuilder_ != null) {
           return umcepBuilder_.getMessageOrBuilder();
         } else {
@@ -7001,7 +7045,7 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 4 [deprecated = true];</code>
        *
        * <pre>
        *client specifies the monster that results after finishing enhancement
@@ -7029,44 +7073,44 @@ public final class EventMonsterProto {
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public java.util.List<java.lang.Long>
+      @java.lang.Deprecated public java.util.List<java.lang.Long>
           getUserMonsterIdsList() {
         return java.util.Collections.unmodifiableList(userMonsterIds_);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public int getUserMonsterIdsCount() {
+      @java.lang.Deprecated public int getUserMonsterIdsCount() {
         return userMonsterIds_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public long getUserMonsterIds(int index) {
+      @java.lang.Deprecated public long getUserMonsterIds(int index) {
         return userMonsterIds_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder setUserMonsterIds(
+      @java.lang.Deprecated public Builder setUserMonsterIds(
           int index, long value) {
         ensureUserMonsterIdsIsMutable();
         userMonsterIds_.set(index, value);
@@ -7074,26 +7118,26 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder addUserMonsterIds(long value) {
+      @java.lang.Deprecated public Builder addUserMonsterIds(long value) {
         ensureUserMonsterIdsIsMutable();
         userMonsterIds_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder addAllUserMonsterIds(
+      @java.lang.Deprecated public Builder addAllUserMonsterIds(
           java.lang.Iterable<? extends java.lang.Long> values) {
         ensureUserMonsterIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -7102,15 +7146,63 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5;</code>
+       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder clearUserMonsterIds() {
+      @java.lang.Deprecated public Builder clearUserMonsterIds() {
         userMonsterIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      private long userMonsterId_ ;
+      /**
+       * <code>optional int64 userMonsterId = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public boolean hasUserMonsterId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 userMonsterId = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public long getUserMonsterId() {
+        return userMonsterId_;
+      }
+      /**
+       * <code>optional int64 userMonsterId = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public Builder setUserMonsterId(long value) {
+        bitField0_ |= 0x00000020;
+        userMonsterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 userMonsterId = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public Builder clearUserMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        userMonsterId_ = 0L;
         onChanged();
         return this;
       }
@@ -7277,27 +7369,19 @@ public final class EventMonsterProto {
        */
       SUCCESS(0, 1),
       /**
-       * <code>FAIL_HEALING_NOT_COMPLETE = 2;</code>
-       */
-      FAIL_HEALING_NOT_COMPLETE(1, 2),
-      /**
        * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
        */
-      FAIL_INSUFFICIENT_FUNDS(2, 3),
+      FAIL_INSUFFICIENT_FUNDS(1, 3),
       /**
        * <code>FAIL_OTHER = 4;</code>
        */
-      FAIL_OTHER(3, 4),
+      FAIL_OTHER(2, 4),
       ;
 
       /**
        * <code>SUCCESS = 1;</code>
        */
       public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_HEALING_NOT_COMPLETE = 2;</code>
-       */
-      public static final int FAIL_HEALING_NOT_COMPLETE_VALUE = 2;
       /**
        * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
        */
@@ -7313,7 +7397,6 @@ public final class EventMonsterProto {
       public static EnhancementWaitTimeCompleteStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return FAIL_HEALING_NOT_COMPLETE;
           case 3: return FAIL_INSUFFICIENT_FUNDS;
           case 4: return FAIL_OTHER;
           default: return null;
@@ -7821,8 +7904,8 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto)
   }
 
-  public interface EnhanceMonsterRequestProtoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhanceMonsterRequestProto)
+  public interface CollectMonsterEnhancementRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -7839,93 +7922,1747 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
      *
      * <pre>
-     *is base monster and contains grouping of sacrificed monsters
+     *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    boolean hasUep();
+    boolean hasUmcep();
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
      *
      * <pre>
-     *is base monster and contains grouping of sacrificed monsters
+     *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep();
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
      *
      * <pre>
-     *is base monster and contains grouping of sacrificed monsters
+     *client specifies the monster that results after finishing enhancement
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>repeated int64 userMonsterIds = 3;</code>
      *
      * <pre>
-     *the result of enhancing
+     *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    boolean hasEnhancingResult();
+    java.util.List<java.lang.Long> getUserMonsterIdsList();
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>repeated int64 userMonsterIds = 3;</code>
      *
      * <pre>
-     *the result of enhancing
+     *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult();
+    int getUserMonsterIdsCount();
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>repeated int64 userMonsterIds = 3;</code>
      *
      * <pre>
-     *the result of enhancing
+     *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder();
+    long getUserMonsterIds(int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
+   */
+  public static final class CollectMonsterEnhancementRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+      CollectMonsterEnhancementRequestProtoOrBuilder {
+    // Use CollectMonsterEnhancementRequestProto.newBuilder() to construct.
+    private CollectMonsterEnhancementRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CollectMonsterEnhancementRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CollectMonsterEnhancementRequestProto defaultInstance;
+    public static CollectMonsterEnhancementRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CollectMonsterEnhancementRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CollectMonsterEnhancementRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = umcep_.toBuilder();
+              }
+              umcep_ = input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(umcep_);
+                umcep_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              userMonsterIds_.add(input.readInt64());
+              break;
+            }
+            case 26: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                userMonsterIds_.add(input.readInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.class, com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CollectMonsterEnhancementRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<CollectMonsterEnhancementRequestProto>() {
+      public CollectMonsterEnhancementRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CollectMonsterEnhancementRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CollectMonsterEnhancementRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int UMCEP_FIELD_NUMBER = 2;
+    private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_;
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+     *
+     * <pre>
+     *client specifies the monster that results after finishing enhancement
+     * </pre>
+     */
+    public boolean hasUmcep() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+     *
+     * <pre>
+     *client specifies the monster that results after finishing enhancement
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
+      return umcep_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+     *
+     * <pre>
+     *client specifies the monster that results after finishing enhancement
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
+      return umcep_;
+    }
+
+    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Long> userMonsterIds_;
+    /**
+     * <code>repeated int64 userMonsterIds = 3;</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    public java.util.List<java.lang.Long>
+        getUserMonsterIdsList() {
+      return userMonsterIds_;
+    }
+    /**
+     * <code>repeated int64 userMonsterIds = 3;</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    public int getUserMonsterIdsCount() {
+      return userMonsterIds_.size();
+    }
+    /**
+     * <code>repeated int64 userMonsterIds = 3;</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    public long getUserMonsterIds(int index) {
+      return userMonsterIds_.get(index);
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
+      userMonsterIds_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, umcep_);
+      }
+      for (int i = 0; i < userMonsterIds_.size(); i++) {
+        output.writeInt64(3, userMonsterIds_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, umcep_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < userMonsterIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getUserMonsterIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.class, com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getUmcepFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (umcepBuilder_ == null) {
+          umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
+        } else {
+          umcepBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userMonsterIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto build() {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto result = new com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (umcepBuilder_ == null) {
+          result.umcep_ = umcep_;
+        } else {
+          result.umcep_ = umcepBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.userMonsterIds_ = userMonsterIds_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasUmcep()) {
+          mergeUmcep(other.getUmcep());
+        }
+        if (!other.userMonsterIds_.isEmpty()) {
+          if (userMonsterIds_.isEmpty()) {
+            userMonsterIds_ = other.userMonsterIds_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureUserMonsterIdsIsMutable();
+            userMonsterIds_.addAll(other.userMonsterIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> umcepBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public boolean hasUmcep() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getUmcep() {
+        if (umcepBuilder_ == null) {
+          return umcep_;
+        } else {
+          return umcepBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public Builder setUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+        if (umcepBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          umcep_ = value;
+          onChanged();
+        } else {
+          umcepBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public Builder setUmcep(
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder builderForValue) {
+        if (umcepBuilder_ == null) {
+          umcep_ = builderForValue.build();
+          onChanged();
+        } else {
+          umcepBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public Builder mergeUmcep(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+        if (umcepBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              umcep_ != com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance()) {
+            umcep_ =
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.newBuilder(umcep_).mergeFrom(value).buildPartial();
+          } else {
+            umcep_ = value;
+          }
+          onChanged();
+        } else {
+          umcepBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public Builder clearUmcep() {
+        if (umcepBuilder_ == null) {
+          umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
+          onChanged();
+        } else {
+          umcepBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder getUmcepBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getUmcepFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder() {
+        if (umcepBuilder_ != null) {
+          return umcepBuilder_.getMessageOrBuilder();
+        } else {
+          return umcep_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto umcep = 2;</code>
+       *
+       * <pre>
+       *client specifies the monster that results after finishing enhancement
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> 
+          getUmcepFieldBuilder() {
+        if (umcepBuilder_ == null) {
+          umcepBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder>(
+                  getUmcep(),
+                  getParentForChildren(),
+                  isClean());
+          umcep_ = null;
+        }
+        return umcepBuilder_;
+      }
+
+      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
+      private void ensureUserMonsterIdsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public java.util.List<java.lang.Long>
+          getUserMonsterIdsList() {
+        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public int getUserMonsterIdsCount() {
+        return userMonsterIds_.size();
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public long getUserMonsterIds(int index) {
+        return userMonsterIds_.get(index);
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder setUserMonsterIds(
+          int index, long value) {
+        ensureUserMonsterIdsIsMutable();
+        userMonsterIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder addUserMonsterIds(long value) {
+        ensureUserMonsterIdsIsMutable();
+        userMonsterIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder addAllUserMonsterIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureUserMonsterIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userMonsterIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 userMonsterIds = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder clearUserMonsterIds() {
+        userMonsterIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+    }
+
+    static {
+      defaultInstance = new CollectMonsterEnhancementRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectMonsterEnhancementRequestProto)
+  }
+
+  public interface CollectMonsterEnhancementResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+      com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 gemsSpent = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto}
+   */
+  public static final class CollectMonsterEnhancementResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+      CollectMonsterEnhancementResponseProtoOrBuilder {
+    // Use CollectMonsterEnhancementResponseProto.newBuilder() to construct.
+    private CollectMonsterEnhancementResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CollectMonsterEnhancementResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CollectMonsterEnhancementResponseProto defaultInstance;
+    public static CollectMonsterEnhancementResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CollectMonsterEnhancementResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CollectMonsterEnhancementResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus value = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.class, com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CollectMonsterEnhancementResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<CollectMonsterEnhancementResponseProto>() {
+      public CollectMonsterEnhancementResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CollectMonsterEnhancementResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CollectMonsterEnhancementResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus}
+     */
+    public enum CollectMonsterEnhancementStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      /**
+       * <code>FAIL_ENHANCEMENT_INCOMPLETE = 3;</code>
+       */
+      FAIL_ENHANCEMENT_INCOMPLETE(2, 3),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+      /**
+       * <code>FAIL_ENHANCEMENT_INCOMPLETE = 3;</code>
+       */
+      public static final int FAIL_ENHANCEMENT_INCOMPLETE_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static CollectMonsterEnhancementStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          case 3: return FAIL_ENHANCEMENT_INCOMPLETE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>() {
+              public CollectMonsterEnhancementStatus findValueByNumber(int number) {
+                return CollectMonsterEnhancementStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final CollectMonsterEnhancementStatus[] VALUES = values();
+
+      public static CollectMonsterEnhancementStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private CollectMonsterEnhancementStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.class, com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto build() {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto result = new com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+    }
+
+    static {
+      defaultInstance = new CollectMonsterEnhancementResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.CollectMonsterEnhancementResponseProto)
+  }
+
+  public interface EnhanceMonsterRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EnhanceMonsterRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
+     */
+    @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
+     *
+     * <pre>
+     *is base monster and contains grouping of sacrificed monsters
+     * </pre>
+     */
+    @java.lang.Deprecated boolean hasUep();
+    /**
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
+     *
+     * <pre>
+     *is base monster and contains grouping of sacrificed monsters
+     * </pre>
+     */
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep();
+    /**
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
+     *
+     * <pre>
+     *is base monster and contains grouping of sacrificed monsters
+     * </pre>
+     */
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
+     *
+     * <pre>
+     *the result of enhancing
+     * </pre>
+     */
+    @java.lang.Deprecated boolean hasEnhancingResult();
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
+     *
+     * <pre>
+     *the result of enhancing
+     * </pre>
+     */
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult();
+    /**
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
+     *
+     * <pre>
+     *the result of enhancing
+     * </pre>
+     */
+    @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder();
+
+    /**
+     * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
      *
      * <pre>
      *if user needs, say, five more oil, then user can spend gems to replace
      *said five oil. (positive number, server will convert it to negative)
      * </pre>
      */
-    boolean hasGemsSpent();
+    @java.lang.Deprecated boolean hasGemsSpent();
     /**
-     * <code>optional int32 gemsSpent = 4;</code>
+     * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
      *
      * <pre>
      *if user needs, say, five more oil, then user can spend gems to replace
      *said five oil. (positive number, server will convert it to negative)
      * </pre>
      */
-    int getGemsSpent();
+    @java.lang.Deprecated int getGemsSpent();
 
     /**
-     * <code>optional sint32 oilChange = 5;</code>
+     * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
      *
      * <pre>
      *cost to use the sacrificed monsters
      * </pre>
      */
-    boolean hasOilChange();
+    @java.lang.Deprecated boolean hasOilChange();
     /**
-     * <code>optional sint32 oilChange = 5;</code>
+     * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
      *
      * <pre>
      *cost to use the sacrificed monsters
      * </pre>
      */
-    int getOilChange();
+    @java.lang.Deprecated int getOilChange();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhanceMonsterRequestProto}
+   *
+   * <pre>
+   *DEPRECATED:
+   * </pre>
    */
   public static final class EnhanceMonsterRequestProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -8068,135 +9805,135 @@ public final class EventMonsterProto {
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public boolean hasSender() {
+    @java.lang.Deprecated public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
     public static final int UEP_FIELD_NUMBER = 2;
     private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto uep_;
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
      *
      * <pre>
      *is base monster and contains grouping of sacrificed monsters
      * </pre>
      */
-    public boolean hasUep() {
+    @java.lang.Deprecated public boolean hasUep() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
      *
      * <pre>
      *is base monster and contains grouping of sacrificed monsters
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep() {
       return uep_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+     * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
      *
      * <pre>
      *is base monster and contains grouping of sacrificed monsters
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder() {
       return uep_;
     }
 
     public static final int ENHANCINGRESULT_FIELD_NUMBER = 3;
     private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto enhancingResult_;
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
      *
      * <pre>
      *the result of enhancing
      * </pre>
      */
-    public boolean hasEnhancingResult() {
+    @java.lang.Deprecated public boolean hasEnhancingResult() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
      *
      * <pre>
      *the result of enhancing
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult() {
       return enhancingResult_;
     }
     /**
-     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+     * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
      *
      * <pre>
      *the result of enhancing
      * </pre>
      */
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder() {
       return enhancingResult_;
     }
 
     public static final int GEMSSPENT_FIELD_NUMBER = 4;
     private int gemsSpent_;
     /**
-     * <code>optional int32 gemsSpent = 4;</code>
+     * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
      *
      * <pre>
      *if user needs, say, five more oil, then user can spend gems to replace
      *said five oil. (positive number, server will convert it to negative)
      * </pre>
      */
-    public boolean hasGemsSpent() {
+    @java.lang.Deprecated public boolean hasGemsSpent() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 gemsSpent = 4;</code>
+     * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
      *
      * <pre>
      *if user needs, say, five more oil, then user can spend gems to replace
      *said five oil. (positive number, server will convert it to negative)
      * </pre>
      */
-    public int getGemsSpent() {
+    @java.lang.Deprecated public int getGemsSpent() {
       return gemsSpent_;
     }
 
     public static final int OILCHANGE_FIELD_NUMBER = 5;
     private int oilChange_;
     /**
-     * <code>optional sint32 oilChange = 5;</code>
+     * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
      *
      * <pre>
      *cost to use the sacrificed monsters
      * </pre>
      */
-    public boolean hasOilChange() {
+    @java.lang.Deprecated public boolean hasOilChange() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional sint32 oilChange = 5;</code>
+     * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
      *
      * <pre>
      *cost to use the sacrificed monsters
      * </pre>
      */
-    public int getOilChange() {
+    @java.lang.Deprecated public int getOilChange() {
       return oilChange_;
     }
 
@@ -8344,6 +10081,10 @@ public final class EventMonsterProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.EnhanceMonsterRequestProto}
+     *
+     * <pre>
+     *DEPRECATED:
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -8528,15 +10269,15 @@ public final class EventMonsterProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public boolean hasSender() {
+      @java.lang.Deprecated public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -8544,9 +10285,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      @java.lang.Deprecated public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8560,9 +10301,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder setSender(
+      @java.lang.Deprecated public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
@@ -8574,9 +10315,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      @java.lang.Deprecated public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
@@ -8593,9 +10334,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder clearSender() {
+      @java.lang.Deprecated public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
@@ -8606,17 +10347,17 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -8624,7 +10365,7 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
@@ -8644,23 +10385,23 @@ public final class EventMonsterProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder> uepBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public boolean hasUep() {
+      @java.lang.Deprecated public boolean hasUep() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getUep() {
         if (uepBuilder_ == null) {
           return uep_;
         } else {
@@ -8668,13 +10409,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public Builder setUep(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
+      @java.lang.Deprecated public Builder setUep(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
         if (uepBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8688,13 +10429,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public Builder setUep(
+      @java.lang.Deprecated public Builder setUep(
           com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder builderForValue) {
         if (uepBuilder_ == null) {
           uep_ = builderForValue.build();
@@ -8706,13 +10447,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public Builder mergeUep(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
+      @java.lang.Deprecated public Builder mergeUep(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
         if (uepBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
               uep_ != com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance()) {
@@ -8729,13 +10470,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public Builder clearUep() {
+      @java.lang.Deprecated public Builder clearUep() {
         if (uepBuilder_ == null) {
           uep_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance();
           onChanged();
@@ -8746,25 +10487,25 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder getUepBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder getUepBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getUepFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getUepOrBuilder() {
         if (uepBuilder_ != null) {
           return uepBuilder_.getMessageOrBuilder();
         } else {
@@ -8772,7 +10513,7 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2;</code>
+       * <code>optional .com.lvl6.proto.UserEnhancementProto uep = 2 [deprecated = true];</code>
        *
        * <pre>
        *is base monster and contains grouping of sacrificed monsters
@@ -8796,23 +10537,23 @@ public final class EventMonsterProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder> enhancingResultBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public boolean hasEnhancingResult() {
+      @java.lang.Deprecated public boolean hasEnhancingResult() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto getEnhancingResult() {
         if (enhancingResultBuilder_ == null) {
           return enhancingResult_;
         } else {
@@ -8820,13 +10561,13 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public Builder setEnhancingResult(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+      @java.lang.Deprecated public Builder setEnhancingResult(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
         if (enhancingResultBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8840,13 +10581,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public Builder setEnhancingResult(
+      @java.lang.Deprecated public Builder setEnhancingResult(
           com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder builderForValue) {
         if (enhancingResultBuilder_ == null) {
           enhancingResult_ = builderForValue.build();
@@ -8858,13 +10599,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public Builder mergeEnhancingResult(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
+      @java.lang.Deprecated public Builder mergeEnhancingResult(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto value) {
         if (enhancingResultBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
               enhancingResult_ != com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance()) {
@@ -8881,13 +10622,13 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public Builder clearEnhancingResult() {
+      @java.lang.Deprecated public Builder clearEnhancingResult() {
         if (enhancingResultBuilder_ == null) {
           enhancingResult_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
           onChanged();
@@ -8898,25 +10639,25 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder getEnhancingResultBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder getEnhancingResultBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getEnhancingResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
        * </pre>
        */
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getEnhancingResultOrBuilder() {
         if (enhancingResultBuilder_ != null) {
           return enhancingResultBuilder_.getMessageOrBuilder();
         } else {
@@ -8924,7 +10665,7 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3;</code>
+       * <code>optional .com.lvl6.proto.UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];</code>
        *
        * <pre>
        *the result of enhancing
@@ -8946,50 +10687,50 @@ public final class EventMonsterProto {
 
       private int gemsSpent_ ;
       /**
-       * <code>optional int32 gemsSpent = 4;</code>
+       * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
        *
        * <pre>
        *if user needs, say, five more oil, then user can spend gems to replace
        *said five oil. (positive number, server will convert it to negative)
        * </pre>
        */
-      public boolean hasGemsSpent() {
+      @java.lang.Deprecated public boolean hasGemsSpent() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 gemsSpent = 4;</code>
+       * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
        *
        * <pre>
        *if user needs, say, five more oil, then user can spend gems to replace
        *said five oil. (positive number, server will convert it to negative)
        * </pre>
        */
-      public int getGemsSpent() {
+      @java.lang.Deprecated public int getGemsSpent() {
         return gemsSpent_;
       }
       /**
-       * <code>optional int32 gemsSpent = 4;</code>
+       * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
        *
        * <pre>
        *if user needs, say, five more oil, then user can spend gems to replace
        *said five oil. (positive number, server will convert it to negative)
        * </pre>
        */
-      public Builder setGemsSpent(int value) {
+      @java.lang.Deprecated public Builder setGemsSpent(int value) {
         bitField0_ |= 0x00000008;
         gemsSpent_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 gemsSpent = 4;</code>
+       * <code>optional int32 gemsSpent = 4 [deprecated = true];</code>
        *
        * <pre>
        *if user needs, say, five more oil, then user can spend gems to replace
        *said five oil. (positive number, server will convert it to negative)
        * </pre>
        */
-      public Builder clearGemsSpent() {
+      @java.lang.Deprecated public Builder clearGemsSpent() {
         bitField0_ = (bitField0_ & ~0x00000008);
         gemsSpent_ = 0;
         onChanged();
@@ -8998,46 +10739,46 @@ public final class EventMonsterProto {
 
       private int oilChange_ ;
       /**
-       * <code>optional sint32 oilChange = 5;</code>
+       * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
        *
        * <pre>
        *cost to use the sacrificed monsters
        * </pre>
        */
-      public boolean hasOilChange() {
+      @java.lang.Deprecated public boolean hasOilChange() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional sint32 oilChange = 5;</code>
+       * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
        *
        * <pre>
        *cost to use the sacrificed monsters
        * </pre>
        */
-      public int getOilChange() {
+      @java.lang.Deprecated public int getOilChange() {
         return oilChange_;
       }
       /**
-       * <code>optional sint32 oilChange = 5;</code>
+       * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
        *
        * <pre>
        *cost to use the sacrificed monsters
        * </pre>
        */
-      public Builder setOilChange(int value) {
+      @java.lang.Deprecated public Builder setOilChange(int value) {
         bitField0_ |= 0x00000010;
         oilChange_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint32 oilChange = 5;</code>
+       * <code>optional sint32 oilChange = 5 [deprecated = true];</code>
        *
        * <pre>
        *cost to use the sacrificed monsters
        * </pre>
        */
-      public Builder clearOilChange() {
+      @java.lang.Deprecated public Builder clearOilChange() {
         bitField0_ = (bitField0_ & ~0x00000010);
         oilChange_ = 0;
         onChanged();
@@ -9060,17 +10801,17 @@ public final class EventMonsterProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    boolean hasSender();
+    @java.lang.Deprecated boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProto getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    @java.lang.Deprecated com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.EnhanceMonsterResponseProto.EnhanceMonsterStatus status = 2;</code>
@@ -9083,6 +10824,10 @@ public final class EventMonsterProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhanceMonsterResponseProto}
+   *
+   * <pre>
+   *DEPRECATED:
+   * </pre>
    */
   public static final class EnhanceMonsterResponseProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -9300,21 +11045,21 @@ public final class EventMonsterProto {
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public boolean hasSender() {
+    @java.lang.Deprecated public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -9453,6 +11198,10 @@ public final class EventMonsterProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.EnhanceMonsterResponseProto}
+     *
+     * <pre>
+     *DEPRECATED:
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -9592,15 +11341,15 @@ public final class EventMonsterProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public boolean hasSender() {
+      @java.lang.Deprecated public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -9608,9 +11357,9 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      @java.lang.Deprecated public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9624,9 +11373,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder setSender(
+      @java.lang.Deprecated public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
@@ -9638,9 +11387,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      @java.lang.Deprecated public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
@@ -9657,9 +11406,9 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public Builder clearSender() {
+      @java.lang.Deprecated public Builder clearSender() {
         if (senderBuilder_ == null) {
           sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
@@ -9670,17 +11419,17 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -9688,7 +11437,7 @@ public final class EventMonsterProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1 [deprecated = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
@@ -30196,6 +31945,16 @@ public final class EventMonsterProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -30355,191 +32114,204 @@ public final class EventMonsterProto {
       "tionFinishedResponseProto.EvolutionFinis" +
       "hedStatus\"R\n\027EvolutionFinishedStatus\022\013\n\007" +
       "SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n" +
-      "\nFAIL_OTHER\020\003\"\305\002\n$SubmitMonsterEnhanceme" +
+      "\nFAIL_OTHER\020\003\"\315\002\n$SubmitMonsterEnhanceme" +
       "ntRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl" +
       "6.proto.MinimumUserProtoWithMaxResources" +
-      "\022<\n\nueipDelete\030\002 \003(\0132(.com.lvl6.proto.Us",
-      "erEnhancementItemProto\022<\n\nueipUpdate\030\003 \003" +
-      "(\0132(.com.lvl6.proto.UserEnhancementItemP" +
-      "roto\0229\n\007ueipNew\030\004 \003(\0132(.com.lvl6.proto.U" +
-      "serEnhancementItemProto\022\021\n\tgemsSpent\030\005 \001" +
-      "(\005\022\021\n\toilChange\030\006 \001(\021\"\305\002\n%SubmitMonsterE" +
-      "nhancementResponseProto\022@\n\006sender\030\001 \001(\0132" +
-      "0.com.lvl6.proto.MinimumUserProtoWithMax" +
-      "Resources\022d\n\006status\030\002 \001(\0162T.com.lvl6.pro" +
-      "to.SubmitMonsterEnhancementResponseProto" +
-      ".SubmitMonsterEnhancementStatus\"t\n\036Submi",
-      "tMonsterEnhancementStatus\022\013\n\007SUCCESS\020\001\022\032" +
-      "\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_INSUF" +
-      "FICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\331\001\n\'Enhanc" +
-      "ementWaitTimeCompleteRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedup" +
-      "\030\003 \001(\005\0229\n\005umcep\030\004 \001(\0132*.com.lvl6.proto.U" +
-      "serMonsterCurrentExpProto\022\026\n\016userMonster" +
-      "Ids\030\005 \003(\003\"\306\002\n(EnhancementWaitTimeComplet" +
-      "eResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl",
-      "6.proto.MinimumUserProto\022j\n\006status\030\002 \001(\016" +
-      "2Z.com.lvl6.proto.EnhancementWaitTimeCom" +
-      "pleteResponseProto.EnhancementWaitTimeCo" +
-      "mpleteStatus\"|\n!EnhancementWaitTimeCompl" +
-      "eteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_N" +
-      "OT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS" +
-      "\020\003\022\016\n\nFAIL_OTHER\020\004\"\354\001\n\032EnhanceMonsterReq" +
-      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\0221\n\003uep\030\002 \001(\0132$.com.l" +
-      "vl6.proto.UserEnhancementProto\022C\n\017enhanc",
-      "ingResult\030\003 \001(\0132*.com.lvl6.proto.UserMon" +
-      "sterCurrentExpProto\022\021\n\tgemsSpent\030\004 \001(\005\022\021" +
-      "\n\toilChange\030\005 \001(\021\"\215\002\n\033EnhanceMonsterResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022P\n\006status\030\002 \001(\0162@.co" +
-      "m.lvl6.proto.EnhanceMonsterResponseProto" +
-      ".EnhanceMonsterStatus\"j\n\024EnhanceMonsterS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_" +
-      "GEMS\020\002\022\031\n\025FAIL_INSUFFICIENT_OIL\020\003\022\016\n\nFAI" +
-      "L_OTHER\020\004\"\310\002\n\037UpdateMonsterHealthRequest",
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022<\n\005umchp\030\002 \003(\0132-.com.lvl" +
-      "6.proto.UserMonsterCurrentHealthProto\022\022\n" +
-      "\nclientTime\030\003 \001(\003\022\022\n\nuserTaskId\030\004 \001(\003\022 \n" +
-      "\030isUpdateTaskStageForUser\030\005 \001(\010\022\025\n\rnuTas" +
-      "kStageId\030\006 \001(\005\022\026\n\016droplessTsfuId\030\007 \001(\003\022 " +
-      "\n\030changeNuPvpDmgMultiplier\030\010 \001(\010\022\032\n\022nuPv" +
-      "pDmgMultiplier\030\t \001(\002\"\207\002\n UpdateMonsterHe" +
-      "althResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022Z\n\006status\030\002 ",
-      "\001(\0162J.com.lvl6.proto.UpdateMonsterHealth" +
-      "ResponseProto.UpdateMonsterHealthStatus\"" +
-      "U\n\031UpdateMonsterHealthStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_O" +
-      "THER\020\003\"\244\003\n\027HealMonsterRequestProto\022@\n\006se" +
-      "nder\030\001 \001(\01320.com.lvl6.proto.MinimumUserP" +
-      "rotoWithMaxResources\022:\n\tumhDelete\030\002 \003(\0132" +
-      "\'.com.lvl6.proto.UserMonsterHealingProto" +
-      "\022:\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.proto.Use" +
-      "rMonsterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.c",
-      "om.lvl6.proto.UserMonsterHealingProto\022\022\n" +
-      "\ncashChange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006" +
-      " \001(\005\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedu" +
-      "p\030\010 \001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto." +
-      "UserMonsterCurrentHealthProto\"\341\002\n\030HealMo" +
-      "nsterResponseProto\022@\n\006sender\030\001 \001(\01320.com" +
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto.He" +
-      "alMonsterResponseProto.HealMonsterStatus" +
-      "\"\266\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n\027F",
-      "AIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_ALL_MON" +
-      "STERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL_MONS" +
-      "TERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\022\035\n\031FA" +
-      "IL_HEALING_NOT_COMPLETE\020\006\"\202\001\n\"AddMonster" +
-      "ToBattleTeamRequestProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\023\n\013te" +
-      "amSlotNum\030\002 \001(\005\022\025\n\ruserMonsterId\030\003 \001(\003\"\366" +
-      "\001\n#AddMonsterToBattleTeamResponseProto\0220" +
+      "\022@\n\nueipDelete\030\002 \003(\0132(.com.lvl6.proto.Us",
+      "erEnhancementItemProtoB\002\030\001\022@\n\nueipUpdate" +
+      "\030\003 \003(\0132(.com.lvl6.proto.UserEnhancementI" +
+      "temProtoB\002\030\001\0229\n\007ueipNew\030\004 \003(\0132(.com.lvl6" +
+      ".proto.UserEnhancementItemProto\022\021\n\tgemsS" +
+      "pent\030\005 \001(\005\022\021\n\toilChange\030\006 \001(\021\"\305\002\n%Submit" +
+      "MonsterEnhancementResponseProto\022@\n\006sende" +
+      "r\030\001 \001(\01320.com.lvl6.proto.MinimumUserProt" +
+      "oWithMaxResources\022d\n\006status\030\002 \001(\0162T.com." +
+      "lvl6.proto.SubmitMonsterEnhancementRespo" +
+      "nseProto.SubmitMonsterEnhancementStatus\"",
+      "t\n\036SubmitMonsterEnhancementStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FA" +
+      "IL_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\370\001" +
+      "\n\'EnhancementWaitTimeCompleteRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsFo" +
+      "rSpeedup\030\003 \001(\005\022=\n\005umcep\030\004 \001(\0132*.com.lvl6" +
+      ".proto.UserMonsterCurrentExpProtoB\002\030\001\022\032\n" +
+      "\016userMonsterIds\030\005 \003(\003B\002\030\001\022\025\n\ruserMonster" +
+      "Id\030\006 \001(\003\"\247\002\n(EnhancementWaitTimeComplete",
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022j\n\006status\030\002 \001(\0162" +
+      "Z.com.lvl6.proto.EnhancementWaitTimeComp" +
+      "leteResponseProto.EnhancementWaitTimeCom" +
+      "pleteStatus\"]\n!EnhancementWaitTimeComple" +
+      "teStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIE" +
+      "NT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\254\001\n%CollectMo" +
+      "nsterEnhancementRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0229" +
+      "\n\005umcep\030\002 \001(\0132*.com.lvl6.proto.UserMonst",
+      "erCurrentExpProto\022\026\n\016userMonsterIds\030\003 \003(" +
+      "\003\"\243\002\n&CollectMonsterEnhancementResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022f\n\006status\030\002 \001(\0162V.com.lvl" +
+      "6.proto.CollectMonsterEnhancementRespons" +
+      "eProto.CollectMonsterEnhancementStatus\"_" +
+      "\n\037CollectMonsterEnhancementStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\037\n\033FAIL_ENHANCEME" +
+      "NT_INCOMPLETE\020\003\"\200\002\n\032EnhanceMonsterReques" +
+      "tProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.proto.",
+      "MinimumUserProtoB\002\030\001\0225\n\003uep\030\002 \001(\0132$.com." +
+      "lvl6.proto.UserEnhancementProtoB\002\030\001\022G\n\017e" +
+      "nhancingResult\030\003 \001(\0132*.com.lvl6.proto.Us" +
+      "erMonsterCurrentExpProtoB\002\030\001\022\025\n\tgemsSpen" +
+      "t\030\004 \001(\005B\002\030\001\022\025\n\toilChange\030\005 \001(\021B\002\030\001\"\221\002\n\033E" +
+      "nhanceMonsterResponseProto\0224\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProtoB\002\030\001" +
+      "\022P\n\006status\030\002 \001(\0162@.com.lvl6.proto.Enhanc" +
+      "eMonsterResponseProto.EnhanceMonsterStat" +
+      "us\"j\n\024EnhanceMonsterStatus\022\013\n\007SUCCESS\020\001\022",
+      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_INSU" +
+      "FFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\310\002\n\037Updat" +
+      "eMonsterHealthRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022<\n\005" +
+      "umchp\030\002 \003(\0132-.com.lvl6.proto.UserMonster" +
+      "CurrentHealthProto\022\022\n\nclientTime\030\003 \001(\003\022\022" +
+      "\n\nuserTaskId\030\004 \001(\003\022 \n\030isUpdateTaskStageF" +
+      "orUser\030\005 \001(\010\022\025\n\rnuTaskStageId\030\006 \001(\005\022\026\n\016d" +
+      "roplessTsfuId\030\007 \001(\003\022 \n\030changeNuPvpDmgMul" +
+      "tiplier\030\010 \001(\010\022\032\n\022nuPvpDmgMultiplier\030\t \001(",
+      "\002\"\207\002\n UpdateMonsterHealthResponseProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.prot",
-      "o.AddMonsterToBattleTeamResponseProto.Ad" +
-      "dMonsterToBattleTeamStatus\";\n\034AddMonster" +
-      "ToBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"r\n\'RemoveMonsterFromBattleTeamRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\025\n\ruserMonsterId\030\003 " +
-      "\001(\003\"\212\002\n(RemoveMonsterFromBattleTeamRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z.com" +
-      ".lvl6.proto.RemoveMonsterFromBattleTeamR",
-      "esponseProto.RemoveMonsterFromBattleTeam" +
-      "Status\"@\n!RemoveMonsterFromBattleTeamSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\266\002\n(Inc" +
-      "reaseMonsterInventorySlotRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022c\n\020increaseSlotType\030\002 \001(\0162I.com." +
-      "lvl6.proto.IncreaseMonsterInventorySlotR" +
-      "equestProto.IncreaseSlotType\022\024\n\014userStru" +
-      "ctId\030\003 \001(\005\022\036\n\026userFbInviteForSlotIds\030\004 \003" +
-      "(\005\"=\n\020IncreaseSlotType\022\014\n\010PURCHASE\020\001\022\033\n\027",
-      "REDEEM_FACEBOOK_INVITES\020\002\"\240\003\n)IncreaseMo" +
-      "nsterInventorySlotResponseProto\0220\n\006sende" +
+      "serProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.prot" +
+      "o.UpdateMonsterHealthResponseProto.Updat" +
+      "eMonsterHealthStatus\"U\n\031UpdateMonsterHea" +
+      "lthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICI" +
+      "ENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\244\003\n\027HealMons" +
+      "terRequestProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
+      "l6.proto.MinimumUserProtoWithMaxResource" +
+      "s\022:\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.Us",
+      "erMonsterHealingProto\022:\n\tumhUpdate\030\003 \003(\013" +
+      "2\'.com.lvl6.proto.UserMonsterHealingProt" +
+      "o\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserM" +
+      "onsterHealingProto\022\022\n\ncashChange\030\005 \001(\021\022\031" +
+      "\n\021gemCostForHealing\030\006 \001(\005\022\021\n\tisSpeedup\030\007" +
+      " \001(\010\022\026\n\016gemsForSpeedup\030\010 \001(\005\022<\n\005umchp\030\t " +
+      "\003(\0132-.com.lvl6.proto.UserMonsterCurrentH" +
+      "ealthProto\"\341\002\n\030HealMonsterResponseProto\022" +
+      "@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimum" +
+      "UserProtoWithMaxResources\022J\n\006status\030\002 \001(",
+      "\0162:.com.lvl6.proto.HealMonsterResponsePr" +
+      "oto.HealMonsterStatus\"\266\001\n\021HealMonsterSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FU" +
+      "NDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HEALI" +
+      "NG\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT\020\004\022" +
+      "\016\n\nFAIL_OTHER\020\005\022\035\n\031FAIL_HEALING_NOT_COMP" +
+      "LETE\020\006\"\202\001\n\"AddMonsterToBattleTeamRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\r" +
+      "userMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBatt",
+      "leTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022`\n\006status\030" +
+      "\002 \001(\0162P.com.lvl6.proto.AddMonsterToBattl" +
+      "eTeamResponseProto.AddMonsterToBattleTea" +
+      "mStatus\";\n\034AddMonsterToBattleTeamStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveMo" +
+      "nsterFromBattleTeamRequestProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto.Incre" +
-      "aseMonsterInventorySlotResponseProto.Inc" +
-      "reaseMonsterInventorySlotStatus\"\322\001\n\"Incr" +
-      "easeMonsterInventorySlotStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022&\n\"FAIL" +
-      "_INSUFFICIENT_FACEBOOK_INVITES\020\003\022\016\n\nFAIL" +
-      "_OTHER\020\004\022!\n\035FAIL_INCONSISTENT_INVITE_DAT",
-      "A\020\005\022\'\n#FAIL_STRUCTURE_AT_MAX_FB_INVITE_L" +
-      "VL\020\006\"\241\002\n#InviteFbFriendsForSlotsRequestP" +
-      "roto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mi" +
-      "nimumUserProtoWithFacebookId\022\\\n\007invites\030" +
-      "\002 \003(\0132K.com.lvl6.proto.InviteFbFriendsFo" +
-      "rSlotsRequestProto.FacebookInviteStructu" +
-      "re\032\\\n\027FacebookInviteStructure\022\022\n\nfbFrien" +
-      "dId\030\001 \001(\t\022\024\n\014userStructId\030\002 \001(\005\022\027\n\017userS" +
-      "tructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFriendsForS" +
-      "lotsResponseProto\022>\n\006sender\030\001 \001(\0132..com.",
-      "lvl6.proto.MinimumUserProtoWithFacebookI" +
-      "d\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto.Invit" +
-      "eFbFriendsForSlotsResponseProto.InviteFb" +
-      "FriendsForSlotsStatus\022B\n\ninvitesNew\030\003 \003(" +
-      "\0132..com.lvl6.proto.UserFacebookInviteFor" +
-      "SlotProto\"<\n\035InviteFbFriendsForSlotsStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n+Acce" +
-      "ptAndRejectFbInviteForSlotsRequestProto\022" +
-      ">\n\006sender\030\001 \001(\0132..com.lvl6.proto.Minimum" +
-      "UserProtoWithFacebookId\022\031\n\021acceptedInvit",
-      "eIds\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003(\005\"\237\003" +
-      "\n,AcceptAndRejectFbInviteForSlotsRespons" +
-      "eProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto." +
-      "MinimumUserProtoWithFacebookId\022r\n\006status" +
-      "\030\002 \001(\0162b.com.lvl6.proto.AcceptAndRejectF" +
-      "bInviteForSlotsResponseProto.AcceptAndRe" +
-      "jectFbInviteForSlotsStatus\022G\n\017acceptedIn" +
-      "vites\030\003 \003(\0132..com.lvl6.proto.UserFaceboo" +
-      "kInviteForSlotProto\"r\n%AcceptAndRejectFb" +
-      "InviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020\n\014FAI",
-      "L_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_USED\020\003\022" +
-      "\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMonsterPi" +
-      "ecesRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\026\n\016userMonste" +
-      "rIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%CombineU" +
-      "serMonsterPiecesResponseProto\0220\n\006sender\030" +
+      "o\022\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMonst" +
+      "erFromBattleTeamResponseProto\0220\n\006sender\030",
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Combine" +
-      "UserMonsterPiecesResponseProto.CombineUs" +
-      "erMonsterPiecesStatus\"\205\001\n\036CombineUserMon",
-      "sterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_IN" +
-      "SUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN_ONE_" +
-      "MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER\020\004\"\233\001" +
-      "\n\033SellUserMonsterRequestProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022:\n\005sales\030\002 \003(\0132+.com.lvl" +
-      "6.proto.MinimumUserMonsterSellProto\"\352\001\n\034" +
-      "SellUserMonsterResponseProto\022@\n\006sender\030\001" +
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\022R\n\006status\030\002 \001(\0162B.com.lvl",
-      "6.proto.SellUserMonsterResponseProto.Sel" +
-      "lUserMonsterStatus\"4\n\025SellUserMonsterSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"k\n\037Rest" +
-      "rictUserMonsterRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\026\n" +
-      "\016userMonsterIds\030\003 \003(\003\"\352\001\n RestrictUserMo" +
-      "nsterResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022Z\n\006status\030\002" +
-      " \001(\0162J.com.lvl6.proto.RestrictUserMonste" +
-      "rResponseProto.RestrictUserMonsterStatus",
-      "\"8\n\031RestrictUserMonsterStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n!UnrestrictUserMons" +
-      "terRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\026\n\016userMonster" +
-      "Ids\030\003 \003(\003\"\362\001\n\"UnrestrictUserMonsterRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.com" +
-      ".lvl6.proto.UnrestrictUserMonsterRespons" +
-      "eProto.UnrestrictUserMonsterStatus\":\n\033Un" +
-      "restrictUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016",
-      "\n\nFAIL_OTHER\020\002B\023B\021EventMonsterProto"
+      "j\n\006status\030\002 \001(\0162Z.com.lvl6.proto.RemoveM" +
+      "onsterFromBattleTeamResponseProto.Remove" +
+      "MonsterFromBattleTeamStatus\"@\n!RemoveMon" +
+      "sterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\266\002\n(IncreaseMonsterInvento" +
+      "rySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022c\n\020increase" +
+      "SlotType\030\002 \001(\0162I.com.lvl6.proto.Increase" +
+      "MonsterInventorySlotRequestProto.Increas",
+      "eSlotType\022\024\n\014userStructId\030\003 \001(\005\022\036\n\026userF" +
+      "bInviteForSlotIds\030\004 \003(\005\"=\n\020IncreaseSlotT" +
+      "ype\022\014\n\010PURCHASE\020\001\022\033\n\027REDEEM_FACEBOOK_INV" +
+      "ITES\020\002\"\240\003\n)IncreaseMonsterInventorySlotR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022l\n\006status\030\002 \001(\0162\\" +
+      ".com.lvl6.proto.IncreaseMonsterInventory" +
+      "SlotResponseProto.IncreaseMonsterInvento" +
+      "rySlotStatus\"\322\001\n\"IncreaseMonsterInventor" +
+      "ySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI",
+      "CIENT_FUNDS\020\002\022&\n\"FAIL_INSUFFICIENT_FACEB" +
+      "OOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\022!\n\035FAIL_IN" +
+      "CONSISTENT_INVITE_DATA\020\005\022\'\n#FAIL_STRUCTU" +
+      "RE_AT_MAX_FB_INVITE_LVL\020\006\"\241\002\n#InviteFbFr" +
+      "iendsForSlotsRequestProto\022>\n\006sender\030\001 \001(" +
+      "\0132..com.lvl6.proto.MinimumUserProtoWithF" +
+      "acebookId\022\\\n\007invites\030\002 \003(\0132K.com.lvl6.pr" +
+      "oto.InviteFbFriendsForSlotsRequestProto." +
+      "FacebookInviteStructure\032\\\n\027FacebookInvit" +
+      "eStructure\022\022\n\nfbFriendId\030\001 \001(\t\022\024\n\014userSt",
+      "ructId\030\002 \001(\005\022\027\n\017userStructFbLvl\030\003 \001(\005\"\314\002" +
+      "\n$InviteFbFriendsForSlotsResponseProto\022>" +
+      "\n\006sender\030\001 \001(\0132..com.lvl6.proto.MinimumU" +
+      "serProtoWithFacebookId\022b\n\006status\030\002 \001(\0162R" +
+      ".com.lvl6.proto.InviteFbFriendsForSlotsR" +
+      "esponseProto.InviteFbFriendsForSlotsStat" +
+      "us\022B\n\ninvitesNew\030\003 \003(\0132..com.lvl6.proto." +
+      "UserFacebookInviteForSlotProto\"<\n\035Invite" +
+      "FbFriendsForSlotsStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
+      "FAIL_OTHER\020\002\"\243\001\n+AcceptAndRejectFbInvite",
+      "ForSlotsRequestProto\022>\n\006sender\030\001 \001(\0132..c" +
+      "om.lvl6.proto.MinimumUserProtoWithFacebo" +
+      "okId\022\031\n\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejec" +
+      "tedInviteIds\030\003 \003(\005\"\237\003\n,AcceptAndRejectFb" +
+      "InviteForSlotsResponseProto\022>\n\006sender\030\001 " +
+      "\001(\0132..com.lvl6.proto.MinimumUserProtoWit" +
+      "hFacebookId\022r\n\006status\030\002 \001(\0162b.com.lvl6.p" +
+      "roto.AcceptAndRejectFbInviteForSlotsResp" +
+      "onseProto.AcceptAndRejectFbInviteForSlot" +
+      "sStatus\022G\n\017acceptedInvites\030\003 \003(\0132..com.l",
+      "vl6.proto.UserFacebookInviteForSlotProto" +
+      "\"r\n%AcceptAndRejectFbInviteForSlotsStatu" +
+      "s\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL" +
+      "_ALREADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n" +
+      "$CombineUserMonsterPiecesRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCo" +
+      "st\030\003 \001(\005\"\307\002\n%CombineUserMonsterPiecesRes" +
+      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022d\n\006status\030\002 \001(\0162T.c",
+      "om.lvl6.proto.CombineUserMonsterPiecesRe" +
+      "sponseProto.CombineUserMonsterPiecesStat" +
+      "us\"\205\001\n\036CombineUserMonsterPiecesStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*" +
+      "\n&FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP" +
+      "\020\003\022\016\n\nFAIL_OTHER\020\004\"\233\001\n\033SellUserMonsterRe" +
+      "questProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
+      "oto.MinimumUserProtoWithMaxResources\022:\n\005" +
+      "sales\030\002 \003(\0132+.com.lvl6.proto.MinimumUser" +
+      "MonsterSellProto\"\352\001\n\034SellUserMonsterResp",
+      "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
+      "to.MinimumUserProtoWithMaxResources\022R\n\006s" +
+      "tatus\030\002 \001(\0162B.com.lvl6.proto.SellUserMon" +
+      "sterResponseProto.SellUserMonsterStatus\"" +
+      "4\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"k\n\037RestrictUserMonsterRequ" +
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\026\n\016userMonsterIds\030\003 \003" +
+      "(\003\"\352\001\n RestrictUserMonsterResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum",
+      "UserProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.pro" +
+      "to.RestrictUserMonsterResponseProto.Rest" +
+      "rictUserMonsterStatus\"8\n\031RestrictUserMon" +
+      "sterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"" +
+      "m\n!UnrestrictUserMonsterRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\026\n\016userMonsterIds\030\003 \003(\003\"\362\001\n\"Unres" +
+      "trictUserMonsterResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Unrestr",
+      "ictUserMonsterResponseProto.UnrestrictUs" +
+      "erMonsterStatus\":\n\033UnrestrictUserMonster" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021E" +
+      "ventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -30596,87 +32368,99 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterIds", });
+        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterIds", "UserMonsterId", });
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
-    internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor =
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(8);
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "Umcep", "UserMonsterIds", });
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhanceMonsterRequestProto_descriptor,
         new java.lang.String[] { "Sender", "Uep", "EnhancingResult", "GemsSpent", "OilChange", });
     internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhanceMonsterResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor,
         new java.lang.String[] { "Sender", "Umchp", "ClientTime", "UserTaskId", "IsUpdateTaskStageForUser", "NuTaskStageId", "DroplessTsfuId", "ChangeNuPvpDmgMultiplier", "NuPvpDmgMultiplier", });
     internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
         new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "GemCostForHealing", "IsSpeedup", "GemsForSpeedup", "Umchp", });
     internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor,
         new java.lang.String[] { "Sender", "TeamSlotNum", "UserMonsterId", });
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor,
         new java.lang.String[] { "Sender", "UserMonsterId", });
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
         new java.lang.String[] { "Sender", "IncreaseSlotType", "UserStructId", "UserFbInviteForSlotIds", });
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor,
@@ -30688,67 +32472,67 @@ public final class EventMonsterProto {
         internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor,
         new java.lang.String[] { "FbFriendId", "UserStructId", "UserStructFbLvl", });
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", "InvitesNew", });
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor,
         new java.lang.String[] { "Sender", "AcceptedInviteIds", "RejectedInviteIds", });
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", "AcceptedInvites", });
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
         new java.lang.String[] { "Sender", "UserMonsterIds", "GemCost", });
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_com_lvl6_proto_SellUserMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SellUserMonsterRequestProto_descriptor,
         new java.lang.String[] { "Sender", "Sales", });
     internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_com_lvl6_proto_SellUserMonsterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SellUserMonsterResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor,
         new java.lang.String[] { "Sender", "UserMonsterIds", });
     internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor,
         new java.lang.String[] { "Sender", "UserMonsterIds", });
     internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor,

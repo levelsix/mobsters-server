@@ -10218,6 +10218,15 @@ public final class MonsterStuffProto {
      * </pre>
      */
     int getEnhancingCost();
+
+    /**
+     * <code>optional bool enhancingComplete = 4;</code>
+     */
+    boolean hasEnhancingComplete();
+    /**
+     * <code>optional bool enhancingComplete = 4;</code>
+     */
+    boolean getEnhancingComplete();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserEnhancementItemProto}
@@ -10284,6 +10293,11 @@ public final class MonsterStuffProto {
             case 24: {
               bitField0_ |= 0x00000004;
               enhancingCost_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              enhancingComplete_ = input.readBool();
               break;
             }
           }
@@ -10397,10 +10411,26 @@ public final class MonsterStuffProto {
       return enhancingCost_;
     }
 
+    public static final int ENHANCINGCOMPLETE_FIELD_NUMBER = 4;
+    private boolean enhancingComplete_;
+    /**
+     * <code>optional bool enhancingComplete = 4;</code>
+     */
+    public boolean hasEnhancingComplete() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bool enhancingComplete = 4;</code>
+     */
+    public boolean getEnhancingComplete() {
+      return enhancingComplete_;
+    }
+
     private void initFields() {
       userMonsterId_ = 0L;
       expectedStartTimeMillis_ = 0L;
       enhancingCost_ = 0;
+      enhancingComplete_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10424,6 +10454,9 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, enhancingCost_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBool(4, enhancingComplete_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10444,6 +10477,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, enhancingCost_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, enhancingComplete_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10568,6 +10605,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         enhancingCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        enhancingComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -10608,6 +10647,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.enhancingCost_ = enhancingCost_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.enhancingComplete_ = enhancingComplete_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10632,6 +10675,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasEnhancingCost()) {
           setEnhancingCost(other.getEnhancingCost());
+        }
+        if (other.hasEnhancingComplete()) {
+          setEnhancingComplete(other.getEnhancingComplete());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10804,6 +10850,38 @@ public final class MonsterStuffProto {
       public Builder clearEnhancingCost() {
         bitField0_ = (bitField0_ & ~0x00000004);
         enhancingCost_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean enhancingComplete_ ;
+      /**
+       * <code>optional bool enhancingComplete = 4;</code>
+       */
+      public boolean hasEnhancingComplete() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bool enhancingComplete = 4;</code>
+       */
+      public boolean getEnhancingComplete() {
+        return enhancingComplete_;
+      }
+      /**
+       * <code>optional bool enhancingComplete = 4;</code>
+       */
+      public Builder setEnhancingComplete(boolean value) {
+        bitField0_ |= 0x00000008;
+        enhancingComplete_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool enhancingComplete = 4;</code>
+       */
+      public Builder clearEnhancingComplete() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        enhancingComplete_ = false;
         onChanged();
         return this;
       }
@@ -14380,26 +14458,27 @@ public final class MonsterStuffProto {
       "cementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonst" +
       "er\030\002 \001(\0132(.com.lvl6.proto.UserEnhancemen" +
       "tItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.p" +
-      "roto.UserEnhancementItemProto\"i\n\030UserEnh" +
-      "ancementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
-      "\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renh" +
-      "ancingCost\030\003 \001(\005\"z\n\032UserMonsterCurrentEx" +
-      "pProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expecte",
-      "dExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005" +
-      "\022\022\n\nexpectedHp\030\004 \001(\005\"H\n\033MinimumUserMonst" +
-      "erSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\nca" +
-      "shAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeam" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003" +
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\"e\n\031UserMonsterEvolutionProto\022\035\n\025catalys" +
-      "tUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002" +
-      " \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterBattl" +
-      "eDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dia",
-      "logueType\030\003 \001(\01627.com.lvl6.proto.Monster" +
-      "BattleDialogueProto.DialogueType\022\020\n\010dial" +
-      "ogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001(\002\"1" +
-      "\n\014DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER" +
-      "_BATTLE\020\001B\023B\021MonsterStuffProto"
+      "roto.UserEnhancementItemProto\"\204\001\n\030UserEn" +
+      "hancementItemProto\022\025\n\ruserMonsterId\030\001 \001(" +
+      "\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\ren" +
+      "hancingCost\030\003 \001(\005\022\031\n\021enhancingComplete\030\004" +
+      " \001(\010\"z\n\032UserMonsterCurrentExpProto\022\025\n\rus",
+      "erMonsterId\030\001 \001(\003\022\032\n\022expectedExperience\030" +
+      "\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\nexpected" +
+      "Hp\030\004 \001(\005\"H\n\033MinimumUserMonsterSellProto\022" +
+      "\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001" +
+      "(\005\"h\n\033UserCurrentMonsterTeamProto\022\016\n\006use" +
+      "rId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl" +
+      "6.proto.FullUserMonsterProto\"e\n\031UserMons" +
+      "terEvolutionProto\022\035\n\025catalystUserMonster" +
+      "Id\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstar" +
+      "tTime\030\003 \001(\003\"\337\001\n\032MonsterBattleDialoguePro",
+      "to\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 " +
+      "\001(\01627.com.lvl6.proto.MonsterBattleDialog" +
+      "ueProto.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032" +
+      "\n\022probabilityUttered\030\004 \001(\002\"1\n\014DialogueTy" +
+      "pe\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B" +
+      "\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14461,7 +14540,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_UserEnhancementItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "ExpectedStartTimeMillis", "EnhancingCost", });
+        new java.lang.String[] { "UserMonsterId", "ExpectedStartTimeMillis", "EnhancingCost", "EnhancingComplete", });
     internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_fieldAccessorTable = new
