@@ -67,13 +67,13 @@ message EvolutionFinishedResponseProto {
 } 
 
 //------------------------------------------------------------------------------------------
-//TODO: Get rid of this***********
+
 message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
 	
 	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
-	repeated UserEnhancementItemProto ueipDelete = 2;
-	repeated UserEnhancementItemProto ueipUpdate = 3;
+	repeated UserEnhancementItemProto ueipDelete = 2  [deprecated = true];
+	repeated UserEnhancementItemProto ueipUpdate = 3  [deprecated = true];
 	repeated UserEnhancementItemProto ueipNew = 4;
 	
 	//if user needs, say, five more cash, then user can spend gems to replace
@@ -101,10 +101,9 @@ message SubmitMonsterEnhancementResponseProto {
 		//TRYING_TO_SURPASS_MAX_LEVEL = 5;
 	}
 }
-//********************************
+
 //------------------------------------------------------------------------------------------
 
-//TODO: Get rid of this***********
 message EnhancementWaitTimeCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	
@@ -114,10 +113,13 @@ message EnhancementWaitTimeCompleteRequestProto {
 	optional int32 gemsForSpeedup = 3;
 	
 	//client specifies the monster that results after finishing enhancement
-	optional UserMonsterCurrentExpProto umcep = 4;
+	optional UserMonsterCurrentExpProto umcep = 4  [deprecated = true];
 	
 	//ids of monster_enhancing_for_user to delete, does not include main monster
-	repeated int64 userMonsterIds = 5; 
+	repeated int64 userMonsterIds = 5  [deprecated = true];
+	
+	//monster that finishes being enhanced, so server doesn't have to figure it out
+	optional int64 userMonsterId = 6;
 }
 
 message EnhancementWaitTimeCompleteResponseProto {
@@ -126,12 +128,35 @@ message EnhancementWaitTimeCompleteResponseProto {
 	
 	enum EnhancementWaitTimeCompleteStatus {
 		SUCCESS = 1;
-		FAIL_HEALING_NOT_COMPLETE = 2;
 		FAIL_INSUFFICIENT_FUNDS = 3;
 		FAIL_OTHER = 4;
 	}
 }
-//********************************
+
+//------------------------------------------------------------------------------------------
+
+message CollectMonsterEnhancementRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//client specifies the monster that results after finishing enhancement
+	optional UserMonsterCurrentExpProto umcep = 2;
+	
+	//ids of monster_enhancing_for_user to delete, does not include main monster
+	repeated int64 userMonsterIds = 3;
+	
+}
+
+message CollectMonsterEnhancementResposeProto {
+	optional MinimumUserProto sender = 1;
+	optional CollectMonsterEnhancementStatus status = 2;
+	
+	enum CollectMonsterEnhancementStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_ENHANCEMENT_INCOMPLETE = 3;
+	}
+}
+
 //------------------------------------------------------------------------------------------
 
 message EnhanceMonsterRequestProto {
