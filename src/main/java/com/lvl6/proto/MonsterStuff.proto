@@ -151,6 +151,7 @@ message UserEnhancementItemProto {
 	optional int64 userMonsterId = 1;
 	optional int64 expectedStartTimeMillis = 2; //TODO: get rid of this
 	optional int32 enhancingCost = 3; //oil not cash, the cost to sacrifice this monster
+	optional bool enhancingComplete = 4;
 }
 
 //------------------------------------------------------------------------------------------
