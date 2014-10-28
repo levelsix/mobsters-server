@@ -1171,13 +1171,16 @@ public class MiscMethods {
 					allCurrentCurrencies, allReasonsForChanges,
 					allDetails);
 
-			log.info("numInserted into currency history: " + numInserted);
+			log.info(String.format(
+				"numInserted into currency history: %s", numInserted));
 
 		} catch (Exception e) {
-			log.error("error updating user_curency_history; userIds=" +
-				userIds + ", reasonsForChanges=" + changeMap +
-				", changeReasonsMap=" + changeReasonsMap +
-				", detailsMap=" + detailsMap, e);
+			String preface = "error updating user_curency_history";
+			log.error(
+				String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap),
+				e);
 		}
 	}
 
@@ -1193,14 +1196,6 @@ public class MiscMethods {
 
 		Map<String, Integer> changeMapTemp =
 			new HashMap<String, Integer>(changeMap);
-		Map<String, Integer> previousCurrencyMapTemp =
-			new HashMap<String, Integer>(previousCurrencyMap);
-		Map<String, Integer> currentCurrencyMapTemp =
-			new HashMap<String, Integer>(currentCurrencyMap);
-		Map<String, String> changeReasonsMapTemp =
-			new HashMap<String, String>(changeReasonsMap);
-		Map<String, String> detailsMapTemp =
-			new HashMap<String, String>(detailsMap);
 
 		//getting rid of changes that are 0
 		Set<String> keys = new HashSet<String>(changeMapTemp.keySet());
@@ -1208,14 +1203,11 @@ public class MiscMethods {
 			Integer change = changeMap.get(key);
 			if (0 == change) {
 				changeMapTemp.remove(key);
-				previousCurrencyMapTemp.remove(key);
-				currentCurrencyMapTemp.remove(key);
-				changeReasonsMapTemp.remove(key);
-				detailsMapTemp.remove(key);
 			}
 		}
 
-		int amount = changeMap.size();
+//		int amount = changeMap.size();
+		int amount = changeMapTemp.size();
 		if (0 == amount) {
 			return;
 		}
@@ -1223,16 +1215,17 @@ public class MiscMethods {
 		List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
 		List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
 		List<String> resourceTypesTemp =
-			new ArrayList<String>(changeMap.keySet());
+			new ArrayList<String>(changeMapTemp.keySet());
 		List<Integer> currencyChangesTemp =
-			getValsInOrder(resourceTypes, changeMap);
+			getValsInOrder(resourceTypesTemp, changeMapTemp);
 		List<Integer> previousCurrenciesTemp =
-			getValsInOrder(resourceTypes, previousCurrencyMap);
+			getValsInOrder(resourceTypesTemp, previousCurrencyMap);
 		List<Integer> currentCurrenciesTemp =
-			getValsInOrder(resourceTypes, currentCurrencyMap);
+			getValsInOrder(resourceTypesTemp, currentCurrencyMap);
 		List<String> reasonsForChangesTemp =
-			getValsInOrder(resourceTypes, changeReasonsMap);
-		List<String> detailsTemp = getValsInOrder(resourceTypes, detailsMap);
+			getValsInOrder(resourceTypesTemp, changeReasonsMap);
+		List<String> detailsTemp =
+			getValsInOrder(resourceTypesTemp, detailsMap);
 
 		userIds.addAll(userIdsTemp);
 		timestamps.addAll(timestampsTemp);
