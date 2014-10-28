@@ -146,7 +146,7 @@ message CollectMonsterEnhancementRequestProto {
 	
 }
 
-message CollectMonsterEnhancementResposeProto {
+message CollectMonsterEnhancementResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional CollectMonsterEnhancementStatus status = 2;
 	
