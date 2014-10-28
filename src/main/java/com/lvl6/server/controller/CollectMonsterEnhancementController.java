@@ -45,7 +45,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT;
+		return EventProtocolRequest.C_COLLECT_MONSTER_ENHANCEMENT_EVENT;
 	}
 
 	@Override
