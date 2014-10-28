@@ -42,6 +42,7 @@ public class PvpLeagueRetrieveUtils {
 			cur = pvpLeagueIdsToPvpLeagues.get(curPvpLeagueId);
 		}
 		
+		//calculate default return value if elo is too low or too high
 		int resultId = 0;
 		if (null != lowestLeague && elo < lowestLeague.getMinElo()) {
 			log.error(String.format("selecting lowest league=%s", lowestLeague));
@@ -50,11 +51,6 @@ public class PvpLeagueRetrieveUtils {
 		} else if (null != highestLeague && elo > highestLeague.getMinElo()) {
 			log.error(String.format("selecting highest league=%s", highestLeague));
 			resultId = highestLeague.getId();
-
-		} else {
-			log.error(String.format("there appears to be a gap between leagues. elo=%s, leagues=%s, choosing lowest league=%s",
-				elo, pvpLeagueIdsToPvpLeagues, lowestLeague));
-			resultId = lowestLeague.getId();
 		}
 
 		int iterations = pvpLeagueIdsToPvpLeagues.size();
@@ -65,7 +61,7 @@ public class PvpLeagueRetrieveUtils {
 
 			if (minElo <= elo && elo <= maxElo) {
 				//minElo <= elo <= maxElo
-				resultId = curPvpLeagueId;
+				resultId = pvpLeagueAtm.getId();
 				break;
 			} else if (elo < minElo) {
 				pvpLeagueAtm = pvpLeagueIdsToPvpLeagues.get(
@@ -76,6 +72,12 @@ public class PvpLeagueRetrieveUtils {
 			}
 			
 			iterations--;
+		}
+		
+		if (resultId <= 0) {
+			log.error(String.format("couldn't figure out pvpLeagueId. elo=%s, leagues=%s, choosing lowest league=%s",
+				elo, pvpLeagueIdsToPvpLeagues, lowestLeague));
+			resultId = lowestLeague.getId();
 		}
 		
 		return resultId;
