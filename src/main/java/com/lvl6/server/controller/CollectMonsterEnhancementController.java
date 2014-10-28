@@ -70,7 +70,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
 			List<Long> userMonsterIds = new ArrayList<Long>();
-			if (null != umcep && !userMonsterIds.isEmpty()) {
+			if (null != umcep && !userMonsterIdsThatFinished.isEmpty()) {
 				userMonsterIds.add(umcep.getUserMonsterId()); //monster being enhanced
 				userMonsterIds.addAll(userMonsterIdsThatFinished);
 			}
