@@ -159,25 +159,26 @@ message CollectMonsterEnhancementResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+//DEPRECATED:
 message EnhanceMonsterRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProto sender = 1 [deprecated = true];
 	
 	//is base monster and contains grouping of sacrificed monsters
-	optional UserEnhancementProto uep = 2;
+	optional UserEnhancementProto uep = 2 [deprecated = true];
 	
 	//the result of enhancing
-	optional UserMonsterCurrentExpProto enhancingResult = 3;
+	optional UserMonsterCurrentExpProto enhancingResult = 3 [deprecated = true];
 	
 	//if user needs, say, five more oil, then user can spend gems to replace
 	//said five oil. (positive number, server will convert it to negative)
-	optional int32 gemsSpent = 4;
+	optional int32 gemsSpent = 4 [deprecated = true];
 	
 	//cost to use the sacrificed monsters
-	optional sint32 oilChange = 5;
+	optional sint32 oilChange = 5 [deprecated = true];
 }
-
+//DEPRECATED:
 message EnhanceMonsterResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProto sender = 1 [deprecated = true];
 	optional EnhanceMonsterStatus status = 2;
 	
 	enum EnhanceMonsterStatus {

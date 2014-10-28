@@ -41,7 +41,6 @@ import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class SubmitMonsterEnhancementController extends EventController {
@@ -75,8 +74,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//get data client sent
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-		List<UserEnhancementItemProto> ueipDelete = reqProto.getUeipDeleteList();
-		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
+//		List<UserEnhancementItemProto> ueipDelete = reqProto.getUeipDeleteList();
+//		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
 		List<UserEnhancementItemProto> ueipNew = reqProto.getUeipNewList();
 		int userId = senderProto.getUserId();
 		//positive value, need to convert to negative when updating user
@@ -86,10 +85,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		int maxOil= senderResourcesProto.getMaxOil();
 
-		Map<Long, UserEnhancementItemProto> deleteMap = MonsterStuffUtils.
-				convertIntoUserMonsterIdToUeipProtoMap(ueipDelete);
-		Map<Long, UserEnhancementItemProto> updateMap = MonsterStuffUtils.
-				convertIntoUserMonsterIdToUeipProtoMap(ueipUpdated);
+//		Map<Long, UserEnhancementItemProto> deleteMap = MonsterStuffUtils.
+//				convertIntoUserMonsterIdToUeipProtoMap(ueipDelete);
+//		Map<Long, UserEnhancementItemProto> updateMap = MonsterStuffUtils.
+//				convertIntoUserMonsterIdToUeipProtoMap(ueipUpdated);
 		Map<Long, UserEnhancementItemProto> newMap = MonsterStuffUtils.
 				convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 		
@@ -116,12 +115,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//the ones being updated
 			Set<Long> newAndUpdatedIds = new HashSet<Long>();
 			newAndUpdatedIds.addAll(newMap.keySet());
-			newAndUpdatedIds.addAll(updateMap.keySet());
+//			newAndUpdatedIds.addAll(updateMap.keySet());
 			Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
     			.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newAndUpdatedIds);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
-					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap, evolution,
+					alreadyEnhancing, alreadyHealing, newMap, evolution,
 					gemsSpent, oilChange);
 
 			boolean successful = false;
@@ -131,7 +130,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				previousOil = aUser.getOil();
 				previousGems = aUser.getGems();
 				successful = writeChangesToDB(aUser, userId, gemsSpent, oilChange,
-						deleteMap, updateMap, newMap, money, maxOil);
+//						deleteMap, updateMap,
+					newMap, money, maxOil);
 			}
 		
 			if (successful) {
@@ -151,7 +151,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				server.writeEvent(resEventUpdate);
 
 				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
-						deleteMap, updateMap, newMap);
+//						deleteMap, updateMap,
+						newMap);
 			}
 
 		} catch (Exception e) {
@@ -163,20 +164,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	 /*
   * Return true if user request is valid; false otherwise and set the
-  * builder status to the appropriate value. delete, update, new maps
-  * MIGHT BE MODIFIED.
+  * 	builder status to the appropriate value. delete, update, new maps
+  * 	MIGHT BE MODIFIED.
   * 
   * For the most part, will always return success. Why?
   * (Will return fail if user does not have enough funds.) 
-  * Answer: For the map
+  * Answer: For the map(s)
   * 
-  * delete - The monsters to be removed from enhancing will/should only be the ones
-  * the user already has in enhancing.
-  * update - The monsters to be updated in enhancing will/should already exist
+  * delete (DEPRECATED) - The monsters to be removed from enhancing will/should
+  * 	only be the ones the user already has in enhancing.
+  * update (DEPRECATED) - The monsters to be updated in enhancing will/should already exist
   * new - brand new monsters
   * 
   * Note: If any of the monsters have "restricted" property set to true,
-  * then said monster can only be the base monster. 
+  * 	then said monster can only be the base monster. 
   * 
   * Ex. If user wants to delete a monster (A) that isn't enhancing, along with some
   * monsters already enhancing (B), only the valid monsters (B) will be deleted.
@@ -187,29 +188,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<Long, MonsterForUser> existingUserMonsters,
 			Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
 			Map<Long, MonsterHealingForUser> alreadyHealing,
-			Map<Long, UserEnhancementItemProto> deleteMap,
-			Map<Long, UserEnhancementItemProto> updateMap,
+//			Map<Long, UserEnhancementItemProto> deleteMap,
+//			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap, MonsterEvolvingForUser evolution,
 			int gemsSpent, int oilChange) {
 		if (null == u ) {
-			log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
-					"\t updateMap=" + updateMap + "\t newMap=" + newMap);
+//			log.error(String.format(
+//				"user is null. userId=%s, deleteMap=%s, updateMap=%s, newMap=%s",
+//				userId, deleteMap, updateMap, newMap));
+			log.error(String.format(
+				"user is null. userId=%s, newMap=%s",
+				userId, newMap));
+			return false;
+		}
+		
+		if ( null != alreadyEnhancing && !alreadyEnhancing.isEmpty() ) {
+			log.error(String.format(
+				"user already has monsters enhancing=%s, user=%s",
+				alreadyEnhancing, u));
 			return false;
 		}
 		
 		//retain only the userMonsters in deleteMap and updateMap that are in enhancing
 		boolean keepThingsInDomain = true;
 		boolean keepThingsNotInDomain = false;
-		Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
-		if (null != deleteMap && !deleteMap.isEmpty()) {
-			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, deleteMap,
-					keepThingsInDomain, keepThingsNotInDomain);
-		}
-
-		if (null != updateMap && !updateMap.isEmpty()) {
-			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, updateMap,
-					keepThingsInDomain, keepThingsNotInDomain);
-		}
+//		Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
+//		if (null != deleteMap && !deleteMap.isEmpty()) {
+//			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, deleteMap,
+//					keepThingsInDomain, keepThingsNotInDomain);
+//		}
+//
+//		if (null != updateMap && !updateMap.isEmpty()) {
+//			MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, updateMap,
+//					keepThingsInDomain, keepThingsNotInDomain);
+//		}
 
 		if (null != newMap && !newMap.isEmpty()) {
 			//retain only the userMonsters in newMap that are in the db
@@ -238,10 +250,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		for (Long restrictedUserMonsterId : restrictedUserMonsterIds) {
 			
 			UserEnhancementItemProto ueip = null;
-			if (updateMap.containsKey(restrictedUserMonsterId)) {
+			/*if (updateMap.containsKey(restrictedUserMonsterId)) {
 				ueip = updateMap.get(restrictedUserMonsterId);
 				
-			} else if (newMap.containsKey(restrictedUserMonsterId)) {
+			} else
+			*/
+			if (newMap.containsKey(restrictedUserMonsterId)) {
 				ueip = newMap.get(restrictedUserMonsterId);
 			}
 			
@@ -251,9 +265,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 			//monster is restricted, better be a base monster
 			if (ueip.getEnhancingCost() > 0 || ueip.getExpectedStartTimeMillis() > 0) {
+//				String msg = String.format(
+//					"user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, updateMap=%s, newMap=%s",
+//					ueip, existingUserMonsters, updateMap, newMap );
 				String msg = String.format(
-					"user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, updateMap=%s, newMap=%s",
-					ueip, existingUserMonsters, updateMap, newMap );
+					"user is using restricted monster in enhancing (not as base monster): %s. userMonsters= %s, newMap=%s",
+					ueip, existingUserMonsters, newMap );
 				log.error(msg);
 				return false;
 			}
@@ -262,11 +279,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 
 		//CHECK MONEY
-		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
+//		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
+		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, newMap)) {
 			return false;
 		}
 
-		if (!hasEnoughOil(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
+//		if (!hasEnoughOil(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
+		if (!hasEnoughOil(resBuilder, u, gemsSpent, oilChange, newMap)) {
 			return false;
 		}
 
@@ -286,16 +305,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
  
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent,
-			int oilChange, Map<Long, UserEnhancementItemProto> deleteMap,
-			Map<Long, UserEnhancementItemProto> updateMap,
+			int oilChange,
+//			Map<Long, UserEnhancementItemProto> deleteMap,
+//			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap) {
 		int userGems = u.getGems();
 		//if user's aggregate gems is < cost, don't allow transaction
 		if (userGems < gemsSpent) {
-			log.error("user error: user does not have enough gems. userGems=" + userGems +
-					"\t gemsSpent=" + gemsSpent + "\t deleteMap=" + deleteMap + "\t newMap=" +
-					newMap + "\t updateMap=" + updateMap + "\t cashChange=" + oilChange +
-					"\t user=" + u);
+			log.error(String.format(
+				"insufficient gems. userGems=%s, gemsSpent=%s, newMap=%s, oilChange=%s, user=%s",
+				userGems, gemsSpent, newMap, oilChange, u));
 			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
@@ -303,8 +322,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean hasEnoughOil(Builder resBuilder, User u, int oilChange,
-			int gemsSpent, Map<Long, UserEnhancementItemProto> deleteMap,
-			Map<Long, UserEnhancementItemProto> updateMap,
+			int gemsSpent,
+//			Map<Long, UserEnhancementItemProto> deleteMap,
+//			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap) {
 		int userOil = u.getOil(); 
 		//positive 'cashChange' means refund, negative means charge user
@@ -312,9 +332,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		//if user not spending gems and is just spending cash, check if he has enough
 		if (0 == gemsSpent && userOil < cost) {
-			log.error("user error: user does not have enough oil. userOil=" + userOil +
-					"\t cost=" + cost + "\t deleteMap=" + deleteMap + "\t newMap=" +
-					newMap + "\t updateMap=" + updateMap + "\t user=" + u);
+			log.error(String.format(
+				"insufficient oil. userOil=%s, cost=%s, newMap=%s, user=%s",
+				userOil, cost, newMap, u));
 			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_OIL);
 			return false;
 		}
@@ -322,10 +342,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean writeChangesToDB(User user, int uId, int gemsSpent,
-			int oilChange, Map<Long, UserEnhancementItemProto> protoDeleteMap,
-		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
-		  Map<Long, UserEnhancementItemProto> protoNewMap,
-		  Map<String, Integer> money, int maxOil) {
+		int oilChange,
+//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
+//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
+		Map<Long, UserEnhancementItemProto> protoNewMap,
+		Map<String, Integer> money, int maxOil)
+	{
 
 		//CHARGE THE USER
 		int cashChange = 0;
@@ -343,9 +365,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 			if (1 != numChange) {
-				log.warn("problem with updating user stats: gemChange=" + gemChange
-						+ ", oilChange=" + oilChange + ", user is " + user +
-						"\t perhaps base monster deleted \t protoDeleteMap=" + protoDeleteMap);
+				log.warn(String.format(
+					"problem with updating user stats: gemChange=%s, oilChange=%s, user=%s",
+					gemChange, oilChange, user));
 			} else {
 				//everything went well
 				if (0 != oilChange) {
@@ -356,37 +378,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				}
 			}
 		}
-//		log.info("deleteMap=" + protoDeleteMap);
-//		log.info("updateMap=" + protoUpdateMap);
-//		log.info("newMap=" + protoNewMap);
+//		log.info(String.format("deleteMap=%s", protoDeleteMap));
+//		log.info(String.format("updateMap=%s", protoUpdateMap));
+//		log.info(String.format("newMap=%s", protoNewMap));
 		
 		
 		int num = 0;
-		//delete everything left in the map, if there are any
-		if (!protoDeleteMap.isEmpty()) {
-			List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
-			num = DeleteUtils.get().deleteMonsterEnhancingForUser(uId, deleteIds);
-			log.info("deleted monster enhancing rows. numDeleted=" + num +
-					"\t protoDeleteMap=" + protoDeleteMap);
-		}
+//		//delete everything left in the map, if there are any
+//		if (!protoDeleteMap.isEmpty()) {
+//			List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
+//			num = DeleteUtils.get().deleteMonsterEnhancingForUser(uId, deleteIds);
+//			log.info("deleted monster enhancing rows. numDeleted=" + num +
+//					"\t protoDeleteMap=" + protoDeleteMap);
+//		}
 		
-		//convert protos to java counterparts
-		List<MonsterEnhancingForUser> updateMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
-	  		uId, protoUpdateMap);
-		log.info("updateMap=" + updateMap);
-		
-	  List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
-	  		uId, protoNewMap);
-	  log.info("newMap=" + newMap);
-	  
-	  List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
-	  updateAndNew.addAll(updateMap);
-	  updateAndNew.addAll(newMap);
-		//update everything in enhancing table that is in update and new map
-		if (null != updateAndNew && !updateAndNew.isEmpty()) {
-			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
-			log.info("updated monster enhancing rows. numUpdated/inserted=" + num);
-		}
+//		//convert protos to java counterparts
+//		List<MonsterEnhancingForUser> updateMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
+//	  		uId, protoUpdateMap);
+//		log.info(String.format("updateMap=%s", updateMap));
+//		
+//	  List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
+//	  		uId, protoNewMap);
+//	  log.info(String.format("newMap=%s", newMap));
+//	  
+//	  List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
+//	  updateAndNew.addAll(updateMap);
+//	  updateAndNew.addAll(newMap);
+//		//update everything in enhancing table that is in update and new map
+//		if (null != updateAndNew && !updateAndNew.isEmpty()) {
+//			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
+//			log.info(String.format(
+//				"updated monster enhancing rows. numInserted=%s", num));
+//		}
 		
 		//for the new monsters, ensure that the monsters are "unequipped"
 	  if (null != protoNewMap && !protoNewMap.isEmpty()) {
@@ -395,7 +418,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
 	  	List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
 	  	num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
-	  	log.info("updated user monster rows. numUpdated=" + num);
+	  	log.info(String.format(
+	  		"updated user monster rows. numUpdated=%s", num));
 	  }
 	  
 		return true;
@@ -403,30 +427,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
-			Map<String, Integer> currencyChange, int previousOil, int previousGems,
-			Map<Long, UserEnhancementItemProto> protoDeleteMap,
-		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
-		  Map<Long, UserEnhancementItemProto> protoNewMap) {
-		
+		Map<String, Integer> currencyChange, int previousOil, int previousGems,
+//		Map<Long, UserEnhancementItemProto> protoDeleteMap,
+//		Map<Long, UserEnhancementItemProto> protoUpdateMap,
+		Map<Long, UserEnhancementItemProto> protoNewMap)
+	{
+
 		StringBuilder detailsSb = new StringBuilder();
 		
 		//maybe shouldn't keep track...oh well, more info hopefully is better than none
-		if (null != protoDeleteMap && !protoDeleteMap.isEmpty()) {
-			detailsSb.append("deleteIds=");
-			for (UserEnhancementItemProto ueip : protoDeleteMap.values()) {
-				long id = ueip.getUserMonsterId();
-				detailsSb.append(id);
-				detailsSb.append(" ");
-			}
-		}
-		if (null != protoUpdateMap && !protoUpdateMap.isEmpty()) {
-			detailsSb.append("updateIds=");
-			for (UserEnhancementItemProto ueip : protoUpdateMap.values()) {
-				long id = ueip.getUserMonsterId();
-				detailsSb.append(id);
-				detailsSb.append(" ");
-			}
-		}
+//		if (null != protoDeleteMap && !protoDeleteMap.isEmpty()) {
+//			detailsSb.append("deleteIds=");
+//			for (UserEnhancementItemProto ueip : protoDeleteMap.values()) {
+//				long id = ueip.getUserMonsterId();
+//				detailsSb.append(id);
+//				detailsSb.append(" ");
+//			}
+//		}
+//		if (null != protoUpdateMap && !protoUpdateMap.isEmpty()) {
+//			detailsSb.append("updateIds=");
+//			for (UserEnhancementItemProto ueip : protoUpdateMap.values()) {
+//				long id = ueip.getUserMonsterId();
+//				detailsSb.append(id);
+//				detailsSb.append(" ");
+//			}
+//		}
 		if (null != protoNewMap && !protoNewMap.isEmpty()) {
 			detailsSb.append("newIds=");
 			for (UserEnhancementItemProto ueip : protoNewMap.values()) {

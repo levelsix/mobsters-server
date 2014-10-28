@@ -112,7 +112,8 @@ import com.lvl6.utils.DBConnection;
     int structId = rs.getInt(DBConstants.STRUCTURE_LAB__STRUCT_ID);
     int queueSize = rs.getInt(DBConstants.STRUCTURE_LAB__QUEUE_SIZE);
     float pointsMultiplier = rs.getFloat(DBConstants.STRUCTURE_LAB__POINTS_MULTIPLIER);
+    float pointsPerSecond = rs.getFloat(DBConstants.STRUCTURE_LAB__POINTS_PER_SECOND);
     
-    return new StructureLab(structId, queueSize, pointsMultiplier);
+    return new StructureLab(structId, queueSize, pointsMultiplier, pointsPerSecond);
   }
 }
