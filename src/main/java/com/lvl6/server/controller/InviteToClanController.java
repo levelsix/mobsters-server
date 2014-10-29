@@ -19,6 +19,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.InviteToClanAction;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class InviteToClanController extends EventController {
@@ -75,19 +76,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		try {
 
 			InviteToClanAction itca = new InviteToClanAction(inviterId,
-				prospectiveMember, clanId, inviteTime, InsertUtils.get(),
+				prospectiveMember, clanId, inviteTime,
+				RetrieveUtils.userClanRetrieveUtils(), InsertUtils.get(),
 				clanInviteRetrieveUtil);
 			itca.execute(resBuilder);
 			
 			InviteToClanResponseEvent resEvent = new InviteToClanResponseEvent(inviterId);
 			resEvent.setTag(event.getTag());
+			resEvent.setInviteToClanResponseProto(resBuilder.build());
+			
 			//only write to user if failed
 			if (resBuilder.getStatus().equals(InviteToClanStatus.FAIL_OTHER)) {
-				resEvent.setInviteToClanResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
 
 			} else {
-				resEvent.setInviteToClanResponseProto(resBuilder.build());
 				server.writeClanEvent(resEvent, clanId);
 			}
 		} catch (Exception e) {

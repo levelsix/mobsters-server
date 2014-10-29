@@ -9,11 +9,15 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanInvite;
 import com.lvl6.info.User;
+import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils;
+import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -27,17 +31,21 @@ public class InviteToClanAction
 	private int prospectiveMemberId;
 	private int clanId;
 	private Date inviteTime;
+	private UserClanRetrieveUtils userClanRetrieveUtils;
 	private InsertUtil insertUtil;
 	private ClanInviteRetrieveUtil clanInviteRetrieveUtil;
 	
 	public InviteToClanAction(int inviterId, int prospectiveMemberId,
-		int clanId, Date inviteTime, InsertUtil insertUtil,
+		int clanId, Date inviteTime,
+		UserClanRetrieveUtils userClanRetrieveUtils, 
+		InsertUtil insertUtil,
 		ClanInviteRetrieveUtil clanInviteRetrieveUtil)
 	{
 		this.inviterId = inviterId;
 		this.prospectiveMemberId = prospectiveMemberId;
 		this.clanId = clanId;
 		this.inviteTime = inviteTime;
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.insertUtil = insertUtil;
 		this.clanInviteRetrieveUtil = clanInviteRetrieveUtil;
 	}
@@ -105,6 +113,31 @@ public class InviteToClanAction
 		if (null == c) {
 			log.error(String.format(
 				"No clan. invalid clanId=%s", clanId));
+			return false;
+		}
+		
+		//make sure user is authorized to send invite
+		UserClan uc = userClanRetrieveUtils.getSpecificUserClan(inviterId, clanId);
+		UserClanStatus status = UserClanStatus.MEMBER; 
+		
+		String strStatus = uc.getStatus();
+		try {
+			status = UserClanStatus.valueOf(strStatus);
+		} catch(Exception e) {
+			log.error(
+				String.format(
+					"invalid UserClan: %s, user=%s. default to MEMBER status",
+					uc, u),
+				e);
+		}
+			
+		boolean authorized = ClanStuffUtils.firstUserClanStatusAboveSecond(
+			status, UserClanStatus.CAPTAIN);
+		
+		if (!authorized) {
+			log.error(String.format(
+				"clan member not authorized to send invite: %s, status=%s",
+				u, uc));
 			return false;
 		}
 		
