@@ -31,6 +31,7 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
@@ -62,6 +63,7 @@ import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -684,6 +686,7 @@ public class ControllerTest extends TestCase {
 	public void testClanInvite() {
 		int jackMayHoff = 1110;
 		User jmh = userRetrieveUtils.getUserById(jackMayHoff);
+		UpdateUtils.get().updateUserClanStatus(jackMayHoff, jmh.getClanId(), UserClanStatus.JUNIOR_LEADER);
 		Clan c = ClanRetrieveUtils.getClanWithId(jmh.getClanId());
 		int prospectiveMemberId = getUnitTesterId();
 		ClanInvite ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
