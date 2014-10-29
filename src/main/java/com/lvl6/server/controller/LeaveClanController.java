@@ -181,12 +181,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       deleteClan(clan, userIds, user);
     } else {
       if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
-        log.error("problem with deleting user clan for " + user + " and clan " + clan);
+        log.error(String.format(
+        	"problem deleting UserClan. user=%s, clan=%s",
+        	user, clan));
       }
       if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
         log.error("problem with making clanid for user null");
       }
     }
+    
     
     int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
     log.info(String.format("num ClanHelps closed: %s", numUpdated));
