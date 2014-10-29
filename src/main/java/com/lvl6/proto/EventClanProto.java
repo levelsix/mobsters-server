@@ -34658,6 +34658,10 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       FAIL_OTHER(1, 2),
+      /**
+       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
+       */
+      FAIL_NOT_AUTHORIZED(2, 3),
       ;
 
       /**
@@ -34668,6 +34672,10 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       public static final int FAIL_OTHER_VALUE = 2;
+      /**
+       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
+       */
+      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
 
 
       public final int getNumber() { return value; }
@@ -34676,6 +34684,7 @@ public final class EventClanProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_NOT_AUTHORIZED;
           default: return null;
         }
       }
@@ -35409,6 +35418,15 @@ public final class EventClanProto {
      */
     com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getRejectedOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AcceptOrRejectClanInviteRequestProto}
@@ -35494,6 +35512,11 @@ public final class EventClanProto {
                 mutable_bitField0_ |= 0x00000004;
               }
               rejected_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanInviteProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -35628,10 +35651,26 @@ public final class EventClanProto {
       return rejected_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 4;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       accepted_ = com.lvl6.proto.ClanProto.ClanInviteProto.getDefaultInstance();
       rejected_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -35655,6 +35694,9 @@ public final class EventClanProto {
       for (int i = 0; i < rejected_.size(); i++) {
         output.writeMessage(3, rejected_.get(i));
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(4, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -35675,6 +35717,10 @@ public final class EventClanProto {
       for (int i = 0; i < rejected_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, rejected_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -35814,6 +35860,8 @@ public final class EventClanProto {
         } else {
           rejectedBuilder_.clear();
         }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -35867,6 +35915,10 @@ public final class EventClanProto {
         } else {
           result.rejected_ = rejectedBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -35914,6 +35966,9 @@ public final class EventClanProto {
               rejectedBuilder_.addAllMessages(other.rejected_);
             }
           }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -36450,6 +36505,38 @@ public final class EventClanProto {
         return rejectedBuilder_;
       }
 
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000008;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AcceptOrRejectClanInviteRequestProto)
     }
 
@@ -36641,6 +36728,10 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       FAIL_OTHER(1, 2),
+      /**
+       * <code>FAIL_CLAN_IS_FULL = 3;</code>
+       */
+      FAIL_CLAN_IS_FULL(2, 3),
       ;
 
       /**
@@ -36651,6 +36742,10 @@ public final class EventClanProto {
        * <code>FAIL_OTHER = 2;</code>
        */
       public static final int FAIL_OTHER_VALUE = 2;
+      /**
+       * <code>FAIL_CLAN_IS_FULL = 3;</code>
+       */
+      public static final int FAIL_CLAN_IS_FULL_VALUE = 3;
 
 
       public final int getNumber() { return value; }
@@ -36659,6 +36754,7 @@ public final class EventClanProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_CLAN_IS_FULL;
           default: return null;
         }
       }
@@ -37762,27 +37858,29 @@ public final class EventClanProto {
       "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030InviteToClanRe" +
       "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr",
       "oto.MinimumUserProto\022\031\n\021prospectiveMembe" +
-      "r\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\377\001\n\031InviteTo" +
+      "r\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\230\002\n\031InviteTo" +
       "ClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
       "lvl6.proto.MinimumUserProto\022L\n\006status\030\002 " +
       "\001(\0162<.com.lvl6.proto.InviteToClanRespons" +
       "eProto.InviteToClanStatus\022/\n\006invite\030\003 \001(" +
-      "\0132\037.com.lvl6.proto.ClanInviteProto\"1\n\022In" +
+      "\0132\037.com.lvl6.proto.ClanInviteProto\"J\n\022In" +
       "viteToClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002\"\276\001\n$AcceptOrRejectClanInviteReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.",
-      "MinimumUserProto\0221\n\010accepted\030\002 \001(\0132\037.com" +
-      ".lvl6.proto.ClanInviteProto\0221\n\010rejected\030" +
-      "\003 \003(\0132\037.com.lvl6.proto.ClanInviteProto\"\273" +
-      "\002\n%AcceptOrRejectClanInviteResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.pr" +
-      "oto.AcceptOrRejectClanInviteResponseProt" +
-      "o.AcceptOrRejectClanInviteStatus\022;\n\010full" +
-      "Clan\030\003 \001(\0132).com.lvl6.proto.FullClanProt" +
-      "oWithClanSize\"=\n\036AcceptOrRejectClanInvit",
-      "eStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016" +
-      "EventClanProto"
+      "HER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\"\322\001\n$Accep" +
+      "tOrRejectClanInviteRequestProto\0220\n\006sende",
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\0221\n\010accepted\030\002 \001(\0132\037.com.lvl6.proto.Cla" +
+      "nInviteProto\0221\n\010rejected\030\003 \003(\0132\037.com.lvl" +
+      "6.proto.ClanInviteProto\022\022\n\nclientTime\030\004 " +
+      "\001(\003\"\322\002\n%AcceptOrRejectClanInviteResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022d\n\006status\030\002 \001(\0162T.com.lv" +
+      "l6.proto.AcceptOrRejectClanInviteRespons" +
+      "eProto.AcceptOrRejectClanInviteStatus\022;\n" +
+      "\010fullClan\030\003 \001(\0132).com.lvl6.proto.FullCla",
+      "nProtoWithClanSize\"T\n\036AcceptOrRejectClan" +
+      "InviteStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
+      "\002\022\025\n\021FAIL_CLAN_IS_FULL\020\003B\020B\016EventClanPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -38014,7 +38112,7 @@ public final class EventClanProto {
     internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AcceptOrRejectClanInviteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Accepted", "Rejected", });
+        new java.lang.String[] { "Sender", "Accepted", "Rejected", "ClientTime", });
     internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(36);
     internal_static_com_lvl6_proto_AcceptOrRejectClanInviteResponseProto_fieldAccessorTable = new

@@ -486,6 +486,7 @@ message InviteToClanResponseProto {
 	enum InviteToClanStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_NOT_AUTHORIZED = 3;
 	}
 }
 
@@ -495,6 +496,7 @@ message AcceptOrRejectClanInviteRequestProto {
 	//NOTE: only really need inviteId, but would like clanId as well
 	optional ClanInviteProto accepted = 2;
 	repeated ClanInviteProto rejected = 3;
+	optional int64 clientTime = 4;
 }
 
 message AcceptOrRejectClanInviteResponseProto {
@@ -507,6 +509,7 @@ message AcceptOrRejectClanInviteResponseProto {
 	enum AcceptOrRejectClanInviteStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_CLAN_IS_FULL = 3;
 	}
 }
 

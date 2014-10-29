@@ -14894,6 +14894,10 @@ public final class ClanProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHelpProto}
+   *
+   * <pre>
+   *Official "ClanHelp" clan mates can provide help on
+   * </pre>
    */
   public static final class ClanHelpProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -15435,6 +15439,10 @@ public final class ClanProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.ClanHelpProto}
+     *
+     * <pre>
+     *Official "ClanHelp" clan mates can provide help on
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -16175,6 +16183,10 @@ public final class ClanProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanHelpNoticeProto}
+   *
+   * <pre>
+   *used to request clan help on something. 
+   * </pre>
    */
   public static final class ClanHelpNoticeProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -16467,6 +16479,10 @@ public final class ClanProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.ClanHelpNoticeProto}
+     *
+     * <pre>
+     *used to request clan help on something. 
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements

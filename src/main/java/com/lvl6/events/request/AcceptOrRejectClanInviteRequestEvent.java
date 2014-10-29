@@ -1,0 +1,34 @@
+package com.lvl6.events.request;
+
+import java.nio.ByteBuffer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.lvl6.events.RequestEvent;
+import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
+
+public class AcceptOrRejectClanInviteRequestEvent extends RequestEvent {
+
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
+  private AcceptOrRejectClanInviteRequestProto acceptOrRejectClanInviteRequestProto;
+  
+  /**
+   * read the event from the given ByteBuffer to populate this event
+   */
+  public void read(ByteBuffer buff) {
+    try {
+      acceptOrRejectClanInviteRequestProto = AcceptOrRejectClanInviteRequestProto.parseFrom(ByteString.copyFrom(buff));
+      playerId = acceptOrRejectClanInviteRequestProto.getSender().getUserId();
+    } catch (InvalidProtocolBufferException e) {
+      log.error("acceptOrRejectClanInvite request exception", e);
+    }
+  }
+
+  public AcceptOrRejectClanInviteRequestProto getAcceptOrRejectClanInviteRequestProto() {
+    return acceptOrRejectClanInviteRequestProto;
+  }
+}

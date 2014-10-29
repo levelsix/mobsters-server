@@ -202,6 +202,7 @@ message ClanIconProto {
 
 //------------------------------------------------------------------------------------------
 
+//Official "ClanHelp" clan mates can provide help on
 message ClanHelpProto {
 	optional int64 clanHelpId = 1;
 	optional int32 clanId = 2;
@@ -215,6 +216,7 @@ message ClanHelpProto {
 	optional int32 staticDataId = 10;
 }
 
+//used to request clan help on something. 
 message ClanHelpNoticeProto {
 	optional ClanHelpType helpType = 1;
 	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
