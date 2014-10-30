@@ -54,7 +54,6 @@ import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
-import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
@@ -122,7 +121,6 @@ import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -1715,9 +1713,9 @@ public class StartupController extends EventController {
 			log.info("Updating leaderboard for user " + user.getId());
 			syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now,
 				newNumConsecutiveDaysLoggedIn);
-			LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+			//LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 			//null PvpLeagueFromUser means will pull from hazelcast instead
-			leaderboard.updateLeaderboardForUser(user, null);
+			//leaderboard.updateLeaderboardForUser(user, null);
 		}
 	}
 

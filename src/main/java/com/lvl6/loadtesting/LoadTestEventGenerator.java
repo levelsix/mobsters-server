@@ -1,6 +1,6 @@
 package com.lvl6.loadtesting;
 
-import org.springframework.integration.Message;
+import org.springframework.messaging.Message;
 
 import com.lvl6.proto.UserProto.MinimumUserProto;
 

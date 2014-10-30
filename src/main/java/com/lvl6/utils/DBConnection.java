@@ -22,7 +22,6 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.StringUtils;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DBConnection {
 
@@ -69,12 +68,12 @@ public class DBConnection {
 
 	private void printConnectionInfoInDebug() {
 		try {
-			if (dataSource instanceof ComboPooledDataSource) {
+			/*if (dataSource instanceof ComboPooledDataSource) {
 				ComboPooledDataSource ds = (ComboPooledDataSource) dataSource;
 				log.debug("num_connections: " + ds.getNumConnectionsDefaultUser());
 				log.debug("num_busy_connections: " + ds.getNumBusyConnectionsDefaultUser());
 				log.debug("num_idle_connections: " + ds.getNumIdleConnectionsDefaultUser());
-			}
+			}*/
 		} catch (Exception e) {
 			log.error("Error printing connectionInfoDebug", e);
 		}

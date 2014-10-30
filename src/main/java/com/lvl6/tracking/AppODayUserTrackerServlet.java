@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.ServletException;
+/*import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AppODayUserTrackerServlet extends HttpServlet {
+public class AppODayUserTrackerServlet{// extends HttpServlet {
 
 	
-	protected static Logger log = LoggerFactory.getLogger(AppODayUserTrackerServlet.class);
+/*	protected static Logger log = LoggerFactory.getLogger(AppODayUserTrackerServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -43,7 +43,7 @@ public class AppODayUserTrackerServlet extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = -3045402726876117659L;
-	
+	*/
 	
 
 }

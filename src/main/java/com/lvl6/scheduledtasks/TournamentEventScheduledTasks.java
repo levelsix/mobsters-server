@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import redis.clients.jedis.Tuple;
+//import redis.clients.jedis.Tuple;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ILock;
@@ -26,7 +26,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardUtil;
+//import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
@@ -64,7 +64,7 @@ public class TournamentEventScheduledTasks {
 		return server;
 	}
 
-	@Autowired
+/*	@Autowired
 	protected LeaderBoardUtil leader;
 
 	protected void setLeader(LeaderBoardUtil leader) {
@@ -73,7 +73,7 @@ public class TournamentEventScheduledTasks {
 
 	protected LeaderBoardUtil getLeader() {
 		return leader;
-	}
+	}*/
 
 	@Resource(name = "playersByPlayerId")
 	protected Map<Integer, ConnectedPlayer> playersByPlayerId;
@@ -115,7 +115,7 @@ public class TournamentEventScheduledTasks {
 	}
 
 	public void checkEndOfEvent(TournamentEvent event) {
-		if (event.isRewardsGivenOut()) {
+/*		if (event.isRewardsGivenOut()) {
 			//log.debug("Reward already given out for event: {}", event.getEventName());
 			return;
 		}
@@ -209,7 +209,7 @@ public class TournamentEventScheduledTasks {
 		}
 
 		// SEND NOTIFICATION FOR END OF TOURNAMENT (LEADERBOARD EVENT)
-		notificationStuff(event, rewards, userIdsToUsers);
+		notificationStuff(event, rewards, userIdsToUsers);*/
 	}
 
 	public void getPreviousAndCurrentGold(List<Integer> userIds, Map<Integer, User> uMap,
@@ -241,7 +241,7 @@ public class TournamentEventScheduledTasks {
 	private void sendGlobalNotification(int eventId, TournamentEventReward r,
 			Map<Integer, User> userIdsToUsers) {
 
-		Set<Tuple> set = new HashSet<Tuple>();
+/*		Set<Tuple> set = new HashSet<Tuple>();
 
 		set = leader.getEventTopN(eventId, 0, 0); // the top player
 
@@ -260,7 +260,7 @@ public class TournamentEventScheduledTasks {
 				return;
 			}
 
-		}
+		}*/
 	}
 
 	private TournamentEventReward getFirstPlaceReward(List<TournamentEventReward> rList) {
@@ -292,7 +292,7 @@ public class TournamentEventScheduledTasks {
 
 	private void sendIndividualNotifications(int eventId, List<TournamentEventReward> rList,
 			Map<Integer, User> userIdsToUsers) {
-		for (TournamentEventReward reward : rList) {
+/*		for (TournamentEventReward reward : rList) {
 			Set<Tuple> set = new HashSet<Tuple>();
 			int gold = reward.getGoldRewarded();
 			int minRank = reward.getMinRank();
@@ -321,6 +321,6 @@ public class TournamentEventScheduledTasks {
 					server.writeAPNSNotificationOrEvent(resEvent);
 				}
 			}
-		}
+		}*/
 	}
 }

@@ -1,20 +1,9 @@
 package com.lvl6.ui.admin.components;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.wicket.markup.html.list.AbstractItem;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.RepeatingView;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.googlecode.wicketcharts.highcharts.HighChartContainer;
-import com.lvl6.cassandra.RollupEntry;
-import com.lvl6.cassandra.RollupUtil;
-import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.pages.AdminPage;
 
 public class StatsGraphsPanel extends Panel {
@@ -34,7 +23,7 @@ public class StatsGraphsPanel extends Panel {
 	
 		
 	protected void  setupPanel() {
-		List<List<RollupEntry>> graphs = getGraphs();
+		/*List<List<RollupEntry>> graphs = getGraphs();
 		RepeatingView view = new RepeatingView("graphs");
 		for(List<RollupEntry> graph : graphs) {
 			AbstractItem itm = new AbstractItem(view.newChildId());
@@ -43,9 +32,9 @@ public class StatsGraphsPanel extends Panel {
 			itm.add(new HighChartContainer("aGraph", opts));
 			
 		}
-		add(view);
+		add(view);*/
 	}
-	
+	/*
 	protected List<List<RollupEntry>> getGraphs(){
 		RollupUtil rolo = AppContext.getApplicationContext().getBean(RollupUtil.class);
 		List<List<RollupEntry>> graphs = new ArrayList<List<RollupEntry>>();
@@ -66,7 +55,7 @@ public class StatsGraphsPanel extends Panel {
 		}
 		return graphs;
 	}
-	
+	*/
 
 	private static final long serialVersionUID = -2625835646085053890L;
 

@@ -1,26 +1,19 @@
 package com.lvl6.server;
 
 import java.lang.reflect.Field;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.SocketChannel;
 import java.text.NumberFormat;
-import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.integration.Message;
-import org.springframework.integration.MessageChannel;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.ip.tcp.connection.TcpNioConnection;
 import org.springframework.integration.ip.tcp.connection.TcpNioServerConnectionFactory;
 
 import com.lvl6.loadtesting.LoadTestEventGenerator;
-import com.lvl6.properties.Globals;
-import com.lvl6.utils.ClientAttachment;
 
 public class HealthCheckImpl implements HealthCheck {
 
@@ -28,6 +21,11 @@ public class HealthCheckImpl implements HealthCheck {
 
 	private static Logger log = LoggerFactory.getLogger(HealthCheckImpl.class);
 
+	
+	//TODO: Fix this class
+	
+	
+	/*
 	public MessageChannel getSendToServer() {
 		return sendToServer;
 	}
@@ -35,7 +33,7 @@ public class HealthCheckImpl implements HealthCheck {
 	public void setSendToServer(MessageChannel sendToServer) {
 		this.sendToServer = sendToServer;
 	}
-
+*/
 	public QueueChannel getServerResponses() {
 		return serverResponses;
 	}
@@ -44,19 +42,9 @@ public class HealthCheckImpl implements HealthCheck {
 		this.serverResponses = serverResponses;
 	}
 
-	@Resource
-	protected DevOps devops;
-
-	public DevOps getDevops() {
-		return devops;
-	}
-
-	public void setDevops(DevOps devops) {
-		this.devops = devops;
-	}
-
+/*
 	@Resource(name = "outboundFakeClientMessageChannel")
-	protected MessageChannel sendToServer;
+	protected MessageChannel sendToServer;*/
 
 	@Resource(name = "inboundFakeClientChannel")
 	protected QueueChannel serverResponses;
@@ -105,8 +93,7 @@ public class HealthCheckImpl implements HealthCheck {
 		log.info("Running health check");
 		checkConnections();
 		//checkNumberOfConnections();
-		sendToServer.send(gen.startup("Cluster Server Instance: "
-				+ server.serverId()));
+		//sendToServer.send(gen.startup("Cluster Server Instance: "+ server.serverId()));
 		// sendToServer.send(gen.userQuestDetails(user));
 		return waitForMessage();
 	}
@@ -114,7 +101,7 @@ public class HealthCheckImpl implements HealthCheck {
 	protected int failsSinceLastSuccess = 0;
 
 	protected boolean waitForMessage() {
-		Message<?> msg = serverResponses
+		/*Message<?> msg = serverResponses
 				.receive(Globals.HEALTH_CHECK_TIMEOUT() * 1000);
 		if (msg != null && msg.getHeaders() != null) {
 			log.debug("Received response message...size: "
@@ -132,8 +119,8 @@ public class HealthCheckImpl implements HealthCheck {
 		failsSinceLastSuccess++;
 		if (failsSinceLastSuccess > 5) {
 			sendAlertToAdmins();
-		}
-		return false;
+		}*/
+		return true;
 	}
 
 	protected void checkNumberOfConnections() {
@@ -166,15 +153,6 @@ public class HealthCheckImpl implements HealthCheck {
 		 */
 	}
 
-	protected void sendAlertToAdmins() {
-		if (devops.lastAlertSentToAdmins == null
-				|| new Date().getTime() > devops.getLastAlertSentToAdmins().getTime() + ALERT_INTERVAL) {
-			log.warn("Contacting admins to notify of failed healthcheck");
-			devops.sendAlertToAdmins("Health check failed on a server");
-		} else {
-			log.warn("Not contacting admins because contact interval threshold has not been exceeded");
-		}
-	}
 
 	@Override
 	public void logCurrentSystemInfo() {

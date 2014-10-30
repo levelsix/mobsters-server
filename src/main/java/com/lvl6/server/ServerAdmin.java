@@ -1,9 +1,6 @@
 package com.lvl6.server;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +14,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ILock;
@@ -25,15 +21,10 @@ import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
 import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
-import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
-import com.lvl6.utils.RetrieveUtils;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
 
@@ -77,16 +68,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.executor = executor;
 	}
 
-	@Autowired
-	protected LeaderBoardUtil leaderboard;
 
-	public LeaderBoardUtil getLeaderboard() {
-		return leaderboard;
-	}
-
-	public void setLeaderboard(LeaderBoardUtil leaderboard) {
-		this.leaderboard = leaderboard;
-	}
 
 	@Resource(name = "playersByPlayerId")
 	Map<Integer, ConnectedPlayer> players;
@@ -170,7 +152,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	}
 
 	public void reloadLeaderboard() {
-		executor.execute(new Runnable() {
+		/*executor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -189,7 +171,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 							User usr = uru.getUserById(id);
 							log.info("Batch reloading leaderboard for user {}", usr.getId());
 							//null for pvpLeagueForUser, will pull it from hazelcast
-							leaderboard.updateLeaderboardForUser(usr, null);
+							//leaderboard.updateLeaderboardForUser(usr, null);
 						} catch (Exception e) {
 							log.error("Error updating leaderboard for user: {}", id, e);
 						}
@@ -198,7 +180,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 					log.error("Error reloading leaderboard",e);
 				}
 			}
-		});
+		});*/
 	}
 		
 	
