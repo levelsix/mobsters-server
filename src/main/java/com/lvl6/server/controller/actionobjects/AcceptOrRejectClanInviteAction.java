@@ -102,18 +102,19 @@ public class AcceptOrRejectClanInviteAction
 		}
 		
 		boolean success = writeChangesToDB(resBuilder);
-		if (success) {
-			
-			resBuilder.setStatus(AcceptOrRejectClanInviteStatus.SUCCESS);
-			
-			if (!rejectOnly) {
-				//meaning user accepted an invite
-				FullClanProtoWithClanSize fcpwcs = CreateInfoProtoUtils
-					.createFullClanProtoWithClanSize(prospectiveClan, clanSize);
-					
-				resBuilder.setFullClan( fcpwcs );
-			}
+		if (!success) {
+			return;
 		}
+		
+		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.SUCCESS);
+		if (!rejectOnly) {
+			//meaning user accepted an invite
+			FullClanProtoWithClanSize fcpwcs = CreateInfoProtoUtils
+				.createFullClanProtoWithClanSize(prospectiveClan, clanSize);
+
+			resBuilder.setFullClan( fcpwcs );
+		}
+		
 	}
 	
 	private boolean verifySyntax(Builder resBuilder) {
@@ -227,4 +228,15 @@ public class AcceptOrRejectClanInviteAction
 		
 		return true;
 	}
+
+	public Clan getProspectiveClan()
+	{
+		return prospectiveClan;
+	}
+
+	public User getProspectiveMember()
+	{
+		return prospectiveMember;
+	}
+
 }

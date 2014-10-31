@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.User;
+import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
-import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -21,16 +21,16 @@ public class SetClanHelpingsAction implements StartUpAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private final StartupResponseProto.Builder resBuilder;
+	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
 	private final int userId;
 	private final ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 	
 	public SetClanHelpingsAction(
-		StartupResponseProto.Builder resBuilder, User user,
+		ClanDataProto.Builder cdpBuilder, User user,
 		int userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil)
 	{
-		this.resBuilder = resBuilder;
+		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
@@ -98,7 +98,7 @@ public class SetClanHelpingsAction implements StartUpAction
 				ClanHelpProto chp = CreateInfoProtoUtils
 					.createClanHelpProtoFromClanHelp(aid, solicitor, null, mup);
 
-				resBuilder.addClanHelpings(chp);
+				cdpBuilder.addClanHelpings(chp);
 			}
 		}
 	}

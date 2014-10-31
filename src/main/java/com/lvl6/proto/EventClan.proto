@@ -515,3 +515,8 @@ message AcceptOrRejectClanInviteResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+message RetrieveClanDataResponseProto {
+	optional MinimumUserProto mup = 1;
+	optional ClanDataProto clanData = 2;
+}
+

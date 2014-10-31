@@ -1259,9 +1259,13 @@ public final class ProtocolsProto {
      */
     S_FORCE_LOGOUT_EVENT(91, 109),
     /**
+     * <code>S_RETRIEVE_CLAN_DATA_EVENT = 110;</code>
+     */
+    S_RETRIEVE_CLAN_DATA_EVENT(92, 110),
+    /**
      * <code>S_DEV_EVENT = 200;</code>
      */
-    S_DEV_EVENT(92, 200),
+    S_DEV_EVENT(93, 200),
     ;
 
     /**
@@ -1649,6 +1653,10 @@ public final class ProtocolsProto {
      */
     public static final int S_FORCE_LOGOUT_EVENT_VALUE = 109;
     /**
+     * <code>S_RETRIEVE_CLAN_DATA_EVENT = 110;</code>
+     */
+    public static final int S_RETRIEVE_CLAN_DATA_EVENT_VALUE = 110;
+    /**
      * <code>S_DEV_EVENT = 200;</code>
      */
     public static final int S_DEV_EVENT_VALUE = 200;
@@ -1750,6 +1758,7 @@ public final class ProtocolsProto {
         case 107: return S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
         case 108: return S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT;
         case 109: return S_FORCE_LOGOUT_EVENT;
+        case 110: return S_RETRIEVE_CLAN_DATA_EVENT;
         case 200: return S_DEV_EVENT;
         default: return null;
       }
@@ -1901,7 +1910,7 @@ public final class ProtocolsProto {
       "\032\n\026C_INVITE_TO_CLAN_EVENT\020R\022(\n$C_ACCEPT_" +
       "OR_REJECT_CLAN_INVITE_EVENT\020S\022\'\n#C_COLLE" +
       "CT_MONSTER_ENHANCEMENT_EVENT\020T\022\022\n\016C_LOGO",
-      "UT_EVENT\020e\022\020\n\013C_DEV_EVENT\020\310\001*\315\030\n\025EventPr" +
+      "UT_EVENT\020e\022\020\n\013C_DEV_EVENT\020\310\001*\355\030\n\025EventPr" +
       "otocolResponse\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027S" +
       "_IN_APP_PURCHASE_EVENT\020\002\022#\n\037S_PURCHASE_N" +
       "ORM_STRUCTURE_EVENT\020\003\022)\n%S_MOVE_OR_ROTAT" +
@@ -1980,7 +1989,8 @@ public final class ProtocolsProto {
       "ON_EVENT\020j\022*\n&S_RECEIVED_RARE_BOOSTER_PU" +
       "RCHASE_EVENT\020k\022(\n$S_AWARD_CLAN_RAID_STAG" +
       "E_REWARD_EVENT\020l\022\030\n\024S_FORCE_LOGOUT_EVENT" +
-      "\020m\022\020\n\013S_DEV_EVENT\020\310\001B\020B\016ProtocolsProto"
+      "\020m\022\036\n\032S_RETRIEVE_CLAN_DATA_EVENT\020n\022\020\n\013S_",
+      "DEV_EVENT\020\310\001B\020B\016ProtocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

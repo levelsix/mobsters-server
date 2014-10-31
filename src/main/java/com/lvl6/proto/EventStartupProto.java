@@ -1877,27 +1877,27 @@ public final class EventStartupProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> 
+    @java.lang.Deprecated java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> 
         getClanChatsList();
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index);
+    @java.lang.Deprecated com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index);
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    int getClanChatsCount();
+    @java.lang.Deprecated int getClanChatsCount();
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
+    @java.lang.Deprecated java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
         getClanChatsOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
+    @java.lang.Deprecated com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
         int index);
 
     /**
@@ -2478,27 +2478,27 @@ public final class EventStartupProto {
         int index);
 
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> 
+    @java.lang.Deprecated java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> 
         getClanHelpingsList();
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index);
+    @java.lang.Deprecated com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index);
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    int getClanHelpingsCount();
+    @java.lang.Deprecated int getClanHelpingsCount();
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+    @java.lang.Deprecated java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
         getClanHelpingsOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+    @java.lang.Deprecated com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
         int index);
 
     /**
@@ -2524,6 +2524,19 @@ public final class EventStartupProto {
      */
     com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getClanInvitesOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    boolean hasClanData();
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanDataProto getClanData();
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder getClanDataOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.StartupResponseProto}
@@ -2988,6 +3001,19 @@ public final class EventStartupProto {
                 mutable_bitField1_ |= 0x00000200;
               }
               clanInvites_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanInviteProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 346: {
+              com.lvl6.proto.ClanProto.ClanDataProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00010000) == 0x00010000)) {
+                subBuilder = clanData_.toBuilder();
+              }
+              clanData_ = input.readMessage(com.lvl6.proto.ClanProto.ClanDataProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(clanData_);
+                clanData_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00010000;
               break;
             }
           }
@@ -19547,34 +19573,34 @@ public final class EventStartupProto {
     public static final int CLANCHATS_FIELD_NUMBER = 17;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_;
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getClanChatsList() {
+    @java.lang.Deprecated public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getClanChatsList() {
       return clanChats_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
         getClanChatsOrBuilderList() {
       return clanChats_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    public int getClanChatsCount() {
+    @java.lang.Deprecated public int getClanChatsCount() {
       return clanChats_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    public com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index) {
+    @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index) {
       return clanChats_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+     * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
      */
-    public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
+    @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
         int index) {
       return clanChats_.get(index);
     }
@@ -20390,34 +20416,34 @@ public final class EventStartupProto {
     public static final int CLANHELPINGS_FIELD_NUMBER = 41;
     private java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> clanHelpings_;
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
+    @java.lang.Deprecated public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
       return clanHelpings_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+    @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
         getClanHelpingsOrBuilderList() {
       return clanHelpings_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    public int getClanHelpingsCount() {
+    @java.lang.Deprecated public int getClanHelpingsCount() {
       return clanHelpings_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
+    @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
       return clanHelpings_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+     * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
      */
-    public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+    @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
         int index) {
       return clanHelpings_.get(index);
     }
@@ -20455,6 +20481,27 @@ public final class EventStartupProto {
     public com.lvl6.proto.ClanProto.ClanInviteProtoOrBuilder getClanInvitesOrBuilder(
         int index) {
       return clanInvites_.get(index);
+    }
+
+    public static final int CLANDATA_FIELD_NUMBER = 43;
+    private com.lvl6.proto.ClanProto.ClanDataProto clanData_;
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    public boolean hasClanData() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanDataProto getClanData() {
+      return clanData_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+     */
+    public com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder getClanDataOrBuilder() {
+      return clanData_;
     }
 
     private void initFields() {
@@ -20500,6 +20547,7 @@ public final class EventStartupProto {
       userItems_ = java.util.Collections.emptyList();
       clanHelpings_ = java.util.Collections.emptyList();
       clanInvites_ = java.util.Collections.emptyList();
+      clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -20639,6 +20687,9 @@ public final class EventStartupProto {
       }
       for (int i = 0; i < clanInvites_.size(); i++) {
         output.writeMessage(42, clanInvites_.get(i));
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeMessage(43, clanData_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -20837,6 +20888,10 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(42, clanInvites_.get(i));
       }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(43, clanData_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -20980,6 +21035,7 @@ public final class EventStartupProto {
           getUserItemsFieldBuilder();
           getClanHelpingsFieldBuilder();
           getClanInvitesFieldBuilder();
+          getClanDataFieldBuilder();
         }
       }
       private static Builder create() {
@@ -21192,6 +21248,12 @@ public final class EventStartupProto {
         } else {
           clanInvitesBuilder_.clear();
         }
+        if (clanDataBuilder_ == null) {
+          clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
+        } else {
+          clanDataBuilder_.clear();
+        }
+        bitField1_ = (bitField1_ & ~0x00000400);
         return this;
       }
 
@@ -21534,6 +21596,14 @@ public final class EventStartupProto {
           result.clanInvites_ = clanInvites_;
         } else {
           result.clanInvites_ = clanInvitesBuilder_.build();
+        }
+        if (((from_bitField1_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        if (clanDataBuilder_ == null) {
+          result.clanData_ = clanData_;
+        } else {
+          result.clanData_ = clanDataBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -22218,6 +22288,9 @@ public final class EventStartupProto {
               clanInvitesBuilder_.addAllMessages(other.clanInvites_);
             }
           }
+        }
+        if (other.hasClanData()) {
+          mergeClanData(other.getClanData());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -24467,9 +24540,9 @@ public final class EventStartupProto {
           com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> clanChatsBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getClanChatsList() {
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getClanChatsList() {
         if (clanChatsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(clanChats_);
         } else {
@@ -24477,9 +24550,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public int getClanChatsCount() {
+      @java.lang.Deprecated public int getClanChatsCount() {
         if (clanChatsBuilder_ == null) {
           return clanChats_.size();
         } else {
@@ -24487,9 +24560,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index) {
+      @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index) {
         if (clanChatsBuilder_ == null) {
           return clanChats_.get(index);
         } else {
@@ -24497,9 +24570,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder setClanChats(
+      @java.lang.Deprecated public Builder setClanChats(
           int index, com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
         if (clanChatsBuilder_ == null) {
           if (value == null) {
@@ -24514,9 +24587,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder setClanChats(
+      @java.lang.Deprecated public Builder setClanChats(
           int index, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder builderForValue) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
@@ -24528,9 +24601,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder addClanChats(com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
+      @java.lang.Deprecated public Builder addClanChats(com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
         if (clanChatsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -24544,9 +24617,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder addClanChats(
+      @java.lang.Deprecated public Builder addClanChats(
           int index, com.lvl6.proto.ChatProto.GroupChatMessageProto value) {
         if (clanChatsBuilder_ == null) {
           if (value == null) {
@@ -24561,9 +24634,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder addClanChats(
+      @java.lang.Deprecated public Builder addClanChats(
           com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder builderForValue) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
@@ -24575,9 +24648,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder addClanChats(
+      @java.lang.Deprecated public Builder addClanChats(
           int index, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder builderForValue) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
@@ -24589,9 +24662,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder addAllClanChats(
+      @java.lang.Deprecated public Builder addAllClanChats(
           java.lang.Iterable<? extends com.lvl6.proto.ChatProto.GroupChatMessageProto> values) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
@@ -24604,9 +24677,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder clearClanChats() {
+      @java.lang.Deprecated public Builder clearClanChats() {
         if (clanChatsBuilder_ == null) {
           clanChats_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00040000);
@@ -24617,9 +24690,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public Builder removeClanChats(int index) {
+      @java.lang.Deprecated public Builder removeClanChats(int index) {
         if (clanChatsBuilder_ == null) {
           ensureClanChatsIsMutable();
           clanChats_.remove(index);
@@ -24630,16 +24703,16 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder getClanChatsBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder getClanChatsBuilder(
           int index) {
         return getClanChatsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
           int index) {
         if (clanChatsBuilder_ == null) {
           return clanChats_.get(index);  } else {
@@ -24647,9 +24720,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
+      @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder> 
            getClanChatsOrBuilderList() {
         if (clanChatsBuilder_ != null) {
           return clanChatsBuilder_.getMessageOrBuilderList();
@@ -24658,24 +24731,24 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder addClanChatsBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder addClanChatsBuilder() {
         return getClanChatsFieldBuilder().addBuilder(
             com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder addClanChatsBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder addClanChatsBuilder(
           int index) {
         return getClanChatsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17;</code>
+       * <code>repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 17 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder> 
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder> 
            getClanChatsBuilderList() {
         return getClanChatsFieldBuilder().getBuilderList();
       }
@@ -29292,9 +29365,9 @@ public final class EventStartupProto {
           com.lvl6.proto.ClanProto.ClanHelpProto, com.lvl6.proto.ClanProto.ClanHelpProto.Builder, com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> clanHelpingsBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto> getClanHelpingsList() {
         if (clanHelpingsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(clanHelpings_);
         } else {
@@ -29302,9 +29375,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public int getClanHelpingsCount() {
+      @java.lang.Deprecated public int getClanHelpingsCount() {
         if (clanHelpingsBuilder_ == null) {
           return clanHelpings_.size();
         } else {
@@ -29312,9 +29385,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
+      @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProto getClanHelpings(int index) {
         if (clanHelpingsBuilder_ == null) {
           return clanHelpings_.get(index);
         } else {
@@ -29322,9 +29395,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder setClanHelpings(
+      @java.lang.Deprecated public Builder setClanHelpings(
           int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
         if (clanHelpingsBuilder_ == null) {
           if (value == null) {
@@ -29339,9 +29412,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder setClanHelpings(
+      @java.lang.Deprecated public Builder setClanHelpings(
           int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
@@ -29353,9 +29426,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder addClanHelpings(com.lvl6.proto.ClanProto.ClanHelpProto value) {
+      @java.lang.Deprecated public Builder addClanHelpings(com.lvl6.proto.ClanProto.ClanHelpProto value) {
         if (clanHelpingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -29369,9 +29442,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder addClanHelpings(
+      @java.lang.Deprecated public Builder addClanHelpings(
           int index, com.lvl6.proto.ClanProto.ClanHelpProto value) {
         if (clanHelpingsBuilder_ == null) {
           if (value == null) {
@@ -29386,9 +29459,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder addClanHelpings(
+      @java.lang.Deprecated public Builder addClanHelpings(
           com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
@@ -29400,9 +29473,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder addClanHelpings(
+      @java.lang.Deprecated public Builder addClanHelpings(
           int index, com.lvl6.proto.ClanProto.ClanHelpProto.Builder builderForValue) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
@@ -29414,9 +29487,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder addAllClanHelpings(
+      @java.lang.Deprecated public Builder addAllClanHelpings(
           java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanHelpProto> values) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
@@ -29429,9 +29502,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder clearClanHelpings() {
+      @java.lang.Deprecated public Builder clearClanHelpings() {
         if (clanHelpingsBuilder_ == null) {
           clanHelpings_ = java.util.Collections.emptyList();
           bitField1_ = (bitField1_ & ~0x00000100);
@@ -29442,9 +29515,9 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public Builder removeClanHelpings(int index) {
+      @java.lang.Deprecated public Builder removeClanHelpings(int index) {
         if (clanHelpingsBuilder_ == null) {
           ensureClanHelpingsIsMutable();
           clanHelpings_.remove(index);
@@ -29455,16 +29528,16 @@ public final class EventStartupProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder getClanHelpingsBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProto.Builder getClanHelpingsBuilder(
           int index) {
         return getClanHelpingsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
           int index) {
         if (clanHelpingsBuilder_ == null) {
           return clanHelpings_.get(index);  } else {
@@ -29472,9 +29545,9 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
+      @java.lang.Deprecated public java.util.List<? extends com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder> 
            getClanHelpingsOrBuilderList() {
         if (clanHelpingsBuilder_ != null) {
           return clanHelpingsBuilder_.getMessageOrBuilderList();
@@ -29483,24 +29556,24 @@ public final class EventStartupProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder() {
+      @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder() {
         return getClanHelpingsFieldBuilder().addBuilder(
             com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder(
+      @java.lang.Deprecated public com.lvl6.proto.ClanProto.ClanHelpProto.Builder addClanHelpingsBuilder(
           int index) {
         return getClanHelpingsFieldBuilder().addBuilder(
             index, com.lvl6.proto.ClanProto.ClanHelpProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41;</code>
+       * <code>repeated .com.lvl6.proto.ClanHelpProto clanHelpings = 41 [deprecated = true];</code>
        */
-      public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto.Builder> 
+      @java.lang.Deprecated public java.util.List<com.lvl6.proto.ClanProto.ClanHelpProto.Builder> 
            getClanHelpingsBuilderList() {
         return getClanHelpingsFieldBuilder().getBuilderList();
       }
@@ -29757,6 +29830,122 @@ public final class EventStartupProto {
           clanInvites_ = null;
         }
         return clanInvitesBuilder_;
+      }
+
+      private com.lvl6.proto.ClanProto.ClanDataProto clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder> clanDataBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public boolean hasClanData() {
+        return ((bitField1_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanDataProto getClanData() {
+        if (clanDataBuilder_ == null) {
+          return clanData_;
+        } else {
+          return clanDataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public Builder setClanData(com.lvl6.proto.ClanProto.ClanDataProto value) {
+        if (clanDataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          clanData_ = value;
+          onChanged();
+        } else {
+          clanDataBuilder_.setMessage(value);
+        }
+        bitField1_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public Builder setClanData(
+          com.lvl6.proto.ClanProto.ClanDataProto.Builder builderForValue) {
+        if (clanDataBuilder_ == null) {
+          clanData_ = builderForValue.build();
+          onChanged();
+        } else {
+          clanDataBuilder_.setMessage(builderForValue.build());
+        }
+        bitField1_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public Builder mergeClanData(com.lvl6.proto.ClanProto.ClanDataProto value) {
+        if (clanDataBuilder_ == null) {
+          if (((bitField1_ & 0x00000400) == 0x00000400) &&
+              clanData_ != com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance()) {
+            clanData_ =
+              com.lvl6.proto.ClanProto.ClanDataProto.newBuilder(clanData_).mergeFrom(value).buildPartial();
+          } else {
+            clanData_ = value;
+          }
+          onChanged();
+        } else {
+          clanDataBuilder_.mergeFrom(value);
+        }
+        bitField1_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public Builder clearClanData() {
+        if (clanDataBuilder_ == null) {
+          clanData_ = com.lvl6.proto.ClanProto.ClanDataProto.getDefaultInstance();
+          onChanged();
+        } else {
+          clanDataBuilder_.clear();
+        }
+        bitField1_ = (bitField1_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanDataProto.Builder getClanDataBuilder() {
+        bitField1_ |= 0x00000400;
+        onChanged();
+        return getClanDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      public com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder getClanDataOrBuilder() {
+        if (clanDataBuilder_ != null) {
+          return clanDataBuilder_.getMessageOrBuilder();
+        } else {
+          return clanData_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.ClanDataProto clanData = 43;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder> 
+          getClanDataFieldBuilder() {
+        if (clanDataBuilder_ == null) {
+          clanDataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.ClanDataProto, com.lvl6.proto.ClanProto.ClanDataProto.Builder, com.lvl6.proto.ClanProto.ClanDataProtoOrBuilder>(
+                  getClanData(),
+                  getParentForChildren(),
+                  isClean());
+          clanData_ = null;
+        }
+        return clanDataBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto)
@@ -30522,7 +30711,7 @@ public final class EventStartupProto {
       "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
       "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
       "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
-      "\030\010 \001(\010\"\3551\n\024StartupResponseProto\022\030\n\020serve" +
+      "\030\010 \001(\010\"\2462\n\024StartupResponseProto\022\030\n\020serve" +
       "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
       "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
@@ -30546,144 +30735,146 @@ public final class EventStartupProto {
       "oto.StartupResponseProto.ReferralNotific" +
       "ationProto\022\030\n\020noticesToPlayers\030\017 \003(\t\022:\n\013" +
       "globalChats\030\020 \003(\0132%.com.lvl6.proto.Group" +
-      "ChatMessageProto\0228\n\tclanChats\030\021 \003(\0132%.co" +
-      "m.lvl6.proto.GroupChatMessageProto\0222\n\004pc" +
-      "pp\030\022 \003(\0132$.com.lvl6.proto.PrivateChatPos" +
-      "tProto\022;\n\rusersMonsters\030\023 \003(\0132$.com.lvl6",
-      ".proto.FullUserMonsterProto\022@\n\017monstersH" +
-      "ealing\030\024 \003(\0132\'.com.lvl6.proto.UserMonste" +
-      "rHealingProto\022:\n\014enhancements\030\025 \001(\0132$.co" +
-      "m.lvl6.proto.UserEnhancementProto\022<\n\tevo" +
-      "lution\030\035 \001(\0132).com.lvl6.proto.UserMonste" +
-      "rEvolutionProto\022F\n\024rareBoosterPurchases\030" +
-      "\026 \003(\0132(.com.lvl6.proto.RareBoosterPurcha" +
-      "seProto\022\021\n\tkabamNaid\030\027 \001(\t\022K\n\023invitesToM" +
-      "eForSlots\030\030 \003(\0132..com.lvl6.proto.UserFac" +
-      "ebookInviteForSlotProto\022M\n\025invitesFromMe",
-      "ForSlots\030\031 \003(\0132..com.lvl6.proto.UserFace" +
-      "bookInviteForSlotProto\022=\n\024staticDataStuf" +
-      "fProto\030\032 \001(\0132\037.com.lvl6.proto.StaticData" +
-      "Proto\022 \n\030taskIdForCurrentCityBoss\030\034 \003(\005\022" +
-      "<\n\nuserEvents\030\036 \003(\0132(.com.lvl6.proto.Use" +
-      "rPersistentEventProto\022I\n\017curRaidClanInfo" +
-      "\030\037 \001(\01320.com.lvl6.proto.PersistentClanEv" +
-      "entClanInfoProto\022M\n\023curRaidClanUserInfo\030" +
-      "  \003(\01320.com.lvl6.proto.PersistentClanEve" +
-      "ntUserInfoProto\022R\n\020raidStageHistory\030! \003(",
-      "\01328.com.lvl6.proto.PersistentClanEventRa" +
-      "idStageHistoryProto\0227\n\016recentNBattles\030# " +
-      "\003(\0132\037.com.lvl6.proto.PvpHistoryProto\0225\n\007" +
-      "curTask\030$ \001(\0132$.com.lvl6.proto.MinimumUs" +
-      "erTaskProto\0225\n\rcurTaskStages\030% \003(\0132\036.com" +
-      ".lvl6.proto.TaskStageProto\022>\n\020userAchiev" +
-      "ements\030& \003(\0132$.com.lvl6.proto.UserAchiev" +
-      "ementProto\022;\n\021userMiniJobProtos\030\' \003(\0132 ." +
-      "com.lvl6.proto.UserMiniJobProto\0220\n\tuserI" +
-      "tems\030( \003(\0132\035.com.lvl6.proto.UserItemProt",
-      "o\0223\n\014clanHelpings\030) \003(\0132\035.com.lvl6.proto" +
-      ".ClanHelpProto\0224\n\013clanInvites\030* \003(\0132\037.co" +
-      "m.lvl6.proto.ClanInviteProto\032\200\001\n\031Attacke" +
-      "dNotificationProto\0222\n\010attacker\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\032\n\022battle" +
-      "CompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032" +
-      "\202\001\n\031ReferralNotificationProto\0222\n\010referre" +
-      "d\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToRe" +
-      "ferrer\030\003 \001(\005\032\275\027\n\020StartupConstants\022H\n\025inA",
-      "ppPurchasePackages\030\001 \003(\0132).com.lvl6.prot" +
-      "o.InAppPurchasePackageProto\022\027\n\017maxLevelF" +
-      "orUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001" +
-      "(\005\022n\n\025animatedSpriteOffsets\030\004 \003(\0132O.com." +
-      "lvl6.proto.StartupResponseProto.StartupC" +
-      "onstants.AnimatedSpriteOffsetProto\022\025\n\rmi" +
-      "nNameLength\030\005 \001(\005\022\025\n\rmaxNameLength\030\006 \001(\005" +
-      "\022\035\n\025maxLengthOfChatString\030\007 \001(\005\022Z\n\rclanC" +
-      "onstants\030\010 \001(\0132C.com.lvl6.proto.StartupR" +
-      "esponseProto.StartupConstants.ClanConsta",
-      "nts\022p\n\030downloadableNibConstants\030\t \001(\0132N." +
-      "com.lvl6.proto.StartupResponseProto.Star" +
-      "tupConstants.DownloadableNibConstants\022\'\n" +
-      "\037numHoursBeforeReshowingGoldSale\030\n \001(\005\022\036" +
-      "\n\026levelToShowRateUsPopup\030\013 \001(\005\022e\n\022touram" +
-      "entConstants\030\014 \001(\0132I.com.lvl6.proto.Star" +
-      "tupResponseProto.StartupConstants.Tourna" +
-      "mentConstants\022\037\n\027fbConnectRewardDiamonds" +
-      "\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022<\n\022adminChat" +
-      "UserProto\030\017 \001(\0132 .com.lvl6.proto.Minimum",
-      "UserProto\022\037\n\027numBeginnerSalesAllowed\030\020 \001" +
-      "(\005\022h\n\024userMonsterConstants\030\021 \001(\0132J.com.l" +
-      "vl6.proto.StartupResponseProto.StartupCo" +
-      "nstants.UserMonsterConstants\022`\n\020monsterC" +
-      "onstants\030\022 \001(\0132F.com.lvl6.proto.StartupR" +
-      "esponseProto.StartupConstants.MonsterCon" +
-      "stants\022\025\n\rminutesPerGem\030\023 \001(\002\022\027\n\017gemsPer" +
-      "Resource\030\025 \001(\002\022\031\n\021pvpRequiredMinLvl\030\024 \001(" +
-      "\005\022\034\n\024monsterDmgMultiplier\030\037 \001(\002\022\'\n\037conti" +
-      "nueBattleGemCostMultiplier\030\026 \001(\002\022 \n\030batt",
-      "leRunAwayBasePercent\030\034 \001(\002\022\036\n\026battleRunA" +
-      "wayIncrement\030\035 \001(\002\022\027\n\017addAllFbFriends\030\027 " +
-      "\001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6.proto.S" +
-      "tartupResponseProto.StartupConstants.Min" +
-      "iTutorialConstants\022\024\n\014maxObstacles\030\031 \001(\005" +
-      "\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020taskMapC" +
-      "onstants\030\033 \001(\0132F.com.lvl6.proto.StartupR" +
-      "esponseProto.StartupConstants.TaskMapCon" +
-      "stants\022 \n\030maxMinutesForFreeSpeedUp\030\036 \001(\005" +
-      "\022b\n\021clanHelpConstants\030  \003(\0132G.com.lvl6.p",
-      "roto.StartupResponseProto.StartupConstan" +
-      "ts.ClanHelpConstants\022W\n\013pvpConstant\030! \001(" +
-      "\0132B.com.lvl6.proto.StartupResponseProto." +
-      "StartupConstants.PvpConstants\032_\n\031Animate" +
-      "dSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n" +
-      "\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\032\257\001\n\rClanConstants\022\035\n\025coinPriceToC" +
-      "reateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanN" +
-      "ame\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescrip" +
-      "tion\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 ",
-      "\001(\005\022\023\n\013maxClanSize\030\005 \001(\005\032c\n\030Downloadable" +
-      "NibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expa" +
-      "nsionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030" +
-      "\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeig" +
-      "ht\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesW" +
-      "eight\030\003 \001(\005\022#\n\033numHoursToShowAfterEventE" +
-      "nd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxN" +
-      "umTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonste" +
-      "rLimit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cas" +
-      "hPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHealPe",
-      "rHealthPoint\030\002 \001(\002\022\031\n\021elementalStrength\030" +
-      "\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilP" +
-      "erMonsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstant" +
-      "s\022\035\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023mapN" +
-      "umberOfSections\030\002 \001(\005\022\030\n\020mapSectionHeigh" +
-      "t\030\003 \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTot" +
-      "alHeight\030\005 \001(\002\032K\n\025MiniTutorialConstants\022" +
-      "\032\n\022miniTutorialTaskId\030\001 \001(\005\022\026\n\016guideMons" +
-      "terId\030\002 \001(\005\032\200\001\n\021ClanHelpConstants\022.\n\010hel" +
-      "pType\030\001 \001(\0162\034.com.lvl6.proto.ClanHelpTyp",
-      "e\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025perce" +
-      "ntRemovedPerHelp\030\003 \001(\002\032t\n\014PvpConstants\022\031" +
-      "\n\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDe" +
-      "lta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvp" +
-      "RequiredMinLvl\030\004 \001(\005\032\234\004\n\021TutorialConstan" +
-      "ts\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016guideMo" +
-      "nsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n" +
-      "\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMon" +
-      "sterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022" +
-      "tutorialStructures\030\003 \003(\0132#.com.lvl6.prot",
-      "o.TutorialStructProto\022\036\n\026structureIdsToB" +
-      "eBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOne" +
-      "Elements\030\006 \003(\0132 .com.lvl6.proto.CityElem" +
-      "entProto\022$\n\034cityElementIdForFirstDungeon" +
-      "\030\007 \001(\005\022%\n\035cityElementIdForSecondDungeon\030" +
-      "\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005" +
-      "\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstacles\030" +
-      "\016 \003(\0132$.com.lvl6.proto.MinimumObstaclePr" +
-      "oto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MI" +
-      "NOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartu",
-      "pStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_D" +
-      "B\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030ForceL" +
-      "ogoutResponseProto\022\031\n\021previousLoginTime\030" +
-      "\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupProto"
+      "ChatMessageProto\022<\n\tclanChats\030\021 \003(\0132%.co" +
+      "m.lvl6.proto.GroupChatMessageProtoB\002\030\001\0222" +
+      "\n\004pcpp\030\022 \003(\0132$.com.lvl6.proto.PrivateCha" +
+      "tPostProto\022;\n\rusersMonsters\030\023 \003(\0132$.com.",
+      "lvl6.proto.FullUserMonsterProto\022@\n\017monst" +
+      "ersHealing\030\024 \003(\0132\'.com.lvl6.proto.UserMo" +
+      "nsterHealingProto\022:\n\014enhancements\030\025 \001(\0132" +
+      "$.com.lvl6.proto.UserEnhancementProto\022<\n" +
+      "\tevolution\030\035 \001(\0132).com.lvl6.proto.UserMo" +
+      "nsterEvolutionProto\022F\n\024rareBoosterPurcha" +
+      "ses\030\026 \003(\0132(.com.lvl6.proto.RareBoosterPu" +
+      "rchaseProto\022\021\n\tkabamNaid\030\027 \001(\t\022K\n\023invite" +
+      "sToMeForSlots\030\030 \003(\0132..com.lvl6.proto.Use" +
+      "rFacebookInviteForSlotProto\022M\n\025invitesFr",
+      "omMeForSlots\030\031 \003(\0132..com.lvl6.proto.User" +
+      "FacebookInviteForSlotProto\022=\n\024staticData" +
+      "StuffProto\030\032 \001(\0132\037.com.lvl6.proto.Static" +
+      "DataProto\022 \n\030taskIdForCurrentCityBoss\030\034 " +
+      "\003(\005\022<\n\nuserEvents\030\036 \003(\0132(.com.lvl6.proto" +
+      ".UserPersistentEventProto\022I\n\017curRaidClan" +
+      "Info\030\037 \001(\01320.com.lvl6.proto.PersistentCl" +
+      "anEventClanInfoProto\022M\n\023curRaidClanUserI" +
+      "nfo\030  \003(\01320.com.lvl6.proto.PersistentCla" +
+      "nEventUserInfoProto\022R\n\020raidStageHistory\030",
+      "! \003(\01328.com.lvl6.proto.PersistentClanEve" +
+      "ntRaidStageHistoryProto\0227\n\016recentNBattle" +
+      "s\030# \003(\0132\037.com.lvl6.proto.PvpHistoryProto" +
+      "\0225\n\007curTask\030$ \001(\0132$.com.lvl6.proto.Minim" +
+      "umUserTaskProto\0225\n\rcurTaskStages\030% \003(\0132\036" +
+      ".com.lvl6.proto.TaskStageProto\022>\n\020userAc" +
+      "hievements\030& \003(\0132$.com.lvl6.proto.UserAc" +
+      "hievementProto\022;\n\021userMiniJobProtos\030\' \003(" +
+      "\0132 .com.lvl6.proto.UserMiniJobProto\0220\n\tu" +
+      "serItems\030( \003(\0132\035.com.lvl6.proto.UserItem",
+      "Proto\0227\n\014clanHelpings\030) \003(\0132\035.com.lvl6.p" +
+      "roto.ClanHelpProtoB\002\030\001\0224\n\013clanInvites\030* " +
+      "\003(\0132\037.com.lvl6.proto.ClanInviteProto\022/\n\010" +
+      "clanData\030+ \001(\0132\035.com.lvl6.proto.ClanData" +
+      "Proto\032\200\001\n\031AttackedNotificationProto\0222\n\010a" +
+      "ttacker\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023\n\013c" +
+      "oinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotificatio" +
+      "nProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022",
+      "\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\275\027\n\020Startu" +
+      "pConstants\022H\n\025inAppPurchasePackages\030\001 \003(" +
+      "\0132).com.lvl6.proto.InAppPurchasePackageP" +
+      "roto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumO" +
+      "fSingleStruct\030\003 \001(\005\022n\n\025animatedSpriteOff" +
+      "sets\030\004 \003(\0132O.com.lvl6.proto.StartupRespo" +
+      "nseProto.StartupConstants.AnimatedSprite" +
+      "OffsetProto\022\025\n\rminNameLength\030\005 \001(\005\022\025\n\rma" +
+      "xNameLength\030\006 \001(\005\022\035\n\025maxLengthOfChatStri" +
+      "ng\030\007 \001(\005\022Z\n\rclanConstants\030\010 \001(\0132C.com.lv",
+      "l6.proto.StartupResponseProto.StartupCon" +
+      "stants.ClanConstants\022p\n\030downloadableNibC" +
+      "onstants\030\t \001(\0132N.com.lvl6.proto.StartupR" +
+      "esponseProto.StartupConstants.Downloadab" +
+      "leNibConstants\022\'\n\037numHoursBeforeReshowin" +
+      "gGoldSale\030\n \001(\005\022\036\n\026levelToShowRateUsPopu" +
+      "p\030\013 \001(\005\022e\n\022touramentConstants\030\014 \001(\0132I.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.TournamentConstants\022\037\n\027fbConn" +
+      "ectRewardDiamonds\030\r \001(\005\022\023\n\013faqFileName\030\016",
+      " \001(\t\022<\n\022adminChatUserProto\030\017 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\037\n\027numBeginne" +
+      "rSalesAllowed\030\020 \001(\005\022h\n\024userMonsterConsta" +
+      "nts\030\021 \001(\0132J.com.lvl6.proto.StartupRespon" +
+      "seProto.StartupConstants.UserMonsterCons" +
+      "tants\022`\n\020monsterConstants\030\022 \001(\0132F.com.lv" +
+      "l6.proto.StartupResponseProto.StartupCon" +
+      "stants.MonsterConstants\022\025\n\rminutesPerGem" +
+      "\030\023 \001(\002\022\027\n\017gemsPerResource\030\025 \001(\002\022\031\n\021pvpRe" +
+      "quiredMinLvl\030\024 \001(\005\022\034\n\024monsterDmgMultipli",
+      "er\030\037 \001(\002\022\'\n\037continueBattleGemCostMultipl" +
+      "ier\030\026 \001(\002\022 \n\030battleRunAwayBasePercent\030\034 " +
+      "\001(\002\022\036\n\026battleRunAwayIncrement\030\035 \001(\002\022\027\n\017a" +
+      "ddAllFbFriends\030\027 \001(\010\022]\n\010miniTuts\030\030 \001(\0132K" +
+      ".com.lvl6.proto.StartupResponseProto.Sta" +
+      "rtupConstants.MiniTutorialConstants\022\024\n\014m" +
+      "axObstacles\030\031 \001(\005\022\032\n\022minutesPerObstacle\030" +
+      "\032 \001(\005\022`\n\020taskMapConstants\030\033 \001(\0132F.com.lv" +
+      "l6.proto.StartupResponseProto.StartupCon" +
+      "stants.TaskMapConstants\022 \n\030maxMinutesFor",
+      "FreeSpeedUp\030\036 \001(\005\022b\n\021clanHelpConstants\030 " +
+      " \003(\0132G.com.lvl6.proto.StartupResponsePro" +
+      "to.StartupConstants.ClanHelpConstants\022W\n" +
+      "\013pvpConstant\030! \001(\0132B.com.lvl6.proto.Star" +
+      "tupResponseProto.StartupConstants.PvpCon" +
+      "stants\032_\n\031AnimatedSpriteOffsetProto\022\021\n\ti" +
+      "mageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\032\257\001\n\rClanConstant" +
+      "s\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxC" +
+      "harLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLen",
+      "gthForClanDescription\030\003 \001(\005\022\037\n\027maxCharLe" +
+      "ngthForClanTag\030\004 \001(\005\022\023\n\013maxClanSize\030\005 \001(" +
+      "\005\032c\n\030DownloadableNibConstants\022\022\n\nmapNibN" +
+      "ame\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021g" +
+      "oldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCons" +
+      "tants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeigh" +
+      "t\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHours" +
+      "ToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonster" +
+      "Constants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031in" +
+      "itialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n\020Monste",
+      "rConstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#" +
+      "\n\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021e" +
+      "lementalStrength\030\003 \001(\002\022\031\n\021elementalWeakn" +
+      "ess\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005 \001(\002\032\227\001" +
+      "\n\020TaskMapConstants\022\035\n\025mapSectionImagePre" +
+      "fix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030\002 \001(\005\022\030" +
+      "\n\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTotalWidt" +
+      "h\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K\n\025MiniT" +
+      "utorialConstants\022\032\n\022miniTutorialTaskId\030\001" +
+      " \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\032\200\001\n\021ClanHel",
+      "pConstants\022.\n\010helpType\030\001 \001(\0162\034.com.lvl6." +
+      "proto.ClanHelpType\022\034\n\024amountRemovedPerHe" +
+      "lp\030\002 \001(\005\022\035\n\025percentRemovedPerHelp\030\003 \001(\002\032" +
+      "t\n\014PvpConstants\022\031\n\021pvpDmgsWindowSize\030\001 \001" +
+      "(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016maxPvpDmgD" +
+      "elta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl\030\004 \001(\005\032\234\004" +
+      "\n\021TutorialConstants\022\031\n\021startingMonsterId" +
+      "\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enemyM" +
+      "onsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(" +
+      "\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZMo",
+      "nsterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(" +
+      "\0132#.com.lvl6.proto.TutorialStructProto\022\036" +
+      "\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId" +
+      "\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.lv" +
+      "l6.proto.CityElementProto\022$\n\034cityElement" +
+      "IdForFirstDungeon\030\007 \001(\005\022%\n\035cityElementId" +
+      "ForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005" +
+      "\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021t" +
+      "utorialObstacles\030\016 \003(\0132$.com.lvl6.proto." +
+      "MinimumObstacleProto\"A\n\014UpdateStatus\022\r\n\t",
+      "NO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_U" +
+      "PDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001" +
+      "\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTE" +
+      "NANCE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n\021p" +
+      "reviousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021" +
+      "EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -30724,7 +30915,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-        new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", });
+        new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "TutorialConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", "RaidStageHistory", "RecentNBattles", "CurTask", "CurTaskStages", "UserAchievements", "UserMiniJobProtos", "UserItems", "ClanHelpings", "ClanInvites", "ClanData", });
     internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(0);
     internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_fieldAccessorTable = new

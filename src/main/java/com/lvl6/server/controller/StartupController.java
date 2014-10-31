@@ -61,6 +61,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
@@ -116,7 +117,8 @@ import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
-import com.lvl6.server.controller.actionobjects.SetGroupChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
@@ -446,52 +448,61 @@ public class StartupController extends EventController {
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
 			log.info("{}ms at clanRaidStuff", stopWatch.getTime());
 			
-			//Sends a read request to user table
+			SetGlobalChatMessageAction sgcma = new SetGlobalChatMessageAction(resBuilder, user, chatMessages); 
+			sgcma.execute();
+			
+			
+			
+			//fill up with userIds, and other ids to fetch from tables
 			StartUpResource fillMe = new StartUpResource(
 				RetrieveUtils.userRetrieveUtils());
 			
-			//setGroupChatMessages(resBuilder, user);
-			SetGroupChatMessageAction sgcma = new SetGroupChatMessageAction(resBuilder, user, chatMessages);
-			sgcma.setUp(fillMe);
-			log.info("{}ms at groupChatMessages", stopWatch.getTime());
-			
-//			setPrivateChatPosts(resBuilder, user, playerId);
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 				resBuilder, user, playerId);
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			
-//			setFacebookAndExtraSlotsStuff(resBuilder, user, playerId);
 			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(resBuilder, user, playerId);
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			
-			//pvpBattleHistoryStuff(resBuilder, user, playerId);
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
 				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, hazelcastPvpUtil);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 			
-			//setClanHelpings(resBuilder, playerId, user);
-			SetClanHelpingsAction scha = new SetClanHelpingsAction(resBuilder, user, playerId, clanHelpRetrieveUtil);
+			
+			//CLAN DATA
+			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
+			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, user);
+			sccma.setUp(fillMe);
+			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
+			
+			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user, playerId, clanHelpRetrieveUtil);
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
+			
+			
 			//Now since all the ids of resources are known, get them from db
 			fillMe.fetch();
 			log.info("{}ms at fillMe.fetch()", stopWatch.getTime());
 
-			sgcma.execute(fillMe);
-			log.info("{}ms at groupChatMessages", stopWatch.getTime());
 			spcma.execute(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			sfesa.execute(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			spbha.execute(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
+			
+			
+			sccma.execute(fillMe);
+			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			scha.execute(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
+			
+			resBuilder.setClanData(cdpb.build());
 			//          setLeaderboardEventStuff(resBuilder);
 
 			//OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME
@@ -1220,389 +1231,6 @@ public class StartupController extends EventController {
 			resBuilder.addRaidStageHistory(stageProto);
 		}
 	}
-
-	/*
-	private void setGroupChatMessages(StartupResponseProto.Builder resBuilder, User user) {
-		Iterator<GroupChatMessageProto> it = chatMessages.iterator();
-		List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
-		while (it.hasNext()) {
-			globalChats.add(it.next());
-		}
-		/*
-  	  Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
-  	    @Override
-  	    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-  	      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-  	        return -1;
-  	      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-  	        return 1;
-  	      } else {
-  	        return 0;
-  	      }
-  	    }
-  	  };*//*
-		Collections.sort(globalChats, new GroupChatComparator());
-		// Need to add them in reverse order
-		for (int i = 0; i < globalChats.size(); i++) {
-			resBuilder.addGlobalChats(globalChats.get(i));
-		}
-		int clanId = user.getClanId(); 
-
-		if (clanId <= 0) {
-			return;
-		}
-		int limit = ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP;
-		List<ClanChatPost> activeClanChatPosts = ClanChatPostRetrieveUtils
-			.getMostRecentClanChatPostsForClan(limit , clanId);
-
-		if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
-			return;
-		}  		
-		List<Integer> userIds = new ArrayList<Integer>();
-		for (ClanChatPost p : activeClanChatPosts) {
-			userIds.add(p.getPosterId());
-		}
-		//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
-		Map<Integer, User> usersByIds = null;
-		if (userIds.size() > 0) {
-			usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-			for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
-				ClanChatPost pwp = activeClanChatPosts.get(i);
-				resBuilder.addClanChats(CreateInfoProtoUtils
-					.createGroupChatMessageProtoFromClanChatPost(pwp,
-						usersByIds.get(pwp.getPosterId())));
-			}
-		}
-	}*/
-
-	/*
-	private void setPrivateChatPosts(Builder resBuilder, User aUser, int userId) {
-		boolean isRecipient = true;
-		Map<Integer, Integer> userIdsToPrivateChatPostIds = null;
-		Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts = new HashMap<Integer, PrivateChatPost>();
-		Map<Integer, User> userIdsToUsers = null;
-		Map<Integer, Set<Integer>> clanIdsToUserIdSet = null;
-		Map<Integer, Clan> clanIdsToClans = null;
-		List<Integer> clanlessUserIds = new ArrayList<Integer>();
-		List<Integer> clanIdList = new ArrayList<Integer>();
-		List<Integer> privateChatPostIds = new ArrayList<Integer>();
-
-		//get all the most recent posts sent to this user
-		Map<Integer, PrivateChatPost> postsUserReceived = 
-			PrivateChatPostRetrieveUtils.getMostRecentPrivateChatPostsByOrToUser(
-				userId, isRecipient, ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED);
-
-		//get all the most recent posts this user sent
-		isRecipient = false;
-		Map<Integer, PrivateChatPost> postsUserSent = 
-			PrivateChatPostRetrieveUtils.getMostRecentPrivateChatPostsByOrToUser(
-				userId, isRecipient, ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT);
-
-		if ((null == postsUserReceived || postsUserReceived.isEmpty()) &&
-			(null == postsUserSent || postsUserSent.isEmpty()) ) {
-			log.info("user has no private chats. aUser=" + aUser);
-			return;
-		}
-
-		//link other users with private chat posts and combine all the posts
-		//linking is done to select only the latest post between the duple (userId, otherUserId)
-		userIdsToPrivateChatPostIds = aggregateOtherUserIdsAndPrivateChatPost(postsUserReceived, postsUserSent, postIdsToPrivateChatPosts);
-
-		if (null != userIdsToPrivateChatPostIds && !userIdsToPrivateChatPostIds.isEmpty()) {
-			//retrieve all users
-			List<Integer> userIdList = new ArrayList<Integer>();
-			userIdList.addAll(userIdsToPrivateChatPostIds.keySet());
-			userIdList.add(userId); //userIdsToPrivateChatPostIds contains userIds other than 'this' userId
-			//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
-			userIdsToUsers = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIdList);
-		} else {
-			//user did not send any nor received any private chat posts
-			log.error("(not really error) aggregating private chat post ids returned nothing, noob user?");
-			return;
-		}
-		if (null == userIdsToUsers || userIdsToUsers.isEmpty() ||
-			userIdsToUsers.size() == 1) {
-			log.error("unexpected error: perhaps user talked to himself. postsUserReceved="
-				+ postsUserReceived + ", postsUserSent=" + postsUserSent + ", aUser=" + aUser);
-			return;
-		}
-
-		//get all the clans for the users (a map: clanId->set(userId))
-		//put the clanless users in the second argument: userIdsToClanlessUsers
-		clanIdsToUserIdSet = determineClanIdsToUserIdSet(userIdsToUsers, clanlessUserIds);
-		if (null != clanIdsToUserIdSet && !clanIdsToUserIdSet.isEmpty()) {
-			clanIdList.addAll(clanIdsToUserIdSet.keySet());
-			//retrieve all clans for the users
-			clanIdsToClans = ClanRetrieveUtils.getClansByIds(clanIdList);
-		}
-
-
-		//create the protoList
-		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());
-		List<PrivateChatPostProto> pcppList = CreateInfoProtoUtils.createPrivateChatPostProtoList(
-			clanIdsToClans, clanIdsToUserIdSet, userIdsToUsers, clanlessUserIds, privateChatPostIds,
-			postIdsToPrivateChatPosts);
-
-		resBuilder.addAllPcpp(pcppList);
-	}
-
-	private Map<Integer, Integer> aggregateOtherUserIdsAndPrivateChatPost(
-		Map<Integer, PrivateChatPost> postsUserReceived, Map<Integer, PrivateChatPost> postsUserSent,
-		Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts) {
-		Map<Integer, Integer> userIdsToPrivateChatPostIds = new HashMap<Integer, Integer>();
-
-		//go through the posts specific user received
-		if (null != postsUserReceived && !postsUserReceived.isEmpty()) {
-			for (int pcpId : postsUserReceived.keySet()) {
-				PrivateChatPost postUserReceived = postsUserReceived.get(pcpId);
-				int senderId = postUserReceived.getPosterId();
-
-				//record that the other user and specific user chatted
-				userIdsToPrivateChatPostIds.put(senderId, pcpId);
-			}
-			//combine all the posts together
-			postIdsToPrivateChatPosts.putAll(postsUserReceived);
-		}
-
-		if (null != postsUserSent && !postsUserSent.isEmpty()) {
-			//go through the posts user sent
-			for (int pcpId: postsUserSent.keySet()) {
-				PrivateChatPost postUserSent = postsUserSent.get(pcpId);
-				int recipientId = postUserSent.getRecipientId();
-
-				//determine the latest post between other recipientId and specific user
-				if (!userIdsToPrivateChatPostIds.containsKey(recipientId)) {
-					//didn't see this user id yet, record it
-					userIdsToPrivateChatPostIds.put(recipientId, pcpId);
-
-				} else {
-					//recipientId sent something to specific user, choose the latest one
-					int postIdUserReceived = userIdsToPrivateChatPostIds.get(recipientId);
-					//postsUserReceived can't be null here
-					PrivateChatPost postUserReceived = postsUserReceived.get(postIdUserReceived);
-
-					Date newDate = postUserSent.getTimeOfPost();
-					Date existingDate = postUserReceived.getTimeOfPost();
-					if (newDate.getTime() > existingDate.getTime()) {
-						//since postUserSent's time is later, choose this post for recipientId
-						userIdsToPrivateChatPostIds.put(recipientId, pcpId);
-					}
-				}
-			}
-
-			//combine all the posts together
-			postIdsToPrivateChatPosts.putAll(postsUserSent);
-		}
-		return userIdsToPrivateChatPostIds;
-	}
-
-	private Map<Integer, Set<Integer>> determineClanIdsToUserIdSet(Map<Integer, User> userIdsToUsers,
-		List<Integer> clanlessUserUserIds) {
-		Map<Integer, Set<Integer>> clanIdsToUserIdSet = new HashMap<Integer, Set<Integer>>();
-		if (null == userIdsToUsers  || userIdsToUsers.isEmpty()) {
-			return clanIdsToUserIdSet;
-		}
-		//go through users and lump them by clan id
-		for (int userId : userIdsToUsers.keySet()) {
-			User u = userIdsToUsers.get(userId);
-			int clanId = u.getClanId();
-			if (ControllerConstants.NOT_SET == clanId) {
-				clanlessUserUserIds.add(userId);
-				continue;	      
-			}
-
-			if (clanIdsToUserIdSet.containsKey(clanId)) {
-				//clan id exists, add userId in with others
-				Set<Integer> userIdSet = clanIdsToUserIdSet.get(clanId);
-				userIdSet.add(userId);
-			} else {
-				//clan id doesn't exist, create new grouping of userIds
-				Set<Integer> userIdSet = new HashSet<Integer>();
-				userIdSet.add(userId);
-
-				clanIdsToUserIdSet.put(clanId, userIdSet);
-			}
-		}
-		return clanIdsToUserIdSet;
-	}
-	*/
-
-	/*
-	private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User thisUser, int userId) {
-		//gather up data so as to make only one user retrieval query
-
-		//get the invites where this user is the recipient, get unaccepted, hence, unredeemed invites
-		Map<Integer, UserFacebookInviteForSlot> idsToInvitesToMe = new HashMap<Integer, UserFacebookInviteForSlot>();
-		String fbId = thisUser.getFacebookId();
-		List<Integer> specificInviteIds = null;
-		boolean filterByAccepted = true;
-		boolean isAccepted = false;
-		boolean filterByRedeemed = false;
-		boolean isRedeemed = false; //doesn't matter
-		//base case where user does not have facebook id
-		if (null != fbId && !fbId.isEmpty()) {
-			idsToInvitesToMe = UserFacebookInviteForSlotRetrieveUtils
-				.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds, filterByAccepted,
-					isAccepted, filterByRedeemed, isRedeemed);
-		}
-
-		//get the invites where this user is the inviter: get accepted, unredeemed/redeemed does not matter 
-		isAccepted = true;
-		Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe = 
-			UserFacebookInviteForSlotRetrieveUtils.getSpecificOrAllInvitesForInviter(
-				userId, specificInviteIds, filterByAccepted, isAccepted, filterByRedeemed, isRedeemed);
-
-		List<String> recipientFacebookIds = getRecipientFbIds(idsToInvitesFromMe);
-
-		//to make it easier later on, get the inviter ids for these invites and
-		//map inviter id to an invite
-		Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
-			new HashMap<Integer, UserFacebookInviteForSlot>();
-		//inviterIdsToInvites will be populated by getInviterIds(...)
-		List<Integer> inviterUserIds = getInviterIds(idsToInvitesToMe, inviterIdsToInvites);
-
-
-		//base case where user never did any invites
-		if ((null == recipientFacebookIds || recipientFacebookIds.isEmpty()) &&
-			(null == inviterUserIds || inviterUserIds.isEmpty())) {
-			//no facebook stuff
-			return;
-		}
-
-		//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
-		//GET THE USERS
-		Map<Integer, User> idsToUsers = RetrieveUtils.userRetrieveUtils()
-			.getUsersForFacebookIdsOrUserIds(recipientFacebookIds, inviterUserIds);
-		List<User> recipients = new ArrayList<User>();
-		List<User> inviters = new ArrayList<User>();
-		separateUsersIntoRecipientsAndInviters(idsToUsers, recipientFacebookIds,
-			inviterUserIds, recipients, inviters);
-
-
-		//send all the invites where this user is the one being invited
-		for (Integer inviterId : inviterUserIds) {
-			User inviter = idsToUsers.get(inviterId);
-			MinimumUserProtoWithFacebookId inviterProto = null;
-			UserFacebookInviteForSlot invite = inviterIdsToInvites.get(inviterId);
-			UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
-				.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter, inviterProto);
-
-			resBuilder.addInvitesToMeForSlots(inviteProto);
-		}
-
-		//send all the invites where this user is the one inviting
-		MinimumUserProtoWithFacebookId thisUserProto = CreateInfoProtoUtils
-			.createMinimumUserProtoWithFacebookIdFromUser(thisUser);
-		for (UserFacebookInviteForSlot invite : idsToInvitesFromMe.values()) {
-			UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
-				.createUserFacebookInviteForSlotProtoFromInvite(invite, thisUser, thisUserProto);
-			resBuilder.addInvitesFromMeForSlots(inviteProto);
-		}
-	}
-
-	private List<String> getRecipientFbIds(Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe) {
-		List<String> fbIds = new ArrayList<String>();
-		for (UserFacebookInviteForSlot invite : idsToInvitesFromMe.values()) {
-			String fbId = invite.getRecipientFacebookId();
-			fbIds.add(fbId);
-		}
-		return fbIds;
-	}
-
-	//inviterIdsToInvites will be populated
-	private List<Integer> getInviterIds(Map<Integer, UserFacebookInviteForSlot> idsToInvites,
-		Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites) {
-
-		List<Integer> inviterIds = new ArrayList<Integer>(); 
-		for (UserFacebookInviteForSlot invite : idsToInvites.values()) {
-			int userId = invite.getInviterUserId();
-			inviterIds.add(userId);
-
-			inviterIdsToInvites.put(userId, invite);
-		}
-		return inviterIds;
-	}
-
-	//given map of userIds to users, list of recipient facebook ids and list of inviter
-	//user ids, separate the map of users into recipient and inviter
-	private void separateUsersIntoRecipientsAndInviters(Map<Integer, User> idsToUsers,
-		List<String> recipientFacebookIds, List<Integer> inviterUserIds,
-		List<User> recipients, List<User> inviters) {
-
-		Set<String> recipientFacebookIdsSet = new HashSet<String>(recipientFacebookIds);
-
-		//set the recipients
-		for (Integer userId : idsToUsers.keySet()) {
-			User u = idsToUsers.get(userId);
-			String facebookId = u.getFacebookId();
-
-			if (null != facebookId && recipientFacebookIdsSet.contains(facebookId)) {
-				//this is a recipient
-				recipients.add(u);
-			}
-		}
-
-		//set the inviters
-		for (Integer inviterId : inviterUserIds) {
-			if (idsToUsers.containsKey(inviterId)) {
-				User u = idsToUsers.get(inviterId);
-				inviters.add(u);
-			}
-		}
-
-	}*/
-
-	/*
-	private void setClanHelpings(Builder resBuilder, int userId, User user) {
-		Map<Integer, List<ClanHelp>> allSolicitations = clanHelpRetrieveUtil
-			.getUserIdToClanHelp(
-				user.getClanId(),
-				userId);
-		log.info(String.format("allSolicitations=%s", allSolicitations));
-
-		//	  Set<Integer> userIds = new HashSet<Integer>();
-		//	  for (Integer helperId : clanHelpings.keySet()) {
-		//		  List<ClanHelp> userHelpings = clanHelpings.get(helperId);
-		//		  
-		//		  for (ClanHelp aid : userHelpings) {
-		//			  userIds.addAll(aid.getHelpers());
-		//		  }
-		//	  }
-		//	  //TODO: ANOTHER QUERY TO USER TABLE, GET RID OF THIS
-		//	  Map<Integer, User> users = RetrieveUtils.userRetrieveUtils()
-		//		  .getUsersByIds(userIds);
-		//	  
-		
-		if (null == allSolicitations || allSolicitations.isEmpty()) {
-			return;
-		}
-		Map<Integer, User> solicitors = RetrieveUtils.userRetrieveUtils()
-			.getUsersByIds(allSolicitations.keySet());                                
-
-		//convert all solicitors into MinimumUserProtos
-		Map<Integer, MinimumUserProto> mupSolicitors = new HashMap<Integer, MinimumUserProto>();
-		for (Integer solicitorId : solicitors.keySet()) {
-			User moocher = solicitors.get(solicitorId);
-			MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(moocher);
-			mupSolicitors.put(solicitorId, mup);
-		}
-
-		for (Integer solicitorId : allSolicitations.keySet()) {
-			List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
-
-			User solicitor = solicitors.get( solicitorId );
-			MinimumUserProto mup = mupSolicitors.get( solicitorId );
-
-			for (ClanHelp aid : solicitations) {
-				ClanHelpProto chp = CreateInfoProtoUtils
-					.createClanHelpProtoFromClanHelp(aid, solicitor, mup);
-
-				resBuilder.addClanHelpings(chp);
-			}
-		}
-	}
-	*/
-
 
 
 
