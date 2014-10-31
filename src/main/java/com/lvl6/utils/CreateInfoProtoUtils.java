@@ -3263,16 +3263,36 @@ public class CreateInfoProtoUtils {
 		if (null == clanIdsToClans) {
 			return;
 		}
-		for (int clanId : clanIdsToClans.keySet()) {
-			Clan c = clanIdsToClans.get(clanId);
-
-			//create minimum user protos for users associated with clan
-			for (int userId: clanIdsToUserIdSet.get(clanId)) {
-				User u = userIdsToUsers.get(userId);
-				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, c, null);
-				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
+//		for (int clanId : clanIdsToClans.keySet()) {
+//			Clan c = clanIdsToClans.get(clanId);
+//
+//			//create minimum user protos for users associated with clan
+//			for (int userId: clanIdsToUserIdSet.get(clanId)) {
+//				User u = userIdsToUsers.get(userId);
+//				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, c, null);
+//				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
+//			}
+//		}
+		for (int clanId : clanIdsToUserIdSet.keySet()) {                                          
+			
+			//precautionary measure
+			if (!clanIdsToClans.containsKey(clanId)) {
+				String preface = String.format("%s, %s",
+					"createMinimumUserProtosFromClannedAndClanlessUsers()",
+					"no clan. curClanId=");
+				log.error(String.format(
+					"%s %s. clanIdsToUserIdSet=%s, clanIdsToClans=%s",
+					preface, clanId, clanIdsToUserIdSet, clanIdsToClans));
 			}
-		}
+			Clan c = clanIdsToClans.get(clanId);                                              
+		                                                                                      
+			//create minimum user protos for users associated with clan                       
+			for (int userId: clanIdsToUserIdSet.get(clanId)) {                                
+				User u = userIdsToUsers.get(userId);                                          
+				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, c, null);
+				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);                         
+			}                                                                                 
+		}                                                                                     
 	}
 
 }

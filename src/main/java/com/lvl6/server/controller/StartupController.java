@@ -503,6 +503,10 @@ public class StartupController extends EventController {
 
 			
 			resBuilder.setClanData(cdpb.build());
+			//TODO: DELETE IN FUTURE. This is for legacy client
+			resBuilder.addAllClanChats(cdpb.getClanChatsList());
+			resBuilder.addAllClanHelpings(cdpb.getClanHelpingsList());
+			
 			//          setLeaderboardEventStuff(resBuilder);
 
 			//OVERWRITE THE LASTLOGINTIME TO THE CURRENT TIME

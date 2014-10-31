@@ -123,6 +123,28 @@ public class StartUpResource
 		return iMap;
 	}
 	
+	public Map<Integer, Clan> getClanIdsToClans(Collection<Integer> clanIds) {
+		if (null == clanIdsToClans) {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
+		
+		Map<Integer, Clan> clanIdsToClansTemp = new HashMap<Integer, Clan>();
+		for (Integer clanId : clanIds) {
+			if (!clanIdsToClans.containsKey(clanId)) {
+				continue;
+			}
+			clanIdsToClansTemp.put(
+				clanId,
+				clanIdsToClans.get(clanId));
+		}
+		
+		ImmutableMap<Integer, Clan> iMap =
+			new Builder<Integer, Clan>()
+			.putAll(clanIdsToClansTemp)
+			.build();
+		return iMap;
+	}
+	
 	public void addClan(int clanId, Clan c) {
 		if (null == clanIdsToClans) {
 			clanIdsToClans = new HashMap<Integer, Clan>();
