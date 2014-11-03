@@ -16,19 +16,26 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
+import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -41,6 +48,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected Locker locker;
 
+  @Autowired
+  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+  
   public ApproveOrRejectRequestToJoinClanController() {
     numAllocatedThreads = 4;
   }
@@ -104,12 +114,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         success = writeChangesToDB(user, requester, accept);
       }
       
+      // Only need to set clan data if user accepted.
+      ClanDataProto cdp = null;
       if (success) {
       	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
       	Clan clan = null;
       	
       	if (accept) {
       		clan = ClanRetrieveUtils.getClanWithId(clanId);
+      		cdp = setClanData(clanId, clan, user, userId);      		
       	}
       	
       	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
@@ -136,6 +149,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         //in case user is not online write an apns
         server.writeAPNSNotificationOrEvent(resEvent2);
         //server.writeEvent(resEvent2);
+        
+        sendClanData(event, senderProto, userId, cdp);
       }
     } catch (Exception e) {
       log.error("exception in ApproveOrRejectRequestToJoinClan processEvent", e);
@@ -249,6 +264,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		return true;
   	}
   }
+
+  private ClanDataProto setClanData( int clanId,
+	  Clan c, User u, int userId )
+  {
+	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
+	  StartUpResource fillMe = new StartUpResource(
+			RetrieveUtils.userRetrieveUtils());
+	  
+	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
+	  sccma.setUp(fillMe);
+	  SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
+	  scha.setUp(fillMe);
+	  
+	  fillMe.fetchUsersOnly();
+	  fillMe.addClan(clanId, c);
+	  
+	  sccma.execute(fillMe);
+	  scha.execute(fillMe);
+	  
+	  return cdpb.build();
+  }
   
   private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 		  List<Integer> clanSizeList) {
@@ -258,12 +294,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int size = clanSizeList.get(0);
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
   }
+
+  private void sendClanData(
+	  RequestEvent event,
+	  MinimumUserProto senderProto,
+	  int userId,
+	  ClanDataProto cdp )
+  {
+	  if (null == cdp) {
+		  return;
+	  }
+	  RetrieveClanDataResponseEvent rcdre =
+		  new RetrieveClanDataResponseEvent(userId);
+	  rcdre.setTag(event.getTag());
+	  RetrieveClanDataResponseProto.Builder rcdrpb =
+		  RetrieveClanDataResponseProto.newBuilder();
+	  rcdrpb.setMup(senderProto);
+	  rcdrpb.setClanData(cdp);
+	  server.writeEvent(rcdre);
+  }
   
   public Locker getLocker() {
 	  return locker;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
+  {
+	  return clanHelpRetrieveUtil;
+  }
+
+  public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
+  {
+	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
   }
 
 }

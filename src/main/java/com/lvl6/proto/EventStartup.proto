@@ -65,7 +65,7 @@ message StartupResponseProto {
 	repeated ReferralNotificationProto referralNotifications = 14;
 	repeated string noticesToPlayers = 15;
 	repeated GroupChatMessageProto globalChats = 16;
-	repeated GroupChatMessageProto clanChats = 17;
+	repeated GroupChatMessageProto clanChats = 17 [deprecated = true];
 	//repeated most recent private chat posts regarding this user
 	repeated PrivateChatPostProto pcpp = 18;
 	
@@ -113,8 +113,10 @@ message StartupResponseProto {
 	repeated UserMiniJobProto userMiniJobProtos = 39;
 	repeated UserItemProto userItems = 40;
 	
-	repeated ClanHelpProto clanHelpings = 41;
+	repeated ClanHelpProto clanHelpings = 41 [deprecated = true];
 	repeated ClanInviteProto clanInvites = 42;
+	optional ClanDataProto clanData = 43;
+
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

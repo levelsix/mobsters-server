@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RequestJoinClanRequestEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
+import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -26,12 +27,14 @@ import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
@@ -39,9 +42,13 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
+import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
+import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -57,6 +64,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+  
+  @Autowired
+  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
   
   public RequestJoinClanController() {
 	  numAllocatedThreads = 4;
@@ -124,9 +134,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
       // Only need to set clan data if it's a successful join.
+      ClanDataProto cdp = null;
       if (successful && !requestToJoinRequired) {
       	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
         sendClanRaidStuff(resBuilder, clan, user);
+        cdp = setClanData(clanId, clan, user, userId);
       }
       RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -161,6 +173,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
+        //this is so user gets all up to date clan information
+        sendClanData(event, senderProto, userId, cdp);
         notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
       }
     } catch (Exception e) {
@@ -180,7 +194,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	}
     }
   }
-
+  
   private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, User user,
   		Clan clan, List<Integer> clanSizeList) {
   	
@@ -375,6 +389,46 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   }
   
+  private ClanDataProto setClanData( int clanId,
+	  Clan c, User u, int userId )
+  {
+	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
+	  StartUpResource fillMe = new StartUpResource(
+			RetrieveUtils.userRetrieveUtils());
+	  
+	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
+	  sccma.setUp(fillMe);
+	  SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
+	  scha.setUp(fillMe);
+	  
+	  fillMe.fetchUsersOnly();
+	  fillMe.addClan(clanId, c);
+	  
+	  sccma.execute(fillMe);
+	  scha.execute(fillMe);
+	  
+	  return cdpb.build();
+  }
+
+  private void sendClanData(
+	  RequestEvent event,
+	  MinimumUserProto senderProto,
+	  int userId,
+	  ClanDataProto cdp )
+  {
+	  if (null == cdp) {
+		  return;
+	  }
+	  RetrieveClanDataResponseEvent rcdre =
+		  new RetrieveClanDataResponseEvent(userId);
+	  rcdre.setTag(event.getTag());
+	  RetrieveClanDataResponseProto.Builder rcdrpb =
+		  RetrieveClanDataResponseProto.newBuilder();
+	  rcdrpb.setMup(senderProto);
+	  rcdrpb.setClanData(cdp);
+	  server.writeEvent(rcdre);
+  }
+
   public Locker getLocker() {
 	  return locker;
   }
@@ -389,6 +443,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   public void setPvpLeagueForUserRetrieveUtil(
 		  PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
 	  this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+  }
+
+  public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
+  {
+	  return clanHelpRetrieveUtil;
+  }
+
+  public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
+  {
+	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
   }
   
 }
