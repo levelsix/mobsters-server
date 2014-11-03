@@ -19,6 +19,8 @@ public class SetGlobalChatMessageAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
+	private static final GroupChatComparator comparator = new GroupChatComparator();
+	
 	private static final class GroupChatComparator implements Comparator<GroupChatMessageProto> {
 		@Override
 		public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
@@ -53,7 +55,7 @@ public class SetGlobalChatMessageAction
 			globalChats.add(it.next());
 		}
 		
-		Collections.sort(globalChats, new GroupChatComparator());
+		Collections.sort(globalChats, comparator);
 		// Need to add them in reverse order
 		for (int i = 0; i < globalChats.size(); i++) {
 			resBuilder.addGlobalChats(globalChats.get(i));
