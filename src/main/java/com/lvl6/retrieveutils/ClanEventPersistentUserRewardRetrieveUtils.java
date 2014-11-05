@@ -204,44 +204,57 @@ import com.lvl6.utils.DBConnection;
 		int userId = rs.getInt(i++);
 		
 		Date crsStartTime = null;
-    try {
-    	Timestamp ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		crsStartTime = new Date(ts.getTime());
-    	}
-    } catch(Exception e) {
-    	log.error("maybe crsStartTime is null for id=" + id + "userId=" + userId +
-    			" crsId=" + rs.getInt(4), e);
-    }
+		try {
+			Timestamp ts = rs.getTimestamp(i++);
+			if (!rs.wasNull()) {
+				crsStartTime = new Date(ts.getTime());
+			}
+		} catch(Exception e) {
+			log.error(String.format(
+				"null crsStartTime? id=%s, userId=%s, crsId=%s",
+				id, userId, rs.getInt(4)), e);
+		}
     
 		int crsId = rs.getInt(i++);
 		
 		Date crsEndTime = null;
-    try {
-    	Timestamp ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		crsEndTime = new Date(ts.getTime());
-    	}
-    } catch(Exception e) {
-    	log.error("maybe crsEndTime is null for id=" + id + "userId=" + userId +
-    			" crsId=" + crsId, e);
-    }
+		try {
+			Timestamp ts = rs.getTimestamp(i++);
+			if (!rs.wasNull()) {
+				crsEndTime = new Date(ts.getTime());
+			}
+		} catch(Exception e) {
+			log.error(String.format(
+				"null crsEndTime? id=%s, userId=%s, crsId=%s",
+				id, userId, crsId), e);
+		}
     
 		String resourceType = rs.getString(i++);
+		if (null != resourceType) {
+			String newResourceType = resourceType.trim().toUpperCase();
+	    	if (!resourceType.equals(newResourceType)) {
+	    		log.error(String.format(
+	    			"resourceType incorrect: %s, id=%s",
+	    			resourceType, id));
+	    		resourceType = newResourceType;
+	    	}
+		}
+		
 		int staticDataId = rs.getInt(i++);
 		int quantity = rs.getInt(i++);
 		int clanEventPersistentId = rs.getInt(i++);
 
 		Date timeRedeemed = null;
-    try {
-    	Timestamp ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		timeRedeemed = new Date(ts.getTime());
-    	}
-    } catch(Exception e) {
-    	log.error("maybe raid history is null for id=" + id + "userId=" + userId +
-    			" eventId=" + clanEventPersistentId + " crsId=" + crsId, e);
-    }
+		try {
+			Timestamp ts = rs.getTimestamp(i++);
+			if (!rs.wasNull()) {
+				timeRedeemed = new Date(ts.getTime());
+			}
+		} catch(Exception e) {
+			log.error(String.format(
+				"null timeRedeemed? id=%s, userId=%s, eventId=%s, crsId=%s",
+				id, userId, clanEventPersistentId, crsId), e);
+		}
 		
 		return new ClanEventPersistentUserReward(id, userId, crsStartTime, crsId, crsEndTime,
 				resourceType, staticDataId, quantity, clanEventPersistentId, timeRedeemed);

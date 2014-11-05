@@ -115,6 +115,16 @@ import com.lvl6.utils.DBConnection;
     boolean monsterPieceDropped = rs.getBoolean(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED);
     int itemIdDropped = rs.getInt(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED);
     
+    if (null != monsterType) {
+    	String newMonsterType = monsterType.trim().toUpperCase();
+    	if (!monsterType.equals(newMonsterType)) {
+    		log.error(String.format(
+    			"monsterType incorrect: %s, id=%s",
+    			monsterType, id));
+    		monsterType = newMonsterType;
+    	}
+    }
+    
     return new TaskStageForUser(id, taskForUserId, stageNum, tsmId,
     	monsterType, expGained, cashGained, oilGained, monsterPieceDropped,
     	itemIdDropped);

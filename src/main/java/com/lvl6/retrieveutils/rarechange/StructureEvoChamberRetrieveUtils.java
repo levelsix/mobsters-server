@@ -113,6 +113,16 @@ import com.lvl6.utils.DBConnection;
     String qualityUnlocked = rs.getString(DBConstants.STRUCTURE_EVO__QUALITY_UNLOCKED);
     int evoTierUnlocked = rs.getInt(DBConstants.STRUCTURE_EVO__EVO_TIER_UNLOCKED);
     
+    if (null != qualityUnlocked) {
+    	String newQualityUnlocked = qualityUnlocked.trim().toUpperCase();
+    	if (!qualityUnlocked.equals(newQualityUnlocked)) {
+    		log.error(String.format(
+    			"qualityUnlocked incorrect: %s, structId=%s",
+    			qualityUnlocked, structId));
+    		qualityUnlocked = newQualityUnlocked;
+    	}
+    }
+    
     return new StructureEvoChamber(structId, qualityUnlocked, evoTierUnlocked);
   }
 }

@@ -171,7 +171,19 @@ public class ClanHelpRetrieveUtil {
 			ch.setId(rs.getInt(DBConstants.CLAN_HELP__ID));
 			ch.setUserId(rs.getInt(DBConstants.CLAN_HELP__USER_ID));
 			ch.setUserDataId(rs.getLong(DBConstants.CLAN_HELP__USER_DATA_ID));
-			ch.setHelpType(rs.getString(DBConstants.CLAN_HELP__HELP_TYPE));
+
+			String helpType = rs.getString(DBConstants.CLAN_HELP__HELP_TYPE);
+			if (null != helpType) {
+		    	String newHelpType = helpType.trim().toUpperCase();
+		    	if (!helpType.equals(newHelpType)) {
+		    		log.error(String.format(
+		    			"helpType incorrect: %s, ClanHelp=%s",
+		    			helpType, ch));
+		    		helpType = newHelpType;
+		    	}
+		    }
+			ch.setHelpType(helpType);
+			
 			ch.setClanId(rs.getInt(DBConstants.CLAN_HELP__CLAN_ID));
 			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_HELP__TIME_OF_ENTRY);
 			ch.setTimeOfEntry(new Date(ts.getTime()));

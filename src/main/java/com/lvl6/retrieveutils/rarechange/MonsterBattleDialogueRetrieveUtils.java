@@ -95,16 +95,19 @@ import com.lvl6.utils.DBConnection;
 		String dialogueType = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE_TYPE);
 		String dialogue = rs.getString(DBConstants.MONSTER_BATTLE_DIALOGUE__DIALOGUE);
 		float probabilityUttered = rs.getFloat(DBConstants.MONSTER_BATTLE_DIALOGUE__PROBABILITY_UTTERED);
+
+		if (null != dialogueType) {
+			String newDialogueType = dialogueType.trim().toUpperCase();
+			if (!dialogueType.equals(newDialogueType)) {
+				log.error(String.format("incorrect MonsterBattleDialogue type. %s, id=%s",
+					dialogueType, id));
+				dialogueType = newDialogueType;
+			}
+		}
 		
 		MonsterBattleDialogue monsterBattleDialogue = new MonsterBattleDialogue(id,
 				monsterId, dialogueType, dialogue, probabilityUttered);
 		
-		if (!dialogueType.equals(dialogueType.trim().toUpperCase())) {
-			log.error("MonsterBattleDialogue type incorrectly capitalized? maybe some whitespace? dialogue=" + 
-					monsterBattleDialogue);
-			dialogueType = dialogueType.trim().toUpperCase();
-			monsterBattleDialogue.setDialogueType(dialogueType);
-		}
 		return monsterBattleDialogue;
 	}
 
