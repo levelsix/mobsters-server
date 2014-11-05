@@ -311,7 +311,7 @@ public class ControllerConstants {
   public static final int STARTUP__LEADERBOARD_MIN_LEVEL = 1;
   public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20; 
   //if development then use user with id = 1
-  public static final int STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? 1 : 98394;//Globals.IS_SANDBOX() ? 98437 : 131287;
+  public static final int STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? 1 : 1;//Globals.IS_SANDBOX() ? 98437 : 131287;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
   

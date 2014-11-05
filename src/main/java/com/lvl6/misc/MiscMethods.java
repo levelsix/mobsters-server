@@ -126,6 +126,7 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
@@ -747,9 +748,13 @@ public class MiscMethods {
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
-		//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
-		//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-		//    cb.setAdminChatUserProto(adminChatUserProto);
+		User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+		if (null != adminChatUser) {
+			MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(adminChatUser, null);
+			cb.setAdminChatUserProto(adminChatUserProto);
+		} else {
+			log.error("adminChatUser is null");
+		}
 
 		cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
 
