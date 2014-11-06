@@ -228,6 +228,7 @@
 					<environmentName>mp-${maven.build.timestamp}</environmentName>
 					<defaultEnvironmentName>default</defaultEnvironmentName>
 					<cnamePrefix>mp-${maven.build.timestamp}</cnamePrefix>
+					<environmentRef>mp-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
 					<timeoutMins>80</timeoutMins>
 					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
