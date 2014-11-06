@@ -311,6 +311,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  RetrieveClanDataResponseProto.newBuilder();
 	  rcdrpb.setMup(senderProto);
 	  rcdrpb.setClanData(cdp);
+	  
+	  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
 	  server.writeEvent(rcdre);
   }
   
