@@ -117,8 +117,11 @@ import com.lvl6.utils.DBConnection;
     	}
     }
     int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
+    int amount = rs.getInt(DBConstants.ITEM__AMOUNT);
+    float secretGiftChance = rs.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
     
-    Item item = new Item(id, name, imgName, itemType, staticDataId);
+    Item item = new Item(id, name, imgName, itemType, staticDataId,
+    	amount, secretGiftChance);
     return item;
   }
 }

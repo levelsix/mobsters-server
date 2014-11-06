@@ -4,15 +4,24 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-	private static final long serialVersionUID = -2498724147517643493L;
+	private static final long serialVersionUID = -1332049578988324064L;
 	
 	private int id;
 	private String name;
 	private String imgName;
 	private String itemType;
 	private int staticDataId;
+	private int amount;
+	private float secretGiftChance;
 
-	public Item( int id, String name, String imgName, String itemType, int staticDataId )
+	public Item(
+		int id,
+		String name,
+		String imgName,
+		String itemType,
+		int staticDataId,
+		int amount,
+		float secretGiftChance )
 	{
 		super();
 		this.id = id;
@@ -20,6 +29,8 @@ public class Item implements Serializable {
 		this.imgName = imgName;
 		this.itemType = itemType;
 		this.staticDataId = staticDataId;
+		this.amount = amount;
+		this.secretGiftChance = secretGiftChance;
 	}
 
 	public int getId() {
@@ -66,6 +77,26 @@ public class Item implements Serializable {
 		this.staticDataId = staticDataId;
 	}
 
+	public int getAmount()
+	{
+		return amount;
+	}
+
+	public void setAmount( int amount )
+	{
+		this.amount = amount;
+	}
+
+	public float getSecretGiftChance()
+	{
+		return secretGiftChance;
+	}
+
+	public void setSecretGiftChance( float secretGiftChance )
+	{
+		this.secretGiftChance = secretGiftChance;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -79,6 +110,10 @@ public class Item implements Serializable {
 			+ itemType
 			+ ", staticDataId="
 			+ staticDataId
+			+ ", amount="
+			+ amount
+			+ ", secretGiftChance="
+			+ secretGiftChance
 			+ "]";
 	}
 

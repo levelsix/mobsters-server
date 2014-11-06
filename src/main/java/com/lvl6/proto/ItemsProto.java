@@ -15,14 +15,50 @@ public final class ItemsProto {
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>BOOSTER_PACK = 1;</code>
+     *
+     * <pre>
+     *prefaced with "ITEM_" because without it, error is:
+     *"com.lvl6.proto.OIL" is already defined in file "Structure.proto".
+     *Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "OIL" must be unique within "com.lvl6.proto", not just within "ItemType".
+     * </pre>
      */
     BOOSTER_PACK(0, 1),
+    /**
+     * <code>ITEM_OIL = 2;</code>
+     */
+    ITEM_OIL(1, 2),
+    /**
+     * <code>ITEM_CASH = 3;</code>
+     */
+    ITEM_CASH(2, 3),
+    /**
+     * <code>SPEED_UP = 4;</code>
+     */
+    SPEED_UP(3, 4),
     ;
 
     /**
      * <code>BOOSTER_PACK = 1;</code>
+     *
+     * <pre>
+     *prefaced with "ITEM_" because without it, error is:
+     *"com.lvl6.proto.OIL" is already defined in file "Structure.proto".
+     *Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "OIL" must be unique within "com.lvl6.proto", not just within "ItemType".
+     * </pre>
      */
     public static final int BOOSTER_PACK_VALUE = 1;
+    /**
+     * <code>ITEM_OIL = 2;</code>
+     */
+    public static final int ITEM_OIL_VALUE = 2;
+    /**
+     * <code>ITEM_CASH = 3;</code>
+     */
+    public static final int ITEM_CASH_VALUE = 3;
+    /**
+     * <code>SPEED_UP = 4;</code>
+     */
+    public static final int SPEED_UP_VALUE = 4;
 
 
     public final int getNumber() { return value; }
@@ -30,6 +66,9 @@ public final class ItemsProto {
     public static ItemType valueOf(int value) {
       switch (value) {
         case 1: return BOOSTER_PACK;
+        case 2: return ITEM_OIL;
+        case 3: return ITEM_CASH;
+        case 4: return SPEED_UP;
         default: return null;
       }
     }
@@ -686,12 +725,38 @@ public final class ItemsProto {
 
     /**
      * <code>optional int32 staticDataId = 5;</code>
+     *
+     * <pre>
+     *refers to id in a table, e.g. booster_pack, monster.
+     * </pre>
      */
     boolean hasStaticDataId();
     /**
      * <code>optional int32 staticDataId = 5;</code>
+     *
+     * <pre>
+     *refers to id in a table, e.g. booster_pack, monster.
+     * </pre>
      */
     int getStaticDataId();
+
+    /**
+     * <code>optional int32 amount = 6;</code>
+     */
+    boolean hasAmount();
+    /**
+     * <code>optional int32 amount = 6;</code>
+     */
+    int getAmount();
+
+    /**
+     * <code>optional float secretGiftChance = 7;</code>
+     */
+    boolean hasSecretGiftChance();
+    /**
+     * <code>optional float secretGiftChance = 7;</code>
+     */
+    float getSecretGiftChance();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ItemProto}
@@ -776,6 +841,16 @@ public final class ItemsProto {
             case 40: {
               bitField0_ |= 0x00000010;
               staticDataId_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              amount_ = input.readInt32();
+              break;
+            }
+            case 61: {
+              bitField0_ |= 0x00000040;
+              secretGiftChance_ = input.readFloat();
               break;
             }
           }
@@ -936,15 +1011,53 @@ public final class ItemsProto {
     private int staticDataId_;
     /**
      * <code>optional int32 staticDataId = 5;</code>
+     *
+     * <pre>
+     *refers to id in a table, e.g. booster_pack, monster.
+     * </pre>
      */
     public boolean hasStaticDataId() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int32 staticDataId = 5;</code>
+     *
+     * <pre>
+     *refers to id in a table, e.g. booster_pack, monster.
+     * </pre>
      */
     public int getStaticDataId() {
       return staticDataId_;
+    }
+
+    public static final int AMOUNT_FIELD_NUMBER = 6;
+    private int amount_;
+    /**
+     * <code>optional int32 amount = 6;</code>
+     */
+    public boolean hasAmount() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int32 amount = 6;</code>
+     */
+    public int getAmount() {
+      return amount_;
+    }
+
+    public static final int SECRETGIFTCHANCE_FIELD_NUMBER = 7;
+    private float secretGiftChance_;
+    /**
+     * <code>optional float secretGiftChance = 7;</code>
+     */
+    public boolean hasSecretGiftChance() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional float secretGiftChance = 7;</code>
+     */
+    public float getSecretGiftChance() {
+      return secretGiftChance_;
     }
 
     private void initFields() {
@@ -953,6 +1066,8 @@ public final class ItemsProto {
       imgName_ = "";
       itemType_ = com.lvl6.proto.ItemsProto.ItemType.BOOSTER_PACK;
       staticDataId_ = 0;
+      amount_ = 0;
+      secretGiftChance_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -982,6 +1097,12 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, staticDataId_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, amount_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeFloat(7, secretGiftChance_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1010,6 +1131,14 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, staticDataId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, amount_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(7, secretGiftChance_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1138,6 +1267,10 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        amount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        secretGiftChance_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -1186,6 +1319,14 @@ public final class ItemsProto {
           to_bitField0_ |= 0x00000010;
         }
         result.staticDataId_ = staticDataId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.amount_ = amount_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.secretGiftChance_ = secretGiftChance_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1220,6 +1361,12 @@ public final class ItemsProto {
         }
         if (other.hasStaticDataId()) {
           setStaticDataId(other.getStaticDataId());
+        }
+        if (other.hasAmount()) {
+          setAmount(other.getAmount());
+        }
+        if (other.hasSecretGiftChance()) {
+          setSecretGiftChance(other.getSecretGiftChance());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1470,18 +1617,30 @@ public final class ItemsProto {
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 5;</code>
+       *
+       * <pre>
+       *refers to id in a table, e.g. booster_pack, monster.
+       * </pre>
        */
       public boolean hasStaticDataId() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int32 staticDataId = 5;</code>
+       *
+       * <pre>
+       *refers to id in a table, e.g. booster_pack, monster.
+       * </pre>
        */
       public int getStaticDataId() {
         return staticDataId_;
       }
       /**
        * <code>optional int32 staticDataId = 5;</code>
+       *
+       * <pre>
+       *refers to id in a table, e.g. booster_pack, monster.
+       * </pre>
        */
       public Builder setStaticDataId(int value) {
         bitField0_ |= 0x00000010;
@@ -1491,10 +1650,78 @@ public final class ItemsProto {
       }
       /**
        * <code>optional int32 staticDataId = 5;</code>
+       *
+       * <pre>
+       *refers to id in a table, e.g. booster_pack, monster.
+       * </pre>
        */
       public Builder clearStaticDataId() {
         bitField0_ = (bitField0_ & ~0x00000010);
         staticDataId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int amount_ ;
+      /**
+       * <code>optional int32 amount = 6;</code>
+       */
+      public boolean hasAmount() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 amount = 6;</code>
+       */
+      public int getAmount() {
+        return amount_;
+      }
+      /**
+       * <code>optional int32 amount = 6;</code>
+       */
+      public Builder setAmount(int value) {
+        bitField0_ |= 0x00000020;
+        amount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 amount = 6;</code>
+       */
+      public Builder clearAmount() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        amount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float secretGiftChance_ ;
+      /**
+       * <code>optional float secretGiftChance = 7;</code>
+       */
+      public boolean hasSecretGiftChance() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional float secretGiftChance = 7;</code>
+       */
+      public float getSecretGiftChance() {
+        return secretGiftChance_;
+      }
+      /**
+       * <code>optional float secretGiftChance = 7;</code>
+       */
+      public Builder setSecretGiftChance(float value) {
+        bitField0_ |= 0x00000040;
+        secretGiftChance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float secretGiftChance = 7;</code>
+       */
+      public Builder clearSecretGiftChance() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        secretGiftChance_ = 0F;
         onChanged();
         return this;
       }
@@ -1510,6 +1737,802 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ItemProto)
   }
 
+  public interface UserItemUsageProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserItemUsageProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int64 usageId = 1;</code>
+     */
+    boolean hasUsageId();
+    /**
+     * <code>optional int64 usageId = 1;</code>
+     */
+    long getUsageId();
+
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    int getUserId();
+
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    int getItemId();
+
+    /**
+     * <code>optional int64 timeOfEntry = 4;</code>
+     */
+    boolean hasTimeOfEntry();
+    /**
+     * <code>optional int64 timeOfEntry = 4;</code>
+     */
+    long getTimeOfEntry();
+
+    /**
+     * <code>optional int64 userDataId = 5;</code>
+     */
+    boolean hasUserDataId();
+    /**
+     * <code>optional int64 userDataId = 5;</code>
+     */
+    long getUserDataId();
+
+    /**
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     */
+    boolean hasActionType();
+    /**
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     */
+    com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserItemUsageProto}
+   */
+  public static final class UserItemUsageProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserItemUsageProto)
+      UserItemUsageProtoOrBuilder {
+    // Use UserItemUsageProto.newBuilder() to construct.
+    private UserItemUsageProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserItemUsageProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserItemUsageProto defaultInstance;
+    public static UserItemUsageProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserItemUsageProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserItemUsageProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              usageId_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              itemId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              timeOfEntry_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              userDataId_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.SharedEnumConfigProto.GameActionType value = com.lvl6.proto.SharedEnumConfigProto.GameActionType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                actionType_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ItemsProto.UserItemUsageProto.class, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserItemUsageProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserItemUsageProto>() {
+      public UserItemUsageProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserItemUsageProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserItemUsageProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USAGEID_FIELD_NUMBER = 1;
+    private long usageId_;
+    /**
+     * <code>optional int64 usageId = 1;</code>
+     */
+    public boolean hasUsageId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int64 usageId = 1;</code>
+     */
+    public long getUsageId() {
+      return usageId_;
+    }
+
+    public static final int USERID_FIELD_NUMBER = 2;
+    private int userId_;
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int ITEMID_FIELD_NUMBER = 3;
+    private int itemId_;
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 itemId = 3;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    public static final int TIMEOFENTRY_FIELD_NUMBER = 4;
+    private long timeOfEntry_;
+    /**
+     * <code>optional int64 timeOfEntry = 4;</code>
+     */
+    public boolean hasTimeOfEntry() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 timeOfEntry = 4;</code>
+     */
+    public long getTimeOfEntry() {
+      return timeOfEntry_;
+    }
+
+    public static final int USERDATAID_FIELD_NUMBER = 5;
+    private long userDataId_;
+    /**
+     * <code>optional int64 userDataId = 5;</code>
+     */
+    public boolean hasUserDataId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 userDataId = 5;</code>
+     */
+    public long getUserDataId() {
+      return userDataId_;
+    }
+
+    public static final int ACTIONTYPE_FIELD_NUMBER = 6;
+    private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_;
+    /**
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     */
+    public boolean hasActionType() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+     */
+    public com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType() {
+      return actionType_;
+    }
+
+    private void initFields() {
+      usageId_ = 0L;
+      userId_ = 0;
+      itemId_ = 0;
+      timeOfEntry_ = 0L;
+      userDataId_ = 0L;
+      actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, usageId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, userId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, itemId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, timeOfEntry_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, userDataId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(6, actionType_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, usageId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, userId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, itemId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, timeOfEntry_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, userDataId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, actionType_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemUsageProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ItemsProto.UserItemUsageProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserItemUsageProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserItemUsageProto)
+        com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ItemsProto.UserItemUsageProto.class, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ItemsProto.UserItemUsageProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        usageId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        timeOfEntry_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userDataId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto build() {
+        com.lvl6.proto.ItemsProto.UserItemUsageProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto buildPartial() {
+        com.lvl6.proto.ItemsProto.UserItemUsageProto result = new com.lvl6.proto.ItemsProto.UserItemUsageProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.usageId_ = usageId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.timeOfEntry_ = timeOfEntry_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.userDataId_ = userDataId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.actionType_ = actionType_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ItemsProto.UserItemUsageProto) {
+          return mergeFrom((com.lvl6.proto.ItemsProto.UserItemUsageProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ItemsProto.UserItemUsageProto other) {
+        if (other == com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance()) return this;
+        if (other.hasUsageId()) {
+          setUsageId(other.getUsageId());
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        if (other.hasTimeOfEntry()) {
+          setTimeOfEntry(other.getTimeOfEntry());
+        }
+        if (other.hasUserDataId()) {
+          setUserDataId(other.getUserDataId());
+        }
+        if (other.hasActionType()) {
+          setActionType(other.getActionType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ItemsProto.UserItemUsageProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ItemsProto.UserItemUsageProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long usageId_ ;
+      /**
+       * <code>optional int64 usageId = 1;</code>
+       */
+      public boolean hasUsageId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int64 usageId = 1;</code>
+       */
+      public long getUsageId() {
+        return usageId_;
+      }
+      /**
+       * <code>optional int64 usageId = 1;</code>
+       */
+      public Builder setUsageId(long value) {
+        bitField0_ |= 0x00000001;
+        usageId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 usageId = 1;</code>
+       */
+      public Builder clearUsageId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        usageId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int userId_ ;
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int itemId_ ;
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000004;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemId = 3;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long timeOfEntry_ ;
+      /**
+       * <code>optional int64 timeOfEntry = 4;</code>
+       */
+      public boolean hasTimeOfEntry() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 timeOfEntry = 4;</code>
+       */
+      public long getTimeOfEntry() {
+        return timeOfEntry_;
+      }
+      /**
+       * <code>optional int64 timeOfEntry = 4;</code>
+       */
+      public Builder setTimeOfEntry(long value) {
+        bitField0_ |= 0x00000008;
+        timeOfEntry_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timeOfEntry = 4;</code>
+       */
+      public Builder clearTimeOfEntry() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        timeOfEntry_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long userDataId_ ;
+      /**
+       * <code>optional int64 userDataId = 5;</code>
+       */
+      public boolean hasUserDataId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 userDataId = 5;</code>
+       */
+      public long getUserDataId() {
+        return userDataId_;
+      }
+      /**
+       * <code>optional int64 userDataId = 5;</code>
+       */
+      public Builder setUserDataId(long value) {
+        bitField0_ |= 0x00000010;
+        userDataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 userDataId = 5;</code>
+       */
+      public Builder clearUserDataId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        userDataId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.SharedEnumConfigProto.GameActionType actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
+      /**
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       */
+      public boolean hasActionType() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       */
+      public com.lvl6.proto.SharedEnumConfigProto.GameActionType getActionType() {
+        return actionType_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       */
+      public Builder setActionType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        actionType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
+       */
+      public Builder clearActionType() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserItemUsageProto)
+    }
+
+    static {
+      defaultInstance = new UserItemUsageProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemUsageProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemProto_descriptor;
   private static
@@ -1520,6 +2543,11 @@ public final class ItemsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserItemUsageProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1529,13 +2557,20 @@ public final class ItemsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nItem.proto\022\016com.lvl6.proto\"A\n\rUserItem" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\022\016\n\006itemId\030\002 \001(\005\022\020\n" +
-      "\010quantity\030\003 \001(\005\"|\n\tItemProto\022\016\n\006itemId\030\001" +
-      " \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010i" +
-      "temType\030\004 \001(\0162\030.com.lvl6.proto.ItemType\022" +
-      "\024\n\014staticDataId\030\005 \001(\005*\034\n\010ItemType\022\020\n\014BOO" +
-      "STER_PACK\020\001B\014B\nItemsProto"
+      "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
+      "Config.proto\"A\n\rUserItemProto\022\016\n\006userId\030" +
+      "\001 \001(\005\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(\005\"" +
+      "\246\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030\002 " +
+      "\001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\0162\030" +
+      ".com.lvl6.proto.ItemType\022\024\n\014staticDataId" +
+      "\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftChan" +
+      "ce\030\007 \001(\002\"\242\001\n\022UserItemUsageProto\022\017\n\007usage" +
+      "Id\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\016\n\006itemId\030\003 \001(\005" +
+      "\022\023\n\013timeOfEntry\030\004 \001(\003\022\022\n\nuserDataId\030\005 \001(",
+      "\003\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto.G" +
+      "ameActionType*G\n\010ItemType\022\020\n\014BOOSTER_PAC" +
+      "K\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEE" +
+      "D_UP\020\004B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1548,6 +2583,7 @@ public final class ItemsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_UserItemProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1560,7 +2596,14 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ItemProto_descriptor,
-        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", });
+        new java.lang.String[] { "ItemId", "Name", "ImgName", "ItemType", "StaticDataId", "Amount", "SecretGiftChance", });
+    internal_static_com_lvl6_proto_UserItemUsageProto_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserItemUsageProto_descriptor,
+        new java.lang.String[] { "UsageId", "UserId", "ItemId", "TimeOfEntry", "UserDataId", "ActionType", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

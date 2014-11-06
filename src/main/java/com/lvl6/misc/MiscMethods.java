@@ -104,7 +104,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
-import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
+import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
@@ -806,9 +806,9 @@ public class MiscMethods {
 			ClanHelpConstants.Builder chcb = ClanHelpConstants.newBuilder();
 			String helpType = ControllerConstants.CLAN_HELP__HELP_TYPE[index];
 			try {
-				chcb.setHelpType(ClanHelpType.valueOf(helpType));
+				chcb.setHelpType(GameActionType.valueOf(helpType));
 			} catch (Exception e) {
-				log.error(String.format("invalid ClanHelpType: %s, not using it", helpType),
+				log.error(String.format("invalid GameActionType: %s, not using it", helpType),
 					e);
 				continue;
 			}

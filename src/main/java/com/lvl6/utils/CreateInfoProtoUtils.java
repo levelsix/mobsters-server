@@ -1,5 +1,6 @@
 package com.lvl6.utils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +45,7 @@ import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
+import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
@@ -132,6 +134,7 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -155,9 +158,9 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
-import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SharedEnumConfigProto.GameType;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.SkillsProto.SkillActivationType;
@@ -1308,12 +1311,12 @@ public class CreateInfoProtoUtils {
 
 		if ( null != helpType ) {
 			try {
-				ClanHelpType cht = ClanHelpType.valueOf(helpType);
+				GameActionType cht = GameActionType.valueOf(helpType);
 				chpb.setHelpType(cht);
 
 			} catch(Exception e) {
 				log.info( String.format(
-					"incorrect ClanHelpType. ClanHelp=%s", ch ));
+					"incorrect GameActionType. ClanHelp=%s", ch ));
 			}
 		}
 		chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
@@ -1396,6 +1399,8 @@ public class CreateInfoProtoUtils {
 		}
 
 		ipb.setStaticDataId(item.getStaticDataId());
+		ipb.setAmount(item.getAmount());
+		ipb.setSecretGiftChance(item.getSecretGiftChance());
 
 		return ipb.build();
 	}
@@ -1433,6 +1438,31 @@ public class CreateInfoProtoUtils {
 		return uipb.build();
 	}
 
+	public static UserItemUsageProto createUserItemUsageProto(ItemForUserUsage ifuu) {
+		UserItemUsageProto.Builder uiupb = UserItemUsageProto.newBuilder();
+		uiupb.setUsageId(ifuu.getId());
+		uiupb.setUserId(ifuu.getUserId());
+		uiupb.setItemId(ifuu.getItemId());
+		Timestamp toe = new Timestamp(ifuu.getTimeOfEntry().getTime());
+		uiupb.setTimeOfEntry(toe.getTime());
+		uiupb.setUserDataId(ifuu.getUserDataId());
+		
+		String str = ifuu.getActionType();
+		if (null != str) {
+			try {
+				GameActionType gat = GameActionType.valueOf(str);
+				uiupb.setActionType(gat);
+			} catch (Exception e) {
+				log.error(String.format(
+					"can't create enum type. actionType=%s. itemForUserUsage=%s",
+					str, ifuu), e);
+			}
+		}
+		
+		return uiupb.build();
+	}
+	
+	
 	/**MiniJobConfig.proto********************************************/
 	public static MiniJobProto createMiniJobProto(MiniJob mj) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();

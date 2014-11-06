@@ -2,7 +2,7 @@ package com.lvl6.properties;
 
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
+import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 
 public class ControllerConstants {
 
@@ -38,11 +38,11 @@ public class ControllerConstants {
 //	public static final float CLAN_HELP__UPGRADE_STRUCT_PERCENT_REMOVED = 0.01F;
 	
 	public static final String[] CLAN_HELP__HELP_TYPE = {
-			ClanHelpType.EVOLVE.name(),
-			ClanHelpType.HEAL.name(),
-			ClanHelpType.MINI_JOB.name(),
-			ClanHelpType.UPGRADE_STRUCT.name(),
-			ClanHelpType.ENHANCE_TIME.name()
+			GameActionType.EVOLVE.name(),
+			GameActionType.HEAL.name(),
+			GameActionType.MINI_JOB.name(),
+			GameActionType.UPGRADE_STRUCT.name(),
+			GameActionType.ENHANCE_TIME.name()
 			
 	};
 	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		5,		1,		1,		1};
