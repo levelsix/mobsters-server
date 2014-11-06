@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureTeamCenter> structIdsToTeamCenters;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TEAM_CENTER;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TEAM_CENTER_CONFIG;
 
   public static Map<Integer, StructureTeamCenter> getStructIdsToTeamCenters() {
     log.debug("retrieving all structs data");

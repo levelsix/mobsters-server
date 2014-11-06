@@ -31,7 +31,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
   private Map<Integer, MonsterForPvp> idsToMonsterForPvps;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_FOR_PVP;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_FOR_PVP_CONFIG;
   
   public static final String MONSTER_FOR_PVP_MAP = "monsterForPvpMap";
   

@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureTownHall> structIdsToTownHalls;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TOWN_HALL;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_TOWN_HALL_CONFIG;
 
   public static Map<Integer, StructureTownHall> getStructIdsToTownHalls() {
     log.debug("retrieving all structs data");

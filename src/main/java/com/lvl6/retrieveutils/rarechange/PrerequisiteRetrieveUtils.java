@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Prerequisite> prerequisiteIdsToPrerequisites;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_PREREQUISITE;
+  private static final String TABLE_NAME = DBConstants.TABLE_PREREQUISITE_CONFIG;
   
   public static Map<Integer, Prerequisite> getPrerequisiteIdsToPrerequisites() {
   	if (null == prerequisiteIdsToPrerequisites) {

@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureResourceStorage> structIdsToResourceStorages;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_STORAGE;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG;
 
   public static Map<Integer, StructureResourceStorage> getStructIdsToResourceStorages() {
     log.debug("retrieving all structs data");

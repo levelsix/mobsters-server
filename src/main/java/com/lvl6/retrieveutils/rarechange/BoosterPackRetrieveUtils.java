@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, BoosterPack> boosterPackIdsToBoosterPacks;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_PACK;
+  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_PACK_CONFIG;
 
   public static Map<Integer, BoosterPack> getBoosterPackIdsToBoosterPacks() {
     log.debug("retrieving all booster packs data map");

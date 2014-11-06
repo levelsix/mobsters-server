@@ -546,7 +546,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.TOURNAMENT_EVENT__REWARDS_GIVEN_OUT, 1);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_TOURNAMENT_EVENT, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_TOURNAMENT_EVENT_CONFIG, null, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;

@@ -25,7 +25,7 @@ import com.lvl6.utils.DBConnection;
   
   private static Map<Integer, Map<Integer, MonsterLevelInfo>> enumeratedPartialMonsterLevelInfo;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO_CONFIG;
 
   public static Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
     log.debug("retrieving all monster lvl info data");

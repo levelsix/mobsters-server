@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, ClanRaidStageReward>> clanRaidStageIdsToIdsToRewards;
   private static Map<Integer, ClanRaidStageReward> idsToRewards;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_REWARD;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_REWARD_CONFIG;
 
   public static Map<Integer, Map<Integer, ClanRaidStageReward>> getClanRaidStageIdsToIdsToRewards() {
     log.debug("retrieving all clan raid stage reward data map");

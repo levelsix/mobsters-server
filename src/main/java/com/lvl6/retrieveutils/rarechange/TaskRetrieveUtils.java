@@ -28,7 +28,7 @@ import com.lvl6.utils.DBConnection;
 	private static Map<Integer, List<Task>> cityIdsToTasks;
 	private static Map<Integer, Task> taskIdsToTasks;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_TASK;
+	private static final String TABLE_NAME = DBConstants.TABLE_TASK_CONFIG;
 
 	//CONTROLLER LOGIC******************************************************************
 	public static int getTaskIdForCityElement(int cityId, int assetId) {

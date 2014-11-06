@@ -25,7 +25,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, QuestJob>> questIdsToQuestJobIdsToJobs;
   private static Map<Integer, Map<Integer, QuestJob>> cityIdToQuestJobIdToQuestJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_CONFIG;
 
   //CONTROLLER LOGIC******************************************************************
   public static List<Integer> getQuestJobIdsForQuestIds(List<Integer> questIdList) {

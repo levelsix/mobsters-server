@@ -26,7 +26,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, BoosterDisplayItem>> 
       boosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_DISPLAY_ITEM;
+  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_DISPLAY_ITEM_CONFIG;
 
   public static Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItems() {
     log.debug("retrieving all BoosterDisplayItems data map");

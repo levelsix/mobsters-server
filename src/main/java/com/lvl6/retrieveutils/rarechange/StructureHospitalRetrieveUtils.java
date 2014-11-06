@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureHospital> structIdsToHospitals;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_HOSPITAL;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_HOSPITAL_CONFIG;
 
   public static Map<Integer, StructureHospital> getStructIdsToHospitals() {
     log.debug("retrieving all structs data");

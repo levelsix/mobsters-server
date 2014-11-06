@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureResourceGenerator> structIdsToResourceGenerators;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_GENERATOR;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG;
 
   public static Map<Integer, StructureResourceGenerator> getStructIdsToResourceGenerators() {
     log.debug("retrieving all structs data");

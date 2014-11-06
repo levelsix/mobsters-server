@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Obstacle> obstacleIdsToObstacles;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE;
+  private static final String TABLE_NAME = DBConstants.TABLE_OBSTACLE_CONFIG;
   
   public static Map<Integer, Obstacle> getObstacleIdsToObstacles() {
   	if (null == obstacleIdsToObstacles) {

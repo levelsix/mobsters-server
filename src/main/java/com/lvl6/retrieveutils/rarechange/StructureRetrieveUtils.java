@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Structure> structIdsToStructs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_CONFIG;
 
   public static Map<Integer, Structure> getStructIdsToStructs() {
     log.debug("retrieving all structs data");
