@@ -24,6 +24,7 @@ import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.request.EnhanceMonsterRequestEvent;
 import com.lvl6.events.request.InviteToClanRequestEvent;
+import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanInvite;
@@ -31,10 +32,12 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
@@ -62,6 +65,7 @@ import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -219,13 +223,22 @@ public class ControllerTest extends TestCase {
 //		deleteFirstTimeUsers(udid);
 		
 		//just to see if optimizations from commit  worked
-//		String udid = "73b8876e68099e7582b6b5e12f63dadd725bda12";
+//		String udid = "e6e393e9dda799377ca53ca0d3de739b73b137ba";
 //		float versionNum = 1.0F;
-//		String fbId = "2500169137658";
+//		String macAddress = "";
+//		String advertiserId = "76864DFE-1BF1-47B5-ADE7-6530F5E0B9A3";
+//		boolean isTutorial = false;
+//		String fbId = "";//"2500169137658";
+//		boolean isFreshRestart = true;
+//		
 //		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
 //		srpb.setUdid(udid);
 //		srpb.setVersionNum(versionNum);
+//		srpb.setMacAddress(macAddress);
+//		srpb.setAdvertiserId(advertiserId);
+//		srpb.setIsForceTutorial(isTutorial);
 //		srpb.setFbId(fbId);
+//		srpb.setIsFreshRestart(isFreshRestart);
 //		
 //		StartupRequestEvent sre = new StartupRequestEvent();
 //		sre.setStartupRequestProto(srpb.build());
@@ -684,6 +697,7 @@ public class ControllerTest extends TestCase {
 	public void testClanInvite() {
 		int jackMayHoff = 1110;
 		User jmh = userRetrieveUtils.getUserById(jackMayHoff);
+		UpdateUtils.get().updateUserClanStatus(jackMayHoff, jmh.getClanId(), UserClanStatus.JUNIOR_LEADER);
 		Clan c = ClanRetrieveUtils.getClanWithId(jmh.getClanId());
 		int prospectiveMemberId = getUnitTesterId();
 		ClanInvite ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);

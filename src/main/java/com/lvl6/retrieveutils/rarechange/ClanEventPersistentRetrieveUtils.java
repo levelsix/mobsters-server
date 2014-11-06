@@ -179,19 +179,19 @@ import com.lvl6.utils.DBConnection;
     int eventDurationMinutes = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__EVENT_DURATION_MINUTES);
     int clanRaidId = rs.getInt(DBConstants.CLAN_EVENT_PERSISTENT__CLAN_RAID_ID);
     
+    if (null != dayOfWeek) {
+    	String newDayOfWeek = dayOfWeek.trim().toUpperCase();
+    	if (!dayOfWeek.equals(newDayOfWeek)) {// || !daysSet.contains(newDayOfWeek)) {
+    		log.error(String.format(
+    			"string for day of week is incorrect: %s, id=%s",
+    			dayOfWeek, id));
+    		dayOfWeek = newDayOfWeek;
+    	}
+    }
+    
     ClanEventPersistent ep = new ClanEventPersistent(id, dayOfWeek, startHour,
     		eventDurationMinutes, clanRaidId);
     
-    if (null != dayOfWeek) {
-    	String newDayOfWeek = dayOfWeek.trim();
-    	newDayOfWeek = newDayOfWeek.toUpperCase();
-    	if (!dayOfWeek.equals(newDayOfWeek) || !daysSet.contains(newDayOfWeek)) {
-    		log.error("string for day of week is incorrect. is: " + dayOfWeek +
-    				"\t (if spelled correctly), expected: " + newDayOfWeek +
-    				"\t clanEventPersistent obj=" + ep);
-    		ep.setDayOfWeek(newDayOfWeek);
-    	}
-    }
     
     return ep;
   }

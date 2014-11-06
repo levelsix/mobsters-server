@@ -106,9 +106,22 @@ import com.lvl6.utils.DBConnection;
     String name = rs.getString(DBConstants.ITEM__NAME);
     String imgName = rs.getString(DBConstants.ITEM__IMG_NAME);
     String itemType = rs.getString(DBConstants.ITEM__ITEM_TYPE);
-    int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
     
-    Item item = new Item(id, name, imgName, itemType, staticDataId);
+    if (null != itemType) {
+    	String newItemType = itemType.trim().toUpperCase();
+    	if (!itemType.equals(newItemType)) {
+    		log.error(String.format(
+    			"itemType incorrect: %s, id=%s",
+    			itemType, id));
+    		itemType = newItemType;
+    	}
+    }
+    int staticDataId = rs.getInt(DBConstants.ITEM__STATIC_DATA_ID);
+    int amount = rs.getInt(DBConstants.ITEM__AMOUNT);
+    float secretGiftChance = rs.getFloat(DBConstants.ITEM__SECRET_GIFT_CHANCE);
+    
+    Item item = new Item(id, name, imgName, itemType, staticDataId,
+    	amount, secretGiftChance);
     return item;
   }
 }

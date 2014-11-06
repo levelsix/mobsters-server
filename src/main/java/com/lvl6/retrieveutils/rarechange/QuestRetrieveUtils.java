@@ -168,6 +168,16 @@ import com.lvl6.utils.QuestGraph;
 //    boolean isAchievement = rs.getBoolean(DBConstants.);
     String monsterElement = rs.getString(DBConstants.QUEST__MONSTER_ELEMENT);
     
+    if (null != monsterElement) {
+    	String newMonsterElement = monsterElement.trim().toUpperCase();
+    	if (!monsterElement.equals(newMonsterElement)) {
+    		log.error(String.format(
+    			"monsterElement incorrect: %s, id=%s",
+    			monsterElement, id));
+    		monsterElement = newMonsterElement;
+    	}
+    }
+    
     Quest quest = new Quest(id, questName, description, doneResponse,
     		acceptDialogue, cashReward, oilReward, gemReward, expReward,
     		monsterIdReward, isCompleteMonster, questsRequiredForThis,

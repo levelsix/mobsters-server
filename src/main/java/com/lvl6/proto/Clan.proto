@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 //import "Battle.proto";
+import "Chat.proto";
 import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
 import "Structure.proto";
@@ -202,21 +203,23 @@ message ClanIconProto {
 
 //------------------------------------------------------------------------------------------
 
+//Official "ClanHelp" clan mates can provide help on
 message ClanHelpProto {
 	optional int64 clanHelpId = 1;
 	optional int32 clanId = 2;
 	optional MinimumUserProto mup = 3;
 	optional int64 userDataId = 4; //user's structure, monster, mini_job, etc
-	optional ClanHelpType helpType = 5 [default = NO_HELP];
+	optional GameActionType helpType = 5;
 	optional int64 timeRequested = 6;
 	optional int32 maxHelpers = 7;
 	repeated int32 helperIds = 8;
 	optional bool open = 9; //whether or not clan mates, or one's self can still give help
-	optional int32 staticDataId = 10;
+	optional int32 staticDataId = 10; //extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
 }
 
+//used to request clan help on something. 
 message ClanHelpNoticeProto {
-	optional ClanHelpType helpType = 1 [default = NO_HELP];
+	optional GameActionType helpType = 1;
 	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
 	optional int32 staticDataId = 3;
 }
@@ -229,4 +232,11 @@ message ClanInviteProto {
 	optional int32 inviterId = 3;
 	optional int32 clanId = 4;
 	optional int64 timeOfInvite = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ClanDataProto {
+	repeated GroupChatMessageProto clanChats = 1;
+	repeated ClanHelpProto clanHelpings = 2;
 }

@@ -3,7 +3,6 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,6 +108,26 @@ import com.lvl6.utils.DBConnection;
     String prereqGameType = rs.getString(DBConstants.PREREQUISITE__PREREQ_GAME_TYPE);
     int prereqGameEntityId = rs.getInt(DBConstants.PREREQUISITE__PREREQ_GAME_ENTITY_ID);
     int quantity = rs.getInt(DBConstants.PREREQUISITE__QUANTITY);
+    
+    if (null != gameType) {
+    	String newGameType = gameType.trim().toUpperCase();
+    	if (!gameType.equals(newGameType)) {
+    		log.error(String.format(
+    			"gameType incorrect: %s, id=%s",
+    			gameType, id));
+    		gameType = newGameType;
+    	}
+    }
+    
+    if (null != prereqGameType) {
+    	String newPrereqGameType = prereqGameType.trim().toUpperCase();
+    	if (!prereqGameType.equals(newPrereqGameType)) {
+    		log.error(String.format(
+    			"prereqGameType incorrect: %s, id=%s",
+    			prereqGameType, id));
+    		prereqGameType = newPrereqGameType;
+    	}
+    }
     
     Prerequisite prerequisite = new Prerequisite(id, gameType, gameEntityId,
     	prereqGameType, prereqGameEntityId, quantity);

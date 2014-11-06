@@ -38,6 +38,7 @@ public class DBConstants {
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM = "item";
 	public static final String TABLE_ITEM_FOR_USER = "item_for_user";
+	public static final String TABLE_ITEM_FOR_USER_USAGE = "item_for_user_usage";
 	public static final String TABLE_LOCK_BOX_EVENT = "lock_box_event";
 	public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
 	public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
@@ -295,6 +296,14 @@ public class DBConstants {
 	public static final String ITEM_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String ITEM_FOR_USER__ITEM_ID = "item_id";
 	public static final String ITEM_FOR_USER__QUANTITY = "quantity";
+	
+	/*ITEM FOR USER TABLE*/
+	public static final String ITEM_FOR_USER_USAGE__ID = GENERIC__ID;
+	public static final String ITEM_FOR_USER_USAGE__USER_ID = GENERIC__USER_ID;
+	public static final String ITEM_FOR_USER_USAGE__ITEM_ID = "item_id";
+	public static final String ITEM_FOR_USER_USAGE__TIME_OF_ENTRY = "time_of_entry";
+	public static final String ITEM_FOR_USER_USAGE__USER_DATA_ID = "user_data_id";
+	public static final String ITEM_FOR_USER_USAGE__ACTION_TYPE = "action_type";
 
 	/*LOCK BOX EVENT FOR USER*/
 	public static final String LOCK_BOX_EVENT_FOR_USER__EVENT_ID = "lock_box_event_id";
@@ -768,6 +777,8 @@ public class DBConstants {
 	public static final String ITEM__IMG_NAME = "img_name";
 	public static final String ITEM__ITEM_TYPE = "item_type";
 	public static final String ITEM__STATIC_DATA_ID = "static_data_id";
+	public static final String ITEM__AMOUNT = "amount";
+	public static final String ITEM__SECRET_GIFT_CHANCE = "secret_gift_chance";
 
 	public static final String MINI_JOB__ID = GENERIC__ID;
 	public static final String MINI_JOB__REQUIRED_STRUCT_ID = "required_struct_id"; 

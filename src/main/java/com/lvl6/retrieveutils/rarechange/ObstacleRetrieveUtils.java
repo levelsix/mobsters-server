@@ -120,6 +120,15 @@ import com.lvl6.utils.DBConnection;
     float shadowVerticalOffset = rs.getFloat(DBConstants.OBSTACLE__SHADOW_VERTICAL_OFFSET);
     float shadowHorizontalOffset = rs.getFloat(DBConstants.OBSTACLE__SHADOW_HORIZONTAL_OFFSET);
     
+    if (null != removalCostType) {
+    	String newRemovalCostType = removalCostType.trim().toUpperCase();
+    	if (!removalCostType.equals(newRemovalCostType)) {
+    		log.error(String.format(
+    			"removalCostType, ResourceType, incorrect: %s, id=%s",
+    			removalCostType, id));
+    		removalCostType = newRemovalCostType;
+    	}
+    }
     
     Obstacle obstacle = new Obstacle(id, name, removalCostType, cost, secondsToRemove,
     		width, height, imgName, imgVerticalPixelOffset, description, chanceToAppear,

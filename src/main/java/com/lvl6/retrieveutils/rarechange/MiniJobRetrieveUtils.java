@@ -189,8 +189,9 @@ import com.lvl6.utils.DBConnection;
     }
     
     if (chanceToAppear < 0F) {
-    	log.error("incorrect chanceToAppear: " + chanceToAppear +
-    			". Forcing it to be above 0. id=" + id);
+    	log.error(String.format(
+    		"incorrect chanceToAppear: %s. Forcing it to be above 0. id=%s",
+    		chanceToAppear, id));
     	chanceToAppear = Math.max(0F, chanceToAppear);
     }
     
@@ -202,7 +203,7 @@ import com.lvl6.utils.DBConnection;
     
     if (maxDmgDealt < minDmgDealt || durationMaxMinutes < durationMinMinutes) {
     	log.error(String.format(
-    		"FUCKED UP MiniJob!!! %s", miniJob));
+    		"FUCKED UP (dmg, or time) MiniJob!!! %s", miniJob));
     }
     
     miniJob.setRand(rand);

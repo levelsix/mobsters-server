@@ -139,9 +139,23 @@ public class ObstacleForUserRetrieveUtil {
 					ofu.setRemovalTime(date);
 				}
 			} catch (Exception e) {
-				log.error("maybe obstacle removal time is invalid", e);
+				log.error(String.format(
+					"maybe obstacle removal time is invalid, ofu=%s", ofu), e);
 			}
-			ofu.setOrientation(rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
+			String orientation = rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION);
+				
+			if (null != orientation) {
+		    	String newOrientation = orientation.trim().toUpperCase();
+		    	if (!orientation.equals(newOrientation)) {
+		    		log.error(String.format(
+		    			"orientation incorrect: %s, ofu=%s",
+		    			orientation, ofu));
+		    		orientation = newOrientation;
+		    	}
+		    }
+				
+			ofu.setOrientation(orientation);
+			
 			return ofu;
 		}        
 

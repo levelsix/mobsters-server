@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.lvl6.utils.utilmethods.StringUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -180,6 +181,49 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
     return userClan;
+  }
+  
+
+  public List<UserClan> getUserUserClansWithStatuses(int clanId, List<String> statuses) {
+    StringBuilder querySb = new StringBuilder();
+    querySb.append("SELECT *");
+    querySb.append(" FROM ");
+    querySb.append(TABLE_NAME);
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    querySb.append("=? AND ");
+    querySb.append(DBConstants.CLAN_FOR_USER__STATUS);
+    querySb.append(" in (");
+    
+    int numQuestionMarks = statuses.size();
+    List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+    String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+    querySb.append(questionMarkStr);
+    querySb.append(");");
+
+    List<Object> values = new ArrayList<Object>();
+    values.add(clanId);
+    values.addAll(statuses);
+
+    String query = querySb.toString();
+    log.info(String.format(
+    	"user clan query=%s, values=%s", query, values));
+
+    Connection conn = null;
+    ResultSet rs = null;
+    List<UserClan> userClans = null;
+    try {
+    	conn = DBConnection.get().getConnection();
+    	rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+    	userClans = grabUserClansFromRS(rs);
+    } catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    	userClans = new ArrayList<UserClan>();
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+    //should not be null and should be a list object
+    return userClans;
   }
   
   public List<Integer> getUserIdsWithStatuses(int clanId, List<String> statuses) {
@@ -388,10 +432,19 @@ import com.lvl6.utils.DBConnection;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private UserClan convertRSRowToUserClan(ResultSet rs) throws SQLException {
-    int i = 1;
     int userId = rs.getInt(DBConstants.CLAN_FOR_USER__USER_ID);
     int clanId = rs.getInt(DBConstants.CLAN_FOR_USER__CLAN_ID);
     String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
+    
+    if (null != status) {
+    	String newStatus = status.trim().toUpperCase();
+    	if (!status.equals(newStatus)) {
+    		log.error(String.format(
+    			"UserClanStatus incorrect: %s, userId=%s, clanId=%s",
+    			status, userId, clanId));
+    		status = newStatus;
+    	}
+    }
 
     Date requestTime = null;
     try {
@@ -400,8 +453,9 @@ import com.lvl6.utils.DBConnection;
     		requestTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("maybe user clan request time was null. userId=" + userId +
-    			"\t clanId=" + clanId, e);
+    	log.error(String.format(
+    		"maybe user clan request time was null. userId=%s, clanId=%s",
+    		userId, clanId), e);
     }
 
 

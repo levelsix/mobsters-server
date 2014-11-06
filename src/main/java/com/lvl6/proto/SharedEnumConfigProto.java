@@ -464,9 +464,15 @@ public final class SharedEnumConfigProto {
   }
 
   /**
-   * Protobuf enum {@code com.lvl6.proto.ClanHelpType}
+   * Protobuf enum {@code com.lvl6.proto.GameActionType}
+   *
+   * <pre>
+   *TODO: Consider redesigning this enum type. At the moment, enum
+   *is used in ClanHelp (deals only with speeding up actions) and
+   *items ("superset" of ClanHelp, so not just speeding up actions).
+   * </pre>
    */
-  public enum ClanHelpType
+  public enum GameActionType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>NO_HELP = 1;</code>
@@ -522,7 +528,7 @@ public final class SharedEnumConfigProto {
 
     public final int getNumber() { return value; }
 
-    public static ClanHelpType valueOf(int value) {
+    public static GameActionType valueOf(int value) {
       switch (value) {
         case 1: return NO_HELP;
         case 2: return UPGRADE_STRUCT;
@@ -534,15 +540,15 @@ public final class SharedEnumConfigProto {
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>
+    public static com.google.protobuf.Internal.EnumLiteMap<GameActionType>
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>
+    private static com.google.protobuf.Internal.EnumLiteMap<GameActionType>
         internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ClanHelpType>() {
-            public ClanHelpType findValueByNumber(int number) {
-              return ClanHelpType.valueOf(number);
+          new com.google.protobuf.Internal.EnumLiteMap<GameActionType>() {
+            public GameActionType findValueByNumber(int number) {
+              return GameActionType.valueOf(number);
             }
           };
 
@@ -559,9 +565,9 @@ public final class SharedEnumConfigProto {
       return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(3);
     }
 
-    private static final ClanHelpType[] VALUES = values();
+    private static final GameActionType[] VALUES = values();
 
-    public static ClanHelpType valueOf(
+    public static GameActionType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -573,12 +579,12 @@ public final class SharedEnumConfigProto {
     private final int index;
     private final int value;
 
-    private ClanHelpType(int index, int value) {
+    private GameActionType(int index, int value) {
       this.index = index;
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ClanHelpType)
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GameActionType)
   }
 
   /**
@@ -699,11 +705,11 @@ public final class SharedEnumConfigProto {
       "\016\n\nNO_ELEMENT\020\007*g\n\007Quality\022\016\n\nNO_QUALITY" +
       "\020\001\022\n\n\006COMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005SUPER\020\004\022\t\n\005U" +
       "LTRA\020\005\022\010\n\004EPIC\020\006\022\r\n\tLEGENDARY\020\007\022\007\n\003EVO\020\010" +
-      "*e\n\014ClanHelpType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRADE",
-      "_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MINI_" +
-      "JOB\020\005\022\020\n\014ENHANCE_TIME\020\006*?\n\010GameType\022\013\n\007N" +
-      "O_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022\t\n" +
-      "\005SKILL\020\004B\027B\025SharedEnumConfigProto"
+      "*g\n\016GameActionType\022\013\n\007NO_HELP\020\001\022\022\n\016UPGRA",
+      "DE_STRUCT\020\002\022\010\n\004HEAL\020\003\022\n\n\006EVOLVE\020\004\022\014\n\010MIN" +
+      "I_JOB\020\005\022\020\n\014ENHANCE_TIME\020\006*?\n\010GameType\022\013\n" +
+      "\007NO_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022" +
+      "\t\n\005SKILL\020\004B\027B\025SharedEnumConfigProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

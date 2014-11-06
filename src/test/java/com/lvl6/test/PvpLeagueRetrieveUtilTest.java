@@ -22,21 +22,29 @@ public class PvpLeagueRetrieveUtilTest extends TestCase {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
 	
-	/*
+	
 	@Test
 	public void testLeagueIdForElo() {
-		log.info("testing computing league id for elo");
+		/*log.info("testing computing league id for elo");
 		
-		int elo = getTestElo();
-		int curPvpLeagueId = getBronzeLeagueId();
+//		int lowestPvpLeagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(0, 0);
+		int bronzeLeagueId = 1;
+		PvpLeague lowestPvpLeague = PvpLeagueRetrieveUtils.getPvpLeagueForLeagueId(bronzeLeagueId);
+		int nextPvpLeagueId = lowestPvpLeague.getSuccessorLeagueId();
 		
-		int calculatedLeagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo,
-				curPvpLeagueId);
+		int testElo = lowestPvpLeague.getMaxElo() + 1;
 		
-		assertTrue("ExpectedLeagueId: " + curPvpLeagueId + ". Actual=" +
-				calculatedLeagueId, curPvpLeagueId == calculatedLeagueId);
+		int calculatedLeagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(testElo,
+			bronzeLeagueId);
 		
-	}*/
+		assertEquals(nextPvpLeagueId, calculatedLeagueId);
+		
+//		assertTrue(String.format(
+//			"ExpectedLeagueId: %s. Actual:%s",
+//			nextPvpLeagueId, calculatedLeagueId), curPvpLeagueId == calculatedLeagueId);
+		 */
+		
+	}
 	
 	/*
 	@Test
@@ -94,14 +102,10 @@ public class PvpLeagueRetrieveUtilTest extends TestCase {
 	} */
 	
 	protected int getTestElo() {
-		return 50;
+		return 1253;
 	}
 	protected int getNumLeaguesForElo() {
 		return 2;
-	}
-	protected int getBronzeLeagueId() {
-		//atm this is what the db says
-		return 1;
 	}
 	protected int getTestRank() {
 		//this is what the Elo maps to using the formula

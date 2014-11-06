@@ -157,6 +157,16 @@ import com.lvl6.utils.DBConnection;
     int gemReward = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__GEM_REWARD);
     int quantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__QUANTITY);
     
+    if (null != monsterQuality) {
+    	String newMonsterQuality = monsterQuality.trim().toUpperCase();
+    	if (!monsterQuality.equals(newMonsterQuality)) {
+    		log.error(String.format(
+    			"monsterQuality incorrect: %s, id=%s",
+    			monsterQuality, id));
+    		monsterQuality = newMonsterQuality;
+    	}
+    }
+    
     BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(id,
     		boosterPackId, isMonster, isComplete, monsterQuality, gemReward,
     		quantity);

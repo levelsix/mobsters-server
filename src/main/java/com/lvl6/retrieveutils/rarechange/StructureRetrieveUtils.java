@@ -156,38 +156,31 @@ import com.lvl6.utils.DBConnection;
     float shadowHorizontalOffset = rs.getFloat(DBConstants.STRUCTURE__SHADOW_HORIZONTAL_OFFSET);
     float shadowScale = rs.getFloat(DBConstants.STRUCTURE__SHADOW_SCALE);
     
+    if (null != structType) {
+    	String newStructType = structType.trim().toUpperCase();
+    	if (!structType.equals(newStructType)) {
+    		log.error(String.format("struct type incorrect: %s, id=%s",
+    			structType, id));
+    		structType = newStructType;
+    	}
+    }
+
+    if (null != buildResourceType) {
+    	String newBuildResourceType = buildResourceType.trim().toUpperCase();
+    	if (!buildResourceType.equals(newBuildResourceType)) {
+    		log.error(String.format(
+    			"incorrect ResourceType. %s, id=%s",
+    			buildResourceType, id));
+    		buildResourceType = newBuildResourceType;
+    	}
+    }
+    
     Structure s = new Structure(id, name, level, structType, buildResourceType,
     		buildCost, minutesToBuild, requiredTownHallLvl, width, height,
     		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
     		imgHorizontalPixelOffset, description, shortDescription, shadowImgName,
     		shadowVerticalOffset, shadowHorizontalOffset, shadowScale);
     
-    if (null != structType) {
-    	String newStructType = structType.trim();
-    	newStructType = newStructType.toUpperCase();
-    	if (!structType.equals(newStructType)) {
-    		log.error("string for struct type is incorrect. is=" + structType +
-    				"\t (if spelled correctly) expected=" + newStructType + "\t struct obj=" + s);
-    		s.setStructType(newStructType);
-    	}
-    	
-    } else {
-    	log.error("structure obj's struct type is null!!!. obj=" + s);
-    }
-    
-    if (null != buildResourceType) {
-    	String newBuildResourceType = buildResourceType.trim();
-    	newBuildResourceType = newBuildResourceType.toUpperCase();
-    	if (!buildResourceType.equals(newBuildResourceType)) {
-    		log.error("string for resource type is incorrect. is=" + buildResourceType +
-    				"\t (if spelled correctly) expected=" + newBuildResourceType +
-    				"\t struct obj=" + s);
-    		s.setBuildResourceType(newBuildResourceType);
-    	}
-    	
-    } else {
-    	log.error("structure obj's resource type is null!!!. obj=" + s);
-    }
     return s;
   }
 }

@@ -104,7 +104,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.PrerequisiteProto.PrereqProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
-import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
+import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SkillsProto.SkillProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
@@ -126,6 +126,7 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
@@ -747,9 +748,13 @@ public class MiscMethods {
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
-		//    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
-		//    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-		//    cb.setAdminChatUserProto(adminChatUserProto);
+		User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+		if (null != adminChatUser) {
+			MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(adminChatUser, null);
+			cb.setAdminChatUserProto(adminChatUserProto);
+		} else {
+			log.error("adminChatUser is null");
+		}
 
 		cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
 
@@ -801,9 +806,9 @@ public class MiscMethods {
 			ClanHelpConstants.Builder chcb = ClanHelpConstants.newBuilder();
 			String helpType = ControllerConstants.CLAN_HELP__HELP_TYPE[index];
 			try {
-				chcb.setHelpType(ClanHelpType.valueOf(helpType));
+				chcb.setHelpType(GameActionType.valueOf(helpType));
 			} catch (Exception e) {
-				log.error(String.format("invalid ClanHelpType: %s, not using it", helpType),
+				log.error(String.format("invalid GameActionType: %s, not using it", helpType),
 					e);
 				continue;
 			}
@@ -1171,13 +1176,16 @@ public class MiscMethods {
 					allCurrentCurrencies, allReasonsForChanges,
 					allDetails);
 
-			log.info("numInserted into currency history: " + numInserted);
+			log.info(String.format(
+				"numInserted into currency history: %s", numInserted));
 
 		} catch (Exception e) {
-			log.error("error updating user_curency_history; userIds=" +
-				userIds + ", reasonsForChanges=" + changeMap +
-				", changeReasonsMap=" + changeReasonsMap +
-				", detailsMap=" + detailsMap, e);
+			String preface = "error updating user_curency_history";
+			log.error(
+				String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap),
+				e);
 		}
 	}
 
@@ -1193,14 +1201,6 @@ public class MiscMethods {
 
 		Map<String, Integer> changeMapTemp =
 			new HashMap<String, Integer>(changeMap);
-		Map<String, Integer> previousCurrencyMapTemp =
-			new HashMap<String, Integer>(previousCurrencyMap);
-		Map<String, Integer> currentCurrencyMapTemp =
-			new HashMap<String, Integer>(currentCurrencyMap);
-		Map<String, String> changeReasonsMapTemp =
-			new HashMap<String, String>(changeReasonsMap);
-		Map<String, String> detailsMapTemp =
-			new HashMap<String, String>(detailsMap);
 
 		//getting rid of changes that are 0
 		Set<String> keys = new HashSet<String>(changeMapTemp.keySet());
@@ -1208,14 +1208,11 @@ public class MiscMethods {
 			Integer change = changeMap.get(key);
 			if (0 == change) {
 				changeMapTemp.remove(key);
-				previousCurrencyMapTemp.remove(key);
-				currentCurrencyMapTemp.remove(key);
-				changeReasonsMapTemp.remove(key);
-				detailsMapTemp.remove(key);
 			}
 		}
 
-		int amount = changeMap.size();
+//		int amount = changeMap.size();
+		int amount = changeMapTemp.size();
 		if (0 == amount) {
 			return;
 		}
@@ -1223,16 +1220,17 @@ public class MiscMethods {
 		List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
 		List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
 		List<String> resourceTypesTemp =
-			new ArrayList<String>(changeMap.keySet());
+			new ArrayList<String>(changeMapTemp.keySet());
 		List<Integer> currencyChangesTemp =
-			getValsInOrder(resourceTypes, changeMap);
+			getValsInOrder(resourceTypesTemp, changeMapTemp);
 		List<Integer> previousCurrenciesTemp =
-			getValsInOrder(resourceTypes, previousCurrencyMap);
+			getValsInOrder(resourceTypesTemp, previousCurrencyMap);
 		List<Integer> currentCurrenciesTemp =
-			getValsInOrder(resourceTypes, currentCurrencyMap);
+			getValsInOrder(resourceTypesTemp, currentCurrencyMap);
 		List<String> reasonsForChangesTemp =
-			getValsInOrder(resourceTypes, changeReasonsMap);
-		List<String> detailsTemp = getValsInOrder(resourceTypes, detailsMap);
+			getValsInOrder(resourceTypesTemp, changeReasonsMap);
+		List<String> detailsTemp =
+			getValsInOrder(resourceTypesTemp, detailsMap);
 
 		userIds.addAll(userIdsTemp);
 		timestamps.addAll(timestampsTemp);

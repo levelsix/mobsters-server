@@ -91,17 +91,13 @@ import com.lvl6.utils.DBConnection;
     String eventType = rs.getString(DBConstants.EVENT_PERSISTENT__EVENT_TYPE);
     String monsterElemType = rs.getString(DBConstants.EVENT_PERSISTENT__MONSTER_ELEMENT);
     
-    EventPersistent ep = new EventPersistent(id, dayOfWeek, startHour,
-    		eventDurationMinutes, taskId, cooldownMinutes, eventType, monsterElemType);
-    
     if (null != dayOfWeek) {
-    	String newDayOfWeek = dayOfWeek.trim();
-    	newDayOfWeek = newDayOfWeek.toUpperCase();
+    	String newDayOfWeek = dayOfWeek.trim().toUpperCase();
     	if (!dayOfWeek.equals(newDayOfWeek)) {
-    		log.error("string for day of week is incorrect. is: " + dayOfWeek +
-    				"\t (if spelled correctly), expected: " + newDayOfWeek +
-    				"\t eventPersistent obj=" + ep);
-    		ep.setDayOfWeek(newDayOfWeek);
+    		log.error(String.format(
+    			"DayOfWeek is incorrect: %s, id=%s",
+    			dayOfWeek, id));
+    		dayOfWeek = newDayOfWeek;
     	}
     }
     
@@ -109,22 +105,25 @@ import com.lvl6.utils.DBConnection;
     	String newEventType = eventType.trim();
     	newEventType = newEventType.toUpperCase();
     	if (!eventType.equals(newEventType)) {
-    		log.error("string for event type is incorrect. is: " + eventType +
-    				"\t (if spelled correctly), expected: " + newEventType +
-    				"\t eventPersistent obj=" + ep);
-    		ep.setEventType(newEventType);
+    		log.error(String.format(
+    			"EventType incorrect: %s, id=%s",
+    			eventType, id));
+    		eventType = newEventType;
     	}
     }
     
     if (null != monsterElemType) {
-    	String newMonsterElementType = monsterElemType.trim();
-    	newMonsterElementType = newMonsterElementType.toUpperCase();
+    	String newMonsterElementType = monsterElemType.trim().toUpperCase();
     	if (!monsterElemType.equals(newMonsterElementType)) {
-    		log.error("string for monster element type incorrect. is: " + monsterElemType +
-    				"\t (if spelled correctly), expected: " + newMonsterElementType +
-    				"\t eventPersistent obj=" + ep);
+    		log.error(String.format(
+    			"monsterElement incorrect: %s, id=%s",
+    			monsterElemType, id));
+    		monsterElemType = newMonsterElementType;
     	}
     }
+    
+    EventPersistent ep = new EventPersistent(id, dayOfWeek, startHour,
+    		eventDurationMinutes, taskId, cooldownMinutes, eventType, monsterElemType);
     
     return ep;
   }

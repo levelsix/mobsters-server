@@ -167,7 +167,10 @@ public class SetPrivateChatMessageAction implements StartUpAction
 		//get all the clans for the users (a map: clanId->set(userId))
 		//put the clanless users in the second argument: clanlessUserUserIds
 		determineClanIdsToUserIdSet(userIdsToUsers);
-		Map<Integer, Clan> clanIdsToClans = useMe.getClanIdsToClans();
+		
+		//need to get ONLY the clans this object has seen
+		Map<Integer, Clan> clanIdsToClans = useMe.getClanIdsToClans(
+			clanIdsToUserIdSet.keySet());
 		
 		//create the protoList
 		privateChatPostIds = new ArrayList<Integer>();

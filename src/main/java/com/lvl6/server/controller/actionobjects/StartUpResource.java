@@ -49,6 +49,23 @@ public class StartUpResource
 	
 	public void fetch() {
 		
+		fetchUsersOnly();
+		
+		clanIds = new HashSet<Integer>();
+		for (User u : userIdsToUsers.values()) {
+			int clanId = u.getClanId();
+			clanIds.add(clanId);
+		}
+		
+		if (!clanIds.isEmpty()) {
+			clanIdsToClans = ClanRetrieveUtils.getClansByIds(clanIds);
+		} else {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
+	}
+
+	public void fetchUsersOnly()
+	{
 		if (!userIds.isEmpty() && facebookIds.isEmpty()) {
 			userIdsToUsers = ur.getUsersByIds(userIds);
 			
@@ -61,19 +78,6 @@ public class StartUpResource
 		
 		if (null == userIdsToUsers) {
 			userIdsToUsers = new HashMap<Integer, User>();
-		}
-		
-		
-		clanIds = new HashSet<Integer>();
-		for (User u : userIdsToUsers.values()) {
-			int clanId = u.getClanId();
-			clanIds.add(clanId);
-		}
-		
-		if (!clanIds.isEmpty()) {
-			clanIdsToClans = ClanRetrieveUtils.getClansByIds(clanIds);
-		} else {
-			clanIdsToClans = new HashMap<Integer, Clan>();
 		}
 	}
 	
@@ -108,10 +112,43 @@ public class StartUpResource
 	
 
 	public Map<Integer, Clan> getClanIdsToClans() {
+		if (null == clanIdsToClans) {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
+		
 		ImmutableMap<Integer, Clan> iMap =
 			new Builder<Integer, Clan>()
 			.putAll(clanIdsToClans)
 			.build();
 		return iMap;
+	}
+	
+	public Map<Integer, Clan> getClanIdsToClans(Collection<Integer> clanIds) {
+		if (null == clanIdsToClans) {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
+		
+		Map<Integer, Clan> clanIdsToClansTemp = new HashMap<Integer, Clan>();
+		for (Integer clanId : clanIds) {
+			if (!clanIdsToClans.containsKey(clanId)) {
+				continue;
+			}
+			clanIdsToClansTemp.put(
+				clanId,
+				clanIdsToClans.get(clanId));
+		}
+		
+		ImmutableMap<Integer, Clan> iMap =
+			new Builder<Integer, Clan>()
+			.putAll(clanIdsToClansTemp)
+			.build();
+		return iMap;
+	}
+	
+	public void addClan(int clanId, Clan c) {
+		if (null == clanIdsToClans) {
+			clanIdsToClans = new HashMap<Integer, Clan>();
+		}
+		clanIdsToClans.put(clanId, c);
 	}
 }

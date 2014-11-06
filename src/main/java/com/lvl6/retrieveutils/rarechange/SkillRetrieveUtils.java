@@ -107,6 +107,26 @@ import com.lvl6.utils.DBConnection;
 			succId = 0;
 		}
 		
+		if (null != type) {
+	    	String newType = type.trim().toUpperCase();
+	    	if (!type.equals(newType)) {
+	    		log.error(String.format(
+	    			"type incorrect: %s, id=%s",
+	    			type, id));
+	    		type = newType;
+	    	}
+	    }
+		
+		if (null != activationType) {
+	    	String newActivationType = activationType.trim().toUpperCase();
+	    	if (!activationType.equals(newActivationType)) {
+	    		log.error(String.format(
+	    			"activationType incorrect: %s, id=%s",
+	    			activationType, id));
+	    		activationType = newActivationType;
+	    	}
+	    }
+		
 		Skill skill = new Skill(id, name, orbCost, type, activationType,
 			predecId, succId, desc, iconImgName, logoImgName);
 		return skill;
