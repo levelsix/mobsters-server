@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "BoosterPackStuff.proto";
+import "Item.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -46,7 +47,7 @@ message TradeItemForSpeedUpsRequestProto {
 
 message TradeItemForSpeedUpsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional TradeItemForSpeedUpsStatus = 2;
+	optional TradeItemForSpeedUpsStatus status = 2;
 	
 	enum TradeItemForSpeedUpsStatus {
 		SUCCESS = 1;
