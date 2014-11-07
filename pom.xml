@@ -102,7 +102,7 @@
 		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
-		<lvl6.server.log.location>/var/log/tomcat7/kingdom</lvl6.server.log.location>
+		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
 		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
 		<lvl6.cassandra.keyspace>Logs</lvl6.cassandra.keyspace>
 		<lvl6.cassandra.stats.keyspace>stats</lvl6.cassandra.stats.keyspace>
@@ -115,7 +115,7 @@
 
 		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
 		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
-		<application.release.name>Kingdom</application.release.name>
+		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
 
 		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
@@ -131,11 +131,7 @@
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<spring.security.version>3.1.1.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
-		<lvl6.smtp.host>smtp.gmail.com</lvl6.smtp.host>
-		<lvl6.smtp.port>587</lvl6.smtp.port>
-		<lvl6.smtp.username>lvl6sender@gmail.com</lvl6.smtp.username>
-		<lvl6.smtp.password>robashen123</lvl6.smtp.password>
-		<lvl6.smtp.contact1>5208206924@vtext.com</lvl6.smtp.contact1>
+
 
 		<amqp.host>robot.lvl6.com</amqp.host>
 		<amqp.user>lvl6server</amqp.user>
