@@ -68,6 +68,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent)event).getApproveOrRejectRequestToJoinClanRequestProto();
+    log.info(String.format("reqProto=%s", reqProto));
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -123,6 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	if (accept) {
       		clan = ClanRetrieveUtils.getClanWithId(clanId);
       		cdp = setClanData(clanId, clan, user, userId);      		
+      		log.info(String.format("ClanDataProto=%s", cdp));
       	}
       	
       	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
@@ -150,7 +152,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         server.writeAPNSNotificationOrEvent(resEvent2);
         //server.writeEvent(resEvent2);
         
-        sendClanData(event, senderProto, userId, cdp);
+        sendClanData(event, senderProto, accept, userId, cdp);
       }
     } catch (Exception e) {
       log.error("exception in ApproveOrRejectRequestToJoinClan processEvent", e);
@@ -298,12 +300,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private void sendClanData(
 	  RequestEvent event,
 	  MinimumUserProto senderProto,
+	  boolean accepted,
 	  int userId,
 	  ClanDataProto cdp )
   {
-	  if (null == cdp) {
+	  if (!accepted || null == cdp) {
+		  log.warn(String.format(
+			  "accepted=%s, cdp=%s", accepted, cdp));
 		  return;
 	  }
+	  log.info(String.format(
+		  "writingClanData to clan. %s",
+		  cdp));
 	  RetrieveClanDataResponseEvent rcdre =
 		  new RetrieveClanDataResponseEvent(userId);
 	  rcdre.setTag(event.getTag());
