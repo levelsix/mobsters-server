@@ -40,7 +40,7 @@ message TradeItemForBoosterResponseProto {
 
 message TradeItemForSpeedUpsRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
+	repeated UserItemUsageProto itemsUsed = 2; //usageId can be set or not set
 	//updated quantity of user's items after using said items
 	repeated UserItemProto nuUserItems = 3;  
 	
