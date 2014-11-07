@@ -227,7 +227,8 @@
 					<applicationName>${application.release.name}</applicationName>
 					<environmentName>mp-${maven.build.timestamp}</environmentName>
 					<defaultEnvironmentName>default</defaultEnvironmentName>
-					<cnamePrefix>${application.release.name}-${maven.build.timestamp}</cnamePrefix>
+					<cnamePrefix>mp-${maven.build.timestamp}</cnamePrefix>
+					<environmentRef>mp-${maven.build.timestamp}.elasticbeanstalk.com</environmentRef>
 					<timeoutMins>80</timeoutMins>
 					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
