@@ -117,6 +117,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       // Only need to set clan data if user accepted.
       ClanDataProto cdp = null;
+      MinimumUserProto requestMup = null;
       if (success) {
       	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
       	Clan clan = null;
@@ -128,7 +129,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	}
       	
       	setResponseBuilderStuff(resBuilder, clan, clanSizeList);
-      	MinimumUserProto requestMup = CreateInfoProtoUtils
+      	requestMup = CreateInfoProtoUtils
       			.createMinimumUserProtoFromUserAndClan(requester, clan);
       	resBuilder.setRequester(requestMup);
       }
@@ -152,7 +153,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         server.writeAPNSNotificationOrEvent(resEvent2);
         //server.writeEvent(resEvent2);
         
-        sendClanData(event, senderProto, accept, userId, cdp);
+        sendClanData(event, requestMup, accept, requesterId, cdp);
       }
     } catch (Exception e) {
       log.error("exception in ApproveOrRejectRequestToJoinClan processEvent", e);
@@ -299,9 +300,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private void sendClanData(
 	  RequestEvent event,
-	  MinimumUserProto senderProto,
+	  MinimumUserProto requesterMup,
 	  boolean accepted,
-	  int userId,
+	  int requesterId,
 	  ClanDataProto cdp )
   {
 	  if (!accepted || null == cdp) {
@@ -313,11 +314,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  "writingClanData to clan. %s",
 		  cdp));
 	  RetrieveClanDataResponseEvent rcdre =
-		  new RetrieveClanDataResponseEvent(userId);
+		  new RetrieveClanDataResponseEvent(requesterId);
 	  rcdre.setTag(event.getTag());
 	  RetrieveClanDataResponseProto.Builder rcdrpb =
 		  RetrieveClanDataResponseProto.newBuilder();
-	  rcdrpb.setMup(senderProto);
+	  rcdrpb.setMup(requesterMup);
 	  rcdrpb.setClanData(cdp);
 	  
 	  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());

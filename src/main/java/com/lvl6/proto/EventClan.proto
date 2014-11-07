@@ -515,8 +515,9 @@ message AcceptOrRejectClanInviteResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+//sent to the newbies that just join a clan
 message RetrieveClanDataResponseProto {
-	optional MinimumUserProto mup = 1;
+	optional MinimumUserProto mup = 1; //the new person that joined a clan
 	optional ClanDataProto clanData = 2;
 }
 
