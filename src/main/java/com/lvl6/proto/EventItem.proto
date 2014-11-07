@@ -37,10 +37,10 @@ message TradeItemForBoosterResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//will only ever add or delete itemUsages
 message TradeItemForSpeedUpsRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserItemUsageProto itemsUsed = 2; //usageId can be set or not set
+	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
 	//updated quantity of user's items after using said items
 	repeated UserItemProto nuUserItems = 3;  
 	
@@ -49,6 +49,8 @@ message TradeItemForSpeedUpsRequestProto {
 message TradeItemForSpeedUpsResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional TradeItemForSpeedUpsStatus status = 2;
+	
+	repeated UserItemUsageProto itemsUsed = 3; //usageIds are now set
 	
 	enum TradeItemForSpeedUpsStatus {
 		SUCCESS = 1;
