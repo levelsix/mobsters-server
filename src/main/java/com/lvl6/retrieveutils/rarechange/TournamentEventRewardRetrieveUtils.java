@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, List<TournamentEventReward>> tournamentEventIdsToLeaderboardEventRewards;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_TOURNAMENT_REWARD;
+  private static final String TABLE_NAME = DBConstants.TABLE_TOURNAMENT_REWARD_CONFIG;
 
   public static Map<Integer, List<TournamentEventReward>> gettournamentEventIdsToLeaderboardEventRewards() {
     log.debug("retrieving tournament event data");

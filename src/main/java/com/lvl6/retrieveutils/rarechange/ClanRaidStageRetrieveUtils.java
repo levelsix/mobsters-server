@@ -27,7 +27,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, ClanRaidStage>> clanRaidIdsToStageNumToClanRaidStages;
   private static Map<Integer, ClanRaidStage> clanRaidStageIdsToClanRaidStages;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_CONFIG;
   
   public static int getClanRaidStageHealthForCrsId(int crsId) {
   	log.debug("retrieving stage health for crsId=" + crsId);

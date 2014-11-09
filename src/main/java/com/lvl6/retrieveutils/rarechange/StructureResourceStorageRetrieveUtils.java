@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureResourceStorage> structIdsToResourceStorages;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_STORAGE;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_STORAGE_CONFIG;
 
   public static Map<Integer, StructureResourceStorage> getStructIdsToResourceStorages() {
     log.debug("retrieving all structs data");
@@ -113,21 +113,19 @@ import com.lvl6.utils.DBConnection;
     String resourceTypeStored = rs.getString(DBConstants.STRUCTURE_RESOURCE_STORAGE__RESOURCE_TYPE_STORED);
     int capacity = rs.getInt(DBConstants.STRUCTURE_RESOURCE_STORAGE__CAPACITY);
     
+    if (null != resourceTypeStored) {
+    	String newResourceTypeStored = resourceTypeStored.trim().toUpperCase();
+    	if (!resourceTypeStored.equals(newResourceTypeStored)) {
+    		log.error(String.format(
+    			"incorrect ResourceType. %s, id=%s",
+    				resourceTypeStored, structId));
+    		resourceTypeStored = newResourceTypeStored;
+    	}
+    }
+
     StructureResourceStorage srs = new StructureResourceStorage(structId,
     		resourceTypeStored, capacity);
-    
-    if (null != resourceTypeStored) {
-    	String newResourceTypeStored = resourceTypeStored.trim();
-    	newResourceTypeStored = newResourceTypeStored.toUpperCase();
-    	if (!resourceTypeStored.equals(newResourceTypeStored)) {
-    		log.error("string for resource type is incorrect. is=" + resourceTypeStored +
-    				"\t (if spelled correctly) expected=" + newResourceTypeStored +
-    				"\t resourceStorage obj=" + srs);
-    		srs.setResourceTypeStored(newResourceTypeStored);
-    	}
-    } else {
-    	log.error("resourceStorage obj's resource type is null!!!. obj=" + srs);
-    }
+
     return srs;
   }
 }

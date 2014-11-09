@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Achievement> achievementIdsToAchievements;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_CONFIG;
 
   //CONTROLLER LOGIC******************************************************************
   public static Set<Integer> getAchievementIds() {
@@ -113,32 +113,36 @@ import com.lvl6.utils.DBConnection;
     if (null != achievementType) {
     	String newAchievementType = achievementType.trim().toUpperCase();
     	if (!achievementType.equals(newAchievementType)) {
-    		log.error("achievementType incorrect: " + achievementType +
-    				"\t id=" + id);
+    		log.error(String.format(
+    			"achievementType incorrect: %s, id=%s",
+    			achievementType, id));
     		achievementType = newAchievementType;
     	}
     }
     if (null != resourceType) {
     	String newResourceType = resourceType.trim().toUpperCase();
     	if (!resourceType.equals(newResourceType)) {
-    		log.error("resourceType incorrect: " + resourceType +
-    				"\t id=" + id);
+    		log.error(String.format(
+    			"resourceType incorrect: %s, id=%s",
+    			resourceType, id));
     		resourceType = newResourceType;
     	}
     }
     if (null != monsterElement) {
     	String newMonsterElement = monsterElement.trim().toUpperCase();
     	if (!monsterElement.equals(newMonsterElement)) {
-    		log.error("monsterElement incorrect: " + monsterElement +
-    				"\t id=" + id);
+    		log.error(String.format(
+    			"monsterElement incorrect: %s, id=%s",
+    			monsterElement, id));
     		monsterElement = newMonsterElement;
     	}
     }
     if (null != monsterQuality) {
     	String newMonsterQuality = monsterQuality.trim().toUpperCase();
     	if (!monsterQuality.equals(newMonsterQuality)) {
-    		log.error("monsterQuality incorrect: " + monsterQuality +
-    				"\t id=" + id);
+    		log.error(String.format(
+    			"monsterQuality incorrect: %s, id=%s",
+    			monsterQuality, id));
     		monsterQuality = newMonsterQuality;
     	}
     }

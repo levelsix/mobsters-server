@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Map<Integer, City> cityIdToCity;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_CITY;
+	private static final String TABLE_NAME = DBConstants.TABLE_CITY_CONFIG;
 
 	public static City getCityForCityId(int cityId) {
 		log.debug("retrieving data for city with city id " + cityId);

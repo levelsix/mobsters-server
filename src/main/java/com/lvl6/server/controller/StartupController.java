@@ -40,6 +40,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
+import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -72,6 +73,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -97,6 +99,7 @@ import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
@@ -114,10 +117,10 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
-import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPvpBattleHistoryAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
@@ -187,6 +190,9 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
+	@Autowired
+	protected ItemForUserUsageRetrieveUtil itemForUserUsageRetrieveUtil;
 
 	@Autowired
 	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
@@ -1132,16 +1138,24 @@ public class StartupController extends EventController {
 			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
 				userId, null);
 
-		if (itemIdToUserItems.isEmpty()) {
-			return;
+		if (!itemIdToUserItems.isEmpty()) {
+			List<UserItemProto> uipList = CreateInfoProtoUtils
+				.createUserItemProtosFromUserItems(
+					new ArrayList<ItemForUser>(
+						itemIdToUserItems.values()));
+
+			resBuilder.addAllUserItems(uipList);
 		}
-
-		List<UserItemProto> uipList = CreateInfoProtoUtils
-			.createUserItemProtosFromUserItems(
-				new ArrayList<ItemForUser>(
-					itemIdToUserItems.values()));
-
-		resBuilder.addAllUserItems(uipList);
+		
+		/*NOTE: DB CALL*/
+		List<ItemForUserUsage> itemsUsed = itemForUserUsageRetrieveUtil
+			.getItemForUserUsage(userId, null);
+		
+		for (ItemForUserUsage ifuu : itemsUsed) {
+			UserItemUsageProto uiup = CreateInfoProtoUtils
+				.createUserItemUsageProto(ifuu);
+			resBuilder.addItemsInUse(uiup);
+		}
 	}
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder, User user) {
@@ -1888,6 +1902,16 @@ public class StartupController extends EventController {
 		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
+	public ItemForUserUsageRetrieveUtil getItemForUserUsageRetrieveUtil()
+	{
+		return itemForUserUsageRetrieveUtil;
+	}
+	public void setItemForUserUsageRetrieveUtil(
+		ItemForUserUsageRetrieveUtil itemForUserUsageRetrieveUtil )
+	{
+		this.itemForUserUsageRetrieveUtil = itemForUserUsageRetrieveUtil;
+	}
+	
 	public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
 	{
 		return clanHelpRetrieveUtil;

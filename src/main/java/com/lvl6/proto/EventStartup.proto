@@ -117,6 +117,7 @@ message StartupResponseProto {
 	repeated ClanInviteProto clanInvites = 42;
 	optional ClanDataProto clanData = 43;
 
+	repeated UserItemUsageProto itemsInUse = 44;
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -241,7 +242,7 @@ message StartupResponseProto {
 			optional int32 guideMonsterId = 2;
 		}
 		message ClanHelpConstants {
-			optional ClanHelpType helpType = 1;
+			optional GameActionType helpType = 1;
 			
 			//of the two, client should use the
 			//one that benefits the user the most

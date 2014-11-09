@@ -1,5 +1,6 @@
 package com.lvl6.utils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +45,7 @@ import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
+import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
@@ -132,6 +134,7 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -155,9 +158,9 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.QuestProto.QuestJobProto;
 import com.lvl6.proto.QuestProto.QuestJobProto.QuestJobType;
 import com.lvl6.proto.QuestProto.UserQuestJobProto;
-import com.lvl6.proto.SharedEnumConfigProto.ClanHelpType;
 import com.lvl6.proto.SharedEnumConfigProto.DayOfWeek;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SharedEnumConfigProto.GameType;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
 import com.lvl6.proto.SkillsProto.SkillActivationType;
@@ -245,7 +248,8 @@ public class CreateInfoProtoUtils {
 				AchievementType at = AchievementType.valueOf(str);
 				ab.setAchievementType(at);
 			} catch(Exception e) {
-				log.error("invalid AchievementType. achievement=" + a);
+				log.error(String.format(
+					"invalid AchievementType. achievement=%s", a), e);
 			}
 		}
 
@@ -255,7 +259,8 @@ public class CreateInfoProtoUtils {
 				ResourceType rt = ResourceType.valueOf(str);
 				ab.setResourceType(rt);
 			} catch(Exception e) {
-				log.error("invalid ResourceType. achievement=" + a);
+				log.error(String.format(
+					"invalid ResourceType. achievement=%s", a), e);
 			}
 		}
 
@@ -265,7 +270,8 @@ public class CreateInfoProtoUtils {
 				Element me = Element.valueOf(str);
 				ab.setElement(me);
 			} catch(Exception e) {
-				log.error("invalid MonsterElement. achievement=" + a);
+				log.error(String.format(
+					"invalid MonsterElement. achievement=%s", a), e);
 			}
 		}
 
@@ -275,7 +281,8 @@ public class CreateInfoProtoUtils {
 				Quality mq = Quality.valueOf(str);
 				ab.setQuality(mq);
 			} catch(Exception e) {
-				log.error("invalid MonsterQuality. achievement=" + a);
+				log.error(String.format(
+					"invalid MonsterQuality. achievement=%s", a), e);
 			}
 		}
 
@@ -667,7 +674,9 @@ public class CreateInfoProtoUtils {
 				Quality mq = Quality.valueOf(monsterQuality);
 				b.setQuality(mq);
 			} catch (Exception e){
-				log.error("invalid monster quality. boosterDisplayItem=" + bdi, e);
+				log.error(String.format(
+					"invalid monster quality. boosterDisplayItem=%s", bdi),
+					e);
 			}
 		}
 
@@ -841,7 +850,8 @@ public class CreateInfoProtoUtils {
 			CityElemType cet = CityElemType.valueOf(ce.getType());
 			builder.setType(cet);
 		} catch (Exception e) {
-			log.error("incorrect element type. cityElement=" + ce);
+			log.error(String.format(
+				"incorrect element type. cityElement=%s", ce), e);
 		}
 		builder.setCoords(createCoordinateProtoFromCoordinatePair(ce.getCoords()));
 
@@ -857,7 +867,8 @@ public class CreateInfoProtoUtils {
 			StructOrientation so = StructOrientation.valueOf(ce.getOrientation()); 
 			builder.setOrientation(so);
 		} catch (Exception e) {
-			log.error("incorrect orientation. cityElement=" + ce);
+			log.error(String.format(
+				"incorrect orientation. cityElement=%s", ce), e);
 		}
 
 		builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(ce.getSpriteCoords()));
@@ -923,7 +934,7 @@ public class CreateInfoProtoUtils {
 			fucpb.setStatus(ucs);
 		} catch (Exception e) {
 			log.error(String.format(
-				"incorrect user clan status. userClan=%s", uc));
+				"incorrect user clan status. userClan=%s", uc), e);
 		}
 
 		Date aTime = uc.getRequestTime();
@@ -952,8 +963,9 @@ public class CreateInfoProtoUtils {
 			UserClanStatus ucs = UserClanStatus.valueOf(userClanStatus);
 			mupfcb.setClanStatus(ucs);
 		} catch (Exception e) {
-			log.error("incorrect userClanStatus. userClanStatus=" + userClanStatus +
-				"\t user=" + u);
+			log.error(String.format(
+				"incorrect userClanStatus: %s, user=%s",
+				userClanStatus, u), e);
 		}
 		mupfcb.setRaidContribution(clanRaidContribution);
 		mupfcb.setBattlesWon(battlesWon);
@@ -1109,7 +1121,9 @@ public class CreateInfoProtoUtils {
 			DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
 			pcepb.setDayOfWeek(dayOfWeek);
 		} catch (Exception e) {
-			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t clanEvent=" + cep);
+			log.error(String.format(
+				"incorrect DayOfWeek: %s, clanEvent=%s",
+				dayOfWeekStr, cep), e);
 		}
 
 
@@ -1207,7 +1221,9 @@ public class CreateInfoProtoUtils {
 				ResourceType rt = ResourceType.valueOf(aStr);
 				pceurpb.setResourceType(rt);
 			} catch(Exception e) {
-				log.info("maybe resource type null. ClanEventPersistentUserReward=" + reward);
+				log.info(String.format(
+					"incorrect resource type. ClanEventPersistentUserReward=%s",
+					reward), e);
 			}
 		}
 
@@ -1295,12 +1311,12 @@ public class CreateInfoProtoUtils {
 
 		if ( null != helpType ) {
 			try {
-				ClanHelpType cht = ClanHelpType.valueOf(helpType);
+				GameActionType cht = GameActionType.valueOf(helpType);
 				chpb.setHelpType(cht);
 
 			} catch(Exception e) {
 				log.info( String.format(
-					"incorrect ClanHelpType. ClanHelp=%s", ch ));
+					"incorrect GameActionType. ClanHelp=%s", ch ));
 			}
 		}
 		chpb.setTimeRequested(ch.getTimeOfEntry().getTime());
@@ -1377,12 +1393,14 @@ public class CreateInfoProtoUtils {
 				ipb.setItemType(it);
 			} catch (Exception e) {
 				log.error(String.format(
-					"can't create enum type. itemType=%s.",
-					str));
+					"can't create enum type. itemType=%s. item=%s",
+					str, item), e);
 			}
 		}
 
 		ipb.setStaticDataId(item.getStaticDataId());
+		ipb.setAmount(item.getAmount());
+		ipb.setSecretGiftChance(item.getSecretGiftChance());
 
 		return ipb.build();
 	}
@@ -1420,6 +1438,44 @@ public class CreateInfoProtoUtils {
 		return uipb.build();
 	}
 
+	public static List<UserItemUsageProto> createUserItemUsageProto(
+		List<ItemForUserUsage> ifuuList)
+	{
+		List<UserItemUsageProto> protos = new ArrayList<UserItemUsageProto>();
+		
+		for (ItemForUserUsage ifuu : ifuuList) {
+			UserItemUsageProto uiup = createUserItemUsageProto(ifuu);
+			protos.add(uiup);
+		}
+		
+		return protos;
+	}
+	
+	public static UserItemUsageProto createUserItemUsageProto(ItemForUserUsage ifuu) {
+		UserItemUsageProto.Builder uiupb = UserItemUsageProto.newBuilder();
+		uiupb.setUsageId(ifuu.getId());
+		uiupb.setUserId(ifuu.getUserId());
+		uiupb.setItemId(ifuu.getItemId());
+		Timestamp toe = new Timestamp(ifuu.getTimeOfEntry().getTime());
+		uiupb.setTimeOfEntry(toe.getTime());
+		uiupb.setUserDataId(ifuu.getUserDataId());
+		
+		String str = ifuu.getActionType();
+		if (null != str) {
+			try {
+				GameActionType gat = GameActionType.valueOf(str);
+				uiupb.setActionType(gat);
+			} catch (Exception e) {
+				log.error(String.format(
+					"can't create enum type. actionType=%s. itemForUserUsage=%s",
+					str, ifuu), e);
+			}
+		}
+		
+		return uiupb.build();
+	}
+	
+	
 	/**MiniJobConfig.proto********************************************/
 	public static MiniJobProto createMiniJobProto(MiniJob mj) {
 		MiniJobProto.Builder mjpb = MiniJobProto.newBuilder();
@@ -1443,7 +1499,8 @@ public class CreateInfoProtoUtils {
 				Quality q = Quality.valueOf(str);
 				mjpb.setQuality(q);
 			} catch(Exception e) {
-				log.error("invalid quality. MiniJob=" + mj);
+				log.error(String.format(
+					"invalid quality. MiniJob=%s", mj), e);
 			}
 		}
 
@@ -1523,7 +1580,8 @@ public class CreateInfoProtoUtils {
 		if (null != aStr) {
 			mpb.setEvolutionGroup(aStr);
 		} else {
-			log.error("monster has no evolutionGroup, aMonster=" + aMonster);
+			log.error(String.format(
+				"monster has no evolutionGroup, aMonster=%s", aMonster));
 		}
 		aStr = aMonster.getMonsterGroup();
 		if (null != aStr) {
@@ -1534,7 +1592,9 @@ public class CreateInfoProtoUtils {
 			Quality mq = Quality.valueOf(monsterQuality);
 			mpb.setQuality(mq);
 		} catch (Exception e) {
-			log.error("invalid monster quality. monster=" + aMonster);
+			log.error(String.format(
+				"invalid monster quality. monster=%s",
+				aMonster), e);
 		}
 		mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
 		aStr = aMonster.getDisplayName(); 
@@ -1547,7 +1607,9 @@ public class CreateInfoProtoUtils {
 			Element me = Element.valueOf(monsterElement);
 			mpb.setMonsterElement(me);
 		} catch (Exception e){
-			log.error("invalid monster element. monster=" + aMonster);
+			log.error(String.format(
+				"invalid monster element. monster=%s",
+				aMonster), e);
 		}
 		aStr = aMonster.getImagePrefix(); 
 		if (null != aStr) {
@@ -1865,7 +1927,7 @@ public class CreateInfoProtoUtils {
 			mbdpb.setDialogueType(type);
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not create DialogueType enum %s", aStr), e);
+				"incorrect DialogueType enum. MonsterBattleDialogue=%s", mbd), e);
 		}
 
 		mbdpb.setDialogue(mbd.getDialogue());
@@ -1897,7 +1959,7 @@ public class CreateInfoProtoUtils {
 				ppb.setGameType(type);
 			} catch (Exception e) {
 				log.error(String.format(
-					"could not create GameType enum %s", str), e);
+					"incorrect GameType enum. Prerequisite=%s", prereq), e);
 			}
 
 		}
@@ -1911,7 +1973,7 @@ public class CreateInfoProtoUtils {
 				ppb.setPrereqGameType(type);
 			} catch (Exception e) {
 				log.error(String.format(
-					"could not create prereq GameType enum %s", str), e);
+					"incorrect prereq GameType enum. Prerequisite=%s", prereq), e);
 			}
 
 		}
@@ -1998,7 +2060,8 @@ public class CreateInfoProtoUtils {
 				Element me = Element.valueOf(str);
 				builder.setMonsterElement(me);
 			} catch (Exception e) {
-				log.error("invalid monsterElement. quest=" + quest);
+				log.error(String.format(
+					"invalid monsterElement. quest=%s", quest), e);
 			}
 		}
 
@@ -2039,8 +2102,9 @@ public class CreateInfoProtoUtils {
 				QuestJobType qjt = QuestJobType.valueOf(aStr);
 				qjpb.setQuestJobType(qjt);
 			} catch (Exception e) {
-				log.error("incorrect QuestJobType: " + aStr +
-					". QuestJob=" + qj);
+				log.error(String.format(
+					"incorrect QuestJobType. QuestJob=%s",
+					qj), e);
 			}
 		}
 
@@ -2168,8 +2232,8 @@ public class CreateInfoProtoUtils {
 				spb.setType(st);
 			} catch (Exception e) {
 				log.error(String.format(
-					"can't create enum type. skillType=%s.",
-					str));
+					"incorrect enum SkillType. Skill=%s.",
+					s), e);
 			}
 		}
 
@@ -2180,8 +2244,8 @@ public class CreateInfoProtoUtils {
 				spb.setActivationType(st);
 			} catch (Exception e) {
 				log.error(String.format(
-					"can't create enum type. skillType=%s.",
-					str));
+					"incorrect enum SkillActivationType. Skill=%s.",
+					s), e);
 			}
 		}
 
@@ -2254,7 +2318,8 @@ public class CreateInfoProtoUtils {
 			StructType st = StructType.valueOf(aStr);
 			builder.setStructType(st);
 		} catch (Exception e) {
-			log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
+			log.error(String.format(
+				"incorrect enum structType. Structure=%s", s), e);
 		}
 
 		aStr = s.getBuildResourceType();
@@ -2262,7 +2327,8 @@ public class CreateInfoProtoUtils {
 			ResourceType rt = ResourceType.valueOf(aStr);
 			builder.setBuildResourceType(rt);
 		} catch (Exception e) {
-			log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
+			log.error(String.format(
+				"incorrect enum ResourceType. Structure=%s", s), e);
 		}
 
 		builder.setBuildCost(s.getBuildCost());
@@ -2322,8 +2388,8 @@ public class CreateInfoProtoUtils {
 			ResourceType rt = ResourceType.valueOf(aStr);
 			rgpb.setResourceType(rt);
 		} catch (Exception e) {
-			log.error("can't create enum type. resourceType=" + aStr +
-				". resourceGenerator=" + srg);
+			log.error(String.format(
+				"incorrect enum ResourceType. ResourceGenerator=%s", srg), e);
 		}
 
 		rgpb.setProductionRate(srg.getProductionRate());
@@ -2346,8 +2412,9 @@ public class CreateInfoProtoUtils {
 			ResourceType rt = ResourceType.valueOf(aStr);
 			rspb.setResourceType(rt);
 		} catch (Exception e) {
-			log.error("can't create enum type. resourceType=" + aStr +
-				". resourceStorage=" + srs);
+			log.error(String.format(
+				"incorrect enum ResourceType. resourceStorage=%s",
+				srs), e);
 		}
 
 		rspb.setCapacity(srs.getCapacity());
@@ -2460,7 +2527,8 @@ public class CreateInfoProtoUtils {
 			StructOrientation so = StructOrientation.valueOf(orientation);
 			builder.setOrientation(so);
 		} catch (Exception e) {
-			log.error("invalid StructureForUser orientation. structureForUser=" + userStruct);
+			log.error(String.format(
+				"incorrect orientation. structureForUser=%s", userStruct), e);
 		}
 
 		if (userStruct.getPurchaseTime() != null) {
@@ -2508,7 +2576,8 @@ public class CreateInfoProtoUtils {
 			ResourceType rt = ResourceType.valueOf(aStr);
 			ob.setRemovalCostType(rt);
 		} catch (Exception e) {
-			log.info("incorrect resource type name in db. name=" + aStr, e);
+			log.info(String.format(
+				"incorrect ResourceType (RemovalCostType). Obstacle=%s", ob), e);
 		}
 
 		ob.setCost(o.getCost());
@@ -2550,8 +2619,14 @@ public class CreateInfoProtoUtils {
 		CoordinateProto cProto = createCoordinateProtoFromCoordinatePair(cp); 
 		mopb.setCoordinate(cProto);
 
-		StructOrientation structOrientation = StructOrientation.valueOf(orientation);
-		mopb.setOrientation(structOrientation);
+		try {
+			StructOrientation structOrientation = StructOrientation.valueOf(orientation);
+			mopb.setOrientation(structOrientation);
+		} catch (Exception e) {
+			log.info(String.format(
+				"incorrect StructOrientation. ObstacleId=%s, posX=%s, posY=%s, orientation=%s",
+				obstacleId, posX, posY, orientation), e);
+		}
 
 		return mopb.build();
 	}
@@ -2605,8 +2680,8 @@ public class CreateInfoProtoUtils {
 				ecpb.setQualityUnlocked(quality);
 			} catch (Exception e) {
 				log.error(String.format(
-					"incorrect QualityUnlocked=%s",
-					str));
+					"incorrect QualityUnlocked. EvoChamber=%s",
+					sec), e);
 			}
 		}
 		ecpb.setEvoTierUnlocked(sec.getEvoTierUnlocked());
@@ -2837,7 +2912,8 @@ public class CreateInfoProtoUtils {
 			MonsterType mt = MonsterType.valueOf(tsmMonsterType);
 			bldr.setMonsterType(mt);
 		} catch (Exception e) {
-			log.error("monster type incorrect, tsm=" + tsm);
+			log.error(String.format(
+				"incorrect monsterType, tsm=%s", tsm), e);
 		}
 		bldr.setCashReward(tsfu.getCashGained());
 		bldr.setOilReward(tsfu.getOilGained());
@@ -2852,8 +2928,8 @@ public class CreateInfoProtoUtils {
 			//check if item exists
 			Item item = ItemRetrieveUtils.getItemForId(itemId);
 			if (null == item) {
-				throw new RuntimeException("nonexistent itemId for userTask=" +
-					tsfu);
+				throw new RuntimeException(
+					String.format("nonexistent itemId for userTask=%s", tsfu));
 			}
 			bldr.setItemId(itemId);
 		}
@@ -2903,7 +2979,9 @@ public class CreateInfoProtoUtils {
 			DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
 			pepb.setDayOfWeek(dayOfWeek);
 		} catch (Exception e) {
-			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t event=" + event);
+			log.error(String.format(
+				"incorrect enum DayOfWeek. EventPersistent=%s",
+				 event), e);
 		}
 
 		pepb.setStartHour(startHour);
@@ -2915,14 +2993,17 @@ public class CreateInfoProtoUtils {
 			EventType typ = EventType.valueOf(eventTypeStr);
 			pepb.setType(typ);
 		} catch (Exception e) {
-			log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
+			log.error(String.format(
+				"incorrect enum EventType. EventPersistent=%s",
+				event), e);
 		}
 		try {
 			Element elem = Element.valueOf(monsterElem);
 			pepb.setMonsterElement(elem);
 		} catch (Exception e) {
-			log.error("can't create enum type. monster elem=" + monsterElem + 
-				".\t event=" + event);
+			log.error(String.format(
+				"incorrect enum MonsterElement. %s",
+				event), e);
 		}
 
 		return pepb.build();
@@ -2958,7 +3039,8 @@ public class CreateInfoProtoUtils {
 			Element me = Element.valueOf(str);
 			tmepb.setElement(me);
 		} catch (Exception e){
-			log.error("invalid element. task map element=" + tme);
+			log.error(String.format(
+				"invalid element. TaskMapElement=%s", tme), e);
 		}
 
 		tmepb.setBoss(tme.isBoss());

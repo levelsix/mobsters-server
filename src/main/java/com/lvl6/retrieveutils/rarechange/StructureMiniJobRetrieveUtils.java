@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureMiniJob> structIdsToMiniJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_MINI_JOB;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_MINI_JOB_CONFIG;
 
   public static Map<Integer, StructureMiniJob> getStructIdsToMiniJobs() {
     log.debug("retrieving all StructureMiniJob data");

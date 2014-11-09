@@ -25,7 +25,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, QuestJob>> questIdsToQuestJobIdsToJobs;
   private static Map<Integer, Map<Integer, QuestJob>> cityIdToQuestJobIdToQuestJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_CONFIG;
 
   //CONTROLLER LOGIC******************************************************************
   public static List<Integer> getQuestJobIdsForQuestIds(List<Integer> questIdList) {
@@ -191,6 +191,16 @@ import com.lvl6.utils.DBConnection;
     
     int cityId = rs.getInt(DBConstants.QUEST_JOB__CITY_ID);
     int cityAssetNum = rs.getInt(DBConstants.QUEST_JOB__CITY_ASSET_NUM);
+    
+    if (null != questJobType) {
+    	String newQuestJobType = questJobType.trim().toUpperCase();
+    	if (!questJobType.equals(newQuestJobType)) {
+    		log.error(String.format(
+    			"questJobType incorrect: %s, id=%s",
+    			questJobType, id));
+    		questJobType = newQuestJobType;
+    	}
+    }
     
     QuestJob quest = new QuestJob(id, questId, questJobType, description,
     		staticDataId, quantity, priority, cityId, cityAssetNum);

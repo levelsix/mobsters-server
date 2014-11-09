@@ -26,7 +26,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, BoosterDisplayItem>> 
       boosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_DISPLAY_ITEM;
+  private static final String TABLE_NAME = DBConstants.TABLE_BOOSTER_DISPLAY_ITEM_CONFIG;
 
   public static Map<Integer, BoosterDisplayItem> getBoosterDisplayItemIdsToBoosterDisplayItems() {
     log.debug("retrieving all BoosterDisplayItems data map");
@@ -156,6 +156,16 @@ import com.lvl6.utils.DBConnection;
     String monsterQuality = rs.getString(DBConstants.BOOSTER_DISPLAY_ITEM__MONSTER_QUALITY);
     int gemReward = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__GEM_REWARD);
     int quantity = rs.getInt(DBConstants.BOOSTER_DISPLAY_ITEM__QUANTITY);
+    
+    if (null != monsterQuality) {
+    	String newMonsterQuality = monsterQuality.trim().toUpperCase();
+    	if (!monsterQuality.equals(newMonsterQuality)) {
+    		log.error(String.format(
+    			"monsterQuality incorrect: %s, id=%s",
+    			monsterQuality, id));
+    		monsterQuality = newMonsterQuality;
+    	}
+    }
     
     BoosterDisplayItem boosterDisplayItem = new BoosterDisplayItem(id,
     		boosterPackId, isMonster, isComplete, monsterQuality, gemReward,

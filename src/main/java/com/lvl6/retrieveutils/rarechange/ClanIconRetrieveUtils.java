@@ -22,7 +22,7 @@ public class ClanIconRetrieveUtils {
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, ClanIcon> clanIconIdsToClanIcons;
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_ICON;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_ICON_CONFIG;
   
 
 	//CONTROLLER LOGIC******************************************************************

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.lvl6.utils.utilmethods.StringUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -434,6 +435,16 @@ import com.lvl6.utils.DBConnection;
     int userId = rs.getInt(DBConstants.CLAN_FOR_USER__USER_ID);
     int clanId = rs.getInt(DBConstants.CLAN_FOR_USER__CLAN_ID);
     String status = rs.getString(DBConstants.CLAN_FOR_USER__STATUS);
+    
+    if (null != status) {
+    	String newStatus = status.trim().toUpperCase();
+    	if (!status.equals(newStatus)) {
+    		log.error(String.format(
+    			"UserClanStatus incorrect: %s, userId=%s, clanId=%s",
+    			status, userId, clanId));
+    		status = newStatus;
+    	}
+    }
 
     Date requestTime = null;
     try {

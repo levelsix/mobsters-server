@@ -43,8 +43,10 @@ enum Quality {
 	
 	EVO = 8; //MONSTERS USED FOR EVOLVING
 }
-
-enum ClanHelpType {
+//TODO: Consider redesigning this enum type. At the moment, enum
+//is used in ClanHelp (deals only with speeding up actions) and
+//items ("superset" of ClanHelp, so not just speeding up actions).
+enum GameActionType {
 	NO_HELP = 1;
 	UPGRADE_STRUCT = 2;
 	HEAL = 3;

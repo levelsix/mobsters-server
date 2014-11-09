@@ -22,7 +22,7 @@ public class MonsterRetrieveUtils {
 
   private static Map<Integer, Monster> monsterIdsToMonsters;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_CONFIG;
 
   public static Map<Integer, Monster> getMonsterIdsToMonsters() {
     log.debug("retrieving all monsteres data map");
@@ -149,6 +149,36 @@ public class MonsterRetrieveUtils {
     int baseOffensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_OFFENSIVE_SKILL_ID);
     int baseDefensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_DEFENSIVE_SKILL_ID);
     
+    if (null != quality) {
+    	String newQuality = quality.trim().toUpperCase();
+    	if (!quality.equals(newQuality)) {
+    		log.error(String.format(
+    			"incorrect monster quality, %s, id=%s",
+    			quality, id));
+    		quality = newQuality;
+    	}
+    }
+    
+    if (null != element) {
+    	String newElement = element.trim().toUpperCase();
+    	if (!element.equals(newElement)) {
+    		log.error(String.format(
+    			"incorrect monster element, %s, id=%s",
+    			element, id));
+    		element = newElement;
+    	}
+    }
+    
+    if (null != animationType) {
+    	String newAnimationType = animationType.trim().toUpperCase();
+    	if (!animationType.equals(newAnimationType)) {
+    		log.error(String.format(
+    			"incorrect monster AnimationType, %s, id=%s",
+    			animationType, id));
+    		animationType = newAnimationType;
+    	}
+    }
+    
     Monster monster = new Monster(id, evolutionGroup, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
     		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
@@ -158,14 +188,6 @@ public class MonsterRetrieveUtils {
     		atkAnimationRepeatedFramesEnd, shorterName, shadowScaleFactor,
     		baseOffensiveSkillId, baseDefensiveSkillId);
     
-    if (null != animationType) {
-    	String newAnimationType = animationType.trim().toUpperCase();
-    	if (!animationType.equals(newAnimationType)) {
-    		log.error("monster's animation type has whitespace or is uncapitalized. actual=" +
-    				animationType + "\t expected=" + newAnimationType);
-    		monster.setAnimationType(newAnimationType);
-    	}
-    }
     
     return monster;
   }

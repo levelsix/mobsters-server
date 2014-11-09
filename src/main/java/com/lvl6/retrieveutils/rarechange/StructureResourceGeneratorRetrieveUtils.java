@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureResourceGenerator> structIdsToResourceGenerators;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_GENERATOR;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_RESOURCE_GENERATOR_CONFIG;
 
   public static Map<Integer, StructureResourceGenerator> getStructIdsToResourceGenerators() {
     log.debug("retrieving all structs data");
@@ -114,21 +114,19 @@ import com.lvl6.utils.DBConnection;
     float productionRate = rs.getFloat(DBConstants.STRUCTURE_RESOURCE_GENERATOR__PRODUCTION_RATE);
     int capacity = rs.getInt(DBConstants.STRUCTURE_RESOURCE_GENERATOR__CAPACITY);
     
+    if (null != resourceTypeGenerated) {
+    	String newResourceTypeGenerated = resourceTypeGenerated.trim().toUpperCase();
+    	if (!resourceTypeGenerated.equals(newResourceTypeGenerated)) {
+    		log.error(String.format(
+    			"incorrect ResourceType. %s, structId=%s",
+    			resourceTypeGenerated, structId));
+    		resourceTypeGenerated = newResourceTypeGenerated;
+    	}
+    }
+    
     StructureResourceGenerator srg = new StructureResourceGenerator(structId,
     		resourceTypeGenerated, productionRate, capacity);
     
-    if (null != resourceTypeGenerated) {
-    	String newResourceTypeGenerated = resourceTypeGenerated.trim();
-    	newResourceTypeGenerated = newResourceTypeGenerated.toUpperCase();
-    	if (!resourceTypeGenerated.equals(newResourceTypeGenerated)) {
-    		log.error("string for resource type is incorrect. is=" + resourceTypeGenerated +
-    				"\t (if spelled correctly) expected=" + newResourceTypeGenerated +
-    				"\t resourceGenerator obj=" + srg);
-    		srg.setResourceTypeGenerated(newResourceTypeGenerated);
-    	}
-    } else {
-    	log.error("resourceStorage obj's resource type is null!!!. obj=" + srg);
-    }
     
     return srg;
   }

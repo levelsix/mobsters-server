@@ -32,7 +32,7 @@ public class TaskStageMonsterRetrieveUtils {
 
 	private static boolean reassignedSkills = false;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
+	private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER_CONFIG;
 
 	public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
 		log.debug("retrieving all task stage monster data map");

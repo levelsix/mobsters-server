@@ -199,7 +199,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private StructureForUser convertRSRowToUserStruct(ResultSet rs) throws SQLException {
-    int i = 1;
     int id = rs.getInt(DBConstants.STRUCTURE_FOR_USER__ID);
     int userId = rs.getInt(DBConstants.STRUCTURE_FOR_USER__USER_ID);
     int structId = rs.getInt(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID);
@@ -217,6 +216,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean isComplete = rs.getBoolean(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE);
     String orientation = rs.getString(DBConstants.STRUCTURE_FOR_USER__ORIENTATION);
     int fbInviteStructLvl = rs.getInt(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL);
+    
+    if (null != orientation) {
+    	String newOrientation = orientation.trim().toUpperCase();
+    	if (!orientation.equals(newOrientation)) {
+    		log.error(String.format(
+    			"orientation incorrect: %s, id=%s",
+    			orientation, id));
+    		orientation = newOrientation;
+    	}
+    }
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
     		purchaseTime, isComplete, orientation, fbInviteStructLvl);

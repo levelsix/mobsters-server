@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 	private static Map<Integer, Map<Integer, SkillProperty>> skillIdsToIdsToSkillPropertys;
 	private static Map<Integer, SkillProperty> skillPropertyIdsToSkillPropertys;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_PROPERTY;
+	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_PROPERTY_CONFIG;
 
 	public static Map<Integer, Map<Integer, SkillProperty>> getSkillIdsToIdsToSkillPropertys() {
 		log.debug("retrieving all skillIds to SkillProperty data map");

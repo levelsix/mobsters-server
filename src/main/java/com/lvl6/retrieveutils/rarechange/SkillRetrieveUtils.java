@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Map<Integer, Skill> idsToSkills;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_SKILL;
+	private static final String TABLE_NAME = DBConstants.TABLE_SKILL_CONFIG;
 
 	public static Map<Integer, Skill> getIdsToSkills() {
 		log.debug("retrieving all Skills data map");
@@ -106,6 +106,26 @@ import com.lvl6.utils.DBConnection;
 		if (rs.wasNull()) {
 			succId = 0;
 		}
+		
+		if (null != type) {
+	    	String newType = type.trim().toUpperCase();
+	    	if (!type.equals(newType)) {
+	    		log.error(String.format(
+	    			"type incorrect: %s, id=%s",
+	    			type, id));
+	    		type = newType;
+	    	}
+	    }
+		
+		if (null != activationType) {
+	    	String newActivationType = activationType.trim().toUpperCase();
+	    	if (!activationType.equals(newActivationType)) {
+	    		log.error(String.format(
+	    			"activationType incorrect: %s, id=%s",
+	    			activationType, id));
+	    		activationType = newActivationType;
+	    	}
+	    }
 		
 		Skill skill = new Skill(id, name, orbCost, type, activationType,
 			predecId, succId, desc, iconImgName, logoImgName);

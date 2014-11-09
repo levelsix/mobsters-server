@@ -26,7 +26,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, Map<Integer, ClanRaidStageMonster>> crsIdsToMonsterNumsToMonsters;
   private static Map<Integer, ClanRaidStageMonster> idsToMonsters;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_MONSTER;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_MONSTER_CONFIG;
   
   public static Map<Integer, ClanRaidStageMonster> getMonsterNumsToMonstersForStageId(int crsId) {
   	log.debug("retrieving all monster num to clan raid stage monster data map");

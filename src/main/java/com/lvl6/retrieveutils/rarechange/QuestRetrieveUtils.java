@@ -28,7 +28,7 @@ import com.lvl6.utils.QuestGraph;
   private static Map<Integer, Quest> questIdsToQuests;
   private static QuestGraph questGraph;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUEST;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_CONFIG;
 
   public static Map<Integer, Quest> getQuestIdsToQuests() {
     log.debug("retrieving all quest data");
@@ -167,6 +167,16 @@ import com.lvl6.utils.QuestGraph;
     String carrotId = rs.getString(DBConstants.QUEST__CARROT_ID);
 //    boolean isAchievement = rs.getBoolean(DBConstants.);
     String monsterElement = rs.getString(DBConstants.QUEST__MONSTER_ELEMENT);
+    
+    if (null != monsterElement) {
+    	String newMonsterElement = monsterElement.trim().toUpperCase();
+    	if (!monsterElement.equals(newMonsterElement)) {
+    		log.error(String.format(
+    			"monsterElement incorrect: %s, id=%s",
+    			monsterElement, id));
+    		monsterElement = newMonsterElement;
+    	}
+    }
     
     Quest quest = new Quest(id, questName, description, doneResponse,
     		acceptDialogue, cashReward, oilReward, gemReward, expReward,

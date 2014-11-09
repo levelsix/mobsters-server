@@ -24,7 +24,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, LockBoxEvent> lockBoxEventIdsToLockBoxEvents;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_LOCK_BOX_EVENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_LOCK_BOX_EVENT_CONFIG;
 
   public static Map<Integer, LockBoxEvent> getLockBoxEventIdsToLockBoxEvents() {
     log.debug("retrieving all lockBoxEvents data map");

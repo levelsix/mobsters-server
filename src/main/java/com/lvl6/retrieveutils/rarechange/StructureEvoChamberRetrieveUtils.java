@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureEvoChamber> structIdsToEvoChambers;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER_CONFIG;
 
   public static Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
     log.debug("retrieving all structs data");
@@ -112,6 +112,16 @@ import com.lvl6.utils.DBConnection;
     int structId = rs.getInt(DBConstants.STRUCTURE_EVO__STRUCT_ID);
     String qualityUnlocked = rs.getString(DBConstants.STRUCTURE_EVO__QUALITY_UNLOCKED);
     int evoTierUnlocked = rs.getInt(DBConstants.STRUCTURE_EVO__EVO_TIER_UNLOCKED);
+    
+    if (null != qualityUnlocked) {
+    	String newQualityUnlocked = qualityUnlocked.trim().toUpperCase();
+    	if (!qualityUnlocked.equals(newQualityUnlocked)) {
+    		log.error(String.format(
+    			"qualityUnlocked incorrect: %s, structId=%s",
+    			qualityUnlocked, structId));
+    		qualityUnlocked = newQualityUnlocked;
+    	}
+    }
     
     return new StructureEvoChamber(structId, qualityUnlocked, evoTierUnlocked);
   }

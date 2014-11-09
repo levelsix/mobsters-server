@@ -14827,13 +14827,13 @@ public final class ClanProto {
     long getUserDataId();
 
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
      */
     boolean hasHelpType();
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
      */
-    com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType();
+    com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType();
 
     /**
      * <code>optional int64 timeRequested = 6;</code>
@@ -14885,10 +14885,18 @@ public final class ClanProto {
 
     /**
      * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+     * </pre>
      */
     boolean hasStaticDataId();
     /**
      * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+     * </pre>
      */
     int getStaticDataId();
   }
@@ -14978,7 +14986,7 @@ public final class ClanProto {
             }
             case 40: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.GameActionType value = com.lvl6.proto.SharedEnumConfigProto.GameActionType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
@@ -15146,17 +15154,17 @@ public final class ClanProto {
     }
 
     public static final int HELPTYPE_FIELD_NUMBER = 5;
-    private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_;
+    private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_;
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
      */
     public boolean hasHelpType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+    public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
       return helpType_;
     }
 
@@ -15239,12 +15247,20 @@ public final class ClanProto {
     private int staticDataId_;
     /**
      * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+     * </pre>
      */
     public boolean hasStaticDataId() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional int32 staticDataId = 10;</code>
+     *
+     * <pre>
+     *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+     * </pre>
      */
     public int getStaticDataId() {
       return staticDataId_;
@@ -15255,7 +15271,7 @@ public final class ClanProto {
       clanId_ = 0;
       mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userDataId_ = 0L;
-      helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       timeRequested_ = 0L;
       maxHelpers_ = 0;
       helperIds_ = java.util.Collections.emptyList();
@@ -15493,7 +15509,7 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         userDataId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         bitField0_ = (bitField0_ & ~0x00000010);
         timeRequested_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -15886,23 +15902,23 @@ public final class ClanProto {
         return this;
       }
 
-      private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
        */
       public boolean hasHelpType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+      public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
         return helpType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
        */
-      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value) {
+      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -15912,11 +15928,11 @@ public final class ClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 5;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 5;</code>
        */
       public Builder clearHelpType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         onChanged();
         return this;
       }
@@ -16102,18 +16118,30 @@ public final class ClanProto {
       private int staticDataId_ ;
       /**
        * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+       * </pre>
        */
       public boolean hasStaticDataId() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+       * </pre>
        */
       public int getStaticDataId() {
         return staticDataId_;
       }
       /**
        * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+       * </pre>
        */
       public Builder setStaticDataId(int value) {
         bitField0_ |= 0x00000200;
@@ -16123,6 +16151,10 @@ public final class ClanProto {
       }
       /**
        * <code>optional int32 staticDataId = 10;</code>
+       *
+       * <pre>
+       *extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
+       * </pre>
        */
       public Builder clearStaticDataId() {
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -16147,13 +16179,13 @@ public final class ClanProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
      */
     boolean hasHelpType();
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
      */
-    com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType();
+    com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType();
 
     /**
      * <code>optional int64 userDataId = 2;</code>
@@ -16239,7 +16271,7 @@ public final class ClanProto {
             }
             case 8: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.GameActionType value = com.lvl6.proto.SharedEnumConfigProto.GameActionType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
@@ -16299,17 +16331,17 @@ public final class ClanProto {
 
     private int bitField0_;
     public static final int HELPTYPE_FIELD_NUMBER = 1;
-    private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_;
+    private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_;
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
      */
     public boolean hasHelpType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+     * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
      */
-    public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+    public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
       return helpType_;
     }
 
@@ -16352,7 +16384,7 @@ public final class ClanProto {
     }
 
     private void initFields() {
-      helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       userDataId_ = 0L;
       staticDataId_ = 0;
     }
@@ -16520,7 +16552,7 @@ public final class ClanProto {
 
       public Builder clear() {
         super.clear();
-        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         bitField0_ = (bitField0_ & ~0x00000001);
         userDataId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -16618,23 +16650,23 @@ public final class ClanProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.SharedEnumConfigProto.ClanHelpType helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+      private com.lvl6.proto.SharedEnumConfigProto.GameActionType helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
        */
       public boolean hasHelpType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
        */
-      public com.lvl6.proto.SharedEnumConfigProto.ClanHelpType getHelpType() {
+      public com.lvl6.proto.SharedEnumConfigProto.GameActionType getHelpType() {
         return helpType_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
        */
-      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.ClanHelpType value) {
+      public Builder setHelpType(com.lvl6.proto.SharedEnumConfigProto.GameActionType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -16644,11 +16676,11 @@ public final class ClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ClanHelpType helpType = 1;</code>
+       * <code>optional .com.lvl6.proto.GameActionType helpType = 1;</code>
        */
       public Builder clearHelpType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        helpType_ = com.lvl6.proto.SharedEnumConfigProto.ClanHelpType.NO_HELP;
+        helpType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         onChanged();
         return this;
       }
@@ -18692,25 +18724,25 @@ public final class ClanProto {
       "EventRaidHistoryProto\022\016\n\006userId\030\001 \001(\005\022\r\n" +
       "\005crDmg\030\002 \001(\005\022\021\n\tclanCrDmg\030\003 \001(\005\"I\n\rClanI" +
       "conProto\022\022\n\nclanIconId\030\001 \001(\005\022\017\n\007imgName\030" +
-      "\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010\"\210\002\n\rClanHelpP" +
+      "\002 \001(\t\022\023\n\013isAvailable\030\003 \001(\010\"\212\002\n\rClanHelpP" +
       "roto\022\022\n\nclanHelpId\030\001 \001(\003\022\016\n\006clanId\030\002 \001(\005" +
       "\022-\n\003mup\030\003 \001(\0132 .com.lvl6.proto.MinimumUs",
-      "erProto\022\022\n\nuserDataId\030\004 \001(\003\022.\n\010helpType\030" +
-      "\005 \001(\0162\034.com.lvl6.proto.ClanHelpType\022\025\n\rt" +
-      "imeRequested\030\006 \001(\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\021" +
-      "\n\thelperIds\030\010 \003(\005\022\014\n\004open\030\t \001(\010\022\024\n\014stati" +
-      "cDataId\030\n \001(\005\"o\n\023ClanHelpNoticeProto\022.\n\010" +
-      "helpType\030\001 \001(\0162\034.com.lvl6.proto.ClanHelp" +
-      "Type\022\022\n\nuserDataId\030\002 \001(\003\022\024\n\014staticDataId" +
-      "\030\003 \001(\005\"l\n\017ClanInviteProto\022\020\n\010inviteId\030\001 " +
-      "\001(\005\022\016\n\006userId\030\002 \001(\005\022\021\n\tinviterId\030\003 \001(\005\022\016" +
-      "\n\006clanId\030\004 \001(\005\022\024\n\014timeOfInvite\030\005 \001(\003\"~\n\r",
-      "ClanDataProto\0228\n\tclanChats\030\001 \003(\0132%.com.l" +
-      "vl6.proto.GroupChatMessageProto\0223\n\014clanH" +
-      "elpings\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpP" +
-      "roto*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJU" +
-      "NIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016" +
-      "\n\nREQUESTING\020\nB\013B\tClanProto"
+      "erProto\022\022\n\nuserDataId\030\004 \001(\003\0220\n\010helpType\030" +
+      "\005 \001(\0162\036.com.lvl6.proto.GameActionType\022\025\n" +
+      "\rtimeRequested\030\006 \001(\003\022\022\n\nmaxHelpers\030\007 \001(\005" +
+      "\022\021\n\thelperIds\030\010 \003(\005\022\014\n\004open\030\t \001(\010\022\024\n\014sta" +
+      "ticDataId\030\n \001(\005\"q\n\023ClanHelpNoticeProto\0220" +
+      "\n\010helpType\030\001 \001(\0162\036.com.lvl6.proto.GameAc" +
+      "tionType\022\022\n\nuserDataId\030\002 \001(\003\022\024\n\014staticDa" +
+      "taId\030\003 \001(\005\"l\n\017ClanInviteProto\022\020\n\010inviteI" +
+      "d\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\021\n\tinviterId\030\003 \001" +
+      "(\005\022\016\n\006clanId\030\004 \001(\005\022\024\n\014timeOfInvite\030\005 \001(\003",
+      "\"~\n\rClanDataProto\0228\n\tclanChats\030\001 \003(\0132%.c" +
+      "om.lvl6.proto.GroupChatMessageProto\0223\n\014c" +
+      "lanHelpings\030\002 \003(\0132\035.com.lvl6.proto.ClanH" +
+      "elpProto*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021" +
+      "\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER" +
+      "\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
