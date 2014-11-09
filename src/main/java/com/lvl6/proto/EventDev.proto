@@ -14,7 +14,10 @@ message DevRequestProto {
 	optional DevRequest devRequest = 2;
 	
 	//could be for cash, oil, and or gems, or monster id
-	optional int32 num = 3;
+	//optional int32 num = 3;
+	optional int32 staticDataId = 3;
+	optional int32 quantity = 4;
+	
 }
 
 																						//DONE
