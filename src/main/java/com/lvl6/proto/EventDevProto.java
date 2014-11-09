@@ -35,21 +35,32 @@ public final class EventDevProto {
     com.lvl6.proto.DevProto.DevRequest getDevRequest();
 
     /**
-     * <code>optional int32 num = 3;</code>
+     * <code>optional int32 staticDataId = 3;</code>
      *
      * <pre>
      *could be for cash, oil, and or gems, or monster id
+     *optional int32 num = 3;
      * </pre>
      */
-    boolean hasNum();
+    boolean hasStaticDataId();
     /**
-     * <code>optional int32 num = 3;</code>
+     * <code>optional int32 staticDataId = 3;</code>
      *
      * <pre>
      *could be for cash, oil, and or gems, or monster id
+     *optional int32 num = 3;
      * </pre>
      */
-    int getNum();
+    int getStaticDataId();
+
+    /**
+     * <code>optional int32 quantity = 4;</code>
+     */
+    boolean hasQuantity();
+    /**
+     * <code>optional int32 quantity = 4;</code>
+     */
+    int getQuantity();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DevRequestProto}
@@ -129,7 +140,12 @@ public final class EventDevProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              num_ = input.readInt32();
+              staticDataId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              quantity_ = input.readInt32();
               break;
             }
           }
@@ -208,33 +224,51 @@ public final class EventDevProto {
       return devRequest_;
     }
 
-    public static final int NUM_FIELD_NUMBER = 3;
-    private int num_;
+    public static final int STATICDATAID_FIELD_NUMBER = 3;
+    private int staticDataId_;
     /**
-     * <code>optional int32 num = 3;</code>
+     * <code>optional int32 staticDataId = 3;</code>
      *
      * <pre>
      *could be for cash, oil, and or gems, or monster id
+     *optional int32 num = 3;
      * </pre>
      */
-    public boolean hasNum() {
+    public boolean hasStaticDataId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 num = 3;</code>
+     * <code>optional int32 staticDataId = 3;</code>
      *
      * <pre>
      *could be for cash, oil, and or gems, or monster id
+     *optional int32 num = 3;
      * </pre>
      */
-    public int getNum() {
-      return num_;
+    public int getStaticDataId() {
+      return staticDataId_;
+    }
+
+    public static final int QUANTITY_FIELD_NUMBER = 4;
+    private int quantity_;
+    /**
+     * <code>optional int32 quantity = 4;</code>
+     */
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 quantity = 4;</code>
+     */
+    public int getQuantity() {
+      return quantity_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       devRequest_ = com.lvl6.proto.DevProto.DevRequest.RESET_ACCOUNT;
-      num_ = 0;
+      staticDataId_ = 0;
+      quantity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -256,7 +290,10 @@ public final class EventDevProto {
         output.writeEnum(2, devRequest_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, num_);
+        output.writeInt32(3, staticDataId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, quantity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -277,7 +314,11 @@ public final class EventDevProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, num_);
+          .computeInt32Size(3, staticDataId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, quantity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -405,8 +446,10 @@ public final class EventDevProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         devRequest_ = com.lvl6.proto.DevProto.DevRequest.RESET_ACCOUNT;
         bitField0_ = (bitField0_ & ~0x00000002);
-        num_ = 0;
+        staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        quantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -450,7 +493,11 @@ public final class EventDevProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.num_ = num_;
+        result.staticDataId_ = staticDataId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.quantity_ = quantity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -473,8 +520,11 @@ public final class EventDevProto {
         if (other.hasDevRequest()) {
           setDevRequest(other.getDevRequest());
         }
-        if (other.hasNum()) {
-          setNum(other.getNum());
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
+        }
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -654,50 +704,86 @@ public final class EventDevProto {
         return this;
       }
 
-      private int num_ ;
+      private int staticDataId_ ;
       /**
-       * <code>optional int32 num = 3;</code>
+       * <code>optional int32 staticDataId = 3;</code>
        *
        * <pre>
        *could be for cash, oil, and or gems, or monster id
+       *optional int32 num = 3;
        * </pre>
        */
-      public boolean hasNum() {
+      public boolean hasStaticDataId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 num = 3;</code>
+       * <code>optional int32 staticDataId = 3;</code>
        *
        * <pre>
        *could be for cash, oil, and or gems, or monster id
+       *optional int32 num = 3;
        * </pre>
        */
-      public int getNum() {
-        return num_;
+      public int getStaticDataId() {
+        return staticDataId_;
       }
       /**
-       * <code>optional int32 num = 3;</code>
+       * <code>optional int32 staticDataId = 3;</code>
        *
        * <pre>
        *could be for cash, oil, and or gems, or monster id
+       *optional int32 num = 3;
        * </pre>
        */
-      public Builder setNum(int value) {
+      public Builder setStaticDataId(int value) {
         bitField0_ |= 0x00000004;
-        num_ = value;
+        staticDataId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 num = 3;</code>
+       * <code>optional int32 staticDataId = 3;</code>
        *
        * <pre>
        *could be for cash, oil, and or gems, or monster id
+       *optional int32 num = 3;
        * </pre>
        */
-      public Builder clearNum() {
+      public Builder clearStaticDataId() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        num_ = 0;
+        staticDataId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int quantity_ ;
+      /**
+       * <code>optional int32 quantity = 4;</code>
+       */
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 quantity = 4;</code>
+       */
+      public int getQuantity() {
+        return quantity_;
+      }
+      /**
+       * <code>optional int32 quantity = 4;</code>
+       */
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000008;
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 quantity = 4;</code>
+       */
+      public Builder clearQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        quantity_ = 0;
         onChanged();
         return this;
       }
@@ -1607,17 +1693,17 @@ public final class EventDevProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventDev.proto\022\016com.lvl6.proto\032\tDev.pr" +
-      "oto\032\022MonsterStuff.proto\032\nUser.proto\"\200\001\n\017" +
+      "oto\032\022MonsterStuff.proto\032\nUser.proto\"\233\001\n\017" +
       "DevRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
       "l6.proto.MinimumUserProto\022.\n\ndevRequest\030" +
-      "\002 \001(\0162\032.com.lvl6.proto.DevRequest\022\013\n\003num" +
-      "\030\003 \001(\005\"\336\001\n\020DevResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022:\n" +
-      "\006status\030\002 \001(\0162*.com.lvl6.proto.DevRespon" +
-      "seProto.DevStatus\0222\n\004fump\030\003 \001(\0132$.com.lv" +
-      "l6.proto.FullUserMonsterProto\"(\n\tDevStat",
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEvent" +
-      "DevProto"
+      "\002 \001(\0162\032.com.lvl6.proto.DevRequest\022\024\n\014sta" +
+      "ticDataId\030\003 \001(\005\022\020\n\010quantity\030\004 \001(\005\"\336\001\n\020De" +
+      "vResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022:\n\006status\030\002 \001(\016" +
+      "2*.com.lvl6.proto.DevResponseProto.DevSt" +
+      "atus\0222\n\004fump\030\003 \001(\0132$.com.lvl6.proto.Full",
+      "UserMonsterProto\"(\n\tDevStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEventDevProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1639,7 +1725,7 @@ public final class EventDevProto {
     internal_static_com_lvl6_proto_DevRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DevRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DevRequest", "Num", });
+        new java.lang.String[] { "Sender", "DevRequest", "StaticDataId", "Quantity", });
     internal_static_com_lvl6_proto_DevResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_DevResponseProto_fieldAccessorTable = new

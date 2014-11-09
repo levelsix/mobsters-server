@@ -947,6 +947,7 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 
+		/*
 		@Override
 		public int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems) {
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
@@ -971,7 +972,7 @@ public class UpdateUtils implements UpdateUtil {
 					tableName, newRows, replaceTheseColumns);
 			
 			return numUpdated;
-		}
+		}*/
 
 		@Override
 		public int updateClanEventPersistentForClanStageStartTime(int clanId,
@@ -1413,6 +1414,31 @@ public class UpdateUtils implements UpdateUtil {
 			relativeParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, quantityChange);
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateItemForUser(List<ItemForUser> ifuList) {
+			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			for(ItemForUser ifu : ifuList) {
+
+				Map<String, Object> aRow = new HashMap<String, Object>();
+				aRow.put(DBConstants.ITEM_FOR_USER__USER_ID, ifu.getUserId());
+				aRow.put(DBConstants.ITEM_FOR_USER__ITEM_ID, ifu.getItemId());
+				aRow.put(DBConstants.ITEM_FOR_USER__QUANTITY, ifu.getQuantity());
+
+				newRows.add(aRow);
+			}
+
+//			int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.ITEM_FOR_USER__QUANTITY);
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
 			
 			return numUpdated;
 		}

@@ -13,6 +13,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -215,4 +216,6 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUpdateClanInvite(int userId,
 		int inviterId, int clanId, Timestamp timeOfInvite);
+	
+	public abstract List<Long> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
 }

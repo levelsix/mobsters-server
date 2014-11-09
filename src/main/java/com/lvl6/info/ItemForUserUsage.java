@@ -17,6 +17,16 @@ public class ItemForUserUsage implements Serializable {
 	public ItemForUserUsage() {
 		super();
 	}
+
+	public ItemForUserUsage(long id, ItemForUserUsage ifuu) {
+		super();
+		this.id = id;
+		this.userId = ifuu.userId;
+		this.itemId = ifuu.itemId;
+		this.timeOfEntry = ifuu.timeOfEntry;
+		this.userDataId = ifuu.userDataId;
+		this.actionType = ifuu.actionType;
+	}
 	
 	public ItemForUserUsage(
 		long id,
