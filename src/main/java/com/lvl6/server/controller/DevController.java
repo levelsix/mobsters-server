@@ -22,10 +22,12 @@ import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -140,7 +142,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				String mfusop = "cheater, cheater, pumpkin eater";
 				List<FullUserMonsterProto> reward = MonsterStuffUtils
 					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity, mfusop, new Date());
-				resBuilder.setFump(reward.get(0));
+				resBuilder.addAllFump(reward);
 				break;
 
 			case F_B_GET_CASH:
@@ -180,6 +182,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				log.info(String.format(
 					"num rows inserted/updated",
 					numInserted));
+				
+				UserItemProto uip = CreateInfoProtoUtils
+					.createUserItemProto(userId, staticDataId, quantity);
+				resBuilder.setUip(uip);
 				break;
 			default :
 				break;
