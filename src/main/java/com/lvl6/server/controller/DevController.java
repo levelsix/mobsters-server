@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DevRequestEvent;
 import com.lvl6.events.response.DevResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.Globals;
@@ -22,10 +24,13 @@ import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -37,6 +42,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		numAllocatedThreads = 1;
 	}
 
+	@Autowired
+	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new DevRequestEvent();
@@ -140,7 +148,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				String mfusop = "cheater, cheater, pumpkin eater";
 				List<FullUserMonsterProto> reward = MonsterStuffUtils
 					.updateUserMonsters(userId, null, monsterIdToLvlToQuantity, mfusop, new Date());
-				resBuilder.setFump(reward.get(0));
+				resBuilder.addAllFump(reward);
 				break;
 
 			case F_B_GET_CASH:
@@ -180,10 +188,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				log.info(String.format(
 					"num rows inserted/updated",
 					numInserted));
+				
+				ItemForUser ifu = (itemForUserRetrieveUtil
+					.getSpecificOrAllItemIdToItemForUserId(
+						userId,
+						Collections.singleton(staticDataId))).get(0);
+				UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
+				resBuilder.setUip(uip);
 				break;
 			default :
 				break;
 		}
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	{
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	{
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
 }

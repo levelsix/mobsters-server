@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Dev.proto";
+import "Item.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -25,7 +26,8 @@ message DevResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional DevStatus status = 2;
 	
-	optional FullUserMonsterProto fump = 3;
+	repeated FullUserMonsterProto fump = 3;
+	optional UserItemProto uip = 4;
 	
 	enum DevStatus {
 		SUCCESS = 1;
