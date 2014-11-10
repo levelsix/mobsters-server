@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Map<Integer, ClanRaid> clanRaidIdToClanRaid;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID;
+	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_CONFIG;
 
 	public static ClanRaid getClanRaidForClanRaidId(int clanRaidId) {
 		log.debug("retrieving data for clanRaid with clanRaid id " + clanRaidId);

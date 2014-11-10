@@ -20,6 +20,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -1543,4 +1544,36 @@ public class InsertUtils implements InsertUtil{
 			return numUpdated;
 		}
 
+		@Override
+		public List<Long> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed)
+		{
+			String tableName = DBConstants.TABLE_ITEM_FOR_USER_USAGE;
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+			for (ItemForUserUsage ifuu : itemsUsed) {
+
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, ifuu.getUserId());                                                                   
+				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID, ifuu.getItemId());    
+				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY, 
+					new Timestamp(
+						ifuu.getTimeOfEntry()
+						.getTime()));
+				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID, ifuu.getUserDataId());      
+				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE, ifuu.getActionType());
+
+				newRows.add(newRow);
+			}
+			
+			List<Long> ids = DBConnection.get()
+				.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
+
+			if (null != ids) {
+				return ids;
+			} else {
+				return new ArrayList<Long>();       
+			}
+		}
+		
 }

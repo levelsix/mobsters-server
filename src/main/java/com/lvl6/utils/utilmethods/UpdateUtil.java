@@ -127,7 +127,7 @@ public interface UpdateUtil {
   public abstract int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
   		List<UserFacebookInviteForSlot> redeemedInvites);
   
-  public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
+//  public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
   
   public abstract int updateClanEventPersistentForClanStageStartTime(int clanId,
   		Timestamp curTime);
@@ -177,6 +177,8 @@ public interface UpdateUtil {
   
   public abstract int updateItemForUser(int userId, int itemId, int quantityChange);
 
+  public abstract int updateItemForUser(List<ItemForUser> ifuList);
+  
   public int updateTaskStageForUserNoMonsterDrop( long droplessTsfuId );
 
   public int updatePvpMonsterDmgMultiplier( int userId, float monsterDmgMultiplier );

@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Map<Integer, QuestJobMonsterItem>> questJobIdsToMonsterIdsToItems;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_MONSTER_ITEM;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_MONSTER_ITEM_CONFIG;
 
   public static Map<Integer, Map<Integer, QuestJobMonsterItem>> getQuestJobIdsToMonsterIdsToItems() {
     log.debug("retrieving all quest job monster item data map");

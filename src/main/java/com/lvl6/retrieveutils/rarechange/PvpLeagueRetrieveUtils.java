@@ -35,7 +35,7 @@ public class PvpLeagueRetrieveUtils {
 	
 	private static final PvpLeagueComparator comparator = new PvpLeagueComparator();
 
-	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE;
+	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE_CONFIG;
 	
 	//CONTROLLER LOGIC******************************************************************
 	public static int getLeagueIdForElo(int elo, int curPvpLeagueId) {

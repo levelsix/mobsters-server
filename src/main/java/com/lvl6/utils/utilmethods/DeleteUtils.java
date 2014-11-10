@@ -27,7 +27,7 @@ public class DeleteUtils implements DeleteUtil {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.AVAILABLE_REFERRAL_CODES__CODE, referralCode);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_REFERRAL_CODE_AVAILABLE, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_REFERRAL_CODE_AVAILABLE_CONFIG, conditionParams, "and");
     if (numDeleted != 1) {
       return false;
     }

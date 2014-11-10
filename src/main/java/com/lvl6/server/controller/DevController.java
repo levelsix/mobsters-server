@@ -27,6 +27,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class DevController extends EventController {
 
@@ -53,7 +54,8 @@ import com.lvl6.utils.RetrieveUtils;
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
 		DevRequest request = reqProto.getDevRequest();
-		int num = reqProto.getNum();
+		int staticDataId = reqProto.getStaticDataId();
+		int quantity = reqProto.getQuantity();
 
 		DevResponseProto.Builder resBuilder = DevResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -67,7 +69,8 @@ import com.lvl6.utils.RetrieveUtils;
 			log.info(String.format(
 				"CHEATER DETECTED!!!! %s", aUser));
 			if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
-				cheat(userId, request, num, resBuilder, aUser);
+				cheat(userId, request, staticDataId, quantity,
+					resBuilder, aUser);
 			} else {
 				log.error(String.format(
 					"azzhole tried cheating: user=",
@@ -107,7 +110,8 @@ import com.lvl6.utils.RetrieveUtils;
 	private void cheat(
 		int userId,
 		DevRequest request,
-		int num,
+		int staticDataId,
+		int quantity,
 		DevResponseProto.Builder resBuilder,
 		User aUser )
 	{
@@ -120,15 +124,17 @@ import com.lvl6.utils.RetrieveUtils;
 
 			case GET_MONZTER:
 				log.info(String.format(
-					"giving user=%s monsterId=%d", 
-					aUser, num));
+					"giving user=%s monsterId=%d, quantity=%s", 
+					aUser, staticDataId, quantity));
 //				Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(num);
 //				Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
 //				monsterIdToNumPieces.put(num, monzter.getNumPuzzlePieces());
 
 				Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity =
 					new HashMap<Integer, Map<Integer, Integer>>();
-					monsterIdToLvlToQuantity.put(num, Collections.singletonMap(1, 1));
+					monsterIdToLvlToQuantity.put(
+						staticDataId,
+						Collections.singletonMap(1, quantity));
 					
 				
 				String mfusop = "cheater, cheater, pumpkin eater";
@@ -140,29 +146,42 @@ import com.lvl6.utils.RetrieveUtils;
 			case F_B_GET_CASH:
 				log.info(String.format(
 					"giving user=%s cash=%d", 
-					aUser, num));
-				aUser.updateRelativeCashAndOilAndGems(num, 0, 0);
+					aUser, staticDataId));
+				aUser.updateRelativeCashAndOilAndGems(quantity, 0, 0);
 				break;
 
 			case F_B_GET_OIL:
 				log.info(String.format(
 					"giving user=%s oil=%d", 
-					aUser, num));
-				aUser.updateRelativeCashAndOilAndGems(0, num, 0);
+					aUser, staticDataId));
+				aUser.updateRelativeCashAndOilAndGems(0, quantity, 0);
 				break;
 
 			case F_B_GET_GEMS:
 				log.info(String.format(
 					"giving user=%s gems=%d", 
-					aUser, num));
-				aUser.updateRelativeCashAndOilAndGems(0, 0, num);
+					aUser, staticDataId));
+				aUser.updateRelativeCashAndOilAndGems(0, 0, quantity);
 				break;
 
 			case F_B_GET_CASH_OIL_GEMS:
 				log.info(String.format(
 					"giving user=%s cash, gems, oil=%d", 
-					aUser, num));
-				aUser.updateRelativeCashAndOilAndGems(num, num, num);
+					aUser, staticDataId));
+				aUser.updateRelativeCashAndOilAndGems(quantity, quantity, quantity);
+				break;
+			case GET_ITEM :
+				log.info(String.format(
+					"giving user=%s, itemId=%s, quantity=%s",
+					aUser, staticDataId, quantity));
+				
+				int numInserted = InsertUtils.get()
+					.insertIntoUpdateUserItem(userId, staticDataId, quantity);
+				log.info(String.format(
+					"num rows inserted/updated",
+					numInserted));
+				break;
+			default :
 				break;
 		}
 	}

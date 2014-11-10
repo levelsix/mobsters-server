@@ -37429,14 +37429,26 @@ public final class EventClanProto {
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     boolean hasMup();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProto getMup();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
 
@@ -37455,6 +37467,10 @@ public final class EventClanProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveClanDataResponseProto}
+   *
+   * <pre>
+   *sent to the newbies that just join a clan
+   * </pre>
    */
   public static final class RetrieveClanDataResponseProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -37575,18 +37591,30 @@ public final class EventClanProto {
     private com.lvl6.proto.UserProto.MinimumUserProto mup_;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     public boolean hasMup() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
       return mup_;
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     *
+     * <pre>
+     *the new person that joined a clan
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
       return mup_;
@@ -37733,6 +37761,10 @@ public final class EventClanProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.RetrieveClanDataResponseProto}
+     *
+     * <pre>
+     *sent to the newbies that just join a clan
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -37882,12 +37914,20 @@ public final class EventClanProto {
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public boolean hasMup() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
         if (mupBuilder_ == null) {
@@ -37898,6 +37938,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public Builder setMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (mupBuilder_ == null) {
@@ -37914,6 +37958,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public Builder setMup(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
@@ -37928,6 +37976,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public Builder mergeMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (mupBuilder_ == null) {
@@ -37947,6 +37999,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public Builder clearMup() {
         if (mupBuilder_ == null) {
@@ -37960,6 +38016,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMupBuilder() {
         bitField0_ |= 0x00000001;
@@ -37968,6 +38028,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
         if (mupBuilder_ != null) {
@@ -37978,6 +38042,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       *
+       * <pre>
+       *the new person that joined a clan
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 

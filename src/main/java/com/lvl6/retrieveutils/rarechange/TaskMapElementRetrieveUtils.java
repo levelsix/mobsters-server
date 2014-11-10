@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, TaskMapElement> idToTaskMapElement;
   private static Map<Integer, TaskMapElement> taskIdToTaskMapElement;
   
-  private static final String TABLE_NAME = DBConstants.TABLE_TASK_MAP_ELEMENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_TASK_MAP_ELEMENT_CONFIG;
 
 
   public static Map<Integer, TaskMapElement> getTaskMapElement() {

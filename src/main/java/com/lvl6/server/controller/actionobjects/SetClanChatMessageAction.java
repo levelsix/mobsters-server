@@ -53,6 +53,7 @@ public class SetClanChatMessageAction implements StartUpAction
 			.getMostRecentClanChatPostsForClan(limit , clanId);
 
 		if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
+			log.warn(String.format("no activeClanChatPosts for clanId=%s", clanId));
 			return;
 		}  		
 		

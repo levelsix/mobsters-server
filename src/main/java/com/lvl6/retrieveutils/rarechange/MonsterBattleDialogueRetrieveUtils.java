@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Map<Integer, List<MonsterBattleDialogue>> monsterIdToBattleDialogue;
 
-	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_BATTLE_DIALOGUE;
+	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_BATTLE_DIALOGUE_CONFIG;
 
 	public static List<MonsterBattleDialogue> getMonsterBattleDialogueForMonsterId(int monsterId) {
 		log.debug("retrieving data for monsterBattleDialogue with monster id " + monsterId);

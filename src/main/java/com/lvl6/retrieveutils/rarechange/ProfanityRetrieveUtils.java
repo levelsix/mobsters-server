@@ -20,7 +20,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Set<String> oneWordProfanity;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_PROFANITY;
+  private static final String TABLE_NAME = DBConstants.TABLE_PROFANITY_CONFIG;
 
   public static Set<String> getAllProfanity() {
     log.debug("retrieving all profanity placed in a set");

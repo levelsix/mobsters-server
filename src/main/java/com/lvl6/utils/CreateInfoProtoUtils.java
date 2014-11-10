@@ -1438,6 +1438,19 @@ public class CreateInfoProtoUtils {
 		return uipb.build();
 	}
 
+	public static List<UserItemUsageProto> createUserItemUsageProto(
+		List<ItemForUserUsage> ifuuList)
+	{
+		List<UserItemUsageProto> protos = new ArrayList<UserItemUsageProto>();
+		
+		for (ItemForUserUsage ifuu : ifuuList) {
+			UserItemUsageProto uiup = createUserItemUsageProto(ifuu);
+			protos.add(uiup);
+		}
+		
+		return protos;
+	}
+	
 	public static UserItemUsageProto createUserItemUsageProto(ItemForUserUsage ifuu) {
 		UserItemUsageProto.Builder uiupb = UserItemUsageProto.newBuilder();
 		uiupb.setUsageId(ifuu.getId());

@@ -644,7 +644,8 @@ public class ControllerTest extends TestCase {
 		drpb.setSender(
 			CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(unitTester, null));
 		drpb.setDevRequest(DevRequest.GET_MONZTER);
-		drpb.setNum(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+		drpb.setStaticDataId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+		drpb.setQuantity(1);
 		
 		DevRequestEvent event = new DevRequestEvent();
 		event.setTag(0);

@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "BoosterPackStuff.proto";
+import "Item.proto";
 import "MonsterStuff.proto";
 import "User.proto";
 
@@ -36,3 +37,35 @@ message TradeItemForBoosterResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+//will only ever add or delete itemUsages
+message TradeItemForSpeedUpsRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
+	//updated quantity of user's items after using said items
+	repeated UserItemProto nuUserItems = 3;  
+	
+}
+
+message TradeItemForSpeedUpsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional TradeItemForSpeedUpsStatus status = 2;
+	
+	repeated UserItemUsageProto itemsUsed = 3; //usageIds are now set
+	
+	enum TradeItemForSpeedUpsStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		
+	}
+}
+
+/*
+message TradeItemForResourcesRequestProto {
+	optional MinimumUserProto sender = 1;
+		
+}
+
+message TradeItemForResourcesResponseProto {
+	optional MinimumUserProto sender = 1;
+}
+*/

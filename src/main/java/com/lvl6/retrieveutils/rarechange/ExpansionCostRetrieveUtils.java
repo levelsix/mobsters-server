@@ -19,7 +19,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_EXPANSION_COST;
+  private static final String TABLE_NAME = DBConstants.TABLE_EXPANSION_COST_CONFIG;
   
   private static Map<Integer, ExpansionCost> expansionNumToExpansionCost;
   

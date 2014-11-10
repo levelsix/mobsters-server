@@ -27,7 +27,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_CONFIG;
   private static String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
 		"SATURDAY", "SUNDAY"};
   private static Set<String> daysSet;

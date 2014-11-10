@@ -1743,10 +1743,18 @@ public final class ItemsProto {
 
     /**
      * <code>optional int64 usageId = 1;</code>
+     *
+     * <pre>
+     *the auto-incrementing primary key in db
+     * </pre>
      */
     boolean hasUsageId();
     /**
      * <code>optional int64 usageId = 1;</code>
+     *
+     * <pre>
+     *the auto-incrementing primary key in db
+     * </pre>
      */
     long getUsageId();
 
@@ -1797,6 +1805,13 @@ public final class ItemsProto {
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserItemUsageProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   *used to represent
+   *1) what is in the database table for items used and represents
+   *2) what the user wants to use 
+   * </pre>
    */
   public static final class UserItemUsageProto extends
       com.google.protobuf.GeneratedMessage implements
@@ -1927,12 +1942,20 @@ public final class ItemsProto {
     private long usageId_;
     /**
      * <code>optional int64 usageId = 1;</code>
+     *
+     * <pre>
+     *the auto-incrementing primary key in db
+     * </pre>
      */
     public boolean hasUsageId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional int64 usageId = 1;</code>
+     *
+     * <pre>
+     *the auto-incrementing primary key in db
+     * </pre>
      */
     public long getUsageId() {
       return usageId_;
@@ -2165,6 +2188,13 @@ public final class ItemsProto {
     }
     /**
      * Protobuf type {@code com.lvl6.proto.UserItemUsageProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     *used to represent
+     *1) what is in the database table for items used and represents
+     *2) what the user wants to use 
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2330,18 +2360,30 @@ public final class ItemsProto {
       private long usageId_ ;
       /**
        * <code>optional int64 usageId = 1;</code>
+       *
+       * <pre>
+       *the auto-incrementing primary key in db
+       * </pre>
        */
       public boolean hasUsageId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional int64 usageId = 1;</code>
+       *
+       * <pre>
+       *the auto-incrementing primary key in db
+       * </pre>
        */
       public long getUsageId() {
         return usageId_;
       }
       /**
        * <code>optional int64 usageId = 1;</code>
+       *
+       * <pre>
+       *the auto-incrementing primary key in db
+       * </pre>
        */
       public Builder setUsageId(long value) {
         bitField0_ |= 0x00000001;
@@ -2351,6 +2393,10 @@ public final class ItemsProto {
       }
       /**
        * <code>optional int64 usageId = 1;</code>
+       *
+       * <pre>
+       *the auto-incrementing primary key in db
+       * </pre>
        */
       public Builder clearUsageId() {
         bitField0_ = (bitField0_ & ~0x00000001);

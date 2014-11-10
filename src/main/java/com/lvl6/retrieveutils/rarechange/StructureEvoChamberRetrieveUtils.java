@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureEvoChamber> structIdsToEvoChambers;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_EVO_CHAMBER_CONFIG;
 
   public static Map<Integer, StructureEvoChamber> getStructIdsToEvoChambers() {
     log.debug("retrieving all structs data");

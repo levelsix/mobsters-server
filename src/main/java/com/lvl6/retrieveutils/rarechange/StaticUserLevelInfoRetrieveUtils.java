@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StaticUserLevelInfo> levelToStaticLevelInfo;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STATIC_LEVEL_INFO;
+  private static final String TABLE_NAME = DBConstants.TABLE_STATIC_LEVEL_INFO_CONFIG;
 
   public static Map<Integer, StaticUserLevelInfo> getAllStaticUserLevelInfo() {
     log.debug("retrieving all static level info");

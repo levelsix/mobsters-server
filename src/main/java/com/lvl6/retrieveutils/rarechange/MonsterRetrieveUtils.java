@@ -22,7 +22,7 @@ public class MonsterRetrieveUtils {
 
   private static Map<Integer, Monster> monsterIdsToMonsters;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_CONFIG;
 
   public static Map<Integer, Monster> getMonsterIdsToMonsters() {
     log.debug("retrieving all monsteres data map");

@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, StructureLab> structIdsToLabs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_LAB;
+  private static final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_LAB_CONFIG;
 
   public static Map<Integer, StructureLab> getStructIdsToLabs() {
     log.debug("retrieving all structs data");
