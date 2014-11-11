@@ -207,7 +207,7 @@ message TransferClanOwnershipResponseProto {
 
 message BootPlayerFromClanRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 playerToBoot = 2;
+	optional string playerToBootUuid = 2;
 }
 
 message BootPlayerFromClanResponseProto {
