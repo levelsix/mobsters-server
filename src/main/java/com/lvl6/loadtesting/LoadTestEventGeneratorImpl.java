@@ -2,8 +2,8 @@ package com.lvl6.loadtesting;
 
 import java.nio.ByteBuffer;
 
-import org.springframework.integration.Message;
-import org.springframework.integration.message.GenericMessage;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.GenericMessage;
 
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.Builder;

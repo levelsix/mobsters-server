@@ -12,7 +12,8 @@ import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.mortbay.log.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -33,6 +34,9 @@ import com.lvl6.utils.DBConnection;
 
 public class InsertUtils implements InsertUtil{
 
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
   public static InsertUtil get() {
     return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
@@ -438,7 +442,7 @@ public class InsertUtils implements InsertUtil{
     
     //number of rows inserted
     int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-    Log.info("number of rows inserted into user_currency_history: " + numUpdated);
+    log.info("number of rows inserted into user_currency_history: " + numUpdated);
     return numUpdated;
   }
   
@@ -811,7 +815,7 @@ public class InsertUtils implements InsertUtil{
 		
 		List<Long> monsterForUserIds = DBConnection.get()
 				.insertIntoTableBasicReturnLongIds(tableName, newRows);
-		Log.info("monsterForUserIds= " + monsterForUserIds);
+		log.info("monsterForUserIds= " + monsterForUserIds);
 		return monsterForUserIds;
 	}
 	

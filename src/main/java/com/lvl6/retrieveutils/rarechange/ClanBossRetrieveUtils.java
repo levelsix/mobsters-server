@@ -1,10 +1,7 @@
 package com.lvl6.retrieveutils.rarechange;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +9,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanBoss;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class ClanBossRetrieveUtils {
 

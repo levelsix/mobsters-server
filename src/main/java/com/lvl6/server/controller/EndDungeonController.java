@@ -453,7 +453,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  ItemForUser ifu = (itemForUserRetrieveUtil
 			  .getSpecificOrAllItemIdToItemForUserId(
 				  userId,
-				  Collections.singleton(itemId))).get(0);
+				  Collections.singleton(itemId))).get(itemId);
 		  UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
 		  resBuilder.setUserItem(uip);
 //		  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,

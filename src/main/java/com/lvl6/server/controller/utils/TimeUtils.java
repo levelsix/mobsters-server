@@ -3,10 +3,10 @@ package com.lvl6.server.controller.utils;
 import java.util.Date;
 import java.util.TimeZone;
 
-//import org.elasticsearch.common.joda.time.Days;
-import org.joda.time.Days;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+//import org.elasticsearch.common.joda.time.Days;
+import org.joda.time.Days;
 //import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.MutableDateTime;

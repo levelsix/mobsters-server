@@ -72,7 +72,7 @@ import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardUtil;
+//import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
@@ -180,7 +180,6 @@ import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -594,8 +593,8 @@ public class MiscMethods {
 		User user, PvpLeagueForUser plfu) {
 		try {
 			if (!user.isFake()) {
-				LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
-				leaderboard.updateLeaderboardForUser(user, plfu);
+				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+				leaderboard.updateLeaderboardForUser(user, plfu);*/
 			}
 		} catch (Exception e) {
 			log.error("Failed to update leaderboard.");

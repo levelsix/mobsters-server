@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mortbay.log.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
@@ -15,6 +16,9 @@ import com.lvl6.utils.DBConnection;
 public class DeleteUtils implements DeleteUtil {
 
 
+	
+	private static final Logger log = LoggerFactory.getLogger(DeleteUtils.class);
+	
   public static DeleteUtil get(){
     return (DeleteUtil) AppContext.getApplicationContext().getBean("deleteUtils");
   }
@@ -161,7 +165,7 @@ public class DeleteUtils implements DeleteUtil {
   	values.add(userId);
   	values.addAll(userMonsterIds);
   	
-  	Log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
+  	log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
   	
   	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
     return numDeleted;
@@ -184,7 +188,7 @@ public class DeleteUtils implements DeleteUtil {
   	values.add(userId);
   	values.addAll(userMonsterIds);
   	
-  	Log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
+  	log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
   	
   	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
     return numDeleted;

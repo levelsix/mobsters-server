@@ -1,23 +1,11 @@
 package com.lvl6.ui.admin.pages;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
-import org.apache.wicket.model.Model;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.lvl6.elasticsearch.LoggingConstants;
-import com.lvl6.elasticsearch.LoggingElasticSearchQuery;
-import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.components.LogSearchForm;
-import com.lvl6.ui.admin.components.LogSearchInputModel;
 
 public class LogViewerPage extends TemplatePage {
 
@@ -53,7 +41,7 @@ public class LogViewerPage extends TemplatePage {
 	
 	protected LogSearchForm form = new LogSearchForm("logSearch") {
 		private static final long serialVersionUID = 1L;
-
+/*
 		@Override
 		protected void onSubmit() {
 			super.onSubmit();
@@ -110,7 +98,7 @@ public class LogViewerPage extends TemplatePage {
 				return format.format(new Date((Long) entry));
 			}
 			return entry.toString();
-		}
+		}*/
 	};
 
 }

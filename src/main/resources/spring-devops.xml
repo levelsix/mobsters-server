@@ -9,12 +9,12 @@
     http://www.springframework.org/schema/integration 
 	http://www.springframework.org/schema/integration/spring-integration.xsd
 	http://www.springframework.org/schema/task
-	http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/task/spring-task.xsd
 	http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+<!-- 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${lvl6.smtp.host}" />
 		<property name="port" value="${lvl6.smtp.port}" />
 		<property name="username" value="${lvl6.smtp.username}" />
@@ -25,24 +25,24 @@
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 
 	<!-- this is a template message that we can pre-load with default state -->
-	<bean id="adminAlertEmail" class="org.springframework.mail.SimpleMailMessage"
+<!-- 	<bean id="adminAlertEmail" class="org.springframework.mail.SimpleMailMessage"
 		scope="prototype">
 		<property name="from" value="lvl6sender@gmail.com" />
 		<property name="subject" value="Server Error" />
 	</bean>
-
-	<bean id="devops" class="com.lvl6.server.DevOps">
+ -->
+<!-- 	<bean id="devops" class="com.lvl6.server.DevOps">
 		<property name="adminEmails">
 			<list>
 				<value>${lvl6.smtp.contact1}</value> 
-				<!-- <value>${lvl6.smtp.contact2}</value>
-				<value>${lvl6.smtp.contact3}</value> -->
+				<value>${lvl6.smtp.contact2}</value>
+				<value>${lvl6.smtp.contact3}</value>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 
 	<bean id="applicationMode" class="com.lvl6.server.ApplicationMode" scope="singleton" />
 		

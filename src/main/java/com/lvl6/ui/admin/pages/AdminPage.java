@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.lvl6.properties.Globals;
-import com.lvl6.server.DevOps;
 import com.lvl6.server.ServerAdmin;
 import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.components.MaintenanceModeForm;
@@ -94,9 +93,9 @@ public class AdminPage extends TemplatePage {
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-				DevOps devops = AppContext.getApplicationContext().getBean(DevOps.class);
+/*				DevOps devops = AppContext.getApplicationContext().getBean(DevOps.class);
 				devops.sendAlertToAdmins(message.getModelObject());
-				message.setModelObject("Message sent");
+				message.setModelObject("Message sent");*/
 			}
 		};
 		contact.add(message);

@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.lvl6.utils.utilmethods.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -23,6 +21,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {
 

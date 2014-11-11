@@ -17,9 +17,8 @@ import com.lvl6.events.request.PurchaseCityExpansionRequestEvent;
 import com.lvl6.events.response.PurchaseCityExpansionResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ExpansionCost;
-import com.lvl6.info.User;
 import com.lvl6.info.ExpansionPurchaseForUser;
-import com.lvl6.leaderboards.LeaderBoardUtil;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
@@ -46,16 +45,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	@Autowired
 	protected Locker locker;
 
-	@Autowired
-	protected LeaderBoardUtil leaderboard;
-
-	public LeaderBoardUtil getLeaderboard() {
-		return leaderboard;
-	}
-
-	public void setLeaderboard(LeaderBoardUtil leaderboard) {
-		this.leaderboard = leaderboard;
-	}
 
 	public PurchaseCityExpansionController() {
 		numAllocatedThreads = 1;
