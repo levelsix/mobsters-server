@@ -11,7 +11,7 @@ option java_outer_classname = "ItemsProto";
 //------------------------------------------------------------------------------------------
 
 message UserItemProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional int32 itemId = 2;
 	optional int32 quantity = 3;
 }
@@ -49,10 +49,10 @@ enum ItemType {
 //1) what is in the database table for items used and represents
 //2) what the user wants to use 
 message UserItemUsageProto {
-	optional int64 usageId = 1; //the auto-incrementing primary key in db
-	optional int32 userId = 2;
+	optional string usageUuid = 1; //IGNORE: //the auto-incrementing primary key in db
+	optional string userUuid = 2;
 	optional int32 itemId = 3;
 	optional int64 timeOfEntry = 4;
-	optional int64 userDataId = 5;
+	optional string userDataUuid = 5;
 	optional GameActionType actionType = 6;
 }

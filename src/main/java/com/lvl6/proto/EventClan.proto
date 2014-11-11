@@ -67,7 +67,7 @@ message LeaveClanResponseProto {
 
 message RequestJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 clanId = 2;
+	optional string clanUuid = 2;
 }
 
 //since clanless user can directly join open clan,
@@ -75,7 +75,7 @@ message RequestJoinClanRequestProto {
 message RequestJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional RequestJoinClanStatus status = 2;
-	optional int32 clanId = 3;
+	optional string clanUuid = 3;
 	optional MinimumUserProtoForClans requester = 4;
 	optional MinimumClanProto minClan = 5;
 	optional FullClanProtoWithClanSize fullClan = 6;
@@ -100,13 +100,13 @@ message RequestJoinClanResponseProto {
 
 message RetractRequestJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 clanId = 2;
+	optional string clanUuid = 2;
 }
 
 message RetractRequestJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional RetractRequestJoinClanStatus status = 2;
-	optional int32 clanId = 3;
+	optional string clanUuid = 3;
 	
 	enum RetractRequestJoinClanStatus {
 		SUCCESS = 1;
@@ -121,7 +121,7 @@ message RetractRequestJoinClanResponseProto {
 //can request as many as you like. wipe out other ones
 message ApproveOrRejectRequestToJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 requesterId = 2;
+	optional string requesterUuid = 2;
 	optional bool accept = 3;
 }
 
@@ -147,10 +147,11 @@ message ApproveOrRejectRequestToJoinClanResponseProto {
 
 message RetrieveClanInfoRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 clanId = 2;
+	optional string clanUuid = 2;
 	optional string clanName = 3;
 	optional ClanInfoGrabType grabType = 4;
-	optional int32 beforeThisClanId = 5;
+	//switch to UUIDs makes this obsolete; consider repeated string blackListIds or date
+	optional int32 beforeThisClanId = 5 [deprecated = true];  
 	optional bool isForBrowsingList = 6;
 	
 	enum ClanInfoGrabType {
@@ -168,9 +169,9 @@ message RetrieveClanInfoResponseProto {
 	optional RetrieveClanInfoStatus status = 4;
 	optional bool isForSearch = 5;
 	optional bool isForBrowsingList = 6;
-	optional int32 clanId = 7;
+	optional string clanUuid = 7;
 	optional string clanName = 8;
-	optional int32 beforeThisClanId = 9;
+	optional int32 beforeThisClanId = 9 [deprecated = true];
 	repeated UserCurrentMonsterTeamProto monsterTeams = 10;
 	
 	enum RetrieveClanInfoStatus {
@@ -183,7 +184,7 @@ message RetrieveClanInfoResponseProto {
 
 message TransferClanOwnershipRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 clanOwnerIdNew = 2;
+	optional string clanOwnerUuidNew = 2;
 }
 
 message TransferClanOwnershipResponseProto {
@@ -367,7 +368,7 @@ message AwardClanRaidStageRewardResponseProto {
 //TODO: MAKE SURE THAT IF THE MONSTER IS DEAD THEN DON'T DO ANYTHING
 message RecordClanRaidStatsRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 clanId = 2;
+	optional string clanUuid = 2;
 	optional int64 clientTime = 3;
 }
 
@@ -386,7 +387,7 @@ message RecordClanRaidStatsResponseProto {
 
 message PromoteDemoteClanMemberRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 victimId = 2;
+	optional string victimUuid = 2;
 	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
 }
 
@@ -433,7 +434,7 @@ message SolicitClanHelpResponseProto {
 
 message GiveClanHelpRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 clanHelpIds = 2;
+	repeated string clanHelpUuids = 2;
 	
 }
 
@@ -454,12 +455,12 @@ message GiveClanHelpResponseProto {
 
 message EndClanHelpRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 clanHelpIds = 2;
+	repeated string clanHelpUuids = 2;
 }
 
 message EndClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 clanHelpIds = 2;
+	repeated string clanHelpUuids = 2;
 	
 	optional EndClanHelpStatus status = 3;
 	//SEND TO ALL CLAN MEMBERS ON SUCCESS

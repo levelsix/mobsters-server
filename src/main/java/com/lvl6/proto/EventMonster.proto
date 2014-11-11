@@ -116,10 +116,10 @@ message EnhancementWaitTimeCompleteRequestProto {
 	optional UserMonsterCurrentExpProto umcep = 4  [deprecated = true];
 	
 	//ids of monster_enhancing_for_user to delete, does not include main monster
-	repeated int64 userMonsterIds = 5  [deprecated = true];
+	repeated string userMonsterUuids = 5  [deprecated = true];
 	
 	//monster that finishes being enhanced, so server doesn't have to figure it out
-	optional int64 userMonsterId = 6;
+	optional string userMonsterUuid = 6;
 }
 
 message EnhancementWaitTimeCompleteResponseProto {
@@ -142,7 +142,7 @@ message CollectMonsterEnhancementRequestProto {
 	optional UserMonsterCurrentExpProto umcep = 2;
 	
 	//ids of monster_enhancing_for_user to delete, does not include main monster
-	repeated int64 userMonsterIds = 3;
+	repeated string userMonsterUuids = 3;
 	
 }
 
@@ -200,12 +200,12 @@ message UpdateMonsterHealthRequestProto {
 	//TODO: Consider putting elsewhere----------------------------------------------------------------
 	//indicates to the server if a user's current task stage should be updated
 	//since server now keeps track of which task stage user is in for a task
-	optional int64 userTaskId = 4;
+	optional string userTaskUuid = 4;
 	optional bool isUpdateTaskStageForUser = 5;
 	optional int32 nuTaskStageId = 6;
 	
 	//make monsterPieceDropped to false in db
-	optional int64 droplessTsfuId = 7;
+	optional string droplessTsfuUuid = 7;
 	//------------------------------------------------------------------------------------------------
 	
 	//TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -301,7 +301,7 @@ message HealMonsterWaitTimeCompleteResponseProto {
 message AddMonsterToBattleTeamRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 teamSlotNum = 2;
-	optional int64 userMonsterId = 3;
+	optional string userMonsterUuid = 3;
 }
 
 message AddMonsterToBattleTeamResponseProto {
@@ -318,7 +318,7 @@ message AddMonsterToBattleTeamResponseProto {
 
 message RemoveMonsterFromBattleTeamRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int64 userMonsterId = 3;
+	optional string userMonsterUuid = 3;
 }
 
 message RemoveMonsterFromBattleTeamResponseProto {
@@ -336,13 +336,13 @@ message RemoveMonsterFromBattleTeamResponseProto {
 message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional IncreaseSlotType increaseSlotType = 2;
-	optional int32 userStructId = 3;
+	optional string userStructUuid = 3;
 	
 	//EVERY TIME USER BUYS SLOTS, RESET user_facebook_invite_for_slot table
 	//no need to update clients that this happened
 	
 	//all these invites are for one userstruct
-	repeated int32 userFbInviteForSlotIds = 4;
+	repeated string userFbInviteForSlotUuids = 4;
 	
 	enum IncreaseSlotType {
 		PURCHASE = 1;
@@ -379,7 +379,7 @@ message InviteFbFriendsForSlotsRequestProto {
 	//at the moment, Dec. 5, this pertains only to the residence structure
 	message FacebookInviteStructure {
 		optional string fbFriendId = 1;
-		optional int32 userStructId = 2;
+		optional string userStructUuid = 2;
 		
 		//also represents the user struct lvl, 
 		//most likely not the current user struct lvl
@@ -405,8 +405,8 @@ message InviteFbFriendsForSlotsResponseProto {
 message AcceptAndRejectFbInviteForSlotsRequestProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
 	//server records all valid accepts, does not enforce max 3 accepts per inviter
-	repeated int32 acceptedInviteIds = 2;
-	repeated int32 rejectedInviteIds = 3;
+	repeated string acceptedInviteUuids = 2;
+	repeated string rejectedInviteUuids = 3;
 }
 
 //server sends this to all the inviters in acceptedInviteIds
@@ -428,7 +428,7 @@ message AcceptAndRejectFbInviteForSlotsResponseProto {
 
 message CombineUserMonsterPiecesRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 userMonsterIds = 2;
+	repeated string userMonsterUuids = 2;
 	
 	//(positive amount) if user wants to speed up the process
 	//if this is set, there should only be one userMonsterId
@@ -469,7 +469,7 @@ message SellUserMonsterResponseProto {
 
 message RestrictUserMonsterRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 userMonsterIds = 3;
+	repeated string userMonsterUuids = 3;
 }
 
 message RestrictUserMonsterResponseProto {
@@ -486,7 +486,7 @@ message RestrictUserMonsterResponseProto {
 
 message UnrestrictUserMonsterRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 userMonsterIds = 3;
+	repeated string userMonsterUuids = 3;
 }
 
 message UnrestrictUserMonsterResponseProto {

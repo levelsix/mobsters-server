@@ -13,9 +13,9 @@ option java_outer_classname = "UserProto";
 //Was in Clan.proto but that file references this file, so
 //import cycle is created, so not allowed.
 message MinimumClanProto {
-	optional int32 clanId = 1;
+	optional string clanUuid = 1;
 	optional string name = 2;
-	//optional int32 ownerId = 3;
+	//optional string ownerUuid = 3;
 	optional int64 createTime = 4;
 	optional string description = 5;
 	optional string tag = 6;
@@ -26,7 +26,7 @@ message MinimumClanProto {
 //------------------------------------------------------------------------------------------
 
 message MinimumUserProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional string name = 2;
 	optional MinimumClanProto clan = 3;
 	optional int32 avatarMonsterId = 4;
@@ -58,12 +58,12 @@ message MinimumUserProtoWithMaxResources {
 //------------------------------------------------------------------------------------------
 
 message UserFacebookInviteForSlotProto {
-	optional int32 inviteId = 1;
+	optional string inviteUuid = 1;
 	optional MinimumUserProtoWithFacebookId inviter = 2;
 	optional string recipientFacebookId = 3;
 	optional int64 timeOfInvite = 4;
 	optional int64 timeAccepted = 5;
-	optional int32 userStructId = 6;
+	optional string userStructUuid = 6;
 	
 	//also represents the user struct lvl,
 	//most likely not the current struct lvl
@@ -75,7 +75,7 @@ message UserFacebookInviteForSlotProto {
 //------------------------------------------------------------------------------------------
 
 message FullUserProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
     optional string name = 2;
     optional int32 level = 3;
 	optional int32 gems = 4;
@@ -145,7 +145,7 @@ message StaticUserLevelInfoProto {
 
 //all the leaderboard information regarding user in pvp
 message UserPvpLeagueProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional int32 leagueId = 2; //pvp league id
 	optional int32 rank = 3;
 	optional int32 elo = 4; //client doesn't really need it, so will not be set :P
