@@ -3,9 +3,7 @@ package com.lvl6.loadtesting;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.integration.MessageChannel;
-
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import org.springframework.messaging.MessageChannel;
 
 public class UserQuestTask implements Runnable{
 	

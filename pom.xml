@@ -61,7 +61,7 @@
 	</repositories>
 	<properties>
 		<!-- <jdbc.url><![CDATA[jdbc:mysql://kingdom-dev-1.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url> -->
-		<jdbc.url><![CDATA[jdbc:mysql://dev.lvl6.com/mobsters?useLegacyDatetimeCode=false]]></jdbc.url>
+		<jdbc.url><![CDATA[jdbc:mysql://localhost/mobsters?useLegacyDatetimeCode=false]]></jdbc.url>
 		<jdbc.username>lvl6admin</jdbc.username>
 		<jdbc.password>robashen123</jdbc.password>
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
@@ -83,7 +83,7 @@
 		<hazelcast.pass>lvl6</hazelcast.pass>
 		<hazelcast.config>dev</hazelcast.config>
 		<hazelcast.port>5701</hazelcast.port>
-		<hazelcast.dev.ips>5.9.28.212</hazelcast.dev.ips>
+		<hazelcast.dev.ips>127.0.0.1</hazelcast.dev.ips>
 		<server.ip>0.0.0.0</server.ip>
 		<server.port>10001</server.port>
 
@@ -102,7 +102,7 @@
 		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
 		<apns.cert.password>robashen123</apns.cert.password>
 		<lvl6.server.log.appender>R</lvl6.server.log.appender>
-		<lvl6.server.log.location>/var/log/tomcat7/kingdom</lvl6.server.log.location>
+		<lvl6.server.log.location>/var/log/tomcat7/mobsters</lvl6.server.log.location>
 		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
 		<lvl6.cassandra.keyspace>Logs</lvl6.cassandra.keyspace>
 		<lvl6.cassandra.stats.keyspace>stats</lvl6.cassandra.stats.keyspace>
@@ -115,7 +115,7 @@
 
 		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
 		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
-		<application.release.name>Kingdom</application.release.name>
+		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
 
 		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
@@ -128,16 +128,12 @@
 		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
 		<ec2.region>us-west-2</ec2.region>
-		<spring.version>3.1.2.RELEASE</spring.version>
-		<spring.security.version>3.1.1.RELEASE</spring.security.version>
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
-		<lvl6.smtp.host>smtp.gmail.com</lvl6.smtp.host>
-		<lvl6.smtp.port>587</lvl6.smtp.port>
-		<lvl6.smtp.username>lvl6sender@gmail.com</lvl6.smtp.username>
-		<lvl6.smtp.password>robashen123</lvl6.smtp.password>
-		<lvl6.smtp.contact1>5208206924@vtext.com</lvl6.smtp.contact1>
 
-		<amqp.host>robot.lvl6.com</amqp.host>
+
+		<amqp.host>localhost</amqp.host>
 		<amqp.user>lvl6server</amqp.user>
 		<amqp.pass>devserver</amqp.pass>
 		<amqp.vhost>devmobsters</amqp.vhost>
@@ -234,8 +230,9 @@
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
 					<configurationTemplate>mobsters-prod-2014-10-21</configurationTemplate>
-					<templateName>mobsters-prod-2014-10-21</templateName> 
-					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7 Java 7</solutionStack>
+					<templateName>mobsters-prod-2014-10-21</templateName>
+					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7
+						Java 7</solutionStack>
 					<configurationTemplates>
 						<configurationTemplate>
 							<id>mobsters-prod-1</id>
@@ -386,9 +383,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
 				<groupId>org.springframework.integration</groupId>
 				<artifactId>spring-integration-amqp</artifactId>
-				<version>2.1.3.RELEASE</version>
+				<version>4.0.4.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.opencsv</groupId>
@@ -433,15 +437,12 @@
 				<artifactId>logback-classic</artifactId>
 				<version>1.0.7</version>
 			</dependency>
-			<dependency>
-				<groupId>c3p0</groupId>
-				<artifactId>c3p0</artifactId>
-				<version>0.9.1.2</version>
-			</dependency>
+			<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
+				<version>0.9.1.2</version> </dependency> -->
 			<dependency>
 				<groupId>com.jolbox</groupId>
 				<artifactId>bonecp</artifactId>
-				<version>0.7.1.RELEASE</version>
+				<version>0.8.0.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>com.notnoop.apns</groupId>
@@ -498,12 +499,12 @@
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-all</artifactId>
-				<version>3.2</version>
+				<version>3.3.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-spring</artifactId>
-				<version>3.2-RC1</version>
+				<version>3.3.1</version>
 			</dependency>
 			<!-- <dependency> <groupId>com.hazelcast</groupId> <artifactId>hazelcast-wm</artifactId> 
 				<version>2.2</version> </dependency> -->
@@ -530,12 +531,12 @@
 			<dependency>
 				<groupId>org.springframework.integration</groupId>
 				<artifactId>spring-integration-core</artifactId>
-				<version>2.1.3.RELEASE</version>
+				<version>4.0.4.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.integration</groupId>
 				<artifactId>spring-integration-ip</artifactId>
-				<version>2.1.3.RELEASE</version>
+				<version>4.0.4.RELEASE</version>
 			</dependency>
 			<!-- <dependency> -->
 			<!-- <groupId>org.springframework</groupId> -->
@@ -561,12 +562,6 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>12.0</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.0.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
@@ -615,20 +610,12 @@
 			</dependency>
 			<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
 				<version>1.0-5</version> </dependency> -->
-			<dependency>
-				<groupId>org.hectorclient</groupId>
-				<artifactId>hector-core</artifactId>
-				<version>1.1-1</version>
-			</dependency>
+			<!-- <dependency> <groupId>org.hectorclient</groupId> <artifactId>hector-core</artifactId> 
+				<version>1.1-1</version> </dependency> -->
 			<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
 				<version>1.6.6</version> </dependency> -->
-			<dependency>
-				<groupId>redis.clients</groupId>
-				<artifactId>jedis</artifactId>
-				<version>2.1.0</version>
-				<type>jar</type>
-				<!-- <scope>compile</scope> -->
-			</dependency>
+			<!-- <dependency> <groupId>redis.clients</groupId> <artifactId>jedis</artifactId> 
+				<version>2.1.0</version> <type>jar</type> <scope>compile</scope> </dependency> -->
 			<dependency>
 				<groupId>com.jayway.awaitility</groupId>
 				<artifactId>awaitility</artifactId>
@@ -638,38 +625,24 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
-				<version>3.1.2.RELEASE</version>
+				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
-				<version>3.1.2.RELEASE</version>
+				<version>${spring.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>1.7.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId>
-				<version>1.7.0</version>
-			</dependency>
+			<!-- <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
+				<version>1.7.0</version> </dependency> <dependency> <groupId>org.aspectj</groupId> 
+				<artifactId>aspectjweaver</artifactId> <version>1.7.0</version> </dependency> -->
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>2.1</version>
 			</dependency>
-			<dependency>
-				<groupId>org.elasticsearch</groupId>
-				<artifactId>elasticsearch</artifactId>
-				<version>0.19.8</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-support</artifactId>
-				<version>2.0.8</version>
-			</dependency>
+			<!-- <dependency> <groupId>org.elasticsearch</groupId> <artifactId>elasticsearch</artifactId> 
+				<version>0.19.8</version> </dependency> <dependency> <groupId>org.springframework</groupId> 
+				<artifactId>spring-support</artifactId> <version>2.0.8</version> </dependency> -->
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
@@ -727,10 +700,8 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.jolbox</groupId>
 			<artifactId>bonecp</artifactId>
@@ -797,8 +768,10 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
-			</dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -829,33 +802,17 @@
 		</dependency>
 		<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
 			</dependency> -->
-		<dependency>
-			<groupId>org.hectorclient</groupId>
-			<artifactId>hector-core</artifactId>
-			<!-- <exclusions> <exclusion> <artifactId>log4j</artifactId> <groupId>log4j</groupId> 
-				</exclusion> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
-				</exclusion> </exclusions> -->
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j</artifactId>
-					<groupId>log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>org.mortbay.jetty</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- <dependency> <groupId>org.hectorclient</groupId> <artifactId>hector-core</artifactId> 
+			<exclusions> <exclusion> <artifactId>log4j</artifactId> <groupId>log4j</groupId> 
+			</exclusion> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
+			</exclusion> </exclusions> <exclusions> <exclusion> <artifactId>slf4j-log4j12</artifactId> 
+			<groupId>org.slf4j</groupId> </exclusion> <exclusion> <artifactId>log4j</artifactId> 
+			<groupId>log4j</groupId> </exclusion> <exclusion> <artifactId>servlet-api</artifactId> 
+			<groupId>org.mortbay.jetty</groupId> </exclusion> </exclusions> </dependency> -->
 		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
 			</dependency> -->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>redis.clients</groupId> <artifactId>jedis</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.jayway.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
@@ -864,18 +821,14 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>org.elasticsearch</groupId> <artifactId>elasticsearch</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-datetime</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-support</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-support</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>

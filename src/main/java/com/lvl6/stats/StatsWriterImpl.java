@@ -1,13 +1,9 @@
 package com.lvl6.stats;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
-import com.lvl6.cassandra.RollupEntry;
-import com.lvl6.cassandra.RollupUtil;
 import com.lvl6.retrieveutils.StatisticsRetrieveUtil;
-import com.lvl6.ui.admin.components.ApplicationStats;
 import com.lvl6.utils.ApplicationUtils;
 
 public class StatsWriterImpl implements StatsWriter {
@@ -31,8 +24,6 @@ public class StatsWriterImpl implements StatsWriter {
 	@Autowired
 	protected ApplicationUtils appUtils;
 
-	@Autowired
-	protected RollupUtil rollupUtil;
 	
 	@Autowired
 	protected HazelcastInstance hazel;
@@ -56,13 +47,7 @@ public class StatsWriterImpl implements StatsWriter {
 		this.hazel = hazel;
 	}
 
-	public RollupUtil getRollupUtil() {
-		return rollupUtil;
-	}
 
-	public void setRollupUtil(RollupUtil rollupUtil) {
-		this.rollupUtil = rollupUtil;
-	}
 
 	public StatisticsRetrieveUtil getStatsUtil() {
 		return statsUtil;
@@ -132,7 +117,7 @@ public class StatsWriterImpl implements StatsWriter {
 	
 	@SuppressWarnings("unchecked")
 	protected void stats(String period, Long time) {
-		log.info("Setting stats for period: {} and time: {}", period, time);
+/*		log.info("Setting stats for period: {} and time: {}", period, time);
 		List<RollupEntry> entries = new ArrayList<RollupEntry>();
 		ApplicationStats stats = getAppUtils().getStats();
 		Map<String, String> props;
@@ -154,7 +139,7 @@ public class StatsWriterImpl implements StatsWriter {
 			rollupUtil.addRollupEntries(entries);
 		} catch (Exception e1) {
 			log.error("", e1);
-		} 
+		} */
 	}
 	
 

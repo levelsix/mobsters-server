@@ -21,7 +21,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.response.PrivateChatPostResponseEvent;
@@ -31,12 +30,11 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.server.GameServer;
-import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -62,9 +60,9 @@ public class AdminChatUtil {
 		this.server = server;
 	}
 
-	protected SimpleMailMessage getEmailTemplate() {
+/*	protected SimpleMailMessage getEmailTemplate() {
 		return (SimpleMailMessage) AppContext.getApplicationContext().getBean("adminChatEmailTemplate");
-	}
+	}*/
 
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -189,10 +187,10 @@ public class AdminChatUtil {
 	}
 
 	public void sendAdminChatEmail(AdminChatPost msg) {
-		SimpleMailMessage tmp = getEmailTemplate();
+/*		SimpleMailMessage tmp = getEmailTemplate();
 		tmp.setTo(new String[] {"4086555751@vtext.com","6509963609@mms.att.net"});
 		tmp.setSubject("Admin Chat from "+msg.getPosterId()+": "+msg.getUsername());
-		tmp.setText(msg.getContent());
+		tmp.setText(msg.getContent());*/
 	}
 
 }

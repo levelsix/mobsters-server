@@ -1,12 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,23 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import redis.clients.jedis.Tuple;
-
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveTournamentRankingsRequestEvent;
 import com.lvl6.events.response.RetrieveTournamentRankingsResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardUtilImpl;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProto;
 import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto;
 import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.Builder;
 import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -39,9 +27,7 @@ public class RetrieveTournamentRankingsController extends EventController {
   private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
 
-  @Autowired
-  public LeaderBoardUtilImpl leader;
-
+ 
   @Autowired
   protected Locker locker;
 
@@ -121,7 +107,7 @@ public class RetrieveTournamentRankingsController extends EventController {
   }
 
   private Map<Integer, UserRankScore> getUsersAfterThisRank(int eventId,	int afterThisRank) {
-    Set<Tuple> usrs = new HashSet<Tuple>();
+/*    Set<Tuple> usrs = new HashSet<Tuple>();
 
     usrs = leader.getEventTopN(eventId, afterThisRank, afterThisRank+ControllerConstants.TOURNAMENT_EVENT__MAX_PLAYERS_SENT_AT_ONCE);
 
@@ -135,8 +121,8 @@ public class RetrieveTournamentRankingsController extends EventController {
       lurs.put(userId, urs);
       log.debug(urs.toString());
       counter++;
-    }
-    return lurs;
+    }*/
+    return null;
   }
 
   private boolean checkLegitRetrieval(Builder resBuilder, User user,

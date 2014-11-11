@@ -24,7 +24,6 @@ import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PvpLeague;
 import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
@@ -52,8 +51,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  @Autowired
-  protected LeaderBoardUtil leaderboard;
 
   @Autowired
   protected InsertUtil insertUtils;
@@ -535,12 +532,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //        previousGoldSilver, reasonsForChanges);
   }
 
-  public LeaderBoardUtil getLeaderboard() {
-	  return leaderboard;
-  }
-  public void setLeaderboard(LeaderBoardUtil leaderboard) {
-	  this.leaderboard = leaderboard;
-  }
+
 
   public void setInsertUtils(InsertUtil insertUtils) {
     this.insertUtils = insertUtils;

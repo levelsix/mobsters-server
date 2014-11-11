@@ -6,18 +6,15 @@
     http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/task
-	http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/task/spring-task.xsd
     http://www.springframework.org/schema/integration 
-	http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+	http://www.springframework.org/schema/integration/spring-integration.xsd
 	http://www.springframework.org/schema/integration/ip
     http://www.springframework.org/schema/integration/ip/spring-integration-ip.xsd">
 
 
 	<int:channel id="inboundFakeClientChannel">
 		<int:queue/>
-  		<!-- <int:interceptors>
-        	<int:wire-tap channel="inloggerChannelAdapter"/>
-     	</int:interceptors> --> 
 	</int:channel>
 
 
@@ -31,9 +28,6 @@
 	/>	
 	
 	<int:channel id="outboundFakeClientMessageChannel" >
- 		 <!-- <int:interceptors>
-        	<int:wire-tap channel="outloggerChannelAdapter"/>
-     	</int:interceptors>  -->
 	</int:channel>
 	
 	<int-ip:tcp-outbound-channel-adapter
@@ -52,7 +46,6 @@
 
 	<bean id="gameEventClientSerializer" class="com.lvl6.events.GameEventClientSerializer" />
 	
-	<int:logging-channel-adapter id="outloggerChannelAdapter" logger-name="client-logger-out" />
-	<int:logging-channel-adapter id="inloggerChannelAdapter" logger-name="client-logger-in" />
+
 
 </beans>
