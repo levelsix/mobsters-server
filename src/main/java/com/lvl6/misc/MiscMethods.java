@@ -180,7 +180,6 @@ import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;

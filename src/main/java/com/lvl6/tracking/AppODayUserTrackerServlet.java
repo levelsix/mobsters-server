@@ -1,16 +1,10 @@
 package com.lvl6.tracking;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
-
 /*import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 */
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AppODayUserTrackerServlet{// extends HttpServlet {
 

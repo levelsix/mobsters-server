@@ -1,14 +1,8 @@
 package com.lvl6.scheduledtasks;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -17,27 +11,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
-//import redis.clients.jedis.Tuple;
-
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.ILock;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
-//import com.lvl6.leaderboards.LeaderBoardUtil;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.ConnectedPlayer;
-import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
+//import redis.clients.jedis.Tuple;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.ILock;
+//import com.lvl6.leaderboards.LeaderBoardUtil;
 
 public class TournamentEventScheduledTasks {
 	private static Logger log = LoggerFactory.getLogger(TournamentEventScheduledTasks.class);

@@ -17,7 +17,6 @@ import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
