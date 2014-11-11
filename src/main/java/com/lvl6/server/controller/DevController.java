@@ -58,6 +58,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		DevRequestProto reqProto = ((DevRequestEvent)event).getDevRequestProto();
+		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -186,13 +187,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				int numInserted = InsertUtils.get()
 					.insertIntoUpdateUserItem(userId, staticDataId, quantity);
 				log.info(String.format(
-					"num rows inserted/updated",
+					"num rows inserted/updated, %s",
 					numInserted));
 				
 				ItemForUser ifu = (itemForUserRetrieveUtil
 					.getSpecificOrAllItemIdToItemForUserId(
 						userId,
-						Collections.singleton(staticDataId))).get(0);
+						Collections.singleton(staticDataId))).get(staticDataId);
 				UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
 				resBuilder.setUip(uip);
 				break;
