@@ -164,7 +164,7 @@ message PersistentClanEventUserInfoProto {
 }
 
 message PersistentClanEventUserRewardProto {
-	optional int32 rewardId = 1; //when redeeming rewards, these ids should be used
+	optional string rewardUuid = 1; //when redeeming rewards, these ids should be used
 	optional string userUuid = 2;
 	//optional int32 crsId = 3;
 	optional int64 crsEndTime = 4;
