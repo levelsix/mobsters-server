@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStageForUser;
@@ -31,10 +33,12 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus;
+import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
@@ -52,6 +56,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+
 
   public EndDungeonController() {
     numAllocatedThreads = 4;
@@ -441,8 +449,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  "numInserted into userItem: %s",
 		  numInserted));
 	  if (numInserted > 0) {
-		  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
-			  quantity));
+		  //send updated quantity not just quantity of 1
+		  ItemForUser ifu = (itemForUserRetrieveUtil
+			  .getSpecificOrAllItemIdToItemForUserId(
+				  userId,
+				  Collections.singleton(itemId))).get(0);
+		  UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
+		  resBuilder.setUserItem(uip);
+//		  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
+//			  quantity));
 		  resBuilder.setTaskMapSectionName(tme.getSectionName());
 	  } else {
 		  log.error(String.format(
@@ -590,6 +605,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+  {
+	  return itemForUserRetrieveUtil;
+  }
+
+  public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+  {
+	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
   }
 
 }
