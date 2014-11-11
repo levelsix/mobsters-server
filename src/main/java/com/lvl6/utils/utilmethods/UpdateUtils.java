@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForUser;
@@ -555,6 +556,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
+	@CacheEvict(value="clanWithId", key="#clanId")
 	public boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.CLANS__ID, clanId);
@@ -1166,6 +1168,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
+		@CacheEvict(value="clanWithId", key="#clanId")
 		public int updateClan(int clanId, boolean isChangeDescription, String description,
 				boolean isChangeJoinType, boolean requestToJoinRequired, boolean isChangeIcon,
 				int iconId) {
