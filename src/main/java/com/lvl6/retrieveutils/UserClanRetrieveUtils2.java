@@ -40,7 +40,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public Map<String, UserClan> getUserClanForUsers(int clanId, List<Integer> userIds) {
+	public Map<String, UserClan> getUserClanForUsers(String clanId, List<String> userIds) {
 		StringBuilder querySb = new StringBuilder();
 		querySb.append("SELECT * FROM ");
 		querySb.append(TABLE_NAME);
