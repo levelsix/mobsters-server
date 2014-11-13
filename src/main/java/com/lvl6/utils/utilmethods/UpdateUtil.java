@@ -122,7 +122,7 @@ public interface UpdateUtil {
   public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
   
   public abstract int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
-  		List<Integer> acceptedInviteIds, Timestamp acceptTime);
+  		List<String> acceptedInviteIds, Timestamp acceptTime);
   
   public abstract int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
   		List<UserFacebookInviteForSlot> redeemedInvites);
@@ -165,7 +165,7 @@ public interface UpdateUtil {
 		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
 		  int attacksLostDelta, int defensesLostDelta, float nuPvpDmgMultiplier);
   
-  public abstract int updateMiniJobForUser(int userId, long userMiniJobId,
+  public abstract int updateMiniJobForUser(String userId, String userMiniJobId,
 		  String userMonsterIdStr, Timestamp now);
   
   public abstract int updateMiniJobForUserCompleteTime(int userId,

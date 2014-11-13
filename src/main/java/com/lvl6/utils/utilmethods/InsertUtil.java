@@ -117,11 +117,11 @@ public interface InsertUtil {
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
 
-	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
+	public abstract String insertIntoUserTaskReturnId(String userId, int taskId, 
 			int expGained, int cashGained, int oilGained, Timestamp startTime,
 			int taskStageId); 
 
-	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
+	public abstract int insertIntoTaskHistory(String userTaskId, String userId,
 			int taskId, int expGained, int cashGained, int oilGained,
 			int numRevives, Timestamp startTime, Timestamp endTime,
 			boolean userWon, boolean cancelled, int taskStageId);
@@ -139,10 +139,10 @@ public interface InsertUtil {
 			Map<Integer, Integer> taskStageMonsterIdToItemId);
 			*/
 	
-	public abstract List<Long> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList);
+	public abstract List<String> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList);
 	
-	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+	public abstract int insertIntoTaskStageHistory(List<String> userTaskStageIds,
+			List<String> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
@@ -163,7 +163,7 @@ public interface InsertUtil {
 	public abstract int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
 			List<Long> userMonsterIds, Timestamp startTime);
 
-	public abstract int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now);
+	public abstract int insertIntoUpdateEventPersistentForUser(String userId, int eventId, Timestamp now);
 	
 	public abstract int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,

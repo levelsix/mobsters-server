@@ -626,12 +626,12 @@ public class MonsterStuffUtils {
   }
   
   //gather up the user monster ids in the evolution(s)
-  public static Set<Long> getUserMonsterIdsUsedInEvolution(MonsterEvolvingForUser mefu,
+  public static Set<String> getUserMonsterIdsUsedInEvolution(MonsterEvolvingForUser mefu,
   		Map<Long, MonsterEvolvingForUser> catalystIdToMonsterEvolutionForUser) {
-  	Set<Long> userMonsterIds = new HashSet<Long>();
+  	Set<String> userMonsterIds = new HashSet<String>();
 
   	if (null != mefu) {
-  		long id = mefu.getCatalystMonsterForUserId();
+  		String id = mefu.getCatalystMonsterForUserId();
   		userMonsterIds.add(id);
   		id = mefu.getMonsterForUserIdOne();
   		userMonsterIds.add(id);
@@ -642,7 +642,7 @@ public class MonsterStuffUtils {
   			!catalystIdToMonsterEvolutionForUser.isEmpty()){
   		//loop through each MonsterEvolvingForUser gathering up the MonsterForUserIds
   		for (MonsterEvolvingForUser mefyou : catalystIdToMonsterEvolutionForUser.values()) {
-  			long id = mefyou.getCatalystMonsterForUserId();
+  			String id = mefyou.getCatalystMonsterForUserId();
   			userMonsterIds.add(id);
   			id = mefyou.getMonsterForUserIdOne();
   			userMonsterIds.add(id);
@@ -654,12 +654,12 @@ public class MonsterStuffUtils {
   	return userMonsterIds;
   }
   
-  public static List<Long> getUserMonsterIdsInClanRaid(
+  public static List<String> getUserMonsterIdsInClanRaid(
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
-  	List<Long> userMonsterIds = new ArrayList<Long>();
+  	List<String> userMonsterIds = new ArrayList<String>();
   	
   	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-  		List<Long> someUserMonsterIds = cepfu.getUserMonsterIds();
+  		List<String> someUserMonsterIds = cepfu.getUserMonsterIds();
   		userMonsterIds.addAll(someUserMonsterIds);
   	}
   	

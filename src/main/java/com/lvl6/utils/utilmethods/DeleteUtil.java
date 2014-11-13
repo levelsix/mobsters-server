@@ -25,9 +25,9 @@ public interface DeleteUtil {
   
   public abstract int deleteAllUserQuestsForUser(int userId);
   
-  public abstract int deleteTaskForUserOngoingWithTaskForUserId(long taskForUserId);
+  public abstract int deleteTaskForUserOngoingWithTaskForUserId(String taskForUserId);
   
-  public abstract int deleteTaskStagesForUserWithIds(List<Long> taskStageForUserIds);
+  public abstract int deleteTaskStagesForUserWithIds(List<String> taskStageForUserIds);
   
   public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
   
@@ -37,7 +37,7 @@ public interface DeleteUtil {
   
   public abstract int deleteMonstersForUser(List<Long> userMonsterIds);
  
-  public abstract int deleteUserFacebookInvitesForSlots(List<Integer> idsOfInvites);
+  public abstract int deleteUserFacebookInvitesForSlots(List<String> idsOfInvites);
   
   public abstract int deleteUnredeemedUserFacebookInvitesForUser(int userId);
   

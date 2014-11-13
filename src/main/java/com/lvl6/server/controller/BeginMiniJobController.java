@@ -17,14 +17,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginMiniJobRequestEvent;
 import com.lvl6.events.response.BeginMiniJobResponseEvent;
-import com.lvl6.events.response.BeginObstacleRemovalResponseEvent;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
@@ -179,8 +177,8 @@ public class BeginMiniJobController extends EventController{
 			return false;
 		}
 		
-		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
-		Map<Long, MiniJobForUser> idToUserMiniJob =
+		Collection<String> userMiniJobIds = Collections.singleton(userMiniJobId);
+		Map<String, MiniJobForUser> idToUserMiniJob =
 				getMiniJobForUserRetrieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
@@ -194,8 +192,8 @@ public class BeginMiniJobController extends EventController{
 		return true;
 	}
 	
-	private boolean writeChangesToDB(int userId, long userMiniJobId,
-			List<Long> userMonsterIds, Timestamp clientTime) {
+	private boolean writeChangesToDB(String userId, String userMiniJobId,
+			List<String> userMonsterIds, Timestamp clientTime) {
 		String userMonsterIdStr = StringUtils.implode(userMonsterIds, ",");
 		
 		int numUpdated = UpdateUtils.get().updateMiniJobForUser(userId,

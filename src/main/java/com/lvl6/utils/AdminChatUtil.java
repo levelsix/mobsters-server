@@ -154,7 +154,7 @@ public class AdminChatUtil {
 		List<String> userIds = new ArrayList<String>();
 		userIds.add(posterId);
 		userIds.add(recipientId);
-		Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+		Map<String, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
 
 		MinimumUserProto.Builder admin = MinimumUserProto.newBuilder().setUserUuid(
 				ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
