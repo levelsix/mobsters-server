@@ -89,7 +89,7 @@ public interface InsertUtil {
 
 	public abstract boolean insertUserClan(String userId, String clanId, String status, Timestamp requestTime);
 
-	public abstract int insertClanChatPost(int userId, int clanId, String content,
+	public abstract String insertClanChatPost(String userId, String clanId, String content,
 			Timestamp timeOfPost);
 
 //	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,

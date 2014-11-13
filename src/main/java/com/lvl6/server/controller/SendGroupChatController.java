@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendGroupChatResponseEvent;
+import com.lvl6.events.response.SetFacebookIdResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -28,6 +30,8 @@ import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
@@ -77,6 +81,7 @@ public class SendGroupChatController extends EventController {
         .getSendGroupChatRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    String userId = senderProto.getUserUuid();
     final GroupChatScope scope = reqProto.getScope();
     String chatMessage = reqProto.getChatMessage();
     final Timestamp timeOfPost = new Timestamp(new Date().getTime());
@@ -87,7 +92,28 @@ public class SendGroupChatController extends EventController {
     SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserUuid());
     resEvent.setTag(event.getTag());
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+      resEvent.setSendGroupChatResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       final User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
@@ -116,7 +142,7 @@ public class SendGroupChatController extends EventController {
         if (scope == GroupChatScope.GLOBAL) {
           chatProto.setIsAdmin(user.isAdmin());
         }
-        sendChatMessage(senderProto.getUserUuid(), chatProto, event.getTag(),
+        sendChatMessage(userId, chatProto, event.getTag(),
             scope == GroupChatScope.CLAN, user.getClanId(), user.isAdmin(),
             timeOfPost.getTime(), user.getLevel());
         // send messages in background so sending player can unlock
@@ -140,12 +166,12 @@ public class SendGroupChatController extends EventController {
     		log.error("exception2 in SendGroupChat processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
-  protected void sendChatMessage(int senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag,
-      boolean isForClan, int clanId, boolean isAdmin, long time, int level) {
+  protected void sendChatMessage(String senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag,
+      boolean isForClan, String clanId, boolean isAdmin, long time, int level) {
     ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(senderId);
     ce.setReceivedGroupChatResponseProto(chatProto.build());
     if (isForClan) {
@@ -154,7 +180,7 @@ public class SendGroupChatController extends EventController {
     } else {
       log.info("Sending global chat ");
       //add new message to front of list
-      chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(time, chatProto.getSender(), chatProto.getChatMessage(), isAdmin, 0));
+      chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(time, chatProto.getSender(), chatProto.getChatMessage(), isAdmin, null));
       //remove older messages
       try {
         while(chatMessages.size() > CHAT_MESSAGES_MAX_SIZE) {

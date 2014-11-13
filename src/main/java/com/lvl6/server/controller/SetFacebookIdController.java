@@ -75,7 +75,6 @@ import com.lvl6.utils.RetrieveUtils;
     List<String> userIds = new ArrayList<String>();
     userIds.add(userId);
     
-    
     Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
     resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);

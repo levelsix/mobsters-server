@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -8,12 +10,16 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetAvatarMonsterRequestEvent;
 import com.lvl6.events.response.SetAvatarMonsterResponseEvent;
+import com.lvl6.events.response.SetFacebookIdResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterRequestProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.RetrieveUtils;
@@ -41,11 +47,34 @@ import com.lvl6.utils.RetrieveUtils;
     SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent)event).getSetAvatarMonsterRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
+    String userId = senderProto.getUserUuid();
     int monsterId = reqProto.getMonsterId();
 
     SetAvatarMonsterResponseProto.Builder resBuilder = SetAvatarMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SetAvatarMonsterStatus.FAIL_OTHER);
+      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
     
 //    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
