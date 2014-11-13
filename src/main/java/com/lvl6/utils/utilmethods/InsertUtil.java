@@ -169,19 +169,19 @@ public interface InsertUtil {
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
 			int defenderWinEloChange, Timestamp battleStartTime);
 	
-	public abstract int insertIntoClanEventPersistentForClan(int clanId,
+	public abstract int insertIntoClanEventPersistentForClan(String clanId,
 			int clanEventPersistentId, int clanRaidId, int clanRaidStageId,
 			Timestamp stageStartTime, int clanRaidStageMonsterId, Timestamp stageMonsterStartTime);
 	
-	public abstract int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
-			int clanRaidId, List<Long> userMonsterIds);
+	public abstract int insertIntoUpdateMonstersClanEventPersistentForUser(String userId, String clanId,
+			int clanRaidId, List<String> userMonsterIds);
 	
-	public abstract int insertIntoClanEventPersistentForClanHistory(int clanId,
+	public abstract int insertIntoClanEventPersistentForClanHistory(String clanId,
 			Timestamp timeOfEntry, int clanEventPersistentId, int crId, int crsId,
 			Timestamp stageStartTime, int crsmId, Timestamp stageMonsterStartTime, boolean won);
 	
 	public abstract int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
-			Map<Integer, ClanEventPersistentForUser> clanUserInfo);	
+			Map<String, ClanEventPersistentForUser> clanUserInfo);	
 	
 	public abstract int insertIntoCepfuRaidStageHistory(Integer clanEventId,
 			Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,

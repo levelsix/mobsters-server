@@ -48,9 +48,9 @@ public interface DeleteUtil {
   
   public abstract int deletePvpBattleForUser(int attackerId);
   
-  public abstract int deleteClanEventPersistentForClan(int clanId);
+  public abstract int deleteClanEventPersistentForClan(String clanId);
   
-  public abstract int deleteClanEventPersistentForUsers(List<Integer> userIdList);
+  public abstract int deleteClanEventPersistentForUsers(List<String> userIdList);
   
   public abstract int deleteObstacleForUser(int userObstacleId);
   

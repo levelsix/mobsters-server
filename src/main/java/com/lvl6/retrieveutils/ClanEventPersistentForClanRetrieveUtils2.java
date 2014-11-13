@@ -1,14 +1,11 @@
 package com.lvl6.retrieveutils;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -20,10 +17,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class ClanEventPersistentForClanRetrieveUtils2 {
 
@@ -40,7 +35,7 @@ import com.lvl6.utils.DBConnection;
 	}
 
 
-	public ClanEventPersistentForClan getPersistentEventForClanId(int clanId) {
+	public ClanEventPersistentForClan getPersistentEventForClanId(String clanId) {
 
 		Object[] values = { clanId };
 		String query = String.format(

@@ -129,7 +129,7 @@ public interface UpdateUtil {
   
 //  public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
   
-  public abstract int updateClanEventPersistentForClanStageStartTime(int clanId,
+  public abstract int updateClanEventPersistentForClanStageStartTime(String clanId,
   		Timestamp curTime);
   
   public abstract int updateClanEventPersistentForClanGoToNextStage(int clanId,
