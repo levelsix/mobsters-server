@@ -61,8 +61,8 @@ public interface UpdateUtil {
    * used for updating last retrieved user struct times
    */
   public abstract boolean updateUserStructsLastretrieved(
-      Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
-      Map<Integer, StructureForUser> structIdsToUserStructs);
+      Map<String, Timestamp> userStructIdsToLastRetrievedTime,
+      Map<String, StructureForUser> structIdsToUserStructs);
 
   /*
    * used for upgrading user struct's fb invite level
