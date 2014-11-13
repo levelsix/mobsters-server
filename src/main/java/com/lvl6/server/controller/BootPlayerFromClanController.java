@@ -69,7 +69,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     UUID playerToBootUuid = null;
     UUID clanUuid = null;
     
-    boolean invalidUuids = false;
+    boolean invalidUuids = true;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
     	clanId = senderProto.getClan().getClanUuid();
     	try {
@@ -77,11 +77,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		playerToBootUuid = UUID.fromString(playerToBootId);
     			
 			clanUuid = UUID.fromString(clanId);
+			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
 				"UUID error. incorrect userId=%s, playerToBootId=%s clanId=%s",
 				userId, playerToBootId, clanId), e);
-			invalidUuids = true;
 		}
     }
     

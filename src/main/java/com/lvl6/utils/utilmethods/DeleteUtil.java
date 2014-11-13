@@ -58,5 +58,5 @@ public interface DeleteUtil {
  
   public abstract int deleteClanHelp(int userId, List<Long> clanHelpIdList);
   
-  public abstract int deleteClanInvite(int userId, List<Integer> clanInviteIdList);
+  public abstract int deleteClanInvite(String userId, List<String> clanInviteIdList);
 }

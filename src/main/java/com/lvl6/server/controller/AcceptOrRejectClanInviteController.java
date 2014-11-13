@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AcceptOrRejectClanInviteAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
@@ -43,6 +46,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	@Autowired
 	protected Locker locker;
 
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected ClanRetrieveUtils2 clanRetrieveUtil;
 
 	@Autowired
 	protected ClanInviteRetrieveUtil clanInviteRetrieveUtil;
@@ -72,7 +80,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		log.info(String.format("reqProto=%s", reqProto));
 		
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		ClanInviteProto accepted = reqProto.getAccepted(); 
 		List<ClanInviteProto> rejected = reqProto.getRejectedList();
 		Date clientTime = new Date(reqProto.getClientTime());
@@ -81,37 +89,62 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
-		int clanId = 0;
-		if (null != accepted && accepted.hasClanId()) {
-			clanId = accepted.getClanId();
+		String clanId = "";
+		if (null != accepted && accepted.hasClanUuid()) {
+			clanId = accepted.getClanUuid();
 		}
+		
+		UUID userUuid = null;
+	    UUID clanUuid = null;
+	    
+	    boolean invalidUuids = true;
+	    if (!clanId.isEmpty()) {
+	    	try {
+	    		userUuid = UUID.fromString(userId);
+				clanUuid = UUID.fromString(clanId);
+				invalidUuids = false;
+			} catch (Exception e) {
+				log.error(String.format(
+					"UUID error. incorrect userId=%s, playerToBootId=%s clanId=%s",
+					userId, clanId), e);
+			}
+	    }
+	    
+	    //UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
+			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setAcceptOrRejectClanInviteResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
 
-		boolean lockedClan = false;
-		if (0 != clanId) {
-			lockedClan = getLocker().lockClan(clanId);
-		}
+		boolean lockedClan = getLocker().lockClan(clanUuid);
 		try {
 			AcceptOrRejectClanInviteAction aorcia = null;
 			if (lockedClan) {
-				int inviteId = 0;
-				int prospectiveMemberId = userId;
-				int inviterId = 0;
+				String inviteId = "";
+				String prospectiveMemberId = userId;
+				String inviterId = "";
 				if (null != accepted) {
-					inviteId = accepted.getInviteId();
-					inviterId = accepted.getInviterId();
+					inviteId = accepted.getInviteUuid();
+					inviterId = accepted.getInviterUuid();
 				}
-				List<Integer> rejectedInviteIds = new ArrayList<Integer>();
+				List<String> rejectedInviteIds = new ArrayList<String>();
 
 				for (ClanInviteProto invite : rejected) {
-					rejectedInviteIds.add( invite.getInviteId() );
+					rejectedInviteIds.add( invite.getInviteUuid() );
 				}
 
 				aorcia =
 					new AcceptOrRejectClanInviteAction(inviteId, prospectiveMemberId,
 						inviterId, clanId, clientTime, rejectedInviteIds,
+						userRetrieveUtil,
 						RetrieveUtils.userClanRetrieveUtils(),
 						InsertUtils.get(), DeleteUtils.get(),
-						clanInviteRetrieveUtil);
+						clanRetrieveUtil, clanInviteRetrieveUtil);
 				aorcia.execute(resBuilder);
 			}
 
@@ -149,19 +182,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				log.error("exception2 in AcceptOrRejectClanInvite processEvent", e);
 			}
 		} finally {
-			if (0 != clanId && lockedClan) {
-				getLocker().unlockClan(clanId);
+			if (null != clanUuid && lockedClan) {
+				getLocker().unlockClan(clanUuid);
 			}
 		}
 	}
 
 
-	private ClanDataProto setClanData( int clanId,
-		Clan c, User u, int userId )
+	private ClanDataProto setClanData( String clanId,
+		Clan c, User u, String userId )
 	{
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 		StartUpResource fillMe = new StartUpResource(
-			RetrieveUtils.userRetrieveUtils());
+			userRetrieveUtil, clanRetrieveUtil );
 
 		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
 		sccma.setUp(fillMe);
@@ -180,7 +213,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	private void sendClanData(
 		  RequestEvent event,
 		  MinimumUserProto senderProto,
-		  int userId,
+		  String userId,
 		  ClanDataProto cdp )
 	  {
 		  if (null == cdp) {
@@ -203,6 +236,26 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public ClanRetrieveUtils2 getClanRetrieveUtil()
+	{
+		return clanRetrieveUtil;
+	}
+
+	public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+	{
+		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
 	public ClanInviteRetrieveUtil getClanInviteRetrieveUtil()
