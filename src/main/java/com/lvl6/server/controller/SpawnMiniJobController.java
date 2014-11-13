@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SpawnMiniJobRequestEvent;
 import com.lvl6.events.response.SpawnMiniJobResponseEvent;
+import com.lvl6.events.response.SpawnObstacleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
@@ -24,6 +26,7 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
+import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -67,7 +70,7 @@ public class SpawnMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		int numToSpawn = reqProto.getNumToSpawn();
 		numToSpawn = Math.max(0, numToSpawn);
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
@@ -77,6 +80,29 @@ public class SpawnMiniJobController extends EventController{
 		SpawnMiniJobResponseProto.Builder resBuilder = SpawnMiniJobResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+      SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 
 		//TODO: figure out if locking is needed
 //		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
@@ -141,7 +167,7 @@ public class SpawnMiniJobController extends EventController{
 		}
 	}
 	
-	private boolean checkLegitRequest(Builder resBuilder, int userId,
+	private boolean checkLegitRequest(Builder resBuilder, String userId,
 			User user, int numToSpawn, int structId,
 			Map<Integer, MiniJob> miniJobIdToMiniJob) {
 		
@@ -212,7 +238,7 @@ public class SpawnMiniJobController extends EventController{
 		return spawnedMiniJobs;
 	}
 	
-	private List<MiniJobForUser> convertIntoUserMiniJobs(int userId,
+	private List<MiniJobForUser> convertIntoUserMiniJobs(String userId,
 			List<MiniJob> miniJobs) {
 		List<MiniJobForUser> userMiniJobs =
 				new ArrayList<MiniJobForUser>();
@@ -235,7 +261,7 @@ public class SpawnMiniJobController extends EventController{
 		return userMiniJobs;
 	}
 
-	private boolean writeChangesToDB(User user, int userId,
+	private boolean writeChangesToDB(User user, String userId,
 			int numToSpawn, Timestamp clientTime, Date now,
 			List<MiniJobForUser> spawnedUserMiniJobs) {
 		
@@ -243,7 +269,7 @@ public class SpawnMiniJobController extends EventController{
 			log.info("inserting user mini jobs: " + spawnedUserMiniJobs +
 					"\t numToSpawn: " + numToSpawn);
 			//give user his mini jobs
-			List<Long> userMiniJobIds = InsertUtils.get()
+			List<String> userMiniJobIds = InsertUtils.get()
 					.insertIntoMiniJobForUserGetIds(
 							userId, spawnedUserMiniJobs);
 			log.info("inserted MiniJobForUser into mini_job_for_user:" +
@@ -251,7 +277,7 @@ public class SpawnMiniJobController extends EventController{
 
 			//TODO: move to some other class
 			for (int index = 0; index < userMiniJobIds.size(); index++) {
-				long userMiniJobId = userMiniJobIds.get(index);
+			  String userMiniJobId = userMiniJobIds.get(index);
 				MiniJobForUser mjfu = spawnedUserMiniJobs.get(index);
 				mjfu.setId(userMiniJobId);
 			}

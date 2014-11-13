@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SpawnObstacleRequestEvent;
 import com.lvl6.events.response.SpawnObstacleResponseEvent;
+import com.lvl6.events.response.TradeItemForBoosterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.Builder;
@@ -64,7 +67,7 @@ public class SpawnObstacleController extends EventController{
 		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		List<MinimumObstacleProto> mopList = reqProto.getProspectiveObstaclesList();
 		
@@ -72,7 +75,30 @@ public class SpawnObstacleController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
+      SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSpawnObstacleResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			
@@ -120,11 +146,11 @@ public class SpawnObstacleController extends EventController{
       	log.error("exception2 in SpawnObstacleController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, int userId, User user,
+	private boolean checkLegit(Builder resBuilder, String userId, User user,
 			List<MinimumObstacleProto> mopList) {
 		
 		if (null == user) {
@@ -141,7 +167,7 @@ public class SpawnObstacleController extends EventController{
 		return true;  
 	}
 	
-  private boolean writeChangesToDB(User user, int userId, Timestamp clientTime,
+  private boolean writeChangesToDB(User user, String userId, Timestamp clientTime,
   		List<MinimumObstacleProto> mopList, List<ObstacleForUser> ofuList) {
   	//convert the protos to java objects
   	List<ObstacleForUser> ofuListTemp = getStructureStuffUtil()
@@ -150,7 +176,7 @@ public class SpawnObstacleController extends EventController{
   	
   	//need to get the ids in order to set the objects' ids so client will know how
   	//to reference said objects
-  	List<Integer> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
+  	List<String> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
   			userId, ofuListTemp);
   	if (null == ofuIdList || ofuIdList.isEmpty()) {
   		log.error("could not insert into obstacle for user obstacles=" + ofuListTemp);

@@ -194,7 +194,7 @@ public interface InsertUtil {
 	public abstract List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
 			Timestamp crsEndTime, int clanEventId, List<ClanEventPersistentUserReward> userRewards);
 
-	public abstract int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+	public abstract int insertIntoPvpBattleHistory(String attackerId, String defenderId,
 			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
 			int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
 			int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
@@ -207,14 +207,14 @@ public interface InsertUtil {
 	public abstract List<String> insertIntoObstaclesForUserGetIds(String userId,
 			List<ObstacleForUser> ofuList);
 	
-	public abstract List<Long> insertIntoMiniJobForUserGetIds(int userId,
+	public abstract List<String> insertIntoMiniJobForUserGetIds(String userId,
 			List<MiniJobForUser> mjfuList); 
 	
-	public abstract int insertIntoUpdateUserItem(int userId, int itemId, int delta);
+	public abstract int insertIntoUpdateUserItem(String userId, int itemId, int delta);
 	
-	public abstract List<Long> insertIntoClanHelpGetId(List<ClanHelp> solicitations);
+	public abstract List<String> insertIntoClanHelpGetId(List<ClanHelp> solicitations);
 	
-	public abstract int insertIntoUpdateClanInvite(int userId,
+	public abstract int insertIntoUpdateClanInvite(String userId,
 		int inviterId, int clanId, Timestamp timeOfInvite);
 	
 	public abstract List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
