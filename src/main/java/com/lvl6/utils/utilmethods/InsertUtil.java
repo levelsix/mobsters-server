@@ -53,7 +53,7 @@ public interface InsertUtil {
 	public abstract int insertUserStruct(int userId, int structId, CoordinatePair coordinates,
 			Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete);
 	
-	public abstract int insertUserStructs(List<Integer> userIdList, List<Integer> structIdList,
+	public abstract int insertUserStructs(List<String> userIdList, List<Integer> structIdList,
   		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
   		List<Timestamp> retrievedTimeList, List<Boolean> isComplete);
 	
@@ -72,12 +72,12 @@ public interface InsertUtil {
 			int coinsGivenToReferrer);
 
 	// returns -1 if error
-	public abstract int insertUser(String name, String udid, int level, int experience,
+	public abstract String insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
 			Timestamp createTime, String facebookId, int avatarMonsterId, String email,
 			String fbData);
 	
-	public abstract int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+	public abstract int insertPvpLeagueForUser(String userId, int pvpLeagueId, int rank,
 			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
@@ -204,7 +204,7 @@ public interface InsertUtil {
 			float nuPvpDmgMultiplier, boolean attackerWon, boolean cancelled,
 			boolean gotRevenge, boolean displayToDefender);
 	
-	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+	public abstract List<String> insertIntoObstaclesForUserGetIds(String userId,
 			List<ObstacleForUser> ofuList);
 	
 	public abstract List<Long> insertIntoMiniJobForUserGetIds(int userId,

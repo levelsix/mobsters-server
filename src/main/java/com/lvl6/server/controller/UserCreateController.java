@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
-import com.lvl6.events.response.ReferralCodeUsedResponseEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
@@ -112,7 +111,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			boolean legitUserCreate = checkLegitUserCreate(gotLock, resBuilder, udid,
 					facebookId, name);
 
-			int userId = ControllerConstants.NOT_SET;
+			String userId = null;
 
 			if (legitUserCreate) {
 //			  String newReferCode = grabNewReferCode();
@@ -127,7 +126,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			log.info("Writing event: " + resEvent);
 			server.writePreDBEvent(resEvent, udid);
 
-			if (userId > 0) {
+			if (userId != null) {
 				//recording that player is online I guess
 			  ConnectedPlayer player = server.getPlayerByUdId(udid);
 			  player.setPlayerId(userId);
@@ -135,7 +134,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  server.getPlayersPreDatabaseByUDID().remove(udid);
 			}
 
-			if (legitUserCreate && userId > 0) {
+			if (legitUserCreate && userId != null) {
 			  /*server.lockPlayer(userId, this.getClass().getSimpleName());*/
 			  try {
 			  	//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
@@ -230,7 +229,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return false;
   }
   
-  private int writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
+  private String writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
   		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId,
   		String email, String fbData) {
   	//TODO: FIX THESE NUMBERS
@@ -238,11 +237,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  int playerExp = 10;
 	  int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 	  
-	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
+	  String userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
 	      gems, false, deviceToken, createTime, facebookId, avatarMonsterId,
 	      email, fbData);
 	        
-	  if (userId > 0) {
+	  if (userId != null) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*//*
 	    try {
 	      user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -267,7 +266,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   
   //THE VALUES AND STRUCTS TO GIVE THE USER
-  private void writeStructs(int userId, Timestamp purchaseTime,
+  private void writeStructs(String userId, Timestamp purchaseTime,
   		List<TutorialStructProto> structsJustBuilt) {
   	Date purchaseDate = new Date(purchaseTime.getTime());
   	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, -7);
@@ -278,7 +277,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	float[] yPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS;
   	log.info("giving user buildings");
   	int quantity = buildingIds.length;
-  	List<Integer> userIdList = new ArrayList<Integer>(
+  	List<String> userIdList = new ArrayList<String>(
   			Collections.nCopies(quantity, userId));
   	List<Integer> structIdList = new ArrayList<Integer>();
   	List<Float> xCoordList = new ArrayList<Float>();
@@ -330,11 +329,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("num buildings given to user: " + numInserted);
   }
   
-  private void writeObstacles(int userId) {
+  private void writeObstacles(String userId) {
   	List<ObstacleForUser> ofuList = getStructureStuffUtil()
   			.createTutorialObstacleForUser(userId);
   	log.info("inserting tutorial obstacles into obstacle_for_user");
-  	List<Integer> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
+  	List<String> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
   			userId, ofuList);
   	
   	log.info("tutorial ofuIdList=" + ofuIdList);
@@ -363,7 +362,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("num tasks inserted:" + numInserted + ", should be " + size);
   }
   
-  private void writeMonsters(int userId, Timestamp createTime, String fbId) {
+  private void writeMonsters(String userId, Timestamp createTime, String fbId) {
   	String sourceOfPieces = ControllerConstants.MFUSOP__USER_CREATE;
   	Date createDate = new Date(createTime.getTime());
   	Date combineStartDate = getTimeUtils().createDateAddDays(createDate, -7);
@@ -390,19 +389,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int firstOne = lvls.get(0);
   		MonsterLevelInfo mli = info.get(firstOne);
   		
-  		MonsterForUser mfu = new MonsterForUser(0, userId, monsterId, 0,//mli.getCurLvlRequiredExp(),
+  		MonsterForUser mfu = new MonsterForUser(null, userId, monsterId, 0,//mli.getCurLvlRequiredExp(),
   				mli.getLevel(), mli.getHp(), monzter.getNumPuzzlePieces(),
   				true, true, combineStartDate, teamSlotNum, sourceOfPieces,
   				false, monzter.getBaseOffensiveSkillId(), monzter.getBaseDefensiveSkillId());
   		userMonsters.add(mfu);
   	}
-  	List<Long> ids = InsertUtils.get().insertIntoMonsterForUserReturnIds(userId,
+  	List<String> ids = InsertUtils.get().insertIntoMonsterForUserReturnIds(userId,
   			userMonsters, sourceOfPieces, combineStartDate);
   	
   	log.info("monsters inserted for userId=" + userId + ", ids=" + ids);
   }
   
-  private void writePvpStuff(int userId, Timestamp createTime) {
+  private void writePvpStuff(String userId, Timestamp createTime) {
 	  int elo = ControllerConstants.PVP__DEFAULT_MIN_ELO;
 	  int pvpLeagueId = ControllerConstants.PVP__INITIAL_LEAGUE_ID;
 	  List<PvpLeague> pvpLeagueList = PvpLeagueRetrieveUtils.getLeaguesForElo(elo);
@@ -455,40 +454,40 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    return newReferCode;
 //  }
 
-  private void rewardReferrer(User referrer, User user) {
-    if (!referrer.isFake()) {
-      getLocker().lockPlayer(referrer.getId(), this.getClass().getSimpleName());
-      try {
-        int previousSilver = referrer.getCash();
-        
-        int coinsGivenToReferrer = MiscMethods.calculateCoinsGivenToReferrer(referrer);
-        if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
-          log.error("problem with rewarding the referrer " + referrer + " with this many coins: " + coinsGivenToReferrer);
-        } else {
-          if (!insertUtils.insertReferral(referrer.getId(), user.getId(), coinsGivenToReferrer)) {
-            log.error("problem with inserting referral into db. referrer is " + referrer.getId() + ", user=" + user.getId()
-                + ", coins given to referrer=" + coinsGivenToReferrer);
-          }
-          ReferralCodeUsedResponseEvent resEvent = new ReferralCodeUsedResponseEvent(referrer.getId());
-          ReferralCodeUsedResponseProto resProto = ReferralCodeUsedResponseProto.newBuilder()
-              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(referrer, null))
-              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
-              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
-          resEvent.setReferralCodeUsedResponseProto(resProto);
-          server.writeAPNSNotificationOrEvent(resEvent);
-          
-          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
-        }
-      } catch (Exception e) {
-        log.error("exception in UserCreateController processEvent", e);
-      } finally {
-        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
-      }
-    }
-  }
+//  private void rewardReferrer(User referrer, User user) {
+//    if (!referrer.isFake()) {
+//      getLocker().lockPlayer(referrer.getId(), this.getClass().getSimpleName());
+//      try {
+//        int previousSilver = referrer.getCash();
+//        
+//        int coinsGivenToReferrer = MiscMethods.calculateCoinsGivenToReferrer(referrer);
+//        if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
+//          log.error("problem with rewarding the referrer " + referrer + " with this many coins: " + coinsGivenToReferrer);
+//        } else {
+//          if (!insertUtils.insertReferral(referrer.getId(), user.getId(), coinsGivenToReferrer)) {
+//            log.error("problem with inserting referral into db. referrer is " + referrer.getId() + ", user=" + user.getId()
+//                + ", coins given to referrer=" + coinsGivenToReferrer);
+//          }
+//          ReferralCodeUsedResponseEvent resEvent = new ReferralCodeUsedResponseEvent(referrer.getId());
+//          ReferralCodeUsedResponseProto resProto = ReferralCodeUsedResponseProto.newBuilder()
+//              .setSender(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(referrer, null))
+//              .setReferredPlayer(CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(user, null))
+//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
+//          resEvent.setReferralCodeUsedResponseProto(resProto);
+//          server.writeAPNSNotificationOrEvent(resEvent);
+//          
+//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
+//        }
+//      } catch (Exception e) {
+//        log.error("exception in UserCreateController processEvent", e);
+//      } finally {
+//        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
+//      }
+//    }
+//  }
 
 
-  private void writeToUserCurrencyHistory(int userId, int cash, int oil, int gems,
+  private void writeToUserCurrencyHistory(String userId, int cash, int oil, int gems,
   		Timestamp createTime) {
   	String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
 
