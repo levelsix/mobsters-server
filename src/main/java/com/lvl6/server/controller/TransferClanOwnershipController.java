@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
+import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -22,9 +24,10 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
+import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -36,7 +39,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
-  
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
+
   public TransferClanOwnershipController() {
     numAllocatedThreads = 2;
   }
@@ -57,9 +63,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    int newClanOwnerId = reqProto.getClanOwnerIdNew();
-    List<Integer> userIds = new ArrayList<Integer>();
+    String userId = senderProto.getUserUuid();
+    String newClanOwnerId = reqProto.getClanOwnerUuidNew();
+    List<String> userIds = new ArrayList<String>();
     //order matters
     userIds.add(userId);
     userIds.add(newClanOwnerId);
@@ -68,104 +74,131 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    int clanId = 0;
+    String clanId = null;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+      clanId = senderProto.getClan().getClanUuid();
     }
-    
+
+    UUID userUuid = null;
+    UUID newClanOwnerUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      newClanOwnerUuid = UUID.fromString(newClanOwnerId);
+      clanUuid = UUID.fromString(clanId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, newClanOwnerId=%s, clanId=%s",
+          userId, newClanOwnerId, clanId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+      TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
     boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
+    if (clanUuid != null) {
+      lockedClan = getLocker().lockClan(clanUuid);
     } 
     try {
-    	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-    	Map<Integer, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
-    			.getUserClanForUsers(clanId, userIds);
-    	
+      Map<String,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+      Map<String, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
+          .getUserClanForUsers(clanId, userIds);
+
       User user = users.get(userId);
       User newClanOwner = users.get(newClanOwnerId);
-      
+
       boolean legitTransfer = checkLegitTransfer(resBuilder, lockedClan, userId, user,
-      		newClanOwnerId, newClanOwner, userClans);
+          newClanOwnerId, newClanOwner, userClans);
 
       if (legitTransfer) {
-      	List<UserClanStatus> statuses = new ArrayList<UserClanStatus>();
-      	//order matters
-      	statuses.add(UserClanStatus.JUNIOR_LEADER);
-      	statuses.add(UserClanStatus.LEADER);
+        List<UserClanStatus> statuses = new ArrayList<UserClanStatus>();
+        //order matters
+        statuses.add(UserClanStatus.JUNIOR_LEADER);
+        statuses.add(UserClanStatus.LEADER);
         writeChangesToDB(clanId, userIds, statuses);
         setResponseBuilderStuff(resBuilder, clanId, newClanOwner);
       }
-      
+
       if (!legitTransfer) {
-      	//if not successful write to guy
-    	  TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);      
+        //if not successful write to guy
+        TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);      
       }
-      
+
       if (legitTransfer) {
-      	TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserUuid());
-      	resEvent.setTag(event.getTag());
-      	resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());  
-      	server.writeClanEvent(resEvent, clanId);
-      
+        TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserUuid());
+        resEvent.setTag(event.getTag());
+        resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());  
+        server.writeClanEvent(resEvent, clanId);
+
       }
 
     } catch (Exception e) {
       log.error("exception in TransferClanOwnership processEvent", e);
       try {
-    	  resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
-    	  TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
-    	  resEvent.setTag(event.getTag());
-    	  resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in TransferClanOwnership processEvent", e);
-    	}
+        resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+        TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in TransferClanOwnership processEvent", e);
+      }
     } finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
-    	}
+      if (clanUuid != null && lockedClan) {
+        getLocker().unlockClan(clanUuid);
+      }
     }
   }
 
-  private boolean checkLegitTransfer(Builder resBuilder, boolean lockedClan, int userId,
-  		User user, int newClanOwnerId, User newClanOwner, Map<Integer, UserClan> userClans) {
+  private boolean checkLegitTransfer(Builder resBuilder, boolean lockedClan, String userId,
+      User user, String newClanOwnerId, User newClanOwner, Map<String, UserClan> userClans) {
 
-  	if (!lockedClan) {
-  		log.error("couldn't obtain clan lock");
-  		return false;
-  	}
-  	
+    if (!lockedClan) {
+      log.error("couldn't obtain clan lock");
+      return false;
+    }
+
     if (user == null || newClanOwner == null) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
       log.error("user is " + user + ", new clan owner is " + newClanOwner);
       return false;      
     }
-    if (user.getClanId() <= 0) {
+    if (user.getClanId() == null) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
       log.error("user not in clan. user=" + user);
       return false;      
     }
-    
+
     if (newClanOwner.getClanId() != user.getClanId()) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NEW_OWNER_NOT_IN_CLAN);
       log.error("new owner not in same clan as user. new owner= " + newClanOwner + ", user is " + user);
       return false;     
     }
-    
-    
+
+
     if (!userClans.containsKey(userId) || !userClans.containsKey(newClanOwnerId)) {
-    	log.error("a UserClan does not exist userId=" + userId + ", newClanOwner=" +
-    			newClanOwnerId + "\t userClans=" + userClans);
-    	return false;
+      log.error("a UserClan does not exist userId=" + userId + ", newClanOwner=" +
+          newClanOwnerId + "\t userClans=" + userClans);
+      return false;
     }
     UserClan userClan = userClans.get(user.getId());
-    
+
     String leaderStatusName = UserClanStatus.LEADER.name();
-    
+
     if (!leaderStatusName.equals(userClan.getStatus())) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
       log.error("user is " + user + ", and user isn't owner. user is:" + userClan);
@@ -175,42 +208,52 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private void writeChangesToDB(int clanId, List<Integer> userIdList,
-  		List<UserClanStatus> statuses) {
-  	//update clan for user table
-  	
-  	int numUpdated = UpdateUtils.get().updateUserClanStatuses(clanId, userIdList, statuses); 
-  	log.info(String.format(
-  		"num clan_for_user updated=%s, userIdList=%s, statuses=%s",
-  		numUpdated, userIdList, statuses));
+  private void writeChangesToDB(String clanId, List<String> userIdList,
+      List<UserClanStatus> statuses) {
+    //update clan for user table
+
+    int numUpdated = UpdateUtils.get().updateUserClanStatuses(clanId, userIdList, statuses); 
+    log.info(String.format(
+        "num clan_for_user updated=%s, userIdList=%s, statuses=%s",
+        numUpdated, userIdList, statuses));
   }
-  
-  private void setResponseBuilderStuff(Builder resBuilder, int clanId, User newClanOwner) {
-  	Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
-  	List<Integer> clanIdList = Collections.singletonList(clanId);
-  	
-  	List<String> statuses = new ArrayList<String>();
-  	statuses.add(UserClanStatus.LEADER.name());
-  	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-  	statuses.add(UserClanStatus.CAPTAIN.name());
-  	statuses.add(UserClanStatus.MEMBER.name());
-  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
-  			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
-  	
+
+  private void setResponseBuilderStuff(Builder resBuilder, String clanId, User newClanOwner) {
+    Clan clan = getClanRetrieveUtil().getClanWithId(clanId);
+    List<String> clanIdList = Collections.singletonList(clanId);
+
+    List<String> statuses = new ArrayList<String>();
+    statuses.add(UserClanStatus.LEADER.name());
+    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+    statuses.add(UserClanStatus.CAPTAIN.name());
+    statuses.add(UserClanStatus.MEMBER.name());
+    Map<String, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+        .getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+
     resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
 
     int size = clanIdToSize.get(clanId);
     resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan, size));
-    
+
     MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(newClanOwner, clan);
     resBuilder.setClanOwnerNew(mup);
   }
-  
+
   public Locker getLocker() {
-	  return locker;
+    return locker;
   }
   public void setLocker(Locker locker) {
-	  this.locker = locker;
+    this.locker = locker;
   }  
-  
+
+  public ClanRetrieveUtils2 getClanRetrieveUtil()
+  {
+    return clanRetrieveUtil;
+  }
+
+  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+  {
+    this.clanRetrieveUtil = clanRetrieveUtil;
+  }
+
 }

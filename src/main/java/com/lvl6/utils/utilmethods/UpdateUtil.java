@@ -79,7 +79,7 @@ public interface UpdateUtil {
 
   public abstract boolean updateUserClanStatus(String userId, String clanId, UserClanStatus status);
   
-  public abstract int updateUserClanStatuses(String clanId, List<Integer> userIdList,
+  public abstract int updateUserClanStatuses(String clanId, List<String> userIdList,
 			List<UserClanStatus> statuses);
 
   public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(String userId, int eventId,
