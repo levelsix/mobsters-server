@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -8,9 +10,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetGameCenterIdRequestEvent;
 import com.lvl6.events.response.SetGameCenterIdResponseEvent;
+import com.lvl6.events.response.SpawnObstacleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus;
@@ -41,7 +45,7 @@ import com.lvl6.utils.RetrieveUtils;
     SetGameCenterIdRequestProto reqProto = ((SetGameCenterIdRequestEvent)event).getSetGameCenterIdRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
+    String userId = senderProto.getUserUuid();
     String gameCenterId = reqProto.getGameCenterId();
     if (gameCenterId != null && gameCenterId.isEmpty()) gameCenterId = null;
 
@@ -49,6 +53,29 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
     if (null != gameCenterId) {
     	resBuilder.setGameCenterId(gameCenterId);
+    }
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
+      SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSetGameCenterIdResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
     }
     
 //    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
