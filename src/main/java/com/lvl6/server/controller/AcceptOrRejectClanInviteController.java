@@ -105,7 +105,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				invalidUuids = false;
 			} catch (Exception e) {
 				log.error(String.format(
-					"UUID error. incorrect userId=%s, playerToBootId=%s clanId=%s",
+					"UUID error. incorrect userId=%s, clanId=%s",
 					userId, clanId), e);
 			}
 	    }

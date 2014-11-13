@@ -21,7 +21,7 @@ public interface DeleteUtil {
 
   public abstract boolean deleteUserClan(String userId, String clanId);
 
-  public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId);
+  public void deleteUserClansForUserExceptSpecificClan(String userId, String clanId);
   
   public abstract int deleteAllUserQuestsForUser(int userId);
   
