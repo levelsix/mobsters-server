@@ -45,7 +45,8 @@ public class AchievementForUserRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, AchievementForUser> getSpecificOrAllAchievementIdToAchievementForUserId(
-			int userId, Collection<Integer> achievementIds) {
+		String userId, Collection<Integer> achievementIds)
+	{
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = null;
 		try {
 			List<String> columnsToSelected = UserAchievementForClientMapper
@@ -89,7 +90,8 @@ public class AchievementForUserRetrieveUtil {
 				achievementIdToUserAchievements.put(achievementId, afu);
 			}
 		} catch (Exception e) {
-			log.error("could not retrieve user obstacle for userId=" + userId, e);
+			log.error(String.format(
+				"could not retrieve user obstacle for userId=%s", userId), e);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 		}

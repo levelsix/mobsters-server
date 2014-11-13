@@ -119,7 +119,7 @@ public interface UpdateUtil {
   		Collection<MonsterForUser> monsterForUserList, String updateReason,
   		Date combineStartTime);
   
-  public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
+  public abstract int updateCompleteUserMonster(List<String> userMonsterIds);
   
   public abstract int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
   		List<String> acceptedInviteIds, Timestamp acceptTime);
