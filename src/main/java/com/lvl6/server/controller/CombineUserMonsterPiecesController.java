@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.Bu
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -39,6 +41,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Autowired
   protected Locker locker;
 
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+  
   public CombineUserMonsterPiecesController() {
     numAllocatedThreads = 4;
   }
@@ -59,9 +64,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
-    userMonsterIds = new ArrayList<Long>(userMonsterIds);
+    String userId = senderProto.getUserUuid();
+    List<String> userMonsterIds = reqProto.getUserMonsterUuidsList();
+    userMonsterIds = new ArrayList<String>(userMonsterIds);
     int gemCost = reqProto.getGemCost();
     Date curDate = new Date();
     Timestamp curTime = new Timestamp(curDate.getTime());
@@ -72,12 +77,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+	boolean invalidUuids = false;
+	try {
+		userUuid = UUID.fromString(userId);
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect userId=%s",
+			userId), e);
+		invalidUuids = true;
+	}
+	
+	//UUID checks
+	if (invalidUuids) {
+		resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER);
+		CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(userId);
+		resEvent.setTag(event.getTag());
+		resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder.build());
+		server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
     	int previousGems = 0;
     	
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
+      Map<String, MonsterForUser> idsToUserMonsters = RetrieveUtils
       		.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
       
       boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
@@ -121,7 +147,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in CombineUserMonsterPiecesController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -137,25 +163,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    *  can be completed  so "userMonsterIds" will be modified to only contain
 	 * 'd'
    */
-  private boolean checkLegit(Builder resBuilder, int userId, User u,
-  		List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters,
+  private boolean checkLegit(Builder resBuilder, String userId, User u,
+  		List<String> userMonsterIds, Map<String, MonsterForUser> idsToUserMonsters,
   		int gemCost) {
   	
   	if (null == u) {
-  		log.error("user is null. no user exists with id=" + userId + "");
+  		log.error(String.format(
+  			"user is null. no user exists with id=%s", userId));
   		return false;
   	}
   	if (null == userMonsterIds || userMonsterIds.isEmpty() ||
   			idsToUserMonsters.isEmpty()) {
-  		log.error("no user monsters exist. userMonsterIds=" + userMonsterIds +
-  				"\t idsToUserMonsters=" + idsToUserMonsters);
+  		log.error(String.format(
+  			"no user monsters exist. userMonsterIds=%s idsToUserMonsters=%s",
+  			userMonsterIds, idsToUserMonsters));
   		return false;
   	}
   	
   	//only complete the user monsters that exist
   	if (userMonsterIds.size() != idsToUserMonsters.size()) {
-  		log.warn("not all monster_for_user_ids exist. userMonsterIds=" + userMonsterIds +
-  				"\t idsToUserMonsters=" + idsToUserMonsters + "\t. Will continue processing");
+  		log.warn(String.format(
+  			"not all monster_for_user_ids exist. userMonsterIds=%s, idsToUserMonsters=%s. %s",
+  			userMonsterIds, idsToUserMonsters, " Will continue processing"));
   		
   		//retaining only the user monster ids that exist
   		userMonsterIds.clear();
@@ -203,15 +232,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
+  private boolean writeChangesToDb(User aUser, List<String> userMonsterIds,
   		int gemCost, Map<String, Integer> money) { 
   	
   	//if user sped up stuff then charge him
   	if (gemCost > 0) {
   		int gemChange = -1 * gemCost;
   		if (!aUser.updateRelativeGemsNaive(gemChange)) {
-  			log.error("problem with updating user gems for speedup. gemChange=" + gemChange + 
-  					"\t userMonsterIds=" + userMonsterIds);
+  			log.error(String.format(
+  				"problem updating user gems for speedup. gemChange=%s, userMonsterIds=%s",
+  				gemChange, userMonsterIds));
   			return false;
   		} else {
   			money.put(MiscMethods.gems, gemChange);
@@ -221,18 +251,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int num = UpdateUtils.get().updateCompleteUserMonster(userMonsterIds);
   	
   	if (num != userMonsterIds.size()) {
-  		log.error("problem with updating user monster is_complete. numUpdated=" +
-  				num + "\t userMonsterIds=" + userMonsterIds);
+  		log.error(String.format(
+  			"problem with updating user monster is_complete. numUpdated=%s, userMonsterIds=%s" +
+  				num , userMonsterIds));
   	}
   	return true;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
-  		Timestamp curTime, int previousGems, List<Long> userMonsterIds) {
+  		Timestamp curTime, int previousGems, List<String> userMonsterIds) {
   	if (null == money || money.isEmpty()) {
   		return;
   	}
-  	int userId = aUser.getId();
+  	String userId = aUser.getId();
   	String gems = MiscMethods.gems;
   	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_COMBINING_MONSTER;
   	
