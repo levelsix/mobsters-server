@@ -339,7 +339,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("tutorial ofuIdList=" + ofuIdList);
   }
 
-  private void writeTaskCompleted(int userId, Timestamp createTime) {
+  private void writeTaskCompleted(String userId, Timestamp createTime) {
   	List<Integer> taskIdList = new ArrayList<Integer>();
   	
   	int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
@@ -354,7 +354,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("taskIdList: "+taskIdList);
   	
   	int size = taskIdList.size();
-  	List<Integer> userIdList = Collections.nCopies(size, userId);
+  	List<String> userIdList = Collections.nCopies(size, userId);
   	List<Timestamp> createTimeList = Collections.nCopies(size, createTime);
   	
   	int numInserted = InsertUtils.get().insertIntoTaskForUserCompleted(userIdList,
