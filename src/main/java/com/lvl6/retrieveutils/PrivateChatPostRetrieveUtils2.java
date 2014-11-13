@@ -1,6 +1,5 @@
 package com.lvl6.retrieveutils;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -20,12 +19,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2.UserObstacleForClientMapper;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class PrivateChatPostRetrieveUtils2 {
 
@@ -42,11 +37,11 @@ import com.lvl6.utils.DBConnection;
 	}
 
 
-	public static List<PrivateChatPost> getPrivateChatPostsBetweenUsersBeforePostId(
-		int limit, int postId, int userOne, int userTwo) {
+	public List<PrivateChatPost> getPrivateChatPostsBetweenUsersBeforePostId(
+		int limit, int userOne, int userTwo) {
 		log.info(String.format(
-			"retrieving %s private chat posts before certain postId %s for userOne %s and userTwo %s",
-			limit, postId, userOne, userTwo));
+			"retrieving %s private chat posts for userOne %s and userTwo %s",
+			limit, userOne, userTwo));
 
 		String query = "";
 		List<Object> values = new ArrayList<Object>();
@@ -61,26 +56,14 @@ import com.lvl6.utils.DBConnection;
 		values.add(userOne);
 		values.add(userTwo);
 
-		//in case no before post id is specified
-		if (ControllerConstants.NOT_SET != postId) {
-			query += "AND " + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + " < ? ";
-			values.add(postId);
-		}
-
-		query += "ORDER BY " + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + " DESC  LIMIT ?";
+		query += "ORDER BY " + DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST + " DESC  LIMIT ?";
 		values.add(limit);
 
-		Connection conn = null;
-		ResultSet rs = null;
 		List<PrivateChatPost> privateChatPosts = null;
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-			privateChatPosts = convertRSToPrivateChatPosts(rs);
+			privateChatPosts = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
 		} catch (Exception e) {
 			log.error("private chat post retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
 		}
 		return privateChatPosts;
 	}

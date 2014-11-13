@@ -24,9 +24,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
-import com.lvl6.info.ObstacleForUser;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil.UserAchievementForClientMapper;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -45,7 +43,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	}
 
 	//CONTROLLER LOGIC******************************************************************
-	public static List<String> getClanIdsFromClans(Collection<Clan> clanList) {
+	public List<String> getClanIdsFromClans(Collection<Clan> clanList) {
 		List<String> clanIdList = new ArrayList<String>();
 
 		for (Clan clan : clanList) {
@@ -57,46 +55,31 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	//RETRIEVE QUERIES*********************************************************************
 	//@Cacheable(value="clanWithId", key="#clanId")
-	public static Clan getClanWithId(String clanId) {
-		log.debug("retrieving clan with id " + clanId);
-
-		TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-		absoluteParams.put(DBConstants.CLANS__ID, clanId);
-
+	public Clan getClanWithId(String clanId) {
 		Clan clan = null;
-		Connection conn = null;
-		ResultSet rs = null;
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteParams, TABLE_NAME);
-			clan = convertRSToSingleClan(rs);
+			Object[] values = { clanId };
+			String query = String.format(
+				"select * from %s where %s=?",
+				TABLE_NAME, DBConstants.CLANS__ID);
+
+			clan = this.jdbcTemplate.queryForObject(query, values, rowMapper);
 		} catch (Exception e) {
-			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
+			log.error(String.format("could not retrieve clan for id=%s", clanId), e);
 		}
+		
 		return clan;
 	}
 
 
 
-	public static Map<Integer, Clan> getClansByIds(Collection<Integer> clanIds) {
+	public Map<String, Clan> getClansByIds(Collection<String> clanIds) {
 		log.debug("retrieving clans with ids " + clanIds);
 
 		if (clanIds == null || clanIds.size() <= 0 ) {
-			return new HashMap<Integer, Clan>();
+			return new HashMap<String, Clan>();
 		}
-
-		/*
-    String query = "select * from " + TABLE_NAME + " where (";
-    List<String> condClauses = new ArrayList<String>();
-    List <Object> values = new ArrayList<Object>();
-    for (Integer clanId : clanIds) {
-      condClauses.add(DBConstants.CLANS__ID + "=?");
-      values.add(clanId);
-    }
-    query += StringUtils.getListInString(condClauses, "or") + ")";
-		 */
+		
 		List<Object> values = new ArrayList<Object>();
 		values.addAll(clanIds);
 
@@ -106,161 +89,80 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			"SELECT * FROM %s WHERE %s IN (%s)",
 			TABLE_NAME, DBConstants.CLANS__ID, csQuestions);
 
-		Connection conn = null;
-		ResultSet rs = null;
-		Map<Integer, Clan> clanIdToClanMap = new HashMap<Integer, Clan>();
+		Map<String, Clan> clanIdToClanMap = new HashMap<String, Clan>();
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-			clanIdToClanMap = convertRSToClanIdToClanMap(rs);
+			List<Clan> clans = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
+			
+			for (Clan c : clans) {
+				clanIdToClanMap.put(c.getId(), c);
+			}
 		} catch (Exception e) {
-			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
+			log.error("clan retrieve db error. clanIds="+clanIds, e);
 		}
 		return clanIdToClanMap;
-
 	}
 
-	public static List<Clan> getClansWithSimilarNameOrTag(String name, String tag) {
+	public List<Clan> getClansWithSimilarNameOrTag(String name, String tag) {
 		log.debug(String.format(
 			"retrieving clan with name=%s, tag=%s",
 			name, tag));
+		
+		String query = String.format(
+		           "SELECT * FROM %s WHERE %s LIKE ? OR %s LIKE ?",
+		           TABLE_NAME, DBConstants.CLANS__NAME, DBConstants.CLANS__TAG);
 
-		TreeMap <String, Object> likeParams = new TreeMap<String, Object>();
-		likeParams.put(DBConstants.CLANS__NAME, "%"+name+"%");
-		likeParams.put(DBConstants.CLANS__TAG, "%"+tag+"%");
+		List<Object> values = new ArrayList<Object>();
+		values.add("%"+name+"%");
+		values.add("%"+tag+"%");
 
-		Connection conn = null;
-		ResultSet rs = null;
 		List<Clan> clans = null;
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsLikeOr(conn, likeParams, TABLE_NAME);
-			clans = convertRSToClansList(rs);
+			clans = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
 		} catch (Exception e) {
 			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
 		}
 		return clans;
 	}
 
-	public static Clan getClanWithNameOrTag(String name, String tag) {
+	public Clan getClanWithNameOrTag(String name, String tag) {
 		log.debug(String.format(
 			"retrieving clan with name=%s, tag=%s",
 			name, tag));
+		
+		String query = String.format(
+		           "SELECT * FROM %s WHERE %s=? OR %s=?",
+		           TABLE_NAME, DBConstants.CLANS__NAME, DBConstants.CLANS__TAG);
 
-		TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-		absoluteParams.put(DBConstants.CLANS__NAME, name);
-		absoluteParams.put(DBConstants.CLANS__TAG, tag);
+		List<Object> values = new ArrayList<Object>();
+		values.add(name);
+		values.add(tag);
 
-		Connection conn = null;
-		ResultSet rs = null;
 		Clan clan = null;
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsAbsoluteOr(conn, absoluteParams, TABLE_NAME);
-			clan = convertRSToSingleClan(rs);
+			List<Clan> clans = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
+
+			if (null != clans && !clans.isEmpty()) {
+				clan = clans.get(0);
+			}
 		} catch (Exception e) {
 			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
 		}
 		return clan;
 	}
 
-	public static List<Clan> getMostRecentClansBeforeClanId(int limit, int clanId) {
-		TreeMap <String, Object> lessThanParamsToVals = new TreeMap<String, Object>();
-		lessThanParamsToVals.put(DBConstants.CLANS__ID, clanId);
+	public List<Clan> getMostRecentClans(int limit) {
+		Object[] values = { limit };
+		String query = String.format(
+		           "SELECT * FROM %s ORDER BY %s LIMIT ?",
+		           TABLE_NAME, DBConstants.CLANS__CREATE_TIME);
 
-		Connection conn = null;
-		ResultSet rs = null;
 		List<Clan> clans = null;
 		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit, lessThanParamsToVals);
-			clans = convertRSToClansList(rs);
+			clans = this.jdbcTemplate.query(query, values, rowMapper);
 		} catch (Exception e) {
 			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
 		}
 		return clans;
-	}
-
-	public static List<Clan> getMostRecentClans(int limit) {
-		Connection conn = null;
-		ResultSet rs = null;
-		List<Clan> clans = null;
-		try {
-			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit);
-			clans = convertRSToClansList(rs);
-		} catch (Exception e) {
-			log.error("clan retrieve db error.", e);
-		} finally {
-			DBConnection.get().close(rs, null, conn);
-		}
-		return clans;
-	}
-
-	private static Clan convertRSToSingleClan(
-		ResultSet rs) {
-		if (rs != null) {
-			try {
-				rs.last();
-				rs.beforeFirst();
-				while(rs.next()) {
-					Clan clan = convertRSRowToClan(rs);
-					return clan;
-				}
-			} catch (SQLException e) {
-				log.error("problem with database call.", e);
-
-			}
-		}
-		return null;
-	}
-
-	private static List<Clan> convertRSToClansList(ResultSet rs) {
-		if (rs != null) {
-			try {
-				rs.last();
-				rs.beforeFirst();
-				List<Clan> clansList = new ArrayList<Clan>();
-				while(rs.next()) {
-					Clan clan = convertRSRowToClan(rs);
-					clansList.add(clan);
-				}
-				return clansList;
-			} catch (SQLException e) {
-				log.error("problem with database call.", e);
-
-			}
-		}
-		return null;
-	}
-
-	private static Map<Integer, Clan> convertRSToClanIdToClanMap(ResultSet rs) {
-		if (rs != null) {
-			try {
-				rs.last();
-				rs.beforeFirst();
-				Map<Integer, Clan> clanIdsToClans = new HashMap<Integer, Clan>();
-				while (rs.next()) {
-					Clan c = convertRSRowToClan(rs);
-					if (null != c) {
-						int clanId = c.getId();
-						clanIdsToClans.put(clanId, c);
-					}
-				}
-				return clanIdsToClans;
-			} catch(SQLException e) {
-				log.error("problem with database call.", e);
-			}
-		}
-		return null;
 	}
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
