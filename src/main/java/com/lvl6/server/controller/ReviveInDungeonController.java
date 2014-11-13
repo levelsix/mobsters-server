@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
@@ -58,8 +60,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    long userTaskId = reqProto.getUserTaskId();
+    String userId = senderProto.getUserUuid();
+    String userTaskId = reqProto.getUserTaskUuid();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     List<UserMonsterCurrentHealthProto> reviveMeProtoList = reqProto.getReviveMeList();
     //positive value, need to convert to negative when updating user
@@ -70,13 +72,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userTaskUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      userTaskUuid = UUID.fromString(userTaskId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userTaskId=%s",
+          userId, userTaskId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER);
+      ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setReviveInDungeonResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousGems = 0;
 
       //will be populated by checkLegit(...);
-      Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
+      Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
     	
 //      List<TaskForUserOngoing> userTaskList = new ArrayList<TaskForUserOngoing>();
       boolean legit = checkLegit(resBuilder, aUser, userId, gemsSpent, userTaskId,
@@ -123,7 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in ReviveInDungeonController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -131,9 +158,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId, int gemsSpent,
-		  long userTaskId, List<UserMonsterCurrentHealthProto> reviveMeProtoList,
-		  Map<Long, Integer> userMonsterIdToExpectedHealth) {//, List<TaskForUserOngoing> userTaskList) {
+  private boolean checkLegit(Builder resBuilder, User u, String userId, int gemsSpent,
+      String userTaskId, List<UserMonsterCurrentHealthProto> reviveMeProtoList,
+		  Map<String, Integer> userMonsterIdToExpectedHealth) {//, List<TaskForUserOngoing> userTaskList) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
@@ -147,9 +174,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //    }
     
     //extract the ids so it's easier to get userMonsters from db
-    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(reviveMeProtoList,
+    List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(reviveMeProtoList,
     		userMonsterIdToExpectedHealth);
-    Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    Map<String, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
     		.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 
     if (null == userMonsters || userMonsters.isEmpty()) {
@@ -179,9 +206,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, long userTaskId,
+  private boolean writeChangesToDb(User u, String uId, String userTaskId,
 		  int gemsSpent, Timestamp clientTime,
-		  Map<Long, Integer> userMonsterIdToExpectedHealth,
+		  Map<String, Integer> userMonsterIdToExpectedHealth,
 		  Map<String, Integer> currencyChange) {
 	  
 	  //update user diamonds
@@ -236,8 +263,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  private void writeToUserCurrencyHistory(int userId, User aUser,
-		  long userTaskId, Timestamp curTime, int previousGems,
+  private void writeToUserCurrencyHistory(String userId, User aUser,
+      String userTaskId, Timestamp curTime, int previousGems,
 		  Map<String, Integer> currencyChange) {
 	  
 	  if (currencyChange.isEmpty()) {

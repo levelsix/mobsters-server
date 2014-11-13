@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SellUserMonsterRequestEvent;
 import com.lvl6.events.response.SellUserMonsterResponseEvent;
+import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -26,6 +28,7 @@ import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus;
+import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -67,12 +70,12 @@ public class SellUserMonsterController extends EventController {
 		// get values sent from the client (the request proto)
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
-		Map<Long, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
+		Map<String, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
-		Set<Long> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
-		List<Long> userMonsterIds = new ArrayList<Long>(userMonsterIdsSet);
+		Set<String> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
+		List<String> userMonsterIds = new ArrayList<String>(userMonsterIdsSet);
 		Date deleteDate = new Date();
 		Timestamp deleteTime = new Timestamp(deleteDate.getTime());
 		
@@ -84,12 +87,43 @@ public class SellUserMonsterController extends EventController {
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
 
-		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userMonsterUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      if (userMonsterIds != null) {
+        for (String userMonsterId : userMonsterIds) {
+          userMonsterUuid = UUID.fromString(userMonsterId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userMonsterIds=%s",
+          userId, userMonsterIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER);
+      SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
+          userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSellUserMonsterResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			int previousCash = 0;
 
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
+			Map<String, MonsterForUser> idsToUserMonsters = RetrieveUtils
 					.monsterForUserRetrieveUtils().getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
 							userMonsterIds);
 
@@ -144,7 +178,7 @@ public class SellUserMonsterController extends EventController {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass()
+			getLocker().unlockPlayer(userUuid, this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -158,8 +192,8 @@ public class SellUserMonsterController extends EventController {
 	 * exist but 'd' does, so "userMonsterIds" will be modified to only contain
 	 * 'd'
 	 */
-	private boolean checkLegit(Builder resBuilder, int userId, User u,
-			List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters) {
+	private boolean checkLegit(Builder resBuilder, String userId, User u,
+			List<String> userMonsterIds, Map<String, MonsterForUser> idsToUserMonsters) {
 
 		if (null == u) {
 			log.error("user is null. no user exists with id=" + userId + "");
@@ -187,8 +221,8 @@ public class SellUserMonsterController extends EventController {
 		return true;
 	}
 
-	private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts, int maxCash,
+	private boolean writeChangesToDb(User aUser, List<String> userMonsterIds,
+			Map<String, Integer> userMonsterIdsToCashAmounts, int maxCash,
 			Map<String, Integer> currencyChange) {
 		boolean success = true;
 
@@ -219,9 +253,9 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	// FOR USER MONSTER HISTORY PURPOSES
-	private void writeChangesToHistory(int userId, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts,
-			Map<Long, MonsterForUser> idsToUserMonsters, Date deleteDate) {
+	private void writeChangesToHistory(String userId, List<String> userMonsterIds,
+			Map<String, Integer> userMonsterIdsToCashAmounts,
+			Map<String, MonsterForUser> idsToUserMonsters, Date deleteDate) {
 
 		if (null == userMonsterIds || userMonsterIds.isEmpty()) {
 			return;
@@ -231,7 +265,7 @@ public class SellUserMonsterController extends EventController {
 		List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>();
 
 		for (int i = 0; i < userMonsterIds.size(); i++) {
-			long userMonsterId = userMonsterIds.get(i);
+		  String userMonsterId = userMonsterIds.get(i);
 			int amount = userMonsterIdsToCashAmounts.get(userMonsterId);
 			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
 			userMonstersList.add(mfu);
@@ -248,10 +282,10 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	// FOR CURRENCY HISTORY PURPOSES
-	public void writeToUserCurrencyHistory(int userId, User aUser,
+	public void writeToUserCurrencyHistory(String userId, User aUser,
 			int previousCash, Timestamp aDate,
-			Map<Long, Integer> userMonsterIdsToCashAmounts,
-			List<Long> userMonsterIds, Map<String, Integer> currencyChange) {
+			Map<String, Integer> userMonsterIdsToCashAmounts,
+			List<String> userMonsterIds, Map<String, Integer> currencyChange) {
 
 		if (currencyChange.isEmpty()) {
 			return;
@@ -259,7 +293,7 @@ public class SellUserMonsterController extends EventController {
 		
 		// record the user monster ids that contributed to changing user's currency
 		StringBuilder detailsSb = new StringBuilder();
-		for (Long umId : userMonsterIdsToCashAmounts.keySet()) {
+		for (String umId : userMonsterIdsToCashAmounts.keySet()) {
 			Integer cash = userMonsterIdsToCashAmounts.get(umId);
 			detailsSb.append("mfuId=");
 			detailsSb.append(umId);
