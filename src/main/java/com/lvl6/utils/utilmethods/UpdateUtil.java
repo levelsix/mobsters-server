@@ -24,37 +24,37 @@ public interface UpdateUtil {
 
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
-  public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
+  public abstract boolean updateUserCityExpansionData(String userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
   
-  public abstract boolean updateUserQuestIscomplete(int userId, int questId);
+  public abstract boolean updateUserQuestIscomplete(String userId, int questId);
 
-  public abstract boolean updateRedeemQuestForUser(int userId, int questId);
+  public abstract boolean updateRedeemQuestForUser(String userId, int questId);
   
-  public abstract int updateUserQuestJobs(int userId,
+  public abstract int updateUserQuestJobs(String userId,
 			Map<Integer, QuestJobForUser> questJobIdToQuestJob);
   
-  public abstract int updateUserAchievement(int userId, Timestamp completeTime,
+  public abstract int updateUserAchievement(String userId, Timestamp completeTime,
 		  Map<Integer, AchievementForUser> achievementIdToAfu);
 
-  public abstract int updateRedeemAchievementForUser(int userId,
+  public abstract int updateRedeemAchievementForUser(String userId,
 		  Collection<Integer> achievementIds, Timestamp completeTime);
   
   /*
    * changin orientation
    */
-  public abstract boolean updateUserStructOrientation(int userStructId,
+  public abstract boolean updateUserStructOrientation(String userStructId,
       StructOrientation orientation);
 
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
-  public abstract boolean updateUserStructsBuildingIscomplete(int userId,
+  public abstract boolean updateUserStructsBuildingIscomplete(String userId,
       List<StructureForUser> userStructs, List<Timestamp> newPurchaseTimes);
 
-  public abstract boolean updateBeginUpgradingUserStruct(int userStructId,
+  public abstract boolean updateBeginUpgradingUserStruct(String userStructId,
   		int newStructId, Timestamp upgradeTime);
   
-  public abstract boolean updateSpeedupUpgradingUserStruct(int userStructId,
+  public abstract boolean updateSpeedupUpgradingUserStruct(String userStructId,
   		Timestamp lastRetrievedTime);
   
   /*
@@ -67,51 +67,51 @@ public interface UpdateUtil {
   /*
    * used for upgrading user struct's fb invite level
    */
-  public abstract boolean updateUserStructLevel(int userStructId, int fbInviteLevelChange);
+  public abstract boolean updateUserStructLevel(String userStructId, int fbInviteLevelChange);
 
   /*
    * used for moving user structs
    */
-  public abstract boolean updateUserStructCoord(int userStructId,
+  public abstract boolean updateUserStructCoord(String userStructId,
       CoordinatePair coordinates);
 
   //public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
 
-  public abstract boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status);
+  public abstract boolean updateUserClanStatus(String userId, String clanId, UserClanStatus status);
   
-  public abstract int updateUserClanStatuses(int clanId, List<Integer> userIdList,
+  public abstract int updateUserClanStatuses(String clanId, List<Integer> userIdList,
 			List<UserClanStatus> statuses);
 
-  public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId,
+  public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(String userId, int eventId,
       int increment);
 
-  public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) ;
+  public boolean updateUsersAddDiamonds(List<String> userIds, int diamonds) ;
   
   public boolean updateLeaderboardEventSetRewardGivenOut(int eventId);
 
-  public abstract boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired);
+  public abstract boolean updateClanJoinTypeForClan(String clanId, boolean requestToJoinRequired);
   
-  public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta);
+  public abstract int incrementUserTaskNumRevives(String userTaskId, int numRevivesDelta);
   
-  public abstract int updateUserTaskTsId(long userTaskId, int nuTaskStageId);
+  public abstract int updateUserTaskTsId(String userTaskId, int nuTaskStageId);
   
   public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
   
 //  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
   
-  public abstract int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters);
+  public abstract int updateUserMonsterHealing(String userId, List<MonsterHealingForUser> monsters);
   
   public abstract int updateNullifyUserMonstersTeamSlotNum(List<Long> userMonsterIdList,
   		List<Integer> teamSlotNumList);
   
-  public abstract int updateUserMonsterTeamSlotNum(long userMonsterId,
+  public abstract int updateUserMonsterTeamSlotNum(String userMonsterId,
   		int teamSlotNum);
   
-  public int nullifyMonstersTeamSlotNum(List<Long> userMonsterIds, int newTeamSlotNum);
+  public int nullifyMonstersTeamSlotNum(List<String> userMonsterIds, int newTeamSlotNum);
   
-  public abstract int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters);
+  public abstract int updateUserMonsterEnhancing(String userId, List<MonsterEnhancingForUser> monsters);
   
-  public abstract int updateCompleteEnhancing(int userId, long curEnhancingMfuId);
+  public abstract int updateCompleteEnhancing(String userId, long curEnhancingMfuId);
   
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl, int newHp);
 

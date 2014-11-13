@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpgradeNormStructureRequestEvent;
+import com.lvl6.events.response.BeginObstacleRemovalResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpgradeNormStructureResponseEvent;
 import com.lvl6.info.Structure;
@@ -21,6 +23,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
+import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -59,8 +62,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    int userStructId = reqProto.getUserStructId();
+    String userId = senderProto.getUserUuid();
+    String userStructId = reqProto.getUserStructUuid();
     Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
     int gemsSpent = reqProto.getGemsSpent();
     //positive means refund, negative means charge user
@@ -71,8 +74,30 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
 
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = false;
+    try {
+        userUuid = UUID.fromString(userId);
+        userStructUuid = UUID.fromString(userStructId);
+    } catch (Exception e) {
+        log.error(String.format(
+            "UUID error. incorrect userId=%s or userStructId=%s",
+            userId, userStructId), e);
+        invalidUuids = true;
+    }
+	
+	//UUID checks
+    if (invalidUuids) {
+		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+		UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
+		resEvent.setTag(event.getTag());
+		resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
+		server.writeEvent(resEvent);
+    	return;
+    }
 
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
     	User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	Structure currentStruct = null;
@@ -123,7 +148,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in UpgradeNormStructure processEvent", e2);
     	}
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
@@ -253,8 +278,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<String, Integer> money, int previousCash, int previousOil,
 		  int previousGems) {
     
-  	int userId = aUser.getId();
-    int userStructId = userStruct.getId();
+  	String userId = aUser.getId();
+  	String userStructId = userStruct.getId();
     int prevStructId = curStruct.getId();
     int prevLevel = curStruct.getLevel();
     StringBuilder structDetailsSb = new StringBuilder();
