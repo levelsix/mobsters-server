@@ -288,7 +288,7 @@ public class MiscMethods {
 	}
 
 	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public static String createUpdateUserMonsterArguments(int userId, int boosterPackId,
+	public static String createUpdateUserMonsterArguments(String userId, int boosterPackId,
 		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
 		List<MonsterForUser> completeUserMonsters, Date now) {
 		StringBuilder sb = new StringBuilder();

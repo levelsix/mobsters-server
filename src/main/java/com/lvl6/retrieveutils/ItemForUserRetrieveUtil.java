@@ -44,7 +44,7 @@ public class ItemForUserRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, ItemForUser> getSpecificOrAllItemIdToItemForUserId(
-			int userId, Collection<Integer> itemIds) {
+	    String userId, Collection<Integer> itemIds) {
 		Map<Integer, ItemForUser> itemIdToUserItems = null;
 		try {
 			List<String> columnsToSelected = UserItemForClientMapper
