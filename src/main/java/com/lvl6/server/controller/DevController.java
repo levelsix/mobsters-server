@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		DevRequestProto reqProto = ((DevRequestEvent)event).getDevRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		DevRequest request = reqProto.getDevRequest();
 		int staticDataId = reqProto.getStaticDataId();
 		int quantity = reqProto.getQuantity();
@@ -61,6 +62,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(DevStatus.SUCCESS);
 
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
+		try {
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(DevStatus.FAIL_OTHER);
+			DevResponseEvent resEvent = new DevResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setDevResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
 		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
@@ -108,7 +131,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 
 	private void cheat(
-		int userId,
+		String userId,
 		DevRequest request,
 		int staticDataId,
 		int quantity,
