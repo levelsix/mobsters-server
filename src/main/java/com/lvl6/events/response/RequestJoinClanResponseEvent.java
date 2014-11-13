@@ -11,7 +11,7 @@ public class RequestJoinClanResponseEvent extends NormalResponseEvent {
 
   private RequestJoinClanResponseProto leaveClanResponseProto;
   
-  public RequestJoinClanResponseEvent(int playerId){
+  public RequestJoinClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_REQUEST_JOIN_CLAN_EVENT;
   }

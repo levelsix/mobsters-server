@@ -22,7 +22,7 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       purchaseCityExpansionRequestProto = PurchaseCityExpansionRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseCityExpansionRequestProto.getSender().getUserId();
+      playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("purchase city expansion request exception", e);
     }
@@ -35,6 +35,6 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
   public void setPurchaseCityExpansionRequestProto(
   		PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto) {
   	this.purchaseCityExpansionRequestProto = purchaseCityExpansionRequestProto;
-  	playerId = purchaseCityExpansionRequestProto.getSender().getUserId();
+  	playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
   }
 }

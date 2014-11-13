@@ -11,7 +11,7 @@ public class LeaveClanResponseEvent extends NormalResponseEvent {
 
   private LeaveClanResponseProto leaveClanResponseProto;
   
-  public LeaveClanResponseEvent(int playerId){
+  public LeaveClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_LEAVE_CLAN_EVENT;
   }

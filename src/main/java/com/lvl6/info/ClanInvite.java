@@ -5,19 +5,22 @@ import java.util.Date;
 
 public class ClanInvite implements Serializable {
 	
-	private static final long serialVersionUID = -2190113788315863774L;
-	
-	private int id;
-	private int userId;
-	private int inviterId; 
-	private int clanId;
+	private String id;
+	private String userId;
+	private String inviterId; 
+	private String clanId;
 	private Date timeOfInvite;
 	
 	public ClanInvite() {
 		super();
 	}
 
-	public ClanInvite( int id, int userId, int inviterId, int clanId, Date timeOfInvite )
+	public ClanInvite(
+		String id,
+		String userId,
+		String inviterId,
+		String clanId,
+		Date timeOfInvite )
 	{
 		super();
 		this.id = id;
@@ -27,42 +30,42 @@ public class ClanInvite implements Serializable {
 		this.timeOfInvite = timeOfInvite;
 	}
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId( int id )
+	public void setId( String id )
 	{
 		this.id = id;
 	}
 
-	public int getUserId()
+	public String getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId( int userId )
+	public void setUserId( String userId )
 	{
 		this.userId = userId;
 	}
 
-	public int getInviterId()
+	public String getInviterId()
 	{
 		return inviterId;
 	}
 
-	public void setInviterId( int inviterId )
+	public void setInviterId( String inviterId )
 	{
 		this.inviterId = inviterId;
 	}
 
-	public int getClanId()
+	public String getClanId()
 	{
 		return clanId;
 	}
 
-	public void setClanId( int clanId )
+	public void setClanId( String clanId )
 	{
 		this.clanId = clanId;
 	}

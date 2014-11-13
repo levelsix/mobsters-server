@@ -11,7 +11,7 @@ public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent {
 
   private PurchaseBoosterPackResponseProto purchaseBoosterPackResponseProto;
   
-  public PurchaseBoosterPackResponseEvent(int playerId){
+  public PurchaseBoosterPackResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_PURCHASE_BOOSTER_PACK_EVENT;
   }

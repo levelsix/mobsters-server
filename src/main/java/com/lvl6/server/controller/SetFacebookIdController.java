@@ -52,7 +52,7 @@ import com.lvl6.utils.RetrieveUtils;
     SetFacebookIdRequestProto reqProto = ((SetFacebookIdRequestEvent)event).getSetFacebookIdRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     String fbId = reqProto.getFbId();
     boolean isUserCreate = reqProto.getIsUserCreate();
     String email = reqProto.getEmail();
@@ -76,9 +76,9 @@ import com.lvl6.utils.RetrieveUtils;
     Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
     resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
     	Map<Integer, User> userMap = RetrieveUtils.userRetrieveUtils()
     			.getUsersForFacebookIdsOrUserIds(facebookIds, userIds);
     	User user = userMap.get(userId);
@@ -94,7 +94,7 @@ import com.lvl6.utils.RetrieveUtils;
       }
       
       SetFacebookIdResponseProto resProto = resBuilder.build();
-      SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserId());
+      SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setSetFacebookIdResponseProto(resProto);
       server.writeEvent(resEvent);
@@ -119,7 +119,7 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetFacebookIdController processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

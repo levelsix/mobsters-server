@@ -22,7 +22,7 @@ public class TradeItemForBoosterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       tradeItemForBoosterRequestProto = TradeItemForBoosterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = tradeItemForBoosterRequestProto.getSender().getUserId();
+      playerId = tradeItemForBoosterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("enable apns request exception", e);
     }

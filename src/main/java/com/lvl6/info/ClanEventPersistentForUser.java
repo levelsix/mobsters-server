@@ -7,22 +7,36 @@ import java.util.List;
 //user can have multiple of these (different clanIds)
 public class ClanEventPersistentForUser implements Serializable {
 	
-	private static final long serialVersionUID = -2606973933800935109L;
-	private int userId;
-	private int clanId;
+	private String userId;
+	private String clanId;
 	private int crId;
 	private int crDmgDone;
 	private int crsId;
 	private int crsDmgDone;
 	private int crsmId;//primary key in clan raid stage monster
 	private int crsmDmgDone;
-	private long userMonsterIdOne;
-	private long userMonsterIdTwo;
-	private long userMonsterIdThree;
+	private String userMonsterIdOne;
+	private String userMonsterIdTwo;
+	private String userMonsterIdThree;
 	
-	public ClanEventPersistentForUser(int userId, int clanId, int crId,
-			int crDmgDone, int crsId, int crsDmgDone, int crsmId, int crsmDmgDone,
-			long userMonsterIdOne, long userMonsterIdTwo, long userMonsterIdThree) {
+	public ClanEventPersistentForUser()
+	{
+		super();
+	}
+
+	public ClanEventPersistentForUser(
+		String userId,
+		String clanId,
+		int crId,
+		int crDmgDone,
+		int crsId,
+		int crsDmgDone,
+		int crsmId,
+		int crsmDmgDone,
+		String userMonsterIdOne,
+		String userMonsterIdTwo,
+		String userMonsterIdThree )
+	{
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -36,18 +50,18 @@ public class ClanEventPersistentForUser implements Serializable {
 		this.userMonsterIdTwo = userMonsterIdTwo;
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
-	
+
 	//convenience methods
-	public List<Long> getUserMonsterIds() {
-		List<Long> userMonsterIds = new ArrayList<Long>();
+	public List<String> getUserMonsterIds() {
+		List<String> userMonsterIds = new ArrayList<String>();
 		
-		if (userMonsterIdOne > 0) {
+		if (null != userMonsterIdOne && !userMonsterIdOne.isEmpty()) {
 			userMonsterIds.add(userMonsterIdOne);
 		}
-		if (userMonsterIdTwo > 0) {
+		if (null != userMonsterIdTwo && !userMonsterIdTwo.isEmpty()) {
 			userMonsterIds.add(userMonsterIdTwo);
 		}
-		if (userMonsterIdThree > 0) {
+		if (null != userMonsterIdThree && !userMonsterIdThree.isEmpty()) {
 			userMonsterIds.add(userMonsterIdThree);
 		}
 		
@@ -55,91 +69,113 @@ public class ClanEventPersistentForUser implements Serializable {
 	}
 	//---------------------------
 
-	public int getUserId() {
+	public String getUserId()
+	{
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId( String userId )
+	{
 		this.userId = userId;
 	}
 
-	public int getClanId() {
+	public String getClanId()
+	{
 		return clanId;
 	}
 
-	public void setClanId(int clanId) {
+	public void setClanId( String clanId )
+	{
 		this.clanId = clanId;
 	}
 
-	public int getCrId() {
+	public int getCrId()
+	{
 		return crId;
 	}
 
-	public void setCrId(int crId) {
+	public void setCrId( int crId )
+	{
 		this.crId = crId;
 	}
 
-	public int getCrDmgDone() {
+	public int getCrDmgDone()
+	{
 		return crDmgDone;
 	}
 
-	public void setCrDmgDone(int crDmgDone) {
+	public void setCrDmgDone( int crDmgDone )
+	{
 		this.crDmgDone = crDmgDone;
 	}
 
-	public int getCrsId() {
+	public int getCrsId()
+	{
 		return crsId;
 	}
 
-	public void setCrsId(int crsId) {
+	public void setCrsId( int crsId )
+	{
 		this.crsId = crsId;
 	}
 
-	public int getCrsDmgDone() {
+	public int getCrsDmgDone()
+	{
 		return crsDmgDone;
 	}
 
-	public void setCrsDmgDone(int crsDmgDone) {
+	public void setCrsDmgDone( int crsDmgDone )
+	{
 		this.crsDmgDone = crsDmgDone;
 	}
 
-	public int getCrsmId() {
+	public int getCrsmId()
+	{
 		return crsmId;
 	}
 
-	public void setCrsmId(int crsmId) {
+	public void setCrsmId( int crsmId )
+	{
 		this.crsmId = crsmId;
 	}
 
-	public int getCrsmDmgDone() {
+	public int getCrsmDmgDone()
+	{
 		return crsmDmgDone;
 	}
 
-	public void setCrsmDmgDone(int crsmDmgDone) {
+	public void setCrsmDmgDone( int crsmDmgDone )
+	{
 		this.crsmDmgDone = crsmDmgDone;
 	}
 
-	public long getUserMonsterIdOne() {
+	public String getUserMonsterIdOne()
+	{
 		return userMonsterIdOne;
 	}
 
-	public void setUserMonsterIdOne(int userMonsterIdOne) {
+	public void setUserMonsterIdOne( String userMonsterIdOne )
+	{
 		this.userMonsterIdOne = userMonsterIdOne;
 	}
 
-	public long getUserMonsterIdTwo() {
+	public String getUserMonsterIdTwo()
+	{
 		return userMonsterIdTwo;
 	}
 
-	public void setUserMonsterIdTwo(int userMonsterIdTwo) {
+	public void setUserMonsterIdTwo( String userMonsterIdTwo )
+	{
 		this.userMonsterIdTwo = userMonsterIdTwo;
 	}
 
-	public long getUserMonsterIdThree() {
+	public String getUserMonsterIdThree()
+	{
 		return userMonsterIdThree;
 	}
 
-	public void setUserMonsterIdThree(int userMonsterIdThree) {
+	public void setUserMonsterIdThree( String userMonsterIdThree )
+	{
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
 

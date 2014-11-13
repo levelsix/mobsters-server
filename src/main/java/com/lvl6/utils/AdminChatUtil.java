@@ -89,9 +89,9 @@ public class AdminChatUtil {
 		List<AdminChatPost> msgs = jdbcTemplate.query(query, new RowMapper<AdminChatPost>() {
 			@Override
 			public AdminChatPost mapRow(ResultSet rs, int index) throws SQLException {
-				return new AdminChatPost(rs.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__ID), rs
-						.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID), rs
-						.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID), rs
+				return new AdminChatPost(rs.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__ID), rs
+						.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID), rs
+						.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID), rs
 						.getDate(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST), rs
 						.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT));
 			}
@@ -104,7 +104,7 @@ public class AdminChatUtil {
 			log.info("No messages for admins");
 			return msgs;
 		}
-		List<Integer> users = new ArrayList<Integer>();
+		List<String> users = new ArrayList<String>();
 		for (AdminChatPost msg : msgs) {
 			if (msg.getPosterId() != ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID) {
 				users.add(msg.getPosterId());
@@ -146,17 +146,17 @@ public class AdminChatUtil {
 
 	public void sendAdminChatMessage(AdminChatPost msg) {
 		log.info("Sending admin chat message to user: "+msg.getUsername()+" : "+msg.getRecipientId()+" content: "+msg.getContent());
-		int posterId = msg.getPosterId();
-		int recipientId = msg.getRecipientId();
+		String posterId = msg.getPosterId();
+		String recipientId = msg.getRecipientId();
 		String censoredContent = MiscMethods.censorUserInput(msg.getContent());
-		int privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId, censoredContent,
+		String privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId, censoredContent,
 				new Timestamp(msg.getTimeOfPost().getTime()));
-		List<Integer> userIds = new ArrayList<Integer>();
+		List<String> userIds = new ArrayList<String>();
 		userIds.add(posterId);
 		userIds.add(recipientId);
 		Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
 
-		MinimumUserProto.Builder admin = MinimumUserProto.newBuilder().setUserId(
+		MinimumUserProto.Builder admin = MinimumUserProto.newBuilder().setUserUuid(
 				ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
 		admin.setName(users.get(posterId).getName());
 		PrivateChatPostResponseProto.Builder resBuilder = PrivateChatPostResponseProto.newBuilder();
@@ -165,12 +165,12 @@ public class AdminChatUtil {
 		PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(posterId);
 		resEvent.setTag(0);
 		Timestamp timeOfPost = new Timestamp(new Date().getTime());
-		if (privateChatPostId <= 0) {
-			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
-			log.error("problem with inserting private chat post into db. posterId=" + posterId
-					+ ", recipientId=" + recipientId + ", content=" + msg.getContent() + ", censoredContent="
-					+ censoredContent + ", timeOfPost=" + timeOfPost);
-		} else {
+//		if (privateChatPostId <= 0) {
+//			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+//			log.error("problem with inserting private chat post into db. posterId=" + posterId
+//					+ ", recipientId=" + recipientId + ", content=" + msg.getContent() + ", censoredContent="
+//					+ censoredContent + ", timeOfPost=" + timeOfPost);
+//		} else {
 
 			PrivateChatPost pwp = new PrivateChatPost(privateChatPostId, posterId, recipientId, timeOfPost,
 					censoredContent);
@@ -185,7 +185,7 @@ public class AdminChatUtil {
 			resEvent2.setPrivateChatPostResponseProto(resBuilder.build());
 			log.info("player "+resEvent2.getPlayerId()+ " "+server.getPlayerById(resEvent2.getPlayerId()));
 			server.writeAPNSNotificationOrEvent(resEvent2);
-		}
+//		}
 	}
 
 	public void sendAdminChatEmail(AdminChatPost msg) {

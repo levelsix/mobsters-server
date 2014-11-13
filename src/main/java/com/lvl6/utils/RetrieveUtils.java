@@ -1,38 +1,38 @@
 package com.lvl6.utils;
 
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.StatisticsRetrieveUtil;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
-import com.lvl6.retrieveutils.QuestForUserRetrieveUtils;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
-import com.lvl6.retrieveutils.StructureForUserRetrieveUtils;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.spring.AppContext;
 
 public class RetrieveUtils {
 
-	public static UserRetrieveUtils userRetrieveUtils() {
+	public static UserRetrieveUtils2 userRetrieveUtils() {
 		return AppContext.getApplicationContext()
-				.getBean(UserRetrieveUtils.class);
+				.getBean(UserRetrieveUtils2.class);
 	}
 
-	public static UserClanRetrieveUtils userClanRetrieveUtils() {
+	public static UserClanRetrieveUtils2 userClanRetrieveUtils() {
 		return AppContext.getApplicationContext()
-				.getBean(UserClanRetrieveUtils.class);
+				.getBean(UserClanRetrieveUtils2.class);
 	}
 
-	public static MonsterForUserRetrieveUtils monsterForUserRetrieveUtils() {
+	public static MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
-				MonsterForUserRetrieveUtils.class);
+				MonsterForUserRetrieveUtils2.class);
 	}
 	
-	public static QuestForUserRetrieveUtils questForUserRetrieveUtils() {
+	public static QuestForUserRetrieveUtils2 questForUserRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
-				QuestForUserRetrieveUtils.class);
+				QuestForUserRetrieveUtils2.class);
 	}
 
-	public static StructureForUserRetrieveUtils userStructRetrieveUtils() {
+	public static StructureForUserRetrieveUtils2 userStructRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
-				StructureForUserRetrieveUtils.class);
+				StructureForUserRetrieveUtils2.class);
 	}
 //	
 //	public static QuestTaskHistoryRetrieveUtils userQuestsCompletedTasksRetrieveUtils() {

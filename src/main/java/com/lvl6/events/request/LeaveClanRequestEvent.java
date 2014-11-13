@@ -22,7 +22,7 @@ public class LeaveClanRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       leaveClanRequestProto = LeaveClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = leaveClanRequestProto.getSender().getUserId();
+      playerId = leaveClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("leave clan request exception", e);
     }

@@ -51,7 +51,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     List<Long> userMonsterIdList = reqProto.getUserMonsterIdsList();
 
     //set some values to send to the client (the response proto)
@@ -59,7 +59,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER); //default
 
-//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in RestrictUserMonsterController processEvent", e);
       }
     } finally {
-//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

@@ -46,9 +46,9 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 //	}
 
 	@Override
-	public MinimumUserProto.Builder minimumUserProto(Integer userId) {
+	public MinimumUserProto.Builder minimumUserProto(String userId) {
 		MinimumUserProto.Builder ubuild = MinimumUserProto.newBuilder();
-		ubuild.setUserId(userId);
+		ubuild.setUserUuid(userId);
 		return ubuild;
 	}
 

@@ -11,7 +11,7 @@ public class SpawnMiniJobResponseEvent extends NormalResponseEvent {
 
   private SpawnMiniJobResponseProto spawnMiniJobResponseProto;
   
-  public SpawnMiniJobResponseEvent(int playerId){
+  public SpawnMiniJobResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SPAWN_MINI_JOB_EVENT;
   }

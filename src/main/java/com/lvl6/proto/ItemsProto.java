@@ -125,13 +125,18 @@ public final class ItemsProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 itemId = 2;</code>
@@ -203,9 +208,10 @@ public final class ItemsProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -258,19 +264,46 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ITEMID_FIELD_NUMBER = 2;
@@ -304,7 +337,7 @@ public final class ItemsProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       itemId_ = 0;
       quantity_ = 0;
     }
@@ -322,7 +355,7 @@ public final class ItemsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, itemId_);
@@ -341,7 +374,7 @@ public final class ItemsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -468,7 +501,7 @@ public final class ItemsProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -505,7 +538,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -530,8 +563,10 @@ public final class ItemsProto {
 
       public Builder mergeFrom(com.lvl6.proto.ItemsProto.UserItemProto other) {
         if (other == com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasItemId()) {
           setItemId(other.getItemId());
@@ -566,34 +601,78 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -1742,30 +1821,44 @@ public final class ItemsProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 usageId = 1;</code>
+     * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *the auto-incrementing primary key in db
+     *IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
-    boolean hasUsageId();
+    boolean hasUsageUuid();
     /**
-     * <code>optional int64 usageId = 1;</code>
+     * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *the auto-incrementing primary key in db
+     *IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
-    long getUsageId();
+    java.lang.String getUsageUuid();
+    /**
+     * <code>optional string usageUuid = 1;</code>
+     *
+     * <pre>
+     *IGNORE: //the auto-incrementing primary key in db
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUsageUuidBytes();
 
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 itemId = 3;</code>
@@ -1786,13 +1879,18 @@ public final class ItemsProto {
     long getTimeOfEntry();
 
     /**
-     * <code>optional int64 userDataId = 5;</code>
+     * <code>optional string userDataUuid = 5;</code>
      */
-    boolean hasUserDataId();
+    boolean hasUserDataUuid();
     /**
-     * <code>optional int64 userDataId = 5;</code>
+     * <code>optional string userDataUuid = 5;</code>
      */
-    long getUserDataId();
+    java.lang.String getUserDataUuid();
+    /**
+     * <code>optional string userDataUuid = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserDataUuidBytes();
 
     /**
      * <code>optional .com.lvl6.proto.GameActionType actionType = 6;</code>
@@ -1862,14 +1960,16 @@ public final class ItemsProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              usageId_ = input.readInt64();
+              usageUuid_ = bs;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -1882,9 +1982,10 @@ public final class ItemsProto {
               timeOfEntry_ = input.readInt64();
               break;
             }
-            case 40: {
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userDataId_ = input.readInt64();
+              userDataUuid_ = bs;
               break;
             }
             case 48: {
@@ -1938,42 +2039,100 @@ public final class ItemsProto {
     }
 
     private int bitField0_;
-    public static final int USAGEID_FIELD_NUMBER = 1;
-    private long usageId_;
+    public static final int USAGEUUID_FIELD_NUMBER = 1;
+    private java.lang.Object usageUuid_;
     /**
-     * <code>optional int64 usageId = 1;</code>
+     * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *the auto-incrementing primary key in db
+     *IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
-    public boolean hasUsageId() {
+    public boolean hasUsageUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 usageId = 1;</code>
+     * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *the auto-incrementing primary key in db
+     *IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
-    public long getUsageId() {
-      return usageId_;
+    public java.lang.String getUsageUuid() {
+      java.lang.Object ref = usageUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          usageUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string usageUuid = 1;</code>
+     *
+     * <pre>
+     *IGNORE: //the auto-incrementing primary key in db
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUsageUuidBytes() {
+      java.lang.Object ref = usageUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        usageUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERID_FIELD_NUMBER = 2;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ITEMID_FIELD_NUMBER = 3;
@@ -2006,19 +2165,46 @@ public final class ItemsProto {
       return timeOfEntry_;
     }
 
-    public static final int USERDATAID_FIELD_NUMBER = 5;
-    private long userDataId_;
+    public static final int USERDATAUUID_FIELD_NUMBER = 5;
+    private java.lang.Object userDataUuid_;
     /**
-     * <code>optional int64 userDataId = 5;</code>
+     * <code>optional string userDataUuid = 5;</code>
      */
-    public boolean hasUserDataId() {
+    public boolean hasUserDataUuid() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 userDataId = 5;</code>
+     * <code>optional string userDataUuid = 5;</code>
      */
-    public long getUserDataId() {
-      return userDataId_;
+    public java.lang.String getUserDataUuid() {
+      java.lang.Object ref = userDataUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userDataUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userDataUuid = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserDataUuidBytes() {
+      java.lang.Object ref = userDataUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userDataUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ACTIONTYPE_FIELD_NUMBER = 6;
@@ -2037,11 +2223,11 @@ public final class ItemsProto {
     }
 
     private void initFields() {
-      usageId_ = 0L;
-      userId_ = 0;
+      usageUuid_ = "";
+      userUuid_ = "";
       itemId_ = 0;
       timeOfEntry_ = 0L;
-      userDataId_ = 0L;
+      userDataUuid_ = "";
       actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
     }
     private byte memoizedIsInitialized = -1;
@@ -2058,10 +2244,10 @@ public final class ItemsProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, usageId_);
+        output.writeBytes(1, getUsageUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userId_);
+        output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, itemId_);
@@ -2070,7 +2256,7 @@ public final class ItemsProto {
         output.writeInt64(4, timeOfEntry_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, userDataId_);
+        output.writeBytes(5, getUserDataUuidBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeEnum(6, actionType_.getNumber());
@@ -2086,11 +2272,11 @@ public final class ItemsProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, usageId_);
+          .computeBytesSize(1, getUsageUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userId_);
+          .computeBytesSize(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2102,7 +2288,7 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, userDataId_);
+          .computeBytesSize(5, getUserDataUuidBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2232,15 +2418,15 @@ public final class ItemsProto {
 
       public Builder clear() {
         super.clear();
-        usageId_ = 0L;
+        usageUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         timeOfEntry_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
-        userDataId_ = 0L;
+        userDataUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
         actionType_ = com.lvl6.proto.SharedEnumConfigProto.GameActionType.NO_HELP;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -2275,11 +2461,11 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.usageId_ = usageId_;
+        result.usageUuid_ = usageUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -2291,7 +2477,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.userDataId_ = userDataId_;
+        result.userDataUuid_ = userDataUuid_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -2312,11 +2498,15 @@ public final class ItemsProto {
 
       public Builder mergeFrom(com.lvl6.proto.ItemsProto.UserItemUsageProto other) {
         if (other == com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance()) return this;
-        if (other.hasUsageId()) {
-          setUsageId(other.getUsageId());
+        if (other.hasUsageUuid()) {
+          bitField0_ |= 0x00000001;
+          usageUuid_ = other.usageUuid_;
+          onChanged();
         }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasItemId()) {
           setItemId(other.getItemId());
@@ -2324,8 +2514,10 @@ public final class ItemsProto {
         if (other.hasTimeOfEntry()) {
           setTimeOfEntry(other.getTimeOfEntry());
         }
-        if (other.hasUserDataId()) {
-          setUserDataId(other.getUserDataId());
+        if (other.hasUserDataUuid()) {
+          bitField0_ |= 0x00000010;
+          userDataUuid_ = other.userDataUuid_;
+          onChanged();
         }
         if (other.hasActionType()) {
           setActionType(other.getActionType());
@@ -2357,82 +2549,178 @@ public final class ItemsProto {
       }
       private int bitField0_;
 
-      private long usageId_ ;
+      private java.lang.Object usageUuid_ = "";
       /**
-       * <code>optional int64 usageId = 1;</code>
+       * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *the auto-incrementing primary key in db
+       *IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
-      public boolean hasUsageId() {
+      public boolean hasUsageUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 usageId = 1;</code>
+       * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *the auto-incrementing primary key in db
+       *IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
-      public long getUsageId() {
-        return usageId_;
+      public java.lang.String getUsageUuid() {
+        java.lang.Object ref = usageUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            usageUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 usageId = 1;</code>
+       * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *the auto-incrementing primary key in db
+       *IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
-      public Builder setUsageId(long value) {
-        bitField0_ |= 0x00000001;
-        usageId_ = value;
+      public com.google.protobuf.ByteString
+          getUsageUuidBytes() {
+        java.lang.Object ref = usageUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          usageUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string usageUuid = 1;</code>
+       *
+       * <pre>
+       *IGNORE: //the auto-incrementing primary key in db
+       * </pre>
+       */
+      public Builder setUsageUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        usageUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 usageId = 1;</code>
+       * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *the auto-incrementing primary key in db
+       *IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
-      public Builder clearUsageId() {
+      public Builder clearUsageUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        usageId_ = 0L;
+        usageUuid_ = getDefaultInstance().getUsageUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string usageUuid = 1;</code>
+       *
+       * <pre>
+       *IGNORE: //the auto-incrementing primary key in db
+       * </pre>
+       */
+      public Builder setUsageUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        usageUuid_ = value;
         onChanged();
         return this;
       }
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000002;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -2501,34 +2789,78 @@ public final class ItemsProto {
         return this;
       }
 
-      private long userDataId_ ;
+      private java.lang.Object userDataUuid_ = "";
       /**
-       * <code>optional int64 userDataId = 5;</code>
+       * <code>optional string userDataUuid = 5;</code>
        */
-      public boolean hasUserDataId() {
+      public boolean hasUserDataUuid() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int64 userDataId = 5;</code>
+       * <code>optional string userDataUuid = 5;</code>
        */
-      public long getUserDataId() {
-        return userDataId_;
+      public java.lang.String getUserDataUuid() {
+        java.lang.Object ref = userDataUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userDataUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userDataId = 5;</code>
+       * <code>optional string userDataUuid = 5;</code>
        */
-      public Builder setUserDataId(long value) {
-        bitField0_ |= 0x00000010;
-        userDataId_ = value;
+      public com.google.protobuf.ByteString
+          getUserDataUuidBytes() {
+        java.lang.Object ref = userDataUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userDataUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userDataUuid = 5;</code>
+       */
+      public Builder setUserDataUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        userDataUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userDataId = 5;</code>
+       * <code>optional string userDataUuid = 5;</code>
        */
-      public Builder clearUserDataId() {
+      public Builder clearUserDataUuid() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        userDataId_ = 0L;
+        userDataUuid_ = getDefaultInstance().getUserDataUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userDataUuid = 5;</code>
+       */
+      public Builder setUserDataUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        userDataUuid_ = value;
         onChanged();
         return this;
       }
@@ -2604,19 +2936,19 @@ public final class ItemsProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nItem.proto\022\016com.lvl6.proto\032\026SharedEnum" +
-      "Config.proto\"A\n\rUserItemProto\022\016\n\006userId\030" +
-      "\001 \001(\005\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(\005\"" +
-      "\246\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\0162\030" +
-      ".com.lvl6.proto.ItemType\022\024\n\014staticDataId" +
-      "\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftChan" +
-      "ce\030\007 \001(\002\"\242\001\n\022UserItemUsageProto\022\017\n\007usage" +
-      "Id\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\016\n\006itemId\030\003 \001(\005" +
-      "\022\023\n\013timeOfEntry\030\004 \001(\003\022\022\n\nuserDataId\030\005 \001(",
-      "\003\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6.proto.G" +
-      "ameActionType*G\n\010ItemType\022\020\n\014BOOSTER_PAC" +
-      "K\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEE" +
-      "D_UP\020\004B\014B\nItemsProto"
+      "Config.proto\"C\n\rUserItemProto\022\020\n\010userUui" +
+      "d\030\001 \001(\t\022\016\n\006itemId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(" +
+      "\005\"\246\001\n\tItemProto\022\016\n\006itemId\030\001 \001(\005\022\014\n\004name\030" +
+      "\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\022*\n\010itemType\030\004 \001(\016" +
+      "2\030.com.lvl6.proto.ItemType\022\024\n\014staticData" +
+      "Id\030\005 \001(\005\022\016\n\006amount\030\006 \001(\005\022\030\n\020secretGiftCh" +
+      "ance\030\007 \001(\002\"\250\001\n\022UserItemUsageProto\022\021\n\tusa" +
+      "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
+      "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
+      "uid\030\005 \001(\t\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
+      ".proto.GameActionType*G\n\010ItemType\022\020\n\014BOO" +
+      "STER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003" +
+      "\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2636,7 +2968,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_UserItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemProto_descriptor,
-        new java.lang.String[] { "UserId", "ItemId", "Quantity", });
+        new java.lang.String[] { "UserUuid", "ItemId", "Quantity", });
     internal_static_com_lvl6_proto_ItemProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_ItemProto_fieldAccessorTable = new
@@ -2648,7 +2980,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemUsageProto_descriptor,
-        new java.lang.String[] { "UsageId", "UserId", "ItemId", "TimeOfEntry", "UserDataId", "ActionType", });
+        new java.lang.String[] { "UsageUuid", "UserUuid", "ItemId", "TimeOfEntry", "UserDataUuid", "ActionType", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

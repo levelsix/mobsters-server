@@ -55,7 +55,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     	
@@ -113,7 +113,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in UpdateMonsterHealthController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

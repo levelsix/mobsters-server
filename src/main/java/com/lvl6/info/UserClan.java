@@ -5,14 +5,17 @@ import java.util.Date;
 
 public class UserClan implements Serializable{
 	
-	private static final long serialVersionUID = 4400616881122130880L;
-	
-	private int userId;
-	private int clanId;
+	private String userId;
+	private String clanId;
 	private String status;
 	private Date requestTime;
 
-	public UserClan(int userId, int clanId, String status, Date requestTime) {
+	public UserClan()
+	{
+		super();
+	}
+
+	public UserClan(String userId, String clanId, String status, Date requestTime) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -20,16 +23,16 @@ public class UserClan implements Serializable{
 		this.requestTime = requestTime;
 	}
 	
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getClanId() {
+	public String getClanId() {
 		return clanId;
 	}
-	public void setClanId(int clanId) {
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 	public String getStatus() {

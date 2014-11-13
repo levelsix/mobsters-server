@@ -16,7 +16,7 @@ import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.events.ResponseEvent;
 import com.lvl6.properties.Globals;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.NIOUtils;
 
 @Component
@@ -45,13 +45,13 @@ public class EventWriterAmqp extends EventWriter {
 	}
 
 	@Autowired
-	UserClanRetrieveUtils userClanRetrieveUtil;
+	UserClanRetrieveUtils2 userClanRetrieveUtil;
 
-	public UserClanRetrieveUtils getUserClanRetrieveUtil() {
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtil() {
 		return userClanRetrieveUtil;
 	}
 
-	public void setUserClanRetrieveUtil(UserClanRetrieveUtils userClanRetrieveUtil) {
+	public void setUserClanRetrieveUtil(UserClanRetrieveUtils2 userClanRetrieveUtil) {
 		this.userClanRetrieveUtil = userClanRetrieveUtil;
 	}
 
@@ -105,7 +105,7 @@ public class EventWriterAmqp extends EventWriter {
 		}
 		// Otherwise this is just a normal message, send response to sender.
 		else {
-			int playerId = ((NormalResponseEvent) event).getPlayerId();
+			String playerId = ((NormalResponseEvent) event).getPlayerId();
 			String routingKey = getRoutingKeyForSingleUser(playerId);
 			log.debug("writing normal event with type=" + event.getEventType() + " to player with routingKey "
 					+ routingKey + " event=" + event.getClass().getSimpleName());
@@ -115,7 +115,7 @@ public class EventWriterAmqp extends EventWriter {
 
 	
 	
-	public String getRoutingKeyForSingleUser(int playerId) {
+	public String getRoutingKeyForSingleUser(String playerId) {
 		return "client_userid_" + playerId;
 	}
 

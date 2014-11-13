@@ -22,7 +22,7 @@ public class RetrieveClanInfoRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       retrieveClanInfoRequestProto = RetrieveClanInfoRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveClanInfoRequestProto.getSender().getUserId();
+      playerId = retrieveClanInfoRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("retrieve clan info request exception", e);
     }

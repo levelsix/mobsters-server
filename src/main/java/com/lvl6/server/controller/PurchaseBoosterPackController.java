@@ -97,9 +97,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      int userId = senderProto.getUserId();
+      int userId = senderProto.getUserUuid();
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousGems = 0;
       BoosterPack aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       }
       
       PurchaseBoosterPackResponseProto resProto = resBuilder.build();
-      PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserId());
+      PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setPurchaseBoosterPackResponseProto(resProto);
       server.writeEvent(resEvent);
@@ -167,7 +167,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	// don't let the client hang
     	try {
     		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-    		PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserId());
+    		PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
         resEvent.setTag(event.getTag());
         resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
         server.writeEvent(resEvent);
@@ -175,7 +175,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		log.error("exception2 in SellUserMonsterController processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

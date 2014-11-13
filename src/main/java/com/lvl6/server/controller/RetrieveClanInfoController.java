@@ -87,7 +87,7 @@ import com.lvl6.utils.RetrieveUtils;
     if (reqProto.hasClanId()) resBuilder.setClanId(clanId);
 
     try {
-      //User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      //User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
       boolean legitCreate = checkLegitCreate(resBuilder, clanName, clanId);
 
@@ -95,7 +95,7 @@ import com.lvl6.utils.RetrieveUtils;
         setBuilder(reqProto, clanId, clanName, beforeClanId, grabType, resBuilder);
       }
 
-      RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(senderProto.getUserId());
+      RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);

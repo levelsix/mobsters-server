@@ -18,10 +18,10 @@ public class PvpBattleOutcome
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
 	
-	private int attackerId;
+	private String attackerId;
 	private double attackerElo;
 	
-	private int defenderId;
+	private String defenderId;
 	private double defenderElo;
 	private double defenderCash;
 	private double defenderOil;
@@ -33,9 +33,9 @@ public class PvpBattleOutcome
 	private double lowerElo;
 	
 	public PvpBattleOutcome(
-		int attackerId,
+		String attackerId,
 		int attackerElo,
-		int defenderId,
+		String defenderId,
 		int defenderElo,
 		int defenderCash,
 		int defenderOil )

@@ -11,7 +11,7 @@ public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {
 
   private PurchaseNormStructureResponseProto purchaseNormStructureResponseProto;
   
-  public PurchaseNormStructureResponseEvent(int playerId){
+  public PurchaseNormStructureResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_PURCHASE_NORM_STRUCTURE_EVENT;
   }

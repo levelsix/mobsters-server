@@ -61,7 +61,7 @@ import com.lvl6.utils.RetrieveUtils;
     LoadPlayerCityRequestProto reqProto = ((LoadPlayerCityRequestEvent)event).getLoadPlayerCityRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int cityOwnerId = reqProto.getCityOwnerId();
 
     LoadPlayerCityResponseProto.Builder resBuilder = LoadPlayerCityResponseProto.newBuilder();
@@ -71,7 +71,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     //I guess in case someone attacks this guy while loading the city, want
     //both people to have one consistent view
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User owner = RetrieveUtils.userRetrieveUtils().getUserById(cityOwnerId);
 
@@ -79,7 +79,7 @@ import com.lvl6.utils.RetrieveUtils;
       setResponseUserStructs(resBuilder, userStructs);
       setObstacleStuff(resBuilder, cityOwnerId);
       
-      List<ExpansionPurchaseForUser> userCityExpansionDataList = ExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
+      List<ExpansionPurchaseForUser> userCityExpansionDataList = ExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserUuid());
       List<UserCityExpansionDataProto> userCityExpansionDataProtoList = new ArrayList<UserCityExpansionDataProto>();
       if (userCityExpansionDataList != null) {
     	for(ExpansionPurchaseForUser uced : userCityExpansionDataList) {
@@ -104,7 +104,7 @@ import com.lvl6.utils.RetrieveUtils;
     		  .createMinimumUserProtoFromUserAndClan(owner, clan));
       }
       
-      LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(senderProto.getUserId());
+      LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setLoadPlayerCityResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -112,7 +112,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in LoadPlayerCity processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

@@ -6001,46 +6001,65 @@ public final class EventMonsterProto {
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated java.util.List<java.lang.Long> getUserMonsterIdsList();
+    @java.lang.Deprecated com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated int getUserMonsterIdsCount();
+    @java.lang.Deprecated int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated long getUserMonsterIds(int index);
+    @java.lang.Deprecated java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    @java.lang.Deprecated com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
 
     /**
-     * <code>optional int64 userMonsterId = 6;</code>
+     * <code>optional string userMonsterUuid = 6;</code>
      *
      * <pre>
      *monster that finishes being enhanced, so server doesn't have to figure it out
      * </pre>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 6;</code>
+     * <code>optional string userMonsterUuid = 6;</code>
      *
      * <pre>
      *monster that finishes being enhanced, so server doesn't have to figure it out
      * </pre>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
@@ -6130,30 +6149,19 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000008;
               break;
             }
-            case 40: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              userMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000010;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
-            case 48: {
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -6165,7 +6173,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -6299,61 +6307,103 @@ public final class EventMonsterProto {
       return umcep_;
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    @java.lang.Deprecated public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    @java.lang.Deprecated public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    @java.lang.Deprecated public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    @java.lang.Deprecated public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
-    public static final int USERMONSTERID_FIELD_NUMBER = 6;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 6;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 6;</code>
+     * <code>optional string userMonsterUuid = 6;</code>
      *
      * <pre>
      *monster that finishes being enhanced, so server doesn't have to figure it out
      * </pre>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 userMonsterId = 6;</code>
+     * <code>optional string userMonsterUuid = 6;</code>
      *
      * <pre>
      *monster that finishes being enhanced, so server doesn't have to figure it out
      * </pre>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 6;</code>
+     *
+     * <pre>
+     *monster that finishes being enhanced, so server doesn't have to figure it out
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
@@ -6361,8 +6411,8 @@ public final class EventMonsterProto {
       isSpeedup_ = false;
       gemsForSpeedup_ = 0;
       umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
-      userMonsterIds_ = java.util.Collections.emptyList();
-      userMonsterId_ = 0L;
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      userMonsterUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6389,11 +6439,11 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, umcep_);
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(5, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(5, userMonsterUuids_.getByteString(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(6, userMonsterId_);
+        output.writeBytes(6, getUserMonsterUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6422,16 +6472,16 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, userMonsterId_);
+          .computeBytesSize(6, getUserMonsterUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6568,9 +6618,9 @@ public final class EventMonsterProto {
           umcepBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
@@ -6625,14 +6675,14 @@ public final class EventMonsterProto {
           result.umcep_ = umcepBuilder_.build();
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000010);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6661,18 +6711,20 @@ public final class EventMonsterProto {
         if (other.hasUmcep()) {
           mergeUmcep(other.getUmcep());
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000010);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000020;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7065,144 +7117,231 @@ public final class EventMonsterProto {
         return umcepBuilder_;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000010;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      @java.lang.Deprecated public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      @java.lang.Deprecated public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      @java.lang.Deprecated public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      @java.lang.Deprecated public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      @java.lang.Deprecated public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      @java.lang.Deprecated public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 5 [deprecated = true];</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      @java.lang.Deprecated public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      @java.lang.Deprecated public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
-
-      private long userMonsterId_ ;
       /**
-       * <code>optional int64 userMonsterId = 6;</code>
+       * <code>repeated string userMonsterUuids = 5 [deprecated = true];</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      @java.lang.Deprecated public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userMonsterUuid_ = "";
+      /**
+       * <code>optional string userMonsterUuid = 6;</code>
        *
        * <pre>
        *monster that finishes being enhanced, so server doesn't have to figure it out
        * </pre>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional int64 userMonsterId = 6;</code>
+       * <code>optional string userMonsterUuid = 6;</code>
        *
        * <pre>
        *monster that finishes being enhanced, so server doesn't have to figure it out
        * </pre>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 6;</code>
+       * <code>optional string userMonsterUuid = 6;</code>
        *
        * <pre>
        *monster that finishes being enhanced, so server doesn't have to figure it out
        * </pre>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000020;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 6;</code>
+       * <code>optional string userMonsterUuid = 6;</code>
        *
        * <pre>
        *monster that finishes being enhanced, so server doesn't have to figure it out
        * </pre>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 6;</code>
+       *
+       * <pre>
+       *monster that finishes being enhanced, so server doesn't have to figure it out
+       * </pre>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -7947,29 +8086,39 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProtoOrBuilder getUmcepOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    int getUserMonsterIdsCount();
+    int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    long getUserMonsterIds(int index);
+    java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
@@ -8049,25 +8198,13 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000002;
               break;
             }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              userMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -8079,7 +8216,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -8167,44 +8304,55 @@ public final class EventMonsterProto {
       return umcep_;
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      *
      * <pre>
      *ids of monster_enhancing_for_user to delete, does not include main monster
      * </pre>
      */
-    public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     *
+     * <pre>
+     *ids of monster_enhancing_for_user to delete, does not include main monster
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
-      userMonsterIds_ = java.util.Collections.emptyList();
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8225,8 +8373,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, umcep_);
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(3, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(3, userMonsterUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8247,12 +8395,12 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8385,7 +8533,7 @@ public final class EventMonsterProto {
           umcepBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -8432,10 +8580,10 @@ public final class EventMonsterProto {
           result.umcep_ = umcepBuilder_.build();
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8458,13 +8606,13 @@ public final class EventMonsterProto {
         if (other.hasUmcep()) {
           mergeUmcep(other.getUmcep());
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
@@ -8763,96 +8911,131 @@ public final class EventMonsterProto {
         return umcepBuilder_;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        *
        * <pre>
        *ids of monster_enhancing_for_user to delete, does not include main monster
        * </pre>
        */
-      public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       *
+       * <pre>
+       *ids of monster_enhancing_for_user to delete, does not include main monster
+       * </pre>
+       */
+      public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -11578,7 +11761,7 @@ public final class EventMonsterProto {
     long getClientTime();
 
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      *
      * <pre>
      *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -11586,9 +11769,9 @@ public final class EventMonsterProto {
      *since server now keeps track of which task stage user is in for a task
      * </pre>
      */
-    boolean hasUserTaskId();
+    boolean hasUserTaskUuid();
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      *
      * <pre>
      *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -11596,7 +11779,18 @@ public final class EventMonsterProto {
      *since server now keeps track of which task stage user is in for a task
      * </pre>
      */
-    long getUserTaskId();
+    java.lang.String getUserTaskUuid();
+    /**
+     * <code>optional string userTaskUuid = 4;</code>
+     *
+     * <pre>
+     *TODO: Consider putting elsewhere----------------------------------------------------------------
+     *indicates to the server if a user's current task stage should be updated
+     *since server now keeps track of which task stage user is in for a task
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserTaskUuidBytes();
 
     /**
      * <code>optional bool isUpdateTaskStageForUser = 5;</code>
@@ -11617,21 +11811,30 @@ public final class EventMonsterProto {
     int getNuTaskStageId();
 
     /**
-     * <code>optional int64 droplessTsfuId = 7;</code>
+     * <code>optional string droplessTsfuUuid = 7;</code>
      *
      * <pre>
      *make monsterPieceDropped to false in db
      * </pre>
      */
-    boolean hasDroplessTsfuId();
+    boolean hasDroplessTsfuUuid();
     /**
-     * <code>optional int64 droplessTsfuId = 7;</code>
+     * <code>optional string droplessTsfuUuid = 7;</code>
      *
      * <pre>
      *make monsterPieceDropped to false in db
      * </pre>
      */
-    long getDroplessTsfuId();
+    java.lang.String getDroplessTsfuUuid();
+    /**
+     * <code>optional string droplessTsfuUuid = 7;</code>
+     *
+     * <pre>
+     *make monsterPieceDropped to false in db
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getDroplessTsfuUuidBytes();
 
     /**
      * <code>optional bool changeNuPvpDmgMultiplier = 8;</code>
@@ -11741,9 +11944,10 @@ public final class EventMonsterProto {
               clientTime_ = input.readInt64();
               break;
             }
-            case 32: {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userTaskId_ = input.readInt64();
+              userTaskUuid_ = bs;
               break;
             }
             case 40: {
@@ -11756,9 +11960,10 @@ public final class EventMonsterProto {
               nuTaskStageId_ = input.readInt32();
               break;
             }
-            case 56: {
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              droplessTsfuId_ = input.readInt64();
+              droplessTsfuUuid_ = bs;
               break;
             }
             case 64: {
@@ -11913,10 +12118,10 @@ public final class EventMonsterProto {
       return clientTime_;
     }
 
-    public static final int USERTASKID_FIELD_NUMBER = 4;
-    private long userTaskId_;
+    public static final int USERTASKUUID_FIELD_NUMBER = 4;
+    private java.lang.Object userTaskUuid_;
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      *
      * <pre>
      *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -11924,11 +12129,11 @@ public final class EventMonsterProto {
      *since server now keeps track of which task stage user is in for a task
      * </pre>
      */
-    public boolean hasUserTaskId() {
+    public boolean hasUserTaskUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      *
      * <pre>
      *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -11936,8 +12141,41 @@ public final class EventMonsterProto {
      *since server now keeps track of which task stage user is in for a task
      * </pre>
      */
-    public long getUserTaskId() {
-      return userTaskId_;
+    public java.lang.String getUserTaskUuid() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userTaskUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userTaskUuid = 4;</code>
+     *
+     * <pre>
+     *TODO: Consider putting elsewhere----------------------------------------------------------------
+     *indicates to the server if a user's current task stage should be updated
+     *since server now keeps track of which task stage user is in for a task
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserTaskUuidBytes() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userTaskUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ISUPDATETASKSTAGEFORUSER_FIELD_NUMBER = 5;
@@ -11970,27 +12208,58 @@ public final class EventMonsterProto {
       return nuTaskStageId_;
     }
 
-    public static final int DROPLESSTSFUID_FIELD_NUMBER = 7;
-    private long droplessTsfuId_;
+    public static final int DROPLESSTSFUUUID_FIELD_NUMBER = 7;
+    private java.lang.Object droplessTsfuUuid_;
     /**
-     * <code>optional int64 droplessTsfuId = 7;</code>
+     * <code>optional string droplessTsfuUuid = 7;</code>
      *
      * <pre>
      *make monsterPieceDropped to false in db
      * </pre>
      */
-    public boolean hasDroplessTsfuId() {
+    public boolean hasDroplessTsfuUuid() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional int64 droplessTsfuId = 7;</code>
+     * <code>optional string droplessTsfuUuid = 7;</code>
      *
      * <pre>
      *make monsterPieceDropped to false in db
      * </pre>
      */
-    public long getDroplessTsfuId() {
-      return droplessTsfuId_;
+    public java.lang.String getDroplessTsfuUuid() {
+      java.lang.Object ref = droplessTsfuUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          droplessTsfuUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string droplessTsfuUuid = 7;</code>
+     *
+     * <pre>
+     *make monsterPieceDropped to false in db
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getDroplessTsfuUuidBytes() {
+      java.lang.Object ref = droplessTsfuUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        droplessTsfuUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CHANGENUPVPDMGMULTIPLIER_FIELD_NUMBER = 8;
@@ -12035,10 +12304,10 @@ public final class EventMonsterProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       umchp_ = java.util.Collections.emptyList();
       clientTime_ = 0L;
-      userTaskId_ = 0L;
+      userTaskUuid_ = "";
       isUpdateTaskStageForUser_ = false;
       nuTaskStageId_ = 0;
-      droplessTsfuId_ = 0L;
+      droplessTsfuUuid_ = "";
       changeNuPvpDmgMultiplier_ = false;
       nuPvpDmgMultiplier_ = 0F;
     }
@@ -12065,7 +12334,7 @@ public final class EventMonsterProto {
         output.writeInt64(3, clientTime_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(4, userTaskId_);
+        output.writeBytes(4, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBool(5, isUpdateTaskStageForUser_);
@@ -12074,7 +12343,7 @@ public final class EventMonsterProto {
         output.writeInt32(6, nuTaskStageId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt64(7, droplessTsfuId_);
+        output.writeBytes(7, getDroplessTsfuUuidBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(8, changeNuPvpDmgMultiplier_);
@@ -12105,7 +12374,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, userTaskId_);
+          .computeBytesSize(4, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -12117,7 +12386,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, droplessTsfuId_);
+          .computeBytesSize(7, getDroplessTsfuUuidBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -12264,13 +12533,13 @@ public final class EventMonsterProto {
         }
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        userTaskId_ = 0L;
+        userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
         isUpdateTaskStageForUser_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
         nuTaskStageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        droplessTsfuId_ = 0L;
+        droplessTsfuUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
         changeNuPvpDmgMultiplier_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -12328,7 +12597,7 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userTaskId_ = userTaskId_;
+        result.userTaskUuid_ = userTaskUuid_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -12340,7 +12609,7 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.droplessTsfuId_ = droplessTsfuId_;
+        result.droplessTsfuUuid_ = droplessTsfuUuid_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
@@ -12397,8 +12666,10 @@ public final class EventMonsterProto {
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
         }
-        if (other.hasUserTaskId()) {
-          setUserTaskId(other.getUserTaskId());
+        if (other.hasUserTaskUuid()) {
+          bitField0_ |= 0x00000008;
+          userTaskUuid_ = other.userTaskUuid_;
+          onChanged();
         }
         if (other.hasIsUpdateTaskStageForUser()) {
           setIsUpdateTaskStageForUser(other.getIsUpdateTaskStageForUser());
@@ -12406,8 +12677,10 @@ public final class EventMonsterProto {
         if (other.hasNuTaskStageId()) {
           setNuTaskStageId(other.getNuTaskStageId());
         }
-        if (other.hasDroplessTsfuId()) {
-          setDroplessTsfuId(other.getDroplessTsfuId());
+        if (other.hasDroplessTsfuUuid()) {
+          bitField0_ |= 0x00000040;
+          droplessTsfuUuid_ = other.droplessTsfuUuid_;
+          onChanged();
         }
         if (other.hasChangeNuPvpDmgMultiplier()) {
           setChangeNuPvpDmgMultiplier(other.getChangeNuPvpDmgMultiplier());
@@ -12918,9 +13191,9 @@ public final class EventMonsterProto {
         return this;
       }
 
-      private long userTaskId_ ;
+      private java.lang.Object userTaskUuid_ = "";
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        *
        * <pre>
        *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -12928,11 +13201,11 @@ public final class EventMonsterProto {
        *since server now keeps track of which task stage user is in for a task
        * </pre>
        */
-      public boolean hasUserTaskId() {
+      public boolean hasUserTaskUuid() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        *
        * <pre>
        *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -12940,11 +13213,22 @@ public final class EventMonsterProto {
        *since server now keeps track of which task stage user is in for a task
        * </pre>
        */
-      public long getUserTaskId() {
-        return userTaskId_;
+      public java.lang.String getUserTaskUuid() {
+        java.lang.Object ref = userTaskUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        *
        * <pre>
        *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -12952,14 +13236,40 @@ public final class EventMonsterProto {
        *since server now keeps track of which task stage user is in for a task
        * </pre>
        */
-      public Builder setUserTaskId(long value) {
-        bitField0_ |= 0x00000008;
-        userTaskId_ = value;
+      public com.google.protobuf.ByteString
+          getUserTaskUuidBytes() {
+        java.lang.Object ref = userTaskUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userTaskUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userTaskUuid = 4;</code>
+       *
+       * <pre>
+       *TODO: Consider putting elsewhere----------------------------------------------------------------
+       *indicates to the server if a user's current task stage should be updated
+       *since server now keeps track of which task stage user is in for a task
+       * </pre>
+       */
+      public Builder setUserTaskUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        *
        * <pre>
        *TODO: Consider putting elsewhere----------------------------------------------------------------
@@ -12967,9 +13277,28 @@ public final class EventMonsterProto {
        *since server now keeps track of which task stage user is in for a task
        * </pre>
        */
-      public Builder clearUserTaskId() {
+      public Builder clearUserTaskUuid() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        userTaskId_ = 0L;
+        userTaskUuid_ = getDefaultInstance().getUserTaskUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userTaskUuid = 4;</code>
+       *
+       * <pre>
+       *TODO: Consider putting elsewhere----------------------------------------------------------------
+       *indicates to the server if a user's current task stage should be updated
+       *since server now keeps track of which task stage user is in for a task
+       * </pre>
+       */
+      public Builder setUserTaskUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
@@ -13038,50 +13367,102 @@ public final class EventMonsterProto {
         return this;
       }
 
-      private long droplessTsfuId_ ;
+      private java.lang.Object droplessTsfuUuid_ = "";
       /**
-       * <code>optional int64 droplessTsfuId = 7;</code>
+       * <code>optional string droplessTsfuUuid = 7;</code>
        *
        * <pre>
        *make monsterPieceDropped to false in db
        * </pre>
        */
-      public boolean hasDroplessTsfuId() {
+      public boolean hasDroplessTsfuUuid() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional int64 droplessTsfuId = 7;</code>
+       * <code>optional string droplessTsfuUuid = 7;</code>
        *
        * <pre>
        *make monsterPieceDropped to false in db
        * </pre>
        */
-      public long getDroplessTsfuId() {
-        return droplessTsfuId_;
+      public java.lang.String getDroplessTsfuUuid() {
+        java.lang.Object ref = droplessTsfuUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            droplessTsfuUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 droplessTsfuId = 7;</code>
+       * <code>optional string droplessTsfuUuid = 7;</code>
        *
        * <pre>
        *make monsterPieceDropped to false in db
        * </pre>
        */
-      public Builder setDroplessTsfuId(long value) {
-        bitField0_ |= 0x00000040;
-        droplessTsfuId_ = value;
+      public com.google.protobuf.ByteString
+          getDroplessTsfuUuidBytes() {
+        java.lang.Object ref = droplessTsfuUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          droplessTsfuUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string droplessTsfuUuid = 7;</code>
+       *
+       * <pre>
+       *make monsterPieceDropped to false in db
+       * </pre>
+       */
+      public Builder setDroplessTsfuUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        droplessTsfuUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 droplessTsfuId = 7;</code>
+       * <code>optional string droplessTsfuUuid = 7;</code>
        *
        * <pre>
        *make monsterPieceDropped to false in db
        * </pre>
        */
-      public Builder clearDroplessTsfuId() {
+      public Builder clearDroplessTsfuUuid() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        droplessTsfuId_ = 0L;
+        droplessTsfuUuid_ = getDefaultInstance().getDroplessTsfuUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string droplessTsfuUuid = 7;</code>
+       *
+       * <pre>
+       *make monsterPieceDropped to false in db
+       * </pre>
+       */
+      public Builder setDroplessTsfuUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        droplessTsfuUuid_ = value;
         onChanged();
         return this;
       }
@@ -17379,13 +17760,18 @@ public final class EventMonsterProto {
     int getTeamSlotNum();
 
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamRequestProto}
@@ -17457,9 +17843,10 @@ public final class EventMonsterProto {
               teamSlotNum_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -17538,25 +17925,52 @@ public final class EventMonsterProto {
       return teamSlotNum_;
     }
 
-    public static final int USERMONSTERID_FIELD_NUMBER = 3;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 3;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       teamSlotNum_ = 0;
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -17578,7 +17992,7 @@ public final class EventMonsterProto {
         output.writeInt32(2, teamSlotNum_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, userMonsterId_);
+        output.writeBytes(3, getUserMonsterUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -17599,7 +18013,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, userMonsterId_);
+          .computeBytesSize(3, getUserMonsterUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -17727,7 +18141,7 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         teamSlotNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -17772,7 +18186,7 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -17795,8 +18209,10 @@ public final class EventMonsterProto {
         if (other.hasTeamSlotNum()) {
           setTeamSlotNum(other.getTeamSlotNum());
         }
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000004;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -17973,34 +18389,78 @@ public final class EventMonsterProto {
         return this;
       }
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000004;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 3;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 3;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -18711,13 +19171,18 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamRequestProto}
@@ -18784,9 +19249,10 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
           }
@@ -18850,24 +19316,51 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    public static final int USERMONSTERID_FIELD_NUMBER = 3;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 3;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 userMonsterId = 3;</code>
+     * <code>optional string userMonsterUuid = 3;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -18886,7 +19379,7 @@ public final class EventMonsterProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(3, userMonsterId_);
+        output.writeBytes(3, getUserMonsterUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -18903,7 +19396,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, userMonsterId_);
+          .computeBytesSize(3, getUserMonsterUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -19029,7 +19522,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -19070,7 +19563,7 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -19090,8 +19583,10 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000002;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -19236,34 +19731,78 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000002;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 3;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 3;</code>
+       * <code>optional string userMonsterUuid = 3;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 3;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -19983,38 +20522,53 @@ public final class EventMonsterProto {
     com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType getIncreaseSlotType();
 
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
 
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    java.util.List<java.lang.Integer> getUserFbInviteForSlotIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserFbInviteForSlotUuidsList();
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    int getUserFbInviteForSlotIdsCount();
+    int getUserFbInviteForSlotUuidsCount();
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    int getUserFbInviteForSlotIds(int index);
+    java.lang.String getUserFbInviteForSlotUuids(int index);
+    /**
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
+     *
+     * <pre>
+     *all these invites are for one userstruct
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserFbInviteForSlotUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto}
@@ -20097,30 +20651,19 @@ public final class EventMonsterProto {
               }
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userStructId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                userFbInviteForSlotIds_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              userFbInviteForSlotIds_.add(input.readInt32());
+              userStructUuid_ = bs;
               break;
             }
             case 34: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                userFbInviteForSlotIds_ = new java.util.ArrayList<java.lang.Integer>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                userFbInviteForSlotUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000008;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userFbInviteForSlotIds_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              userFbInviteForSlotUuids_.add(bs);
               break;
             }
           }
@@ -20132,7 +20675,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          userFbInviteForSlotIds_ = java.util.Collections.unmodifiableList(userFbInviteForSlotIds_);
+          userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -20284,60 +20827,98 @@ public final class EventMonsterProto {
       return increaseSlotType_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 3;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 3;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERFBINVITEFORSLOTIDS_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Integer> userFbInviteForSlotIds_;
+    public static final int USERFBINVITEFORSLOTUUIDS_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList userFbInviteForSlotUuids_;
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getUserFbInviteForSlotIdsList() {
-      return userFbInviteForSlotIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserFbInviteForSlotUuidsList() {
+      return userFbInviteForSlotUuids_;
     }
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    public int getUserFbInviteForSlotIdsCount() {
-      return userFbInviteForSlotIds_.size();
+    public int getUserFbInviteForSlotUuidsCount() {
+      return userFbInviteForSlotUuids_.size();
     }
     /**
-     * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
      *
      * <pre>
      *all these invites are for one userstruct
      * </pre>
      */
-    public int getUserFbInviteForSlotIds(int index) {
-      return userFbInviteForSlotIds_.get(index);
+    public java.lang.String getUserFbInviteForSlotUuids(int index) {
+      return userFbInviteForSlotUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userFbInviteForSlotUuids = 4;</code>
+     *
+     * <pre>
+     *all these invites are for one userstruct
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserFbInviteForSlotUuidsBytes(int index) {
+      return userFbInviteForSlotUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
-      userStructId_ = 0;
-      userFbInviteForSlotIds_ = java.util.Collections.emptyList();
+      userStructUuid_ = "";
+      userFbInviteForSlotUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -20359,10 +20940,10 @@ public final class EventMonsterProto {
         output.writeEnum(2, increaseSlotType_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, userStructId_);
+        output.writeBytes(3, getUserStructUuidBytes());
       }
-      for (int i = 0; i < userFbInviteForSlotIds_.size(); i++) {
-        output.writeInt32(4, userFbInviteForSlotIds_.get(i));
+      for (int i = 0; i < userFbInviteForSlotUuids_.size(); i++) {
+        output.writeBytes(4, userFbInviteForSlotUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -20383,16 +20964,16 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, userStructId_);
+          .computeBytesSize(3, getUserStructUuidBytes());
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userFbInviteForSlotIds_.size(); i++) {
+        for (int i = 0; i < userFbInviteForSlotUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(userFbInviteForSlotIds_.get(i));
+            .computeBytesSizeNoTag(userFbInviteForSlotUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserFbInviteForSlotIdsList().size();
+        size += 1 * getUserFbInviteForSlotUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -20525,9 +21106,9 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        userFbInviteForSlotIds_ = java.util.Collections.emptyList();
+        userFbInviteForSlotUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -20572,12 +21153,12 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          userFbInviteForSlotIds_ = java.util.Collections.unmodifiableList(userFbInviteForSlotIds_);
+          userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000008);
         }
-        result.userFbInviteForSlotIds_ = userFbInviteForSlotIds_;
+        result.userFbInviteForSlotUuids_ = userFbInviteForSlotUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -20600,16 +21181,18 @@ public final class EventMonsterProto {
         if (other.hasIncreaseSlotType()) {
           setIncreaseSlotType(other.getIncreaseSlotType());
         }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000004;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
-        if (!other.userFbInviteForSlotIds_.isEmpty()) {
-          if (userFbInviteForSlotIds_.isEmpty()) {
-            userFbInviteForSlotIds_ = other.userFbInviteForSlotIds_;
+        if (!other.userFbInviteForSlotUuids_.isEmpty()) {
+          if (userFbInviteForSlotUuids_.isEmpty()) {
+            userFbInviteForSlotUuids_ = other.userFbInviteForSlotUuids_;
             bitField0_ = (bitField0_ & ~0x00000008);
           } else {
-            ensureUserFbInviteForSlotIdsIsMutable();
-            userFbInviteForSlotIds_.addAll(other.userFbInviteForSlotIds_);
+            ensureUserFbInviteForSlotUuidsIsMutable();
+            userFbInviteForSlotUuids_.addAll(other.userFbInviteForSlotUuids_);
           }
           onChanged();
         }
@@ -20791,128 +21374,207 @@ public final class EventMonsterProto {
         return this;
       }
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000004;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 3;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 3;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
 
-      private java.util.List<java.lang.Integer> userFbInviteForSlotIds_ = java.util.Collections.emptyList();
-      private void ensureUserFbInviteForSlotIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userFbInviteForSlotUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserFbInviteForSlotUuidsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          userFbInviteForSlotIds_ = new java.util.ArrayList<java.lang.Integer>(userFbInviteForSlotIds_);
+          userFbInviteForSlotUuids_ = new com.google.protobuf.LazyStringArrayList(userFbInviteForSlotUuids_);
           bitField0_ |= 0x00000008;
          }
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getUserFbInviteForSlotIdsList() {
-        return java.util.Collections.unmodifiableList(userFbInviteForSlotIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserFbInviteForSlotUuidsList() {
+        return userFbInviteForSlotUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public int getUserFbInviteForSlotIdsCount() {
-        return userFbInviteForSlotIds_.size();
+      public int getUserFbInviteForSlotUuidsCount() {
+        return userFbInviteForSlotUuids_.size();
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public int getUserFbInviteForSlotIds(int index) {
-        return userFbInviteForSlotIds_.get(index);
+      public java.lang.String getUserFbInviteForSlotUuids(int index) {
+        return userFbInviteForSlotUuids_.get(index);
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public Builder setUserFbInviteForSlotIds(
-          int index, int value) {
-        ensureUserFbInviteForSlotIdsIsMutable();
-        userFbInviteForSlotIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserFbInviteForSlotUuidsBytes(int index) {
+        return userFbInviteForSlotUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
+       *
+       * <pre>
+       *all these invites are for one userstruct
+       * </pre>
+       */
+      public Builder setUserFbInviteForSlotUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserFbInviteForSlotUuidsIsMutable();
+        userFbInviteForSlotUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public Builder addUserFbInviteForSlotIds(int value) {
-        ensureUserFbInviteForSlotIdsIsMutable();
-        userFbInviteForSlotIds_.add(value);
+      public Builder addUserFbInviteForSlotUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserFbInviteForSlotUuidsIsMutable();
+        userFbInviteForSlotUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public Builder addAllUserFbInviteForSlotIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureUserFbInviteForSlotIdsIsMutable();
+      public Builder addAllUserFbInviteForSlotUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserFbInviteForSlotUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userFbInviteForSlotIds_);
+            values, userFbInviteForSlotUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userFbInviteForSlotIds = 4;</code>
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
        *
        * <pre>
        *all these invites are for one userstruct
        * </pre>
        */
-      public Builder clearUserFbInviteForSlotIds() {
-        userFbInviteForSlotIds_ = java.util.Collections.emptyList();
+      public Builder clearUserFbInviteForSlotUuids() {
+        userFbInviteForSlotUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userFbInviteForSlotUuids = 4;</code>
+       *
+       * <pre>
+       *all these invites are for one userstruct
+       * </pre>
+       */
+      public Builder addUserFbInviteForSlotUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserFbInviteForSlotUuidsIsMutable();
+        userFbInviteForSlotUuids_.add(value);
         onChanged();
         return this;
       }
@@ -21830,13 +22492,18 @@ public final class EventMonsterProto {
           getFbFriendIdBytes();
 
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      boolean hasUserStructId();
+      boolean hasUserStructUuid();
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      int getUserStructId();
+      java.lang.String getUserStructUuid();
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getUserStructUuidBytes();
 
       /**
        * <code>optional int32 userStructFbLvl = 3;</code>
@@ -21919,9 +22586,10 @@ public final class EventMonsterProto {
                 fbFriendId_ = bs;
                 break;
               }
-              case 16: {
+              case 18: {
+                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000002;
-                userStructId_ = input.readInt32();
+                userStructUuid_ = bs;
                 break;
               }
               case 24: {
@@ -22011,19 +22679,46 @@ public final class EventMonsterProto {
         }
       }
 
-      public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-      private int userStructId_;
+      public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
+      private java.lang.Object userStructUuid_;
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
 
       public static final int USERSTRUCTFBLVL_FIELD_NUMBER = 3;
@@ -22053,7 +22748,7 @@ public final class EventMonsterProto {
 
       private void initFields() {
         fbFriendId_ = "";
-        userStructId_ = 0;
+        userStructUuid_ = "";
         userStructFbLvl_ = 0;
       }
       private byte memoizedIsInitialized = -1;
@@ -22073,7 +22768,7 @@ public final class EventMonsterProto {
           output.writeBytes(1, getFbFriendIdBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeInt32(2, userStructId_);
+          output.writeBytes(2, getUserStructUuidBytes());
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeInt32(3, userStructFbLvl_);
@@ -22093,7 +22788,7 @@ public final class EventMonsterProto {
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(2, userStructId_);
+            .computeBytesSize(2, getUserStructUuidBytes());
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
@@ -22222,7 +22917,7 @@ public final class EventMonsterProto {
           super.clear();
           fbFriendId_ = "";
           bitField0_ = (bitField0_ & ~0x00000001);
-          userStructId_ = 0;
+          userStructUuid_ = "";
           bitField0_ = (bitField0_ & ~0x00000002);
           userStructFbLvl_ = 0;
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -22261,7 +22956,7 @@ public final class EventMonsterProto {
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          result.userStructId_ = userStructId_;
+          result.userStructUuid_ = userStructUuid_;
           if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
             to_bitField0_ |= 0x00000004;
           }
@@ -22287,8 +22982,10 @@ public final class EventMonsterProto {
             fbFriendId_ = other.fbFriendId_;
             onChanged();
           }
-          if (other.hasUserStructId()) {
-            setUserStructId(other.getUserStructId());
+          if (other.hasUserStructUuid()) {
+            bitField0_ |= 0x00000002;
+            userStructUuid_ = other.userStructUuid_;
+            onChanged();
           }
           if (other.hasUserStructFbLvl()) {
             setUserStructFbLvl(other.getUserStructFbLvl());
@@ -22396,34 +23093,78 @@ public final class EventMonsterProto {
           return this;
         }
 
-        private int userStructId_ ;
+        private java.lang.Object userStructUuid_ = "";
         /**
-         * <code>optional int32 userStructId = 2;</code>
+         * <code>optional string userStructUuid = 2;</code>
          */
-        public boolean hasUserStructId() {
+        public boolean hasUserStructUuid() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional int32 userStructId = 2;</code>
+         * <code>optional string userStructUuid = 2;</code>
          */
-        public int getUserStructId() {
-          return userStructId_;
+        public java.lang.String getUserStructUuid() {
+          java.lang.Object ref = userStructUuid_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              userStructUuid_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
         }
         /**
-         * <code>optional int32 userStructId = 2;</code>
+         * <code>optional string userStructUuid = 2;</code>
          */
-        public Builder setUserStructId(int value) {
-          bitField0_ |= 0x00000002;
-          userStructId_ = value;
+        public com.google.protobuf.ByteString
+            getUserStructUuidBytes() {
+          java.lang.Object ref = userStructUuid_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            userStructUuid_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string userStructUuid = 2;</code>
+         */
+        public Builder setUserStructUuid(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          userStructUuid_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 userStructId = 2;</code>
+         * <code>optional string userStructUuid = 2;</code>
          */
-        public Builder clearUserStructId() {
+        public Builder clearUserStructUuid() {
           bitField0_ = (bitField0_ & ~0x00000002);
-          userStructId_ = 0;
+          userStructUuid_ = getDefaultInstance().getUserStructUuid();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string userStructUuid = 2;</code>
+         */
+        public Builder setUserStructUuidBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          userStructUuid_ = value;
           onChanged();
           return this;
         }
@@ -24272,42 +25013,58 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    java.util.List<java.lang.Integer> getAcceptedInviteIdsList();
+    com.google.protobuf.ProtocolStringList
+        getAcceptedInviteUuidsList();
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    int getAcceptedInviteIdsCount();
+    int getAcceptedInviteUuidsCount();
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    int getAcceptedInviteIds(int index);
+    java.lang.String getAcceptedInviteUuids(int index);
+    /**
+     * <code>repeated string acceptedInviteUuids = 2;</code>
+     *
+     * <pre>
+     *server records all valid accepts, does not enforce max 3 accepts per inviter
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getAcceptedInviteUuidsBytes(int index);
 
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    java.util.List<java.lang.Integer> getRejectedInviteIdsList();
+    com.google.protobuf.ProtocolStringList
+        getRejectedInviteUuidsList();
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    int getRejectedInviteIdsCount();
+    int getRejectedInviteUuidsCount();
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    int getRejectedInviteIds(int index);
+    java.lang.String getRejectedInviteUuids(int index);
+    /**
+     * <code>repeated string rejectedInviteUuids = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getRejectedInviteUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AcceptAndRejectFbInviteForSlotsRequestProto}
@@ -24374,46 +25131,22 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                acceptedInviteIds_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              acceptedInviteIds_.add(input.readInt32());
-              break;
-            }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                acceptedInviteIds_ = new java.util.ArrayList<java.lang.Integer>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                acceptedInviteUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                acceptedInviteIds_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                rejectedInviteIds_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              rejectedInviteIds_.add(input.readInt32());
+              acceptedInviteUuids_.add(bs);
               break;
             }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                rejectedInviteIds_ = new java.util.ArrayList<java.lang.Integer>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                rejectedInviteUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                rejectedInviteIds_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              rejectedInviteUuids_.add(bs);
               break;
             }
           }
@@ -24425,10 +25158,10 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          acceptedInviteIds_ = java.util.Collections.unmodifiableList(acceptedInviteIds_);
+          acceptedInviteUuids_ = acceptedInviteUuids_.getUnmodifiableView();
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          rejectedInviteIds_ = java.util.Collections.unmodifiableList(rejectedInviteIds_);
+          rejectedInviteUuids_ = rejectedInviteUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -24483,66 +25216,84 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    public static final int ACCEPTEDINVITEIDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> acceptedInviteIds_;
+    public static final int ACCEPTEDINVITEUUIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList acceptedInviteUuids_;
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getAcceptedInviteIdsList() {
-      return acceptedInviteIds_;
+    public com.google.protobuf.ProtocolStringList
+        getAcceptedInviteUuidsList() {
+      return acceptedInviteUuids_;
     }
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    public int getAcceptedInviteIdsCount() {
-      return acceptedInviteIds_.size();
+    public int getAcceptedInviteUuidsCount() {
+      return acceptedInviteUuids_.size();
     }
     /**
-     * <code>repeated int32 acceptedInviteIds = 2;</code>
+     * <code>repeated string acceptedInviteUuids = 2;</code>
      *
      * <pre>
      *server records all valid accepts, does not enforce max 3 accepts per inviter
      * </pre>
      */
-    public int getAcceptedInviteIds(int index) {
-      return acceptedInviteIds_.get(index);
+    public java.lang.String getAcceptedInviteUuids(int index) {
+      return acceptedInviteUuids_.get(index);
+    }
+    /**
+     * <code>repeated string acceptedInviteUuids = 2;</code>
+     *
+     * <pre>
+     *server records all valid accepts, does not enforce max 3 accepts per inviter
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getAcceptedInviteUuidsBytes(int index) {
+      return acceptedInviteUuids_.getByteString(index);
     }
 
-    public static final int REJECTEDINVITEIDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> rejectedInviteIds_;
+    public static final int REJECTEDINVITEUUIDS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList rejectedInviteUuids_;
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    public java.util.List<java.lang.Integer>
-        getRejectedInviteIdsList() {
-      return rejectedInviteIds_;
+    public com.google.protobuf.ProtocolStringList
+        getRejectedInviteUuidsList() {
+      return rejectedInviteUuids_;
     }
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    public int getRejectedInviteIdsCount() {
-      return rejectedInviteIds_.size();
+    public int getRejectedInviteUuidsCount() {
+      return rejectedInviteUuids_.size();
     }
     /**
-     * <code>repeated int32 rejectedInviteIds = 3;</code>
+     * <code>repeated string rejectedInviteUuids = 3;</code>
      */
-    public int getRejectedInviteIds(int index) {
-      return rejectedInviteIds_.get(index);
+    public java.lang.String getRejectedInviteUuids(int index) {
+      return rejectedInviteUuids_.get(index);
+    }
+    /**
+     * <code>repeated string rejectedInviteUuids = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRejectedInviteUuidsBytes(int index) {
+      return rejectedInviteUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
-      acceptedInviteIds_ = java.util.Collections.emptyList();
-      rejectedInviteIds_ = java.util.Collections.emptyList();
+      acceptedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      rejectedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -24560,11 +25311,11 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < acceptedInviteIds_.size(); i++) {
-        output.writeInt32(2, acceptedInviteIds_.get(i));
+      for (int i = 0; i < acceptedInviteUuids_.size(); i++) {
+        output.writeBytes(2, acceptedInviteUuids_.getByteString(i));
       }
-      for (int i = 0; i < rejectedInviteIds_.size(); i++) {
-        output.writeInt32(3, rejectedInviteIds_.get(i));
+      for (int i = 0; i < rejectedInviteUuids_.size(); i++) {
+        output.writeBytes(3, rejectedInviteUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -24581,21 +25332,21 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < acceptedInviteIds_.size(); i++) {
+        for (int i = 0; i < acceptedInviteUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(acceptedInviteIds_.get(i));
+            .computeBytesSizeNoTag(acceptedInviteUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getAcceptedInviteIdsList().size();
+        size += 1 * getAcceptedInviteUuidsList().size();
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < rejectedInviteIds_.size(); i++) {
+        for (int i = 0; i < rejectedInviteUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(rejectedInviteIds_.get(i));
+            .computeBytesSizeNoTag(rejectedInviteUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getRejectedInviteIdsList().size();
+        size += 1 * getRejectedInviteUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -24721,9 +25472,9 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        acceptedInviteIds_ = java.util.Collections.emptyList();
+        acceptedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        rejectedInviteIds_ = java.util.Collections.emptyList();
+        rejectedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -24762,15 +25513,15 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          acceptedInviteIds_ = java.util.Collections.unmodifiableList(acceptedInviteIds_);
+          acceptedInviteUuids_ = acceptedInviteUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.acceptedInviteIds_ = acceptedInviteIds_;
+        result.acceptedInviteUuids_ = acceptedInviteUuids_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          rejectedInviteIds_ = java.util.Collections.unmodifiableList(rejectedInviteIds_);
+          rejectedInviteUuids_ = rejectedInviteUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.rejectedInviteIds_ = rejectedInviteIds_;
+        result.rejectedInviteUuids_ = rejectedInviteUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -24790,23 +25541,23 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.acceptedInviteIds_.isEmpty()) {
-          if (acceptedInviteIds_.isEmpty()) {
-            acceptedInviteIds_ = other.acceptedInviteIds_;
+        if (!other.acceptedInviteUuids_.isEmpty()) {
+          if (acceptedInviteUuids_.isEmpty()) {
+            acceptedInviteUuids_ = other.acceptedInviteUuids_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureAcceptedInviteIdsIsMutable();
-            acceptedInviteIds_.addAll(other.acceptedInviteIds_);
+            ensureAcceptedInviteUuidsIsMutable();
+            acceptedInviteUuids_.addAll(other.acceptedInviteUuids_);
           }
           onChanged();
         }
-        if (!other.rejectedInviteIds_.isEmpty()) {
-          if (rejectedInviteIds_.isEmpty()) {
-            rejectedInviteIds_ = other.rejectedInviteIds_;
+        if (!other.rejectedInviteUuids_.isEmpty()) {
+          if (rejectedInviteUuids_.isEmpty()) {
+            rejectedInviteUuids_ = other.rejectedInviteUuids_;
             bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureRejectedInviteIdsIsMutable();
-            rejectedInviteIds_.addAll(other.rejectedInviteIds_);
+            ensureRejectedInviteUuidsIsMutable();
+            rejectedInviteUuids_.addAll(other.rejectedInviteUuids_);
           }
           onChanged();
         }
@@ -24953,162 +25704,224 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private java.util.List<java.lang.Integer> acceptedInviteIds_ = java.util.Collections.emptyList();
-      private void ensureAcceptedInviteIdsIsMutable() {
+      private com.google.protobuf.LazyStringList acceptedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureAcceptedInviteUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          acceptedInviteIds_ = new java.util.ArrayList<java.lang.Integer>(acceptedInviteIds_);
+          acceptedInviteUuids_ = new com.google.protobuf.LazyStringArrayList(acceptedInviteUuids_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getAcceptedInviteIdsList() {
-        return java.util.Collections.unmodifiableList(acceptedInviteIds_);
+      public com.google.protobuf.ProtocolStringList
+          getAcceptedInviteUuidsList() {
+        return acceptedInviteUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public int getAcceptedInviteIdsCount() {
-        return acceptedInviteIds_.size();
+      public int getAcceptedInviteUuidsCount() {
+        return acceptedInviteUuids_.size();
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public int getAcceptedInviteIds(int index) {
-        return acceptedInviteIds_.get(index);
+      public java.lang.String getAcceptedInviteUuids(int index) {
+        return acceptedInviteUuids_.get(index);
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public Builder setAcceptedInviteIds(
-          int index, int value) {
-        ensureAcceptedInviteIdsIsMutable();
-        acceptedInviteIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getAcceptedInviteUuidsBytes(int index) {
+        return acceptedInviteUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string acceptedInviteUuids = 2;</code>
+       *
+       * <pre>
+       *server records all valid accepts, does not enforce max 3 accepts per inviter
+       * </pre>
+       */
+      public Builder setAcceptedInviteUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAcceptedInviteUuidsIsMutable();
+        acceptedInviteUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public Builder addAcceptedInviteIds(int value) {
-        ensureAcceptedInviteIdsIsMutable();
-        acceptedInviteIds_.add(value);
+      public Builder addAcceptedInviteUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAcceptedInviteUuidsIsMutable();
+        acceptedInviteUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public Builder addAllAcceptedInviteIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureAcceptedInviteIdsIsMutable();
+      public Builder addAllAcceptedInviteUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureAcceptedInviteUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, acceptedInviteIds_);
+            values, acceptedInviteUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 acceptedInviteIds = 2;</code>
+       * <code>repeated string acceptedInviteUuids = 2;</code>
        *
        * <pre>
        *server records all valid accepts, does not enforce max 3 accepts per inviter
        * </pre>
        */
-      public Builder clearAcceptedInviteIds() {
-        acceptedInviteIds_ = java.util.Collections.emptyList();
+      public Builder clearAcceptedInviteUuids() {
+        acceptedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated string acceptedInviteUuids = 2;</code>
+       *
+       * <pre>
+       *server records all valid accepts, does not enforce max 3 accepts per inviter
+       * </pre>
+       */
+      public Builder addAcceptedInviteUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAcceptedInviteUuidsIsMutable();
+        acceptedInviteUuids_.add(value);
+        onChanged();
+        return this;
+      }
 
-      private java.util.List<java.lang.Integer> rejectedInviteIds_ = java.util.Collections.emptyList();
-      private void ensureRejectedInviteIdsIsMutable() {
+      private com.google.protobuf.LazyStringList rejectedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureRejectedInviteUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          rejectedInviteIds_ = new java.util.ArrayList<java.lang.Integer>(rejectedInviteIds_);
+          rejectedInviteUuids_ = new com.google.protobuf.LazyStringArrayList(rejectedInviteUuids_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public java.util.List<java.lang.Integer>
-          getRejectedInviteIdsList() {
-        return java.util.Collections.unmodifiableList(rejectedInviteIds_);
+      public com.google.protobuf.ProtocolStringList
+          getRejectedInviteUuidsList() {
+        return rejectedInviteUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public int getRejectedInviteIdsCount() {
-        return rejectedInviteIds_.size();
+      public int getRejectedInviteUuidsCount() {
+        return rejectedInviteUuids_.size();
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public int getRejectedInviteIds(int index) {
-        return rejectedInviteIds_.get(index);
+      public java.lang.String getRejectedInviteUuids(int index) {
+        return rejectedInviteUuids_.get(index);
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public Builder setRejectedInviteIds(
-          int index, int value) {
-        ensureRejectedInviteIdsIsMutable();
-        rejectedInviteIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getRejectedInviteUuidsBytes(int index) {
+        return rejectedInviteUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string rejectedInviteUuids = 3;</code>
+       */
+      public Builder setRejectedInviteUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRejectedInviteUuidsIsMutable();
+        rejectedInviteUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public Builder addRejectedInviteIds(int value) {
-        ensureRejectedInviteIdsIsMutable();
-        rejectedInviteIds_.add(value);
+      public Builder addRejectedInviteUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRejectedInviteUuidsIsMutable();
+        rejectedInviteUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public Builder addAllRejectedInviteIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureRejectedInviteIdsIsMutable();
+      public Builder addAllRejectedInviteUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureRejectedInviteUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, rejectedInviteIds_);
+            values, rejectedInviteUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 rejectedInviteIds = 3;</code>
+       * <code>repeated string rejectedInviteUuids = 3;</code>
        */
-      public Builder clearRejectedInviteIds() {
-        rejectedInviteIds_ = java.util.Collections.emptyList();
+      public Builder clearRejectedInviteUuids() {
+        rejectedInviteUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string rejectedInviteUuids = 3;</code>
+       */
+      public Builder addRejectedInviteUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRejectedInviteUuidsIsMutable();
+        rejectedInviteUuids_.add(value);
         onChanged();
         return this;
       }
@@ -26213,17 +27026,23 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    int getUserMonsterIdsCount();
+    int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    long getUserMonsterIds(int index);
+    java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
 
     /**
      * <code>optional int32 gemCost = 3;</code>
@@ -26309,25 +27128,13 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              userMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
             case 24: {
@@ -26344,7 +27151,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -26399,26 +27206,33 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      */
-    public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
     public static final int GEMCOST_FIELD_NUMBER = 3;
@@ -26448,7 +27262,7 @@ public final class EventMonsterProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userMonsterIds_ = java.util.Collections.emptyList();
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       gemCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -26467,8 +27281,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(2, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(2, userMonsterUuids_.getByteString(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(3, gemCost_);
@@ -26488,12 +27302,12 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -26623,7 +27437,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         gemCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -26664,10 +27478,10 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -26691,13 +27505,13 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
@@ -26847,68 +27661,95 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 2;</code>
+       */
+      public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        */
-      public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 2;</code>
+       */
+      public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -29242,17 +30083,23 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    int getUserMonsterIdsCount();
+    int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    long getUserMonsterIds(int index);
+    java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterRequestProto}
@@ -29319,25 +30166,13 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              userMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -29349,7 +30184,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -29404,31 +30239,38 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userMonsterIds_ = java.util.Collections.emptyList();
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -29446,8 +30288,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(3, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(3, userMonsterUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -29464,12 +30306,12 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -29595,7 +30437,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -29634,10 +30476,10 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -29657,13 +30499,13 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
@@ -29810,68 +30652,95 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       */
+      public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       */
+      public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -30582,17 +31451,23 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    int getUserMonsterIdsCount();
+    int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    long getUserMonsterIds(int index);
+    java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterRequestProto}
@@ -30659,25 +31534,13 @@ public final class EventMonsterProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              userMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
           }
@@ -30689,7 +31552,7 @@ public final class EventMonsterProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -30744,31 +31607,38 @@ public final class EventMonsterProto {
       return sender_;
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 3;</code>
+     * <code>repeated string userMonsterUuids = 3;</code>
      */
-    public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userMonsterIds_ = java.util.Collections.emptyList();
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -30786,8 +31656,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(3, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(3, userMonsterUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -30804,12 +31674,12 @@ public final class EventMonsterProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -30935,7 +31805,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -30974,10 +31844,10 @@ public final class EventMonsterProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -30997,13 +31867,13 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
@@ -31150,68 +32020,95 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       */
+      public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 3;</code>
+       * <code>repeated string userMonsterUuids = 3;</code>
        */
-      public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 3;</code>
+       */
+      public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -32130,188 +33027,189 @@ public final class EventMonsterProto {
       "nseProto.SubmitMonsterEnhancementStatus\"",
       "t\n\036SubmitMonsterEnhancementStatus\022\013\n\007SUC" +
       "CESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FA" +
-      "IL_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\370\001" +
+      "IL_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\374\001" +
       "\n\'EnhancementWaitTimeCompleteRequestProt" +
       "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
       "umUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsFo" +
       "rSpeedup\030\003 \001(\005\022=\n\005umcep\030\004 \001(\0132*.com.lvl6" +
-      ".proto.UserMonsterCurrentExpProtoB\002\030\001\022\032\n" +
-      "\016userMonsterIds\030\005 \003(\003B\002\030\001\022\025\n\ruserMonster" +
-      "Id\030\006 \001(\003\"\247\002\n(EnhancementWaitTimeComplete",
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022j\n\006status\030\002 \001(\0162" +
-      "Z.com.lvl6.proto.EnhancementWaitTimeComp" +
-      "leteResponseProto.EnhancementWaitTimeCom" +
-      "pleteStatus\"]\n!EnhancementWaitTimeComple" +
-      "teStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIE" +
-      "NT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\254\001\n%CollectMo" +
-      "nsterEnhancementRequestProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0229" +
-      "\n\005umcep\030\002 \001(\0132*.com.lvl6.proto.UserMonst",
-      "erCurrentExpProto\022\026\n\016userMonsterIds\030\003 \003(" +
-      "\003\"\243\002\n&CollectMonsterEnhancementResponseP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022f\n\006status\030\002 \001(\0162V.com.lvl" +
-      "6.proto.CollectMonsterEnhancementRespons" +
-      "eProto.CollectMonsterEnhancementStatus\"_" +
-      "\n\037CollectMonsterEnhancementStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\037\n\033FAIL_ENHANCEME" +
-      "NT_INCOMPLETE\020\003\"\200\002\n\032EnhanceMonsterReques" +
-      "tProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.proto.",
-      "MinimumUserProtoB\002\030\001\0225\n\003uep\030\002 \001(\0132$.com." +
-      "lvl6.proto.UserEnhancementProtoB\002\030\001\022G\n\017e" +
-      "nhancingResult\030\003 \001(\0132*.com.lvl6.proto.Us" +
-      "erMonsterCurrentExpProtoB\002\030\001\022\025\n\tgemsSpen" +
-      "t\030\004 \001(\005B\002\030\001\022\025\n\toilChange\030\005 \001(\021B\002\030\001\"\221\002\n\033E" +
-      "nhanceMonsterResponseProto\0224\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProtoB\002\030\001" +
-      "\022P\n\006status\030\002 \001(\0162@.com.lvl6.proto.Enhanc" +
-      "eMonsterResponseProto.EnhanceMonsterStat" +
-      "us\"j\n\024EnhanceMonsterStatus\022\013\n\007SUCCESS\020\001\022",
-      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_INSU" +
-      "FFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\310\002\n\037Updat" +
-      "eMonsterHealthRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022<\n\005" +
-      "umchp\030\002 \003(\0132-.com.lvl6.proto.UserMonster" +
-      "CurrentHealthProto\022\022\n\nclientTime\030\003 \001(\003\022\022" +
-      "\n\nuserTaskId\030\004 \001(\003\022 \n\030isUpdateTaskStageF" +
-      "orUser\030\005 \001(\010\022\025\n\rnuTaskStageId\030\006 \001(\005\022\026\n\016d" +
-      "roplessTsfuId\030\007 \001(\003\022 \n\030changeNuPvpDmgMul" +
-      "tiplier\030\010 \001(\010\022\032\n\022nuPvpDmgMultiplier\030\t \001(",
-      "\002\"\207\002\n UpdateMonsterHealthResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.prot" +
-      "o.UpdateMonsterHealthResponseProto.Updat" +
-      "eMonsterHealthStatus\"U\n\031UpdateMonsterHea" +
-      "lthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICI" +
-      "ENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\244\003\n\027HealMons" +
-      "terRequestProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
-      "l6.proto.MinimumUserProtoWithMaxResource" +
-      "s\022:\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.Us",
-      "erMonsterHealingProto\022:\n\tumhUpdate\030\003 \003(\013" +
-      "2\'.com.lvl6.proto.UserMonsterHealingProt" +
-      "o\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserM" +
-      "onsterHealingProto\022\022\n\ncashChange\030\005 \001(\021\022\031" +
-      "\n\021gemCostForHealing\030\006 \001(\005\022\021\n\tisSpeedup\030\007" +
-      " \001(\010\022\026\n\016gemsForSpeedup\030\010 \001(\005\022<\n\005umchp\030\t " +
-      "\003(\0132-.com.lvl6.proto.UserMonsterCurrentH" +
-      "ealthProto\"\341\002\n\030HealMonsterResponseProto\022" +
-      "@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimum" +
-      "UserProtoWithMaxResources\022J\n\006status\030\002 \001(",
-      "\0162:.com.lvl6.proto.HealMonsterResponsePr" +
-      "oto.HealMonsterStatus\"\266\001\n\021HealMonsterSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FU" +
-      "NDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HEALI" +
-      "NG\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT\020\004\022" +
-      "\016\n\nFAIL_OTHER\020\005\022\035\n\031FAIL_HEALING_NOT_COMP" +
-      "LETE\020\006\"\202\001\n\"AddMonsterToBattleTeamRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\r" +
-      "userMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBatt",
-      "leTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022`\n\006status\030" +
-      "\002 \001(\0162P.com.lvl6.proto.AddMonsterToBattl" +
-      "eTeamResponseProto.AddMonsterToBattleTea" +
-      "mStatus\";\n\034AddMonsterToBattleTeamStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveMo" +
-      "nsterFromBattleTeamRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMonst" +
-      "erFromBattleTeamResponseProto\0220\n\006sender\030",
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "j\n\006status\030\002 \001(\0162Z.com.lvl6.proto.RemoveM" +
-      "onsterFromBattleTeamResponseProto.Remove" +
-      "MonsterFromBattleTeamStatus\"@\n!RemoveMon" +
-      "sterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\"\266\002\n(IncreaseMonsterInvento" +
-      "rySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022c\n\020increase" +
-      "SlotType\030\002 \001(\0162I.com.lvl6.proto.Increase" +
-      "MonsterInventorySlotRequestProto.Increas",
-      "eSlotType\022\024\n\014userStructId\030\003 \001(\005\022\036\n\026userF" +
-      "bInviteForSlotIds\030\004 \003(\005\"=\n\020IncreaseSlotT" +
-      "ype\022\014\n\010PURCHASE\020\001\022\033\n\027REDEEM_FACEBOOK_INV" +
-      "ITES\020\002\"\240\003\n)IncreaseMonsterInventorySlotR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022l\n\006status\030\002 \001(\0162\\" +
-      ".com.lvl6.proto.IncreaseMonsterInventory" +
-      "SlotResponseProto.IncreaseMonsterInvento" +
-      "rySlotStatus\"\322\001\n\"IncreaseMonsterInventor" +
-      "ySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI",
-      "CIENT_FUNDS\020\002\022&\n\"FAIL_INSUFFICIENT_FACEB" +
-      "OOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\022!\n\035FAIL_IN" +
-      "CONSISTENT_INVITE_DATA\020\005\022\'\n#FAIL_STRUCTU" +
-      "RE_AT_MAX_FB_INVITE_LVL\020\006\"\241\002\n#InviteFbFr" +
-      "iendsForSlotsRequestProto\022>\n\006sender\030\001 \001(" +
-      "\0132..com.lvl6.proto.MinimumUserProtoWithF" +
-      "acebookId\022\\\n\007invites\030\002 \003(\0132K.com.lvl6.pr" +
-      "oto.InviteFbFriendsForSlotsRequestProto." +
-      "FacebookInviteStructure\032\\\n\027FacebookInvit" +
-      "eStructure\022\022\n\nfbFriendId\030\001 \001(\t\022\024\n\014userSt",
-      "ructId\030\002 \001(\005\022\027\n\017userStructFbLvl\030\003 \001(\005\"\314\002" +
-      "\n$InviteFbFriendsForSlotsResponseProto\022>" +
-      "\n\006sender\030\001 \001(\0132..com.lvl6.proto.MinimumU" +
-      "serProtoWithFacebookId\022b\n\006status\030\002 \001(\0162R" +
-      ".com.lvl6.proto.InviteFbFriendsForSlotsR" +
-      "esponseProto.InviteFbFriendsForSlotsStat" +
-      "us\022B\n\ninvitesNew\030\003 \003(\0132..com.lvl6.proto." +
-      "UserFacebookInviteForSlotProto\"<\n\035Invite" +
-      "FbFriendsForSlotsStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"\243\001\n+AcceptAndRejectFbInvite",
-      "ForSlotsRequestProto\022>\n\006sender\030\001 \001(\0132..c" +
-      "om.lvl6.proto.MinimumUserProtoWithFacebo" +
-      "okId\022\031\n\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejec" +
-      "tedInviteIds\030\003 \003(\005\"\237\003\n,AcceptAndRejectFb" +
-      "InviteForSlotsResponseProto\022>\n\006sender\030\001 " +
-      "\001(\0132..com.lvl6.proto.MinimumUserProtoWit" +
-      "hFacebookId\022r\n\006status\030\002 \001(\0162b.com.lvl6.p" +
-      "roto.AcceptAndRejectFbInviteForSlotsResp" +
-      "onseProto.AcceptAndRejectFbInviteForSlot" +
-      "sStatus\022G\n\017acceptedInvites\030\003 \003(\0132..com.l",
-      "vl6.proto.UserFacebookInviteForSlotProto" +
-      "\"r\n%AcceptAndRejectFbInviteForSlotsStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL" +
-      "_ALREADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n" +
-      "$CombineUserMonsterPiecesRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCo" +
-      "st\030\003 \001(\005\"\307\002\n%CombineUserMonsterPiecesRes" +
+      ".proto.UserMonsterCurrentExpProtoB\002\030\001\022\034\n" +
+      "\020userMonsterUuids\030\005 \003(\tB\002\030\001\022\027\n\017userMonst" +
+      "erUuid\030\006 \001(\t\"\247\002\n(EnhancementWaitTimeComp",
+      "leteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022j\n\006status\030\002 " +
+      "\001(\0162Z.com.lvl6.proto.EnhancementWaitTime" +
+      "CompleteResponseProto.EnhancementWaitTim" +
+      "eCompleteStatus\"]\n!EnhancementWaitTimeCo" +
+      "mpleteStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFF" +
+      "ICIENT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\256\001\n%Colle" +
+      "ctMonsterEnhancementRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\0229\n\005umcep\030\002 \001(\0132*.com.lvl6.proto.UserM",
+      "onsterCurrentExpProto\022\030\n\020userMonsterUuid" +
+      "s\030\003 \003(\t\"\243\002\n&CollectMonsterEnhancementRes" +
       "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022d\n\006status\030\002 \001(\0162T.c",
-      "om.lvl6.proto.CombineUserMonsterPiecesRe" +
-      "sponseProto.CombineUserMonsterPiecesStat" +
-      "us\"\205\001\n\036CombineUserMonsterPiecesStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*" +
-      "\n&FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP" +
-      "\020\003\022\016\n\nFAIL_OTHER\020\004\"\233\001\n\033SellUserMonsterRe" +
-      "questProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
-      "oto.MinimumUserProtoWithMaxResources\022:\n\005" +
-      "sales\030\002 \003(\0132+.com.lvl6.proto.MinimumUser" +
-      "MonsterSellProto\"\352\001\n\034SellUserMonsterResp",
+      "oto.MinimumUserProto\022f\n\006status\030\002 \001(\0162V.c" +
+      "om.lvl6.proto.CollectMonsterEnhancementR" +
+      "esponseProto.CollectMonsterEnhancementSt" +
+      "atus\"_\n\037CollectMonsterEnhancementStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\037\n\033FAIL_ENH" +
+      "ANCEMENT_INCOMPLETE\020\003\"\200\002\n\032EnhanceMonster" +
+      "RequestProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.",
+      "proto.MinimumUserProtoB\002\030\001\0225\n\003uep\030\002 \001(\0132" +
+      "$.com.lvl6.proto.UserEnhancementProtoB\002\030" +
+      "\001\022G\n\017enhancingResult\030\003 \001(\0132*.com.lvl6.pr" +
+      "oto.UserMonsterCurrentExpProtoB\002\030\001\022\025\n\tge" +
+      "msSpent\030\004 \001(\005B\002\030\001\022\025\n\toilChange\030\005 \001(\021B\002\030\001" +
+      "\"\221\002\n\033EnhanceMonsterResponseProto\0224\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "toB\002\030\001\022P\n\006status\030\002 \001(\0162@.com.lvl6.proto." +
+      "EnhanceMonsterResponseProto.EnhanceMonst" +
+      "erStatus\"j\n\024EnhanceMonsterStatus\022\013\n\007SUCC",
+      "ESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAI" +
+      "L_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\314\002\n" +
+      "\037UpdateMonsterHealthRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.proto.UserM" +
+      "onsterCurrentHealthProto\022\022\n\nclientTime\030\003" +
+      " \001(\003\022\024\n\014userTaskUuid\030\004 \001(\t\022 \n\030isUpdateTa" +
+      "skStageForUser\030\005 \001(\010\022\025\n\rnuTaskStageId\030\006 " +
+      "\001(\005\022\030\n\020droplessTsfuUuid\030\007 \001(\t\022 \n\030changeN" +
+      "uPvpDmgMultiplier\030\010 \001(\010\022\032\n\022nuPvpDmgMulti",
+      "plier\030\t \001(\002\"\207\002\n UpdateMonsterHealthRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J.com" +
+      ".lvl6.proto.UpdateMonsterHealthResponseP" +
+      "roto.UpdateMonsterHealthStatus\"U\n\031Update" +
+      "MonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL" +
+      "_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\244\003" +
+      "\n\027HealMonsterRequestProto\022@\n\006sender\030\001 \001(" +
+      "\01320.com.lvl6.proto.MinimumUserProtoWithM" +
+      "axResources\022:\n\tumhDelete\030\002 \003(\0132\'.com.lvl",
+      "6.proto.UserMonsterHealingProto\022:\n\tumhUp" +
+      "date\030\003 \003(\0132\'.com.lvl6.proto.UserMonsterH" +
+      "ealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6.p" +
+      "roto.UserMonsterHealingProto\022\022\n\ncashChan" +
+      "ge\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001(\005\022\021\n\ti" +
+      "sSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030\010 \001(\005\022<" +
+      "\n\005umchp\030\t \003(\0132-.com.lvl6.proto.UserMonst" +
+      "erCurrentHealthProto\"\341\002\n\030HealMonsterResp" +
       "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
-      "to.MinimumUserProtoWithMaxResources\022R\n\006s" +
-      "tatus\030\002 \001(\0162B.com.lvl6.proto.SellUserMon" +
-      "sterResponseProto.SellUserMonsterStatus\"" +
-      "4\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\"k\n\037RestrictUserMonsterRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\026\n\016userMonsterIds\030\003 \003" +
-      "(\003\"\352\001\n RestrictUserMonsterResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum",
-      "UserProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.pro" +
-      "to.RestrictUserMonsterResponseProto.Rest" +
-      "rictUserMonsterStatus\"8\n\031RestrictUserMon" +
+      "to.MinimumUserProtoWithMaxResources\022J\n\006s",
+      "tatus\030\002 \001(\0162:.com.lvl6.proto.HealMonster" +
+      "ResponseProto.HealMonsterStatus\"\266\001\n\021Heal" +
+      "MonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUF" +
+      "FICIENT_FUNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALR" +
+      "EADY_HEALING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONE" +
+      "XISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\022\035\n\031FAIL_HEALIN" +
+      "G_NOT_COMPLETE\020\006\"\204\001\n\"AddMonsterToBattleT" +
+      "eamRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\023\n\013teamSlotNum" +
+      "\030\002 \001(\005\022\027\n\017userMonsterUuid\030\003 \001(\t\"\366\001\n#AddM",
+      "onsterToBattleTeamResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.AddMo" +
+      "nsterToBattleTeamResponseProto.AddMonste" +
+      "rToBattleTeamStatus\";\n\034AddMonsterToBattl" +
+      "eTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\"t\n\'RemoveMonsterFromBattleTeamRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\027\n\017userMonsterUuid\030\003 \001(\t\"\212" +
+      "\002\n(RemoveMonsterFromBattleTeamResponsePr",
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6" +
+      ".proto.RemoveMonsterFromBattleTeamRespon" +
+      "seProto.RemoveMonsterFromBattleTeamStatu" +
+      "s\"@\n!RemoveMonsterFromBattleTeamStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\272\002\n(Increase" +
+      "MonsterInventorySlotRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022c\n\020increaseSlotType\030\002 \001(\0162I.com.lvl6." +
+      "proto.IncreaseMonsterInventorySlotReques",
+      "tProto.IncreaseSlotType\022\026\n\016userStructUui" +
+      "d\030\003 \001(\t\022 \n\030userFbInviteForSlotUuids\030\004 \003(" +
+      "\t\"=\n\020IncreaseSlotType\022\014\n\010PURCHASE\020\001\022\033\n\027R" +
+      "EDEEM_FACEBOOK_INVITES\020\002\"\240\003\n)IncreaseMon" +
+      "sterInventorySlotResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto.Increa" +
+      "seMonsterInventorySlotResponseProto.Incr" +
+      "easeMonsterInventorySlotStatus\"\322\001\n\"Incre" +
+      "aseMonsterInventorySlotStatus\022\013\n\007SUCCESS",
+      "\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022&\n\"FAIL_" +
+      "INSUFFICIENT_FACEBOOK_INVITES\020\003\022\016\n\nFAIL_" +
+      "OTHER\020\004\022!\n\035FAIL_INCONSISTENT_INVITE_DATA" +
+      "\020\005\022\'\n#FAIL_STRUCTURE_AT_MAX_FB_INVITE_LV" +
+      "L\020\006\"\243\002\n#InviteFbFriendsForSlotsRequestPr" +
+      "oto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Min" +
+      "imumUserProtoWithFacebookId\022\\\n\007invites\030\002" +
+      " \003(\0132K.com.lvl6.proto.InviteFbFriendsFor" +
+      "SlotsRequestProto.FacebookInviteStructur" +
+      "e\032^\n\027FacebookInviteStructure\022\022\n\nfbFriend",
+      "Id\030\001 \001(\t\022\026\n\016userStructUuid\030\002 \001(\t\022\027\n\017user" +
+      "StructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFriendsFor" +
+      "SlotsResponseProto\022>\n\006sender\030\001 \001(\0132..com" +
+      ".lvl6.proto.MinimumUserProtoWithFacebook" +
+      "Id\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto.Invi" +
+      "teFbFriendsForSlotsResponseProto.InviteF" +
+      "bFriendsForSlotsStatus\022B\n\ninvitesNew\030\003 \003" +
+      "(\0132..com.lvl6.proto.UserFacebookInviteFo" +
+      "rSlotProto\"<\n\035InviteFbFriendsForSlotsSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\247\001\n+Acc",
+      "eptAndRejectFbInviteForSlotsRequestProto" +
+      "\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Minimu" +
+      "mUserProtoWithFacebookId\022\033\n\023acceptedInvi" +
+      "teUuids\030\002 \003(\t\022\033\n\023rejectedInviteUuids\030\003 \003" +
+      "(\t\"\237\003\n,AcceptAndRejectFbInviteForSlotsRe" +
+      "sponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.p" +
+      "roto.MinimumUserProtoWithFacebookId\022r\n\006s" +
+      "tatus\030\002 \001(\0162b.com.lvl6.proto.AcceptAndRe" +
+      "jectFbInviteForSlotsResponseProto.Accept" +
+      "AndRejectFbInviteForSlotsStatus\022G\n\017accep",
+      "tedInvites\030\003 \003(\0132..com.lvl6.proto.UserFa" +
+      "cebookInviteForSlotProto\"r\n%AcceptAndRej" +
+      "ectFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020" +
+      "\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_US" +
+      "ED\020\003\022\016\n\nFAIL_OTHER\020\004\"\203\001\n$CombineUserMons" +
+      "terPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\030\n\020userM" +
+      "onsterUuids\030\002 \003(\t\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%C" +
+      "ombineUserMonsterPiecesResponseProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse",
+      "rProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto." +
+      "CombineUserMonsterPiecesResponseProto.Co" +
+      "mbineUserMonsterPiecesStatus\"\205\001\n\036Combine" +
+      "UserMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
+      "FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_TH" +
+      "AN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTH" +
+      "ER\020\004\"\233\001\n\033SellUserMonsterRequestProto\022@\n\006" +
+      "sender\030\001 \001(\01320.com.lvl6.proto.MinimumUse" +
+      "rProtoWithMaxResources\022:\n\005sales\030\002 \003(\0132+." +
+      "com.lvl6.proto.MinimumUserMonsterSellPro",
+      "to\"\352\001\n\034SellUserMonsterResponseProto\022@\n\006s" +
+      "ender\030\001 \001(\01320.com.lvl6.proto.MinimumUser" +
+      "ProtoWithMaxResources\022R\n\006status\030\002 \001(\0162B." +
+      "com.lvl6.proto.SellUserMonsterResponsePr" +
+      "oto.SellUserMonsterStatus\"4\n\025SellUserMon" +
       "sterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"" +
-      "m\n!UnrestrictUserMonsterRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\026\n\016userMonsterIds\030\003 \003(\003\"\362\001\n\"Unres" +
-      "trictUserMonsterResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Unrestr",
-      "ictUserMonsterResponseProto.UnrestrictUs" +
-      "erMonsterStatus\":\n\033UnrestrictUserMonster" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021E" +
-      "ventMonsterProto"
+      "m\n\037RestrictUserMonsterRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\030\n\020userMonsterUuids\030\003 \003(\t\"\352\001\n Restr" +
+      "ictUserMonsterResponseProto\0220\n\006sender\030\001 ",
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022Z\n" +
+      "\006status\030\002 \001(\0162J.com.lvl6.proto.RestrictU" +
+      "serMonsterResponseProto.RestrictUserMons" +
+      "terStatus\"8\n\031RestrictUserMonsterStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"o\n!Unrestric" +
+      "tUserMonsterRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\030\n\020us" +
+      "erMonsterUuids\030\003 \003(\t\"\362\001\n\"UnrestrictUserM" +
+      "onsterResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022^\n\006status\030",
+      "\002 \001(\0162N.com.lvl6.proto.UnrestrictUserMon" +
+      "sterResponseProto.UnrestrictUserMonsterS" +
+      "tatus\":\n\033UnrestrictUserMonsterStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonste" +
+      "rProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -32368,7 +33266,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterIds", "UserMonsterId", });
+        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterUuids", "UserMonsterUuid", });
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable = new
@@ -32380,7 +33278,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Umcep", "UserMonsterIds", });
+        new java.lang.String[] { "Sender", "Umcep", "UserMonsterUuids", });
     internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable = new
@@ -32404,7 +33302,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMonsterHealthRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Umchp", "ClientTime", "UserTaskId", "IsUpdateTaskStageForUser", "NuTaskStageId", "DroplessTsfuId", "ChangeNuPvpDmgMultiplier", "NuPvpDmgMultiplier", });
+        new java.lang.String[] { "Sender", "Umchp", "ClientTime", "UserTaskUuid", "IsUpdateTaskStageForUser", "NuTaskStageId", "DroplessTsfuUuid", "ChangeNuPvpDmgMultiplier", "NuPvpDmgMultiplier", });
     internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
@@ -32428,7 +33326,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AddMonsterToBattleTeamRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "TeamSlotNum", "UserMonsterId", });
+        new java.lang.String[] { "Sender", "TeamSlotNum", "UserMonsterUuid", });
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(17);
     internal_static_com_lvl6_proto_AddMonsterToBattleTeamResponseProto_fieldAccessorTable = new
@@ -32440,7 +33338,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserMonsterId", });
+        new java.lang.String[] { "Sender", "UserMonsterUuid", });
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(19);
     internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable = new
@@ -32452,7 +33350,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IncreaseSlotType", "UserStructId", "UserFbInviteForSlotIds", });
+        new java.lang.String[] { "Sender", "IncreaseSlotType", "UserStructUuid", "UserFbInviteForSlotUuids", });
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(21);
     internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable = new
@@ -32470,7 +33368,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor,
-        new java.lang.String[] { "FbFriendId", "UserStructId", "UserStructFbLvl", });
+        new java.lang.String[] { "FbFriendId", "UserStructUuid", "UserStructFbLvl", });
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(23);
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable = new
@@ -32482,7 +33380,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "AcceptedInviteIds", "RejectedInviteIds", });
+        new java.lang.String[] { "Sender", "AcceptedInviteUuids", "RejectedInviteUuids", });
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(25);
     internal_static_com_lvl6_proto_AcceptAndRejectFbInviteForSlotsResponseProto_fieldAccessorTable = new
@@ -32494,7 +33392,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserMonsterIds", "GemCost", });
+        new java.lang.String[] { "Sender", "UserMonsterUuids", "GemCost", });
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(27);
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable = new
@@ -32518,7 +33416,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RestrictUserMonsterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserMonsterIds", });
+        new java.lang.String[] { "Sender", "UserMonsterUuids", });
     internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(31);
     internal_static_com_lvl6_proto_RestrictUserMonsterResponseProto_fieldAccessorTable = new
@@ -32530,7 +33428,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UnrestrictUserMonsterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserMonsterIds", });
+        new java.lang.String[] { "Sender", "UserMonsterUuids", });
     internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(33);
     internal_static_com_lvl6_proto_UnrestrictUserMonsterResponseProto_fieldAccessorTable = new

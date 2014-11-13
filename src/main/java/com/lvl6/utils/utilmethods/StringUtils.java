@@ -118,4 +118,20 @@ public class StringUtils {
 		return returnValue;
 	}
 
+
+	public static List<String> explodeIntoStrings(String stringToExplode, 
+		String delimiter)
+	{
+		List<String> returnVal = new ArrayList<String>();
+		StringTokenizer st = new StringTokenizer(stringToExplode, delimiter);
+		while (st.hasMoreTokens()) {
+			String tok = st.nextToken().trim();
+			if (tok.isEmpty()) {
+				continue;
+			}
+			returnVal.add(tok);
+		}
+		
+		return returnVal;
+	}
 }

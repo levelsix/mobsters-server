@@ -68,7 +68,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int structId = reqProto.getStructId();
     CoordinatePair cp = new CoordinatePair(reqProto.getStructCoordinates().getX(), reqProto.getStructCoordinates().getY());
     Timestamp timeOfPurchase = new Timestamp(reqProto.getTimeOfPurchase());
@@ -83,10 +83,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	//get things from the db
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       log.info("user=" + user);
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
       
@@ -116,7 +116,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       	resBuilder.setUserStructId(uStructId);
       }
 
-      PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(senderProto.getUserId());
+      PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -144,7 +144,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     		log.error("exception2 in PurchaseNormStructure processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

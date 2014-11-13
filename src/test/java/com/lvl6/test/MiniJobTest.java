@@ -151,8 +151,8 @@ public class MiniJobTest extends TestCase {
 		//spawn the minijob
 		MiniJobForUser mjfuThen = createNewMiniJobForUser(userId,
 				unitTesterThen, clientTime); 
-		long newMiniJobForUserIdThen = mjfuThen.getId();
-		Collection<Long> userMiniJobIds =
+		String newMiniJobForUserIdThen = mjfuThen.getId();
+		Collection<String> userMiniJobIds =
 				Collections.singleton(newMiniJobForUserIdThen);
 		assertTrue("Expected startTime: null. Actual: " + mjfuThen,
 				null == mjfuThen.getTimeStarted());
@@ -162,12 +162,12 @@ public class MiniJobTest extends TestCase {
 				mjfuThen.getUserMonsterIdStr().isEmpty());
 		
 		//send the begin minijob request
-		Map<Long, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
+		Map<String, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, null);
 		assertTrue("Expected userMonsters: not null, or empty. Actual: " +
 				mfuIdToMfu,
 				null != mfuIdToMfu && !mfuIdToMfu.isEmpty());
-		Collection<Long> userMonsterIds = mfuIdToMfu.keySet();
+		Collection<String> userMonsterIds = mfuIdToMfu.keySet();
 		log.info("testSendBeginMiniJob() begfore" +
 				" sendBeginMiniJobRequestEvent");  
 		sendBeginMiniJobRequestEvent(unitTesterThen, clientTime,

@@ -89,7 +89,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     MinimumUserProto senderProto = reqProto.getSender();
     int clanId = reqProto.getClanId();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
 
     RequestJoinClanResponseProto.Builder resBuilder = RequestJoinClanResponseProto.newBuilder();
     resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
@@ -140,7 +140,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         sendClanRaidStuff(resBuilder, clan, user);
         cdp = setClanData(clanId, clan, user, userId);
       }
-      RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
+      RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRequestJoinClanResponseProto(resBuilder.build());
       /* I think I meant write to the clan leader if leader is not on

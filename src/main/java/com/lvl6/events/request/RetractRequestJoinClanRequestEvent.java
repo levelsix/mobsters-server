@@ -22,7 +22,7 @@ public class RetractRequestJoinClanRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       retractRequestJoinClanRequestProto = RetractRequestJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retractRequestJoinClanRequestProto.getSender().getUserId();
+      playerId = retractRequestJoinClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("retract request join clan request exception", e);
     }

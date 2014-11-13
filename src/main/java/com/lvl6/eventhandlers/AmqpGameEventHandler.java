@@ -27,13 +27,13 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 	private static final int DEFAULT_TTL = 9;
 
 	@Resource(name = "playersByPlayerId")
-	IMap<Integer, ConnectedPlayer> playersByPlayerId;
+	IMap<String, ConnectedPlayer> playersByPlayerId;
 
-	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+	public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
-	public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(IMap<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
@@ -82,10 +82,10 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		if (getApplicationMode().isMaintenanceMode()) {
 			if(event instanceof PreDatabaseRequestEvent) {
 				String udid = ((PreDatabaseRequestEvent) event).getUdid();
-				messagingUtil.sendMaintanenceModeMessage(getApplicationMode().getMessageForUsers(), udid);
+				messagingUtil.sendMaintanenceModeMessageUdid(getApplicationMode().getMessageForUsers(), udid);
 			}else {
-				int playerId = event.getPlayerId();
-				messagingUtil.sendMaintanenceModeMessage(getApplicationMode().getMessageForUsers(), playerId);
+				String playerId = event.getPlayerId();
+				messagingUtil.sendMaintanenceModeMessageUdid(getApplicationMode().getMessageForUsers(), playerId);
 			}
 		} else {
 			updatePlayerToServerMaps(event);
@@ -134,7 +134,7 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		ConnectedPlayer newp = new ConnectedPlayer();
 		newp.setIp_connection_id("amqp");
 		newp.setServerHostName(server.serverId());
-		if (event.getPlayerId() != -1) {
+		if (!event.getPlayerId().equals("")) {
 			log.info("Player logged on: " + event.getPlayerId());
 			newp.setPlayerId(event.getPlayerId());
 			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL, TimeUnit.MINUTES);

@@ -1215,13 +1215,18 @@ public final class EventStructureProto {
     com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus getStatus();
 
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PurchaseNormStructureResponseProto}
@@ -1299,9 +1304,10 @@ public final class EventStructureProto {
               }
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              userStructId_ = input.readInt32();
+              userStructUuid_ = bs;
               break;
             }
           }
@@ -1489,25 +1495,52 @@ public final class EventStructureProto {
       return status_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 3;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 3;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 userStructId = 3;</code>
+     * <code>optional string userStructUuid = 3;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
-      userStructId_ = 0;
+      userStructUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1529,7 +1562,7 @@ public final class EventStructureProto {
         output.writeEnum(2, status_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, userStructId_);
+        output.writeBytes(3, getUserStructUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1550,7 +1583,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, userStructId_);
+          .computeBytesSize(3, getUserStructUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1678,7 +1711,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -1723,7 +1756,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1746,8 +1779,10 @@ public final class EventStructureProto {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000004;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1927,34 +1962,78 @@ public final class EventStructureProto {
         return this;
       }
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000004;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 3;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 3;</code>
+       * <code>optional string userStructUuid = 3;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 3;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
@@ -1988,13 +2067,18 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
 
     /**
      * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType type = 3;</code>
@@ -2096,9 +2180,10 @@ public final class EventStructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructId_ = input.readInt32();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -2278,19 +2363,46 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TYPE_FIELD_NUMBER = 3;
@@ -2346,7 +2458,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userStructId_ = 0;
+      userStructUuid_ = "";
       type_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType.MOVE;
       curStructCoordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       orientationNew_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
@@ -2368,7 +2480,7 @@ public final class EventStructureProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userStructId_);
+        output.writeBytes(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, type_.getNumber());
@@ -2394,7 +2506,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userStructId_);
+          .computeBytesSize(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2537,7 +2649,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         type_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType.MOVE;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2588,7 +2700,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -2624,8 +2736,10 @@ public final class EventStructureProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000002;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
         if (other.hasType()) {
           setType(other.getType());
@@ -2779,34 +2893,78 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000002;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
@@ -3711,13 +3869,18 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
 
     /**
      * <code>optional int64 timeOfUpgrade = 3;</code>
@@ -3843,9 +4006,10 @@ public final class EventStructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructId_ = input.readInt32();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -3935,19 +4099,46 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TIMEOFUPGRADE_FIELD_NUMBER = 3;
@@ -4030,7 +4221,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userStructId_ = 0;
+      userStructUuid_ = "";
       timeOfUpgrade_ = 0L;
       gemsSpent_ = 0;
       resourceChange_ = 0;
@@ -4053,7 +4244,7 @@ public final class EventStructureProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userStructId_);
+        output.writeBytes(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, timeOfUpgrade_);
@@ -4082,7 +4273,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userStructId_);
+          .computeBytesSize(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4229,7 +4420,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         timeOfUpgrade_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4278,7 +4469,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -4314,8 +4505,10 @@ public final class EventStructureProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000002;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
         if (other.hasTimeOfUpgrade()) {
           setTimeOfUpgrade(other.getTimeOfUpgrade());
@@ -4472,34 +4665,78 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000002;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
@@ -5439,13 +5676,18 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
 
     /**
      * <code>optional int64 timeOfSpeedup = 3;</code>
@@ -5545,9 +5787,10 @@ public final class EventStructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userStructId_ = input.readInt32();
+              userStructUuid_ = bs;
               break;
             }
             case 24: {
@@ -5621,19 +5864,46 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userStructId = 2;</code>
+     * <code>optional string userStructUuid = 2;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TIMEOFSPEEDUP_FIELD_NUMBER = 3;
@@ -5678,7 +5948,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userStructId_ = 0;
+      userStructUuid_ = "";
       timeOfSpeedup_ = 0L;
       gemCostToSpeedup_ = 0;
     }
@@ -5699,7 +5969,7 @@ public final class EventStructureProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userStructId_);
+        output.writeBytes(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, timeOfSpeedup_);
@@ -5722,7 +5992,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userStructId_);
+          .computeBytesSize(2, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5861,7 +6131,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         timeOfSpeedup_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5906,7 +6176,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -5934,8 +6204,10 @@ public final class EventStructureProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000002;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
         if (other.hasTimeOfSpeedup()) {
           setTimeOfSpeedup(other.getTimeOfSpeedup());
@@ -6086,34 +6358,78 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000002;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 2;</code>
+       * <code>optional string userStructUuid = 2;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
@@ -6925,17 +7241,23 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    java.util.List<java.lang.Integer> getUserStructIdList();
+    com.google.protobuf.ProtocolStringList
+        getUserStructUuidList();
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    int getUserStructIdCount();
+    int getUserStructUuidCount();
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    int getUserStructId(int index);
+    java.lang.String getUserStructUuid(int index);
+    /**
+     * <code>repeated string userStructUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes(int index);
 
     /**
      * <code>optional int64 curTime = 3;</code>
@@ -7028,25 +7350,13 @@ public final class EventStructureProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userStructId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              userStructId_.add(input.readInt32());
-              break;
-            }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                userStructId_ = new java.util.ArrayList<java.lang.Integer>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userStructUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userStructId_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              userStructUuid_.add(bs);
               break;
             }
             case 24: {
@@ -7063,7 +7373,7 @@ public final class EventStructureProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userStructId_ = java.util.Collections.unmodifiableList(userStructId_);
+          userStructUuid_ = userStructUuid_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -7118,26 +7428,33 @@ public final class EventStructureProto {
       return sender_;
     }
 
-    public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList userStructUuid_;
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    public java.util.List<java.lang.Integer>
-        getUserStructIdList() {
-      return userStructId_;
+    public com.google.protobuf.ProtocolStringList
+        getUserStructUuidList() {
+      return userStructUuid_;
     }
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    public int getUserStructIdCount() {
-      return userStructId_.size();
+    public int getUserStructUuidCount() {
+      return userStructUuid_.size();
     }
     /**
-     * <code>repeated int32 userStructId = 2;</code>
+     * <code>repeated string userStructUuid = 2;</code>
      */
-    public int getUserStructId(int index) {
-      return userStructId_.get(index);
+    public java.lang.String getUserStructUuid(int index) {
+      return userStructUuid_.get(index);
+    }
+    /**
+     * <code>repeated string userStructUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes(int index) {
+      return userStructUuid_.getByteString(index);
     }
 
     public static final int CURTIME_FIELD_NUMBER = 3;
@@ -7169,7 +7486,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userStructId_ = java.util.Collections.emptyList();
+      userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       curTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -7188,8 +7505,8 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < userStructId_.size(); i++) {
-        output.writeInt32(2, userStructId_.get(i));
+      for (int i = 0; i < userStructUuid_.size(); i++) {
+        output.writeBytes(2, userStructUuid_.getByteString(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(3, curTime_);
@@ -7209,12 +7526,12 @@ public final class EventStructureProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userStructId_.size(); i++) {
+        for (int i = 0; i < userStructUuid_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(userStructId_.get(i));
+            .computeBytesSizeNoTag(userStructUuid_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserStructIdList().size();
+        size += 1 * getUserStructUuidList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7349,7 +7666,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = java.util.Collections.emptyList();
+        userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         curTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -7390,10 +7707,10 @@ public final class EventStructureProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userStructId_ = java.util.Collections.unmodifiableList(userStructId_);
+          userStructUuid_ = userStructUuid_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -7417,13 +7734,13 @@ public final class EventStructureProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.userStructId_.isEmpty()) {
-          if (userStructId_.isEmpty()) {
-            userStructId_ = other.userStructId_;
+        if (!other.userStructUuid_.isEmpty()) {
+          if (userStructUuid_.isEmpty()) {
+            userStructUuid_ = other.userStructUuid_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserStructIdIsMutable();
-            userStructId_.addAll(other.userStructId_);
+            ensureUserStructUuidIsMutable();
+            userStructUuid_.addAll(other.userStructUuid_);
           }
           onChanged();
         }
@@ -7573,68 +7890,95 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private java.util.List<java.lang.Integer> userStructId_ = java.util.Collections.emptyList();
-      private void ensureUserStructIdIsMutable() {
+      private com.google.protobuf.LazyStringList userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserStructUuidIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userStructId_ = new java.util.ArrayList<java.lang.Integer>(userStructId_);
+          userStructUuid_ = new com.google.protobuf.LazyStringArrayList(userStructUuid_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public java.util.List<java.lang.Integer>
-          getUserStructIdList() {
-        return java.util.Collections.unmodifiableList(userStructId_);
+      public com.google.protobuf.ProtocolStringList
+          getUserStructUuidList() {
+        return userStructUuid_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public int getUserStructIdCount() {
-        return userStructId_.size();
+      public int getUserStructUuidCount() {
+        return userStructUuid_.size();
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public int getUserStructId(int index) {
-        return userStructId_.get(index);
+      public java.lang.String getUserStructUuid(int index) {
+        return userStructUuid_.get(index);
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public Builder setUserStructId(
-          int index, int value) {
-        ensureUserStructIdIsMutable();
-        userStructId_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes(int index) {
+        return userStructUuid_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userStructUuid = 2;</code>
+       */
+      public Builder setUserStructUuid(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserStructUuidIsMutable();
+        userStructUuid_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public Builder addUserStructId(int value) {
-        ensureUserStructIdIsMutable();
-        userStructId_.add(value);
+      public Builder addUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserStructUuidIsMutable();
+        userStructUuid_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public Builder addAllUserStructId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureUserStructIdIsMutable();
+      public Builder addAllUserStructUuid(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserStructUuidIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userStructId_);
+            values, userStructUuid_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 userStructId = 2;</code>
+       * <code>repeated string userStructUuid = 2;</code>
        */
-      public Builder clearUserStructId() {
-        userStructId_ = java.util.Collections.emptyList();
+      public Builder clearUserStructUuid() {
+        userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userStructUuid = 2;</code>
+       */
+      public Builder addUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserStructUuidIsMutable();
+        userStructUuid_.add(value);
         onChanged();
         return this;
       }
@@ -8926,13 +9270,18 @@ public final class EventStructureProto {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      boolean hasUserStructId();
+      boolean hasUserStructUuid();
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      int getUserStructId();
+      java.lang.String getUserStructUuid();
+      /**
+       * <code>optional string userStructUuid = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getUserStructUuidBytes();
 
       /**
        * <code>optional int64 timeOfRetrieval = 2;</code>
@@ -9004,9 +9353,10 @@ public final class EventStructureProto {
                 }
                 break;
               }
-              case 8: {
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000001;
-                userStructId_ = input.readInt32();
+                userStructUuid_ = bs;
                 break;
               }
               case 16: {
@@ -9059,19 +9409,46 @@ public final class EventStructureProto {
       }
 
       private int bitField0_;
-      public static final int USERSTRUCTID_FIELD_NUMBER = 1;
-      private int userStructId_;
+      public static final int USERSTRUCTUUID_FIELD_NUMBER = 1;
+      private java.lang.Object userStructUuid_;
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
 
       public static final int TIMEOFRETRIEVAL_FIELD_NUMBER = 2;
@@ -9105,7 +9482,7 @@ public final class EventStructureProto {
       }
 
       private void initFields() {
-        userStructId_ = 0;
+        userStructUuid_ = "";
         timeOfRetrieval_ = 0L;
         amountCollected_ = 0;
       }
@@ -9123,7 +9500,7 @@ public final class EventStructureProto {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeInt32(1, userStructId_);
+          output.writeBytes(1, getUserStructUuidBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeInt64(2, timeOfRetrieval_);
@@ -9142,7 +9519,7 @@ public final class EventStructureProto {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, userStructId_);
+            .computeBytesSize(1, getUserStructUuidBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
@@ -9269,7 +9646,7 @@ public final class EventStructureProto {
 
         public Builder clear() {
           super.clear();
-          userStructId_ = 0;
+          userStructUuid_ = "";
           bitField0_ = (bitField0_ & ~0x00000001);
           timeOfRetrieval_ = 0L;
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -9306,7 +9683,7 @@ public final class EventStructureProto {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.userStructId_ = userStructId_;
+          result.userStructUuid_ = userStructUuid_;
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
@@ -9331,8 +9708,10 @@ public final class EventStructureProto {
 
         public Builder mergeFrom(com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval other) {
           if (other == com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval.getDefaultInstance()) return this;
-          if (other.hasUserStructId()) {
-            setUserStructId(other.getUserStructId());
+          if (other.hasUserStructUuid()) {
+            bitField0_ |= 0x00000001;
+            userStructUuid_ = other.userStructUuid_;
+            onChanged();
           }
           if (other.hasTimeOfRetrieval()) {
             setTimeOfRetrieval(other.getTimeOfRetrieval());
@@ -9367,34 +9746,78 @@ public final class EventStructureProto {
         }
         private int bitField0_;
 
-        private int userStructId_ ;
+        private java.lang.Object userStructUuid_ = "";
         /**
-         * <code>optional int32 userStructId = 1;</code>
+         * <code>optional string userStructUuid = 1;</code>
          */
-        public boolean hasUserStructId() {
+        public boolean hasUserStructUuid() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional int32 userStructId = 1;</code>
+         * <code>optional string userStructUuid = 1;</code>
          */
-        public int getUserStructId() {
-          return userStructId_;
+        public java.lang.String getUserStructUuid() {
+          java.lang.Object ref = userStructUuid_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              userStructUuid_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
         }
         /**
-         * <code>optional int32 userStructId = 1;</code>
+         * <code>optional string userStructUuid = 1;</code>
          */
-        public Builder setUserStructId(int value) {
-          bitField0_ |= 0x00000001;
-          userStructId_ = value;
+        public com.google.protobuf.ByteString
+            getUserStructUuidBytes() {
+          java.lang.Object ref = userStructUuid_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            userStructUuid_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string userStructUuid = 1;</code>
+         */
+        public Builder setUserStructUuid(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          userStructUuid_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 userStructId = 1;</code>
+         * <code>optional string userStructUuid = 1;</code>
          */
-        public Builder clearUserStructId() {
+        public Builder clearUserStructUuid() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          userStructId_ = 0;
+          userStructUuid_ = getDefaultInstance().getUserStructUuid();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string userStructUuid = 1;</code>
+         */
+        public Builder setUserStructUuidBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          userStructUuid_ = value;
           onChanged();
           return this;
         }
@@ -14818,13 +15241,18 @@ public final class EventStructureProto {
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
 
     /**
-     * <code>optional int32 userObstacleId = 6;</code>
+     * <code>optional string userObstacleUuid = 6;</code>
      */
-    boolean hasUserObstacleId();
+    boolean hasUserObstacleUuid();
     /**
-     * <code>optional int32 userObstacleId = 6;</code>
+     * <code>optional string userObstacleUuid = 6;</code>
      */
-    int getUserObstacleId();
+    java.lang.String getUserObstacleUuid();
+    /**
+     * <code>optional string userObstacleUuid = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserObstacleUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalRequestProto}
@@ -14917,9 +15345,10 @@ public final class EventStructureProto {
               }
               break;
             }
-            case 48: {
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              userObstacleId_ = input.readInt32();
+              userObstacleUuid_ = bs;
               break;
             }
           }
@@ -15061,19 +15490,46 @@ public final class EventStructureProto {
       return resourceType_;
     }
 
-    public static final int USEROBSTACLEID_FIELD_NUMBER = 6;
-    private int userObstacleId_;
+    public static final int USEROBSTACLEUUID_FIELD_NUMBER = 6;
+    private java.lang.Object userObstacleUuid_;
     /**
-     * <code>optional int32 userObstacleId = 6;</code>
+     * <code>optional string userObstacleUuid = 6;</code>
      */
-    public boolean hasUserObstacleId() {
+    public boolean hasUserObstacleUuid() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional int32 userObstacleId = 6;</code>
+     * <code>optional string userObstacleUuid = 6;</code>
      */
-    public int getUserObstacleId() {
-      return userObstacleId_;
+    public java.lang.String getUserObstacleUuid() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userObstacleUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userObstacleUuid = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserObstacleUuidBytes() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userObstacleUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
@@ -15082,7 +15538,7 @@ public final class EventStructureProto {
       gemsSpent_ = 0;
       resourceChange_ = 0;
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
-      userObstacleId_ = 0;
+      userObstacleUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -15113,7 +15569,7 @@ public final class EventStructureProto {
         output.writeEnum(5, resourceType_.getNumber());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, userObstacleId_);
+        output.writeBytes(6, getUserObstacleUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -15146,7 +15602,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, userObstacleId_);
+          .computeBytesSize(6, getUserObstacleUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15280,7 +15736,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000010);
-        userObstacleId_ = 0;
+        userObstacleUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
@@ -15337,7 +15793,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.userObstacleId_ = userObstacleId_;
+        result.userObstacleUuid_ = userObstacleUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15369,8 +15825,10 @@ public final class EventStructureProto {
         if (other.hasResourceType()) {
           setResourceType(other.getResourceType());
         }
-        if (other.hasUserObstacleId()) {
-          setUserObstacleId(other.getUserObstacleId());
+        if (other.hasUserObstacleUuid()) {
+          bitField0_ |= 0x00000020;
+          userObstacleUuid_ = other.userObstacleUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15682,34 +16140,78 @@ public final class EventStructureProto {
         return this;
       }
 
-      private int userObstacleId_ ;
+      private java.lang.Object userObstacleUuid_ = "";
       /**
-       * <code>optional int32 userObstacleId = 6;</code>
+       * <code>optional string userObstacleUuid = 6;</code>
        */
-      public boolean hasUserObstacleId() {
+      public boolean hasUserObstacleUuid() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional int32 userObstacleId = 6;</code>
+       * <code>optional string userObstacleUuid = 6;</code>
        */
-      public int getUserObstacleId() {
-        return userObstacleId_;
+      public java.lang.String getUserObstacleUuid() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userObstacleId = 6;</code>
+       * <code>optional string userObstacleUuid = 6;</code>
        */
-      public Builder setUserObstacleId(int value) {
-        bitField0_ |= 0x00000020;
-        userObstacleId_ = value;
+      public com.google.protobuf.ByteString
+          getUserObstacleUuidBytes() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userObstacleUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userObstacleUuid = 6;</code>
+       */
+      public Builder setUserObstacleUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userObstacleId = 6;</code>
+       * <code>optional string userObstacleUuid = 6;</code>
        */
-      public Builder clearUserObstacleId() {
+      public Builder clearUserObstacleUuid() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        userObstacleId_ = 0;
+        userObstacleUuid_ = getDefaultInstance().getUserObstacleUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userObstacleUuid = 6;</code>
+       */
+      public Builder setUserObstacleUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
@@ -16475,13 +16977,18 @@ public final class EventStructureProto {
     int getGemsSpent();
 
     /**
-     * <code>optional int32 userObstacleId = 5;</code>
+     * <code>optional string userObstacleUuid = 5;</code>
      */
-    boolean hasUserObstacleId();
+    boolean hasUserObstacleUuid();
     /**
-     * <code>optional int32 userObstacleId = 5;</code>
+     * <code>optional string userObstacleUuid = 5;</code>
      */
-    int getUserObstacleId();
+    java.lang.String getUserObstacleUuid();
+    /**
+     * <code>optional string userObstacleUuid = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserObstacleUuidBytes();
 
     /**
      * <code>optional bool atMaxObstacles = 6;</code>
@@ -16582,9 +17089,10 @@ public final class EventStructureProto {
               gemsSpent_ = input.readInt32();
               break;
             }
-            case 40: {
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
-              userObstacleId_ = input.readInt32();
+              userObstacleUuid_ = bs;
               break;
             }
             case 48: {
@@ -16708,19 +17216,46 @@ public final class EventStructureProto {
       return gemsSpent_;
     }
 
-    public static final int USEROBSTACLEID_FIELD_NUMBER = 5;
-    private int userObstacleId_;
+    public static final int USEROBSTACLEUUID_FIELD_NUMBER = 5;
+    private java.lang.Object userObstacleUuid_;
     /**
-     * <code>optional int32 userObstacleId = 5;</code>
+     * <code>optional string userObstacleUuid = 5;</code>
      */
-    public boolean hasUserObstacleId() {
+    public boolean hasUserObstacleUuid() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 userObstacleId = 5;</code>
+     * <code>optional string userObstacleUuid = 5;</code>
      */
-    public int getUserObstacleId() {
-      return userObstacleId_;
+    public java.lang.String getUserObstacleUuid() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userObstacleUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userObstacleUuid = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserObstacleUuidBytes() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userObstacleUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ATMAXOBSTACLES_FIELD_NUMBER = 6;
@@ -16753,7 +17288,7 @@ public final class EventStructureProto {
       curTime_ = 0L;
       speedUp_ = false;
       gemsSpent_ = 0;
-      userObstacleId_ = 0;
+      userObstacleUuid_ = "";
       atMaxObstacles_ = false;
     }
     private byte memoizedIsInitialized = -1;
@@ -16782,7 +17317,7 @@ public final class EventStructureProto {
         output.writeInt32(4, gemsSpent_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, userObstacleId_);
+        output.writeBytes(5, getUserObstacleUuidBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(6, atMaxObstacles_);
@@ -16814,7 +17349,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, userObstacleId_);
+          .computeBytesSize(5, getUserObstacleUuidBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -16950,7 +17485,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         gemsSpent_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        userObstacleId_ = 0;
+        userObstacleUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
         atMaxObstacles_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -17005,7 +17540,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.userObstacleId_ = userObstacleId_;
+        result.userObstacleUuid_ = userObstacleUuid_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -17038,8 +17573,10 @@ public final class EventStructureProto {
         if (other.hasGemsSpent()) {
           setGemsSpent(other.getGemsSpent());
         }
-        if (other.hasUserObstacleId()) {
-          setUserObstacleId(other.getUserObstacleId());
+        if (other.hasUserObstacleUuid()) {
+          bitField0_ |= 0x00000010;
+          userObstacleUuid_ = other.userObstacleUuid_;
+          onChanged();
         }
         if (other.hasAtMaxObstacles()) {
           setAtMaxObstacles(other.getAtMaxObstacles());
@@ -17303,34 +17840,78 @@ public final class EventStructureProto {
         return this;
       }
 
-      private int userObstacleId_ ;
+      private java.lang.Object userObstacleUuid_ = "";
       /**
-       * <code>optional int32 userObstacleId = 5;</code>
+       * <code>optional string userObstacleUuid = 5;</code>
        */
-      public boolean hasUserObstacleId() {
+      public boolean hasUserObstacleUuid() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 userObstacleId = 5;</code>
+       * <code>optional string userObstacleUuid = 5;</code>
        */
-      public int getUserObstacleId() {
-        return userObstacleId_;
+      public java.lang.String getUserObstacleUuid() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userObstacleId = 5;</code>
+       * <code>optional string userObstacleUuid = 5;</code>
        */
-      public Builder setUserObstacleId(int value) {
-        bitField0_ |= 0x00000010;
-        userObstacleId_ = value;
+      public com.google.protobuf.ByteString
+          getUserObstacleUuidBytes() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userObstacleUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userObstacleUuid = 5;</code>
+       */
+      public Builder setUserObstacleUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userObstacleId = 5;</code>
+       * <code>optional string userObstacleUuid = 5;</code>
        */
-      public Builder clearUserObstacleId() {
+      public Builder clearUserObstacleUuid() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        userObstacleId_ = 0;
+        userObstacleUuid_ = getDefaultInstance().getUserObstacleUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userObstacleUuid = 5;</code>
+       */
+      public Builder setUserObstacleUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
@@ -18207,137 +18788,138 @@ public final class EventStructureProto {
       "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\022\021\n\tgemsSpe" +
       "nt\030\005 \001(\005\022\026\n\016resourceChange\030\006 \001(\021\0228\n\014reso" +
       "urceType\030\007 \001(\0162\034.com.lvl6.proto.Resource" +
-      "Type:\004CASH\"\334\002\n\"PurchaseNormStructureResp",
+      "Type:\004CASH\"\336\002\n\"PurchaseNormStructureResp",
       "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
       "to.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.co" +
       "m.lvl6.proto.PurchaseNormStructureRespon" +
-      "seProto.PurchaseNormStructureStatus\022\024\n\014u" +
-      "serStructId\030\003 \001(\005\"\215\001\n\033PurchaseNormStruct" +
-      "ureStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICI" +
-      "ENT_CASH\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022\031" +
-      "\n\025FAIL_INSUFFICIENT_OIL\020\004\022\016\n\nFAIL_OTHER\020" +
-      "\005\"\375\002\n%MoveOrRotateNormStructureRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min",
-      "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022^\n\004t" +
-      "ype\030\003 \001(\0162P.com.lvl6.proto.MoveOrRotateN" +
-      "ormStructureRequestProto.MoveOrRotateNor" +
-      "mStructType\022=\n\024curStructCoordinates\030\004 \001(" +
-      "\0132\037.com.lvl6.proto.CoordinateProto\022E\n\016or" +
-      "ientationNew\030\005 \001(\0162!.com.lvl6.proto.Stru" +
-      "ctOrientation:\nPOSITION_1\"&\n\032MoveOrRotat" +
-      "eNormStructType\022\010\n\004MOVE\020\001\"\202\002\n&MoveOrRota" +
-      "teNormStructureResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f",
-      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.MoveOrRo" +
-      "tateNormStructureResponseProto.MoveOrRot" +
-      "ateNormStructureStatus\">\n\037MoveOrRotateNo" +
-      "rmStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_" +
-      "FAIL\020\002\"\346\001\n UpgradeNormStructureRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rt" +
-      "imeOfUpgrade\030\003 \001(\003\022\021\n\tgemsSpent\030\004 \001(\005\022\026\n" +
-      "\016resourceChange\030\005 \001(\021\0228\n\014resourceType\030\006 " +
-      "\001(\0162\034.com.lvl6.proto.ResourceType:\004CASH\"",
-      "\216\003\n!UpgradeNormStructureResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto" +
-      ".UpgradeNormStructureResponseProto.Upgra" +
-      "deNormStructureStatus\"\330\001\n\032UpgradeNormStr" +
-      "uctureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_CASH\020\002\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\003\022\027\n" +
-      "\023FAIL_NOT_ENOUGH_OIL\020\004\022\026\n\022FAIL_NOT_BUILT" +
-      "_YET\020\005\022\031\n\025FAIL_NOT_USERS_STRUCT\020\006\022\035\n\031FAI" +
-      "L_AT_MAX_LEVEL_ALREADY\020\010\022\016\n\nFAIL_OTHER\020\t",
-      "\"\253\001\n0FinishNormStructWaittimeWithDiamond" +
-      "sRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\024\n\014userStructId\030" +
-      "\002 \001(\005\022\025\n\rtimeOfSpeedup\030\003 \001(\003\022\030\n\020gemCostT" +
-      "oSpeedup\030\004 \001(\005\"\260\002\n1FinishNormStructWaitt" +
-      "imeWithDiamondsResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022p" +
-      "\n\006status\030\002 \001(\0162`.com.lvl6.proto.FinishNo" +
-      "rmStructWaittimeWithDiamondsResponseProt" +
-      "o.FinishNormStructWaittimeStatus\"W\n\036Fini",
-      "shNormStructWaittimeStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\030\n\024FAIL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020" +
-      "\003\"}\n\"NormStructWaitCompleteRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007curTi" +
-      "me\030\003 \001(\003\"\311\002\n#NormStructWaitCompleteRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022`\n\006status\030\002 \001(\0162P.com" +
-      ".lvl6.proto.NormStructWaitCompleteRespon" +
-      "seProto.NormStructWaitCompleteStatus\022:\n\n",
-      "userStruct\030\003 \003(\0132&.com.lvl6.proto.FullUs" +
-      "erStructureProto\"R\n\034NormStructWaitComple" +
-      "teStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_DONE_Y" +
-      "ET\020\002\022\016\n\nFAIL_OTHER\020\003\"\265\002\n-RetrieveCurrenc" +
-      "yFromNormStructureRequestProto\022@\n\006sender" +
-      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
-      "WithMaxResources\022g\n\020structRetrievals\030\002 \003" +
-      "(\0132M.com.lvl6.proto.RetrieveCurrencyFrom" +
-      "NormStructureRequestProto.StructRetrieva" +
-      "l\032Y\n\017StructRetrieval\022\024\n\014userStructId\030\001 \001",
-      "(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017amountCol" +
-      "lected\030\003 \001(\005\"\262\002\n.RetrieveCurrencyFromNor" +
-      "mStructureResponseProto\022@\n\006sender\030\001 \001(\0132" +
-      "0.com.lvl6.proto.MinimumUserProtoWithMax" +
-      "Resources\022v\n\006status\030\002 \001(\0162f.com.lvl6.pro" +
-      "to.RetrieveCurrencyFromNormStructureResp" +
-      "onseProto.RetrieveCurrencyFromNormStruct" +
-      "ureStatus\"F\n\'RetrieveCurrencyFromNormStr" +
-      "uctureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
-      "\002\"\267\001\n!ExpansionWaitCompleteRequestProto\022",
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030" +
-      "\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(" +
-      "\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expansio" +
-      "nWaitCompleteResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006" +
-      "status\030\002 \001(\0162N.com.lvl6.proto.ExpansionW" +
-      "aitCompleteResponseProto.ExpansionWaitCo" +
-      "mpleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.p" +
-      "roto.UserCityExpansionDataProto\"\211\001\n\033Expa",
-      "nsionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
-      "FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DON" +
-      "E_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nF" +
-      "AIL_OTHER\020\005\"\242\001\n\031SpawnObstacleRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022B\n\024prospectiveObstacles\030\002 \003(" +
-      "\0132$.com.lvl6.proto.MinimumObstacleProto\022" +
-      "\017\n\007curTime\030\003 \001(\003\"\217\002\n\032SpawnObstacleRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022;\n\020spawnedObstacles\030\002 ",
-      "\003(\0132!.com.lvl6.proto.UserObstacleProto\022N" +
-      "\n\006status\030\003 \001(\0162>.com.lvl6.proto.SpawnObs" +
-      "tacleResponseProto.SpawnObstacleStatus\"2" +
-      "\n\023SpawnObstacleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
-      "IL_OTHER\020\002\"\342\001\n BeginObstacleRemovalReque" +
+      "seProto.PurchaseNormStructureStatus\022\026\n\016u" +
+      "serStructUuid\030\003 \001(\t\"\215\001\n\033PurchaseNormStru" +
+      "ctureStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
+      "CIENT_CASH\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003" +
+      "\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\016\n\nFAIL_OTHE" +
+      "R\020\005\"\377\002\n%MoveOrRotateNormStructureRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
+      "inimumUserProto\022\026\n\016userStructUuid\030\002 \001(\t\022" +
+      "^\n\004type\030\003 \001(\0162P.com.lvl6.proto.MoveOrRot" +
+      "ateNormStructureRequestProto.MoveOrRotat" +
+      "eNormStructType\022=\n\024curStructCoordinates\030" +
+      "\004 \001(\0132\037.com.lvl6.proto.CoordinateProto\022E" +
+      "\n\016orientationNew\030\005 \001(\0162!.com.lvl6.proto." +
+      "StructOrientation:\nPOSITION_1\"&\n\032MoveOrR" +
+      "otateNormStructType\022\010\n\004MOVE\020\001\"\202\002\n&MoveOr" +
+      "RotateNormStructureResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
+      "to\022f\n\006status\030\002 \001(\0162V.com.lvl6.proto.Move" +
+      "OrRotateNormStructureResponseProto.MoveO" +
+      "rRotateNormStructureStatus\">\n\037MoveOrRota" +
+      "teNormStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOT" +
+      "HER_FAIL\020\002\"\350\001\n UpgradeNormStructureReque" +
       "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tge" +
-      "msSpent\030\003 \001(\005\022\026\n\016resourceChange\030\004 \001(\021\0228\n" +
-      "\014resourceType\030\005 \001(\0162\034.com.lvl6.proto.Res" +
-      "ourceType:\004CASH\022\026\n\016userObstacleId\030\006 \001(\005\"",
-      "\252\002\n!BeginObstacleRemovalResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto" +
-      ".BeginObstacleRemovalResponseProto.Begin" +
-      "ObstacleRemovalStatus\"u\n\032BeginObstacleRe" +
-      "movalStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
-      "CIENT_GEMS\020\002\022\036\n\032FAIL_INSUFFICIENT_RESOUR" +
-      "CE\020\003\022\016\n\nFAIL_OTHER\020\004\"\274\001\n#ObstacleRemoval" +
-      "CompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\017\n\007curTim",
-      "e\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 " +
-      "\001(\005\022\026\n\016userObstacleId\030\005 \001(\005\022\026\n\016atMaxObst" +
-      "acles\030\006 \001(\010\"\226\002\n$ObstacleRemovalCompleteR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022b\n\006status\030\002 \001(\0162R" +
-      ".com.lvl6.proto.ObstacleRemovalCompleteR" +
-      "esponseProto.ObstacleRemovalCompleteStat" +
-      "us\"X\n\035ObstacleRemovalCompleteStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\n" +
-      "FAIL_OTHER\020\003B\025B\023EventStructureProto"
+      ".MinimumUserProto\022\026\n\016userStructUuid\030\002 \001(" +
+      "\t\022\025\n\rtimeOfUpgrade\030\003 \001(\003\022\021\n\tgemsSpent\030\004 " +
+      "\001(\005\022\026\n\016resourceChange\030\005 \001(\021\0228\n\014resourceT" +
+      "ype\030\006 \001(\0162\034.com.lvl6.proto.ResourceType:",
+      "\004CASH\"\216\003\n!UpgradeNormStructureResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6" +
+      ".proto.UpgradeNormStructureResponseProto" +
+      ".UpgradeNormStructureStatus\"\330\001\n\032UpgradeN" +
+      "ormStructureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_" +
+      "NOT_ENOUGH_CASH\020\002\022\030\n\024FAIL_NOT_ENOUGH_GEM" +
+      "S\020\003\022\027\n\023FAIL_NOT_ENOUGH_OIL\020\004\022\026\n\022FAIL_NOT" +
+      "_BUILT_YET\020\005\022\031\n\025FAIL_NOT_USERS_STRUCT\020\006\022" +
+      "\035\n\031FAIL_AT_MAX_LEVEL_ALREADY\020\010\022\016\n\nFAIL_O",
+      "THER\020\t\"\255\001\n0FinishNormStructWaittimeWithD" +
+      "iamondsRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\026\n\016userStr" +
+      "uctUuid\030\002 \001(\t\022\025\n\rtimeOfSpeedup\030\003 \001(\003\022\030\n\020" +
+      "gemCostToSpeedup\030\004 \001(\005\"\260\002\n1FinishNormStr" +
+      "uctWaittimeWithDiamondsResponseProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022p\n\006status\030\002 \001(\0162`.com.lvl6.proto." +
+      "FinishNormStructWaittimeWithDiamondsResp" +
+      "onseProto.FinishNormStructWaittimeStatus",
+      "\"W\n\036FinishNormStructWaittimeStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAI" +
+      "L_OTHER\020\003\"\177\n\"NormStructWaitCompleteReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\026\n\016userStructUuid\030\002 \003(" +
+      "\t\022\017\n\007curTime\030\003 \001(\003\"\311\002\n#NormStructWaitCom" +
+      "pleteResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022`\n\006status\030\002" +
+      " \001(\0162P.com.lvl6.proto.NormStructWaitComp" +
+      "leteResponseProto.NormStructWaitComplete",
+      "Status\022:\n\nuserStruct\030\003 \003(\0132&.com.lvl6.pr" +
+      "oto.FullUserStructureProto\"R\n\034NormStruct" +
+      "WaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_" +
+      "NOT_DONE_YET\020\002\022\016\n\nFAIL_OTHER\020\003\"\267\002\n-Retri" +
+      "eveCurrencyFromNormStructureRequestProto" +
+      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
+      "mUserProtoWithMaxResources\022g\n\020structRetr" +
+      "ievals\030\002 \003(\0132M.com.lvl6.proto.RetrieveCu" +
+      "rrencyFromNormStructureRequestProto.Stru" +
+      "ctRetrieval\032[\n\017StructRetrieval\022\026\n\016userSt",
+      "ructUuid\030\001 \001(\t\022\027\n\017timeOfRetrieval\030\002 \001(\003\022" +
+      "\027\n\017amountCollected\030\003 \001(\005\"\262\002\n.RetrieveCur" +
+      "rencyFromNormStructureResponseProto\022@\n\006s" +
+      "ender\030\001 \001(\01320.com.lvl6.proto.MinimumUser" +
+      "ProtoWithMaxResources\022v\n\006status\030\002 \001(\0162f." +
+      "com.lvl6.proto.RetrieveCurrencyFromNormS" +
+      "tructureResponseProto.RetrieveCurrencyFr" +
+      "omNormStructureStatus\"F\n\'RetrieveCurrenc" +
+      "yFromNormStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"\267\001\n!ExpansionWaitCompleteR",
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021" +
+      "\n\txPosition\030\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007" +
+      "speedUp\030\005 \001(\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"" +
+      "\375\002\n\"ExpansionWaitCompleteResponseProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.prot" +
+      "o.ExpansionWaitCompleteResponseProto.Exp" +
+      "ansionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132" +
+      "*.com.lvl6.proto.UserCityExpansionDataPr",
+      "oto\"\211\001\n\033ExpansionWaitCompleteStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021" +
+      "FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFFICIENT" +
+      "_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005\"\242\001\n\031SpawnObstacl" +
+      "eRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022B\n\024prospectiveOb" +
+      "stacles\030\002 \003(\0132$.com.lvl6.proto.MinimumOb" +
+      "stacleProto\022\017\n\007curTime\030\003 \001(\003\"\217\002\n\032SpawnOb" +
+      "stacleResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022;\n\020spawned",
+      "Obstacles\030\002 \003(\0132!.com.lvl6.proto.UserObs" +
+      "tacleProto\022N\n\006status\030\003 \001(\0162>.com.lvl6.pr" +
+      "oto.SpawnObstacleResponseProto.SpawnObst" +
+      "acleStatus\"2\n\023SpawnObstacleStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\344\001\n BeginObstacle" +
+      "RemovalRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\017\n\007curTime" +
+      "\030\002 \001(\003\022\021\n\tgemsSpent\030\003 \001(\005\022\026\n\016resourceCha" +
+      "nge\030\004 \001(\021\0228\n\014resourceType\030\005 \001(\0162\034.com.lv" +
+      "l6.proto.ResourceType:\004CASH\022\030\n\020userObsta",
+      "cleUuid\030\006 \001(\t\"\252\002\n!BeginObstacleRemovalRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L." +
+      "com.lvl6.proto.BeginObstacleRemovalRespo" +
+      "nseProto.BeginObstacleRemovalStatus\"u\n\032B" +
+      "eginObstacleRemovalStatus\022\013\n\007SUCCESS\020\001\022\032" +
+      "\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\036\n\032FAIL_INSUF" +
+      "FICIENT_RESOURCE\020\003\022\016\n\nFAIL_OTHER\020\004\"\276\001\n#O" +
+      "bstacleRemovalCompleteRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
+      "roto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021" +
+      "\n\tgemsSpent\030\004 \001(\005\022\030\n\020userObstacleUuid\030\005 " +
+      "\001(\t\022\026\n\016atMaxObstacles\030\006 \001(\010\"\226\002\n$Obstacle" +
+      "RemovalCompleteResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022b" +
+      "\n\006status\030\002 \001(\0162R.com.lvl6.proto.Obstacle" +
+      "RemovalCompleteResponseProto.ObstacleRem" +
+      "ovalCompleteStatus\"X\n\035ObstacleRemovalCom" +
+      "pleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
+      "CIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\025B\023EventStr",
+      "uctureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -18365,13 +18947,13 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Status", "UserStructId", });
+        new java.lang.String[] { "Sender", "Status", "UserStructUuid", });
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MoveOrRotateNormStructureRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserStructId", "Type", "CurStructCoordinates", "OrientationNew", });
+        new java.lang.String[] { "Sender", "UserStructUuid", "Type", "CurStructCoordinates", "OrientationNew", });
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_fieldAccessorTable = new
@@ -18383,7 +18965,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserStructId", "TimeOfUpgrade", "GemsSpent", "ResourceChange", "ResourceType", });
+        new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfUpgrade", "GemsSpent", "ResourceChange", "ResourceType", });
     internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_fieldAccessorTable = new
@@ -18395,7 +18977,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserStructId", "TimeOfSpeedup", "GemCostToSpeedup", });
+        new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfSpeedup", "GemCostToSpeedup", });
     internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_fieldAccessorTable = new
@@ -18407,7 +18989,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserStructId", "CurTime", });
+        new java.lang.String[] { "Sender", "UserStructUuid", "CurTime", });
     internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable = new
@@ -18425,7 +19007,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor,
-        new java.lang.String[] { "UserStructId", "TimeOfRetrieval", "AmountCollected", });
+        new java.lang.String[] { "UserStructUuid", "TimeOfRetrieval", "AmountCollected", });
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_fieldAccessorTable = new
@@ -18461,7 +19043,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleId", });
+        new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleUuid", });
     internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(17);
     internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_fieldAccessorTable = new
@@ -18473,7 +19055,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleId", "AtMaxObstacles", });
+        new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleUuid", "AtMaxObstacles", });
     internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(19);
     internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_fieldAccessorTable = new

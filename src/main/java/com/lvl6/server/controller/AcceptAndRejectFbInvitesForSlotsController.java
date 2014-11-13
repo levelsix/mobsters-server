@@ -63,27 +63,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent)event).getAcceptAndRejectFbInviteForSlotsRequestProto();
 
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
     MinimumUserProto sender = senderProto.getMinUserProto();
-    int userId = sender.getUserId();
+    String userId = sender.getUserUuid();
     String userFacebookId = senderProto.getFacebookId();
     
     //just accept these
-    List<Integer> acceptedInviteIds = reqProto.getAcceptedInviteIdsList();
+    List<String> acceptedInviteIds = reqProto.getAcceptedInviteUuidsList();
     if(null == acceptedInviteIds) {
-    	acceptedInviteIds = new ArrayList<Integer>();
+    	acceptedInviteIds = new ArrayList<String>();
     } else {
-    	acceptedInviteIds = new ArrayList<Integer>(acceptedInviteIds);
+    	acceptedInviteIds = new ArrayList<String>(acceptedInviteIds);
     }
     
     //delete these from the table
-    List<Integer> rejectedInviteIds = reqProto.getRejectedInviteIdsList();
+    List<String> rejectedInviteIds = reqProto.getRejectedInviteUuidsList();
     if (null == rejectedInviteIds) {
-    	rejectedInviteIds = new ArrayList<Integer>();
+    	rejectedInviteIds = new ArrayList<String>();
     } else {
-    	rejectedInviteIds = new ArrayList<Integer>(rejectedInviteIds);
+    	rejectedInviteIds = new ArrayList<String>(rejectedInviteIds);
     }
     Timestamp acceptTime = new Timestamp((new Date()).getTime());
 

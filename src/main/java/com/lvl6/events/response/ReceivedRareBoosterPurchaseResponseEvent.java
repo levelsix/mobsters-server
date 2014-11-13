@@ -11,7 +11,7 @@ public class ReceivedRareBoosterPurchaseResponseEvent extends NormalResponseEven
 
   private ReceivedRareBoosterPurchaseResponseProto receivedRareBoosterPurchaseResponseProto;
   
-  public ReceivedRareBoosterPurchaseResponseEvent(int playerId){
+  public ReceivedRareBoosterPurchaseResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
   }

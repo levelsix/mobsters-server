@@ -22,7 +22,7 @@ public class EvolutionFinishedRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       evolutionFinishedRequestProto = EvolutionFinishedRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = evolutionFinishedRequestProto.getSender().getUserId();
+      playerId = evolutionFinishedRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("evolution finished request exception", e);
     }

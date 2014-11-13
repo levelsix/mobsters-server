@@ -6,21 +6,26 @@ import java.util.Date;
 //user can have multiple of these (different clanIds)
 public class CepfuRaidHistory implements Serializable {
 	
-	private static final long serialVersionUID = -3600025631841826924L;
-	private int userId;
+	private String userId;
 	private Date timeOfEntry;
-	private int clanId;
+	private String clanId;
 	private int clanEventPersistentId;
 	private int crId;
 	private int crDmgDone;
 	private int clanCrDmg;
-	private long userMonsterIdOne;
-	private long userMonsterIdTwo;
-	private long userMonsterIdThree;
+	private String userMonsterIdOne;
+	private String userMonsterIdTwo;
+	private String userMonsterIdThree;
 	
-	public CepfuRaidHistory(int userId, Date timeOfEntry, int clanId,
+	public CepfuRaidHistory()
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CepfuRaidHistory(String userId, Date timeOfEntry, String clanId,
 			int clanEventPersistentId, int crId, int crDmgDone, int clanCrDmg,
-			long userMonsterIdOne, long userMonsterIdTwo, long userMonsterIdThree) {
+			String userMonsterIdOne, String userMonsterIdTwo, String userMonsterIdThree) {
 		super();
 		this.userId = userId;
 		this.timeOfEntry = timeOfEntry;
@@ -34,11 +39,11 @@ public class CepfuRaidHistory implements Serializable {
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -50,11 +55,11 @@ public class CepfuRaidHistory implements Serializable {
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public int getClanId() {
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId(int clanId) {
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 
@@ -90,27 +95,33 @@ public class CepfuRaidHistory implements Serializable {
 		this.clanCrDmg = clanCrDmg;
 	}
 
-	public long getUserMonsterIdOne() {
+	public String getUserMonsterIdOne()
+	{
 		return userMonsterIdOne;
 	}
 
-	public void setUserMonsterIdOne(long userMonsterIdOne) {
+	public void setUserMonsterIdOne( String userMonsterIdOne )
+	{
 		this.userMonsterIdOne = userMonsterIdOne;
 	}
 
-	public long getUserMonsterIdTwo() {
+	public String getUserMonsterIdTwo()
+	{
 		return userMonsterIdTwo;
 	}
 
-	public void setUserMonsterIdTwo(long userMonsterIdTwo) {
+	public void setUserMonsterIdTwo( String userMonsterIdTwo )
+	{
 		this.userMonsterIdTwo = userMonsterIdTwo;
 	}
 
-	public long getUserMonsterIdThree() {
+	public String getUserMonsterIdThree()
+	{
 		return userMonsterIdThree;
 	}
 
-	public void setUserMonsterIdThree(long userMonsterIdThree) {
+	public void setUserMonsterIdThree( String userMonsterIdThree )
+	{
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
 

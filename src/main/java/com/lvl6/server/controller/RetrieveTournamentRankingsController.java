@@ -76,9 +76,9 @@ public class RetrieveTournamentRankingsController extends EventController {
     resBuilder.setAfterThisRank(afterThisRank);
     resBuilder.setStatus(RetrieveTournamentStatus.OTHER_FAIL);
 
-//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 //      int userId = user.getId();
 //      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user,	eventId);
 //      Map<Integer, UserRankScore> lurs = null;
@@ -105,7 +105,7 @@ public class RetrieveTournamentRankingsController extends EventController {
 //      }
 
       RetrieveTournamentRankingsResponseProto resProto = resBuilder.build();
-      RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserId());
+      RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrieveTournamentRankingsResponseProto(resProto);
 
@@ -115,7 +115,7 @@ public class RetrieveTournamentRankingsController extends EventController {
           "exception in RetrieveTournamentController processEvent",
           e);
 //    } finally {
-//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
 
   }

@@ -19,7 +19,7 @@ public interface DeleteUtil {
   
 //  public abstract boolean deleteBlacksmithAttempt(int blacksmithId);
 
-  public abstract boolean deleteUserClan(int userId, int clanId);
+  public abstract boolean deleteUserClan(String userId, String clanId);
 
   public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId);
   

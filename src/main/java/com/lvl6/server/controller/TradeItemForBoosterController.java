@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		TradeItemForBoosterRequestProto reqProto = ((TradeItemForBoosterRequestEvent)event).getTradeItemForBoosterRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		int itemId = reqProto.getItemId();
 		Date now = new Date(reqProto.getClientTime());
 		Timestamp nowTimestamp = new Timestamp(reqProto.getClientTime());
@@ -80,10 +80,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(TradeItemForBoosterStatus.FAIL_OTHER);
 
-		//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
 		try {
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			Item itm = ItemRetrieveUtils.getItemForId(itemId);
 			//TODO: Consider writing currency history and other history
 
@@ -132,7 +132,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 			
 			TradeItemForBoosterResponseProto resProto = resBuilder.build();
-			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(senderProto.getUserId());
+			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForBoosterResponseProto(resProto);
 			server.writeEvent(resEvent);
@@ -164,7 +164,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 

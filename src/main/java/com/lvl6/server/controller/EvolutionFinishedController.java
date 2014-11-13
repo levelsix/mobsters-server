@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		//(positive number, server will convert it to negative)
 		int gemsSpent = reqProto.getGemsSpent();
 		Date now = new Date();
@@ -82,7 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), getClass().getSimpleName());
 		try {
 			int previousGems = 0;
 			//get whatever we need from the database
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
 			}
 
-			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserId());
+			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -137,7 +137,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(senderProto.getUserUuid(), getClass().getSimpleName());   
 		}
 	}
 	

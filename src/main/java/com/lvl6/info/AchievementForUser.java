@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class AchievementForUser implements Serializable {
 	
-	private static final long serialVersionUID = -4983025581174212987L;
-	
-	private int userId;
+	private String userId;
 	private int achievementId;
 	private int progress;
 	private boolean isComplete;
@@ -16,7 +14,7 @@ public class AchievementForUser implements Serializable {
 		super();
 	}
 
-	public AchievementForUser(int userId, int achievementId, int progress,
+	public AchievementForUser(String userId, int achievementId, int progress,
 			boolean isComplete, boolean isRedeemed) {
 		super();
 		this.userId = userId;
@@ -26,11 +24,11 @@ public class AchievementForUser implements Serializable {
 		this.isRedeemed = isRedeemed;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

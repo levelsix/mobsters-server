@@ -223,28 +223,28 @@ public class ControllerTest extends TestCase {
 //		deleteFirstTimeUsers(udid);
 		
 		//just to see if optimizations from commit  worked
-//		String udid = "e6e393e9dda799377ca53ca0d3de739b73b137ba";
-//		float versionNum = 1.0F;
-//		String macAddress = "";
-//		String advertiserId = "76864DFE-1BF1-47B5-ADE7-6530F5E0B9A3";
-//		boolean isTutorial = false;
-//		String fbId = "";//"2500169137658";
-//		boolean isFreshRestart = true;
-//		
-//		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
-//		srpb.setUdid(udid);
-//		srpb.setVersionNum(versionNum);
-//		srpb.setMacAddress(macAddress);
-//		srpb.setAdvertiserId(advertiserId);
-//		srpb.setIsForceTutorial(isTutorial);
-//		srpb.setFbId(fbId);
-//		srpb.setIsFreshRestart(isFreshRestart);
-//		
-//		StartupRequestEvent sre = new StartupRequestEvent();
-//		sre.setStartupRequestProto(srpb.build());
-//		
-//		startupController.handleEvent(sre);
-//		log.info("done");
+		String udid = "e6e393e9dda799377ca53ca0d3de739b73b137ba";
+		float versionNum = 1.0F;
+		String macAddress = "";
+		String advertiserId = "76864DFE-1BF1-47B5-ADE7-6530F5E0B9A3";
+		boolean isTutorial = false;
+		String fbId = "";//"2500169137658";
+		boolean isFreshRestart = true;
+		
+		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
+		srpb.setUdid(udid);
+		srpb.setVersionNum(versionNum);
+		srpb.setMacAddress(macAddress);
+		srpb.setAdvertiserId(advertiserId);
+		srpb.setIsForceTutorial(isTutorial);
+		srpb.setFbId(fbId);
+		srpb.setIsFreshRestart(isFreshRestart);
+		
+		StartupRequestEvent sre = new StartupRequestEvent();
+		sre.setStartupRequestProto(srpb.build());
+		
+		startupController.handleEvent(sre);
+		log.info("done");
 	}
 	
 	
@@ -543,7 +543,7 @@ public class ControllerTest extends TestCase {
 	}
 	*/
 	
-	private Map<Long, MonsterForUser> createCompleteMonsters(int userId,
+	private Map<String, MonsterForUser> createCompleteMonsters(int userId,
 		Date now) {
 		
 		List<Monster> twoMonsters = new ArrayList<Monster>(
@@ -564,13 +564,13 @@ public class ControllerTest extends TestCase {
 		}
 		
 		String mfusop = "ControllerTest.createCompleteMonsters";
-		List<Long> monsterForUserIds = InsertUtils.get()
+		List<String> monsterForUserIds = InsertUtils.get()
 			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
 	
-		Map<Long, MonsterForUser> returnMap = new HashMap<Long, MonsterForUser>();
+		Map<String, MonsterForUser> returnMap = new HashMap<String, MonsterForUser>();
 		for (int index = 0; index < twoMonsters.size(); index++) {
 			MonsterForUser mfu = completeUserMonsters.get(index);
-			Long mfuId = monsterForUserIds.get(index);
+			String mfuId = monsterForUserIds.get(index);
 			
 			mfu.setId(mfuId);
 			returnMap.put(mfuId, mfu);
@@ -579,52 +579,52 @@ public class ControllerTest extends TestCase {
 	}
 	
 	private static int expectedEnhancedMonsterExpLvlHp = 1;
-	private Long submitEnhanceMonsterRequest(User aUser, Map<Long, MonsterForUser> mfuMap) {
-		//create the arguments for the event
-		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(aUser, null);
-		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
-		
-		for (MonsterForUser mfu: mfuMap.values()) {
-
-		    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
-		    ueipb.setUserMonsterId(mfu.getId());
-		    ueipb.setEnhancingCost(0);
-		    feeders.add(ueipb.build());
-		}
-		
-		UserEnhancementItemProto baseMonster = feeders.remove(0);
-		
-		UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
-			aUser.getId(), baseMonster, feeders);
-		
-		UserMonsterCurrentExpProto.Builder result = UserMonsterCurrentExpProto.newBuilder();
-		result.setUserMonsterId(baseMonster.getUserMonsterId());
-		result.setExpectedExperience(expectedEnhancedMonsterExpLvlHp);
-		result.setExpectedLevel(expectedEnhancedMonsterExpLvlHp);
-		result.setExpectedHp(expectedEnhancedMonsterExpLvlHp);
-		
-		int gemsSpent = 1;
-		int oilChange = 1;
-		
-		EnhanceMonsterRequestProto.Builder eventBuilder =
-			EnhanceMonsterRequestProto.newBuilder();
-		eventBuilder.setSender(mup);
-		eventBuilder.setUep(uep);
-		eventBuilder.setEnhancingResult(result.build());
-		eventBuilder.setGemsSpent(gemsSpent);
-		eventBuilder.setOilChange(oilChange);
-
-		//give the user money
-		aUser.updateRelativeCashAndOilAndGems(0, 1, 1);
-		
-		//generate the event
-		EnhanceMonsterRequestEvent event = new EnhanceMonsterRequestEvent();
-		event.setTag(0);
-		event.setEnhanceMonsterRequestProto(eventBuilder.build());
-		enhanceMonsterController.handleEvent(event);
-		
-		return baseMonster.getUserMonsterId();
-	}
+//	private String submitEnhanceMonsterRequest(User aUser, Map<String, MonsterForUser> mfuMap) {
+//		//create the arguments for the event
+//		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(aUser, null);
+//		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
+//		
+//		for (MonsterForUser mfu: mfuMap.values()) {
+//
+//		    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
+//		    ueipb.setUserMonsterUuid(mfu.getId());
+//		    ueipb.setEnhancingCost(0);
+//		    feeders.add(ueipb.build());
+//		}
+//		
+//		UserEnhancementItemProto baseMonster = feeders.remove(0);
+//		
+//		UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+//			aUser.getId(), baseMonster, feeders);
+//		
+//		UserMonsterCurrentExpProto.Builder result = UserMonsterCurrentExpProto.newBuilder();
+//		result.setUserMonsterUuid(baseMonster.getUserMonsterUuid());
+//		result.setExpectedExperience(expectedEnhancedMonsterExpLvlHp);
+//		result.setExpectedLevel(expectedEnhancedMonsterExpLvlHp);
+//		result.setExpectedHp(expectedEnhancedMonsterExpLvlHp);
+//		
+//		int gemsSpent = 1;
+//		int oilChange = 1;
+//		
+//		EnhanceMonsterRequestProto.Builder eventBuilder =
+//			EnhanceMonsterRequestProto.newBuilder();
+//		eventBuilder.setSender(mup);
+//		eventBuilder.setUep(uep);
+//		eventBuilder.setEnhancingResult(result.build());
+//		eventBuilder.setGemsSpent(gemsSpent);
+//		eventBuilder.setOilChange(oilChange);
+//
+//		//give the user money
+//		aUser.updateRelativeCashAndOilAndGems(0, 1, 1);
+//		
+//		//generate the event
+//		EnhanceMonsterRequestEvent event = new EnhanceMonsterRequestEvent();
+//		event.setTag(0);
+//		event.setEnhanceMonsterRequestProto(eventBuilder.build());
+//		enhanceMonsterController.handleEvent(event);
+//		
+//		return baseMonster.getUserMonsterUuid();
+//	}
 	
 	@Test
 	public void testDevControllerAwardMonster() {

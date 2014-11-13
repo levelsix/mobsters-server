@@ -4,10 +4,8 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = -2718007215209964130L;
-	
-	private long id;
-	private long userTaskId;
+	private String id;
+	private String userTaskId;
 	private int stageNum;
 	private int taskStageMonsterId; //not task stage monster monster id
 	private String monsterType;
@@ -18,7 +16,7 @@ public class TaskStageForUser implements Serializable {
 	private int itemIdDropped;
 	//maybe should specify the (enhancement) level of monster dropped
 	
-	public TaskStageForUser(long id, long userTaskId, int stageNum,
+	public TaskStageForUser(String id, String userTaskId, int stageNum,
 			int taskStageMonsterId, String monsterType, int expGained,
 			int cashGained, int oilGained, boolean monsterPieceDropped,
 			int itemIdDropped) {
@@ -37,19 +35,19 @@ public class TaskStageForUser implements Serializable {
 
 	public TaskStageForUser() { }
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public long getUserTaskId() {
+	public String getUserTaskId() {
 		return userTaskId;
 	}
 
-	public void setUserTaskId(long userTaskId) {
+	public void setUserTaskId(String userTaskId) {
 		this.userTaskId = userTaskId;
 	}
 

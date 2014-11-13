@@ -5911,13 +5911,18 @@ public final class QuestProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 questId = 2;</code>
@@ -6022,9 +6027,10 @@ public final class QuestProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -6093,19 +6099,46 @@ public final class QuestProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int QUESTID_FIELD_NUMBER = 2;
@@ -6189,7 +6222,7 @@ public final class QuestProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       questId_ = 0;
       isRedeemed_ = false;
       isComplete_ = false;
@@ -6209,7 +6242,7 @@ public final class QuestProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, questId_);
@@ -6234,7 +6267,7 @@ public final class QuestProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6370,7 +6403,7 @@ public final class QuestProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         questId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6415,7 +6448,7 @@ public final class QuestProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -6453,8 +6486,10 @@ public final class QuestProto {
 
       public Builder mergeFrom(com.lvl6.proto.QuestProto.FullUserQuestProto other) {
         if (other == com.lvl6.proto.QuestProto.FullUserQuestProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasQuestId()) {
           setQuestId(other.getQuestId());
@@ -6518,34 +6553,78 @@ public final class QuestProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -7598,13 +7677,14 @@ public final class QuestProto {
       ".DialogueProto.SpeechSegmentProto\032d\n\022Spe" +
       "echSegmentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014spea",
       "kerImage\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\ni" +
-      "sLeftSide\030\004 \001(\010\"\227\001\n\022FullUserQuestProto\022\016" +
-      "\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRed" +
-      "eemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruserQ" +
-      "uestJobs\030\005 \003(\0132!.com.lvl6.proto.UserQues" +
-      "tJobProto\"^\n\021UserQuestJobProto\022\017\n\007questI" +
-      "d\030\001 \001(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisComplet" +
-      "e\030\003 \001(\010\022\020\n\010progress\030\004 \001(\005B\014B\nQuestProto"
+      "sLeftSide\030\004 \001(\010\"\231\001\n\022FullUserQuestProto\022\020" +
+      "\n\010userUuid\030\001 \001(\t\022\017\n\007questId\030\002 \001(\005\022\022\n\nisR" +
+      "edeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruse" +
+      "rQuestJobs\030\005 \003(\0132!.com.lvl6.proto.UserQu" +
+      "estJobProto\"^\n\021UserQuestJobProto\022\017\n\007ques" +
+      "tId\030\001 \001(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisCompl" +
+      "ete\030\003 \001(\010\022\020\n\010progress\030\004 \001(\005B\014B\nQuestProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7651,7 +7731,7 @@ public final class QuestProto {
     internal_static_com_lvl6_proto_FullUserQuestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserQuestProto_descriptor,
-        new java.lang.String[] { "UserId", "QuestId", "IsRedeemed", "IsComplete", "UserQuestJobs", });
+        new java.lang.String[] { "UserUuid", "QuestId", "IsRedeemed", "IsComplete", "UserQuestJobs", });
     internal_static_com_lvl6_proto_UserQuestJobProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_UserQuestJobProto_fieldAccessorTable = new

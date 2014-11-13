@@ -22,7 +22,7 @@ public class ChangeClanSettingsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       changeClanSettingsRequestProto = ChangeClanSettingsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = changeClanSettingsRequestProto.getSender().getUserId();
+      playerId = changeClanSettingsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("change clan settings request exception");
     }

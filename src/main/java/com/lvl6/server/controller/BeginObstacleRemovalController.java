@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Buil
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -39,7 +40,7 @@ public class BeginObstacleRemovalController extends EventController{
 	protected Locker locker;
 
 	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 	
 	public BeginObstacleRemovalController() {
 		numAllocatedThreads = 4;
@@ -58,27 +59,49 @@ public class BeginObstacleRemovalController extends EventController{
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent)event).getBeginObstacleRemovalRequestProto();
-		log.info("reqProto=" + reqProto);
+		log.info(String.format(
+			"reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int gemsSpent = reqProto.getGemsSpent();
 	    //positive means refund, negative means charge user
 		int resourceChange = reqProto.getResourceChange();
 		ResourceType rt = reqProto.getResourceType();
-		int userObstacleId = reqProto.getUserObstacleId();
+		String userObstacleId = reqProto.getUserObstacleUuid();
 
 		BeginObstacleRemovalResponseProto.Builder resBuilder = BeginObstacleRemovalResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = false;
+		try {
+			userUuid = UUID.fromString(userId);
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+			invalidUuids = true;
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+	      	BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(userId);
+	      	resEvent.setTag(event.getTag());
+	      	resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());
+	      	server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
-					getUserObstacleForId(userObstacleId);
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+			ObstacleForUser ofu = obstacleForUserRetrieveUtil
+				.getUserObstacleForId(userObstacleId);
 			
 			boolean legitComplete = checkLegit(resBuilder, userId, user, userObstacleId, ofu,
 					gemsSpent, resourceChange, rt);
@@ -92,7 +115,7 @@ public class BeginObstacleRemovalController extends EventController{
 						clientTime, currencyChange, previousCurrency);
 			}
 			
-			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(senderProto.getUserId());
+			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginObstacleRemovalResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -100,12 +123,12 @@ public class BeginObstacleRemovalController extends EventController{
 			if (success) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
-      	resEventUpdate.setTag(event.getTag());
-      	server.writeEvent(resEventUpdate);
-      	
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
 				writeToUserCurrencyHistory(userId, user, clientTime, currencyChange,
-						previousCurrency, ofu, rt);
+					previousCurrency, ofu, rt);
 			}
 			
 		} catch (Exception e) {
@@ -121,12 +144,14 @@ public class BeginObstacleRemovalController extends EventController{
       	log.error("exception2 in BeginObstacleRemovalController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, int userId, User user, int ofuId,
-			ObstacleForUser ofu, int gemsSpent, int resourceChange, ResourceType rt) {
+	private boolean checkLegit(Builder resBuilder, String userId, User user,
+		String ofuId, ObstacleForUser ofu, int gemsSpent, int resourceChange,
+		ResourceType rt)
+	{
 		
 		if (null == user || null == ofu) {
 			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
@@ -200,7 +225,7 @@ public class BeginObstacleRemovalController extends EventController{
   	return true;
   }
 
-  private boolean writeChangesToDB(User user, int ofuId, int gemsSpent, int resourceChange,
+  private boolean writeChangesToDB(User user, String ofuId, int gemsSpent, int resourceChange,
   		ResourceType rt, Timestamp clientTime, Map<String, Integer> currencyChange,
   		Map<String, Integer> previousCurrency) {
   	
@@ -255,7 +280,7 @@ public class BeginObstacleRemovalController extends EventController{
 	  return true;
   }
 
-	private void writeToUserCurrencyHistory(int userId, User user, Timestamp curTime,
+	private void writeToUserCurrencyHistory(String userId, User user, Timestamp curTime,
 			Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency,
 			ObstacleForUser ofu, ResourceType rt) {
 		if (currencyChange.isEmpty()) {
@@ -308,11 +333,11 @@ public class BeginObstacleRemovalController extends EventController{
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+	public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
 		return obstacleForUserRetrieveUtil;
 	}
 	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+			ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
 		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
 	}
 	

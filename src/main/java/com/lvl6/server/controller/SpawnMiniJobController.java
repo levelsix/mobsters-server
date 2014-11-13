@@ -67,7 +67,7 @@ public class SpawnMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		int numToSpawn = reqProto.getNumToSpawn();
 		numToSpawn = Math.max(0, numToSpawn);
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
@@ -79,7 +79,7 @@ public class SpawnMiniJobController extends EventController{
 		resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
 
 		//TODO: figure out if locking is needed
-//		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
@@ -109,7 +109,7 @@ public class SpawnMiniJobController extends EventController{
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
 			}
 			
-			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(senderProto.getUserId());
+			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -137,7 +137,7 @@ public class SpawnMiniJobController extends EventController{
       	log.error("exception2 in SpawnMiniJobController processEvent", e);
       }
 //		} finally {
-//			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 	

@@ -22,7 +22,7 @@ public class EarnFreeDiamondsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       earnFreeDiamondsRequestProto = EarnFreeDiamondsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = earnFreeDiamondsRequestProto.getSender().getUserId();
+      playerId = earnFreeDiamondsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("earn free diamonds request exception", e);
     }

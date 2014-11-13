@@ -22,7 +22,7 @@ public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       combineMonsterPiecesRequestProto = CombineUserMonsterPiecesRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = combineMonsterPiecesRequestProto.getSender().getUserId();
+      playerId = combineMonsterPiecesRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("combine monster pieces request exeption", e);
     }

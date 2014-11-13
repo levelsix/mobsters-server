@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderProtoMaxResources = reqProto.getSender();
     MinimumUserProto senderProto = senderProtoMaxResources.getMinUserProto();
-    int attackerId = senderProto.getUserId();
+    int attackerId = senderProto.getUserUuid();
     int defenderId = reqProto.getDefenderId();
     boolean attackerAttacked = reqProto.getUserAttacked();
     boolean attackerWon = reqProto.getUserWon();

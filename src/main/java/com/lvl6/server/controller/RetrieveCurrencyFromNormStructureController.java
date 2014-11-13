@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get stuff client sent
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
     int maxCash = senderResourcesProto.getMaxCash();
@@ -83,9 +83,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
     resBuilder.setSender(senderResourcesProto);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       int previousCash = 0;
       int previousOil = 0;
       List<Integer> userStructIds = new ArrayList<Integer>(userStructIdsToTimesOfRetrieval.keySet());
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
       }
 
-      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserId());
+      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } catch (Exception e) {
       log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

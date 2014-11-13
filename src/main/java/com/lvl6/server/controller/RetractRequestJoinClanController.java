@@ -50,7 +50,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     RetractRequestJoinClanRequestProto reqProto = ((RetractRequestJoinClanRequestEvent)event).getRetractRequestJoinClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int clanId = reqProto.getClanId();
 
     RetractRequestJoinClanResponseProto.Builder resBuilder = RetractRequestJoinClanResponseProto.newBuilder();
@@ -63,7 +63,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     	lockedClan = getLocker().lockClan(clanId);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
       boolean legitRetract = checkLegitRequest(resBuilder, lockedClan, user, clan);
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         resBuilder.setStatus(RetractRequestJoinClanStatus.SUCCESS);
       }
       
-      RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(senderProto.getUserId());
+      RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
       server.writeEvent(resEvent);

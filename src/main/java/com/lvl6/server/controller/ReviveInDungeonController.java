@@ -58,7 +58,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     long userTaskId = reqProto.getUserTaskId();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     List<UserMonsterCurrentHealthProto> reviveMeProtoList = reqProto.getReviveMeList();
@@ -70,7 +70,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousGems = 0;
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in ReviveInDungeonController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

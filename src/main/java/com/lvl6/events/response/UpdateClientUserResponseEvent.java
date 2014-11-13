@@ -11,7 +11,7 @@ public class UpdateClientUserResponseEvent extends NormalResponseEvent{
 
   private UpdateClientUserResponseProto updateClientUserResponseProto;
   
-  public UpdateClientUserResponseEvent(int playerId) {
+  public UpdateClientUserResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_UPDATE_CLIENT_USER_EVENT;
   }

@@ -60,7 +60,7 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
 
 //    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
-//    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId()) : null;
+//    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
     Map<Integer, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
@@ -92,7 +92,7 @@ import com.lvl6.utils.RetrieveUtils;
       log.error("no users with the ids " + requestedUserIds);
     }
     RetrieveUsersForUserIdsResponseProto resProto = resBuilder.build();
-    RetrieveUsersForUserIdsResponseEvent resEvent = new RetrieveUsersForUserIdsResponseEvent(senderProto.getUserId());
+    RetrieveUsersForUserIdsResponseEvent resEvent = new RetrieveUsersForUserIdsResponseEvent(senderProto.getUserUuid());
     resEvent.setTag(event.getTag());
     resEvent.setRetrieveUsersForUserIdsResponseProto(resProto);
     server.writeEvent(resEvent);

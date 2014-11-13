@@ -84,7 +84,7 @@ public class RedeemMiniJobController extends EventController{
 		int maxOil = senderResourcesProto.getMaxOil();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		Date now = new Date(reqProto.getClientTime());
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		long userMiniJobId = reqProto.getUserMiniJobId();
@@ -96,12 +96,12 @@ public class RedeemMiniJobController extends EventController{
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
 			User user = RetrieveUtils.userRetrieveUtils()
-					.getUserById(senderProto.getUserId());
+					.getUserById(senderProto.getUserUuid());
 			List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>();
 
 			Map<Long, Integer> userMonsterIdToExpectedHealth =
@@ -127,7 +127,7 @@ public class RedeemMiniJobController extends EventController{
 				resBuilder.setStatus(RedeemMiniJobStatus.SUCCESS);
 			}
 			
-			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(senderProto.getUserId());
+			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemMiniJobResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -158,7 +158,7 @@ public class RedeemMiniJobController extends EventController{
       	log.error("exception2 in RedeemMiniJobController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

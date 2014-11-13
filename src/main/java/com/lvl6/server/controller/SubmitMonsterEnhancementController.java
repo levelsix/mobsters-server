@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		List<UserEnhancementItemProto> ueipDelete = reqProto.getUeipDeleteList();
 //		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
 		List<UserEnhancementItemProto> ueipNew = reqProto.getUeipNewList();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		//positive value, need to convert to negative when updating user
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resBuilder.setStatus(SubmitMonsterEnhancementStatus.SUCCESS);
 			}
 
-			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserId());
+			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSubmitMonsterEnhancementResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);

@@ -76,7 +76,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int questId = reqProto.getQuestId();
     boolean isQuestComplete = reqProto.getIsComplete();
     
@@ -99,7 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
     resBuilder.setStatus(QuestProgressStatus.FAIL_OTHER);
 
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	//retrieve whatever is necessary from the db
     	QuestForUser qfu = RetrieveUtils.questForUserRetrieveUtils()
@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
     		  resBuilder.setStatus(QuestProgressStatus.SUCCESS);
     	}
 
-    	QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserId());
+    	QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserUuid());
     	resEvent.setTag(event.getTag());
     	resEvent.setQuestProgressResponseProto(resBuilder.build());  
     	server.writeEvent(resEvent);
@@ -146,7 +146,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
     } catch (Exception e) {
     	log.error("exception in QuestProgress processEvent", e);
     } finally {
-    	getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+    	getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

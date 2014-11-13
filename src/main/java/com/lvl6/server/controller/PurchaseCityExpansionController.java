@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		//variables client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		//in relation to center square (the origin 0,0)
 		int xPosition = reqProto.getXPosition();
 		int yPosition = reqProto.getYPosition();
@@ -87,10 +87,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 
 		//so someone doesn't steal user's silver during transaction
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			List<ExpansionPurchaseForUser> userCityExpansionDataList =
 					ExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(userId);
 			//used to calculate cost for buying expansion
@@ -104,7 +104,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 					userCityExpansionDataList, numExpansions, cityExpansionCostList);
 
 			//write to the client
-			PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserId());
+			PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -147,7 +147,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in BeginDungeonController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

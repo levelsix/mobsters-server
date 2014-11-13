@@ -22,7 +22,7 @@ public class AchievementRedeemRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       achievementRedeemRequestProto = AchievementRedeemRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = achievementRedeemRequestProto.getSender().getUserId();
+      playerId = achievementRedeemRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("AchievementRedeemRequest exception", e);
     }

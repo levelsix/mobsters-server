@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     QuestAcceptRequestProto reqProto = ((QuestAcceptRequestEvent)event).getQuestAcceptRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int questId = reqProto.getQuestId();
 
     QuestAcceptResponseProto.Builder resBuilder = QuestAcceptResponseProto.newBuilder();
@@ -73,9 +73,9 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     resBuilder.setStatus(QuestAcceptStatus.FAIL_OTHER);
 
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
 
       boolean legitAccept = checkLegitAccept(resBuilder, user, userId,
@@ -90,7 +90,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     	  resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
       }
       
-      QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserId());
+      QuestAcceptResponseEvent resEvent = new QuestAcceptResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setQuestAcceptResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -99,7 +99,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     } catch (Exception e) {
       log.error("exception in QuestAccept processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

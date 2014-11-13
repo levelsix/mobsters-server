@@ -13,13 +13,18 @@ public final class CityProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional sint32 xPosition = 2;</code>
@@ -109,9 +114,10 @@ public final class CityProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -174,19 +180,46 @@ public final class CityProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int XPOSITION_FIELD_NUMBER = 2;
@@ -250,7 +283,7 @@ public final class CityProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       xPosition_ = 0;
       yPosition_ = 0;
       isExpanding_ = false;
@@ -270,7 +303,7 @@ public final class CityProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeSInt32(2, xPosition_);
@@ -295,7 +328,7 @@ public final class CityProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -430,7 +463,7 @@ public final class CityProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         xPosition_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -471,7 +504,7 @@ public final class CityProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -504,8 +537,10 @@ public final class CityProto {
 
       public Builder mergeFrom(com.lvl6.proto.CityProto.UserCityExpansionDataProto other) {
         if (other == com.lvl6.proto.CityProto.UserCityExpansionDataProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasXPosition()) {
           setXPosition(other.getXPosition());
@@ -546,34 +581,78 @@ public final class CityProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -4519,30 +4598,30 @@ public final class CityProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nCity.proto\022\016com.lvl6.proto\032\017Structure." +
-      "proto\"\200\001\n\032UserCityExpansionDataProto\022\016\n\006" +
-      "userId\030\001 \001(\005\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosi" +
-      "tion\030\003 \001(\021\022\023\n\013isExpanding\030\004 \001(\010\022\027\n\017expan" +
-      "dStartTime\030\005 \001(\003\"e\n\026CityExpansionCostPro" +
-      "to\022\024\n\014expansionNum\030\001 \001(\005\022\031\n\021expansionCos" +
-      "tCash\030\002 \001(\005\022\032\n\022numMinutesToExpand\030\003 \001(\005\"" +
-      "\237\003\n\020CityElementProto\022\016\n\006cityId\030\001 \001(\005\022\017\n\007" +
-      "assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162-.com.lvl6.p" +
-      "roto.CityElementProto.CityElemType\022/\n\006co",
-      "ords\030\005 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\022\017\n\007xLength\030\006 \001(\002\022\017\n\007yLength\030\007 \001(\002\022\r\n" +
-      "\005imgId\030\010 \001(\t\022B\n\013orientation\030\t \001(\0162!.com." +
-      "lvl6.proto.StructOrientation:\nPOSITION_1" +
-      "\0225\n\014spriteCoords\030\n \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\"P\n\014CityElemType\022\014\n\010BUILD" +
-      "ING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NEUTRAL_" +
-      "ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\002\n\rFullCityProto\022\016\n\006c" +
-      "ityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapImgName\030" +
-      "\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6.proto.C",
-      "oordinateProto\022\023\n\013roadImgName\030\005 \001(\t\022\022\n\nm" +
-      "apTmxName\030\006 \001(\t\0226\n\rroadImgCoords\030\007 \001(\0132\037" +
-      ".com.lvl6.proto.CoordinateProto\022\017\n\007taskI" +
-      "ds\030\010 \003(\005\022\035\n\025attackMapLabelImgName\030\t \001(\tB" +
-      "\013B\tCityProto"
+      "proto\"\202\001\n\032UserCityExpansionDataProto\022\020\n\010" +
+      "userUuid\030\001 \001(\t\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPo" +
+      "sition\030\003 \001(\021\022\023\n\013isExpanding\030\004 \001(\010\022\027\n\017exp" +
+      "andStartTime\030\005 \001(\003\"e\n\026CityExpansionCostP" +
+      "roto\022\024\n\014expansionNum\030\001 \001(\005\022\031\n\021expansionC" +
+      "ostCash\030\002 \001(\005\022\032\n\022numMinutesToExpand\030\003 \001(" +
+      "\005\"\237\003\n\020CityElementProto\022\016\n\006cityId\030\001 \001(\005\022\017" +
+      "\n\007assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162-.com.lvl6" +
+      ".proto.CityElementProto.CityElemType\022/\n\006",
+      "coords\030\005 \001(\0132\037.com.lvl6.proto.Coordinate" +
+      "Proto\022\017\n\007xLength\030\006 \001(\002\022\017\n\007yLength\030\007 \001(\002\022" +
+      "\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030\t \001(\0162!.co" +
+      "m.lvl6.proto.StructOrientation:\nPOSITION" +
+      "_1\0225\n\014spriteCoords\030\n \001(\0132\037.com.lvl6.prot" +
+      "o.CoordinateProto\"P\n\014CityElemType\022\014\n\010BUI" +
+      "LDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NEUTRA" +
+      "L_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\002\n\rFullCityProto\022\016\n" +
+      "\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapImgNam" +
+      "e\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6.proto",
+      ".CoordinateProto\022\023\n\013roadImgName\030\005 \001(\t\022\022\n" +
+      "\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCoords\030\007 \001(\013" +
+      "2\037.com.lvl6.proto.CoordinateProto\022\017\n\007tas" +
+      "kIds\030\010 \003(\005\022\035\n\025attackMapLabelImgName\030\t \001(" +
+      "\tB\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4562,7 +4641,7 @@ public final class CityProto {
     internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor,
-        new java.lang.String[] { "UserId", "XPosition", "YPosition", "IsExpanding", "ExpandStartTime", });
+        new java.lang.String[] { "UserUuid", "XPosition", "YPosition", "IsExpanding", "ExpandStartTime", });
     internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new

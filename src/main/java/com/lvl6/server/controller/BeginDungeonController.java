@@ -79,7 +79,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     int taskId = reqProto.getTaskId();
 
@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setTaskId(taskId);
     resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
@@ -165,7 +165,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in BeginDungeonController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

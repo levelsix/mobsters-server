@@ -41,15 +41,15 @@ import com.lvl6.utils.RetrieveUtils;
     SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent)event).getSetAvatarMonsterRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int monsterId = reqProto.getMonsterId();
 
     SetAvatarMonsterResponseProto.Builder resBuilder = SetAvatarMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
 //      boolean isDifferent = checkIfNewTokenDifferent(user.getAvatarMonster(), gameCenterId);
       
@@ -69,7 +69,7 @@ import com.lvl6.utils.RetrieveUtils;
       }
 
       SetAvatarMonsterResponseProto resProto = resBuilder.build();
-      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(senderProto.getUserId());
+      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(senderProto.getUserUuid());
       resEvent.setSetAvatarMonsterResponseProto(resProto);
       server.writeEvent(resEvent);
       
@@ -95,7 +95,7 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetAvatarMonsterController processEvent", e);
     	}
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

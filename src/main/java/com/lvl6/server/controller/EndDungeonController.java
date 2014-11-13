@@ -75,7 +75,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     long userTaskId = reqProto.getUserTaskId();
     boolean userWon = reqProto.getUserWon();
     Date currentDate = new Date(reqProto.getClientTime());
@@ -94,7 +94,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setUserWon(userWon);
     resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousCash = 0;
@@ -197,7 +197,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in EndDungeonController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

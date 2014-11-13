@@ -5,8 +5,7 @@ import java.util.Date;
 
 public class ClanEventPersistentForClan implements Serializable {
 	
-	private static final long serialVersionUID = -8806794346949184851L;
-	private int clanId;
+	private String clanId;
 	private int clanEventPersistentId; //not really needed, but oh well
 	private int crId; //clan raid id
 	private int crsId; //clan raid stage id
@@ -14,7 +13,13 @@ public class ClanEventPersistentForClan implements Serializable {
 	private int crsmId; //clan raid stage monster id
 	private Date stageMonsterStartTime; //differentiate attacks across different stage monsters
   
-	public ClanEventPersistentForClan(int clanId, int clanEventPersistentId,
+	public ClanEventPersistentForClan()
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClanEventPersistentForClan(String clanId, int clanEventPersistentId,
 			int crId, int crsId, Date stageStartTime, int crsmId,
 			Date stageMonsterStartTime) {
 		super();
@@ -27,11 +32,11 @@ public class ClanEventPersistentForClan implements Serializable {
 		this.stageMonsterStartTime = stageMonsterStartTime;
 	}
 
-	public int getClanId() {
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId(int clanId) {
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 
@@ -93,7 +98,19 @@ public class ClanEventPersistentForClan implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime
+			* result
+			+ ((clanId == null) ? 0 : clanId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals( Object obj )
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -101,27 +118,12 @@ public class ClanEventPersistentForClan implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ClanEventPersistentForClan other = (ClanEventPersistentForClan) obj;
-		if (clanEventPersistentId != other.clanEventPersistentId)
-			return false;
-		if (clanId != other.clanId)
-			return false;
-		if (crId != other.crId)
-			return false;
-		if (crsId != other.crsId)
-			return false;
-		if (crsmId != other.crsmId)
-			return false;
-		if (stageMonsterStartTime == null) {
-			if (other.stageMonsterStartTime != null)
+		if (clanId == null) {
+			if (other.clanId != null)
 				return false;
-		} else if (!stageMonsterStartTime.equals(other.stageMonsterStartTime))
-			return false;
-		if (stageStartTime == null) {
-			if (other.stageStartTime != null)
-				return false;
-		} else if (!stageStartTime.equals(other.stageStartTime))
+		} else if (!clanId.equals(other.clanId))
 			return false;
 		return true;
 	}
-	
+
 }

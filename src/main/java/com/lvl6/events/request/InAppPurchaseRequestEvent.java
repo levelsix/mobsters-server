@@ -22,7 +22,7 @@ public class InAppPurchaseRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       inAppPurchaseRequestProto = InAppPurchaseRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = inAppPurchaseRequestProto.getSender().getUserId();
+      playerId = inAppPurchaseRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("in app purchase request exception", e);
     }

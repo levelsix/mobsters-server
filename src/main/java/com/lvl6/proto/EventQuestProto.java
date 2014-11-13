@@ -1382,32 +1382,43 @@ public final class EventQuestProto {
         int index);
 
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    java.util.List<java.lang.Long> getDeleteUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getDeleteUserMonsterUuidsList();
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    int getDeleteUserMonsterIdsCount();
+    int getDeleteUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    long getDeleteUserMonsterIds(int index);
+    java.lang.String getDeleteUserMonsterUuids(int index);
+    /**
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getDeleteUserMonsterUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.QuestProgressRequestProto}
@@ -1497,25 +1508,13 @@ public final class EventQuestProto {
               userQuestJobs_.add(input.readMessage(com.lvl6.proto.QuestProto.UserQuestJobProto.PARSER, extensionRegistry));
               break;
             }
-            case 40: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              deleteUserMonsterIds_.add(input.readInt64());
-              break;
-            }
             case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
-                deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                deleteUserMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000010;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                deleteUserMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              deleteUserMonsterUuids_.add(bs);
               break;
             }
           }
@@ -1530,7 +1529,7 @@ public final class EventQuestProto {
           userQuestJobs_ = java.util.Collections.unmodifiableList(userQuestJobs_);
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterIds_ = java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
+          deleteUserMonsterUuids_ = deleteUserMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1675,41 +1674,53 @@ public final class EventQuestProto {
       return userQuestJobs_.get(index);
     }
 
-    public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Long> deleteUserMonsterIds_;
+    public static final int DELETEUSERMONSTERUUIDS_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList deleteUserMonsterUuids_;
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    public java.util.List<java.lang.Long>
-        getDeleteUserMonsterIdsList() {
-      return deleteUserMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getDeleteUserMonsterUuidsList() {
+      return deleteUserMonsterUuids_;
     }
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    public int getDeleteUserMonsterIdsCount() {
-      return deleteUserMonsterIds_.size();
+    public int getDeleteUserMonsterUuidsCount() {
+      return deleteUserMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
      *
      * <pre>
      *if set, delete these user monster ids. Deleting monsters
      *will be set for only one quest job
      * </pre>
      */
-    public long getDeleteUserMonsterIds(int index) {
-      return deleteUserMonsterIds_.get(index);
+    public java.lang.String getDeleteUserMonsterUuids(int index) {
+      return deleteUserMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string deleteUserMonsterUuids = 5;</code>
+     *
+     * <pre>
+     *if set, delete these user monster ids. Deleting monsters
+     *will be set for only one quest job
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getDeleteUserMonsterUuidsBytes(int index) {
+      return deleteUserMonsterUuids_.getByteString(index);
     }
 
     private void initFields() {
@@ -1717,7 +1728,7 @@ public final class EventQuestProto {
       questId_ = 0;
       isComplete_ = false;
       userQuestJobs_ = java.util.Collections.emptyList();
-      deleteUserMonsterIds_ = java.util.Collections.emptyList();
+      deleteUserMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1744,8 +1755,8 @@ public final class EventQuestProto {
       for (int i = 0; i < userQuestJobs_.size(); i++) {
         output.writeMessage(4, userQuestJobs_.get(i));
       }
-      for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
-        output.writeInt64(5, deleteUserMonsterIds_.get(i));
+      for (int i = 0; i < deleteUserMonsterUuids_.size(); i++) {
+        output.writeBytes(5, deleteUserMonsterUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1774,12 +1785,12 @@ public final class EventQuestProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
+        for (int i = 0; i < deleteUserMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(deleteUserMonsterIds_.get(i));
+            .computeBytesSizeNoTag(deleteUserMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getDeleteUserMonsterIdsList().size();
+        size += 1 * getDeleteUserMonsterUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1921,7 +1932,7 @@ public final class EventQuestProto {
         } else {
           userQuestJobsBuilder_.clear();
         }
-        deleteUserMonsterIds_ = java.util.Collections.emptyList();
+        deleteUserMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -1977,10 +1988,10 @@ public final class EventQuestProto {
           result.userQuestJobs_ = userQuestJobsBuilder_.build();
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterIds_ = java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
+          deleteUserMonsterUuids_ = deleteUserMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000010);
         }
-        result.deleteUserMonsterIds_ = deleteUserMonsterIds_;
+        result.deleteUserMonsterUuids_ = deleteUserMonsterUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2032,13 +2043,13 @@ public final class EventQuestProto {
             }
           }
         }
-        if (!other.deleteUserMonsterIds_.isEmpty()) {
-          if (deleteUserMonsterIds_.isEmpty()) {
-            deleteUserMonsterIds_ = other.deleteUserMonsterIds_;
+        if (!other.deleteUserMonsterUuids_.isEmpty()) {
+          if (deleteUserMonsterUuids_.isEmpty()) {
+            deleteUserMonsterUuids_ = other.deleteUserMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000010);
           } else {
-            ensureDeleteUserMonsterIdsIsMutable();
-            deleteUserMonsterIds_.addAll(other.deleteUserMonsterIds_);
+            ensureDeleteUserMonsterUuidsIsMutable();
+            deleteUserMonsterUuids_.addAll(other.deleteUserMonsterUuids_);
           }
           onChanged();
         }
@@ -2579,103 +2590,140 @@ public final class EventQuestProto {
         return userQuestJobsBuilder_;
       }
 
-      private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureDeleteUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList deleteUserMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureDeleteUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>(deleteUserMonsterIds_);
+          deleteUserMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(deleteUserMonsterUuids_);
           bitField0_ |= 0x00000010;
          }
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public java.util.List<java.lang.Long>
-          getDeleteUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getDeleteUserMonsterUuidsList() {
+        return deleteUserMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public int getDeleteUserMonsterIdsCount() {
-        return deleteUserMonsterIds_.size();
+      public int getDeleteUserMonsterUuidsCount() {
+        return deleteUserMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public long getDeleteUserMonsterIds(int index) {
-        return deleteUserMonsterIds_.get(index);
+      public java.lang.String getDeleteUserMonsterUuids(int index) {
+        return deleteUserMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public Builder setDeleteUserMonsterIds(
-          int index, long value) {
-        ensureDeleteUserMonsterIdsIsMutable();
-        deleteUserMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getDeleteUserMonsterUuidsBytes(int index) {
+        return deleteUserMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
+      public Builder setDeleteUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMonsterUuidsIsMutable();
+        deleteUserMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public Builder addDeleteUserMonsterIds(long value) {
-        ensureDeleteUserMonsterIdsIsMutable();
-        deleteUserMonsterIds_.add(value);
+      public Builder addDeleteUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMonsterUuidsIsMutable();
+        deleteUserMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public Builder addAllDeleteUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureDeleteUserMonsterIdsIsMutable();
+      public Builder addAllDeleteUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureDeleteUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, deleteUserMonsterIds_);
+            values, deleteUserMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 deleteUserMonsterIds = 5;</code>
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
        *
        * <pre>
        *if set, delete these user monster ids. Deleting monsters
        *will be set for only one quest job
        * </pre>
        */
-      public Builder clearDeleteUserMonsterIds() {
-        deleteUserMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearDeleteUserMonsterUuids() {
+        deleteUserMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string deleteUserMonsterUuids = 5;</code>
+       *
+       * <pre>
+       *if set, delete these user monster ids. Deleting monsters
+       *will be set for only one quest job
+       * </pre>
+       */
+      public Builder addDeleteUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDeleteUserMonsterUuidsIsMutable();
+        deleteUserMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -5385,35 +5433,35 @@ public final class EventQuestProto {
       "proto.QuestAcceptResponseProto.QuestAcce" +
       "ptStatus\"g\n\021QuestAcceptStatus\022\013\n\007SUCCESS" +
       "\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER\020\002\022\031\n\025FAIL_A",
-      "LREADY_ACCEPTED\020\003\022\016\n\nFAIL_OTHER\020\004\"\312\001\n\031Qu" +
+      "LREADY_ACCEPTED\020\003\022\016\n\nFAIL_OTHER\020\004\"\314\001\n\031Qu" +
       "estProgressRequestProto\0220\n\006sender\030\001 \001(\0132" +
       " .com.lvl6.proto.MinimumUserProto\022\017\n\007que" +
       "stId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\0228\n\ruserQu" +
       "estJobs\030\004 \003(\0132!.com.lvl6.proto.UserQuest" +
-      "JobProto\022\034\n\024deleteUserMonsterIds\030\005 \003(\003\"\200" +
-      "\003\n\032QuestProgressResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "N\n\006status\030\002 \001(\0162>.com.lvl6.proto.QuestPr" +
-      "ogressResponseProto.QuestProgressStatus\"",
-      "\337\001\n\023QuestProgressStatus\022\013\n\007SUCCESS\020\001\022\030\n\024" +
-      "FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FAIL_DELETE_AM" +
-      "OUNT_DOES_NOT_MATCH_QUEST\020\003\022\"\n\036FAIL_NONE" +
-      "XISTENT_USER_MONSTERS\020\004\022!\n\035FAIL_INCOMPLE" +
-      "TE_USER_MONSTERS\020\005\022\035\n\031FAIL_QUEST_JOB_INC" +
-      "OMPLETE\020\007\022\016\n\nFAIL_OTHER\020\006\"l\n\027QuestRedeem" +
-      "RequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
-      "proto.MinimumUserProtoWithMaxResources\022\017" +
-      "\n\007questId\030\002 \001(\005\"\364\002\n\030QuestRedeemResponseP" +
-      "roto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Mi",
-      "nimumUserProtoWithMaxResources\022<\n\024newlyA" +
-      "vailableQuests\030\002 \003(\0132\036.com.lvl6.proto.Fu" +
-      "llQuestProto\022J\n\006status\030\003 \001(\0162:.com.lvl6." +
-      "proto.QuestRedeemResponseProto.QuestRede" +
-      "emStatus\0222\n\004fump\030\004 \001(\0132$.com.lvl6.proto." +
-      "FullUserMonsterProto\022\017\n\007questId\030\005 \001(\005\"G\n" +
-      "\021QuestRedeemStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_" +
-      "NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003B\021B\017EventQ" +
-      "uestProto"
+      "JobProto\022\036\n\026deleteUserMonsterUuids\030\005 \003(\t" +
+      "\"\200\003\n\032QuestProgressResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022N\n\006status\030\002 \001(\0162>.com.lvl6.proto.Quest" +
+      "ProgressResponseProto.QuestProgressStatu",
+      "s\"\337\001\n\023QuestProgressStatus\022\013\n\007SUCCESS\020\001\022\030" +
+      "\n\024FAIL_NO_QUEST_EXISTS\020\002\022+\n\'FAIL_DELETE_" +
+      "AMOUNT_DOES_NOT_MATCH_QUEST\020\003\022\"\n\036FAIL_NO" +
+      "NEXISTENT_USER_MONSTERS\020\004\022!\n\035FAIL_INCOMP" +
+      "LETE_USER_MONSTERS\020\005\022\035\n\031FAIL_QUEST_JOB_I" +
+      "NCOMPLETE\020\007\022\016\n\nFAIL_OTHER\020\006\"l\n\027QuestRede" +
+      "emRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl" +
+      "6.proto.MinimumUserProtoWithMaxResources" +
+      "\022\017\n\007questId\030\002 \001(\005\"\364\002\n\030QuestRedeemRespons" +
+      "eProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.",
+      "MinimumUserProtoWithMaxResources\022<\n\024newl" +
+      "yAvailableQuests\030\002 \003(\0132\036.com.lvl6.proto." +
+      "FullQuestProto\022J\n\006status\030\003 \001(\0162:.com.lvl" +
+      "6.proto.QuestRedeemResponseProto.QuestRe" +
+      "deemStatus\0222\n\004fump\030\004 \001(\0132$.com.lvl6.prot" +
+      "o.FullUserMonsterProto\022\017\n\007questId\030\005 \001(\005\"" +
+      "G\n\021QuestRedeemStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAI" +
+      "L_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003B\021B\017Even" +
+      "tQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5447,7 +5495,7 @@ public final class EventQuestProto {
     internal_static_com_lvl6_proto_QuestProgressRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_QuestProgressRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterIds", });
+        new java.lang.String[] { "Sender", "QuestId", "IsComplete", "UserQuestJobs", "DeleteUserMonsterUuids", });
     internal_static_com_lvl6_proto_QuestProgressResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_QuestProgressResponseProto_fieldAccessorTable = new

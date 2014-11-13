@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     IncreaseSlotType increaseType = reqProto.getIncreaseSlotType();
     int userStructId = reqProto.getUserStructId();
     //the invites to redeem     
@@ -83,7 +83,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	int previousGems = 0;
     	//get stuff from the db
@@ -143,7 +143,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in IncreaseMonsterInventorySlotController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

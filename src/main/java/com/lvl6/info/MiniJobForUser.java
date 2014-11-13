@@ -6,15 +6,13 @@ import java.util.List;
 
 public class MiniJobForUser implements Serializable {
 	
-	private static final long serialVersionUID = 5935675161654042334L;
-	
-	private long id;
-	private int userId;
+	private String id;
+	private String userId;
 	private int miniJobId;
 	private int baseDmgReceived;
 	private int durationSeconds;
 	private Date timeStarted;
-	private List<Long> userMonsterIds;
+	private List<String> userMonsterIds;
 	private String userMonsterIdStr;
 	private Date timeCompleted;
 	
@@ -22,9 +20,9 @@ public class MiniJobForUser implements Serializable {
 		super();
 	}
 
-	public MiniJobForUser(long id, int userId, int miniJobId,
+	public MiniJobForUser(String id, String userId, int miniJobId,
 			int baseDmgReceived, int durationSeconds, Date timeStarted,
-			List<Long> userMonsterIds, String userMonsterIdStr,
+			List<String> userMonsterIds, String userMonsterIdStr,
 			Date timeCompleted) {
 		super();
 		this.id = id;
@@ -38,19 +36,19 @@ public class MiniJobForUser implements Serializable {
 		this.timeCompleted = timeCompleted;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -86,11 +84,11 @@ public class MiniJobForUser implements Serializable {
 		this.timeStarted = timeStarted;
 	}
 
-	public List<Long> getUserMonsterIds() {
+	public List<String> getUserMonsterIds() {
 		return userMonsterIds;
 	}
 
-	public void setUserMonsterIds(List<Long> userMonsterIds) {
+	public void setUserMonsterIds(List<String> userMonsterIds) {
 		this.userMonsterIds = userMonsterIds;
 	}
 

@@ -17,14 +17,14 @@ public abstract class EventWriter extends Wrap {
 
 	public abstract void processGlobalChatResponseEvent(ResponseEvent event);
 
-	public void handleClanEvent(ResponseEvent event, int clanId) {
+	public void handleClanEvent(ResponseEvent event, String clanId) {
 		try {
 			processClanResponseEvent(event, clanId);
 		} catch (Exception e) {
 			log.error("Error handling clan event: " + event, e);
 		}
 	}
-	public abstract void processClanResponseEvent(ResponseEvent event, int clanId);
+	public abstract void processClanResponseEvent(ResponseEvent event, String clanId);
 	
 	public void handleEvent(GameEvent event) {
 		try {

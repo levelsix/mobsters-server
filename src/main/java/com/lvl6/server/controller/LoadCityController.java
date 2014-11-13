@@ -52,7 +52,7 @@ import com.lvl6.utils.RetrieveUtils;
     LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int cityId = reqProto.getCityId();
     City city = CityRetrieveUtils.getCityForCityId(cityId);
 
@@ -62,7 +62,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     resBuilder.setStatus(LoadCityStatus.SUCCESS);
 
-//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
@@ -87,7 +87,7 @@ import com.lvl6.utils.RetrieveUtils;
 
       }
 
-      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserId());
+      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setLoadCityResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -95,7 +95,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in LoadCity processEvent", e);
     } finally {
-//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
   

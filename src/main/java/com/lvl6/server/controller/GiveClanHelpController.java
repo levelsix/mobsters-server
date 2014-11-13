@@ -59,7 +59,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info(String.format("reqProto=%s", reqProto));
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int clanId = 0;
     
     if (null != senderProto.getClan()) {
@@ -84,7 +84,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -127,7 +127,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}
     }*/
   }

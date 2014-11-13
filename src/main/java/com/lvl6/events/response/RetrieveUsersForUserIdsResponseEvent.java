@@ -11,7 +11,7 @@ public class RetrieveUsersForUserIdsResponseEvent extends NormalResponseEvent {
 
   private RetrieveUsersForUserIdsResponseProto retrieveUsersForUserIdsResponseProto;
   
-  public RetrieveUsersForUserIdsResponseEvent(int playerId) {
+  public RetrieveUsersForUserIdsResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_RETRIEVE_USERS_FOR_USER_IDS_EVENT;
   }

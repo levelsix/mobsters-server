@@ -60,7 +60,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int xPosition = reqProto.getXPosition();
 		int yPosition = reqProto.getYPosition();
@@ -71,9 +71,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ExpansionWaitCompleteStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			List<ExpansionPurchaseForUser> epfuList = ExpansionPurchaseForUserRetrieveUtils
 					.getUserCityExpansionDatasForUserId(userId);
 			ExpansionPurchaseForUser epfu = selectSpecificExpansion(xPosition, yPosition,
@@ -97,7 +97,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resBuilder.setUcedp(ucedp);
 			}
 			
-			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserId());
+			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	log.error("exception2 in ExpansionWaitCompleteController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

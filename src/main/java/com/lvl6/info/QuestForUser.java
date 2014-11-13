@@ -4,14 +4,17 @@ import java.io.Serializable;
 
 public class QuestForUser implements Serializable {
 
-	private static final long serialVersionUID = 7369579561100973258L;
-	
-	private int userId;
+	private String userId;
 	private int questId;
 	private boolean isRedeemed;
 	private boolean isComplete;
 	
-	public QuestForUser(int userId, int questId, boolean isRedeemed,
+	public QuestForUser()
+	{
+		super();
+	}
+	
+	public QuestForUser(String userId, int questId, boolean isRedeemed,
 			boolean isComplete) {
 		super();
 		this.userId = userId;
@@ -20,11 +23,11 @@ public class QuestForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

@@ -84,12 +84,12 @@ public class SendGroupChatController extends EventController {
     SendGroupChatResponseProto.Builder resBuilder = SendGroupChatResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
-    SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserId());
+    SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserUuid());
     resEvent.setTag(event.getTag());
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      final User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      final User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
       boolean legitSend = checkLegitSend(resBuilder, user, scope, chatMessage);
 
@@ -116,7 +116,7 @@ public class SendGroupChatController extends EventController {
         if (scope == GroupChatScope.GLOBAL) {
           chatProto.setIsAdmin(user.isAdmin());
         }
-        sendChatMessage(senderProto.getUserId(), chatProto, event.getTag(),
+        sendChatMessage(senderProto.getUserUuid(), chatProto, event.getTag(),
             scope == GroupChatScope.CLAN, user.getClanId(), user.isAdmin(),
             timeOfPost.getTime(), user.getLevel());
         // send messages in background so sending player can unlock
@@ -140,7 +140,7 @@ public class SendGroupChatController extends EventController {
     		log.error("exception2 in SendGroupChat processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

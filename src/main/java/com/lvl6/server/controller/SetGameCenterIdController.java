@@ -41,7 +41,7 @@ import com.lvl6.utils.RetrieveUtils;
     SetGameCenterIdRequestProto reqProto = ((SetGameCenterIdRequestEvent)event).getSetGameCenterIdRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     String gameCenterId = reqProto.getGameCenterId();
     if (gameCenterId != null && gameCenterId.isEmpty()) gameCenterId = null;
 
@@ -51,9 +51,9 @@ import com.lvl6.utils.RetrieveUtils;
     	resBuilder.setGameCenterId(gameCenterId);
     }
     
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
 //      boolean isDifferent = checkIfNewTokenDifferent(user.getGameCenterId(), gameCenterId);
       boolean legit = writeChangesToDb(user, gameCenterId);
@@ -65,7 +65,7 @@ import com.lvl6.utils.RetrieveUtils;
       }
 
       SetGameCenterIdResponseProto resProto = resBuilder.build();
-      SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(senderProto.getUserId());
+      SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(senderProto.getUserUuid());
       resEvent.setSetGameCenterIdResponseProto(resProto);
       server.writeEvent(resEvent);
       
@@ -91,7 +91,7 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetGameCenterIdController processEvent", e);
     	}
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

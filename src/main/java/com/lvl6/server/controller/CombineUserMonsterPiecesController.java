@@ -59,7 +59,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
     userMonsterIds = new ArrayList<Long>(userMonsterIds);
     int gemCost = reqProto.getGemCost();
@@ -72,7 +72,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	int previousGems = 0;
     	
@@ -121,7 +121,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in CombineUserMonsterPiecesController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 
@@ -162,7 +162,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		userMonsterIds.addAll(idsToUserMonsters.keySet());
   	}
   	
-  	List<Long> wholeUserMonsterIds = MonsterStuffUtils
+  	List<String> wholeUserMonsterIds = MonsterStuffUtils
   			.getWholeButNotCombinedUserMonsters(idsToUserMonsters);
   	if (wholeUserMonsterIds.size() != userMonsterIds.size()) {
   		log.warn("client trying to combine already combined or incomplete monsters." +

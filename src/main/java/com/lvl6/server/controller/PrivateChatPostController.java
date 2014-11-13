@@ -70,7 +70,7 @@ public class PrivateChatPostController extends EventController {
 
 		// from client
 		MinimumUserProto senderProto = reqProto.getSender();
-		int posterId = senderProto.getUserId();
+		int posterId = senderProto.getUserUuid();
 		int recipientId = reqProto.getRecipientId();
 		String content = (reqProto.hasContent()) ? reqProto.getContent() : "";
 

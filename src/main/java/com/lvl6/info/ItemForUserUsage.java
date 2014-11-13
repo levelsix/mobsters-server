@@ -5,20 +5,18 @@ import java.util.Date;
 
 public class ItemForUserUsage implements Serializable {
 
-	private static final long serialVersionUID = -8426227433650264999L;
-	
-	private long id;
-	private int userId;
+	private String id;
+	private String userId;
 	private int itemId;
 	private Date timeOfEntry;
-	private long userDataId;
+	private String userDataId;
 	private String actionType;
 	
 	public ItemForUserUsage() {
 		super();
 	}
 
-	public ItemForUserUsage(long id, ItemForUserUsage ifuu) {
+	public ItemForUserUsage(String id, ItemForUserUsage ifuu) {
 		super();
 		this.id = id;
 		this.userId = ifuu.userId;
@@ -29,11 +27,11 @@ public class ItemForUserUsage implements Serializable {
 	}
 	
 	public ItemForUserUsage(
-		long id,
-		int userId,
+		String id,
+		String userId,
 		int itemId,
 		Date timeOfEntry,
-		long userDataId,
+		String userDataId,
 		String actionType )
 	{
 		super();
@@ -45,22 +43,22 @@ public class ItemForUserUsage implements Serializable {
 		this.actionType = actionType;
 	}
 
-	public long getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId( long id )
+	public void setId( String id )
 	{
 		this.id = id;
 	}
 
-	public int getUserId()
+	public String getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId( int userId )
+	public void setUserId( String userId )
 	{
 		this.userId = userId;
 	}
@@ -85,12 +83,12 @@ public class ItemForUserUsage implements Serializable {
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public long getUserDataId()
+	public String getUserDataId()
 	{
 		return userDataId;
 	}
 
-	public void setUserDataId( long userDataId )
+	public void setUserDataId( String userDataId )
 	{
 		this.userDataId = userDataId;
 	}

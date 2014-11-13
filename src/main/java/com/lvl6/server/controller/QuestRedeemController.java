@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int questId = reqProto.getQuestId();
     Date currentDate = new Date();
     Timestamp now = new Timestamp(currentDate.getTime());
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
     resBuilder.setQuestId(questId);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	//retrieve whatever is necessary from the db
     	
@@ -94,13 +94,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	legitRedeem = awardMonsterReward(resBuilder, userId, quest, questId, currentDate);
       }
       
-      QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserId());
+      QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setQuestRedeemResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
 
       if (legitRedeem) {
-        User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+        User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
         
         Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
         Map<String, Integer> currencyChange = new HashMap<String, Integer>();
@@ -128,7 +128,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in QuestRedeem processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

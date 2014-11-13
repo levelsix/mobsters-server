@@ -11,7 +11,7 @@ public class CreateClanResponseEvent extends NormalResponseEvent {
 
   private CreateClanResponseProto createClanResponseProto;
   
-  public CreateClanResponseEvent(int playerId){
+  public CreateClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_CREATE_CLAN_EVENT;
   }

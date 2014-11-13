@@ -92,10 +92,10 @@ public class EarnFreeDiamondsController extends EventController {
     EarnFreeDiamondsResponseProto.Builder resBuilder = EarnFreeDiamondsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       int previousGems = 0;
       int previousCash = 0;
 
@@ -123,7 +123,7 @@ public class EarnFreeDiamondsController extends EventController {
 //        }
       }
 
-      EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserId());
+      EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setEarnFreeDiamondsResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -149,7 +149,7 @@ public class EarnFreeDiamondsController extends EventController {
     } catch (Exception e) {
       log.error("exception in earn free gold processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

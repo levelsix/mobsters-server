@@ -5,16 +5,24 @@ import java.util.Date;
 
 public class MonsterEvolvingForUser implements Serializable {
 
-	private static final long serialVersionUID = -8663041420598844646L;
-	private long catalystMonsterForUserId;
-	private long monsterForUserIdOne;
-	private long monsterForUserIdTwo;
-	private int userId;
+	private String catalystMonsterForUserId;
+	private String monsterForUserIdOne;
+	private String monsterForUserIdTwo;
+	private String userId;
 	private Date startTime;
+	
+	public MonsterEvolvingForUser()
+	{
+		super();
+	}
 
-  public MonsterEvolvingForUser(long catalystMonsterForUserId,
-			long monsterForUserIdOne, long monsterForUserIdTwo, int userId,
-			Date startTime) {
+	public MonsterEvolvingForUser(
+		String catalystMonsterForUserId,
+		String monsterForUserIdOne,
+		String monsterForUserIdTwo,
+		String userId,
+		Date startTime )
+	{
 		super();
 		this.catalystMonsterForUserId = catalystMonsterForUserId;
 		this.monsterForUserIdOne = monsterForUserIdOne;
@@ -23,43 +31,53 @@ public class MonsterEvolvingForUser implements Serializable {
 		this.startTime = startTime;
 	}
 
-	public long getCatalystMonsterForUserId() {
+	public String getCatalystMonsterForUserId()
+	{
 		return catalystMonsterForUserId;
 	}
 
-	public void setCatalystMonsterForUserId(long catalystMonsterForUserId) {
+	public void setCatalystMonsterForUserId( String catalystMonsterForUserId )
+	{
 		this.catalystMonsterForUserId = catalystMonsterForUserId;
 	}
 
-	public long getMonsterForUserIdOne() {
+	public String getMonsterForUserIdOne()
+	{
 		return monsterForUserIdOne;
 	}
 
-	public void setMonsterForUserIdOne(long monsterForUserIdOne) {
+	public void setMonsterForUserIdOne( String monsterForUserIdOne )
+	{
 		this.monsterForUserIdOne = monsterForUserIdOne;
 	}
 
-	public long getMonsterForUserIdTwo() {
+	public String getMonsterForUserIdTwo()
+	{
 		return monsterForUserIdTwo;
 	}
 
-	public void setMonsterForUserIdTwo(long monsterForUserIdTwo) {
+	public void setMonsterForUserIdTwo( String monsterForUserIdTwo )
+	{
 		this.monsterForUserIdTwo = monsterForUserIdTwo;
 	}
 
-	public int getUserId() {
+	public String getUserId()
+	{
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId( String userId )
+	{
 		this.userId = userId;
 	}
 
-	public Date getStartTime() {
+	public Date getStartTime()
+	{
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime( Date startTime )
+	{
 		this.startTime = startTime;
 	}
 

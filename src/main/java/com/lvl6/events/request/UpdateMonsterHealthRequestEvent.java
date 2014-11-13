@@ -22,7 +22,7 @@ public class UpdateMonsterHealthRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       updateMonsterHealthRequestProto = UpdateMonsterHealthRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = updateMonsterHealthRequestProto.getSender().getUserId();
+      playerId = updateMonsterHealthRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("update monster health request exception", e);
     }

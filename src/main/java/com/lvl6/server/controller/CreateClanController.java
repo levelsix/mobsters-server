@@ -61,7 +61,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     String clanName = reqProto.getName();
     String tag = reqProto.getTag();
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
@@ -78,7 +78,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     getLocker().lockPlayer(userId, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       Timestamp createTime = new Timestamp(new Date().getTime());
       
       boolean legitCreate = checkLegitCreate(resBuilder, user, clanName, tag, gemsSpent,
@@ -100,7 +100,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resBuilder.setStatus(CreateClanStatus.SUCCESS);
       }
       
-      CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserId());
+      CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setCreateClanResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);

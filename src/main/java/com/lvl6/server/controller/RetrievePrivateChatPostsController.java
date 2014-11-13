@@ -52,7 +52,7 @@ import com.lvl6.utils.RetrieveUtils;
     RetrievePrivateChatPostsRequestProto reqProto = ((RetrievePrivateChatPostsRequestEvent)event).getRetrievePrivateChatPostsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int otherUserId = reqProto.getOtherUserId();
     int beforePrivateChatId = reqProto.getBeforePrivateChatId();
 
@@ -112,7 +112,7 @@ import com.lvl6.utils.RetrieveUtils;
 
       RetrievePrivateChatPostsResponseProto resProto = resBuilder.build();
 
-      RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(senderProto.getUserId());
+      RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrievePrivateChatPostsResponseProto(resProto);
 

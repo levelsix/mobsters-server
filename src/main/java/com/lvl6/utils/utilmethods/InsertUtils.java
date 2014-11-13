@@ -835,7 +835,7 @@ public class InsertUtils implements InsertUtil{
 		
 		for(int i = 0; i < userMonsters.size(); i++){
 			MonsterForUser mfu = userMonsters.get(i);
-			long monsterForUserId = mfu.getId();
+			String monsterForUserId = mfu.getId();
 			int monsterId = mfu.getMonsterId();
 			int currentExp = mfu.getCurrentExp();
 			int currentLvl = mfu.getCurrentLvl();
@@ -1308,7 +1308,7 @@ public class InsertUtils implements InsertUtil{
 			for (ClanEventPersistentUserReward reward : userRewards) {                               
 				Map<String, Object> newRow = new HashMap<String, Object>();
 				
-				int userId = reward.getUserId();                                                       
+				String userId = reward.getUserId();                                                       
 				String resourceType = reward.getResourceType();                                        
 				int staticDataId = reward.getStaticDataId();                                           
 				int quantity = reward.getQuantity();                                                   

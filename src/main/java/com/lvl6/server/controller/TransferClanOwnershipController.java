@@ -57,7 +57,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int newClanOwnerId = reqProto.getClanOwnerIdNew();
     List<Integer> userIds = new ArrayList<Integer>();
     //order matters
@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (legitTransfer) {
-      	TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserId());
+      	TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserUuid());
       	resEvent.setTag(event.getTag());
       	resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());  
       	server.writeClanEvent(resEvent, clanId);

@@ -44,8 +44,8 @@ public class GameEventRecorder implements InitializingBean {
 		
 	}
 
-	public void persistEvent(Integer userId, Integer eventType,	byte[] eventBytes) {
-		if (userId != null && userId > 0 && eventBytes != null) {
+	public void persistEvent(String userId, Integer eventType,	byte[] eventBytes) {
+		if (userId != null && !userId.equals("") && eventBytes != null) {
 			try {
 				log.info("Persisting event for user: {}", userId);
 				jdbc.update(

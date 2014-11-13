@@ -11,7 +11,7 @@ public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEven
 
   private EnhancementWaitTimeCompleteResponseProto enhancementWaitTimeCompleteResponseProto;
   
-  public EnhancementWaitTimeCompleteResponseEvent(int playerId){
+  public EnhancementWaitTimeCompleteResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT;
   }

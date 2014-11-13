@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
     //only locking so you cant moveOrRotate it hella times
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
@@ -98,7 +98,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           }
         }
       }
-      MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(senderProto.getUserId());
+      MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } catch (Exception e) {
       log.error("exception in MoveOrRotateNormStructure processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

@@ -63,7 +63,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				.getAchievementRedeemRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		int achievementId = reqProto.getAchievementId();
 		Date currentDate = new Date();
 		Timestamp now = new Timestamp(currentDate.getTime());
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
 			User user = RetrieveUtils.userRetrieveUtils()
-					.getUserById(senderProto.getUserId());
+					.getUserById(senderProto.getUserUuid());
 			int previousGems = 0;
 
 			Map<Integer, AchievementForUser> achievementIdToUserAchievement = 
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resBuilder.setStatus(AchievementRedeemStatus.SUCCESS);
 			}
 			
-			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(senderProto.getUserId());
+			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementRedeemResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in AchievementRedeem processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

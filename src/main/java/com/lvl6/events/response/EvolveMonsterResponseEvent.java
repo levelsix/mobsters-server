@@ -11,7 +11,7 @@ public class EvolveMonsterResponseEvent extends NormalResponseEvent {
 
   private EvolveMonsterResponseProto evolveMonsterResponseProto;
   
-  public EvolveMonsterResponseEvent(int playerId){
+  public EvolveMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_EVOLVE_MONSTER_EVENT;
   }

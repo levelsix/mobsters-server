@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,27 +56,53 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent)event).getBootPlayerFromClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    int playerToBootId = reqProto.getPlayerToBoot();
-    List<Integer> userIds = new ArrayList<Integer>();
-    userIds.add(userId);
-    userIds.add(playerToBootId);
+    String userId = senderProto.getUserUuid();
+    String playerToBootId = reqProto.getPlayerToBootUuid();
 
     BootPlayerFromClanResponseProto.Builder resBuilder = BootPlayerFromClanResponseProto.newBuilder();
     resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-
-    int clanId = 0;
     
+    String clanId = "";
+
+    UUID userUuid = null;
+    UUID playerToBootUuid = null;
+    UUID clanUuid = null;
+    
+    boolean invalidUuids = false;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
+    	try {
+    		userUuid = UUID.fromString(userId);
+    		playerToBootUuid = UUID.fromString(playerToBootId);
+    			
+			clanUuid = UUID.fromString(clanId);
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s, playerToBootId=%s clanId=%s",
+				userId, playerToBootId, clanId), e);
+			invalidUuids = true;
+		}
     }
+    
+    //UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+    	BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(userId);
+    	resEvent.setTag(event.getTag());
+    	resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+    	return;
+    }
+
+    List<String> userIds = new ArrayList<String>();
+    userIds.add(userId);
+    userIds.add(playerToBootId);
+    
     boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
-    }
+    lockedClan = getLocker().lockClan(clanUuid);
     try {
-    	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+    	Map<String,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
       User user = users.get(userId);
       User playerToBoot = users.get(playerToBootId);
 
@@ -91,7 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resBuilder.setPlayerToBoot(mup);
       }
       
-      BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(senderProto.getUserId());
+      BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setBootPlayerFromClanResponseProto(resBuilder.build()); 
 
@@ -114,8 +141,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in BootPlayerFromClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
+    	if (null != clanUuid && lockedClan) {
+    		getLocker().unlockClan(clanUuid);
     	}
     }
   }
@@ -130,31 +157,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
     if (user == null || playerToBoot == null) {
       resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
-      log.error("user is " + user + ", playerToBoot is " + playerToBoot);
+      log.error(String.format(
+    	  "user is %s, playerToBoot is %s",
+    	  user, playerToBoot));
       return false;      
     }
     
-    int clanId = user.getClanId();
+    String clanId = user.getClanId();
     List<String> statuses = new ArrayList<String>();
     statuses.add(UserClanStatus.LEADER.name());
     statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    List<String> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     
-    Set<Integer> uniqUserIds = new HashSet<Integer>(); 
+    Set<String> uniqUserIds = new HashSet<String>(); 
     if (null != userIds && !userIds.isEmpty()) {
     	uniqUserIds.addAll(userIds);
     }
     
-    int userId = user.getId();
+    String userId = user.getId();
     if (!uniqUserIds.contains(userId)) {
       resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_NOT_AUTHORIZED);
       log.error("user can't boot player. user=" + user +"\t playerToBoot=" + playerToBoot);
       return false;      
     }
-    if (playerToBoot.getClanId() != user.getClanId()) {
+    
+    //TODO: Consider checking UserClanStatus (userStatus > playerToBootStatus)
+    
+    String playerToBootClanId = playerToBoot.getClanId(); 
+    if ( !playerToBootClanId.equals(user.getClanId()) ) {
       resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_BOOTED_NOT_IN_CLAN);
-      log.error("playerToBoot is not in user clan. playerToBoot is in " + playerToBoot.getClanId());
+      log.error(String.format(
+    	  "playerToBoot not in user's clan. playerToBoot is in %s, user's clan %s",
+    	  playerToBootClanId, user.getClanId()));
       return false;
     }
     resBuilder.setStatus(BootPlayerFromClanStatus.SUCCESS);
@@ -162,8 +197,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean writeChangesToDB(User user, User playerToBoot) {
-	  int userId = playerToBoot.getId();
-	  int clanId = playerToBoot.getClanId();
+	  String userId = playerToBoot.getId();
+	  String clanId = playerToBoot.getClanId();
     if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
       log.error("problem with deleting user clan info for playerToBoot with id " + playerToBoot.getId() + " and clan id " + playerToBoot.getClanId()); 
     }

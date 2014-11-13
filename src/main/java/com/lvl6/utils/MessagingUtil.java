@@ -61,24 +61,24 @@ public class MessagingUtil {
 	}
 	
 	
-	public void sendMaintanenceModeMessage(String message, String udid) {
+	public void sendMaintanenceModeMessageUdid(String message, String udid) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}", message, udid);
 		//send admin message
 		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
 		samrp.setMessage(message);
-		samrp.setSenderId(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(-1);
+		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent("");
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.processPreDBResponseEvent(ev, udid);
 	}
 
 	
-	public void sendMaintanenceModeMessage(String message, int playerId) {
+	public void sendMaintanenceModeMessage(String message, String playerId) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}", message, playerId);
 		//send admin message
 		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
 		samrp.setMessage(message);
-		samrp.setSenderId(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(playerId);
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.handleEvent(ev);
@@ -91,8 +91,8 @@ public class MessagingUtil {
 		//send admin message
 		SendAdminMessageResponseProto.Builder samrp = SendAdminMessageResponseProto.newBuilder();
 		samrp.setMessage(message);
-		samrp.setSenderId(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(samrp.getSenderId());
+		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(samrp.getSenderUuid());
 		ev.setSendAdminMessageResponseProto(samrp.build());
 		eventWriter.processGlobalChatResponseEvent(ev);
 		//send regular global chat
@@ -105,10 +105,10 @@ public class MessagingUtil {
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
 		chatProto.setIsAdmin(true);
-		sendChatMessage(senderProto.getMinUserProto().getUserId(), chatProto, 1, timeOfPost.getTime());
+		sendChatMessage(senderProto.getMinUserProto().getUserUuid(), chatProto, 1, timeOfPost.getTime());
 	}
 	
-	protected void sendChatMessage(int senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
+	protected void sendChatMessage(String senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(senderId);
 		ce.setReceivedGroupChatResponseProto(chatProto.build());
 		ce.setTag(tag);

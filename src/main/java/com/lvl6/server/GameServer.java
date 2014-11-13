@@ -95,16 +95,16 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	private Hashtable<EventProtocolRequest, EventController> eventControllers;
 
 	@Resource(name = "playersByPlayerId")
-	Map<Integer, ConnectedPlayer> playersByPlayerId;
+	Map<String, ConnectedPlayer> playersByPlayerId;
 
 	// private Hashtable<SocketChannel, Integer> channelToPlayerId;
 	// private Hashtable<String, SocketChannel> udidToChannel;
 
-	public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+	public Map<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
-	public void setPlayersByPlayerId(Map<Integer, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(Map<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
@@ -174,11 +174,11 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	/**
 	 * pass the clan event on to the EventWriter
 	 */
-	public void writeClanEvent(ResponseEvent e, int clanId) {
+	public void writeClanEvent(ResponseEvent e, String clanId) {
 		eventWriter.handleClanEvent(e, clanId);
 	}
 	
-	public void writeApnsClanEvent (ResponseEvent e, int clanId){
+	public void writeApnsClanEvent (ResponseEvent e, String clanId){
 		apnsWriter.handleClanEvent(e, clanId);
 		eventWriter.handleClanEvent(e, clanId);
 	}
@@ -256,7 +256,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	/**
 	 * fetches the Player for a given playerId
 	 */
-	public ConnectedPlayer getPlayerById(int id) {
+	public ConnectedPlayer getPlayerById(String id) {
 		return playersByPlayerId.get(id);
 	}
 
@@ -435,7 +435,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		}
 	}
 
-	public Set<Integer> getConnectedPlayerIds() {
+	public Set<String> getConnectedPlayerIds() {
 		return playersByPlayerId.keySet();
 	}
 

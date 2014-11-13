@@ -11,7 +11,7 @@ public class RemoveMonsterFromBattleTeamResponseEvent extends NormalResponseEven
 
   private RemoveMonsterFromBattleTeamResponseProto removeMonsterFromBattleTeamResponseProto;
   
-  public RemoveMonsterFromBattleTeamResponseEvent(int playerId){
+  public RemoveMonsterFromBattleTeamResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_REMOVE_MONSTER_FROM_BATTLE_TEAM_EVENT;
   }

@@ -22,7 +22,7 @@ public class InviteFbFriendsForSlotsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       inviteFbFriendsForSlotsRequestProto = InviteFbFriendsForSlotsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = inviteFbFriendsForSlotsRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = inviteFbFriendsForSlotsRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("invite fb friends for slots request exception", e);
     }

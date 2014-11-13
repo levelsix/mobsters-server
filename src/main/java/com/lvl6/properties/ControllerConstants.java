@@ -311,7 +311,8 @@ public class ControllerConstants {
   public static final int STARTUP__LEADERBOARD_MIN_LEVEL = 1;
   public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20; 
   //if development then use user with id = 1
-  public static final int STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? 1 : 1;//Globals.IS_SANDBOX() ? 98437 : 131287;
+  //TODO: GET THE REAL IDS
+  public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? "1" : "1";//Globals.IS_SANDBOX() ? 98437 : 131287;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
   
@@ -350,7 +351,7 @@ public class ControllerConstants {
   public static final int USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER = 100;
   public static final int USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED = 50;
   public static final double USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER = .2;
-  public static final int USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals.IS_SANDBOX() ? 1 : 98394;
+  public static final String USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals.IS_SANDBOX() ? "1" : "1";
   public static final String USER_CREATE__FIRST_WALL_POST_TEXT = 
 	  "Hi! My name's " + (Globals.KABAM_ENABLED() ? "Stevie" : "Andrew") + ", one of the creators of this game. Feel free to message me if you need any help.";
   public static final int USER_CREATE__INITIAL_GLOBAL_CHATS = 10;

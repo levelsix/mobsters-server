@@ -22,7 +22,7 @@ public class PurchaseBoosterPackRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       purchaseBoosterPackRequestProto = PurchaseBoosterPackRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseBoosterPackRequestProto.getSender().getUserId();
+      playerId = purchaseBoosterPackRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("purchase booster pack request exception", e);
     }

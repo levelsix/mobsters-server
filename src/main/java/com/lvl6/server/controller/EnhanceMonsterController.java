@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     /*UserEnhancementProto uep = reqProto.getUep();
     UserMonsterCurrentExpProto result = reqProto.getEnhancingResult();
     int gemsSpent = reqProto.getGemsSpent();
@@ -79,7 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(EnhanceMonsterStatus.FAIL_OTHER); //default
 
-//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
     	/*int previousGems = 0;
 
@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in EnhanceMonsterController processEvent", e);
     	}
     } finally {
-//    	getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    	getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
   

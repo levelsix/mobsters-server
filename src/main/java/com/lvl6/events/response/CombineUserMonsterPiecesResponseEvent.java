@@ -11,7 +11,7 @@ public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent {
 
   private CombineUserMonsterPiecesResponseProto combineMonsterPiecesResponseProto;
   
-  public CombineUserMonsterPiecesResponseEvent(int playerId){
+  public CombineUserMonsterPiecesResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_COMBINE_USER_MONSTER_PIECES_EVENT;
   }

@@ -56,7 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
 		//user monster ids that will be deleted from monster enhancing for user table
 		List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
@@ -67,7 +67,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER); //default
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			List<Long> userMonsterIds = new ArrayList<Long>();
 			if (null != umcep && !userMonsterIdsThatFinished.isEmpty()) {
@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in CollectMonsterEnhancementController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 

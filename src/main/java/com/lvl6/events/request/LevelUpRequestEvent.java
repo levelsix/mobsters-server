@@ -22,7 +22,7 @@ public class LevelUpRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       levelUpRequestProto = LevelUpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = levelUpRequestProto.getSender().getUserId();
+      playerId = levelUpRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("level up request exception", e);
     }

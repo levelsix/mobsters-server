@@ -22,7 +22,7 @@ public class ExpansionWaitCompleteRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       expansionWaitCompleteRequestProto = ExpansionWaitCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = expansionWaitCompleteRequestProto.getSender().getUserId();
+      playerId = expansionWaitCompleteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("expansion wait complete request exception", e);
     }

@@ -67,7 +67,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		//get stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		List<UserAchievementProto> uapList = reqProto.getUapListList();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 
@@ -79,7 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			
@@ -96,7 +96,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				resBuilder.setStatus(AchievementProgressStatus.SUCCESS);
 			}
 
-			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(senderProto.getUserId());
+			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setAchievementProgressResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -104,7 +104,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		} catch (Exception e) {
 			log.error("exception in AchievementProgress processEvent", e);
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

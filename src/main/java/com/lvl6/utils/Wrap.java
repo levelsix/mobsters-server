@@ -36,7 +36,7 @@ public abstract class Wrap {
 		}
 	}
 
-	public void handleClanEvent(ResponseEvent event, int clanId) {
+	public void handleClanEvent(ResponseEvent event, String clanId) {
 		try {
 			processClanResponseEvent(event, clanId);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public abstract class Wrap {
 
 	protected abstract void processEvent(GameEvent event) throws Exception;
 
-	public void processClanResponseEvent(ResponseEvent event, int clanId) {
+	public void processClanResponseEvent(ResponseEvent event, String clanId) {
 		
 	}
 }

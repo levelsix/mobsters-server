@@ -52,7 +52,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     
     //all positive numbers, server will change to negative
     int cashSpent = reqProto.getCashSpent();
@@ -68,7 +68,7 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousGems = 0;
@@ -128,7 +128,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

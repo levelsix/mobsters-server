@@ -58,7 +58,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     int userStructId = reqProto.getUserStructId();
     //userstruct's lastRetrieved will start with this date
     Timestamp timeOfSpeedup = new Timestamp(reqProto.getTimeOfSpeedup());
@@ -68,9 +68,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       log.info("user=" + user);
       int previousGems = 0;
       StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
@@ -98,7 +98,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
       }
       
-      FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
+      FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	log.error("exception2 in FinishNormStructWaittimeWithDiamondsController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
     }
   }
 

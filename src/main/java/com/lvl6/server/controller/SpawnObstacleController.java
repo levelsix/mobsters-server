@@ -64,7 +64,7 @@ public class SpawnObstacleController extends EventController{
 		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		List<MinimumObstacleProto> mopList = reqProto.getProspectiveObstaclesList();
 		
@@ -72,9 +72,9 @@ public class SpawnObstacleController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			
 			boolean legitComplete = checkLegit(resBuilder, userId, user, mopList);
 
@@ -92,7 +92,7 @@ public class SpawnObstacleController extends EventController{
 				}
 			}
 			
-			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(senderProto.getUserId());
+			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnObstacleResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -120,7 +120,7 @@ public class SpawnObstacleController extends EventController{
       	log.error("exception2 in SpawnObstacleController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

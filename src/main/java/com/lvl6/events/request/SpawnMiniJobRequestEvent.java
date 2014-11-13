@@ -22,7 +22,7 @@ public class SpawnMiniJobRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       spawnMiniJobRequestProto = SpawnMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = spawnMiniJobRequestProto.getSender().getUserId();
+      playerId = spawnMiniJobRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("spawn obstacle request exception", e);
     }

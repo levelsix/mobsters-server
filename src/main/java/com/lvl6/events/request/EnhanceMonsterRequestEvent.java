@@ -22,7 +22,7 @@ public class EnhanceMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
     	enhanceMonsterRequestProto = EnhanceMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = enhanceMonsterRequestProto.getSender().getUserId();
+      playerId = enhanceMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("enhancement wait time complete request exception", e);
     }

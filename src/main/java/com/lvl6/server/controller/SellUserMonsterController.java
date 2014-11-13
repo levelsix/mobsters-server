@@ -67,7 +67,7 @@ public class SellUserMonsterController extends EventController {
 		// get values sent from the client (the request proto)
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
 		Map<Long, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
@@ -84,7 +84,7 @@ public class SellUserMonsterController extends EventController {
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			int previousCash = 0;
 
@@ -144,7 +144,7 @@ public class SellUserMonsterController extends EventController {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass()
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass()
 					.getSimpleName());
 		}
 	}

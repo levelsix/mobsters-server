@@ -22,7 +22,7 @@ public class RetrieveTournamentRankingsRequestEvent extends RequestEvent{
   public void read(ByteBuffer buff) {
     try {
       retrieveTournamentRankingsRequestProto = RetrieveTournamentRankingsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveTournamentRankingsRequestProto.getSender().getUserId();
+      playerId = retrieveTournamentRankingsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("retrieve tournament rankings request exception", e);
     }

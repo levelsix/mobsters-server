@@ -55,7 +55,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent)event).getLeaveClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
 
     LeaveClanResponseProto.Builder resBuilder = LeaveClanResponseProto.newBuilder();
     resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
@@ -72,10 +72,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     }/* else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
       List<Integer> clanOwnerIdList = new ArrayList<Integer>();
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	}/* else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}*/
     }
   }

@@ -11,7 +11,7 @@ public class AwardClanRaidStageRewardResponseEvent extends NormalResponseEvent {
 
   private AwardClanRaidStageRewardResponseProto awardClanRaidStageRewardResponseProto;
   
-  public AwardClanRaidStageRewardResponseEvent(int playerId){
+  public AwardClanRaidStageRewardResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_AWARD_CLAN_RAID_STAGE_REWARD_EVENT;
   }

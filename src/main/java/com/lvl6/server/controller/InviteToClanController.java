@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int inviterId = senderProto.getUserId();
+		int inviterId = senderProto.getUserUuid();
 		int prospectiveMember = reqProto.getProspectiveMember();
 		Date inviteTime = new Date(reqProto.getClientTime());
 
@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		//    if (0 != clanId) {
 		//    	lockedClan = getLocker().lockClan(clanId);
 		//    }/* else {
-		//    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		//    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		//    }*/
 		try {
 
@@ -107,7 +107,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			//    	if (0 != clanId && lockedClan) {
 			//    		getLocker().unlockClan(clanId);
 			//    	}/* else {
-			//    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+			//    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 			//    	}*/
 		}
 	}

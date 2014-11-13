@@ -5,23 +5,22 @@ import java.util.Date;
 
 public class TaskForUserCompleted implements Serializable {
 
-	private static final long serialVersionUID = 1056343725813049903L;
-	private int userId;
+	private String userId;
 	private int taskId;
 	private Date timeOfEntry;
 	
-	public TaskForUserCompleted(int userId, int taskId, Date timeOfEntry) {
+	public TaskForUserCompleted(String userId, int taskId, Date timeOfEntry) {
 		super();
 		this.userId = userId;
 		this.taskId = taskId;
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

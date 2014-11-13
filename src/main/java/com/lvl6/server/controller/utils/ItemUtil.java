@@ -28,13 +28,13 @@ public class ItemUtil {
 		for (UserItemUsageProto uiup : itemsUsedProtos) {
 			ItemForUserUsage ifuu = new ItemForUserUsage();
 			
-			ifuu.setUserId(uiup.getUserId());
+			ifuu.setUserId(uiup.getUserUuid());
 			ifuu.setItemId(uiup.getItemId());
 			
 			Date timeOfEntry = new Date(uiup.getTimeOfEntry());
 			ifuu.setTimeOfEntry(timeOfEntry);
 			
-			ifuu.setUserDataId(uiup.getUserDataId());
+			ifuu.setUserDataId(uiup.getUserDataUuid());
 			
 			String gameActionType = uiup.getActionType().name();
 			ifuu.setActionType(gameActionType);
@@ -54,7 +54,7 @@ public class ItemUtil {
 		for (UserItemProto uip : userItemsProtos) {
 			ItemForUser ifu = new ItemForUser();
 			
-			ifu.setUserId(uip.getUserId());
+			ifu.setUserId(uip.getUserUuid());
 			ifu.setItemId(uip.getItemId());
 			ifu.setQuantity(uip.getQuantity());
 			

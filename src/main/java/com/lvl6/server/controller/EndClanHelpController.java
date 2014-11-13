@@ -50,7 +50,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     
     MinimumUserProto senderProto = reqProto.getSender();
     List<Long> clanHelpIdList = reqProto.getClanHelpIdsList();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
 
     EndClanHelpResponseProto.Builder resBuilder = EndClanHelpResponseProto.newBuilder();
     resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
@@ -103,7 +103,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}
     }*/
   }

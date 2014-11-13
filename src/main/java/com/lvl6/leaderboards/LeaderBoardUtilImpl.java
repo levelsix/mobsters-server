@@ -349,36 +349,37 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 
 	@Override
 	public void updateLeaderboardForUser(User user, PvpLeagueForUser plfu) {
-		if (user != null) {
-			long startTime = new Date().getTime();
-			try {
-				int userId = user.getId();
-				//so if null plfu this means to access hazelcast to get it
-				//since maybe not so important to hit db to get it
-				if (null == plfu) {
-					plfu = new PvpLeagueForUser(getHazelcastPvpUtil()
-							.getPvpUser(userId));
-				}
-					
-				setBattlesWonForUser(user.getId(), (double) plfu.getBattlesWon());
-
-				if (plfu.getBattlesWon() + plfu.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
-					setBattlesWonOverTotalBattlesRatioForUser(user.getId(),
-						 ((double) plfu.getBattlesWon() /
-								 (plfu .getBattlesLost() + plfu.getBattlesWon())));
-				} else {
-					setBattlesWonOverTotalBattlesRatioForUser(user.getId(), 0.0);
-				}
-				setTotalCoinValueForUser(user.getId(), (double) user.getCash());
-				setExperienceForUser(user.getId(),
-						(double) user.getExperience());
-
-			} catch (Exception e) {
-				log.error("Error updating leaderboard for user: " + user, e);
-			}
-			long endTime = new Date().getTime();
-			log.info("Update Leaderboard for user {} took {}ms", user.getId(), endTime-startTime);
-		}
+		//TODO:CONSIDER FIXING
+//		if (user != null) {
+//			long startTime = new Date().getTime();
+//			try {
+//				int userId = user.getId();
+//				//so if null plfu this means to access hazelcast to get it
+//				//since maybe not so important to hit db to get it
+//				if (null == plfu) {
+//					plfu = new PvpLeagueForUser(getHazelcastPvpUtil()
+//							.getPvpUser(userId));
+//				}
+//					
+//				setBattlesWonForUser(user.getId(), (double) plfu.getBattlesWon());
+//
+//				if (plfu.getBattlesWon() + plfu.getBattlesLost() > ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION) {
+//					setBattlesWonOverTotalBattlesRatioForUser(user.getId(),
+//						 ((double) plfu.getBattlesWon() /
+//								 (plfu .getBattlesLost() + plfu.getBattlesWon())));
+//				} else {
+//					setBattlesWonOverTotalBattlesRatioForUser(user.getId(), 0.0);
+//				}
+//				setTotalCoinValueForUser(user.getId(), (double) user.getCash());
+//				setExperienceForUser(user.getId(),
+//						(double) user.getExperience());
+//
+//			} catch (Exception e) {
+//				log.error("Error updating leaderboard for user: " + user, e);
+//			}
+//			long endTime = new Date().getTime();
+//			log.info("Update Leaderboard for user {} took {}ms", user.getId(), endTime-startTime);
+//		}
 	}
 
 	@Override

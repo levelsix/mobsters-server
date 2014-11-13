@@ -57,7 +57,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     List<Integer> userStructIds = reqProto.getUserStructIdList();
     userStructIds = new ArrayList<Integer>(userStructIds);
     Timestamp clientTime = new Timestamp(reqProto.getCurTime());
@@ -74,7 +74,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
       boolean legitWaitComplete = checkLegitWaitComplete(resBuilder, userStructs,
-      		userStructIds, senderProto.getUserId(), clientTime, 
+      		userStructIds, senderProto.getUserUuid(), clientTime, 
       		newRetrievedTimes);
 
 
@@ -94,7 +94,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	}
       }
       
-      NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(senderProto.getUserId());
+      NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);

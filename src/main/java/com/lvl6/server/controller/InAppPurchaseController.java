@@ -103,9 +103,9 @@ public class InAppPurchaseController extends EventController {
     resBuilder.setReceipt(reqProto.getReceipt());
 
     // Lock this player's ID
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       
       JSONObject response;
       JSONObject jsonReceipt = new JSONObject();
@@ -216,7 +216,7 @@ public class InAppPurchaseController extends EventController {
 
       InAppPurchaseResponseProto resProto = resBuilder.build();
 
-      InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserId());
+      InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setInAppPurchaseResponseProto(resProto);
       server.writeEvent(resEvent);
@@ -244,7 +244,7 @@ public class InAppPurchaseController extends EventController {
       log.error("exception in InAppPurchaseController processEvent", e);
     } finally {
       // Unlock this player
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 

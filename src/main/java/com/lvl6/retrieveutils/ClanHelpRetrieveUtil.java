@@ -22,15 +22,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanHelp;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component 
 public class ClanHelpRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(ClanHelpRetrieveUtil.class);
 	
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_HELP; 
+	private static final ClanHelpForClientMapper rowMapper = new ClanHelpForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -45,7 +46,7 @@ public class ClanHelpRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public List<ClanHelp> getClanHelpsForIds(List<Long> clanHelpIds)
+	public List<ClanHelp> getClanHelpsForIds(List<String> clanHelpIds)
 	{
 		List<ClanHelp> clanHelps = null;
 		try {
@@ -57,11 +58,10 @@ public class ClanHelpRetrieveUtil {
 			
 			String conditionDelimiter = getQueryConstructionUtil().getOr();
 
-			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryInConditions(columnsToSelect, TABLE_NAME,
@@ -70,7 +70,7 @@ public class ClanHelpRetrieveUtil {
 				"getUserIdToClanHelpForClanId() query=%s", query));
 			
 			clanHelps = this.jdbcTemplate
-					.query(query, new ClanHelpForClientMapper());
+					.query(query, values.toArray(), rowMapper);
 			
 		} catch (Exception e) {
 			log.error(String.format(
@@ -83,33 +83,32 @@ public class ClanHelpRetrieveUtil {
 		return clanHelps;
 	}
 	
-	public Map<Integer, List<ClanHelp>> getUserIdToClanHelp(
-		int clanId, int userId )
+	public Map<String, List<ClanHelp>> getUserIdToClanHelp(
+		String clanId, String userId )
 	{
-		Map<Integer, List<ClanHelp>> userIdToClanHelps = null;
+		Map<String, List<ClanHelp>> userIdToClanHelps = null;
 		try {
 			List<String> columnsToSelected = ClanHelpForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			if (userId > 0) {
+			if (null != userId && !userId.isEmpty()) {
 				equalityConditions.put(DBConstants.CLAN_HELP__USER_ID, userId);
 			}
-			if (clanId > 0) {
+			if (null != clanId && !clanId.isEmpty()) {
 				equalityConditions.put(DBConstants.CLAN_HELP__CLAN_ID, clanId);
 			}
 			
 			if (equalityConditions.isEmpty()) {
-				return new HashMap<Integer, List<ClanHelp>>();
+				return new HashMap<String, List<ClanHelp>>();
 			}
 			
 			String eqDelim = getQueryConstructionUtil().getOr();
 
-			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityConditions(
@@ -118,12 +117,12 @@ public class ClanHelpRetrieveUtil {
 			log.info(String.format(
 				"getUserIdToClanHelpForClanId() query=%s", query));
 			List<ClanHelp> chList = this.jdbcTemplate
-					.query(query, new ClanHelpForClientMapper());
+					.query(query, values.toArray(), new ClanHelpForClientMapper());
 			
 			
-			userIdToClanHelps = new HashMap<Integer, List<ClanHelp>>();
+			userIdToClanHelps = new HashMap<String, List<ClanHelp>>();
 			for (ClanHelp ch : chList) {
-				int userId2 = ch.getUserId();
+				String userId2 = ch.getUserId();
 				
 				//base case: initializing list
 				if (!userIdToClanHelps.containsKey(userId2)) {
@@ -138,7 +137,7 @@ public class ClanHelpRetrieveUtil {
 				"could not retrieve clan help for clanId=%s", clanId),
 				e);
 			userIdToClanHelps =
-					new HashMap<Integer, List<ClanHelp>>();
+					new HashMap<String, List<ClanHelp>>();
 		}
 		
 		return userIdToClanHelps;
@@ -168,9 +167,9 @@ public class ClanHelpRetrieveUtil {
 
 		public ClanHelp mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ClanHelp ch = new ClanHelp();
-			ch.setId(rs.getInt(DBConstants.CLAN_HELP__ID));
-			ch.setUserId(rs.getInt(DBConstants.CLAN_HELP__USER_ID));
-			ch.setUserDataId(rs.getLong(DBConstants.CLAN_HELP__USER_DATA_ID));
+			ch.setId(rs.getString(DBConstants.CLAN_HELP__ID));
+			ch.setUserId(rs.getString(DBConstants.CLAN_HELP__USER_ID));
+			ch.setUserDataId(rs.getString(DBConstants.CLAN_HELP__USER_DATA_ID));
 
 			String helpType = rs.getString(DBConstants.CLAN_HELP__HELP_TYPE);
 			if (null != helpType) {
@@ -184,15 +183,15 @@ public class ClanHelpRetrieveUtil {
 		    }
 			ch.setHelpType(helpType);
 			
-			ch.setClanId(rs.getInt(DBConstants.CLAN_HELP__CLAN_ID));
+			ch.setClanId(rs.getString(DBConstants.CLAN_HELP__CLAN_ID));
 			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_HELP__TIME_OF_ENTRY);
 			ch.setTimeOfEntry(new Date(ts.getTime()));
 			ch.setMaxHelpers(rs.getInt(DBConstants.CLAN_HELP__MAX_HELPERS));
 			
 			String helperIds = rs.getString(DBConstants.CLAN_HELP__HELPERS); 
-			List<Integer> helpers = new ArrayList<Integer>();
+			List<String> helpers = null;
 			if (null != helperIds) {
-				MiscMethods.explodeIntoInts(helperIds, ",", helpers);
+				helpers = StringUtils.explodeIntoStrings(helperIds, ",");
 			}
 			ch.setHelpers(helpers);
 			

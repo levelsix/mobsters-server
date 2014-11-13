@@ -212,6 +212,7 @@ public class DBConstants {
 	public static final String CEPFU_RAID_STAGE_HISTORY__CRS_START_TIME = "crs_start_time";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CLAN_ID = "clan_id";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+	public static final String CEPFU_RAID_STAGE_HISTORY__CR_ID = "cr_id";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CRS_ID = "crs_id";
 	public static final String CEPFU_RAID_STAGE_HISTORY__CRS_DMG_DONE = "crs_dmg_done";
 	public static final String CEPFU_RAID_STAGE_HISTORY__STAGE_HEALTH = "stage_health";
@@ -238,6 +239,7 @@ public class DBConstants {
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__STATIC_DATA_ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__QUANTITY = "quantity";
 	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+	public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__TIME_REDEEMED = "time_redeemed";
 
 	/*CLAN FOR USER*/
 	public static final String CLAN_FOR_USER__USER_ID = "user_id";

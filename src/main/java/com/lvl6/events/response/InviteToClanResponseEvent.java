@@ -11,7 +11,7 @@ public class InviteToClanResponseEvent extends NormalResponseEvent {
 
   private InviteToClanResponseProto inviteToClanResponseProto;
   
-  public InviteToClanResponseEvent(int playerId){
+  public InviteToClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_INVITE_TO_CLAN_EVENT;
   }

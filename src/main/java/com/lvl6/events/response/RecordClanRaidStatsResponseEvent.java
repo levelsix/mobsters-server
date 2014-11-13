@@ -11,7 +11,7 @@ public class RecordClanRaidStatsResponseEvent extends NormalResponseEvent {
 
   private RecordClanRaidStatsResponseProto recordClanRaidStatsResponseProto;
   
-  public RecordClanRaidStatsResponseEvent(int playerId){
+  public RecordClanRaidStatsResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_RECORD_CLAN_RAID_STATS_EVENT;
   }

@@ -33,7 +33,7 @@ public class PvpUser implements Serializable {
 	}
 	public PvpUser(PvpLeagueForUser plfu) {
 		super();
-		String userId = Integer.toString(plfu.getUserId());
+		String userId = plfu.getUserId();
 		this.userId = userId;
 		this.pvpLeagueId = plfu.getPvpLeagueId();
 		this.rank = plfu.getRank();

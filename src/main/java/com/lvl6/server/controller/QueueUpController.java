@@ -95,7 +95,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info("reqProto=" + reqProto); 
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
-		int attackerId = attackerProto.getUserId();
+		int attackerId = attackerProto.getUserUuid();
 		//TODO: Maybe delete this since going to use db value anyway
 //		int attackerElo = reqProto.getAttackerElo();
 		

@@ -757,7 +757,7 @@ public class UpdateUtils implements UpdateUtil {
 			Map <String, Object> aRow = new HashMap<String, Object>();
 			
 			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userId);
-			long monsterForUserId = mhfu.getMonsterForUserId();
+			String monsterForUserId = mhfu.getMonsterForUserId();
 			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, monsterForUserId);
 			
 			Date d = mhfu.getExpectedStartTime();
@@ -912,10 +912,10 @@ public class UpdateUtils implements UpdateUtil {
 				List<UserFacebookInviteForSlot> redeemedInvites) {
 			String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 			int amount = redeemedInvites.size();
-			List<Integer> ids = new ArrayList<Integer>();
+			List<String> ids = new ArrayList<String>();
 			
 			for(UserFacebookInviteForSlot invite : redeemedInvites) {
-				int id = invite.getId();
+				String id = invite.getId();
 				ids.add(id);
 			}
 			List<String> questions = Collections.nCopies(amount, "?");

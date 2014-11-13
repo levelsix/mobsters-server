@@ -11,7 +11,7 @@ public class EndPvpBattleResponseEvent extends NormalResponseEvent {
 
   private EndPvpBattleResponseProto endPvpBattleResponseProto;
   
-  public EndPvpBattleResponseEvent(int playerId){
+  public EndPvpBattleResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_END_PVP_BATTLE_EVENT;
   }

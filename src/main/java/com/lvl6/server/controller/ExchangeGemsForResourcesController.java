@@ -66,9 +66,9 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
     
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
       boolean legit = checkLegit(resBuilder, user, numGems, resourceType, numGems);
       
@@ -88,7 +88,7 @@ import com.lvl6.utils.RetrieveUtils;
 
       ExchangeGemsForResourcesResponseProto resProto = resBuilder.build();
       ExchangeGemsForResourcesResponseEvent resEvent =
-      		new ExchangeGemsForResourcesResponseEvent(senderProto.getUserId());
+      		new ExchangeGemsForResourcesResponseEvent(senderProto.getUserUuid());
       resEvent.setExchangeGemsForResourcesResponseProto(resProto);
       resEvent.setTag(event.getTag());
       server.writeEvent(resEvent);
@@ -106,7 +106,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in ExchangeGemsForResourcesController processEvent", e);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

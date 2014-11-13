@@ -70,7 +70,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		
 		UserMonsterEvolutionProto uep = reqProto.getEvolution();
 		int gemsSpent = reqProto.getGemsSpent();
@@ -93,7 +93,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), getClass().getSimpleName());
 		try {
 			int previousOil = 0;
 			int previousGems = 0;
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				resBuilder.setStatus(EvolveMonsterStatus.SUCCESS);
 			}
 
-			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserId());
+			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolveMonsterResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -157,7 +157,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(senderProto.getUserUuid(), getClass().getSimpleName());   
 		}
 	}
 

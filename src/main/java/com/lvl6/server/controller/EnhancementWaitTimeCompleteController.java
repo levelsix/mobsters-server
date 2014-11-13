@@ -60,7 +60,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		boolean isSpeedUp = reqProto.getIsSpeedup();
 		int gemsForSpeedUp = reqProto.getGemsForSpeedup();
 //		UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
@@ -75,7 +75,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER); //default
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			int previousGems = 0;
 //			List<Long> userMonsterIds = new ArrayList<Long>();
@@ -137,7 +137,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in EnhancementWaitTimeCompleteController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 

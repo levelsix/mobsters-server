@@ -6,16 +6,14 @@ import java.util.List;
 
 public class ClanHelp implements Serializable {
 	
-	private static final long serialVersionUID = 2752721561844734596L;
-	
-	private long id;
-	private int userId;
-	private long userDataId;
+	private String id;
+	private String userId;
+	private String userDataId;
 	private String helpType;
-	private int clanId;
+	private String clanId;
 	private Date timeOfEntry;
 	private int maxHelpers; 
-	private List<Integer> helpers;
+	private List<String> helpers;
 	private boolean open;
 	private int staticDataId;
 	
@@ -24,14 +22,14 @@ public class ClanHelp implements Serializable {
 	}
 
 	public ClanHelp(
-		long id,
-		int userId,
-		long userDataId,
+		String id,
+		String userId,
+		String userDataId,
 		String helpType,
-		int clanId,
+		String clanId,
 		Date timeOfEntry,
 		int maxHelpers,
-		List<Integer> helpers,
+		List<String> helpers,
 		boolean open,
 		int staticDataId )
 	{
@@ -48,33 +46,32 @@ public class ClanHelp implements Serializable {
 		this.staticDataId = staticDataId;
 	}
 
-
-	public long getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId( long id )
+	public void setId( String id )
 	{
 		this.id = id;
 	}
 
-	public int getUserId()
+	public String getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId( int userId )
+	public void setUserId( String userId )
 	{
 		this.userId = userId;
 	}
 
-	public long getUserDataId()
+	public String getUserDataId()
 	{
 		return userDataId;
 	}
 
-	public void setUserDataId( long userDataId )
+	public void setUserDataId( String userDataId )
 	{
 		this.userDataId = userDataId;
 	}
@@ -89,12 +86,12 @@ public class ClanHelp implements Serializable {
 		this.helpType = helpType;
 	}
 
-	public int getClanId()
+	public String getClanId()
 	{
 		return clanId;
 	}
 
-	public void setClanId( int clanId )
+	public void setClanId( String clanId )
 	{
 		this.clanId = clanId;
 	}
@@ -119,12 +116,12 @@ public class ClanHelp implements Serializable {
 		this.maxHelpers = maxHelpers;
 	}
 
-	public List<Integer> getHelpers()
+	public List<String> getHelpers()
 	{
 		return helpers;
 	}
 
-	public void setHelpers( List<Integer> helpers )
+	public void setHelpers( List<String> helpers )
 	{
 		this.helpers = helpers;
 	}

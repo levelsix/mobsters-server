@@ -9310,22 +9310,32 @@ public final class StructureProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userStructId = 1;</code>
+     * <code>optional string userStructUuid = 1;</code>
      */
-    boolean hasUserStructId();
+    boolean hasUserStructUuid();
     /**
-     * <code>optional int32 userStructId = 1;</code>
+     * <code>optional string userStructUuid = 1;</code>
      */
-    int getUserStructId();
+    java.lang.String getUserStructUuid();
+    /**
+     * <code>optional string userStructUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserStructUuidBytes();
 
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 structId = 3;</code>
@@ -9446,14 +9456,16 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userStructId_ = input.readInt32();
+              userStructUuid_ = bs;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -9545,34 +9557,88 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    public static final int USERSTRUCTID_FIELD_NUMBER = 1;
-    private int userStructId_;
+    public static final int USERSTRUCTUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userStructUuid_;
     /**
-     * <code>optional int32 userStructId = 1;</code>
+     * <code>optional string userStructUuid = 1;</code>
      */
-    public boolean hasUserStructId() {
+    public boolean hasUserStructUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userStructId = 1;</code>
+     * <code>optional string userStructUuid = 1;</code>
      */
-    public int getUserStructId() {
-      return userStructId_;
+    public java.lang.String getUserStructUuid() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userStructUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserStructUuidBytes() {
+      java.lang.Object ref = userStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERID_FIELD_NUMBER = 2;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int STRUCTID_FIELD_NUMBER = 3;
@@ -9687,8 +9753,8 @@ public final class StructureProto {
     }
 
     private void initFields() {
-      userStructId_ = 0;
-      userId_ = 0;
+      userStructUuid_ = "";
+      userUuid_ = "";
       structId_ = 0;
       lastRetrieved_ = 0L;
       purchaseTime_ = 0L;
@@ -9711,10 +9777,10 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userStructId_);
+        output.writeBytes(1, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userId_);
+        output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, structId_);
@@ -9748,11 +9814,11 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userStructId_);
+          .computeBytesSize(1, getUserStructUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userId_);
+          .computeBytesSize(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9900,9 +9966,9 @@ public final class StructureProto {
 
       public Builder clear() {
         super.clear();
-        userStructId_ = 0;
+        userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         structId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9953,11 +10019,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userStructId_ = userStructId_;
+        result.userStructUuid_ = userStructUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -10006,11 +10072,15 @@ public final class StructureProto {
 
       public Builder mergeFrom(com.lvl6.proto.StructureProto.FullUserStructureProto other) {
         if (other == com.lvl6.proto.StructureProto.FullUserStructureProto.getDefaultInstance()) return this;
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
+        if (other.hasUserStructUuid()) {
+          bitField0_ |= 0x00000001;
+          userStructUuid_ = other.userStructUuid_;
+          onChanged();
         }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasStructId()) {
           setStructId(other.getStructId());
@@ -10060,66 +10130,154 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      private int userStructId_ ;
+      private java.lang.Object userStructUuid_ = "";
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public boolean hasUserStructId() {
+      public boolean hasUserStructUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public int getUserStructId() {
-        return userStructId_;
+      public java.lang.String getUserStructUuid() {
+        java.lang.Object ref = userStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000001;
-        userStructId_ = value;
+      public com.google.protobuf.ByteString
+          getUserStructUuidBytes() {
+        java.lang.Object ref = userStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userStructUuid = 1;</code>
+       */
+      public Builder setUserStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userStructId = 1;</code>
+       * <code>optional string userStructUuid = 1;</code>
        */
-      public Builder clearUserStructId() {
+      public Builder clearUserStructUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = 0;
+        userStructUuid_ = getDefaultInstance().getUserStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userStructUuid = 1;</code>
+       */
+      public Builder setUserStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userStructUuid_ = value;
         onChanged();
         return this;
       }
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000002;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -13963,22 +14121,32 @@ public final class StructureProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userObstacleId = 1;</code>
+     * <code>optional string userObstacleUuid = 1;</code>
      */
-    boolean hasUserObstacleId();
+    boolean hasUserObstacleUuid();
     /**
-     * <code>optional int32 userObstacleId = 1;</code>
+     * <code>optional string userObstacleUuid = 1;</code>
      */
-    int getUserObstacleId();
+    java.lang.String getUserObstacleUuid();
+    /**
+     * <code>optional string userObstacleUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserObstacleUuidBytes();
 
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 obstacleId = 3;</code>
@@ -14072,14 +14240,16 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userObstacleId_ = input.readInt32();
+              userObstacleUuid_ = bs;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -14156,34 +14326,88 @@ public final class StructureProto {
     }
 
     private int bitField0_;
-    public static final int USEROBSTACLEID_FIELD_NUMBER = 1;
-    private int userObstacleId_;
+    public static final int USEROBSTACLEUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userObstacleUuid_;
     /**
-     * <code>optional int32 userObstacleId = 1;</code>
+     * <code>optional string userObstacleUuid = 1;</code>
      */
-    public boolean hasUserObstacleId() {
+    public boolean hasUserObstacleUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userObstacleId = 1;</code>
+     * <code>optional string userObstacleUuid = 1;</code>
      */
-    public int getUserObstacleId() {
-      return userObstacleId_;
+    public java.lang.String getUserObstacleUuid() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userObstacleUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userObstacleUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserObstacleUuidBytes() {
+      java.lang.Object ref = userObstacleUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userObstacleUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERID_FIELD_NUMBER = 2;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int OBSTACLEID_FIELD_NUMBER = 3;
@@ -14253,8 +14477,8 @@ public final class StructureProto {
     }
 
     private void initFields() {
-      userObstacleId_ = 0;
-      userId_ = 0;
+      userObstacleUuid_ = "";
+      userUuid_ = "";
       obstacleId_ = 0;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       orientation_ = com.lvl6.proto.StructureProto.StructOrientation.NO_ORIENTATION;
@@ -14274,10 +14498,10 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userObstacleId_);
+        output.writeBytes(1, getUserObstacleUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userId_);
+        output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, obstacleId_);
@@ -14302,11 +14526,11 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userObstacleId_);
+          .computeBytesSize(1, getUserObstacleUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userId_);
+          .computeBytesSize(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -14442,9 +14666,9 @@ public final class StructureProto {
 
       public Builder clear() {
         super.clear();
-        userObstacleId_ = 0;
+        userObstacleUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         obstacleId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -14489,11 +14713,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userObstacleId_ = userObstacleId_;
+        result.userObstacleUuid_ = userObstacleUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -14530,11 +14754,15 @@ public final class StructureProto {
 
       public Builder mergeFrom(com.lvl6.proto.StructureProto.UserObstacleProto other) {
         if (other == com.lvl6.proto.StructureProto.UserObstacleProto.getDefaultInstance()) return this;
-        if (other.hasUserObstacleId()) {
-          setUserObstacleId(other.getUserObstacleId());
+        if (other.hasUserObstacleUuid()) {
+          bitField0_ |= 0x00000001;
+          userObstacleUuid_ = other.userObstacleUuid_;
+          onChanged();
         }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasObstacleId()) {
           setObstacleId(other.getObstacleId());
@@ -14575,66 +14803,154 @@ public final class StructureProto {
       }
       private int bitField0_;
 
-      private int userObstacleId_ ;
+      private java.lang.Object userObstacleUuid_ = "";
       /**
-       * <code>optional int32 userObstacleId = 1;</code>
+       * <code>optional string userObstacleUuid = 1;</code>
        */
-      public boolean hasUserObstacleId() {
+      public boolean hasUserObstacleUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userObstacleId = 1;</code>
+       * <code>optional string userObstacleUuid = 1;</code>
        */
-      public int getUserObstacleId() {
-        return userObstacleId_;
+      public java.lang.String getUserObstacleUuid() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userObstacleUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userObstacleId = 1;</code>
+       * <code>optional string userObstacleUuid = 1;</code>
        */
-      public Builder setUserObstacleId(int value) {
-        bitField0_ |= 0x00000001;
-        userObstacleId_ = value;
+      public com.google.protobuf.ByteString
+          getUserObstacleUuidBytes() {
+        java.lang.Object ref = userObstacleUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userObstacleUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userObstacleUuid = 1;</code>
+       */
+      public Builder setUserObstacleUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userObstacleId = 1;</code>
+       * <code>optional string userObstacleUuid = 1;</code>
        */
-      public Builder clearUserObstacleId() {
+      public Builder clearUserObstacleUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userObstacleId_ = 0;
+        userObstacleUuid_ = getDefaultInstance().getUserObstacleUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userObstacleUuid = 1;</code>
+       */
+      public Builder setUserObstacleUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userObstacleUuid_ = value;
         onChanged();
         return this;
       }
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000002;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -16857,49 +17173,49 @@ public final class StructureProto {
       "mbers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nst" +
       "ructInfo\030\001 \001(\0132\".com.lvl6.proto.Structur" +
       "eInfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n" +
-      "\031hoursBetweenJobGeneration\030\003 \001(\005\"\232\002\n\026Ful" +
-      "lUserStructureProto\022\024\n\014userStructId\030\001 \001(" +
-      "\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rl" +
-      "astRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003" +
-      "\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(" +
-      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
-      "ientation\030\010 \001(\0162!.com.lvl6.proto.StructO",
-      "rientation\022\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n" +
-      "\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\" +
-      "\n\023TutorialStructProto\022\020\n\010structId\030\001 \001(\005\022" +
-      "3\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto.Coo" +
-      "rdinateProto\"\342\002\n\rObstacleProto\022\022\n\nobstac" +
-      "leId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalCostT" +
-      "ype\030\003 \001(\0162\034.com.lvl6.proto.ResourceType\022" +
-      "\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001(\005\022\r" +
-      "\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007imgName" +
-      "\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001(\002\022\023",
-      "\n\013description\030\n \001(\t\022\026\n\016chanceToAppear\030\013 " +
-      "\001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadowVert" +
-      "icalOffset\030\r \001(\002\022\037\n\027shadowHorizontalOfff" +
-      "set\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022\n\nob" +
-      "stacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
+      "\031hoursBetweenJobGeneration\030\003 \001(\005\"\236\002\n\026Ful" +
+      "lUserStructureProto\022\026\n\016userStructUuid\030\001 " +
+      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022" +
+      "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005" +
+      " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030" +
+      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
+      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str",
+      "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
+      "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
+      "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
+      "\001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.proto" +
+      ".CoordinateProto\"\342\002\n\rObstacleProto\022\022\n\nob" +
+      "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
+      "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT" +
+      "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001" +
+      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img" +
+      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001",
+      "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
+      "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
+      "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
+      "Offfset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProto\022\022" +
+      "\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037" +
+      ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
+      "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie" +
+      "ntation\"\333\001\n\021UserObstacleProto\022\030\n\020userObs" +
+      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs" +
+      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com",
       ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
       "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
-      "ion\"\327\001\n\021UserObstacleProto\022\026\n\016userObstacl" +
-      "eId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobstacleId\030" +
-      "\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com.lvl6.pr",
-      "oto.CoordinateProto\0226\n\013orientation\030\005 \001(\016" +
-      "2!.com.lvl6.proto.StructOrientation\022\030\n\020r" +
-      "emovalStartTime\030\006 \001(\003\"\224\001\n\017EvoChamberProt" +
-      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
-      "tructureInfoProto\0220\n\017qualityUnlocked\030\002 \001" +
-      "(\0162\027.com.lvl6.proto.Quality\022\027\n\017evoTierUn" +
-      "locked\030\003 \001(\005\"`\n\017TeamCenterProto\0226\n\nstruc" +
-      "tInfo\030\001 \001(\0132\".com.lvl6.proto.StructureIn" +
-      "foProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k\n\016ClanHo" +
-      "useProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.",
-      "proto.StructureInfoProto\022!\n\031maxHelpersPe" +
-      "rSolicitation\030\002 \001(\005*I\n\014ResourceType\022\017\n\013N" +
-      "O_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020" +
-      "\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientation\022\022\n\016N" +
-      "O_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSIT" +
-      "ION_2\020\002B\020B\016StructureProto"
+      "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\224\001\n\017EvoCha" +
+      "mberProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6" +
+      ".proto.StructureInfoProto\0220\n\017qualityUnlo" +
+      "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality\022\027\n\017e" +
+      "voTierUnlocked\030\003 \001(\005\"`\n\017TeamCenterProto\022" +
+      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
+      "uctureInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k" +
+      "\n\016ClanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
+      "om.lvl6.proto.StructureInfoProto\022!\n\031maxH" +
+      "elpersPerSolicitation\030\002 \001(\005*I\n\014ResourceT" +
+      "ype\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022" +
+      "\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*G\n\021StructOrientat" +
+      "ion\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022" +
+      "\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16967,7 +17283,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
-        new java.lang.String[] { "UserStructId", "UserId", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", });
+        new java.lang.String[] { "UserStructUuid", "UserUuid", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", });
     internal_static_com_lvl6_proto_CoordinateProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable = new
@@ -16997,7 +17313,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserObstacleProto_descriptor,
-        new java.lang.String[] { "UserObstacleId", "UserId", "ObstacleId", "Coordinates", "Orientation", "RemovalStartTime", });
+        new java.lang.String[] { "UserObstacleUuid", "UserUuid", "ObstacleId", "Coordinates", "Orientation", "RemovalStartTime", });
     internal_static_com_lvl6_proto_EvoChamberProto_descriptor =
       getDescriptor().getMessageTypes().get(14);
     internal_static_com_lvl6_proto_EvoChamberProto_fieldAccessorTable = new

@@ -6,10 +6,8 @@ import java.util.Date;
 //look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 	
-	private static final long serialVersionUID = -2619239431555979083L;
-	
-	private int attackerId;
-	private int defenderId;
+	private String attackerId;
+	private String defenderId;
 	private Date battleEndTime;
 	private Date battleStartTime;
 	
@@ -43,7 +41,7 @@ public class PvpBattleHistory implements Serializable {
 		super();
 	}
 
-	public PvpBattleHistory(int attackerId, int defenderId, Date battleEndTime,
+	public PvpBattleHistory(String attackerId, String defenderId, Date battleEndTime,
 			Date battleStartTime, int attackerEloChange, int attackerEloBefore,
 			int attackerEloAfter, int defenderEloChange, int defenderEloBefore,
 			int defenderEloAfter, int attackerPrevLeague,
@@ -81,19 +79,19 @@ public class PvpBattleHistory implements Serializable {
 		this.exactedRevenge = exactedRevenge;
 	}
 
-	public int getAttackerId() {
+	public String getAttackerId() {
 		return attackerId;
 	}
 
-	public void setAttackerId(int attackerId) {
+	public void setAttackerId(String attackerId) {
 		this.attackerId = attackerId;
 	}
 
-	public int getDefenderId() {
+	public String getDefenderId() {
 		return defenderId;
 	}
 
-	public void setDefenderId(int defenderId) {
+	public void setDefenderId(String defenderId) {
 		this.defenderId = defenderId;
 	}
 

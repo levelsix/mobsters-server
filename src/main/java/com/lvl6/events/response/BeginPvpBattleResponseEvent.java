@@ -11,7 +11,7 @@ public class BeginPvpBattleResponseEvent extends NormalResponseEvent {
 
   private BeginPvpBattleResponseProto beginPvpBattleResponseProto;
   
-  public BeginPvpBattleResponseEvent(int playerId){
+  public BeginPvpBattleResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_BEGIN_PVP_BATTLE_EVENT;
   }

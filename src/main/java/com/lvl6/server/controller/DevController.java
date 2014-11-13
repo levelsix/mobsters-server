@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		DevRequestProto reqProto = ((DevRequestEvent)event).getDevRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		DevRequest request = reqProto.getDevRequest();
 		int staticDataId = reqProto.getStaticDataId();
 		int quantity = reqProto.getQuantity();
@@ -61,9 +61,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(DevStatus.SUCCESS);
 
-		//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			//TODO: Consider writing currency history and other history
 			
 			log.info(String.format(
@@ -80,7 +80,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 			DevResponseProto resProto = resBuilder.build();
-			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserId());
+			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserUuid());
 			resEvent.setDevResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
@@ -103,7 +103,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 

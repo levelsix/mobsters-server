@@ -22,7 +22,7 @@ public class EvolveMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       evolveMonsterRequestProto = EvolveMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = evolveMonsterRequestProto.getSender().getUserId();
+      playerId = evolveMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("evolve monster request exception", e);
     }

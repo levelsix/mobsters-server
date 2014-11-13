@@ -11,7 +11,7 @@ public class QuestAcceptResponseEvent extends NormalResponseEvent {
 
   private QuestAcceptResponseProto questAcceptResponseProto;
   
-  public QuestAcceptResponseEvent(int playerId){
+  public QuestAcceptResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_QUEST_ACCEPT_EVENT;
   }

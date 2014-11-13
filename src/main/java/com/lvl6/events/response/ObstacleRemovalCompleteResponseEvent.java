@@ -11,7 +11,7 @@ public class ObstacleRemovalCompleteResponseEvent extends NormalResponseEvent {
 
   private ObstacleRemovalCompleteResponseProto obstacleRemovalCompleteResponseProto;
   
-  public ObstacleRemovalCompleteResponseEvent(int playerId){
+  public ObstacleRemovalCompleteResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_OBSTACLE_REMOVAL_COMPLETE_EVENT;
   }

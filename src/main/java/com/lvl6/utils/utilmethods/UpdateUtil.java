@@ -115,7 +115,7 @@ public interface UpdateUtil {
   
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl, int newHp);
 
-  public abstract int updateUserMonsterNumPieces(int userId,
+  public abstract int updateUserMonsterNumPieces(String userId,
   		Collection<MonsterForUser> monsterForUserList, String updateReason,
   		Date combineStartTime);
   
@@ -147,17 +147,17 @@ public interface UpdateUtil {
   public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
   		int dmgDealt, int crsId, int crsmId);
   
-  public abstract int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
-  		int historyDefenderId, Timestamp battleEndTime);
+  public abstract int updatePvpBattleHistoryExactRevenge(String historyAttackerId,
+  		String historyDefenderId, Timestamp battleEndTime);
   
-  public abstract int updateObstacleForUserRemovalTime(int obstacleForUserId,
+  public abstract int updateObstacleForUserRemovalTime(String obstacleForUserId,
   		Timestamp clientTime);
   
   public abstract int updateClan(int clanId, boolean isChangeDescription,
   		String description, boolean isChangeJoinType, boolean requestToJoinRequired,
   		boolean isChangeIcon, int iconId);
   
-  public abstract int updatePvpLeagueForUserShields(int userId, Timestamp shieldEndTime,
+  public abstract int updatePvpLeagueForUserShields(String userId, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime);
   
   public abstract int updatePvpLeagueForUser(int userId, int newPvpLeagueId, 
@@ -185,5 +185,5 @@ public interface UpdateUtil {
   
   public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds);
   
-  public int closeClanHelp(int userId, int clanId);
+  public int closeClanHelp(String userId, String clanId);
 }

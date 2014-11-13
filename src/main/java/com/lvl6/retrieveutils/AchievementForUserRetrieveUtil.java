@@ -29,6 +29,7 @@ public class AchievementForUserRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(AchievementForUserRetrieveUtil.class);
 	
 	private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_FOR_USER; 
+	private static final UserAchievementForClientMapper rowMapper = new UserAchievementForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -79,7 +80,7 @@ public class AchievementForUserRetrieveUtil {
 					query);
 
 			List<AchievementForUser> afuList = this.jdbcTemplate
-					.query(query, new UserAchievementForClientMapper());
+					.query(query, rowMapper);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 			for (AchievementForUser afu : afuList) {

@@ -68,7 +68,7 @@ public class CompleteMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 		
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		long userMiniJobId = reqProto.getUserMiniJobId();
 		
@@ -79,12 +79,12 @@ public class CompleteMiniJobController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
 			User user = RetrieveUtils.userRetrieveUtils()
-					.getUserById(senderProto.getUserId());
+					.getUserById(senderProto.getUserUuid());
 			int previousGems = 0;
 			
 			boolean legit = checkLegit(resBuilder, userId, user,
@@ -103,7 +103,7 @@ public class CompleteMiniJobController extends EventController{
 				resBuilder.setStatus(CompleteMiniJobStatus.SUCCESS);
 			}
 			
-			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(senderProto.getUserId());
+			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setCompleteMiniJobResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -133,7 +133,7 @@ public class CompleteMiniJobController extends EventController{
       	log.error("exception2 in CompleteMiniJobController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

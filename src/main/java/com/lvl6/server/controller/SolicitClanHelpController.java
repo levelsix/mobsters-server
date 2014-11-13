@@ -60,7 +60,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     MinimumUserProto senderProto = reqProto.getSender();
     List<ClanHelpNoticeProto> chnpList = reqProto.getNoticeList();
-    int userId = senderProto.getUserId();
+    int userId = senderProto.getUserUuid();
     Date clientDate = new Date(reqProto.getClientTime());
     int maxHelpers = reqProto.getMaxHelpers();
 
@@ -85,7 +85,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -136,7 +136,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}
     }*/
   }

@@ -61,7 +61,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		boolean speedUp = reqProto.getSpeedUp();
 		int gemCostToSpeedUp = reqProto.getGemsSpent();
@@ -72,9 +72,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
 					getUserObstacleForId(userObstacleId);
 			
@@ -90,7 +90,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 						clientTime, atMaxObstacles, money);
 			}
 			
-			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(senderProto.getUserId());
+			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       	log.error("exception2 in ObstacleRemovalCompleteController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 

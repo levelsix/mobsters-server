@@ -22,7 +22,7 @@ public class QueueUpRequestEvent extends RequestEvent{
   public void read(ByteBuffer buff) {
     try {
       queueUpRequestProto = QueueUpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = queueUpRequestProto.getAttacker().getUserId();
+      playerId = queueUpRequestProto.getAttacker().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("queue up request exception", e);
     }

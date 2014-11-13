@@ -55,7 +55,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 
 		// get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		int userId = senderProto.getUserUuid();
 		int teamSlotNum = reqProto.getTeamSlotNum();
 		long userMonsterId = reqProto.getUserMonsterId();
 
@@ -65,7 +65,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER); // default
 
-		getLocker().lockPlayer(senderProto.getUserId(),
+		getLocker().lockPlayer(senderProto.getUserUuid(),
 				this.getClass().getSimpleName());
 		try {
 
@@ -122,7 +122,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(),
+			getLocker().unlockPlayer(senderProto.getUserUuid(),
 					this.getClass().getSimpleName());
 		}
 	}

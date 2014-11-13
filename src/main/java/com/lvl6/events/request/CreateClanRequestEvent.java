@@ -22,7 +22,7 @@ public class CreateClanRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       createClanRequestProto = CreateClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = createClanRequestProto.getSender().getUserId();
+      playerId = createClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("create clan request exception", e);
     }

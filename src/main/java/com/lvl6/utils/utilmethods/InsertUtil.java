@@ -100,7 +100,7 @@ public interface InsertUtil {
 	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, String resourceType, 
 			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange, String details);
 
-	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,
+	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<String> userIds,
 			List<Timestamp> dates, List<String> resourceTypes, List<Integer> currenciesChange,
 			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges,
 			List<String> details);
@@ -148,7 +148,7 @@ public interface InsertUtil {
 			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
 			List<Integer> monsterDropLvls);
 	
-	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
+	public abstract List<String> insertIntoMonsterForUserReturnIds(String userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);
 	
 	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
@@ -165,7 +165,7 @@ public interface InsertUtil {
 
 	public abstract int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now);
 	
-	public abstract int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
+	public abstract int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
 			int defenderWinEloChange, Timestamp battleStartTime);
 	
