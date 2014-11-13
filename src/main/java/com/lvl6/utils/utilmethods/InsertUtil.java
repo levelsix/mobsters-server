@@ -105,14 +105,14 @@ public interface InsertUtil {
 			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges,
 			List<String> details);
 
-	public abstract int insertIntoLoginHistory(String udid, int userId, Timestamp now, boolean isLogin, boolean goingThroughTutorial);
+	public abstract int insertIntoLoginHistory(String udid, String userId, Timestamp now, boolean isLogin, boolean goingThroughTutorial);
 
 	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId, Timestamp now);
 
-	public abstract int insertIntoBoosterPackPurchaseHistory(int userId, int boosterPackId, 
-      Timestamp timeOfPurchase, BoosterItem bi, List<Long> userMonsterIds);
+	public abstract int insertIntoBoosterPackPurchaseHistory(String userId, int boosterPackId, 
+      Timestamp timeOfPurchase, BoosterItem bi, List<String> userMonsterIds);
 
-	public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
+	public abstract int insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
 
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
@@ -126,10 +126,10 @@ public interface InsertUtil {
 			int numRevives, Timestamp startTime, Timestamp endTime,
 			boolean userWon, boolean cancelled, int taskStageId);
 	
-	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
+	public abstract int insertIntoTaskForUserCompleted(String userId, int task,
 			Timestamp timeOfEntry);
 	
-	public abstract int insertIntoTaskForUserCompleted(List<Integer> userIdList,
+	public abstract int insertIntoTaskForUserCompleted(List<String> userIdList,
 			List<Integer> taskIdList, List<Timestamp> timeOfEntryList);
 	
 	/*
@@ -217,5 +217,5 @@ public interface InsertUtil {
 	public abstract int insertIntoUpdateClanInvite(int userId,
 		int inviterId, int clanId, Timestamp timeOfInvite);
 	
-	public abstract List<Long> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
+	public abstract List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
 }

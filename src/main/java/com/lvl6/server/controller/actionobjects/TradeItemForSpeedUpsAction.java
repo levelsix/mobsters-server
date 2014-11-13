@@ -18,14 +18,14 @@ public class TradeItemForSpeedUpsAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private int userId;
+	private String userId;
 	private List<ItemForUserUsage> itemsUsed;
 	private List<ItemForUser> nuUserItems;
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	
 	public TradeItemForSpeedUpsAction(
-		int userId,
+		String userId,
 		List<ItemForUserUsage> itemsUsed,
 		List<ItemForUser> nuUserItems,
 		InsertUtil insertUtil,
@@ -54,7 +54,7 @@ public class TradeItemForSpeedUpsAction
 //	}
 	
 	//derived state
-	private List<Long> itemForUserUsageIds;
+	private List<String> itemForUserUsageIds;
 	private List<ItemForUserUsage> itemsUsedWithIds;
 
 	public void execute(Builder resBuilder) {
@@ -122,7 +122,7 @@ public class TradeItemForSpeedUpsAction
 		if (null != itemForUserUsageIds) {
 			for (int index = 0; index < itemsUsed.size(); index++) {
 				ItemForUserUsage ifuu  = itemsUsed.get(index);
-				long id = itemForUserUsageIds.get(index);
+				String id = itemForUserUsageIds.get(index);
 				
 				ItemForUserUsage ifuuWithId = new ItemForUserUsage(id, ifuu);
 				
