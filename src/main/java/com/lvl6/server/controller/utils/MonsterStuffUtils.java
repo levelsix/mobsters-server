@@ -655,7 +655,7 @@ public class MonsterStuffUtils {
   }
   
   public static List<String> getUserMonsterIdsInClanRaid(
-  		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  		Map<String, ClanEventPersistentForUser> userIdToCepfu) {
   	List<String> userMonsterIds = new ArrayList<String>();
   	
   	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {

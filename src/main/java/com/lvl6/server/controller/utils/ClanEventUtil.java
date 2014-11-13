@@ -57,16 +57,19 @@ public class ClanEventUtil implements InitializingBean {
 	 * @param clanId
 	 * @return returns 0 if no entry for clanId exists, otherwise returns value stored.
 	 */
-	public int getCrsmDmgForClanId(Integer clanId) {
-		String clanIdStr = clanId.toString();
+	public int getCrsmDmgForClanId(String clanIdStr) {
+//		String clanIdStr = clanId.toString();
 
 		if (!clanRaidMonsterDmgMap.containsKey(clanIdStr)) {
-			log.info("no crsmDmg for clanId=" + clanIdStr + " returning 0");
+			log.info(String.format(
+				"no crsmDmg for clanId=%s, returning 0",
+				clanIdStr));
 			return 0;
 		}
 
 		int curCrsmDmg = clanRaidMonsterDmgMap.get(clanIdStr);
-		log.info("crsmDmg exists for clanId=" + clanIdStr + "\t dmg=" + curCrsmDmg);
+		log.info(String.format("crsmDmg exists for clanId=%s, dmg=%s",
+			clanIdStr, curCrsmDmg));
 		return curCrsmDmg;
 	}
 

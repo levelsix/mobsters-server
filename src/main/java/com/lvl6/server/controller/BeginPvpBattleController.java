@@ -105,7 +105,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     } catch (Exception e1) {
     	log.error(String.format(
-			"UUID error. incorrect enemyUserUuid=%s",
+			"UUID error. incorrect enemyUserId=%s",
 			enemyUserId), e1);
     }
     

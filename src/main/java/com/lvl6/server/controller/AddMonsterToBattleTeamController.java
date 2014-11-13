@@ -55,9 +55,9 @@ public class AddMonsterToBattleTeamController extends EventController {
 
 		// get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		int teamSlotNum = reqProto.getTeamSlotNum();
-		long userMonsterId = reqProto.getUserMonsterId();
+		String userMonsterId = reqProto.getUserMonsterUuid();
 
 		// set some values to send to the client (the response proto)
 		AddMonsterToBattleTeamResponseProto.Builder resBuilder = AddMonsterToBattleTeamResponseProto

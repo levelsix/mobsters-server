@@ -132,19 +132,19 @@ public interface UpdateUtil {
   public abstract int updateClanEventPersistentForClanStageStartTime(String clanId,
   		Timestamp curTime);
   
-  public abstract int updateClanEventPersistentForClanGoToNextStage(int clanId,
+  public abstract int updateClanEventPersistentForClanGoToNextStage(String clanId,
   		int crsId, int crsmId);
   
   public abstract int updateClanEventPersistentForUserGoToNextStage(int crsId, int crsmId,
-			Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+			Map<String, ClanEventPersistentForUser> userIdToCepfu);
   
-  public abstract int updateClanEventPersistentForClanGoToNextMonster(int clanId,
+  public abstract int updateClanEventPersistentForClanGoToNextMonster(String clanId,
   		int crsmId, Timestamp curTime);
   
   public abstract int updateClanEventPersistentForUsersGoToNextMonster(int crsId,
-  		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+  		int crsmId, Map<String, ClanEventPersistentForUser> userIdToCepfu);
   
-  public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
+  public abstract int updateClanEventPersistentForUserCrsmDmgDone(String userId,
   		int dmgDealt, int crsId, int crsmId);
   
   public abstract int updatePvpBattleHistoryExactRevenge(String historyAttackerId,

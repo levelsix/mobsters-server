@@ -97,14 +97,8 @@ import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
-import com.lvl6.proto.ChatProto.ColorProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
-import com.lvl6.proto.CityProto.CityElementProto;
-import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
-import com.lvl6.proto.CityProto.CityExpansionCostProto;
-import com.lvl6.proto.CityProto.FullCityProto;
-import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
@@ -190,8 +184,6 @@ import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
-import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
-import com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -200,7 +192,6 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.proto.UserProto.UserPvpLeagueProto;
 import com.lvl6.pvp.PvpUser;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
@@ -209,7 +200,6 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
@@ -407,12 +397,13 @@ public class CreateInfoProtoUtils {
 		return pvpProtoList;
 		}
 
-	public static PvpHistoryProto createPvpHistoryProto(User attacker, PvpBattleHistory info,
-		Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
-		int prospectiveOilWinnings) {
+	public static PvpHistoryProto createPvpHistoryProto(User attacker, Clan c,
+		PvpBattleHistory info, Collection<MonsterForUser> userMonsters,
+		int prospectiveCashWinnings, int prospectiveOilWinnings) {
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		//there is db call for clan...
-		FullUserProto fup = createFullUserProtoFromUser(attacker, null);
+		FullUserProto fup = createFullUserProtoFromUser(attacker, null,
+			c);
 		phpb.setAttacker(fup);
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
@@ -461,6 +452,7 @@ public class CreateInfoProtoUtils {
 
 	public static List<PvpHistoryProto> createPvpHistoryProto(
 		List<PvpBattleHistory> historyList, Map<Integer, User> attackerIdsToAttackers,
+		Map<Integer, Clan> attackerIdsToClans,
 		Map<Integer, List<MonsterForUser>> attackerIdsToUserMonsters,
 		Map<Integer, Integer> attackerIdsToProspectiveCashWinnings,
 		Map<Integer, Integer> attackerIdsToProspectiveOilWinnings) {
@@ -475,7 +467,14 @@ public class CreateInfoProtoUtils {
 			int prospectiveCashWinnings = attackerIdsToProspectiveCashWinnings.get(attackerId);
 			int prospectiveOilWinnings = attackerIdsToProspectiveOilWinnings.get(attackerId);
 
-			PvpHistoryProto php = createPvpHistoryProto(attacker, history, attackerMonsters,
+			String clanId = attacker.getClanId();
+			Clan clan = null;
+			if (attackerIdsToClans.containsKey(clanId)) {
+				clan = attackerIdsToClans.get(clanId);
+			}
+			
+			PvpHistoryProto php = createPvpHistoryProto(attacker,
+				clan, history, attackerMonsters,
 				prospectiveCashWinnings, prospectiveOilWinnings);
 			phpList.add(php);
 		}
@@ -1151,7 +1150,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
-		ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
+		ClanEventPersistentForUser cepfu, Map<String, MonsterForUser> idsToUserMonsters,
 		List<FullUserMonsterProto> fumpList){
 		PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
 		String userId = cepfu.getUserId();
@@ -3214,7 +3213,8 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullUserProto createFullUserProtoFromUser(User u,
-		PvpLeagueForUser plfu) {
+		PvpLeagueForUser plfu, Clan c)
+	{
 		FullUserProto.Builder builder = FullUserProto.newBuilder();
 		String userId = u.getId();
 		builder.setUserUuid(userId);
@@ -3240,9 +3240,10 @@ public class CreateInfoProtoUtils {
 		builder.setIsAdmin(u.isAdmin());
 		builder.setNumCoinsRetrievedFromStructs(u.getNumCoinsRetrievedFromStructs());
 		builder.setNumOilRetrievedFromStructs(u.getNumOilRetrievedFromStructs());
-		if (u.getClanId() > 0) {
-			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
-			builder.setClan(createMinimumClanProtoFromClan(clan));
+//		if (u.getClanId() > 0) {
+		if (null != c) {
+//			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
+			builder.setClan(createMinimumClanProtoFromClan(c));
 		}
 		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
 		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());

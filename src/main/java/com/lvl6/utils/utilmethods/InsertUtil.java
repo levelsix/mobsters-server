@@ -185,13 +185,13 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoCepfuRaidStageHistory(Integer clanEventId,
 			Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,
-			Map<Integer, ClanEventPersistentForUser> clanUserInfo);
+			Map<String, ClanEventPersistentForUser> clanUserInfo);
 	
 	public abstract int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
 			Map<Integer, ClanEventPersistentForUser> clanUserInfo,
 			ClanEventPersistentForClan cepfc);
 	
-	public abstract List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
+	public abstract List<String> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
 			Timestamp crsEndTime, int clanEventId, List<ClanEventPersistentUserReward> userRewards);
 
 	public abstract int insertIntoPvpBattleHistory(String attackerId, String defenderId,

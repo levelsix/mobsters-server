@@ -76,14 +76,15 @@ public class BeginObstacleRemovalController extends EventController{
 		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
-		boolean invalidUuids = false;
+		boolean invalidUuids = true;
+		
 		try {
 			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
 				"UUID error. incorrect userId=%s",
 				userId), e);
-			invalidUuids = true;
 		}
 		
 		//UUID checks

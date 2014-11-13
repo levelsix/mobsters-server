@@ -114,14 +114,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER); //default
 
     UUID userUuid = null;
-	boolean invalidUuids = false;
+	boolean invalidUuids = true; 
 	try {
 		userUuid = UUID.fromString(userId);
+		invalidUuids = false;
 	} catch (Exception e) {
 		log.error(String.format(
 			"UUID error. incorrect userId=%s",
 			userId), e);
-		invalidUuids = true;
 	}
 	
 	//UUID checks
