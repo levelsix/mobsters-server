@@ -95,7 +95,7 @@ public interface UpdateUtil {
   
   public abstract int updateUserTaskTsId(String userTaskId, int nuTaskStageId);
   
-  public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
+  public abstract int updateUserMonstersHealth(Map<String, Integer> userMonsterIdsToHealths); 
   
 //  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
   
@@ -168,22 +168,22 @@ public interface UpdateUtil {
   public abstract int updateMiniJobForUser(String userId, String userMiniJobId,
 		  String userMonsterIdStr, Timestamp now);
   
-  public abstract int updateMiniJobForUserCompleteTime(int userId,
-		  long userMiniJobId, Timestamp now);
+  public abstract int updateMiniJobForUserCompleteTime(String userId,
+		  String userMiniJobId, Timestamp now);
 
-  public abstract int updateRestrictUserMonsters( int userId, List<Long> userMonsterIdList );
+  public abstract int updateRestrictUserMonsters( String userId, List<String> userMonsterIdList );
   
-  public abstract int updateUnrestrictUserMonsters( int userId, List<Long> userMonsterIdList );
+  public abstract int updateUnrestrictUserMonsters( String userId, List<String> userMonsterIdList );
   
-  public abstract int updateItemForUser(int userId, int itemId, int quantityChange);
+  public abstract int updateItemForUser(String userId, int itemId, int quantityChange);
 
   public abstract int updateItemForUser(List<ItemForUser> ifuList);
   
-  public int updateTaskStageForUserNoMonsterDrop( long droplessTsfuId );
+  public int updateTaskStageForUserNoMonsterDrop( String droplessTsfuId );
 
-  public int updatePvpMonsterDmgMultiplier( int userId, float monsterDmgMultiplier );
+  public int updatePvpMonsterDmgMultiplier( String userId, float monsterDmgMultiplier );
   
-  public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds);
+  public int updateClanHelp(String userId, String clanId, List<Long> clanHelpIds);
   
   public int closeClanHelp(String userId, String clanId);
 }
