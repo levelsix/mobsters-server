@@ -38,7 +38,7 @@ import com.lvl6.properties.DBConstants;
 
 
 	public List<PrivateChatPost> getPrivateChatPostsBetweenUsersBeforePostId(
-		int limit, int userOne, int userTwo) {
+		int limit, String userOne, String userTwo) {
 		log.info(String.format(
 			"retrieving %s private chat posts for userOne %s and userTwo %s",
 			limit, userOne, userTwo));
