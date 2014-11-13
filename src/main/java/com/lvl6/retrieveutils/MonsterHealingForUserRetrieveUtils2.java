@@ -37,7 +37,7 @@ import com.lvl6.properties.DBConstants;
 	}
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
-	public Map<String, MonsterHealingForUser> getMonstersForUser(int userId) {
+	public Map<String, MonsterHealingForUser> getMonstersForUser(String userId) {
 		log.debug("retrieving user monsters being healined for userId " + userId);
 
 		Object[] values = { userId };

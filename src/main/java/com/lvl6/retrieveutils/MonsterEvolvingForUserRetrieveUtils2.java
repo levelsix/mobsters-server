@@ -38,7 +38,7 @@ import com.lvl6.properties.DBConstants;
 	}
 
 
-	public Map<String, MonsterEvolvingForUser> getCatalystIdsToEvolutionsForUser(int userId) {
+	public Map<String, MonsterEvolvingForUser> getCatalystIdsToEvolutionsForUser(String userId) {
 		log.debug("retrieving user monsters being evolved for userId " + userId);
 
 		Object[] values = { userId };
@@ -65,7 +65,7 @@ import com.lvl6.properties.DBConstants;
 	}
 	
 	
-	public MonsterEvolvingForUser getEvolutionForUser(int userId) {
+	public MonsterEvolvingForUser getEvolutionForUser(String userId) {
 		log.debug("retrieving user monsters being healined for userId " + userId);
 
 		Map<String, MonsterEvolvingForUser> catalystMonsterIdToEvolution =

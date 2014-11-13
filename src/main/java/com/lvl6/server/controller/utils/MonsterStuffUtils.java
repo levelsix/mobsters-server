@@ -103,13 +103,13 @@ public class MonsterStuffUtils {
    * selected monsters (the second argument) might be modified, nothing is done if
    * selected monsters is empty.
    */
-  public static void retainValidMonsters(Set<Long> domain,  Map<Long, ?> selectedMonsters,
+  public static void retainValidMonsters(Set<String> domain,  Map<String, ?> selectedMonsters,
   		boolean keepThingsInDomain, boolean keepThingsNotInDomain) {
-  	Set<Long> selectedIds = selectedMonsters.keySet();
-  	selectedIds = new HashSet<Long>(selectedIds);
+  	Set<String> selectedIds = selectedMonsters.keySet();
+  	selectedIds = new HashSet<String>(selectedIds);
   	
   	log.info("domain=" + domain + "\t selectedMonsters=" + selectedMonsters);
-  	for (Long selectedId : selectedIds) {
+  	for (String selectedId : selectedIds) {
   		if (domain.contains(selectedId) && keepThingsInDomain) {
   			continue;
   		}
