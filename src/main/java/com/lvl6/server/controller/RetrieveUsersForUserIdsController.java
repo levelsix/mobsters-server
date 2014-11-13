@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,21 +54,38 @@ import com.lvl6.utils.RetrieveUtils;
     RetrieveUsersForUserIdsRequestProto reqProto = ((RetrieveUsersForUserIdsRequestEvent)event).getRetrieveUsersForUserIdsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    List<Integer> requestedUserIds = reqProto.getRequestedUserIdsList();
+    List<String> requestedUserIds = reqProto.getRequestedUserUuidsList();
     boolean includeCurMonsterTeam = reqProto.getIncludeCurMonsterTeam();
     
     RetrieveUsersForUserIdsResponseProto.Builder resBuilder = RetrieveUsersForUserIdsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      if (requestedUserIds != null) {
+        for (String userId : requestedUserIds) {
+          userUuid = UUID.fromString(userId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect requestedUserIds=%s",
+          requestedUserIds), e);
+      invalidUuids = true;
+    }
+
 //    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
 //    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
-    Map<Integer, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
+    Map<String, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
     	  
     	  //TODO: consider getting from db
     	  //pull from hazelcast for now
-    	  int userId = user.getId();
+        String userId = user.getId();
     	  PvpUser pu = getHazelcastPvpUtil().getPvpUser(userId);
     	  PvpLeagueForUser plfu = null;
     	  
@@ -98,13 +116,13 @@ import com.lvl6.utils.RetrieveUtils;
     server.writeEvent(resEvent);
   }
   
-  private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(List<Integer> userIds) {
-  	Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = RetrieveUtils
+  private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(List<String> userIds) {
+  	Map<String, List<MonsterForUser>> userIdsToCurrentTeam = RetrieveUtils
   			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds);
 
   	//for each user construct his current team
   	List<UserCurrentMonsterTeamProto> retVal = new ArrayList<UserCurrentMonsterTeamProto>();
-  	for (Integer userId : userIdsToCurrentTeam.keySet()) {
+  	for (String userId : userIdsToCurrentTeam.keySet()) {
   		List<MonsterForUser> currentTeam = userIdsToCurrentTeam.get(userId);
 
   		List<FullUserMonsterProto> currentTeamProto = CreateInfoProtoUtils
@@ -112,7 +130,7 @@ import com.lvl6.utils.RetrieveUtils;
   		
   		//create the proto via the builder
   		UserCurrentMonsterTeamProto.Builder teamForUser = UserCurrentMonsterTeamProto.newBuilder();
-  		teamForUser.setUserId(userId);
+  		teamForUser.setUserUuid(userId);
   		teamForUser.addAllCurrentTeam(currentTeamProto);
   		
   		retVal.add(teamForUser.build());
