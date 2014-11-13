@@ -76,10 +76,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     UUID userUuid = null;
     UUID userStructUuid = null;
-    boolean invalidUuids = false;
+    boolean invalidUuids = true;
     try {
         userUuid = UUID.fromString(userId);
         userStructUuid = UUID.fromString(userStructId);
+        invalidUuids = false;
     } catch (Exception e) {
         log.error(String.format(
             "UUID error. incorrect userId=%s or userStructId=%s",
