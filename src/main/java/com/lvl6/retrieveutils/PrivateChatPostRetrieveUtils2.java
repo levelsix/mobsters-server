@@ -89,9 +89,11 @@ import com.lvl6.properties.DBConstants;
 		//TODO: use duple (timestamp, otherPersonColumn)
 		//get last post id between specified user and person said user chatted with
 		String subquery = String.format(
-			"(SELECT max(%s) as id FROM %s WHERE %s=? GROUP BY %s)",
-			DBConstants.USER_PRIVATE_CHAT_POSTS__ID, TABLE_NAME,
-			column, otherPersonColumn);
+			"(SELECT max(%s) as %@, %s FROM %s WHERE %s=? GROUP BY %s)",
+			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, 
+			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
+			TABLE_NAME, column, otherPersonColumn);
 //		subquery +=
 //			"(SELECT max(" + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + ") as id " + 
 //				"FROM " + TABLE_NAME + " " +
@@ -101,8 +103,14 @@ import com.lvl6.properties.DBConstants;
 
 		
 		String query = String.format(
-			"SELECT pcp.* FROM %s as idList LEFT JOIN %s as pcp ON idList.id=pcp.id ORDER BY pcp.time_of_post DESC LIMIT ?",
-			subquery, TABLE_NAME);
+			"SELECT pcp.* FROM %s as timeList LEFT JOIN %s as pcp ON timeList.%s=pcp.%s AND timeList.%s=pcp.%s AND pcp.%s=? ORDER BY pcp.%s DESC LIMIT ?",
+			subquery, TABLE_NAME,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID,
+			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST);
 		//get the actual posts to those ids
 //		query +=
 //			"SELECT pcp.* " +
@@ -112,6 +120,7 @@ import com.lvl6.properties.DBConstants;
 //				"ON idList.id=pcp.id " +
 //				"ORDER BY pcp.time_of_post DESC " +
 //				"LIMIT ?";
+		values.add(userId);
 		values.add(limit);
 
 
