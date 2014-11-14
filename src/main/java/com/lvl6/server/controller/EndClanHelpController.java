@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class EndClanHelpController extends EventController {
 
@@ -49,20 +51,44 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     log.info(String.format("reqProto=%s", reqProto));
     
     MinimumUserProto senderProto = reqProto.getSender();
-    List<Long> clanHelpIdList = reqProto.getClanHelpIdsList();
-    int userId = senderProto.getUserUuid();
+    List<String> clanHelpIdList = reqProto.getClanHelpUuidsList();
+    String userId = senderProto.getUserUuid();
 
     EndClanHelpResponseProto.Builder resBuilder = EndClanHelpResponseProto.newBuilder();
     resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.addAllClanHelpIds(clanHelpIdList);
+    resBuilder.addAllClanHelpUuids(clanHelpIdList);
 
-    int clanId = 0;
-
+    String clanId = "";
     if (null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
     }
 
+    boolean invalidUuids = true;
+    if (!clanId.isEmpty()) {
+    	try {
+    		UUID.fromString(userId);
+			UUID.fromString(clanId);
+			StringUtils.convertToUUID(clanHelpIdList);
+			
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s, clanId=%s",
+				userId, clanId), e);
+		}
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
+    	EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(userId);
+    	resEvent.setTag(event.getTag());
+    	resEvent.setEndClanHelpResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+    	return;
+    }
+    
     try {
       boolean legitLeave = checkLegitLeave(resBuilder, userId, clanHelpIdList);
       
@@ -108,10 +134,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }*/
   }
 
-  private boolean checkLegitLeave(Builder resBuilder, int userId,
-	  List<Long> clanHelpIds) {
+  private boolean checkLegitLeave(Builder resBuilder, String userId,
+	  List<String> clanHelpIds) {
 
-    if (userId <= 0) {
+    if (userId.isEmpty()) {
       log.error(String.format("user is null. id=%s", userId));
       return false;      
     }
@@ -124,8 +150,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(int userId, int clanId,
-	  List<Long> clanHelpIdList)
+  private boolean writeChangesToDB(String userId, String clanId,
+	  List<String> clanHelpIdList)
   {
 	  int numDeleted = DeleteUtils.get().deleteClanHelp(userId, clanHelpIdList);
 	  log.info(String.format("numDeleted: %s", numDeleted));
