@@ -1,86 +1,76 @@
 package com.lvl6.retrieveutils;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.TreeMap;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class IAPHistoryRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static final String TABLE_NAME = DBConstants.TABLE_IAP_HISTORY;
+  private JdbcTemplate jdbcTemplate;
 
-  public static boolean checkIfDuplicateTransaction(long transactionId) {
+  @Resource
+  public void setDataSource(DataSource dataSource) {
+	  log.info("Setting datasource and creating jdbcTemplate");
+	  this.jdbcTemplate = new JdbcTemplate(dataSource);
+  }
+
+  public boolean checkIfDuplicateTransaction(long transactionId) {
     log.debug("checking if transaction already exists for transaction Id" + transactionId);
-    TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.IAP_HISTORY__TRANSACTION_ID, transactionId);
 
-    boolean isDuplicateTransaction = false;
+    Object[] values = { transactionId };
+    String query = String.format(
+    	"select %s from %s where %s=?",
+    	DBConstants.IAP_HISTORY__ID,
+    	TABLE_NAME, DBConstants.IAP_HISTORY__TRANSACTION_ID);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
+    boolean isDuplicateTransaction = true;
     try {
-			if (conn != null) {
-			  rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      while(rs.next()) {
-			        isDuplicateTransaction = true;
-			      }
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  } 
-			}
-		} catch (Exception e) {
+    	List<Integer> idList = this.jdbcTemplate
+    		.queryForList(query, values, Integer.class);
+
+    	if (null == idList || idList.isEmpty()) {
+    		isDuplicateTransaction = false;
+    		log.info(String.format(
+    			"not a duplicate transactionId: %s", transactionId));
+    	}
+
+    } catch (Exception e) {
     	log.error("iap history retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
+    	//    } finally {
+    	//    	DBConnection.get().close(rs, null, conn);
     }
     return isDuplicateTransaction;
   }
 
-  public static boolean checkIfUserHasPurchased(int userId) {
+  public boolean checkIfUserHasPurchased(String userId) {
     log.debug("checking if player has purchased anything");
-    TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.IAP_HISTORY__USER_ID, userId);
+    
+    String query = String.format(
+    	"select count(*) from %s where %s=?",
+    	TABLE_NAME, DBConstants.IAP_HISTORY__USER_ID);
+    
 
     boolean hasBought = false;
-    
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
     try {
-			if (conn != null) {
-			  rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-			  if (rs != null) {
-			    try {
-			      rs.last();
-			      rs.beforeFirst();
-			      while(rs.next()) {
-			        hasBought = true;
-			        break;
-			      }
-			    } catch (SQLException e) {
-			      log.error("problem with database call.", e);
-			      
-			    }
-			  } 
-			}
-		} catch (Exception e) {
+    	int numBought = this.jdbcTemplate.queryForInt(query, userId);
+    	if (numBought > 0) {
+    		hasBought = true;
+    	}
+    } catch (Exception e) {
     	log.error("iap history retrieve db error.", e);
-    } finally {
-    	DBConnection.get().close(rs, null, conn);
+    	//    } finally {
+    	//    	DBConnection.get().close(rs, null, conn);
     }
     return hasBought;
   }
