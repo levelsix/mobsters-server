@@ -67,7 +67,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override 
-	public boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition,
+	public boolean updateUserCityExpansionData(String userId, int xPosition, int yPosition,
 			boolean isExpanding, Timestamp expandStartTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
@@ -88,7 +88,7 @@ public class UpdateUtils implements UpdateUtil {
 
 
 	@Override
-	public boolean updateUserQuestIscomplete(int userId, int questId) {
+	public boolean updateUserQuestIscomplete(String userId, int questId) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
 		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
@@ -105,7 +105,7 @@ public class UpdateUtils implements UpdateUtil {
 	}  
 
 	@Override
-	public int updateUserQuestJobs(int userId,
+	public int updateUserQuestJobs(String userId,
 			Map<Integer, QuestJobForUser> questJobIdToQuestJob) {
 		String tableName = DBConstants.TABLE_QUEST_JOB_FOR_USER;
 		
@@ -140,7 +140,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public boolean updateRedeemQuestForUser(int userId, int questId) {
+	public boolean updateRedeemQuestForUser(String userId, int questId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.QUEST_FOR_USER__USER_ID, userId);
 		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
@@ -158,7 +158,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public int updateUserAchievement(int userId, Timestamp completeTime,
+	public int updateUserAchievement(String userId, Timestamp completeTime,
 			Map<Integer, AchievementForUser> achievementIdToAfu) {
 		
 		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
@@ -200,7 +200,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateRedeemAchievementForUser(int userId,
+	public int updateRedeemAchievementForUser(String userId,
 			Collection<Integer> achievementIds, Timestamp redeemTime) {
 		String tableName = DBConstants.TABLE_ACHIEVEMENT_FOR_USER;
 		
@@ -234,7 +234,7 @@ public class UpdateUtils implements UpdateUtil {
 	 * changin orientation
 	 */
 	@Override
-	public boolean updateUserStructOrientation(int userStructId,
+	public boolean updateUserStructOrientation(String userStructId,
 			StructOrientation orientation) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
@@ -252,7 +252,7 @@ public class UpdateUtils implements UpdateUtil {
 
 
 	@Override
-	public boolean updateBeginUpgradingUserStruct(int userStructId,
+	public boolean updateBeginUpgradingUserStruct(String userStructId,
   		int newStructId, Timestamp upgradeTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
@@ -274,7 +274,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updateSpeedupUpgradingUserStruct(int userStructId, Timestamp lastRetrievedTime) {
+	public boolean updateSpeedupUpgradingUserStruct(String userStructId, Timestamp lastRetrievedTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 		
@@ -293,7 +293,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updateUserStructsBuildingIscomplete(int userId, 
+	public boolean updateUserStructsBuildingIscomplete(String userId, 
 			List<StructureForUser> userStructs, List<Timestamp> newRetrievedTimes) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
@@ -342,12 +342,12 @@ public class UpdateUtils implements UpdateUtil {
 	 */
 
 	@Override
-	public boolean updateUserStructsLastretrieved(Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
-			Map<Integer, StructureForUser> structIdsToUserStructs) {
+	public boolean updateUserStructsLastretrieved(Map<String, Timestamp> userStructIdsToLastRetrievedTime,
+			Map<String, StructureForUser> structIdsToUserStructs) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-		for(Integer userStructId : userStructIdsToLastRetrievedTime.keySet()) {
+		for(String userStructId : userStructIdsToLastRetrievedTime.keySet()) {
 			Timestamp lastRetrievedTime = userStructIdsToLastRetrievedTime.get(userStructId);
 			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
@@ -388,7 +388,7 @@ public class UpdateUtils implements UpdateUtil {
    * used for upgrading user struct's fb invite level
    */
 	@Override
-  public boolean updateUserStructLevel(int userStructId, int fbInviteLevelChange) {
+  public boolean updateUserStructLevel(String userStructId, int fbInviteLevelChange) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -410,7 +410,7 @@ public class UpdateUtils implements UpdateUtil {
 	 * used for moving user structs
 	 */
 	@Override
-	public boolean updateUserStructCoord(int userStructId, CoordinatePair coordinates) {
+	public boolean updateUserStructCoord(String userStructId, CoordinatePair coordinates) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
@@ -427,7 +427,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId, int increment) {
+	public boolean incrementNumberOfLockBoxesForLockBoxEvent(String userId, int eventId, int increment) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
 
 		insertParams.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__USER_ID, userId);
@@ -467,7 +467,7 @@ public class UpdateUtils implements UpdateUtil {
 	}*/
 
 	@Override
-	public boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status) {
+	public boolean updateUserClanStatus(String userId, String clanId, UserClanStatus status) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
 		conditionParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
@@ -484,13 +484,13 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public int updateUserClanStatuses(int clanId, List<Integer> userIdList,
+	public int updateUserClanStatuses(String clanId, List<String> userIdList,
 			List<UserClanStatus> statuses) {
 		String tableName = DBConstants.TABLE_CLAN_FOR_USER;
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		for(int index = 0; index < userIdList.size(); index++) {
-			int userId = userIdList.get(index);
+		  String userId = userIdList.get(index);
 			String status = statuses.get(index).name();
 
 			Map<String, Object> aRow = new HashMap<String, Object>();
@@ -511,7 +511,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) {
+	public boolean updateUsersAddDiamonds(List<String> userIds, int diamonds) {
 		if (userIds == null || userIds.size() <= 0) return true;
 
 		List<Object> values = new ArrayList<Object>();
@@ -555,7 +555,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired) {
+	public boolean updateClanJoinTypeForClan(String clanId, boolean requestToJoinRequired) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.CLANS__ID, clanId);
 
@@ -571,7 +571,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta) {
+	public int incrementUserTaskNumRevives(String userTaskId, int numRevivesDelta) {
 		String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
@@ -588,7 +588,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateUserTaskTsId(long userTaskId, int nuTaskStageId) {
+	public int updateUserTaskTsId(String userTaskId, int nuTaskStageId) {
 		String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
@@ -608,7 +608,7 @@ public class UpdateUtils implements UpdateUtil {
 	//if expectedHealths contains the exact same info as userMonsterIdsToHealths
 	//if map isn't set then list is used
 	@Override
-	public int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths) {
+	public int updateUserMonstersHealth(Map<String, Integer> userMonsterIdsToHealths) {
 		if (null == userMonsterIdsToHealths || userMonsterIdsToHealths.isEmpty()) {
 			return 0;
 		}
@@ -627,7 +627,7 @@ public class UpdateUtils implements UpdateUtil {
 		clauses.clear();
 		//if map(userMonsterId -> expectedHealth) is set then use it
 		//this generates the (...) clauses that go after "VALUES" 
-		for (long userMonsterId : userMonsterIdsToHealths.keySet()) {
+		for (String userMonsterId : userMonsterIdsToHealths.keySet()) {
 			int health = userMonsterIdsToHealths.get(userMonsterId);
 			String subclause = "(?,?)";
 			clauses.add(subclause);
@@ -651,7 +651,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	@Override
-	public int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters) {
+	public int updateUserMonsterHealing(String userId, List<MonsterHealingForUser> monsters) {
 		String tableName = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
@@ -693,7 +693,7 @@ public class UpdateUtils implements UpdateUtil {
 	
 	//only works for erasing multiple monsters team slot num
 	@Override
-	public int updateNullifyUserMonstersTeamSlotNum(List<Long> userMonsterIdList, List<Integer> teamSlotNumList) {
+	public int updateNullifyUserMonstersTeamSlotNum(List<String> userMonsterIdList, List<Integer> teamSlotNumList) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
@@ -701,7 +701,7 @@ public class UpdateUtils implements UpdateUtil {
 		int size = userMonsterIdList.size();
 		
 		for (int i = 0; i < size; i++) {
-			long userMonsterId = userMonsterIdList.get(i);
+		  String userMonsterId = userMonsterIdList.get(i);
 			int teamSlotNum = teamSlotNumList.get(i);
 			conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
 			absoluteParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
@@ -714,7 +714,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateUserMonsterTeamSlotNum(long userMonsterId, int teamSlotNum) {
+	public int updateUserMonsterTeamSlotNum(String userMonsterId, int teamSlotNum) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
@@ -729,7 +729,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int nullifyMonstersTeamSlotNum(List<Long> userMonsterIds, int newTeamSlotNum) {
+	public int nullifyMonstersTeamSlotNum(List<String> userMonsterIds, int newTeamSlotNum) {
 		List<Object> values = new ArrayList<Object>();
 		String query = "UPDATE " + DBConstants.TABLE_MONSTER_FOR_USER + " SET "
 				+ DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM + "=? "+ "where " +
@@ -747,7 +747,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters) {
+	public int updateUserMonsterEnhancing(String userId, List<MonsterEnhancingForUser> monsters) {
 		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		
@@ -786,7 +786,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateCompleteEnhancing(int userId, long curEnhancingMfuId) {
+	public int updateCompleteEnhancing(String userId, String curEnhancingMfuId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userId);
 		conditionParams.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, curEnhancingMfuId);
@@ -801,7 +801,7 @@ public class UpdateUtils implements UpdateUtil {
 	
 //	update a user monster after enhancing
 	@Override
-	public int updateUserMonsterExpAndLvl(long userEquipId, int newExp, int newLvl, int newHp) {
+	public int updateUserMonsterExpAndLvl(String userEquipId, int newExp, int newLvl, int newHp) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
 
@@ -816,7 +816,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 		@Override
-		public int updateUserMonsterNumPieces(int userId,
+		public int updateUserMonsterNumPieces(String userId,
 				Collection<MonsterForUser> monsterForUserList, String updateReason,
 				Date combineStartDate) {
 			Timestamp combineStartTime = new Timestamp(combineStartDate.getTime()); 
@@ -855,7 +855,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		@Override
-		public int updateCompleteUserMonster(List<Long> userMonsterIds) {
+		public int updateCompleteUserMonster(List<String> userMonsterIds) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			int size = userMonsterIds.size();
 			List<String> questions = Collections.nCopies(size, "?");
@@ -874,7 +874,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		@Override
 		public int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
-				List<Integer> acceptedInviteIds, Timestamp acceptTime) {
+				List<String> acceptedInviteIds, Timestamp acceptTime) {
 			String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 			int size = acceptedInviteIds.size();
 			List<String> questions = Collections.nCopies(size, "?");
@@ -975,7 +975,7 @@ public class UpdateUtils implements UpdateUtil {
 		}*/
 
 		@Override
-		public int updateClanEventPersistentForClanStageStartTime(int clanId,
+		public int updateClanEventPersistentForClanStageStartTime(String clanId,
 				Timestamp curTime) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
 			Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -994,7 +994,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClanEventPersistentForClanGoToNextStage(int clanId, int crsId, int crsmId) {
+		public int updateClanEventPersistentForClanGoToNextStage(String clanId, int crsId, int crsmId) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
 			Map <String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
@@ -1015,11 +1015,11 @@ public class UpdateUtils implements UpdateUtil {
 		
 		@Override
 		public int updateClanEventPersistentForUserGoToNextStage(int crsId, int crsmId,
-				Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+				Map<String, ClanEventPersistentForUser> userIdToCepfu) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 			
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			for(Integer userId : userIdToCepfu.keySet()) {
+			for(String userId : userIdToCepfu.keySet()) {
 				ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
 
 				Map<String, Object> aRow = new HashMap<String, Object>();
@@ -1054,7 +1054,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClanEventPersistentForClanGoToNextMonster(int clanId,
+		public int updateClanEventPersistentForClanGoToNextMonster(String clanId,
 	  		int crsmId, Timestamp curTime) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
 			Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1073,11 +1073,11 @@ public class UpdateUtils implements UpdateUtil {
 
 		@Override
 		public int updateClanEventPersistentForUsersGoToNextMonster(int crsId,
-	  		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+	  		int crsmId, Map<String, ClanEventPersistentForUser> userIdToCepfu) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 			
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-			for(Integer userId : userIdToCepfu.keySet()) {
+			for(String userId : userIdToCepfu.keySet()) {
 				ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
 
 				Map<String, Object> aRow = new HashMap<String, Object>();
@@ -1110,7 +1110,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClanEventPersistentForUserCrsmDmgDone(int userId, int dmgDealt,
+		public int updateClanEventPersistentForUserCrsmDmgDone(String userId, int dmgDealt,
 				int crsId, int crsmId) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1130,8 +1130,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
-	  		int historyDefenderId, Timestamp battleEndTime) {
+		public int updatePvpBattleHistoryExactRevenge(String historyAttackerId,
+		    String historyDefenderId, Timestamp battleEndTime) {
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, historyAttackerId);
@@ -1150,7 +1150,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateObstacleForUserRemovalTime(int ofuId, Timestamp clientTime) {
+		public int updateObstacleForUserRemovalTime(String ofuId, Timestamp clientTime) {
 			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
@@ -1166,7 +1166,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClan(int clanId, boolean isChangeDescription, String description,
+		public int updateClan(String clanId, boolean isChangeDescription, String description,
 				boolean isChangeJoinType, boolean requestToJoinRequired, boolean isChangeIcon,
 				int iconId) {
 			
@@ -1197,7 +1197,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updatePvpLeagueForUserShields(int userId, Timestamp shieldEndTime,
+		public int updatePvpLeagueForUserShields(String userId, Timestamp shieldEndTime,
 				Timestamp inBattleEndTime) {
 			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 			
@@ -1226,7 +1226,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updatePvpLeagueForUser(int userId, int newPvpLeagueId,
+		public int updatePvpLeagueForUser(String userId, int newPvpLeagueId,
 				int newRank, int eloChange, Timestamp shieldEndTime,
 				Timestamp inBattleEndTime, int attacksWonDelta,
 				int defensesWonDelta, int attacksLostDelta,
@@ -1283,7 +1283,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateMiniJobForUser(int userId, long userMiniJobId,
+		public int updateMiniJobForUser(String userId, String userMiniJobId,
 				String userMonsterIdStr, Timestamp now) {
 			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
 
@@ -1310,8 +1310,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		@Override
-		public int updateMiniJobForUserCompleteTime(int userId,
-				  long userMiniJobId, Timestamp now) {
+		public int updateMiniJobForUserCompleteTime(String userId,
+		    String userMiniJobId, Timestamp now) {
 			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1331,7 +1331,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateRestrictUserMonsters(int userId, List<Long> userMonsterIdList) {
+		public int updateRestrictUserMonsters(String userId, List<String> userMonsterIdList) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			int size = userMonsterIdList.size();
 			List<String> questions = Collections.nCopies(size, "?");
@@ -1366,7 +1366,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateUnrestrictUserMonsters(int userId, List<Long> userMonsterIdList) {
+		public int updateUnrestrictUserMonsters(String userId, List<String> userMonsterIdList) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			int size = userMonsterIdList.size();
 			List<String> questions = Collections.nCopies(size, "?");
@@ -1401,7 +1401,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateItemForUser(int userId, int itemId, int quantityChange) {
+		public int updateItemForUser(String userId, int itemId, int quantityChange) {
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
 			
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1444,7 +1444,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateTaskStageForUserNoMonsterDrop(long droplessTsfuId) {
+		public int updateTaskStageForUserNoMonsterDrop(String droplessTsfuId) {
 			String tableName = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 			
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1461,7 +1461,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updatePvpMonsterDmgMultiplier(int userId, float monsterDmgMultiplier) {
+		public int updatePvpMonsterDmgMultiplier(String userId, float monsterDmgMultiplier) {
 			String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 			
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1478,7 +1478,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds) {
+		public int updateClanHelp(String userId, String clanId, List<String> clanHelpIds) {
 			//for every ClanHelp with clanId and clanHelpId
 			//append userId to the helpers property
 			String tableName = DBConstants.TABLE_CLAN_HELP;
@@ -1500,7 +1500,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int closeClanHelp(int userId, int clanId) {
+		public int closeClanHelp(String userId, String clanId) {
 			String tableName = DBConstants.TABLE_CLAN_HELP;
 
 			Map<String, Object> conditionParams = new HashMap<String, Object>();
