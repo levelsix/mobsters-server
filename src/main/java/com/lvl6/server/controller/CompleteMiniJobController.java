@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,8 @@ import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMin
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -41,7 +43,10 @@ public class CompleteMiniJobController extends EventController{
 	protected Locker locker;
 	
 	@Autowired
-	protected MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
@@ -68,9 +73,9 @@ public class CompleteMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 		
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
-		long userMiniJobId = reqProto.getUserMiniJobId();
+		String userMiniJobId = reqProto.getUserMiniJobUuid();
 		
 		boolean isSpeedUp = reqProto.getIsSpeedUp();
 		int gemCost = reqProto.getGemCost();
@@ -79,7 +84,31 @@ public class CompleteMiniJobController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		UUID userUuid = null;
+		UUID userMiniJobUuid = null;
+		
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			userMiniJobUuid = UUID.fromString(userMiniJobId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s, userMiniJobId=%s",
+				userId, userMiniJobId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+	      	CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(userId);
+	      	resEvent.setTag(event.getTag());
+	      	resEvent.setCompleteMiniJobResponseProto(resBuilder.build());
+	      	server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
@@ -133,22 +162,23 @@ public class CompleteMiniJobController extends EventController{
       	log.error("exception2 in CompleteMiniJobController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, int userId, User user,
-			long userMiniJobId, boolean isSpeedUp, int gemCost) {
+	private boolean checkLegit(Builder resBuilder, String userId, User user,
+		String userMiniJobId, boolean isSpeedUp, int gemCost) {
 		
 		//sanity check
-		if (0 == userMiniJobId) {
-			log.error("invalid userMiniJobId. userMiniJobId=" + userMiniJobId);
+		if (null == userMiniJobId || userMiniJobId.isEmpty()) {
+			log.error(String.format(
+				"invalid userMiniJobId. userMiniJobId=%s", userMiniJobId));
 			return false;
 		}
 		
-		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
-		Map<Long, MiniJobForUser> idToUserMiniJob =
-				getMiniJobForUserRetrieveUtil()
+		Collection<String> userMiniJobIds = Collections.singleton(userMiniJobId);
+		Map<String, MiniJobForUser> idToUserMiniJob =
+				miniJobForUserRetrieveUtil
 				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
 	
@@ -178,8 +208,8 @@ public class CompleteMiniJobController extends EventController{
 	  	return true;
 	  }
 	
-	private boolean writeChangesToDB(int userId, User user,
-			long userMiniJobId, boolean isSpeedUp, int gemCost,
+	private boolean writeChangesToDB(String userId, User user,
+			String userMiniJobId, boolean isSpeedUp, int gemCost,
 			Timestamp clientTime, Map<String, Integer> currencyChange) {
 		
 		//update user currency
@@ -189,9 +219,9 @@ public class CompleteMiniJobController extends EventController{
 
 		if (isSpeedUp &&
 				!updateUser(user, gemsChange, cashChange, oilChange)) {
-			log.error("unexpected error: could not decrement user gems by " +
-					gemsChange + ", cash by " + cashChange + ", and oil by " +
-					oilChange);
+			log.error(String.format(
+				"could not decrement user gems by %s, cash by %s, and oil by %s",
+				gemsChange, cashChange, oilChange));
 			return false;
 		} else {
 			if (0 != gemsChange) {
@@ -215,19 +245,19 @@ public class CompleteMiniJobController extends EventController{
 				oilChange, gemsChange);
 
 		if (numChange <= 0) {
-			log.error("unexpected error: problem with updating user gems," +
-					" cash, and oil. gemChange=" + gemsChange + ", cash= " +
-					cashChange + ", oil=" + oilChange + " user=" + u);
+			log.error(String.format(
+				"problem with updating resources. gemChange=%s, cash=%s, oil=%s, user=%s",
+				gemsChange, cashChange, oilChange, u));
 			return false;
 		}
 		return true;
 	}
 	
 
-	private void writeToUserCurrencyHistory(User aUser, long userMiniJobId,
+	private void writeToUserCurrencyHistory(User aUser, String userMiniJobId,
 			Map<String, Integer> currencyChange, Timestamp curTime,
 			int previousGems) {
-		int userId = aUser.getId();
+		String userId = aUser.getId();
 		String reason = ControllerConstants.UCHRFC__SPED_UP_COMPLETE_MINI_JOB;
 		StringBuilder detailsSb = new StringBuilder();
 		detailsSb.append("userMiniJobId=");
@@ -256,20 +286,32 @@ public class CompleteMiniJobController extends EventController{
 		this.locker = locker;
 	}
 
-	public MonsterForUserRetrieveUtils getMonsterForUserRetrieveUtils() {
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils()
+	{
 		return monsterForUserRetrieveUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-			MonsterForUserRetrieveUtils monsterForUserRetrieveUtils) {
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils )
+	{
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 
-
+	
 	public MiniJobForUserRetrieveUtil getMiniJobForUserRetrieveUtil() {
 		return miniJobForUserRetrieveUtil;
 	}
-
 
 	public void setMiniJobForUserRetrieveUtil(
 			MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil) {
