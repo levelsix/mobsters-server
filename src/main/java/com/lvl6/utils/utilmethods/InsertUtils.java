@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,10 @@ public class InsertUtils implements InsertUtil{
 
   public static InsertUtil get() {
     return (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
+  }
+  
+  private String randomUUID() {
+    return UUID.randomUUID().toString();
   }
 
   //	@Autowired
@@ -136,7 +141,10 @@ public class InsertUtils implements InsertUtil{
   public boolean insertUserStructJustBuilt(String userId, int structId,
       Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
       CoordinatePair structCoords) {
+    String id = randomUUID();
+    
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__ID, id);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structId);
     insertParams
@@ -166,7 +174,10 @@ public class InsertUtils implements InsertUtil{
   @Override
   public String insertUserStruct(String userId, int structId, CoordinatePair coordinates,
   		Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete) {
+    String userStructId = randomUUID();
+    
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, coordinates.getX());
@@ -178,8 +189,13 @@ public class InsertUtils implements InsertUtil{
     	
     }
 
-    int userStructId = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_STRUCTURE_FOR_USER, insertParams);
+    
+    if (numChanged != 1) {
+      userStructId = null;
+    }
+    
     return userStructId;
   }
 
@@ -190,12 +206,17 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertUserStructs(List<String> userIdList, List<Integer> structIdList,
   		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
-  		List<Timestamp> retrievedTimeList, List<Boolean> isComplete) { 
+  		List<Timestamp> retrievedTimeList, List<Boolean> isComplete) {
   	String tablename = DBConstants.TABLE_STRUCTURE_FOR_USER;
 
   	//did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
   	Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
   	int numRows = userIdList.size();
+    
+    List<String> userStructIds = new ArrayList<String>();
+    for (int i = 0; i < numRows; i++) {
+      userStructIds.add(randomUUID());
+    }
 
   	insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID,
   			userIdList);														
@@ -217,6 +238,7 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertIAPHistoryElem(org.json.JSONObject, int, com.lvl6.info.User, double)
    */
   @Override
+  //TODO
   public boolean insertIAPHistoryElem(JSONObject appleReceipt,
       int diamondChange, int coinChange, User user, double cashCost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -288,8 +310,10 @@ public class InsertUtils implements InsertUtil{
   public String insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
   		String facebookId, int avatarMonsterId, String email, String fbData) {
+    String userId = randomUUID();
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.USER__ID, userId);
     insertParams.put(DBConstants.USER__NAME, name);
     insertParams.put(DBConstants.USER__LEVEL, level);
     insertParams.put(DBConstants.USER__GEMS, gems);
@@ -323,8 +347,11 @@ public class InsertUtils implements InsertUtil{
     }
     insertParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, createTime);
     
-    int userId = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_USER, insertParams);
+    if (numChanged != 1) {
+      userId = null;
+    }
     return userId;
   }
   
@@ -350,7 +377,9 @@ public class InsertUtils implements InsertUtil{
   @Override
   public String insertClan(String name, Timestamp createTime, String description, String tag,
       boolean requestToJoinRequired, int clanIconId) {
+    String clanId = randomUUID();
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.CLANS__ID, clanId);
     insertParams.put(DBConstants.CLANS__NAME, name);
 //    insertParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
     insertParams.put(DBConstants.CLANS__CREATE_TIME, createTime);
@@ -359,8 +388,11 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.CLANS__REQUEST_TO_JOIN_REQUIRED, requestToJoinRequired);
     insertParams.put(DBConstants.CLANS__CLAN_ICON_ID, clanIconId);
 
-    int clanId = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_CLANS, insertParams);
+    if (numChanged != 1) {
+      clanId = null;
+    }
     return clanId;
   }
 
@@ -383,7 +415,10 @@ public class InsertUtils implements InsertUtil{
   @Override
   public String insertClanChatPost(String userId, String clanId, String content,
       Timestamp timeOfPost) {
+    String wallPostId = randomUUID();
+    
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.CLAN_CHAT_POST__ID, wallPostId);
     insertParams.put(DBConstants.CLAN_CHAT_POST__POSTER_ID, userId);
     insertParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID,
         clanId);
@@ -391,8 +426,11 @@ public class InsertUtils implements InsertUtil{
         timeOfPost);
     insertParams.put(DBConstants.CLAN_CHAT_POST__CONTENT, content);
 
-    int wallPostId = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_CLAN_CHAT_POST, insertParams);
+    if (numChanged != 1) {
+      wallPostId = null;
+    }
     return wallPostId;
   }
   
@@ -424,9 +462,12 @@ public class InsertUtils implements InsertUtil{
   public int insertIntoUserCurrencyHistory (String userId, Timestamp date, String resourceType, 
       int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange,
       String details) {
+    String userCurrId = randomUUID();
+    
     String tableName = DBConstants.TABLE_USER_CURRENCY_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    
+
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__ID, userCurrId);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID, userId);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, date);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__RESOURCE_TYPE, resourceType);
@@ -454,9 +495,14 @@ public class InsertUtils implements InsertUtil{
     //did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
     Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
     int numRows = userIds.size();
+    
+    List<String> userCurrIds = new ArrayList<String>();
+    for (int i = 0; i < numRows; i++) {
+      userCurrIds.add(randomUUID());
+    }
 
-    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID,
-        userIds);														
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__ID, userCurrIds);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID, userIds);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, dates);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__RESOURCE_TYPE, resourceTypes);
     if(null != changesToCurrencies && 0 < changesToCurrencies.size()) {
@@ -477,9 +523,12 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoLoginHistory(String udid, String userId, Timestamp now, boolean isLogin,
       boolean goingThroughTutorial) {
+    String loginId = randomUUID();
+    
     String tableName = DBConstants.TABLE_LOGIN_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    
+
+    insertParams.put(DBConstants.LOGIN_HISTORY__ID, loginId);
     insertParams.put(DBConstants.LOGIN_HISTORY__UDID, udid);
     //if going through tutorial, no id exists
     if(!goingThroughTutorial) {
@@ -495,9 +544,12 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId,
       Timestamp now) {
+    String loginId = randomUUID();
+    
     String tableName = DBConstants.TABLE_USER_BEFORE_TUTORIAL_COMPLETION;
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    
+
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__ID, loginId);
     insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID, openUdid);
     insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__UDID, udid);
     insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__MAC, mac);
@@ -548,46 +600,57 @@ public class InsertUtils implements InsertUtil{
   
   
   public String insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost) {
+    String wallPostId = randomUUID();
+    
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__ID, wallPostId);
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, timeOfPost);
 
-    int wallPostId = DBConnection.get().insertIntoTableBasicReturnId(
+    int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_USER_PRIVATE_CHAT_POST, insertParams);
+    if (numChanged != 1) {
+      wallPostId = null;
+    }
     return wallPostId;
   }
   
   public List<String> insertIntoPrivateChatPosts(List<String> posterIds, List<String> recipientIds,
       List<String> contents, List<Date> timeOfPosts) {
     String tableName = DBConstants.TABLE_USER_PRIVATE_CHAT_POST;
-    List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-    for(int i = 0; i < posterIds.size(); i++){
-      String posterId = posterIds.get(i);
-      String recipientId = recipientIds.get(i);
-      String content = contents.get(i);
-      Date dateOfPost = timeOfPosts.get(i);
-      Timestamp ts = new Timestamp(dateOfPost.getTime());
-      
-      Map<String, Object> row = new HashMap<String, Object>();
-      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
-      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
-      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
-      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, ts);
-      newRows.add(row);
+    
+    //did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
+    Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+    int numRows = posterIds.size();
+
+    List<String> postIds = new ArrayList<String>();
+    for (int i = 0; i < numRows; i++) {
+      postIds.add(randomUUID());
     }
-    List<Integer> postIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
+
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__ID, postIds);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterIds);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientIds);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, contents);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, timeOfPosts);
+    
+    int numChanged = DBConnection.get().insertIntoTableMultipleRows(tableName, insertParams, numRows);
+    if (numChanged != numRows) {
+      postIds = new ArrayList<String>();
+    }
     return postIds;
   }
   
   //returns the id
   public String insertIntoUserTaskReturnId(String userId, int taskId, int expGained,
   		int cashGained, int oilGained, Timestamp startTime, int taskStageId) {
-	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+    String userTaskId = randomUUID();
 	  
 	  //for recording what-dropped in which-stage
 	  Map<String, Object> row = new HashMap<String, Object>();
+    row.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__USER_ID, userId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_ID, taskId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__EXP_GAINED, expGained);
@@ -596,14 +659,11 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_STAGE_ID, taskStageId);
-	  newRows.add(row);
 	  
-	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
-			  DBConstants.TABLE_TASK_FOR_USER_ONGOING, newRows);
-	  
-	  long userTaskId = 0;
-	  if (!userTaskIdList.isEmpty()) {
-	  	userTaskId = userTaskIdList.get(0);
+	  int numChanged = DBConnection.get().insertIntoTableBasic(
+			  DBConstants.TABLE_TASK_FOR_USER_ONGOING, row);
+	  if (numChanged != 1) {
+	    userTaskId = null;
 	  }
 	  return userTaskId;
   }
@@ -718,9 +778,14 @@ public class InsertUtils implements InsertUtil{
   		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
   		
   		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+  		List<String> tsfuIds = new ArrayList<String>();
   		for (TaskStageForUser tsfu : tsfuList) {
+  		  String tsfuId = randomUUID();
+  		  tsfuIds.add(tsfuId);
+  		  
   			Map<String, Object> newRow = new HashMap<String, Object>();
-  			
+
+        newRow.put(DBConstants.TASK_STAGE_FOR_USER__ID, tsfuId);
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, tsfu.getUserTaskId());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, tsfu.getStageNum());
   			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsfu.getTaskStageMonsterId());
@@ -735,7 +800,11 @@ public class InsertUtils implements InsertUtil{
   		}
   		
   		
-  		return DBConnection.get().insertIntoTableBasicReturnLongIds(tablename, newRows);
+  		int numChanged = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tablename, newRows);
+  		if (numChanged != tsfuList.size()) {
+  		  tsfuIds = new ArrayList<String>();
+  		}
+  		return tsfuIds;
   	}
   
 	@Override
@@ -782,6 +851,7 @@ public class InsertUtils implements InsertUtil{
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		sourceOfPieces = " " + sourceOfPieces + " ";
 		
+		List<String> mfuIds = new ArrayList<String>();
 		for(int i = 0; i < userMonsters.size(); i++){
 			MonsterForUser mfu = userMonsters.get(i);
 			int monsterId = mfu.getMonsterId();
@@ -792,9 +862,14 @@ public class InsertUtils implements InsertUtil{
 			boolean hasAllPieces = mfu.isHasAllPieces();
 			boolean isComplete = mfu.isComplete();
 			int teamSlotNum = mfu.getTeamSlotNum();
+			String userMonsterId = randomUUID();
+			
+			mfuIds.add(userMonsterId);
+			
 			//Since this is a new monster just use argument for sourceOfPieces
 			
 			Map<String, Object> row = new HashMap<String, Object>();
+      row.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
 			row.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
 			row.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
 			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currentExp);
@@ -809,14 +884,16 @@ public class InsertUtils implements InsertUtil{
 			newRows.add(row);
 		}
 		
-		List<Long> monsterForUserIds = DBConnection.get()
-				.insertIntoTableBasicReturnLongIds(tableName, newRows);
-		Log.info("monsterForUserIds= " + monsterForUserIds);
-		return monsterForUserIds;
+		int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != userMonsters.size()) {
+		  mfuIds = new ArrayList<String>();
+		}
+		Log.info("monsterForUserIds= " + mfuIds);
+		return mfuIds;
 	}
 	
 	@Override
-	public String insertIntoMonsterForUserDeleted(String userId, List<String> delReasons,
+	public int insertIntoMonsterForUserDeleted(String userId, List<String> delReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
@@ -888,11 +965,16 @@ public class InsertUtils implements InsertUtil{
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		List<String> inviteIds = new ArrayList<String>();
 		for (String fbId : facebookIds) {
 		  String userStructId = fbIdsToUserStructIds.get(fbId);
 			Integer userStructFbLvl = fbIdsToUserStructsFbLvl.get(fbId);
+			String inviteId = randomUUID();
+			
+			inviteIds.add(inviteId);
 			
 			Map<String, Object> newRow = new HashMap<String, Object>();
+      newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID, inviteId);
 			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
 			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, fbId);
 			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, curTime);
@@ -902,8 +984,11 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		
-		List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
-		return ids;
+		int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+		if (numUpdated != facebookIds.size()) {
+		  inviteIds = new ArrayList<String>();
+		}
+		return inviteIds;
 	}
 
 	//the user monster ids will be ordered in ascending order, and this will determine
@@ -912,8 +997,8 @@ public class InsertUtils implements InsertUtil{
 	public int insertIntoMonsterEvolvingForUser(String userId, String catalystUserMonsterId,
 			List<String> userMonsterIds, Timestamp startTime) {
 		Collections.sort(userMonsterIds);
-		long userMonsterIdOne = userMonsterIds.get(0);
-		long userMOnsterIdTwo = userMonsterIds.get(1);
+		String userMonsterIdOne = userMonsterIds.get(0);
+		String userMOnsterIdTwo = userMonsterIds.get(1);
 		
 		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 		
@@ -1036,17 +1121,17 @@ public class InsertUtils implements InsertUtil{
 		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
 		
 		if (userMonsterIds.size() >= 1) {
-			long userMonsterId = userMonsterIds.get(0);
+			String userMonsterId = userMonsterIds.get(0);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
 		}
 		if (userMonsterIds.size() >= 2) {
-			long userMonsterId = userMonsterIds.get(1);
+		  String userMonsterId = userMonsterIds.get(1);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
 		}
 		if (userMonsterIds.size() >= 3) {
-			long userMonsterId = userMonsterIds.get(2);
+		  String userMonsterId = userMonsterIds.get(2);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
 		}
@@ -1305,14 +1390,19 @@ public class InsertUtils implements InsertUtil{
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 			
+			List<String> rewardIds = new ArrayList<String>();
 			for (ClanEventPersistentUserReward reward : userRewards) {                               
 				Map<String, Object> newRow = new HashMap<String, Object>();
 				
 				String userId = reward.getUserId();                                                       
 				String resourceType = reward.getResourceType();                                        
 				int staticDataId = reward.getStaticDataId();                                           
-				int quantity = reward.getQuantity();                                                   
+				int quantity = reward.getQuantity();   
+				String rewardId = randomUUID();
+				
+				rewardIds.add(rewardId);
 
+        newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__ID, rewardId);  
 				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID, userId);    
 				newRow.put(DBConstants.CLAN_EVENT_PERSISTENT_USER_REWARD__CRS_START_TIME,          
 						crsStartTime);                                                                   
@@ -1328,10 +1418,12 @@ public class InsertUtils implements InsertUtil{
 				
 				newRows.add(newRow);
 			}                                                                                        
-			List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName,
-					newRows);                        
-
-			return ids;                                                                      
+			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);                        
+			if (numUpdated != userRewards.size()) {
+			  rewardIds = new ArrayList<String>();
+			}
+			
+			return rewardIds;                                                                      
 		}                                                                                          
 		
 		@Override
@@ -1408,14 +1500,19 @@ public class InsertUtils implements InsertUtil{
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 			
+			List<String> ofuIds = new ArrayList<String>();
 			for (ObstacleForUser ofu : ofuList) {                               
 				Map<String, Object> newRow = new HashMap<String, Object>();
 				
 				int obstacleId = ofu.getObstacleId();                                           
 				int xcoord = ofu.getXcoord();
 				int ycoord = ofu.getYcoord();
-				String orientation = ofu.getOrientation();                                        
+				String orientation = ofu.getOrientation();
+				String ofuId = randomUUID();
+				
+				ofuIds.add(ofuId);
 
+        newRow.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);   
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   
 				newRow.put(DBConstants.OBSTACLE_FOR_USER__XCOORD, xcoord);      
@@ -1424,10 +1521,13 @@ public class InsertUtils implements InsertUtil{
 				
 				newRows.add(newRow);
 			}                                                                                        
-			List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName,
-					newRows);                        
-
-			return ids;            
+			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName,
+					newRows);
+			if (numUpdated != ofuList.size()) {
+			  ofuIds = new ArrayList<String>();
+			}
+			
+			return ofuIds;            
 		}
 		
 		@Override
@@ -1437,10 +1537,14 @@ public class InsertUtils implements InsertUtil{
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
+			List<String> mjIds = new ArrayList<String>();
 			for (MiniJobForUser mjfu : mjfuList) {
 				Map<String, Object> newRow = new HashMap<String, Object>();
 
+				String mjId = randomUUID();
+				mjIds.add(mjId);
 
+        newRow.put(DBConstants.MINI_JOB_FOR_USER__ID, mjId);
 				newRow.put(DBConstants.MINI_JOB_FOR_USER__USER_ID, userId);    
 				newRow.put(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID,
 						mjfu.getMiniJobId());                                                                   
@@ -1451,10 +1555,12 @@ public class InsertUtils implements InsertUtil{
 
 				newRows.add(newRow);
 			}                                                                                        
-			List<Long> ids = DBConnection.get()
-					.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
-
-			return ids;            
+			int numUpdated = DBConnection.get().insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != mjfuList.size()) {
+			  mjIds = new ArrayList<String>();
+			}
+			
+			return mjIds;            
 
 		}
 		
@@ -1485,9 +1591,13 @@ public class InsertUtils implements InsertUtil{
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
+			List<String> chIds = new ArrayList<String>();
 			for (ClanHelp ch : solicitations) {
+			  String chId = randomUUID();
+			  chIds.add(chId);
 
 				Map<String, Object> newRow = new HashMap<String, Object>();
+        newRow.put(DBConstants.CLAN_HELP__ID, chId);
 				newRow.put(DBConstants.CLAN_HELP__CLAN_ID, ch.getClanId());    
 				newRow.put(DBConstants.CLAN_HELP__USER_ID, ch.getUserId());                                                                   
 				newRow.put(DBConstants.CLAN_HELP__USER_DATA_ID, ch.getUserDataId());      
@@ -1503,14 +1613,12 @@ public class InsertUtils implements InsertUtil{
 				newRows.add(newRow);
 			}
 			
-			List<Long> ids = DBConnection.get()
-				.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
-
-			if (null != ids) {
-				return ids;
-			} else {
-				return new ArrayList<Long>();       
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != solicitations.size()) {
+			  chIds = new ArrayList<String>();
 			}
+			return chIds;
 		}
 		
 		@Override
@@ -1551,9 +1659,13 @@ public class InsertUtils implements InsertUtil{
 
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
+			List<String> ids = new ArrayList<String>();
 			for (ItemForUserUsage ifuu : itemsUsed) {
-
+			  String id = randomUUID();
+			  ids.add(id);
+			  
 				Map<String, Object> newRow = new HashMap<String, Object>();
+        newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ID, id); 
 				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, ifuu.getUserId());                                                                   
 				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID, ifuu.getItemId());    
 				newRow.put(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY, 
@@ -1566,14 +1678,12 @@ public class InsertUtils implements InsertUtil{
 				newRows.add(newRow);
 			}
 			
-			List<Long> ids = DBConnection.get()
-				.insertIntoTableBasicReturnLongIds(tableName, newRows);                        
-
-			if (null != ids) {
-				return ids;
-			} else {
-				return new ArrayList<String>();       
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != itemsUsed.size()) {
+			  ids = new ArrayList<String>();
 			}
+			return ids;
 		}
 		
 }
