@@ -183,7 +183,7 @@ public interface UpdateUtil {
 
   public int updatePvpMonsterDmgMultiplier( String userId, float monsterDmgMultiplier );
   
-  public int updateClanHelp(String userId, String clanId, List<Long> clanHelpIds);
+  public int updateClanHelp(String userId, String clanId, List<String> clanHelpIds);
   
   public int closeClanHelp(String userId, String clanId);
 }

@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveUsersForUserIdsRequestEvent;
 import com.lvl6.events.response.RetrieveUsersForUserIdsResponseEvent;
+import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
@@ -25,6 +27,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -38,6 +41,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
   
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
   
   @Autowired
   protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -88,6 +94,19 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
     Map<String, User> usersByIds = getUserRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
+      List<String> clanIds = new ArrayList<String>();
+      for (User user : usersByIds.values()) {
+        String id = user.getClanId();
+        if (id != null) {
+          clanIds.add(id);
+        }
+      }
+
+      Map<String, Clan> clanIdToClan = new HashMap<String, Clan>();
+      if (!clanIds.isEmpty()) {
+        clanIdToClan = getClanRetrieveUtils().getClansByIds(clanIds);
+      }
+      
       for (User user : usersByIds.values()) {
     	  
     	  //TODO: consider getting from db
@@ -99,8 +118,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     	  if (null != pu) {
     		  plfu = new PvpLeagueForUser(pu);
     	  }
+    	  
+    	  Clan clan = null;
+    	  if (null != user.getClanId()) {
+    	    clan = clanIdToClan.get(clan);
+    	  }
+    	  
     	  resBuilder.addRequestedUsers(CreateInfoProtoUtils
-    			  .createFullUserProtoFromUser(user, plfu));
+    			  .createFullUserProtoFromUser(user, plfu, clan));
         
       }
       
@@ -169,6 +194,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
   public void setMonsterForUserRetrieveUtils(
       MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
     this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
   }
 
 }
