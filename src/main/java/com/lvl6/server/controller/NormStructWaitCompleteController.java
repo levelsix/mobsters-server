@@ -228,7 +228,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean writeChangesToDB(String userId, List<StructureForUser> buildsDone,
   		List<Timestamp> newRetrievedTimes) {
-    if (!UpdateUtils.get().updateUserStructsBuildingIscomplete(userId, buildsDone,
+    if (!UpdateUtils.get().updateUserStructsBuildingIsComplete(userId, buildsDone,
     		newRetrievedTimes)) {
       log.error("problem with marking norm struct builds as complete for one of these structs: " + buildsDone);
       return false;

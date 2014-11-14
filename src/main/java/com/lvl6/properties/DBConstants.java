@@ -662,6 +662,7 @@ public class DBConstants {
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME = "create_time";
 
 	/*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
+  public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;
 	public static final String USER_CURRENCY_HISTORY__USER_ID = GENERIC__USER_ID;
 	public static final String USER_CURRENCY_HISTORY__DATE = "date";
 	public static final String USER_CURRENCY_HISTORY__RESOURCE_TYPE = "resource_type";

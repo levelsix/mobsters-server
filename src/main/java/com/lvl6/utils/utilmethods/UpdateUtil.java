@@ -48,7 +48,7 @@ public interface UpdateUtil {
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
-  public abstract boolean updateUserStructsBuildingIscomplete(String userId,
+  public abstract boolean updateUserStructsBuildingIsComplete(String userId,
       List<StructureForUser> userStructs, List<Timestamp> newPurchaseTimes);
 
   public abstract boolean updateBeginUpgradingUserStruct(String userStructId,
@@ -60,7 +60,7 @@ public interface UpdateUtil {
   /*
    * used for updating last retrieved user struct times
    */
-  public abstract boolean updateUserStructsLastretrieved(
+  public abstract boolean updateUserStructsLastRetrieved(
       Map<String, Timestamp> userStructIdsToLastRetrievedTime,
       Map<String, StructureForUser> structIdsToUserStructs);
 

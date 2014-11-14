@@ -360,7 +360,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     }
   	
-    if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
+    if (!UpdateUtils.get().updateUserStructsLastRetrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
       log.error("problem with updating user structs last retrieved for userStructIds " 
           + userStructIdsToTimesOfRetrieval);
       return false;
