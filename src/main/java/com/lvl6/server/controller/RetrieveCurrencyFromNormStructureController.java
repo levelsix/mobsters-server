@@ -18,19 +18,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
-import com.lvl6.events.response.ReviveInDungeonResponseEvent;
-import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus;
-import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
-import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
@@ -40,9 +33,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveCurrencyFromNormStructureController extends EventController{
@@ -51,6 +45,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public RetrieveCurrencyFromNormStructureController() {
     numAllocatedThreads = 14;
@@ -125,7 +125,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       int previousCash = 0;
       int previousOil = 0;
       
@@ -227,7 +227,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return returnValue;
     }
     
-    List<StructureForUser> userStructList = RetrieveUtils.userStructRetrieveUtils()
+    List<StructureForUser> userStructList = getUserStructRetrieveUtils()
         .getSpecificOrAllUserStructsForUser(userId, userStructIds);
     for(StructureForUser us : userStructList) {
       if(null != us) {
@@ -436,6 +436,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
 
 }

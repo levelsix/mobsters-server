@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -91,28 +92,18 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
-import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
-import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
-import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
-import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
-import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
-import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -129,7 +120,6 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -174,15 +164,18 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected Globals globals;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
 	protected QuestJobForUserRetrieveUtil questJobForUserRetrieveUtil;
 
 	@Autowired
-	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 
 	@Autowired
-	protected PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
+	protected PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
 
 	@Autowired
 	protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil; 
@@ -224,7 +217,7 @@ public class StartupController extends EventController {
 		String udid = reqProto.getUdid();
 		String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
 
-		int playerId = 0;
+		String playerId = null;
 		MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 		log.info("{}ms at getIpOfPlayer", stopWatch.getTime());
 
@@ -263,7 +256,7 @@ public class StartupController extends EventController {
 		log.info("{}ms at start of logic", stopWatch.getTime());
 		try {
 			if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
-				List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
+				List<User> users = getUserRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
 				user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
 				
 				boolean isLogin = true;
@@ -273,7 +266,7 @@ public class StartupController extends EventController {
 				if (user != null) {
 					playerId = user.getId();
 					//if can't lock player, exception will be thrown
-					getLocker().lockPlayer(playerId, this.getClass().getSimpleName());
+					getLocker().lockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
 					log.info("{}ms at got lock", stopWatch.getTime());
 					startupStatus = StartupStatus.USER_IN_DB;
 					log.info("No major update... getting user info");
@@ -408,7 +401,7 @@ public class StartupController extends EventController {
 	private void loginExistingUser(
 		StopWatch stopWatch,
 		String udid,
-		int playerId,
+		String playerId,
 		Builder resBuilder,
 		Date nowDate,
 		Timestamp now,
@@ -461,7 +454,7 @@ public class StartupController extends EventController {
 			
 			//fill up with userIds, and other ids to fetch from tables
 			StartUpResource fillMe = new StartUpResource(
-				RetrieveUtils.userRetrieveUtils());
+				getUserRetrieveUtils());
 			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 				resBuilder, user, playerId);
@@ -1865,22 +1858,27 @@ public class StartupController extends EventController {
 		QuestJobForUserRetrieveUtil questJobForUserRetrieveUtil) {
 		this.questJobForUserRetrieveUtil = questJobForUserRetrieveUtil;
 	}
-	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
-		return pvpLeagueForUserRetrieveUtil;
-	}
-	public void setPvpLeagueForUserRetrieveUtil(
-		PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
-		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
-	}
-
-	public PvpBattleHistoryRetrieveUtil getPvpBattleHistoryRetrieveUtil() {
-		return pvpBattleHistoryRetrieveUtil;
-	}
-	public void setPvpBattleHistoryRetrieveUtil(
-		PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil) {
-		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
-	}
-	public AchievementForUserRetrieveUtil getAchievementForUserRetrieveUtil() {
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+  public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
+    return pvpLeagueForUserRetrieveUtil;
+  }
+  public void setPvpLeagueForUserRetrieveUtil(
+      PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
+    this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+  }
+  public PvpBattleHistoryRetrieveUtil2 getPvpBattleHistoryRetrieveUtil() {
+    return pvpBattleHistoryRetrieveUtil;
+  }
+  public void setPvpBattleHistoryRetrieveUtil(
+      PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil) {
+    this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
+  }
+  public AchievementForUserRetrieveUtil getAchievementForUserRetrieveUtil() {
 		return achievementForUserRetrieveUtil;
 	}
 	public void setAchievementForUserRetrieveUtil(

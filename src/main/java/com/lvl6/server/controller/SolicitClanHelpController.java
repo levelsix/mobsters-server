@@ -26,9 +26,9 @@ import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHel
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class SolicitClanHelpController extends EventController {
@@ -40,6 +40,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Autowired
   protected ClanRetrieveUtils2 clanRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SolicitClanHelpController() {
     numAllocatedThreads = 4;
@@ -117,7 +120,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User user = getUserRetrieveUtils().getUserById(userId);
       
       boolean legitLeave = checkLegitLeave(resBuilder, user);
       
@@ -259,6 +262,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
   {
     this.clanRetrieveUtil = clanRetrieveUtil;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,8 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class MoveOrRotateNormStructureController extends EventController {
@@ -28,6 +30,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
   public MoveOrRotateNormStructureController() {
     numAllocatedThreads = 3;
@@ -50,7 +55,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userStructId = reqProto.getUserStructId();
+    String userId = senderProto.getUserUuid();
+    String userStructId = reqProto.getUserStructUuid();
     MoveOrRotateNormStructType type = reqProto.getType();
 
     CoordinatePair newCoords = null;
@@ -62,14 +68,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MoveOrRotateNormStructureResponseProto.Builder resBuilder = MoveOrRotateNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+          userStructUuid = UUID.fromString(userStructId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userStructId=%s",
+          userId, userStructId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+      MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
 
     //only locking so you cant moveOrRotate it hella times
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
       
-      StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+      StructureForUser userStruct = getStructureForUserRetrieveUtils().getSpecificUserStruct(userStructId);
       if (userStruct == null) {
         legit = false;
         resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
@@ -105,8 +136,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     } catch (Exception e) {
       log.error("exception in MoveOrRotateNormStructure processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+        MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in MoveOrRotateNormStructure processEvent", e);
+      }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
@@ -116,6 +157,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils() {
+    return structureForUserRetrieveUtils;
+  }
+
+  public void setStructureForUserRetrieveUtils(
+      StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+    this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
   }
   
 }

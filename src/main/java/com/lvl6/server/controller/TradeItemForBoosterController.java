@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForBoosterRequestEvent;
 import com.lvl6.events.response.TradeItemForBoosterResponseEvent;
-import com.lvl6.events.response.TradeItemForSpeedUpsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -33,17 +32,17 @@ import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
-import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -58,6 +57,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   @Override
   public RequestEvent createRequestEvent() {
@@ -109,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     //TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      User aUser = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       Item itm = ItemRetrieveUtils.getItemForId(itemId);
       //TODO: Consider writing currency history and other history
 
@@ -374,6 +376,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     log.info("wrote to booster pack history!!!! \t numInserted=" + num +
         "\t boosterItem=" + itemsUserReceives);
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

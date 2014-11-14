@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +18,16 @@ import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class NormStructWaitCompleteController extends EventController{
@@ -36,6 +36,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
   public NormStructWaitCompleteController() {
     numAllocatedThreads = 5;
@@ -57,9 +60,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    List<Integer> userStructIds = reqProto.getUserStructIdList();
-    userStructIds = new ArrayList<Integer>(userStructIds);
+    String userId = senderProto.getUserUuid();
+    List<String> userStructIds = reqProto.getUserStructUuidList();
+    userStructIds = new ArrayList<String>(userStructIds);
     Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 
     //stuff to send to client
@@ -67,9 +70,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
 
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
     try {
-      List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils()
+      userUuid = UUID.fromString(userId);
+
+      if (userStructIds != null) {
+        for (String userStructId : userStructIds) {
+          userStructUuid = UUID.fromString(userStructId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userStructIds=%s",
+          userId, userStructIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+      NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      List<StructureForUser> userStructs = getStructureForUserRetrieveUtils()
       		.getSpecificOrAllUserStructsForUser(userId, userStructIds);
 
       List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
@@ -86,8 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (success) {
       	resBuilder.setStatus(NormStructWaitCompleteStatus.SUCCESS);
-      	List<StructureForUser> newUserStructs = RetrieveUtils
-      			.userStructRetrieveUtils()
+      	List<StructureForUser> newUserStructs = getStructureForUserRetrieveUtils()
       			.getSpecificOrAllUserStructsForUser(userId, userStructIds);
       	for (StructureForUser userStruct : newUserStructs) {
       		resBuilder.addUserStruct(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
@@ -101,14 +133,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     } catch (Exception e) {
       log.error("exception in NormStructWaitCompleteController processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+        NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in NormStructWaitCompleteController processEvent", e);
+      }
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
-      List<StructureForUser> userStructs, List<Integer> userStructIds,
-      int userId, Timestamp clientTime, 
+      List<StructureForUser> userStructs, List<String> userStructIds,
+      String userId, Timestamp clientTime, 
       List<Timestamp> newRetrievedTimes) {
   	
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
@@ -121,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //for each user structure complete the ones the client said are done.
     //replace what client sent with the ones that are actually done
     List<StructureForUser> validUserStructs = new ArrayList<StructureForUser>();
-    List<Integer> validUserStructIds = new ArrayList<Integer>();
+    List<String> validUserStructIds = new ArrayList<String>();
     
     List<Timestamp> timesBuildsFinished = calculateValidUserStructs(userId,
     	clientTime, userStructs, validUserStructIds, validUserStructs);
@@ -142,14 +184,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   //"validUserStructIds" and "validUserStructs" WILL BE POPULATED
-  private List<Timestamp> calculateValidUserStructs(int userId, Timestamp clientTime, 
+  private List<Timestamp> calculateValidUserStructs(String userId, Timestamp clientTime, 
   		List<StructureForUser> userStructs, 
-  		List<Integer> validUserStructIds, List<StructureForUser> validUserStructs) {
+  		List<String> validUserStructIds, List<StructureForUser> validUserStructs) {
   	List<Timestamp> timesBuildsFinished = new ArrayList<Timestamp>();
     Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
     
     for (StructureForUser us : userStructs) {
-      if (us.getUserId() != userId) {
+      if (!us.getUserId().equals(userId)) {
         log.warn("user struct's owner's id is " + us.getUserId() + ", and user id is " + userId);
         continue;
       }
@@ -184,7 +226,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
 
-  private boolean writeChangesToDB(int userId, List<StructureForUser> buildsDone,
+  private boolean writeChangesToDB(String userId, List<StructureForUser> buildsDone,
   		List<Timestamp> newRetrievedTimes) {
     if (!UpdateUtils.get().updateUserStructsBuildingIscomplete(userId, buildsDone,
     		newRetrievedTimes)) {
@@ -200,6 +242,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils() {
+    return structureForUserRetrieveUtils;
+  }
+
+  public void setStructureForUserRetrieveUtils(
+      StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+    this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
   }
 
 }

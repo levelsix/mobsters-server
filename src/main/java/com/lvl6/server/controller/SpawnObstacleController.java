@@ -13,12 +13,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SpawnObstacleRequestEvent;
 import com.lvl6.events.response.SpawnObstacleResponseEvent;
-import com.lvl6.events.response.TradeItemForBoosterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.Builder;
@@ -27,10 +25,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 
@@ -44,6 +42,9 @@ public class SpawnObstacleController extends EventController{
 	
 	@Autowired
 	protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 
 	public SpawnObstacleController() {
@@ -100,7 +101,7 @@ public class SpawnObstacleController extends EventController{
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+			User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 			
 			boolean legitComplete = checkLegit(resBuilder, userId, user, mopList);
 
@@ -207,6 +208,16 @@ public class SpawnObstacleController extends EventController{
   }
   public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
 	  this.structureStuffUtil = structureStuffUtil;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

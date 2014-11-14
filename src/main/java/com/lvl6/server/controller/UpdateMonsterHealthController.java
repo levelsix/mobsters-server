@@ -15,19 +15,17 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
 import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
-import com.lvl6.events.response.UpgradeNormStructureResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus;
-import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class UpdateMonsterHealthController extends EventController {
@@ -36,6 +34,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	protected Locker locker;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public UpdateMonsterHealthController() {
 		numAllocatedThreads = 4;
@@ -173,7 +174,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (!isUmchpListEmpty) {
 			//extract the ids so it's easier to get userMonsters from db
 			List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
-			Map<String, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+			Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
 					.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 
 			if (null == userMonsters || userMonsters.isEmpty()) {
@@ -246,5 +247,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
 
 }

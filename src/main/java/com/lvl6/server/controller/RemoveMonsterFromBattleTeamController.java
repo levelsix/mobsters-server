@@ -11,17 +11,15 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RemoveMonsterFromBattleTeamRequestEvent;
 import com.lvl6.events.response.RemoveMonsterFromBattleTeamResponseEvent;
-import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class RemoveMonsterFromBattleTeamController extends EventController {
@@ -30,6 +28,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public RemoveMonsterFromBattleTeamController() {
     numAllocatedThreads = 4;
@@ -89,7 +90,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
     	//make sure it exists
-    	MonsterForUser mfu = RetrieveUtils.monsterForUserRetrieveUtils().getSpecificUserMonster(userMonsterId);
+    	MonsterForUser mfu = getMonsterForUserRetrieveUtils().getSpecificUserMonster(userMonsterId);
     	
       boolean legit = checkLegit(resBuilder, userId, userMonsterId, mfu);
 
@@ -175,6 +176,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
   
 }

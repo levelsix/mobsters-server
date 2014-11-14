@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetFacebookIdRequestEvent;
 import com.lvl6.events.response.SetFacebookIdResponseEvent;
-import com.lvl6.events.response.SetGameCenterIdResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -22,12 +21,11 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
-import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class SetFacebookIdController extends EventController {
 
@@ -35,6 +33,9 @@ import com.lvl6.utils.RetrieveUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SetFacebookIdController() {
     numAllocatedThreads = 1;
@@ -105,7 +106,7 @@ import com.lvl6.utils.RetrieveUtils;
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
-    	Map<String, User> userMap = RetrieveUtils.userRetrieveUtils()
+    	Map<String, User> userMap = getUserRetrieveUtils()
     			.getUsersForFacebookIdsOrUserIds(facebookIds, userIds);
     	User user = userMap.get(userId);
 
@@ -214,6 +215,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

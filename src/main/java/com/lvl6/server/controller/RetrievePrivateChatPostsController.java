@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrievePrivateChatPostsRequestEvent;
 import com.lvl6.events.response.RetrievePrivateChatPostsResponseEvent;
-import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.User;
@@ -24,14 +23,13 @@ import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus;
-import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class RetrievePrivateChatPostsController extends EventController{
 
@@ -41,6 +39,9 @@ import com.lvl6.utils.RetrieveUtils;
   protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
   @Autowired
   protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public RetrievePrivateChatPostsController() {
     numAllocatedThreads = 5;
@@ -106,7 +107,7 @@ import com.lvl6.utils.RetrieveUtils;
           userIds.add(otherUserId);
           Map<String, User> usersByIds = null;
           if (userIds.size() > 0) {
-            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+            usersByIds = getUserRetrieveUtils().getUsersByIds(userIds);
             
             //for not hitting the db for every private chat post
             Map<String, MinimumUserProtoWithLevel> userIdsToMups =
@@ -193,6 +194,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
     this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

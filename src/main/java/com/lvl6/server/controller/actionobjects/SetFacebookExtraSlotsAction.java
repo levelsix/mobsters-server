@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -16,7 +17,7 @@ import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetFacebookExtraSlotsAction implements StartUpAction
@@ -24,13 +25,16 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
 	private final StartupResponseProto.Builder resBuilder;
 	private final User user;
-	private final int userId;
+	private final String userId;
 	
 	public SetFacebookExtraSlotsAction(
-		StartupResponseProto.Builder resBuilder, User user, int userId
+		StartupResponseProto.Builder resBuilder, User user, String userId
 		)
 	{
 		this.resBuilder = resBuilder;
@@ -39,11 +43,11 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 	}
 	
 	//derived state
-	private Map<Integer, UserFacebookInviteForSlot> idsToInvitesToMe;
-	private Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe;
+	private Map<String, UserFacebookInviteForSlot> idsToInvitesToMe;
+	private Map<String, UserFacebookInviteForSlot> idsToInvitesFromMe;
 	private Set<String> recipientFacebookIds;
-	private Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites;
-	private Set<Integer> inviterUserIds;
+	private Map<String, UserFacebookInviteForSlot> inviterIdsToInvites;
+	private Set<String> inviterUserIds;
 	private List<User> recipients;
 	private List<User> inviters;
 	
@@ -77,19 +81,19 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 			return;
 		}
 		
-		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers();
-		Map<Integer, Clan> clanIdsToClans = useMe.getClanIdsToClans();
+		Map<String, User> userIdsToUsers = useMe.getUserIdsToUsers();
+		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans();
 
 		separateUsersIntoRecipientsAndInviters(userIdsToUsers);
 
 		//send all the invites where this user is the one being invited
-		for (Integer inviterId : inviterUserIds) {
+		for (String inviterId : inviterUserIds) {
 			UserFacebookInviteForSlot invite = inviterIdsToInvites.get(inviterId);
 			User inviter = userIdsToUsers.get(inviterId);
 			Clan inviterClan = null;
 			MinimumUserProtoWithFacebookId inviterProto = null;
 			
-			int clanId = inviter.getClanId();
+			String clanId = inviter.getClanId();
 			if (clanIdsToClans.containsKey(clanId)) {
 				inviterClan = clanIdsToClans.get(clanId); 
 			}
@@ -102,7 +106,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		}
 
 		Clan userClan = null;
-		int clanId = user.getClanId();
+		String clanId = user.getClanId();
 		if (clanIdsToClans.containsKey(clanId)) {
 			userClan = clanIdsToClans.get(clanId); 
 		}
@@ -122,7 +126,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 	{
 		//get the invites where this user is the recipient, get unaccepted, hence, unredeemed invites
 		String fbId = user.getFacebookId();
-		List<Integer> specificInviteIds = null;
+		List<String> specificInviteIds = null;
 		boolean filterByAccepted = true;
 		boolean isAccepted = false;
 		boolean filterByRedeemed = false;
@@ -130,25 +134,25 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		
 		//base case where user does not have facebook id
 		if (null != fbId && !fbId.isEmpty()) {
-			idsToInvitesToMe = UserFacebookInviteForSlotRetrieveUtils
+			idsToInvitesToMe = getUserFacebookInviteForSlotRetrieveUtils()
 				.getSpecificOrAllInvitesForRecipient(
 					fbId, specificInviteIds, filterByAccepted,
 					isAccepted, filterByRedeemed, isRedeemed);
 		}
 		
 		if (null == idsToInvitesToMe) {
-			idsToInvitesToMe = new HashMap<Integer, UserFacebookInviteForSlot>();
+			idsToInvitesToMe = new HashMap<String, UserFacebookInviteForSlot>();
 		}
 
 		//get the invites where this user is the inviter: get accepted, unredeemed/redeemed does not matter 
 		isAccepted = true;
-		idsToInvitesFromMe = UserFacebookInviteForSlotRetrieveUtils
+		idsToInvitesFromMe = getUserFacebookInviteForSlotRetrieveUtils()
 			.getSpecificOrAllInvitesForInviter(
 				userId, specificInviteIds, filterByAccepted,
 				isAccepted, filterByRedeemed, isRedeemed);
 		
 		if (null == idsToInvitesFromMe) {
-			idsToInvitesFromMe = new HashMap<Integer, UserFacebookInviteForSlot>();
+			idsToInvitesFromMe = new HashMap<String, UserFacebookInviteForSlot>();
 		}
 	}
 	
@@ -163,10 +167,10 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 	}
 
 	private void getInviterIds() {
-		inviterUserIds = new HashSet<Integer>(); 
-		inviterIdsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
+		inviterUserIds = new HashSet<String>(); 
+		inviterIdsToInvites = new HashMap<String, UserFacebookInviteForSlot>();
 		for (UserFacebookInviteForSlot invite : idsToInvitesToMe.values()) {
-			int userId = invite.getInviterUserId();
+		  String userId = invite.getInviterUserId();
 			inviterUserIds.add(userId);
 
 			inviterIdsToInvites.put(userId, invite);
@@ -176,7 +180,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 
 	//given map of userIds to users, list of recipient facebook ids and list of inviter
 	//user ids, separate the map of users into recipient and inviter
-	private void separateUsersIntoRecipientsAndInviters(Map<Integer, User> idsToUsers)
+	private void separateUsersIntoRecipientsAndInviters(Map<String, User> idsToUsers)
 	{
 
 		recipients = new ArrayList<User>();
@@ -185,7 +189,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		Set<String> recipientFacebookIdsSet = new HashSet<String>(recipientFacebookIds);
 
 		//set the recipients
-		for (Integer userId : idsToUsers.keySet()) {
+		for (String userId : idsToUsers.keySet()) {
 			User u = idsToUsers.get(userId);
 			String facebookId = u.getFacebookId();
 
@@ -196,7 +200,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		}
 
 		//set the inviters
-		for (Integer inviterId : inviterUserIds) {
+		for (String inviterId : inviterUserIds) {
 			if (idsToUsers.containsKey(inviterId)) {
 				User u = idsToUsers.get(inviterId);
 				inviters.add(u);
@@ -204,4 +208,15 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		}
 
 	}
+
+  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+    return userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public void setUserFacebookInviteForSlotRetrieveUtils(
+      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+  }
+	
+	
 }

@@ -27,7 +27,7 @@ public interface InsertUtil {
 	//	public abstract void setCache(CacheManager cache);
 
 
-	public abstract boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
+	public abstract boolean insertUserCityExpansionData(String userId, Timestamp expandStartTime, 
 			int xPosition, int yPosition, boolean isExpanding);
 
 //	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
@@ -38,19 +38,19 @@ public interface InsertUtil {
 //			Timestamp startTimeOfEnhancement);
 
 
-	public abstract int insertUserQuest(int userId, int questId);
+	public abstract int insertUserQuest(String userId, int questId);
 	
-	public abstract int insertUserQuestJobs(int userId, int questId,
+	public abstract int insertUserQuestJobs(String userId, int questId,
 			  List<Integer> questJobIds);
 	
-	public abstract boolean insertUserStructJustBuilt(int userId, int structId,
+	public abstract boolean insertUserStructJustBuilt(String userId, int structId,
 			Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
 			CoordinatePair structCoords);
 
 	/*
 	 * returns the id of the userstruct, -1 if none
 	 */
-	public abstract int insertUserStruct(int userId, int structId, CoordinatePair coordinates,
+	public abstract String insertUserStruct(String userId, int structId, CoordinatePair coordinates,
 			Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete);
 	
 	public abstract int insertUserStructs(List<String> userIdList, List<Integer> structIdList,
@@ -112,7 +112,7 @@ public interface InsertUtil {
 	public abstract int insertIntoBoosterPackPurchaseHistory(String userId, int boosterPackId, 
       Timestamp timeOfPurchase, BoosterItem bi, List<String> userMonsterIds);
 
-	public abstract int insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
+	public abstract String insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
 
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);

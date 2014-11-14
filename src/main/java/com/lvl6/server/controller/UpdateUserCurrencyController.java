@@ -15,18 +15,16 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserCurrencyRequestEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
-import com.lvl6.events.response.UpgradeNormStructureResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
@@ -34,6 +32,9 @@ import com.lvl6.utils.RetrieveUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public UpdateUserCurrencyController() {
     numAllocatedThreads = 4;
@@ -95,7 +96,7 @@ import com.lvl6.utils.RetrieveUtils;
     
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       int previousGems = 0;
       int previousCash = 0;
       int previousOil = 0;
@@ -329,6 +330,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

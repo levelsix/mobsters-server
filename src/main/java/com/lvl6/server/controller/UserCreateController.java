@@ -26,7 +26,6 @@ import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.Builder;
@@ -34,6 +33,7 @@ import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
@@ -42,8 +42,6 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
-import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -65,6 +63,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
  
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public UserCreateController() {
     numAllocatedThreads = 3;
@@ -177,7 +178,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private boolean checkLegitUserCreate(boolean gotLock, Builder resBuilder, String udid,
   		String facebookId, String name) {
-  	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, facebookId);
+  	List<User> users = getUserRetrieveUtils().getUserByUDIDorFbId(udid, facebookId);
   	
   	if (!gotLock) {
   		log.error("did not get fb lock. fbId=" + facebookId + ", udid=" + udid + ", name="
@@ -564,5 +565,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
 	  this.structureStuffUtil = structureStuffUtil;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 }

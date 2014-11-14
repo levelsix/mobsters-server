@@ -37,10 +37,10 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -58,6 +58,9 @@ public class RedeemMiniJobController extends EventController{
 
   @Autowired
   protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public RedeemMiniJobController() {
     numAllocatedThreads = 4;
@@ -126,7 +129,7 @@ public class RedeemMiniJobController extends EventController{
     try {
       //retrieve whatever is necessary from the db
       //TODO: consider only retrieving user if the request is valid
-      User user = RetrieveUtils.userRetrieveUtils()
+      User user = getUserRetrieveUtils()
           .getUserById(senderProto.getUserUuid());
       List<MiniJobForUser> mjfuList = new ArrayList<MiniJobForUser>();
 
@@ -412,6 +415,16 @@ public class RedeemMiniJobController extends EventController{
   public void setMiniJobForUserRetrieveUtil(
       MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil) {
     this.miniJobForUserRetrieveUtil = miniJobForUserRetrieveUtil;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

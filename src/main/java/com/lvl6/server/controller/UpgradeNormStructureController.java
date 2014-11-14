@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpgradeNormStructureRequestEvent;
-import com.lvl6.events.response.BeginObstacleRemovalResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpgradeNormStructureResponseEvent;
 import com.lvl6.info.Structure;
@@ -23,15 +22,15 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
-import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class UpgradeNormStructureController extends EventController {
@@ -40,6 +39,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public UpgradeNormStructureController() {
     numAllocatedThreads = 4;
@@ -100,10 +105,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-    	User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+    	User user = getUserRetrieveUtils().getUserById(userId);
     	Structure currentStruct = null;
     	Structure nextLevelStruct = null;
-    	StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+    	StructureForUser userStruct = getUserStructRetrieveUtils().getSpecificUserStruct(userStructId);
     	
     	if (userStruct != null) {
     		currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
@@ -327,6 +332,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
 
 }

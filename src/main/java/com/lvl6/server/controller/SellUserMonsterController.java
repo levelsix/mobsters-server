@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SellUserMonsterRequestEvent;
 import com.lvl6.events.response.SellUserMonsterResponseEvent;
-import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -28,14 +27,15 @@ import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
@@ -47,6 +47,12 @@ public class SellUserMonsterController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public SellUserMonsterController() {
 		numAllocatedThreads = 4;
@@ -122,10 +128,9 @@ public class SellUserMonsterController extends EventController {
 		try {
 			int previousCash = 0;
 
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			Map<String, MonsterForUser> idsToUserMonsters = RetrieveUtils
-					.monsterForUserRetrieveUtils().getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
-							userMonsterIds);
+			User aUser = getUserRetrieveUtils().getUserById(userId);
+			Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
+			    .getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIds);
 
 			boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
 					idsToUserMonsters);
@@ -328,5 +333,22 @@ public class SellUserMonsterController extends EventController {
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
 
 }

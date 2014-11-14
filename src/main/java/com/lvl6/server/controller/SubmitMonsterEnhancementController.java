@@ -38,10 +38,11 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class SubmitMonsterEnhancementController extends EventController {
@@ -57,6 +58,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
   @Autowired
   protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public SubmitMonsterEnhancementController() {
     numAllocatedThreads = 3;
@@ -141,7 +148,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int previousOil = 0;
       int previousGems = 0;
       //get whatever we need from the database
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       Map<String, MonsterEnhancingForUser> alreadyEnhancing =
           getMonsterEnhancingForUserRetrieveUtils().getMonstersForUser(userId);
       Map<String, MonsterHealingForUser> alreadyHealing =
@@ -154,8 +161,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Set<String> newAndUpdatedIds = new HashSet<String>();
       newAndUpdatedIds.addAll(newMap.keySet());
       //			newAndUpdatedIds.addAll(updateMap.keySet());
-      Map<String, MonsterForUser> existingUserMonsters = RetrieveUtils
-          .monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newAndUpdatedIds);
+      Map<String, MonsterForUser> existingUserMonsters = getMonsterForUserRetrieveUtils()
+          .getSpecificOrAllUserMonstersForUser(userId, newAndUpdatedIds);
 
       boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
           alreadyEnhancing, alreadyHealing, newMap, evolution,
@@ -564,5 +571,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void setMonsterEvolvingForUserRetrieveUtils(
       MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
     this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
 }
