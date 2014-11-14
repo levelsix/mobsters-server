@@ -183,7 +183,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     //see if the user can upgrade it
-    if (user.getId() != userStruct.getUserId()) {
+    if (!user.getId().equals(userStruct.getUserId())) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
       log.error("user struct belongs to someone else with id " + userStruct.getUserId());
       return false;

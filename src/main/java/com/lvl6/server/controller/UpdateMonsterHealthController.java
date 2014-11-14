@@ -63,9 +63,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		Timestamp curTime = new Timestamp(reqProto.getClientTime());
 		List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 
-		String userTaskId = reqProto.getUserTaskUuid();
 		boolean isUpdateTaskStageForUser = reqProto.getIsUpdateTaskStageForUser();
 		int nuTaskStageId = reqProto.getNuTaskStageId();
+
+    String userTaskId = null;
+    if (reqProto.hasUserTaskUuid()) {
+      userTaskId = reqProto.getUserTaskUuid();
+    }
 
 		//make monsterPieceDropped to false in db
 		String droplessTsfuId = null;
@@ -87,7 +91,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
-			userTaskUuid = UUID.fromString(userTaskId);
+			
+			if (userTaskUuid != null) {
+	      userTaskUuid = UUID.fromString(userTaskId);
+			}
 
 			if (droplessTsfuId != null) {
 				droplessTsfuUuid = UUID.fromString(droplessTsfuId);

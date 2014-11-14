@@ -20,13 +20,13 @@ public class HazelcastScheduledTasks {
 	private static final Logger log = LoggerFactory.getLogger(HazelcastScheduledTasks.class);
 	
 	@Resource(name = "playersByPlayerId")
-	protected IMap<Integer, ConnectedPlayer> playersByPlayerId;
+	protected IMap<String, ConnectedPlayer> playersByPlayerId;
 
-	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+	public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
-	public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(IMap<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 	
@@ -53,7 +53,7 @@ public class HazelcastScheduledTasks {
 		try {
 			if(playersCleanupLock.tryLock()) {
 				gotLock = true;
-				for(Integer playerId : getPlayersByPlayerId().keySet()) {
+				for(String playerId : getPlayersByPlayerId().keySet()) {
 					try {
 						ConnectedPlayer player = getPlayersByPlayerId().get(playerId);
 						if(System.currentTimeMillis() - fifteenMinutes > player.getLastMessageSentToServer().getTime()) {

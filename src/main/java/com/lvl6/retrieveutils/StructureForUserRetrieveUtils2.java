@@ -47,7 +47,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		Object[] values = { userId };
 		String query = String.format(
 			"select * from %s where %s=?",
-			TABLE_NAME, DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID);
+			TABLE_NAME, DBConstants.STRUCTURE_FOR_USER__USER_ID);
 
 		List<StructureForUser> userStructs = null;
 		try {
