@@ -543,11 +543,11 @@ public class MiscMethods {
 		MDC.remove(MDCKeys.IP);
 	}
 
-	public static void setMDCProperties(String udid, Integer playerId, String ip) {
+	public static void setMDCProperties(String udid, String playerId, String ip) {
 		purgeMDCProperties();
 		if (udid != null) MDC.put(MDCKeys.UDID, udid);
 		if (ip != null) MDC.put(MDCKeys.IP, ip);
-		if (playerId != null && playerId > 0) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
+		if (null != playerId && playerId.isEmpty()) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
 	}
 
 	public static int calculateCoinsGivenToReferrer(User referrer) {

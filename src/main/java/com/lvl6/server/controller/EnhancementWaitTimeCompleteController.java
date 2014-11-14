@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,8 @@ import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -37,6 +38,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	public EnhancementWaitTimeCompleteController() {
 		numAllocatedThreads = 4;
@@ -60,7 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		boolean isSpeedUp = reqProto.getIsSpeedup();
 		int gemsForSpeedUp = reqProto.getGemsForSpeedup();
 //		UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
@@ -68,14 +72,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
 //		userMonsterIdsThatFinished = new ArrayList<Long>(userMonsterIdsThatFinished);
 		Timestamp curTime = new Timestamp((new Date()).getTime());
-		long curEnhancingMfuId = reqProto.getUserMonsterId(); //monster being enhanced
+		String curEnhancingMfuId = reqProto.getUserMonsterUuid(); //monster being enhanced
 
 		//set some values to send to the client (the response proto)
 		EnhancementWaitTimeCompleteResponseProto.Builder resBuilder = EnhancementWaitTimeCompleteResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER); //default
 
-		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
+		try {
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER);
+			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			int previousGems = 0;
 //			List<Long> userMonsterIds = new ArrayList<Long>();
@@ -83,7 +109,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //			userMonsterIds.addAll(userMonsterIdsThatFinished);
 
 			//get whatever we need from the database
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+			User aUser = userRetrieveUtil.getUserById(userId);
 //			Map<Long, MonsterEnhancingForUser> inEnhancing =
 //				MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
 //			Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
@@ -137,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in EnhancementWaitTimeCompleteController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
@@ -159,7 +185,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	 * @param gemsForSpeedUp
 	 * @return
 	 */
-	private boolean checkLegit(Builder resBuilder, User u, int userId,
+	private boolean checkLegit(Builder resBuilder, User u, String userId,
 //		Map<Long, MonsterForUser> idsToUserMonsters,
 //		Map<Long, MonsterEnhancingForUser> inEnhancing, UserMonsterCurrentExpProto umcep,
 //		List<Long> usedUpMonsterIds,
@@ -222,10 +248,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private boolean writeChangesToDb(User u, int uId, Timestamp clientTime,
+	private boolean writeChangesToDb(User u, String uId, Timestamp clientTime,
 //		Map<Long, MonsterEnhancingForUser> inEnhancing, UserMonsterCurrentExpProto umcep,
 //		List<Long> userMonsterIds,
-		boolean isSpeedup, int gemsForSpeedup, long curEnhancingMfuId,
+		boolean isSpeedup, int gemsForSpeedup, String curEnhancingMfuId,
 		Map<String, Integer> money) {
 
 
@@ -265,9 +291,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private void setResponseBuilder(Builder resBuilder) {
 	}
 
-	private void writeChangesToHistory(int uId,
-		Map<Long, MonsterEnhancingForUser> inEnhancing,
-		List<Long> userMonsterIds) {
+	private void writeChangesToHistory(String uId,
+		Map<String, MonsterEnhancingForUser> inEnhancing,
+		List<String> userMonsterIds) {
 
 		//TODO: keep track of the userMonsters that are deleted
 
@@ -292,14 +318,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private void writeToUserCurrencyHistory(User aUser, Timestamp curTime,
-		long userMonsterId, Map<String, Integer> money, int previousGems) {
+		String userMonsterId, Map<String, Integer> money, int previousGems) {
 		if (money.isEmpty()) {
 			return;
 		}
 		String gems = MiscMethods.gems;
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
 
-		int userId = aUser.getId();
+		String userId = aUser.getId();
 		Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
 		Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -321,6 +347,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 }
