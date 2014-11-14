@@ -78,10 +78,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   protected UserRetrieveUtils2 userRetrieveUtils;
   
   @Autowired
-  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
   
   @Autowired
-  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
   
   @Autowired
   protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils;

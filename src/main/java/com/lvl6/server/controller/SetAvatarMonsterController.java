@@ -4,29 +4,29 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetAvatarMonsterRequestEvent;
 import com.lvl6.events.response.SetAvatarMonsterResponseEvent;
-import com.lvl6.events.response.SetFacebookIdResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterRequestProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
   @Component @DependsOn("gameServer") public class SetAvatarMonsterController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SetAvatarMonsterController() {
     numAllocatedThreads = 1;
@@ -78,7 +78,7 @@ import com.lvl6.utils.RetrieveUtils;
     
 //    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 
 //      boolean isDifferent = checkIfNewTokenDifferent(user.getAvatarMonster(), gameCenterId);
       
@@ -142,4 +142,14 @@ import com.lvl6.utils.RetrieveUtils;
   	
   	return false;
   }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+  
+  
 }

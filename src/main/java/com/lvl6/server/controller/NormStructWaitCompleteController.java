@@ -16,21 +16,18 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
-import com.lvl6.events.response.ObstacleRemovalCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
-import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class NormStructWaitCompleteController extends EventController{
@@ -39,6 +36,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
   public NormStructWaitCompleteController() {
     numAllocatedThreads = 5;
@@ -102,7 +102,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils()
+      List<StructureForUser> userStructs = getStructureForUserRetrieveUtils()
       		.getSpecificOrAllUserStructsForUser(userId, userStructIds);
 
       List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
@@ -119,8 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (success) {
       	resBuilder.setStatus(NormStructWaitCompleteStatus.SUCCESS);
-      	List<StructureForUser> newUserStructs = RetrieveUtils
-      			.userStructRetrieveUtils()
+      	List<StructureForUser> newUserStructs = getStructureForUserRetrieveUtils()
       			.getSpecificOrAllUserStructsForUser(userId, userStructIds);
       	for (StructureForUser userStruct : newUserStructs) {
       		resBuilder.addUserStruct(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
@@ -243,6 +242,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils() {
+    return structureForUserRetrieveUtils;
+  }
+
+  public void setStructureForUserRetrieveUtils(
+      StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+    this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
   }
 
 }

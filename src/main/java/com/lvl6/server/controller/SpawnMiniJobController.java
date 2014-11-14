@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SpawnMiniJobRequestEvent;
 import com.lvl6.events.response.SpawnMiniJobResponseEvent;
-import com.lvl6.events.response.SpawnObstacleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
@@ -26,14 +25,13 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.Builder;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
-import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 
@@ -44,6 +42,9 @@ public class SpawnMiniJobController extends EventController{
 	
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 	
 //	@Autowired
 //	protected Locker locker;
@@ -107,7 +108,7 @@ public class SpawnMiniJobController extends EventController{
 		//TODO: figure out if locking is needed
 //		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+			User user = getUserRetrieveUtils().getUserById(userId);
 			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
 			
@@ -304,6 +305,16 @@ public class SpawnMiniJobController extends EventController{
   }
   public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
 	  this.structureStuffUtil = structureStuffUtil;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

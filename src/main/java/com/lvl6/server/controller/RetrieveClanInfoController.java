@@ -39,11 +39,11 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.CepfuRaidHistoryRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class RetrieveClanInfoController extends EventController {
 
@@ -66,6 +66,9 @@ import com.lvl6.utils.RetrieveUtils;
   
   @Autowired
   protected CepfuRaidHistoryRetrieveUtils2 cepfuRaidHistoryRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
   
 	public RetrieveClanInfoController() {
     numAllocatedThreads = 8;
@@ -204,7 +207,7 @@ import com.lvl6.utils.RetrieveUtils;
 	  
 	  if (grabType == ClanInfoGrabType.ALL || grabType == ClanInfoGrabType.MEMBERS) {
 		  log.info("getUserClansRelatedToClan clanId=" + clanId);
-		  List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToClan(clanId);
+		  List<UserClan> userClans = getUserClanRetrieveUtils().getUserClansRelatedToClan(clanId);
 		  log.info("user clans related to clanId:" + clanId + "\t " + userClans);
 		  Set<String> userIds = new HashSet<String>();
 		  //this is because clan with 1k+ users overflows buffer when sending to client and need to 
@@ -222,8 +225,8 @@ import com.lvl6.utils.RetrieveUtils;
 		  //get the users
 		  Map<String, User> usersMap = getUserRetrieveUtils().getUsersByIds(userIdList);
 		  //get the monster battle teams for the users
-		  Map<String, List<MonsterForUser>> userIdsToMonsterTeams = RetrieveUtils
-			  .monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIdList);
+		  Map<String, List<MonsterForUser>> userIdsToMonsterTeams = getMonsterForUserRetrieveUtils()
+		      .getUserIdsToMonsterTeamForUserIds(userIdList);
 
 		  int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY;
 		  //get the clan raid contribution stuff
@@ -286,7 +289,7 @@ import com.lvl6.utils.RetrieveUtils;
     statuses.add(UserClanStatus.CAPTAIN.name());
     statuses.add(UserClanStatus.MEMBER.name());
 
-    Map<String, Integer> clanIdsToSizes = RetrieveUtils.userClanRetrieveUtils()
+    Map<String, Integer> clanIdsToSizes = getUserClanRetrieveUtils()
     		.getClanSizeForClanIdsAndStatuses(clanIds, statuses);
 
     for (Clan c : clanList) {
@@ -419,5 +422,14 @@ import com.lvl6.utils.RetrieveUtils;
   public void setCepfuRaidHistoryRetrieveUtils(
       CepfuRaidHistoryRetrieveUtils2 cepfuRaidHistoryRetrieveUtils) {
     this.cepfuRaidHistoryRetrieveUtils = cepfuRaidHistoryRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
 }

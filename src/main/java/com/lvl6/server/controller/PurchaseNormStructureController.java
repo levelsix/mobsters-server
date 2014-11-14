@@ -16,14 +16,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseNormStructureRequestEvent;
 import com.lvl6.events.response.PurchaseNormStructureResponseEvent;
-import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
@@ -31,12 +29,12 @@ import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Pur
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-  @Component @DependsOn("gameServer") public class PurchaseNormStructureController extends EventController {
+@Component @DependsOn("gameServer") public class PurchaseNormStructureController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
@@ -46,9 +44,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   @Autowired
   protected InsertUtil insertUtils;
 
-  public void setInsertUtils(InsertUtil insertUtils) {
-	this.insertUtils = insertUtils;
-  }
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public PurchaseNormStructureController() {
     numAllocatedThreads = 3;
@@ -111,11 +108,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-    	//get things from the db
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      //get things from the db
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       log.info("user=" + user);
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
-      
+
       //currency history purposes
       int previousGems = 0;
       int previousOil = 0;
@@ -123,23 +120,23 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       String uStructId = null;
 
       boolean legitPurchaseNorm = checkLegitPurchaseNorm(resBuilder, struct, user,
-      		timeOfPurchase, gemsSpent, resourceChange, resourceType);
+          timeOfPurchase, gemsSpent, resourceChange, resourceType);
 
       boolean success = false;
       List<String> uStructIdList = new ArrayList<String>();
       Map<String, Integer> money = new HashMap<String, Integer>();
       if (legitPurchaseNorm) {
-      	previousGems = user.getGems();
-      	previousOil = user.getOil();
-      	previousCash = user.getCash();
-      	success = writeChangesToDB(user, structId, cp, timeOfPurchase, gemsSpent,
-      			resourceChange, resourceType, uStructIdList, money);
+        previousGems = user.getGems();
+        previousOil = user.getOil();
+        previousCash = user.getCash();
+        success = writeChangesToDB(user, structId, cp, timeOfPurchase, gemsSpent,
+            resourceChange, resourceType, uStructIdList, money);
       }
-      
+
       if (success) {
-      	resBuilder.setStatus(PurchaseNormStructureStatus.SUCCESS);
-      	uStructId = uStructIdList.get(0);
-      	resBuilder.setUserStructUuid(uStructId);
+        resBuilder.setStatus(PurchaseNormStructureStatus.SUCCESS);
+        uStructId = uStructIdList.get(0);
+        resBuilder.setUserStructUuid(uStructId);
       }
 
       PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(senderProto.getUserUuid());
@@ -148,27 +145,27 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       server.writeEvent(resEvent);
 
       if (success) {
-    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+        //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
-        
+
         writeToUserCurrencyHistory(user, structId, uStructId, timeOfPurchase,
-        		money, previousGems, previousOil, previousCash);
+            money, previousGems, previousOil, previousCash);
       }
     } catch (Exception e) {
-    	log.error("exception in PurchaseNormStructure processEvent", e);
-    	//don't let the client hang
-    	try {
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
-    		PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(userId);
-    		resEvent.setTag(event.getTag());
-    		resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
-    		server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in PurchaseNormStructure processEvent", e);
-    	}
+      log.error("exception in PurchaseNormStructure processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+        PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in PurchaseNormStructure processEvent", e);
+      }
     } finally {
       getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
@@ -185,51 +182,51 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
     ResourceType structResourceType = ResourceType.valueOf(prospective.getBuildResourceType());
     if (resourceType != structResourceType) {
-    	log.error("client is specifying unexpected resource type. actual=" + resourceType +
-    			"\t expected=" + structResourceType + "\t structure=" + prospective);
-    	return false;
+      log.error("client is specifying unexpected resource type. actual=" + resourceType +
+          "\t expected=" + structResourceType + "\t structure=" + prospective);
+      return false;
     }
-    
+
     //check if user has enough resources to build it
     int userGems = user.getGems();
     //check if gems are spent
     if (gemsSpent > 0) {
-    	if (userGems < gemsSpent) {
-    		//doesn't have enough gems
-    		log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
-    				resourceChange  + " " + resourceType + " to buy structure=" + prospective);
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-    		return false;
-    	} else {
-    		//has enough gems
-    		return true;
-    	}
-    	
+      if (userGems < gemsSpent) {
+        //doesn't have enough gems
+        log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
+            resourceChange  + " " + resourceType + " to buy structure=" + prospective);
+        resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+        return false;
+      } else {
+        //has enough gems
+        return true;
+      }
+
     }
-    
+
     //since negative resourceChange means charge, then negative of that is
     //the cost. If resourceChange is positive, meaning refund, user will always
     //have more than a negative amount
     int requiredResourceAmount = -1 * resourceChange;
     if (resourceType == ResourceType.CASH) {
-    	int userResource = user.getCash();
-    	if (userResource < requiredResourceAmount) {
-    		log.error("not enough cash to buy structure. cash=" + userResource +
-    				"\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
-    		return false;
-    	}
+      int userResource = user.getCash();
+      if (userResource < requiredResourceAmount) {
+        log.error("not enough cash to buy structure. cash=" + userResource +
+            "\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+        resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
+        return false;
+      }
     } else if (resourceType == ResourceType.OIL) {
-    	int userResource = user.getOil();
-    	if (userResource < requiredResourceAmount) {
-    		log.error("not enough oil to buy structure. oil=" + userResource +
-    				"\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
-    		return false;
-    	}
+      int userResource = user.getOil();
+      if (userResource < requiredResourceAmount) {
+        log.error("not enough oil to buy structure. oil=" + userResource +
+            "\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+        resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
+        return false;
+      }
     } else {
-    	log.error("unknown resource type: " + resourceType + "\t structure=" + prospective);
-    	return false;
+      log.error("unknown resource type: " + resourceType + "\t structure=" + prospective);
+      return false;
     }
 
     return true;
@@ -237,41 +234,41 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
   //uStructId will store the newly created user structure
   private boolean writeChangesToDB(User user, int structId, CoordinatePair cp,
-  		Timestamp purchaseTime, int gemsSpent, int resourceChange, ResourceType resourceType,
-  		List<String> uStructId, Map<String, Integer> money) {
+      Timestamp purchaseTime, int gemsSpent, int resourceChange, ResourceType resourceType,
+      List<String> uStructId, Map<String, Integer> money) {
     String userId = user.getId();
     Timestamp lastRetrievedTime = null;
     boolean isComplete = false;
-    
+
     String userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
-    		lastRetrievedTime, isComplete);
+        lastRetrievedTime, isComplete);
     if (userStructId == null) {
       log.error("problem with giving struct " + structId + " at " + purchaseTime +
-      		" on " + cp);
+          " on " + cp);
       return false;
     }
-    
+
     //TAKE AWAY THE CORRECT RESOURCE
     int gemChange = -1 * gemsSpent;
     int cashChange = 0;
     int oilChange = 0;
-    
+
     if (resourceType == ResourceType.CASH) {
-    	cashChange = resourceChange;
+      cashChange = resourceChange;
     } else if (resourceType == ResourceType.OIL) {
-    	oilChange = resourceChange;
+      oilChange = resourceChange;
     }
-    
+
     if (0 == gemChange && 0 == cashChange && 0 == oilChange) {
-    	log.error("gemChange=" + gemChange + " cashChange=" + cashChange + " oilChange=" +
-    			oilChange + "\t Not purchasing norm struct.");
-    	return false;
+      log.error("gemChange=" + gemChange + " cashChange=" + cashChange + " oilChange=" +
+          oilChange + "\t Not purchasing norm struct.");
+      return false;
     }
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
       log.error("problem with updating user currency. gemChange=" + gemChange +
-      		" cashChange=" + cashChange + "\t numRowsUpdated=" + num);
+          " cashChange=" + cashChange + "\t numRowsUpdated=" + num);
       return false;
     } else {//things went ok
       if (0 != gemChange) {
@@ -281,17 +278,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
         money.put(MiscMethods.cash, cashChange);
       }
       if (0 != oilChange) {
-      	money.put(MiscMethods.oil, oilChange);
+        money.put(MiscMethods.oil, oilChange);
       }
     }
-    
+
     uStructId.add(userStructId);
     return true;
   }
-  
+
   private void writeToUserCurrencyHistory(User u, int structId, String uStructId,
-  		Timestamp date, Map<String, Integer> money, int previousGems, int previousOil,
-  		int previousCash) {
+      Timestamp date, Map<String, Integer> money, int previousGems, int previousOil,
+      int previousCash) {
     String userId = u.getId();
     Map<String, Integer> previousCurencyMap = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
@@ -320,19 +317,30 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     details.put(gems, detail);
     details.put(cash, detail);
     details.put(oil, detail);
-    
+
     MiscMethods.writeToUserCurrencyOneUser(userId, date, money,
-    		previousCurencyMap, currentCurrencyMap, reasonsForChanges,
-    		details);
-    
+        previousCurencyMap, currentCurrencyMap, reasonsForChanges,
+        details);
+
   }
 
   public Locker getLocker() {
-	  return locker;
+    return locker;
   }
 
   public void setLocker(Locker locker) {
-	  this.locker = locker;
+    this.locker = locker;
   }
 
+  public void setInsertUtils(InsertUtil insertUtils) {
+    this.insertUtils = insertUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
 }

@@ -18,7 +18,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendGroupChatResponseEvent;
-import com.lvl6.events.response.SetFacebookIdResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -30,16 +29,14 @@ import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
@@ -59,6 +56,9 @@ public class SendGroupChatController extends EventController {
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 
   public SendGroupChatController() {
@@ -115,7 +115,7 @@ public class SendGroupChatController extends EventController {
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      final User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      final User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 
       boolean legitSend = checkLegitSend(resBuilder, user, scope, chatMessage);
 
@@ -275,6 +275,14 @@ public class SendGroupChatController extends EventController {
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

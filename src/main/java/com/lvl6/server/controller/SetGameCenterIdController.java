@@ -4,27 +4,29 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SetGameCenterIdRequestEvent;
 import com.lvl6.events.response.SetGameCenterIdResponseEvent;
-import com.lvl6.events.response.SpawnObstacleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
-  @Component @DependsOn("gameServer") public class SetGameCenterIdController extends EventController {
+@Component @DependsOn("gameServer") public class SetGameCenterIdController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SetGameCenterIdController() {
     numAllocatedThreads = 1;
@@ -52,7 +54,7 @@ import com.lvl6.utils.RetrieveUtils;
     SetGameCenterIdResponseProto.Builder resBuilder = SetGameCenterIdResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     if (null != gameCenterId) {
-    	resBuilder.setGameCenterId(gameCenterId);
+      resBuilder.setGameCenterId(gameCenterId);
     }
 
     UUID userUuid = null;
@@ -77,12 +79,12 @@ import com.lvl6.utils.RetrieveUtils;
       server.writeEvent(resEvent);
       return;
     }
-    
-//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
-    try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
-//      boolean isDifferent = checkIfNewTokenDifferent(user.getGameCenterId(), gameCenterId);
+    //    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
+
+      //      boolean isDifferent = checkIfNewTokenDifferent(user.getGameCenterId(), gameCenterId);
       boolean legit = writeChangesToDb(user, gameCenterId);
 
       if (legit) { 
@@ -95,44 +97,52 @@ import com.lvl6.utils.RetrieveUtils;
       SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(senderProto.getUserUuid());
       resEvent.setSetGameCenterIdResponseProto(resProto);
       server.writeEvent(resEvent);
-      
+
       if (legit) {
-    	  //game center id might have changed
-    	  //null PvpLeagueFromUser means will pull from hazelcast instead
-      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
-      	resEventUpdate.setTag(event.getTag());
-      	server.writeEvent(resEventUpdate);
+        //game center id might have changed
+        //null PvpLeagueFromUser means will pull from hazelcast instead
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+        resEventUpdate.setTag(event.getTag());
+        server.writeEvent(resEventUpdate);
       }
-      
+
     } catch (Exception e) {
-    	log.error("exception in SetGameCenterIdController processEvent", e);
-    	//don't let the client hang
-    	try {
-    		resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
-    		SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(userId);
-    		resEvent.setTag(event.getTag());
-    		resEvent.setSetGameCenterIdResponseProto(resBuilder.build());
-    		server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in SetGameCenterIdController processEvent", e);
-    	}
+      log.error("exception in SetGameCenterIdController processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
+        SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setSetGameCenterIdResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in SetGameCenterIdController processEvent", e);
+      }
     } finally {
-//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+      //      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 
   private boolean writeChangesToDb(User user, String gameCenterId) {
-  	try {
-			if (!user.updateGameCenterId(gameCenterId)) {
-			  log.error("problem with setting user's facebook id to " + gameCenterId);
-			}
-			return true;
-		} catch (Exception e) {
-			log.error("problem with updating user game center id. user=" + user +
-					"\t gameCenterId=" + gameCenterId);
-		}
-  	
-  	return false;
+    try {
+      if (!user.updateGameCenterId(gameCenterId)) {
+        log.error("problem with setting user's facebook id to " + gameCenterId);
+      }
+      return true;
+    } catch (Exception e) {
+      log.error("problem with updating user game center id. user=" + user +
+          "\t gameCenterId=" + gameCenterId);
+    }
+
+    return false;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 }

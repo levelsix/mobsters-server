@@ -11,21 +11,17 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.MoveOrRotateNormStructureRequestEvent;
 import com.lvl6.events.response.MoveOrRotateNormStructureResponseEvent;
-import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
-import com.lvl6.events.response.ObstacleRemovalCompleteResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus;
-import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
-import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class MoveOrRotateNormStructureController extends EventController {
@@ -34,6 +30,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
   public MoveOrRotateNormStructureController() {
     numAllocatedThreads = 3;
@@ -101,7 +100,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
       
-      StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+      StructureForUser userStruct = getStructureForUserRetrieveUtils().getSpecificUserStruct(userStructId);
       if (userStruct == null) {
         legit = false;
         resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
@@ -158,6 +157,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public StructureForUserRetrieveUtils2 getStructureForUserRetrieveUtils() {
+    return structureForUserRetrieveUtils;
+  }
+
+  public void setStructureForUserRetrieveUtils(
+      StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
+    this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
   }
   
 }

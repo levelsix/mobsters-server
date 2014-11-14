@@ -20,7 +20,6 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
@@ -28,9 +27,11 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDun
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class ReviveInDungeonController extends EventController {
@@ -39,6 +40,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public ReviveInDungeonController() {
     numAllocatedThreads = 4;
@@ -99,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       int previousGems = 0;
 
       //will be populated by checkLegit(...);
@@ -176,7 +183,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //extract the ids so it's easier to get userMonsters from db
     List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(reviveMeProtoList,
     		userMonsterIdToExpectedHealth);
-    Map<String, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    Map<String, MonsterForUser> userMonsters = getMonsterForUserRetrieveUtils()
     		.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 
     if (null == userMonsters || userMonsters.isEmpty()) {
@@ -299,6 +306,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
 
 }

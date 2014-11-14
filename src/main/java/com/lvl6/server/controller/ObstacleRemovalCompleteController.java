@@ -14,13 +14,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ObstacleRemovalCompleteRequestEvent;
 import com.lvl6.events.response.ObstacleRemovalCompleteResponseEvent;
-import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.Builder;
@@ -28,8 +26,8 @@ import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.O
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 
@@ -42,6 +40,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public ObstacleRemovalCompleteController() {
 		numAllocatedThreads = 4;
@@ -102,7 +103,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+			User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 			ObstacleForUser ofu = getObstacleForUserRetrieveUtil().
 					getUserObstacleForId(userObstacleId);
 			
@@ -252,5 +253,13 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
 	
 }

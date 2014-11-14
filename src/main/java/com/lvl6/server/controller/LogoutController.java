@@ -60,7 +60,7 @@ public class LogoutController extends EventController {
 	protected Locker locker;
 	
 	@Autowired
-	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
 	
 	@Override
 	public RequestEvent createRequestEvent() {

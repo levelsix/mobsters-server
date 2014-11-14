@@ -13,18 +13,15 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RestrictUserMonsterRequestEvent;
 import com.lvl6.events.response.RestrictUserMonsterResponseEvent;
-import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class RestrictUserMonsterController extends EventController {

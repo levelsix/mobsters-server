@@ -22,8 +22,9 @@ import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Retract
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component @DependsOn("gameServer") public class RetractRequestJoinClanController extends EventController {
@@ -35,6 +36,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   
   @Autowired
   protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 	
   public RetractRequestJoinClanController() {
     numAllocatedThreads = 4;
@@ -93,7 +100,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     	lockedClan = getLocker().lockClan(clanUuid);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
 
       boolean legitRetract = checkLegitRequest(resBuilder, lockedClan, user, clan);
@@ -151,7 +158,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       log.error("user is already in clan with id " + user.getClanId());
       return false;      
     }
-    UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clan.getId());
+    UserClan uc = getUserClanRetrieveUtils().getSpecificUserClan(user.getId(), clan.getId());
     if (uc == null || !UserClanStatus.REQUESTING.name().equals(uc.getStatus())) {
       resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_DID_NOT_REQUEST);
       log.error("user clan request has not been filed");
@@ -181,6 +188,23 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
     this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+    this.userClanRetrieveUtils = userClanRetrieveUtils;
   }
   
 }

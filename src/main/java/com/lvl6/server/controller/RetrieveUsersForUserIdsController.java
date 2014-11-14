@@ -25,9 +25,9 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveUsersForUserIdsController extends EventController{
 
@@ -38,6 +38,9 @@ import com.lvl6.utils.RetrieveUtils;
   
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public RetrieveUsersForUserIdsController() {
     numAllocatedThreads = 4;
@@ -121,8 +124,8 @@ import com.lvl6.utils.RetrieveUtils;
   }
   
   private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(List<String> userIds) {
-  	Map<String, List<MonsterForUser>> userIdsToCurrentTeam = RetrieveUtils
-  			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds);
+  	Map<String, List<MonsterForUser>> userIdsToCurrentTeam = getMonsterForUserRetrieveUtils()
+  	    .getUserIdsToMonsterTeamForUserIds(userIds);
 
   	//for each user construct his current team
   	List<UserCurrentMonsterTeamProto> retVal = new ArrayList<UserCurrentMonsterTeamProto>();
@@ -157,6 +160,15 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
     this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
 
 }
