@@ -361,12 +361,12 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
-		Map<Integer, Clan> userIdToClan,
-		Map<Integer, PvpLeagueForUser> userIdToLeagueInfo,
-		Map<Integer, PvpUser> userIdToPvpUser,
-		Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
-		Map<Integer, Integer> userIdToCashReward,
-		Map<Integer, Integer> userIdToOilReward)
+		Map<String, Clan> userIdToClan,
+		Map<String, PvpLeagueForUser> userIdToLeagueInfo,
+		Map<String, PvpUser> userIdToPvpUser,
+		Map<String, List<MonsterForUser>> userIdToUserMonsters,
+		Map<String, Integer> userIdToCashReward,
+		Map<String, Integer> userIdToOilReward)
 		{
 		List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
 

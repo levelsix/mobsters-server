@@ -117,9 +117,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//TODO: consider moving to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
 	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, Date now,
-			int limit, Collection<Integer> excludeIds) {
+			int limit, Collection<String> excludeIds) {
 		Collection<String> excludeIdStrs = new ArrayList<String>();
-		for (Integer i : excludeIds) {
+		for (String i : excludeIds) {
 			excludeIdStrs.add(i.toString());
 		}
 		
