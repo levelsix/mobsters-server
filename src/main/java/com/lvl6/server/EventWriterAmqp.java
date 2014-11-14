@@ -131,7 +131,7 @@ public class EventWriterAmqp extends EventWriter {
 	}
 
 	@Override
-	public void processClanResponseEvent(ResponseEvent event, int clanId) {
+	public void processClanResponseEvent(ResponseEvent event, String clanId) {
 		MessageProperties msgProps = getProps();
 		String clanIdString = "clan_" + clanId;
 		log.info("Sending clan response event with routing key:" + clanIdString);

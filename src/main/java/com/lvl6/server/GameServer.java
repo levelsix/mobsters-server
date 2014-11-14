@@ -306,7 +306,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	  return "ClanTowersTableLock";
 	}
 	
-	public boolean lockClan(int clanId) {
+	public boolean lockClan(String clanId) {
 		log.debug("Locking clan: " + clanId);
 		try {
 			if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
@@ -324,7 +324,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
 	}
 
-	public void unlockClan(int clanId) {
+	public void unlockClan(String clanId) {
 		log.debug("Unlocking clan: " + clanId);
 		try {
 			String clanLockName = clanLockName(clanId);
@@ -340,7 +340,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		}
 	}
 
-	protected String clanLockName(int clanId) {
+	protected String clanLockName(String clanId) {
 		return "ClanLock: " + clanId;
 	}
 
@@ -370,7 +370,7 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		}
 	}
 
-	public boolean lockPlayer(int playerId, String lockedByClass) {
+	public boolean lockPlayer(String playerId, String lockedByClass) {
 		log.info("Locking player {} from class {}", playerId, lockedByClass);
 		// Lock playerLock = hazel.getLock(playersInAction.lockName(playerId));
 		try {
@@ -390,19 +390,19 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		throw new RuntimeException("Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
 	}
 
-	public boolean lockPlayers(int playerId1, int playerId2, String lockedByClass) {
+	public boolean lockPlayers(String playerId1, String playerId2, String lockedByClass) {
 		log.info("Locking players: " + playerId1 + ", " + playerId2);
-		if (playerId1 == playerId2) {
+		if (playerId1.equals(playerId2)) {
 			return lockPlayer(playerId1, lockedByClass);
 		}
-		if (playerId1 > playerId2) {
+		if (playerId1.compareTo(playerId2) > 0) {
 			return lockPlayer(playerId2, lockedByClass) && lockPlayer(playerId1, lockedByClass);
 		} else {
 			return lockPlayer(playerId1, lockedByClass) && lockPlayer(playerId2, lockedByClass);
 		}
 	}
 
-	public void unlockPlayer(int playerId, String fromClass) {
+	public void unlockPlayer(String playerId, String fromClass) {
 		log.info("Unlocking player: " + playerId+" from class: "+fromClass);
 		// ILock lock = hazel.getLock(playersInAction.lockName(playerId));
 		try {
@@ -424,9 +424,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 		}
 	}
 
-	public void unlockPlayers(int playerId1, int playerId2, String fromClass) {
+	public void unlockPlayers(String playerId1, String playerId2, String fromClass) {
 		log.info("Unlocking players: " + playerId1 + ", " + playerId2+" from class: "+fromClass);
-		if (playerId1 > playerId2) {
+		if (playerId1.compareTo(playerId2) > 0) {
 			unlockPlayer(playerId2, fromClass);
 			unlockPlayer(playerId1, fromClass);
 		} else {
