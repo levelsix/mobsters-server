@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,16 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.MoveOrRotateNormStructureRequestEvent;
 import com.lvl6.events.response.MoveOrRotateNormStructureResponseEvent;
+import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
+import com.lvl6.events.response.ObstacleRemovalCompleteResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus;
+import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
+import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -50,7 +56,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userStructId = reqProto.getUserStructId();
+    String userId = senderProto.getUserUuid();
+    String userStructId = reqProto.getUserStructUuid();
     MoveOrRotateNormStructType type = reqProto.getType();
 
     CoordinatePair newCoords = null;
@@ -62,9 +69,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MoveOrRotateNormStructureResponseProto.Builder resBuilder = MoveOrRotateNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+          userStructUuid = UUID.fromString(userStructId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userStructId=%s",
+          userId, userStructId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+      MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
 
     //only locking so you cant moveOrRotate it hella times
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
@@ -105,8 +137,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     } catch (Exception e) {
       log.error("exception in MoveOrRotateNormStructure processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+        MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setMoveOrRotateNormStructureResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in MoveOrRotateNormStructure processEvent", e);
+      }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
