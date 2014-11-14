@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Builder
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -30,6 +32,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
 	
   public RetractRequestJoinClanController() {
     numAllocatedThreads = 4;
@@ -50,21 +55,46 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     RetractRequestJoinClanRequestProto reqProto = ((RetractRequestJoinClanRequestEvent)event).getRetractRequestJoinClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    int clanId = reqProto.getClanId();
+    String userId = senderProto.getUserUuid();
+    String clanId = reqProto.getClanUuid();
 
     RetractRequestJoinClanResponseProto.Builder resBuilder = RetractRequestJoinClanResponseProto.newBuilder();
     resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setClanId(clanId);
+    resBuilder.setClanUuid(clanId);
+
+    UUID userUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      clanUuid = UUID.fromString(clanId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, clanId=%s",
+          userId, clanId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+      RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 
     boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
+    if (clanUuid != null) {
+    	lockedClan = getLocker().lockClan(clanUuid);
     }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
-      Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+      Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
 
       boolean legitRetract = checkLegitRequest(resBuilder, lockedClan, user, clan);
 
@@ -98,8 +128,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in RetractRequestJoinClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
+    	if (clanUuid != null && lockedClan) {
+    		getLocker().unlockClan(clanUuid);
     	}
     }
   }
@@ -116,7 +146,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       log.error("user is " + user + ", clan is " + clan);
       return false;      
     }
-    if (user.getClanId() > 0) {
+    if (user.getClanId() != null) {
       resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
       log.error("user is already in clan with id " + user.getClanId());
       return false;      
@@ -130,7 +160,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(User user, int clanId) {
+  private boolean writeChangesToDB(User user, String clanId) {
     if (!DeleteUtils.get().deleteUserClan(user.getId(), clanId)) {
       log.error("problem with deleting user clan data for user " + user + ", and clan id " + clanId);
       return false;
@@ -143,6 +173,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
   }
   
 }
