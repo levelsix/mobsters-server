@@ -34,9 +34,6 @@ public class LogoutController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-  
-  @Autowired
-  protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public LogoutController() {
 		numAllocatedThreads = 4;
@@ -61,6 +58,9 @@ public class LogoutController extends EventController {
 	
 	@Autowired
 	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Override
 	public RequestEvent createRequestEvent() {

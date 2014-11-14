@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,19 +12,14 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadPlayerCityRequestEvent;
 import com.lvl6.events.response.LoadPlayerCityResponseEvent;
-import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
-import com.lvl6.events.response.SubmitMonsterEnhancementResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.Builder;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus;
-import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus;
-import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
