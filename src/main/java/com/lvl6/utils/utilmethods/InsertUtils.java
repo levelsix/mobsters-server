@@ -64,7 +64,7 @@ public class InsertUtils implements InsertUtil{
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserExpansionLastexpandtimeLastexpanddirectionIsexpanding(int, java.sql.Timestamp, com.lvl6.proto.InfoProto.ExpansionDirection, boolean)
 	 */
 	@Override
-	public boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
+	public boolean insertUserCityExpansionData(String userId, Timestamp expandStartTime, 
 			int xPosition, int yPosition, boolean isExpanding) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
 		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
@@ -80,7 +80,7 @@ public class InsertUtils implements InsertUtil{
 		return false;
 	}
   
-  public boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime) {
+  public boolean insertLastLoginLastLogoutToUserSessions(String userId, Timestamp loginTime, Timestamp logoutTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER_SESSIONS__USER_ID, userId);
     insertParams.put(DBConstants.USER_SESSIONS__LOGIN_TIME, loginTime);
@@ -95,7 +95,7 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public int insertUserQuest(int userId, int questId) {
+  public int insertUserQuest(String userId, int questId) {
   	String tablename = DBConstants.TABLE_QUEST_FOR_USER;
   	
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -108,12 +108,12 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public int insertUserQuestJobs(int userId, int questId,
+  public int insertUserQuestJobs(String userId, int questId,
 		  List<Integer> questJobIds) {
 	  String tableName = DBConstants.TABLE_QUEST_JOB_FOR_USER;
 	  
 	  int size = questJobIds.size();
-	  List<Integer> userIdList = Collections.nCopies(size, userId);
+	  List<String> userIdList = Collections.nCopies(size, userId);
 	  List<Integer> questIdList = Collections.nCopies(size, questId);
 	  
 	  Map<String, List<?>> insertParams =
@@ -133,7 +133,7 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserStructJustBuilt(int, int, java.sql.Timestamp, java.sql.Timestamp, com.lvl6.info.CoordinatePair)
    */
   @Override
-  public boolean insertUserStructJustBuilt(int userId, int structId,
+  public boolean insertUserStructJustBuilt(String userId, int structId,
       Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
       CoordinatePair structCoords) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -164,7 +164,7 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserStruct(int, int, com.lvl6.info.CoordinatePair, java.sql.Timestamp)
    */
   @Override
-  public int insertUserStruct(int userId, int structId, CoordinatePair coordinates,
+  public String insertUserStruct(String userId, int structId, CoordinatePair coordinates,
   		Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
@@ -188,7 +188,7 @@ public class InsertUtils implements InsertUtil{
    * they make up the values for one row to insert into user_currency_history
    */
   @Override
-  public int insertUserStructs(List<Integer> userIdList, List<Integer> structIdList,
+  public int insertUserStructs(List<String> userIdList, List<Integer> structIdList,
   		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
   		List<Timestamp> retrievedTimeList, List<Boolean> isComplete) { 
   	String tablename = DBConstants.TABLE_STRUCTURE_FOR_USER;
@@ -285,7 +285,7 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
-  public int insertUser(String name, String udid, int level, int experience, int cash,
+  public String insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, Timestamp createTime,
   		String facebookId, int avatarMonsterId, String email, String fbData) {
 
@@ -329,7 +329,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   @Override
-  public int insertPvpLeagueForUser(int userId, int pvpLeagueId, int rank,
+  public int insertPvpLeagueForUser(String userId, int pvpLeagueId, int rank,
 			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime) {
 	  String tableName = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -348,7 +348,7 @@ public class InsertUtils implements InsertUtil{
 
 
   @Override
-  public int insertClan(String name, Timestamp createTime, String description, String tag,
+  public String insertClan(String name, Timestamp createTime, String description, String tag,
       boolean requestToJoinRequired, int clanIconId) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLANS__NAME, name);
@@ -365,7 +365,7 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public boolean insertUserClan(int userId, int clanId, String status, Timestamp requestTime) {
+  public boolean insertUserClan(String userId, String clanId, String status, Timestamp requestTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
@@ -381,7 +381,7 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public int insertClanChatPost(int userId, int clanId, String content,
+  public String insertClanChatPost(String userId, String clanId, String content,
       Timestamp timeOfPost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLAN_CHAT_POST__POSTER_ID, userId);
@@ -421,7 +421,7 @@ public class InsertUtils implements InsertUtil{
   
   
   //0 for isSilver means currency is gold; 1 for isSilver means currency is silver
-  public int insertIntoUserCurrencyHistory (int userId, Timestamp date, String resourceType, 
+  public int insertIntoUserCurrencyHistory (String userId, Timestamp date, String resourceType, 
       int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange,
       String details) {
     String tableName = DBConstants.TABLE_USER_CURRENCY_HISTORY;
@@ -446,7 +446,7 @@ public class InsertUtils implements InsertUtil{
    * assumptions: all the entries at index i across all the lists, 
    * they make up the values for one row to insert into user_currency_history
    */
-  public int insertIntoUserCurrencyHistoryMultipleRows(List<Integer> userIds, List<Timestamp> dates, 
+  public int insertIntoUserCurrencyHistoryMultipleRows(List<String> userIds, List<Timestamp> dates, 
       List<String> resourceTypes, List<Integer> changesToCurrencies, List<Integer> previousCurrencies, 
       List<Integer> currentCurrencies, List<String> reasonsForChanges, List<String> details) {
     String tablename = DBConstants.TABLE_USER_CURRENCY_HISTORY;
@@ -475,7 +475,7 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertIntoLoginHistory(String udid, int userId, Timestamp now, boolean isLogin,
+  public int insertIntoLoginHistory(String udid, String userId, Timestamp now, boolean isLogin,
       boolean goingThroughTutorial) {
     String tableName = DBConstants.TABLE_LOGIN_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -509,8 +509,8 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertIntoBoosterPackPurchaseHistory(int userId, int boosterPackId, 
-      Timestamp timeOfPurchase, BoosterItem bi, List<Long> userMonsterIds) {
+  public int insertIntoBoosterPackPurchaseHistory(String userId, int boosterPackId, 
+      Timestamp timeOfPurchase, BoosterItem bi, List<String> userMonsterIds) {
     String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
     
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -547,7 +547,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   
-  public int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost) {
+  public String insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
     insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
@@ -559,13 +559,13 @@ public class InsertUtils implements InsertUtil{
     return wallPostId;
   }
   
-  public List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds,
+  public List<String> insertIntoPrivateChatPosts(List<String> posterIds, List<String> recipientIds,
       List<String> contents, List<Date> timeOfPosts) {
     String tableName = DBConstants.TABLE_USER_PRIVATE_CHAT_POST;
     List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
     for(int i = 0; i < posterIds.size(); i++){
-      int posterId = posterIds.get(i);
-      int recipientId = recipientIds.get(i);
+      String posterId = posterIds.get(i);
+      String recipientId = recipientIds.get(i);
       String content = contents.get(i);
       Date dateOfPost = timeOfPosts.get(i);
       Timestamp ts = new Timestamp(dateOfPost.getTime());
@@ -582,7 +582,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   //returns the id
-  public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
+  public String insertIntoUserTaskReturnId(String userId, int taskId, int expGained,
   		int cashGained, int oilGained, Timestamp startTime, int taskStageId) {
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
@@ -609,7 +609,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   @Override
-  public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
+  public int insertIntoTaskHistory(String userTaskId, String userId, int taskId,
 		  int expGained, int cashGained, int oilGained, int numRevives, Timestamp startTime,
 		  Timestamp endTime, boolean userWon, boolean cancelled, int taskStageId) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -633,7 +633,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   @Override
-  public int insertIntoTaskForUserCompleted(int userId, int taskId, 
+  public int insertIntoTaskForUserCompleted(String userId, int taskId, 
   		Timestamp timeOfEntry) {
   	Map<String, Object> insertParams = new HashMap<String, Object>();
   	
@@ -647,7 +647,7 @@ public class InsertUtils implements InsertUtil{
   }
   
   @Override
-  public int insertIntoTaskForUserCompleted(List<Integer> userIdList, List<Integer> taskIdList,
+  public int insertIntoTaskForUserCompleted(List<String> userIdList, List<Integer> taskIdList,
   		List<Timestamp> timeOfEntryList) {
   	String tablename = DBConstants.TABLE_TASK_FOR_USER_COMPLETED;
 
@@ -714,7 +714,7 @@ public class InsertUtils implements InsertUtil{
 	*/
 
   	@Override
-  	public List<Long> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList) {
+  	public List<String> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList) {
   		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
   		
   		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
@@ -739,8 +739,8 @@ public class InsertUtils implements InsertUtil{
   	}
   
 	@Override
-	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+	public int insertIntoTaskStageHistory(List<String> userTaskStageIds,
+			List<String> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
 			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
 			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			List<Integer> itemIdDropped, List<Integer> monsterIdDrops,
@@ -774,7 +774,7 @@ public class InsertUtils implements InsertUtil{
    * they make up the values for one row to insert into the table
    */
 	@Override
-	public List<Long> insertIntoMonsterForUserReturnIds(int userId,
+	public List<String> insertIntoMonsterForUserReturnIds(String userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		Timestamp combineStartTime = new Timestamp(combineStartDate.getTime());
@@ -816,7 +816,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoMonsterForUserDeleted(int userId, List<String> delReasons,
+	public String insertIntoMonsterForUserDeleted(String userId, List<String> delReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER_DELETED;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
@@ -882,14 +882,14 @@ public class InsertUtils implements InsertUtil{
 	}
 
 	@Override
-	public List<Integer> insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
-			Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
+	public List<String> insertIntoUserFbInviteForSlot(String userId, List<String> facebookIds,
+			Timestamp curTime, Map<String, String> fbIdsToUserStructIds,
   		Map<String, Integer> fbIdsToUserStructsFbLvl) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		for (String fbId : facebookIds) {
-			Integer userStructId = fbIdsToUserStructIds.get(fbId);
+		  String userStructId = fbIdsToUserStructIds.get(fbId);
 			Integer userStructFbLvl = fbIdsToUserStructsFbLvl.get(fbId);
 			
 			Map<String, Object> newRow = new HashMap<String, Object>();
@@ -909,8 +909,8 @@ public class InsertUtils implements InsertUtil{
 	//the user monster ids will be ordered in ascending order, and this will determine
 	//which one is one and which one is two
 	@Override
-	public int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
-			List<Long> userMonsterIds, Timestamp startTime) {
+	public int insertIntoMonsterEvolvingForUser(String userId, String catalystUserMonsterId,
+			List<String> userMonsterIds, Timestamp startTime) {
 		Collections.sort(userMonsterIds);
 		long userMonsterIdOne = userMonsterIds.get(0);
 		long userMOnsterIdTwo = userMonsterIds.get(1);
@@ -933,7 +933,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now) {
+	public int insertIntoUpdateEventPersistentForUser(String userId, int eventId, Timestamp now) {
 		String tableName = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -952,7 +952,7 @@ public class InsertUtils implements InsertUtil{
 		
 	}
 	
-	public int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
+	public int insertUpdatePvpBattleForUser(String attackerId, String defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
 			int defenderWinEloChange, Timestamp battleStartTime) {
 		String tableName = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
@@ -998,7 +998,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoClanEventPersistentForClan(int clanId, int clanEventPersistentId,
+	public int insertIntoClanEventPersistentForClan(String clanId, int clanEventPersistentId,
 			int clanRaidId, int clanRaidStageId, Timestamp stageStartTime,
 			int clanRaidStageMonsterId, Timestamp stageMonsterStartTime) {
 		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
@@ -1021,8 +1021,8 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
-			int clanRaidId, List<Long> userMonsterIds) {
+	public int insertIntoUpdateMonstersClanEventPersistentForUser(String userId, String clanId,
+			int clanRaidId, List<String> userMonsterIds) {
 		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1057,7 +1057,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoClanEventPersistentForClanHistory(int clanId,
+	public int insertIntoClanEventPersistentForClanHistory(String clanId,
 			Timestamp timeOfEntry, int clanEventPersistentId, int crId, int crsId,
 			Timestamp stageStartTime, int crsmId, Timestamp stageMonsterStartTime, boolean won) {
 		
@@ -1085,7 +1085,7 @@ public class InsertUtils implements InsertUtil{
 		//SAVE CLAN RAID USER HISTORY 
 		@Override
 		public int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
-				Map<Integer, ClanEventPersistentForUser> clanUserInfo) {
+				Map<String, ClanEventPersistentForUser> clanUserInfo) {
 			String tableName = DBConstants.TABLE_CEPFU_RAID_HISTORY;
 			
 			List<Object> userIdList = new ArrayList<Object>();
@@ -1098,7 +1098,7 @@ public class InsertUtils implements InsertUtil{
 			List<Object> userMonsterIdOneList = new ArrayList<Object>();
 			List<Object> userMonsterIdTwoList = new ArrayList<Object>();
 			List<Object> userMonsterIdThreeList = new ArrayList<Object>();
-			for(int userId  : clanUserInfo.keySet()){
+			for(String userId  : clanUserInfo.keySet()){
 				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
 				
 				userIdList.add(userId);
@@ -1144,7 +1144,7 @@ public class InsertUtils implements InsertUtil{
 		@Override
 		public int insertIntoCepfuRaidStageHistory(Integer clanEventId,
 				Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,
-				Map<Integer, ClanEventPersistentForUser> clanUserInfo) {
+				Map<String, ClanEventPersistentForUser> clanUserInfo) {
 			String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_HISTORY;
 			
 			List<Object> userIdList = new ArrayList<Object>();
@@ -1155,7 +1155,7 @@ public class InsertUtils implements InsertUtil{
 			List<Object> crsDmgDoneList = new ArrayList<Object>();
 			List<Object> stageHealthList = new ArrayList<Object>();
 			List<Object> crsEndTimeList = new ArrayList<Object>();
-			for(int userId  : clanUserInfo.keySet()){
+			for(String userId  : clanUserInfo.keySet()){
 				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
 				
 				userIdList.add(userId);
@@ -1191,7 +1191,7 @@ public class InsertUtils implements InsertUtil{
 		
 		@Override
 		public int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
-				Map<Integer, ClanEventPersistentForUser> clanUserInfo,
+				Map<String, ClanEventPersistentForUser> clanUserInfo,
 				ClanEventPersistentForClan cepfc) {
 			String tableName = DBConstants.TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY;
 			int clanEventId = cepfc.getClanEventPersistentId();
@@ -1205,7 +1205,7 @@ public class InsertUtils implements InsertUtil{
 			List<Object> crsmDmgDoneList = new ArrayList<Object>();
 			List<Object> crsmEndTimeList = new ArrayList<Object>();
 			
-			for(int userId  : clanUserInfo.keySet()){
+			for(String userId  : clanUserInfo.keySet()){
 				ClanEventPersistentForUser cepfu = clanUserInfo.get(userId);
 				
 				userIdList.add(userId);
@@ -1298,7 +1298,7 @@ public class InsertUtils implements InsertUtil{
 //		}
 		
 		@Override                                                                                  
-		public List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,                      
+		public List<String> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,                      
 				Timestamp crsEndTime, int clanEventId,                                                 
 				List<ClanEventPersistentUserReward> userRewards) {                                     
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;                  
@@ -1335,7 +1335,7 @@ public class InsertUtils implements InsertUtil{
 		}                                                                                          
 		
 		@Override
-		public int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+		public int insertIntoPvpBattleHistory(String attackerId, String defenderId,
 				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
 				int attackerEloBefore, int defenderEloChange, int defenderEloBefore,
 				int attackerPrevLeague, int attackerCurLeague, int defenderPrevLeague,
@@ -1402,7 +1402,7 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+		public List<String> insertIntoObstaclesForUserGetIds(String userId,
 				List<ObstacleForUser> ofuList) {
 			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;                  
 
@@ -1431,7 +1431,7 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public List<Long> insertIntoMiniJobForUserGetIds(int userId,
+		public List<String> insertIntoMiniJobForUserGetIds(String userId,
 				List<MiniJobForUser> mjfuList) {
 			String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
 
@@ -1459,7 +1459,7 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public int insertIntoUpdateUserItem(int userId, int itemId, int delta) {
+		public int insertIntoUpdateUserItem(String userId, int itemId, int delta) {
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
 
 			Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1479,7 +1479,7 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public List<Long> insertIntoClanHelpGetId( List<ClanHelp> solicitations )
+		public List<String> insertIntoClanHelpGetId( List<ClanHelp> solicitations )
 		{
 			String tableName = DBConstants.TABLE_CLAN_HELP;
 
@@ -1514,8 +1514,8 @@ public class InsertUtils implements InsertUtil{
 		}
 		
 		@Override
-		public int insertIntoUpdateClanInvite(int userId,
-			int inviterId, int clanId, Timestamp timeOfInvite)
+		public int insertIntoUpdateClanInvite(String userId,
+		    String inviterId, String clanId, Timestamp timeOfInvite)
 		{
 			String tableName = DBConstants.TABLE_CLAN_INVITE;
 
@@ -1545,7 +1545,7 @@ public class InsertUtils implements InsertUtil{
 		}
 
 		@Override
-		public List<Long> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed)
+		public List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed)
 		{
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER_USAGE;
 
@@ -1572,7 +1572,7 @@ public class InsertUtils implements InsertUtil{
 			if (null != ids) {
 				return ids;
 			} else {
-				return new ArrayList<Long>();       
+				return new ArrayList<String>();       
 			}
 		}
 		

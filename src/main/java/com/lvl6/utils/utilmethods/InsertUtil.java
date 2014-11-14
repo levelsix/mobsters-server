@@ -97,7 +97,7 @@ public interface InsertUtil {
 
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
 
-	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, String resourceType, 
+	public abstract int insertIntoUserCurrencyHistory (String userId, Timestamp date, String resourceType, 
 			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange, String details);
 
 	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<String> userIds,
@@ -114,7 +114,7 @@ public interface InsertUtil {
 
 	public abstract String insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
 
-	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
+	public abstract List<String> insertIntoPrivateChatPosts(List<String> posterIds, List<String> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
 
 	public abstract String insertIntoUserTaskReturnId(String userId, int taskId, 
@@ -188,7 +188,7 @@ public interface InsertUtil {
 			Map<String, ClanEventPersistentForUser> clanUserInfo);
 	
 	public abstract int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
-			Map<Integer, ClanEventPersistentForUser> clanUserInfo,
+			Map<String, ClanEventPersistentForUser> clanUserInfo,
 			ClanEventPersistentForClan cepfc);
 	
 	public abstract List<String> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
@@ -215,7 +215,7 @@ public interface InsertUtil {
 	public abstract List<String> insertIntoClanHelpGetId(List<ClanHelp> solicitations);
 	
 	public abstract int insertIntoUpdateClanInvite(String userId,
-		int inviterId, int clanId, Timestamp timeOfInvite);
+	    String inviterId, String clanId, Timestamp timeOfInvite);
 	
 	public abstract List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
 }
