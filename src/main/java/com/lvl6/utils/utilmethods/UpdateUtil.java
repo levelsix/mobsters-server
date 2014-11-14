@@ -113,7 +113,7 @@ public interface UpdateUtil {
   
   public abstract int updateCompleteEnhancing(String userId, long curEnhancingMfuId);
   
-  public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl, int newHp);
+  public abstract int updateUserMonsterExpAndLvl(String l, int newExp, int newLvl, int newHp);
 
   public abstract int updateUserMonsterNumPieces(String userId,
   		Collection<MonsterForUser> monsterForUserList, String updateReason,
