@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RemoveMonsterFromBattleTeamRequestEvent;
 import com.lvl6.events.response.RemoveMonsterFromBattleTeamResponseEvent;
+import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus;
+import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
@@ -47,15 +51,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    long userMonsterId = reqProto.getUserMonsterId();
+    String userId = senderProto.getUserUuid();
+    String userMonsterId = reqProto.getUserMonsterUuid();
 
     //set some values to send to the client (the response proto)
     RemoveMonsterFromBattleTeamResponseProto.Builder resBuilder = RemoveMonsterFromBattleTeamResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userMonsterUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+          userMonsterUuid = UUID.fromString(userMonsterId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userMonsterId=%s",
+          userId, userMonsterId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER);
+      RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRemoveMonsterFromBattleTeamResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
@@ -95,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in RemoveMonsterFromBattleTeamController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -104,8 +133,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, int userId,
-  		long userMonsterId, MonsterForUser mfu) {
+  private boolean checkLegit(Builder resBuilder, String userId,
+      String userMonsterId, MonsterForUser mfu) {
   	
   	if (null == mfu) {
   		log.error("no monster_for_user exists with id=" + userMonsterId);
@@ -113,8 +142,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
 
   	//check to make sure this is indeed the user's monster
-  	int mfuUserId = mfu.getUserId();
-  	if (mfuUserId != userId) {
+  	String mfuUserId = mfu.getUserId();
+  	if (!mfuUserId.equals(userId)) {
   		log.error("what is this I don't even...client trying to \"unequip\" " +
   				"another user's monster. userId=" + userId + "\t monsterForUser=" + mfu);
   		return false;
@@ -124,7 +153,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private boolean writeChangesToDb(int uId, long userMonsterId, MonsterForUser mfu) { 
+  private boolean writeChangesToDb(String uId, String userMonsterId, MonsterForUser mfu) { 
   	//"unequip" monster
   	int teamSlotNum = 0;
   	
