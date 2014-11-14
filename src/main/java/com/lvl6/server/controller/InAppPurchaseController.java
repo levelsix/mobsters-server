@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
@@ -34,6 +35,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
+import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -44,11 +46,12 @@ import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -66,10 +69,9 @@ public class InAppPurchaseController extends EventController {
 
   @Autowired
   protected InsertUtil insertUtils;
-
-  public void setInsertUtils(InsertUtil insertUtils) {
-    this.insertUtils = insertUtils;
-  }
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public InAppPurchaseController() {
     numAllocatedThreads = 2;
@@ -96,16 +98,40 @@ public class InAppPurchaseController extends EventController {
         .getInAppPurchaseRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    String userId = senderProto.getUserUuid();
     String receipt = reqProto.getReceipt();
 
     InAppPurchaseResponseProto.Builder resBuilder = InAppPurchaseResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setReceipt(reqProto.getReceipt());
 
-    // Lock this player's ID
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+      InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    // Lock this player's ID
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(userId);
       
       JSONObject response;
       JSONObject jsonReceipt = new JSONObject();
@@ -242,9 +268,19 @@ public class InAppPurchaseController extends EventController {
       //      }
     } catch (Exception e) {
       log.error("exception in InAppPurchaseController processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+        InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setInAppPurchaseResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in InviteFbFriendsForSlotsController processEvent", e);
+      }
     } finally {
       // Unlock this player
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -332,7 +368,7 @@ public class InAppPurchaseController extends EventController {
 		  Timestamp date, Map<String, Integer> currencyChangeMap,
 		  Map<String, Integer> previousCurrency) {
 	  
-	  int userId = aUser.getId();
+	  String userId = aUser.getId();
 	  Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 	  Map<String, String> changeReasonsMap = new HashMap<String, String>();
 	  Map<String, String> detailsMap = new HashMap<String, String>();
@@ -358,6 +394,18 @@ public class InAppPurchaseController extends EventController {
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public void setInsertUtils(InsertUtil insertUtils) {
+    this.insertUtils = insertUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,12 +36,13 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -50,6 +52,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
+  @Autowired
+  protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
+  @Autowired
+  protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public HealMonsterController() {
     numAllocatedThreads = 4;
@@ -73,7 +88,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserUuid();
+    String userId = senderProto.getUserUuid();
     List<UserMonsterHealingProto> umhDelete = reqProto.getUmhDeleteList();
     List<UserMonsterHealingProto> umhUpdate = reqProto.getUmhUpdateList();
     List<UserMonsterHealingProto> umhNew = reqProto.getUmhNewList();
@@ -84,16 +99,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     boolean isSpeedup = reqProto.getIsSpeedup();
     int gemsForSpeedup = reqProto.getGemsForSpeedup();
     List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
-    Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
-    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+    Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
+    List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
     
     int gemCost = gemCostForHealing + gemsForSpeedup;//reqProto.getTotalGemCost();
     Timestamp curTime = new Timestamp((new Date()).getTime());
     int maxCash = senderResourcesProto.getMaxCash();
 
-    Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
-    Map<Long, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
-    Map<Long, UserMonsterHealingProto> newMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhNew); 
+    Map<String, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
+    Map<String, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
+    Map<String, UserMonsterHealingProto> newMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhNew); 
     
     log.info("umchpList=" + umchpList + "\t userMonsterIdToExpectedHealth" +
     		userMonsterIdToExpectedHealth + "\t userMonsterIds=" + userMonsterIds);
@@ -103,25 +118,45 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userMonsterUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      if (userMonsterIds != null) {
+        for (String userMonsterId : userMonsterIds) {
+          userMonsterUuid = UUID.fromString(userMonsterId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userMonsterIds=%s",
+          userId, userMonsterIds), e);
+      invalidUuids = true;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       int previousCash = 0;
       int previousGems = 0;
     	//get whatever we need from the database
-    	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	Map<Long, MonsterHealingForUser> alreadyHealing =
-    			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
-    	Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
-					MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
-    	MonsterEvolvingForUser evolution = MonsterEvolvingForUserRetrieveUtils
+    	User aUser = getUserRetrieveUtils().getUserById(userId);
+    	Map<String, MonsterHealingForUser> alreadyHealing =
+    			getMonsterHealingForUserRetrieveUtils().getMonstersForUser(userId);
+    	Map<String, MonsterEnhancingForUser> alreadyEnhancing =
+					getMonsterEnhancingForUserRetrieveUtils().getMonstersForUser(userId);
+    	MonsterEvolvingForUser evolution = getMonsterEvolvingForUserRetrieveUtils()
 					.getEvolutionForUser(userId);
     	
     	//retrieve only the new monsters that will be healed
-    	Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
+    	Map<String, MonsterForUser> existingUserMonsters = new HashMap<String, MonsterForUser>();
     	if (null != newMap && !newMap.isEmpty()) {
-    		Set<Long> newIds = new HashSet<Long>();
+    		Set<String> newIds = new HashSet<String>();
     		newIds.addAll(newMap.keySet());
-    		existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    		existingUserMonsters = getMonsterForUserRetrieveUtils()
     				.getSpecificOrAllUserMonstersForUser(userId, newIds);
     	}
     	
@@ -179,7 +214,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in HealMonsterController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
   
@@ -205,14 +240,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * monster(s), 'B', will be deleted. Same logic with update and new. 
    * 
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId,
+  private boolean checkLegit(Builder resBuilder, User u, String userId,
   		int cashChange, int gemCost,
-  		Map<Long, MonsterForUser> existingUserMonsters,
-  		Map<Long, MonsterHealingForUser> alreadyHealing,
-  		Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
-  		Map<Long, UserMonsterHealingProto> deleteMap,
-  		Map<Long, UserMonsterHealingProto> updateMap,
-  		Map<Long, UserMonsterHealingProto> newMap, List<Long> healedUp,
+  		Map<String, MonsterForUser> existingUserMonsters,
+  		Map<String, MonsterHealingForUser> alreadyHealing,
+  		Map<String, MonsterEnhancingForUser> alreadyEnhancing,
+  		Map<String, UserMonsterHealingProto> deleteMap,
+  		Map<String, UserMonsterHealingProto> updateMap,
+  		Map<String, UserMonsterHealingProto> newMap, List<String> healedUp,
   		MonsterEvolvingForUser evolution) {
     if (null == u ) {
       log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
@@ -250,22 +285,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //retain only the userMonsters, the client sent, that are in healing
     boolean keepThingsInDomain = true;
     boolean keepThingsNotInDomain = false;
-    Set<Long> alreadyHealingIds = alreadyHealing.keySet();
+    Set<String> alreadyHealingIds = alreadyHealing.keySet();
     MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap, keepThingsInDomain, keepThingsNotInDomain);
     MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap, keepThingsInDomain, keepThingsNotInDomain);
     
     //retain only the userMonsters, the client sent, that are in the db
-    Set<Long> existingIds = existingUserMonsters.keySet();
+    Set<String> existingIds = existingUserMonsters.keySet();
     MonsterStuffUtils.retainValidMonsters(existingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
     //retain only the userMonsters, the client sent, that are not in enhancing
     keepThingsInDomain = false;
     keepThingsNotInDomain = true;
-    Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
+    Set<String> alreadyEnhancingIds = alreadyEnhancing.keySet();
     MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
     //retain only the userMonsters, the client sent, that are not in evolutions
-    Set<Long> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(evolution, null);
+    Set<String> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(evolution, null);
     MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
     
@@ -278,25 +313,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //only the entries in the map that have their key in validIds will be kept  
   //idsToValues contains keys that are in validIds and some that aren't
-  private Map<Long, Integer> getValidEntries(List<Long> validIds, 
-  		Map<Long, Integer> idsToValues) {
+  private Map<String, Integer> getValidEntries(List<String> validIds, 
+  		Map<String, Integer> idsToValues) {
 
-  	Map<Long, Integer> returnMap = new HashMap<Long, Integer>();
+  	Map<String, Integer> returnMap = new HashMap<String, Integer>();
 
-  	for(long id : validIds) {
+  	for(String id : validIds) {
   		int value = idsToValues.get(id);
   		returnMap.put(id, value);
   	}
   	return returnMap;
   }
   
-  private boolean writeChangesToDb(User u, int uId, int cashChange,
-		  int gemCost, Map<Long, UserMonsterHealingProto> protoDeleteMap,
-		  Map<Long, UserMonsterHealingProto> protoUpdateMap,
-		  Map<Long, UserMonsterHealingProto> protoNewMap,
+  private boolean writeChangesToDb(User u, String uId, int cashChange,
+		  int gemCost, Map<String, UserMonsterHealingProto> protoDeleteMap,
+		  Map<String, UserMonsterHealingProto> protoUpdateMap,
+		  Map<String, UserMonsterHealingProto> protoNewMap,
 		  int gemCostForHealing, Map<String, Integer> moneyForHealing,
-		  List<Long> userMonsterIds,
-		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup,
+		  List<String> userMonsterIds,
+		  Map<String, Integer> userMonsterIdsToHealths, boolean isSpeedup,
 		  int gemsForSpeedup, Map<String, Integer> moneyForSpeedup,
 		  Map<String, Integer> changeMap, int maxCash) {
 
@@ -356,7 +391,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //delete the selected monsters from  the healing table, if there are
   	//any to delete
   	if (!protoDeleteMap.isEmpty()) {
-  		List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
+  		List<String> deleteIds = new ArrayList<String>(protoDeleteMap.keySet());
   		int num = DeleteUtils.get().deleteMonsterHealingForUser(
   				uId, deleteIds);
   		log.info("deleted monster healing rows. numDeleted=" + num +
@@ -416,12 +451,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private void writeToUserCurrencyHistory(User aUser,
 		  Map<String, Integer> changeMap, Map<String, Integer> moneyForHealing,
 		  Timestamp curTime, int previousCash, int previousGems,
-		  Map<Long, UserMonsterHealingProto> deleteMap, 
-		  Map<Long, UserMonsterHealingProto> updateMap,
-		  Map<Long, UserMonsterHealingProto> newMap,
+		  Map<String, UserMonsterHealingProto> deleteMap, 
+		  Map<String, UserMonsterHealingProto> updateMap,
+		  Map<String, UserMonsterHealingProto> newMap,
 		  Map<String, Integer> moneyForHealSpeedup) {
   	
-  	int userId = aUser.getId();
+    String userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -492,6 +527,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtils() {
+    return monsterEnhancingForUserRetrieveUtils;
+  }
+
+  public void setMonsterEnhancingForUserRetrieveUtils(
+      MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
+    this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
+  }
+
+  public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
+    return monsterHealingForUserRetrieveUtils;
+  }
+
+  public void setMonsterHealingForUserRetrieveUtils(
+      MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
+    this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
+  }
+
+  public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtils() {
+    return monsterEvolvingForUserRetrieveUtils;
+  }
+
+  public void setMonsterEvolvingForUserRetrieveUtils(
+      MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
+    this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
 
 }
