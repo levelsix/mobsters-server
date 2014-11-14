@@ -39,7 +39,7 @@ import com.lvl6.properties.DBConstants;
 
 		Object[] values = { clanId };
 		String query = String.format(
-			"select * from %s, where %s=?",
+			"select * from %s where %s=?",
 			TABLE_NAME, DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID);
 
 		ClanEventPersistentForClan clanPersistentEvent = null;

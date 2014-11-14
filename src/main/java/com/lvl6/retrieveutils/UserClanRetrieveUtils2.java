@@ -309,6 +309,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		    			status, uc.getUserId(), uc.getClanId()));
 		    		status = newStatus;
 				}
+				uc.setStatus(status);
 			}
 			
 			try {
