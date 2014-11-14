@@ -41,6 +41,7 @@ import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
@@ -88,6 +89,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
   
   public RequestJoinClanController() {
 	  numAllocatedThreads = 4;
@@ -213,15 +217,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resEvent.setRequestJoinClanResponseProto(resBuilder.build());
         server.writeClanEvent(resEvent, clan.getId());
         
-        //null PvpLeagueFromUser means will pull from hazelcast instead
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
+        if (!requestToJoinRequired) {
+          //null PvpLeagueFromUser means will pull from hazelcast instead
+          UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+              .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, clan);
+          resEventUpdate.setTag(event.getTag());
+          server.writeEvent(resEventUpdate);
+          
+          //this is so user gets all up to date clan information
+          sendClanData(event, senderProto, userId, cdp);
+        }
         
-        //this is so user gets all up to date clan information
-        sendClanData(event, senderProto, userId, cdp);
-        notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
+        // handled by client
+        //notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
       }
     } catch (Exception e) {
     	log.error("exception in RequestJoinClan processEvent", e);
@@ -440,7 +448,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 	  StartUpResource fillMe = new StartUpResource(getUserRetrieveUtils(), getClanRetrieveUtils());
 	  
-	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
+	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u, getClanChatPostRetrieveUtils());
 	  sccma.setUp(fillMe);
 	  SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
 	  scha.setUp(fillMe);
@@ -565,6 +573,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   public void setClanEventPersistentForUserRetrieveUtils(
       ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
     this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
+  }
+
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+    return clanChatPostRetrieveUtils;
+  }
+
+
+  public void setClanChatPostRetrieveUtils(
+      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
   }
   
 }

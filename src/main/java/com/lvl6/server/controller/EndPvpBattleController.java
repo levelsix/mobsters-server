@@ -220,7 +220,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		//regardless of whether the attacker won, his elo will change
     		UpdateClientUserResponseEvent resEventUpdate =  MiscMethods
     				.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-    						attacker, attackerPlfu);
+    						attacker, attackerPlfu, null);
     		resEventUpdate.setTag(event.getTag());
     		server.writeEvent(resEventUpdate);
 
@@ -228,7 +228,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		if (attackerWon && null != defender) {
     			UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
     					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-    							defender, defenderPlfu);
+    							defender, defenderPlfu, null);
     			resEventUpdate.setTag(event.getTag());
     			server.writeEvent(resEventUpdateDefender);
     		}

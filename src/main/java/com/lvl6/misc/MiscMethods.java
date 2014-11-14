@@ -33,6 +33,7 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
@@ -120,6 +121,7 @@ import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
@@ -576,7 +578,7 @@ public class MiscMethods {
 //	}
 
 	public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
-		User user, PvpLeagueForUser plfu) {
+		User user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (!user.isFake()) {
 				LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
@@ -585,10 +587,19 @@ public class MiscMethods {
 		} catch (Exception e) {
 			log.error("Failed to update leaderboard.");
 		}
+		
+		// Retrieve clan if its not set
+		if (clan == null && user.getClanId() != null && !user.getClanId().isEmpty()) {
+		  ClanRetrieveUtils2 clanRetrieveUtils = AppContext.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+		  clan = clanRetrieveUtils.getClanWithId(user.getClanId());
+		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
+		  log.error ("Trying to set clan for user with different clan id.");
+		  clan = null;
+		}
 
 		UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(user.getId());
 		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto.newBuilder()
-			.setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu))
+			.setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan))
 			.setTimeOfUserUpdate(new Date().getTime()).build();
 		resEvent.setUpdateClientUserResponseProto(resProto);
 		return resEvent;

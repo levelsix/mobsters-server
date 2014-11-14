@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-      					aUser, null);
+      					aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
         writeToUserCurrencyHistory(userId, aUser, userTaskId, curTime,

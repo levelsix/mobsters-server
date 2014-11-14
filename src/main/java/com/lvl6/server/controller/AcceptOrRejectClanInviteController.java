@@ -26,6 +26,7 @@ import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatu
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -54,9 +55,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Autowired
 	protected ClanInviteRetrieveUtil clanInviteRetrieveUtil;
-	
-	@Autowired
-	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+  
+  @Autowired
+  protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
 
 
 	public AcceptOrRejectClanInviteController() {
@@ -196,7 +200,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		StartUpResource fillMe = new StartUpResource(
 			userRetrieveUtil, clanRetrieveUtil );
 
-		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
+		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u, getClanChatPostRetrieveUtils());
 		sccma.setUp(fillMe);
 		SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
 		scha.setUp(fillMe);
@@ -277,5 +281,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	{
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
 	}
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+    return clanChatPostRetrieveUtils;
+  }
+
+  public void setClanChatPostRetrieveUtils(
+      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
+  }
 
 }

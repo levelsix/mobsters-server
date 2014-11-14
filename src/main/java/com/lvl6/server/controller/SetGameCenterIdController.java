@@ -102,7 +102,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
         //game center id might have changed
         //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
       }

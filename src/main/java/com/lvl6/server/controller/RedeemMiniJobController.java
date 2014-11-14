@@ -165,7 +165,7 @@ public class RedeemMiniJobController extends EventController{
         //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
             .createUpdateClientUserResponseEventAndUpdateLeaderboard(
-                user, null);
+                user, null, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
 

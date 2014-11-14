@@ -260,7 +260,7 @@ public class InAppPurchaseController extends EventController {
 
       //null PvpLeagueFromUser means will pull from hazelcast instead
       UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+          .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
       resEventUpdate.setTag(event.getTag());
       server.writeEvent(resEventUpdate);
 

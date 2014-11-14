@@ -128,7 +128,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       
       if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
     	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
     	  resEventUpdate.setTag(event.getTag());
     	  server.writeEvent(resEventUpdate);
       }

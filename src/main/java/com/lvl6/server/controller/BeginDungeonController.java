@@ -173,7 +173,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful && 0 != gemsSpent) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	

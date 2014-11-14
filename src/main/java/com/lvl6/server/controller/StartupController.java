@@ -36,6 +36,7 @@ import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CepfuRaidStageHistory;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -93,6 +94,7 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
@@ -109,6 +111,7 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
@@ -118,6 +121,7 @@ import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -257,6 +261,15 @@ public class StartupController extends EventController {
   
   @Autowired
   protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+  
+  @Autowired
+  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+  
+  @Autowired
+  protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -522,24 +535,28 @@ public class StartupController extends EventController {
 			StartUpResource fillMe = new StartUpResource(
 				getUserRetrieveUtils(), getClanRetrieveUtils());
 			
+			// For creating the full user
+			fillMe.addUserId(user.getId());
+			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
-				resBuilder, user, playerId);
+				resBuilder, user, playerId, getPrivateChatPostRetrieveUtils());
 			spcma.setUp(fillMe);
 			log.info("{}ms at privateChatPosts", stopWatch.getTime());
 			
-			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(resBuilder, user, playerId);
+			SetFacebookExtraSlotsAction sfesa = new SetFacebookExtraSlotsAction(resBuilder, user, playerId, getUserFacebookInviteForSlotRetrieveUtils());
 			sfesa.setUp(fillMe);
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
-				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, getMonsterForUserRetrieveUtils(), hazelcastPvpUtil);
+				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, getMonsterForUserRetrieveUtils(), 
+				getClanRetrieveUtils(), hazelcastPvpUtil);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 			
 			
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
-			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, user);
+			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, user, getClanChatPostRetrieveUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			
@@ -579,8 +596,12 @@ public class StartupController extends EventController {
 			user.setLastLogin(nowDate);
 			//log.info("after last login change, user=" + user);
 
+			Clan clan = null;
+			if (user.getClanId() != null) {
+			  clan = fillMe.getClanIdsToClans().get(user.getClanId());
+			}
 			FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(
-				user, plfu);
+				user, plfu, clan);
 			//log.info("fup=" + fup);
 			resBuilder.setSender(fup);
 
@@ -2122,6 +2143,27 @@ public class StartupController extends EventController {
   public void setUserClanRetrieveUtils(
       UserClanRetrieveUtils2 userClanRetrieveUtils) {
     this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }
+  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+    return userFacebookInviteForSlotRetrieveUtils;
+  }
+  public void setUserFacebookInviteForSlotRetrieveUtils(
+      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+  }
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+    return clanChatPostRetrieveUtils;
+  }
+  public void setClanChatPostRetrieveUtils(
+      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
+  }
+  public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
+    return privateChatPostRetrieveUtils;
+  }
+  public void setPrivateChatPostRetrieveUtils(
+      PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
+    this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
   }  
 
 }

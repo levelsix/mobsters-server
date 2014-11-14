@@ -109,7 +109,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			server.writeEvent(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-				.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+				.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
 			server.writeEvent(resEventUpdate);
 

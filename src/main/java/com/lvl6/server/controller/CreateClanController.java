@@ -134,7 +134,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (success) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
