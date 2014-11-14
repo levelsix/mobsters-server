@@ -72,6 +72,9 @@ public class InAppPurchaseController extends EventController {
   
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
 
   public InAppPurchaseController() {
     numAllocatedThreads = 2;
@@ -180,7 +183,7 @@ public class InAppPurchaseController extends EventController {
       JSONObject receiptFromApple = null;
       if (response.getInt(IAPValues.STATUS) == 0) {
         receiptFromApple = response.getJSONObject(IAPValues.RECEIPT);
-        if (!IAPHistoryRetrieveUtils.checkIfDuplicateTransaction(Long.parseLong(receiptFromApple
+        if (!getIapHistoryRetrieveUtils().checkIfDuplicateTransaction(Long.parseLong(receiptFromApple
             .getString(IAPValues.TRANSACTION_ID)))) {
           try {
             String packageName = receiptFromApple.getString(IAPValues.PRODUCT_ID);
@@ -406,6 +409,15 @@ public class InAppPurchaseController extends EventController {
 
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
     this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
+    return iapHistoryRetrieveUtils;
+  }
+
+  public void setIapHistoryRetrieveUtils(
+      IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
+    this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
   }
   
 }

@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +26,10 @@ import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRe
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class FinishNormStructWaittimeWithDiamondsController extends EventController{
@@ -36,6 +38,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public FinishNormStructWaittimeWithDiamondsController() {
     numAllocatedThreads = 2;
@@ -58,8 +66,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info("reqProto=" + reqProto);
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
-    int userStructId = reqProto.getUserStructId();
+    String userId = senderProto.getUserUuid();
+    String userStructId = reqProto.getUserStructUuid();
     //userstruct's lastRetrieved will start with this date
     Timestamp timeOfSpeedup = new Timestamp(reqProto.getTimeOfSpeedup());
     int gemCostToSpeedup = reqProto.getGemCostToSpeedup();
@@ -68,12 +76,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+      userUuid = UUID.fromString(userId);
+      userStructUuid = UUID.fromString(userStructId);
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s or userStructId=%s",
+          userId, userStructId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+      FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       log.info("user=" + user);
       int previousGems = 0;
-      StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+      StructureForUser userStruct = getUserStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
       Structure formerStruct = null;
       
@@ -124,7 +156,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	log.error("exception2 in FinishNormStructWaittimeWithDiamondsController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
@@ -185,7 +217,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  if (money.isEmpty()) {
 		  return;
 	  }
-    int userStructId = userStruct.getId();
+    String userStructId = userStruct.getId();
     int structId = userStruct.getStructId();
     StringBuilder structDetails = new StringBuilder(); //   + structId;
     if (null == formerStruct) {
@@ -209,7 +241,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	structDetails.append(prevLevel);
     }
     
-    int userId = aUser.getId();
+    String userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -233,6 +265,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
   
 }
