@@ -2,8 +2,11 @@ package com.lvl6.utils.utilmethods;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,5 +136,13 @@ public class StringUtils {
 		}
 		
 		return returnVal;
+	}
+	
+	public static Map<String, UUID> convertToUUID(Collection<String> strList) {
+		Map<String, UUID> retMap = new HashMap<String, UUID>();
+		for (String str : strList) {
+			retMap.put(str, UUID.fromString(str));
+		}
+		return retMap;
 	}
 }
