@@ -67,13 +67,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int nuTaskStageId = reqProto.getNuTaskStageId();
 
     String userTaskId = null;
-    if (reqProto.hasUserTaskUuid()) {
+    if (reqProto.hasUserTaskUuid() && !reqProto.getUserTaskUuid().isEmpty()) {
       userTaskId = reqProto.getUserTaskUuid();
     }
 
 		//make monsterPieceDropped to false in db
 		String droplessTsfuId = null;
-		if (reqProto.hasDroplessTsfuUuid()) {
+		if (reqProto.hasDroplessTsfuUuid() && !reqProto.getDroplessTsfuUuid().isEmpty()) {
 			droplessTsfuId = reqProto.getDroplessTsfuUuid();
 		}
 

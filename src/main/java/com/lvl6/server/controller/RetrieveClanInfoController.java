@@ -101,7 +101,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     resBuilder.setIsForSearch(false);
     
     if (reqProto.hasClanName()) resBuilder.setClanName(clanName);
-    if (reqProto.hasClanUuid()) resBuilder.setClanUuid(clanId);
+    if (reqProto.hasClanUuid() && !reqProto.getClanUuid().isEmpty()) resBuilder.setClanUuid(clanId);
 
     UUID clanUuid = null;
     boolean invalidUuids = true;
