@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.C
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -34,6 +35,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	@Autowired
 	protected Locker locker;
 
+	@Autowired
+	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
+	
 	public CollectMonsterEnhancementController() {
 		numAllocatedThreads = 4;
 	}
@@ -56,28 +60,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserUuid();
+		String userId = senderProto.getUserUuid();
 		UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
 		//user monster ids that will be deleted from monster enhancing for user table
-		List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
-		userMonsterIdsThatFinished = new ArrayList<Long>(userMonsterIdsThatFinished);
+		List<String> userMonsterIdsThatFinished = reqProto.getUserMonsterUuidsList();
+		userMonsterIdsThatFinished = new ArrayList<String>(userMonsterIdsThatFinished);
 
 		//set some values to send to the client (the response proto)
 		CollectMonsterEnhancementResponseProto.Builder resBuilder = CollectMonsterEnhancementResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER); //default
 
-		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
 		try {
-			List<Long> userMonsterIds = new ArrayList<Long>();
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER);
+			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		try {
+			List<String> userMonsterIds = new ArrayList<String>();
 			if (null != umcep && !userMonsterIdsThatFinished.isEmpty()) {
-				userMonsterIds.add(umcep.getUserMonsterId()); //monster being enhanced
+				userMonsterIds.add(umcep.getUserMonsterUuid()); //monster being enhanced
 				userMonsterIds.addAll(userMonsterIdsThatFinished);
 			}
 
 			//get whatever we need from the database
-			Map<Long, MonsterEnhancingForUser> inEnhancing =
-				MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
+			Map<String, MonsterEnhancingForUser> inEnhancing =
+				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
 
 			boolean legit = checkLegit(resBuilder, userId,
 				userMonsterIds, inEnhancing, umcep, userMonsterIdsThatFinished);
@@ -111,7 +137,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("exception2 in CollectMonsterEnhancementController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 		}
 	}
 
@@ -131,10 +157,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	 * @param usedUpUserMonsterIds - userMonsterIds the user thinks has finished being enhanced
 	 * @return
 	 */
-	private boolean checkLegit(Builder resBuilder, int userId,
-		List<Long> userMonsterIds,
-		Map<Long, MonsterEnhancingForUser> inEnhancing,
-		UserMonsterCurrentExpProto umcep, List<Long> usedUpMonsterIds)
+	private boolean checkLegit(Builder resBuilder, String userId,
+		List<String> userMonsterIds,
+		Map<String, MonsterEnhancingForUser> inEnhancing,
+		UserMonsterCurrentExpProto umcep, List<String> usedUpMonsterIds)
 	{
 
 		if ( null == umcep || usedUpMonsterIds.isEmpty()) {
@@ -147,7 +173,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
 
 		//make sure that all the monsters involved in enhancing is accounted for
-		Set<Long> inEnhancingIds = inEnhancing.keySet();
+		Set<String> inEnhancingIds = inEnhancing.keySet();
 		
 		if (inEnhancingIds.size() != userMonsterIds.size() ||
 			!inEnhancingIds.containsAll(userMonsterIds))
@@ -159,7 +185,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		//check to make sure the base is complete
-		MonsterEnhancingForUser mefu = inEnhancing.get(umcep.getUserMonsterId()); 
+		MonsterEnhancingForUser mefu = inEnhancing.get(umcep.getUserMonsterUuid()); 
 		if (!mefu.isEnhancingComplete()) {
 			log.error(String.format(
 				"base monster being enhanced is incomplete: %s", mefu));
@@ -169,11 +195,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private boolean writeChangesToDb(int uId,
+	private boolean writeChangesToDb(String uId,
 		UserMonsterCurrentExpProto umcep)
 	{
 
-		long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
+		String userMonsterIdBeingEnhanced = umcep.getUserMonsterUuid();
 		int newExp = umcep.getExpectedExperience();
 		int newLvl = umcep.getExpectedLevel();
 		int newHp = umcep.getExpectedHp();
@@ -187,8 +213,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private void writeChangesToHistory(int uId, List<Long> allEnhancingMfuIds,
-		Map<Long, MonsterEnhancingForUser> inEnhancing, List<Long> usedUpMfuIds)
+	private void writeChangesToHistory(String uId, List<String> allEnhancingMfuIds,
+		Map<String, MonsterEnhancingForUser> inEnhancing, List<String> usedUpMfuIds)
 	{
 
 		//TODO: keep track of the userMonsters that are deleted
@@ -219,6 +245,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtil()
+	{
+		return monsterEnhancingForUserRetrieveUtil;
+	}
+
+	public void setMonsterEnhancingForUserRetrieveUtil(
+		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil )
+	{
+		this.monsterEnhancingForUserRetrieveUtil = monsterEnhancingForUserRetrieveUtil;
 	}
 
 }
