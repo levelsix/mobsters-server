@@ -114,7 +114,7 @@ public class QuestJobForUserRetrieveUtil {
 	}
 	
 	public Map<Integer, Collection<QuestJobForUser>> getSpecificOrAllQuestIdToQuestJobsForUserId(
-			int userId, Collection<Integer> questIds) {
+			String userId, Collection<Integer> questIds) {
 		Map<Integer, Collection<QuestJobForUser>> questIdToQjfuList = null;
 		try {
 			List<String> columnsToSelected = UserQuestJobForClientMapper

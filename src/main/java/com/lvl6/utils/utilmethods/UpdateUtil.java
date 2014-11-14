@@ -160,7 +160,7 @@ public interface UpdateUtil {
   public abstract int updatePvpLeagueForUserShields(String userId, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime);
   
-  public abstract int updatePvpLeagueForUser(int userId, int newPvpLeagueId, 
+  public abstract int updatePvpLeagueForUser(String userId, int newPvpLeagueId, 
 		  int newRank, int eloChange, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
 		  int attacksLostDelta, int defensesLostDelta, float nuPvpDmgMultiplier);

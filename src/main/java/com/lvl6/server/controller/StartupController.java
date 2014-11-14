@@ -92,17 +92,32 @@ import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
+import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.QuestJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -168,6 +183,9 @@ public class StartupController extends EventController {
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
 
+  @Autowired
+  protected QuestForUserRetrieveUtils2 questForUserRetrieveUtils;
+
 	@Autowired
 	protected QuestJobForUserRetrieveUtil questJobForUserRetrieveUtil;
 
@@ -191,6 +209,54 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+
+  @Autowired
+  protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
+  
+  @Autowired
+  protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
+  
+  @Autowired
+  protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+  
+  @Autowired
+  protected TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils;
+  
+  @Autowired
+  protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
+  
+  @Autowired
+  protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
+  
+  @Autowired
+  protected EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils;
+  
+  @Autowired
+  protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils;
+  
+  @Autowired
+  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
+  
+  @Autowired
+  protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils;
+  
+  @Autowired
+  protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils;
+  
+  @Autowired
+  protected CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils;
+  
+  @Autowired
+  protected ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public StartupController() {
 		numAllocatedThreads = 3;
@@ -376,7 +442,7 @@ public class StartupController extends EventController {
 	{
 		boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
 		//TODO: Retrieve from user table
-		int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
+		int numOldAccounts = getUserRetrieveUtils().numAccountsForUDID(udid);
 		boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
 		boolean isFirstTimeUser = false;
 		if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
@@ -454,7 +520,7 @@ public class StartupController extends EventController {
 			
 			//fill up with userIds, and other ids to fetch from tables
 			StartUpResource fillMe = new StartUpResource(
-				getUserRetrieveUtils());
+				getUserRetrieveUtils(), getClanRetrieveUtils());
 			
 			SetPrivateChatMessageAction spcma = new SetPrivateChatMessageAction(
 				resBuilder, user, playerId);
@@ -466,7 +532,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at facebookAndExtraSlotsStuff", stopWatch.getTime());
 			
 			SetPvpBattleHistoryAction spbha = new SetPvpBattleHistoryAction(
-				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, hazelcastPvpUtil);
+				resBuilder, user, playerId, pvpBattleHistoryRetrieveUtil, getMonsterForUserRetrieveUtils(), hazelcastPvpUtil);
 			spbha.setUp(fillMe);
 			log.info("{}ms at pvpBattleHistoryStuff", stopWatch.getTime());
 			
@@ -521,7 +587,7 @@ public class StartupController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in StartupController processEvent", e);
 		} finally {
-			getLocker().unlockPlayer(playerId, this.getClass().getSimpleName());
+			getLocker().unlockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
 			log.info("{}ms at unlock", stopWatch.getTime());
 		}
 	}
@@ -529,7 +595,7 @@ public class StartupController extends EventController {
 	private void forceLogOutOthers(
 		StopWatch stopWatch,
 		String udid,
-		int playerId,
+		String playerId,
 		User user,
 		String fbId )
 	{
@@ -552,9 +618,9 @@ public class StartupController extends EventController {
 		}
 	}
 	
-	private void setInProgressAndAvailableQuests(Builder resBuilder, int userId) {
+	private void setInProgressAndAvailableQuests(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+		List<QuestForUser> inProgressAndRedeemedUserQuests = getQuestForUserRetrieveUtils()
 			.getUserQuestsForUser(userId);
 		
 		if (null == inProgressAndRedeemedUserQuests ||
@@ -598,9 +664,9 @@ public class StartupController extends EventController {
 		resBuilder.addAllRedeemedQuestIds(redeemedQuestIds);
 	}
 
-	private void setUserClanInfos(StartupResponseProto.Builder resBuilder, int userId) {
+	private void setUserClanInfos(StartupResponseProto.Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToUser(
+		List<UserClan> userClans = getUserClanRetrieveUtils().getUserClansRelatedToUser(
 			userId);
 		for (UserClan uc : userClans) {
 			resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc));
@@ -618,9 +684,9 @@ public class StartupController extends EventController {
 
 	}
 
-	private void setUserMonsterStuff(Builder resBuilder, int userId) {
+	private void setUserMonsterStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
+		List<MonsterForUser> userMonsters= getMonsterForUserRetrieveUtils()
 			.getMonstersForUser(userId);
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
@@ -632,7 +698,7 @@ public class StartupController extends EventController {
 
 		/*NOTE: DB CALL*/
 		//monsters in healing
-		Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
+		Map<String, MonsterHealingForUser> userMonstersHealing = getMonsterHealingForUserRetrieveUtils()
 			.getMonstersForUser(userId);
 		if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
 
@@ -645,7 +711,7 @@ public class StartupController extends EventController {
 
 		/*NOTE: DB CALL*/
 		//enhancing monsters
-		Map<Long, MonsterEnhancingForUser> userMonstersEnhancing = MonsterEnhancingForUserRetrieveUtils
+		Map<String, MonsterEnhancingForUser> userMonstersEnhancing = getMonsterEnhancingForUserRetrieveUtils()
 			.getMonstersForUser(userId);
 		if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
 			//find the monster that is being enhanced
@@ -680,7 +746,7 @@ public class StartupController extends EventController {
 
 		/*NOTE: DB CALL*/
 		//evolving monsters
-		Map<Long, MonsterEvolvingForUser> userMonsterEvolving = MonsterEvolvingForUserRetrieveUtils
+		Map<String, MonsterEvolvingForUser> userMonsterEvolving = getMonsterEvolvingForUserRetrieveUtils()
 			.getCatalystIdsToEvolutionsForUser(userId);
 		if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
 
@@ -721,14 +787,14 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setTaskStuff(Builder resBuilder, int userId) {
+	private void setTaskStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
+		List<Integer> taskIds = getTaskForUserCompletedRetrieveUtils()
 			.getAllTaskIdsForUser(userId);
 		resBuilder.addAllCompletedTaskIds(taskIds);
 
 		/*NOTE: DB CALL*/
-		TaskForUserOngoing aTaskForUser = TaskForUserOngoingRetrieveUtils
+		TaskForUserOngoing aTaskForUser = getTaskForUserOngoingRetrieveUtils()
 			.getUserTaskForUserId(userId);
 		if(null != aTaskForUser) {
 			log.warn(String.format(
@@ -737,9 +803,9 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setEventStuff(Builder resBuilder, int userId) {
+	private void setEventStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		List<EventPersistentForUser> events = EventPersistentForUserRetrieveUtils
+		List<EventPersistentForUser> events = getEventPersistentForUserRetrieveUtils()
 			.getUserPersistentEventForUserId(userId);
 
 		for (EventPersistentForUser epfu : events) {
@@ -749,7 +815,7 @@ public class StartupController extends EventController {
 
 	}
 
-	private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, int userId,
+	private PvpLeagueForUser pvpBattleStuff(Builder resBuilder, User user, String userId,
 		boolean isFreshRestart, Timestamp battleEndTime) {
 
 		//	  PvpLeagueForUser plfu = setPvpLeagueInfo(resBuilder, userId);
@@ -769,7 +835,7 @@ public class StartupController extends EventController {
 		/*NOTE: DB CALL*/
 		//if bool isFreshRestart is true, then deduct user's elo by amount specified in
 		//the table (pvp_battle_for_user), since user auto loses
-		PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
+		PvpBattleForUser battle = getPvpBattleForUserRetrieveUtils()
 			.getPvpBattleForUserForAttacker(userId);
 
 		if (null == battle) {
@@ -782,7 +848,7 @@ public class StartupController extends EventController {
 			eloAttackerLoses = -1 * plfu.getElo();
 		}
 
-		int defenderId = battle.getDefenderId();
+		String defenderId = battle.getDefenderId();
 		int eloDefenderWins = battle.getDefenderLoseEloChange();
 
 		//user has unfinished battle, reward defender and penalize attacker
@@ -791,16 +857,35 @@ public class StartupController extends EventController {
 		return plfu;
 	}
 
-	private void penalizeUserForLeavingGameWhileInPvp(int userId, User user, 
-		PvpLeagueForUser attackerPlfu, int defenderId,
+	private void penalizeUserForLeavingGameWhileInPvp(String userId, User user, 
+		PvpLeagueForUser attackerPlfu, String defenderId,
 		int eloAttackerLoses, int eloDefenderWins, Timestamp battleEndTime,
 		Timestamp battleStartTime, PvpBattleForUser battle) {
 		//NOTE: this lock ordering might result in a temp deadlock
 		//doesn't reeeally matter if can't penalize defender...
 
+    UUID defenderUuid = null;
+    boolean invalidUuids = true;
+    try {
+      defenderUuid = UUID.fromString(defenderId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect defenderId=%s",
+          defenderId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      return;
+    }
+	  
+
 		//only lock real users
-		if (0 != defenderId) {
-			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
+		if (null != defenderUuid) {
+			getLocker().lockPlayer(defenderUuid, this.getClass().getSimpleName());
 		}
 		try {
 			int attackerEloBefore = attackerPlfu.getElo();
@@ -840,7 +925,7 @@ public class StartupController extends EventController {
 			getHazelcastPvpUtil().replacePvpUser(attackerPu, userId);
 
 			//update defender if real, TODO: might need to cap defenderElo
-			if (0 != defenderId) {
+			if (null != defenderId) {
 				PvpLeagueForUser defenderPlfu = getPvpLeagueForUserRetrieveUtil()
 					.getUserPvpLeagueForId(defenderId);
 
@@ -898,13 +983,13 @@ public class StartupController extends EventController {
 					battle),
 				e);
 		} finally {
-			if (0 != defenderId) {
-				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
+			if (null != defenderUuid) {
+				getLocker().unlockPlayer(defenderUuid, this.getClass().getSimpleName());
 			}
 		}
 	}
 
-	private void setOngoingTask(Builder resBuilder, int userId,
+	private void setOngoingTask(Builder resBuilder, String userId,
 		TaskForUserOngoing aTaskForUser) {
 		try {
 			MinimumUserTaskProto mutp = CreateInfoProtoUtils.createMinimumUserTaskProto(
@@ -912,9 +997,9 @@ public class StartupController extends EventController {
 			resBuilder.setCurTask(mutp);
 
 			//create protos for stages
-			long userTaskId = aTaskForUser.getId();
+			String userTaskId = aTaskForUser.getId();
 			/*NOTE: DB CALL*/
-			List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
+			List<TaskStageForUser> taskStages = getTaskStageForUserRetrieveUtils()
 				.getTaskStagesForUserWithTaskForUserId(userTaskId);
 
 			//group taskStageForUsers by stage nums because more than one
@@ -951,8 +1036,8 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
-		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet);
+	private void setAllStaticData(Builder resBuilder, String userId, boolean userIdSet) {
+		StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet, getQuestForUserRetrieveUtils());
 
 		resBuilder.setStaticDataStuffProto(sdp);
 	}
@@ -1095,7 +1180,7 @@ public class StartupController extends EventController {
 	}
 	*/
 
-	private void setAchievementStuff(Builder resBuilder, int userId) {
+	private void setAchievementStuff(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements =
 			getAchievementForUserRetrieveUtil()
@@ -1109,9 +1194,9 @@ public class StartupController extends EventController {
 		}
 	}
 
-	private void setMiniJob(Builder resBuilder, int userId) {
+	private void setMiniJob(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
-		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs =
+		Map<String, MiniJobForUser> miniJobIdToUserMiniJobs =
 			getMiniJobForUserRetrieveUtil()
 			.getSpecificOrAllIdToMiniJobForUser(userId, null);
 
@@ -1127,7 +1212,7 @@ public class StartupController extends EventController {
 		resBuilder.addAllUserMiniJobProtos(umjpList);
 	}
 
-	private void setUserItems(Builder resBuilder, int userId) {
+	private void setUserItems(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, ItemForUser> itemIdToUserItems =
 			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
@@ -1155,20 +1240,20 @@ public class StartupController extends EventController {
 
 	private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder, User user) {
 		/*NOTE: DB CALL*/
-		boolean hasPurchased = IAPHistoryRetrieveUtils.checkIfUserHasPurchased(user.getId());
+		boolean hasPurchased = getIapHistoryRetrieveUtils().checkIfUserHasPurchased(user.getId());
 		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
 	}
 
-	private void setClanRaidStuff(Builder resBuilder, User user, int userId, Timestamp now) {
+	private void setClanRaidStuff(Builder resBuilder, User user, String userId, Timestamp now) {
 		Date nowDate = new Date(now.getTime());
-		int clanId = user.getClanId();
+		String clanId = user.getClanId();
 
-		if (clanId <= 0) {
+		if (clanId == null) {
 			return;
 		}
 		/*NOTE: DB CALL*/
 		//get the clan raid information for the clan
-		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+		ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
 			.getPersistentEventForClanId(clanId);
 
 		if (null == cepfc) {
@@ -1184,7 +1269,7 @@ public class StartupController extends EventController {
 		/*NOTE: DB CALL*/
 		//get the clan raid information for all the clan users
 		//shouldn't be null (per the retrieveUtils)
-		Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
+		Map<String, ClanEventPersistentForUser> userIdToCepfu = getClanEventPersistentForUserRetrieveUtils()
 			.getPersistentEventUserInfoForClanId(clanId);
 		log.info(String.format(
 			"the users involved in clan raid:%s", userIdToCepfu));
@@ -1195,12 +1280,12 @@ public class StartupController extends EventController {
 			return;
 		}
 
-		List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+		List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
 
 		/*NOTE: DB CALL*/
 		//TODO: when retrieving clan info, and user's current teams, maybe query for 
 		//these monsters as well
-		Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+		Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
 			.getSpecificUserMonsters(userMonsterIds);
 
 		for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
@@ -1213,18 +1298,18 @@ public class StartupController extends EventController {
 
 	}
 
-	private void setClanRaidHistoryStuff(Builder resBuilder, int userId, Date nowDate) {
+	private void setClanRaidHistoryStuff(Builder resBuilder, String userId, Date nowDate) {
 
 		/*NOTE: DB CALL*/
 		//the raid stage and reward history for past 7 days
 		int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY; 
 		Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory =
-			CepfuRaidStageHistoryRetrieveUtils.getRaidStageHistoryForPastNDaysForUserId(
+			getCepfuRaidStageHistoryRetrieveUtils().getRaidStageHistoryForPastNDaysForUserId(
 				userId, nDays, nowDate, timeUtils);
 
 		/*NOTE: DB CALL*/
 		Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards =
-			ClanEventPersistentUserRewardRetrieveUtils.getCepUserRewardForPastNDaysForUserId(
+			getClanEventPersistentUserRewardRetrieveUtils().getCepUserRewardForPastNDaysForUserId(
 				userId, nDays, nowDate, timeUtils);
 
 		//possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage
@@ -1919,6 +2004,124 @@ public class StartupController extends EventController {
 	public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
 	{
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
-	}  
+	}
+  public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
+    return questForUserRetrieveUtils;
+  }
+  public void setQuestForUserRetrieveUtils(
+      QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
+    this.questForUserRetrieveUtils = questForUserRetrieveUtils;
+  }
+  public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtils() {
+    return monsterEnhancingForUserRetrieveUtils;
+  }
+  public void setMonsterEnhancingForUserRetrieveUtils(
+      MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
+    this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
+  }
+  public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
+    return monsterHealingForUserRetrieveUtils;
+  }
+  public void setMonsterHealingForUserRetrieveUtils(
+      MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
+    this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
+  }
+  public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtils() {
+    return monsterEvolvingForUserRetrieveUtils;
+  }
+  public void setMonsterEvolvingForUserRetrieveUtils(
+      MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
+    this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
+  }
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
+  public TaskForUserCompletedRetrieveUtils getTaskForUserCompletedRetrieveUtils() {
+    return taskForUserCompletedRetrieveUtils;
+  }
+  public void setTaskForUserCompletedRetrieveUtils(
+      TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils) {
+    this.taskForUserCompletedRetrieveUtils = taskForUserCompletedRetrieveUtils;
+  }
+  public TaskForUserOngoingRetrieveUtils2 getTaskForUserOngoingRetrieveUtils() {
+    return taskForUserOngoingRetrieveUtils;
+  }
+  public void setTaskForUserOngoingRetrieveUtils(
+      TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils) {
+    this.taskForUserOngoingRetrieveUtils = taskForUserOngoingRetrieveUtils;
+  }
+  public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtils() {
+    return taskStageForUserRetrieveUtils;
+  }
+  public void setTaskStageForUserRetrieveUtils(
+      TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils) {
+    this.taskStageForUserRetrieveUtils = taskStageForUserRetrieveUtils;
+  }
+  public EventPersistentForUserRetrieveUtils2 getEventPersistentForUserRetrieveUtils() {
+    return eventPersistentForUserRetrieveUtils;
+  }
+  public void setEventPersistentForUserRetrieveUtils(
+      EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils) {
+    this.eventPersistentForUserRetrieveUtils = eventPersistentForUserRetrieveUtils;
+  }
+  public PvpBattleForUserRetrieveUtils2 getPvpBattleForUserRetrieveUtils() {
+    return pvpBattleForUserRetrieveUtils;
+  }
+  public void setPvpBattleForUserRetrieveUtils(
+      PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils) {
+    this.pvpBattleForUserRetrieveUtils = pvpBattleForUserRetrieveUtils;
+  }
+  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
+    return iapHistoryRetrieveUtils;
+  }
+  public void setIapHistoryRetrieveUtils(
+      IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
+    this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
+  }
+  public ClanEventPersistentForClanRetrieveUtils2 getClanEventPersistentForClanRetrieveUtils() {
+    return clanEventPersistentForClanRetrieveUtils;
+  }
+  public void setClanEventPersistentForClanRetrieveUtils(
+      ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils) {
+    this.clanEventPersistentForClanRetrieveUtils = clanEventPersistentForClanRetrieveUtils;
+  }
+  public ClanEventPersistentForUserRetrieveUtils2 getClanEventPersistentForUserRetrieveUtils() {
+    return clanEventPersistentForUserRetrieveUtils;
+  }
+  public void setClanEventPersistentForUserRetrieveUtils(
+      ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
+    this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
+  }
+  public CepfuRaidStageHistoryRetrieveUtils2 getCepfuRaidStageHistoryRetrieveUtils() {
+    return cepfuRaidStageHistoryRetrieveUtils;
+  }
+  public void setCepfuRaidStageHistoryRetrieveUtils(
+      CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils) {
+    this.cepfuRaidStageHistoryRetrieveUtils = cepfuRaidStageHistoryRetrieveUtils;
+  }
+  public ClanEventPersistentUserRewardRetrieveUtils2 getClanEventPersistentUserRewardRetrieveUtils() {
+    return clanEventPersistentUserRewardRetrieveUtils;
+  }
+  public void setClanEventPersistentUserRewardRetrieveUtils(
+      ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils) {
+    this.clanEventPersistentUserRewardRetrieveUtils = clanEventPersistentUserRewardRetrieveUtils;
+  }
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+    this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }  
 
 }

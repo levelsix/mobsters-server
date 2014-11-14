@@ -80,7 +80,7 @@ public interface InsertUtil {
 	public abstract int insertPvpLeagueForUser(String userId, int pvpLeagueId, int rank,
 			int elo, Timestamp shieldEndTime, Timestamp inBattleShieldEndTime);
 
-	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
+	public abstract boolean insertLastLoginLastLogoutToUserSessions(String userId, Timestamp loginTime, Timestamp logoutTime); 
 
 //	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
