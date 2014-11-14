@@ -25,6 +25,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -34,6 +35,9 @@ import com.lvl6.utils.RetrieveUtils;
   
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public RetrieveUsersForUserIdsController() {
     numAllocatedThreads = 4;
@@ -79,7 +83,7 @@ import com.lvl6.utils.RetrieveUtils;
 
 //    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
 //    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
-    Map<String, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
+    Map<String, User> usersByIds = getUserRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
     	  
@@ -145,6 +149,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 	  this.hazelcastPvpUtil = hazelcastPvpUtil;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

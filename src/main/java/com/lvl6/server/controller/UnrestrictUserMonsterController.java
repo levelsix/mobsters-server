@@ -20,8 +20,8 @@ import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.Build
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class UnrestrictUserMonsterController extends EventController {
@@ -30,6 +30,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public UnrestrictUserMonsterController() {
 		numAllocatedThreads = 4;
@@ -95,8 +98,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
 			//make sure it exists
-			Map<String, MonsterForUser> mfuMap = RetrieveUtils
-					.monsterForUserRetrieveUtils()
+			Map<String, MonsterForUser> mfuMap = getMonsterForUserRetrieveUtils()
 					.getSpecificOrAllRestrictedUserMonstersForUser(userId, userMonsterIdList);
 
 			boolean legit = checkLegit(resBuilder, userId, userMonsterIdList, mfuMap);
@@ -175,5 +177,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
 
 }
