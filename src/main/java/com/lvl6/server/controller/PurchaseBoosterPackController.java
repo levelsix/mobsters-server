@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -21,6 +22,7 @@ import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
 import com.lvl6.events.response.PurchaseBoosterPackResponseEvent;
+import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -35,6 +37,7 @@ import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
+import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -85,6 +88,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     PurchaseBoosterPackRequestProto reqProto = ((PurchaseBoosterPackRequestEvent)event).getPurchaseBoosterPackRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    String userId = senderProto.getUserUuid();
     int boosterPackId = reqProto.getBoosterPackId();
     Date now = new Date(reqProto.getClientTime());
     Timestamp nowTimestamp = new Timestamp(now.getTime());
@@ -96,10 +100,32 @@ import com.lvl6.utils.utilmethods.StringUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
-
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      int userId = senderProto.getUserUuid();
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+      PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
+      resEvent.setTag(event.getTag());
+      resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousGems = 0;
       BoosterPack aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
@@ -175,7 +201,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		log.error("exception2 in SellUserMonsterController processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName()); 
     }
   }
 
@@ -205,7 +231,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 //    }
   }
   
-  private boolean checkLegitPurchase(Builder resBuilder, User aUser, int userId, 
+  private boolean checkLegitPurchase(Builder resBuilder, User aUser, String userId, 
       Date now, BoosterPack aPack, int boosterPackId, int gemPrice,
       boolean freeBoosterPack, Map<Integer, BoosterItem> idsToBoosterItems) {
     
@@ -270,7 +296,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       boolean freeBoosterPack) {
   	
     //update user, user_monsters
-  	int userId = user.getId();
+    String userId = user.getId();
   	int currencyChange = -1 * gemPrice; //should be negative
   	if (freeBoosterPack) {
   		currencyChange = 0;
@@ -306,7 +332,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     //this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
     if (!completeUserMonsters.isEmpty()) {
-    	List<Long> monsterForUserIds = InsertUtils.get()
+    	List<String> monsterForUserIds = InsertUtils.get()
     			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
     	List<FullUserMonsterProto> newOrUpdated = MiscMethods. 
     		createFullUserMonsterProtos(
@@ -352,7 +378,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  if (freeBoosterPack) {
 		  return;
 	  }
-  	int userId = aUser.getId();
+	  String userId = aUser.getId();
   	List<Integer> itemIds = new ArrayList<Integer>();
   	for (BoosterItem item : items) {
   		int id = item.getId();
@@ -392,7 +418,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		currentCurrencies, reasonsForChanges, details);
   }
   
-  private void writeToBoosterPackPurchaseHistory(int userId, int boosterPackId,
+  private void writeToBoosterPackPurchaseHistory(String userId, int boosterPackId,
   		List<BoosterItem> itemsUserReceives, List<FullUserMonsterProto> fumpList,
   		Timestamp timeOfPurchase) {
   	//just assuming there is one Booster Item
@@ -401,7 +427,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	}
   	BoosterItem bi = itemsUserReceives.get(0);
 
-  	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(fumpList); 
+  	List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(fumpList); 
   	
   	int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(userId,
   			boosterPackId, timeOfPurchase, bi, userMonsterIds);

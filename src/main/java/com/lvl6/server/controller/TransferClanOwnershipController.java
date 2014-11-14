@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
-import com.lvl6.events.response.UnrestrictUserMonsterResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -24,13 +23,13 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class TransferClanOwnershipController extends EventController {
@@ -41,7 +40,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected Locker locker;
 
   @Autowired
-  protected ClanRetrieveUtils2 clanRetrieveUtil;
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
   public TransferClanOwnershipController() {
     numAllocatedThreads = 2;
@@ -111,8 +116,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       lockedClan = getLocker().lockClan(clanUuid);
     } 
     try {
-      Map<String,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-      Map<String, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
+      Map<String,User> users = getUserRetrieveUtils().getUsersByIds(userIds);
+      Map<String, UserClan> userClans = getUserClanRetrieveUtils()
           .getUserClanForUsers(clanId, userIds);
 
       User user = users.get(userId);
@@ -219,7 +224,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private void setResponseBuilderStuff(Builder resBuilder, String clanId, User newClanOwner) {
-    Clan clan = getClanRetrieveUtil().getClanWithId(clanId);
+    Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
     List<String> clanIdList = Collections.singletonList(clanId);
 
     List<String> statuses = new ArrayList<String>();
@@ -227,7 +232,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     statuses.add(UserClanStatus.JUNIOR_LEADER.name());
     statuses.add(UserClanStatus.CAPTAIN.name());
     statuses.add(UserClanStatus.MEMBER.name());
-    Map<String, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+    Map<String, Integer> clanIdToSize = getUserClanRetrieveUtils()
         .getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 
     resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
@@ -244,16 +249,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   public void setLocker(Locker locker) {
     this.locker = locker;
-  }  
-
-  public ClanRetrieveUtils2 getClanRetrieveUtil()
-  {
-    return clanRetrieveUtil;
   }
 
-  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
-  {
-    this.clanRetrieveUtil = clanRetrieveUtil;
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+    this.userClanRetrieveUtils = userClanRetrieveUtils;
   }
 
 }
