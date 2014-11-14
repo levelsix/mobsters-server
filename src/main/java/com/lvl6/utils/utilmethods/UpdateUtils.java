@@ -293,7 +293,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updateUserStructsBuildingIscomplete(String userId, 
+	public boolean updateUserStructsBuildingIsComplete(String userId, 
 			List<StructureForUser> userStructs, List<Timestamp> newRetrievedTimes) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
@@ -342,7 +342,7 @@ public class UpdateUtils implements UpdateUtil {
 	 */
 
 	@Override
-	public boolean updateUserStructsLastretrieved(Map<String, Timestamp> userStructIdsToLastRetrievedTime,
+	public boolean updateUserStructsLastRetrieved(Map<String, Timestamp> userStructIdsToLastRetrievedTime,
 			Map<String, StructureForUser> structIdsToUserStructs) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		

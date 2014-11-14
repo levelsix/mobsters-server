@@ -238,11 +238,13 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertIAPHistoryElem(org.json.JSONObject, int, com.lvl6.info.User, double)
    */
   @Override
-  //TODO
   public boolean insertIAPHistoryElem(JSONObject appleReceipt,
       int diamondChange, int coinChange, User user, double cashCost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     try {
+      String id = randomUUID();
+      
+      insertParams.put(DBConstants.IAP_HISTORY__ID, id);
       insertParams.put(DBConstants.IAP_HISTORY__USER_ID, user.getId());
       insertParams.put(DBConstants.IAP_HISTORY__TRANSACTION_ID,
           appleReceipt.getString(IAPValues.TRANSACTION_ID));
