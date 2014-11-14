@@ -89,7 +89,7 @@ import com.lvl6.properties.DBConstants;
 		//TODO: use duple (timestamp, otherPersonColumn)
 		//get last post id between specified user and person said user chatted with
 		String subquery = String.format(
-			"(SELECT max(%s) as %@, %s FROM %s WHERE %s=? GROUP BY %s)",
+			"(SELECT max(%s) as %s, %s FROM %s WHERE %s=? GROUP BY %s)",
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, 
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
 			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,

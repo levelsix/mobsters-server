@@ -218,8 +218,8 @@ public class InsertUtils implements InsertUtil{
       userStructIds.add(randomUUID());
     }
 
-  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID,
-  			userIdList);														
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructIds);
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userIdList);
   	insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structIdList);
   	insertParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, xCoordList);
   	insertParams.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, yCoordList);

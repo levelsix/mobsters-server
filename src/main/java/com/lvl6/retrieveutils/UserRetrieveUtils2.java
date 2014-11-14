@@ -137,7 +137,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	public int numAccountsForUDID(String udid) {
 		String query = String.format(
-			"select count(*) from %s where %s like concat(?, \"%\");",
+			"select count(*) from %s where %s like concat(?, \"%%\");",
 			TABLE_NAME, DBConstants.USER__UDID_FOR_HISTORY, udid);
 		try {
 			return this.jdbcTemplate.queryForInt(query, udid);

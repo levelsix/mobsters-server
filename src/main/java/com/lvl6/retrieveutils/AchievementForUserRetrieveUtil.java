@@ -68,8 +68,8 @@ public class AchievementForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(
@@ -81,7 +81,7 @@ public class AchievementForUserRetrieveUtil {
 					query);
 
 			List<AchievementForUser> afuList = this.jdbcTemplate
-					.query(query, rowMapper);
+					.query(query, values.toArray(), rowMapper);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 			for (AchievementForUser afu : afuList) {
@@ -91,7 +91,7 @@ public class AchievementForUserRetrieveUtil {
 			}
 		} catch (Exception e) {
 			log.error(String.format(
-				"could not retrieve user obstacle for userId=%s", userId), e);
+				"could not retrieve user achievement for userId=%s", userId), e);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 		}
