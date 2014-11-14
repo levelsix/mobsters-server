@@ -151,17 +151,17 @@ public interface InsertUtil {
 	public abstract List<String> insertIntoMonsterForUserReturnIds(String userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);
 	
-	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
+	public abstract int insertIntoMonsterForUserDeleted(String userId, List<String> deleteReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate);
 	
-	public abstract List<Integer> insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
-			Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
+	public abstract List<String> insertIntoUserFbInviteForSlot(String userId, List<String> facebookIds,
+			Timestamp curTime, Map<String, String> fbIdsToUserStructIds,
   		Map<String, Integer> fbIdsToUserStructsFbLvl);
 	
 	//the user monster ids will be ordered in ascending order, and this will determine
 	//which one is one and which one is two
-	public abstract int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
-			List<Long> userMonsterIds, Timestamp startTime);
+	public abstract int insertIntoMonsterEvolvingForUser(String userId, String catalystUserMonsterId,
+			List<String> userMonsterIds, Timestamp startTime);
 
 	public abstract int insertIntoUpdateEventPersistentForUser(String userId, int eventId, Timestamp now);
 	
