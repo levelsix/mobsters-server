@@ -300,7 +300,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
       StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
       
-      if (null == userStruct || userId != userStruct.getUserId() || !userStruct.isComplete()) {
+      if (null == userStruct || !userId.equals(userStruct.getUserId()) || !userStruct.isComplete()) {
         resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
         log.error("(will continue processing) struct owner is not user, or struct" +
         		" is not complete yet. userStruct=" + userStruct);

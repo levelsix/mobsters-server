@@ -164,7 +164,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		StructureForUser userStruct, Timestamp timeOfSpeedup, Structure struct,
   		int gemCostToSpeedup) {
     if (user == null || userStruct == null || struct == null ||
-    		userStruct.getUserId() != user.getId() || userStruct.isComplete()) {
+    		!userStruct.getUserId().equals(user.getId()) || userStruct.isComplete()) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
       log.error("something passed in is null. user=" + user +
            ", struct=" + struct + ", struct owner's id=" + userStruct.getUserId() +
