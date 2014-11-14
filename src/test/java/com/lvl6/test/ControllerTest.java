@@ -706,9 +706,9 @@ public class ControllerTest extends TestCase {
 		icre.setTag(1);
 		icre.setInviteToClanRequestProto(itcrpb.build());
 		
-		inviteToClanController.handleEvent(icre);
-		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
-		assertNotNull(ci);
+//		inviteToClanController.handleEvent(icre);
+//		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+//		assertNotNull(ci);
 		
 		DeleteUtils.get().deleteClanInvite(prospectiveMemberId, null);
 		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);

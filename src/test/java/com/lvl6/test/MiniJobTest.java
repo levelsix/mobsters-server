@@ -37,8 +37,8 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.controller.BeginMiniJobController;
 import com.lvl6.server.controller.CompleteMiniJobController;
@@ -58,7 +58,7 @@ public class MiniJobTest extends TestCase {
   }.getClass().getEnclosingClass());
 	
 	@Autowired
-	protected UserRetrieveUtils userRetrieveUtils;
+	protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Autowired
 	protected TimeUtils timeUtils;
@@ -67,7 +67,7 @@ public class MiniJobTest extends TestCase {
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetieveUtil;
 	
 	@Autowired
-	protected MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	
 	@Autowired
 	protected SpawnMiniJobController spawnMiniJobController;
@@ -86,7 +86,7 @@ public class MiniJobTest extends TestCase {
 //	@Transactional //just manually undo...
 	public void testSendSpawnMiniJob() {
 		log.info("spawn mini job");
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date lastMiniJobSpawnTimeThen = unitTesterThen.getLastMiniJobGeneratedTime();
 
@@ -96,7 +96,7 @@ public class MiniJobTest extends TestCase {
 		int structId = getMiniJobTestStructId();
 
 		//get count of user's current MiniJobs
-		Map<Long, MiniJobForUser> userMiniJobIdsToUserMiniJobsThen =
+		Map<String, MiniJobForUser> userMiniJobIdsToUserMiniJobsThen =
 				getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 		int miniJobCountThen = userMiniJobIdsToUserMiniJobsThen.size();
@@ -107,7 +107,7 @@ public class MiniJobTest extends TestCase {
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
 		//should have new entries for this user
-		Map<Long, MiniJobForUser> userMiniJobIdsToUserMiniJobsNow =
+		Map<String, MiniJobForUser> userMiniJobIdsToUserMiniJobsNow =
 				getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 		int miniJobCountNow = userMiniJobIdsToUserMiniJobsNow.size();
@@ -134,9 +134,9 @@ public class MiniJobTest extends TestCase {
 		
 		
 		//manually delete the created MiniJobForUser
-		Set<Long> set1 = userMiniJobIdsToUserMiniJobsNow.keySet();
-		Set<Long> set2 = userMiniJobIdsToUserMiniJobsThen.keySet();
-		Set<Long> newMiniJobForUserIds = Sets.difference(set1, set2);
+		Set<String> set1 = userMiniJobIdsToUserMiniJobsNow.keySet();
+		Set<String> set2 = userMiniJobIdsToUserMiniJobsThen.keySet();
+		Set<String> newMiniJobForUserIds = Sets.difference(set1, set2);
 		undoMiniJobTest(userId, unitTesterThen, lastMiniJobSpawnTimeThen,
 				newMiniJobForUserIds);
 	}
@@ -144,7 +144,7 @@ public class MiniJobTest extends TestCase {
 	@Test
 	public void testSendBeginMiniJob() {
 		log.info("begin mini job");
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date clientTime = new Date();
 
@@ -176,7 +176,7 @@ public class MiniJobTest extends TestCase {
 		
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
-		Map<Long, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
+		Map<String, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds) ;
 		
 		MiniJobForUser mjfuNow  = mjfuIdToMjfu.get(newMiniJobForUserIdThen);
@@ -208,30 +208,30 @@ public class MiniJobTest extends TestCase {
 				userMiniJobIds);
 	}
 	protected MiniJobForUser createNewMiniJobForUser(
-			int userId, User unitTester, Date clientTime) {
+	    String userId, User unitTester, Date clientTime) {
 		int numToSpawn = 1;
 		int structId = getMiniJobTestStructId();
 
-		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobsThen =
+		Map<String, MiniJobForUser> miniJobIdToUserMiniJobsThen =
 				getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 		
 		sendSpawnMiniJobRequestEvent(unitTester, clientTime, numToSpawn, structId);
 		
-		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobsNow =
+		Map<String, MiniJobForUser> miniJobIdToUserMiniJobsNow =
 				getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, null);
 		
 		//get the newly created MiniJob and begin it
-		Set<Long> set1 = miniJobIdToUserMiniJobsNow.keySet();
-		Set<Long> set2 = miniJobIdToUserMiniJobsThen.keySet();
-		Set<Long> newMiniJobForUserIds = Sets.difference(set1, set2);
+		Set<String> set1 = miniJobIdToUserMiniJobsNow.keySet();
+		Set<String> set2 = miniJobIdToUserMiniJobsThen.keySet();
+		Set<String> newMiniJobForUserIds = Sets.difference(set1, set2);
 		
-		long newMiniJobForUserId = (newMiniJobForUserIds.iterator()).next();
+		String newMiniJobForUserId = (newMiniJobForUserIds.iterator()).next();
 		
-		Collection<Long> userMiniJobIds =
+		Collection<String> userMiniJobIds =
 				Collections.singleton(newMiniJobForUserId);
-		Map<Long, MiniJobForUser> miniJobForUserIdToMjfu =
+		Map<String, MiniJobForUser> miniJobForUserIdToMjfu =
 				getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
 		
@@ -243,10 +243,10 @@ public class MiniJobTest extends TestCase {
 	@Test
 	public void testSendCompleteMiniJob() {
 		log.info("complete mini job");
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date clientTime = new Date();
-		Map<Long, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
+		Map<String, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, null);
 
 		//spawn the minijob
@@ -254,7 +254,7 @@ public class MiniJobTest extends TestCase {
 				unitTesterThen, clientTime); 
 		
 		//begin the minijob
-		long newMiniJobForUserIdThen = mjfuThen.getId();
+		String newMiniJobForUserIdThen = mjfuThen.getId();
 		beginMiniJobForUser(userId, unitTesterThen, clientTime,
 				newMiniJobForUserIdThen, mjfuThen, mfuIdToMfu);
 		
@@ -265,9 +265,9 @@ public class MiniJobTest extends TestCase {
 				newMiniJobForUserIdThen, false, 0);//, umchp);
 		
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
-		Collection<Long> userMiniJobIds = Collections
+		Collection<String> userMiniJobIds = Collections
 				.singleton(newMiniJobForUserIdThen);
-		Map<Long, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
+		Map<String, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
 		MiniJobForUser mjfuNow = mjfuIdToMjfu.get(newMiniJobForUserIdThen);
 		
@@ -280,9 +280,9 @@ public class MiniJobTest extends TestCase {
 				.getLastMiniJobGeneratedTime();
 		undoMiniJobTest(userId, unitTesterThen, lastMiniJobSpawnTimeThen, userMiniJobIds);
 	}
-	protected void beginMiniJobForUser(int userId, User user,
-			Date clientTime, long newMiniJobForUserId, MiniJobForUser mjfu,
-			Map<Long, MonsterForUser> mfuIdToMfu) {
+	protected void beginMiniJobForUser(String userId, User user,
+			Date clientTime, String newMiniJobForUserId, MiniJobForUser mjfu,
+			Map<String, MonsterForUser> mfuIdToMfu) {
 		assertTrue("Expected startTime: null. Actual: " + mjfu,
 				null == mjfu.getTimeStarted());
 		assertTrue("Expected userMonsterIds: null or empty. Actual: " +
@@ -294,12 +294,12 @@ public class MiniJobTest extends TestCase {
 		assertTrue("Expected userMonsters: not null, or empty. Actual: " +
 				mfuIdToMfu,
 				null != mfuIdToMfu && !mfuIdToMfu.isEmpty());
-		Collection<Long> userMonsterIds = mfuIdToMfu.keySet();
+		Collection<String> userMonsterIds = mfuIdToMfu.keySet();
 		sendBeginMiniJobRequestEvent(user, clientTime,
 				userMonsterIds, newMiniJobForUserId);
 	}
 	protected List<UserMonsterCurrentHealthProto> createUmchp(
-			Map<Long, MonsterForUser> mfuIdToMfu) {
+			Map<String, MonsterForUser> mfuIdToMfu) {
 		assertTrue("Expected userMonsters: not null, or empty. Actual: " +
 				mfuIdToMfu,
 				null != mfuIdToMfu && !mfuIdToMfu.isEmpty());
@@ -319,17 +319,17 @@ public class MiniJobTest extends TestCase {
 	@Test
 	public void testSendRedeemMiniJob() {
 		log.info("complete mini job");
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTesterThen = getUserRetrieveUtils().getUserById(userId);
 		Date clientTime = new Date();
-		Map<Long, MonsterForUser> monstersThen =
+		Map<String, MonsterForUser> monstersThen =
 				getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, null);
 		
 		MiniJobForUser mjfuThen = completeMiniJob(userId, unitTesterThen,
 				clientTime);
 		int miniJobId = mjfuThen.getMiniJobId();
-		long miniJobForUserId = mjfuThen.getId();
+		String miniJobForUserId = mjfuThen.getId();
 		
 		List<UserMonsterCurrentHealthProto> umchp = createUmchp(monstersThen);
 		
@@ -340,9 +340,9 @@ public class MiniJobTest extends TestCase {
 		//CHECK DATABASE TO VALIDATE CONTROLLER LOGIC
 		
 		//no more MiniJobForUser
-		Collection<Long> userMiniJobIds =
+		Collection<String> userMiniJobIds =
 				Collections.singleton(miniJobForUserId);
-		Map<Long, MiniJobForUser> idToMjfu = getMiniJobForUserRetieveUtil()
+		Map<String, MiniJobForUser> idToMjfu = getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
 		MiniJobForUser mjfuNow = null;
 		if (idToMjfu.containsKey(miniJobForUserId)) {
@@ -352,7 +352,7 @@ public class MiniJobTest extends TestCase {
 				null == mjfuNow);
 		
 		User unitTesterNow = getUserRetrieveUtils().getUserById(userId);
-		Map<Long, MonsterForUser> monstersNow =
+		Map<String, MonsterForUser> monstersNow =
 				getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, null);
 		
@@ -363,9 +363,9 @@ public class MiniJobTest extends TestCase {
 		
 		//user monsters should have changed if MiniJob gave monster reward
 	}
-	protected MiniJobForUser completeMiniJob(int userId, User user,
+	protected MiniJobForUser completeMiniJob(String userId, User user,
 			Date clientTime) {
-		Map<Long, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
+		Map<String, MonsterForUser> mfuIdToMfu = getMonsterForUserRetrieveUtils()
 				.getSpecificOrAllUserMonstersForUser(userId, null);
 
 		//spawn the minijob
@@ -373,7 +373,7 @@ public class MiniJobTest extends TestCase {
 				user, clientTime); 
 		
 		//begin the minijob
-		long newMiniJobForUserIdThen = mjfuThen.getId();
+		String newMiniJobForUserIdThen = mjfuThen.getId();
 		beginMiniJobForUser(userId, user, clientTime,
 				newMiniJobForUserIdThen, mjfuThen, mfuIdToMfu);
 		
@@ -383,17 +383,17 @@ public class MiniJobTest extends TestCase {
 		sendCompleteMiniJobRequestEvent(user, clientTime,
 				newMiniJobForUserIdThen, false, 0);//, umchp);
 		
-		Collection<Long> userMiniJobIds = Collections
+		Collection<String> userMiniJobIds = Collections
 				.singleton(newMiniJobForUserIdThen);
-		Map<Long, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
+		Map<String, MiniJobForUser> mjfuIdToMjfu = getMiniJobForUserRetieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(userId, userMiniJobIds);
 		MiniJobForUser mjfuNow = mjfuIdToMjfu.get(newMiniJobForUserIdThen);
 		
 		return mjfuNow;
 	}
 	protected void checkIfUserRewarded(User userThen, User userNow,
-			int miniJobId, Map<Long, MonsterForUser> monstersThen,
-			Map<Long, MonsterForUser> monstersNow) {
+			int miniJobId, Map<String, MonsterForUser> monstersThen,
+			Map<String, MonsterForUser> monstersNow) {
 		MiniJob mj = MiniJobRetrieveUtils.getMiniJobForMiniJobId(miniJobId);
 		
 		int cashReward = mj.getCashReward();
@@ -439,8 +439,8 @@ public class MiniJobTest extends TestCase {
 		}
 	}
 	protected boolean checkMonstersDifferent(
-			Map<Long, MonsterForUser> monstersOne,
-			Map<Long, MonsterForUser> monstersTwo) {
+			Map<String, MonsterForUser> monstersOne,
+			Map<String, MonsterForUser> monstersTwo) {
 		boolean monstersDifferent = false;
 		
 		if (monstersOne.size() != monstersTwo.size()) {
@@ -448,7 +448,7 @@ public class MiniJobTest extends TestCase {
 			return monstersDifferent;
 		}
 		//since same size, then one of the monsters might be different
-		for(Long mfuId : monstersOne.keySet()) {
+		for(String mfuId : monstersOne.keySet()) {
 			
 			boolean existsTwo = monstersTwo.containsKey(mfuId); 
 			
@@ -471,8 +471,8 @@ public class MiniJobTest extends TestCase {
 		return monstersDifferent;
 	}
 	
-	protected int getTestUserId() {
-		return 11; //Unit testing account
+	protected String getTestUserId() {
+		return "11"; //Unit testing account
 	}
 	
 	protected int getMiniJobTestStructId() {
@@ -510,7 +510,7 @@ public class MiniJobTest extends TestCase {
 	
 	
 	protected void sendBeginMiniJobRequestEvent(User user, Date clientTime,
-			Collection<Long> userMonsterIds, long userMiniJobId) {
+			Collection<String> userMonsterIds, String userMiniJobId) {
 		BeginMiniJobRequestProto bmjrp = createBeginMinijobRequestProto(
 				user, clientTime, userMonsterIds, userMiniJobId);
 		BeginMiniJobRequestEvent bmjre = new BeginMiniJobRequestEvent();
@@ -521,8 +521,8 @@ public class MiniJobTest extends TestCase {
 		getBeginMiniJobController().handleEvent(bmjre);
 	}
 	protected BeginMiniJobRequestProto createBeginMinijobRequestProto(
-			User user, Date clientTime, Collection<Long> userMonsterIds,
-			long userMiniJobId) {
+			User user, Date clientTime, Collection<String> userMonsterIds,
+			String userMiniJobId) {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
 		MinimumUserProto mup = CreateInfoProtoUtils
@@ -532,15 +532,15 @@ public class MiniJobTest extends TestCase {
 				BeginMiniJobRequestProto.newBuilder();
 		bmjrpb.setSender(mup);
 		bmjrpb.setClientTime(clientTime.getTime());
-		bmjrpb.addAllUserMonsterIds(userMonsterIds);
-		bmjrpb.setUserMiniJobId(userMiniJobId);
+		bmjrpb.addAllUserMonsterUuids(userMonsterIds);
+		bmjrpb.setUserMiniJobUuid(userMiniJobId);
 		
 		return bmjrpb.build();
 	}
 	
 	
 	protected void sendCompleteMiniJobRequestEvent(User user, Date clientTime,
-			long userMiniJobId, boolean isSpeedUp, int gemCost) {//,
+	    String userMiniJobId, boolean isSpeedUp, int gemCost) {//,
 			//List<UserMonsterCurrentHealthProto> umchp) {
 		CompleteMiniJobRequestProto cmjrp = createCompleteMiniJobRequestProto(
 				user, clientTime, userMiniJobId, isSpeedUp, gemCost);//, umchp);
@@ -553,7 +553,7 @@ public class MiniJobTest extends TestCase {
 		getCompleteMiniJobController().handleEvent(cmjre);
 	}
 	protected CompleteMiniJobRequestProto createCompleteMiniJobRequestProto(
-			User user, Date clientTime, long userMiniJobId, boolean isSpeedUp,
+			User user, Date clientTime, String userMiniJobId, boolean isSpeedUp,
 			int gemCost) {
 		assertTrue("Expected user: not null. Actual: " + user,
 				null != user);
@@ -564,7 +564,7 @@ public class MiniJobTest extends TestCase {
 				CompleteMiniJobRequestProto.newBuilder();
 		cmjrpb.setSender(mup);
 		cmjrpb.setClientTime(clientTime.getTime());
-		cmjrpb.setUserMiniJobId(userMiniJobId);
+		cmjrpb.setUserMiniJobUuid(userMiniJobId);
 		cmjrpb.setIsSpeedUp(isSpeedUp);
 		cmjrpb.setGemCost(gemCost);
 		//cmjrpb.addAllUmchp(umchp);
@@ -611,15 +611,15 @@ public class MiniJobTest extends TestCase {
 				RedeemMiniJobRequestProto.newBuilder();
 		rmjrpb.setSender(mupwmrb.build());
 		rmjrpb.setClientTime(clientTime.getTime());
-		rmjrpb.setUserMiniJobId(mjfu.getId());
+		rmjrpb.setUserMiniJobUuid(mjfu.getId());
 		rmjrpb.addAllUmchp(umchp);
 		
 		return rmjrpb.build();
 	}
 	
-	protected void undoMiniJobTest(int userId, User user,
+	protected void undoMiniJobTest(String userId, User user,
 			Date lastMiniJobSpawnTime,
-			Collection<Long> miniJobForUserIds) {
+			Collection<String> miniJobForUserIds) {
 		deleteMiniJobForUser(userId, miniJobForUserIds);
 
 		//undo the lastMiniJobSpawnTime
@@ -629,8 +629,8 @@ public class MiniJobTest extends TestCase {
 		}
 		user.updateLastMiniJobGeneratedTime(lastMiniJobSpawnTime, nowTime);
 	}
-	protected void deleteMiniJobForUser(int userId,
-			Collection<Long> miniJobForUserIds) {
+	protected void deleteMiniJobForUser(String userId,
+			Collection<String> miniJobForUserIds) {
 		String tableName = DBConstants.TABLE_MINI_JOB_FOR_USER;
 		int size = miniJobForUserIds.size();
 		List<String> questions = Collections.nCopies(size, "?");
@@ -651,8 +651,8 @@ public class MiniJobTest extends TestCase {
 	    String query = querySb.toString();
 	    
 	    log.info("deleteMiniJobForUser() query=" + query);
-	    List<Long> miniJobForUserIdList =
-	    		new ArrayList<Long>(miniJobForUserIds);
+	    List<String> miniJobForUserIdList =
+	    		new ArrayList<String>(miniJobForUserIds);
 	    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
 	    		miniJobForUserIdList);
 	    log.info("num mini_job_for_user deleted=" + numDeleted);
@@ -662,11 +662,11 @@ public class MiniJobTest extends TestCase {
 	}
 
 	
-	public UserRetrieveUtils getUserRetrieveUtils() {
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
 		return userRetrieveUtils;
 	}
 
-	public void setUserRetrieveUtils(UserRetrieveUtils userRetrieveUtils) {
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
 		this.userRetrieveUtils = userRetrieveUtils;
 	}
 
@@ -687,12 +687,12 @@ public class MiniJobTest extends TestCase {
 		this.miniJobForUserRetieveUtil = miniJobForUserRetieveUtil;
 	}
 
-	public MonsterForUserRetrieveUtils getMonsterForUserRetrieveUtils() {
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
 		return monsterForUserRetrieveUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-			MonsterForUserRetrieveUtils monsterForUserRetrieveUtils) {
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 

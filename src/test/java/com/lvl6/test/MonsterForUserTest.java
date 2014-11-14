@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -33,11 +33,11 @@ public class MonsterForUserTest extends TestCase {
   }.getClass().getEnclosingClass());
 	
 	@Autowired
-	protected MonsterForUserRetrieveUtils mfuRetrieveUtil;
+	protected MonsterForUserRetrieveUtils2 mfuRetrieveUtil;
 	
-	private int TESTER_ID = 11;
+	private String TESTER_ID = "11";
 	private int PIECE_DEFICIENT_MONSTER_ID = 140;
-	private long PIECE_SUFFICIENT_USER_MONSTER_ID = 36849;
+	private String PIECE_SUFFICIENT_USER_MONSTER_ID = "36849";
 	private int PIECE_SUFFICIENT_MONSTER_ID = 38;
 	
 	@Test
@@ -109,20 +109,20 @@ public class MonsterForUserTest extends TestCase {
 			TESTER_ID, PIECE_DEFICIENT_MONSTER_ID, monzter, now,
 			false, false); 
 		
-		List<Long> ids = InsertUtils.get()
+		List<String> ids = InsertUtils.get()
 			.insertIntoMonsterForUserReturnIds(
 				TESTER_ID, Collections.singletonList(mfu), "testcase", now);
 		
 		assertNotNull("Creating one test user monster didn't work.", ids);
 		assertTrue("No ids returned when creating one test user monster.", !ids.isEmpty());
 		
-		Map<Long, MonsterForUser> mfuIdToMfu = mfuRetrieveUtil
+		Map<String, MonsterForUser> mfuIdToMfu = mfuRetrieveUtil
 			.getSpecificOrAllUnrestrictedUserMonstersForUser(TESTER_ID, ids);
 		
 		assertNotNull("Retrieving one unrestricted user monster didn't work.", mfuIdToMfu);
 		assertTrue("Newly created unrestricted user monster does not exist.", !mfuIdToMfu.isEmpty());
 		
-		Long userMonsterId = ids.get(0);
+		String userMonsterId = ids.get(0);
 		assertTrue(
 			String.format(
 				"Somehow retrieved different unrestricted user monster: %s, expectedId=%d",
@@ -132,12 +132,12 @@ public class MonsterForUserTest extends TestCase {
 		DeleteUtils.get().deleteMonsterForUser(userMonsterId);
 	}
 	
-	public MonsterForUserRetrieveUtils getMfuRetrieveUtil()
+	public MonsterForUserRetrieveUtils2 getMfuRetrieveUtil()
 	{
 		return mfuRetrieveUtil;
 	}
 
-	public void setMfuRetrieveUtil( MonsterForUserRetrieveUtils mfuRetrieveUtil )
+	public void setMfuRetrieveUtil( MonsterForUserRetrieveUtils2 mfuRetrieveUtil )
 	{
 		this.mfuRetrieveUtil = mfuRetrieveUtil;
 	}
