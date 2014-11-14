@@ -114,7 +114,7 @@ public class MessagingUtil {
 		ce.setTag(tag);
 		log.info("Sending global chat ");
 		//add new message to front of list
-		chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(time, chatProto.getSender(), chatProto.getChatMessage(), true, 0));
+		chatMessages.add(0, CreateInfoProtoUtils.createGroupChatMessageProto(time, chatProto.getSender(), chatProto.getChatMessage(), true, null));
 		eventWriter.processGlobalChatResponseEvent(ce);
 	}
 	

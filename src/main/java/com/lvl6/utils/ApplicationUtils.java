@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
 import com.lvl6.retrieveutils.StatisticsRetrieveUtil;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.ui.admin.components.ApplicationStats;
 
 @Component
@@ -24,7 +24,7 @@ public class ApplicationUtils {
 	protected StatisticsRetrieveUtil statsUtil;
 	
 	@Resource
-	protected UserRetrieveUtils usersUtil;
+	protected UserRetrieveUtils2 usersUtil;
 	
 	
 
