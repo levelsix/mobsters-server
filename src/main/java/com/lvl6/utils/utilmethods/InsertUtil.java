@@ -112,7 +112,7 @@ public interface InsertUtil {
 	public abstract int insertIntoBoosterPackPurchaseHistory(String userId, int boosterPackId, 
       Timestamp timeOfPurchase, BoosterItem bi, List<String> userMonsterIds);
 
-	public abstract int insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
+	public abstract String insertIntoPrivateChatPosts(String posterId, String recipientId, String content, Timestamp timeOfPost);
 
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
