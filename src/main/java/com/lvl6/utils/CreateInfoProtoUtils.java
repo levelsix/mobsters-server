@@ -451,11 +451,11 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static List<PvpHistoryProto> createPvpHistoryProto(
-		List<PvpBattleHistory> historyList, Map<Integer, User> attackerIdsToAttackers,
-		Map<Integer, Clan> attackerIdsToClans,
-		Map<Integer, List<MonsterForUser>> attackerIdsToUserMonsters,
-		Map<Integer, Integer> attackerIdsToProspectiveCashWinnings,
-		Map<Integer, Integer> attackerIdsToProspectiveOilWinnings) {
+		List<PvpBattleHistory> historyList, Map<String, User> attackerIdsToAttackers,
+		Map<String, Clan> attackerIdsToClans,
+		Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
+		Map<String, Integer> attackerIdsToProspectiveCashWinnings,
+		Map<String, Integer> attackerIdsToProspectiveOilWinnings) {
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 
@@ -736,14 +736,14 @@ public class CreateInfoProtoUtils {
 	//clanIdsToUserIdSet. Not all users will have a clan, hence clanlessUserIds
 	//privateChatPostIds is used by StartupController to pick out a subset of 
 	//postIdsToPrivateChatPosts; does not need to be set.
-	public static List<PrivateChatPostProto> createPrivateChatPostProtoList (Map<Integer, Clan> clanIdsToClans,
-		Map<Integer, Set<Integer>> clanIdsToUserIdSet, Map<Integer, User> userIdsToUsers,
-		List<Integer> clanlessUserIds, List<Integer> privateChatPostIds,
-		Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts) {
+	public static List<PrivateChatPostProto> createPrivateChatPostProtoList (Map<String, Clan> clanIdsToClans,
+		Map<String, Set<String>> clanIdsToUserIdSet, Map<String, User> userIdsToUsers,
+		List<String> clanlessUserIds, List<String> privateChatPostIds,
+		Map<String, PrivateChatPost> postIdsToPrivateChatPosts) {
 
 		List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
-		Map<Integer, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel =
-			new HashMap<Integer, MinimumUserProtoWithLevel>();
+		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel =
+			new HashMap<String, MinimumUserProtoWithLevel>();
 		//construct the minimum user protos for the users that have clans
 		//and the clanless users
 		createMinimumUserProtosFromClannedAndClanlessUsers(clanIdsToClans, clanIdsToUserIdSet,
@@ -752,7 +752,7 @@ public class CreateInfoProtoUtils {
 		//now actually construct the PrivateChatPostProtos
 		if (null != privateChatPostIds && !privateChatPostIds.isEmpty()) {
 			//only pick out a subset of postIdsToPrivateChatPosts
-			for (int postId : privateChatPostIds) {
+			for (String postId : privateChatPostIds) {
 				PrivateChatPost pcp = postIdsToPrivateChatPosts.get(postId);
 				String posterId = pcp.getPosterId();
 				String recipientId = pcp.getRecipientId();
@@ -3326,11 +3326,11 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static void createMinimumUserProtosFromClannedAndClanlessUsers(
-		Map<Integer, Clan> clanIdsToClans, Map<Integer, Set<Integer>> clanIdsToUserIdSet,
-		List<Integer> clanlessUserIds, Map<Integer, User> userIdsToUsers, 
-		Map<Integer, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel) {
+		Map<String, Clan> clanIdsToClans, Map<String, Set<String>> clanIdsToUserIdSet,
+		List<String> clanlessUserIds, Map<String, User> userIdsToUsers, 
+		Map<String, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel) {
 		//construct the minimum user protos for the clanless users
-		for (int userId : clanlessUserIds) {
+		for (String userId : clanlessUserIds) {
 			User u = userIdsToUsers.get(userId);
 			MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, null, null);
 			userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
@@ -3350,7 +3350,7 @@ public class CreateInfoProtoUtils {
 //				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
 //			}
 //		}
-		for (int clanId : clanIdsToUserIdSet.keySet()) {                                          
+		for (String clanId : clanIdsToUserIdSet.keySet()) {                                          
 			
 			//precautionary measure
 			if (!clanIdsToClans.containsKey(clanId)) {
@@ -3364,7 +3364,7 @@ public class CreateInfoProtoUtils {
 			Clan c = clanIdsToClans.get(clanId);                                              
 		                                                                                      
 			//create minimum user protos for users associated with clan                       
-			for (int userId: clanIdsToUserIdSet.get(clanId)) {                                
+			for (String userId: clanIdsToUserIdSet.get(clanId)) {                                
 				User u = userIdsToUsers.get(userId);                                          
 				MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevel(u, c, null);
 				userIdToMinimumUserProtoWithLevel.put(userId, mupwl);                         

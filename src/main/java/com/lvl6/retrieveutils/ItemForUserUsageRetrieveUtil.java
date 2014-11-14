@@ -45,7 +45,7 @@ public class ItemForUserUsageRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public List<ItemForUserUsage> getItemForUserUsage(
-			int userId, Collection<Integer> itemIds) {
+	    String userId, Collection<Integer> itemIds) {
 		List<ItemForUserUsage> itemUsages = null;
 		try {
 			List<String> columnsToSelected = UserItemUsageForClientMapper

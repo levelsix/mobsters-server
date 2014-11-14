@@ -27,7 +27,7 @@ import com.lvl6.properties.DBConstants;
 	  this.jdbcTemplate = new JdbcTemplate(dataSource);
   }
 
-  public List<Integer> getAllTaskIdsForUser(int userId) {
+  public List<Integer> getAllTaskIdsForUser(String userId) {
   	
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");

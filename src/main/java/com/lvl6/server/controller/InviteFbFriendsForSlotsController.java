@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +19,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InviteFbFriendsForSlotsRequestEvent;
 import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
+import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
@@ -29,10 +32,11 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Inv
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -42,6 +46,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
   public InviteFbFriendsForSlotsController() {
     numAllocatedThreads = 4;
@@ -65,10 +75,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
-    int userId = senderProto.getMinUserProto().getUserId();
+    String userId = senderProto.getMinUserProto().getUserUuid();
     List<FacebookInviteStructure> invites = reqProto.getInvitesList();
     
-    Map<String, Integer> fbIdsToUserStructIds = new HashMap<String, Integer>();
+    Map<String, String> fbIdsToUserStructIds = new HashMap<String, String>();
     Map<String, Integer> fbIdsToUserStructFbLvl = new HashMap<String, Integer>();
     List<String> fbIdsOfFriends = demultiplexFacebookInviteStructure(invites,
     		fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
@@ -81,17 +91,40 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
+      InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       //get all the invites the user sent
-      List<Integer> specificIds = null;
+      List<String> specificIds = null;
       boolean filterByAccepted = false;
       boolean isAccepted = false;
       boolean filterByRedeemed = false;
       boolean isRedeemed = false;
-      Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
-      		UserFacebookInviteForSlotRetrieveUtils.getSpecificOrAllInvitesForInviter(
+      Map<String, UserFacebookInviteForSlot> idsToInvites = 
+      		getUserFacebookInviteForSlotRetrieveUtils().getSpecificOrAllInvitesForInviter(
       				userId, specificIds, filterByAccepted, isAccepted, filterByRedeemed, isRedeemed);
       
       //will contain the facebook ids of new users the user can invite
@@ -103,7 +136,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		idsToInvites, newFacebookIdsToInvite);
 
       boolean successful = false;
-      List<Integer> inviteIds = new ArrayList<Integer>();
+      List<String> inviteIds = new ArrayList<String>();
       if(legit) {
       	//will populate inviteIds
     	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime,
@@ -113,10 +146,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful) {
     	  Clan inviterClan = null;
     	  
-      	Map<Integer, UserFacebookInviteForSlot> newIdsToInvites =
-      			UserFacebookInviteForSlotRetrieveUtils.getInviteForId(inviteIds);
+      	Map<String, UserFacebookInviteForSlot> newIdsToInvites =
+      			getUserFacebookInviteForSlotRetrieveUtils().getInviteForId(inviteIds);
       	//client needs to know what the new invites are;
-      	for (Integer id : newIdsToInvites.keySet()) {
+      	for (String id : newIdsToInvites.keySet()) {
       		UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
       		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
       				.createUserFacebookInviteForSlotProtoFromInvite(
@@ -134,11 +167,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful) {
       	//send this to all the recipients in fbIdsOfFriends that have a user id
       	//if want to send to the new ones use newFacebookIdsToInvite
-      	List<Integer> recipientUserIds = RetrieveUtils.userRetrieveUtils()
+      	List<String> recipientUserIds = getUserRetrieveUtils()
       			.getUserIdsForFacebookIds(newFacebookIdsToInvite);
       	
       	InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
-      	for (Integer recipientUserId : recipientUserIds) {
+      	for (String recipientUserId : recipientUserIds) {
       		InviteFbFriendsForSlotsResponseEvent newResEvent =
       				new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
       		newResEvent.setTag(0);
@@ -159,18 +192,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in InviteFbFriendsForSlotsController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
   
   private List<String> demultiplexFacebookInviteStructure(List<FacebookInviteStructure> invites,
-  		Map<String, Integer> fbIdsToUserStructIds, Map<String, Integer> fbIdsToUserStructFbLvl) {
+  		Map<String, String> fbIdsToUserStructIds, Map<String, Integer> fbIdsToUserStructFbLvl) {
   	
   	List<String> retVal = new ArrayList<String>();
   	for (FacebookInviteStructure fis : invites) {
   		String fbId = fis.getFbFriendId();
   		
-  		int userStructId = fis.getUserStructId();
+  		String userStructId = fis.getUserStructUuid();
   		int userStructFbLvl = fis.getUserStructFbLvl();
   		
   		retVal.add(fbId);
@@ -186,8 +219,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * builder status to the appropriate value. newUserIdsToInvite will be 
    * modified
    */
-  private boolean checkLegit(Builder resBuilder, int userId, User u,
-  		List<String> fbIdsOfFriends, Map<Integer, UserFacebookInviteForSlot> idsToInvites,
+  private boolean checkLegit(Builder resBuilder, String userId, User u,
+  		List<String> fbIdsOfFriends, Map<String, UserFacebookInviteForSlot> idsToInvites,
   		List<String> newFacebookIdsToInvite) {
   	
   	if (null == u) {
@@ -205,16 +238,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //keeps and returns the facebook ids that have not been invited yet
   private List<String> getNewInvites(List<String> fbIdsOfFriends,
-  		 Map<Integer, UserFacebookInviteForSlot> idsToInvites) {
+  		 Map<String, UserFacebookInviteForSlot> idsToInvites) {
   	//CONTAINS THE DUPLICATE INVITES, THAT NEED TO BE DELETED
   	//E.G. TWO INVITES EXIST WITH SAME INVITERID AND RECIPIENTID
-  	List<Integer> inviteIdsOfDuplicateInvites = new ArrayList<Integer>();
+  	List<String> inviteIdsOfDuplicateInvites = new ArrayList<String>();
   	
   	//running collection of recipient ids already seen
   	Set<String> processedRecipientIds = new HashSet<String>();
   	
   	//for each recipientId separate the unique ones from the duplicates
-  	for (Integer inviteId : idsToInvites.keySet()) {
+  	for (String inviteId : idsToInvites.keySet()) {
   		UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
   		String recipientId = invite.getRecipientFacebookId(); 
   		
@@ -252,13 +285,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
-  		Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
-  		Map<String, Integer> fbIdsToUserStructsFbLvl, List<Integer> inviteIds) {
+  		Timestamp curTime, Map<String, String> fbIdsToUserStructIds,
+  		Map<String, Integer> fbIdsToUserStructsFbLvl, List<String> inviteIds) {
   	if (newFacebookIdsToInvite.isEmpty()) {
   		return true;
   	}
-  	int userId = aUser.getId();
-  	List<Integer> inviteIdsTemp = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
+  	String userId = aUser.getId();
+  	List<String> inviteIdsTemp = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
   			newFacebookIdsToInvite, curTime, fbIdsToUserStructIds, fbIdsToUserStructsFbLvl);
   	int numInserted = inviteIdsTemp.size();
   	
@@ -279,6 +312,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+    return userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public void setUserFacebookInviteForSlotRetrieveUtils(
+      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
   }
   
 }

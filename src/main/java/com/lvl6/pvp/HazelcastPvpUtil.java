@@ -252,9 +252,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 	}
 	
-	public Map<String, PvpUser> getPvpUsers(Collection<Integer> userIds) {
+	public Map<String, PvpUser> getPvpUsers(Collection<String> userIds) {
 		List<String> stringIds = Lists.transform(
-			new ArrayList<Integer>(userIds), Functions.toStringFunction());
+			new ArrayList<String>(userIds), Functions.toStringFunction());
 			
 		if (isUseDatabaseInstead()) {
 			log.info("getting users from db instead of hazelcast. userIds=" + userIds);
@@ -262,7 +262,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 		
 		Map<String, PvpUser> users = new HashMap<String, PvpUser>();
-		for (Integer userId : userIds) {
+		for (String userId : userIds) {
 			String userIdStr = String.valueOf(userId);
 			
 			users.put(userIdStr, getPvpUserViaHazelcast(userIdStr));

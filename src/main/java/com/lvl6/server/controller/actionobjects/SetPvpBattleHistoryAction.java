@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
@@ -19,7 +20,8 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
-import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -30,13 +32,15 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 
 	private final StartupResponseProto.Builder resBuilder;
 	private final User user;
-	private final int userId;
-	private final PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
+	private final String userId;
+  private final PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
+  private final MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	private final HazelcastPvpUtil hazelcastPvpUtil;
 	
 	public SetPvpBattleHistoryAction(
 		StartupResponseProto.Builder resBuilder, User user,
-		int userId, PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil,
+		String userId, PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil,
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
 		HazelcastPvpUtil hazelcastPvpUtil)
 	{
 		this.resBuilder = resBuilder;
@@ -44,17 +48,18 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		this.userId = userId;
 		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil; 
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 	
 	//derived state
 	private List<PvpBattleHistory> historyList;
-	private Set<Integer> attackerIds;
+	private Set<String> attackerIds;
 	
 	
-	private List<Integer> attackerIdsList;
-	private Map<Integer, List<MonsterForUser>> userIdsToUserMonsters;
-	private Map<Integer, Integer> attackerIdsToProspectiveCashWinnings;
-	private Map<Integer, Integer> attackerIdsToProspectiveOilWinnings;
+	private List<String> attackerIdsList;
+	private Map<String, List<MonsterForUser>> userIdsToUserMonsters;
+	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
+	private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
 	
 	//Extracted from Startup
 	@Override
@@ -88,18 +93,18 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 			return;
 		}
 		
-		Map<Integer, User> idsToAttackers = useMe.getUserIdsToUsers(attackerIds);
+		Map<String, User> idsToAttackers = useMe.getUserIdsToUsers(attackerIds);
 		log.info(String.format(
 			"idsToAttackers=%s", idsToAttackers));
 
-		attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
+		attackerIdsList = new ArrayList<String>(idsToAttackers.keySet());
 		selectMonstersForUsers();
 		
 		log.info(String.format(
 			"history monster teams=%s", userIdsToUserMonsters));
 
-		attackerIdsToProspectiveCashWinnings = new HashMap<Integer, Integer>();
-		attackerIdsToProspectiveOilWinnings = new HashMap<Integer, Integer>();
+		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
+		attackerIdsToProspectiveOilWinnings = new HashMap<String, Integer>();
 		PvpUser attackerPu = hazelcastPvpUtil.getPvpUser(userId);
 		calculateCashOilRewardFromPvpUsers(attackerPu.getElo(),
 			idsToAttackers, attackerIdsToProspectiveCashWinnings,
@@ -119,17 +124,17 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 	private void selectMonstersForUsers() {
 
 		//return value
-		userIdsToUserMonsters = new HashMap<Integer, List<MonsterForUser>>();
+		userIdsToUserMonsters = new HashMap<String, List<MonsterForUser>>();
 
 		//for all these users, get all their complete monsters
-		Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = RetrieveUtils
-			.monsterForUserRetrieveUtils().getCompleteMonstersForUser(attackerIdsList);
+		Map<String, Map<String, MonsterForUser>> userIdsToMfuIdsToMonsters = 
+		    monsterForUserRetrieveUtils.getCompleteMonstersForUser(attackerIdsList);
 
 
 		for (int index = 0; index < attackerIdsList.size(); index++) {
 			//extract a user's monsters
-			int defenderId = attackerIdsList.get(index);
-			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
+		  String defenderId = attackerIdsList.get(index);
+			Map<String, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
 
 			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
 				log.error(String.format(
@@ -145,7 +150,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		}
 
 	}
-	private List<MonsterForUser> selectMonstersForUser(Map<Long, MonsterForUser> mfuIdsToMonsters) {
+	private List<MonsterForUser> selectMonstersForUser(Map<String, MonsterForUser> mfuIdsToMonsters) {
 
 		//get all the monsters the user has on a team (at the moment, max is 3)
 		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
@@ -159,7 +164,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 
 		return defenderMonsters;
 	}
-	private List<MonsterForUser> getEquippedMonsters(Map<Long, MonsterForUser> userMonsters) {
+	private List<MonsterForUser> getEquippedMonsters(Map<String, MonsterForUser> userMonsters) {
 		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
 
 		for (MonsterForUser mfu : userMonsters.values()) {
@@ -175,15 +180,15 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 	
 	//Similar logic to calculateCashOilRewards in QueueUpController
 	private void calculateCashOilRewardFromPvpUsers(
-		int attackerElo, Map<Integer, User> userIdsToUsers,
-		Map<Integer, Integer> userIdToCashStolen,
-		Map<Integer, Integer> userIdToOilStolen )
+		int attackerElo, Map<String, User> userIdsToUsers,
+		Map<String, Integer> userIdToCashStolen,
+		Map<String, Integer> userIdToOilStolen )
 	{
-		Collection<Integer> userIdz = userIdsToUsers.keySet() ;
+		Collection<String> userIdz = userIdsToUsers.keySet() ;
 		Map<String, PvpUser> idsToPvpUsers = hazelcastPvpUtil
 			.getPvpUsers(userIdz);
 
-		for (Integer defenderId : userIdz) {
+		for (String defenderId : userIdz) {
 			String defenderEyed = defenderId.toString();
 
 			User defender = userIdsToUsers.get(defenderId);

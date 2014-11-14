@@ -40,7 +40,7 @@ import com.lvl6.server.controller.utils.TimeUtils;
 
 
 	public Map<Date, List<ClanEventPersistentUserReward>> getCepUserRewardForPastNDaysForUserId(
-		int userId, int nDays, Date curDate, TimeUtils timeUtils) {
+		String userId, int nDays, Date curDate, TimeUtils timeUtils) {
 
 		curDate = timeUtils.createPstDate(curDate, 0, 0, 0);
 		Date pastDate = timeUtils.createPstDate(curDate, -1* nDays, 0, 0);

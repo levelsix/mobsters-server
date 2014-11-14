@@ -69,7 +69,7 @@ import com.lvl6.properties.DBConstants;
 	}
 
 	public Map<String, PrivateChatPost> getMostRecentPrivateChatPostsByOrToUser(
-		int userId, boolean isRecipient, int limit) {
+	    String userId, boolean isRecipient, int limit) {
 		log.debug(String.format(
 			"retrieving most recent private chat posts. userId %s isRecipient=%s",
 			userId, isRecipient));
