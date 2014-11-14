@@ -153,7 +153,7 @@ public interface UpdateUtil {
   public abstract int updateObstacleForUserRemovalTime(String obstacleForUserId,
   		Timestamp clientTime);
   
-  public abstract int updateClan(int clanId, boolean isChangeDescription,
+  public abstract int updateClan(String clanId, boolean isChangeDescription,
   		String description, boolean isChangeJoinType, boolean requestToJoinRequired,
   		boolean isChangeIcon, int iconId);
   
