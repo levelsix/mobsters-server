@@ -14,7 +14,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ClanProto.ClanDataProto;
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetClanChatMessageAction implements StartUpAction
@@ -25,31 +25,34 @@ public class SetClanChatMessageAction implements StartUpAction
 
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
+  private final ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
 	
 	public SetClanChatMessageAction(
-		ClanDataProto.Builder cdpBuilder, User user )
+		ClanDataProto.Builder cdpBuilder, User user, 
+		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils)
 	{
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
+		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
 	}
 	
-	private Set<Integer> userIds;
-	private int clanId;
+	private Set<String> userIds;
+	private String clanId;
 	List<ClanChatPost> activeClanChatPosts;
 	
 	//Extracted from Startup
 	@Override
 	public void setUp(StartUpResource fillMe)
 	{
-		userIds = new HashSet<Integer>();
+		userIds = new HashSet<String>();
 		clanId = user.getClanId(); 
 
-		if (clanId <= 0) {
+		if (clanId == null) {
 			return;
 		}
 		
 		int limit = ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP;
-		activeClanChatPosts = ClanChatPostRetrieveUtils
+		activeClanChatPosts = clanChatPostRetrieveUtils
 			.getMostRecentClanChatPostsForClan(limit , clanId);
 
 		if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
@@ -70,18 +73,18 @@ public class SetClanChatMessageAction implements StartUpAction
 		if (null == userIds || userIds.isEmpty()) {
 			return;
 		}
-		Map<Integer, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
+		Map<String, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
 		if (userIdsToUsers.isEmpty()) {
 			return;
 		}
 		
-		Map<Integer, Clan> clanIdsToClans = useMe.getClanIdsToClans();
+		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans();
 		
 		for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
 			ClanChatPost pwp = activeClanChatPosts.get(i);
-			int userId = pwp.getPosterId();
+			String userId = pwp.getPosterId();
 			User u = userIdsToUsers.get(userId);
-			int clanId = u.getClanId();
+			String clanId = u.getClanId();
 			Clan c = null;
 			
 			if (clanIdsToClans.containsKey(clanId)) {

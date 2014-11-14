@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.User;
@@ -20,10 +20,10 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
 public class SetPvpBattleHistoryAction implements StartUpAction
 {
@@ -35,12 +35,14 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 	private final String userId;
   private final PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
   private final MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+  private final ClanRetrieveUtils2 clanRetrieveUtils;
 	private final HazelcastPvpUtil hazelcastPvpUtil;
 	
 	public SetPvpBattleHistoryAction(
 		StartupResponseProto.Builder resBuilder, User user,
 		String userId, PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil,
-		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
+    MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
+    ClanRetrieveUtils2 clanRetrieveUtils,
 		HazelcastPvpUtil hazelcastPvpUtil)
 	{
 		this.resBuilder = resBuilder;
@@ -49,6 +51,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil; 
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+		this.clanRetrieveUtils = clanRetrieveUtils;
 	}
 	
 	//derived state
@@ -59,7 +62,7 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 	private List<String> attackerIdsList;
 	private Map<String, List<MonsterForUser>> userIdsToUserMonsters;
 	private Map<String, Integer> attackerIdsToProspectiveCashWinnings;
-	private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
+  private Map<String, Integer> attackerIdsToProspectiveOilWinnings;
 	
 	//Extracted from Startup
 	@Override
@@ -109,9 +112,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		calculateCashOilRewardFromPvpUsers(attackerPu.getElo(),
 			idsToAttackers, attackerIdsToProspectiveCashWinnings,
 			attackerIdsToProspectiveOilWinnings);
+		
+		Map<String, Clan> attackerIdsToClans = useMe.getUserIdsToClans(attackerIds);
 
 		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-			.createPvpHistoryProto(historyList, idsToAttackers, userIdsToUserMonsters,
+			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdsToClans, userIdsToUserMonsters,
 				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
 
 		//  	log.info("historyProtoList=" + historyProtoList);

@@ -27,20 +27,20 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-  @Autowired
-  protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
-
 	private final StartupResponseProto.Builder resBuilder;
 	private final User user;
 	private final String userId;
+	private final PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
 	
 	public SetPrivateChatMessageAction(
-		StartupResponseProto.Builder resBuilder, User user, String userId
+		StartupResponseProto.Builder resBuilder, User user, String userId,
+		PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils
 		)
 	{
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
+		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 	}
 	
 	private Set<String> userIds;
@@ -61,13 +61,13 @@ public class SetPrivateChatMessageAction implements StartUpAction
 		boolean isRecipient = true;
 		
 		//get all the most recent posts sent to this user
-		postsUserReceived =  getPrivateChatPostRetrieveUtils()
+		postsUserReceived =  privateChatPostRetrieveUtils
 			.getMostRecentPrivateChatPostsByOrToUser(
 				userId, isRecipient, ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED);
 
 		//get all the most recent posts this user sent
 		isRecipient = false;
-		postsUserSent =  getPrivateChatPostRetrieveUtils()
+		postsUserSent =  privateChatPostRetrieveUtils
 			.getMostRecentPrivateChatPostsByOrToUser(
 				userId, isRecipient, ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT);
 
@@ -214,15 +214,5 @@ public class SetPrivateChatMessageAction implements StartUpAction
 			}
 		}
 	}
-
-  public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
-    return privateChatPostRetrieveUtils;
-  }
-
-  public void setPrivateChatPostRetrieveUtils(
-      PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
-    this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
-  }
-	
 	
 }

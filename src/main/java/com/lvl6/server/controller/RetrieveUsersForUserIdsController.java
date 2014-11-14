@@ -2,8 +2,10 @@ package com.lvl6.server.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -94,11 +96,12 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
     Map<String, User> usersByIds = getUserRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
-      List<String> clanIds = new ArrayList<String>();
+      
+      Set<String> clanIds = new HashSet<String>();
       for (User user : usersByIds.values()) {
-        String id = user.getClanId();
-        if (id != null) {
-          clanIds.add(id);
+        String clanId = user.getClanId();
+        if (clanId != null && !clanId.isEmpty()) {
+          clanIds.add(clanId);
         }
       }
 

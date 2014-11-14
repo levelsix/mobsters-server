@@ -155,4 +155,34 @@ public class StartUpResource
 		}
 		clanIdsToClans.put(clanId, c);
 	}
+  
+	// Map from user id to the clan of that user. Used mostly by CreateInfoProtoUtils
+  public Map<String, Clan> getUserIdsToClans(Collection<String> userIds) {
+    Map<String, Clan> userIdsToClansTemp = new HashMap<String, Clan>();
+    
+    if (null != userIds && !userIds.isEmpty()) {
+      for (String userId : userIds) {
+        if (!userIdsToUsers.containsKey(userId)) {
+          continue;
+        }
+        
+        User user = userIdsToUsers.get(userId);
+        if (user.getClanId() != null) {
+          Clan c = clanIdsToClans.get(user.getClanId());
+          if (c != null) {
+            userIdsToClansTemp.put(
+                userId,
+                c
+                );
+          }
+        }
+      }
+    }
+    
+    ImmutableMap<String, Clan> iMap =
+      new Builder<String, Clan>()
+      .putAll(userIdsToClansTemp)
+      .build();
+    return iMap;
+  }
 }

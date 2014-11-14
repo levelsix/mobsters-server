@@ -25,21 +25,21 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
-  
-  @Autowired
-  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
 	private final StartupResponseProto.Builder resBuilder;
 	private final User user;
 	private final String userId;
+	private final UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 	
 	public SetFacebookExtraSlotsAction(
-		StartupResponseProto.Builder resBuilder, User user, String userId
+		StartupResponseProto.Builder resBuilder, User user, String userId,
+		UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils
 		)
 	{
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
+		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
 	}
 	
 	//derived state
@@ -134,7 +134,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		
 		//base case where user does not have facebook id
 		if (null != fbId && !fbId.isEmpty()) {
-			idsToInvitesToMe = getUserFacebookInviteForSlotRetrieveUtils()
+			idsToInvitesToMe = userFacebookInviteForSlotRetrieveUtils
 				.getSpecificOrAllInvitesForRecipient(
 					fbId, specificInviteIds, filterByAccepted,
 					isAccepted, filterByRedeemed, isRedeemed);
@@ -146,7 +146,7 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 
 		//get the invites where this user is the inviter: get accepted, unredeemed/redeemed does not matter 
 		isAccepted = true;
-		idsToInvitesFromMe = getUserFacebookInviteForSlotRetrieveUtils()
+		idsToInvitesFromMe = userFacebookInviteForSlotRetrieveUtils
 			.getSpecificOrAllInvitesForInviter(
 				userId, specificInviteIds, filterByAccepted,
 				isAccepted, filterByRedeemed, isRedeemed);
@@ -208,15 +208,4 @@ public class SetFacebookExtraSlotsAction implements StartUpAction
 		}
 
 	}
-
-  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
-    return userFacebookInviteForSlotRetrieveUtils;
-  }
-
-  public void setUserFacebookInviteForSlotRetrieveUtils(
-      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
-    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
-  }
-	
-	
 }
