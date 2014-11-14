@@ -1119,10 +1119,10 @@ public class MiscMethods {
 
 	public static void writeToUserCurrencyUsers(List<String> userIds,
 		Timestamp thyme, Map<String, Map<String, Integer>> changeMap,
-		Map<Integer, Map<String, Integer>> previousCurrencyMap,
-		Map<Integer, Map<String, Integer>> currentCurrencyMap,
-		Map<Integer, Map<String, String>> changeReasonsMap,
-		Map<Integer, Map<String, String>> detailsMap) {
+		Map<String, Map<String, Integer>> previousCurrencyMap,
+		Map<String, Map<String, Integer>> currentCurrencyMap,
+		Map<String, Map<String, String>> changeReasonsMap,
+		Map<String, Map<String, String>> detailsMap) {
 		try {
 			List<String> allUserIds = new ArrayList<String>();
 			List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 

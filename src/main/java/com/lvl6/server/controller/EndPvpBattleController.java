@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +32,12 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
-import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -55,9 +56,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected TimeUtils timeUtils;
 
   @Autowired
-  protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
-
+  protected UserRetrieveUtils2 userRetrieveUtil;
   
+  @Autowired
+  protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil;
+  
+  @Autowired
+  protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
+
   
   public EndPvpBattleController() {
     numAllocatedThreads = 7;
@@ -76,13 +82,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     EndPvpBattleRequestProto reqProto = ((EndPvpBattleRequestEvent)event).getEndPvpBattleRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderProtoMaxResources = reqProto.getSender();
     MinimumUserProto senderProto = senderProtoMaxResources.getMinUserProto();
-    int attackerId = senderProto.getUserUuid();
-    int defenderId = reqProto.getDefenderId();
+    String attackerId = senderProto.getUserUuid();
+    String defenderId = reqProto.getDefenderUuid();
     boolean attackerAttacked = reqProto.getUserAttacked();
     boolean attackerWon = reqProto.getUserWon();
     int oilStolen = reqProto.getOilChange(); //non negative
@@ -114,32 +120,53 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     EndPvpBattleResponseEvent resEvent = new EndPvpBattleResponseEvent(attackerId);
     resEvent.setTag(event.getTag());
 
-    List<Integer> userIds = new ArrayList<Integer>();
+    List<String> userIds = new ArrayList<String>();
     userIds.add(attackerId);
     userIds.add(defenderId); //doesn't matter if fake i.e. enemyUserId=0
     
+    UUID attackerUuid = null;
+	UUID defenderUuid = null;
+	try {
+		attackerUuid = UUID.fromString(attackerId);
+		defenderUuid = UUID.fromString(defenderId);
+		
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect attackerId=%s, defenderId=%s",
+			attackerId, defenderId), e);
+	}
+    
+	if (null == attackerUuid) {
+		resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
+	    resEvent = new EndPvpBattleResponseEvent(attackerId);
+	    resEvent.setTag(event.getTag());
+	    resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+	    server.writeEvent(resEvent);
+	    return;
+	}
+	
     //NEED TO LOCK BOTH PLAYERS, well need to lock defender because defender can be online,
     //Lock attacker because someone might be attacking him while attacker is attacking defender?
-    if (0 != defenderId) {
-    	getLocker().lockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    if (null != defenderUuid) {
+    	getLocker().lockPlayers(defenderUuid, attackerUuid, this.getClass().getSimpleName());
     	log.info("locked defender and attacker");
     } else {
     	//ONLY ATTACKER IF DEFENDER IS FAKE
-    	getLocker().lockPlayer(attackerId, this.getClass().getSimpleName());
+    	getLocker().lockPlayer(attackerUuid, this.getClass().getSimpleName());
     	log.info("locked attacker");
     }
     
     try {
     	//get whatever from db
-    	Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+    	Map<String, User> users = userRetrieveUtil.getUsersByIds(userIds);
     	User attacker = users.get(attackerId);
     	User defender = users.get(defenderId);
-    	PvpBattleForUser pvpBattleInfo = PvpBattleForUserRetrieveUtils
+    	PvpBattleForUser pvpBattleInfo = pvpBattleForUserRetrieveUtil
     			.getPvpBattleForUserForAttacker(attackerId);
     	log.info(String.format(
     		"pvpBattleInfo=%s", pvpBattleInfo));
 
-    	Map<Integer, PvpLeagueForUser> plfuMap = getPvpLeagueForUserRetrieveUtil()
+    	Map<String, PvpLeagueForUser> plfuMap = pvpLeagueForUserRetrieveUtil
     			.getUserPvpLeagueForUsers(userIds);
     	log.info(String.format(
     		"plfuMap=%s", plfuMap));
@@ -158,10 +185,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	boolean legit = checkLegit(resBuilder, attacker, defender, pvpBattleInfo, curDate);
     	
-    	Map<Integer, Map<String, Integer>> changeMap =
-    			new HashMap<Integer, Map<String, Integer>>();
-    	Map<Integer, Map<String, Integer>> previousCurrencyMap =
-    			new HashMap<Integer, Map<String, Integer>>();
+    	Map<String, Map<String, Integer>> changeMap =
+    			new HashMap<String, Map<String, Integer>>();
+    	Map<String, Map<String, Integer>> previousCurrencyMap =
+    			new HashMap<String, Map<String, Integer>>();
     	boolean successful = false;
     	if(legit) {
     		//it is possible that the defender has a shield, most likely via
@@ -222,11 +249,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
 
     } finally {
-    	if (0 != defenderId) {
-    		getLocker().unlockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    	if (null != defenderUuid) {
+    		getLocker().unlockPlayers(defenderUuid, attackerUuid, this.getClass().getSimpleName());
     		log.info("unlocked defender and attacker");
     	} else {
-    		getLocker().unlockPlayer(attackerId, this.getClass().getSimpleName());
+    		getLocker().unlockPlayer(attackerUuid, this.getClass().getSimpleName());
     		log.info("unlocked attacker");
     	}
     }
@@ -265,14 +292,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //the attackerPlfu and the defenderPlfu will be modified
-  private boolean writeChangesToDb(User attacker, int attackerId, 
-		  PvpLeagueForUser attackerPlfu, User defender, int defenderId,
+  private boolean writeChangesToDb(User attacker, String attackerId, 
+		  PvpLeagueForUser attackerPlfu, User defender, String defenderId,
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
 		  int oilStolen, int cashStolen, Timestamp clientTime, Date clientDate,
 		  boolean attackerAttacked, boolean attackerWon, float nuPvpDmgMultiplier,
 		  int attackerMaxOil, int attackerMaxCash,
-		  Map<Integer, Map<String, Integer>> changeMap,
-		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
+		  Map<String, Map<String, Integer>> changeMap,
+		  Map<String, Map<String, Integer>> previousCurrencyMap) {
   	
 	  boolean cancelled = !attackerAttacked;
 	  
@@ -349,14 +376,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	log.info("deleting from PvpBattleForUser");
   	//need to delete PvpBattleForUser
   	int numDeleted = DeleteUtils.get().deletePvpBattleForUser(attackerId);
-  	log.info("numDeleted (should be 1): " + numDeleted); 
+  	log.info(String.format("numDeleted (should be 1): %s", numDeleted)); 
   			
   	return true;
   }
   
-  private void processCancellation(User attacker, int attackerId,
+  private void processCancellation(User attacker, String attackerId,
 		  PvpLeagueForUser attackerPlfu, User defender, 
-		  int defenderId, PvpLeagueForUser defenderPlfu,
+		  String defenderId, PvpLeagueForUser defenderPlfu,
 		  PvpBattleForUser pvpBattleInfo, Timestamp clientTime,
 		  float nuPvpDmgMultiplier, boolean attackerWon, boolean cancelled) {
 	  
@@ -406,35 +433,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int userCash = user.getCash();
   	int amountOverMax = calculateAmountOverMaxResource(user, userCash,
   			maxCash, MiscMethods.cash);
-  	log.info("calculateMaxCashChange amount over max=" + amountOverMax);
+  	log.info(String.format(
+  		"calculateMaxCashChange amount over max=%s", amountOverMax));
   	
 
   	if (userWon) {
-  		log.info("calculateMaxCashChange userWon!. user=" + user);
+  		log.info(String.format(
+  	  		"calculateMaxCashChange userWon!. user=%s", user));
   		int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxOil.
-  		log.info("calculateMaxCashChange curCash=" + curCash);
+  		log.info(String.format(
+  	  		"calculateMaxCashChange curCash=%s", curCash));
   		int maxCashUserCanGain = maxCash - curCash;
-  		log.info("calculateMaxCashChange  maxCashUserCanGain=" +
-  				maxCashUserCanGain);
+  		log.info(String.format(
+  	  		"calculateMaxCashChange  maxCashUserCanGain=%s", maxCashUserCanGain));
   		int maxCashChange = Math.min(cashChange, maxCashUserCanGain);
-  		log.info("calculateMaxCashChange maxCashChange=" + maxCashChange);
+  		log.info(String.format(
+  	  		"calculateMaxCashChange maxCashChange=%s", maxCashChange));
   		
   		//IF USER IS ABOVE maxCash, need to drag him down to maxCash
   		int actualCashChange = maxCashChange - amountOverMax; 
-  		log.info("calculateMaxCashChange  actualCashChange=" +
-  				actualCashChange);
+  		log.info(String.format(
+  			"calculateMaxCashChange  actualCashChange=%s", actualCashChange));
   		return actualCashChange;
   		
   	} else {
-  		log.info("calculateMaxCashChange userLost!. user=" + user);
+  		log.info(String.format(
+  			"calculateMaxCashChange userLost!. user=%s", user));
   		
   		int maxCashUserCanLose = Math.min(user.getCash(), maxCash);
   		//always non negative number
   		int maxCashChange = Math.min(cashChange, maxCashUserCanLose);
   		
   		int actualCashChange = -1 * (amountOverMax + maxCashChange);
-  		log.info("calculateMaxCashChange  actualCashChange=" +
-  				actualCashChange);		
+  		log.info(String.format(
+  			"calculateMaxCashChange  actualCashChange=%s", actualCashChange));		
   		return actualCashChange;
   	}
   }
@@ -453,41 +485,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int userOil = user.getOil();
 	  int amountOverMax = calculateAmountOverMaxResource(user, userOil,
 			  maxOil, MiscMethods.oil);
-	  log.info("calculateMaxOilChange amount over max=" + amountOverMax);
+	  log.info(String.format(
+		  "calculateMaxOilChange amount over max=%s", amountOverMax));
 
 
 	  if (userWon) {
-		  log.info("calculateMaxOilChange userWon!. user=" + user);
+		  log.info(String.format(
+			  "calculateMaxOilChange userWon!. user=%s", user));
 		  int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
-		  log.info("calculateAmountOverMaxOil curOil=" + curOil);
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil curOil=%s", curOil));
 		  int maxOilUserCanGain = maxOil - curOil;
-		  log.info("calculateAmountOverMaxOil  maxOilUserCanGain=" +
-				  maxOilUserCanGain);
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil  maxOilUserCanGain=%s",
+			  maxOilUserCanGain));
 		  int maxOilChange = Math.min(oilChange, maxOilUserCanGain);
-		  log.info("calculateAmountOverMaxOil maxOilChange=" + maxOilChange);
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil maxOilChange=%s", maxOilChange));
 
 		  //IF USER IS ABOVE maxOil, need to drag him down to maxOil
 		  int actualOilChange = maxOilChange - amountOverMax; 
-		  log.info("calculateAmountOverMaxOil  actualOilChange=" +
-				  actualOilChange);
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil  actualOilChange=%s",
+				  actualOilChange));
 		  return actualOilChange;
 
 	  } else {
-		  log.info("calculateAmountOverMaxOil userLost!. user=" + user);
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil userLost!. user=%s", user));
 		  int maxOilUserCanLose = Math.min(user.getOil(), maxOil);
 		  //always a nonnegative number
 		  int maxOilChange = Math.min(oilChange, maxOilUserCanLose);
 		  
 		  int actualOilChange = -1 * (amountOverMax + maxOilChange);
-		  log.info("calculateAmountOverMaxOil  actualOilChange=" +
-				  actualOilChange);		
+		  log.info(String.format(
+			  "calculateAmountOverMaxOil  actualOilChange=%s",
+				  actualOilChange));		
 		  return actualOilChange;
 	  }
   }
 
   private int calculateAmountOverMaxResource(User u, int userResource,
 		  int maxResource, String resource) {
-	  log.info("calculateAmountOverMaxResource resource=" + resource);
+	  log.info(String.format(
+		  "calculateAmountOverMaxResource resource=%s", resource));
 	  int resourceLoss = 0;
 	  if (userResource > maxResource) {
 //		  if (u.isAdmin()) {
@@ -519,17 +560,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		defenderEloChange = pvpBattleInfo.getDefenderLoseEloChange(); //negative value
   		
   		//don't cap fake player's elo
-  		if (null != defender && pvpBattleInfo.getDefenderId() > 0) {
-  			log.info("getEloChanges attacker fought real player. battleInfo=" + pvpBattleInfo);
+  		if (null != defender && null != pvpBattleInfo.getDefenderId() &&
+  			!pvpBattleInfo.getDefenderId().isEmpty())
+  		{
+  			log.info(String.format(
+  				"getEloChanges attacker fought real player. battleInfo=%s", pvpBattleInfo));
   			
   			//make sure defender's elo doesn't go below 0
   			defenderEloChange = capPlayerMinimumElo(defenderPlfu, defenderEloChange);
   		} else {
-  			log.info("getEloChanges attacker fought fake player. battleInfo=" + pvpBattleInfo);
+  			log.info(String.format(
+  				"getEloChanges attacker fought fake player. battleInfo=%s", pvpBattleInfo));
   		}
   		
-  		log.info("getEloChanges attackerEloChange=" + attackerEloChange);
-  		log.info("getEloChanges defenderEloChange=" + defenderEloChange);
+  		log.info(String.format(
+				"getEloChanges attackerEloChange=%s", attackerEloChange));
+  		log.info(String.format(
+				"getEloChanges defenderEloChange=%s", defenderEloChange));
 
   	} else {
   		log.info("getEloChanges attacker lost.");
@@ -548,19 +595,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private int capPlayerMinimumElo(PvpLeagueForUser playerPlfu, int playerEloChange) {
 	  int playerElo = playerPlfu.getElo();
-	  log.info("capPlayerMinimumElo plfu=" + playerPlfu + "\t eloChange" +
-			  	playerEloChange);
+	  log.info(String.format(
+		  "capPlayerMinimumElo plfu=%s,  eloChange=%s",
+		  playerPlfu, playerEloChange));
+	  
 	  if (playerElo + playerEloChange < 0) {
 		  log.info("capPlayerMinimumElo player loses more elo than has atm. playerElo=" +
 				  playerElo + "\t playerEloChange=" + playerEloChange);
 		  playerEloChange = -1 * playerElo;
 	  }
 	  
-	  log.info("capPlayerMinimumElo updated playerEloChange=" + playerEloChange);
+	  log.info(String.format(
+		  "capPlayerMinimumElo updated playerEloChange=%s", playerEloChange));
 	  return playerEloChange;
   }
 
-  private void updateAttacker(User attacker, int attackerId,
+  private void updateAttacker(User attacker, String attackerId,
 		  PvpLeagueForUser attackerPlfu, int attackerCashChange,
 		  int attackerOilChange, int attackerEloChange,
 		  float nuPvpDmgMultiplier, boolean attackerWon) {
@@ -626,16 +676,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //the elo, oil, cash, display lists are return values
-  private void updateDefender(User attacker, User defender, int defenderId,
+  private void updateDefender(User attacker, User defender, String defenderId,
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
 		  int defenderEloChange, int oilStolen, int cashStolen, Date clientDate,
 		  boolean attackerWon, List<Integer> defenderEloChangeList,
 		  List<Integer> defenderOilChangeList, List<Integer> defenderCashChangeList,
 		  List<Boolean> displayToDefenderList,
-		  Map<Integer, Map<String, Integer>> changeMap,
-		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
+		  Map<String, Map<String, Integer>> changeMap,
+		  Map<String, Map<String, Integer>> previousCurrencyMap) {
 	  if (null == defender) {
-		  log.info("attacker attacked fake defender. attacker=" + attacker);
+		  log.info(String.format(
+			  "attacker attacked fake defender. attacker=%s", attacker));
 		  defenderEloChangeList.clear();
 		  defenderEloChangeList.add(0);
 		  defenderOilChangeList.add(0);
@@ -666,8 +717,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  displayToDefender = false;
 
 	  } else {
-		  log.info("penalizing/rewarding for losing/winning. defenderWon=" +
-				  defenderWon);
+		  log.info(String.format(
+			  "penalizing/rewarding for losing/winning. defenderWon=%s",
+			  defenderWon));
 		  updateUnshieldedDefender(attacker, defenderId, defender, defenderPlfu,
 				  shieldEndTime, pvpBattleInfo, clientDate, attackerWon,
 				  defenderEloChange, defenderCashChange, defenderOilChange);
@@ -691,7 +743,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  previousCurrencyMap.put(defenderId, defenderPreviousCurrency);
   }
   
-  private void updateUnshieldedDefender(User attacker, int defenderId, User defender,
+  private void updateUnshieldedDefender(User attacker, String defenderId, User defender,
 		  PvpLeagueForUser defenderPlfu, Date defenderShieldEndTime,
 		  PvpBattleForUser pvpBattleInfo, Date clientDate, boolean attackerWon,
 		  int defenderEloChange, int defenderCashChange, int defenderOilChange) {
@@ -712,14 +764,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  //if attacker won then defender money would need to be updated
 	  if (attackerWon) {
-		  log.info("updateUnshieldedDefender  defender before currency update:" +
-				  defender);
+		  log.info(String.format(
+			  "updateUnshieldedDefender  defender before currency update:%s",
+				  defender));
 		  int numUpdated = defender.updateRelativeCashAndOilAndGems(
 				  defenderCashChange, defenderOilChange, 0);
-		  log.info("updateUnshieldedDefender num updated when changing defender's" +
-		  		" currency=" + numUpdated);
-		  log.info("updateUnshieldedDefender  defender after currency update:" +
-				  defender);
+		  log.info(String.format(
+			  "updateUnshieldedDefender num updated when changing defender's currency=%s",
+			  numUpdated));
+		  log.info(String.format(
+			  "updateUnshieldedDefender  defender after currency update: %s",
+				  defender));
 
 		  int hoursAddend = ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS;
 		  defenderShieldEndTime = getTimeUtils().createDateAddHours(clientDate, hoursAddend);
@@ -731,8 +786,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  defensesWonDelta = 1;
 		  defensesWon += defensesWonDelta;
 	  }
-	  log.info("updateUnshieldedDefender defender PvpLeagueForUser before battle outcome:" +
-			  defenderPlfu);
+	  log.info(String.format(
+		  "updateUnshieldedDefender defender PvpLeagueForUser before battle outcome: %s",
+			  defenderPlfu));
 
 	  //regardless if user won or lost, this is shield time
 	  Date inBattleShieldEndTime = defenderShieldEndTime;
@@ -750,7 +806,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  inBattleTimestamp, attacksWonDelta, defensesWonDelta,
 			  attacksLostDelta, defensesLostDelta, -1);
 
-	  log.info("num updated when changing defender's elo=" + numUpdated);
+	  log.info(String.format(
+		  "num updated when changing defender's elo=%s", numUpdated));
 
 	  //modify object to return back to user
 	  defenderPlfu.setShieldEndTime(defenderShieldEndTime);
@@ -765,21 +822,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //update hazelcast's object
 	  PvpUser defenderPu = new PvpUser(defenderPlfu);
 	  getHazelcastPvpUtil().replacePvpUser(defenderPu, defenderId);
-	  log.info("defender PvpLeagueForUser after battle outcome:" +
-			  defenderPlfu);
+	  log.info(String.format(
+		  "defender PvpLeagueForUser after battle outcome: %s",
+			  defenderPlfu));
   }
   
   //new method created so as to reduce clutter in calling method 
-  private void writePvpBattleHistory(int attackerId, int attackerEloBefore,
-		  int defenderId, int defenderEloBefore, int attackerPrevLeague,
-		  int attackerCurLeague, int defenderPrevLeague,
-		  int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
-		  int defenderPrevRank, int defenderCurRank,
-		  Timestamp endTime, PvpBattleForUser pvpBattleInfo, int attackerEloChange,
-		  int defenderEloChange, int attackerOilChange, int defenderOilChange,
-		  int attackerCashChange, int defenderCashChange, float nuPvpDmgMultiplier,
-		  boolean attackerWon, boolean cancelled, boolean gotRevenge,
-		  boolean displayToDefender) {
+  private void writePvpBattleHistory(String attackerId, int attackerEloBefore,
+	  String defenderId, int defenderEloBefore, int attackerPrevLeague,
+	  int attackerCurLeague, int defenderPrevLeague,
+	  int defenderCurLeague, int attackerPrevRank, int attackerCurRank,
+	  int defenderPrevRank, int defenderCurRank,
+	  Timestamp endTime, PvpBattleForUser pvpBattleInfo, int attackerEloChange,
+	  int defenderEloChange, int attackerOilChange, int defenderOilChange,
+	  int attackerCashChange, int defenderCashChange, float nuPvpDmgMultiplier,
+	  boolean attackerWon, boolean cancelled, boolean gotRevenge,
+	  boolean displayToDefender) {
 
 
   	Date startDate = pvpBattleInfo.getBattleStartTime();
@@ -797,9 +855,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //new method created so as to reduce clutter in calling method
-  private void writePvpBattleHistoryNotcancelled(int attackerId,
+  private void writePvpBattleHistoryNotcancelled(String attackerId,
 		  PvpLeagueForUser attackerPrevPlfu, PvpLeagueForUser attackerPlfu,
-		  int defenderId, PvpLeagueForUser defenderPrevPlfu,
+		  String defenderId, PvpLeagueForUser defenderPrevPlfu,
 		  PvpLeagueForUser defenderPlfu, PvpBattleForUser pvpBattleInfo,
 		  Timestamp clientTime, boolean attackerWon, int attackerCashChange,
 		  int attackerOilChange, int attackerEloChange, int defenderEloChange,
@@ -849,17 +907,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  cancelled, false, displayToDefender);
   }
 
-  private void writeToUserCurrencyHistory(int attackerId, User attacker,
-		  int defenderId, User defender, boolean attackerWon,
-		  Timestamp curTime, Map<Integer, Map<String, Integer>> changeMap,
-		  Map<Integer, Map<String, Integer>> previousCurrencyMap) {
+  private void writeToUserCurrencyHistory(String attackerId, User attacker,
+	  String defenderId, User defender, boolean attackerWon,
+	  Timestamp curTime, Map<String, Map<String, Integer>> changeMap,
+	  Map<String, Map<String, Integer>> previousCurrencyMap) {
 	  
-	  Map<Integer, Map<String, Integer>> currentCurrencyMap =
-			  new HashMap<Integer, Map<String, Integer>>();
-	  Map<Integer, Map<String, String>> changeReasonsMap =
-			  new HashMap<Integer, Map<String, String>>();
-	  Map<Integer, Map<String, String>> detailsMap =
-			  new HashMap<Integer, Map<String, String>>();
+	  Map<String, Map<String, Integer>> currentCurrencyMap =
+			  new HashMap<String, Map<String, Integer>>();
+	  Map<String, Map<String, String>> changeReasonsMap =
+			  new HashMap<String, Map<String, String>>();
+	  Map<String, Map<String, String>> detailsMap =
+			  new HashMap<String, Map<String, String>>();
 	  String reasonForChange = ControllerConstants.UCHRFC__PVP_BATTLE;
 	  String oil = MiscMethods.oil;
 	  String cash = MiscMethods.cash;
@@ -924,10 +982,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  
 	  }
 	  
-	  List<Integer> userIds = new ArrayList<Integer>();
+	  List<String> userIds = new ArrayList<String>();
 	  userIds.add(attackerId);
 	  
-	  if (null != defender && defenderId > 0) {
+	  if (null != defender && !defenderId.isEmpty()) {
 		  userIds.add(defenderId);
 	  }
 	  
@@ -961,12 +1019,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.timeUtils = timeUtils;
 	}
 
-	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public PvpBattleForUserRetrieveUtils2 getPvpBattleForUserRetrieveUtil()
+	{
+		return pvpBattleForUserRetrieveUtil;
+	}
+
+	public void setPvpBattleForUserRetrieveUtil(
+		PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil )
+	{
+		this.pvpBattleForUserRetrieveUtil = pvpBattleForUserRetrieveUtil;
+	}
+
+	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil()
+	{
 		return pvpLeagueForUserRetrieveUtil;
 	}
 
 	public void setPvpLeagueForUserRetrieveUtil(
-			PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+		PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil )
+	{
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
+
 }
