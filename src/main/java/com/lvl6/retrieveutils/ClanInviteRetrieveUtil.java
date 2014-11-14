@@ -81,7 +81,7 @@ public class ClanInviteRetrieveUtil {
 		return clanInvites;
 	}
 	
-	public ClanInvite getClanInvite( int userId, int inviterId )
+	public ClanInvite getClanInvite( String userId, String inviterId )
 	{
 		ClanInvite invite = null;
 		try {

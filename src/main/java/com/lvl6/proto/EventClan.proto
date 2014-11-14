@@ -475,7 +475,7 @@ message EndClanHelpResponseProto {
 
 message InviteToClanRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 prospectiveMember = 2;
+	optional string prospectiveMember = 2;
 	optional int64 clientTime = 3;
 }
 

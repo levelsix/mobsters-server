@@ -34817,13 +34817,18 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 prospectiveMember = 2;</code>
+     * <code>optional string prospectiveMember = 2;</code>
      */
     boolean hasProspectiveMember();
     /**
-     * <code>optional int32 prospectiveMember = 2;</code>
+     * <code>optional string prospectiveMember = 2;</code>
      */
-    int getProspectiveMember();
+    java.lang.String getProspectiveMember();
+    /**
+     * <code>optional string prospectiveMember = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getProspectiveMemberBytes();
 
     /**
      * <code>optional int64 clientTime = 3;</code>
@@ -34899,9 +34904,10 @@ public final class EventClanProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              prospectiveMember_ = input.readInt32();
+              prospectiveMember_ = bs;
               break;
             }
             case 24: {
@@ -34971,18 +34977,45 @@ public final class EventClanProto {
     }
 
     public static final int PROSPECTIVEMEMBER_FIELD_NUMBER = 2;
-    private int prospectiveMember_;
+    private java.lang.Object prospectiveMember_;
     /**
-     * <code>optional int32 prospectiveMember = 2;</code>
+     * <code>optional string prospectiveMember = 2;</code>
      */
     public boolean hasProspectiveMember() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 prospectiveMember = 2;</code>
+     * <code>optional string prospectiveMember = 2;</code>
      */
-    public int getProspectiveMember() {
-      return prospectiveMember_;
+    public java.lang.String getProspectiveMember() {
+      java.lang.Object ref = prospectiveMember_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          prospectiveMember_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string prospectiveMember = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getProspectiveMemberBytes() {
+      java.lang.Object ref = prospectiveMember_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        prospectiveMember_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
@@ -35002,7 +35035,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      prospectiveMember_ = 0;
+      prospectiveMember_ = "";
       clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -35022,7 +35055,7 @@ public final class EventClanProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, prospectiveMember_);
+        output.writeBytes(2, getProspectiveMemberBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, clientTime_);
@@ -35042,7 +35075,7 @@ public final class EventClanProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, prospectiveMember_);
+          .computeBytesSize(2, getProspectiveMemberBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -35172,7 +35205,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        prospectiveMember_ = 0;
+        prospectiveMember_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -35240,7 +35273,9 @@ public final class EventClanProto {
           mergeSender(other.getSender());
         }
         if (other.hasProspectiveMember()) {
-          setProspectiveMember(other.getProspectiveMember());
+          bitField0_ |= 0x00000002;
+          prospectiveMember_ = other.prospectiveMember_;
+          onChanged();
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
@@ -35388,34 +35423,78 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private int prospectiveMember_ ;
+      private java.lang.Object prospectiveMember_ = "";
       /**
-       * <code>optional int32 prospectiveMember = 2;</code>
+       * <code>optional string prospectiveMember = 2;</code>
        */
       public boolean hasProspectiveMember() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 prospectiveMember = 2;</code>
+       * <code>optional string prospectiveMember = 2;</code>
        */
-      public int getProspectiveMember() {
-        return prospectiveMember_;
+      public java.lang.String getProspectiveMember() {
+        java.lang.Object ref = prospectiveMember_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            prospectiveMember_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 prospectiveMember = 2;</code>
+       * <code>optional string prospectiveMember = 2;</code>
        */
-      public Builder setProspectiveMember(int value) {
-        bitField0_ |= 0x00000002;
+      public com.google.protobuf.ByteString
+          getProspectiveMemberBytes() {
+        java.lang.Object ref = prospectiveMember_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          prospectiveMember_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string prospectiveMember = 2;</code>
+       */
+      public Builder setProspectiveMember(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         prospectiveMember_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 prospectiveMember = 2;</code>
+       * <code>optional string prospectiveMember = 2;</code>
        */
       public Builder clearProspectiveMember() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        prospectiveMember_ = 0;
+        prospectiveMember_ = getDefaultInstance().getProspectiveMember();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string prospectiveMember = 2;</code>
+       */
+      public Builder setProspectiveMemberBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        prospectiveMember_ = value;
         onChanged();
         return this;
       }
@@ -39614,7 +39693,7 @@ public final class EventClanProto {
       "SS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030InviteToClanRequ",
       "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
       "o.MinimumUserProto\022\031\n\021prospectiveMember\030" +
-      "\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\230\002\n\031InviteToCl" +
+      "\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\230\002\n\031InviteToCl" +
       "anResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
       "l6.proto.MinimumUserProto\022L\n\006status\030\002 \001(" +
       "\0162<.com.lvl6.proto.InviteToClanResponseP" +
