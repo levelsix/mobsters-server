@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +16,14 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseNormStructureRequestEvent;
 import com.lvl6.events.response.PurchaseNormStructureResponseEvent;
+import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
@@ -68,7 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserUuid();
+    String userId = senderProto.getUserUuid();
     int structId = reqProto.getStructId();
     CoordinatePair cp = new CoordinatePair(reqProto.getStructCoordinates().getX(), reqProto.getStructCoordinates().getY());
     Timestamp timeOfPurchase = new Timestamp(reqProto.getTimeOfPurchase());
@@ -83,7 +86,30 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
 
-    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+      PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
     	//get things from the db
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
@@ -94,13 +120,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       int previousGems = 0;
       int previousOil = 0;
       int previousCash = 0;
-      int uStructId = 0;
+      String uStructId = null;
 
       boolean legitPurchaseNorm = checkLegitPurchaseNorm(resBuilder, struct, user,
       		timeOfPurchase, gemsSpent, resourceChange, resourceType);
 
       boolean success = false;
-      List<Integer> uStructIdList = new ArrayList<Integer>();
+      List<String> uStructIdList = new ArrayList<String>();
       Map<String, Integer> money = new HashMap<String, Integer>();
       if (legitPurchaseNorm) {
       	previousGems = user.getGems();
@@ -113,7 +139,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       if (success) {
       	resBuilder.setStatus(PurchaseNormStructureStatus.SUCCESS);
       	uStructId = uStructIdList.get(0);
-      	resBuilder.setUserStructId(uStructId);
+      	resBuilder.setUserStructUuid(uStructId);
       }
 
       PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(senderProto.getUserUuid());
@@ -144,7 +170,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     		log.error("exception2 in PurchaseNormStructure processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
@@ -212,14 +238,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   //uStructId will store the newly created user structure
   private boolean writeChangesToDB(User user, int structId, CoordinatePair cp,
   		Timestamp purchaseTime, int gemsSpent, int resourceChange, ResourceType resourceType,
-  		List<Integer> uStructId, Map<String, Integer> money) {
-    int userId = user.getId();
+  		List<String> uStructId, Map<String, Integer> money) {
+    String userId = user.getId();
     Timestamp lastRetrievedTime = null;
     boolean isComplete = false;
     
-    int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
+    String userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
     		lastRetrievedTime, isComplete);
-    if (userStructId <= 0) {
+    if (userStructId == null) {
       log.error("problem with giving struct " + structId + " at " + purchaseTime +
       		" on " + cp);
       return false;
@@ -263,10 +289,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
   
-  private void writeToUserCurrencyHistory(User u, int structId, int uStructId,
+  private void writeToUserCurrencyHistory(User u, int structId, String uStructId,
   		Timestamp date, Map<String, Integer> money, int previousGems, int previousOil,
   		int previousCash) {
-  	int userId = u.getId();
+    String userId = u.getId();
     Map<String, Integer> previousCurencyMap = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
