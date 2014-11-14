@@ -91,7 +91,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     log.info(String.format("reqProto=%s", reqProto));
     
     MinimumUserProto senderProto = reqProto.getSender();
-    String clanId = reqProto.getClanUuid();
     String clanName = reqProto.getClanName();
     ClanInfoGrabType grabType = reqProto.getGrabType();
 
@@ -101,7 +100,12 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     resBuilder.setIsForSearch(false);
     
     if (reqProto.hasClanName()) resBuilder.setClanName(clanName);
-    if (reqProto.hasClanUuid() && !reqProto.getClanUuid().isEmpty()) resBuilder.setClanUuid(clanId);
+
+    String clanId = null;
+    if (reqProto.hasClanUuid() && !reqProto.getClanUuid().isEmpty()) {
+      clanId = reqProto.getClanUuid();
+      resBuilder.setClanUuid(clanId);
+    }
 
     UUID clanUuid = null;
     boolean invalidUuids = true;
@@ -120,6 +124,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
     //UUID checks
     if (invalidUuids) {
+      resBuilder.setStatus(RetrieveClanInfoStatus.OTHER_FAIL);
       RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());  
@@ -142,6 +147,15 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       server.writeEvent(resEvent);
     } catch (Exception e) {
       log.error("exception in RetrieveClanInfo processEvent", e);
+      try {
+        resBuilder.setStatus(RetrieveClanInfoStatus.OTHER_FAIL);
+        RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(senderProto.getUserUuid());
+        resEvent.setTag(event.getTag());
+        resEvent.setRetrieveClanInfoResponseProto(resBuilder.build());  
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in RetrieveClanInfo processEvent", e);
+      }
     }
   }
 

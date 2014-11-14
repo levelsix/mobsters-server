@@ -228,9 +228,8 @@ public class PvpUserRetrieveUtil {
 
 		public PvpUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpUser pu = new PvpUser();
-			int userId = rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
-			String userIdStr = Integer.toString(userId);
-			pu.setUserId(userIdStr);
+			String userId = rs.getString(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
+			pu.setUserId(userId);
 			pu.setPvpLeagueId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID));
 			pu.setRank(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__RANK));
 			pu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));
