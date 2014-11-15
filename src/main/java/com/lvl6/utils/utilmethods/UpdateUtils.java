@@ -1487,12 +1487,14 @@ public class UpdateUtils implements UpdateUtil {
 			String questionMarks = StringUtils.implode(questions, ",");
 			
 			String query = String.format(
-				"UPDATE %s	SET %s=CONCAT(%s, ',%s')	WHERE %s=%s AND %s IN (%s)",
-				tableName, helpers, helpers, userId,
-				DBConstants.CLAN_HELP__CLAN_ID, clanId,
+				"UPDATE %s	SET %s=CONCAT(%s, ?)	WHERE %s=? AND %s IN (%s)",
+				tableName, helpers, helpers, 
+				DBConstants.CLAN_HELP__CLAN_ID,
 				DBConstants.CLAN_HELP__ID, questionMarks);
 
 			List<Object> values = new ArrayList<Object>();
+      values.add(","+userId);
+      values.add(clanId);
 			values.addAll(clanHelpIds);
 			
 			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);

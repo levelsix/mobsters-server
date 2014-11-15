@@ -796,7 +796,10 @@ public class CreateInfoProtoUtils {
 		gcmpb.setTimeOfChat(time);
 		gcmpb.setContent(content);
 		gcmpb.setIsAdmin(isAdmin);
-		gcmpb.setChatUuid(chatId).build();
+		
+		if (chatId != null) {
+	    gcmpb.setChatUuid(chatId);
+		}
 		return gcmpb.build();
 	}
 
