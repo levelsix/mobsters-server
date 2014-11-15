@@ -93,7 +93,7 @@ public class PvpBattleOutcome
 	*/
 	public int getUnsignedEloAttackerWins() {
 		log.info(String.format(
-			"getEloAttackerWins() attackerId=%d, defenderId=%d",
+			"getEloAttackerWins() attackerId=%s, defenderId=%s",
 			attackerId, defenderId));
 		
 		double eloDiff = attackerElo - defenderElo;
@@ -132,7 +132,7 @@ public class PvpBattleOutcome
 	
 	public int getUnsignedEloAttackerLoses() {
 		log.info(String.format(
-			"getEloAttackerLoses() attackerId=%d, defenderId=%d",
+			"getEloAttackerLoses() attackerId=%s, defenderId=%s",
 			attackerId, defenderId));
 		
 		double eloDiff = defenderElo - attackerElo;
@@ -173,7 +173,7 @@ public class PvpBattleOutcome
 	public int getUnsignedCashAttackerWins() {
 		
 		log.info(String.format(
-			"attackerId=%d, defenderId=%d",
+			"attackerId=%s, defenderId=%s",
 			attackerId, defenderId));
 		
 		double eloDiff = attackerElo - defenderElo;
@@ -214,7 +214,7 @@ public class PvpBattleOutcome
 	public int getUnsignedOilAttackerWins() {
 
 		log.info(String.format(
-			"attackerId=%d, defenderId=%d",
+			"attackerId=%s, defenderId=%s",
 			attackerId, defenderId));
 		
 		double eloDiff = attackerElo - defenderElo;
