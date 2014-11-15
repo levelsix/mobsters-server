@@ -62,7 +62,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		String query = querySb.toString();
 		log.info(String.format(
-			"user clan query=%s, values=%",
+			"user clan query=%s, values=%s",
 			query, values));
 
 		Map<String, UserClan> userIdsToStatuses = new HashMap<String, UserClan>();
