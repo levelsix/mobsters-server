@@ -125,7 +125,7 @@ public class MonsterForUserTest extends TestCase {
 		String userMonsterId = ids.get(0);
 		assertTrue(
 			String.format(
-				"Somehow retrieved different unrestricted user monster: %s, expectedId=%d",
+				"Somehow retrieved different unrestricted user monster: %s, expectedId=%s",
 				mfuIdToMfu, userMonsterId ),
 			mfuIdToMfu.containsKey(userMonsterId));
 		
