@@ -92,7 +92,7 @@ import com.lvl6.properties.DBConstants;
 			"(SELECT max(%s) as %s, %s FROM %s WHERE %s=? GROUP BY %s)",
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, 
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
-			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
+			otherPersonColumn,
 			TABLE_NAME, column, otherPersonColumn);
 //		subquery +=
 //			"(SELECT max(" + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + ") as id " + 
@@ -107,9 +107,9 @@ import com.lvl6.properties.DBConstants;
 			subquery, TABLE_NAME,
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST,
-			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
-			DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID,
-			DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID,
+			otherPersonColumn,
+			otherPersonColumn,
+			column,
 			DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST);
 		//get the actual posts to those ids
 //		query +=
