@@ -333,7 +333,7 @@ public class CreateInfoProtoUtils {
 
 		//create the fake user
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
-		mupb.setUserUuid(userId);
+		//mupb.setUserUuid(userId); // fake user will never have id
 		mupb.setName(name);
 		MinimumUserProto mup = mupb.build();
 
@@ -562,7 +562,7 @@ public class CreateInfoProtoUtils {
 	public static UserPvpLeagueProto createFakeUserPvpLeagueProto(String userId, int elo,
 		boolean setElo) {
 		UserPvpLeagueProto.Builder uplpb = UserPvpLeagueProto.newBuilder();
-		uplpb.setUserUuid(userId);
+		//uplpb.setUserUuid(userId);
 
 		int leagueId = PvpLeagueRetrieveUtils.getLeagueIdForElo(elo, 0);
 		uplpb.setLeagueId(leagueId);
