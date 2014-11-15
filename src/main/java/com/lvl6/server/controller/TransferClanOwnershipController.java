@@ -188,7 +188,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;      
     }
 
-    if (newClanOwner.getClanId() != user.getClanId()) {
+    if (!newClanOwner.getClanId().equals(user.getClanId())) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NEW_OWNER_NOT_IN_CLAN);
       log.error("new owner not in same clan as user. new owner= " + newClanOwner + ", user is " + user);
       return false;     
