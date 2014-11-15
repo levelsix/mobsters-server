@@ -176,6 +176,12 @@ public class SetPrivateChatMessageAction implements StartUpAction
 		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans(
 			clanIdsToUserIdSet.keySet());
 		
+		log.info(String.format(
+			"clanIdsToClans=%s, clanIdsToUserIdSet=%s, userIdsToUsers=%s, clanlessUserUserIds=%s, privateChatPostIds=%s, postIdsToPrivateChatPosts=%s",
+			clanIdsToClans, clanIdsToUserIdSet, userIdsToUsers, clanlessUserUserIds, privateChatPostIds,
+			postIdsToPrivateChatPosts));
+		
+		
 		//create the protoList
 		privateChatPostIds = new ArrayList<String>();
 		privateChatPostIds.addAll(userIdsToPrivateChatPostIds.values());

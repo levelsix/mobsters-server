@@ -123,6 +123,9 @@ import com.lvl6.properties.DBConstants;
 		values.add(userId);
 		values.add(limit);
 
+		log.info(String.format(
+			"query=%s, values=%s",
+			query, values));
 
 		Map<String, PrivateChatPost> idsToPrivateChatPosts =
 			new HashMap<String, PrivateChatPost>();
