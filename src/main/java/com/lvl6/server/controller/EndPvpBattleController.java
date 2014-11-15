@@ -128,8 +128,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	UUID defenderUuid = null;
 	try {
 		attackerUuid = UUID.fromString(attackerId);
-		defenderUuid = UUID.fromString(defenderId);
-		
+		if (!"".equals(defenderId)) {
+			defenderUuid = UUID.fromString(defenderId);
+		}
 	} catch (Exception e) {
 		log.error(String.format(
 			"UUID error. incorrect attackerId=%s, defenderId=%s",
