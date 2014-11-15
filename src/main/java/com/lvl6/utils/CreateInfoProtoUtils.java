@@ -333,7 +333,7 @@ public class CreateInfoProtoUtils {
 
 		//create the fake user
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
-		mupb.setUserUuid(userId);
+		//mupb.setUserUuid(userId); // fake user will never have id
 		mupb.setName(name);
 		MinimumUserProto mup = mupb.build();
 
