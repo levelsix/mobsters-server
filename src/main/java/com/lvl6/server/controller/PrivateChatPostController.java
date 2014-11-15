@@ -129,7 +129,7 @@ public class PrivateChatPostController extends EventController {
 				String censoredContent = MiscMethods.censorUserInput(content);
 				String privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId,
 						censoredContent, timeOfPost);
-				if (privateChatPostId != null) {
+				if (privateChatPostId == null) {
 					legitPost = false;
 					resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 					log.error("problem with inserting private chat post into db. posterId=" + posterId
