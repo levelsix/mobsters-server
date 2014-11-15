@@ -223,7 +223,7 @@ public class PrivateChatPostController extends EventController {
 					+ recipientId);
 			return false;
 		}
-		if (users.size() != 1 && !posterId.equals(recipientId)) {
+		if (users.size() != 1 && posterId.equals(recipientId)) {
 			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 			log.error("error retrieving one of the users. posterId=" + posterId + ", recipientId="
 					+ recipientId);
