@@ -1135,6 +1135,13 @@ public class MiscMethods {
 		Map<String, Map<String, String>> changeReasonsMap,
 		Map<String, Map<String, String>> detailsMap) {
 		try {
+			if (changeMap.isEmpty()) {
+				String preface = "changeMap is empty";
+				log.warn(String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap));
+				return;
+			}
 			List<String> allUserIds = new ArrayList<String>();
 			List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 
 			List<String> allResourceTypes = new ArrayList<String>();
@@ -1146,7 +1153,14 @@ public class MiscMethods {
 
 			//for each user, accrue up the values to store to the db
 			for (String userId : userIds) {
-				Map<String, Integer> oneUserChangeMap = changeMap.get(userId);
+				Map<String, Integer> oneUserChangeMap = null;
+				if (changeMap.containsKey(userId)) {
+					oneUserChangeMap = changeMap.get(userId);
+				}
+				if (null == oneUserChangeMap) {
+					continue;
+				}
+					
 				Map<String, Integer> oneUserPrevCurrency =
 					previousCurrencyMap.get(userId);
 				Map<String, Integer> oneUserCurCurrency =
@@ -1165,6 +1179,14 @@ public class MiscMethods {
 					allReasonsForChanges, allDetails);
 			}
 
+			if (allCurrencyChanges.isEmpty()) {
+				String preface = "no currency changes";
+				log.warn(String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap));
+				return;
+			}
+			
 			int numInserted = InsertUtils.get()
 				.insertIntoUserCurrencyHistoryMultipleRows(
 					allUserIds, allTimestamps, allResourceTypes,

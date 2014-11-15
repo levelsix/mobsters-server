@@ -232,10 +232,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			resEventUpdate.setTag(event.getTag());
     			server.writeEvent(resEventUpdateDefender);
     		}
-    		//TRACK CURRENCY HISTORY
-    		writeToUserCurrencyHistory(attackerId, attacker, defenderId,
+    		
+    		if (attackerWon) {
+    			//TRACK CURRENCY HISTORY, resource changes only if attacker won
+    			writeToUserCurrencyHistory(attackerId, attacker, defenderId,
     				defender, attackerWon, curTime, changeMap,
     				previousCurrencyMap);
+    		}
     	}
 
     } catch (Exception e) {
