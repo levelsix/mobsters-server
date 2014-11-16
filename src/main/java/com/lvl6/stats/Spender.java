@@ -1,7 +1,7 @@
 package com.lvl6.stats;
 
 public class Spender {
-	protected Integer userId;
+	protected String userId;
 	protected Double amountSpent;
 	protected String name;
 
@@ -13,12 +13,12 @@ public class Spender {
 		this.name = name;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
