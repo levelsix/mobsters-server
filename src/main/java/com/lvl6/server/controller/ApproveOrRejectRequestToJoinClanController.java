@@ -249,7 +249,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return false;      
 		}
 		//check if requester is already in a clan
-		if (!requester.getClanId().isEmpty()) {
+		if (requester.getClanId() != null && !requester.getClanId().isEmpty()) {
 			resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_ALREADY_IN_A_CLAN);
 			log.error("trying to accept a user that is already in a clan");
 			//the other requests in user_clans table that have a status of 2 (requesting to join clan)
