@@ -146,9 +146,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				requester = idsToUsers.get(requesterId);
 			}
 			
-			log.info(String.format(
-				"idsToUsers=%s, user=%s, requester=%s",
-				idsToUsers, user, requester));
+//			log.info(String.format(
+//				"idsToUsers=%s, user=%s, requester=%s",
+//				idsToUsers, user, requester));
 			List<Integer> clanSizeList = new ArrayList<Integer>();
 			boolean legitDecision = checkLegitDecision(resBuilder, lockedClan, user, requester,
 				accept, clanSizeList);
@@ -169,9 +169,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					clan = clanRetrieveUtil.getClanWithId(clanId);
 					cdp = setClanData(clanId, clan, user, userId);      		
 					log.info(String.format("ClanDataProto=%s", cdp));
+					setResponseBuilderStuff(resBuilder, clan, clanSizeList);
 				}
 
-				setResponseBuilderStuff(resBuilder, clan, clanSizeList);
 				requestMup = CreateInfoProtoUtils
 					.createMinimumUserProtoFromUserAndClan(requester, clan);
 				resBuilder.setRequester(requestMup);
