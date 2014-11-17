@@ -549,7 +549,7 @@ public class MiscMethods {
 		purgeMDCProperties();
 		if (udid != null) MDC.put(MDCKeys.UDID, udid);
 		if (ip != null) MDC.put(MDCKeys.IP, ip);
-		if (null != playerId && playerId.isEmpty()) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
+		if (null != playerId && !playerId.isEmpty()) MDC.put(MDCKeys.PLAYER_ID, playerId);
 	}
 
 	public static int calculateCoinsGivenToReferrer(User referrer) {
