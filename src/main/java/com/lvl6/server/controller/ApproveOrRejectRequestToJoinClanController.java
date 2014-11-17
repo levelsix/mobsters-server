@@ -145,7 +145,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			if (idsToUsers.containsKey(requesterId)) {
 				requester = idsToUsers.get(requesterId);
 			}
-
+			
+			log.info(String.format(
+				"idsToUsers=%s, user=%s, requester=%s",
+				idsToUsers, user, requester));
 			List<Integer> clanSizeList = new ArrayList<Integer>();
 			boolean legitDecision = checkLegitDecision(resBuilder, lockedClan, user, requester,
 				accept, clanSizeList);
