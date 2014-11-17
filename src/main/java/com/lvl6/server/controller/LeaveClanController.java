@@ -170,7 +170,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user is null");
       return false;      
     }
-    if (user.getClanId() != clan.getId()) {
+    if (!user.getClanId().equals(clan.getId())) {
       resBuilder.setStatus(LeaveClanStatus.FAIL_NOT_IN_CLAN);
       log.error("user's clan id is " + user.getClanId() + ", clan id is " + clan.getId());
       return false;
