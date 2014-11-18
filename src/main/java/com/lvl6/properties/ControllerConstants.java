@@ -312,7 +312,7 @@ public class ControllerConstants {
   public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20; 
   //if development then use user with id = 1
   //TODO: GET THE REAL IDS
-  public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? "96db181e-4b63-40c4-8746-d62114f587a2" : "1";//Globals.IS_SANDBOX() ? 98437 : 131287;
+  public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? "96db181e-4b63-40c4-8746-d62114f587a2" : "4df84fdd-705f-4089-ac80-70c1a0143f24";//Globals.IS_SANDBOX() ? 98437 : 131287;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
   
