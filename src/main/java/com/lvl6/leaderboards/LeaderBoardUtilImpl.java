@@ -27,7 +27,7 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 
-	protected JdbcTemplate jdbc;
+	protected JdbcTemplate jdbc; 
 
 	@Resource
 	protected DataSource dataSource;
