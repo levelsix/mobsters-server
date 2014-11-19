@@ -100,6 +100,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			
 			log.info(String.format(
 				"CHEATER DETECTED!!!! %s", aUser));
+			
+			if (DevRequest.RESET_ACCOUNT.equals(request)) {
+				log.info(String.format(
+					"resetting user=%s", aUser));
+				aUser.updateResetAccount();
+			}
+			
 			if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
 				cheat(userId, request, staticDataId, quantity,
 					resBuilder, aUser);
@@ -149,9 +156,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	{
 		switch (request) {
 			case RESET_ACCOUNT:
-				log.info(String.format(
-					"resetting user=%s", aUser));
-				aUser.updateResetAccount();
+//				log.info(String.format(
+//					"resetting user=%s", aUser));
+//				aUser.updateResetAccount();
 				break;
 
 			case GET_MONZTER:
