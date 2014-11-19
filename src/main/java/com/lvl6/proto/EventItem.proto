@@ -37,7 +37,7 @@ message TradeItemForBoosterResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//will only ever add or delete itemUsages
+//will only ever add itemUsages
 message TradeItemForSpeedUpsRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
@@ -59,13 +59,39 @@ message TradeItemForSpeedUpsResponseProto {
 	}
 }
 
-/*
+//------------------------------------------------------------------------------------------
+message RemoveUserItemUsedRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string userItemUsedId = 2; //NOTE: not userItemUsed itemId	
+	
+}
+
+message RemoveUserItemUsedResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RemoveUserItemUsedStatus status = 2;
+	
+	enum RemoveUserItemUsedStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
 message TradeItemForResourcesRequestProto {
 	optional MinimumUserProto sender = 1;
-		
+	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
+	//updated quantity of user's items after using said items
+	repeated UserItemProto nuUserItems = 3;		
 }
 
 message TradeItemForResourcesResponseProto {
 	optional MinimumUserProto sender = 1;
+	optional TradeItemForResourcesStatus status = 2;
+	
+	enum TradeItemForResourcesStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
 }
-*/
+

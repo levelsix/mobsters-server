@@ -49,7 +49,7 @@ enum ItemType {
 //1) what is in the database table for items used and represents
 //2) what the user wants to use 
 message UserItemUsageProto {
-	optional string usageUuid = 1; //IGNORE: //the auto-incrementing primary key in db
+	optional string usageUuid = 1; //ids are strings, IGNORE: //the auto-incrementing primary key in db
 	optional string userUuid = 2;
 	optional int32 itemId = 3;
 	optional int64 timeOfEntry = 4;
