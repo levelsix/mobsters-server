@@ -1824,7 +1824,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     boolean hasUsageUuid();
@@ -1832,7 +1832,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     java.lang.String getUsageUuid();
@@ -1840,7 +1840,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -2045,7 +2045,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     public boolean hasUsageUuid() {
@@ -2055,7 +2055,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     public java.lang.String getUsageUuid() {
@@ -2076,7 +2076,7 @@ public final class ItemsProto {
      * <code>optional string usageUuid = 1;</code>
      *
      * <pre>
-     *IGNORE: //the auto-incrementing primary key in db
+     *ids are strings, IGNORE: //the auto-incrementing primary key in db
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -2554,7 +2554,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public boolean hasUsageUuid() {
@@ -2564,7 +2564,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public java.lang.String getUsageUuid() {
@@ -2585,7 +2585,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -2605,7 +2605,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public Builder setUsageUuid(
@@ -2622,7 +2622,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public Builder clearUsageUuid() {
@@ -2635,7 +2635,7 @@ public final class ItemsProto {
        * <code>optional string usageUuid = 1;</code>
        *
        * <pre>
-       *IGNORE: //the auto-incrementing primary key in db
+       *ids are strings, IGNORE: //the auto-incrementing primary key in db
        * </pre>
        */
       public Builder setUsageUuidBytes(

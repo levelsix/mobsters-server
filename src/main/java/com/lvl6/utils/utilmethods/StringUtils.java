@@ -140,6 +140,10 @@ public class StringUtils {
 	
 	public static Map<String, UUID> convertToUUID(Collection<String> strList) {
 		Map<String, UUID> retMap = new HashMap<String, UUID>();
+		
+		if (null == strList) {
+			return retMap;
+		}
 		for (String str : strList) {
 			retMap.put(str, UUID.fromString(str));
 		}

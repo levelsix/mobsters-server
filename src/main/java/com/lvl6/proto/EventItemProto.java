@@ -2253,7 +2253,7 @@ public final class EventItemProto {
    *
    * <pre>
    *------------------------------------------------------------------------------------------
-   *will only ever add or delete itemUsages
+   *will only ever add itemUsages
    * </pre>
    */
   public static final class TradeItemForSpeedUpsRequestProto extends
@@ -2642,7 +2642,7 @@ public final class EventItemProto {
      *
      * <pre>
      *------------------------------------------------------------------------------------------
-     *will only ever add or delete itemUsages
+     *will only ever add itemUsages
      * </pre>
      */
     public static final class Builder extends
@@ -4754,6 +4754,3579 @@ public final class EventItemProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForSpeedUpsResponseProto)
   }
 
+  public interface RemoveUserItemUsedRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveUserItemUsedRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    com.google.protobuf.ProtocolStringList
+        getUserItemUsedIdList();
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    int getUserItemUsedIdCount();
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    java.lang.String getUserItemUsedId(int index);
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserItemUsedIdBytes(int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedRequestProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   * </pre>
+   */
+  public static final class RemoveUserItemUsedRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveUserItemUsedRequestProto)
+      RemoveUserItemUsedRequestProtoOrBuilder {
+    // Use RemoveUserItemUsedRequestProto.newBuilder() to construct.
+    private RemoveUserItemUsedRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RemoveUserItemUsedRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RemoveUserItemUsedRequestProto defaultInstance;
+    public static RemoveUserItemUsedRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RemoveUserItemUsedRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RemoveUserItemUsedRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userItemUsedId_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              userItemUsedId_.add(bs);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          userItemUsedId_ = userItemUsedId_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.class, com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RemoveUserItemUsedRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<RemoveUserItemUsedRequestProto>() {
+      public RemoveUserItemUsedRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RemoveUserItemUsedRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RemoveUserItemUsedRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int USERITEMUSEDID_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList userItemUsedId_;
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getUserItemUsedIdList() {
+      return userItemUsedId_;
+    }
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    public int getUserItemUsedIdCount() {
+      return userItemUsedId_.size();
+    }
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    public java.lang.String getUserItemUsedId(int index) {
+      return userItemUsedId_.get(index);
+    }
+    /**
+     * <code>repeated string userItemUsedId = 2;</code>
+     *
+     * <pre>
+     *NOTE: not userItemUsed itemId	
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserItemUsedIdBytes(int index) {
+      return userItemUsedId_.getByteString(index);
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < userItemUsedId_.size(); i++) {
+        output.writeBytes(2, userItemUsedId_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < userItemUsedId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(userItemUsedId_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getUserItemUsedIdList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedRequestProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveUserItemUsedRequestProto)
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.class, com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto build() {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto buildPartial() {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto result = new com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          userItemUsedId_ = userItemUsedId_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.userItemUsedId_ = userItemUsedId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto other) {
+        if (other == com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (!other.userItemUsedId_.isEmpty()) {
+          if (userItemUsedId_.isEmpty()) {
+            userItemUsedId_ = other.userItemUsedId_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureUserItemUsedIdIsMutable();
+            userItemUsedId_.addAll(other.userItemUsedId_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserItemUsedIdIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          userItemUsedId_ = new com.google.protobuf.LazyStringArrayList(userItemUsedId_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getUserItemUsedIdList() {
+        return userItemUsedId_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public int getUserItemUsedIdCount() {
+        return userItemUsedId_.size();
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public java.lang.String getUserItemUsedId(int index) {
+        return userItemUsedId_.get(index);
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserItemUsedIdBytes(int index) {
+        return userItemUsedId_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public Builder setUserItemUsedId(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserItemUsedIdIsMutable();
+        userItemUsedId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public Builder addUserItemUsedId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserItemUsedIdIsMutable();
+        userItemUsedId_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public Builder addAllUserItemUsedId(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserItemUsedIdIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, userItemUsedId_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public Builder clearUserItemUsedId() {
+        userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userItemUsedId = 2;</code>
+       *
+       * <pre>
+       *NOTE: not userItemUsed itemId	
+       * </pre>
+       */
+      public Builder addUserItemUsedIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserItemUsedIdIsMutable();
+        userItemUsedId_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RemoveUserItemUsedRequestProto)
+    }
+
+    static {
+      defaultInstance = new RemoveUserItemUsedRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveUserItemUsedRequestProto)
+  }
+
+  public interface RemoveUserItemUsedResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.RemoveUserItemUsedResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedResponseProto}
+   */
+  public static final class RemoveUserItemUsedResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.RemoveUserItemUsedResponseProto)
+      RemoveUserItemUsedResponseProtoOrBuilder {
+    // Use RemoveUserItemUsedResponseProto.newBuilder() to construct.
+    private RemoveUserItemUsedResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RemoveUserItemUsedResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RemoveUserItemUsedResponseProto defaultInstance;
+    public static RemoveUserItemUsedResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RemoveUserItemUsedResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RemoveUserItemUsedResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus value = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.class, com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RemoveUserItemUsedResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<RemoveUserItemUsedResponseProto>() {
+      public RemoveUserItemUsedResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RemoveUserItemUsedResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RemoveUserItemUsedResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus}
+     */
+    public enum RemoveUserItemUsedStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static RemoveUserItemUsedStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>() {
+              public RemoveUserItemUsedStatus findValueByNumber(int number) {
+                return RemoveUserItemUsedStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final RemoveUserItemUsedStatus[] VALUES = values();
+
+      public static RemoveUserItemUsedStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private RemoveUserItemUsedStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.RemoveUserItemUsedResponseProto)
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.class, com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto build() {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto buildPartial() {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto result = new com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto other) {
+        if (other == com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RemoveUserItemUsedResponseProto)
+    }
+
+    static {
+      defaultInstance = new RemoveUserItemUsedResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveUserItemUsedResponseProto)
+  }
+
+  public interface TradeItemForResourcesRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForResourcesRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> 
+        getItemsUsedList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    int getItemsUsedCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
+        getItemsUsedOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> 
+        getNuUserItemsList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProto getNuUserItems(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    int getNuUserItemsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getNuUserItemsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
+   */
+  public static final class TradeItemForResourcesRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForResourcesRequestProto)
+      TradeItemForResourcesRequestProtoOrBuilder {
+    // Use TradeItemForResourcesRequestProto.newBuilder() to construct.
+    private TradeItemForResourcesRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TradeItemForResourcesRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TradeItemForResourcesRequestProto defaultInstance;
+    public static TradeItemForResourcesRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TradeItemForResourcesRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TradeItemForResourcesRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                itemsUsed_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              itemsUsed_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemUsageProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                nuUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              nuUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          itemsUsed_ = java.util.Collections.unmodifiableList(itemsUsed_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          nuUserItems_ = java.util.Collections.unmodifiableList(nuUserItems_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.class, com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TradeItemForResourcesRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<TradeItemForResourcesRequestProto>() {
+      public TradeItemForResourcesRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TradeItemForResourcesRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TradeItemForResourcesRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int ITEMSUSED_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> getItemsUsedList() {
+      return itemsUsed_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
+        getItemsUsedOrBuilderList() {
+      return itemsUsed_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    public int getItemsUsedCount() {
+      return itemsUsed_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index) {
+      return itemsUsed_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+     *
+     * <pre>
+     *usageId not set
+     * </pre>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
+        int index) {
+      return itemsUsed_.get(index);
+    }
+
+    public static final int NUUSERITEMS_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_;
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getNuUserItemsList() {
+      return nuUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+        getNuUserItemsOrBuilderList() {
+      return nuUserItems_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    public int getNuUserItemsCount() {
+      return nuUserItems_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProto getNuUserItems(int index) {
+      return nuUserItems_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+     *
+     * <pre>
+     *updated quantity of user's items after using said items
+     * </pre>
+     */
+    public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
+        int index) {
+      return nuUserItems_.get(index);
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      itemsUsed_ = java.util.Collections.emptyList();
+      nuUserItems_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < itemsUsed_.size(); i++) {
+        output.writeMessage(2, itemsUsed_.get(i));
+      }
+      for (int i = 0; i < nuUserItems_.size(); i++) {
+        output.writeMessage(3, nuUserItems_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < itemsUsed_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, itemsUsed_.get(i));
+      }
+      for (int i = 0; i < nuUserItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, nuUserItems_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForResourcesRequestProto)
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.class, com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getItemsUsedFieldBuilder();
+          getNuUserItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (itemsUsedBuilder_ == null) {
+          itemsUsed_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          itemsUsedBuilder_.clear();
+        }
+        if (nuUserItemsBuilder_ == null) {
+          nuUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          nuUserItemsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto build() {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto buildPartial() {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto result = new com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (itemsUsedBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            itemsUsed_ = java.util.Collections.unmodifiableList(itemsUsed_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.itemsUsed_ = itemsUsed_;
+        } else {
+          result.itemsUsed_ = itemsUsedBuilder_.build();
+        }
+        if (nuUserItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            nuUserItems_ = java.util.Collections.unmodifiableList(nuUserItems_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.nuUserItems_ = nuUserItems_;
+        } else {
+          result.nuUserItems_ = nuUserItemsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto other) {
+        if (other == com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (itemsUsedBuilder_ == null) {
+          if (!other.itemsUsed_.isEmpty()) {
+            if (itemsUsed_.isEmpty()) {
+              itemsUsed_ = other.itemsUsed_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureItemsUsedIsMutable();
+              itemsUsed_.addAll(other.itemsUsed_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.itemsUsed_.isEmpty()) {
+            if (itemsUsedBuilder_.isEmpty()) {
+              itemsUsedBuilder_.dispose();
+              itemsUsedBuilder_ = null;
+              itemsUsed_ = other.itemsUsed_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              itemsUsedBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getItemsUsedFieldBuilder() : null;
+            } else {
+              itemsUsedBuilder_.addAllMessages(other.itemsUsed_);
+            }
+          }
+        }
+        if (nuUserItemsBuilder_ == null) {
+          if (!other.nuUserItems_.isEmpty()) {
+            if (nuUserItems_.isEmpty()) {
+              nuUserItems_ = other.nuUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureNuUserItemsIsMutable();
+              nuUserItems_.addAll(other.nuUserItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.nuUserItems_.isEmpty()) {
+            if (nuUserItemsBuilder_.isEmpty()) {
+              nuUserItemsBuilder_.dispose();
+              nuUserItemsBuilder_ = null;
+              nuUserItems_ = other.nuUserItems_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              nuUserItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNuUserItemsFieldBuilder() : null;
+            } else {
+              nuUserItemsBuilder_.addAllMessages(other.nuUserItems_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_ =
+        java.util.Collections.emptyList();
+      private void ensureItemsUsedIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          itemsUsed_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>(itemsUsed_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> itemsUsedBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> getItemsUsedList() {
+        if (itemsUsedBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(itemsUsed_);
+        } else {
+          return itemsUsedBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public int getItemsUsedCount() {
+        if (itemsUsedBuilder_ == null) {
+          return itemsUsed_.size();
+        } else {
+          return itemsUsedBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index) {
+        if (itemsUsedBuilder_ == null) {
+          return itemsUsed_.get(index);
+        } else {
+          return itemsUsedBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder setItemsUsed(
+          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
+        if (itemsUsedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsUsedIsMutable();
+          itemsUsed_.set(index, value);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder setItemsUsed(
+          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
+        if (itemsUsedBuilder_ == null) {
+          ensureItemsUsedIsMutable();
+          itemsUsed_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsUsedBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder addItemsUsed(com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
+        if (itemsUsedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsUsedIsMutable();
+          itemsUsed_.add(value);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder addItemsUsed(
+          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
+        if (itemsUsedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsUsedIsMutable();
+          itemsUsed_.add(index, value);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder addItemsUsed(
+          com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
+        if (itemsUsedBuilder_ == null) {
+          ensureItemsUsedIsMutable();
+          itemsUsed_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsUsedBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder addItemsUsed(
+          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
+        if (itemsUsedBuilder_ == null) {
+          ensureItemsUsedIsMutable();
+          itemsUsed_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsUsedBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder addAllItemsUsed(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemUsageProto> values) {
+        if (itemsUsedBuilder_ == null) {
+          ensureItemsUsedIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, itemsUsed_);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder clearItemsUsed() {
+        if (itemsUsedBuilder_ == null) {
+          itemsUsed_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public Builder removeItemsUsed(int index) {
+        if (itemsUsedBuilder_ == null) {
+          ensureItemsUsedIsMutable();
+          itemsUsed_.remove(index);
+          onChanged();
+        } else {
+          itemsUsedBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder getItemsUsedBuilder(
+          int index) {
+        return getItemsUsedFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
+          int index) {
+        if (itemsUsedBuilder_ == null) {
+          return itemsUsed_.get(index);  } else {
+          return itemsUsedBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
+           getItemsUsedOrBuilderList() {
+        if (itemsUsedBuilder_ != null) {
+          return itemsUsedBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(itemsUsed_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder addItemsUsedBuilder() {
+        return getItemsUsedFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder addItemsUsedBuilder(
+          int index) {
+        return getItemsUsedFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
+       *
+       * <pre>
+       *usageId not set
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder> 
+           getItemsUsedBuilderList() {
+        return getItemsUsedFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
+          getItemsUsedFieldBuilder() {
+        if (itemsUsedBuilder_ == null) {
+          itemsUsedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder>(
+                  itemsUsed_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          itemsUsed_ = null;
+        }
+        return itemsUsedBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_ =
+        java.util.Collections.emptyList();
+      private void ensureNuUserItemsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          nuUserItems_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemProto>(nuUserItems_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> nuUserItemsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> getNuUserItemsList() {
+        if (nuUserItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(nuUserItems_);
+        } else {
+          return nuUserItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public int getNuUserItemsCount() {
+        if (nuUserItemsBuilder_ == null) {
+          return nuUserItems_.size();
+        } else {
+          return nuUserItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto getNuUserItems(int index) {
+        if (nuUserItemsBuilder_ == null) {
+          return nuUserItems_.get(index);
+        } else {
+          return nuUserItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder setNuUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (nuUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.set(index, value);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder setNuUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (nuUserItemsBuilder_ == null) {
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder addNuUserItems(com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (nuUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.add(value);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder addNuUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto value) {
+        if (nuUserItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.add(index, value);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder addNuUserItems(
+          com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (nuUserItemsBuilder_ == null) {
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder addNuUserItems(
+          int index, com.lvl6.proto.ItemsProto.UserItemProto.Builder builderForValue) {
+        if (nuUserItemsBuilder_ == null) {
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder addAllNuUserItems(
+          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemProto> values) {
+        if (nuUserItemsBuilder_ == null) {
+          ensureNuUserItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, nuUserItems_);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder clearNuUserItems() {
+        if (nuUserItemsBuilder_ == null) {
+          nuUserItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public Builder removeNuUserItems(int index) {
+        if (nuUserItemsBuilder_ == null) {
+          ensureNuUserItemsIsMutable();
+          nuUserItems_.remove(index);
+          onChanged();
+        } else {
+          nuUserItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder getNuUserItemsBuilder(
+          int index) {
+        return getNuUserItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
+          int index) {
+        if (nuUserItemsBuilder_ == null) {
+          return nuUserItems_.get(index);  } else {
+          return nuUserItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+           getNuUserItemsOrBuilderList() {
+        if (nuUserItemsBuilder_ != null) {
+          return nuUserItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(nuUserItems_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addNuUserItemsBuilder() {
+        return getNuUserItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public com.lvl6.proto.ItemsProto.UserItemProto.Builder addNuUserItemsBuilder(
+          int index) {
+        return getNuUserItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
+       *
+       * <pre>
+       *updated quantity of user's items after using said items
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.ItemsProto.UserItemProto.Builder> 
+           getNuUserItemsBuilderList() {
+        return getNuUserItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder> 
+          getNuUserItemsFieldBuilder() {
+        if (nuUserItemsBuilder_ == null) {
+          nuUserItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ItemsProto.UserItemProto, com.lvl6.proto.ItemsProto.UserItemProto.Builder, com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder>(
+                  nuUserItems_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          nuUserItems_ = null;
+        }
+        return nuUserItemsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForResourcesRequestProto)
+    }
+
+    static {
+      defaultInstance = new TradeItemForResourcesRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForResourcesRequestProto)
+  }
+
+  public interface TradeItemForResourcesResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.TradeItemForResourcesResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     */
+    com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesResponseProto}
+   */
+  public static final class TradeItemForResourcesResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.TradeItemForResourcesResponseProto)
+      TradeItemForResourcesResponseProtoOrBuilder {
+    // Use TradeItemForResourcesResponseProto.newBuilder() to construct.
+    private TradeItemForResourcesResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TradeItemForResourcesResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TradeItemForResourcesResponseProto defaultInstance;
+    public static TradeItemForResourcesResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TradeItemForResourcesResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TradeItemForResourcesResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus value = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.class, com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TradeItemForResourcesResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<TradeItemForResourcesResponseProto>() {
+      public TradeItemForResourcesResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TradeItemForResourcesResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TradeItemForResourcesResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus}
+     */
+    public enum TradeItemForResourcesStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static TradeItemForResourcesStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>() {
+              public TradeItemForResourcesStatus findValueByNumber(int number) {
+                return TradeItemForResourcesStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final TradeItemForResourcesStatus[] VALUES = values();
+
+      public static TradeItemForResourcesStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private TradeItemForResourcesStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     */
+    public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.TradeItemForResourcesResponseProto)
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.class, com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventItemProto.internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto build() {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto buildPartial() {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto result = new com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto other) {
+        if (other == com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       */
+      public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForResourcesResponseProto)
+    }
+
+    static {
+      defaultInstance = new TradeItemForResourcesResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TradeItemForResourcesResponseProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor;
   private static
@@ -4774,6 +8347,26 @@ public final class EventItemProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4810,7 +8403,27 @@ public final class EventItemProto {
       "eedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lv" +
       "l6.proto.UserItemUsageProto\"9\n\032TradeItem" +
       "ForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\020B\016EventItemProto"
+      "THER\020\002\"j\n\036RemoveUserItemUsedRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\026\n\016userItemUsedId\030\002 \003(\t\"\346\001\n\037R",
+      "emoveUserItemUsedResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remove" +
+      "UserItemUsedResponseProto.RemoveUserItem" +
+      "UsedStatus\"7\n\030RemoveUserItemUsedStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\300\001\n!TradeIte" +
+      "mForResourcesRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\0225\n\ti" +
+      "temsUsed\030\002 \003(\0132\".com.lvl6.proto.UserItem" +
+      "UsageProto\0222\n\013nuUserItems\030\003 \003(\0132\035.com.lv",
+      "l6.proto.UserItemProto\"\362\001\n\"TradeItemForR" +
+      "esourcesResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022^\n\006statu" +
+      "s\030\002 \001(\0162N.com.lvl6.proto.TradeItemForRes" +
+      "ourcesResponseProto.TradeItemForResource" +
+      "sStatus\":\n\033TradeItemForResourcesStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventItem" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4852,6 +8465,30 @@ public final class EventItemProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForSpeedUpsResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", "ItemsUsed", });
+    internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "UserItemUsedId", });
+    internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
+    internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
+    internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
