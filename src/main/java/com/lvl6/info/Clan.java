@@ -1,9 +1,12 @@
 package com.lvl6.info;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Clan {
+public class Clan implements Serializable{
 	
+	private static final long	serialVersionUID	= -6551373040373362240L;
+
 	private String id;
 //	private String ownerId;
 	private String name;
