@@ -5,10 +5,8 @@ import java.util.Date;
 
 public class TaskForUserOngoing implements Serializable {
 	
-	private static final long serialVersionUID = 8030638296503679697L;
-	
-	private long id;
-	private int userId;
+	private String id;
+	private String userId;
 	private int taskId;
 	public int expGained;
 	public int cashGained;
@@ -17,7 +15,12 @@ public class TaskForUserOngoing implements Serializable {
 	private Date startDate;
 	private int taskStageId;
 	
-	public TaskForUserOngoing(long id, int userId, int taskId, int expGained,
+	public TaskForUserOngoing()
+	{
+		super();
+	}
+
+	public TaskForUserOngoing(String id, String userId, int taskId, int expGained,
 			int cashGained, int oilGained, int numRevives, Date startDate,
 			int taskStageId) {
 		super();
@@ -32,19 +35,23 @@ public class TaskForUserOngoing implements Serializable {
 		this.taskStageId = taskStageId;
 	}
 
-	public long getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId( String id )
+	{
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId()
+	{
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId( String userId )
+	{
 		this.userId = userId;
 	}
 

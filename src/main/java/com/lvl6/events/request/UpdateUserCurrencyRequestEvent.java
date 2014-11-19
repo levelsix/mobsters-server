@@ -22,7 +22,7 @@ public class UpdateUserCurrencyRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       updateUserCurrencyRequestProto = UpdateUserCurrencyRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = updateUserCurrencyRequestProto.getSender().getUserId();
+      playerId = updateUserCurrencyRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("update user currency request exception", e);
     }

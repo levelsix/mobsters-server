@@ -11,7 +11,7 @@ public class FinishNormStructWaittimeWithDiamondsResponseEvent extends NormalRes
 
   private FinishNormStructWaittimeWithDiamondsResponseProto finishNormStructWaittimeWithDiamondsResponseProto;
   
-  public FinishNormStructWaittimeWithDiamondsResponseEvent(int playerId) {
+  public FinishNormStructWaittimeWithDiamondsResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS_EVENT;
   }

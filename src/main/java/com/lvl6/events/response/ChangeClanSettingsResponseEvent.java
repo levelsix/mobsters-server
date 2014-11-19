@@ -11,7 +11,7 @@ public class ChangeClanSettingsResponseEvent extends NormalResponseEvent {
 
   private ChangeClanSettingsResponseProto changeClanSettingsResponseProto;
   
-  public ChangeClanSettingsResponseEvent(int playerId){
+  public ChangeClanSettingsResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_CHANGE_CLAN_SETTINGS_EVENT;
   }

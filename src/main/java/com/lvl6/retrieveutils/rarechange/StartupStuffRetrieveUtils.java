@@ -103,4 +103,5 @@ import com.lvl6.utils.RetrieveUtils;
     
     return noticesTerm;
   }
+
 }

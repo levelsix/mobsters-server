@@ -3,7 +3,7 @@ package com.lvl6.stats;
 import java.util.Date;
 
 public class InAppPurchase {
-	protected Integer userId;
+	protected String userId;
 	protected Double cashSpent;
 	protected Date purchasedDate;
 	protected String name;
@@ -16,11 +16,11 @@ public class InAppPurchase {
 		this.name = name;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

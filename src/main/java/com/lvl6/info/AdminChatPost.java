@@ -3,12 +3,12 @@ package com.lvl6.info;
 import java.util.Date;
 
 public class AdminChatPost extends PrivateChatPost {
-	public AdminChatPost(int id, int posterId, int recipientId, Date timeOfPost, String content) {
+	public AdminChatPost(String id, String posterId, String recipientId, Date timeOfPost, String content) {
 		super(id, posterId, recipientId, timeOfPost, content);
 		//setUsername(username);
 	}
 	
-	public AdminChatPost(int id, int posterId, int recipientId, Date timeOfPost, String content, String username) {
+	public AdminChatPost(String id, String posterId, String recipientId, Date timeOfPost, String content, String username) {
 		super(id, posterId, recipientId, timeOfPost, content);
 		setUsername(username);
 	}
@@ -25,6 +25,4 @@ public class AdminChatPost extends PrivateChatPost {
 		this.username = username;
 	}
 
-	private static final long serialVersionUID = -4608572851669225658L;
-	
 }

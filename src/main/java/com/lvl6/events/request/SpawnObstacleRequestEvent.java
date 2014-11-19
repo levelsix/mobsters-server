@@ -22,7 +22,7 @@ public class SpawnObstacleRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       spawnObstacleRequestProto = SpawnObstacleRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = spawnObstacleRequestProto.getSender().getUserId();
+      playerId = spawnObstacleRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("spawn obstacle request exception", e);
     }

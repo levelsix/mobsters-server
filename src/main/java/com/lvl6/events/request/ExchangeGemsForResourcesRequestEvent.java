@@ -22,7 +22,7 @@ public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       exchangeGemsForResourcesRequestProto = ExchangeGemsForResourcesRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = exchangeGemsForResourcesRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = exchangeGemsForResourcesRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("exchange gems for resources request exception", e);
     }

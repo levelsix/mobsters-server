@@ -44,9 +44,9 @@ public class MiniJobForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Long, MiniJobForUser> getSpecificOrAllIdToMiniJobForUser(
-			int userId, Collection<Long> userMiniJobIds) {
-		Map<Long, MiniJobForUser> miniJobIdToUserMiniJobs = null;
+	public Map<String, MiniJobForUser> getSpecificOrAllIdToMiniJobForUser(
+			String userId, Collection<String> userMiniJobIds) {
+		Map<String, MiniJobForUser> miniJobIdToUserMiniJobs = null;
 		try {
 			List<String> columnsToSelected = UserMiniJobForClientMapper
 					.getColumnsSelected();
@@ -67,8 +67,8 @@ public class MiniJobForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(
@@ -80,18 +80,18 @@ public class MiniJobForUserRetrieveUtil {
 					query);
 
 			List<MiniJobForUser> mjfuList = this.jdbcTemplate
-					.query(query, new UserMiniJobForClientMapper());
+					.query(query, values.toArray(), new UserMiniJobForClientMapper());
 			miniJobIdToUserMiniJobs =
-					new HashMap<Long, MiniJobForUser>();
+					new HashMap<String, MiniJobForUser>();
 			for (MiniJobForUser mjfu : mjfuList) {
-				long miniJobId = mjfu.getId();
+				String miniJobId = mjfu.getId();
 				
 				miniJobIdToUserMiniJobs.put(miniJobId, mjfu);
 			}
 		} catch (Exception e) {
 			log.error("could not retrieve user obstacle for userId=" + userId, e);
 			miniJobIdToUserMiniJobs =
-					new HashMap<Long, MiniJobForUser>();
+					new HashMap<String, MiniJobForUser>();
 		}
 		
 		return miniJobIdToUserMiniJobs;
@@ -114,7 +114,7 @@ public class MiniJobForUserRetrieveUtil {
 
 		public MiniJobForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			MiniJobForUser mjfu = new MiniJobForUser();
-			mjfu.setId(rs.getLong(DBConstants.MINI_JOB_FOR_USER__ID));
+			mjfu.setId(rs.getString(DBConstants.MINI_JOB_FOR_USER__ID));
 			mjfu.setMiniJobId(rs.getInt(DBConstants.MINI_JOB_FOR_USER__MINI_JOB_ID));
 			mjfu.setBaseDmgReceived(rs.getInt(DBConstants.MINI_JOB_FOR_USER__BASE_DMG_RECEIVED));
 			mjfu.setDurationSeconds(rs.getInt(DBConstants.MINI_JOB_FOR_USER__DURATION_SECONDS));
@@ -131,8 +131,8 @@ public class MiniJobForUserRetrieveUtil {
 			try {
 				String stringToExplode = rs.getString(DBConstants.MINI_JOB_FOR_USER__USER_MONSTER_IDS); 
 				if (null != stringToExplode) {
-					List<Long> userMonsterIds = StringUtils
-							.explodeIntoLongs(stringToExplode, ",");
+					List<String> userMonsterIds = StringUtils
+							.explodeIntoStrings(stringToExplode, ",");
 					mjfu.setUserMonsterIds(userMonsterIds);
 					mjfu.setUserMonsterIdStr(stringToExplode);
 				}

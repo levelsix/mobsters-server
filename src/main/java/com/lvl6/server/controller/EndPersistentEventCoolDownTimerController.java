@@ -49,7 +49,7 @@
 //
 //    //get values sent from the client (the request proto)
 //    MinimumUserProto senderProto = reqProto.getSender();
-//    int userId = senderProto.getUserId();
+//    int userId = senderProto.getUserUuid();
 //    int gemsSpent = reqProto.getGemsSpent();
 //    int eventPersistentId = reqProto.getEventPersistentId();
 //
@@ -58,7 +58,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(EndPersistentEventCoolDownTimerStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 //    try {
 //      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 ////      int previousGems = 0;
@@ -97,7 +97,7 @@
 //    	  log.error("exception2 in EndPersistentEventCoolDownTimerController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 //    }
 //  }
 //

@@ -11,7 +11,7 @@ public class AchievementRedeemResponseEvent extends NormalResponseEvent {
 
   private AchievementRedeemResponseProto achievementRedeemResponseProto;
   
-  public AchievementRedeemResponseEvent(int playerId){
+  public AchievementRedeemResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ACHIEVEMENT_REDEEM_EVENT;
   }

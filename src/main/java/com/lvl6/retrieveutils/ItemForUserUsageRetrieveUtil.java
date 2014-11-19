@@ -45,7 +45,7 @@ public class ItemForUserUsageRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public List<ItemForUserUsage> getItemForUserUsage(
-			int userId, Collection<Integer> itemIds) {
+	    String userId, Collection<Integer> itemIds) {
 		List<ItemForUserUsage> itemUsages = null;
 		try {
 			List<String> columnsToSelected = UserItemUsageForClientMapper
@@ -67,8 +67,8 @@ public class ItemForUserUsageRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(
@@ -81,7 +81,7 @@ public class ItemForUserUsageRetrieveUtil {
 				query));
 
 			itemUsages = this.jdbcTemplate
-					.query(query, new UserItemUsageForClientMapper());
+					.query(query, values.toArray(), new UserItemUsageForClientMapper());
 		} catch (Exception e) {
 			log.error(
 				String.format(
@@ -118,14 +118,14 @@ public class ItemForUserUsageRetrieveUtil {
 
 		public ItemForUserUsage mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ItemForUserUsage ifuu = new ItemForUserUsage();
-			ifuu.setId(rs.getLong(DBConstants.ITEM_FOR_USER_USAGE__ID));
-			ifuu.setUserId(rs.getInt(DBConstants.ITEM_FOR_USER_USAGE__USER_ID));
+			ifuu.setId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ID));
+			ifuu.setUserId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_ID));
 			ifuu.setItemId(rs.getInt(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID));
 			
 			Timestamp ts = rs.getTimestamp(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
 			ifuu.setTimeOfEntry(ts);
 			
-			ifuu.setUserDataId(rs.getLong(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID));
+			ifuu.setUserDataId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID));
 			
 			String actionType = rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
 			if (null != actionType) {

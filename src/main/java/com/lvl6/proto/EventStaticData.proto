@@ -10,7 +10,7 @@ option java_outer_classname = "EventStaticDataProto";
 
 
 message PurgeClientStaticDataResponseProto {
-	optional int32 senderId = 1;
+	optional string senderUuid = 1;
 	optional StaticDataProto staticDataStuff = 2;
 }
 

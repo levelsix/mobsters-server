@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +38,13 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
@@ -60,7 +62,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	protected TimeUtils timeUtils;
 	
 	@Autowired
-	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	
 //	@Autowired
 //	protected PvpUtil pvpUtil;
@@ -95,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info("reqProto=" + reqProto); 
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
-		int attackerId = attackerProto.getUserId();
+		String attackerId = attackerProto.getUserUuid();
 		//TODO: Maybe delete this since going to use db value anyway
 //		int attackerElo = reqProto.getAttackerElo();
 		
@@ -104,8 +115,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//positive means refund, negative means charge user
 //		int cashChange = reqProto.getCashChange();
 		
-		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
-		Set<Integer> uniqSeenUserIds = new HashSet<Integer>(seenUserIds);
+		List<String> seenUserIds = reqProto.getSeenUserUuidsList();
+		Set<String> uniqSeenUserIds = new HashSet<String>(seenUserIds);
 		//don't want the attacker to see himself
 		uniqSeenUserIds.add(attackerId);
 		
@@ -117,8 +128,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 
+    UUID userUuid = null;
+    UUID seenUserUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(attackerId);
+
+      if (uniqSeenUserIds != null) {
+        for (String seenUserId : uniqSeenUserIds) {
+          seenUserUuid = UUID.fromString(seenUserId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, seenUserIds=%s",
+          attackerId, uniqSeenUserIds), e);
+      invalidUuids = true;
+    }
+
 		try {
-			User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId);
+			User attacker = getUserRetrieveUtils().getUserById(attackerId);
 			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()
 					.getUserPvpLeagueForId(attackerId);
 			//check if user can search for a player to attack
@@ -152,7 +183,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
-								attacker, plfu);
+								attacker, plfu, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 //				
@@ -224,7 +255,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //	}
 	
 	private void setProspectivePvpMatches(Builder resBuilder, User attacker,
-			Set<Integer> uniqSeenUserIds, Date clientDate, int attackerElo) {
+			Set<String> uniqSeenUserIds, Date clientDate, int attackerElo) {
 	//so as to not recompute elo range
 //		List<Integer> minEloList = new ArrayList<Integer>();
 //		List<Integer> maxEloList = new ArrayList<Integer>();
@@ -242,9 +273,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int maxElo = minAndMaxElo.getValue();
 		
 		//ids are for convenience 
-		List<Integer> queuedOpponentIdsList = new ArrayList<Integer>();
+		List<String> queuedOpponentIdsList = new ArrayList<String>();
 		//if want up-to-date info comment this out and query from db instead 
-		Map<Integer, PvpUser> userIdToPvpUser = new HashMap<Integer, PvpUser>();
+		Map<String, PvpUser> userIdToPvpUser = new HashMap<String, PvpUser>();
 		
 		//get the users that the attacker will fight
 		List<User> queuedOpponents = getQueuedOpponents(attacker, attackerElo, minElo,
@@ -279,7 +310,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.info(String.format(
 				"queuedOpponents:%s", queuedOpponents));
 			
-			Map<Integer, Clan> userIdToClan = getClans(queuedOpponents);
+			Map<String, Clan> userIdToClan = getClans(queuedOpponents);
 			
 			/*
 			Map<Integer, PvpLeagueForUser> userIdToPvpLeagueInfo = 
@@ -288,11 +319,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 			//get the 3 monsters for each defender: ideally should be equipped, but 
 			//will randomly select if user doesn't have 3 equipped
-			Map<Integer, List<MonsterForUser>> userIdToUserMonsters = 
+			Map<String, List<MonsterForUser>> userIdToUserMonsters = 
 					selectMonstersForUsers(queuedOpponentIdsList);
 			
-			Map<Integer, Integer> userIdToProspectiveCashReward = new HashMap<Integer, Integer>();
-			Map<Integer, Integer> userIdToProspectiveOilReward = new HashMap<Integer, Integer>();
+			Map<String, Integer> userIdToProspectiveCashReward = new HashMap<String, Integer>();
+			Map<String, Integer> userIdToProspectiveOilReward = new HashMap<String, Integer>();
 			
 			calculateCashOilRewards(attacker.getId(), attackerElo,
 				queuedOpponents, userIdToPvpUser, userIdToProspectiveCashReward,
@@ -313,23 +344,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	
 	//TODO: Is getting clans necessary?
 	//given bunch o users, get their clans and pair them up
-	private Map<Integer, Clan> getClans(List<User> queuedOpponents) {
-		Set<Integer> clanIds = new HashSet<Integer>();
+	private Map<String, Clan> getClans(List<User> queuedOpponents) {
+		Set<String> clanIds = new HashSet<String>();
 		
 		for (User u : queuedOpponents) {
-			int clanId = u.getClanId();
+		  String clanId = u.getClanId();
 			
-			if (clanId > 0) {
+			if (clanId != null) {
 				clanIds.add(clanId);
 			}
 		}
 		
-		Map<Integer, Clan> clanIdToClan = ClanRetrieveUtils.getClansByIds(clanIds);
+		Map<String, Clan> clanIdToClan = getClanRetrieveUtils().getClansByIds(clanIds);
 		
 		//pair up user and clan
-		Map<Integer, Clan> userIdsToClans = new HashMap<Integer, Clan>();
+		Map<String, Clan> userIdsToClans = new HashMap<String, Clan>();
 		for (User u : queuedOpponents) {
-			int clanId = u.getClanId();
+		  String clanId = u.getClanId();
 			
 			if (clanIdToClan.containsKey(clanId)) {
 				userIdsToClans.put( u.getId(), clanIdToClan.get(clanId) );
@@ -416,8 +447,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	//purpose of userIdList is to prevent another iteration through the return list just
 	//to extract the user ids
 	private List<User> getQueuedOpponents(User attacker, int attackerElo, int minElo,
-			int maxElo, Set<Integer> seenUserIds, Date clientDate,
-			List<Integer> userIdList, Map<Integer, PvpUser> userIdToPvpUser) {
+			int maxElo, Set<String> seenUserIds, Date clientDate,
+			List<String> userIdList, Map<String, PvpUser> userIdToPvpUser) {
 		//inefficient: 5 db calls
 //		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
 //				attacker, elo, seenUserIds, clientDate);
@@ -467,7 +498,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		List<User> selectedDefenders = new ArrayList<User>();
 		if (!prospectiveDefenders.isEmpty()) {
-			Map<Integer, User> selectedDefendersMap = RetrieveUtils.userRetrieveUtils()
+			Map<String, User> selectedDefendersMap = getUserRetrieveUtils()
 					.getUsersByIds(userIdList);
 			selectedDefenders.addAll(selectedDefendersMap.values());
 		}
@@ -477,8 +508,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 	
 	private void selectUsers(int numNeeded, int numDefenders,
-			Set<PvpUser> prospectiveDefenders, List<Integer> userIdList,
-			Map<Integer, PvpUser> userIdToPvpUser) {
+			Set<PvpUser> prospectiveDefenders, List<String> userIdList,
+			Map<String, PvpUser> userIdToPvpUser) {
 		Random rand = new Random();
 		
 		float numNeededSoFar = numNeeded;
@@ -490,7 +521,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.info("pvp opponents, numNeeded=" + numNeededSoFar);
 			log.info("pvp opponents, numAvailable=" + numDefendersLeft);
 			
-			int userId = Integer.valueOf(pvpUser.getUserId());
+			String userId = pvpUser.getUserId();
 			
 			if (userIdList.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
 				//don't want to send every eligible victim to user.
@@ -526,22 +557,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	//given users, get the 3 monsters for each user
-	private Map<Integer, List<MonsterForUser>> selectMonstersForUsers(
-			List<Integer> userIdList) {
+	private Map<String, List<MonsterForUser>> selectMonstersForUsers(
+			List<String> userIdList) {
 		
 		//return value
-		Map<Integer, List<MonsterForUser>> userIdsToUserMonsters =
-				new HashMap<Integer, List<MonsterForUser>>();
+		Map<String, List<MonsterForUser>> userIdsToUserMonsters =
+				new HashMap<String, List<MonsterForUser>>();
 		
 		//for all these users, get all their complete monsters
-		Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = RetrieveUtils
-				.monsterForUserRetrieveUtils().getCompleteMonstersForUser(userIdList);
+		Map<String, Map<String, MonsterForUser>> userIdsToMfuIdsToMonsters = getMonsterForUserRetrieveUtils()
+		    .getCompleteMonstersForUser(userIdList);
 		
 		
 		for (int index = 0; index < userIdList.size(); index++) {
 			//extract a user's monsters
-			int defenderId = userIdList.get(index);
-			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
+		  String defenderId = userIdList.get(index);
+			Map<String, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
 			
 			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
 				log.error("WTF!!!!!!!! user has no monsters!!!!! userId=" + defenderId +
@@ -558,7 +589,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return userIdsToUserMonsters;
 	}
 	
-	private List<MonsterForUser> selectMonstersForUser(Map<Long, MonsterForUser> mfuIdsToMonsters) {
+	private List<MonsterForUser> selectMonstersForUser(Map<String, MonsterForUser> mfuIdsToMonsters) {
 
 		//get all the monsters the user has on a team (at the moment, max is 3)
 		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
@@ -577,7 +608,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 	
 	
-	private List<MonsterForUser> getEquippedMonsters(Map<Long, MonsterForUser> userMonsters) {
+	private List<MonsterForUser> getEquippedMonsters(Map<String, MonsterForUser> userMonsters) {
 		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
 		
 		for (MonsterForUser mfu : userMonsters.values()) {
@@ -591,16 +622,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return equipped;
 	}
 
-	private void getRandomMonsters(Map<Long, MonsterForUser> possibleMonsters,
+	private void getRandomMonsters(Map<String, MonsterForUser> possibleMonsters,
 			List<MonsterForUser> defenderMonsters) {
 		
-		Map<Long, MonsterForUser> possibleMonstersTemp =
-				new HashMap<Long, MonsterForUser>(possibleMonsters);
+		Map<String, MonsterForUser> possibleMonstersTemp =
+				new HashMap<String, MonsterForUser>(possibleMonsters);
 		
 		//remove the defender monsters from possibleMonstersTemp, since defenderMonsters
 		//were already selected from possibleMonsters
 		for (MonsterForUser m : defenderMonsters) {
-			long mfuId = m.getId();
+		  String mfuId = m.getId();
 			
 			possibleMonstersTemp.remove(mfuId);
 		}
@@ -672,14 +703,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 	
 	
-	private void calculateCashOilRewards(int attackerId, int attackerElo,
-		List<User> queuedOpponents, Map<Integer, PvpUser> userIdToPvpUser,
-		Map<Integer, Integer> userIdToProspectiveCashReward,
-		Map<Integer, Integer> userIdToProspectiveOilReward)
+	private void calculateCashOilRewards(String attackerId, int attackerElo,
+		List<User> queuedOpponents, Map<String, PvpUser> userIdToPvpUser,
+		Map<String, Integer> userIdToProspectiveCashReward,
+		Map<String, Integer> userIdToProspectiveOilReward)
 	{
 		//TODO: Need to account for the user's uncollected resources
 		for (User queuedOpponent : queuedOpponents) {
-			int userId = queuedOpponent.getId();
+		  String userId = queuedOpponent.getId();
 			PvpUser pu = userIdToPvpUser.get(userId);
 			
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
@@ -717,7 +748,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<Integer> oilWinnings = new ArrayList<Integer>();
 		int avgElo = determineAvgEloAndCashOilReward(mfpList, cashWinnings, oilWinnings);
 		
-		int userId = 0;
+		String userId = null;
 		String randomName = getHazelcastPvpUtil().getRandomName();
 		int lvl = avgElo / ControllerConstants.PVP__FAKE_USER_LVL_DIVISOR;
 		
@@ -755,7 +786,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	
 	
 	// remove his shield if he has one, since he is going to attack some one
-	private boolean writeChangesToDB(int attackerId, User attacker, //int gemsSpent, int cashChange, 
+	private boolean writeChangesToDB(String attackerId, User attacker, //int gemsSpent, int cashChange, 
 			Timestamp queueTime, PvpLeagueForUser plfu, Map<String, Integer> money) {
 		
 //		//CHARGE THE USER
@@ -826,13 +857,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.timeUtils = timeUtils;
 	}
 
-	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
+	public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
 		return pvpLeagueForUserRetrieveUtil;
 	}
 
 	public void setPvpLeagueForUserRetrieveUtil(
-			PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
+			PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
 	}
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
 
 }

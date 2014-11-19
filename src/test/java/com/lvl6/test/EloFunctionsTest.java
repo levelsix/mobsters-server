@@ -276,16 +276,16 @@ public class EloFunctionsTest extends TestCase {
 			oilWon >= expectedOilWonNotMuchMin);
 	}
 	
-	protected int getAttackerId() {
-		return 1;
+	protected String getAttackerId() {
+		return "1";
 	}
 	
 	protected int getAttackerElo() {
 		return 1200;
 	}
 	
-	protected int getDefenderId() {
-		return 2;
+	protected String getDefenderId() {
+		return "2";
 	}
 	
 	//defender elo values based on xcel spreadsheet by Dash  

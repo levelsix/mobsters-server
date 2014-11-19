@@ -12,7 +12,7 @@ public class GeneralNotificationResponseEvent extends NormalResponseEvent {
   private GeneralNotificationResponseProto generalNotificationResponseProto;
 
   //The input argument is not used.
-  public GeneralNotificationResponseEvent(int playerId){
+  public GeneralNotificationResponseEvent(String playerId){
     super(playerId); 
     eventType = EventProtocolResponse.S_GENERAL_NOTIFICATION_EVENT;
   }

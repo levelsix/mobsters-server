@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class NotificationTitleColor implements Serializable {
-	private static final long serialVersionUID = 491813211027909557L;
+	
 	private double red;
 	private double green;
 	private double blue;
@@ -27,9 +27,15 @@ public class NotificationTitleColor implements Serializable {
   }
 
   @Override
-  public String toString() {
-    return "UnhandledBlacksmithAttempt [red=" + red + ", green=" + green
-        + ", blue=" + blue + "]";
+  public String toString()
+  {
+	  return "NotificationTitleColor [red="
+		  + red
+		  + ", green="
+		  + green
+		  + ", blue="
+		  + blue
+		  + "]";
   }
-  
+
 }

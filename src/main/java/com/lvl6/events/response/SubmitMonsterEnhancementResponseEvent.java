@@ -11,7 +11,7 @@ public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent {
 
   private SubmitMonsterEnhancementResponseProto submitMonsterEnhanceResponseProto;
   
-  public SubmitMonsterEnhancementResponseEvent(int playerId){
+  public SubmitMonsterEnhancementResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SUBMIT_MONSTER_ENHANCEMENT_EVENT;
   }

@@ -61,7 +61,7 @@
 //    int equipEnhancementId = reqProto.getEquipEnhancementId(); 
 //    Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 //    boolean speedUp = false;//reqProto.getSpeedUp();
-//    int userId = senderProto.getUserId();
+//    int userId = senderProto.getUserUuid();
 //    
 //    CollectEquipEnhancementResponseProto.Builder resBuilder = CollectEquipEnhancementResponseProto.newBuilder();
 //    resBuilder.setSender(senderProto);
@@ -76,7 +76,7 @@
 //      List<EquipEnhancementFeeder> feedersForEnhancement = EquipEnhancementFeederRetrieveUtils
 //          .getEquipEnhancementFeedersForEquipEnhancementId(equipEnhancementId);
 //
-//      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId()); 
+//      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()); 
 ////      int previousGold = 0;
 //      
 //      //check if the time is right, if speed up, check if user has enough gold, check if enhancement is complete
@@ -99,7 +99,7 @@
 //        resBuilder.setResultingEquip(userEquipBuilder.build());
 //      }
 //      
-//      CollectEquipEnhancementResponseEvent resEvent = new CollectEquipEnhancementResponseEvent(senderProto.getUserId());
+//      CollectEquipEnhancementResponseEvent resEvent = new CollectEquipEnhancementResponseEvent(senderProto.getUserUuid());
 //      resEvent.setTag(event.getTag());
 //      resEvent.setCollectEquipEnhancementResponseProto(resBuilder.build());  
 //      server.writeEvent(resEvent);

@@ -11,7 +11,7 @@ public class UpgradeNormStructureResponseEvent extends NormalResponseEvent {
 
   private UpgradeNormStructureResponseProto upgradeNormStructureResponseProto;
   
-  public UpgradeNormStructureResponseEvent(int playerId){
+  public UpgradeNormStructureResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_UPGRADE_NORM_STRUCTURE_EVENT;
   }

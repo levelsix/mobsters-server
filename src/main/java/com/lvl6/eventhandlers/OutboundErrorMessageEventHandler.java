@@ -38,18 +38,18 @@ public class OutboundErrorMessageEventHandler implements MessageHandler {
 
 
 	@Resource(name="messagesForDisconnectedPlayers")
-	protected Map<Integer, List<Message<?>>> messagesForDisconnectedPlayers;
+	protected Map<String, List<Message<?>>> messagesForDisconnectedPlayers;
 
 	
 	
-	public Map<Integer, List<Message<?>>> getMessagesForDisconnectedPlayers() {
+	public Map<String, List<Message<?>>> getMessagesForDisconnectedPlayers() {
 		return messagesForDisconnectedPlayers;
 	}
 
 
 
 	public void setMessagesForDisconnectedPlayers(
-			Map<Integer, List<Message<?>>> messagesForDisconnectedPlayers) {
+			Map<String, List<Message<?>>> messagesForDisconnectedPlayers) {
 		this.messagesForDisconnectedPlayers = messagesForDisconnectedPlayers;
 	}
 
@@ -60,7 +60,7 @@ public class OutboundErrorMessageEventHandler implements MessageHandler {
 		log.info("Handling failed message");
 		if(failedMessage.getHeaders().containsKey("playerId")) {
 			NormalResponseEvent ev = (NormalResponseEvent) failedMessage.getPayload();
-			Integer user = ev.getPlayerId();
+			String user = ev.getPlayerId();
 			log.info("Failed to send message to user "+user+"... saving in case they reconnect ");
 			List<Message<?>> playerPendingMessages;
 			if(messagesForDisconnectedPlayers.containsKey(user)) {

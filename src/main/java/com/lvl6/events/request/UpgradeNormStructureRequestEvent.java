@@ -22,7 +22,7 @@ public class UpgradeNormStructureRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       upgradeNormStructureRequestProto = UpgradeNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = upgradeNormStructureRequestProto.getSender().getUserId();
+      playerId = upgradeNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("upgrade norm structure request exception", e);
     }

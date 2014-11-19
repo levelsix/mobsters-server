@@ -22,7 +22,7 @@ public class CollectMonsterEnhancementRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
     	collectMonsterEnhancementRequestProto = CollectMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = collectMonsterEnhancementRequestProto.getSender().getUserId();
+      playerId = collectMonsterEnhancementRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("collectMonsterEnhancementRequest exception", e);
     }

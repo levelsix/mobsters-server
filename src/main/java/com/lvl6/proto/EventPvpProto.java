@@ -35,29 +35,39 @@ public final class EventPvpProto {
     int getAttackerElo();
 
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    java.util.List<java.lang.Integer> getSeenUserIdsList();
+    com.google.protobuf.ProtocolStringList
+        getSeenUserUuidsList();
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    int getSeenUserIdsCount();
+    int getSeenUserUuidsCount();
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    int getSeenUserIds(int index);
+    java.lang.String getSeenUserUuids(int index);
+    /**
+     * <code>repeated string seenUserUuids = 5;</code>
+     *
+     * <pre>
+     *these users should not be considered 
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getSeenUserUuidsBytes(int index);
 
     /**
      * <code>optional int64 clientTime = 6;</code>
@@ -145,25 +155,13 @@ public final class EventPvpProto {
               attackerElo_ = input.readInt32();
               break;
             }
-            case 40: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                seenUserIds_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              seenUserIds_.add(input.readInt32());
-              break;
-            }
             case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                seenUserIds_ = new java.util.ArrayList<java.lang.Integer>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                seenUserUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                seenUserIds_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              seenUserUuids_.add(bs);
               break;
             }
             case 48: {
@@ -180,7 +178,7 @@ public final class EventPvpProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          seenUserIds_ = java.util.Collections.unmodifiableList(seenUserIds_);
+          seenUserUuids_ = seenUserUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -250,38 +248,49 @@ public final class EventPvpProto {
       return attackerElo_;
     }
 
-    public static final int SEENUSERIDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Integer> seenUserIds_;
+    public static final int SEENUSERUUIDS_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList seenUserUuids_;
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getSeenUserIdsList() {
-      return seenUserIds_;
+    public com.google.protobuf.ProtocolStringList
+        getSeenUserUuidsList() {
+      return seenUserUuids_;
     }
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    public int getSeenUserIdsCount() {
-      return seenUserIds_.size();
+    public int getSeenUserUuidsCount() {
+      return seenUserUuids_.size();
     }
     /**
-     * <code>repeated int32 seenUserIds = 5;</code>
+     * <code>repeated string seenUserUuids = 5;</code>
      *
      * <pre>
      *these users should not be considered 
      * </pre>
      */
-    public int getSeenUserIds(int index) {
-      return seenUserIds_.get(index);
+    public java.lang.String getSeenUserUuids(int index) {
+      return seenUserUuids_.get(index);
+    }
+    /**
+     * <code>repeated string seenUserUuids = 5;</code>
+     *
+     * <pre>
+     *these users should not be considered 
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getSeenUserUuidsBytes(int index) {
+      return seenUserUuids_.getByteString(index);
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 6;
@@ -302,7 +311,7 @@ public final class EventPvpProto {
     private void initFields() {
       attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       attackerElo_ = 0;
-      seenUserIds_ = java.util.Collections.emptyList();
+      seenUserUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -324,8 +333,8 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, attackerElo_);
       }
-      for (int i = 0; i < seenUserIds_.size(); i++) {
-        output.writeInt32(5, seenUserIds_.get(i));
+      for (int i = 0; i < seenUserUuids_.size(); i++) {
+        output.writeBytes(5, seenUserUuids_.getByteString(i));
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(6, clientTime_);
@@ -349,12 +358,12 @@ public final class EventPvpProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < seenUserIds_.size(); i++) {
+        for (int i = 0; i < seenUserUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(seenUserIds_.get(i));
+            .computeBytesSizeNoTag(seenUserUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getSeenUserIdsList().size();
+        size += 1 * getSeenUserUuidsList().size();
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -493,7 +502,7 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         attackerElo_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        seenUserIds_ = java.util.Collections.emptyList();
+        seenUserUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -538,10 +547,10 @@ public final class EventPvpProto {
         }
         result.attackerElo_ = attackerElo_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          seenUserIds_ = java.util.Collections.unmodifiableList(seenUserIds_);
+          seenUserUuids_ = seenUserUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.seenUserIds_ = seenUserIds_;
+        result.seenUserUuids_ = seenUserUuids_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -568,13 +577,13 @@ public final class EventPvpProto {
         if (other.hasAttackerElo()) {
           setAttackerElo(other.getAttackerElo());
         }
-        if (!other.seenUserIds_.isEmpty()) {
-          if (seenUserIds_.isEmpty()) {
-            seenUserIds_ = other.seenUserIds_;
+        if (!other.seenUserUuids_.isEmpty()) {
+          if (seenUserUuids_.isEmpty()) {
+            seenUserUuids_ = other.seenUserUuids_;
             bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureSeenUserIdsIsMutable();
-            seenUserIds_.addAll(other.seenUserIds_);
+            ensureSeenUserUuidsIsMutable();
+            seenUserUuids_.addAll(other.seenUserUuids_);
           }
           onChanged();
         }
@@ -756,96 +765,131 @@ public final class EventPvpProto {
         return this;
       }
 
-      private java.util.List<java.lang.Integer> seenUserIds_ = java.util.Collections.emptyList();
-      private void ensureSeenUserIdsIsMutable() {
+      private com.google.protobuf.LazyStringList seenUserUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSeenUserUuidsIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          seenUserIds_ = new java.util.ArrayList<java.lang.Integer>(seenUserIds_);
+          seenUserUuids_ = new com.google.protobuf.LazyStringArrayList(seenUserUuids_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getSeenUserIdsList() {
-        return java.util.Collections.unmodifiableList(seenUserIds_);
+      public com.google.protobuf.ProtocolStringList
+          getSeenUserUuidsList() {
+        return seenUserUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public int getSeenUserIdsCount() {
-        return seenUserIds_.size();
+      public int getSeenUserUuidsCount() {
+        return seenUserUuids_.size();
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public int getSeenUserIds(int index) {
-        return seenUserIds_.get(index);
+      public java.lang.String getSeenUserUuids(int index) {
+        return seenUserUuids_.get(index);
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public Builder setSeenUserIds(
-          int index, int value) {
-        ensureSeenUserIdsIsMutable();
-        seenUserIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getSeenUserUuidsBytes(int index) {
+        return seenUserUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string seenUserUuids = 5;</code>
+       *
+       * <pre>
+       *these users should not be considered 
+       * </pre>
+       */
+      public Builder setSeenUserUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSeenUserUuidsIsMutable();
+        seenUserUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public Builder addSeenUserIds(int value) {
-        ensureSeenUserIdsIsMutable();
-        seenUserIds_.add(value);
+      public Builder addSeenUserUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSeenUserUuidsIsMutable();
+        seenUserUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public Builder addAllSeenUserIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureSeenUserIdsIsMutable();
+      public Builder addAllSeenUserUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSeenUserUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, seenUserIds_);
+            values, seenUserUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 seenUserIds = 5;</code>
+       * <code>repeated string seenUserUuids = 5;</code>
        *
        * <pre>
        *these users should not be considered 
        * </pre>
        */
-      public Builder clearSeenUserIds() {
-        seenUserIds_ = java.util.Collections.emptyList();
+      public Builder clearSeenUserUuids() {
+        seenUserUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string seenUserUuids = 5;</code>
+       *
+       * <pre>
+       *these users should not be considered 
+       * </pre>
+       */
+      public Builder addSeenUserUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSeenUserUuidsIsMutable();
+        seenUserUuids_.add(value);
         onChanged();
         return this;
       }
@@ -3817,13 +3861,18 @@ public final class EventPvpProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    boolean hasDefenderId();
+    boolean hasDefenderUuid();
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    int getDefenderId();
+    java.lang.String getDefenderUuid();
+    /**
+     * <code>optional string defenderUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDefenderUuidBytes();
 
     /**
      * <code>optional bool userAttacked = 3;</code>
@@ -3996,9 +4045,10 @@ public final class EventPvpProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              defenderId_ = input.readInt32();
+              defenderUuid_ = bs;
               break;
             }
             case 24: {
@@ -4092,19 +4142,46 @@ public final class EventPvpProto {
       return sender_;
     }
 
-    public static final int DEFENDERID_FIELD_NUMBER = 2;
-    private int defenderId_;
+    public static final int DEFENDERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object defenderUuid_;
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    public boolean hasDefenderId() {
+    public boolean hasDefenderUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    public int getDefenderId() {
-      return defenderId_;
+    public java.lang.String getDefenderUuid() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          defenderUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string defenderUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDefenderUuidBytes() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        defenderUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERATTACKED_FIELD_NUMBER = 3;
@@ -4251,7 +4328,7 @@ public final class EventPvpProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      defenderId_ = 0;
+      defenderUuid_ = "";
       userAttacked_ = false;
       userWon_ = false;
       clientTime_ = 0L;
@@ -4276,7 +4353,7 @@ public final class EventPvpProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, defenderId_);
+        output.writeBytes(2, getDefenderUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, userAttacked_);
@@ -4311,7 +4388,7 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, defenderId_);
+          .computeBytesSize(2, getDefenderUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4461,7 +4538,7 @@ public final class EventPvpProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        defenderId_ = 0;
+        defenderUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         userAttacked_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4514,7 +4591,7 @@ public final class EventPvpProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.defenderId_ = defenderId_;
+        result.defenderUuid_ = defenderUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -4558,8 +4635,10 @@ public final class EventPvpProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasDefenderId()) {
-          setDefenderId(other.getDefenderId());
+        if (other.hasDefenderUuid()) {
+          bitField0_ |= 0x00000002;
+          defenderUuid_ = other.defenderUuid_;
+          onChanged();
         }
         if (other.hasUserAttacked()) {
           setUserAttacked(other.getUserAttacked());
@@ -4722,34 +4801,78 @@ public final class EventPvpProto {
         return senderBuilder_;
       }
 
-      private int defenderId_ ;
+      private java.lang.Object defenderUuid_ = "";
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public boolean hasDefenderId() {
+      public boolean hasDefenderUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public int getDefenderId() {
-        return defenderId_;
+      public java.lang.String getDefenderUuid() {
+        java.lang.Object ref = defenderUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            defenderUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public Builder setDefenderId(int value) {
-        bitField0_ |= 0x00000002;
-        defenderId_ = value;
+      public com.google.protobuf.ByteString
+          getDefenderUuidBytes() {
+        java.lang.Object ref = defenderUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          defenderUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string defenderUuid = 2;</code>
+       */
+      public Builder setDefenderUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        defenderUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public Builder clearDefenderId() {
+      public Builder clearDefenderUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        defenderId_ = 0;
+        defenderUuid_ = getDefaultInstance().getDefenderUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string defenderUuid = 2;</code>
+       */
+      public Builder setDefenderUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        defenderUuid_ = value;
         onChanged();
         return this;
       }
@@ -5079,13 +5202,18 @@ public final class EventPvpProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    boolean hasDefenderId();
+    boolean hasDefenderUuid();
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    int getDefenderId();
+    java.lang.String getDefenderUuid();
+    /**
+     * <code>optional string defenderUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDefenderUuidBytes();
 
     /**
      * <code>optional bool attackerAttacked = 3;</code>
@@ -5179,9 +5307,10 @@ public final class EventPvpProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              defenderId_ = input.readInt32();
+              defenderUuid_ = bs;
               break;
             }
             case 24: {
@@ -5357,19 +5486,46 @@ public final class EventPvpProto {
       return sender_;
     }
 
-    public static final int DEFENDERID_FIELD_NUMBER = 2;
-    private int defenderId_;
+    public static final int DEFENDERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object defenderUuid_;
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    public boolean hasDefenderId() {
+    public boolean hasDefenderUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 defenderId = 2;</code>
+     * <code>optional string defenderUuid = 2;</code>
      */
-    public int getDefenderId() {
-      return defenderId_;
+    public java.lang.String getDefenderUuid() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          defenderUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string defenderUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDefenderUuidBytes() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        defenderUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ATTACKERATTACKED_FIELD_NUMBER = 3;
@@ -5419,7 +5575,7 @@ public final class EventPvpProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      defenderId_ = 0;
+      defenderUuid_ = "";
       attackerAttacked_ = false;
       attackerWon_ = false;
       status_ = com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus.SUCCESS;
@@ -5441,7 +5597,7 @@ public final class EventPvpProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, defenderId_);
+        output.writeBytes(2, getDefenderUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, attackerAttacked_);
@@ -5467,7 +5623,7 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, defenderId_);
+          .computeBytesSize(2, getDefenderUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5605,7 +5761,7 @@ public final class EventPvpProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        defenderId_ = 0;
+        defenderUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         attackerAttacked_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5652,7 +5808,7 @@ public final class EventPvpProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.defenderId_ = defenderId_;
+        result.defenderUuid_ = defenderUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -5684,8 +5840,10 @@ public final class EventPvpProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasDefenderId()) {
-          setDefenderId(other.getDefenderId());
+        if (other.hasDefenderUuid()) {
+          bitField0_ |= 0x00000002;
+          defenderUuid_ = other.defenderUuid_;
+          onChanged();
         }
         if (other.hasAttackerAttacked()) {
           setAttackerAttacked(other.getAttackerAttacked());
@@ -5839,34 +5997,78 @@ public final class EventPvpProto {
         return senderBuilder_;
       }
 
-      private int defenderId_ ;
+      private java.lang.Object defenderUuid_ = "";
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public boolean hasDefenderId() {
+      public boolean hasDefenderUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public int getDefenderId() {
-        return defenderId_;
+      public java.lang.String getDefenderUuid() {
+        java.lang.Object ref = defenderUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            defenderUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public Builder setDefenderId(int value) {
-        bitField0_ |= 0x00000002;
-        defenderId_ = value;
+      public com.google.protobuf.ByteString
+          getDefenderUuidBytes() {
+        java.lang.Object ref = defenderUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          defenderUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string defenderUuid = 2;</code>
+       */
+      public Builder setDefenderUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        defenderUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 defenderId = 2;</code>
+       * <code>optional string defenderUuid = 2;</code>
        */
-      public Builder clearDefenderId() {
+      public Builder clearDefenderUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        defenderId_ = 0;
+        defenderUuid_ = getDefaultInstance().getDefenderUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string defenderUuid = 2;</code>
+       */
+      public Builder setDefenderUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        defenderUuid_ = value;
         onChanged();
         return this;
       }
@@ -6021,44 +6223,44 @@ public final class EventPvpProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
-      ".proto\032\nUser.proto\"\207\001\n\023QueueUpRequestPro" +
+      ".proto\032\nUser.proto\"\211\001\n\023QueueUpRequestPro" +
       "to\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\023\n\013s" +
-      "eenUserIds\030\005 \003(\005\022\022\n\nclientTime\030\006 \001(\003\"\244\002\n" +
-      "\024QueueUpResponseProto\0222\n\010attacker\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0222\n\020def" +
-      "enderInfoList\030\002 \003(\0132\030.com.lvl6.proto.Pvp" +
-      "Proto\022B\n\006status\030\003 \001(\01622.com.lvl6.proto.Q" +
-      "ueueUpResponseProto.QueueUpStatus\"`\n\rQue",
-      "ueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOU" +
-      "GH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestPro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017attac" +
-      "kStartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com.lv" +
-      "l6.proto.PvpProto\022\027\n\017exactingRevenge\030\005 \001" +
-      "(\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033Be" +
-      "ginPvpBattleResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022P\n\006s",
-      "tatus\030\002 \001(\0162@.com.lvl6.proto.BeginPvpBat" +
-      "tleResponseProto.BeginPvpBattleStatus\"O\n" +
-      "\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
-      "IL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003\"\356" +
-      "\001\n\030EndPvpBattleRequestProto\022@\n\006sender\030\001 " +
-      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
-      "hMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\024\n\014use" +
-      "rAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\nclie" +
-      "ntTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\ncashC" +
-      "hange\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 \001(\002\"",
-      "\300\002\n\031EndPvpBattleResponseProto\022@\n\006sender\030" +
+      "nimumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\025\n\rs" +
+      "eenUserUuids\030\005 \003(\t\022\022\n\nclientTime\030\006 \001(\003\"\244" +
+      "\002\n\024QueueUpResponseProto\0222\n\010attacker\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\0222\n\020d" +
+      "efenderInfoList\030\002 \003(\0132\030.com.lvl6.proto.P" +
+      "vpProto\022B\n\006status\030\003 \001(\01622.com.lvl6.proto" +
+      ".QueueUpResponseProto.QueueUpStatus\"`\n\rQ",
+      "ueueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_EN" +
+      "OUGH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_" +
+      "ENOUGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017att" +
+      "ackStartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com." +
+      "lvl6.proto.PvpProto\022\027\n\017exactingRevenge\030\005" +
+      " \001(\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033" +
+      "BeginPvpBattleResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022P\n",
+      "\006status\030\002 \001(\0162@.com.lvl6.proto.BeginPvpB" +
+      "attleResponseProto.BeginPvpBattleStatus\"" +
+      "O\n\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
+      "FAIL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003" +
+      "\"\360\001\n\030EndPvpBattleRequestProto\022@\n\006sender\030" +
       "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022\022\n\ndefenderId\030\002 \001(\005\022\030\n\020a" +
-      "ttackerAttacked\030\003 \001(\010\022\023\n\013attackerWon\030\004 \001" +
-      "(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.proto.EndP" +
-      "vpBattleResponseProto.EndPvpBattleStatus" +
-      "\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG" +
-      "\020\003B\017B\rEventPvpProto"
+      "ithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t\022\024\n" +
+      "\014userAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\n" +
+      "clientTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\nc" +
+      "ashChange\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 ",
+      "\001(\002\"\302\002\n\031EndPvpBattleResponseProto\022@\n\006sen" +
+      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr" +
+      "otoWithMaxResources\022\024\n\014defenderUuid\030\002 \001(" +
+      "\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerW" +
+      "on\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.prot" +
+      "o.EndPvpBattleResponseProto.EndPvpBattle" +
+      "Status\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TO" +
+      "O_LONG\020\003B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6079,7 +6281,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_QueueUpRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor,
-        new java.lang.String[] { "Attacker", "AttackerElo", "SeenUserIds", "ClientTime", });
+        new java.lang.String[] { "Attacker", "AttackerElo", "SeenUserUuids", "ClientTime", });
     internal_static_com_lvl6_proto_QueueUpResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_QueueUpResponseProto_fieldAccessorTable = new
@@ -6103,13 +6305,13 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderId", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderId", "AttackerAttacked", "AttackerWon", "Status", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

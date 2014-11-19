@@ -11,7 +11,7 @@ public class AttackClanRaidMonsterResponseEvent extends NormalResponseEvent {
 
   private AttackClanRaidMonsterResponseProto attackClanRaidMonsterResponseProto;
   
-  public AttackClanRaidMonsterResponseEvent(int playerId){
+  public AttackClanRaidMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ATTACK_CLAN_RAID_MONSTER_EVENT;
   }

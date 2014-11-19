@@ -11,7 +11,7 @@ public class EvolutionFinishedResponseEvent extends NormalResponseEvent {
 
   private EvolutionFinishedResponseProto evolutionFinishedResponseProto;
   
-  public EvolutionFinishedResponseEvent(int playerId){
+  public EvolutionFinishedResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_EVOLUTION_FINISHED_EVENT;
   }

@@ -11,7 +11,7 @@ public class DevResponseEvent extends NormalResponseEvent {
 
   private DevResponseProto devResponseProto;
   
-  public DevResponseEvent(int playerId){
+  public DevResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_DEV_EVENT;
   }

@@ -11,7 +11,7 @@ public class PrivateChatPostResponseEvent extends NormalResponseEvent {
 
   private PrivateChatPostResponseProto privateChatPostResponseProto;
   
-  public PrivateChatPostResponseEvent(int playerId){
+  public PrivateChatPostResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_PRIVATE_CHAT_POST_EVENT;
   }

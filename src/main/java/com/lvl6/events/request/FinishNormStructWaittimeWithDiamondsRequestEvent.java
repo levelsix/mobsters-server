@@ -22,7 +22,7 @@ public class FinishNormStructWaittimeWithDiamondsRequestEvent extends RequestEve
   public void read(ByteBuffer buff) {
     try {
       finishNormStructWaittimeWithDiamondsRequestProto = FinishNormStructWaittimeWithDiamondsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = finishNormStructWaittimeWithDiamondsRequestProto.getSender().getUserId();
+      playerId = finishNormStructWaittimeWithDiamondsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("finish norm struct wait time with diamonds request exception", e);
     }

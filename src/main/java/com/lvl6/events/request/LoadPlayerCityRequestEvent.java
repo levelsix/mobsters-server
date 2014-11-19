@@ -22,7 +22,7 @@ public class LoadPlayerCityRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       loadPlayerCityRequestProto = LoadPlayerCityRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = loadPlayerCityRequestProto.getSender().getUserId();
+      playerId = loadPlayerCityRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("load player city request exception", e);
     }

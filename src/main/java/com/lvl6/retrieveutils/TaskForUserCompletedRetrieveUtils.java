@@ -1,27 +1,33 @@
 package com.lvl6.retrieveutils;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.properties.DBConstants;
-import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class TaskForUserCompletedRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
+
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_COMPLETED;
-  
-  
-  public static List<Integer> getAllTaskIdsForUser(int userId) {
+  private JdbcTemplate jdbcTemplate;
+
+  @Resource
+  public void setDataSource(DataSource dataSource) {
+	  log.info("Setting datasource and creating jdbcTemplate");
+	  this.jdbcTemplate = new JdbcTemplate(dataSource);
+  }
+
+  public List<Integer> getAllTaskIdsForUser(String userId) {
   	
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
@@ -37,29 +43,19 @@ import com.lvl6.utils.DBConnection;
     values.add(userId);
     
     String query = querySb.toString();
-    log.info("query=" + query + "\t values=" + values);
+    log.info(String.format("query=%s, values=%s",
+    	query, values));
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<Integer> taskIds = new ArrayList<Integer>();
+    List<Integer> taskIds = null;
     try {
-  		if (null == rs) {
-  			return taskIds;
-  		}
-  		try {
-  			rs.last();
-  			rs.beforeFirst();
-  			while(rs.next()) {
-  				int taskId = rs.getInt(1);
-  				taskIds.add(taskId);
-  			}
-  		} catch (SQLException e) {
-  			log.error("problem with database call.", e);
-  		}
+    	taskIds = this.jdbcTemplate
+			.queryForList(query, values.toArray(), Integer.class);
+    	
   	} catch (Exception e) {
   		log.error("sql query wrong 2", e);
-  	} finally {
-  		DBConnection.get().close(rs, null, conn);
+  		taskIds = new ArrayList<Integer>();
+//  	} finally {
+//  		DBConnection.get().close(rs, null, conn);
   	}
     return taskIds;
   }

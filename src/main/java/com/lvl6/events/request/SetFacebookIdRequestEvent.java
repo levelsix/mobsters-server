@@ -22,7 +22,7 @@ public class SetFacebookIdRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       setFacebookIdRequestProto = SetFacebookIdRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = setFacebookIdRequestProto.getSender().getUserId();
+      playerId = setFacebookIdRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("set facebook id request exception", e);
     }

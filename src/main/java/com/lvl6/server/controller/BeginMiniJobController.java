@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -41,7 +42,7 @@ public class BeginMiniJobController extends EventController{
 //	protected Locker locker;
 	
 	@Autowired
-	protected MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 	
 	@Autowired
 	protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
@@ -71,19 +72,40 @@ public class BeginMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
-		List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
-		userMonsterIds = new ArrayList<Long>(userMonsterIds); //gonna modify it
+		List<String> userMonsterIds = reqProto.getUserMonsterUuidsList();
+		userMonsterIds = new ArrayList<String>(userMonsterIds); //gonna modify it
 		
-		long userMiniJobId = reqProto.getUserMiniJobId();
+		String userMiniJobId = reqProto.getUserMiniJobUuid();
 		
 		BeginMiniJobResponseProto.Builder resBuilder = BeginMiniJobResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(BeginMiniJobStatus.FAIL_OTHER);
 
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		try {
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(BeginMiniJobStatus.FAIL_OTHER);
+	      	BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(userId);
+	      	resEvent.setTag(event.getTag());
+	      	resEvent.setBeginMiniJobResponseProto(resBuilder.build());
+	      	server.writeEvent(resEvent);
+	    	return;
+	    }
+		
 		//TODO: figure out if locking is needed
-//		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 			
 			boolean legit = checkLegit(resBuilder, userId, userMonsterIds,
@@ -100,7 +122,7 @@ public class BeginMiniJobController extends EventController{
 				resBuilder.setStatus(BeginMiniJobStatus.SUCCESS);
 			}
 			
-			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(senderProto.getUserId());
+			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginMiniJobResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -119,15 +141,17 @@ public class BeginMiniJobController extends EventController{
       	log.error("exception2 in BeginMiniJobController processEvent", e);
       }
 //		} finally {
-//			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, int userId,
-			List<Long> userMonsterIds, long userMiniJobId) {
+	private boolean checkLegit(Builder resBuilder, String userId,
+			List<String> userMonsterIds, String userMiniJobId) {
 		
 		//sanity check
-		if (userMonsterIds.isEmpty() || 0 == userMiniJobId) {
+		if (userMonsterIds.isEmpty() || null == userMiniJobId ||
+			userMiniJobId.isEmpty())
+		{
 			log.error(String.format(
 				"invalid userMonsterIds or userMiniJobId. userMonsterIds=%s userMiniJobId=%s",
 				userMonsterIds, userMiniJobId));
@@ -135,8 +159,8 @@ public class BeginMiniJobController extends EventController{
 		}
 		
 		//keep only valid userMonsterIds
-		Map<Long, MonsterForUser> mfuIdsToUserMonsters = 
-				getMonsterForUserRetrieveUtils()
+		Map<String, MonsterForUser> mfuIdsToUserMonsters = 
+				monsterForUserRetrieveUtils
 				.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
 		//another sanity check
 		if (userMonsterIds.size() != mfuIdsToUserMonsters.size()) {
@@ -144,7 +168,7 @@ public class BeginMiniJobController extends EventController{
 					" Keeping valid ones. userMonsterIds=" + userMonsterIds +
 					" mfuIdsToUserMonsters=" + mfuIdsToUserMonsters);
 			
-			Set<Long> existing = mfuIdsToUserMonsters.keySet();
+			Set<String> existing = mfuIdsToUserMonsters.keySet();
 			MonsterStuffUtils.retainValidMonsterIds(existing, userMonsterIds);
 		}
 		
@@ -153,8 +177,8 @@ public class BeginMiniJobController extends EventController{
 			return false;
 		}
 		
-		Collection<Long> userMiniJobIds = Collections.singleton(userMiniJobId);
-		Map<Long, MiniJobForUser> idToUserMiniJob =
+		Collection<String> userMiniJobIds = Collections.singleton(userMiniJobId);
+		Map<String, MiniJobForUser> idToUserMiniJob =
 				getMiniJobForUserRetrieveUtil()
 				.getSpecificOrAllIdToMiniJobForUser(
 						userId, userMiniJobIds);
@@ -168,8 +192,8 @@ public class BeginMiniJobController extends EventController{
 		return true;
 	}
 	
-	private boolean writeChangesToDB(int userId, long userMiniJobId,
-			List<Long> userMonsterIds, Timestamp clientTime) {
+	private boolean writeChangesToDB(String userId, String userMiniJobId,
+			List<String> userMonsterIds, Timestamp clientTime) {
 		String userMonsterIdStr = StringUtils.implode(userMonsterIds, ",");
 		
 		int numUpdated = UpdateUtils.get().updateMiniJobForUser(userId,
@@ -180,12 +204,12 @@ public class BeginMiniJobController extends EventController{
 		return true;
 	}
 
-	public MonsterForUserRetrieveUtils getMonsterForUserRetrieveUtils() {
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
 		return monsterForUserRetrieveUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-			MonsterForUserRetrieveUtils monsterForUserRetrieveUtils) {
+			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}
 

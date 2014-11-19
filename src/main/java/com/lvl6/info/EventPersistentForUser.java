@@ -5,12 +5,17 @@ import java.util.Date;
 
 public class EventPersistentForUser implements Serializable {
 	
-	private static final long serialVersionUID = -5875488219039765364L;
-	private int userId;
+	private String userId;
 	private int eventPersistentId;
 	private Date timeOfEntry; // refers to time user started a daily event
 
-  public EventPersistentForUser(int userId, int eventPersistentId,
+  public EventPersistentForUser()
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+public EventPersistentForUser(String userId, int eventPersistentId,
 			Date timeOfEntry) {
 		super();
 		this.userId = userId;
@@ -18,11 +23,11 @@ public class EventPersistentForUser implements Serializable {
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

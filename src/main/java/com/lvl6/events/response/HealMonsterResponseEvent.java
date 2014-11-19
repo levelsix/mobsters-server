@@ -11,7 +11,7 @@ public class HealMonsterResponseEvent extends NormalResponseEvent {
 
   private HealMonsterResponseProto healMonsterResponseProto;
   
-  public HealMonsterResponseEvent(int playerId){
+  public HealMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_HEAL_MONSTER_EVENT;
   }

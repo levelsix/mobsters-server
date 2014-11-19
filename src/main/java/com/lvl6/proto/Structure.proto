@@ -176,8 +176,8 @@ message MiniJobCenterProto {
 //------------------------------------------------------------------------------------------
 
 message FullUserStructureProto {
-	optional int32 userStructId = 1;
-	optional int32 userId = 2;
+	optional string userStructUuid = 1;
+	optional string userUuid = 2;
 	optional int32 structId = 3;
 	optional int64 lastRetrieved = 4;
 	optional int64 purchaseTime = 5;
@@ -238,8 +238,8 @@ message MinimumObstacleProto {
 }
 
 message UserObstacleProto {
-	optional int32 userObstacleId = 1;
-	optional int32 userId = 2;
+	optional string userObstacleUuid = 1;
+	optional string userUuid = 2;
 	optional int32 obstacleId = 3;
 	optional CoordinateProto coordinates = 4;
 	optional StructOrientation orientation = 5;

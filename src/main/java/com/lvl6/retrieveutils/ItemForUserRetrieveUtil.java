@@ -44,7 +44,7 @@ public class ItemForUserRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, ItemForUser> getSpecificOrAllItemIdToItemForUserId(
-			int userId, Collection<Integer> itemIds) {
+	    String userId, Collection<Integer> itemIds) {
 		Map<Integer, ItemForUser> itemIdToUserItems = null;
 		try {
 			List<String> columnsToSelected = UserItemForClientMapper
@@ -66,8 +66,8 @@ public class ItemForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(
@@ -79,7 +79,7 @@ public class ItemForUserRetrieveUtil {
 					query);
 
 			List<ItemForUser> afuList = this.jdbcTemplate
-					.query(query, new UserItemForClientMapper());
+					.query(query, values.toArray(), new UserItemForClientMapper());
 			itemIdToUserItems =
 					new HashMap<Integer, ItemForUser>();
 			for (ItemForUser afu : afuList) {
@@ -124,7 +124,7 @@ public class ItemForUserRetrieveUtil {
 
 		public ItemForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ItemForUser ifu = new ItemForUser();
-			ifu.setUserId(rs.getInt(DBConstants.ITEM_FOR_USER__USER_ID));
+			ifu.setUserId(rs.getString(DBConstants.ITEM_FOR_USER__USER_ID));
 			ifu.setItemId(rs.getInt(DBConstants.ITEM_FOR_USER__ITEM_ID));
 			ifu.setQuantity(rs.getInt(DBConstants.ITEM_FOR_USER__QUANTITY));
 			return ifu;

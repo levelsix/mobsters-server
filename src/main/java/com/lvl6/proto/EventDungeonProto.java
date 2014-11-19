@@ -1761,13 +1761,18 @@ public final class EventDungeonProto {
         int index);
 
     /**
-     * <code>optional int64 userTaskId = 3;</code>
+     * <code>optional string userTaskUuid = 3;</code>
      */
-    boolean hasUserTaskId();
+    boolean hasUserTaskUuid();
     /**
-     * <code>optional int64 userTaskId = 3;</code>
+     * <code>optional string userTaskUuid = 3;</code>
      */
-    long getUserTaskId();
+    java.lang.String getUserTaskUuid();
+    /**
+     * <code>optional string userTaskUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserTaskUuidBytes();
 
     /**
      * <code>optional int32 taskId = 4;</code>
@@ -1860,9 +1865,10 @@ public final class EventDungeonProto {
               tsp_.add(input.readMessage(com.lvl6.proto.TaskProto.TaskStageProto.PARSER, extensionRegistry));
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskId_ = input.readInt64();
+              userTaskUuid_ = bs;
               break;
             }
             case 32: {
@@ -2062,19 +2068,46 @@ public final class EventDungeonProto {
       return tsp_.get(index);
     }
 
-    public static final int USERTASKID_FIELD_NUMBER = 3;
-    private long userTaskId_;
+    public static final int USERTASKUUID_FIELD_NUMBER = 3;
+    private java.lang.Object userTaskUuid_;
     /**
-     * <code>optional int64 userTaskId = 3;</code>
+     * <code>optional string userTaskUuid = 3;</code>
      */
-    public boolean hasUserTaskId() {
+    public boolean hasUserTaskUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 userTaskId = 3;</code>
+     * <code>optional string userTaskUuid = 3;</code>
      */
-    public long getUserTaskId() {
-      return userTaskId_;
+    public java.lang.String getUserTaskUuid() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userTaskUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userTaskUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserTaskUuidBytes() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userTaskUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TASKID_FIELD_NUMBER = 4;
@@ -2110,7 +2143,7 @@ public final class EventDungeonProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       tsp_ = java.util.Collections.emptyList();
-      userTaskId_ = 0L;
+      userTaskUuid_ = "";
       taskId_ = 0;
       status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
     }
@@ -2134,7 +2167,7 @@ public final class EventDungeonProto {
         output.writeMessage(2, tsp_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(3, userTaskId_);
+        output.writeBytes(3, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(4, taskId_);
@@ -2161,7 +2194,7 @@ public final class EventDungeonProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, userTaskId_);
+          .computeBytesSize(3, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2302,7 +2335,7 @@ public final class EventDungeonProto {
         } else {
           tspBuilder_.clear();
         }
-        userTaskId_ = 0L;
+        userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         taskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -2356,7 +2389,7 @@ public final class EventDungeonProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userTaskId_ = userTaskId_;
+        result.userTaskUuid_ = userTaskUuid_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -2410,8 +2443,10 @@ public final class EventDungeonProto {
             }
           }
         }
-        if (other.hasUserTaskId()) {
-          setUserTaskId(other.getUserTaskId());
+        if (other.hasUserTaskUuid()) {
+          bitField0_ |= 0x00000004;
+          userTaskUuid_ = other.userTaskUuid_;
+          onChanged();
         }
         if (other.hasTaskId()) {
           setTaskId(other.getTaskId());
@@ -2802,34 +2837,78 @@ public final class EventDungeonProto {
         return tspBuilder_;
       }
 
-      private long userTaskId_ ;
+      private java.lang.Object userTaskUuid_ = "";
       /**
-       * <code>optional int64 userTaskId = 3;</code>
+       * <code>optional string userTaskUuid = 3;</code>
        */
-      public boolean hasUserTaskId() {
+      public boolean hasUserTaskUuid() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 userTaskId = 3;</code>
+       * <code>optional string userTaskUuid = 3;</code>
        */
-      public long getUserTaskId() {
-        return userTaskId_;
+      public java.lang.String getUserTaskUuid() {
+        java.lang.Object ref = userTaskUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userTaskId = 3;</code>
+       * <code>optional string userTaskUuid = 3;</code>
        */
-      public Builder setUserTaskId(long value) {
-        bitField0_ |= 0x00000004;
-        userTaskId_ = value;
+      public com.google.protobuf.ByteString
+          getUserTaskUuidBytes() {
+        java.lang.Object ref = userTaskUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userTaskUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userTaskUuid = 3;</code>
+       */
+      public Builder setUserTaskUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userTaskId = 3;</code>
+       * <code>optional string userTaskUuid = 3;</code>
        */
-      public Builder clearUserTaskId() {
+      public Builder clearUserTaskUuid() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        userTaskId_ = 0L;
+        userTaskUuid_ = getDefaultInstance().getUserTaskUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userTaskUuid = 3;</code>
+       */
+      public Builder setUserTaskUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
@@ -2930,13 +3009,18 @@ public final class EventDungeonProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    boolean hasUserTaskId();
+    boolean hasUserTaskUuid();
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    long getUserTaskId();
+    java.lang.String getUserTaskUuid();
+    /**
+     * <code>optional string userTaskUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserTaskUuidBytes();
 
     /**
      * <code>optional bool userWon = 3;</code>
@@ -2995,29 +3079,39 @@ public final class EventDungeonProto {
     boolean getUserBeatAllCityTasks();
 
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    java.util.List<java.lang.Long> getDroplessTsfuIdsList();
+    com.google.protobuf.ProtocolStringList
+        getDroplessTsfuUuidsList();
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    int getDroplessTsfuIdsCount();
+    int getDroplessTsfuUuidsCount();
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    long getDroplessTsfuIds(int index);
+    java.lang.String getDroplessTsfuUuids(int index);
+    /**
+     * <code>repeated string droplessTsfuUuids = 7;</code>
+     *
+     * <pre>
+     *tsfuIds for monsters that don't drop pieces
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getDroplessTsfuUuidsBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndDungeonRequestProto}
@@ -3084,9 +3178,10 @@ public final class EventDungeonProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskId_ = input.readInt64();
+              userTaskUuid_ = bs;
               break;
             }
             case 24: {
@@ -3109,25 +3204,13 @@ public final class EventDungeonProto {
               userBeatAllCityTasks_ = input.readBool();
               break;
             }
-            case 56: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                droplessTsfuIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              droplessTsfuIds_.add(input.readInt64());
-              break;
-            }
             case 58: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
-                droplessTsfuIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                droplessTsfuUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000040;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                droplessTsfuIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              droplessTsfuUuids_.add(bs);
               break;
             }
           }
@@ -3139,7 +3222,7 @@ public final class EventDungeonProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          droplessTsfuIds_ = java.util.Collections.unmodifiableList(droplessTsfuIds_);
+          droplessTsfuUuids_ = droplessTsfuUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3194,19 +3277,46 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    public static final int USERTASKID_FIELD_NUMBER = 2;
-    private long userTaskId_;
+    public static final int USERTASKUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userTaskUuid_;
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    public boolean hasUserTaskId() {
+    public boolean hasUserTaskUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    public long getUserTaskId() {
-      return userTaskId_;
+    public java.lang.String getUserTaskUuid() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userTaskUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userTaskUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserTaskUuidBytes() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userTaskUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERWON_FIELD_NUMBER = 3;
@@ -3289,48 +3399,59 @@ public final class EventDungeonProto {
       return userBeatAllCityTasks_;
     }
 
-    public static final int DROPLESSTSFUIDS_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.Long> droplessTsfuIds_;
+    public static final int DROPLESSTSFUUUIDS_FIELD_NUMBER = 7;
+    private com.google.protobuf.LazyStringList droplessTsfuUuids_;
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    public java.util.List<java.lang.Long>
-        getDroplessTsfuIdsList() {
-      return droplessTsfuIds_;
+    public com.google.protobuf.ProtocolStringList
+        getDroplessTsfuUuidsList() {
+      return droplessTsfuUuids_;
     }
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    public int getDroplessTsfuIdsCount() {
-      return droplessTsfuIds_.size();
+    public int getDroplessTsfuUuidsCount() {
+      return droplessTsfuUuids_.size();
     }
     /**
-     * <code>repeated int64 droplessTsfuIds = 7;</code>
+     * <code>repeated string droplessTsfuUuids = 7;</code>
      *
      * <pre>
      *tsfuIds for monsters that don't drop pieces
      * </pre>
      */
-    public long getDroplessTsfuIds(int index) {
-      return droplessTsfuIds_.get(index);
+    public java.lang.String getDroplessTsfuUuids(int index) {
+      return droplessTsfuUuids_.get(index);
+    }
+    /**
+     * <code>repeated string droplessTsfuUuids = 7;</code>
+     *
+     * <pre>
+     *tsfuIds for monsters that don't drop pieces
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getDroplessTsfuUuidsBytes(int index) {
+      return droplessTsfuUuids_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      userTaskId_ = 0L;
+      userTaskUuid_ = "";
       userWon_ = false;
       clientTime_ = 0L;
       firstTimeUserWonTask_ = false;
       userBeatAllCityTasks_ = false;
-      droplessTsfuIds_ = java.util.Collections.emptyList();
+      droplessTsfuUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3349,7 +3470,7 @@ public final class EventDungeonProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, userTaskId_);
+        output.writeBytes(2, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, userWon_);
@@ -3363,8 +3484,8 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(6, userBeatAllCityTasks_);
       }
-      for (int i = 0; i < droplessTsfuIds_.size(); i++) {
-        output.writeInt64(7, droplessTsfuIds_.get(i));
+      for (int i = 0; i < droplessTsfuUuids_.size(); i++) {
+        output.writeBytes(7, droplessTsfuUuids_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -3381,7 +3502,7 @@ public final class EventDungeonProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, userTaskId_);
+          .computeBytesSize(2, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3401,12 +3522,12 @@ public final class EventDungeonProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < droplessTsfuIds_.size(); i++) {
+        for (int i = 0; i < droplessTsfuUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(droplessTsfuIds_.get(i));
+            .computeBytesSizeNoTag(droplessTsfuUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getDroplessTsfuIdsList().size();
+        size += 1 * getDroplessTsfuUuidsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3532,7 +3653,7 @@ public final class EventDungeonProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userTaskId_ = 0L;
+        userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         userWon_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3542,7 +3663,7 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         userBeatAllCityTasks_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
-        droplessTsfuIds_ = java.util.Collections.emptyList();
+        droplessTsfuUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -3583,7 +3704,7 @@ public final class EventDungeonProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userTaskId_ = userTaskId_;
+        result.userTaskUuid_ = userTaskUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -3601,10 +3722,10 @@ public final class EventDungeonProto {
         }
         result.userBeatAllCityTasks_ = userBeatAllCityTasks_;
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          droplessTsfuIds_ = java.util.Collections.unmodifiableList(droplessTsfuIds_);
+          droplessTsfuUuids_ = droplessTsfuUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000040);
         }
-        result.droplessTsfuIds_ = droplessTsfuIds_;
+        result.droplessTsfuUuids_ = droplessTsfuUuids_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3624,8 +3745,10 @@ public final class EventDungeonProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserTaskId()) {
-          setUserTaskId(other.getUserTaskId());
+        if (other.hasUserTaskUuid()) {
+          bitField0_ |= 0x00000002;
+          userTaskUuid_ = other.userTaskUuid_;
+          onChanged();
         }
         if (other.hasUserWon()) {
           setUserWon(other.getUserWon());
@@ -3639,13 +3762,13 @@ public final class EventDungeonProto {
         if (other.hasUserBeatAllCityTasks()) {
           setUserBeatAllCityTasks(other.getUserBeatAllCityTasks());
         }
-        if (!other.droplessTsfuIds_.isEmpty()) {
-          if (droplessTsfuIds_.isEmpty()) {
-            droplessTsfuIds_ = other.droplessTsfuIds_;
+        if (!other.droplessTsfuUuids_.isEmpty()) {
+          if (droplessTsfuUuids_.isEmpty()) {
+            droplessTsfuUuids_ = other.droplessTsfuUuids_;
             bitField0_ = (bitField0_ & ~0x00000040);
           } else {
-            ensureDroplessTsfuIdsIsMutable();
-            droplessTsfuIds_.addAll(other.droplessTsfuIds_);
+            ensureDroplessTsfuUuidsIsMutable();
+            droplessTsfuUuids_.addAll(other.droplessTsfuUuids_);
           }
           onChanged();
         }
@@ -3792,34 +3915,78 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      private long userTaskId_ ;
+      private java.lang.Object userTaskUuid_ = "";
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public boolean hasUserTaskId() {
+      public boolean hasUserTaskUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public long getUserTaskId() {
-        return userTaskId_;
+      public java.lang.String getUserTaskUuid() {
+        java.lang.Object ref = userTaskUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public Builder setUserTaskId(long value) {
-        bitField0_ |= 0x00000002;
-        userTaskId_ = value;
+      public com.google.protobuf.ByteString
+          getUserTaskUuidBytes() {
+        java.lang.Object ref = userTaskUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userTaskUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userTaskUuid = 2;</code>
+       */
+      public Builder setUserTaskUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public Builder clearUserTaskId() {
+      public Builder clearUserTaskUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userTaskId_ = 0L;
+        userTaskUuid_ = getDefaultInstance().getUserTaskUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userTaskUuid = 2;</code>
+       */
+      public Builder setUserTaskUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
@@ -3992,96 +4159,131 @@ public final class EventDungeonProto {
         return this;
       }
 
-      private java.util.List<java.lang.Long> droplessTsfuIds_ = java.util.Collections.emptyList();
-      private void ensureDroplessTsfuIdsIsMutable() {
+      private com.google.protobuf.LazyStringList droplessTsfuUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureDroplessTsfuUuidsIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          droplessTsfuIds_ = new java.util.ArrayList<java.lang.Long>(droplessTsfuIds_);
+          droplessTsfuUuids_ = new com.google.protobuf.LazyStringArrayList(droplessTsfuUuids_);
           bitField0_ |= 0x00000040;
          }
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public java.util.List<java.lang.Long>
-          getDroplessTsfuIdsList() {
-        return java.util.Collections.unmodifiableList(droplessTsfuIds_);
+      public com.google.protobuf.ProtocolStringList
+          getDroplessTsfuUuidsList() {
+        return droplessTsfuUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public int getDroplessTsfuIdsCount() {
-        return droplessTsfuIds_.size();
+      public int getDroplessTsfuUuidsCount() {
+        return droplessTsfuUuids_.size();
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public long getDroplessTsfuIds(int index) {
-        return droplessTsfuIds_.get(index);
+      public java.lang.String getDroplessTsfuUuids(int index) {
+        return droplessTsfuUuids_.get(index);
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public Builder setDroplessTsfuIds(
-          int index, long value) {
-        ensureDroplessTsfuIdsIsMutable();
-        droplessTsfuIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getDroplessTsfuUuidsBytes(int index) {
+        return droplessTsfuUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string droplessTsfuUuids = 7;</code>
+       *
+       * <pre>
+       *tsfuIds for monsters that don't drop pieces
+       * </pre>
+       */
+      public Builder setDroplessTsfuUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDroplessTsfuUuidsIsMutable();
+        droplessTsfuUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public Builder addDroplessTsfuIds(long value) {
-        ensureDroplessTsfuIdsIsMutable();
-        droplessTsfuIds_.add(value);
+      public Builder addDroplessTsfuUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDroplessTsfuUuidsIsMutable();
+        droplessTsfuUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public Builder addAllDroplessTsfuIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureDroplessTsfuIdsIsMutable();
+      public Builder addAllDroplessTsfuUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureDroplessTsfuUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, droplessTsfuIds_);
+            values, droplessTsfuUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 droplessTsfuIds = 7;</code>
+       * <code>repeated string droplessTsfuUuids = 7;</code>
        *
        * <pre>
        *tsfuIds for monsters that don't drop pieces
        * </pre>
        */
-      public Builder clearDroplessTsfuIds() {
-        droplessTsfuIds_ = java.util.Collections.emptyList();
+      public Builder clearDroplessTsfuUuids() {
+        droplessTsfuUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string droplessTsfuUuids = 7;</code>
+       *
+       * <pre>
+       *tsfuIds for monsters that don't drop pieces
+       * </pre>
+       */
+      public Builder addDroplessTsfuUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureDroplessTsfuUuidsIsMutable();
+        droplessTsfuUuids_.add(value);
         onChanged();
         return this;
       }
@@ -5846,13 +6048,18 @@ public final class EventDungeonProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    boolean hasUserTaskId();
+    boolean hasUserTaskUuid();
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    long getUserTaskId();
+    java.lang.String getUserTaskUuid();
+    /**
+     * <code>optional string userTaskUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserTaskUuidBytes();
 
     /**
      * <code>optional int64 clientTime = 3;</code>
@@ -5979,9 +6186,10 @@ public final class EventDungeonProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userTaskId_ = input.readInt64();
+              userTaskUuid_ = bs;
               break;
             }
             case 24: {
@@ -6066,19 +6274,46 @@ public final class EventDungeonProto {
       return sender_;
     }
 
-    public static final int USERTASKID_FIELD_NUMBER = 2;
-    private long userTaskId_;
+    public static final int USERTASKUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userTaskUuid_;
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    public boolean hasUserTaskId() {
+    public boolean hasUserTaskUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 userTaskId = 2;</code>
+     * <code>optional string userTaskUuid = 2;</code>
      */
-    public long getUserTaskId() {
-      return userTaskId_;
+    public java.lang.String getUserTaskUuid() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userTaskUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userTaskUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserTaskUuidBytes() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userTaskUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 3;
@@ -6166,7 +6401,7 @@ public final class EventDungeonProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userTaskId_ = 0L;
+      userTaskUuid_ = "";
       clientTime_ = 0L;
       reviveMe_ = java.util.Collections.emptyList();
       gemsSpent_ = 0;
@@ -6188,7 +6423,7 @@ public final class EventDungeonProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, userTaskId_);
+        output.writeBytes(2, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, clientTime_);
@@ -6214,7 +6449,7 @@ public final class EventDungeonProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, userTaskId_);
+          .computeBytesSize(2, getUserTaskUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6353,7 +6588,7 @@ public final class EventDungeonProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userTaskId_ = 0L;
+        userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -6404,7 +6639,7 @@ public final class EventDungeonProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userTaskId_ = userTaskId_;
+        result.userTaskUuid_ = userTaskUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -6441,8 +6676,10 @@ public final class EventDungeonProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasUserTaskId()) {
-          setUserTaskId(other.getUserTaskId());
+        if (other.hasUserTaskUuid()) {
+          bitField0_ |= 0x00000002;
+          userTaskUuid_ = other.userTaskUuid_;
+          onChanged();
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
@@ -6619,34 +6856,78 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      private long userTaskId_ ;
+      private java.lang.Object userTaskUuid_ = "";
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public boolean hasUserTaskId() {
+      public boolean hasUserTaskUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public long getUserTaskId() {
-        return userTaskId_;
+      public java.lang.String getUserTaskUuid() {
+        java.lang.Object ref = userTaskUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public Builder setUserTaskId(long value) {
-        bitField0_ |= 0x00000002;
-        userTaskId_ = value;
+      public com.google.protobuf.ByteString
+          getUserTaskUuidBytes() {
+        java.lang.Object ref = userTaskUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userTaskUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userTaskUuid = 2;</code>
+       */
+      public Builder setUserTaskUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userTaskId = 2;</code>
+       * <code>optional string userTaskUuid = 2;</code>
        */
-      public Builder clearUserTaskId() {
+      public Builder clearUserTaskUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userTaskId_ = 0L;
+        userTaskUuid_ = getDefaultInstance().getUserTaskUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userTaskUuid = 2;</code>
+       */
+      public Builder setUserTaskUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
@@ -7738,42 +8019,42 @@ public final class EventDungeonProto {
       " \001(\005\022\020\n\010questIds\030\010 \003(\005\0221\n\004elem\030\t \001(\0162\027.c" +
       "om.lvl6.proto.Element:\nNO_ELEMENT\022\026\n\016for",
       "ceEnemyElem\030\n \001(\010\022(\n alreadyCompletedMin" +
-      "iTutorialTask\030\013 \001(\010\"\237\002\n\031BeginDungeonResp" +
+      "iTutorialTask\030\013 \001(\010\"\241\002\n\031BeginDungeonResp" +
       "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
       "to.MinimumUserProto\022+\n\003tsp\030\002 \003(\0132\036.com.l" +
-      "vl6.proto.TaskStageProto\022\022\n\nuserTaskId\030\003" +
-      " \001(\003\022\016\n\006taskId\030\004 \001(\005\022L\n\006status\030\005 \001(\0162<.c" +
-      "om.lvl6.proto.BeginDungeonResponseProto." +
-      "BeginDungeonStatus\"1\n\022BeginDungeonStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\350\001\n\026EndDun" +
-      "geonRequestProto\022@\n\006sender\030\001 \001(\01320.com.l",
-      "vl6.proto.MinimumUserProtoWithMaxResourc" +
-      "es\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n\007userWon\030\003 \001(\010\022" +
-      "\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUserWonT" +
-      "ask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030\006 \001(\010\022" +
-      "\027\n\017droplessTsfuIds\030\007 \003(\003\"\200\003\n\027EndDungeonR" +
-      "esponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
-      "proto.MinimumUserProtoWithMaxResources\022H" +
-      "\n\006status\030\002 \001(\01628.com.lvl6.proto.EndDunge" +
-      "onResponseProto.EndDungeonStatus\022:\n\014upda" +
-      "tedOrNew\030\003 \003(\0132$.com.lvl6.proto.FullUser",
-      "MonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007userWon\030" +
-      "\005 \001(\010\022/\n\010userItem\030\006 \001(\0132\035.com.lvl6.proto" +
-      ".UserItemProto\022\032\n\022taskMapSectionName\030\007 \001" +
-      "(\t\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\"\313\001\n\033ReviveInDungeonRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\022\n\ncli" +
-      "entTime\030\003 \001(\003\022?\n\010reviveMe\030\004 \003(\0132-.com.lv" +
-      "l6.proto.UserMonsterCurrentHealthProto\022\021" +
-      "\n\tgemsSpent\030\005 \001(\005\"\367\001\n\034ReviveInDungeonRes",
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.c" +
-      "om.lvl6.proto.ReviveInDungeonResponsePro" +
-      "to.ReviveInDungeonStatus\"Q\n\025ReviveInDung" +
-      "eonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICI" +
-      "ENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventDung" +
-      "eonProto"
+      "vl6.proto.TaskStageProto\022\024\n\014userTaskUuid" +
+      "\030\003 \001(\t\022\016\n\006taskId\030\004 \001(\005\022L\n\006status\030\005 \001(\0162<" +
+      ".com.lvl6.proto.BeginDungeonResponseProt" +
+      "o.BeginDungeonStatus\"1\n\022BeginDungeonStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\354\001\n\026EndD" +
+      "ungeonRequestProto\022@\n\006sender\030\001 \001(\01320.com",
+      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
+      "rces\022\024\n\014userTaskUuid\030\002 \001(\t\022\017\n\007userWon\030\003 " +
+      "\001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUser" +
+      "WonTask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030\006 " +
+      "\001(\010\022\031\n\021droplessTsfuUuids\030\007 \003(\t\"\200\003\n\027EndDu" +
+      "ngeonResponseProto\022@\n\006sender\030\001 \001(\01320.com" +
+      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
+      "rces\022H\n\006status\030\002 \001(\01628.com.lvl6.proto.En" +
+      "dDungeonResponseProto.EndDungeonStatus\022:" +
+      "\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto.Fu",
+      "llUserMonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007us" +
+      "erWon\030\005 \001(\010\022/\n\010userItem\030\006 \001(\0132\035.com.lvl6" +
+      ".proto.UserItemProto\022\032\n\022taskMapSectionNa" +
+      "me\030\007 \001(\t\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\016\n\nFAIL_OTHER\020\002\"\315\001\n\033ReviveInDungeonReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\024\n\014userTaskUuid\030\002 \001(" +
+      "\t\022\022\n\nclientTime\030\003 \001(\003\022?\n\010reviveMe\030\004 \003(\0132" +
+      "-.com.lvl6.proto.UserMonsterCurrentHealt" +
+      "hProto\022\021\n\tgemsSpent\030\005 \001(\005\"\367\001\n\034ReviveInDu",
+      "ngeonResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022R\n\006status\030\002" +
+      " \001(\0162B.com.lvl6.proto.ReviveInDungeonRes" +
+      "ponseProto.ReviveInDungeonStatus\"Q\n\025Revi" +
+      "veInDungeonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_I" +
+      "NSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021E" +
+      "ventDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7803,13 +8084,13 @@ public final class EventDungeonProto {
     internal_static_com_lvl6_proto_BeginDungeonResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "Tsp", "UserTaskId", "TaskId", "Status", });
+        new java.lang.String[] { "Sender", "Tsp", "UserTaskUuid", "TaskId", "Status", });
     internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_EndDungeonRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserTaskId", "UserWon", "ClientTime", "FirstTimeUserWonTask", "UserBeatAllCityTasks", "DroplessTsfuIds", });
+        new java.lang.String[] { "Sender", "UserTaskUuid", "UserWon", "ClientTime", "FirstTimeUserWonTask", "UserBeatAllCityTasks", "DroplessTsfuUuids", });
     internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable = new
@@ -7821,7 +8102,7 @@ public final class EventDungeonProto {
     internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserTaskId", "ClientTime", "ReviveMe", "GemsSpent", });
+        new java.lang.String[] { "Sender", "UserTaskUuid", "ClientTime", "ReviveMe", "GemsSpent", });
     internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_fieldAccessorTable = new

@@ -22,7 +22,7 @@ public class PurchaseNormStructureRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       purchaseNormStructureRequestProto = PurchaseNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = purchaseNormStructureRequestProto.getSender().getUserId();
+      playerId = purchaseNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("purchase norm structure request exception", e);
     }

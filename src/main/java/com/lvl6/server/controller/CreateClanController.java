@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -41,6 +42,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Autowired
   protected Locker locker;
 
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
+  
   public CreateClanController() {
     numAllocatedThreads = 4;
   }
@@ -58,10 +62,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     String clanName = reqProto.getName();
     String tag = reqProto.getTag();
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
@@ -76,9 +80,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    UUID userUuid = null;
+	boolean invalidUuids = true;
+	
+	try {
+		userUuid = UUID.fromString(userId);
+		invalidUuids = false;
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect userId=%s",
+			userId), e);
+	}
+	
+	//UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+    	CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
+    	resEvent.setTag(event.getTag());
+    	resEvent.setCreateClanResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
       Timestamp createTime = new Timestamp(new Date().getTime());
       
       boolean legitCreate = checkLegitCreate(resBuilder, user, clanName, tag, gemsSpent,
@@ -100,7 +126,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resBuilder.setStatus(CreateClanStatus.SUCCESS);
       }
       
-      CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserId());
+      CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setCreateClanResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -108,7 +134,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (success) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, createdClan);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
@@ -129,13 +155,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		log.error("exception2 in CreateClan processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
   private boolean checkLegitCreate(Builder resBuilder, User user, String clanName,
   		String tag, int gemsSpent, int cashChange) {
-    if (user == null || clanName == null || clanName.length() <= 0 || tag == null || tag.length() <= 0) {
+    if (user == null || clanName == null || clanName.isEmpty() ||
+    	tag == null || tag.isEmpty()) {
       resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
       log.error("user is null");
       return false;      
@@ -147,22 +174,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    }
     if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
       resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
-      log.error("clan name " + clanName + " is more than " + ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME + " characters");
+      log.error(String.format(
+    	  "clan name %s is more than %s characters",
+    	  clanName, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME));
       return false;
     }
     
     if (tag.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG) {
       resBuilder.setStatus(CreateClanStatus.FAIL_INVALID_TAG_LENGTH);
-      log.error("clan tag " + tag + " is more than " + ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG + " characters");
+      log.error(String.format(
+    	  "clan tag %s is more than %s characters.",
+    	  tag, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG));
       return false;
     }
     
-    if (user.getClanId() > 0) {
+    if (null != user.getClanId() && !user.getClanId().isEmpty()) {
       resBuilder.setStatus(CreateClanStatus.FAIL_ALREADY_IN_CLAN);
-      log.error("user already in clan with id " + user.getClanId());
+      log.error(String.format(
+    	  "user already in clan with id %s", user.getClanId()));
       return false;
     }
-    Clan clan = ClanRetrieveUtils.getClanWithNameOrTag(clanName, tag);
+    Clan clan = clanRetrieveUtil.getClanWithNameOrTag(clanName, tag);
     if (clan != null) {
       if (clan.getName().equalsIgnoreCase(clanName)) {
         resBuilder.setStatus(CreateClanStatus.FAIL_NAME_TAKEN);
@@ -236,24 +268,25 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	//just in case user doesn't input one, set default description
   	if (null == description || description.isEmpty()) {
-  		description = "Welcome to " + name + "!";
+  		description = String.format( "Welcome to %s!", name );
   	}
   	
-  	int clanId = InsertUtils.get().insertClan(name, createTime, description,
+  	String clanId = InsertUtils.get().insertClan(name, createTime, description,
         tag, requestToJoinRequired, clanIconId);
-    if (clanId <= 0) {
+    if (null == clanId || clanId.isEmpty()) {
       return false;
     } else {
     	setClan(createdClan, clanId, name, createTime, description, tag,
     			requestToJoinRequired, clanIconId);
-    	log.info("clan=" + createdClan);
+    	log.info(String.format("clan=%s", createdClan));
     }
 
     int gemChange = -1 * Math.abs(gemsSpent);
     cashChange = -1 * Math.abs(cashChange);
     if (!user.updateGemsCashClan(gemChange, cashChange, clanId)) {
-      log.error("problem with decreasing user gems, cash for creating clan. gemChange=" +
-      		gemChange + "\t cashChange=" + cashChange);
+      log.error(String.format(
+    	  "problem decreasing user gems, cash for creating clan. gemChange=%s, cashChange=%s",
+      		gemChange, cashChange));
     } else {
     	if (0 != gemsSpent) {
     		money.put(MiscMethods.gems, gemsSpent);
@@ -265,15 +298,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     if (!InsertUtils.get().insertUserClan(user.getId(), clanId,
     		UserClanStatus.LEADER.name(), createTime)) {
-      log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
+      log.error(String.format(
+    	  "problem with inserting user clan data for user %s, and clan id %s",
+    	  user, clanId));
     }
     DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(user.getId(), clanId);
     
     return true;
   }
   
-  private void setClan(Clan createdClan, int clanId, String name, Timestamp createTime,
-  		String description, String tag, boolean requestToJoinRequired, int clanIconId) {
+  private void setClan(Clan createdClan, String clanId, String name,
+	  Timestamp createTime, String description, String tag,
+	  boolean requestToJoinRequired, int clanIconId)
+  {
   	createdClan.setId(clanId);
   	createdClan.setName(name);
   	createdClan.setCreateTime(createTime);
@@ -297,7 +334,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	detailsSb.append(clan.getName());
   	String details = detailsSb.toString();
   	
-  	int userId = aUser.getId();
+  	String userId = aUser.getId();
     Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
@@ -321,6 +358,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtil()
+  {
+	  return clanRetrieveUtil;
+  }
+
+  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+  {
+	  this.clanRetrieveUtil = clanRetrieveUtil;
   }
   
 }

@@ -33,10 +33,10 @@ message MiniJobProto {
 //------------------------------------------------------------------------------------------
 //user can have duplicate mini jobs
 message UserMiniJobProto {
-	optional int64 userMiniJobId = 1;
+	optional string userMiniJobUuid = 1;
     optional int32 baseDmgReceived = 2;
 	optional int64 timeStarted = 3; 
-	repeated int64 userMonsterIds = 4;
+	repeated string userMonsterUuids = 4;
 	optional int64 timeCompleted = 5;
 	optional int32 durationMinutes = 7;
 	

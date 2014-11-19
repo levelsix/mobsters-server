@@ -24,166 +24,166 @@ public interface UpdateUtil {
 
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
-  public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
+  public abstract boolean updateUserCityExpansionData(String userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
   
-  public abstract boolean updateUserQuestIscomplete(int userId, int questId);
+  public abstract boolean updateUserQuestIscomplete(String userId, int questId);
 
-  public abstract boolean updateRedeemQuestForUser(int userId, int questId);
+  public abstract boolean updateRedeemQuestForUser(String userId, int questId);
   
-  public abstract int updateUserQuestJobs(int userId,
+  public abstract int updateUserQuestJobs(String userId,
 			Map<Integer, QuestJobForUser> questJobIdToQuestJob);
   
-  public abstract int updateUserAchievement(int userId, Timestamp completeTime,
+  public abstract int updateUserAchievement(String userId, Timestamp completeTime,
 		  Map<Integer, AchievementForUser> achievementIdToAfu);
 
-  public abstract int updateRedeemAchievementForUser(int userId,
+  public abstract int updateRedeemAchievementForUser(String userId,
 		  Collection<Integer> achievementIds, Timestamp completeTime);
   
   /*
    * changin orientation
    */
-  public abstract boolean updateUserStructOrientation(int userStructId,
+  public abstract boolean updateUserStructOrientation(String userStructId,
       StructOrientation orientation);
 
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
-  public abstract boolean updateUserStructsBuildingIscomplete(int userId,
+  public abstract boolean updateUserStructsBuildingIsComplete(String userId,
       List<StructureForUser> userStructs, List<Timestamp> newPurchaseTimes);
 
-  public abstract boolean updateBeginUpgradingUserStruct(int userStructId,
+  public abstract boolean updateBeginUpgradingUserStruct(String userStructId,
   		int newStructId, Timestamp upgradeTime);
   
-  public abstract boolean updateSpeedupUpgradingUserStruct(int userStructId,
+  public abstract boolean updateSpeedupUpgradingUserStruct(String userStructId,
   		Timestamp lastRetrievedTime);
   
   /*
    * used for updating last retrieved user struct times
    */
-  public abstract boolean updateUserStructsLastretrieved(
-      Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
-      Map<Integer, StructureForUser> structIdsToUserStructs);
+  public abstract boolean updateUserStructsLastRetrieved(
+      Map<String, Timestamp> userStructIdsToLastRetrievedTime,
+      Map<String, StructureForUser> structIdsToUserStructs);
 
   /*
    * used for upgrading user struct's fb invite level
    */
-  public abstract boolean updateUserStructLevel(int userStructId, int fbInviteLevelChange);
+  public abstract boolean updateUserStructLevel(String userStructId, int fbInviteLevelChange);
 
   /*
    * used for moving user structs
    */
-  public abstract boolean updateUserStructCoord(int userStructId,
+  public abstract boolean updateUserStructCoord(String userStructId,
       CoordinatePair coordinates);
 
   //public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
 
-  public abstract boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status);
+  public abstract boolean updateUserClanStatus(String userId, String clanId, UserClanStatus status);
   
-  public abstract int updateUserClanStatuses(int clanId, List<Integer> userIdList,
+  public abstract int updateUserClanStatuses(String clanId, List<String> userIdList,
 			List<UserClanStatus> statuses);
 
-  public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId,
+  public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(String userId, int eventId,
       int increment);
 
-  public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) ;
+  public boolean updateUsersAddDiamonds(List<String> userIds, int diamonds) ;
   
   public boolean updateLeaderboardEventSetRewardGivenOut(int eventId);
 
-  public abstract boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired);
+  public abstract boolean updateClanJoinTypeForClan(String clanId, boolean requestToJoinRequired);
   
-  public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta);
+  public abstract int incrementUserTaskNumRevives(String userTaskId, int numRevivesDelta);
   
-  public abstract int updateUserTaskTsId(long userTaskId, int nuTaskStageId);
+  public abstract int updateUserTaskTsId(String userTaskId, int nuTaskStageId);
   
-  public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
+  public abstract int updateUserMonstersHealth(Map<String, Integer> userMonsterIdsToHealths); 
   
 //  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
   
-  public abstract int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters);
+  public abstract int updateUserMonsterHealing(String userId, List<MonsterHealingForUser> monsters);
   
-  public abstract int updateNullifyUserMonstersTeamSlotNum(List<Long> userMonsterIdList,
+  public abstract int updateNullifyUserMonstersTeamSlotNum(List<String> userMonsterIdList,
   		List<Integer> teamSlotNumList);
   
-  public abstract int updateUserMonsterTeamSlotNum(long userMonsterId,
+  public abstract int updateUserMonsterTeamSlotNum(String userMonsterId,
   		int teamSlotNum);
   
-  public int nullifyMonstersTeamSlotNum(List<Long> userMonsterIds, int newTeamSlotNum);
+  public int nullifyMonstersTeamSlotNum(List<String> userMonsterIds, int newTeamSlotNum);
   
-  public abstract int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters);
+  public abstract int updateUserMonsterEnhancing(String userId, List<MonsterEnhancingForUser> monsters);
   
-  public abstract int updateCompleteEnhancing(int userId, long curEnhancingMfuId);
+  public abstract int updateCompleteEnhancing(String userId, String curEnhancingMfuId);
   
-  public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl, int newHp);
+  public abstract int updateUserMonsterExpAndLvl(String l, int newExp, int newLvl, int newHp);
 
-  public abstract int updateUserMonsterNumPieces(int userId,
+  public abstract int updateUserMonsterNumPieces(String userId,
   		Collection<MonsterForUser> monsterForUserList, String updateReason,
   		Date combineStartTime);
   
-  public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
+  public abstract int updateCompleteUserMonster(List<String> userMonsterIds);
   
   public abstract int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
-  		List<Integer> acceptedInviteIds, Timestamp acceptTime);
+  		List<String> acceptedInviteIds, Timestamp acceptTime);
   
   public abstract int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
   		List<UserFacebookInviteForSlot> redeemedInvites);
   
 //  public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
   
-  public abstract int updateClanEventPersistentForClanStageStartTime(int clanId,
+  public abstract int updateClanEventPersistentForClanStageStartTime(String clanId,
   		Timestamp curTime);
   
-  public abstract int updateClanEventPersistentForClanGoToNextStage(int clanId,
+  public abstract int updateClanEventPersistentForClanGoToNextStage(String clanId,
   		int crsId, int crsmId);
   
   public abstract int updateClanEventPersistentForUserGoToNextStage(int crsId, int crsmId,
-			Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+			Map<String, ClanEventPersistentForUser> userIdToCepfu);
   
-  public abstract int updateClanEventPersistentForClanGoToNextMonster(int clanId,
+  public abstract int updateClanEventPersistentForClanGoToNextMonster(String clanId,
   		int crsmId, Timestamp curTime);
   
   public abstract int updateClanEventPersistentForUsersGoToNextMonster(int crsId,
-  		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+  		int crsmId, Map<String, ClanEventPersistentForUser> userIdToCepfu);
   
-  public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
+  public abstract int updateClanEventPersistentForUserCrsmDmgDone(String userId,
   		int dmgDealt, int crsId, int crsmId);
   
-  public abstract int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
-  		int historyDefenderId, Timestamp battleEndTime);
+  public abstract int updatePvpBattleHistoryExactRevenge(String historyAttackerId,
+  		String historyDefenderId, Timestamp battleEndTime);
   
-  public abstract int updateObstacleForUserRemovalTime(int obstacleForUserId,
+  public abstract int updateObstacleForUserRemovalTime(String obstacleForUserId,
   		Timestamp clientTime);
   
-  public abstract int updateClan(int clanId, boolean isChangeDescription,
+  public abstract int updateClan(String clanId, boolean isChangeDescription,
   		String description, boolean isChangeJoinType, boolean requestToJoinRequired,
   		boolean isChangeIcon, int iconId);
   
-  public abstract int updatePvpLeagueForUserShields(int userId, Timestamp shieldEndTime,
+  public abstract int updatePvpLeagueForUserShields(String userId, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime);
   
-  public abstract int updatePvpLeagueForUser(int userId, int newPvpLeagueId, 
+  public abstract int updatePvpLeagueForUser(String userId, int newPvpLeagueId, 
 		  int newRank, int eloChange, Timestamp shieldEndTime,
 		  Timestamp inBattleEndTime, int attacksWonDelta, int defensesWonDelta,
 		  int attacksLostDelta, int defensesLostDelta, float nuPvpDmgMultiplier);
   
-  public abstract int updateMiniJobForUser(int userId, long userMiniJobId,
+  public abstract int updateMiniJobForUser(String userId, String userMiniJobId,
 		  String userMonsterIdStr, Timestamp now);
   
-  public abstract int updateMiniJobForUserCompleteTime(int userId,
-		  long userMiniJobId, Timestamp now);
+  public abstract int updateMiniJobForUserCompleteTime(String userId,
+		  String userMiniJobId, Timestamp now);
 
-  public abstract int updateRestrictUserMonsters( int userId, List<Long> userMonsterIdList );
+  public abstract int updateRestrictUserMonsters( String userId, List<String> userMonsterIdList );
   
-  public abstract int updateUnrestrictUserMonsters( int userId, List<Long> userMonsterIdList );
+  public abstract int updateUnrestrictUserMonsters( String userId, List<String> userMonsterIdList );
   
-  public abstract int updateItemForUser(int userId, int itemId, int quantityChange);
+  public abstract int updateItemForUser(String userId, int itemId, int quantityChange);
 
   public abstract int updateItemForUser(List<ItemForUser> ifuList);
   
-  public int updateTaskStageForUserNoMonsterDrop( long droplessTsfuId );
+  public int updateTaskStageForUserNoMonsterDrop( String droplessTsfuId );
 
-  public int updatePvpMonsterDmgMultiplier( int userId, float monsterDmgMultiplier );
+  public int updatePvpMonsterDmgMultiplier( String userId, float monsterDmgMultiplier );
   
-  public int updateClanHelp(int userId, int clanId, List<Long> clanHelpIds);
+  public int updateClanHelp(String userId, String clanId, List<String> clanHelpIds);
   
-  public int closeClanHelp(int userId, int clanId);
+  public int closeClanHelp(String userId, String clanId);
 }

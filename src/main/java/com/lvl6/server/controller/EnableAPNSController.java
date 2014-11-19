@@ -44,9 +44,9 @@ import com.lvl6.utils.RetrieveUtils;
 
     EnableAPNSResponseProto.Builder resBuilder = EnableAPNSResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 
       if (deviceToken != null && user != null) { 
         resBuilder.setStatus(EnableAPNSStatus.SUCCESS);
@@ -55,7 +55,7 @@ import com.lvl6.utils.RetrieveUtils;
       }
 
       EnableAPNSResponseProto resProto = resBuilder.build();
-      EnableAPNSResponseEvent resEvent = new EnableAPNSResponseEvent(senderProto.getUserId());
+      EnableAPNSResponseEvent resEvent = new EnableAPNSResponseEvent(senderProto.getUserUuid());
       resEvent.setEnableAPNSResponseProto(resProto);
       server.writeEvent(resEvent);
 
@@ -69,7 +69,7 @@ import com.lvl6.utils.RetrieveUtils;
     } catch (Exception e) {
       log.error("exception in EnableAPNSController processEvent", e);
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 

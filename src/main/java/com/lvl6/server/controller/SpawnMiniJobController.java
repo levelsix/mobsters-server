@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,10 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobSt
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 
@@ -41,6 +42,9 @@ public class SpawnMiniJobController extends EventController{
 	
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 	
 //	@Autowired
 //	protected Locker locker;
@@ -67,7 +71,7 @@ public class SpawnMiniJobController extends EventController{
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		int numToSpawn = reqProto.getNumToSpawn();
 		numToSpawn = Math.max(0, numToSpawn);
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
@@ -78,10 +82,33 @@ public class SpawnMiniJobController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
 
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+      SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSpawnMiniJobResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
 		//TODO: figure out if locking is needed
-//		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+			User user = getUserRetrieveUtils().getUserById(userId);
 			Map<Integer, MiniJob> miniJobIdToMiniJob = MiniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
 			
@@ -109,7 +136,7 @@ public class SpawnMiniJobController extends EventController{
 				resBuilder.addAllMiniJobs(userMiniJobProtos);
 			}
 			
-			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(senderProto.getUserId());
+			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnMiniJobResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -118,7 +145,7 @@ public class SpawnMiniJobController extends EventController{
 				//modified the user, the last obstacle removed time
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -137,11 +164,11 @@ public class SpawnMiniJobController extends EventController{
       	log.error("exception2 in SpawnMiniJobController processEvent", e);
       }
 //		} finally {
-//			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
 		}
 	}
 	
-	private boolean checkLegitRequest(Builder resBuilder, int userId,
+	private boolean checkLegitRequest(Builder resBuilder, String userId,
 			User user, int numToSpawn, int structId,
 			Map<Integer, MiniJob> miniJobIdToMiniJob) {
 		
@@ -212,7 +239,7 @@ public class SpawnMiniJobController extends EventController{
 		return spawnedMiniJobs;
 	}
 	
-	private List<MiniJobForUser> convertIntoUserMiniJobs(int userId,
+	private List<MiniJobForUser> convertIntoUserMiniJobs(String userId,
 			List<MiniJob> miniJobs) {
 		List<MiniJobForUser> userMiniJobs =
 				new ArrayList<MiniJobForUser>();
@@ -235,7 +262,7 @@ public class SpawnMiniJobController extends EventController{
 		return userMiniJobs;
 	}
 
-	private boolean writeChangesToDB(User user, int userId,
+	private boolean writeChangesToDB(User user, String userId,
 			int numToSpawn, Timestamp clientTime, Date now,
 			List<MiniJobForUser> spawnedUserMiniJobs) {
 		
@@ -243,7 +270,7 @@ public class SpawnMiniJobController extends EventController{
 			log.info("inserting user mini jobs: " + spawnedUserMiniJobs +
 					"\t numToSpawn: " + numToSpawn);
 			//give user his mini jobs
-			List<Long> userMiniJobIds = InsertUtils.get()
+			List<String> userMiniJobIds = InsertUtils.get()
 					.insertIntoMiniJobForUserGetIds(
 							userId, spawnedUserMiniJobs);
 			log.info("inserted MiniJobForUser into mini_job_for_user:" +
@@ -251,7 +278,7 @@ public class SpawnMiniJobController extends EventController{
 
 			//TODO: move to some other class
 			for (int index = 0; index < userMiniJobIds.size(); index++) {
-				long userMiniJobId = userMiniJobIds.get(index);
+			  String userMiniJobId = userMiniJobIds.get(index);
 				MiniJobForUser mjfu = spawnedUserMiniJobs.get(index);
 				mjfu.setId(userMiniJobId);
 			}
@@ -278,6 +305,16 @@ public class SpawnMiniJobController extends EventController{
   }
   public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
 	  this.structureStuffUtil = structureStuffUtil;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

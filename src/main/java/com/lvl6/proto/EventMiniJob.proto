@@ -38,8 +38,8 @@ message SpawnMiniJobResponseProto {
 message BeginMiniJobRequestProto {                         
      optional MinimumUserProto sender = 1;
      optional int64 clientTime = 2;
-     repeated int64 userMonsterIds = 3;
-     optional int64 userMiniJobId = 4; 
+     repeated string userMonsterUuids = 3;
+     optional string userMiniJobUuid = 4; 
 }
 
 																						//DONE
@@ -59,7 +59,7 @@ message BeginMiniJobResponseProto {
 message CompleteMiniJobRequestProto {                         
      optional MinimumUserProto sender = 1;
      optional int64 clientTime = 2;
-     optional int64 userMiniJobId = 3;
+     optional string userMiniJobUuid = 3;
      
      //speeding up
      optional bool isSpeedUp = 4;
@@ -86,7 +86,7 @@ message CompleteMiniJobResponseProto {
 message RedeemMiniJobRequestProto {                         
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional int64 clientTime = 2;
-     optional int64 userMiniJobId = 3;
+     optional string userMiniJobUuid = 3;
      
 	repeated UserMonsterCurrentHealthProto umchp = 6;
 }

@@ -115,9 +115,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//TODO: consider moving to PvpUserRetrieveUtils
 	//METHOD TO ACTUALLY USE IMAP, distributed map
 	public Set<PvpUser> retrievePvpUsers(int minElo, int maxElo, Date now,
-			int limit, Collection<Integer> excludeIds) {
+			int limit, Collection<String> excludeIds) {
 		Collection<String> excludeIdStrs = new ArrayList<String>();
-		for (Integer i : excludeIds) {
+		for (String i : excludeIds) {
 			excludeIdStrs.add(i.toString());
 		}
 		
@@ -239,7 +239,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 
 	//METHODS TO GET AND SET AN OFFLINEPVPUSER, WHICH ALL SERVERS WILL SEE
-	public PvpUser getPvpUser(int userId) {
+	public PvpUser getPvpUser(String userId) {
 		String userIdStr = String.valueOf(userId);
 		if (isUseDatabaseInstead()) {
 			log.info("getting a user from db instead of hazelcast");
@@ -250,9 +250,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 	}
 	
-	public Map<String, PvpUser> getPvpUsers(Collection<Integer> userIds) {
+	public Map<String, PvpUser> getPvpUsers(Collection<String> userIds) {
 		List<String> stringIds = Lists.transform(
-			new ArrayList<Integer>(userIds), Functions.toStringFunction());
+			new ArrayList<String>(userIds), Functions.toStringFunction());
 			
 		if (isUseDatabaseInstead()) {
 			log.info("getting users from db instead of hazelcast. userIds=" + userIds);
@@ -260,7 +260,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 		
 		Map<String, PvpUser> users = new HashMap<String, PvpUser>();
-		for (Integer userId : userIds) {
+		for (String userId : userIds) {
 			String userIdStr = String.valueOf(userId);
 			
 			users.put(userIdStr, getPvpUserViaHazelcast(userIdStr));
@@ -281,7 +281,7 @@ public class HazelcastPvpUtil implements InitializingBean {
 		}
 	}
 
-	public void replacePvpUser(PvpUser userOpu, int userId) {
+	public void replacePvpUser(PvpUser userOpu, String userId) {
 		if (isUseDatabaseInstead()) {
 			return;
 		}
@@ -314,14 +314,15 @@ public class HazelcastPvpUtil implements InitializingBean {
 	//    	}
 	//    }
 
-	public void removePvpUser(int userId) {
+//	public void removePvpUser(String userId) {
+	public void removePvpUser(String userIdStr) {
 		if (isUseDatabaseInstead()) {
 			return;
 		}
-		String userIdStr = String.valueOf(userId);
+//		String userIdStr = String.valueOf(userId);
 
 		if (pvpUserMap.containsKey(userIdStr)) {
-			log.info("removing userId from available pvp enemies. userId=" + userId);
+			log.info("removing userId from available pvp enemies. userId=" + userIdStr);
 		}
 		pvpUserMap.remove(userIdStr);
 	}

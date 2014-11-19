@@ -22,7 +22,7 @@ public class TransferClanOwnershipRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       transferClanOwnershipRequestProto = TransferClanOwnershipRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = transferClanOwnershipRequestProto.getSender().getUserId();
+      playerId = transferClanOwnershipRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("transfer clan ownership request exception", e);
     }

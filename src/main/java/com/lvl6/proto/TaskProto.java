@@ -2327,13 +2327,18 @@ public final class TaskProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 taskId = 2;</code>
@@ -2354,13 +2359,18 @@ public final class TaskProto {
     int getCurTaskStageId();
 
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      */
-    boolean hasUserTaskId();
+    boolean hasUserTaskUuid();
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      */
-    long getUserTaskId();
+    java.lang.String getUserTaskUuid();
+    /**
+     * <code>optional string userTaskUuid = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserTaskUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserTaskProto}
@@ -2414,9 +2424,10 @@ public final class TaskProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -2429,9 +2440,10 @@ public final class TaskProto {
               curTaskStageId_ = input.readInt32();
               break;
             }
-            case 32: {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              userTaskId_ = input.readInt64();
+              userTaskUuid_ = bs;
               break;
             }
           }
@@ -2474,19 +2486,46 @@ public final class TaskProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TASKID_FIELD_NUMBER = 2;
@@ -2519,26 +2558,53 @@ public final class TaskProto {
       return curTaskStageId_;
     }
 
-    public static final int USERTASKID_FIELD_NUMBER = 4;
-    private long userTaskId_;
+    public static final int USERTASKUUID_FIELD_NUMBER = 4;
+    private java.lang.Object userTaskUuid_;
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      */
-    public boolean hasUserTaskId() {
+    public boolean hasUserTaskUuid() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int64 userTaskId = 4;</code>
+     * <code>optional string userTaskUuid = 4;</code>
      */
-    public long getUserTaskId() {
-      return userTaskId_;
+    public java.lang.String getUserTaskUuid() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userTaskUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userTaskUuid = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserTaskUuidBytes() {
+      java.lang.Object ref = userTaskUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userTaskUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       taskId_ = 0;
       curTaskStageId_ = 0;
-      userTaskId_ = 0L;
+      userTaskUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2554,7 +2620,7 @@ public final class TaskProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, taskId_);
@@ -2563,7 +2629,7 @@ public final class TaskProto {
         output.writeInt32(3, curTaskStageId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, userTaskId_);
+        output.writeBytes(4, getUserTaskUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2576,7 +2642,7 @@ public final class TaskProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2588,7 +2654,7 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, userTaskId_);
+          .computeBytesSize(4, getUserTaskUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2707,13 +2773,13 @@ public final class TaskProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         taskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         curTaskStageId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        userTaskId_ = 0L;
+        userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -2746,7 +2812,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2758,7 +2824,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.userTaskId_ = userTaskId_;
+        result.userTaskUuid_ = userTaskUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2775,8 +2841,10 @@ public final class TaskProto {
 
       public Builder mergeFrom(com.lvl6.proto.TaskProto.MinimumUserTaskProto other) {
         if (other == com.lvl6.proto.TaskProto.MinimumUserTaskProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasTaskId()) {
           setTaskId(other.getTaskId());
@@ -2784,8 +2852,10 @@ public final class TaskProto {
         if (other.hasCurTaskStageId()) {
           setCurTaskStageId(other.getCurTaskStageId());
         }
-        if (other.hasUserTaskId()) {
-          setUserTaskId(other.getUserTaskId());
+        if (other.hasUserTaskUuid()) {
+          bitField0_ |= 0x00000008;
+          userTaskUuid_ = other.userTaskUuid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2814,34 +2884,78 @@ public final class TaskProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -2910,34 +3024,78 @@ public final class TaskProto {
         return this;
       }
 
-      private long userTaskId_ ;
+      private java.lang.Object userTaskUuid_ = "";
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        */
-      public boolean hasUserTaskId() {
+      public boolean hasUserTaskUuid() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        */
-      public long getUserTaskId() {
-        return userTaskId_;
+      public java.lang.String getUserTaskUuid() {
+        java.lang.Object ref = userTaskUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userTaskUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        */
-      public Builder setUserTaskId(long value) {
-        bitField0_ |= 0x00000008;
-        userTaskId_ = value;
+      public com.google.protobuf.ByteString
+          getUserTaskUuidBytes() {
+        java.lang.Object ref = userTaskUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userTaskUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userTaskUuid = 4;</code>
+       */
+      public Builder setUserTaskUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userTaskId = 4;</code>
+       * <code>optional string userTaskUuid = 4;</code>
        */
-      public Builder clearUserTaskId() {
+      public Builder clearUserTaskUuid() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        userTaskId_ = 0L;
+        userTaskUuid_ = getDefaultInstance().getUserTaskUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userTaskUuid = 4;</code>
+       */
+      public Builder setUserTaskUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userTaskUuid_ = value;
         onChanged();
         return this;
       }
@@ -2958,21 +3116,30 @@ public final class TaskProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 tsfuId = 15;</code>
+     * <code>optional string tsfuUuid = 15;</code>
      *
      * <pre>
      *the property that differentiates one taskStageMonster from another
      * </pre>
      */
-    boolean hasTsfuId();
+    boolean hasTsfuUuid();
     /**
-     * <code>optional int64 tsfuId = 15;</code>
+     * <code>optional string tsfuUuid = 15;</code>
      *
      * <pre>
      *the property that differentiates one taskStageMonster from another
      * </pre>
      */
-    long getTsfuId();
+    java.lang.String getTsfuUuid();
+    /**
+     * <code>optional string tsfuUuid = 15;</code>
+     *
+     * <pre>
+     *the property that differentiates one taskStageMonster from another
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTsfuUuidBytes();
 
     /**
      * <code>optional int32 tsmId = 11;</code>
@@ -3310,9 +3477,10 @@ public final class TaskProto {
               offensiveSkillId_ = input.readInt32();
               break;
             }
-            case 120: {
+            case 122: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              tsfuId_ = input.readInt64();
+              tsfuUuid_ = bs;
               break;
             }
             case 130: {
@@ -3472,27 +3640,58 @@ public final class TaskProto {
     }
 
     private int bitField0_;
-    public static final int TSFUID_FIELD_NUMBER = 15;
-    private long tsfuId_;
+    public static final int TSFUUUID_FIELD_NUMBER = 15;
+    private java.lang.Object tsfuUuid_;
     /**
-     * <code>optional int64 tsfuId = 15;</code>
+     * <code>optional string tsfuUuid = 15;</code>
      *
      * <pre>
      *the property that differentiates one taskStageMonster from another
      * </pre>
      */
-    public boolean hasTsfuId() {
+    public boolean hasTsfuUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 tsfuId = 15;</code>
+     * <code>optional string tsfuUuid = 15;</code>
      *
      * <pre>
      *the property that differentiates one taskStageMonster from another
      * </pre>
      */
-    public long getTsfuId() {
-      return tsfuId_;
+    public java.lang.String getTsfuUuid() {
+      java.lang.Object ref = tsfuUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tsfuUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string tsfuUuid = 15;</code>
+     *
+     * <pre>
+     *the property that differentiates one taskStageMonster from another
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTsfuUuidBytes() {
+      java.lang.Object ref = tsfuUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tsfuUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TSMID_FIELD_NUMBER = 11;
@@ -3804,7 +4003,7 @@ public final class TaskProto {
     }
 
     private void initFields() {
-      tsfuId_ = 0L;
+      tsfuUuid_ = "";
       tsmId_ = 0;
       monsterId_ = 0;
       monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
@@ -3878,7 +4077,7 @@ public final class TaskProto {
         output.writeInt32(14, offensiveSkillId_);
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(15, tsfuId_);
+        output.writeBytes(15, getTsfuUuidBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeMessage(16, initialD_);
@@ -3953,7 +4152,7 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(15, tsfuId_);
+          .computeBytesSize(15, getTsfuUuidBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4082,7 +4281,7 @@ public final class TaskProto {
 
       public Builder clear() {
         super.clear();
-        tsfuId_ = 0L;
+        tsfuUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         tsmId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -4155,7 +4354,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.tsfuId_ = tsfuId_;
+        result.tsfuUuid_ = tsfuUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -4244,8 +4443,10 @@ public final class TaskProto {
 
       public Builder mergeFrom(com.lvl6.proto.TaskProto.TaskStageMonsterProto other) {
         if (other == com.lvl6.proto.TaskProto.TaskStageMonsterProto.getDefaultInstance()) return this;
-        if (other.hasTsfuId()) {
-          setTsfuId(other.getTsfuId());
+        if (other.hasTsfuUuid()) {
+          bitField0_ |= 0x00000001;
+          tsfuUuid_ = other.tsfuUuid_;
+          onChanged();
         }
         if (other.hasTsmId()) {
           setTsmId(other.getTsmId());
@@ -4322,50 +4523,102 @@ public final class TaskProto {
       }
       private int bitField0_;
 
-      private long tsfuId_ ;
+      private java.lang.Object tsfuUuid_ = "";
       /**
-       * <code>optional int64 tsfuId = 15;</code>
+       * <code>optional string tsfuUuid = 15;</code>
        *
        * <pre>
        *the property that differentiates one taskStageMonster from another
        * </pre>
        */
-      public boolean hasTsfuId() {
+      public boolean hasTsfuUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 tsfuId = 15;</code>
+       * <code>optional string tsfuUuid = 15;</code>
        *
        * <pre>
        *the property that differentiates one taskStageMonster from another
        * </pre>
        */
-      public long getTsfuId() {
-        return tsfuId_;
+      public java.lang.String getTsfuUuid() {
+        java.lang.Object ref = tsfuUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tsfuUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 tsfuId = 15;</code>
+       * <code>optional string tsfuUuid = 15;</code>
        *
        * <pre>
        *the property that differentiates one taskStageMonster from another
        * </pre>
        */
-      public Builder setTsfuId(long value) {
-        bitField0_ |= 0x00000001;
-        tsfuId_ = value;
+      public com.google.protobuf.ByteString
+          getTsfuUuidBytes() {
+        java.lang.Object ref = tsfuUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tsfuUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string tsfuUuid = 15;</code>
+       *
+       * <pre>
+       *the property that differentiates one taskStageMonster from another
+       * </pre>
+       */
+      public Builder setTsfuUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        tsfuUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 tsfuId = 15;</code>
+       * <code>optional string tsfuUuid = 15;</code>
        *
        * <pre>
        *the property that differentiates one taskStageMonster from another
        * </pre>
        */
-      public Builder clearTsfuId() {
+      public Builder clearTsfuUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        tsfuId_ = 0L;
+        tsfuUuid_ = getDefaultInstance().getTsfuUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string tsfuUuid = 15;</code>
+       *
+       * <pre>
+       *the property that differentiates one taskStageMonster from another
+       * </pre>
+       */
+      public Builder setTsfuUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        tsfuUuid_ = value;
         onChanged();
         return this;
       }
@@ -6245,13 +6498,18 @@ public final class TaskProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 eventId = 2;</code>
@@ -6323,9 +6581,10 @@ public final class TaskProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 16: {
@@ -6378,19 +6637,46 @@ public final class TaskProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int EVENTID_FIELD_NUMBER = 2;
@@ -6424,7 +6710,7 @@ public final class TaskProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       eventId_ = 0;
       coolDownStartTime_ = 0L;
     }
@@ -6442,7 +6728,7 @@ public final class TaskProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, eventId_);
@@ -6461,7 +6747,7 @@ public final class TaskProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6588,7 +6874,7 @@ public final class TaskProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         eventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6625,7 +6911,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -6650,8 +6936,10 @@ public final class TaskProto {
 
       public Builder mergeFrom(com.lvl6.proto.TaskProto.UserPersistentEventProto other) {
         if (other == com.lvl6.proto.TaskProto.UserPersistentEventProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasEventId()) {
           setEventId(other.getEventId());
@@ -6686,34 +6974,78 @@ public final class TaskProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -8584,43 +8916,44 @@ public final class TaskProto {
       "dWidth\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017gro",
       "undImgPrefix\030\n \001(\t\022>\n\027initialDefeatedDia" +
       "logue\030\013 \001(\0132\035.com.lvl6.proto.DialoguePro" +
-      "to\"b\n\024MinimumUserTaskProto\022\016\n\006userId\030\001 \001" +
-      "(\005\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003 \001" +
-      "(\005\022\022\n\nuserTaskId\030\004 \001(\003\"\251\004\n\025TaskStageMons" +
-      "terProto\022\016\n\006tsfuId\030\017 \001(\003\022\r\n\005tsmId\030\013 \001(\005\022" +
-      "\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001(\0162" +
-      "1.com.lvl6.proto.TaskStageMonsterProto.M" +
-      "onsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpReward\030\003" +
-      " \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilReward\030\010 ",
-      "\001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n\024puzzl" +
-      "ePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n" +
-      "\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveSkillId" +
-      "\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!\n\031puzz" +
-      "lePieceMonsterDropLvl\030\r \001(\005\022/\n\010initialD\030" +
-      "\020 \001(\0132\035.com.lvl6.proto.DialogueProto\022/\n\010" +
-      "defaultD\030\021 \001(\0132\035.com.lvl6.proto.Dialogue" +
-      "Proto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMIN" +
-      "I_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEventPr" +
-      "oto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162",
-      "\031.com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tst" +
-      "artHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 " +
-      "\001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006" +
-      " \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Pers" +
-      "istentEventProto.EventType\022;\n\016monsterEle" +
-      "ment\030\010 \001(\0162\027.com.lvl6.proto.Element:\nNO_" +
-      "ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVO" +
-      "LUTION\020\002\"V\n\030UserPersistentEventProto\022\016\n\006" +
-      "userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDow" +
-      "nStartTime\030\003 \001(\003\"\353\002\n\023TaskMapElementProto",
-      "\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014" +
-      "\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 " +
-      "\001(\0162\027.com.lvl6.proto.Element\022\014\n\004boss\030\006 \001" +
-      "(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\nitemDropId\030\010 " +
-      "\001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\ncashReward\030\n" +
-      " \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020characterImgN" +
-      "ame\030\014 \001(\t\022\036\n\026charImgVertPixelOffset\030\r \001(" +
-      "\005\022\037\n\027charImgHorizPixelOffset\030\016 \001(\005\022\032\n\022ch" +
-      "arImgScaleFactor\030\017 \001(\002B\013B\tTaskProto"
+      "to\"f\n\024MinimumUserTaskProto\022\020\n\010userUuid\030\001" +
+      " \001(\t\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003" +
+      " \001(\005\022\024\n\014userTaskUuid\030\004 \001(\t\"\253\004\n\025TaskStage" +
+      "MonsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005tsmId\030" +
+      "\013 \001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030" +
+      "\002 \001(\01621.com.lvl6.proto.TaskStageMonsterP" +
+      "roto.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpRe" +
+      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRew",
+      "ard\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n" +
+      "\024puzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 " +
+      "\001(\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveS" +
+      "killId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!" +
+      "\n\031puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n\010ini" +
+      "tialD\030\020 \001(\0132\035.com.lvl6.proto.DialoguePro" +
+      "to\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.proto.Di" +
+      "alogueProto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022" +
+      "\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentE" +
+      "ventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030",
+      "\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY" +
+      "\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinu" +
+      "tes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMin" +
+      "utes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.prot" +
+      "o.PersistentEventProto.EventType\022;\n\016mons" +
+      "terElement\030\010 \001(\0162\027.com.lvl6.proto.Elemen" +
+      "t:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022" +
+      "\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEventPro" +
+      "to\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\005\022\031\n" +
+      "\021coolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMapElem",
+      "entProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId" +
+      "\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007el" +
+      "ement\030\005 \001(\0162\027.com.lvl6.proto.Element\022\014\n\004" +
+      "boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\nitemD" +
+      "ropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\ncash" +
+      "Reward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020chara" +
+      "cterImgName\030\014 \001(\t\022\036\n\026charImgVertPixelOff" +
+      "set\030\r \001(\005\022\037\n\027charImgHorizPixelOffset\030\016 \001" +
+      "(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTaskPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8654,13 +8987,13 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
-        new java.lang.String[] { "UserId", "TaskId", "CurTaskStageId", "UserTaskId", });
+        new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", });
     internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-        new java.lang.String[] { "TsfuId", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
+        new java.lang.String[] { "TsfuUuid", "TsmId", "MonsterId", "MonsterType", "Level", "ExpReward", "CashReward", "OilReward", "PuzzlePieceDropped", "PuzzlePieceMonsterId", "ItemId", "DmgMultiplier", "DefensiveSkillId", "OffensiveSkillId", "PuzzlePieceMonsterDropLvl", "InitialD", "DefaultD", });
     internal_static_com_lvl6_proto_PersistentEventProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
@@ -8672,7 +9005,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserPersistentEventProto_descriptor,
-        new java.lang.String[] { "UserId", "EventId", "CoolDownStartTime", });
+        new java.lang.String[] { "UserUuid", "EventId", "CoolDownStartTime", });
     internal_static_com_lvl6_proto_TaskMapElementProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_TaskMapElementProto_fieldAccessorTable = new

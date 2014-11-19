@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info(String.format("reqProto=%s", reqProto));
 		
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		List<UserItemUsageProto> itemsUsedProtos = reqProto.getItemsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
 
@@ -63,7 +64,30 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
 
-		//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
+      TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setTradeItemForSpeedUpsResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+    
+		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseSpeedUpsPack, see what else can be optimized/shared
 		try {
 			List<ItemForUserUsage> itemsUsed = null;
@@ -90,7 +114,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 			
 			TradeItemForSpeedUpsResponseProto resProto = resBuilder.build();
-			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(senderProto.getUserId());
+			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setTradeItemForSpeedUpsResponseProto(resProto);
 			server.writeEvent(resEvent);
@@ -108,7 +132,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 

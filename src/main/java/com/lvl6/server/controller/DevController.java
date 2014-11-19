@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		log.info(String.format("reqProto=%s", reqProto));
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		DevRequest request = reqProto.getDevRequest();
 		int staticDataId = reqProto.getStaticDataId();
 		int quantity = reqProto.getQuantity();
@@ -70,9 +71,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(DevStatus.SUCCESS);
 
-		//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
 		try {
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(DevStatus.FAIL_OTHER);
+			DevResponseEvent resEvent = new DevResponseEvent(userId);
+			resEvent.setTag(event.getTag());
+			resEvent.setDevResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		try {
+			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			//TODO: Consider writing currency history and other history
 			
 			log.info(String.format(
@@ -89,13 +112,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 			DevResponseProto resProto = resBuilder.build();
-			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserId());
+			DevResponseEvent resEvent = new DevResponseEvent(senderProto.getUserUuid());
 			resEvent.setDevResponseProto(resProto);
 			resEvent.setTag(event.getTag());
 			server.writeEvent(resEvent);
 
 			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-				.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+				.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 			resEventUpdate.setTag(event.getTag());
 			server.writeEvent(resEventUpdate);
 
@@ -112,12 +135,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 
 	private void cheat(
-		int userId,
+		String userId,
 		DevRequest request,
 		int staticDataId,
 		int quantity,

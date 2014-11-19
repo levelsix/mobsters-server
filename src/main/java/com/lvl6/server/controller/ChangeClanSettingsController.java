@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,9 @@ import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -40,6 +43,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtil;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtil;
   
   @Autowired
   protected ClanIconRetrieveUtils clanIconRetrieveUtils;
@@ -63,7 +75,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ChangeClanSettingsRequestProto reqProto = ((ChangeClanSettingsRequestEvent)event).getChangeClanSettingsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     boolean isChangeDescription = reqProto.getIsChangeDescription();
     String description = reqProto.getDescriptionNow();
     boolean isChangeJoinType = reqProto.getIsChangeJoinType();
@@ -75,18 +87,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    int clanId = 0;
-    
+    String clanId = "";
     if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
     }
-    boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
+    
+	UUID userUuid = null;
+    UUID clanUuid = null;
+    
+    boolean invalidUuids = true;
+    if (!clanId.isEmpty()) {
+    	try {
+    		userUuid = UUID.fromString(userId);
+			clanUuid = UUID.fromString(clanId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s, clanId=%s",
+				userId, clanId), e);
+		}
     }
+    
+    //UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+    	ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(userId);
+    	resEvent.setTag(event.getTag());
+    	resEvent.setChangeClanSettingsResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+    	return;
+    }
+	boolean lockedClan = getLocker().lockClan(clanUuid);
+	
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
+      User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
+      Clan clan = clanRetrieveUtil.getClanWithId(user.getClanId());
       
       boolean legitChange = checkLegitChange(resBuilder, lockedClan, userId, user,
       		clanId, clan);
@@ -98,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         setResponseBuilderStuff(resBuilder, clanId, clan);
       }
       
-      ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserId());
+      ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setChangeClanSettingsResponseProto(resBuilder.build());  
       
@@ -123,14 +158,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in ChangeClanSettings processEvent", e);
     	}
     } finally {
-    	if (0 != clanId && lockedClan) {
-    		getLocker().unlockClan(clanId);
-    	}
+    	if (null != clanUuid && lockedClan) {
+			getLocker().unlockClan(clanUuid);
+		}
     }
   }
   
-  private boolean checkLegitChange(Builder resBuilder, boolean lockedClan, int userId,
-  		User user, int clanId, Clan clan) {
+  private boolean checkLegitChange(Builder resBuilder, boolean lockedClan, String userId,
+  		User user, String clanId, Clan clan) {
 
   	if (!lockedClan) {
   		log.error("couldn't obtain clan lock");
@@ -138,11 +173,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
     if (user == null || clan == null) {
       resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-      log.error("userId is " + userId + ", user is " + user + "\t clanId is " + clanId +
-      		", clan is " + clan);
+      log.error(String.format(
+    	  "userId is %s, user is %s, clanId is %s, clan is %s",
+    	  userId, user, clanId, clan));
       return false;      
     }
-    if (user.getClanId() <= 0) {
+    String clanIdUser = user.getClanId();
+    if (null == clanIdUser || clanIdUser.isEmpty()) {
       resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_IN_CLAN);
       log.error("user not in clan");
       return false;      
@@ -151,32 +188,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<String> statuses = new ArrayList<String>();
     statuses.add(UserClanStatus.LEADER.name());
     statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    List<String> userIds = userClanRetrieveUtil
     		.getUserIdsWithStatuses(clanId, statuses);
     
-    Set<Integer> uniqUserIds = new HashSet<Integer>(); 
+    Set<String> uniqUserIds = new HashSet<String>(); 
     if (null != userIds && !userIds.isEmpty()) {
     	uniqUserIds.addAll(userIds);
     }
     
     if (!uniqUserIds.contains(userId)) {
       resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_AUTHORIZED);
-      log.error("clan member can't change clan description member=" + user);
+      log.error(String.format(
+    	  "clan member can't change clan description member=%s", user));
       return false;      
     }
     resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
     return true;
   }
 
-  private void writeChangesToDB(Builder resBuilder, int clanId, Clan clan, 
+  private void writeChangesToDB(Builder resBuilder, String clanId, Clan clan, 
   		boolean isChangeDescription, String description, boolean isChangeJoinType,
   		boolean requestToJoinRequired, boolean isChangeIcon, int iconId) {
   	
   	if (isChangeDescription) {
   		if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
   			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-  			log.warn("description is " + description + ", and length of that is " + description.length() + ", max size is " + 
-  					ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
+  			log.warn(String.format(
+  				"description is %s, and length of that is %s, max size is %s",
+  				description, description.length(), 
+  				ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION));
   		} else {
   			clan.setDescription(description);
   		}
@@ -190,7 +230,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
   		if (null == ci) {
   			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
-  			log.warn("no clan icon with id=" + iconId);
+  			log.warn(String.format(
+  				"no clan icon with id=%s", iconId));
   		} else {
   			clan.setClanIconId(iconId);
   		}
@@ -199,18 +240,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int numUpdated = UpdateUtils.get().updateClan(clanId, isChangeDescription, description,
   			isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId);
   	
-  	log.info("numUpdated (should be 1)=" + numUpdated);
+  	log.info(String.format(
+  		"numUpdated (should be 1)=%s", numUpdated));
   }
   
-  private void setResponseBuilderStuff(Builder resBuilder, int clanId, Clan clan) {
-	  List<Integer> clanIdList = Collections.singletonList(clanId);
+  private void setResponseBuilderStuff(Builder resBuilder, String clanId, Clan clan) {
+	  List<String> clanIdList = Collections.singletonList(clanId);
   	
   	List<String> statuses = new ArrayList<String>();
   	statuses.add(UserClanStatus.LEADER.name());
   	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
   	statuses.add(UserClanStatus.CAPTAIN.name());
   	statuses.add(UserClanStatus.MEMBER.name());
-  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  	Map<String, Integer> clanIdToSize = userClanRetrieveUtil
   			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
   	
     resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
@@ -225,8 +267,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void setLocker(Locker locker) {
 	  this.locker = locker;
   }
-  
-  public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
+
+  public UserRetrieveUtils2 getUserRetrieveUtil()
+  {
+	  return userRetrieveUtil;
+  }
+
+  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+  {
+	  this.userRetrieveUtil = userRetrieveUtil;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtil()
+  {
+	  return clanRetrieveUtil;
+  }
+
+  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+  {
+	  this.clanRetrieveUtil = clanRetrieveUtil;
+  }
+
+public UserClanRetrieveUtils2 getUserClanRetrieveUtil()
+{
+	return userClanRetrieveUtil;
+}
+
+public void setUserClanRetrieveUtil( UserClanRetrieveUtils2 userClanRetrieveUtil )
+{
+	this.userClanRetrieveUtil = userClanRetrieveUtil;
+}
+
+public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
 	  return clanIconRetrieveUtils;
   }
   public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {

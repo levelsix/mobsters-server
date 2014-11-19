@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
+import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
@@ -18,12 +20,13 @@ import com.lvl6.proto.EventClanProto.GiveClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus;
+import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class GiveClanHelpController extends EventController {
@@ -35,6 +38,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
    
 
   public GiveClanHelpController() {
@@ -59,19 +65,49 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info(String.format("reqProto=%s", reqProto));
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    int clanId = 0;
+    String userId = senderProto.getUserUuid();
+    String clanId = null;
     
     if (null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
     }
     
     //NOTE: For all these ids, append userId to helperIds property
-    List<Long> clanHelpIds = reqProto.getClanHelpIdsList();
+    List<String> clanHelpIds = reqProto.getClanHelpUuidsList();
 
     GiveClanHelpResponseProto.Builder resBuilder = GiveClanHelpResponseProto.newBuilder();
     resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
+
+    UUID userUuid = null;
+    UUID clanUuid = null;
+    UUID clanHelpUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      clanUuid = UUID.fromString(clanId);
+      
+      for (String clanHelpId : clanHelpIds) {
+        clanHelpUuid = UUID.fromString(clanHelpId);
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, clanId=%s, clanHelpIds=%s",
+          userId, clanId, clanHelpIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+      GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setGiveClanHelpResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 
     /*int clanId = 0;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
@@ -84,7 +120,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -127,14 +163,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}
     }*/
   }
 
-  private boolean checkLegitLeave(Builder resBuilder, int userId, int clanId) {
+  private boolean checkLegitLeave(Builder resBuilder, String userId, String clanId) {
 
-    if (userId <= 0 || clanId <= 0) {
+    if (userId == null || clanId == null) {
       log.error("invalid: userId=%s, clanId=%s", userId, clanId );
       return false;
     }
@@ -142,8 +178,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(int userId, int clanId,
-	  List<Long> clanHelpIds)
+  private boolean writeChangesToDB(String userId, String clanId,
+	  List<String> clanHelpIds)
   {
     int numUpdated = UpdateUtils.get().updateClanHelp(userId, clanId,
     	clanHelpIds);
@@ -151,7 +187,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info(String.format(
     	"numUpdated=%s", numUpdated));
     
-    User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+    User user = getUserRetrieveUtils().getUserById(userId);
     boolean updated = user.updateClanHelps(clanHelpIds.size());
     log.info(String.format( "updated=%s", updated ));
     
@@ -160,14 +196,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private void setClanHelpings(Builder resBuilder, User solicitor,
-	  MinimumUserProto mup, List<Long> clanHelpIds)
+	  MinimumUserProto mup, List<String> clanHelpIds)
   {
 	  List<ClanHelp> modifiedSolicitations = clanHelpRetrieveUtil
 		  .getClanHelpsForIds( clanHelpIds );
 	  
 	  for (ClanHelp aid : modifiedSolicitations) {
 		  //only need the name
-		  MinimumUserProto mup2 = MinimumUserProto.newBuilder().setUserId(aid.getUserId()).build();
+		  MinimumUserProto mup2 = MinimumUserProto.newBuilder().setUserUuid(aid.getUserId()).build();
 
 		  //only need name not clan
 		  ClanHelpProto chp = CreateInfoProtoUtils
@@ -204,6 +240,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
   {
 	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

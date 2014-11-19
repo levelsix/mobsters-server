@@ -7,9 +7,7 @@ import com.lvl6.pvp.PvpUser;
 
 public class PvpLeagueForUser implements Serializable {
 	
-	private static final long serialVersionUID = 1903133289529345252L;
-	
-	private int userId;
+	private String userId;
 	private int pvpLeagueId;
 	private int rank;
 	private int elo;
@@ -30,7 +28,7 @@ public class PvpLeagueForUser implements Serializable {
 
 	public PvpLeagueForUser(PvpUser pu) {
 		super();
-		this.userId = Integer.parseInt(pu.getUserId());
+		this.userId = pu.getUserId();
 		this.pvpLeagueId = pu.getPvpLeagueId();
 		this.rank = pu.getRank();
 		this.elo = pu.getElo();
@@ -59,7 +57,7 @@ public class PvpLeagueForUser implements Serializable {
 		this.monsterDmgMultiplier = plfu.getMonsterDmgMultiplier();
 	}
 	
-	public PvpLeagueForUser(int userId, int pvpLeagueId, int rank, int elo,
+	public PvpLeagueForUser(String userId, int pvpLeagueId, int rank, int elo,
 			Date shieldEndTime, Date inBattleShieldEndTime, int attacksWon,
 			int defensesWon, int attacksLost, int defensesLost,
 			Date lastBattleNotificationTime, float monsterDmgMultiplier) {
@@ -96,11 +94,11 @@ public class PvpLeagueForUser implements Serializable {
 	}
 	//end covenience methods--------------------------------------------------------
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

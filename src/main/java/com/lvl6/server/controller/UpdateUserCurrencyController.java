@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,8 @@ import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
@@ -31,6 +32,9 @@ import com.lvl6.utils.RetrieveUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public UpdateUserCurrencyController() {
     numAllocatedThreads = 4;
@@ -52,7 +56,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     
     //all positive numbers, server will change to negative
     int cashSpent = reqProto.getCashSpent();
@@ -68,9 +72,31 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+        userUuid = UUID.fromString(userId);
+        invalidUuids = false;
+    } catch (Exception e) {
+        log.error(String.format(
+            "UUID error. incorrect userId=%s",
+            userId), e);
+        invalidUuids = true;
+    }
+	
+	//UUID checks
+    if (invalidUuids) {
+  	  resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER);
+  	  UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(userId);
+  	  resEvent.setTag(event.getTag());
+  	  resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
+  	  server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       int previousGems = 0;
       int previousCash = 0;
       int previousOil = 0;
@@ -100,7 +126,7 @@ import com.lvl6.utils.RetrieveUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
@@ -128,7 +154,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -136,7 +162,7 @@ import com.lvl6.utils.RetrieveUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId, int cashSpent,
+  private boolean checkLegit(Builder resBuilder, User u, String userId, int cashSpent,
   		int oilSpent, int gemsSpent) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
@@ -222,7 +248,7 @@ import com.lvl6.utils.RetrieveUtils;
   }
   
 
-  private boolean writeChangesToDb(User u, int uId, int cashSpent, int oilSpent, 
+  private boolean writeChangesToDb(User u, String uId, int cashSpent, int oilSpent, 
   		int gemsSpent, Timestamp clientTime, Map<String, Integer> currencyChange) {
 	  
   	//update user currency
@@ -270,7 +296,7 @@ import com.lvl6.utils.RetrieveUtils;
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> currencyChange,
   		Timestamp curTime, int previousGems, int previousCash, int previousOil,
   		String reason, String details) {
-  	int userId = aUser.getId();
+	  String userId = aUser.getId();
   	
     Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
@@ -304,6 +330,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

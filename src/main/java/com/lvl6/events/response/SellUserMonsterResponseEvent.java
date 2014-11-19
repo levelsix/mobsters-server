@@ -11,7 +11,7 @@ public class SellUserMonsterResponseEvent extends NormalResponseEvent {
 
   private SellUserMonsterResponseProto sellUserMonsterResponseProto;
   
-  public SellUserMonsterResponseEvent(int playerId){
+  public SellUserMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SELL_USER_MONSTER_EVENT;
   }

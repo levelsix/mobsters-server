@@ -595,6 +595,23 @@ public class DBConnection {
 		}
 		return new ArrayList<Long>();
 	}
+  
+  public int insertIntoTableBasicReturnNumUpdated(String tableName, List<Map<String, Object>> newRows) {
+    List<String> questions = new LinkedList<String>();
+    List<String> columns = new LinkedList<String>();
+    List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
+
+    populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
+
+    if (0 <= columns.size()) {
+      boolean isInsert = true;
+      int numberOfQuestionLists = valuesListCollection.size();
+      String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName, columns, questions,
+          numberOfQuestionLists, isInsert);
+      return queryDbAndReturnNumUpdated(query, valuesListCollection);
+    }
+    return 0;
+  }
 
 	// assumption: ordering of keys returned matches ordering of the list
 	// elements in list inserted in a specific order, the keys/ids returned

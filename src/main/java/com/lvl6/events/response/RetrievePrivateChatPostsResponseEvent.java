@@ -11,7 +11,7 @@ public class RetrievePrivateChatPostsResponseEvent extends NormalResponseEvent {
 
   private RetrievePrivateChatPostsResponseProto retrievePrivateChatPostsResponseProto;
   
-  public RetrievePrivateChatPostsResponseEvent(int playerId) {
+  public RetrievePrivateChatPostsResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_RETRIEVE_PRIVATE_CHAT_POST_EVENT;
   }

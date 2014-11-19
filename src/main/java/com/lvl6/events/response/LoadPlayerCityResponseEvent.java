@@ -11,7 +11,7 @@ public class LoadPlayerCityResponseEvent extends NormalResponseEvent{
 
   private LoadPlayerCityResponseProto loadPlayerCityResponseProto;
   
-  public LoadPlayerCityResponseEvent(int playerId) {
+  public LoadPlayerCityResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_LOAD_PLAYER_CITY_EVENT;
   }

@@ -54,7 +54,7 @@ message BeginDungeonRequestProto {
 message BeginDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated TaskStageProto tsp = 2;
-	optional int64 userTaskId = 3;
+	optional string userTaskUuid = 3;
 	optional int32 taskId = 4;
 	optional BeginDungeonStatus status = 5;
 	
@@ -68,7 +68,7 @@ message BeginDungeonResponseProto {
 
 message EndDungeonRequestProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional int64 userTaskId = 2;
+	optional string userTaskUuid = 2;
 	optional bool userWon = 3; 
 	optional int64 clientTime = 4;
 	
@@ -81,7 +81,7 @@ message EndDungeonRequestProto {
 	optional bool userBeatAllCityTasks = 6; //TODO: REMOVE
 	
 	//tsfuIds for monsters that don't drop pieces
-	repeated int64 droplessTsfuIds = 7;
+	repeated string droplessTsfuUuids = 7;
 }
 
 message EndDungeonResponseProto {
@@ -105,7 +105,7 @@ message EndDungeonResponseProto {
 
 message ReviveInDungeonRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int64 userTaskId = 2;
+	optional string userTaskUuid = 2;
 	optional int64 clientTime = 3; //tracking purposes 
 	repeated UserMonsterCurrentHealthProto reviveMe = 4;
 	
@@ -136,7 +136,7 @@ message EndPersistentEventCoolDownTimerRequestProto {
 	//(positive number, server will convert it to negative)
 	optional int32 gemsSpent = 2; 
 	
-	optional int32 eventPersistentId = 3;
+	optional int32 eventPersistentUuid = 3;
 }
 
 message EndPersistentEventCoolDownTimerResponseProto {

@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class ItemForUser implements Serializable {
 
-	private static final long serialVersionUID = -1504114174323721269L;
-	
-	private int userId;
+	private String userId;
 	private int itemId;
 	private int quantity;
 	
@@ -14,18 +12,18 @@ public class ItemForUser implements Serializable {
 		super();
 	}
 	
-	public ItemForUser(int userId, int itemId, int quantity) {
+	public ItemForUser(String userId, int itemId, int quantity) {
 		super();
 		this.userId = userId;
 		this.itemId = itemId;
 		this.quantity = quantity;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

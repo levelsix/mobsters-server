@@ -19,7 +19,7 @@ public void setSendAdminMessageResponseProto(SendAdminMessageResponseProto sendA
 	this.sendAdminMessageResponseProto = sendAdminMessageResponseProto;
 }
 
-public SendAdminMessageResponseEvent(int playerId){
+public SendAdminMessageResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SEND_ADMIN_MESSAGE_EVENT;
   }

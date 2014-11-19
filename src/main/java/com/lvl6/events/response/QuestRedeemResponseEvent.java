@@ -11,7 +11,7 @@ public class QuestRedeemResponseEvent extends NormalResponseEvent {
 
   private QuestRedeemResponseProto questRedeemResponseProto;
   
-  public QuestRedeemResponseEvent(int playerId){
+  public QuestRedeemResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_QUEST_REDEEM_EVENT;
   }

@@ -15,7 +15,7 @@ option java_outer_classname = "ClanProto";
 
 
 message FullClanProto {
-	optional int32 clanId = 1;
+	optional string clanUuid = 1;
 	optional string name = 2;
 	//optional MinimumUserProto owner = 3;
 	optional int64 createTime = 4;
@@ -39,8 +39,8 @@ enum UserClanStatus {
 //------------------------------------------------------------------------------------------
 
 message FullUserClanProto {
-	optional int32 userId = 1;
-	optional int32 clanId = 2;
+	optional string userUuid = 1;
+	optional string clanUuid = 2;
 	optional UserClanStatus status = 3;
 	optional int64 requestTime = 4;
 }
@@ -129,7 +129,7 @@ message PersistentClanEventProto {
 
 //must be sent every time user wants to attack a clan raid stage monster or end a raid
 message PersistentClanEventClanInfoProto {
-	optional int32 clanId = 1;
+	optional string clanUuid = 1;
 	optional int32 clanEventId = 2;
 	optional int32 clanRaidId = 3;
 	optional int32 clanRaidStageId = 4;
@@ -147,8 +147,8 @@ message PersistentClanEventClanInfoProto {
 }
 
 message PersistentClanEventUserInfoProto {
-	optional int32 userId = 1;
-	optional int32 clanId = 2;
+	optional string userUuid = 1;
+	optional string clanUuid = 2;
 	optional int32 crId = 3; //clan_raid_id
 	optional int32 crDmgDone = 4; //damage done for this clan raid
 	
@@ -164,8 +164,8 @@ message PersistentClanEventUserInfoProto {
 }
 
 message PersistentClanEventUserRewardProto {
-	optional int32 rewardId = 1; //when redeeming rewards, these ids should be used
-	optional int32 userId = 2;
+	optional string rewardUuid = 1; //when redeeming rewards, these ids should be used
+	optional string userUuid = 2;
 	//optional int32 crsId = 3;
 	optional int64 crsEndTime = 4;
 	optional ResourceType resourceType = 5 [default = CASH];
@@ -188,7 +188,7 @@ message PersistentClanEventRaidStageHistoryProto {
 }
 
 message PersistentClanEventRaidHistoryProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional int32 crDmg = 2;
 	optional int32 clanCrDmg = 3;
 }
@@ -205,14 +205,14 @@ message ClanIconProto {
 
 //Official "ClanHelp" clan mates can provide help on
 message ClanHelpProto {
-	optional int64 clanHelpId = 1;
-	optional int32 clanId = 2;
+	optional string clanHelpUuid = 1;
+	optional string clanUuid = 2;
 	optional MinimumUserProto mup = 3;
-	optional int64 userDataId = 4; //user's structure, monster, mini_job, etc
+	optional string userDataUuid = 4; //user's structure, monster, mini_job, etc
 	optional GameActionType helpType = 5;
 	optional int64 timeRequested = 6;
 	optional int32 maxHelpers = 7;
-	repeated int32 helperIds = 8;
+	repeated string helperUuids = 8;
 	optional bool open = 9; //whether or not clan mates, or one's self can still give help
 	optional int32 staticDataId = 10; //extra information supplementing userDataId (e.g. specific structure for the user_structure_id)
 }
@@ -220,17 +220,17 @@ message ClanHelpProto {
 //used to request clan help on something. 
 message ClanHelpNoticeProto {
 	optional GameActionType helpType = 1;
-	optional int64 userDataId = 2; //user's structure, monster, mini_job, etc
+	optional string userDataUuid = 2; //user's structure, monster, mini_job, etc
 	optional int32 staticDataId = 3;
 }
 
 //------------------------------------------------------------------------------------------
 
 message ClanInviteProto {
-	optional int32 inviteId = 1; 
-	optional int32 userId = 2; //prospective member id
-	optional int32 inviterId = 3;
-	optional int32 clanId = 4;
+	optional string inviteUuid = 1; 
+	optional string userUuid = 2; //prospective member id
+	optional string inviterUuid = 3;
+	optional string clanUuid = 4;
 	optional int64 timeOfInvite = 5;
 }
 

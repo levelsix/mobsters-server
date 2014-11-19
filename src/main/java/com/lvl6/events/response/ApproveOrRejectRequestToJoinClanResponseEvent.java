@@ -11,7 +11,7 @@ public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalRespons
 
   private ApproveOrRejectRequestToJoinClanResponseProto approveOrRejectRequestToJoinClanResponseProto;
   
-  public ApproveOrRejectRequestToJoinClanResponseEvent(int playerId){
+  public ApproveOrRejectRequestToJoinClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_APPROVE_OR_REJECT_REQUEST_TO_JOIN_CLAN_EVENT;
   }

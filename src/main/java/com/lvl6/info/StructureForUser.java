@@ -7,10 +7,8 @@ import java.util.Date;
 public class StructureForUser implements Serializable {
 	//any change in this class should also change the UpdateUtils.java method updateUserStructsLastretrieved()
 	
-	private static final long serialVersionUID = -3430826000446530128L;
-	
-	private int id;
-	private int userId;
+	private String id;
+	private String userId;
 	private int structId;
 	private Date lastRetrieved;
 	private CoordinatePair coordinates;
@@ -20,7 +18,12 @@ public class StructureForUser implements Serializable {
 	private String orientation;
 	private int fbInviteStructLvl;
 	
-	public StructureForUser(int id, int userId, int structId,
+	public StructureForUser()
+	{
+		super();
+	}
+
+	public StructureForUser(String id, String userId, int structId,
 			Date lastRetrieved, CoordinatePair coordinates, Date purchaseTime,
 			boolean isComplete, String orientation, int fbInviteStructLvl) {
 		super();
@@ -35,19 +38,19 @@ public class StructureForUser implements Serializable {
 		this.fbInviteStructLvl = fbInviteStructLvl;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

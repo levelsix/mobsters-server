@@ -11,7 +11,7 @@ public class IncreaseMonsterInventorySlotResponseEvent extends NormalResponseEve
 
   private IncreaseMonsterInventorySlotResponseProto increaseMonsterInventorySlotResponseProto;
   
-  public IncreaseMonsterInventorySlotResponseEvent(int playerId){
+  public IncreaseMonsterInventorySlotResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT;
   }

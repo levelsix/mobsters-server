@@ -22,7 +22,7 @@ public class TradeItemForSpeedUpsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       tradeItemForSpeedUpsRequestProto = TradeItemForSpeedUpsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = tradeItemForSpeedUpsRequestProto.getSender().getUserId();
+      playerId = tradeItemForSpeedUpsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("TradeItemForSpeedUps request exception", e);
     }

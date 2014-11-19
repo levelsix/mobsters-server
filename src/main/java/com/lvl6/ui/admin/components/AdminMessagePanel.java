@@ -88,11 +88,11 @@ public class AdminMessagePanel extends Panel {
 	SendAdminMessageForm form;
 	
 	protected void addReplyForm() {
-	  int sender = ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID;
-	  int recipient = adminChatPost.getPosterId() != sender ? adminChatPost.getPosterId() : adminChatPost.getRecipientId();
+	  String sender = ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID;
+	  String recipient = !adminChatPost.getPosterId().equals(sender) ? adminChatPost.getPosterId() : adminChatPost.getRecipientId();
 		form = new SendAdminMessageForm("replyForm",
 				new AdminChatPost(
-						-1, 
+						"", 
 						sender, recipient,
 						new Date(),
 						"", 

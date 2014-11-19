@@ -11,7 +11,7 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent {
 
   private InviteFbFriendsForSlotsResponseProto inviteFbFriendsForSlotsResponseProto;
   
-  public InviteFbFriendsForSlotsResponseEvent(int playerId){
+  public InviteFbFriendsForSlotsResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
   }

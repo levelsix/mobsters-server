@@ -11,7 +11,7 @@ public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent 
 
   private MoveOrRotateNormStructureResponseProto moveOrRotateNormStructureResponseProto;
   
-  public MoveOrRotateNormStructureResponseEvent(int playerId){
+  public MoveOrRotateNormStructureResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_MOVE_OR_ROTATE_NORM_STRUCTURE_EVENT;
   }

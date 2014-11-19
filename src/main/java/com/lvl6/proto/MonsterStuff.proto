@@ -88,8 +88,8 @@ message MonsterLevelInfoProto {
 //------------------------------------------------------------------------------------------
 
 message FullUserMonsterProto {
-	optional int64 userMonsterId = 1;
-	optional int32 userId = 2;
+	optional string userMonsterUuid = 1;
+	optional string userUuid = 2;
 	optional int32 monsterId = 3;
 	optional int32 currentExp = 4;
 	optional int32 currentLvl = 5;
@@ -113,13 +113,13 @@ message MinimumUserMonsterProto {
 //------------------------------------------------------------------------------------------
 // used in HealMonsterRequestProto
 message UserMonsterHealingProto {
-	optional int32 userId = 1;
-	optional int64 userMonsterId = 2;
+	optional string userUuid = 1;
+	optional string userMonsterUuid = 2;
 	//optional int64 expectedStartTimeMillis = 3;
 	optional int64 queuedTimeMillis = 3; //when the monster was put into the queue(?)
 	
 	//id of the user's hospital structure
-	//optional int32 userHospitalStructId = 4; //not needed, can infer from priority and 
+	//optional string userHospitalStructUuid = 4; //not needed, can infer from priority and 
 											   //the hospitals the user has
 											   
 	//how much health is already healed	
@@ -133,14 +133,14 @@ message UserMonsterHealingProto {
 // used in UpdateMonsterHealthRequestProto
 // proto not created by server
 message UserMonsterCurrentHealthProto {
-	optional int64 userMonsterId = 1;
+	optional string userMonsterUuid = 1;
 	optional int32 currentHealth = 2; //what the health should be
 }
 
 //------------------------------------------------------------------------------------------
 
 message UserEnhancementProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional UserEnhancementItemProto baseMonster = 2;
 	repeated UserEnhancementItemProto feeders = 3;
 }
@@ -148,7 +148,7 @@ message UserEnhancementProto {
 message UserEnhancementItemProto {
 	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
 	//enhancingCost set or have it set to 0
-	optional int64 userMonsterId = 1;
+	optional string userMonsterUuid = 1;
 	optional int64 expectedStartTimeMillis = 2; //TODO: get rid of this
 	optional int32 enhancingCost = 3; //oil not cash, the cost to sacrifice this monster
 	optional bool enhancingComplete = 4;
@@ -160,7 +160,7 @@ message UserEnhancementItemProto {
 //(before it was termed enhancement or enhancement percentage)
 //proto not created by server
 message UserMonsterCurrentExpProto {
-	optional int64 userMonsterId = 1;
+	optional string userMonsterUuid = 1;
 	optional int32 expectedExperience = 2;
 	optional int32 expectedLevel = 3;
 	optional int32 expectedHp = 4;
@@ -169,14 +169,14 @@ message UserMonsterCurrentExpProto {
 //------------------------------------------------------------------------------------------
 //proto not created by server
 message MinimumUserMonsterSellProto {
-	optional int64 userMonsterId = 1;
+	optional string userMonsterUuid = 1;
 	optional int32 cashAmount = 2;
 }
 
 //------------------------------------------------------------------------------------------
 
 message UserCurrentMonsterTeamProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	repeated FullUserMonsterProto currentTeam = 2;
 }
 
@@ -184,10 +184,10 @@ message UserCurrentMonsterTeamProto {
 
 message UserMonsterEvolutionProto {
 	//the monster that is required to combine 2 monsters
-	optional int64 catalystUserMonsterId = 1;
+	optional string catalystUserMonsterUuid = 1;
 	
 	//the 2 monsters that are combined
-	repeated int64 userMonsterIds = 2;
+	repeated string userMonsterUuids = 2;
 	
 	optional int64 startTime = 3;
 }

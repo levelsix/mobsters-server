@@ -5,16 +5,19 @@ import java.util.Date;
 
 public class MonsterEnhancingForUser implements Serializable {
 
-	private static final long serialVersionUID = -8422312968703378208L;
-	
-	private int userId;
-	private long monsterForUserId;
+	private String userId;
+	private String monsterForUserId;
 	private Date expectedStartTime;
 //	private Date queuedTime;
 	private int enhancingCost;
 	private boolean enhancingComplete;
   
-	public MonsterEnhancingForUser(int userId, long monsterForUserId,
+	public MonsterEnhancingForUser()
+	{
+		super();
+	}
+
+	public MonsterEnhancingForUser(String userId, String monsterForUserId,
 		Date expectedStartTime, int enhancingCost, boolean enhancingComplete)
 	{
 		super();
@@ -25,19 +28,19 @@ public class MonsterEnhancingForUser implements Serializable {
 		this.enhancingComplete = enhancingComplete;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public long getMonsterForUserId() {
+	public String getMonsterForUserId() {
 		return monsterForUserId;
 	}
 
-	public void setMonsterForUserId(long monsterForUserId) {
+	public void setMonsterForUserId(String monsterForUserId) {
 		this.monsterForUserId = monsterForUserId;
 	}
 

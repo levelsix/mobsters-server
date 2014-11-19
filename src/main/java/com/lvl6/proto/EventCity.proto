@@ -13,7 +13,7 @@ option java_outer_classname = "EventCityProto";
 
 message LoadPlayerCityRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 cityOwnerId = 2;
+	optional string cityOwnerUuid = 2;
 }
 
 																						//DONE

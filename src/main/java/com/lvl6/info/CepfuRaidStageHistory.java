@@ -6,10 +6,9 @@ import java.util.Date;
 //user can have multiple of these (different clanIds)
 public class CepfuRaidStageHistory implements Serializable {
 	
-	private static final long serialVersionUID = -3437234734957993022L;
-	private int userId;
+	private String userId;
 	private Date crsStartTime;
-	private int clanId;
+	private String clanId;
 	private int clanEventPersistentId;
 	private int crId;
 	private int crsId;
@@ -17,7 +16,12 @@ public class CepfuRaidStageHistory implements Serializable {
 	private int stageHealth;
 	private Date crsEndTime;
 	
-	public CepfuRaidStageHistory(int userId, Date crsStartTime, int clanId,
+	public CepfuRaidStageHistory()
+	{
+		super();
+	}
+
+	public CepfuRaidStageHistory(String userId, Date crsStartTime, String clanId,
 			int clanEventPersistentId, int crId, int crsId, int crsDmgDone,
 			int stageHealth, Date crsEndTime) {
 		super();
@@ -32,11 +36,11 @@ public class CepfuRaidStageHistory implements Serializable {
 		this.crsEndTime = crsEndTime;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -48,11 +52,11 @@ public class CepfuRaidStageHistory implements Serializable {
 		this.crsStartTime = crsStartTime;
 	}
 
-	public int getClanId() {
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId(int clanId) {
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 

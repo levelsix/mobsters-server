@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,12 +33,13 @@ import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.Evolution
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -47,7 +49,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtil;
 
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 	public EvolutionFinishedController() {
 		numAllocatedThreads = 3;
 	}
@@ -71,27 +81,48 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		//(positive number, server will convert it to negative)
 		int gemsSpent = reqProto.getGemsSpent();
 		Date now = new Date();
 		
-
 		//set some values to send to the client (the response proto)
 		EvolutionFinishedResponseProto.Builder resBuilder = EvolutionFinishedResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
+		try {
+			userUuid = UUID.fromString(userId);
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, getClass().getSimpleName());
 		try {
 			int previousGems = 0;
 			//get whatever we need from the database
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			MonsterEvolvingForUser evolution = MonsterEvolvingForUserRetrieveUtils
+			User aUser = userRetrieveUtil.getUserById(userId);
+			MonsterEvolvingForUser evolution = monsterEvolvingForUserRetrieveUtil
 					.getEvolutionForUser(userId);
 			
 			//retrieve all the monsters used in evolution
-    	Map<Long, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
+    	Map<String, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
     			evolution);
     	
     	log.info(String.format("evolution=%s", evolution));
@@ -118,7 +149,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
 			}
 
-			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserId());
+			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -126,7 +157,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -136,33 +167,38 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
+			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setEvolutionFinishedResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}
 	}
 	
-	private Map<Long, MonsterForUser> getMonstersUsedInEvolution(int userId,
+	private Map<String, MonsterForUser> getMonstersUsedInEvolution(String userId,
 			MonsterEvolvingForUser evolution) {
-		Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
+		Map<String, MonsterForUser> existingUserMonsters = new HashMap<String, MonsterForUser>();
 		//just  in case evolution is null, but most likely not.
 		//retrieve all the monsters used in evolution, so they can be deleted
 		if (null != evolution) {
-			Set<Long> newIds = new HashSet<Long>();
-			long catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
-			long userMonsterIdOne = evolution.getMonsterForUserIdOne();
-			long userMonsterIdTwo = evolution.getMonsterForUserIdTwo();
+			Set<String> newIds = new HashSet<String>();
+			String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
+			String userMonsterIdOne = evolution.getMonsterForUserIdOne();
+			String userMonsterIdTwo = evolution.getMonsterForUserIdTwo();
 			newIds.add(catalystUserMonsterId);
 			newIds.add(userMonsterIdOne);
 			newIds.add(userMonsterIdTwo);
-			existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+			existingUserMonsters = monsterForUserRetrieveUtil
 					.getSpecificOrAllUserMonstersForUser(userId, newIds);
 		}
 		
 		return existingUserMonsters;
 	}
 
-	private boolean checkLegit(Builder resBuilder, User u, int userId,
-			MonsterEvolvingForUser evolution, Map<Long, MonsterForUser> existingUserMonsters,
+	private boolean checkLegit(Builder resBuilder, User u, String userId,
+			MonsterEvolvingForUser evolution, Map<String, MonsterForUser> existingUserMonsters,
 			int gemsSpent) {
 		if (null == u || null == evolution || null == existingUserMonsters ||
 				existingUserMonsters.isEmpty()) {
@@ -173,9 +209,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		}
 		
 		//check to make sure these monsters still exist
-		long catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
-		long one = evolution.getMonsterForUserIdOne();
-		long two = evolution.getMonsterForUserIdTwo();
+		String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
+		String one = evolution.getMonsterForUserIdOne();
+		String two = evolution.getMonsterForUserIdTwo();
 		if (!existingUserMonsters.containsKey(catalystUserMonsterId) ||
 				!existingUserMonsters.containsKey(one) || !existingUserMonsters.containsKey(two)) {
 			log.error("one of the monsters in an evolution is missing. evolution=" + evolution +
@@ -209,9 +245,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
 	//List<MonsterForUser> userMonsters will be populated with the evolved monster
-	private boolean writeChangesToDB(User user, int uId, Date now, int gemsSpent,
+	private boolean writeChangesToDB(User user, String uId, Date now, int gemsSpent,
 			MonsterEvolvingForUser mefu, Map<String, Integer> money,
-			Map<Long, MonsterForUser> idsToUserMonsters, List<MonsterForUser> userMonsters) {
+			Map<String, MonsterForUser> idsToUserMonsters, List<MonsterForUser> userMonsters) {
 
 		//CHARGE THE USER IF HE SPED UP THE EVOLUTION
 		if (0 != gemsSpent) {
@@ -220,8 +256,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			int gemChange = -1 * gemsSpent;
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 			if (1 != numChange) {
-				log.warn("problem with updating user stats: gemChange=" + gemChange
-						+ ", cashChange=" + oilChange + ", user is " + user);
+				log.warn(String.format(
+					"problem with updating user stats: gemChange=%s, cashChange=%s, user is %s",
+					gemChange, oilChange, user));
 			} else {
 				//everything went well
 				if (0 != oilChange) {
@@ -233,12 +270,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			}
 		}
 		//delete the monsters used in the evolution
-		List<Long> userMonsterIds = new ArrayList<Long>();
-		long catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
+		List<String> userMonsterIds = new ArrayList<String>();
+		String catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
 		userMonsterIds.add(catalystUserMonsterId);
-		long uMonsterIdOne = mefu.getMonsterForUserIdOne();
+		String uMonsterIdOne = mefu.getMonsterForUserIdOne();
 		userMonsterIds.add(uMonsterIdOne);
-		long uMonsterIdTwo = mefu.getMonsterForUserIdTwo();
+		String uMonsterIdTwo = mefu.getMonsterForUserIdTwo();
 		userMonsterIds.add(uMonsterIdTwo);
 		int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
 		log.info(String.format("num monsterForUser deleted: %s", num));
@@ -255,23 +292,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		userMonsters.add(evolvedUserMonster);
 
 		String sourceOfPieces = createSourceOfPieces(catalystUserMonsterId, uMonsterIdOne, uMonsterIdTwo);
-		List<Long> evovlvedMfuId = InsertUtils.get().insertIntoMonsterForUserReturnIds(uId,
+		List<String> evovlvedMfuId = InsertUtils.get().insertIntoMonsterForUserReturnIds(uId,
 				userMonsters, sourceOfPieces, now); 
 		
 		//set the evolved monster for user's id
 		if (null != evovlvedMfuId && !evovlvedMfuId.isEmpty()) {
-			long mfuId = evovlvedMfuId.get(0);
+			String mfuId = evovlvedMfuId.get(0);
 			evolvedUserMonster.setId(mfuId);
 		}
 		
-		log.info("evolvedUserMonster=" + evolvedUserMonster);
-		log.info("userMonsters=" + userMonsters);
+		log.info(String.format("evolvedUserMonster=%s", evolvedUserMonster));
+		log.info(String.format("userMonsters=%s", userMonsters));
 		
 		return true;
 	}
 	
-	private MonsterForUser createEvolvedMonster(int uId, Date now, long uMonsterIdOne,
-			Map<Long, MonsterForUser> idsToUserMonsters) {
+	private MonsterForUser createEvolvedMonster(String uId, Date now, String uMonsterIdOne,
+			Map<String, MonsterForUser> idsToUserMonsters)
+	{
 		MonsterForUser unevolvedMonster = idsToUserMonsters.get(uMonsterIdOne);
 		int monsterId = unevolvedMonster.getMonsterId();
 		Monster evolvedMonster = MonsterRetrieveUtils.getEvolvedFormForMonster(monsterId);
@@ -284,8 +322,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		return mfu;
 	}
 	
-	private String createSourceOfPieces(long catalystUserMonsterId, long uMonsterIdOne,
-			long uMonsterIdTwo) {
+	private String createSourceOfPieces(String catalystUserMonsterId,
+		String uMonsterIdOne, String uMonsterIdTwo)
+	{
 		StringBuilder sourceOfPiecesSb = new StringBuilder();
 		sourceOfPiecesSb.append("evolved from (catalystId,idOne,idTwo): (");
 		sourceOfPiecesSb.append(catalystUserMonsterId);
@@ -308,11 +347,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		String gems = MiscMethods.gems;
 		
 		Timestamp date = new Timestamp((now.getTime()));
-		long catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
-		long one = evolution.getMonsterForUserIdOne();
-		long two = evolution.getMonsterForUserIdTwo();
+		String catalystUserMonsterId = evolution.getCatalystMonsterForUserId();
+		String one = evolution.getMonsterForUserIdOne();
+		String two = evolution.getMonsterForUserIdTwo();
 		MonsterForUser evolved = evolvedUserMonsterList.get(0);
-		long evolvedId = evolved.getId();
+		String evolvedId = evolved.getId();
 		
 		String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_EVOLUTION;
 		StringBuilder detailSb = new StringBuilder();
@@ -328,7 +367,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		detailSb.append(evolvedId);
 		detailSb.append(")");
 		
-		int userId = aUser.getId();
+		String userId = aUser.getId();
 		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
 		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 		Map<String, String> changeReasonsMap = new HashMap<String, String>();
@@ -349,6 +388,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtil()
+	{
+		return monsterEvolvingForUserRetrieveUtil;
+	}
+
+	public void setMonsterEvolvingForUserRetrieveUtil(
+		MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtil )
+	{
+		this.monsterEvolvingForUserRetrieveUtil = monsterEvolvingForUserRetrieveUtil;
+	}
+
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
+	{
+		return monsterForUserRetrieveUtil;
+	}
+
+	public void setMonsterForUserRetrieveUtil(
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
+	{
+		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
 }

@@ -6,9 +6,8 @@ import java.util.Date;
 //user can have multiple of these (different clanIds)
 public class ClanEventPersistentUserReward implements Serializable {
 	
-	private static final long serialVersionUID = -7227824016627786538L;
-	private int id;
-	private int userId;
+	private String id;
+	private String userId;
 	private Date crsStartTime;
 	private int crsId;
 	private Date crsEndTime;
@@ -18,9 +17,23 @@ public class ClanEventPersistentUserReward implements Serializable {
 	private int clanEventPersistentId;
 	private Date timeRedeemed;
 	
-	public ClanEventPersistentUserReward(int id, int userId, Date crsStartTime,
-			int crsId, Date crsEndTime, String resourceType, int staticDataId,
-			int quantity, int clanEventPersistentId, Date timeRedeemed) {
+	public ClanEventPersistentUserReward()
+	{
+		super();
+	}
+
+	public ClanEventPersistentUserReward(
+		String id,
+		String userId,
+		Date crsStartTime,
+		int crsId,
+		Date crsEndTime,
+		String resourceType,
+		int staticDataId,
+		int quantity,
+		int clanEventPersistentId,
+		Date timeRedeemed )
+	{
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -34,19 +47,19 @@ public class ClanEventPersistentUserReward implements Serializable {
 		this.timeRedeemed = timeRedeemed;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

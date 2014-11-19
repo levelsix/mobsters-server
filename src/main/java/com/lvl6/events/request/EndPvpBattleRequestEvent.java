@@ -22,7 +22,7 @@ public class EndPvpBattleRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       endPvpBattleRequestProto = EndPvpBattleRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = endPvpBattleRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = endPvpBattleRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("update user currency request exception", e);
     }

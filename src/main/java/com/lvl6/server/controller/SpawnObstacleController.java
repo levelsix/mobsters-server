@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +25,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 
@@ -41,6 +42,9 @@ public class SpawnObstacleController extends EventController{
 	
 	@Autowired
 	protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
 
 	public SpawnObstacleController() {
@@ -64,7 +68,7 @@ public class SpawnObstacleController extends EventController{
 		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		List<MinimumObstacleProto> mopList = reqProto.getProspectiveObstaclesList();
 		
@@ -72,9 +76,32 @@ public class SpawnObstacleController extends EventController{
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
+      SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSpawnObstacleResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 			
 			boolean legitComplete = checkLegit(resBuilder, userId, user, mopList);
 
@@ -92,7 +119,7 @@ public class SpawnObstacleController extends EventController{
 				}
 			}
 			
-			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(senderProto.getUserId());
+			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setSpawnObstacleResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -101,7 +128,7 @@ public class SpawnObstacleController extends EventController{
 				//modified the user, the last obstacle removed time
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
@@ -120,11 +147,11 @@ public class SpawnObstacleController extends EventController{
       	log.error("exception2 in SpawnObstacleController processEvent", e);
       }
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, int userId, User user,
+	private boolean checkLegit(Builder resBuilder, String userId, User user,
 			List<MinimumObstacleProto> mopList) {
 		
 		if (null == user) {
@@ -141,7 +168,7 @@ public class SpawnObstacleController extends EventController{
 		return true;  
 	}
 	
-  private boolean writeChangesToDB(User user, int userId, Timestamp clientTime,
+  private boolean writeChangesToDB(User user, String userId, Timestamp clientTime,
   		List<MinimumObstacleProto> mopList, List<ObstacleForUser> ofuList) {
   	//convert the protos to java objects
   	List<ObstacleForUser> ofuListTemp = getStructureStuffUtil()
@@ -150,7 +177,7 @@ public class SpawnObstacleController extends EventController{
   	
   	//need to get the ids in order to set the objects' ids so client will know how
   	//to reference said objects
-  	List<Integer> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
+  	List<String> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
   			userId, ofuListTemp);
   	if (null == ofuIdList || ofuIdList.isEmpty()) {
   		log.error("could not insert into obstacle for user obstacles=" + ofuListTemp);
@@ -181,6 +208,16 @@ public class SpawnObstacleController extends EventController{
   }
   public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
 	  this.structureStuffUtil = structureStuffUtil;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

@@ -8,16 +8,20 @@ import java.util.Date;
 //EXCEPT IF THE DEFENDER ID IS 0, i.e. defender is fake 
 public class PvpBattleForUser implements Serializable {
 	
-	private static final long serialVersionUID = -3001596819322010535L;
-	private int attackerId;
-	private int defenderId;
+	private String attackerId;
+	private String defenderId;
 	private int attackerWinEloChange;
 	private int defenderLoseEloChange;
 	private int attackerLoseEloChange;
 	private int defenderWinEloChange;
 	private Date battleStartTime;
 	
-	public PvpBattleForUser(int attackerId, int defenderId,
+	public PvpBattleForUser()
+	{
+		super();
+	}
+
+	public PvpBattleForUser(String attackerId, String defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange,
 			int attackerLoseEloChange, int defenderWinEloChange, Date battleStartTime) {
 		super();
@@ -30,19 +34,19 @@ public class PvpBattleForUser implements Serializable {
 		this.battleStartTime = battleStartTime;
 	}
 
-	public int getAttackerId() {
+	public String getAttackerId() {
 		return attackerId;
 	}
 
-	public void setAttackerId(int attackerId) {
+	public void setAttackerId(String attackerId) {
 		this.attackerId = attackerId;
 	}
 
-	public int getDefenderId() {
+	public String getDefenderId() {
 		return defenderId;
 	}
 
-	public void setDefenderId(int defenderId) {
+	public void setDefenderId(String defenderId) {
 		this.defenderId = defenderId;
 	}
 

@@ -13,13 +13,18 @@ public final class EventStaticDataProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 senderId = 1;</code>
+     * <code>optional string senderUuid = 1;</code>
      */
-    boolean hasSenderId();
+    boolean hasSenderUuid();
     /**
-     * <code>optional int32 senderId = 1;</code>
+     * <code>optional string senderUuid = 1;</code>
      */
-    int getSenderId();
+    java.lang.String getSenderUuid();
+    /**
+     * <code>optional string senderUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getSenderUuidBytes();
 
     /**
      * <code>optional .com.lvl6.proto.StaticDataProto staticDataStuff = 2;</code>
@@ -86,9 +91,10 @@ public final class EventStaticDataProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              senderId_ = input.readInt32();
+              senderUuid_ = bs;
               break;
             }
             case 18: {
@@ -144,19 +150,46 @@ public final class EventStaticDataProto {
     }
 
     private int bitField0_;
-    public static final int SENDERID_FIELD_NUMBER = 1;
-    private int senderId_;
+    public static final int SENDERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object senderUuid_;
     /**
-     * <code>optional int32 senderId = 1;</code>
+     * <code>optional string senderUuid = 1;</code>
      */
-    public boolean hasSenderId() {
+    public boolean hasSenderUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 senderId = 1;</code>
+     * <code>optional string senderUuid = 1;</code>
      */
-    public int getSenderId() {
-      return senderId_;
+    public java.lang.String getSenderUuid() {
+      java.lang.Object ref = senderUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          senderUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string senderUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSenderUuidBytes() {
+      java.lang.Object ref = senderUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        senderUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int STATICDATASTUFF_FIELD_NUMBER = 2;
@@ -181,7 +214,7 @@ public final class EventStaticDataProto {
     }
 
     private void initFields() {
-      senderId_ = 0;
+      senderUuid_ = "";
       staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -198,7 +231,7 @@ public final class EventStaticDataProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, senderId_);
+        output.writeBytes(1, getSenderUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, staticDataStuff_);
@@ -214,7 +247,7 @@ public final class EventStaticDataProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, senderId_);
+          .computeBytesSize(1, getSenderUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -338,7 +371,7 @@ public final class EventStaticDataProto {
 
       public Builder clear() {
         super.clear();
-        senderId_ = 0;
+        senderUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (staticDataStuffBuilder_ == null) {
           staticDataStuff_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
@@ -377,7 +410,7 @@ public final class EventStaticDataProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.senderId_ = senderId_;
+        result.senderUuid_ = senderUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -402,8 +435,10 @@ public final class EventStaticDataProto {
 
       public Builder mergeFrom(com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto other) {
         if (other == com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto.getDefaultInstance()) return this;
-        if (other.hasSenderId()) {
-          setSenderId(other.getSenderId());
+        if (other.hasSenderUuid()) {
+          bitField0_ |= 0x00000001;
+          senderUuid_ = other.senderUuid_;
+          onChanged();
         }
         if (other.hasStaticDataStuff()) {
           mergeStaticDataStuff(other.getStaticDataStuff());
@@ -435,34 +470,78 @@ public final class EventStaticDataProto {
       }
       private int bitField0_;
 
-      private int senderId_ ;
+      private java.lang.Object senderUuid_ = "";
       /**
-       * <code>optional int32 senderId = 1;</code>
+       * <code>optional string senderUuid = 1;</code>
        */
-      public boolean hasSenderId() {
+      public boolean hasSenderUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 senderId = 1;</code>
+       * <code>optional string senderUuid = 1;</code>
        */
-      public int getSenderId() {
-        return senderId_;
+      public java.lang.String getSenderUuid() {
+        java.lang.Object ref = senderUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            senderUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 senderId = 1;</code>
+       * <code>optional string senderUuid = 1;</code>
        */
-      public Builder setSenderId(int value) {
-        bitField0_ |= 0x00000001;
-        senderId_ = value;
+      public com.google.protobuf.ByteString
+          getSenderUuidBytes() {
+        java.lang.Object ref = senderUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          senderUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string senderUuid = 1;</code>
+       */
+      public Builder setSenderUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        senderUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 senderId = 1;</code>
+       * <code>optional string senderUuid = 1;</code>
        */
-      public Builder clearSenderId() {
+      public Builder clearSenderUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        senderId_ = 0;
+        senderUuid_ = getDefaultInstance().getSenderUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string senderUuid = 1;</code>
+       */
+      public Builder setSenderUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        senderUuid_ = value;
         onChanged();
         return this;
       }
@@ -609,10 +688,10 @@ public final class EventStaticDataProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025EventStaticData.proto\022\016com.lvl6.proto\032" +
-      "\020StaticData.proto\"p\n\"PurgeClientStaticDa" +
-      "taResponseProto\022\020\n\010senderId\030\001 \001(\005\0228\n\017sta" +
-      "ticDataStuff\030\002 \001(\0132\037.com.lvl6.proto.Stat" +
-      "icDataProtoB\026B\024EventStaticDataProto"
+      "\020StaticData.proto\"r\n\"PurgeClientStaticDa" +
+      "taResponseProto\022\022\n\nsenderUuid\030\001 \001(\t\0228\n\017s" +
+      "taticDataStuff\030\002 \001(\0132\037.com.lvl6.proto.St" +
+      "aticDataProtoB\026B\024EventStaticDataProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -632,7 +711,7 @@ public final class EventStaticDataProto {
     internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor,
-        new java.lang.String[] { "SenderId", "StaticDataStuff", });
+        new java.lang.String[] { "SenderUuid", "StaticDataStuff", });
     com.lvl6.proto.StaticDataStuffProto.getDescriptor();
   }
 

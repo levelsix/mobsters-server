@@ -11,7 +11,7 @@ public class SpawnObstacleResponseEvent extends NormalResponseEvent {
 
   private SpawnObstacleResponseProto spawnObstacleResponseProto;
   
-  public SpawnObstacleResponseEvent(int playerId){
+  public SpawnObstacleResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SPAWN_OBSTACLE_EVENT;
   }

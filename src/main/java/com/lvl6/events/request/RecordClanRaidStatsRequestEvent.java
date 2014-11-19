@@ -22,7 +22,7 @@ public class RecordClanRaidStatsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       recordClanRaidStatsRequestProto = RecordClanRaidStatsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = recordClanRaidStatsRequestProto.getSender().getUserId();
+      playerId = recordClanRaidStatsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("boot player from clan request exception", e);
     }

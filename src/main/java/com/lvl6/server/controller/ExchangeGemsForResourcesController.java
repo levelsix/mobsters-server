@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +26,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class ExchangeGemsForResourcesController extends EventController {
 
@@ -34,6 +35,9 @@ import com.lvl6.utils.RetrieveUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtil;
 
   public ExchangeGemsForResourcesController() {
     numAllocatedThreads = 1;
@@ -55,6 +59,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
+    String userId = senderProto.getUserUuid();
     int numGems = reqProto.getNumGems();
     int numResources = reqProto.getNumResources();
     ResourceType resourceType = reqProto.getResourceType();
@@ -66,9 +71,32 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
     
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+    UUID userUuid = null;
+	boolean invalidUuids = true;
+	
+	try {
+		userUuid = UUID.fromString(userId);
+		invalidUuids = false;
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect userId=%s",
+			userId), e);
+	}
+	
+	//UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
+        ExchangeGemsForResourcesResponseEvent resEvent =
+        		new ExchangeGemsForResourcesResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setExchangeGemsForResourcesResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+    	return;
+    }
+	
+	getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+	try {
+      User user = userRetrieveUtil.getUserById(userId);
 
       boolean legit = checkLegit(resBuilder, user, numGems, resourceType, numGems);
       
@@ -88,7 +116,7 @@ import com.lvl6.utils.RetrieveUtils;
 
       ExchangeGemsForResourcesResponseProto resProto = resBuilder.build();
       ExchangeGemsForResourcesResponseEvent resEvent =
-      		new ExchangeGemsForResourcesResponseEvent(senderProto.getUserId());
+      		new ExchangeGemsForResourcesResponseEvent(userId);
       resEvent.setExchangeGemsForResourcesResponseProto(resProto);
       resEvent.setTag(event.getTag());
       server.writeEvent(resEvent);
@@ -96,7 +124,7 @@ import com.lvl6.utils.RetrieveUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
 
@@ -105,16 +133,23 @@ import com.lvl6.utils.RetrieveUtils;
       }
     } catch (Exception e) {
       log.error("exception in ExchangeGemsForResourcesController processEvent", e);
+      resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
+      ExchangeGemsForResourcesResponseEvent resEvent =
+      		new ExchangeGemsForResourcesResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setExchangeGemsForResourcesResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName()); 
     }
   }
 
   private boolean checkLegit(Builder resBuilder, User aUser, int numGems,
   		ResourceType resourceType, int numResources) {
   	if (null == aUser || null == resourceType || 0 == numGems) {
-  		log.error("user or resourceType is null, or numGems is 0. user=" + aUser + 
-  				"\t resourceType=" + resourceType + "\t numGems=" + numGems);
+  		log.error(String.format(
+  			"user, resourceType is null, or numGems is 0. user=%s, resourceType=%s numGems=%" ,
+  			aUser, resourceType, numGems));
   		return false;
   	}
     
@@ -134,8 +169,9 @@ import com.lvl6.utils.RetrieveUtils;
   private boolean writeChangesToDb(User user, int numGems, ResourceType resourceType,
   		int numResources, int maxCash, int maxOil, Map<String, Integer> currencyChange) {
   	boolean success = true;
-  	log.info("exchanging " + numGems + " gems for " + numResources + " " + 
-  			resourceType.name());
+  	log.info(String.format(
+  		"exchanging %s gems for %s %s",
+  		numGems, numResources, resourceType.name()));
   	
   	int cashChange = 0;
   	int oilChange = 0;
@@ -164,10 +200,12 @@ import com.lvl6.utils.RetrieveUtils;
   		return false;
   	}
   	
-  	log.info("user before: " + user);
+  	log.info(String.format( "user before: %s", user ));
   	int numUpdated = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
   	if (2 != numUpdated && 1 != numUpdated) {
-  		log.error("did not increase user's " + resourceType + " by " + numResources);
+  		log.error(String.format(
+  			"did not increase user's %s by %s",
+  			resourceType, numResources));
   		success = false;
   	} else {
   		if (0 != cashChange) {
@@ -181,7 +219,7 @@ import com.lvl6.utils.RetrieveUtils;
   		}
   	}
   	
-  	log.info("user after: " + user);
+  	log.info(String.format("user after: %s", user));
   	return success;
   }
   
@@ -204,7 +242,7 @@ import com.lvl6.utils.RetrieveUtils;
 	  detailsSb.append(" ");
 	  detailsSb.append(resourceType.name());
 	  
-	  int userId = aUser.getId();
+	  String userId = aUser.getId();
 	  Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
 	  Map<String, String> reasonsForChanges = new HashMap<String, String>();
 	  Map<String, String> details = new HashMap<String, String>();

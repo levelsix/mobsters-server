@@ -6,16 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -5697714546871498556L;
-	
-	private int id;
+	private String id;
 	private String name;
 	private int level;
 	private int gems;
@@ -37,7 +34,7 @@ public class User implements Serializable {
 	private int numCoinsRetrievedFromStructs;
 	private int numOilRetrievedFromStructs;
 	private int numConsecutiveDaysPlayed;
-	private int clanId;
+	private String clanId;
 	private Date lastWallPostNotificationTime;
 //	private int kabamNaid;
 	private boolean hasReceivedfbReward;
@@ -53,13 +50,18 @@ public class User implements Serializable {
 	private Date lastFreeBoosterPackTime;
 	private int clanHelps;
 
-	public User(int id, String name, int level, int gems, int cash, int oil,
+	public User()
+	{
+		super();
+	}
+
+	public User(String id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, String referralCode,
 			int numReferrals, String udidForHistory, Date lastLogin,
 			Date lastLogout, String deviceToken, int numBadges, boolean isFake,
 			Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
-			int numConsecutiveDaysPlayed, int clanId,
+			int numConsecutiveDaysPlayed, String clanId,
 			Date lastWallPostNotificationTime, /*int kabamNaid,*/
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			String facebookId, boolean fbIdSetOnUserCreate,
@@ -506,7 +508,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativeCoinsAbsoluteClan (int coinChange, Integer clanId) {
+	public boolean updateRelativeCoinsAbsoluteClan (int coinChange, String clanId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -520,14 +522,14 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.cash += coinChange;
-			if (clanId == null) this.clanId = ControllerConstants.NOT_SET;
+			if (clanId == null) this.clanId = "";
 			else this.clanId = clanId;
 			return true;
 		}
 		return false;
 	}
 
-	public boolean updateGemsCashClan(int gemChange, int cashChange, int clanId) {
+	public boolean updateGemsCashClan(int gemChange, int cashChange, String clanId) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -873,11 +875,11 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -1049,11 +1051,11 @@ public class User implements Serializable {
 		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
 	}
 
-	public int getClanId() {
+	public String getClanId() {
 		return clanId;
 	}
 
-	public void setClanId(int clanId) {
+	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
 

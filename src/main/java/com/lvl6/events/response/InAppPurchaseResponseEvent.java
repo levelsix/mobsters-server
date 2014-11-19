@@ -11,7 +11,7 @@ public class InAppPurchaseResponseEvent extends NormalResponseEvent{
 
   private InAppPurchaseResponseProto inAppPurchaseResponseProto;
   
-  public InAppPurchaseResponseEvent(int playerId) {
+  public InAppPurchaseResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_IN_APP_PURCHASE_EVENT;
   }

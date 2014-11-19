@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +25,10 @@ import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class SolicitClanHelpController extends EventController {
@@ -36,6 +37,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SolicitClanHelpController() {
     numAllocatedThreads = 4;
@@ -60,7 +67,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     MinimumUserProto senderProto = reqProto.getSender();
     List<ClanHelpNoticeProto> chnpList = reqProto.getNoticeList();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     Date clientDate = new Date(reqProto.getClientTime());
     int maxHelpers = reqProto.getMaxHelpers();
 
@@ -68,10 +75,35 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    int clanId = 0;
+    String clanId = null;
 
     if (null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
+    }
+
+    UUID userUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      clanUuid = UUID.fromString(clanId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, clanId=%s",
+          userId, clanId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
+      SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSolicitClanHelpResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
     }
 
     /*int clanId = 0;
@@ -85,10 +117,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     if (0 != clanId) {
     	lockedClan = getLocker().lockClan(clanId);
     } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }*/
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User user = getUserRetrieveUtils().getUserById(userId);
       
       boolean legitLeave = checkLegitLeave(resBuilder, user);
       
@@ -136,7 +168,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	if (0 != clanId && lockedClan) {
     		getLocker().unlockClan(clanId);
     	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     	}
     }*/
   }
@@ -147,7 +179,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("user is null");
       return false;      
     }
-    if (user.getClanId() <= 0) {
+    if (user.getClanId() == null) {
       resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
       log.error(String.format(
     	  "user's clanId=%s",
@@ -155,7 +187,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       return false;
     }
 
-    Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
+    Clan clan = getClanRetrieveUtil().getClanWithId(user.getClanId());
     if (null == clan) {
     	resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
         log.error("user not in clan=%s", user.getClanId());
@@ -165,7 +197,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(int userId, User user, int clanId,
+  private boolean writeChangesToDB(String userId, User user, String clanId,
 	  List<ClanHelpNoticeProto> chnpList, Date clientDate, int maxHelpers,
 	  List<ClanHelp> clanHelpStore)
   {
@@ -177,7 +209,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  ch.setMaxHelpers(maxHelpers);
 		  ch.setTimeOfEntry(clientDate);
 		  ch.setUserDataId(
-			  chnp.getUserDataId());
+			  chnp.getUserDataUuid());
 		  ch.setStaticDataId(
 			  chnp.getStaticDataId());
 		  ch.setHelpType(
@@ -187,11 +219,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  solicitations.add(ch);
 	  }
 
-	  List<Long> clanHelpIds = InsertUtils.get().insertIntoClanHelpGetId(solicitations);
+	  List<String> clanHelpIds = InsertUtils.get().insertIntoClanHelpGetId(solicitations);
 
 	  for (int index = 0; index < clanHelpIds.size(); index++) {
 		  ClanHelp ch = solicitations.get(index);
-		  Long clanHelpId = clanHelpIds.get(index);
+		  String clanHelpId = clanHelpIds.get(index);
 		  ch.setId(clanHelpId);
 	  }
 	  log.info(String.format("new clanHelps: %s", solicitations));
@@ -220,6 +252,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtil()
+  {
+    return clanRetrieveUtil;
+  }
+
+  public void setClanRetrieveUtil( ClanRetrieveUtils2 clanRetrieveUtil )
+  {
+    this.clanRetrieveUtil = clanRetrieveUtil;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

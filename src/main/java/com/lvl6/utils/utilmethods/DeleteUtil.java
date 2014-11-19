@@ -11,52 +11,52 @@ public interface DeleteUtil {
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			//@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-	public abstract boolean deleteUserStruct(int userStructId);
+	public abstract boolean deleteUserStruct(String userStructId);
 	
-  public abstract boolean deleteUserClanDataRelatedToClanId(int clanId, int numRowsToDelete);
+  public abstract boolean deleteUserClanDataRelatedToClanId(String clanId, int numRowsToDelete);
 
-  public abstract boolean deleteClanWithClanId(int clanId);
+  public abstract boolean deleteClanWithClanId(String clanId);
   
 //  public abstract boolean deleteBlacksmithAttempt(int blacksmithId);
 
-  public abstract boolean deleteUserClan(int userId, int clanId);
+  public abstract boolean deleteUserClan(String userId, String clanId);
 
-  public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId);
+  public void deleteUserClansForUserExceptSpecificClan(String userId, String clanId);
   
-  public abstract int deleteAllUserQuestsForUser(int userId);
+  public abstract int deleteAllUserQuestsForUser(String userId);
   
-  public abstract int deleteTaskForUserOngoingWithTaskForUserId(long taskForUserId);
+  public abstract int deleteTaskForUserOngoingWithTaskForUserId(String taskForUserId);
   
-  public abstract int deleteTaskStagesForUserWithIds(List<Long> taskStageForUserIds);
+  public abstract int deleteTaskStagesForUserWithIds(List<String> taskStageForUserIds);
   
-  public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
+  public abstract int deleteMonsterHealingForUser(String userId, List<String> userMonsterIds);
   
-  public abstract int deleteMonsterEnhancingForUser(int userId, List<Long> userMonsterIds);
+  public abstract int deleteMonsterEnhancingForUser(String userId, List<String> userMonsterIds);
 
-  public abstract int deleteMonsterForUser(long l);
+  public abstract int deleteMonsterForUser(String l);
   
-  public abstract int deleteMonstersForUser(List<Long> userMonsterIds);
+  public abstract int deleteMonstersForUser(List<String> userMonsterIds);
  
-  public abstract int deleteUserFacebookInvitesForSlots(List<Integer> idsOfInvites);
+  public abstract int deleteUserFacebookInvitesForSlots(List<String> idsOfInvites);
   
-  public abstract int deleteUnredeemedUserFacebookInvitesForUser(int userId);
+  public abstract int deleteUnredeemedUserFacebookInvitesForUser(String userId);
   
-  public abstract int deleteMonsterEvolvingForUser(long catalystUserMonsterId,
-  		long userMonsterIdOne, long userMonsterIdTwo, int userId);
+  public abstract int deleteMonsterEvolvingForUser(String catalystUserMonsterId,
+      String userMonsterIdOne, String userMonsterIdTwo, String userId);
   
-  public abstract int deleteEventPersistentForUser(int userId, int eventId);
+  public abstract int deleteEventPersistentForUser(String userId, int eventId);
   
-  public abstract int deletePvpBattleForUser(int attackerId);
+  public abstract int deletePvpBattleForUser(String attackerId);
   
-  public abstract int deleteClanEventPersistentForClan(int clanId);
+  public abstract int deleteClanEventPersistentForClan(String clanId);
   
-  public abstract int deleteClanEventPersistentForUsers(List<Integer> userIdList);
+  public abstract int deleteClanEventPersistentForUsers(List<String> userIdList);
   
-  public abstract int deleteObstacleForUser(int userObstacleId);
+  public abstract int deleteObstacleForUser(String userObstacleId);
   
-  public abstract int deleteMiniJobForUser(long userMiniJobId);
+  public abstract int deleteMiniJobForUser(String userMiniJobId);
  
-  public abstract int deleteClanHelp(int userId, List<Long> clanHelpIdList);
+  public abstract int deleteClanHelp(String userId, List<String> clanHelpIdList);
   
-  public abstract int deleteClanInvite(int userId, List<Integer> clanInviteIdList);
+  public abstract int deleteClanInvite(String userId, List<String> clanInviteIdList);
 }

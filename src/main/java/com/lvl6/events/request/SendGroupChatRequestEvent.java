@@ -22,7 +22,7 @@ public class SendGroupChatRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       sendGroupChatRequestProto = SendGroupChatRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = sendGroupChatRequestProto.getSender().getUserId();
+      playerId = sendGroupChatRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("send group chat request exception", e);
     }

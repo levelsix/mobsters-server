@@ -100,7 +100,7 @@ public class StatisticsRetrieveUtil {
 		        new RowMapper<Spender>() {
 		            public Spender mapRow(ResultSet rs, int rowNum) throws SQLException {
 		            	Spender spender = new Spender();
-		            	spender.setUserId(rs.getInt(DBConstants.IAP_HISTORY__USER_ID));
+		            	spender.setUserId(rs.getString(DBConstants.IAP_HISTORY__USER_ID));
                   spender.setName(rs.getString(DBConstants.USER__NAME));
 		            	spender.setAmountSpent(Math.ceil(rs.getDouble(amountSpent)));
 		                return spender;
@@ -118,7 +118,7 @@ public class StatisticsRetrieveUtil {
 		        new RowMapper<InAppPurchase>() {
 		            public InAppPurchase mapRow(ResultSet rs, int rowNum) throws SQLException {
 		            	InAppPurchase inAppPurchase = new InAppPurchase();
-		            	inAppPurchase.setUserId(rs.getInt(DBConstants.IAP_HISTORY__USER_ID));
+		            	inAppPurchase.setUserId(rs.getString(DBConstants.IAP_HISTORY__USER_ID));
 		            	inAppPurchase.setCashSpent(Math.ceil(rs.getDouble(DBConstants.IAP_HISTORY__CASH_SPENT)));
 		            	inAppPurchase.setName(rs.getString(DBConstants.USER__NAME));
 		            	inAppPurchase.setPurchasedDate(new Date(rs.getTimestamp(DBConstants.IAP_HISTORY__PURCHASE_DATE).getTime()));

@@ -11,7 +11,7 @@ public class NormStructWaitCompleteResponseEvent extends NormalResponseEvent {
 
   private NormStructWaitCompleteResponseProto normStructWaitCompleteResponseProto;
   
-  public NormStructWaitCompleteResponseEvent(int playerId){
+  public NormStructWaitCompleteResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_NORM_STRUCT_WAIT_COMPLETE_EVENT;
   }

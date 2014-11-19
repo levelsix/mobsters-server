@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +24,12 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Builde
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class PromoteDemoteClanMemberController extends EventController {
@@ -36,12 +38,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-		return locker;
-	}
-	public void setLocker(Locker locker) {
-		this.locker = locker;
-	}
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
 	public PromoteDemoteClanMemberController() {
     numAllocatedThreads = 4;
@@ -62,10 +67,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     PromoteDemoteClanMemberRequestProto reqProto = ((PromoteDemoteClanMemberRequestEvent)event).getPromoteDemoteClanMemberRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    int victimId = reqProto.getVictimId();
+    String userId = senderProto.getUserUuid();
+    String victimId = reqProto.getVictimUuid();
     UserClanStatus newUserClanStatus = reqProto.getUserClanStatus();
-    List<Integer> userIds = new ArrayList<Integer>();
+    List<String> userIds = new ArrayList<String>();
     userIds.add(userId);
     userIds.add(victimId);
     
@@ -74,18 +79,45 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setUserClanStatus(newUserClanStatus);
 
-    int clanId = 0;
+    String clanId = null;
     if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
+    	clanId = senderProto.getClan().getClanUuid();
+    }
+
+    UUID userUuid = null;
+    UUID victimUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      victimUuid = UUID.fromString(victimId);
+      clanUuid = UUID.fromString(clanId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, victimId=%s, clanId=%s",
+          userId, victimId, clanId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+      PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
     }
     
     boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
+    if (clanUuid != null) {
+    	lockedClan = getLocker().lockClan(clanUuid);
     }
     try {
-    	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-    	Map<Integer, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
+    	Map<String,User> users = getUserRetrieveUtils().getUsersByIds(userIds);
+    	Map<String, UserClan> userClans = getUserClanRetrieveUtils()
     			.getUserClanForUsers(clanId, userIds);
 
       boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, userId, victimId,
@@ -118,7 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//only write to clan if success
         resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
         User victim = users.get(victimId);
-        Clan victimClan = ClanRetrieveUtils.getClanWithId(clanId);
+        Clan victimClan = getClanRetrieveUtils().getClanWithId(clanId);
         MinimumUserProto mup = CreateInfoProtoUtils
         	.createMinimumUserProtoFromUserAndClan(victim, victimClan);
         resBuilder.setVictim(mup);
@@ -139,15 +171,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in PromoteDemoteClanMember processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		getLocker().unlockClan(clanId);
+    	if (clanId != null && lockedClan) {
+    		getLocker().unlockClan(clanUuid);
     	}
     }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, int userId,
-  		int victimId, UserClanStatus newUserClanStatus, Map<Integer, User> userIdsToUsers,
-  		Map<Integer, UserClan> userIdsToUserClans) {
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, String userId,
+      String victimId, UserClanStatus newUserClanStatus, Map<String, User> userIdsToUsers,
+  		Map<String, UserClan> userIdsToUserClans) {
   	
   	if (!lockedClan) {
   		log.error("couldn't obtain clan lock");
@@ -206,7 +238,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private boolean writeChangesToDB(User victim, int victimId, int clanId,
+  private boolean writeChangesToDB(User victim, String victimId, String clanId,
   		UserClan oldInfo, UserClanStatus newUserClanStatus) {
   	if (!UpdateUtils.get().updateUserClanStatus(victimId, clanId, newUserClanStatus)) {
       log.error("problem with updating user clan status for user=" + victim +
@@ -214,6 +246,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
   	return true;
+  }
+  
+  public Locker getLocker() {
+    return locker;
+  }
+  public void setLocker(Locker locker) {
+    this.locker = locker;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+    this.userClanRetrieveUtils = userClanRetrieveUtils;
   }
 
 }

@@ -22,7 +22,7 @@ public class BeginObstacleRemovalRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       beginObstacleRemovalRequestProto = BeginObstacleRemovalRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = beginObstacleRemovalRequestProto.getSender().getUserId();
+      playerId = beginObstacleRemovalRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("begin obstacle removal request exception", e);
     }

@@ -1,7 +1,10 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +19,14 @@ import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
   @Component @DependsOn("gameServer") public class SetAvatarMonsterController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SetAvatarMonsterController() {
     numAllocatedThreads = 1;
@@ -41,15 +47,38 @@ import com.lvl6.utils.RetrieveUtils;
     SetAvatarMonsterRequestProto reqProto = ((SetAvatarMonsterRequestEvent)event).getSetAvatarMonsterRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     int monsterId = reqProto.getMonsterId();
 
     SetAvatarMonsterResponseProto.Builder resBuilder = SetAvatarMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SetAvatarMonsterStatus.FAIL_OTHER);
+      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSetAvatarMonsterResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+    
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
 
 //      boolean isDifferent = checkIfNewTokenDifferent(user.getAvatarMonster(), gameCenterId);
       
@@ -69,7 +98,7 @@ import com.lvl6.utils.RetrieveUtils;
       }
 
       SetAvatarMonsterResponseProto resProto = resBuilder.build();
-      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(senderProto.getUserId());
+      SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(senderProto.getUserUuid());
       resEvent.setSetAvatarMonsterResponseProto(resProto);
       server.writeEvent(resEvent);
       
@@ -77,7 +106,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  //game center id might have changed
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       }
@@ -95,7 +124,7 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetAvatarMonsterController processEvent", e);
     	}
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
     }
   }
 
@@ -113,4 +142,14 @@ import com.lvl6.utils.RetrieveUtils;
   	
   	return false;
   }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+  
+  
 }

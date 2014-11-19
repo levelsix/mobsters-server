@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,9 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class SetFacebookIdController extends EventController {
 
@@ -32,6 +33,9 @@ import com.lvl6.utils.RetrieveUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public SetFacebookIdController() {
     numAllocatedThreads = 1;
@@ -52,7 +56,7 @@ import com.lvl6.utils.RetrieveUtils;
     SetFacebookIdRequestProto reqProto = ((SetFacebookIdRequestEvent)event).getSetFacebookIdRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     String fbId = reqProto.getFbId();
     boolean isUserCreate = reqProto.getIsUserCreate();
     String email = reqProto.getEmail();
@@ -69,17 +73,40 @@ import com.lvl6.utils.RetrieveUtils;
     	facebookIds = new ArrayList<String>();
     	facebookIds.add(fbId);
     }
-    List<Integer> userIds = new ArrayList<Integer>();
+    List<String> userIds = new ArrayList<String>();
     userIds.add(userId);
-    
     
     Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
     resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-    	Map<Integer, User> userMap = RetrieveUtils.userRetrieveUtils()
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
+      SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSetFacebookIdResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
+    	Map<String, User> userMap = getUserRetrieveUtils()
     			.getUsersForFacebookIdsOrUserIds(facebookIds, userIds);
     	User user = userMap.get(userId);
 
@@ -94,14 +121,14 @@ import com.lvl6.utils.RetrieveUtils;
       }
       
       SetFacebookIdResponseProto resProto = resBuilder.build();
-      SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserId());
+      SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setSetFacebookIdResponseProto(resProto);
       server.writeEvent(resEvent);
       
       if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
     	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+    			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
     	  resEventUpdate.setTag(event.getTag());
     	  server.writeEvent(resEventUpdate);
       }
@@ -119,12 +146,12 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in SetFacebookIdController processEvent", e);
     	}
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName()); 
     }
   }
 
   private boolean checkLegitRequest(Builder resBuilder, User user, String newFbId,
-  		Map<Integer, User> userMap) {
+  		Map<String, User> userMap) {
   	if (newFbId == null || newFbId.isEmpty() || user == null) { 
   		log.error(String.format(
   			"fbId not set or user is null. fbId='%s', user=%s",
@@ -188,6 +215,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

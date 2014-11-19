@@ -11,7 +11,7 @@ public class RetrieveClanInfoResponseEvent extends NormalResponseEvent {
 
   private RetrieveClanInfoResponseProto retrieveClanInfoResponseProto;
   
-  public RetrieveClanInfoResponseEvent(int playerId){
+  public RetrieveClanInfoResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_RETRIEVE_CLAN_INFO_EVENT;
   }

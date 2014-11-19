@@ -11,7 +11,7 @@ public class RetractRequestJoinClanResponseEvent extends NormalResponseEvent {
 
   private RetractRequestJoinClanResponseProto retractRequestJoinClanResponseProto;
   
-  public RetractRequestJoinClanResponseEvent(int playerId){
+  public RetractRequestJoinClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_RETRACT_REQUEST_JOIN_CLAN_EVENT;
   }

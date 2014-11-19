@@ -17,7 +17,7 @@
 //  public void read(ByteBuffer buff) {
 //    try {
 //      collectEquipEnhancementRequestProto = CollectEquipEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-//      playerId = collectEquipEnhancementRequestProto.getSender().getUserId();
+//      playerId = collectEquipEnhancementRequestProto.getSender().getUserUuid();
 //    } catch (InvalidProtocolBufferException e) {
 //      e.printStackTrace();
 //    }

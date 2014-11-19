@@ -22,7 +22,7 @@ public class RedeemMiniJobRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       redeemMiniJobRequestProto = RedeemMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = redeemMiniJobRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = redeemMiniJobRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("RedeemMiniJob request exception", e);
     }

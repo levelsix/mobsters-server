@@ -11,7 +11,7 @@ public class LevelUpResponseEvent extends NormalResponseEvent {
 
   private LevelUpResponseProto levelUpResponseProto;
   
-  public LevelUpResponseEvent(int playerId){
+  public LevelUpResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_LEVEL_UP_EVENT;
   }

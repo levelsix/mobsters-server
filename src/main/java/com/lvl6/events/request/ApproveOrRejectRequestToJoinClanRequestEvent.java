@@ -22,7 +22,7 @@ public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       approveOrRejectRequestToJoinClanRequestProto = ApproveOrRejectRequestToJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = approveOrRejectRequestToJoinClanRequestProto.getSender().getUserId();
+      playerId = approveOrRejectRequestToJoinClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("approve or reject request to join clan request exception", e);
     }

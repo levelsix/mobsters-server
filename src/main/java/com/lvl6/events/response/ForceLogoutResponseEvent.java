@@ -11,7 +11,7 @@ public class ForceLogoutResponseEvent extends NormalResponseEvent{
 
   private ForceLogoutResponseProto forceLogoutResponseProto;
   
-  public ForceLogoutResponseEvent(int playerId) {
+  public ForceLogoutResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_FORCE_LOGOUT_EVENT;
   }

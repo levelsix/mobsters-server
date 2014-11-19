@@ -29,6 +29,7 @@ public class AchievementForUserRetrieveUtil {
 	private static Logger log = LoggerFactory.getLogger(AchievementForUserRetrieveUtil.class);
 	
 	private static final String TABLE_NAME = DBConstants.TABLE_ACHIEVEMENT_FOR_USER; 
+	private static final UserAchievementForClientMapper rowMapper = new UserAchievementForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -44,7 +45,8 @@ public class AchievementForUserRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public Map<Integer, AchievementForUser> getSpecificOrAllAchievementIdToAchievementForUserId(
-			int userId, Collection<Integer> achievementIds) {
+		String userId, Collection<Integer> achievementIds)
+	{
 		Map<Integer, AchievementForUser> achievementIdToUserAchievements = null;
 		try {
 			List<String> columnsToSelected = UserAchievementForClientMapper
@@ -66,8 +68,8 @@ public class AchievementForUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityAndInConditions(
@@ -79,7 +81,7 @@ public class AchievementForUserRetrieveUtil {
 					query);
 
 			List<AchievementForUser> afuList = this.jdbcTemplate
-					.query(query, new UserAchievementForClientMapper());
+					.query(query, values.toArray(), rowMapper);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 			for (AchievementForUser afu : afuList) {
@@ -88,7 +90,8 @@ public class AchievementForUserRetrieveUtil {
 				achievementIdToUserAchievements.put(achievementId, afu);
 			}
 		} catch (Exception e) {
-			log.error("could not retrieve user obstacle for userId=" + userId, e);
+			log.error(String.format(
+				"could not retrieve user achievement for userId=%s", userId), e);
 			achievementIdToUserAchievements =
 					new HashMap<Integer, AchievementForUser>();
 		}

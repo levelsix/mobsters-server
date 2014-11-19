@@ -18,7 +18,7 @@ public class StructureStuffUtil {
 	
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
-	public List<ObstacleForUser> createObstacleForUserFromUserObstacleProtos(int userId,
+	public List<ObstacleForUser> createObstacleForUserFromUserObstacleProtos(String userId,
 			List<MinimumObstacleProto> mopList) {
 		if (null == mopList || mopList.isEmpty()) {
 			log.warn("no MinimumObstacleProto in list to convert to ObstacleForUser");
@@ -35,7 +35,7 @@ public class StructureStuffUtil {
 			
 			String orientation = mop.getOrientation().name();
 			
-			ObstacleForUser ofu = new ObstacleForUser(0, userId, obstacleId, xcoord, ycoord,
+			ObstacleForUser ofu = new ObstacleForUser(null, userId, obstacleId, xcoord, ycoord,
 					null, orientation);
 			
 			ofuList.add(ofu);
@@ -43,9 +43,9 @@ public class StructureStuffUtil {
 		return ofuList;
 	}
 	
-	public void setObstacleForUserIds(List<Integer> ids, List<ObstacleForUser> ofuList) {
+	public void setObstacleForUserIds(List<String> ids, List<ObstacleForUser> ofuList) {
 		for (int i = 0; i < ids.size(); i++) {
-			Integer id = ids.get(i);
+			String id = ids.get(i);
 			ObstacleForUser ofu = ofuList.get(i);
 			
 			ofu.setId(id);
@@ -53,7 +53,7 @@ public class StructureStuffUtil {
 		
 	}
 	
-	public List<ObstacleForUser> createTutorialObstacleForUser(int userId) {
+	public List<ObstacleForUser> createTutorialObstacleForUser(String userId) {
 		List<ObstacleForUser> ofuList = new ArrayList<ObstacleForUser>();
 		String orientation = StructOrientation.POSITION_1.name();
     for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
@@ -61,7 +61,7 @@ public class StructureStuffUtil {
     	int posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
     	int posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
     	
-    	ObstacleForUser ofu = new ObstacleForUser(0, userId, obstacleId, posX, posY,
+    	ObstacleForUser ofu = new ObstacleForUser(null, userId, obstacleId, posX, posY,
     			null, orientation);
     	ofuList.add(ofu);
     }

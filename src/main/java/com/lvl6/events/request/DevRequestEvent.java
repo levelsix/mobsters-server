@@ -22,7 +22,7 @@ public class DevRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       devRequestProto = DevRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = devRequestProto.getSender().getUserId();
+      playerId = devRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("enable apns request exception", e);
     }

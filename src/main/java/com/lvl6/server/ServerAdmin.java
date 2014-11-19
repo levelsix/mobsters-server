@@ -24,6 +24,8 @@ import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
@@ -71,7 +73,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 
 
 	@Resource(name = "playersByPlayerId")
-	Map<Integer, ConnectedPlayer> players;
+	Map<String, ConnectedPlayer> players;
 
 	@Resource(name = "serverEvents")
 	protected ITopic<ServerMessage> serverEvents;
@@ -101,11 +103,11 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.staticDataReloadDone = staticDataReloadDone;
 	}
 
-	public Map<Integer, ConnectedPlayer> getPlayers() {
+	public Map<String, ConnectedPlayer> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Map<Integer, ConnectedPlayer> players) {
+	public void setPlayers(Map<String, ConnectedPlayer> players) {
 		this.players = players;
 	}
 
@@ -125,7 +127,8 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		this.writer = writer;
 	}
 
-	
+	@Autowired
+	protected QuestForUserRetrieveUtils2 qfuRetrieveUtils;
 	
 	protected Integer instanceCountForDataReload = 0;
 	protected Integer instancesDoneReloadingCount = 0;
@@ -156,17 +159,17 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			@Override
 			public void run() {
 				try {
-					UserRetrieveUtils uru = RetrieveUtils.userRetrieveUtils();
-					List<Integer> ids = jdbc.query("select " + DBConstants.USER__ID + " from " + DBConstants.TABLE_USER
-							+ " where " + DBConstants.USER__IS_FAKE + "=0;", new RowMapper<Integer>() {
+					UserRetrieveUtils2 uru = RetrieveUtils.userRetrieveUtils();
+					List<String> ids = jdbc.query("select " + DBConstants.USER__ID + " from " + DBConstants.TABLE_USER
+							+ " where " + DBConstants.USER__IS_FAKE + "=0;", new RowMapper<String>() {
 						@Override
-						public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-							return rs.getInt(DBConstants.USER__ID);
+						public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+							return rs.getString(DBConstants.USER__ID);
 						}
 					});
 					log.info("Reloading leaderboard stats for {} users", ids.size());
 					//Map<Integer, User> users = uru.getUsersByIds(ids);
-					for (final Integer id : ids) {
+					for (final String id : ids) {
 						try {
 							User usr = uru.getUserById(id);
 							log.info("Batch reloading leaderboard for user {}", usr.getId());
@@ -193,17 +196,17 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	
 
 	protected void sendPurgeStaticDataNotificationToAllClients() {
-		Set<Integer> keySet = players.keySet();
+		Set<String> keySet = players.keySet();
 		if (keySet != null) {
-			Iterator<Integer> playas = keySet.iterator();
+			Iterator<String> playas = keySet.iterator();
 			log.info("Sending purge static data notification to clients: " + keySet.size());
 			while (playas.hasNext()) {
-				Integer playa = playas.next();
+				String playa = playas.next();
 				
-				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true);
+				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true, qfuRetrieveUtils);
 				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(playa);
 				PurgeClientStaticDataResponseProto.Builder purgeProto = PurgeClientStaticDataResponseProto.newBuilder();
-				purgeProto.setSenderId(playa);
+				purgeProto.setSenderUuid(playa);
 				purgeProto.setStaticDataStuff(sdp);
 				
 				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());

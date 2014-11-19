@@ -17,7 +17,7 @@
 //  public void read(ByteBuffer buff) {
 //    try {
 //    	healMonsterWaitTimeCompleteRequestProto = HealMonsterWaitTimeCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-//      playerId = healMonsterWaitTimeCompleteRequestProto.getSender().getUserId();
+//      playerId = healMonsterWaitTimeCompleteRequestProto.getSender().getUserUuid();
 //    } catch (InvalidProtocolBufferException e) {
 //      e.printStackTrace();
 //    }

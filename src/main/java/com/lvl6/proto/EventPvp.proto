@@ -33,7 +33,7 @@ message QueueUpRequestProto {
 	*/
 	
 	//these users should not be considered 
-	repeated int32 seenUserIds = 5;
+	repeated string seenUserUuids = 5;
 	optional int64 clientTime = 6;
 
 }
@@ -91,7 +91,7 @@ message BeginPvpBattleResponseProto {
 
 message EndPvpBattleRequestProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional int32 defenderId = 2;
+	optional string defenderUuid = 2;
 	
 	//is false if user didn't make a move when ending the battle
 	//(or didn't change monsters? or did "soft close" the app?)
@@ -115,7 +115,7 @@ message EndPvpBattleRequestProto {
 
 message EndPvpBattleResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional int32 defenderId = 2;
+	optional string defenderUuid = 2;
 	optional bool attackerAttacked = 3;
 	optional bool attackerWon = 4;
 	

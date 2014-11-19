@@ -11,7 +11,7 @@ public class SolicitClanHelpResponseEvent extends NormalResponseEvent {
 
   private SolicitClanHelpResponseProto solicitClanHelpResponseProto;
   
-  public SolicitClanHelpResponseEvent(int playerId){
+  public SolicitClanHelpResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SOLICIT_CLAN_HELP_EVENT;
   }

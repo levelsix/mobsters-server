@@ -33,14 +33,12 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.City;
-import com.lvl6.info.CityElement;
+import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
-import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
@@ -69,8 +67,6 @@ import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
-import com.lvl6.info.TournamentEvent;
-import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
 //import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -80,8 +76,6 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
-import com.lvl6.proto.CityProto.CityElementProto;
-import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
@@ -125,16 +119,15 @@ import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.TaskMapElementProto;
-import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
@@ -142,10 +135,8 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -176,13 +167,11 @@ import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -198,7 +187,6 @@ public class MiscMethods {
 	public static final String CASH = "CASH";
 	public static final String OIL = "OIL";
 	public static final String MONSTER = "MONSTER";
-
 
 	//METHODS FOR CAPPING USER RESOURCE
 	public static int capResourceGain(int currentAmt, int delta, int maxAmt) {
@@ -302,7 +290,7 @@ public class MiscMethods {
 	}
 
 	//monsterIdsToNumPieces or completeUserMonsters will be populated
-	public static String createUpdateUserMonsterArguments(int userId, int boosterPackId,
+	public static String createUpdateUserMonsterArguments(String userId, int boosterPackId,
 		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
 		List<MonsterForUser> completeUserMonsters, Date now) {
 		StringBuilder sb = new StringBuilder();
@@ -347,11 +335,11 @@ public class MiscMethods {
 
 
 	public static List<FullUserMonsterProto> createFullUserMonsterProtos(
-		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
+		List<String> userMonsterIds, List<MonsterForUser> mfuList) {
 		List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
 
 		for(int i = 0; i < userMonsterIds.size(); i++) {
-			long mfuId = userMonsterIds.get(i);
+			String mfuId = userMonsterIds.get(i);
 			MonsterForUser mfu = mfuList.get(i);
 			mfu.setId(mfuId);
 			FullUserMonsterProto fump = CreateInfoProtoUtils
@@ -534,9 +522,9 @@ public class MiscMethods {
 		}
 	}
 
-	public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
+	public static String getIPOfPlayer(GameServer server, String playerId, String udid) {
 		ConnectedPlayer player = null;
-		if (playerId != null && playerId > 0) {
+		if (playerId != null && !playerId.isEmpty()) {
 			player = server.getPlayerById(playerId); 
 			if (player != null) {
 				return player.getIp_connection_id();
@@ -557,11 +545,11 @@ public class MiscMethods {
 		MDC.remove(MDCKeys.IP);
 	}
 
-	public static void setMDCProperties(String udid, Integer playerId, String ip) {
+	public static void setMDCProperties(String udid, String playerId, String ip) {
 		purgeMDCProperties();
 		if (udid != null) MDC.put(MDCKeys.UDID, udid);
 		if (ip != null) MDC.put(MDCKeys.IP, ip);
-		if (playerId != null && playerId > 0) MDC.put(MDCKeys.PLAYER_ID.toString(), playerId.toString());
+		if (null != playerId && !playerId.isEmpty()) MDC.put(MDCKeys.PLAYER_ID, playerId);
 	}
 
 	public static int calculateCoinsGivenToReferrer(User referrer) {
@@ -579,18 +567,18 @@ public class MiscMethods {
 		return false;
 	}
 
-	public static List<City> getCitiesAvailableForUserLevel(int userLevel) {
-		List<City> availCities = new ArrayList<City>();
-		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-		for (Integer cityId : cities.keySet()) {
-			City city = cities.get(cityId);
-			availCities.add(city);
-		}
-		return availCities;
-	}
+//	public static List<City> getCitiesAvailableForUserLevel(int userLevel) {
+//		List<City> availCities = new ArrayList<City>();
+//		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+//		for (Integer cityId : cities.keySet()) {
+//			City city = cities.get(cityId);
+//			availCities.add(city);
+//		}
+//		return availCities;
+//	}
 
 	public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(
-		User user, PvpLeagueForUser plfu) {
+		User user, PvpLeagueForUser plfu, Clan clan) {
 		try {
 			if (!user.isFake()) {
 				/*LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
@@ -599,10 +587,19 @@ public class MiscMethods {
 		} catch (Exception e) {
 			log.error("Failed to update leaderboard.");
 		}
+		
+		// Retrieve clan if its not set
+		if (clan == null && user.getClanId() != null && !user.getClanId().isEmpty()) {
+		  ClanRetrieveUtils2 clanRetrieveUtils = AppContext.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+		  clan = clanRetrieveUtils.getClanWithId(user.getClanId());
+		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
+		  log.error ("Trying to set clan for user with different clan id.");
+		  clan = null;
+		}
 
 		UpdateClientUserResponseEvent resEvent = new UpdateClientUserResponseEvent(user.getId());
 		UpdateClientUserResponseProto resProto = UpdateClientUserResponseProto.newBuilder()
-			.setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu))
+			.setSender(CreateInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan))
 			.setTimeOfUserUpdate(new Date().getTime()).build();
 		resEvent.setUpdateClientUserResponseProto(resProto);
 		return resEvent;
@@ -651,19 +648,19 @@ public class MiscMethods {
 			Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
 		tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
 
-		int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
-		tcb.setCityId(cityId);
-		List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
-		for (CityElement ce : cityElements) {
-			CityElementProto cep = CreateInfoProtoUtils
-				.createCityElementProtoFromCityElement(ce);
-			tcb.addCityOneElements(cep);
-		}
-
-		tcb.setCityElementIdForFirstDungeon(
-			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
-		tcb.setCityElementIdForSecondDungeon(
-			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
+//		int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
+//		tcb.setCityId(cityId);
+//		List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
+//		for (CityElement ce : cityElements) {
+//			CityElementProto cep = CreateInfoProtoUtils
+//				.createCityElementProtoFromCityElement(ce);
+//			tcb.addCityOneElements(cep);
+//		}
+//
+//		tcb.setCityElementIdForFirstDungeon(
+//			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_FIRST_DUNGEON);
+//		tcb.setCityElementIdForSecondDungeon(
+//			ControllerConstants.TUTORIAL__CITY_ONE_ASSET_NUM_FOR_SECOND_DUNGEON);
 
 
 		tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
@@ -917,34 +914,34 @@ public class MiscMethods {
 		return mtcb.build();
 	}
 
-	public static List<TournamentEventProto> currentTournamentEventProtos() {
-		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
-		long curTime = (new Date()).getTime();
-		List<Integer> activeEventIds = new ArrayList<Integer>();
-
-		//return value
-		List<TournamentEventProto> protos = new ArrayList<TournamentEventProto>();
-
-		//get the ids of active leader board events
-		for(TournamentEvent e : idsToEvents.values()) {
-			if (e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
-				activeEventIds.add(e.getId());
-			}
-		}
-
-		//get all the rewards for all the current leaderboard events
-		Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
-			TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
-
-		//create the protos
-		for(Integer i: activeEventIds) {
-			TournamentEvent e = idsToEvents.get(i);
-			List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
-
-			protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
-		}
-		return protos;
-	}
+//	public static List<TournamentEventProto> currentTournamentEventProtos() {
+//		Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
+//		long curTime = (new Date()).getTime();
+//		List<Integer> activeEventIds = new ArrayList<Integer>();
+//
+//		//return value
+//		List<TournamentEventProto> protos = new ArrayList<TournamentEventProto>();
+//
+//		//get the ids of active leader board events
+//		for(TournamentEvent e : idsToEvents.values()) {
+//			if (e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
+//				activeEventIds.add(e.getId());
+//			}
+//		}
+//
+//		//get all the rewards for all the current leaderboard events
+//		Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
+//			TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
+//
+//		//create the protos
+//		for(Integer i: activeEventIds) {
+//			TournamentEvent e = idsToEvents.get(i);
+//			List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
+//
+//			protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
+//		}
+//		return protos;
+//	}
 
 	public static void reloadAllRareChangeStaticData() {
 		log.info("Reloading rare change static data");
@@ -954,8 +951,8 @@ public class MiscMethods {
 		BoosterItemRetrieveUtils.reload();
 		BoosterPackRetrieveUtils.reload();
 		//    CityBossRetrieveUtils.reload();
-		CityElementsRetrieveUtils.reload(); 
-		CityRetrieveUtils.reload();
+//		CityElementsRetrieveUtils.reload(); 
+//		CityRetrieveUtils.reload();
 		//    ClanBossRetrieveUtils.reload();
 		//    ClanBossRewardRetrieveUtils.reload();
 		ClanIconRetrieveUtils.reload();
@@ -965,10 +962,10 @@ public class MiscMethods {
 		ClanRaidStageMonsterRetrieveUtils.reload();
 		ClanRaidStageRewardRetrieveUtils.reload();
 		EventPersistentRetrieveUtils.reload();
-		ExpansionCostRetrieveUtils.reload();
+//		ExpansionCostRetrieveUtils.reload();
 		GoldSaleRetrieveUtils.reload();
 		ItemRetrieveUtils.reload();
-		LockBoxEventRetrieveUtils.reload();
+//		LockBoxEventRetrieveUtils.reload();
 		//    MonsterForPvpRetrieveUtils.staticReload();
 		MiniJobRetrieveUtils.reload();
 		MonsterBattleDialogueRetrieveUtils.reload();
@@ -1000,8 +997,8 @@ public class MiscMethods {
 		TaskRetrieveUtils.reload();
 		TaskStageMonsterRetrieveUtils.reload();
 		TaskStageRetrieveUtils.reload();
-		TournamentEventRetrieveUtils.reload();
-		TournamentEventRewardRetrieveUtils.reload();
+//		TournamentEventRetrieveUtils.reload();
+//		TournamentEventRewardRetrieveUtils.reload();
 	}
 
 
@@ -1062,21 +1059,21 @@ public class MiscMethods {
 		GeneralNotificationResponseProto.Builder notificationProto = 
 			n.generateNotificationBuilder();
 
-		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
+		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent("");
 		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 		server.writeGlobalEvent(aNotification);
 	}
 
-	public static void writeClanApnsNotification(Notification n, GameServer server, int clanId) {
+	public static void writeClanApnsNotification(Notification n, GameServer server, String clanId) {
 		GeneralNotificationResponseProto.Builder notificationProto =
 			n.generateNotificationBuilder();
 
-		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(0);
+		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent("");
 		aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 		server.writeApnsClanEvent(aNotification, clanId);
 	}
 
-	public static void writeNotificationToUser(Notification aNote, GameServer server, int userId) {
+	public static void writeNotificationToUser(Notification aNote, GameServer server, String userId) {
 		GeneralNotificationResponseProto.Builder notificationProto =
 			aNote.generateNotificationBuilder();
 		GeneralNotificationResponseEvent aNotification =
@@ -1131,14 +1128,21 @@ public class MiscMethods {
 		return s;
 	}
 
-	public static void writeToUserCurrencyUsers(List<Integer> userIds,
-		Timestamp thyme, Map<Integer, Map<String, Integer>> changeMap,
-		Map<Integer, Map<String, Integer>> previousCurrencyMap,
-		Map<Integer, Map<String, Integer>> currentCurrencyMap,
-		Map<Integer, Map<String, String>> changeReasonsMap,
-		Map<Integer, Map<String, String>> detailsMap) {
+	public static void writeToUserCurrencyUsers(List<String> userIds,
+		Timestamp thyme, Map<String, Map<String, Integer>> changeMap,
+		Map<String, Map<String, Integer>> previousCurrencyMap,
+		Map<String, Map<String, Integer>> currentCurrencyMap,
+		Map<String, Map<String, String>> changeReasonsMap,
+		Map<String, Map<String, String>> detailsMap) {
 		try {
-			List<Integer> allUserIds = new ArrayList<Integer>();
+			if (changeMap.isEmpty()) {
+				String preface = "changeMap is empty";
+				log.warn(String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap));
+				return;
+			}
+			List<String> allUserIds = new ArrayList<String>();
 			List<Timestamp> allTimestamps = new ArrayList<Timestamp>(); 
 			List<String> allResourceTypes = new ArrayList<String>();
 			List<Integer> allCurrencyChanges = new ArrayList<Integer>();
@@ -1148,8 +1152,15 @@ public class MiscMethods {
 			List<String> allDetails = new ArrayList<String>();
 
 			//for each user, accrue up the values to store to the db
-			for (Integer userId : userIds) {
-				Map<String, Integer> oneUserChangeMap = changeMap.get(userId);
+			for (String userId : userIds) {
+				Map<String, Integer> oneUserChangeMap = null;
+				if (changeMap.containsKey(userId)) {
+					oneUserChangeMap = changeMap.get(userId);
+				}
+				if (null == oneUserChangeMap) {
+					continue;
+				}
+					
 				Map<String, Integer> oneUserPrevCurrency =
 					previousCurrencyMap.get(userId);
 				Map<String, Integer> oneUserCurCurrency =
@@ -1168,6 +1179,14 @@ public class MiscMethods {
 					allReasonsForChanges, allDetails);
 			}
 
+			if (allCurrencyChanges.isEmpty()) {
+				String preface = "no currency changes";
+				log.warn(String.format(
+					"%s userIds=%s, changeMap=%s, changeReasonsMap=%s, detailsMap=%s",
+					preface, userIds, changeMap, changeReasonsMap, detailsMap));
+				return;
+			}
+			
 			int numInserted = InsertUtils.get()
 				.insertIntoUserCurrencyHistoryMultipleRows(
 					allUserIds, allTimestamps, allResourceTypes,
@@ -1188,12 +1207,12 @@ public class MiscMethods {
 		}
 	}
 
-	protected static void writeToUserCurrencyUsersHelper(Integer userId,
+	protected static void writeToUserCurrencyUsersHelper(String userId,
 		Timestamp thyme, Map<String, Integer> changeMap,
 		Map<String, Integer> previousCurrencyMap,
 		Map<String, Integer> currentCurrencyMap,
 		Map<String, String> changeReasonsMap, Map<String, String> detailsMap,
-		List<Integer> userIds, List<Timestamp> timestamps,
+		List<String> userIds, List<Timestamp> timestamps,
 		List<String> resourceTypes, List<Integer> currencyChanges,
 		List<Integer> previousCurrencies, List<Integer> currentCurrencies,
 		List<String> reasonsForChanges, List<String> details) {
@@ -1216,7 +1235,7 @@ public class MiscMethods {
 			return;
 		}
 
-		List<Integer> userIdsTemp = Collections.nCopies(amount, userId);
+		List<String> userIdsTemp = Collections.nCopies(amount, userId);
 		List<Timestamp> timestampsTemp = Collections.nCopies(amount, thyme); 
 		List<String> resourceTypesTemp =
 			new ArrayList<String>(changeMapTemp.keySet());
@@ -1244,7 +1263,7 @@ public class MiscMethods {
 	//currencyChange should represent how much user's currency increased or decreased and
 	//this should be called after the user is updated
 	//arguments are modified!!!
-	public static void writeToUserCurrencyOneUser(int userId, Timestamp thyme,
+	public static void writeToUserCurrencyOneUser(String userId, Timestamp thyme,
 		Map<String,Integer> changeMap, Map<String, Integer> previousCurrencyMap,
 		Map<String, Integer> currentCurrencyMap, Map<String, String> changeReasonsMap,
 		Map<String, String> detailsMap) {
@@ -1265,7 +1284,7 @@ public class MiscMethods {
 
 			int amount = changeMap.size();
 
-			List<Integer> userIds = Collections.nCopies(amount, userId);
+			List<String> userIds = Collections.nCopies(amount, userId);
 			List<Timestamp> timestamps = Collections.nCopies(amount, thyme); 
 			List<String> resourceTypes = new ArrayList<String>(changeMap.keySet());
 			List<Integer> currencyChanges = getValsInOrder(resourceTypes, changeMap);
@@ -1776,15 +1795,16 @@ public class MiscMethods {
 		return newCost;
 	}
 
-	public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
+	public static StaticDataProto getAllStaticData(String userId,
+		boolean userIdSet, QuestForUserRetrieveUtils2 qfuRetrieveUtils) {
 		StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
 
-		setPlayerCityExpansions(sdpb);
-		setCities(sdpb);
+//		setPlayerCityExpansions(sdpb);
+//		setCities(sdpb);
 		setTasks(sdpb);
 		setMonsters(sdpb);
 		setUserLevelStuff(sdpb);
-		setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
+		setInProgressAndAvailableQuests(sdpb, userId, userIdSet, qfuRetrieveUtils);
 		setBoosterPackStuff(sdpb);
 		setStructures(sdpb);
 		setEvents(sdpb);
@@ -1800,24 +1820,24 @@ public class MiscMethods {
 
 		return sdpb.build();
 	}
-	private static void setPlayerCityExpansions(Builder sdpb) {
-		//Player city expansions
-		Map<Integer, ExpansionCost> expansionCosts =
-			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-		for (ExpansionCost cec : expansionCosts.values()) {
-			CityExpansionCostProto cecp = CreateInfoProtoUtils
-				.createCityExpansionCostProtoFromCityExpansionCost(cec);
-			sdpb.addExpansionCosts(cecp);
-		}
-	}
-	private static void setCities(Builder sdpb) {
-		//Cities
-		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-		for (Integer cityId : cities.keySet()) {
-			City city = cities.get(cityId);
-			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-		}
-	}
+//	private static void setPlayerCityExpansions(Builder sdpb) {
+//		//Player city expansions
+//		Map<Integer, ExpansionCost> expansionCosts =
+//			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+//		for (ExpansionCost cec : expansionCosts.values()) {
+//			CityExpansionCostProto cecp = CreateInfoProtoUtils
+//				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+//			sdpb.addExpansionCosts(cecp);
+//		}
+//	}
+//	private static void setCities(Builder sdpb) {
+//		//Cities
+//		Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+//		for (Integer cityId : cities.keySet()) {
+//			City city = cities.get(cityId);
+//			sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+//		}
+//	}
 	private static void setTasks(Builder sdpb) {
 		//Tasks
 		Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
@@ -1862,12 +1882,12 @@ public class MiscMethods {
 			sdpb.addSlip(slipb.build());
 		}
 	}
-	private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
-		boolean userIdSet) {
+	private static void setInProgressAndAvailableQuests(Builder sdpb, String userId,
+		boolean userIdSet, QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
 		if (!userIdSet) {
 			return;
 		}
-		List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+		List<QuestForUser> inProgressAndRedeemedUserQuests = questForUserRetrieveUtils
 			.getUserQuestsForUser(userId);
 
 

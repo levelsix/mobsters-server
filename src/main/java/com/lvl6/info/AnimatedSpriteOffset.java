@@ -21,3 +21,4 @@ public class AnimatedSpriteOffset implements Serializable {
 		return offSet;
 	}
 }
+//TODO: CONSIDER DELETE

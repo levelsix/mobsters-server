@@ -22,7 +22,7 @@ public class AcceptOrRejectClanInviteRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       acceptOrRejectClanInviteRequestProto = AcceptOrRejectClanInviteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = acceptOrRejectClanInviteRequestProto.getSender().getUserId();
+      playerId = acceptOrRejectClanInviteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("acceptOrRejectClanInvite request exception", e);
     }

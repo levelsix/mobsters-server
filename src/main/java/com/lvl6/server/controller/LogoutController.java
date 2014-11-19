@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -14,15 +15,17 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LogoutRequestEvent;
+import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.info.User;
+import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
@@ -54,7 +57,10 @@ public class LogoutController extends EventController {
 	protected Locker locker;
 	
 	@Autowired
-	protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+	protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -72,13 +78,32 @@ public class LogoutController extends EventController {
 				.getLogoutRequestProto();
 
 		MinimumUserProto sender = reqProto.getSender();
-		int userId = sender.getUserId();
+		String userId = sender.getUserUuid();
 		Timestamp lastLogout = new Timestamp(new Date().getTime());
 
-		if (userId > 0) {
-			getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+		if (userId != null) {
+
+	    UUID userUuid = null;
+	    boolean invalidUuids = true;
+	    try {
+	      userUuid = UUID.fromString(userId);
+
+	      invalidUuids = false;
+	    } catch (Exception e) {
+	      log.error(String.format(
+	          "UUID error. incorrect userId=%s",
+	          userId), e);
+	      invalidUuids = true;
+	    }
+
+	    //UUID checks
+	    if (invalidUuids) {
+	      return;
+	    }
+	    
+			getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 			try {
-				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+				User user = getUserRetrieveUtils().getUserById(userId);
 				if (null != user) {
 					//TODO: figure out if still deducting elo from user after logging out
 					//FOR NOW DON'T DO THE FOLLOWING
@@ -118,7 +143,7 @@ public class LogoutController extends EventController {
 			} catch (Exception e) {
 				log.error("exception in updating user logout", e);
 			} finally {
-				getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
+				getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
 			}
 		} else {
 			log.error("cannot update last logout because playerid of sender:"+sender.getName()+" is <= 0, it's "	+ userId);
@@ -233,13 +258,22 @@ public class LogoutController extends EventController {
 		this.locker = locker;
 	}
 
-	public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
-		return pvpLeagueForUserRetrieveUtil;
-	}
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
 
-	public void setPvpLeagueForUserRetrieveUtil(
-			PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
-		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
-	}
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
+    return pvpLeagueForUserRetrieveUtil;
+  }
+
+  public void setPvpLeagueForUserRetrieveUtil(
+      PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
+    this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+  }
+	
 	
 }

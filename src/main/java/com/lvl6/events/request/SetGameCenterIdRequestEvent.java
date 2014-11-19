@@ -22,7 +22,7 @@ public class SetGameCenterIdRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       setGameCenterIdRequestProto = SetGameCenterIdRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = setGameCenterIdRequestProto.getSender().getUserId();
+      playerId = setGameCenterIdRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("set facebook id request exception", e);
     }
