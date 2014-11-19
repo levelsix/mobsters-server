@@ -1800,7 +1800,8 @@ public class CreateInfoProtoUtils {
 	public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForPvp mfp) {
 		MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
 
-		int id = mfp.getId();
+		//int id = mfp.getId();
+		int id = mfp.getMonsterId();
 		int lvl = mfp.getMonsterLvl();
 
 		mumpb.setMonsterId(id);
