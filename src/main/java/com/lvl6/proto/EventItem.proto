@@ -80,9 +80,9 @@ message RemoveUserItemUsedResponseProto {
 
 message TradeItemForResourcesRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
+	
 	//updated quantity of user's items after using said items
-	repeated UserItemProto nuUserItems = 3;		
+	repeated UserItemProto nuUserItems = 2;		
 }
 
 message TradeItemForResourcesResponseProto {
