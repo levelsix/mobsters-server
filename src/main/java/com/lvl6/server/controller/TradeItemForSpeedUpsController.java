@@ -87,7 +87,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return;
     }
     
-		//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		//TODO: Logic similar to PurchaseSpeedUpsPack, see what else can be optimized/shared
 		try {
 			List<ItemForUserUsage> itemsUsed = null;
@@ -132,7 +132,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 
 		} finally {
-			//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
+			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
 
