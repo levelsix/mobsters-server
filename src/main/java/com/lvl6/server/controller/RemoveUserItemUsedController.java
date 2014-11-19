@@ -40,7 +40,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_TRADE_ITEM_FOR_SPEED_UPS_EVENT;
+		return EventProtocolRequest.C_REMOVE_USER_ITEM_USED_EVENT;
 	}
 
 	@Override
