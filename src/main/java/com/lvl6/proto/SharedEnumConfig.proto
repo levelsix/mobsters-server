@@ -53,6 +53,7 @@ enum GameActionType {
 	EVOLVE = 4;
 	MINI_JOB = 5;
 	ENHANCE_TIME = 6;
+	REMOVE_OBSTACLE = 7;
 }
 
 enum GameType {
