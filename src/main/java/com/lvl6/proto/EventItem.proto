@@ -62,7 +62,7 @@ message TradeItemForSpeedUpsResponseProto {
 //------------------------------------------------------------------------------------------
 message RemoveUserItemUsedRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated string userItemUsedId = 2; //NOTE: not userItemUsed itemId	
+	repeated string userItemUsedUuid = 2; //NOTE: not userItemUsed itemId	
 	
 }
 
