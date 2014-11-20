@@ -79,7 +79,7 @@ message RemoveUserItemUsedResponseProto {
 //------------------------------------------------------------------------------------------
 
 message TradeItemForResourcesRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	repeated int32 itemIdsUsed = 2;
 	
 	//updated quantity of user's items after using said items
@@ -87,7 +87,7 @@ message TradeItemForResourcesRequestProto {
 }
 
 message TradeItemForResourcesResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	optional TradeItemForResourcesStatus status = 2;
 	
 	enum TradeItemForResourcesStatus {
