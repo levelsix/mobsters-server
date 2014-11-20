@@ -105,9 +105,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				log.info(String.format(
 					"resetting user=%s", aUser));
 				aUser.updateResetAccount();
-			}
-			
-			if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
+			} else if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
 				cheat(userId, request, staticDataId, quantity,
 					resBuilder, aUser);
 			} else {
