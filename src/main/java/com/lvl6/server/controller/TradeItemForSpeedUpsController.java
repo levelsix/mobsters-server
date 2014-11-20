@@ -101,8 +101,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 			
 			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
-				userId, itemsUsed, nuUserItems, InsertUtils.get(),
-				UpdateUtils.get());
+				userId, itemsUsed, nuUserItems,itemForUserRetrieveUtil,
+				InsertUtils.get(), UpdateUtils.get());
 				
 			tifsua.execute(resBuilder);
 			
@@ -134,6 +134,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		} finally {
 			      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	{
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	{
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
 }
