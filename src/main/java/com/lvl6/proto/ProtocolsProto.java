@@ -1254,9 +1254,9 @@ public final class ProtocolsProto {
      */
     S_REMOVE_USER_ITEM_USED_EVENT(84, 86),
     /**
-     * <code>S_TRADE_ITEM_FOR_RESOURES_EVENT = 87;</code>
+     * <code>S_TRADE_ITEM_FOR_RESOURCES_EVENT = 87;</code>
      */
-    S_TRADE_ITEM_FOR_RESOURES_EVENT(85, 87),
+    S_TRADE_ITEM_FOR_RESOURCES_EVENT(85, 87),
     /**
      * <code>S_UPDATE_CLIENT_USER_EVENT = 101;</code>
      *
@@ -1660,9 +1660,9 @@ public final class ProtocolsProto {
      */
     public static final int S_REMOVE_USER_ITEM_USED_EVENT_VALUE = 86;
     /**
-     * <code>S_TRADE_ITEM_FOR_RESOURES_EVENT = 87;</code>
+     * <code>S_TRADE_ITEM_FOR_RESOURCES_EVENT = 87;</code>
      */
-    public static final int S_TRADE_ITEM_FOR_RESOURES_EVENT_VALUE = 87;
+    public static final int S_TRADE_ITEM_FOR_RESOURCES_EVENT_VALUE = 87;
     /**
      * <code>S_UPDATE_CLIENT_USER_EVENT = 101;</code>
      *
@@ -1802,7 +1802,7 @@ public final class ProtocolsProto {
         case 84: return S_COLLECT_MONSTER_ENHANCEMENT_EVENT;
         case 85: return S_TRADE_ITEM_FOR_SPEED_UPS_EVENT;
         case 86: return S_REMOVE_USER_ITEM_USED_EVENT;
-        case 87: return S_TRADE_ITEM_FOR_RESOURES_EVENT;
+        case 87: return S_TRADE_ITEM_FOR_RESOURCES_EVENT;
         case 101: return S_UPDATE_CLIENT_USER_EVENT;
         case 102: return S_REFERRAL_CODE_USED_EVENT;
         case 103: return S_PURGE_STATIC_DATA_EVENT;
@@ -1967,7 +1967,7 @@ public final class ProtocolsProto {
       "E_ITEM_FOR_SPEED_UPS_EVENT\020U\022!\n\035C_REMOVE" +
       "_USER_ITEM_USED_EVENT\020V\022#\n\037C_TRADE_ITEM_" +
       "FOR_RESOURES_EVENT\020W\022\022\n\016C_LOGOUT_EVENT\020e" +
-      "\022\020\n\013C_DEV_EVENT\020\310\001*\333\031\n\025EventProtocolResp" +
+      "\022\020\n\013C_DEV_EVENT\020\310\001*\334\031\n\025EventProtocolResp" +
       "onse\022\023\n\017S_STARTUP_EVENT\020\001\022\033\n\027S_IN_APP_PU" +
       "RCHASE_EVENT\020\002\022#\n\037S_PURCHASE_NORM_STRUCT" +
       "URE_EVENT\020\003\022)\n%S_MOVE_OR_ROTATE_NORM_STR" +
@@ -2040,17 +2040,17 @@ public final class ProtocolsProto {
       "ENT\020S\022\'\n#S_COLLECT_MONSTER_ENHANCEMENT_E" +
       "VENT\020T\022$\n S_TRADE_ITEM_FOR_SPEED_UPS_EVE" +
       "NT\020U\022!\n\035S_REMOVE_USER_ITEM_USED_EVENT\020V\022" +
-      "#\n\037S_TRADE_ITEM_FOR_RESOURES_EVENT\020W\022\036\n\032" +
-      "S_UPDATE_CLIENT_USER_EVENT\020e\022\036\n\032S_REFERR" +
-      "AL_CODE_USED_EVENT\020f\022\035\n\031S_PURGE_STATIC_D" +
-      "ATA_EVENT\020g\022\037\n\033S_RECEIVED_GROUP_CHAT_EVE",
-      "NT\020h\022\036\n\032S_SEND_ADMIN_MESSAGE_EVENT\020i\022 \n\034" +
-      "S_GENERAL_NOTIFICATION_EVENT\020j\022*\n&S_RECE" +
-      "IVED_RARE_BOOSTER_PURCHASE_EVENT\020k\022(\n$S_" +
-      "AWARD_CLAN_RAID_STAGE_REWARD_EVENT\020l\022\030\n\024" +
-      "S_FORCE_LOGOUT_EVENT\020m\022\036\n\032S_RETRIEVE_CLA" +
-      "N_DATA_EVENT\020n\022\020\n\013S_DEV_EVENT\020\310\001B\020B\016Prot" +
-      "ocolsProto"
+      "$\n S_TRADE_ITEM_FOR_RESOURCES_EVENT\020W\022\036\n" +
+      "\032S_UPDATE_CLIENT_USER_EVENT\020e\022\036\n\032S_REFER" +
+      "RAL_CODE_USED_EVENT\020f\022\035\n\031S_PURGE_STATIC_" +
+      "DATA_EVENT\020g\022\037\n\033S_RECEIVED_GROUP_CHAT_EV",
+      "ENT\020h\022\036\n\032S_SEND_ADMIN_MESSAGE_EVENT\020i\022 \n" +
+      "\034S_GENERAL_NOTIFICATION_EVENT\020j\022*\n&S_REC" +
+      "EIVED_RARE_BOOSTER_PURCHASE_EVENT\020k\022(\n$S" +
+      "_AWARD_CLAN_RAID_STAGE_REWARD_EVENT\020l\022\030\n" +
+      "\024S_FORCE_LOGOUT_EVENT\020m\022\036\n\032S_RETRIEVE_CL" +
+      "AN_DATA_EVENT\020n\022\020\n\013S_DEV_EVENT\020\310\001B\020B\016Pro" +
+      "tocolsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

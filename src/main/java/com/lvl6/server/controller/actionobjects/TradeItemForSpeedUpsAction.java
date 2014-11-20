@@ -144,6 +144,13 @@ public class TradeItemForSpeedUpsAction
 			int quantitySpent = itemIdToQuantityUsed.get(itemId);
 			int actualQuantity = ifu.getQuantity() - quantitySpent;
 			
+			if (actualQuantity < 0) {
+				log.error(String.format(
+					"client using more items than has. itemsUsed=%s, inDbUserItems=%s",
+					itemsUsed, inDb));
+				return false;
+			}
+			
 			int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
 			
 			if (actualQuantity != clientExpectedQuantity) {

@@ -54,6 +54,7 @@ enum GameActionType {
 	MINI_JOB = 5;
 	ENHANCE_TIME = 6;
 	REMOVE_OBSTACLE = 7;
+	COMBINE_MONSTER = 8;
 }
 
 enum GameType {
