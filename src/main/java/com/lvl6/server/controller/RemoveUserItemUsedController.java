@@ -51,7 +51,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
-		List<String> userItemUsedIdList = reqProto.getUserItemUsedIdList();
+		List<String> userItemUsedIdList = reqProto.getUserItemUsedUuidList();
 
 		RemoveUserItemUsedResponseProto.Builder resBuilder = RemoveUserItemUsedResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);

@@ -4772,39 +4772,39 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
     com.google.protobuf.ProtocolStringList
-        getUserItemUsedIdList();
+        getUserItemUsedUuidList();
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    int getUserItemUsedIdCount();
+    int getUserItemUsedUuidCount();
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    java.lang.String getUserItemUsedId(int index);
+    java.lang.String getUserItemUsedUuid(int index);
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
     com.google.protobuf.ByteString
-        getUserItemUsedIdBytes(int index);
+        getUserItemUsedUuidBytes(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedRequestProto}
@@ -4878,10 +4878,10 @@ public final class EventItemProto {
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userItemUsedId_ = new com.google.protobuf.LazyStringArrayList();
+                userItemUsedUuid_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userItemUsedId_.add(bs);
+              userItemUsedUuid_.add(bs);
               break;
             }
           }
@@ -4893,7 +4893,7 @@ public final class EventItemProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userItemUsedId_ = userItemUsedId_.getUnmodifiableView();
+          userItemUsedUuid_ = userItemUsedUuid_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -4948,54 +4948,54 @@ public final class EventItemProto {
       return sender_;
     }
 
-    public static final int USERITEMUSEDID_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList userItemUsedId_;
+    public static final int USERITEMUSEDUUID_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList userItemUsedUuid_;
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
     public com.google.protobuf.ProtocolStringList
-        getUserItemUsedIdList() {
-      return userItemUsedId_;
+        getUserItemUsedUuidList() {
+      return userItemUsedUuid_;
     }
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    public int getUserItemUsedIdCount() {
-      return userItemUsedId_.size();
+    public int getUserItemUsedUuidCount() {
+      return userItemUsedUuid_.size();
     }
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
-    public java.lang.String getUserItemUsedId(int index) {
-      return userItemUsedId_.get(index);
+    public java.lang.String getUserItemUsedUuid(int index) {
+      return userItemUsedUuid_.get(index);
     }
     /**
-     * <code>repeated string userItemUsedId = 2;</code>
+     * <code>repeated string userItemUsedUuid = 2;</code>
      *
      * <pre>
      *NOTE: not userItemUsed itemId	
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getUserItemUsedIdBytes(int index) {
-      return userItemUsedId_.getByteString(index);
+        getUserItemUsedUuidBytes(int index) {
+      return userItemUsedUuid_.getByteString(index);
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      userItemUsedUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5013,8 +5013,8 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < userItemUsedId_.size(); i++) {
-        output.writeBytes(2, userItemUsedId_.getByteString(i));
+      for (int i = 0; i < userItemUsedUuid_.size(); i++) {
+        output.writeBytes(2, userItemUsedUuid_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5031,12 +5031,12 @@ public final class EventItemProto {
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userItemUsedId_.size(); i++) {
+        for (int i = 0; i < userItemUsedUuid_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(userItemUsedId_.getByteString(i));
+            .computeBytesSizeNoTag(userItemUsedUuid_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserItemUsedIdList().size();
+        size += 1 * getUserItemUsedUuidList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5166,7 +5166,7 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        userItemUsedUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -5205,10 +5205,10 @@ public final class EventItemProto {
           result.sender_ = senderBuilder_.build();
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userItemUsedId_ = userItemUsedId_.getUnmodifiableView();
+          userItemUsedUuid_ = userItemUsedUuid_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userItemUsedId_ = userItemUsedId_;
+        result.userItemUsedUuid_ = userItemUsedUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5228,13 +5228,13 @@ public final class EventItemProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.userItemUsedId_.isEmpty()) {
-          if (userItemUsedId_.isEmpty()) {
-            userItemUsedId_ = other.userItemUsedId_;
+        if (!other.userItemUsedUuid_.isEmpty()) {
+          if (userItemUsedUuid_.isEmpty()) {
+            userItemUsedUuid_ = other.userItemUsedUuid_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserItemUsedIdIsMutable();
-            userItemUsedId_.addAll(other.userItemUsedId_);
+            ensureUserItemUsedUuidIsMutable();
+            userItemUsedUuid_.addAll(other.userItemUsedUuid_);
           }
           onChanged();
         }
@@ -5381,131 +5381,131 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private com.google.protobuf.LazyStringList userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureUserItemUsedIdIsMutable() {
+      private com.google.protobuf.LazyStringList userItemUsedUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserItemUsedUuidIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userItemUsedId_ = new com.google.protobuf.LazyStringArrayList(userItemUsedId_);
+          userItemUsedUuid_ = new com.google.protobuf.LazyStringArrayList(userItemUsedUuid_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
       public com.google.protobuf.ProtocolStringList
-          getUserItemUsedIdList() {
-        return userItemUsedId_.getUnmodifiableView();
+          getUserItemUsedUuidList() {
+        return userItemUsedUuid_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public int getUserItemUsedIdCount() {
-        return userItemUsedId_.size();
+      public int getUserItemUsedUuidCount() {
+        return userItemUsedUuid_.size();
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public java.lang.String getUserItemUsedId(int index) {
-        return userItemUsedId_.get(index);
+      public java.lang.String getUserItemUsedUuid(int index) {
+        return userItemUsedUuid_.get(index);
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getUserItemUsedIdBytes(int index) {
-        return userItemUsedId_.getByteString(index);
+          getUserItemUsedUuidBytes(int index) {
+        return userItemUsedUuid_.getByteString(index);
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public Builder setUserItemUsedId(
+      public Builder setUserItemUsedUuid(
           int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureUserItemUsedIdIsMutable();
-        userItemUsedId_.set(index, value);
+  ensureUserItemUsedUuidIsMutable();
+        userItemUsedUuid_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public Builder addUserItemUsedId(
+      public Builder addUserItemUsedUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureUserItemUsedIdIsMutable();
-        userItemUsedId_.add(value);
+  ensureUserItemUsedUuidIsMutable();
+        userItemUsedUuid_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public Builder addAllUserItemUsedId(
+      public Builder addAllUserItemUsedUuid(
           java.lang.Iterable<java.lang.String> values) {
-        ensureUserItemUsedIdIsMutable();
+        ensureUserItemUsedUuidIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userItemUsedId_);
+            values, userItemUsedUuid_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public Builder clearUserItemUsedId() {
-        userItemUsedId_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      public Builder clearUserItemUsedUuid() {
+        userItemUsedUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string userItemUsedId = 2;</code>
+       * <code>repeated string userItemUsedUuid = 2;</code>
        *
        * <pre>
        *NOTE: not userItemUsed itemId	
        * </pre>
        */
-      public Builder addUserItemUsedIdBytes(
+      public Builder addUserItemUsedUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureUserItemUsedIdIsMutable();
-        userItemUsedId_.add(value);
+  ensureUserItemUsedUuidIsMutable();
+        userItemUsedUuid_.add(value);
         onChanged();
         return this;
       }
@@ -6216,48 +6216,17 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> 
-        getItemsUsedList();
+    java.util.List<java.lang.Integer> getItemIdsUsedList();
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index);
+    int getItemIdsUsedCount();
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    int getItemsUsedCount();
-    /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
-     */
-    java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
-        getItemsUsedOrBuilderList();
-    /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
-     */
-    com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
-        int index);
+    int getItemIdsUsed(int index);
 
     /**
      * <code>repeated .com.lvl6.proto.UserItemProto nuUserItems = 3;</code>
@@ -6368,12 +6337,25 @@ public final class EventItemProto {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 18: {
+            case 16: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                itemsUsed_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>();
+                itemIdsUsed_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              itemsUsed_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemUsageProto.PARSER, extensionRegistry));
+              itemIdsUsed_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                itemIdsUsed_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                itemIdsUsed_.add(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
             case 26: {
@@ -6393,7 +6375,7 @@ public final class EventItemProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          itemsUsed_ = java.util.Collections.unmodifiableList(itemsUsed_);
+          itemIdsUsed_ = java.util.Collections.unmodifiableList(itemIdsUsed_);
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           nuUserItems_ = java.util.Collections.unmodifiableList(nuUserItems_);
@@ -6451,59 +6433,26 @@ public final class EventItemProto {
       return sender_;
     }
 
-    public static final int ITEMSUSED_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_;
+    public static final int ITEMIDSUSED_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> itemIdsUsed_;
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> getItemsUsedList() {
-      return itemsUsed_;
+    public java.util.List<java.lang.Integer>
+        getItemIdsUsedList() {
+      return itemIdsUsed_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
-        getItemsUsedOrBuilderList() {
-      return itemsUsed_;
+    public int getItemIdsUsedCount() {
+      return itemIdsUsed_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
+     * <code>repeated int32 itemIdsUsed = 2;</code>
      */
-    public int getItemsUsedCount() {
-      return itemsUsed_.size();
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
-     */
-    public com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index) {
-      return itemsUsed_.get(index);
-    }
-    /**
-     * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-     *
-     * <pre>
-     *usageId not set
-     * </pre>
-     */
-    public com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
-        int index) {
-      return itemsUsed_.get(index);
+    public int getItemIdsUsed(int index) {
+      return itemIdsUsed_.get(index);
     }
 
     public static final int NUUSERITEMS_FIELD_NUMBER = 3;
@@ -6563,7 +6512,7 @@ public final class EventItemProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      itemsUsed_ = java.util.Collections.emptyList();
+      itemIdsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -6582,8 +6531,8 @@ public final class EventItemProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < itemsUsed_.size(); i++) {
-        output.writeMessage(2, itemsUsed_.get(i));
+      for (int i = 0; i < itemIdsUsed_.size(); i++) {
+        output.writeInt32(2, itemIdsUsed_.get(i));
       }
       for (int i = 0; i < nuUserItems_.size(); i++) {
         output.writeMessage(3, nuUserItems_.get(i));
@@ -6601,9 +6550,14 @@ public final class EventItemProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < itemsUsed_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, itemsUsed_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < itemIdsUsed_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(itemIdsUsed_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getItemIdsUsedList().size();
       }
       for (int i = 0; i < nuUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -6719,7 +6673,6 @@ public final class EventItemProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getItemsUsedFieldBuilder();
           getNuUserItemsFieldBuilder();
         }
       }
@@ -6735,12 +6688,8 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (itemsUsedBuilder_ == null) {
-          itemsUsed_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          itemsUsedBuilder_.clear();
-        }
+        itemIdsUsed_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         if (nuUserItemsBuilder_ == null) {
           nuUserItems_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -6783,15 +6732,11 @@ public final class EventItemProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (itemsUsedBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            itemsUsed_ = java.util.Collections.unmodifiableList(itemsUsed_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.itemsUsed_ = itemsUsed_;
-        } else {
-          result.itemsUsed_ = itemsUsedBuilder_.build();
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          itemIdsUsed_ = java.util.Collections.unmodifiableList(itemIdsUsed_);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
+        result.itemIdsUsed_ = itemIdsUsed_;
         if (nuUserItemsBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004)) {
             nuUserItems_ = java.util.Collections.unmodifiableList(nuUserItems_);
@@ -6820,31 +6765,15 @@ public final class EventItemProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (itemsUsedBuilder_ == null) {
-          if (!other.itemsUsed_.isEmpty()) {
-            if (itemsUsed_.isEmpty()) {
-              itemsUsed_ = other.itemsUsed_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureItemsUsedIsMutable();
-              itemsUsed_.addAll(other.itemsUsed_);
-            }
-            onChanged();
+        if (!other.itemIdsUsed_.isEmpty()) {
+          if (itemIdsUsed_.isEmpty()) {
+            itemIdsUsed_ = other.itemIdsUsed_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureItemIdsUsedIsMutable();
+            itemIdsUsed_.addAll(other.itemIdsUsed_);
           }
-        } else {
-          if (!other.itemsUsed_.isEmpty()) {
-            if (itemsUsedBuilder_.isEmpty()) {
-              itemsUsedBuilder_.dispose();
-              itemsUsedBuilder_ = null;
-              itemsUsed_ = other.itemsUsed_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              itemsUsedBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getItemsUsedFieldBuilder() : null;
-            } else {
-              itemsUsedBuilder_.addAllMessages(other.itemsUsed_);
-            }
-          }
+          onChanged();
         }
         if (nuUserItemsBuilder_ == null) {
           if (!other.nuUserItems_.isEmpty()) {
@@ -7015,316 +6944,70 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> itemsUsed_ =
-        java.util.Collections.emptyList();
-      private void ensureItemsUsedIsMutable() {
+      private java.util.List<java.lang.Integer> itemIdsUsed_ = java.util.Collections.emptyList();
+      private void ensureItemIdsUsedIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          itemsUsed_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.UserItemUsageProto>(itemsUsed_);
+          itemIdsUsed_ = new java.util.ArrayList<java.lang.Integer>(itemIdsUsed_);
           bitField0_ |= 0x00000002;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> itemsUsedBuilder_;
-
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto> getItemsUsedList() {
-        if (itemsUsedBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(itemsUsed_);
-        } else {
-          return itemsUsedBuilder_.getMessageList();
-        }
+      public java.util.List<java.lang.Integer>
+          getItemIdsUsedList() {
+        return java.util.Collections.unmodifiableList(itemIdsUsed_);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public int getItemsUsedCount() {
-        if (itemsUsedBuilder_ == null) {
-          return itemsUsed_.size();
-        } else {
-          return itemsUsedBuilder_.getCount();
-        }
+      public int getItemIdsUsedCount() {
+        return itemIdsUsed_.size();
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public com.lvl6.proto.ItemsProto.UserItemUsageProto getItemsUsed(int index) {
-        if (itemsUsedBuilder_ == null) {
-          return itemsUsed_.get(index);
-        } else {
-          return itemsUsedBuilder_.getMessage(index);
-        }
+      public int getItemIdsUsed(int index) {
+        return itemIdsUsed_.get(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public Builder setItemsUsed(
-          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
-        if (itemsUsedBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureItemsUsedIsMutable();
-          itemsUsed_.set(index, value);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.setMessage(index, value);
-        }
+      public Builder setItemIdsUsed(
+          int index, int value) {
+        ensureItemIdsUsedIsMutable();
+        itemIdsUsed_.set(index, value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public Builder setItemsUsed(
-          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
-        if (itemsUsedBuilder_ == null) {
-          ensureItemsUsedIsMutable();
-          itemsUsed_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          itemsUsedBuilder_.setMessage(index, builderForValue.build());
-        }
+      public Builder addItemIdsUsed(int value) {
+        ensureItemIdsUsedIsMutable();
+        itemIdsUsed_.add(value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public Builder addItemsUsed(com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
-        if (itemsUsedBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureItemsUsedIsMutable();
-          itemsUsed_.add(value);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.addMessage(value);
-        }
+      public Builder addAllItemIdsUsed(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureItemIdsUsedIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, itemIdsUsed_);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
+       * <code>repeated int32 itemIdsUsed = 2;</code>
        */
-      public Builder addItemsUsed(
-          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto value) {
-        if (itemsUsedBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureItemsUsedIsMutable();
-          itemsUsed_.add(index, value);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.addMessage(index, value);
-        }
+      public Builder clearItemIdsUsed() {
+        itemIdsUsed_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public Builder addItemsUsed(
-          com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
-        if (itemsUsedBuilder_ == null) {
-          ensureItemsUsedIsMutable();
-          itemsUsed_.add(builderForValue.build());
-          onChanged();
-        } else {
-          itemsUsedBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public Builder addItemsUsed(
-          int index, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder builderForValue) {
-        if (itemsUsedBuilder_ == null) {
-          ensureItemsUsedIsMutable();
-          itemsUsed_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          itemsUsedBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public Builder addAllItemsUsed(
-          java.lang.Iterable<? extends com.lvl6.proto.ItemsProto.UserItemUsageProto> values) {
-        if (itemsUsedBuilder_ == null) {
-          ensureItemsUsedIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, itemsUsed_);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public Builder clearItemsUsed() {
-        if (itemsUsedBuilder_ == null) {
-          itemsUsed_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public Builder removeItemsUsed(int index) {
-        if (itemsUsedBuilder_ == null) {
-          ensureItemsUsedIsMutable();
-          itemsUsed_.remove(index);
-          onChanged();
-        } else {
-          itemsUsedBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder getItemsUsedBuilder(
-          int index) {
-        return getItemsUsedFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder getItemsUsedOrBuilder(
-          int index) {
-        if (itemsUsedBuilder_ == null) {
-          return itemsUsed_.get(index);  } else {
-          return itemsUsedBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public java.util.List<? extends com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
-           getItemsUsedOrBuilderList() {
-        if (itemsUsedBuilder_ != null) {
-          return itemsUsedBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(itemsUsed_);
-        }
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder addItemsUsedBuilder() {
-        return getItemsUsedFieldBuilder().addBuilder(
-            com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder addItemsUsedBuilder(
-          int index) {
-        return getItemsUsedFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ItemsProto.UserItemUsageProto.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 2;</code>
-       *
-       * <pre>
-       *usageId not set
-       * </pre>
-       */
-      public java.util.List<com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder> 
-           getItemsUsedBuilderList() {
-        return getItemsUsedFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder> 
-          getItemsUsedFieldBuilder() {
-        if (itemsUsedBuilder_ == null) {
-          itemsUsedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ItemsProto.UserItemUsageProto, com.lvl6.proto.ItemsProto.UserItemUsageProto.Builder, com.lvl6.proto.ItemsProto.UserItemUsageProtoOrBuilder>(
-                  itemsUsed_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          itemsUsed_ = null;
-        }
-        return itemsUsedBuilder_;
       }
 
       private java.util.List<com.lvl6.proto.ItemsProto.UserItemProto> nuUserItems_ =
@@ -8403,27 +8086,26 @@ public final class EventItemProto {
       "eedUpsStatus\0225\n\titemsUsed\030\003 \003(\0132\".com.lv" +
       "l6.proto.UserItemUsageProto\"9\n\032TradeItem" +
       "ForSpeedUpsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\"j\n\036RemoveUserItemUsedRequestProto" +
+      "THER\020\002\"l\n\036RemoveUserItemUsedRequestProto" +
       "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\026\n\016userItemUsedId\030\002 \003(\t\"\346\001\n\037R",
-      "emoveUserItemUsedResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remove" +
-      "UserItemUsedResponseProto.RemoveUserItem" +
-      "UsedStatus\"7\n\030RemoveUserItemUsedStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\300\001\n!TradeIte" +
-      "mForResourcesRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\0225\n\ti" +
-      "temsUsed\030\002 \003(\0132\".com.lvl6.proto.UserItem" +
-      "UsageProto\0222\n\013nuUserItems\030\003 \003(\0132\035.com.lv",
-      "l6.proto.UserItemProto\"\362\001\n\"TradeItemForR" +
-      "esourcesResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022^\n\006statu" +
-      "s\030\002 \001(\0162N.com.lvl6.proto.TradeItemForRes" +
-      "ourcesResponseProto.TradeItemForResource" +
-      "sStatus\":\n\033TradeItemForResourcesStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventItem" +
-      "Proto"
+      "mUserProto\022\030\n\020userItemUsedUuid\030\002 \003(\t\"\346\001\n",
+      "\037RemoveUserItemUsedResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remo" +
+      "veUserItemUsedResponseProto.RemoveUserIt" +
+      "emUsedStatus\"7\n\030RemoveUserItemUsedStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\236\001\n!TradeI" +
+      "temForResourcesRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\023\n" +
+      "\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132" +
+      "\035.com.lvl6.proto.UserItemProto\"\362\001\n\"Trade",
+      "ItemForResourcesResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "^\n\006status\030\002 \001(\0162N.com.lvl6.proto.TradeIt" +
+      "emForResourcesResponseProto.TradeItemFor" +
+      "ResourcesStatus\":\n\033TradeItemForResources" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016E" +
+      "ventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8470,7 +8152,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RemoveUserItemUsedRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserItemUsedId", });
+        new java.lang.String[] { "Sender", "UserItemUsedUuid", });
     internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_RemoveUserItemUsedResponseProto_fieldAccessorTable = new
@@ -8482,7 +8164,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemsUsed", "NuUserItems", });
+        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", });
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new
