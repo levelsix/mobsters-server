@@ -202,21 +202,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       Date purchaseDate = us.getPurchaseTime();
-      long buildTimeMillis = 60000*struct.getMinutesToBuild();
+      
+      // Commented out to allow speedups to work
+//      long buildTimeMillis = 60000*struct.getMinutesToBuild();
       
       if (null != purchaseDate) {
-      	long timeBuildFinishes = purchaseDate.getTime() + buildTimeMillis;
-      	
-      	if (timeBuildFinishes > clientTime.getTime()) {
-      		log.warn(String.format(
-      			"building not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes=%s",
-      			us, clientTime, purchaseDate, timeBuildFinishes));
-      		continue;
-        }//else this building is done now     
+//      	long timeBuildFinishes = purchaseDate.getTime() + buildTimeMillis;
+//      	
+//      	if (timeBuildFinishes > clientTime.getTime()) {
+//      		log.warn(String.format(
+//      			"building not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes=%s",
+//      			us, clientTime, purchaseDate, timeBuildFinishes));
+//      		continue;
+//        }//else this building is done now     
         
         validUserStructIds.add(us.getId());
         validUserStructs.add(us);
-        timesBuildsFinished.add(new Timestamp(timeBuildFinishes));
+        timesBuildsFinished.add(clientTime);
         
       } else {
         log.warn("user struct has never been bought or purchased according to db. " + us);
