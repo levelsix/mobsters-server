@@ -240,8 +240,9 @@ public class SellUserMonsterController extends EventController {
 		//if user at max resources, user can still delete monster, but won't get any resources
 		if (0 != sum) {
 			if (!aUser.updateRelativeCashNaive(sum)) {
-				log.error("error updating user coins by " + sum + " not deleting "
-						+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
+				log.error(String.format(
+					"error updating user coins by %s. not deleting userMonstersIdsToCashAmounts=%s",
+					sum, userMonsterIdsToCashAmounts));
 				return false;
 			} else {
 				currencyChange.put(MiscMethods.cash, sum);
@@ -251,8 +252,9 @@ public class SellUserMonsterController extends EventController {
 		// delete the user monsters;
 		if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
 			int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
-			log.info("num user monsters deleted: " + num + "\t ids deleted: "
-					+ userMonsterIds);
+			log.info(String.format(
+				"num user monsters deleted: %s, ids deleted: %s",
+				num, userMonsterIds));
 		}
 		return success;
 	}

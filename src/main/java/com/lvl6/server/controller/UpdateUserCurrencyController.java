@@ -135,11 +135,13 @@ import com.lvl6.server.Locker;
       	
       }
       
-      //cheat code, reset user account
-      if (1234 == cashSpent && 1234 == oilSpent && 1234 == gemsSpent) {
-    	  log.info("resetting user " + aUser);
-    	  aUser.updateResetAccount();
-      }
+//      //cheat code, reset user account
+//      if (1234 == cashSpent && 1234 == oilSpent && 1234 == gemsSpent) {
+//    	  log.info(String.format(
+//    		  "resetting user %s",
+//    		  aUser);
+//    	  aUser.updateResetAccount();
+//      }
       
     } catch (Exception e) {
       log.error("exception in UpdateUserCurrencyController processEvent", e);
@@ -165,44 +167,30 @@ import com.lvl6.server.Locker;
   private boolean checkLegit(Builder resBuilder, User u, String userId, int cashSpent,
   		int oilSpent, int gemsSpent) {
     if (null == u) {
-      log.error("unexpected error: user is null. user=" + u);
+      log.error(String.format(
+    	  "user is null. userId=%s, user=%s", userId, u));
       return false;
     }
     
     if (cashSpent != Math.abs(cashSpent) || oilSpent != Math.abs(oilSpent) ||
     		gemsSpent != Math.abs(gemsSpent)) {
-    	log.error("client sent a negative value! all should be positive :(  cashSpent=" +
-    			cashSpent + "\t oilSpent=" + oilSpent + "\t gemsSpent=" + gemsSpent);
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	log.error(String.format(
+    		"negative value(s)! all should be positive :( cashSpent=%s, oilSpent=%s, gemsSpent=%s",
+    			cashSpent, oilSpent, gemsSpent));
+    	return false;
     }
     
     //CHECK MONEY
     if (!hasEnoughCash(resBuilder, u, cashSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     if (!hasEnoughOil(resBuilder, u, oilSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     if (!hasEnoughGems(resBuilder, u, gemsSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     return true;
@@ -212,8 +200,9 @@ import com.lvl6.server.Locker;
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
   	if (userCash < cashSpent) {
-  		log.error("user error: user does not have enough cash. userCash=" + userCash +
-  				"\t cashSpent=" + cashSpent);
+  		log.error(String.format(
+  			"not enough cash. userCash=%s, cashSpent=%s",
+  			userCash, cashSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_CASH);
   		return false;
   	}
@@ -225,8 +214,9 @@ import com.lvl6.server.Locker;
   	int userOil = u.getOil();
   	//if user's aggregate oil is < cost, don't allow transaction
   	if (userOil < oilSpent) {
-  		log.error("user error: user does not have enough oil. userOil=" + userOil +
-  				"\t oilSpent=" + oilSpent);
+  		log.error(String.format(
+  			"not enough oil. userOil=%s, oilSpent=%s",
+  			userOil, oilSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_OIL);
   		return false;
   	}
@@ -238,8 +228,9 @@ import com.lvl6.server.Locker;
   	int userGems = u.getGems();
   	//if user's aggregate gems is < cost, don't allow transaction
   	if (userGems < gemsSpent) {
-  		log.error("user error: user does not have enough gems. userGems=" + userGems +
-  				"\t gemsSpent=" + gemsSpent);
+  		log.error(String.format(
+  			"not enough gems. userGems=%s, gemsSpent=%s",
+  			userGems, gemsSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_GEMS);
   		return false;
   	}
@@ -255,30 +246,24 @@ import com.lvl6.server.Locker;
   	int gemsChange = -1 * Math.abs(gemsSpent);
   	int cashChange = -1 * Math.abs(cashSpent);
   	int oilChange = -1 * Math.abs(oilSpent);
-  	
-  	//if user is admin then allow any change
-	  if (u.isAdmin()) {
-	  	gemsChange = gemsSpent;
-	  	cashChange = cashSpent;
-	  	oilChange = oilSpent;
-	  }
-	  
-	  if (!updateUser(u, gemsChange, cashChange, oilChange)) {
-		  log.error("unexpected error: could not decrement user's gems by " +
-				  gemsChange + ", cash by " + cashChange + ", and oil by " + oilChange);
-		  return false;
-	  } else {
-	  	if (0 != gemsChange) {
-	  		currencyChange.put(MiscMethods.gems, gemsChange);
-	  	}
-	  	if (0 != cashChange) {
-	  		currencyChange.put(MiscMethods.cash, cashChange);
-	  	}
-	  	if (0 != oilChange) {
-	  		currencyChange.put(MiscMethods.oil, oilChange);
-	  	}
-	  }
-	  
+
+  	if (!updateUser(u, gemsChange, cashChange, oilChange)) {
+  		log.error(String.format(
+  			"could not decrement user's gems by %s, cash by %s, and oil by %s",
+  				gemsChange, cashChange, oilChange));
+  		return false;
+  	} else {
+  		if (0 != gemsChange) {
+  			currencyChange.put(MiscMethods.gems, gemsChange);
+  		}
+  		if (0 != cashChange) {
+  			currencyChange.put(MiscMethods.cash, cashChange);
+  		}
+  		if (0 != oilChange) {
+  			currencyChange.put(MiscMethods.oil, oilChange);
+  		}
+  	}
+
 	  return true;
   }
   
@@ -286,8 +271,9 @@ import com.lvl6.server.Locker;
 	  int numChange = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemsChange);
 
 	  if (numChange <= 0) {
-	  	log.error("unexpected error: problem with updating user gems, cash, and oil. gemChange=" +
-	  			gemsChange + ", cash= " + cashChange + ", oil=" + oilChange + " user=" + u);
+	  	log.error(String.format(
+	  		"problem updating user gems, cash, oil. gemChange=%s, cash=%s, oil=%s, user=%s",
+	  			gemsChange, cashChange, oilChange, u));
 	  	return false;
 	  }
 	  return true;

@@ -84,7 +84,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent)event)
         .getSubmitMonsterEnhancementRequestProto();
 
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     //get data client sent
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();

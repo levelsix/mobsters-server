@@ -172,7 +172,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     if (user.getClanId() == null || !user.getClanId().equals(clan.getId())) {
       resBuilder.setStatus(LeaveClanStatus.FAIL_NOT_IN_CLAN);
-      log.error("user's clan id is " + user.getClanId() + ", clan id is " + clan.getId());
+      log.error(String.format(
+    	  "user's clan id=%s, clan id=%s",
+    	  user.getClanId(), clan.getId()));
       return false;
     }
 
@@ -198,8 +200,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	int userClanMembersInClan = clanIdToSize.get(clanId);
       if (userClanMembersInClan > 1) {
         resBuilder.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
-        log.error("user is owner and he's not alone in clan, can't leave without switching ownership. user clan members are " 
-            + userClanMembersInClan);
+        String preface = "user is owner and he's not alone in clan,";
+        String preface2 = "can't leave without switching ownership."; 
+        log.error(String.format(
+        	"%s %s user clan members are %s", 
+            preface, preface2, userClanMembersInClan));
         return false;
       }
     }
@@ -235,13 +240,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private void deleteClan(Clan clan, List<String> userIds, User user) {
     if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
-      log.error("problem with marking clan id null for users with ids in " + userIds);
+      log.error(String.format(
+    	  "problem marking clan id null for users with ids in %s", userIds));
     } else {
       if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {
-        log.error("problem with deleting user clan data for clan with id " + clan.getId());
+        log.error(String.format(
+        	"problem with deleting user clan data for clan with id %s",
+        	clan.getId()));
       } else {
         if (!DeleteUtils.get().deleteClanWithClanId(clan.getId())) {
-          log.error("problem with deleting clan with id " + clan.getId());
+          log.error(String.format(
+        	  "problem with deleting clan with id %s",
+        	  clan.getId()));
         }
       }
     }

@@ -156,8 +156,9 @@ public class BeginObstacleRemovalController extends EventController{
 		
 		if (null == user || null == ofu) {
 			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
-			log.error("unexpected error: user or obstacle for user is null. user=" + user +
-					"\t userId=" + userId + "\t obstacleForUser=" + ofu + "\t ofuId=" + ofuId);
+			log.error(String.format(
+				"user or ofu is null. user=%s, userId=%s, ofu=%s, ofuId=%s",
+				user, userId, ofu, ofuId));
 			return false;
 		}
 		
@@ -191,8 +192,9 @@ public class BeginObstacleRemovalController extends EventController{
   	int userGems = u.getGems();
   	//if user's aggregate gems is < cost, don't allow transaction
   	if (userGems < gemsSpent) {
-  		log.error("user error: user does not have enough gems. userGems=" + userGems +
-  				"\t gemsSpent=" + gemsSpent);
+  		log.error(String.format(
+  			"not enough gems. userGems=%s, gemsSpent=%s",
+  			userGems, gemsSpent));
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_GEMS);
   		return false;
   	}
@@ -204,8 +206,9 @@ public class BeginObstacleRemovalController extends EventController{
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
   	if (userCash < cashSpent) {
-  		log.error("user error: user does not have enough cash. userCash=" + userCash +
-  				"\t cashSpent=" + cashSpent);
+  		log.error(String.format(
+  			"not enough cash. userCash=%s, cashSpent=%s",
+  			userCash, cashSpent));
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
   		return false;
   	}
@@ -217,8 +220,9 @@ public class BeginObstacleRemovalController extends EventController{
   	int userOil = u.getOil();
   	//if user's aggregate oil is < cost, don't allow transaction
   	if (userOil < oilSpent) {
-  		log.error("user error: user does not have enough oil. userOil=" + userOil +
-  				"\t oilSpent=" + oilSpent);
+  		log.error(String.format(
+  			"not enough oil. userOil=%s, oilSpent=%s",
+  			userOil, oilSpent));
   		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
   		return false;
   	}
@@ -250,8 +254,9 @@ public class BeginObstacleRemovalController extends EventController{
   	}
   	
   	if (!updateUser(user, gemsChange, cashChange, oilChange)) {
-		  log.error("unexpected error: could not decrement user's gems by " +
-				  gemsChange + ", cash by " + cashChange + " or oil by " + oilChange);
+		  log.error(String.format(
+			  "could not decrement user's gems by %s, cash by %s,  or oil by %s",
+			  gemsChange, cashChange, oilChange));
 		  return false;
 	  } else {
 	  	if (0 != gemsChange) {
@@ -266,7 +271,8 @@ public class BeginObstacleRemovalController extends EventController{
 	  }
 	  
   	int numUpdated = UpdateUtils.get().updateObstacleForUserRemovalTime(ofuId, clientTime);
-  	log.info("(obstacles, should be 1) numUpdated=" + numUpdated);
+  	log.info(String.format(
+  		"(obstacles, should be 1) numUpdated=%s", numUpdated));
   	return true;
   }
 
@@ -274,8 +280,9 @@ public class BeginObstacleRemovalController extends EventController{
 	  int numChange = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemsChange);
 
 	  if (numChange <= 0) {
-	  	log.error("unexpected error: problem with updating user gems, cash, and oil. gemChange=" +
-	  			gemsChange + ", cash= " + cashChange + ", oil=" + oilChange + " user=" + u);
+	  	log.error(String.format(
+	  		"problem updating user gems, cash, oil. gemChange=%s, cash=%s, oil=%s, user=%s",
+	  		gemsChange, cashChange, oilChange, u));
 	  	return false;
 	  }
 	  return true;

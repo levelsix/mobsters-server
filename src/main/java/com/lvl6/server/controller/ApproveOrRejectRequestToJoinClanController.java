@@ -227,7 +227,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		if (user == null || requester == null) {
 			resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
-			log.error("user is " + user + ", requester is " + requester);
+			log.error(String.format(
+				"user is %s, requester is %s",
+				user, requester));
 			return false;      
 		}
 		//    Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
@@ -313,7 +315,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return true;
 		} else {
 			if (!DeleteUtils.get().deleteUserClan(requester.getId(), user.getClanId())) {
-				log.error("problem with deleting user clan info for requester with id " + requester.getId() + " and clan id " + user.getClanId()); 
+				log.error(String.format(
+					"problem deleting UserClan for requesterId %s, and clan id %s",
+					requester.getId(), user.getClanId())); 
 				return false;
 			}
 			return true;

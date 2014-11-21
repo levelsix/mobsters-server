@@ -83,7 +83,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent)event).getHealMonsterRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
@@ -110,8 +110,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
     Map<String, UserMonsterHealingProto> newMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhNew); 
     
-    log.info("umchpList=" + umchpList + "\t userMonsterIdToExpectedHealth" +
-    		userMonsterIdToExpectedHealth + "\t userMonsterIds=" + userMonsterIds);
+    log.info(String.format(
+    	"umchpList=%s, userMonsterIdToExpectedHealth=%s, userMonsterIds=%s",
+    	umchpList, userMonsterIdToExpectedHealth, userMonsterIds));
     
     //set some values to send to the client (the response proto)
     HealMonsterResponseProto.Builder resBuilder = HealMonsterResponseProto.newBuilder();
@@ -361,13 +362,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (0 != cashChange || 0 != gemChange) {
   		
   		//CHARGE THE USER
-  		log.info("user before funds change. u=" + u + "\t cashChange=" + cashChange +
-  				"\t oilChange=" + oilChange + "\t gemChange=" + gemChange);
+  		log.info(String.format(
+  			"user before funds change. u=%s, cashChange=%s, oilChange=%s, gemChange=%s",
+  			u, cashChange, oilChange, gemChange));
+  		
   		int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
-  		log.info("user after funds change. u=" + u);
+  		log.info(String.format(
+  			"user after funds change. u=%s", u));
   		if (num != 1) {
-  			log.error("problem with updating user's funds. cashChange=" + cashChange +
-  					", gemCost=" + gemCost + ", user=" + u + "\t numUpdated=" + num);
+  			String preface = "problem with updating user's funds.";
+  			log.error(String.format(
+  				"% cashChange=%s, gemCost=%s, user=%s, numUpdated=%s",
+  				cashChange, gemCost, u, num));
   			return false;
   		} else {
   			//things went ok

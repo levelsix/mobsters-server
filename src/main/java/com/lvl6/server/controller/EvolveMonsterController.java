@@ -253,9 +253,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		//used in enhancing or is being healed
 		if (!Collections.disjoint(prospectiveEvolutionMfuIds, unavailableMfuIds))
 		{
-			log.error("at least one of the monsters provided is in healing or enhancing. enhancing=" +
-				alreadyEnhancing + "\t healing=" + alreadyHealing + "\t catalyst=" +
-					catalystUserMonsterId + "\t others=" + userMonsterIds);
+			log.error(String.format(
+				"at least one of the monsters is in healing or enhancing. enhancing=%s, healing=%s, catalyst=%s, others=%s",
+				alreadyEnhancing, alreadyHealing, catalystUserMonsterId, userMonsterIds));
 			return false;
 		}
 		
@@ -284,9 +284,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		int userGems = u.getGems();
 		//if user's aggregate gems is < cost, don't allow transaction
 		if (userGems < gemsSpent) {
-			log.error("user error: user does not have enough gems. userGems=" + userGems +
-					"\t gemsSpent=" + gemsSpent + "\t oilChange=" + oilChange + "\t catalyst=" +
-					catalyst + "\t userMonsterIds=" + userMonsterIds);
+			log.error(String.format(
+				"not enough gems. userGems=%s, gemsSpent=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
+				userGems, gemsSpent, oilChange, catalyst, userMonsterIds));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
@@ -301,9 +301,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		
 		//if user not spending gems check if user has enough oil
 		if (0 == gemsSpent && userOil < cost) {
-			log.error("user error: user does not have enough cash. cost=" + cost +
-					"\t oilChange=" + oilChange + "\t catalyst=" + catalyst + 
-					"\t userMonsterIds=" + userMonsterIds);
+			log.error(String.format(
+				"not enough oil. cost=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
+				cost, oilChange, catalyst, userMonsterIds));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_RESOURCES);
 			return false;
 		}
@@ -320,8 +320,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
-			log.error("problem with updating user stats: gemChange=" + gemChange
-					+ ", cashChange=" + oilChange + ", user is " + user);
+			log.error(String.format(
+				"problem updating user stats: gemChange=%s, oilChange=%s, user=%s",
+				gemChange, oilChange, user));
 			return false;
 			
 		} else {

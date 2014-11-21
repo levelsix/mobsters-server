@@ -311,28 +311,32 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			  expGained, cashGained, oilGained, numRevives, startTime,
 			  clientTime, userWon, cancelled, tsId);
 	  if (1 != num) {
-		  log.error("unexpected error: error when inserting into user_task_history. " +
-		  		"numInserted=" + num + " Attempting to undo shi");
+		  log.error(String.format(
+			  "error inserting into user_task_history. numInserted=%s. Attempting to undo shi",
+			  num));
 		  updateUser(u, -1 * expGained, -1 * cashGained,  -1 * oilGained, clientTime);
 		  return false;
 	  }
 	  
 	  //DELETE FROM TASK_FOR_USER TABLE
 	  num = DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(utId); 
-	  log.info("num rows deleted from task_for_user table. num=" + num);
+	  log.info(String.format(
+		  "num rows deleted from task_for_user table. num=%s", num));
 	  
 	  return true;
   }
   
   private boolean updateUser(User u, int expGained, int cashGained, int oilGained,
-		  Timestamp clientTime) {
+	  Timestamp clientTime)
+  {
 	  int energyChange = 0;
 	  if (!u.updateRelativeCashOilExpTasksCompleted(expGained, cashGained, oilGained, 1,
-	  		clientTime)) {
-		  log.error("problem with updating user stats post-task. expGained=" + expGained +
-		  		", cashGained=" + cashGained + ", oilGained=" + oilGained + ", increased" +
-				  " tasks completed by 1, energyChange=" + energyChange +
-				  ", clientTime=" + clientTime + ", user=" + u);
+		  clientTime)) {
+		  String preface = "problem updating user stats.";
+		  String midface = "increased tasks completed by 1,";
+		  log.error(String.format(
+			  "%s expGained=%s, cashGained=%s, oilGained=%s, %s energyChange=%s, clientTime=%s, user=%s",
+			  preface, expGained, cashGained, oilGained, energyChange, clientTime, u));
 		  return false;
 	  }
 	  return true;

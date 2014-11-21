@@ -64,7 +64,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     PurchaseNormStructureRequestProto reqProto = ((PurchaseNormStructureRequestEvent)event).getPurchaseNormStructureRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format(
+    	"reqProto=%s", reqProto));
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
@@ -110,7 +111,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     try {
       //get things from the db
       User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
-      log.info("user=" + user);
+      log.info(String.format("user=%s", user));
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
 
       //currency history purposes
@@ -176,14 +177,16 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       User user, Timestamp timeOfPurchase, int gemsSpent, int resourceChange,
       ResourceType resourceType) {
     if (user == null || prospective == null || timeOfPurchase == null) {
-      log.error("parameter passed in is null. user=" + user + ", struct=" + prospective 
-          + ", timeOfPurchase=" + timeOfPurchase);
+      log.error(String.format(
+    	  "parameter passed in is null. user=%s\t struct=%s\t timeOfPurchase=%s",
+    	  user, prospective, timeOfPurchase));
       return false;
     }
     ResourceType structResourceType = ResourceType.valueOf(prospective.getBuildResourceType());
     if (resourceType != structResourceType) {
-      log.error("client is specifying unexpected resource type. actual=" + resourceType +
-          "\t expected=" + structResourceType + "\t structure=" + prospective);
+      log.error(String.format(
+    	  "unexpected resource type. actual=%s, expected=%s, structure=%s",
+    	  resourceType, structResourceType, prospective));
       return false;
     }
 
@@ -193,8 +196,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (gemsSpent > 0) {
       if (userGems < gemsSpent) {
         //doesn't have enough gems
-        log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
-            resourceChange  + " " + resourceType + " to buy structure=" + prospective);
+        log.error(String.format(
+        	"user has %s gems; trying to spend %s and %s %s to buy structure=%s",
+        	userGems, gemsSpent, resourceChange, resourceType, prospective));
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
         return false;
       } else {
@@ -211,21 +215,25 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (resourceType == ResourceType.CASH) {
       int userResource = user.getCash();
       if (userResource < requiredResourceAmount) {
-        log.error("not enough cash to buy structure. cash=" + userResource +
-            "\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+        log.error(String.format(
+        	"not enough cash. cash=%s, cost=%s, structure=%s",
+        	userResource, requiredResourceAmount, prospective));
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
         return false;
       }
     } else if (resourceType == ResourceType.OIL) {
       int userResource = user.getOil();
       if (userResource < requiredResourceAmount) {
-        log.error("not enough oil to buy structure. oil=" + userResource +
-            "\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+        log.error(String.format(
+        	"not enough oil. oil=%s, cost=%s, structure=%s",
+        	userResource, requiredResourceAmount, prospective));
         resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
         return false;
       }
     } else {
-      log.error("unknown resource type: " + resourceType + "\t structure=" + prospective);
+      log.error(String.format(
+    	  "unknown resource type: %s, structure=%s",
+    	  resourceType, prospective));
       return false;
     }
 
@@ -243,8 +251,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     String userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
         lastRetrievedTime, isComplete);
     if (userStructId == null) {
-      log.error("problem with giving struct " + structId + " at " + purchaseTime +
-          " on " + cp);
+      log.error(String.format(
+    	  "problem with giving struct %s at %s on %s",
+    	  structId, purchaseTime, cp));
       return false;
     }
 
@@ -260,15 +269,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
 
     if (0 == gemChange && 0 == cashChange && 0 == oilChange) {
-      log.error("gemChange=" + gemChange + " cashChange=" + cashChange + " oilChange=" +
-          oilChange + "\t Not purchasing norm struct.");
+      log.error(String.format(
+    	  "gemChange=%s, cashChange=%s, oilChange=%s. Not purchasing norm struct.",
+    	  gemChange, cashChange, oilChange));
       return false;
     }
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
-      log.error("problem with updating user currency. gemChange=" + gemChange +
-          " cashChange=" + cashChange + "\t numRowsUpdated=" + num);
+      log.error(String.format(
+    	  "can't update user currency. gemChange=%s, cashChange=%s, numRowsUpdated=%s",
+    	  gemChange, cashChange, num));
       return false;
     } else {//things went ok
       if (0 != gemChange) {

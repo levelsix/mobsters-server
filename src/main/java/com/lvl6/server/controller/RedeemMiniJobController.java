@@ -278,9 +278,9 @@ public class RedeemMiniJobController extends EventController{
     int monsterIdReward = mj.getMonsterIdReward();
 
     if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange, maxOil)) {
-      log.error("unexpected error: could not decrement user gems by " +
-          gemsChange + ", cash by " + cashChange + ", and oil by " +
-          oilChange);
+      log.error(String.format(
+    	  "could not decrement user gems by %s, cash by %s, and oil by %s",
+          gemsChange, cashChange, oilChange));
       return false;
     } else {
       if (0 != gemsChange) {

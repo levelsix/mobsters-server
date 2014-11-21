@@ -162,8 +162,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Structure currentStruct, Structure nextLevelStruct, int gemsSpent, int resourceChange, 
       ResourceType rt,Timestamp timeOfUpgrade) {
     if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
-      log.error("parameter passed in is null. user=" + user + ", user struct=" + userStruct + 
-          ", userStruct's last retrieve time=" + userStruct.getLastRetrieved());
+      log.error(String.format(
+    	  "parameter passed in is null. user=%s, userStruct=%s, userStruct's lastRetrieveTime=%s",
+    	  user, userStruct, userStruct.getLastRetrieved()));
       return false;
     }
     if (!userStruct.isComplete()) {
@@ -173,30 +174,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     if (null == nextLevelStruct) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
-      log.error("user struct at max level already. struct is " + currentStruct);
+      log.error(String.format(
+    	  "user struct at max level already. struct is %s", currentStruct));
       return false;
     }
     if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
-      log.error("the upgrade time " + timeOfUpgrade + " is before the last time the building was retrieved:"
-          + userStruct.getLastRetrieved());
+      log.error(String.format(
+    	  "the upgrade time %s is before the last time the building was retrieved:%s",
+    	  timeOfUpgrade, userStruct.getLastRetrieved()));
       return false;
     }
     //see if the user can upgrade it
     if (!user.getId().equals(userStruct.getUserId())) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
-      log.error("user struct belongs to someone else with id " + userStruct.getUserId());
+      log.error(String.format(
+    	  "user struct belongs to someone else with id=%s",
+    	  userStruct.getUserId()));
       return false;
     }
 
     if (gemsSpent < 0) {
-      log.warn("gemsSpent is negative! gemsSpent=" + gemsSpent);
+      log.warn(String.format(
+    	  "gemsSpent is negative! gemsSpent=%s", gemsSpent));
       gemsSpent = Math.abs(gemsSpent);
     }
     int userGems = user.getGems();
     if (gemsSpent > 0 && userGems < gemsSpent) {
-      log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
-          resourceChange  + " " + rt + " to upgrade to structure=" + nextLevelStruct);
+      log.error(String.format(
+    	  "user has %s gems; trying to spend %s and %s %s to upgrade to structure=%s",
+    	  userGems, gemsSpent, resourceChange, rt, nextLevelStruct));
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
       return false;
     }
@@ -208,13 +215,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (ResourceType.CASH.equals(rt)) {
       if (user.getCash() < resourceRequired) {
         resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-        log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + resourceChange);
+        log.error(String.format(
+        	"user doesn't have enough cash, has %s, needs %s",
+        	user.getCash(), resourceChange));
         return false;
       }
     } else if (ResourceType.OIL.equals(rt)){
       if (user.getOil() < resourceRequired) {
         resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
-        log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + resourceChange);
+        log.error(String.format(
+        	"user doesn't have enough gems, has %s, needs %s",
+        	user.getGems(), resourceChange));
         return false;
       }
     }
@@ -243,8 +254,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //upgrade the user's struct
     if (!UpdateUtils.get().updateBeginUpgradingUserStruct(userStruct.getId(),
         newStructId, timeOfUpgrade)) {
-      log.error("problem with changing time of upgrade to " + timeOfUpgrade + 
-          " and marking as incomplete, the user struct " + userStruct);
+      log.error(String.format(
+    	  "problem with changing time of upgrade to %s and marking as incomplete, userStruct=%",
+    	  timeOfUpgrade, userStruct));
     }
 
     //charge the user  	
@@ -260,8 +272,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
-      log.error("problem with updating user currency. gemChange=" + gemChange +
-          " cashChange=" + cashChange + "\t oilChange=" + oilChange + "\t numRowsUpdated=" + num);
+      log.error(String.format(
+    	  "problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
+    	  gemChange, cashChange, oilChange, num));
     } else {//things went ok
       if (0 != gemChange) {
         money.put(MiscMethods.gems, gemChange);
@@ -273,8 +286,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         money.put(MiscMethods.oil, oilChange);
       }
     }
-
-
 
   }
 

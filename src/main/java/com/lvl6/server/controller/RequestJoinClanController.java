@@ -258,13 +258,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
     if (user == null || clan == null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
-      log.error("user is " + user + ", clan is " + clan);
+      log.error(String.format(
+    	  "user is %s, clan is ",
+    	  user, clan));
       return false;      
     }
     String clanId = user.getClanId();
     if (clanId != null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
-      log.error("user is already in clan with id " + clanId);
+      log.error(String.format(
+    	  "user is already in clan with id %s", clanId));
       return false;      
     }
     
@@ -278,7 +281,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     UserClan uc = getUserClanRetrieveUtils().getSpecificUserClan(user.getId(), clanId);
     if (uc != null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_REQUEST_ALREADY_FILED);
-      log.error("user clan already exists for this: " + uc);
+      log.error(String.format("user clan already exists for this: %s", uc));
       return false;      
     }
 
@@ -306,8 +309,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
     if (size >= maxSize) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_CLAN_IS_FULL);
-      log.warn("user error: trying to join full clan with id " + clanId +
-      		" cur size=" + maxSize);
+      log.warn(String.format(
+    	  "trying to join full clan with id %s, cur size=%s",
+    	  clanId, maxSize));
       return false;      
     }
     clanSizeList.add(size);
@@ -330,7 +334,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     
     if (!InsertUtils.get().insertUserClan(userId, clanId, userClanStatus, new Timestamp(new Date().getTime()))) {
-      log.error("unexpected error: problem with inserting user clan data for user " + user + ", and clan id " + clanId);
+      log.error(String.format(
+    	  "problem inserting user clan data for user=%s, and clan id %s",
+    	  user, clanId));
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
       return false;
     } 
@@ -338,12 +344,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean deleteUserClanInserted = false;
     //update user to reflect he joined clan if the clan does not require a request to join
     if (!requestToJoinRequired) {
-      if (!user.updateRelativeCoinsAbsoluteClan(0, clanId)) {
-        //could not change clan_id for user
-        log.error("unexpected error: could not change clan id for requester " + user + " to " + clanId 
-            + ". Deleting user clan that was just created.");
-        deleteUserClanInserted = true;
-      } else {
+    	if (!user.updateRelativeCoinsAbsoluteClan(0, clanId)) {
+    		//could not change clan_id for user
+    		String preface = "could not change clanId for";
+    		String postface = "Deleting user clan that was just created.";
+    		log.error(String.format(
+    			"%s requester %s to %s. %s",
+    			preface, user, clanId, postface));
+    		deleteUserClanInserted = true;
+    	} else {
         //successfully changed clan_id in current user
         //get rid of all other join clan requests
         //don't know if this next line will always work...

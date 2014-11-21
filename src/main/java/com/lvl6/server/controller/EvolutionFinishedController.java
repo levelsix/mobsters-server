@@ -214,8 +214,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		String two = evolution.getMonsterForUserIdTwo();
 		if (!existingUserMonsters.containsKey(catalystUserMonsterId) ||
 				!existingUserMonsters.containsKey(one) || !existingUserMonsters.containsKey(two)) {
-			log.error("one of the monsters in an evolution is missing. evolution=" + evolution +
-					"\t existingUserMonsters=" + existingUserMonsters);
+			log.error(String.format(
+				"one of the monsters in an evolution is missing. evolution=%s, existingUserMonsters=%s",
+				evolution, existingUserMonsters));
 			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
 			return false;
 		}

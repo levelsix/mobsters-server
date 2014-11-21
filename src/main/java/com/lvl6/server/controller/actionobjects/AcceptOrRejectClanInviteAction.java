@@ -229,7 +229,6 @@ public class AcceptOrRejectClanInviteAction
 				return false;
 			} 
 
-			
 		}
 		
 		return true;

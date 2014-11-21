@@ -107,8 +107,8 @@ import com.lvl6.server.Locker;
       	previousCurrency.put(MiscMethods.cash, user.getCash());
       	previousCurrency.put(MiscMethods.oil, user.getOil());
       	previousCurrency.put(MiscMethods.gems, user.getGems());
-      	successful = writeChangesToDb(user, numGems, resourceType, numResources, maxCash,
-      			maxOil, currencyChange);
+      	successful = writeChangesToDb(user, numGems, resourceType, numResources,
+      		maxCash, maxOil, currencyChange);
       }
       if (successful) {
       	resBuilder.setStatus(ExchangeGemsForResourcesStatus.SUCCESS);
@@ -167,7 +167,8 @@ import com.lvl6.server.Locker;
   }
 
   private boolean writeChangesToDb(User user, int numGems, ResourceType resourceType,
-  		int numResources, int maxCash, int maxOil, Map<String, Integer> currencyChange) {
+  		int numResources, int maxCash, int maxOil,
+  		Map<String, Integer> currencyChange) {
   	boolean success = true;
   	log.info(String.format(
   		"exchanging %s gems for %s %s",
@@ -194,9 +195,13 @@ import com.lvl6.server.Locker;
   	}
   	
   	if (0 == oilChange && 0 == cashChange) {
-  		log.error("oil and cash (user exchanged) for gems are both 0. oilChange=" +
-  				oilChange + "\t cashChange=" + cashChange + "\t gemChange=" + gemChange +
-  				"\t maxOil=" + maxOil + "\t maxCash=" + maxCash);
+//  		log.error("oil and cash (user exchanged) for gems are both 0. oilChange=" +
+//  				oilChange + "\t cashChange=" + cashChange + "\t gemChange=" + gemChange +
+//  				"\t maxOil=" + maxOil + "\t maxCash=" + maxCash);
+  		String preface = "oil and cash (user exchanged) for gems are both 0.";
+  		log.error(String.format(
+  			"%s oilChange=%s, cashChange=%s, gemChange=%s",
+  			preface, oilChange, cashChange, gemChange));
   		return false;
   	}
   	

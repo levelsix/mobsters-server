@@ -329,8 +329,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   		int attackerEloChange = attackerEloChangeList.get(0); //already pos or neg
   		int defenderEloChange = defenderEloChangeList.get(0); //already pos or neg
-  		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashStolen, attackerWon);
-  		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilStolen, attackerWon);
+  		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash,
+  			cashStolen, attackerWon);
+  		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil,
+  			oilStolen, attackerWon);
   		
   		PvpLeagueForUser attackerPrevPlfu = new PvpLeagueForUser(attackerPlfu);
   		//attackerPlfu will be updated

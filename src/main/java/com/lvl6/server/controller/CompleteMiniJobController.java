@@ -233,7 +233,8 @@ public class CompleteMiniJobController extends EventController{
 		int numUpdated = UpdateUtils.get().updateMiniJobForUserCompleteTime(
 			userId, userMiniJobId, clientTime);
 		
-		log.info("writeChangesToDB() numUpdated=" + numUpdated);
+		log.info(String.format(
+			"writeChangesToDB() numUpdated=%s", numUpdated));
 		
 		return true;
 	}
