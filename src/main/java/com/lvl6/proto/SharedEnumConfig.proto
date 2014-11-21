@@ -55,6 +55,8 @@ enum GameActionType {
 	ENHANCE_TIME = 6;
 	REMOVE_OBSTACLE = 7;
 	COMBINE_MONSTER = 8;
+	ENTER_PERSISTENT_EVENT = 9;
+	GAME_ACTION_TYPE_RESEARCH = 10; //all enums not in "message" share namespace 
 }
 
 enum GameType {
