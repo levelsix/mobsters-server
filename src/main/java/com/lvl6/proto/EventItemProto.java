@@ -6203,17 +6203,17 @@ public final class EventItemProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
      * <code>repeated int32 itemIdsUsed = 2;</code>
@@ -6325,11 +6325,11 @@ public final class EventItemProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = sender_.toBuilder();
               }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(sender_);
                 sender_ = subBuilder.buildPartial();
@@ -6413,23 +6413,23 @@ public final class EventItemProto {
 
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -6511,7 +6511,7 @@ public final class EventItemProto {
     }
 
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       itemIdsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
     }
@@ -6683,7 +6683,7 @@ public final class EventItemProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -6828,19 +6828,19 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -6848,9 +6848,9 @@ public final class EventItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6864,10 +6864,10 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -6878,14 +6878,14 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -6897,11 +6897,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -6910,17 +6910,17 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -6928,14 +6928,14 @@ public final class EventItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   getSender(),
                   getParentForChildren(),
                   isClean());
@@ -7338,17 +7338,17 @@ public final class EventItemProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
@@ -7412,11 +7412,11 @@ public final class EventItemProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = sender_.toBuilder();
               }
-              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(sender_);
                 sender_ = subBuilder.buildPartial();
@@ -7558,23 +7558,23 @@ public final class EventItemProto {
 
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
 
@@ -7594,7 +7594,7 @@ public final class EventItemProto {
     }
 
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -7752,7 +7752,7 @@ public final class EventItemProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -7848,19 +7848,19 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
@@ -7868,9 +7868,9 @@ public final class EventItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7884,10 +7884,10 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -7898,14 +7898,14 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -7917,11 +7917,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -7930,17 +7930,17 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -7948,14 +7948,14 @@ public final class EventItemProto {
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   getSender(),
                   getParentForChildren(),
                   isClean());
@@ -8094,18 +8094,19 @@ public final class EventItemProto {
       "to\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remo" +
       "veUserItemUsedResponseProto.RemoveUserIt" +
       "emUsedStatus\"7\n\030RemoveUserItemUsedStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\236\001\n!TradeI" +
-      "temForResourcesRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\023\n" +
-      "\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132" +
-      "\035.com.lvl6.proto.UserItemProto\"\362\001\n\"Trade",
-      "ItemForResourcesResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "^\n\006status\030\002 \001(\0162N.com.lvl6.proto.TradeIt" +
-      "emForResourcesResponseProto.TradeItemFor" +
-      "ResourcesStatus\":\n\033TradeItemForResources" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016E" +
-      "ventItemProto"
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\256\001\n!TradeI" +
+      "temForResourcesRequestProto\022@\n\006sender\030\001 " +
+      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
+      "hMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nu" +
+      "UserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIte",
+      "mProto\"\202\002\n\"TradeItemForResourcesResponse" +
+      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
+      "inimumUserProtoWithMaxResources\022^\n\006statu" +
+      "s\030\002 \001(\0162N.com.lvl6.proto.TradeItemForRes" +
+      "ourcesResponseProto.TradeItemForResource" +
+      "sStatus\":\n\033TradeItemForResourcesStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventItem" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
