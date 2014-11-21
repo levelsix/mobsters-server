@@ -112,14 +112,12 @@ public class Attachment {
     if (readBuff.remaining() >= payloadSize) {
       try {
         readBuff.get(payload, 0, payloadSize);
+        return true;
       }
       catch (BufferUnderflowException bue) {
         log.error("buffer underflow", bue);
       }
-      return true;
     }
-    else {
-      return false;
-    }
+    return false;
   }
 }// Attachment
