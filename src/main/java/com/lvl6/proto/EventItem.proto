@@ -79,11 +79,14 @@ message RemoveUserItemUsedResponseProto {
 //------------------------------------------------------------------------------------------
 
 message TradeItemForResourcesRequestProto {
+	//NOTE: server not enforcing resource cap
 	optional MinimumUserProtoWithMaxResources sender = 1;
 	repeated int32 itemIdsUsed = 2;
 	
 	//updated quantity of user's items after using said items
 	repeated UserItemProto nuUserItems = 3;		
+	
+	optional int64 clientTime = 4;
 }
 
 message TradeItemForResourcesResponseProto {

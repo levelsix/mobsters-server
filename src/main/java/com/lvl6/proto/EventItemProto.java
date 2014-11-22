@@ -6204,14 +6204,26 @@ public final class EventItemProto {
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     boolean hasSender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
@@ -6271,6 +6283,15 @@ public final class EventItemProto {
      */
     com.lvl6.proto.ItemsProto.UserItemProtoOrBuilder getNuUserItemsOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesRequestProto}
@@ -6366,6 +6387,11 @@ public final class EventItemProto {
               nuUserItems_.add(input.readMessage(com.lvl6.proto.ItemsProto.UserItemProto.PARSER, extensionRegistry));
               break;
             }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6416,18 +6442,30 @@ public final class EventItemProto {
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+     *
+     * <pre>
+     *NOTE: server not enforcing resource cap
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
@@ -6510,10 +6548,26 @@ public final class EventItemProto {
       return nuUserItems_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 4;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       itemIdsUsed_ = java.util.Collections.emptyList();
       nuUserItems_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6536,6 +6590,9 @@ public final class EventItemProto {
       }
       for (int i = 0; i < nuUserItems_.size(); i++) {
         output.writeMessage(3, nuUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(4, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6562,6 +6619,10 @@ public final class EventItemProto {
       for (int i = 0; i < nuUserItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, nuUserItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6696,6 +6757,8 @@ public final class EventItemProto {
         } else {
           nuUserItemsBuilder_.clear();
         }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6746,6 +6809,10 @@ public final class EventItemProto {
         } else {
           result.nuUserItems_ = nuUserItemsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6801,6 +6868,9 @@ public final class EventItemProto {
             }
           }
         }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -6833,12 +6903,20 @@ public final class EventItemProto {
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
@@ -6849,6 +6927,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
@@ -6865,6 +6947,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
@@ -6879,6 +6965,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
@@ -6898,6 +6988,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public Builder clearSender() {
         if (senderBuilder_ == null) {
@@ -6911,6 +7005,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
@@ -6919,6 +7017,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
@@ -6929,6 +7031,10 @@ public final class EventItemProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;</code>
+       *
+       * <pre>
+       *NOTE: server not enforcing resource cap
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
@@ -7320,6 +7426,38 @@ public final class EventItemProto {
           nuUserItems_ = null;
         }
         return nuUserItemsBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000008;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TradeItemForResourcesRequestProto)
@@ -8094,19 +8232,19 @@ public final class EventItemProto {
       "to\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Remo" +
       "veUserItemUsedResponseProto.RemoveUserIt" +
       "emUsedStatus\"7\n\030RemoveUserItemUsedStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\256\001\n!TradeI" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\302\001\n!TradeI" +
       "temForResourcesRequestProto\022@\n\006sender\030\001 " +
       "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
       "hMaxResources\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nu" +
       "UserItems\030\003 \003(\0132\035.com.lvl6.proto.UserIte",
-      "mProto\"\202\002\n\"TradeItemForResourcesResponse" +
-      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
-      "inimumUserProtoWithMaxResources\022^\n\006statu" +
-      "s\030\002 \001(\0162N.com.lvl6.proto.TradeItemForRes" +
-      "ourcesResponseProto.TradeItemForResource" +
-      "sStatus\":\n\033TradeItemForResourcesStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventItem" +
-      "Proto"
+      "mProto\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\"TradeItem" +
+      "ForResourcesResponseProto\022@\n\006sender\030\001 \001(" +
+      "\01320.com.lvl6.proto.MinimumUserProtoWithM" +
+      "axResources\022^\n\006status\030\002 \001(\0162N.com.lvl6.p" +
+      "roto.TradeItemForResourcesResponseProto." +
+      "TradeItemForResourcesStatus\":\n\033TradeItem" +
+      "ForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
+      "OTHER\020\002B\020B\016EventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8165,7 +8303,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_TradeItemForResourcesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", });
+        new java.lang.String[] { "Sender", "ItemIdsUsed", "NuUserItems", "ClientTime", });
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_TradeItemForResourcesResponseProto_fieldAccessorTable = new

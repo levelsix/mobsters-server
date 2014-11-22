@@ -410,7 +410,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     reasonsForChanges.put(gems, reasonForChange);
     details.put(gems, detailSb.toString());
     
-    log.info("DETAILS=" + detailSb.toString());
+    log.info(String.format(
+    	"DETAILS=%s", detailSb.toString()));
     MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurrencies,
     		currentCurrencies, reasonsForChanges, details);
   }

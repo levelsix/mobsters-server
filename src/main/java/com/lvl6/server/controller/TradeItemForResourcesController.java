@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForResourcesRequestEvent;
 import com.lvl6.events.response.TradeItemForResourcesResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
+import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
@@ -64,6 +68,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<Integer> itemIdsUsed = reqProto.getItemIdsUsedList();
 		List<UserItemProto> nuUserItemsProtos = reqProto.getNuUserItemsList();
 
+		Timestamp date = new Timestamp(reqProto.getClientTime());
+		
 		TradeItemForResourcesResponseProto.Builder resBuilder = TradeItemForResourcesResponseProto.newBuilder();
 		resBuilder.setSender(mupMaxResources);
 		resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
@@ -110,6 +116,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setTradeItemForResourcesResponseProto(resProto);
 			server.writeEvent(resEvent);
 
+			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder.getStatus()))
+			{
+				User user = tifsua.getUser();
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+				
+				writeToCurrencyHistory(userId, date, tifsua);
+			}
+			
 		} catch (Exception e) {
 			log.error("exception in TradeItemForResourcesController processEvent", e);
 			try {
@@ -126,6 +143,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName()); 
 		}
 	}
+	
+	private void writeToCurrencyHistory(String userId, Timestamp date,
+		TradeItemForResourcesAction tifsua)
+	{
+		MiscMethods.writeToUserCurrencyOneUser(userId, date,
+			tifsua.getCurrencyDeltas(), tifsua.getPreviousCurrencies(),
+    		tifsua.getCurrentCurrencies(), tifsua.getReasons(),
+    		tifsua.getDetails());
+	}
+	
 
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
 	{
