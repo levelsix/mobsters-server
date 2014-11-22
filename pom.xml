@@ -113,7 +113,7 @@
 		<lvl6.elastic.search.cluster.name>lvl6_robot</lvl6.elastic.search.cluster.name>
 		<lvl6.elastic.search.hosts>robot.lvl6.com</lvl6.elastic.search.hosts>
 
-		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm</maven.build.timestamp.format>
 		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
 		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
