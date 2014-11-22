@@ -1,0 +1,10 @@
+#Copy SSL Certs 
+
+- synchronize: src=files/rabbitmq dest=/etc/rabbitmq
+
+
+# Install the package "rabbitmq-server"
+
+- apt: name=rabbitmq-server state=present update_cache=yes cache_valid_time=1000
+
+
