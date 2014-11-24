@@ -231,7 +231,7 @@
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
 					<configurationTemplate>${ec2.configuration}</configurationTemplate>
-					<templateName>mobsters-prod-2014-10-21</templateName>
+					<templateName>${ec2.configuration}</templateName>
 					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7 Java 7</solutionStack>
 					<configurationTemplates>
 						<configurationTemplate>

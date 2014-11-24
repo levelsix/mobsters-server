@@ -1,5 +1,0 @@
----
-- hosts: amqpservers
-  roles:
-     - common
-     - amqp
