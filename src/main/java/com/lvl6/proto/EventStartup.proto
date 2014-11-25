@@ -198,7 +198,7 @@ message StartupResponseProto {
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;
 			optional int32 maxClanSize = 5;
-			optional int32 questIdForClanRewards = 6;
+			repeated int32 achievementIdsForClanRewards = 6;
 		}
 		message DownloadableNibConstants {
 			optional string mapNibName = 1;

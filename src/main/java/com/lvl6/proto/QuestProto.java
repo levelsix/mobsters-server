@@ -3286,18 +3286,6 @@ public final class QuestProto {
        * </pre>
        */
       COLLECT_SPECIAL_ITEM(5, 6),
-      /**
-       * <code>SOLICIT_HELP = 7;</code>
-       *
-       * <pre>
-       * For Squad Rewards
-       * </pre>
-       */
-      SOLICIT_HELP(6, 7),
-      /**
-       * <code>GIVE_HELP = 8;</code>
-       */
-      GIVE_HELP(7, 8),
       ;
 
       /**
@@ -3357,18 +3345,6 @@ public final class QuestProto {
        * </pre>
        */
       public static final int COLLECT_SPECIAL_ITEM_VALUE = 6;
-      /**
-       * <code>SOLICIT_HELP = 7;</code>
-       *
-       * <pre>
-       * For Squad Rewards
-       * </pre>
-       */
-      public static final int SOLICIT_HELP_VALUE = 7;
-      /**
-       * <code>GIVE_HELP = 8;</code>
-       */
-      public static final int GIVE_HELP_VALUE = 8;
 
 
       public final int getNumber() { return value; }
@@ -3381,8 +3357,6 @@ public final class QuestProto {
           case 4: return COMPLETE_TASK;
           case 5: return UPGRADE_STRUCT;
           case 6: return COLLECT_SPECIAL_ITEM;
-          case 7: return SOLICIT_HELP;
-          case 8: return GIVE_HELP;
           default: return null;
         }
       }
@@ -7688,29 +7662,29 @@ public final class QuestProto {
       "fset\030\021 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
       "oto\022;\n\016monsterElement\030\023 \001(\0162\027.com.lvl6.p" +
       "roto.Element:\nNO_ELEMENT\022+\n\004jobs\030\025 \003(\0132\035" +
-      ".com.lvl6.proto.QuestJobProto\"\247\003\n\rQuestJ" +
+      ".com.lvl6.proto.QuestJobProto\"\206\003\n\rQuestJ" +
       "obProto\022\022\n\nquestJobId\030\001 \001(\005\022\017\n\007questId\030\002" +
       " \001(\005\022@\n\014questJobType\030\003 \001(\0162*.com.lvl6.pr" +
       "oto.QuestJobProto.QuestJobType\022\023\n\013descri",
       "ption\030\004 \001(\t\022\024\n\014staticDataId\030\005 \001(\005\022\020\n\010qua" +
       "ntity\030\006 \001(\005\022\020\n\010priority\030\007 \001(\005\022\016\n\006cityId\030" +
-      "\010 \001(\005\022\024\n\014cityAssetNum\030\t \001(\005\"\271\001\n\014QuestJob" +
+      "\010 \001(\005\022\024\n\014cityAssetNum\030\t \001(\005\"\230\001\n\014QuestJob" +
       "Type\022\031\n\025KILL_SPECIFIC_MONSTER\020\001\022\030\n\024KILL_" +
       "MONSTER_IN_CITY\020\002\022\022\n\016DONATE_MONSTER\020\003\022\021\n" +
       "\rCOMPLETE_TASK\020\004\022\022\n\016UPGRADE_STRUCT\020\005\022\030\n\024" +
-      "COLLECT_SPECIAL_ITEM\020\006\022\020\n\014SOLICIT_HELP\020\007" +
-      "\022\r\n\tGIVE_HELP\020\010\"\276\001\n\rDialogueProto\022G\n\rspe" +
-      "echSegment\030\001 \003(\01320.com.lvl6.proto.Dialog" +
-      "ueProto.SpeechSegmentProto\032d\n\022SpeechSegm",
-      "entProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014speakerImag" +
-      "e\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\nisLeftSi" +
-      "de\030\004 \001(\010\"\231\001\n\022FullUserQuestProto\022\020\n\010userU" +
-      "uid\030\001 \001(\t\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed" +
-      "\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruserQuestJ" +
-      "obs\030\005 \003(\0132!.com.lvl6.proto.UserQuestJobP" +
-      "roto\"^\n\021UserQuestJobProto\022\017\n\007questId\030\001 \001" +
-      "(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisComplete\030\003 \001" +
-      "(\010\022\020\n\010progress\030\004 \001(\005B\014B\nQuestProto"
+      "COLLECT_SPECIAL_ITEM\020\006\"\276\001\n\rDialogueProto" +
+      "\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl6.proto" +
+      ".DialogueProto.SpeechSegmentProto\032d\n\022Spe" +
+      "echSegmentProto\022\017\n\007speaker\030\001 \001(\t\022\024\n\014spea",
+      "kerImage\030\002 \001(\t\022\023\n\013speakerText\030\003 \001(\t\022\022\n\ni" +
+      "sLeftSide\030\004 \001(\010\"\231\001\n\022FullUserQuestProto\022\020" +
+      "\n\010userUuid\030\001 \001(\t\022\017\n\007questId\030\002 \001(\005\022\022\n\nisR" +
+      "edeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\0228\n\ruse" +
+      "rQuestJobs\030\005 \003(\0132!.com.lvl6.proto.UserQu" +
+      "estJobProto\"^\n\021UserQuestJobProto\022\017\n\007ques" +
+      "tId\030\001 \001(\005\022\022\n\nquestJobId\030\002 \001(\005\022\022\n\nisCompl" +
+      "ete\030\003 \001(\010\022\020\n\010progress\030\004 \001(\005B\014B\nQuestProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
