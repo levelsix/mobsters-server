@@ -84,6 +84,9 @@ message QuestJobProto {
 		//staticDataId is item id, quantity is number of items to collect
      	COLLECT_SPECIAL_ITEM = 6;
      	
+     	// For Squad Rewards
+     	SOLICIT_HELP = 7;
+     	GIVE_HELP = 8;
      }
 }
 
