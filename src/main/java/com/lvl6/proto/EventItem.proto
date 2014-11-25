@@ -109,7 +109,7 @@ message RedeemSecretGiftRequestProto {
 
 message RedeemSecretGiftResponseProto {
 	optional MinimumUserProto mup = 1;
-	repeated UserItemSecretGiftProto = 2; //new gifts after redeeming cur one
+	repeated UserItemSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
 	
 	optional RedeemSecretGiftStatus status = 3;
 	
