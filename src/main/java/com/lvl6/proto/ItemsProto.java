@@ -2911,6 +2911,803 @@ public final class ItemsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemUsageProto)
   }
 
+  public interface UserItemSecretGiftProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.UserItemSecretGiftProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    boolean hasUisgUuid();
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    java.lang.String getUisgUuid();
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUisgUuidBytes();
+
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional int32 minsForCollection = 3;</code>
+     */
+    boolean hasMinsForCollection();
+    /**
+     * <code>optional int32 minsForCollection = 3;</code>
+     */
+    int getMinsForCollection();
+
+    /**
+     * <code>optional int32 itemId = 4;</code>
+     */
+    boolean hasItemId();
+    /**
+     * <code>optional int32 itemId = 4;</code>
+     */
+    int getItemId();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.UserItemSecretGiftProto}
+   *
+   * <pre>
+   *------------------------------------------------------------------------------------------
+   * </pre>
+   */
+  public static final class UserItemSecretGiftProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.UserItemSecretGiftProto)
+      UserItemSecretGiftProtoOrBuilder {
+    // Use UserItemSecretGiftProto.newBuilder() to construct.
+    private UserItemSecretGiftProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserItemSecretGiftProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserItemSecretGiftProto defaultInstance;
+    public static UserItemSecretGiftProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserItemSecretGiftProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserItemSecretGiftProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              uisgUuid_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              userUuid_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              minsForCollection_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              itemId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.class, com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserItemSecretGiftProto> PARSER =
+        new com.google.protobuf.AbstractParser<UserItemSecretGiftProto>() {
+      public UserItemSecretGiftProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserItemSecretGiftProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserItemSecretGiftProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int UISGUUID_FIELD_NUMBER = 1;
+    private java.lang.Object uisgUuid_;
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    public boolean hasUisgUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    public java.lang.String getUisgUuid() {
+      java.lang.Object ref = uisgUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          uisgUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string uisgUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUisgUuidBytes() {
+      java.lang.Object ref = uisgUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uisgUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MINSFORCOLLECTION_FIELD_NUMBER = 3;
+    private int minsForCollection_;
+    /**
+     * <code>optional int32 minsForCollection = 3;</code>
+     */
+    public boolean hasMinsForCollection() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 minsForCollection = 3;</code>
+     */
+    public int getMinsForCollection() {
+      return minsForCollection_;
+    }
+
+    public static final int ITEMID_FIELD_NUMBER = 4;
+    private int itemId_;
+    /**
+     * <code>optional int32 itemId = 4;</code>
+     */
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 itemId = 4;</code>
+     */
+    public int getItemId() {
+      return itemId_;
+    }
+
+    private void initFields() {
+      uisgUuid_ = "";
+      userUuid_ = "";
+      minsForCollection_ = 0;
+      itemId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUisgUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, minsForCollection_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, itemId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUisgUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, minsForCollection_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, itemId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ItemsProto.UserItemSecretGiftProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.UserItemSecretGiftProto}
+     *
+     * <pre>
+     *------------------------------------------------------------------------------------------
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.UserItemSecretGiftProto)
+        com.lvl6.proto.ItemsProto.UserItemSecretGiftProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.class, com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        uisgUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        minsForCollection_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ItemsProto.internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemSecretGiftProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemSecretGiftProto build() {
+        com.lvl6.proto.ItemsProto.UserItemSecretGiftProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ItemsProto.UserItemSecretGiftProto buildPartial() {
+        com.lvl6.proto.ItemsProto.UserItemSecretGiftProto result = new com.lvl6.proto.ItemsProto.UserItemSecretGiftProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.uisgUuid_ = uisgUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.minsForCollection_ = minsForCollection_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.itemId_ = itemId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ItemsProto.UserItemSecretGiftProto) {
+          return mergeFrom((com.lvl6.proto.ItemsProto.UserItemSecretGiftProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ItemsProto.UserItemSecretGiftProto other) {
+        if (other == com.lvl6.proto.ItemsProto.UserItemSecretGiftProto.getDefaultInstance()) return this;
+        if (other.hasUisgUuid()) {
+          bitField0_ |= 0x00000001;
+          uisgUuid_ = other.uisgUuid_;
+          onChanged();
+        }
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasMinsForCollection()) {
+          setMinsForCollection(other.getMinsForCollection());
+        }
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ItemsProto.UserItemSecretGiftProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ItemsProto.UserItemSecretGiftProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object uisgUuid_ = "";
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public boolean hasUisgUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public java.lang.String getUisgUuid() {
+        java.lang.Object ref = uisgUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            uisgUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUisgUuidBytes() {
+        java.lang.Object ref = uisgUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          uisgUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public Builder setUisgUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        uisgUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public Builder clearUisgUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        uisgUuid_ = getDefaultInstance().getUisgUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string uisgUuid = 1;</code>
+       */
+      public Builder setUisgUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        uisgUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int minsForCollection_ ;
+      /**
+       * <code>optional int32 minsForCollection = 3;</code>
+       */
+      public boolean hasMinsForCollection() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 minsForCollection = 3;</code>
+       */
+      public int getMinsForCollection() {
+        return minsForCollection_;
+      }
+      /**
+       * <code>optional int32 minsForCollection = 3;</code>
+       */
+      public Builder setMinsForCollection(int value) {
+        bitField0_ |= 0x00000004;
+        minsForCollection_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 minsForCollection = 3;</code>
+       */
+      public Builder clearMinsForCollection() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        minsForCollection_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int itemId_ ;
+      /**
+       * <code>optional int32 itemId = 4;</code>
+       */
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 itemId = 4;</code>
+       */
+      public int getItemId() {
+        return itemId_;
+      }
+      /**
+       * <code>optional int32 itemId = 4;</code>
+       */
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000008;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 itemId = 4;</code>
+       */
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        itemId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserItemSecretGiftProto)
+    }
+
+    static {
+      defaultInstance = new UserItemSecretGiftProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserItemSecretGiftProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserItemProto_descriptor;
   private static
@@ -2926,6 +3723,11 @@ public final class ItemsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserItemUsageProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2946,9 +3748,12 @@ public final class ItemsProto {
       "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
       "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
       "uid\030\005 \001(\t\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType*G\n\010ItemType\022\020\n\014BOO" +
-      "STER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003" +
-      "\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
+      ".proto.GameActionType\"h\n\027UserItemSecretG" +
+      "iftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
+      " \001(\t\022\031\n\021minsForCollection\030\003 \001(\005\022\016\n\006itemI" +
+      "d\030\004 \001(\005*G\n\010ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n" +
+      "\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_UP\020\004" +
+      "B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2981,6 +3786,12 @@ public final class ItemsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemUsageProto_descriptor,
         new java.lang.String[] { "UsageUuid", "UserUuid", "ItemId", "TimeOfEntry", "UserDataUuid", "ActionType", });
+    internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
+        new java.lang.String[] { "UisgUuid", "UserUuid", "MinsForCollection", "ItemId", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
