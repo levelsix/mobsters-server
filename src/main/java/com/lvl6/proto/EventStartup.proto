@@ -118,6 +118,8 @@ message StartupResponseProto {
 	optional ClanDataProto clanData = 43;
 
 	repeated UserItemUsageProto itemsInUse = 44;
+	repeated UserItemSecretGiftProto gifts = 45;
+	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;

@@ -56,3 +56,11 @@ message UserItemUsageProto {
 	optional string userDataUuid = 5;
 	optional GameActionType actionType = 6;
 }
+
+//------------------------------------------------------------------------------------------
+message UserItemSecretGiftProto {
+	optional string uisgUuid = 1;
+	optional string userUuid = 2;
+	optional int32 minsForCollection = 3;
+	optional int32 itemId = 4;
+}
