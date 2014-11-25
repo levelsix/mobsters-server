@@ -21,7 +21,8 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
-	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 2 : 50;
+    public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 2 : 50;
+    public static final int CLAN__QUEST_ID_FOR_CLAN_REWARDS = 1;
 	
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;

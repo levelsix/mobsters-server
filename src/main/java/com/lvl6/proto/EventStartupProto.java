@@ -6184,6 +6184,15 @@ public final class EventStartupProto {
          * <code>optional int32 maxClanSize = 5;</code>
          */
         int getMaxClanSize();
+
+        /**
+         * <code>optional int32 questIdForClanRewards = 6;</code>
+         */
+        boolean hasQuestIdForClanRewards();
+        /**
+         * <code>optional int32 questIdForClanRewards = 6;</code>
+         */
+        int getQuestIdForClanRewards();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants}
@@ -6260,6 +6269,11 @@ public final class EventStartupProto {
                 case 40: {
                   bitField0_ |= 0x00000010;
                   maxClanSize_ = input.readInt32();
+                  break;
+                }
+                case 48: {
+                  bitField0_ |= 0x00000020;
+                  questIdForClanRewards_ = input.readInt32();
                   break;
                 }
               }
@@ -6377,12 +6391,28 @@ public final class EventStartupProto {
           return maxClanSize_;
         }
 
+        public static final int QUESTIDFORCLANREWARDS_FIELD_NUMBER = 6;
+        private int questIdForClanRewards_;
+        /**
+         * <code>optional int32 questIdForClanRewards = 6;</code>
+         */
+        public boolean hasQuestIdForClanRewards() {
+          return ((bitField0_ & 0x00000020) == 0x00000020);
+        }
+        /**
+         * <code>optional int32 questIdForClanRewards = 6;</code>
+         */
+        public int getQuestIdForClanRewards() {
+          return questIdForClanRewards_;
+        }
+
         private void initFields() {
           coinPriceToCreateClan_ = 0;
           maxCharLengthForClanName_ = 0;
           maxCharLengthForClanDescription_ = 0;
           maxCharLengthForClanTag_ = 0;
           maxClanSize_ = 0;
+          questIdForClanRewards_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -6412,6 +6442,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             output.writeInt32(5, maxClanSize_);
           }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            output.writeInt32(6, questIdForClanRewards_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -6440,6 +6473,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(5, maxClanSize_);
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(6, questIdForClanRewards_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -6568,6 +6605,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000008);
             maxClanSize_ = 0;
             bitField0_ = (bitField0_ & ~0x00000010);
+            questIdForClanRewards_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000020);
             return this;
           }
 
@@ -6616,6 +6655,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000010;
             }
             result.maxClanSize_ = maxClanSize_;
+            if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+              to_bitField0_ |= 0x00000020;
+            }
+            result.questIdForClanRewards_ = questIdForClanRewards_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -6646,6 +6689,9 @@ public final class EventStartupProto {
             }
             if (other.hasMaxClanSize()) {
               setMaxClanSize(other.getMaxClanSize());
+            }
+            if (other.hasQuestIdForClanRewards()) {
+              setQuestIdForClanRewards(other.getQuestIdForClanRewards());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -6830,6 +6876,38 @@ public final class EventStartupProto {
           public Builder clearMaxClanSize() {
             bitField0_ = (bitField0_ & ~0x00000010);
             maxClanSize_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int questIdForClanRewards_ ;
+          /**
+           * <code>optional int32 questIdForClanRewards = 6;</code>
+           */
+          public boolean hasQuestIdForClanRewards() {
+            return ((bitField0_ & 0x00000020) == 0x00000020);
+          }
+          /**
+           * <code>optional int32 questIdForClanRewards = 6;</code>
+           */
+          public int getQuestIdForClanRewards() {
+            return questIdForClanRewards_;
+          }
+          /**
+           * <code>optional int32 questIdForClanRewards = 6;</code>
+           */
+          public Builder setQuestIdForClanRewards(int value) {
+            bitField0_ |= 0x00000020;
+            questIdForClanRewards_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 questIdForClanRewards = 6;</code>
+           */
+          public Builder clearQuestIdForClanRewards() {
+            bitField0_ = (bitField0_ & ~0x00000020);
+            questIdForClanRewards_ = 0;
             onChanged();
             return this;
           }
@@ -31071,7 +31149,7 @@ public final class EventStartupProto {
       "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
       "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
       "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
-      "\030\010 \001(\010\"\3402\n\024StartupResponseProto\022\030\n\020serve" +
+      "\030\010 \001(\010\"\3772\n\024StartupResponseProto\022\030\n\020serve" +
       "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
       "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
@@ -31141,7 +31219,7 @@ public final class EventStartupProto {
       "erralNotificationProto\0222\n\010referred\030\001 \001(\013",
       "2 .com.lvl6.proto.MinimumUserProto\022\023\n\013re" +
       "cruitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030" +
-      "\003 \001(\005\032\277\027\n\020StartupConstants\022H\n\025inAppPurch" +
+      "\003 \001(\005\032\336\027\n\020StartupConstants\022H\n\025inAppPurch" +
       "asePackages\030\001 \003(\0132).com.lvl6.proto.InApp" +
       "PurchasePackageProto\022\027\n\017maxLevelForUser\030" +
       "\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025a" +
@@ -31188,54 +31266,55 @@ public final class EventStartupProto {
       "Constants.PvpConstants\032_\n\031AnimatedSprite" +
       "OffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet" +
       "\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProto\032" +
-      "\257\001\n\rClanConstants\022\035\n\025coinPriceToCreateCl",
+      "\316\001\n\rClanConstants\022\035\n\025coinPriceToCreateCl",
       "an\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001" +
       "(\005\022\'\n\037maxCharLengthForClanDescription\030\003 " +
       "\001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\022\023\n\013" +
-      "maxClanSize\030\005 \001(\005\032c\n\030DownloadableNibCons" +
-      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
-      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y" +
-      "\n\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(" +
-      "\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003" +
-      " \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(" +
-      "\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumTeamS",
-      "lots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030" +
-      "\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPerHea" +
-      "lthPoint\030\001 \001(\002\022#\n\033secondsToHealPerHealth" +
-      "Point\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031" +
-      "\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilPerMonst" +
-      "erLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035\n\025ma" +
-      "pSectionImagePrefix\030\001 \001(\t\022\033\n\023mapNumberOf" +
-      "Sections\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002" +
-      "\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeigh" +
-      "t\030\005 \001(\002\032K\n\025MiniTutorialConstants\022\032\n\022mini",
-      "TutorialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002" +
-      " \001(\005\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001" +
-      " \001(\0162\036.com.lvl6.proto.GameActionType\022\034\n\024" +
-      "amountRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRem" +
-      "ovedPerHelp\030\003 \001(\002\032t\n\014PvpConstants\022\031\n\021pvp" +
-      "DmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002" +
-      " \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequi" +
-      "redMinLvl\030\004 \001(\005\032\234\004\n\021TutorialConstants\022\031\n" +
-      "\021startingMonsterId\030\001 \001(\005\022\026\n\016guideMonster" +
-      "Id\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enem",
-      "yMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterI" +
-      "d\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutor" +
-      "ialStructures\030\003 \003(\0132#.com.lvl6.proto.Tut" +
-      "orialStructProto\022\036\n\026structureIdsToBeBuil" +
-      "lt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneEleme" +
-      "nts\030\006 \003(\0132 .com.lvl6.proto.CityElementPr" +
-      "oto\022$\n\034cityElementIdForFirstDungeon\030\007 \001(" +
-      "\005\022%\n\035cityElementIdForSecondDungeon\030\010 \001(\005" +
-      "\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010g" +
-      "emsInit\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\013",
-      "2$.com.lvl6.proto.MinimumObstacleProto\"A" +
-      "\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_U" +
-      "PDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStat" +
-      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031" +
-      "\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030ForceLogout" +
-      "ResponseProto\022\031\n\021previousLoginTime\030\001 \001(\003" +
-      "\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupProto"
+      "maxClanSize\030\005 \001(\005\022\035\n\025questIdForClanRewar" +
+      "ds\030\006 \001(\005\032c\n\030DownloadableNibConstants\022\022\n\n" +
+      "mapNibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001" +
+      "(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tournam" +
+      "entConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014loss" +
+      "esWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033n" +
+      "umHoursToShowAfterEventEnd\030\004 \001(\005\032R\n\024User",
+      "MonsterConstants\022\027\n\017maxNumTeamSlots\030\001 \001(" +
+      "\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001(\005\032\245\001\n" +
+      "\020MonsterConstants\022\032\n\022cashPerHealthPoint\030" +
+      "\001 \001(\002\022#\n\033secondsToHealPerHealthPoint\030\002 \001" +
+      "(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021element" +
+      "alWeakness\030\004 \001(\002\022\032\n\022oilPerMonsterLevel\030\005" +
+      " \001(\002\032\227\001\n\020TaskMapConstants\022\035\n\025mapSectionI" +
+      "magePrefix\030\001 \001(\t\022\033\n\023mapNumberOfSections\030" +
+      "\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002\022\025\n\rmapTo" +
+      "talWidth\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 \001(\002\032K",
+      "\n\025MiniTutorialConstants\022\032\n\022miniTutorialT" +
+      "askId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005\032\202\001\n\021" +
+      "ClanHelpConstants\0220\n\010helpType\030\001 \001(\0162\036.co" +
+      "m.lvl6.proto.GameActionType\022\034\n\024amountRem" +
+      "ovedPerHelp\030\002 \001(\005\022\035\n\025percentRemovedPerHe" +
+      "lp\030\003 \001(\002\032t\n\014PvpConstants\022\031\n\021pvpDmgsWindo" +
+      "wSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002\022\026\n\016m" +
+      "axPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequiredMinLvl" +
+      "\030\004 \001(\005\032\234\004\n\021TutorialConstants\022\031\n\021starting" +
+      "MonsterId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022",
+      "\026\n\016enemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterI" +
+      "dTwo\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026" +
+      "\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialStruct" +
+      "ures\030\003 \003(\0132#.com.lvl6.proto.TutorialStru" +
+      "ctProto\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022" +
+      "\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\013" +
+      "2 .com.lvl6.proto.CityElementProto\022$\n\034ci" +
+      "tyElementIdForFirstDungeon\030\007 \001(\005\022%\n\035city" +
+      "ElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashI" +
+      "nit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r",
+      " \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.lv" +
+      "l6.proto.MinimumObstacleProto\"A\n\014UpdateS" +
+      "tatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020" +
+      "\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSE" +
+      "R_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_" +
+      "IN_MAINTENANCE\020\003\"C\n\030ForceLogoutResponseP" +
+      "roto\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030" +
+      "\002 \001(\tB\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -31306,7 +31385,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
-        new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", "MaxClanSize", });
+        new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", "MaxClanSize", "QuestIdForClanRewards", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
