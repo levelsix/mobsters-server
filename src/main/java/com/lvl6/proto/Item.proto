@@ -63,4 +63,5 @@ message UserItemSecretGiftProto {
 	optional string userUuid = 2;
 	optional int32 minsForCollection = 3;
 	optional int32 itemId = 4;
+	optional int64 createTime = 5;
 }
