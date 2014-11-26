@@ -22,7 +22,7 @@ public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent{
   public void read(ByteBuffer buff) {
     try {
       retrieveCurrencyFromNormStructureRequestProto = RetrieveCurrencyFromNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveCurrencyFromNormStructureRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = retrieveCurrencyFromNormStructureRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("retrieve currency from norm strucure request exception", e);
     }

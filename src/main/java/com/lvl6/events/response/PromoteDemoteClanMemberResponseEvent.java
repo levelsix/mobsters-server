@@ -11,7 +11,7 @@ public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent {
 
   private PromoteDemoteClanMemberResponseProto promoteDemoteClanMemberResponseProto;
   
-  public PromoteDemoteClanMemberResponseEvent(int playerId){
+  public PromoteDemoteClanMemberResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
   }

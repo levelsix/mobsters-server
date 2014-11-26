@@ -23,12 +23,12 @@ public class SetClanHelpingsAction implements StartUpAction
 
 	private final ClanDataProto.Builder cdpBuilder;
 	private final User user;
-	private final int userId;
+	private final String userId;
 	private final ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 	
 	public SetClanHelpingsAction(
 		ClanDataProto.Builder cdpBuilder, User user,
-		int userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil)
+		String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil)
 	{
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
@@ -37,7 +37,7 @@ public class SetClanHelpingsAction implements StartUpAction
 	}
 	
 	//derived state
-	private Map<Integer, List<ClanHelp>> allSolicitations;
+	private Map<String, List<ClanHelp>> allSolicitations;
 	
 	//Extracted from Startup
 	@Override
@@ -63,19 +63,19 @@ public class SetClanHelpingsAction implements StartUpAction
 		if (null == allSolicitations || allSolicitations.isEmpty()) {
 			return;
 		}
-		Map<Integer, User> solicitors = useMe.getUserIdsToUsers(allSolicitations.keySet());
+		Map<String, User> solicitors = useMe.getUserIdsToUsers(allSolicitations.keySet());
 		
 		if (null == solicitors || solicitors.isEmpty()) {
 			return;
 		}
 		
-		Map<Integer, Clan> clanIdsToClans = useMe.getClanIdsToClans();
+		Map<String, Clan> clanIdsToClans = useMe.getClanIdsToClans();
 		
 		//convert all solicitors into MinimumUserProtos
-		Map<Integer, MinimumUserProto> mupSolicitors = new HashMap<Integer, MinimumUserProto>();
-		for (Integer solicitorId : solicitors.keySet()) {
+		Map<String, MinimumUserProto> mupSolicitors = new HashMap<String, MinimumUserProto>();
+		for (String solicitorId : solicitors.keySet()) {
 			User moocher = solicitors.get(solicitorId);
-			int clanId = moocher.getClanId();
+			String clanId = moocher.getClanId();
 			Clan c = null;
 			
 			if (clanIdsToClans.containsKey(solicitorId)) {
@@ -86,7 +86,7 @@ public class SetClanHelpingsAction implements StartUpAction
 			mupSolicitors.put(solicitorId, mup);
 		}
 
-		for (Integer solicitorId : allSolicitations.keySet()) {
+		for (String solicitorId : allSolicitations.keySet()) {
 			List<ClanHelp> solicitations = allSolicitations.get(solicitorId);
 
 			User solicitor = solicitors.get( solicitorId );

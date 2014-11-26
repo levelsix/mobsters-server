@@ -11,7 +11,7 @@ public class BeginObstacleRemovalResponseEvent extends NormalResponseEvent {
 
   private BeginObstacleRemovalResponseProto beginObstacleRemovalResponseProto;
   
-  public BeginObstacleRemovalResponseEvent(int playerId){
+  public BeginObstacleRemovalResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_BEGIN_OBSTACLE_REMOVAL_EVENT;
   }

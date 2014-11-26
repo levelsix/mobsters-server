@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class PrivateChatPost implements Serializable {
-	protected static final long serialVersionUID = 8450554970377509383L;
-  	protected int id;
-	protected int posterId;
-	protected int recipientId;
+  	protected String id;
+	protected String posterId;
+	protected String recipientId;
 	protected Date timeOfPost;
 	protected String content;
 
-	public PrivateChatPost(int id, int posterId, int recipientId,
+	public PrivateChatPost()
+	{
+		super();
+	}
+
+	public PrivateChatPost(String id, String posterId, String recipientId,
 			Date timeOfPost, String content) {
 		super();
 		this.id = id;
@@ -21,35 +25,56 @@ public class PrivateChatPost implements Serializable {
 		this.content = content;
 	}
 
-	public int getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public int getPosterId() {
+	public void setId( String id )
+	{
+		this.id = id;
+	}
+
+	public String getPosterId()
+	{
 		return posterId;
 	}
 
-	public int getRecipientId() {
+	public void setPosterId( String posterId )
+	{
+		this.posterId = posterId;
+	}
+
+	public String getRecipientId()
+	{
 		return recipientId;
 	}
 
-	public Date getTimeOfPost() {
+	public void setRecipientId( String recipientId )
+	{
+		this.recipientId = recipientId;
+	}
+
+	public Date getTimeOfPost()
+	{
 		return timeOfPost;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setTimeOfPost(Date timeOfPost) {
+	public void setTimeOfPost( Date timeOfPost )
+	{
 		this.timeOfPost = timeOfPost;
 	}
 
-	public void setContent(String content) {
+	public String getContent()
+	{
+		return content;
+	}
+
+	public void setContent( String content )
+	{
 		this.content = content;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "PlayerWallPost [id=" + id + ", posterId=" + posterId

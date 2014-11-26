@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.IncreaseMonsterInventorySlotRequestEvent;
 import com.lvl6.events.response.IncreaseMonsterInventorySlotResponseEvent;
+import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
@@ -31,14 +33,17 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus;
+import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -48,6 +53,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+  
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public IncreaseMonsterInventorySlotController() {
     numAllocatedThreads = 4;
@@ -71,11 +88,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     IncreaseSlotType increaseType = reqProto.getIncreaseSlotType();
-    int userStructId = reqProto.getUserStructId();
+    String userStructId = reqProto.getUserStructUuid();
     //the invites to redeem     
-    List<Integer> userFbInviteIds = reqProto.getUserFbInviteForSlotIdsList();
+    List<String> userFbInviteIds = reqProto.getUserFbInviteForSlotUuidsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
     //set some values to send to the client (the response proto)
@@ -83,17 +100,47 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID inviteUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      if (userFbInviteIds != null) {
+        for (String userFbInviteId : userFbInviteIds) {
+          inviteUuid = UUID.fromString(userFbInviteId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userFbInviteIds=%s",
+          userId, userFbInviteIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER);
+      IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
     	int previousGems = 0;
     	//get stuff from the db
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	StructureForUser sfu = RetrieveUtils.userStructRetrieveUtils()
+      User aUser = getUserRetrieveUtils().getUserById(userId);
+    	StructureForUser sfu = getUserStructRetrieveUtils()
     			.getSpecificUserStruct(userStructId);
     	
     	//will be populated if user is successfully redeeming fb invites
-    	Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites = 
-    			new HashMap<Integer, UserFacebookInviteForSlot>();
+    	Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites = 
+    			new HashMap<String, UserFacebookInviteForSlot>();
       
       boolean legit = checkLegit(resBuilder, userId, aUser, userStructId, sfu,
       		increaseType, userFbInviteIds, idsToAcceptedInvites);
@@ -120,7 +167,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
@@ -143,7 +190,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in IncreaseMonsterInventorySlotController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -152,9 +199,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, int userId, User u, int userStructId,
-  		StructureForUser sfu, IncreaseSlotType aType, List<Integer> userFbInviteIds,
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites) {
+  private boolean checkLegit(Builder resBuilder, String userId, User u, String userStructId,
+  		StructureForUser sfu, IncreaseSlotType aType, List<String> userFbInviteIds,
+  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites) {
   	if (null == u) {
   		log.error("user is null. no user exists with id=" + userId);
   		return false;
@@ -167,7 +214,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//THE CHECK IF USER IS REDEEMING FACEBOOK INVITES
   	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
   		//get accepted and unredeemed invites
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp = getInvites(userId,
+  		Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp = getInvites(userId,
   				userFbInviteIds);
   		//check if requested invites even exist
   		if (null == idsToAcceptedTemp || idsToAcceptedTemp.isEmpty()) {
@@ -175,8 +222,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			return false;
   		}
 
-    	int userStructIdFromInvites = getUserStructId(idsToAcceptedTemp);
-    	if (userStructId != userStructIdFromInvites) {
+  		String userStructIdFromInvites = getUserStructId(idsToAcceptedTemp);
+    	if (!userStructId.equals(userStructIdFromInvites)) {
     		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INCONSISTENT_INVITE_DATA);
     		log.error("data across invites aren't consistent: user struct id/fb lvl. invites=" +
     				idsToAcceptedTemp + "\t expectedUserStructId=" + userStructId);
@@ -230,35 +277,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private Map<Integer, UserFacebookInviteForSlot> getInvites(int userId,
-  		List<Integer> userFbInviteIds) {
+  private Map<String, UserFacebookInviteForSlot> getInvites(String userId,
+  		List<String> userFbInviteIds) {
   	//get accepted and unredeemed invites
 		boolean filterByAccepted = true;
 		boolean isAccepted = true;
 		boolean filterByRedeemed = true;
 		boolean isRedeemed = false;
-		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp =
-				UserFacebookInviteForSlotRetrieveUtils.getSpecificOrAllInvitesForInviter(
+		Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp =
+				getUserFacebookInviteForSlotRetrieveUtils().getSpecificOrAllInvitesForInviter(
 						userId, userFbInviteIds, filterByAccepted, isAccepted, filterByRedeemed,
 						isRedeemed);
 		return idsToAcceptedTemp;
   }
   
   //if user struct ids and user struct fb lvls are inconsistent, return non-positive value;
-  private int getUserStructId(Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp) {
-  	int prevUserStructId = -1;
+  private String getUserStructId(Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp) {
+    String prevUserStructId = null;
   	int prevUserStructFbLvl = -1;
   	
   	for (UserFacebookInviteForSlot invite : idsToAcceptedTemp.values()) {
-  		int tempUserStructId = invite.getUserStructId();
+  	  String tempUserStructId = invite.getUserStructId();
   		int tempUserStructFbLvl = invite.getUserStructFbLvl();
-  		if (-1 == prevUserStructId) {
+  		if (null == prevUserStructId) {
   			prevUserStructId = tempUserStructId;
   			prevUserStructFbLvl = tempUserStructFbLvl;
   			
-  		} else if (prevUserStructId != tempUserStructId || prevUserStructFbLvl != tempUserStructFbLvl) {
+  		} else if (!prevUserStructId.equals(tempUserStructId) || prevUserStructFbLvl != tempUserStructFbLvl) {
   			//since the userStructIds or userStructFbLvl's are inconsistent, return failure
-  			return -1;
+  			return null;
   		}
   		
   	}
@@ -314,7 +361,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDb(User aUser, StructureForUser sfu, 
   		IncreaseSlotType increaseType, int gemCost, Timestamp curTime,
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites,
+  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites,
   		Map<String, Integer> changeMap) {
   	boolean success = false;
   	
@@ -324,7 +371,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
   		//if num accepted invites more than min required, just take the earliest ones
-  		List<Integer> inviteIdsTheRest = new ArrayList<Integer>();
+  		List<String> inviteIdsTheRest = new ArrayList<String>();
   		List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestInvites(
   				idsToAcceptedInvites, minNumInvites, inviteIdsTheRest); 
   		
@@ -362,7 +409,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//increase the user structs fb invite lvl
-  	int userStructId = sfu.getId();
+  	String userStructId = sfu.getId();
   	int fbInviteLevelChange = 1;
   	if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
   		log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
@@ -373,8 +420,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private List<UserFacebookInviteForSlot> nEarliestInvites(
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites, int n,
-  		List<Integer> inviteIdsTheRest) {
+  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites, int n,
+  		List<String> inviteIdsTheRest) {
   	
   	List<UserFacebookInviteForSlot> earliestAcceptedInvites =
   			new ArrayList<UserFacebookInviteForSlot>(idsToAcceptedInvites.values());
@@ -385,7 +432,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		
   		//want to get the remaining invites after the first n
   		for (UserFacebookInviteForSlot invite : earliestAcceptedInvites.subList(n, amount)) {
-  			Integer id = invite.getId();
+  		  String id = invite.getId();
   			inviteIdsTheRest.add(id);
   		}
   		
@@ -431,7 +478,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  return;
 	  }
 	  
-  	int userId = aUser.getId();
+	  String userId = aUser.getId();
   	Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
   	Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
     Map<String, String> changeReasonsMap = new HashMap<String, String>();
@@ -459,7 +506,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //after user buys slots, delete all accepted and unaccepted invites for slots
-  private void deleteInvitesForSlotsAfterPurchase(int userId, Map<String, Integer> money) {
+  private void deleteInvitesForSlotsAfterPurchase(String userId, Map<String, Integer> money) {
   	if (money.isEmpty()) {
   		return;
   	}
@@ -475,6 +522,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+    return userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public void setUserFacebookInviteForSlotRetrieveUtils(
+      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
   
 }

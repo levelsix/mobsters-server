@@ -22,7 +22,7 @@ public class EndDungeonRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       endDungeonRequestProto = EndDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = endDungeonRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = endDungeonRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("end dungeon request exception", e);
     }

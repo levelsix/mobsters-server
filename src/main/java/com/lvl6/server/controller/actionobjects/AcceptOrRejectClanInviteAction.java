@@ -18,10 +18,10 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.Builder;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -30,27 +30,31 @@ public class AcceptOrRejectClanInviteAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private int acceptedInviteId;
-	private int prospectiveMemberId;
-	private int inviterId;
-	private int clanId;
+	private String acceptedInviteId;
+	private String prospectiveMemberId;
+	private String inviterId;
+	private String clanId;
 	private Date clientTime;
-	private List<Integer> rejectedInviteIds;
-	private UserClanRetrieveUtils userClanRetrieveUtils;
+	private List<String> rejectedInviteIds;
+	private UserRetrieveUtils2 userRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
 	private InsertUtil insertUtil;
 	private DeleteUtil deleteUtil;
+	private ClanRetrieveUtils2 clanRetrieveUtil;
 	private ClanInviteRetrieveUtil clanInviteRetrieveUtil;
 	
 	public AcceptOrRejectClanInviteAction(
-		int acceptedInviteId,
-		int prospectiveMemberId,
-		int inviterId,
-		int clanId,
+		String acceptedInviteId,
+		String prospectiveMemberId,
+		String inviterId,
+		String clanId,
 		Date clientTime,
-		List<Integer> rejectedInviteIds,
-		UserClanRetrieveUtils userClanRetrieveUtils,
+		List<String> rejectedInviteIds,
+		UserRetrieveUtils2 userRetrieveUtils,
+		UserClanRetrieveUtils2 userClanRetrieveUtils,
 		InsertUtil insertUtil,
 		DeleteUtil deleteUtil,
+		ClanRetrieveUtils2 clanRetrieveUtil,
 		ClanInviteRetrieveUtil clanInviteRetrieveUtil )
 	{
 		super();
@@ -119,7 +123,14 @@ public class AcceptOrRejectClanInviteAction
 	
 	private boolean verifySyntax(Builder resBuilder) {
 		
-		if (acceptedInviteId <= 0  && rejectedInviteIds.isEmpty()) {
+		if (acceptedInviteId.isEmpty()  && rejectedInviteIds.isEmpty()) {
+			log.error(String.format(
+				"invalid request: did not accept or reject invites. acceptedInviteId=%s, rejectedInviteIds=%s",
+				acceptedInviteId, rejectedInviteIds));
+			return false;
+		}
+		
+		if (inviterId.isEmpty() || clanId.isEmpty()) {
 			log.error(String.format(
 				"invalid inviterId=%s or clanId=%s", inviterId, clanId));
 			return false;
@@ -130,22 +141,17 @@ public class AcceptOrRejectClanInviteAction
 	
 	private boolean verifySemantics(Builder resBuilder) {
 		rejectOnly = false;
-		if (acceptedInviteId <= 0 && rejectedInviteIds.isEmpty()) {
-			log.error("invalid request: did not accept or reject invites.");
-			return false;
-		}
 		//user is just rejecting invites.
-		if (acceptedInviteId <= 0 && !rejectedInviteIds.isEmpty()) {
+		if (acceptedInviteId.isEmpty() && !rejectedInviteIds.isEmpty()) {
 			rejectOnly = true;
 			log.info("user is just rejecting invites.");
-			
 			
 			return true;
 		}
 		
 		log.info("user is accepting an invite");
 		
-		prospectiveMember = RetrieveUtils.userRetrieveUtils().getUserById(inviterId);
+		prospectiveMember = userRetrieveUtils.getUserById(inviterId);
 		if (null == prospectiveMember) {
 			log.error(String.format(
 				"No user. invalid prospectiveMemberId=%s", prospectiveMemberId));
@@ -153,14 +159,14 @@ public class AcceptOrRejectClanInviteAction
 		}
 		
 		//check if user already in a clan
-		if (prospectiveMember.getClanId() > 0) {
+		if (!prospectiveMember.getClanId().isEmpty()) {
 			log.error(String.format(
 				"prospectiveMember already in clan. %s", prospectiveMember));
 			return false;
 		}
 		
 		//check if clan full
-		prospectiveClan = ClanRetrieveUtils.getClanWithId(clanId);
+		prospectiveClan = clanRetrieveUtil.getClanWithId(clanId);
 		if (null == prospectiveClan) {
 			log.error(String.format(
 				"No clan. invalid clanId=%s", clanId));
@@ -168,13 +174,13 @@ public class AcceptOrRejectClanInviteAction
 		}
 		
 		//check out the size of the clan
-	    List<Integer> clanIdList = Collections.singletonList(clanId);
+	    List<String> clanIdList = Collections.singletonList(clanId);
 		List<String> statuses = new ArrayList<String>();
 	    statuses.add(UserClanStatus.LEADER.name());
 	    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
 	    statuses.add(UserClanStatus.CAPTAIN.name());
 	  	statuses.add(UserClanStatus.MEMBER.name());
-	  	Map<Integer, Integer> clanIdToSize = userClanRetrieveUtils
+	  	Map<String, Integer> clanIdToSize = userClanRetrieveUtils
   			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
 		
 	  	clanSize = clanIdToSize.get(clanId);
@@ -223,7 +229,6 @@ public class AcceptOrRejectClanInviteAction
 				return false;
 			} 
 
-			
 		}
 		
 		return true;

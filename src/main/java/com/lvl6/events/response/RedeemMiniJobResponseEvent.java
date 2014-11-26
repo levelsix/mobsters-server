@@ -11,7 +11,7 @@ public class RedeemMiniJobResponseEvent extends NormalResponseEvent {
 
   private RedeemMiniJobResponseProto redeemMiniJobResponseProto;
   
-  public RedeemMiniJobResponseEvent(int playerId){
+  public RedeemMiniJobResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_REDEEM_MINI_JOB_EVENT;
   }

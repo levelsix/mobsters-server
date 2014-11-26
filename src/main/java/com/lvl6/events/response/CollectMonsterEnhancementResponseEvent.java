@@ -11,7 +11,7 @@ public class CollectMonsterEnhancementResponseEvent extends NormalResponseEvent 
 
   private CollectMonsterEnhancementResponseProto collectMonsterEnhancementResponseProto;
   
-  public CollectMonsterEnhancementResponseEvent(int playerId){
+  public CollectMonsterEnhancementResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_COLLECT_MONSTER_ENHANCEMENT_EVENT;
   }

@@ -54,6 +54,11 @@ message AchievementProto {
 		WIN_PVP_BATTLE = 16;
 		
 		//NO_ACHIEVEMENT = 17;
+		
+     	// For Squad Rewards
+     	JOIN_CLAN = 18;
+     	SOLICIT_HELP = 19;
+     	GIVE_HELP = 20;
      }
 }
 

@@ -1,6 +1,7 @@
 package com.lvl6.server;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -24,12 +25,12 @@ public class Locker {
 		
 		//these are the users that are online
 		@javax.annotation.Resource(name = "playersByPlayerId")
-		IMap<Integer, ConnectedPlayer> playersByPlayerId;
+		IMap<String, ConnectedPlayer> playersByPlayerId;
 
-		public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+		public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 			return playersByPlayerId;
 		}
-		public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+		public void setPlayersByPlayerId(IMap<String, ConnectedPlayer> playersByPlayerId) {
 			this.playersByPlayerId = playersByPlayerId;
 		} 
 
@@ -105,7 +106,8 @@ public class Locker {
 		
 		//ALL COPIED FROM GameServer.java
     //either returns true or throws exception
-    public boolean lockPlayer(int playerId, String lockedByClass) {
+    public boolean lockPlayer(UUID playerUuid, String lockedByClass) {
+    	String playerId = playerUuid.toString();
   		log.info("Locking player {} from class {}", playerId, lockedByClass);
   		// Lock playerLock = hazel.getLock(playersInAction.lockName(playerId));
   		try {
@@ -126,19 +128,21 @@ public class Locker {
   		throw new RuntimeException("2Unable to obtain lock after " + LOCK_WAIT_SECONDS + " seconds");
   	}
 
-  	public boolean lockPlayers(int playerId1, int playerId2, String lockedByClass) {
+  	public boolean lockPlayers(UUID playerId1, UUID playerId2, String lockedByClass) {
   		log.info("Locking players: " + playerId1 + ", " + playerId2);
-  		if (playerId1 == playerId2) {
+  		if (playerId1.equals(playerId2)) {
   			return lockPlayer(playerId1, lockedByClass);
   		}
-  		if (playerId1 > playerId2) {
+//  		if (playerId1 > playerId2) {
+  		if (playerId1.compareTo(playerId2) > 0) {
   			return lockPlayer(playerId2, lockedByClass) && lockPlayer(playerId1, lockedByClass);
   		} else {
   			return lockPlayer(playerId1, lockedByClass) && lockPlayer(playerId2, lockedByClass);
   		}
   	}
     
-  	public void unlockPlayer(int playerId, String fromClass) {
+  	public void unlockPlayer(UUID playerUuid, String fromClass) {
+  		String playerId = playerUuid.toString();
   		log.info("Unlocking player: " + playerId+" from class: "+fromClass);
   		// ILock lock = hazel.getLock(playersInAction.lockName(playerId));
   		try {
@@ -160,9 +164,10 @@ public class Locker {
   		}
   	}
 
-  	public void unlockPlayers(int playerId1, int playerId2, String fromClass) {
+  	public void unlockPlayers(UUID playerId1, UUID playerId2, String fromClass) {
   		log.info("Unlocking players: " + playerId1 + ", " + playerId2+" from class: "+fromClass);
-  		if (playerId1 > playerId2) {
+//  		if (playerId1 > playerId2) {
+  		if (playerId1.compareTo(playerId2) > 0) {
   			unlockPlayer(playerId2, fromClass);
   			unlockPlayer(playerId1, fromClass);
   		} else {
@@ -217,7 +222,8 @@ public class Locker {
   		return "FbIdLock: " + fbId;
   	}
   	
-  	public boolean lockClan(int clanId) {
+  	public boolean lockClan(UUID clanUuid) {
+  		String clanId = clanUuid.toString();
   		log.debug("Locking clan: " + clanId);
   		try {
 			if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
@@ -243,7 +249,8 @@ public class Locker {
   		// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
   	}
 
-  	public void unlockClan(int clanId) {
+  	public void unlockClan(UUID clanUuid) {
+  		String clanId = clanUuid.toString();
   		log.debug("Unlocking clan: " + clanId);
   		try {
   			String clanLockName = clanLockName(clanId);
@@ -259,7 +266,7 @@ public class Locker {
   		}
   	}
 
-  	protected String clanLockName(int clanId) {
+  	protected String clanLockName(String clanId) {
   		return "ClanLock: " + clanId;
   	}
 

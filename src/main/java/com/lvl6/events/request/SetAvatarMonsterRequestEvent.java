@@ -22,7 +22,7 @@ public class SetAvatarMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       setAvatarMonsterRequestProto = SetAvatarMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = setAvatarMonsterRequestProto.getSender().getUserId();
+      playerId = setAvatarMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("set facebook id request exception", e);
     }

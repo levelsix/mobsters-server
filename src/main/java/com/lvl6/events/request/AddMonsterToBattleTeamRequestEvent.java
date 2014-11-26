@@ -22,7 +22,7 @@ public class AddMonsterToBattleTeamRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       addMonsterToBattleTeamRequestProto = AddMonsterToBattleTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = addMonsterToBattleTeamRequestProto.getSender().getUserId();
+      playerId = addMonsterToBattleTeamRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("add monster to battle team request exception", e);
     }

@@ -26,7 +26,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.UserClanRetrieveUtils;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.Wrap;
@@ -40,26 +40,26 @@ public class APNSWriter extends Wrap {
 	// reference to game server
 
 	@Autowired
-	UserClanRetrieveUtils userClanRetrieveUtil;
+	UserClanRetrieveUtils2 userClanRetrieveUtil;
 	
-	public UserClanRetrieveUtils getUserClanRetrieveUtil() {
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtil() {
 		return userClanRetrieveUtil;
 	}
 	
-	public void setUserClanRetrieveUtil(UserClanRetrieveUtils userClanRetrieveUtil) {
+	public void setUserClanRetrieveUtil(UserClanRetrieveUtils2 userClanRetrieveUtil) {
 		this.userClanRetrieveUtil = userClanRetrieveUtil;
 	}
 	
-	public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+	public Map<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 	
-	public void setPlayersByPlayerId(Map<Integer, ConnectedPlayer> playersByPlayerId) {
+	public void setPlayersByPlayerId(Map<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
 	@Resource(name="playersByPlayerId")
-	protected Map<Integer, ConnectedPlayer> playersByPlayerId;
+	protected Map<String, ConnectedPlayer> playersByPlayerId;
 
 	
 	@Autowired
@@ -117,7 +117,7 @@ public class APNSWriter extends Wrap {
 	 * the writeBuffer
 	 */
 	protected void processResponseEvent(NormalResponseEvent event) {
-		int playerId = event.getPlayerId();
+		String playerId = event.getPlayerId();
 		ConnectedPlayer connectedPlayer = server.getPlayerById(playerId);
 		if (connectedPlayer != null) {
 			log.info("wrote a response event to connected player with id " + playerId
@@ -269,7 +269,7 @@ public class APNSWriter extends Wrap {
 	 * @param event
 	 * @param playerId - person to send event to
 	 */
-	protected void sendApnsNotificationToPlayer(ResponseEvent event, int playerId) {
+	protected void sendApnsNotificationToPlayer(ResponseEvent event, String playerId) {
 		ConnectedPlayer player = playersByPlayerId.get(playerId);
 		if(player == null){ 
 			log.info("sending apns with type=" + event.getEventType()+ " to player with id " + playerId + ", event=" + event);
@@ -285,7 +285,7 @@ public class APNSWriter extends Wrap {
 	}
 	
 	// copied from EventWriter.processClanResponseEvent
-	public void processClanResponseEvent(ResponseEvent event, int clanId) {
+	public void processClanResponseEvent(ResponseEvent event, String clanId) {
 		log.debug("apnsWriter received clan event=" + event);
 		ResponseEvent e = (ResponseEvent) event;
 		List<String> statuses = new ArrayList<String>();
@@ -293,10 +293,10 @@ public class APNSWriter extends Wrap {
 	    statuses.add(UserClanStatus.JUNIOR_LEADER.name());
 	    statuses.add(UserClanStatus.CAPTAIN.name());
 	    statuses.add(UserClanStatus.MEMBER.name());
-	    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+	    List<String> userIds = RetrieveUtils.userClanRetrieveUtils()
 	    		.getUserIdsWithStatuses(clanId, statuses);
 		
-		for (Integer userId : userIds) {
+		for (String userId : userIds) {
 			log.info("Sending apns to clan: {} member: {}", clanId, userId);
 			sendApnsNotificationToPlayer(e, userId);
 		}
@@ -320,7 +320,11 @@ public class APNSWriter extends Wrap {
 	        }
 	      }
 	      MinimumUserProto mup = post.getPoster().getMinUserProto();
-	      String clan = mup.getClan().getClanId() > 0 ? "[" + mup.getClan().getTag() + "] " : "";
+	      String clanId = "";
+	      if (null != mup.getClan()) {
+	    	  clanId = mup.getClan().getClanUuid();
+	      }
+	      String clan =  !clanId.isEmpty() ? "[" + mup.getClan().getTag() + "] " : "";
 	      pb.alertBody(clan + mup.getName()
 	          + " sent a private message: " + content);
 

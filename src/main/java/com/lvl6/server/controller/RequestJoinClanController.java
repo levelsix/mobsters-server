@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,18 +41,21 @@ import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -63,10 +67,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   protected Locker locker;
   
   @Autowired
-  protected PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil;
+  protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
   
   @Autowired
   protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+  
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+  
+  @Autowired
+  protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils;
+  
+  @Autowired
+  protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils;
+  
+  @Autowired
+  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
   
   public RequestJoinClanController() {
 	  numAllocatedThreads = 4;
@@ -88,21 +113,46 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent)event).getRequestJoinClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int clanId = reqProto.getClanId();
-    int userId = senderProto.getUserId();
+    String clanId = reqProto.getClanUuid();
+    String userId = senderProto.getUserUuid();
 
     RequestJoinClanResponseProto.Builder resBuilder = RequestJoinClanResponseProto.newBuilder();
     resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setClanId(clanId);
+    resBuilder.setClanUuid(clanId);
+
+    UUID userUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      clanUuid = UUID.fromString(clanId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, clanId=%s",
+          userId, clanId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+      RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 
     boolean lockedClan = false;
-    if (0 != clanId) {
-    	lockedClan = getLocker().lockClan(clanId);
+    if (clanUuid != null) {
+    	lockedClan = getLocker().lockClan(clanUuid);
     }
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
+      User user = getUserRetrieveUtils().getUserById(userId);
+      Clan clan = getClanRetrieveUtils().getClanWithId(clanId);
       boolean requestToJoinRequired = false; //to be set if request is legit
 
       List<Integer> clanSizeList = new ArrayList<Integer>();
@@ -140,7 +190,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         sendClanRaidStuff(resBuilder, clan, user);
         cdp = setClanData(clanId, clan, user, userId);
       }
-      RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
+      RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRequestJoinClanResponseProto(resBuilder.build());
       /* I think I meant write to the clan leader if leader is not on
@@ -152,11 +202,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.writeEvent(resEvent);
       
       if (successful) {
-      	List<Integer> userIds = new ArrayList<Integer>();
+      	List<String> userIds = new ArrayList<String>();
       	userIds.add(userId);
       	//get user's current monster team
-      	Map<Integer, List<MonsterForUser>> userIdToTeam = RetrieveUtils
-      			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds); 
+      	Map<String, List<MonsterForUser>> userIdToTeam = getMonsterForUserRetrieveUtils()
+      	    .getUserIdsToMonsterTeamForUserIds(userIds); 
       	UserCurrentMonsterTeamProto curTeamProto = CreateInfoProtoUtils
       			.createUserCurrentMonsterTeamProto(userId, userIdToTeam.get(userId));
       	resBuilder.setRequesterMonsters(curTeamProto);
@@ -167,15 +217,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resEvent.setRequestJoinClanResponseProto(resBuilder.build());
         server.writeClanEvent(resEvent, clan.getId());
         
-        //null PvpLeagueFromUser means will pull from hazelcast instead
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
+        if (!requestToJoinRequired) {
+          //null PvpLeagueFromUser means will pull from hazelcast instead
+          UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+              .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, clan);
+          resEventUpdate.setTag(event.getTag());
+          server.writeEvent(resEventUpdate);
+          
+          //this is so user gets all up to date clan information
+          sendClanData(event, senderProto, userId, cdp);
+        }
         
-        //this is so user gets all up to date clan information
-        sendClanData(event, senderProto, userId, cdp);
-        notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
+        // handled by client
+        //notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
       }
     } catch (Exception e) {
     	log.error("exception in RequestJoinClan processEvent", e);
@@ -189,8 +243,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		log.error("exception2 in RequestJoinClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		getLocker().unlockClan(clanId);
+    	if (clanUuid != null && lockedClan) {
+    		getLocker().unlockClan(clanUuid);
     	}
     }
   }
@@ -204,13 +258,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
     if (user == null || clan == null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
-      log.error("user is " + user + ", clan is " + clan);
+      log.error(String.format(
+    	  "user is %s, clan is ",
+    	  user, clan));
       return false;      
     }
-    int clanId = user.getClanId();
-    if (clanId > 0) {
+    String clanId = user.getClanId();
+    if (clanId != null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
-      log.error("user is already in clan with id " + clanId);
+      log.error(String.format(
+    	  "user is already in clan with id %s", clanId));
       return false;      
     }
     
@@ -221,15 +278,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //      log.error("user is good " + user.getType() + ", user type is good " + user.getType());
 //      return false;      
 //    }
-    UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clanId);
+    UserClan uc = getUserClanRetrieveUtils().getSpecificUserClan(user.getId(), clanId);
     if (uc != null) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_REQUEST_ALREADY_FILED);
-      log.error("user clan already exists for this: " + uc);
+      log.error(String.format("user clan already exists for this: %s", uc));
       return false;      
     }
 
-    if (ControllerConstants.CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId ||
-        ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
+    if (ControllerConstants.CLAN__CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT.equals(clanId)) {
       return true;
     }
     
@@ -240,21 +296,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     //check out the size of the clan since user can just join
     
-    List<Integer> clanIdList = Collections.singletonList(clanId);
+    List<String> clanIdList = Collections.singletonList(clanId);
     List<String> statuses = new ArrayList<String>();
   	statuses.add(UserClanStatus.LEADER.name());
   	statuses.add(UserClanStatus.JUNIOR_LEADER.name());
   	statuses.add(UserClanStatus.CAPTAIN.name());
   	statuses.add(UserClanStatus.MEMBER.name());
-  	Map<Integer, Integer> clanIdToSize = RetrieveUtils.userClanRetrieveUtils()
+  	Map<String, Integer> clanIdToSize = getUserClanRetrieveUtils()
   			.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
   	
   	int size = clanIdToSize.get(clanId);
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
     if (size >= maxSize) {
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_CLAN_IS_FULL);
-      log.warn("user error: trying to join full clan with id " + clanId +
-      		" cur size=" + maxSize);
+      log.warn(String.format(
+    	  "trying to join full clan with id %s, cur size=%s",
+    	  clanId, maxSize));
       return false;      
     }
     clanSizeList.add(size);
@@ -265,8 +322,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private boolean writeChangesToDB(Builder resBuilder, User user, Clan clan) {
     //clan can be open, or user needs to send a request to join the clan
     boolean requestToJoinRequired = clan.isRequestToJoinRequired();
-    int userId = user.getId();
-    int clanId = clan.getId(); //user.getClanId(); //this is null still...
+    String userId = user.getId();
+    String clanId = clan.getId(); //user.getClanId(); //this is null still...
     String userClanStatus;
     if (requestToJoinRequired) {
       userClanStatus = UserClanStatus.REQUESTING.name();
@@ -277,7 +334,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
     
     if (!InsertUtils.get().insertUserClan(userId, clanId, userClanStatus, new Timestamp(new Date().getTime()))) {
-      log.error("unexpected error: problem with inserting user clan data for user " + user + ", and clan id " + clanId);
+      log.error(String.format(
+    	  "problem inserting user clan data for user=%s, and clan id %s",
+    	  user, clanId));
       resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
       return false;
     } 
@@ -285,12 +344,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean deleteUserClanInserted = false;
     //update user to reflect he joined clan if the clan does not require a request to join
     if (!requestToJoinRequired) {
-      if (!user.updateRelativeCoinsAbsoluteClan(0, clanId)) {
-        //could not change clan_id for user
-        log.error("unexpected error: could not change clan id for requester " + user + " to " + clanId 
-            + ". Deleting user clan that was just created.");
-        deleteUserClanInserted = true;
-      } else {
+    	if (!user.updateRelativeCoinsAbsoluteClan(0, clanId)) {
+    		//could not change clan_id for user
+    		String preface = "could not change clanId for";
+    		String postface = "Deleting user clan that was just created.";
+    		log.error(String.format(
+    			"%s requester %s to %s. %s",
+    			preface, user, clanId, postface));
+    		deleteUserClanInserted = true;
+    	} else {
         //successfully changed clan_id in current user
         //get rid of all other join clan requests
         //don't know if this next line will always work...
@@ -311,12 +373,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void notifyClan(User aUser, Clan aClan, boolean requestToJoinRequired) {
-  	int clanId = aUser.getClanId();
+    String clanId = aUser.getClanId();
     List<String> statuses = Collections.singletonList(UserClanStatus.LEADER.name());
-    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    List<String> userIds = getUserClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
-    int clanOwnerId = 0;
+    String clanOwnerId = null;
     if (null != userIds && !userIds.isEmpty()) {
     	clanOwnerId = userIds.get(0);
     }
@@ -357,8 +419,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		return;
   	}
   	
-  	int clanId = clan.getId();
-  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  	String clanId = clan.getId();
+  	ClanEventPersistentForClan cepfc = getClanEventPersistentForClanRetrieveUtils()
   			.getPersistentEventForClanId(clanId);
   	
   	//send to the user the current clan raid details for the clan
@@ -368,16 +430,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		resBuilder.setEventDetails(updatedEventDetails);
   	}
   	
-  	Map<Integer, ClanEventPersistentForUser> userIdToCepfu =
-  			ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+  	Map<String, ClanEventPersistentForUser> userIdToCepfu =
+  			getClanEventPersistentForUserRetrieveUtils().getPersistentEventUserInfoForClanId(clanId);
   	
   	
   	//send to the user the current clan raid details for all the users
   	if (!userIdToCepfu.isEmpty()) {
     	//whenever server has this information send it to the clients
-    	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+    	List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
     	
-    	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    	Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
     			.getSpecificUserMonsters(userMonsterIds);
     	
     	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
@@ -389,14 +451,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   }
   
-  private ClanDataProto setClanData( int clanId,
-	  Clan c, User u, int userId )
+  private ClanDataProto setClanData( String clanId,
+	  Clan c, User u, String userId )
   {
 	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
-	  StartUpResource fillMe = new StartUpResource(
-			RetrieveUtils.userRetrieveUtils());
+	  StartUpResource fillMe = new StartUpResource(getUserRetrieveUtils(), getClanRetrieveUtils());
 	  
-	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u);
+	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, u, getClanChatPostRetrieveUtils());
 	  sccma.setUp(fillMe);
 	  SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, u, userId, clanHelpRetrieveUtil);
 	  scha.setUp(fillMe);
@@ -413,7 +474,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void sendClanData(
 	  RequestEvent event,
 	  MinimumUserProto senderProto,
-	  int userId,
+	  String userId,
 	  ClanDataProto cdp )
   {
 	  if (null == cdp) {
@@ -438,15 +499,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  this.locker = locker;
   }
 
-
-  public PvpLeagueForUserRetrieveUtil getPvpLeagueForUserRetrieveUtil() {
-	  return pvpLeagueForUserRetrieveUtil;
-  }
-  public void setPvpLeagueForUserRetrieveUtil(
-		  PvpLeagueForUserRetrieveUtil pvpLeagueForUserRetrieveUtil) {
-	  this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
-  }
-
   public ClanHelpRetrieveUtil getClanHelpRetrieveUtil()
   {
 	  return clanHelpRetrieveUtil;
@@ -455,6 +507,92 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
   {
 	  this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
+  }
+
+
+  public PvpLeagueForUserRetrieveUtil2 getPvpLeagueForUserRetrieveUtil() {
+    return pvpLeagueForUserRetrieveUtil;
+  }
+
+
+  public void setPvpLeagueForUserRetrieveUtil(
+      PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil) {
+    this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+  }
+
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+
+  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+    return userClanRetrieveUtils;
+  }
+
+
+  public void setUserClanRetrieveUtils(
+      UserClanRetrieveUtils2 userClanRetrieveUtils) {
+    this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }
+
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
+
+
+  public ClanEventPersistentForClanRetrieveUtils2 getClanEventPersistentForClanRetrieveUtils() {
+    return clanEventPersistentForClanRetrieveUtils;
+  }
+
+
+  public void setClanEventPersistentForClanRetrieveUtils(
+      ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils) {
+    this.clanEventPersistentForClanRetrieveUtils = clanEventPersistentForClanRetrieveUtils;
+  }
+
+
+  public ClanEventPersistentForUserRetrieveUtils2 getClanEventPersistentForUserRetrieveUtils() {
+    return clanEventPersistentForUserRetrieveUtils;
+  }
+
+
+  public void setClanEventPersistentForUserRetrieveUtils(
+      ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
+    this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
+  }
+
+
+  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+    return clanChatPostRetrieveUtils;
+  }
+
+
+  public void setClanChatPostRetrieveUtils(
+      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
   }
   
 }

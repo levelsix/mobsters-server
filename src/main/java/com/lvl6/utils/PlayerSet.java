@@ -19,13 +19,13 @@ public class PlayerSet implements HazelcastInstanceAware {
 
 	org.slf4j.Logger log = LoggerFactory.getLogger(PlayerSet.class);
 	
-	private IMap<Integer, PlayerInAction> players;
+	private IMap<String, PlayerInAction> players;
 
-	public IMap<Integer, PlayerInAction> getPlayers() {
+	public IMap<String, PlayerInAction> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(IMap<Integer, PlayerInAction> players) {
+	public void setPlayers(IMap<String, PlayerInAction> players) {
 		this.players = players;
 	}
 
@@ -46,25 +46,25 @@ public class PlayerSet implements HazelcastInstanceAware {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public void addPlayer(int playerId, String lockedByClass) {
+	public void addPlayer(String playerId, String lockedByClass) {
 		players.put(playerId, new PlayerInAction(playerId, lockedByClass));
 	}
 
-	public PlayerInAction getPlayerInAction(int playerId) {
+	public PlayerInAction getPlayerInAction(String playerId) {
 		return players.get(playerId);
 	}
 	
-	public void removePlayer(int playerId) {
+	public void removePlayer(String playerId) {
 		if(containsPlayer(playerId))
 			players.remove(playerId);
 	}
 
-	public boolean containsPlayer(int playerId) {
+	public boolean containsPlayer(String playerId) {
 		return players.containsKey(playerId);
 	}
 	
 	
-	public String lockName(int playerId) {
+	public String lockName(String playerId) {
 		return "PlayerLock:"+playerId;
 	}
 	
@@ -72,7 +72,7 @@ public class PlayerSet implements HazelcastInstanceAware {
 	public void clearOldLocks(){
 		long now = new Date().getTime();
 		log.debug("Removing stale player locks");
-		for(Integer player:players.keySet()){
+		for(String player:players.keySet()){
 			try {
 				PlayerInAction play = players.get(player);
 				if(play != null && play.getLockTime() != null) {

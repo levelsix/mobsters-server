@@ -11,7 +11,7 @@ public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent {
 
   private PurgeClientStaticDataResponseProto purgeClientStaticDataResponseProto;
   
-  public PurgeClientStaticDataResponseEvent(int playerId){
+  public PurgeClientStaticDataResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_PURGE_STATIC_DATA_EVENT;
   }

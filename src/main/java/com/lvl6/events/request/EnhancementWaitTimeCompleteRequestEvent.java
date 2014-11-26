@@ -22,7 +22,7 @@ public class EnhancementWaitTimeCompleteRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
     	enhancementWaitTimeCompleteRequestProto = EnhancementWaitTimeCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = enhancementWaitTimeCompleteRequestProto.getSender().getUserId();
+      playerId = enhancementWaitTimeCompleteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("enhancement wait time complete request exception", e);
     }

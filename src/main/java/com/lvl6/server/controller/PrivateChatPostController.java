@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +31,11 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.utils.AdminChatUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -49,6 +50,13 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtils;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+	
 	public PrivateChatPostController() {
 		numAllocatedThreads = 4;
 	}
@@ -70,20 +78,46 @@ public class PrivateChatPostController extends EventController {
 
 		// from client
 		MinimumUserProto senderProto = reqProto.getSender();
-		int posterId = senderProto.getUserId();
-		int recipientId = reqProto.getRecipientId();
+		String posterId = senderProto.getUserUuid();
+		String recipientId = reqProto.getRecipientUuid();
 		String content = (reqProto.hasContent()) ? reqProto.getContent() : "";
 
 		// to client
 		PrivateChatPostResponseProto.Builder resBuilder = PrivateChatPostResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
 
-		List<Integer> userIds = new ArrayList<Integer>();
+		List<String> userIds = new ArrayList<String>();
 		userIds.add(posterId);
 		userIds.add(recipientId);
+
+    UUID userUuid = null;
+    UUID recipientUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(posterId);
+      recipientUuid = UUID.fromString(recipientId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect posterId=%s, recipientId=%s",
+          posterId, recipientId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+      PrivateChatPostResponseEvent resEvent =
+          new PrivateChatPostResponseEvent(posterId);
+      resEvent.setTag(event.getTag());
+      resEvent.setPrivateChatPostResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 		
 		try {
-			Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+			Map<String, User> users = getUserRetrieveUtils().getUsersByIds(userIds);
 			boolean legitPost = checkLegitPost(resBuilder, posterId, recipientId, content, users);
 
 			PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(posterId);
@@ -93,9 +127,9 @@ public class PrivateChatPostController extends EventController {
 				// record in db
 				Timestamp timeOfPost = new Timestamp(new Date().getTime());
 				String censoredContent = MiscMethods.censorUserInput(content);
-				int privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId,
+				String privateChatPostId = insertUtils.insertIntoPrivateChatPosts(posterId, recipientId,
 						censoredContent, timeOfPost);
-				if (privateChatPostId <= 0) {
+				if (privateChatPostId == null) {
 					legitPost = false;
 					resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 					log.error("problem with inserting private chat post into db. posterId=" + posterId
@@ -117,17 +151,17 @@ public class PrivateChatPostController extends EventController {
 					Clan recipientClan = null;
 					
 					//TODO: not sure if necessary to get the clans
-					Set<Integer> clanIds = new HashSet<Integer>();
-					int posterClanId = poster.getClanId();
-					int recipientClanId = recipient.getClanId();
-					if (0 != posterClanId) {
+					Set<String> clanIds = new HashSet<String>();
+					String posterClanId = poster.getClanId();
+					String recipientClanId = recipient.getClanId();
+					if (null != posterClanId) {
 						clanIds.add(posterClanId);
 					}
-					if (0 != recipientClanId) {
+					if (null != recipientClanId) {
 						clanIds.add(recipientClanId);
 					}
 					if (!clanIds.isEmpty()) {
-						Map<Integer, Clan> clanIdsToClans = ClanRetrieveUtils
+						Map<String, Clan> clanIdsToClans = getClanRetrieveUtils()
 							.getClansByIds(clanIds);
 						if (clanIdsToClans.containsKey(posterClanId)) {
 							posterClan = clanIdsToClans.get(posterClanId); 
@@ -176,20 +210,20 @@ public class PrivateChatPostController extends EventController {
 
 	}
 
-	private boolean checkLegitPost(Builder resBuilder, int posterId, int recipientId, String content,
-			Map<Integer, User> users) {
+	private boolean checkLegitPost(Builder resBuilder, String posterId, String recipientId, String content,
+			Map<String, User> users) {
 		if (users == null) {
 			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 			log.error("users are null- posterId=" + posterId + ", recipientId=" + recipientId);
 			return false;
 		}
-		if (users.size() != 2 && posterId != recipientId) {
+		if (users.size() != 2 && !posterId.equals(recipientId)) {
 			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 			log.error("error retrieving one of the users. posterId=" + posterId + ", recipientId="
 					+ recipientId);
 			return false;
 		}
-		if (users.size() != 1 && posterId == recipientId) {
+		if (users.size() != 1 && posterId.equals(recipientId)) {
 			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
 			log.error("error retrieving one of the users. posterId=" + posterId + ", recipientId="
 					+ recipientId);
@@ -230,5 +264,21 @@ public class PrivateChatPostController extends EventController {
 	public void setInsertUtils(InsertUtil insertUtils) {
 		this.insertUtils = insertUtils;
 	}
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
 	
 }

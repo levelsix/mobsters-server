@@ -43,7 +43,7 @@ message QuestProgressRequestProto {
 	
 	//if set, delete these user monster ids. Deleting monsters
 	//will be set for only one quest job
-	repeated int64 deleteUserMonsterIds = 5;
+	repeated string deleteUserMonsterUuids = 5;
 }
 
 																						//DONE

@@ -5,19 +5,22 @@ import java.util.Date;
 
 public class MonsterHealingForUser implements Serializable {
 
-	private static final long serialVersionUID = -1710714770808323548L;
-	
-	private int userId;
-	private long monsterForUserId;
+	private String userId;
+	private String monsterForUserId;
 	private Date queuedTime;
 //	private int userStructHospitalId;
 	private float healthProgress;
 	private int priority;
 	private float elapsedSeconds;
 
+	public MonsterHealingForUser()
+	{
+		super();
+	}
+
 	public MonsterHealingForUser(
-		int userId,
-		long monsterForUserId,
+		String userId,
+		String monsterForUserId,
 		Date queuedTime,
 		float healthProgress,
 		int priority,
@@ -32,19 +35,19 @@ public class MonsterHealingForUser implements Serializable {
 		this.elapsedSeconds = elapsedSeconds;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public long getMonsterForUserId() {
+	public String getMonsterForUserId() {
 		return monsterForUserId;
 	}
 
-	public void setMonsterForUserId(long monsterForUserId) {
+	public void setMonsterForUserId(String monsterForUserId) {
 		this.monsterForUserId = monsterForUserId;
 	}
 

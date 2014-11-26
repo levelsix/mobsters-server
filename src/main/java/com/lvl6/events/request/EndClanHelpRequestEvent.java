@@ -22,7 +22,7 @@ public class EndClanHelpRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       endClanHelpRequestProto = EndClanHelpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = endClanHelpRequestProto.getSender().getUserId();
+      playerId = endClanHelpRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("endClanHelp request exception", e);
     }

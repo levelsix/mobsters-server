@@ -11,7 +11,7 @@ public class BootPlayerFromClanResponseEvent extends NormalResponseEvent {
 
   private BootPlayerFromClanResponseProto bootPlayerFromClanResponseProto;
   
-  public BootPlayerFromClanResponseEvent(int playerId){
+  public BootPlayerFromClanResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_BOOT_PLAYER_FROM_CLAN_EVENT;
   }

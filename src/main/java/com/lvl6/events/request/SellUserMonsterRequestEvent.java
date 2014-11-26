@@ -22,7 +22,7 @@ public class SellUserMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       sellUserMonsterRequestProto = SellUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = sellUserMonsterRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = sellUserMonsterRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("sell user monster request exception", e);
     }

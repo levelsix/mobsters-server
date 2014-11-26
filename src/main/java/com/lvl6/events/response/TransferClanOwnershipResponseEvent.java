@@ -11,7 +11,7 @@ public class TransferClanOwnershipResponseEvent extends NormalResponseEvent{
 
   private TransferClanOwnershipResponseProto transferClanOwnershipResponseProto;
   
-  public TransferClanOwnershipResponseEvent(int playerId) {
+  public TransferClanOwnershipResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_TRANSFER_CLAN_OWNERSHIP;
   }

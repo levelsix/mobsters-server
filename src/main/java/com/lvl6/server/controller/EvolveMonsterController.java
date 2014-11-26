@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +34,14 @@ import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonster
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class EvolveMonsterController extends EventController {
 
@@ -47,6 +50,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	@Autowired
 	protected Locker locker;
 
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtil;
+	
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
 	public EvolveMonsterController() {
 		numAllocatedThreads = 3;
 	}
@@ -70,21 +88,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		
 		UserMonsterEvolutionProto uep = reqProto.getEvolution();
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
 		int oilChange = reqProto.getOilChange();
 		
-		long catalystUserMonsterId = 0;
-		List<Long> evolvingUserMonsterIds = new ArrayList<Long>();
+		String catalystUserMonsterId = "";
+		List<String> evolvingUserMonsterIds = new ArrayList<String>();
 		Timestamp clientTime = null;
 		
 		if (null != uep && reqProto.hasEvolution()) {
 			log.info("uep is not null");
-			catalystUserMonsterId = uep.getCatalystUserMonsterId();
-			evolvingUserMonsterIds = new ArrayList<Long>(uep.getUserMonsterIdsList());
+			catalystUserMonsterId = uep.getCatalystUserMonsterUuid();
+			evolvingUserMonsterIds = new ArrayList<String>(uep.getUserMonsterUuidsList());
 			clientTime = new Timestamp(uep.getStartTime());
 		}
 
@@ -93,31 +111,57 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
 
-		getLocker().lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		UUID userUuid = null;
+		boolean invalidUuids = true;
+		
+		try {
+			userUuid = UUID.fromString(userId);
+			//just seeing if ids are valid
+			UUID.fromString(catalystUserMonsterId);
+			StringUtils.convertToUUID(evolvingUserMonsterIds);
+			
+			invalidUuids = false;
+		} catch (Exception e) {
+			log.error(String.format(
+				"UUID error. incorrect userId=%s",
+				userId), e);
+		}
+		
+		//UUID checks
+	    if (invalidUuids) {
+	    	resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
+			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(userId);
+	      	resEvent.setTag(event.getTag());
+	      	resEvent.setEvolveMonsterResponseProto(resBuilder.build());
+	      	server.writeEvent(resEvent);
+	    	return;
+	    }
+		
+		getLocker().lockPlayer(userUuid, getClass().getSimpleName());
 		try {
 			int previousOil = 0;
 			int previousGems = 0;
 			//get whatever we need from the database
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
-						MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
+			User aUser = userRetrieveUtil.getUserById(userId);
+			Map<String, MonsterEnhancingForUser> alreadyEnhancing =
+				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
 			
-			Map<Long, MonsterHealingForUser> alreadyHealing =
-    			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+			Map<String, MonsterHealingForUser> alreadyHealing =
+    			monsterHealingForUserRetrieveUtil.getMonstersForUser(userId);
 			
-			Map<Long, MonsterEvolvingForUser> alreadyEvolving =
-					MonsterEvolvingForUserRetrieveUtils.getCatalystIdsToEvolutionsForUser(userId);
+			Map<String, MonsterEvolvingForUser> alreadyEvolving =
+					monsterEvolvingForUserRetrieveUtil.getCatalystIdsToEvolutionsForUser(userId);
 			
 			//retrieve all the new monsters
-    	Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
+    	Map<String, MonsterForUser> existingUserMonsters = new HashMap<String, MonsterForUser>();
 
     	//just in case uep is null, but most likely not. retrieve all the monsters used
     	//in evolution, just to make sure they exist
     	if (null != uep && reqProto.hasEvolution()) {
-    		Set<Long> newIds = new HashSet<Long>();
+    		Set<String> newIds = new HashSet<String>();
     		newIds.add(catalystUserMonsterId);
     		newIds.addAll(evolvingUserMonsterIds);
-    		existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
+    		existingUserMonsters = monsterForUserRetrieveUtil.getSpecificOrAllUserMonstersForUser(userId, newIds);
     		log.info(String.format("retrieved user monsters. existingUserMonsters=%s", existingUserMonsters));
     	}
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
@@ -138,7 +182,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				resBuilder.setStatus(EvolveMonsterStatus.SUCCESS);
 			}
 
-			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserId());
+			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
 			resEvent.setEvolveMonsterResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
@@ -146,7 +190,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
@@ -155,18 +199,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			}
 
 		} catch (Exception e) {
-			log.error("exception in EnhanceMonster processEvent", e);
+			log.error("exception in EvolveMonster processEvent", e);
+			resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
+			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(userId);
+	      	resEvent.setTag(event.getTag());
+	      	resEvent.setEvolveMonsterResponseProto(resBuilder.build());
+	      	server.writeEvent(resEvent);
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());   
 		}
 	}
 
-	private boolean checkLegit(Builder resBuilder, User u, int userId,
-			Map<Long, MonsterForUser> existingUserMonsters,
-			Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
-			Map<Long, MonsterHealingForUser> alreadyHealing,
-			Map<Long, MonsterEvolvingForUser> alreadyEvolving, long catalystUserMonsterId,
-			List<Long> userMonsterIds, int gemsSpent, int oilChange) {
+	private boolean checkLegit(Builder resBuilder, User u, String userId,
+			Map<String, MonsterForUser> existingUserMonsters,
+			Map<String, MonsterEnhancingForUser> alreadyEnhancing,
+			Map<String, MonsterHealingForUser> alreadyHealing,
+			Map<String, MonsterEvolvingForUser> alreadyEvolving, String catalystUserMonsterId,
+			List<String> userMonsterIds, int gemsSpent, int oilChange) {
 		if (null == u ) {
 			log.error(String.format(
 				"user is null. user=%s, catalystUserMonsterId=%s, userMonsterIds=%s",
@@ -194,19 +243,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		}
 		
 		// TODO: Check minijob
-		Set<Long> prospectiveEvolutionMfuIds = new HashSet<Long>(userMonsterIds);
+		Set<String> prospectiveEvolutionMfuIds = new HashSet<String>(userMonsterIds);
 		prospectiveEvolutionMfuIds.add(catalystUserMonsterId);
 		
-		Set<Long> unavailableMfuIds = new HashSet<Long>(alreadyEnhancing.keySet());
+		Set<String> unavailableMfuIds = new HashSet<String>(alreadyEnhancing.keySet());
 		unavailableMfuIds.addAll(alreadyHealing.keySet());
 		
 		//don't allow this transaction through because at least one of these monsters is
 		//used in enhancing or is being healed
 		if (!Collections.disjoint(prospectiveEvolutionMfuIds, unavailableMfuIds))
 		{
-			log.error("at least one of the monsters provided is in healing or enhancing. enhancing=" +
-				alreadyEnhancing + "\t healing=" + alreadyHealing + "\t catalyst=" +
-					catalystUserMonsterId + "\t others=" + userMonsterIds);
+			log.error(String.format(
+				"at least one of the monsters is in healing or enhancing. enhancing=%s, healing=%s, catalyst=%s, others=%s",
+				alreadyEnhancing, alreadyHealing, catalystUserMonsterId, userMonsterIds));
 			return false;
 		}
 		
@@ -231,13 +280,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
  
 	//if gem cost is 0 and user gems is 0, then 0 !< 0 so no error issued
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent,
-			int oilChange, long catalyst, List<Long> userMonsterIds) {
+			int oilChange, String catalyst, List<String> userMonsterIds) {
 		int userGems = u.getGems();
 		//if user's aggregate gems is < cost, don't allow transaction
 		if (userGems < gemsSpent) {
-			log.error("user error: user does not have enough gems. userGems=" + userGems +
-					"\t gemsSpent=" + gemsSpent + "\t oilChange=" + oilChange + "\t catalyst=" +
-					catalyst + "\t userMonsterIds=" + userMonsterIds);
+			log.error(String.format(
+				"not enough gems. userGems=%s, gemsSpent=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
+				userGems, gemsSpent, oilChange, catalyst, userMonsterIds));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
@@ -245,24 +294,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 
 	private boolean hasEnoughOil(Builder resBuilder, User u, int gemsSpent,
-			int oilChange, long catalyst, List<Long> userMonsterIds) {
+			int oilChange, String catalyst, List<String> userMonsterIds) {
 		int userOil = u.getOil(); 
 		//positive 'cashChange' means refund, negative means charge user
 		int cost = -1 * oilChange;
 		
 		//if user not spending gems check if user has enough oil
 		if (0 == gemsSpent && userOil < cost) {
-			log.error("user error: user does not have enough cash. cost=" + cost +
-					"\t oilChange=" + oilChange + "\t catalyst=" + catalyst + 
-					"\t userMonsterIds=" + userMonsterIds);
+			log.error(String.format(
+				"not enough oil. cost=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
+				cost, oilChange, catalyst, userMonsterIds));
 			resBuilder.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_RESOURCES);
 			return false;
 		}
 		return true;
 	}
 
-	private boolean writeChangesToDB(User user, int uId, int gemsSpent,
-			int oilChange, long catalystUserMonsterId, List<Long> userMonsterIds,
+	private boolean writeChangesToDB(User user, String uId, int gemsSpent,
+			int oilChange, String catalystUserMonsterId, List<String> userMonsterIds,
 		  Timestamp clientTime, Map<String, Integer> money) {
 
 		//CHARGE THE USER
@@ -271,8 +320,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
-			log.error("problem with updating user stats: gemChange=" + gemChange
-					+ ", cashChange=" + oilChange + ", user is " + user);
+			log.error(String.format(
+				"problem updating user stats: gemChange=%s, oilChange=%s, user=%s",
+				gemChange, oilChange, user));
 			return false;
 			
 		} else {
@@ -289,7 +339,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		int numInserted = InsertUtils.get().insertIntoMonsterEvolvingForUser(uId,
 				catalystUserMonsterId, userMonsterIds, clientTime);
 		
-		log.info("for monster_evolving table, numInserted=" + numInserted);
+		log.info(String.format(
+			"for monster_evolving table, numInserted=%s", numInserted));
 		
 		return true;
 	}
@@ -297,7 +348,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
 			Map<String, Integer> moneyChange, int previousOil, int previousGems,
-			long catalystUserMonsterId, List<Long> userMonsterIds) {
+			String catalystUserMonsterId, List<String> userMonsterIds) {
 		if (moneyChange.isEmpty()) {
 			return;
 		}
@@ -314,14 +365,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		detailSb.append("(");
 		detailSb.append(catalystUserMonsterId);
 		detailSb.append(",");
-		long one = userMonsterIds.get(0);
+		String one = userMonsterIds.get(0);
 		detailSb.append(one);
-		long two = userMonsterIds.get(1);
+		String two = userMonsterIds.get(1);
 		detailSb.append(two);
 		detailSb.append(")");
 		
 		
-		int userId = aUser.getId();
+		String userId = aUser.getId();
 		Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
 		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 		Map<String, String> changeReasonsMap = new HashMap<String, String>();
@@ -348,6 +399,60 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtil()
+	{
+		return monsterEnhancingForUserRetrieveUtil;
+	}
+
+	public void setMonsterEnhancingForUserRetrieveUtil(
+		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil )
+	{
+		this.monsterEnhancingForUserRetrieveUtil = monsterEnhancingForUserRetrieveUtil;
+	}
+
+	public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtil()
+	{
+		return monsterHealingForUserRetrieveUtil;
+	}
+
+	public void setMonsterHealingForUserRetrieveUtil(
+		MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtil )
+	{
+		this.monsterHealingForUserRetrieveUtil = monsterHealingForUserRetrieveUtil;
+	}
+
+	public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtil()
+	{
+		return monsterEvolvingForUserRetrieveUtil;
+	}
+
+	public void setMonsterEvolvingForUserRetrieveUtil(
+		MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtil )
+	{
+		this.monsterEvolvingForUserRetrieveUtil = monsterEvolvingForUserRetrieveUtil;
+	}
+
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
+	{
+		return monsterForUserRetrieveUtil;
+	}
+
+	public void setMonsterForUserRetrieveUtil(
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
+	{
+		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 	}
 
 }

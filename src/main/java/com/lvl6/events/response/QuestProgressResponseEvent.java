@@ -11,7 +11,7 @@ public class QuestProgressResponseEvent extends NormalResponseEvent {
 
   private QuestProgressResponseProto questProgressResponseProto;
   
-  public QuestProgressResponseEvent(int playerId){
+  public QuestProgressResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_QUEST_PROGRESS_EVENT;
   }

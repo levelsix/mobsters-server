@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,8 @@ import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.Builder
 import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class RestrictUserMonsterController extends EventController {
@@ -29,6 +30,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
   public RestrictUserMonsterController() {
     numAllocatedThreads = 4;
@@ -51,21 +55,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    List<Long> userMonsterIdList = reqProto.getUserMonsterIdsList();
+    String userId = senderProto.getUserUuid();
+    List<String> userMonsterIdList = reqProto.getUserMonsterUuidsList();
 
     //set some values to send to the client (the response proto)
     RestrictUserMonsterResponseProto.Builder resBuilder = RestrictUserMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER); //default
 
-//    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userMonsterUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      if (userMonsterIdList != null) {
+        for (String userMonsterId : userMonsterIdList) {
+          userMonsterUuid = UUID.fromString(userMonsterId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userMonsterIdList=%s",
+          userId, userMonsterIdList), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RestrictUserMonsterStatus.FAIL_OTHER);
+      RestrictUserMonsterResponseEvent resEvent = new RestrictUserMonsterResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRestrictUserMonsterResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+//    getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     try {
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
     	//make sure it exists
-    	Map<Long, MonsterForUser> mfuMap = RetrieveUtils
-    		.monsterForUserRetrieveUtils()
+    	Map<String, MonsterForUser> mfuMap = getMonsterForUserRetrieveUtils()
     		.getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIdList);
     	
       boolean legit = checkLegit(resBuilder, userId, userMonsterIdList, mfuMap);
@@ -101,7 +134,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in RestrictUserMonsterController processEvent", e);
       }
     } finally {
-//      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//      getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
     }
   }
 
@@ -110,8 +143,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, int userId,
-  		List<Long> userMonsterIdList, Map<Long, MonsterForUser> mfuMap) {
+  private boolean checkLegit(Builder resBuilder, String userId,
+  		List<String> userMonsterIdList, Map<String, MonsterForUser> mfuMap) {
   	
   	if (null == mfuMap || mfuMap.isEmpty()) {
   		log.error(String.format(
@@ -124,7 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private boolean writeChangesToDb(int uId, List<Long> userMonsterIdList) { 
+  private boolean writeChangesToDb(String uId, List<String> userMonsterIdList) { 
   	
   	int numUpdated = UpdateUtils.get().updateRestrictUserMonsters(
   		uId, userMonsterIdList);
@@ -143,6 +176,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
   }
   
 }

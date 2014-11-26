@@ -22,7 +22,7 @@ public class AchievementProgressRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       achievementProgressRequestProto = AchievementProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = achievementProgressRequestProto.getSender().getUserId();
+      playerId = achievementProgressRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("AchievementProgress request exception", e);
     }

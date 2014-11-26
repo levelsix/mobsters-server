@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,8 @@ import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
@@ -31,6 +32,9 @@ import com.lvl6.utils.RetrieveUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public UpdateUserCurrencyController() {
     numAllocatedThreads = 4;
@@ -52,7 +56,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     
     //all positive numbers, server will change to negative
     int cashSpent = reqProto.getCashSpent();
@@ -68,9 +72,31 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+        userUuid = UUID.fromString(userId);
+        invalidUuids = false;
+    } catch (Exception e) {
+        log.error(String.format(
+            "UUID error. incorrect userId=%s",
+            userId), e);
+        invalidUuids = true;
+    }
+	
+	//UUID checks
+    if (invalidUuids) {
+  	  resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER);
+  	  UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(userId);
+  	  resEvent.setTag(event.getTag());
+  	  resEvent.setUpdateUserCurrencyResponseProto(resBuilder.build());
+  	  server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User aUser = getUserRetrieveUtils().getUserById(userId);
       int previousGems = 0;
       int previousCash = 0;
       int previousOil = 0;
@@ -100,7 +126,7 @@ import com.lvl6.utils.RetrieveUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
@@ -109,11 +135,13 @@ import com.lvl6.utils.RetrieveUtils;
       	
       }
       
-      //cheat code, reset user account
-      if (1234 == cashSpent && 1234 == oilSpent && 1234 == gemsSpent) {
-    	  log.info("resetting user " + aUser);
-    	  aUser.updateResetAccount();
-      }
+//      //cheat code, reset user account
+//      if (1234 == cashSpent && 1234 == oilSpent && 1234 == gemsSpent) {
+//    	  log.info(String.format(
+//    		  "resetting user %s",
+//    		  aUser);
+//    	  aUser.updateResetAccount();
+//      }
       
     } catch (Exception e) {
       log.error("exception in UpdateUserCurrencyController processEvent", e);
@@ -128,7 +156,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -136,47 +164,33 @@ import com.lvl6.utils.RetrieveUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId, int cashSpent,
+  private boolean checkLegit(Builder resBuilder, User u, String userId, int cashSpent,
   		int oilSpent, int gemsSpent) {
     if (null == u) {
-      log.error("unexpected error: user is null. user=" + u);
+      log.error(String.format(
+    	  "user is null. userId=%s, user=%s", userId, u));
       return false;
     }
     
     if (cashSpent != Math.abs(cashSpent) || oilSpent != Math.abs(oilSpent) ||
     		gemsSpent != Math.abs(gemsSpent)) {
-    	log.error("client sent a negative value! all should be positive :(  cashSpent=" +
-    			cashSpent + "\t oilSpent=" + oilSpent + "\t gemsSpent=" + gemsSpent);
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	log.error(String.format(
+    		"negative value(s)! all should be positive :( cashSpent=%s, oilSpent=%s, gemsSpent=%s",
+    			cashSpent, oilSpent, gemsSpent));
+    	return false;
     }
     
     //CHECK MONEY
     if (!hasEnoughCash(resBuilder, u, cashSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     if (!hasEnoughOil(resBuilder, u, oilSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     if (!hasEnoughGems(resBuilder, u, gemsSpent)) {
-    	if (u.isAdmin()) {
-    		log.info("it's alright. User is admin.");
-    	} else {
-    		return false;
-    	}
+    	return false;
     }
     
     return true;
@@ -186,8 +200,9 @@ import com.lvl6.utils.RetrieveUtils;
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
   	if (userCash < cashSpent) {
-  		log.error("user error: user does not have enough cash. userCash=" + userCash +
-  				"\t cashSpent=" + cashSpent);
+  		log.error(String.format(
+  			"not enough cash. userCash=%s, cashSpent=%s",
+  			userCash, cashSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_CASH);
   		return false;
   	}
@@ -199,8 +214,9 @@ import com.lvl6.utils.RetrieveUtils;
   	int userOil = u.getOil();
   	//if user's aggregate oil is < cost, don't allow transaction
   	if (userOil < oilSpent) {
-  		log.error("user error: user does not have enough oil. userOil=" + userOil +
-  				"\t oilSpent=" + oilSpent);
+  		log.error(String.format(
+  			"not enough oil. userOil=%s, oilSpent=%s",
+  			userOil, oilSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_OIL);
   		return false;
   	}
@@ -212,8 +228,9 @@ import com.lvl6.utils.RetrieveUtils;
   	int userGems = u.getGems();
   	//if user's aggregate gems is < cost, don't allow transaction
   	if (userGems < gemsSpent) {
-  		log.error("user error: user does not have enough gems. userGems=" + userGems +
-  				"\t gemsSpent=" + gemsSpent);
+  		log.error(String.format(
+  			"not enough gems. userGems=%s, gemsSpent=%s",
+  			userGems, gemsSpent));
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_GEMS);
   		return false;
   	}
@@ -222,37 +239,31 @@ import com.lvl6.utils.RetrieveUtils;
   }
   
 
-  private boolean writeChangesToDb(User u, int uId, int cashSpent, int oilSpent, 
+  private boolean writeChangesToDb(User u, String uId, int cashSpent, int oilSpent, 
   		int gemsSpent, Timestamp clientTime, Map<String, Integer> currencyChange) {
 	  
   	//update user currency
   	int gemsChange = -1 * Math.abs(gemsSpent);
   	int cashChange = -1 * Math.abs(cashSpent);
   	int oilChange = -1 * Math.abs(oilSpent);
-  	
-  	//if user is admin then allow any change
-	  if (u.isAdmin()) {
-	  	gemsChange = gemsSpent;
-	  	cashChange = cashSpent;
-	  	oilChange = oilSpent;
-	  }
-	  
-	  if (!updateUser(u, gemsChange, cashChange, oilChange)) {
-		  log.error("unexpected error: could not decrement user's gems by " +
-				  gemsChange + ", cash by " + cashChange + ", and oil by " + oilChange);
-		  return false;
-	  } else {
-	  	if (0 != gemsChange) {
-	  		currencyChange.put(MiscMethods.gems, gemsChange);
-	  	}
-	  	if (0 != cashChange) {
-	  		currencyChange.put(MiscMethods.cash, cashChange);
-	  	}
-	  	if (0 != oilChange) {
-	  		currencyChange.put(MiscMethods.oil, oilChange);
-	  	}
-	  }
-	  
+
+  	if (!updateUser(u, gemsChange, cashChange, oilChange)) {
+  		log.error(String.format(
+  			"could not decrement user's gems by %s, cash by %s, and oil by %s",
+  				gemsChange, cashChange, oilChange));
+  		return false;
+  	} else {
+  		if (0 != gemsChange) {
+  			currencyChange.put(MiscMethods.gems, gemsChange);
+  		}
+  		if (0 != cashChange) {
+  			currencyChange.put(MiscMethods.cash, cashChange);
+  		}
+  		if (0 != oilChange) {
+  			currencyChange.put(MiscMethods.oil, oilChange);
+  		}
+  	}
+
 	  return true;
   }
   
@@ -260,8 +271,9 @@ import com.lvl6.utils.RetrieveUtils;
 	  int numChange = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemsChange);
 
 	  if (numChange <= 0) {
-	  	log.error("unexpected error: problem with updating user gems, cash, and oil. gemChange=" +
-	  			gemsChange + ", cash= " + cashChange + ", oil=" + oilChange + " user=" + u);
+	  	log.error(String.format(
+	  		"problem updating user gems, cash, oil. gemChange=%s, cash=%s, oil=%s, user=%s",
+	  			gemsChange, cashChange, oilChange, u));
 	  	return false;
 	  }
 	  return true;
@@ -270,7 +282,7 @@ import com.lvl6.utils.RetrieveUtils;
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> currencyChange,
   		Timestamp curTime, int previousGems, int previousCash, int previousOil,
   		String reason, String details) {
-  	int userId = aUser.getId();
+	  String userId = aUser.getId();
   	
     Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
@@ -304,6 +316,14 @@ import com.lvl6.utils.RetrieveUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
 
 }

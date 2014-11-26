@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +19,19 @@ import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 
   @Component
   public class LevelUpController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
   
   @Autowired
   protected Locker locker;
-  public Locker getLocker() {
-	  return locker;
-  }
-  public void setLocker(Locker locker) {
-	  this.locker = locker;
-  }
   
   public LevelUpController() {
     numAllocatedThreads = 2;
@@ -54,16 +52,39 @@ import com.lvl6.utils.RetrieveUtils;
     LevelUpRequestProto reqProto = ((LevelUpRequestEvent)event).getLevelUpRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     int newLevel = reqProto.getNextLevel();
 
     LevelUpResponseProto.Builder resBuilder = LevelUpResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
-    
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+
+    UUID userUuid = null;
+    boolean invalidUuids = true;
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      userUuid = UUID.fromString(userId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s",
+          userId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+      LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setLevelUpResponseProto(resBuilder.build());
+      getEventWriter().handleEvent(resEvent);
+      return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(userId);
       boolean legitLevelUp = checkLegitLevelUp(resBuilder, user);
 
       boolean success = false;
@@ -75,7 +96,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  resBuilder.setStatus(LevelUpStatus.SUCCESS);
       }
       
-      LevelUpResponseEvent resEvent = new LevelUpResponseEvent(senderProto.getUserId());
+      LevelUpResponseEvent resEvent = new LevelUpResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       LevelUpResponseProto resProto = resBuilder.build();
       resEvent.setLevelUpResponseProto(resProto);
@@ -84,7 +105,7 @@ import com.lvl6.utils.RetrieveUtils;
       if (success) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
     	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-    			  .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+    			  .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
     	  resEventUpdate.setTag(event.getTag());
     	  getEventWriter().handleEvent(resEventUpdate);
       }
@@ -102,7 +123,7 @@ import com.lvl6.utils.RetrieveUtils;
     	  log.error("exception2 in LevelUpController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName()); 
     }
   }
 
@@ -121,5 +142,19 @@ import com.lvl6.utils.RetrieveUtils;
     }
     return true;
   }
-  
+
+  public Locker getLocker() {
+    return locker;
+  }
+  public void setLocker(Locker locker) {
+    this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
 }

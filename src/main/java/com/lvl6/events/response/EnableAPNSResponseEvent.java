@@ -11,7 +11,7 @@ public class EnableAPNSResponseEvent extends NormalResponseEvent {
 
   private EnableAPNSResponseProto enableAPNSResponseProto;
   
-  public EnableAPNSResponseEvent(int playerId){
+  public EnableAPNSResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ENABLE_APNS_EVENT;
   }

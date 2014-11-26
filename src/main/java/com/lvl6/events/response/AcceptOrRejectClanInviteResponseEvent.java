@@ -11,7 +11,7 @@ public class AcceptOrRejectClanInviteResponseEvent extends NormalResponseEvent {
 
   private AcceptOrRejectClanInviteResponseProto acceptOrRejectClanInviteResponseProto;
   
-  public AcceptOrRejectClanInviteResponseEvent(int playerId){
+  public AcceptOrRejectClanInviteResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ACCEPT_OR_REJECT_CLAN_INVITE_EVENT;
   }

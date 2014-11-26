@@ -11,7 +11,7 @@ public class RestrictUserMonsterResponseEvent extends NormalResponseEvent {
 
   private RestrictUserMonsterResponseProto restrictUserMonsterResponseProto;
   
-  public RestrictUserMonsterResponseEvent(int playerId){
+  public RestrictUserMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_RESTRICT_USER_MONSTER_EVENT;
   }

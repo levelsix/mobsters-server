@@ -93,7 +93,7 @@
 		<globals.kabamEnabled>true</globals.kabamEnabled>
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>
 		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/ageofchaos]]></globals.appStoreUrl>
-		<globals.appleBundleId>com.scopely.mobsquad</globals.appleBundleId>
+		<globals.appleBundleId>com.lvl6.toonsquad</globals.appleBundleId>
 		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
 
@@ -113,7 +113,7 @@
 		<lvl6.elastic.search.cluster.name>lvl6_robot</lvl6.elastic.search.cluster.name>
 		<lvl6.elastic.search.hosts>robot.lvl6.com</lvl6.elastic.search.hosts>
 
-		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm</maven.build.timestamp.format>
 		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
 		<application.release.name>Mobsters</application.release.name>
 		<wicket.mode>development</wicket.mode>
@@ -128,6 +128,7 @@
 		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
 		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
 		<ec2.region>us-west-2</ec2.region>
+		<ec2.configuration>mobsters-prod-2014-10-21</ec2.configuration>
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<tests.fake.client.host>localhost</tests.fake.client.host>
@@ -229,10 +230,9 @@
 					<region>${ec2.region}</region>
 					<s3Bucket>prodWars</s3Bucket>
 					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
-					<configurationTemplate>mobsters-prod-2014-10-21</configurationTemplate>
-					<templateName>mobsters-prod-2014-10-21</templateName>
-					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7
-						Java 7</solutionStack>
+					<configurationTemplate>${ec2.configuration}</configurationTemplate>
+					<templateName>${ec2.configuration}</templateName>
+					<solutionStack>64bit Amazon Linux 2014.09 v1.0.9 running Tomcat 7 Java 7</solutionStack>
 					<configurationTemplates>
 						<configurationTemplate>
 							<id>mobsters-prod-1</id>

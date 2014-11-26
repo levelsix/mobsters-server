@@ -11,7 +11,7 @@ public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent {
 
   private ExchangeGemsForResourcesResponseProto exchangeGemsForResourcesResponseProto;
   
-  public ExchangeGemsForResourcesResponseEvent(int playerId){
+  public ExchangeGemsForResourcesResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_EXCHANGE_GEMS_FOR_RESOURCES_EVENT;
   }

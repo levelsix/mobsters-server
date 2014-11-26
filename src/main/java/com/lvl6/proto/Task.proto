@@ -35,17 +35,17 @@ message FullTaskProto {
 //------------------------------------------------------------------------------------------
 
 message MinimumUserTaskProto {
-     optional int32 userId = 1;
+     optional string userUuid = 1;
      optional int32 taskId = 2;
      optional int32 curTaskStageId = 3;
-     optional int64 userTaskId = 4;
+     optional string userTaskUuid = 4;
 }
 
 //------------------------------------------------------------------------------------------
 
 message TaskStageMonsterProto {
 	//the property that differentiates one taskStageMonster from another
-	optional int64 tsfuId = 15;
+	optional string tsfuUuid = 15;
 	
 	optional int32 tsmId = 11;
 	optional int32 monsterId = 1;
@@ -77,7 +77,7 @@ message TaskStageMonsterProto {
 	optional int32 puzzlePieceMonsterDropLvl = 13;
 
 	//optional int32 offensiveSkillId = 14; defined above
-	//optional int32 tsfuId = 15; defined above
+	//optional string tsfuUuid = 15; defined above
 
 	optional DialogueProto initialD = 16; //:D
 	optional DialogueProto defaultD = 17;
@@ -110,7 +110,7 @@ message PersistentEventProto {
 //------------------------------------------------------------------------------------------
 
 message UserPersistentEventProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional int32 eventId = 2;
 	optional int64 coolDownStartTime = 3;
 }

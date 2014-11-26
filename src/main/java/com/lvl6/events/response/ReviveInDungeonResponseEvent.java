@@ -11,7 +11,7 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
 
   private ReviveInDungeonResponseProto reviveInDungeonResponseProto;
   
-  public ReviveInDungeonResponseEvent(int playerId){
+  public ReviveInDungeonResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_REVIVE_IN_DUNGEON_EVENT;
   }

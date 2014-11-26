@@ -11,7 +11,7 @@ public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponse
 
   private AcceptAndRejectFbInviteForSlotsResponseProto acceptAndRejectFbInviteForSlotsResponseProto;
   
-  public AcceptAndRejectFbInviteForSlotsResponseEvent(int playerId){
+  public AcceptAndRejectFbInviteForSlotsResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT;
   }

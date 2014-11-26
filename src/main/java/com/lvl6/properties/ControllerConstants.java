@@ -21,7 +21,8 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
-	public static final int CLAN__MAX_NUM_MEMBERS = 50;
+    public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 2 : 50;
+    public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
 	
 	//CLAN EVENT PERSISTENT
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
@@ -195,8 +196,8 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
+	public static final String UCHRFC__TRADE_ITEM_FOR_RESOURCES = "trade item for resources";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
-	
 	
 	
 	
@@ -311,7 +312,8 @@ public class ControllerConstants {
   public static final int STARTUP__LEADERBOARD_MIN_LEVEL = 1;
   public static final int STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK = 20; 
   //if development then use user with id = 1
-  public static final int STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? 1 : 1;//Globals.IS_SANDBOX() ? 98437 : 131287;
+  //TODO: GET THE REAL IDS
+  public static final String STARTUP__ADMIN_CHAT_USER_ID = Globals.IS_SANDBOX() ? "96db181e-4b63-40c4-8746-d62114f587a2" : "4df84fdd-705f-4089-ac80-70c1a0143f24";//Globals.IS_SANDBOX() ? 98437 : 131287;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_SENT = 150;
   public static final int STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED = 150;
   
@@ -350,7 +352,7 @@ public class ControllerConstants {
   public static final int USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER = 100;
   public static final int USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED = 50;
   public static final double USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER = .2;
-  public static final int USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals.IS_SANDBOX() ? 1 : 98394;
+  public static final String USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL = Globals.IS_SANDBOX() ? "1" : "1";
   public static final String USER_CREATE__FIRST_WALL_POST_TEXT = 
 	  "Hi! My name's " + (Globals.KABAM_ENABLED() ? "Stevie" : "Andrew") + ", one of the creators of this game. Feel free to message me if you need any help.";
   public static final int USER_CREATE__INITIAL_GLOBAL_CHATS = 10;
@@ -382,8 +384,7 @@ public class ControllerConstants {
   public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION = 350;
   public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG = 3;
   public static final int RETRIEVE_CLANS__NUM_CLANS_CAP = 50;
-  public static final int CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 967 : 92;
-  public static final int CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? 958 : 148;
+  public static final String CLAN__CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT = Globals.IS_SANDBOX() ? "967" : "0";
   public static final int CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB = 50;
   
   

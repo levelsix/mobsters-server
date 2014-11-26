@@ -11,7 +11,7 @@ public class SetGameCenterIdResponseEvent extends NormalResponseEvent {
 
   private SetGameCenterIdResponseProto setGameCenterIdResponseProto;
   
-  public SetGameCenterIdResponseEvent(int playerId){
+  public SetGameCenterIdResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SET_GAME_CENTER_ID_EVENT;
   }

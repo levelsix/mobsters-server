@@ -5,19 +5,23 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = -1731978369694889921L;
-	private int id;
-	private int inviterUserId;
+	private String id;
+	private String inviterUserId;
 	private String recipientFacebookId;
 	private Date timeOfInvite;
 	private Date timeAccepted;
-	private int userStructId;
+	private String userStructId;
 	private int userStructFbLvl;
 	private Date timeRedeemed;
 	
-	public UserFacebookInviteForSlot(int id, int inviterUserId,
+	public UserFacebookInviteForSlot()
+	{
+		super();
+	}
+
+	public UserFacebookInviteForSlot(String id, String inviterUserId,
 			String recipientFacebookId, Date timeOfInvite, Date timeAccepted,
-			int userStructId, int userStructFbLvl, Date timeRedeemed) {
+			String userStructId, int userStructFbLvl, Date timeRedeemed) {
 		super();
 		this.id = id;
 		this.inviterUserId = inviterUserId;
@@ -29,19 +33,19 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeRedeemed = timeRedeemed;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getInviterUserId() {
+	public String getInviterUserId() {
 		return inviterUserId;
 	}
 
-	public void setInviterUserId(int inviterUserId) {
+	public void setInviterUserId(String inviterUserId) {
 		this.inviterUserId = inviterUserId;
 	}
 
@@ -69,11 +73,11 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeAccepted = timeAccepted;
 	}
 
-	public int getUserStructId() {
+	public String getUserStructId() {
 		return userStructId;
 	}
 
-	public void setUserStructId(int userStructId) {
+	public void setUserStructId(String userStructId) {
 		this.userStructId = userStructId;
 	}
 

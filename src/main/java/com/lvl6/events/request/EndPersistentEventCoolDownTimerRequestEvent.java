@@ -17,7 +17,7 @@
 //  public void read(ByteBuffer buff) {
 //    try {
 //      endPersistentEventCoolDownTimerRequestProto = EndPersistentEventCoolDownTimerRequestProto.parseFrom(ByteString.copyFrom(buff));
-//      playerId = endPersistentEventCoolDownTimerRequestProto.getSender().getUserId();
+//      playerId = endPersistentEventCoolDownTimerRequestProto.getSender().getUserUuid();
 //    } catch (InvalidProtocolBufferException e) {
 //      e.printStackTrace();
 //    }

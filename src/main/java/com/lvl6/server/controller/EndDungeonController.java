@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
@@ -29,6 +31,7 @@ import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
@@ -39,16 +42,17 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
-import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class EndDungeonController extends EventController {
 
@@ -56,11 +60,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtil;
 
   @Autowired
   protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
-
+  @Autowired
+  protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtil;
+  
+  @Autowired
+  protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil;
+  
   public EndDungeonController() {
     numAllocatedThreads = 4;
   }
@@ -83,8 +95,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserId();
-    long userTaskId = reqProto.getUserTaskId();
+    String userId = senderProto.getUserUuid();
+    String userTaskId = reqProto.getUserTaskUuid();
     boolean userWon = reqProto.getUserWon();
     Date currentDate = new Date(reqProto.getClientTime());
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
@@ -92,9 +104,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int maxCash = senderResourcesProto.getMaxCash();
     int maxOil = senderResourcesProto.getMaxOil();
     
-    Set<Long> droplessTsfuIds = new HashSet<Long>();
-    if (null != reqProto.getDroplessTsfuIdsList()) {
-    		droplessTsfuIds.addAll(reqProto.getDroplessTsfuIdsList());
+    Set<String> droplessTsfuIds = new HashSet<String>();
+    if (null != reqProto.getDroplessTsfuUuidsList()) {
+    		droplessTsfuIds.addAll(reqProto.getDroplessTsfuUuidsList());
     }
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
@@ -102,13 +114,36 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setUserWon(userWon);
     resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+	boolean invalidUuids = true;
+	
+	try {
+		userUuid = UUID.fromString(userId);
+		StringUtils.convertToUUID(droplessTsfuIds);
+		invalidUuids = false;
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect userId=%s",
+			userId), e);
+	}
+	
+	//UUID checks
+	if (invalidUuids) {
+		resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER);
+		EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(userId);
+		resEvent.setTag(event.getTag());
+		resEvent.setEndDungeonResponseProto(resBuilder.build());
+		server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
-      User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      User aUser = userRetrieveUtil.getUserById(userId);
       int previousCash = 0;
       int previousOil = 0;
 
-      TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
+      TaskForUserOngoing ut = taskForUserOngoingRetrieveUtil.getUserTaskForId(userTaskId);
       boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, ut);
 
 
@@ -137,9 +172,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
       }
       if (successful) {
-      	long taskForUserId = ut.getId(); 
+      	String taskForUserId = ut.getId(); 
       	//the things to delete and store into history
-      	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
+      	List<TaskStageForUser> tsfuList = taskStageForUserRetrieveUtil
       			.getTaskStagesForUserWithTaskForUserId(taskForUserId);
       	
       	//delete from task_stage_for_user and put into task_stage_history,
@@ -184,7 +219,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	writeToUserCurrencyHistory(aUser, curTime, userTaskId, taskId,
@@ -205,7 +240,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in EndDungeonController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -213,15 +248,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, TaskForUserOngoing ut) {
+  private boolean checkLegit(Builder resBuilder, User u, String userId,
+	  String userTaskId, TaskForUserOngoing ut) {
     if (null == u) {
-      log.error("unexpected error: user is null. user=" + u);
+      log.error(String.format(
+    	  "unexpected error: user is null. user=%s", u));
       return false;
     }
     
     if (null == ut) {
-    	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
+    	log.error(String.format(
+    		"unexpected error: no user task for id userTaskId=%s", userTaskId));
     	return false;
     }
     
@@ -229,7 +266,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut,
+  private boolean writeChangesToDb(User u, String uId, TaskForUserOngoing ut,
 		  boolean userWon, Timestamp clientTime, Map<String, Integer> money,
 		  int maxCash, int maxOil, boolean firstTimeUserWonTask, TaskMapElement tme) {
 	  int cashGained = ut.getCashGained();
@@ -244,7 +281,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  cashGained = MiscMethods.capResourceGain(u.getCash(), cashGained, maxCash);
 	  oilGained = MiscMethods.capResourceGain(u.getOil(), oilGained, maxOil);
 
-	  log.info("user before currency change. " + u);
+	  log.info(String.format("user before currency change. ", u));
 	  if (userWon) {
 		  log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
@@ -259,10 +296,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  	}
 		  }
 	  }
-	  log.info("user after currency change. " + u);
+	  log.info(String.format("user after currency change. %s", u));
 	  //TODO: MOVE THIS INTO A UTIL METHOD FOR TASK 
 	  //delete from user_task and insert it into user_task_history
-	  long utId = ut.getId();
+	  String utId = ut.getId();
 	  int tId = ut.getTaskId();
 	  int numRevives = ut.getNumRevives();
 	  Date startDate = ut.getStartDate();
@@ -274,35 +311,39 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  expGained, cashGained, oilGained, numRevives, startTime,
 			  clientTime, userWon, cancelled, tsId);
 	  if (1 != num) {
-		  log.error("unexpected error: error when inserting into user_task_history. " +
-		  		"numInserted=" + num + " Attempting to undo shi");
+		  log.error(String.format(
+			  "error inserting into user_task_history. numInserted=%s. Attempting to undo shi",
+			  num));
 		  updateUser(u, -1 * expGained, -1 * cashGained,  -1 * oilGained, clientTime);
 		  return false;
 	  }
 	  
 	  //DELETE FROM TASK_FOR_USER TABLE
 	  num = DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(utId); 
-	  log.info("num rows deleted from task_for_user table. num=" + num);
+	  log.info(String.format(
+		  "num rows deleted from task_for_user table. num=%s", num));
 	  
 	  return true;
   }
   
   private boolean updateUser(User u, int expGained, int cashGained, int oilGained,
-		  Timestamp clientTime) {
+	  Timestamp clientTime)
+  {
 	  int energyChange = 0;
 	  if (!u.updateRelativeCashOilExpTasksCompleted(expGained, cashGained, oilGained, 1,
-	  		clientTime)) {
-		  log.error("problem with updating user stats post-task. expGained=" + expGained +
-		  		", cashGained=" + cashGained + ", oilGained=" + oilGained + ", increased" +
-				  " tasks completed by 1, energyChange=" + energyChange +
-				  ", clientTime=" + clientTime + ", user=" + u);
+		  clientTime)) {
+		  String preface = "problem updating user stats.";
+		  String midface = "increased tasks completed by 1,";
+		  log.error(String.format(
+			  "%s expGained=%s, cashGained=%s, oilGained=%s, %s energyChange=%s, clientTime=%s, user=%s",
+			  preface, expGained, cashGained, oilGained, energyChange, clientTime, u));
 		  return false;
 	  }
 	  return true;
   }
   //
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
-	  	Set<Long> droplessTsfuIds,
+	  	Set<String> droplessTsfuIds,
   		Map<Integer, Integer> monsterIdToNumPieces,
   		Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity)
   {
@@ -312,8 +353,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	
   	//collections to hold values to be saved to the db
-  	List<Long> userTaskStageId = new ArrayList<Long>();
-  	List<Long> userTaskId = new ArrayList<Long>();
+  	List<String> userTaskStageId = new ArrayList<String>();
+  	List<String> userTaskId = new ArrayList<String>();
   	List<Integer> stageNum = new ArrayList<Integer>();
   	List<Integer> tsmIdList = new ArrayList<Integer>();
   	List<String> monsterTypes = new ArrayList<String>();
@@ -375,12 +416,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			userTaskId, stageNum, tsmIdList, monsterTypes, expGained,
   			cashGained, oilGained, monsterPieceDropped, itemIdDropped,
   			monsterIdDrops, monsterDropLvls);
-  	log.info("num task stage history rows inserted: num=" + num +
-  			"taskStageForUser=" + tsfuList);
+  	log.info(String.format(
+  		"num task stage history rows inserted: num=%s, taskStageForUser=%s",
+  		num, tsfuList));
   	
   	//DELETE FROM TASK_STAGE_FOR_USER
   	num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
-  	log.info("num task stage for user rows deleted: num=" + num);
+  	log.info(String.format("num task stage for user rows deleted: num=%s", num));
   	
   	//retrieve those task stage monsters. aggregate the quantities by monster id
   	//assume different task stage monsters can be the same monster
@@ -431,7 +473,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void awardOneTimeItem(
-	  Builder resBuilder, int userId, int itemId, int taskId,
+	  Builder resBuilder, String userId, int itemId, int taskId,
 	  TaskMapElement tme)
   {
 	  log.info(String.format(
@@ -550,7 +592,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   */
   
   private void writeToUserCurrencyHistory(User aUser, Timestamp curTime,
-		  long userTaskId, int taskId, int previousCash, int previousOil,
+	  String userTaskId, int taskId, int previousCash, int previousOil,
 		  Map<String, Integer> money) {
 	  if (money.isEmpty()) {
 		  return;
@@ -565,7 +607,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	String oil = MiscMethods.oil;
   	String reasonForChange = ControllerConstants.UCHRFC__END_TASK;
   	
-  	int userId = aUser.getId();
+  	String userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -589,13 +631,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   }
   
-  private void writeToTaskForUserCompleted(int userId, int taskId, 
+  private void writeToTaskForUserCompleted(String userId, int taskId, 
   		boolean userWon, boolean firstTimeUserWonTask, Timestamp now) {
   	if (userWon && firstTimeUserWonTask) {
   		int numInserted = InsertUtils.get()
   				.insertIntoTaskForUserCompleted(userId, taskId, now);
   		
-  		log.info("numInserted into task_for_user_completed: " + numInserted);
+  		log.info(String.format(
+  			"numInserted into task_for_user_completed: %s", numInserted));
   	}
   }
 
@@ -607,6 +650,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  this.locker = locker;
   }
 
+  public UserRetrieveUtils2 getUserRetrieveUtil()
+  {
+	  return userRetrieveUtil;
+  }
+
+  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+  {
+	  this.userRetrieveUtil = userRetrieveUtil;
+  }
+
   public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
   {
 	  return itemForUserRetrieveUtil;
@@ -615,6 +668,28 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
   {
 	  this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+  }
+
+  public TaskForUserOngoingRetrieveUtils2 getTaskForUserOngoingRetrieveUtil()
+  {
+	  return taskForUserOngoingRetrieveUtil;
+  }
+
+  public void setTaskForUserOngoingRetrieveUtil(
+	  TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtil )
+  {
+	  this.taskForUserOngoingRetrieveUtil = taskForUserOngoingRetrieveUtil;
+  }
+
+  public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtil()
+  {
+	  return taskStageForUserRetrieveUtil;
+  }
+
+  public void setTaskStageForUserRetrieveUtil(
+	  TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil )
+  {
+	  this.taskStageForUserRetrieveUtil = taskStageForUserRetrieveUtil;
   }
 
 }

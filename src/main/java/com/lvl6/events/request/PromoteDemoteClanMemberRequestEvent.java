@@ -22,7 +22,7 @@ public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       promoteDemoteClanMemberRequestProto = PromoteDemoteClanMemberRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = promoteDemoteClanMemberRequestProto.getSender().getUserId();
+      playerId = promoteDemoteClanMemberRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("boot player from clan request exception", e);
     }

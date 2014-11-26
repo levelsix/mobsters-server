@@ -11,7 +11,7 @@ public class EndDungeonResponseEvent extends NormalResponseEvent {
 
   private EndDungeonResponseProto endDungeonResponseProto;
   
-  public EndDungeonResponseEvent(int playerId){
+  public EndDungeonResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_END_DUNGEON_EVENT;
   }

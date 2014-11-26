@@ -11,7 +11,7 @@ public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent {
 
   private TradeItemForSpeedUpsResponseProto tradeItemForSpeedUpsResponseProto;
   
-  public TradeItemForSpeedUpsResponseEvent(int playerId){
+  public TradeItemForSpeedUpsResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_TRADE_ITEM_FOR_SPEED_UPS_EVENT;
   }

@@ -11,7 +11,7 @@ public class TradeItemForBoosterResponseEvent extends NormalResponseEvent {
 
   private TradeItemForBoosterResponseProto tradeItemForBoosterResponseProto;
   
-  public TradeItemForBoosterResponseEvent(int playerId){
+  public TradeItemForBoosterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_TRADE_ITEM_FOR_BOOSTER_EVENT;
   }

@@ -22,7 +22,7 @@ public class RetrieveUsersForUserIdsRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       retrieveUsersForUserIdsRequestProto = RetrieveUsersForUserIdsRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = retrieveUsersForUserIdsRequestProto.getSender().getUserId();
+      playerId = retrieveUsersForUserIdsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("retrieve users for user ids request exception", e);
     }

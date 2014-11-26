@@ -23,7 +23,7 @@ public class RemoveMonsterFromBattleTeamRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       removeMonsterFromBattleTeamRequestProto = RemoveMonsterFromBattleTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = removeMonsterFromBattleTeamRequestProto.getSender().getUserId();
+      playerId = removeMonsterFromBattleTeamRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("remove monster from battle team request exception", e);
     }

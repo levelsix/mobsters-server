@@ -22,7 +22,7 @@ public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       moveOrRotateNormStructureRequestProto = MoveOrRotateNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = moveOrRotateNormStructureRequestProto.getSender().getUserId();
+      playerId = moveOrRotateNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("move or rotate norm structure request exception", e);
     }

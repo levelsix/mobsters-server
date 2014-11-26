@@ -11,7 +11,7 @@ public class CompleteMiniJobResponseEvent extends NormalResponseEvent {
 
   private CompleteMiniJobResponseProto completeMiniJobResponseProto;
   
-  public CompleteMiniJobResponseEvent(int playerId){
+  public CompleteMiniJobResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_COMPLETE_MINI_JOB_EVENT;
   }

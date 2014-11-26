@@ -11,7 +11,7 @@ public class QueueUpResponseEvent extends NormalResponseEvent {
 
   private QueueUpResponseProto QueueUpResponseProto;
   
-  public QueueUpResponseEvent(int playerId){
+  public QueueUpResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_QUEUE_UP_EVENT;
   }

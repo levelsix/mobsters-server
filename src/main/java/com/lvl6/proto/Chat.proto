@@ -8,7 +8,7 @@ option java_outer_classname = "ChatProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message PrivateChatPostProto {
-	optional int32 privateChatPostId = 1;
+	optional string privateChatPostUuid = 1;
 	optional MinimumUserProtoWithLevel poster = 2;
 	optional MinimumUserProtoWithLevel recipient = 3;
 	optional int64 timeOfPost = 4;
@@ -30,7 +30,7 @@ message GroupChatMessageProto {
 	optional int64 timeOfChat = 2;
 	optional string content = 3;
 	optional bool isAdmin = 4;
-	optional int32 chatId = 5;
+	optional string chatUuid = 5;
 }
 
 //-------------------------------------------------------------------------------------

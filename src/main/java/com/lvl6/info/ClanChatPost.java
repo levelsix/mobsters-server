@@ -4,47 +4,86 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClanChatPost implements Serializable {
-	private static final long serialVersionUID = -7441177529235760896L;
-	private int id;
-	private int posterId;
-	private int clanId;
+	private String id;
+	private String posterId;
+	private String clanId;
 	private Date timeOfPost;
 	private String content;
 
-  public ClanChatPost(int id, int posterId, int clanId,
-      Date timeOfPost, String content) {
-    super();
-    this.id = id;
-    this.posterId = posterId;
-    this.clanId = clanId;
-    this.timeOfPost = timeOfPost;
-    this.content = content;
+	public ClanChatPost()
+	{
+		super();
+	}
+
+	public ClanChatPost(
+		String id,
+		String posterId,
+		String clanId,
+		Date timeOfPost,
+		String content )
+	{
+		super();
+		this.id = id;
+		this.posterId = posterId;
+		this.clanId = clanId;
+		this.timeOfPost = timeOfPost;
+		this.content = content;
+	}
+
+  public String getId()
+  {
+	  return id;
   }
 
-  public int getId() {
-    return id;
+  public void setId( String id )
+  {
+	  this.id = id;
   }
 
-  public int getPosterId() {
-    return posterId;
+  public String getPosterId()
+  {
+	  return posterId;
   }
 
-  public int getClanId() {
-    return clanId;
+  public void setPosterId( String posterId )
+  {
+	  this.posterId = posterId;
   }
 
-  public Date getTimeOfPost() {
-    return timeOfPost;
+  public String getClanId()
+  {
+	  return clanId;
   }
 
-  public String getContent() {
-    return content;
+  public void setClanId( String clanId )
+  {
+	  this.clanId = clanId;
+  }
+
+  public Date getTimeOfPost()
+  {
+	  return timeOfPost;
+  }
+
+  public void setTimeOfPost( Date timeOfPost )
+  {
+	  this.timeOfPost = timeOfPost;
+  }
+
+  public String getContent()
+  {
+	  return content;
+  }
+
+  public void setContent( String content )
+  {
+	  this.content = content;
   }
 
   @Override
   public String toString() {
-    return "ClanChatPost [id=" + id + ", posterId=" + posterId
-        + ", clanID=" + clanId + ", timeOfPost=" + timeOfPost
-        + ", content=" + content + "]";
+	  return "ClanChatPost [id=" + id + ", posterId=" + posterId
+		  + ", clanID=" + clanId + ", timeOfPost=" + timeOfPost
+		  + ", content=" + content + "]";
   }
 }

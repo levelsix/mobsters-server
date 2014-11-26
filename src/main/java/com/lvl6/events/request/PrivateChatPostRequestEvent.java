@@ -22,7 +22,7 @@ public class PrivateChatPostRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       privateChatPostRequestProto = PrivateChatPostRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = privateChatPostRequestProto.getSender().getUserId();
+      playerId = privateChatPostRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("private chat post request exception", e);
     }

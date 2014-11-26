@@ -37,7 +37,7 @@ message TradeItemForBoosterResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//will only ever add or delete itemUsages
+//will only ever add itemUsages
 message TradeItemForSpeedUpsRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserItemUsageProto itemsUsed = 2; //usageId not set
@@ -59,13 +59,64 @@ message TradeItemForSpeedUpsResponseProto {
 	}
 }
 
-/*
-message TradeItemForResourcesRequestProto {
+//------------------------------------------------------------------------------------------
+message RemoveUserItemUsedRequestProto {
 	optional MinimumUserProto sender = 1;
-		
+	repeated string userItemUsedUuid = 2; //NOTE: not userItemUsed itemId	
+	
+}
+
+message RemoveUserItemUsedResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RemoveUserItemUsedStatus status = 2;
+	
+	enum RemoveUserItemUsedStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message TradeItemForResourcesRequestProto {
+	//NOTE: server not enforcing resource cap
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	repeated int32 itemIdsUsed = 2;
+	
+	//updated quantity of user's items after using said items
+	repeated UserItemProto nuUserItems = 3;		
+	
+	optional int64 clientTime = 4;
 }
 
 message TradeItemForResourcesResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	optional TradeItemForResourcesStatus status = 2;
+	
+	enum TradeItemForResourcesStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
 }
-*/
+
+//------------------------------------------------------------------------------------------
+
+message RedeemSecretGiftRequestProto {
+	optional MinimumUserProto mup = 1;
+	optional int64 clientTime = 2;
+	repeated string uisgUuid = 3; //primary key ids for the user's secret gifs
+}
+
+message RedeemSecretGiftResponseProto {
+	optional MinimumUserProto mup = 1;
+	repeated UserItemSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
+	
+	optional RedeemSecretGiftStatus status = 3;
+	
+	enum RedeemSecretGiftStatus {
+		SUCCESS = 1;
+		FAIL_ITEMS_NONEXISTENT = 2;
+		FAIL_OTHER = 3;
+	}
+}
+//------------------------------------------------------------------------------------------

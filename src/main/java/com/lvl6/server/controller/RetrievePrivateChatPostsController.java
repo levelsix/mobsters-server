@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -24,14 +26,22 @@ import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.Retri
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class RetrievePrivateChatPostsController extends EventController{
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  @Autowired
+  protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
 
   public RetrievePrivateChatPostsController() {
     numAllocatedThreads = 5;
@@ -52,48 +62,61 @@ import com.lvl6.utils.RetrieveUtils;
     RetrievePrivateChatPostsRequestProto reqProto = ((RetrievePrivateChatPostsRequestEvent)event).getRetrievePrivateChatPostsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    int otherUserId = reqProto.getOtherUserId();
-    int beforePrivateChatId = reqProto.getBeforePrivateChatId();
+    String userId = senderProto.getUserUuid();
+    String otherUserId = reqProto.getOtherUserUuid();
 
     RetrievePrivateChatPostsResponseProto.Builder resBuilder = RetrievePrivateChatPostsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    if (reqProto.hasBeforePrivateChatId()) {
-      resBuilder.setBeforePrivateChatId(beforePrivateChatId);
+    resBuilder.setOtherUserUuid(otherUserId);
+
+    UUID userUuid = null;
+    UUID otherUserUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+      otherUserUuid = UUID.fromString(otherUserId);
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, otherUserId=%s",
+          userId, otherUserId), e);
+      invalidUuids = true;
     }
-    resBuilder.setOtherUserId(otherUserId);
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
+      RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
 
     try {
       resBuilder.setStatus(RetrievePrivateChatPostsStatus.SUCCESS);
 
-      List <PrivateChatPost> recentPrivateChatPosts;
-      if (beforePrivateChatId > 0) {
-        //if client specified a private chat id
-        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
-            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, beforePrivateChatId, userId, otherUserId);        
-      } else {
-//        //if client didn't specify a private chat id
-        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
-            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP,
-            ControllerConstants.NOT_SET, userId, otherUserId);
-      }
+      List <PrivateChatPost> recentPrivateChatPosts = getPrivateChatPostRetrieveUtils().getPrivateChatPostsBetweenUsersBeforePostId(
+            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, userId, otherUserId);
+   
       if (recentPrivateChatPosts != null) {
         if (recentPrivateChatPosts != null && recentPrivateChatPosts.size() > 0) {
-          List <Integer> userIds = new ArrayList<Integer>();
+          List <String> userIds = new ArrayList<String>();
           userIds.add(userId);
           userIds.add(otherUserId);
-          Map<Integer, User> usersByIds = null;
+          Map<String, User> usersByIds = null;
           if (userIds.size() > 0) {
-            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+            usersByIds = getUserRetrieveUtils().getUsersByIds(userIds);
             
             //for not hitting the db for every private chat post
-            Map<Integer, MinimumUserProtoWithLevel> userIdsToMups =
+            Map<String, MinimumUserProtoWithLevel> userIdsToMups =
                 generateUserIdsToMupsWithLevel(usersByIds, userId,
                 	senderProto, otherUserId);
             
             //convert private chat post to group chat message proto
             for (PrivateChatPost pwp : recentPrivateChatPosts) {
-              int posterId = pwp.getPosterId();
+              String posterId = pwp.getPosterId();
               
               long time = pwp.getTimeOfPost().getTime();
               MinimumUserProtoWithLevel user = userIdsToMups.get(posterId);
@@ -112,7 +135,7 @@ import com.lvl6.utils.RetrieveUtils;
 
       RetrievePrivateChatPostsResponseProto resProto = resBuilder.build();
 
-      RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(senderProto.getUserId());
+      RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrievePrivateChatPostsResponseProto(resProto);
 
@@ -133,9 +156,9 @@ import com.lvl6.utils.RetrieveUtils;
 
   }
   
-  private Map<Integer, MinimumUserProtoWithLevel> generateUserIdsToMupsWithLevel(Map<Integer, User> usersByIds,
-      int userId, MinimumUserProto userMup, int otherUserId) {
-    Map<Integer, MinimumUserProtoWithLevel> userIdsToMups = new HashMap<Integer, MinimumUserProtoWithLevel>();
+  private Map<String, MinimumUserProtoWithLevel> generateUserIdsToMupsWithLevel(Map<String, User> usersByIds,
+      String userId, MinimumUserProto userMup, String otherUserId) {
+    Map<String, MinimumUserProtoWithLevel> userIdsToMups = new HashMap<String, MinimumUserProtoWithLevel>();
     
     User aUser = usersByIds.get(userId);
     User otherUser = usersByIds.get(otherUserId);
@@ -145,8 +168,8 @@ import com.lvl6.utils.RetrieveUtils;
     userIdsToMups.put(userId, mup1);
     
     Clan otherUserClan = null;
-    if (otherUser.getClanId() > 0) {
-    	otherUserClan = ClanRetrieveUtils.getClanWithId(otherUser.getClanId());
+    if (otherUser.getClanId() != null) {
+    	otherUserClan = getClanRetrieveUtils().getClanWithId(otherUser.getClanId());
     }
     
     MinimumUserProtoWithLevel mup2 = CreateInfoProtoUtils.createMinimumUserProtoWithLevel(
@@ -154,6 +177,31 @@ import com.lvl6.utils.RetrieveUtils;
     userIdsToMups.put(otherUserId, mup2);
     
     return userIdsToMups;
+  }
+
+  public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
+    return privateChatPostRetrieveUtils;
+  }
+
+  public void setPrivateChatPostRetrieveUtils(
+      PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
+    this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils() {
+    return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+    this.clanRetrieveUtils = clanRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
   }
   
 }

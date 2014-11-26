@@ -11,7 +11,7 @@ public class SetAvatarMonsterResponseEvent extends NormalResponseEvent {
 
   private SetAvatarMonsterResponseProto setAvatarMonsterResponseProto;
   
-  public SetAvatarMonsterResponseEvent(int playerId){
+  public SetAvatarMonsterResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SET_AVATAR_MONSTER_EVENT;
   }

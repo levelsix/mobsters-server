@@ -11,7 +11,7 @@ public class AddMonsterToBattleTeamResponseEvent extends NormalResponseEvent {
 
   private AddMonsterToBattleTeamResponseProto addMonsterToBattleTeamResponseProto;
   
-  public AddMonsterToBattleTeamResponseEvent(int playerId){
+  public AddMonsterToBattleTeamResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_ADD_MONSTER_TO_BATTLE_TEAM_EVENT;
   }

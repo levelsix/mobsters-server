@@ -11,7 +11,7 @@ public class SendGroupChatResponseEvent extends NormalResponseEvent {
 
   private SendGroupChatResponseProto sendGroupChatResponseProto;
   
-  public SendGroupChatResponseEvent(int playerId){
+  public SendGroupChatResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SEND_GROUP_CHAT_EVENT;
   }

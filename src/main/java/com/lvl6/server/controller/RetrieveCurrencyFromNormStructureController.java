@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +33,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveCurrencyFromNormStructureController extends EventController{
@@ -43,6 +45,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public RetrieveCurrencyFromNormStructureController() {
     numAllocatedThreads = 14;
@@ -61,38 +69,69 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
     //get stuff client sent
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
     int maxCash = senderResourcesProto.getMaxCash();
     int maxOil = senderResourcesProto.getMaxOil();
     
-    Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<Integer, Timestamp>();
-    Map<Integer, Integer> userStructIdsToAmountCollected = new HashMap<Integer, Integer>();
-    List<Integer> duplicates = new ArrayList<Integer>();
+    Map<String, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<String, Timestamp>();
+    Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
+    List<String> duplicates = new ArrayList<String>();
     //create map from ids to times and check for duplicates
     getIdsAndTimes(structRetrievals, duplicates,
     		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
+    
+    List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
     
     RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
     		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
     resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
     resBuilder.setSender(senderResourcesProto);
 
-    getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      userUuid = UUID.fromString(userId);
+
+      if (userStructIds != null) {
+        for (String userStructId : userStructIds) {
+          userStructUuid = UUID.fromString(userStructId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userStructIds=%s",
+          userId, userStructIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
       int previousCash = 0;
       int previousOil = 0;
-      List<Integer> userStructIds = new ArrayList<Integer>(userStructIdsToTimesOfRetrieval.keySet());
       
-      Map<Integer, StructureForUser> userStructIdsToUserStructs = 
+      Map<String, StructureForUser> userStructIdsToUserStructs = 
       		getUserStructIdsToUserStructs(userId, userStructIds);
-      Map<Integer, StructureResourceGenerator> userStructIdsToGenerators =
+      Map<String, StructureResourceGenerator> userStructIdsToGenerators =
       		getUserStructIdsToResourceGenerators(userStructIdsToUserStructs.values());
       
       //this will contain the amount user collects
@@ -122,7 +161,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
       }
 
-      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserId());
+      RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
       resEvent.setTag(event.getTag());
       resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
@@ -130,7 +169,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitRetrieval) {
     	  //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
@@ -141,22 +180,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     } catch (Exception e) {
       log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
+      //don't let the client hang
+      try {
+        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+        RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setRetrieveCurrencyFromNormStructureResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in RetrieveCurrencyFromNormStructureController processEvent", e);
+      }
     } finally {
-      getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
   //separate the duplicate ids from the unique ones
-  private void getIdsAndTimes(List<StructRetrieval> srList,  List<Integer> duplicates,
-  		Map<Integer, Timestamp> structIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> structIdsToAmountCollected) {
+  private void getIdsAndTimes(List<StructRetrieval> srList,  List<String> duplicates,
+  		Map<String, Timestamp> structIdsToTimesOfRetrieval,
+  		Map<String, Integer> structIdsToAmountCollected) {
     if (srList.isEmpty()) {
       log.error("RetrieveCurrencyFromNormStruct request did not send any user struct ids.");
       return;
     }
     
     for(StructRetrieval sr : srList) {
-      int key = sr.getUserStructId();
+      String key = sr.getUserStructUuid();
       Timestamp value = new Timestamp(sr.getTimeOfRetrieval());
       int amount = sr.getAmountCollected();
       
@@ -170,15 +219,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //retrieve these user structs from the db and put them in a map
-  private Map<Integer, StructureForUser> getUserStructIdsToUserStructs(int userId,
-  		List<Integer> userStructIds) {
-    Map<Integer, StructureForUser> returnValue = new HashMap<Integer, StructureForUser>();
+  private Map<String, StructureForUser> getUserStructIdsToUserStructs(String userId,
+  		List<String> userStructIds) {
+    Map<String, StructureForUser> returnValue = new HashMap<String, StructureForUser>();
     if(null == userStructIds || userStructIds.isEmpty()) {
       log.error("no user struct ids!");
       return returnValue;
     }
     
-    List<StructureForUser> userStructList = RetrieveUtils.userStructRetrieveUtils()
+    List<StructureForUser> userStructList = getUserStructRetrieveUtils()
         .getSpecificOrAllUserStructsForUser(userId, userStructIds);
     for(StructureForUser us : userStructList) {
       if(null != us) {
@@ -193,10 +242,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //link up a user struct id with the structure object
-  private Map<Integer, StructureResourceGenerator> getUserStructIdsToResourceGenerators(
+  private Map<String, StructureResourceGenerator> getUserStructIdsToResourceGenerators(
   		Collection<StructureForUser> userStructs) {
-    Map<Integer, StructureResourceGenerator> returnValue =
-    		new HashMap<Integer, StructureResourceGenerator>();
+    Map<String, StructureResourceGenerator> returnValue =
+    		new HashMap<String, StructureResourceGenerator>();
     Map<Integer, StructureResourceGenerator> structIdsToStructs = 
     		StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
     
@@ -206,7 +255,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     for(StructureForUser us : userStructs) {
       int structId = us.getStructId();
-      int userStructId = us.getId();
+      String userStructId = us.getId();
       
       StructureResourceGenerator s = structIdsToStructs.get(structId);
       if(null != s) {
@@ -220,15 +269,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private boolean checkLegitRetrieval(Builder resBuilder, User user,
-  		List<Integer> userStructIds, 
-      Map<Integer, StructureForUser> userStructIdsToUserStructs,
-      Map<Integer, StructureResourceGenerator> userStructIdsToGenerators,
-      List<Integer> duplicates,
-      Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-      Map<Integer, Integer> userStructIdsToAmountCollected,
+  		List<String> userStructIds, 
+      Map<String, StructureForUser> userStructIdsToUserStructs,
+      Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+      List<String> duplicates,
+      Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
+      Map<String, Integer> userStructIdsToAmountCollected,
       Map<String, Integer> resourcesGained) {
 
-    int userId = user.getId();
+    String userId = user.getId();
     
     if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
         || userStructIdsToGenerators.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { 
@@ -247,11 +296,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //retrieved
     int cash = 0;
     int oil = 0;
-    for (Integer id : userStructIds) {
+    for (String id : userStructIds) {
       StructureForUser userStruct = userStructIdsToUserStructs.get(id);
       StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
       
-      if (null == userStruct || userId != userStruct.getUserId() || !userStruct.isComplete()) {
+      if (null == userStruct || !userId.equals(userStruct.getUserId()) || !userStruct.isComplete()) {
         resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
         log.error("(will continue processing) struct owner is not user, or struct" +
         		" is not complete yet. userStruct=" + userStruct);
@@ -284,9 +333,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private boolean writeChangesToDb(User user, int cashGain, int oilGain,
-  		Map<Integer, StructureForUser> userStructIdsToUserStructs,
-  		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> userStructIdsToAmountCollected, int maxCash,
+  		Map<String, StructureForUser> userStructIdsToUserStructs,
+  		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
+  		Map<String, Integer> userStructIdsToAmountCollected, int maxCash,
   		int maxOil, Map<String, Integer> currencyChange) {
   	//capping how much the user can gain of a certain resource
   	int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
@@ -311,7 +360,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     }
   	
-    if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
+    if (!UpdateUtils.get().updateUserStructsLastRetrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
       log.error("problem with updating user structs last retrieved for userStructIds " 
           + userStructIdsToTimesOfRetrieval);
       return false;
@@ -321,13 +370,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   public void writeToUserCurrencyHistory(User aUser, int previousCash,
   		int previousOil, Timestamp curTime,
-  		Map<Integer, StructureForUser> userStructIdsToUserStructs,
-  		Map<Integer, StructureResourceGenerator> userStructIdsToGenerators,
-  		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> userStructIdsToAmountCollected,
+  		Map<String, StructureForUser> userStructIdsToUserStructs,
+  		Map<String, StructureResourceGenerator> userStructIdsToGenerators,
+  		Map<String, Timestamp> userStructIdsToTimesOfRetrieval,
+  		Map<String, Integer> userStructIdsToAmountCollected,
   		Map<String, Integer> currencyChange) {
 
-  	int userId = aUser.getId();
+    String userId = aUser.getId();
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
@@ -341,7 +390,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     oilDetailSb.append("(userStructId,time,amount)=");
     
     //being descriptive, separating cash stuff from oil stuff
-    for(Integer id : userStructIdsToAmountCollected.keySet()) {
+    for(String id : userStructIdsToAmountCollected.keySet()) {
       StructureResourceGenerator struct = userStructIdsToGenerators.get(id);
       Timestamp t = userStructIdsToTimesOfRetrieval.get(id);
       int amount = userStructIdsToAmountCollected.get(id);
@@ -387,6 +436,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
 
 }

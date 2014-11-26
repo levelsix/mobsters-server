@@ -11,7 +11,7 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends NormalRespon
 
   private RetrieveCurrencyFromNormStructureResponseProto retrieveCurrencyFromNormStructureResponseProto;
   
-  public RetrieveCurrencyFromNormStructureResponseEvent(int playerId) {
+  public RetrieveCurrencyFromNormStructureResponseEvent(String playerId) {
     super(playerId);
     eventType = EventProtocolResponse.S_RETRIEVE_CURRENCY_FROM_NORM_STRUCTURE_EVENT;
   }

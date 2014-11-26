@@ -23,7 +23,7 @@ public class GameEventHandler extends AbstractGameEventHandler {
 	private static final Logger log = LoggerFactory.getLogger(GameEventHandler.class);
 
 	@Resource(name = "playersByPlayerId")
-	IMap<Integer, ConnectedPlayer> playersByPlayerId;
+	IMap<String, ConnectedPlayer> playersByPlayerId;
 
 	@Resource(name = "playersPreDatabaseByUDID")
 	IMap<String, ConnectedPlayer> playersPreDatabaseByUDID;
@@ -37,12 +37,12 @@ public class GameEventHandler extends AbstractGameEventHandler {
 		this.playersPreDatabaseByUDID = playersPreDatabaseByUDID;
 	}
 
-	public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+	public IMap<String, ConnectedPlayer> getPlayersByPlayerId() {
 		return playersByPlayerId;
 	}
 
 	public void setPlayersByPlayerId(
-			IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+			IMap<String, ConnectedPlayer> playersByPlayerId) {
 		this.playersByPlayerId = playersByPlayerId;
 	}
 
@@ -93,7 +93,7 @@ public class GameEventHandler extends AbstractGameEventHandler {
 		ConnectedPlayer newp = new ConnectedPlayer();
 		newp.setIp_connection_id(ip_connection_id);
 		newp.setServerHostName(server.serverId());
-		if (event.getPlayerId() != -1) {
+		if (!event.getPlayerId().equals("")) {
 			log.info("Player logged on: " + event.getPlayerId());
 			newp.setPlayerId(event.getPlayerId());
 			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL,TimeUnit.MINUTES);

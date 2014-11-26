@@ -88,7 +88,7 @@ message StartupResponseProto {
 	
 	//repeated int32 redeemedQuestIds = 27; //above, after "userQuests = 6"
 	//for each city, the city's boss is hiding in the specified taskId
-	repeated int32 taskIdForCurrentCityBoss = 28;
+	repeated int32 taskIdForCurrentCityBoss = 28; //TODO: GET RID OF THIS
 	
 	//optional UserEvolutionProto evolution = 29; //defined above, below #21
 	
@@ -118,6 +118,8 @@ message StartupResponseProto {
 	optional ClanDataProto clanData = 43;
 
 	repeated UserItemUsageProto itemsInUse = 44;
+	repeated UserItemSecretGiftProto gifts = 45;
+	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -188,7 +190,6 @@ message StartupResponseProto {
 		repeated ClanHelpConstants clanHelpConstants = 32;
 		optional PvpConstants pvpConstant = 33;
 		
-		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;
@@ -199,6 +200,7 @@ message StartupResponseProto {
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;
 			optional int32 maxClanSize = 5;
+			repeated int32 achievementIdsForClanRewards = 6;
 		}
 		message DownloadableNibConstants {
 			optional string mapNibName = 1;

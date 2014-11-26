@@ -11,7 +11,7 @@ public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent {
 
   private UpdateMonsterHealthResponseProto updateMonsterHealthResponseProto;
   
-  public UpdateMonsterHealthResponseEvent(int playerId){
+  public UpdateMonsterHealthResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_UPDATE_MONSTER_HEALTH_EVENT;
   }

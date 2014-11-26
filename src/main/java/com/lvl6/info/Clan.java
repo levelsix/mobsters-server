@@ -1,11 +1,14 @@
 package com.lvl6.info;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Clan {
+public class Clan implements Serializable{
 	
-	private int id;
-//	private int ownerId;
+	private static final long	serialVersionUID	= -6551373040373362240L;
+
+	private String id;
+//	private String ownerId;
 	private String name;
 	private Date createTime;
 	private String description;
@@ -17,7 +20,7 @@ public class Clan {
 		super();
 	}
 
-	public Clan(int id, String name, Date createTime, String description,
+	public Clan(String id, String name, Date createTime, String description,
 			String tag, boolean requestToJoinRequired, int clanIconId) {
 		super();
 		this.id = id;
@@ -29,11 +32,11 @@ public class Clan {
 		this.clanIconId = clanIconId;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

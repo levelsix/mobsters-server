@@ -22,7 +22,7 @@ public class IncreaseMonsterInventorySlotRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       increaseMonsterInventorySlotRequestProto = IncreaseMonsterInventorySlotRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = increaseMonsterInventorySlotRequestProto.getSender().getUserId();
+      playerId = increaseMonsterInventorySlotRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("increase monster inventory slot request exception", e);
     }

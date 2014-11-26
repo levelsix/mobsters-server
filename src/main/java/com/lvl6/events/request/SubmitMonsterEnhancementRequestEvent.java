@@ -22,7 +22,7 @@ public class SubmitMonsterEnhancementRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       submitMonsterEnhancementRequestProto = SubmitMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = submitMonsterEnhancementRequestProto.getSender().getMinUserProto().getUserId();
+      playerId = submitMonsterEnhancementRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("submit monster enhancement request exception", e);
     }

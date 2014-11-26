@@ -12,7 +12,7 @@ public class ConnectedPlayer implements Serializable {
 
 	private static final long serialVersionUID = -4695628631220580445L;
 	
-	protected int playerId;
+	protected String playerId;
 	protected String ip_connection_id = "";
 	protected String serverHostName = "";
 	protected String udid = "";
@@ -51,11 +51,11 @@ public class ConnectedPlayer implements Serializable {
 		this.serverHostName = serverHostName;
 	}
 
-	public int getPlayerId() {
+	public String getPlayerId() {
 		return playerId;
 	}
 
-	public void setPlayerId(int id) {
+	public void setPlayerId(String id) {
 		playerId = id;
 	}
 

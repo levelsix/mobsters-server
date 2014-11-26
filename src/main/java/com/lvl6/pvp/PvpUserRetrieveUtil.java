@@ -164,8 +164,8 @@ public class PvpUserRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
 					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
@@ -178,7 +178,7 @@ public class PvpUserRetrieveUtil {
 //				plfu = plfuList.get(0); //guaranteed to only be one, primary key is user id
 //			}
 			// entry in this table for the user is created on start up, so should exist
-			pu = this.jdbcTemplate.queryForObject(query, new PvpUserMapper());
+			pu = this.jdbcTemplate.queryForObject(query, values.toArray(), new PvpUserMapper());
 		} catch (Exception e) {
 			log.error("could not retrieve user pvpUser for userId=" + userId, e);
 		}
@@ -228,9 +228,8 @@ public class PvpUserRetrieveUtil {
 
 		public PvpUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PvpUser pu = new PvpUser();
-			int userId = rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
-			String userIdStr = Integer.toString(userId);
-			pu.setUserId(userIdStr);
+			String userId = rs.getString(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
+			pu.setUserId(userId);
 			pu.setPvpLeagueId(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID));
 			pu.setRank(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__RANK));
 			pu.setElo(rs.getInt(DBConstants.PVP_LEAGUE_FOR_USER__ELO));

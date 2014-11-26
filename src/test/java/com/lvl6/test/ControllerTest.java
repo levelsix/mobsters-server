@@ -22,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.Predicate;
 import com.lvl6.events.request.DevRequestEvent;
-import com.lvl6.events.request.EnhanceMonsterRequestEvent;
 import com.lvl6.events.request.InviteToClanRequestEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanEventPersistent;
@@ -35,24 +34,16 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
-import com.lvl6.proto.EventMonsterProto.EnhanceMonsterRequestProto;
-import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
-import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.DevController;
-import com.lvl6.server.controller.EnhanceMonsterController;
-import com.lvl6.server.controller.InviteToClanController;
-import com.lvl6.server.controller.PurchaseCityExpansionController;
-import com.lvl6.server.controller.QuestProgressController;
 import com.lvl6.server.controller.RetrieveClanInfoController;
 import com.lvl6.server.controller.StartupController;
 import com.lvl6.server.controller.TransferClanOwnershipController;
@@ -74,8 +65,8 @@ public class ControllerTest extends TestCase {
 	private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
 	
-	@Autowired
-	PurchaseCityExpansionController purchaseCityExpansionController;
+//	@Autowired
+//	PurchaseCityExpansionController purchaseCityExpansionController;
 	
 	@Autowired
 	StartupController startupController;
@@ -86,11 +77,11 @@ public class ControllerTest extends TestCase {
 	@Autowired
 	TransferClanOwnershipController transferClanOwnershipController;
 	
-	@Autowired
-	QuestProgressController questProgressController;
-	
-	@Autowired
-	EnhanceMonsterController enhanceMonsterController;
+//	@Autowired
+//	QuestProgressController questProgressController;
+//	
+//	@Autowired
+//	EnhanceMonsterController enhanceMonsterController;
 	
 	@Autowired
 	DevController devController;
@@ -98,17 +89,20 @@ public class ControllerTest extends TestCase {
 	@Autowired
 	RetrieveClanInfoController retrieveClanInfoController;
 	
-	@Autowired
-	InviteToClanController inviteToClanController;
+//	@Autowired
+//	InviteToClanController inviteToClanController;
 	
 	@Autowired
 	TimeUtils timeUtils;
 	
 	@Autowired
-	UserRetrieveUtils userRetrieveUtils;
+	UserRetrieveUtils2 userRetrieveUtil;
 	
 	@Autowired
-	MonsterForUserRetrieveUtils monsterForUserRetrieveUtils;
+	MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	
+	@Autowired
+	ClanRetrieveUtils2 clanRetrieveUtil;
 	
 	@Autowired
 	ClanInviteRetrieveUtil clanInviteRetrieveUtil;
@@ -207,7 +201,7 @@ public class ControllerTest extends TestCase {
 //		createUser(udid);
 //		//log.info("CREATED USER\n\n\n\n\n\n\n\n\n\n\n");
 //		
-//		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
+//		User aUser = userRetrieveUtil.getUserByUDID(udid);
 //		assertTrue("Expected: not null. Actual=" + aUser, null != aUser);
 //		//log.info("user=" + aUser);
 //		//log.info("\n\n\n\n\n\n");
@@ -221,28 +215,28 @@ public class ControllerTest extends TestCase {
 //		deleteFirstTimeUsers(udid);
 		
 		//just to see if optimizations from commit  worked
-//		String udid = "e6e393e9dda799377ca53ca0d3de739b73b137ba";
-//		float versionNum = 1.0F;
-//		String macAddress = "";
-//		String advertiserId = "76864DFE-1BF1-47B5-ADE7-6530F5E0B9A3";
-//		boolean isTutorial = false;
-//		String fbId = "";//"2500169137658";
-//		boolean isFreshRestart = true;
-//		
-//		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
-//		srpb.setUdid(udid);
-//		srpb.setVersionNum(versionNum);
-//		srpb.setMacAddress(macAddress);
-//		srpb.setAdvertiserId(advertiserId);
-//		srpb.setIsForceTutorial(isTutorial);
-//		srpb.setFbId(fbId);
-//		srpb.setIsFreshRestart(isFreshRestart);
-//		
-//		StartupRequestEvent sre = new StartupRequestEvent();
-//		sre.setStartupRequestProto(srpb.build());
-//		
-//		startupController.handleEvent(sre);
-//		log.info("done");
+		/*String udid = "e6e393e9dda799377ca53ca0d3de739b73b137ba";
+		float versionNum = 1.0F;
+		String macAddress = "";
+		String advertiserId = "76864DFE-1BF1-47B5-ADE7-6530F5E0B9A3";
+		boolean isTutorial = false;
+		String fbId = "";//"2500169137658";
+		boolean isFreshRestart = true;
+		
+		StartupRequestProto.Builder srpb = StartupRequestProto.newBuilder();
+		srpb.setUdid(udid);
+		srpb.setVersionNum(versionNum);
+		srpb.setMacAddress(macAddress);
+		srpb.setAdvertiserId(advertiserId);
+		srpb.setIsForceTutorial(isTutorial);
+		srpb.setFbId(fbId);
+		srpb.setIsFreshRestart(isFreshRestart);
+		
+		StartupRequestEvent sre = new StartupRequestEvent();
+		sre.setStartupRequestProto(srpb.build());
+		
+		startupController.handleEvent(sre);
+		log.info("done");*/
 	}
 	
 	
@@ -250,7 +244,7 @@ public class ControllerTest extends TestCase {
 	public void testPurchaseCityExpansion() {
 //		String udid = "udid";
 //		createUser(udid);
-//		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
+//		User aUser = userRetrieveUtil.getUserByUDID(udid);
 //		//increase the user's coins 
 //		
 //		log.info("\n\n\n\n\n\n\n\n\n\n\n PURCHASING EXPANSION");
@@ -439,7 +433,7 @@ public class ControllerTest extends TestCase {
 	/*
 	@Test
 	public void testTransferClanOwnership() {
-		User aUser = getUserRetrieveUtils().getUserById(379);
+		User aUser = userRetrieveUtil.getUserById(379);
 		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
 		int clanOwnerIdNew = 574;
 		
@@ -457,7 +451,7 @@ public class ControllerTest extends TestCase {
 	
 	@Test
 	public void testQuestProgress() {
-		User aUser = getUserRetrieveUtils().getUserById(379);
+		User aUser = userRetrieveUtil.getUserById(379);
 		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
 		
 		QuestProgressRequestProto.Builder reqProto = QuestProgressRequestProto.newBuilder();
@@ -489,7 +483,7 @@ public class ControllerTest extends TestCase {
 	@Test
 	public void testEnhanceMonster() {
 		int unitTesterId = getUnitTesterId();
-		User unitTester = getUserRetrieveUtils().getUserById(unitTesterId);
+		User unitTester = userRetrieveUtil.getUserById(unitTesterId);
 		Date now = new Date();
 		//get num monsters
 		List<MonsterForUser> mfuList = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
@@ -541,7 +535,7 @@ public class ControllerTest extends TestCase {
 	}
 	*/
 	
-	private Map<Long, MonsterForUser> createCompleteMonsters(int userId,
+	private Map<String, MonsterForUser> createCompleteMonsters(String userId,
 		Date now) {
 		
 		List<Monster> twoMonsters = new ArrayList<Monster>(
@@ -562,13 +556,13 @@ public class ControllerTest extends TestCase {
 		}
 		
 		String mfusop = "ControllerTest.createCompleteMonsters";
-		List<Long> monsterForUserIds = InsertUtils.get()
+		List<String> monsterForUserIds = InsertUtils.get()
 			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
 	
-		Map<Long, MonsterForUser> returnMap = new HashMap<Long, MonsterForUser>();
+		Map<String, MonsterForUser> returnMap = new HashMap<String, MonsterForUser>();
 		for (int index = 0; index < twoMonsters.size(); index++) {
 			MonsterForUser mfu = completeUserMonsters.get(index);
-			Long mfuId = monsterForUserIds.get(index);
+			String mfuId = monsterForUserIds.get(index);
 			
 			mfu.setId(mfuId);
 			returnMap.put(mfuId, mfu);
@@ -577,57 +571,57 @@ public class ControllerTest extends TestCase {
 	}
 	
 	private static int expectedEnhancedMonsterExpLvlHp = 1;
-	private Long submitEnhanceMonsterRequest(User aUser, Map<Long, MonsterForUser> mfuMap) {
-		//create the arguments for the event
-		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(aUser, null);
-		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
-		
-		for (MonsterForUser mfu: mfuMap.values()) {
-
-		    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
-		    ueipb.setUserMonsterId(mfu.getId());
-		    ueipb.setEnhancingCost(0);
-		    feeders.add(ueipb.build());
-		}
-		
-		UserEnhancementItemProto baseMonster = feeders.remove(0);
-		
-		UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
-			aUser.getId(), baseMonster, feeders);
-		
-		UserMonsterCurrentExpProto.Builder result = UserMonsterCurrentExpProto.newBuilder();
-		result.setUserMonsterId(baseMonster.getUserMonsterId());
-		result.setExpectedExperience(expectedEnhancedMonsterExpLvlHp);
-		result.setExpectedLevel(expectedEnhancedMonsterExpLvlHp);
-		result.setExpectedHp(expectedEnhancedMonsterExpLvlHp);
-		
-		int gemsSpent = 1;
-		int oilChange = 1;
-		
-		EnhanceMonsterRequestProto.Builder eventBuilder =
-			EnhanceMonsterRequestProto.newBuilder();
-		eventBuilder.setSender(mup);
-		eventBuilder.setUep(uep);
-		eventBuilder.setEnhancingResult(result.build());
-		eventBuilder.setGemsSpent(gemsSpent);
-		eventBuilder.setOilChange(oilChange);
-
-		//give the user money
-		aUser.updateRelativeCashAndOilAndGems(0, 1, 1);
-		
-		//generate the event
-		EnhanceMonsterRequestEvent event = new EnhanceMonsterRequestEvent();
-		event.setTag(0);
-		event.setEnhanceMonsterRequestProto(eventBuilder.build());
-		enhanceMonsterController.handleEvent(event);
-		
-		return baseMonster.getUserMonsterId();
-	}
+//	private String submitEnhanceMonsterRequest(User aUser, Map<String, MonsterForUser> mfuMap) {
+//		//create the arguments for the event
+//		MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUserAndClan(aUser, null);
+//		List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
+//		
+//		for (MonsterForUser mfu: mfuMap.values()) {
+//
+//		    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
+//		    ueipb.setUserMonsterUuid(mfu.getId());
+//		    ueipb.setEnhancingCost(0);
+//		    feeders.add(ueipb.build());
+//		}
+//		
+//		UserEnhancementItemProto baseMonster = feeders.remove(0);
+//		
+//		UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+//			aUser.getId(), baseMonster, feeders);
+//		
+//		UserMonsterCurrentExpProto.Builder result = UserMonsterCurrentExpProto.newBuilder();
+//		result.setUserMonsterUuid(baseMonster.getUserMonsterUuid());
+//		result.setExpectedExperience(expectedEnhancedMonsterExpLvlHp);
+//		result.setExpectedLevel(expectedEnhancedMonsterExpLvlHp);
+//		result.setExpectedHp(expectedEnhancedMonsterExpLvlHp);
+//		
+//		int gemsSpent = 1;
+//		int oilChange = 1;
+//		
+//		EnhanceMonsterRequestProto.Builder eventBuilder =
+//			EnhanceMonsterRequestProto.newBuilder();
+//		eventBuilder.setSender(mup);
+//		eventBuilder.setUep(uep);
+//		eventBuilder.setEnhancingResult(result.build());
+//		eventBuilder.setGemsSpent(gemsSpent);
+//		eventBuilder.setOilChange(oilChange);
+//
+//		//give the user money
+//		aUser.updateRelativeCashAndOilAndGems(0, 1, 1);
+//		
+//		//generate the event
+//		EnhanceMonsterRequestEvent event = new EnhanceMonsterRequestEvent();
+//		event.setTag(0);
+//		event.setEnhanceMonsterRequestProto(eventBuilder.build());
+//		enhanceMonsterController.handleEvent(event);
+//		
+//		return baseMonster.getUserMonsterUuid();
+//	}
 	
 	@Test
 	public void testDevControllerAwardMonster() {
-		int unitTesterId = getUnitTesterId();
-		User unitTester = getUserRetrieveUtils().getUserById(unitTesterId);
+		/*String unitTesterId = getUnitTesterId();
+		User unitTester = userRetrieveUtil.getUserById(unitTesterId);
 		
 		//get num monsters
 		List<MonsterForUser> mfuList = monsterForUserRetrieveUtils.getMonstersForUser(unitTesterId);
@@ -660,13 +654,13 @@ public class ControllerTest extends TestCase {
 		
 		mfuListTwo.removeAll(mfuList);
 		
-		DeleteUtils.get().deleteMonsterForUser(mfuListTwo.get(0).getId());
+		DeleteUtils.get().deleteMonsterForUser(mfuListTwo.get(0).getId());*/
 	}
 	
 //	@Test
 //	public void testRetrieveClanInfo() {
 //		int errorId = 1098;
-//		User error = getUserRetrieveUtils().getUserById(errorId);
+//		User error = userRetrieveUtil.getUserById(errorId);
 //		int clanId = 66;
 //		Clan c = ClanRetrieveUtils.getClanWithId(clanId);
 //		boolean isForBrowsingList = false;
@@ -694,11 +688,11 @@ public class ControllerTest extends TestCase {
 	
 	@Test
 	public void testClanInvite() {
-		int jackMayHoff = 1110;
-		User jmh = userRetrieveUtils.getUserById(jackMayHoff);
+		/*String jackMayHoff = "1110";
+		User jmh = userRetrieveUtil.getUserById(jackMayHoff);
 		UpdateUtils.get().updateUserClanStatus(jackMayHoff, jmh.getClanId(), UserClanStatus.JUNIOR_LEADER);
-		Clan c = ClanRetrieveUtils.getClanWithId(jmh.getClanId());
-		int prospectiveMemberId = getUnitTesterId();
+		Clan c = clanRetrieveUtil.getClanWithId(jmh.getClanId());
+		String prospectiveMemberId = getUnitTesterId();
 		ClanInvite ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
 		assertNull(ci);
 		
@@ -711,27 +705,27 @@ public class ControllerTest extends TestCase {
 		icre.setTag(1);
 		icre.setInviteToClanRequestProto(itcrpb.build());
 		
-		inviteToClanController.handleEvent(icre);
-		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
-		assertNotNull(ci);
+//		inviteToClanController.handleEvent(icre);
+//		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
+//		assertNotNull(ci);
 		
 		DeleteUtils.get().deleteClanInvite(prospectiveMemberId, null);
 		ci = clanInviteRetrieveUtil.getClanInvite(prospectiveMemberId, jackMayHoff);
-		assertNull(ci);
+		assertNull(ci);*/
 	}
 	
-	private int getUnitTesterId() {
-		return 11;
+	private String getUnitTesterId() {
+		return "11";
 	}
 	
 	
-	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
-		return purchaseCityExpansionController;
-	}
-	public void setPurchaseCityExpansionController(
-			PurchaseCityExpansionController purchaseCityExpansionController) {
-		this.purchaseCityExpansionController = purchaseCityExpansionController;
-	}
+//	public PurchaseCityExpansionController getPurchaseCityExpansionController() {
+//		return purchaseCityExpansionController;
+//	}
+//	public void setPurchaseCityExpansionController(
+//			PurchaseCityExpansionController purchaseCityExpansionController) {
+//		this.purchaseCityExpansionController = purchaseCityExpansionController;
+//	}
 
 	public StartupController getStartupController() {
 		return startupController;
@@ -757,23 +751,23 @@ public class ControllerTest extends TestCase {
 		this.transferClanOwnershipController = transferClanOwnershipController;
 	}
 
-	public QuestProgressController getQuestProgressController()
-	{
-		return questProgressController;
-	}
-	public void setQuestProgressController( QuestProgressController questProgressController )
-	{
-		this.questProgressController = questProgressController;
-	}
-
-	public EnhanceMonsterController getEnhanceMonsterController()
-	{
-		return enhanceMonsterController;
-	}
-	public void setEnhanceMonsterController( EnhanceMonsterController enhanceMonsterController )
-	{
-		this.enhanceMonsterController = enhanceMonsterController;
-	}
+//	public QuestProgressController getQuestProgressController()
+//	{
+//		return questProgressController;
+//	}
+//	public void setQuestProgressController( QuestProgressController questProgressController )
+//	{
+//		this.questProgressController = questProgressController;
+//	}
+//
+//	public EnhanceMonsterController getEnhanceMonsterController()
+//	{
+//		return enhanceMonsterController;
+//	}
+//	public void setEnhanceMonsterController( EnhanceMonsterController enhanceMonsterController )
+//	{
+//		this.enhanceMonsterController = enhanceMonsterController;
+//	}
 
 	public DevController getDevController()
 	{
@@ -793,14 +787,14 @@ public class ControllerTest extends TestCase {
 		this.retrieveClanInfoController = retrieveClanInfoController;
 	}
 
-	public InviteToClanController getInviteToClanController()
-	{
-		return inviteToClanController;
-	}
-	public void setInviteToClanController( InviteToClanController inviteToClanController )
-	{
-		this.inviteToClanController = inviteToClanController;
-	}
+//	public InviteToClanController getInviteToClanController()
+//	{
+//		return inviteToClanController;
+//	}
+//	public void setInviteToClanController( InviteToClanController inviteToClanController )
+//	{
+//		this.inviteToClanController = inviteToClanController;
+//	}
 
 
 	
@@ -812,21 +806,21 @@ public class ControllerTest extends TestCase {
 		this.timeUtils = timeUtils;
 	}
 
-	public UserRetrieveUtils getUserRetrieveUtils() {
-		return userRetrieveUtils;
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
+		return userRetrieveUtil;
 	}
 
-	public void setUserRetrieveUtils(UserRetrieveUtils userRetrieveUtils) {
-		this.userRetrieveUtils = userRetrieveUtils;
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtil) {
+		this.userRetrieveUtil = userRetrieveUtil;
 	}
 	
-	public MonsterForUserRetrieveUtils getMonsterForUserRetrieveUtils()
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils()
 	{
 		return monsterForUserRetrieveUtils;
 	}
 
 	public void setMonsterForUserRetrieveUtils(
-		MonsterForUserRetrieveUtils monsterForUserRetrieveUtils )
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils )
 	{
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
 	}

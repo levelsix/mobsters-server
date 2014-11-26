@@ -57,7 +57,7 @@
 //
 //    //get values sent from the client (the request proto)
 //    MinimumUserProto senderProto = reqProto.getSender();
-//    int userId = senderProto.getUserId();
+//    int userId = senderProto.getUserUuid();
 //    boolean isSpeedUp = reqProto.getIsSpeedup();
 //    List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 //    Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
@@ -73,7 +73,7 @@
 //    resBuilder.setSender(senderProto);
 //    resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER); //default
 //
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 //    try {
 //      int previousGems = 0;
 //    	//get whatever we need from the database
@@ -121,7 +121,7 @@
 //    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);
 //      }
 //    } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//      server.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 //    }
 //  }
 //  

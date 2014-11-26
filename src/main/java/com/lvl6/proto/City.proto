@@ -9,7 +9,7 @@ option java_outer_classname = "CityProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message UserCityExpansionDataProto {
-	optional int32 userId = 1;
+	optional string userUuid = 1;
 	optional sint32 xPosition = 2;
 	optional sint32 yPosition = 3;
 	optional bool isExpanding = 4;

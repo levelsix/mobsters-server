@@ -22,7 +22,7 @@ public class LogoutRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       logoutRequestProto = LogoutRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = logoutRequestProto.getSender().getUserId();
+      playerId = logoutRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("logout request exception", e);
     }

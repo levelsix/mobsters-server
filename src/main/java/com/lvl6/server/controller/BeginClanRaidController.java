@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +35,9 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -55,7 +57,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserClanRetrieveUtils2 userClanRetrieveUtil;
 
+  @Autowired
+  protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtil;
+  
+  @Autowired
+  protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtil;
+  
   @Autowired
   protected TimeUtils timeUtils;
 
@@ -80,11 +91,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent)event).getBeginClanRaidRequestProto();
 
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    String userId = senderProto.getUserUuid();
     MinimumClanProto mcp = senderProto.getClan();
-    int clanId = mcp.getClanId();
     int clanEventPersistentId = reqProto.getClanEventId();
     
     Date curDate = new Date(reqProto.getCurTime());
@@ -93,7 +103,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     boolean setMonsterTeamForRaid = reqProto.getSetMonsterTeamForRaid();
     List<FullUserMonsterProto> userMonsters = reqProto.getUserMonstersList();
-    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(userMonsters);
+    List<String> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(userMonsters);
     boolean isFirstStage = reqProto.getIsFirstStage();
     
     BeginClanRaidResponseProto.Builder resBuilder = BeginClanRaidResponseProto.newBuilder();
@@ -104,15 +114,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //get the clan lock; get the clan raid object for the clan;
     // If doesn't exist, create it. If does exist, check to see if the raids are different.
     // If different, replace it with a new one. Else, do nothing.
+    String clanId = "";
+
+    UUID userUuid = null;
+    UUID clanUuid = null;
+    boolean invalidUuids = true;
+    if (null != mcp && mcp.hasClanUuid()) {
+    	clanId = mcp.getClanUuid();
+    	try {
+    		userUuid = UUID.fromString(userId);
+    		clanUuid = UUID.fromString(clanId);
+    		
+    		invalidUuids = false;
+    	} catch (Exception e) {
+    		log.error(String.format(
+    			"UUID error. incorrect userId=%s, clanId=%s",
+    			userId, clanId), e);
+    	}
+    }
+    
+    //UUID checks
+    if (invalidUuids) {
+    	resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
+    	BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
+    	resEvent.setTag(event.getTag());
+    	resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+    	return;
+    }
     
     //ONLY GET CLAN LOCK IF TRYING TO BEGIN A RAID
     boolean lockedClan = false;
-    if (null != mcp && mcp.hasClanId()) {
-    	clanId = mcp.getClanId();
-    	if (0 != clanId && !setMonsterTeamForRaid) {
-    		lockedClan = getLocker().lockClan(clanId);
-    		log.info("locking clanId=" + clanId);
-    	}
+    if (null != clanUuid && !setMonsterTeamForRaid) {
+    	log.info(String.format("locking clanId=%s", clanId));
+    	lockedClan = getLocker().lockClan(clanUuid);
     }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -171,27 +206,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } finally {
     	
     	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
-    	if (null != mcp && mcp.hasClanId()) {
-    		if (0 != clanId && !setMonsterTeamForRaid && lockedClan) {
-    			getLocker().unlockClan(clanId);
-    			log.info("unlocked clanId=" + clanId);
-    		}
-      }
+    	//if (null != mcp && mcp.hasClanId()) {
+    	//if (0 != clanId && !setMonsterTeamForRaid && lockedClan) {
+    	if (lockedClan) {
+    		getLocker().unlockClan(clanUuid);
+    		log.info(String.format("unlocked clanId=%s", clanId));
+    	}
+      //}
     	
     }
   }
 
   private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan,
-		  MinimumUserProto mupfc, int userId, int clanId, UserClan uc,
+		  MinimumUserProto mupfc, String userId, String clanId, UserClan uc,
 		  int clanEventId, int clanRaidId, Date curDate, Timestamp curTime,
-		  boolean setMonsterTeamForRaid, List<Long> userMonsterIds,
+		  boolean setMonsterTeamForRaid, List<String> userMonsterIds,
 		  boolean isFirstStage) {
 	  
 	  if (!lockedClan) {
 		  log.error("couldn't obtain clan lock");
 		  return false;
 	  }
-    if (0 == clanId || 0 == clanRaidId || null == uc) {
+    if (clanId.isEmpty() || 0 == clanRaidId || null == uc) {
       log.error("not in clan. user is " + mupfc + "\t or clanRaidId invalid id=" +
       		clanRaidId + "\t or no user clan exists. uc=" + uc);
       return false;      
@@ -203,7 +239,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		.getActiveClanEventIdsToEvents(curDate, timeUtils);
     if (!clanEventIdToEvent.containsKey(clanEventId)) {
     	resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
-    	log.error("no active clan event with id=" + clanEventId + "\t user=" + mupfc);
+    	log.error(String.format(
+    		"no active clan event with id=%s, user=%s",
+    		clanEventId, mupfc));
     	return false;
     }
     
@@ -212,8 +250,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int eventRaidId = cep.getClanRaidId();
     if (clanRaidId != eventRaidId) {
     	resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
-    	log.error("no active clan event with raidId=" + clanRaidId + "\t event=" + cep + 
-    	"\t user=" + mupfc);
+    	log.error(String.format(
+    		"no active clan event with raidId=%s, event=%s, user=%s",
+    		clanRaidId, cep, mupfc));
     	return false;
     }
 
@@ -221,10 +260,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //only check if user can start raid if he is not setting his monsters
     //check if the clan already has existing raid information
     if (!setMonsterTeamForRaid) {
-    	Set<Integer> authorizedUsers = getAuthorizedUsers(clanId);
+    	Set<String> authorizedUsers = getAuthorizedUsers(clanId);
     	if (!authorizedUsers.contains(userId)) {
     		resBuilder.setStatus(BeginClanRaidStatus.FAIL_NOT_AUTHORIZED);
-    		log.error("user can't start raid. user=" + mupfc);
+    		log.error(String.format(
+    			"user can't start raid. user=%s" + mupfc));
     		return false;      
     	}
     	//user is authorized to start clan raid
@@ -247,13 +287,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //get all the members in a clan
-  private Set<Integer> getAuthorizedUsers(int clanId) {
-  	Set<Integer> authorizedUsers = new HashSet<Integer>();
+  private Set<String> getAuthorizedUsers(String clanId) {
+  	Set<String> authorizedUsers = new HashSet<String>();
   	List<String> statuses = new ArrayList<String>();
   	statuses.add(UserClanStatus.LEADER.name());
     statuses.add(UserClanStatus.JUNIOR_LEADER.name());
     statuses.add(UserClanStatus.CAPTAIN.name());
-    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    List<String> userIds = userClanRetrieveUtil
     		.getUserIdsWithStatuses(clanId, statuses);
     
     if (null != userIds && !userIds.isEmpty()) {
@@ -263,10 +303,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return authorizedUsers;
   }
   
-  private boolean validClanInfo(Builder resBuilder, int clanId, int clanEventId, 
+  private boolean validClanInfo(Builder resBuilder, String clanId, int clanEventId, 
   		int clanRaidId, Date curDate, Timestamp now, boolean isFirstStage) {
   	//check if clan already started the event
-  	ClanEventPersistentForClan raidStartedByClan = ClanEventPersistentForClanRetrieveUtils
+  	ClanEventPersistentForClan raidStartedByClan = clanEventPersistentForClanRetrieveUtil
   			.getPersistentEventForClanId(clanId);
   	
   	if (null == raidStartedByClan && isFirstStage) {
@@ -299,8 +339,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	//the clan raid stage start time should be null/not set
   	if (null != raidStartedByClan.getStageStartTime()) {
-  		log.warn("the clan raid stage start time is not null when beginning clan raid." +
-  				" clanEvent=" + raidStartedByClan);
+  		log.warn(String.format(
+  			"the clan raid stage start time is not null when beginning clan raid. clanEvent=%s",
+  			raidStartedByClan));
   		//let the testers/users notify us that something is wrong, because
   		//I don't know how to resolve this issue
   		return false;
@@ -318,7 +359,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //copy pasted from RecordClanRaidStatsController.writeChangesToD
-  private void pushCurrentClanEventDataToHistory(int clanId, Timestamp now,
+  private void pushCurrentClanEventDataToHistory(String clanId, Timestamp now,
   		ClanEventPersistentForClan clanEvent) {
   	int clanEventPersistentId = clanEvent.getClanEventPersistentId();
   	int crId = clanEvent.getCrId();
@@ -339,9 +380,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			now, clanEventPersistentId, crId, crsId, stageStartTime, crsmId,
   			stageMonsterStartTime, won);
   	
-  	log.info("rows inserted into clan raid info for clan (should be 1): " + numInserted);
+  	log.info(String.format(
+  		"rows inserted into clan raid info for clan (should be 1): %s",
+  		numInserted));
   	//get all the clan raid info for the users, and then delete them
-  	Map<Integer, ClanEventPersistentForUser> clanUserInfo = ClanEventPersistentForUserRetrieveUtils
+  	Map<String, ClanEventPersistentForUser> clanUserInfo = clanEventPersistentForUserRetrieveUtil
   			.getPersistentEventUserInfoForClanId(clanId);
   	
   	
@@ -352,19 +395,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//record whatever is in the ClanEventPersistentForUser
   		numInserted = InsertUtils.get().insertIntoCepfuRaidHistory(clanEventPersistentId,
   				now, clanUserInfo);
-  		log.info("rows inserted into clan raid info for user (should be " + 
-  				clanUserInfo.size() + "): " + numInserted);
+  		log.info(String.format(
+  			"rows inserted into clan raid info for user (should be %s): %s",
+  			clanUserInfo.size(), numInserted));
   		
   		//delete clan user info for clan raid
-  		List<Integer> userIdList = new ArrayList<Integer>(clanUserInfo.keySet());
+  		List<String> userIdList = new ArrayList<String>(clanUserInfo.keySet());
   		DeleteUtils.get().deleteClanEventPersistentForUsers(userIdList);
   	
   	}
   }
   
-  private boolean writeChangesToDB(int userId, int clanId, int clanEventPersistentId,
+  private boolean writeChangesToDB(String userId, String clanId, int clanEventPersistentId,
   		int clanRaidId, Timestamp curTime, boolean setMonsterTeamForRaid,
-  		List<Long> userMonsterIds, boolean isFirstStage, List<ClanEventPersistentForClan> clanInfo) {
+  		List<String> userMonsterIds, boolean isFirstStage, List<ClanEventPersistentForClan> clanInfo) {
   	
   	if (setMonsterTeamForRaid) {
   		int numInserted = InsertUtils.get().insertIntoUpdateMonstersClanEventPersistentForUser(
@@ -385,7 +429,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
 
-  		log.info("num rows inserted into clan raid info for clan table: " + numInserted);
+  		log.info(String.format(
+  			"num rows inserted into clan raid info for clan table: %s",
+  			numInserted));
 
   		ClanEventPersistentForClan cepfc = new ClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
@@ -401,7 +447,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				clanId, curTime);
   		log.info("num rows updated in clan raid info for clan table: " + numUpdated);
   		
-  		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  		ClanEventPersistentForClan cepfc = clanEventPersistentForClanRetrieveUtil
   				.getPersistentEventForClanId(clanId);
   		clanInfo.add(cepfc);
   	}
@@ -410,33 +456,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   
-  private void setClanAndUserDetails(Builder resBuilder, int userId, int clanId,
-  		int clanRaidId, List<Long> userMonsterIds, List<FullUserMonsterProto> userMonsters) {
+  private void setClanAndUserDetails(Builder resBuilder, String userId, String clanId,
+  		int clanRaidId, List<String> userMonsterIds, List<FullUserMonsterProto> userMonsters) {
   //crsId and crsmId is not needed in PersistentClanEventUserInfoProto
   	//should already be in the db table 
 //  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
 //    		.getPersistentEventForClanId(clanId);
   	
-  	long userMonsterIdOne = 0;
-  	long userMonsterIdTwo = 0;
-  	long userMonsterIdThree = 0;
-  	
-  	if (userMonsterIds.size() >= 1) {
-  		userMonsterIdOne = userMonsterIds.get(0);
-  	}
-  	if (userMonsterIds.size() >= 2) {
-  		userMonsterIdTwo = userMonsterIds.get(1);
-  	}
-  	if (userMonsterIds.size() >= 3) {
-  		userMonsterIdThree = userMonsterIds.get(2);
-  	}
-  	
-  	ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
-  			clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
-  			userMonsterIdThree);
-  	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
-  			.createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
-  	resBuilder.setUserDetails(userDetails);
+	  String userMonsterIdOne = "";
+	  String userMonsterIdTwo = "";
+	  String userMonsterIdThree = "";
+
+	  if (userMonsterIds.size() >= 1) {
+		  userMonsterIdOne = userMonsterIds.get(0);
+	  }
+	  if (userMonsterIds.size() >= 2) {
+		  userMonsterIdTwo = userMonsterIds.get(1);
+	  }
+	  if (userMonsterIds.size() >= 3) {
+		  userMonsterIdThree = userMonsterIds.get(2);
+	  }
+
+	  ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
+		  clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
+		  userMonsterIdThree);
+	  PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
+		  .createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
+	  resBuilder.setUserDetails(userDetails);
   }
   
   protected Locker getLocker() {

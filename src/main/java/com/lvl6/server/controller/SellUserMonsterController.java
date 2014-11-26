@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +31,11 @@ import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component
@@ -44,6 +47,12 @@ public class SellUserMonsterController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+  
+  @Autowired
+  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public SellUserMonsterController() {
 		numAllocatedThreads = 4;
@@ -67,12 +76,12 @@ public class SellUserMonsterController extends EventController {
 		// get values sent from the client (the request proto)
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
-		int userId = senderProto.getUserId();
+		String userId = senderProto.getUserUuid();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
-		Map<Long, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
+		Map<String, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
 				.convertToMonsterForUserIdToCashAmount(userMonsters);
-		Set<Long> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
-		List<Long> userMonsterIds = new ArrayList<Long>(userMonsterIdsSet);
+		Set<String> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
+		List<String> userMonsterIds = new ArrayList<String>(userMonsterIdsSet);
 		Date deleteDate = new Date();
 		Timestamp deleteTime = new Timestamp(deleteDate.getTime());
 		
@@ -84,14 +93,44 @@ public class SellUserMonsterController extends EventController {
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
 
-		getLocker().lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userMonsterUuid = null;
+    boolean invalidUuids = true;
+    try {
+      userUuid = UUID.fromString(userId);
+
+      if (userMonsterIds != null) {
+        for (String userMonsterId : userMonsterIds) {
+          userMonsterUuid = UUID.fromString(userMonsterId);
+        }
+      }
+
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s, userMonsterIds=%s",
+          userId, userMonsterIds), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER);
+      SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
+          userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setSellUserMonsterResponseProto(resBuilder.build());
+      server.writeEvent(resEvent);
+      return;
+    }
+
+		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			int previousCash = 0;
 
-			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-			Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
-					.monsterForUserRetrieveUtils().getSpecificOrAllUnrestrictedUserMonstersForUser(userId,
-							userMonsterIds);
+			User aUser = getUserRetrieveUtils().getUserById(userId);
+			Map<String, MonsterForUser> idsToUserMonsters = getMonsterForUserRetrieveUtils()
+			    .getSpecificOrAllUnrestrictedUserMonstersForUser(userId, userMonsterIds);
 
 			boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
 					idsToUserMonsters);
@@ -119,7 +158,7 @@ public class SellUserMonsterController extends EventController {
 			if (successful) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null);
+						.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 				
@@ -144,7 +183,7 @@ public class SellUserMonsterController extends EventController {
 				log.error("exception2 in SellUserMonsterController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(senderProto.getUserId(), this.getClass()
+			getLocker().unlockPlayer(userUuid, this.getClass()
 					.getSimpleName());
 		}
 	}
@@ -158,8 +197,8 @@ public class SellUserMonsterController extends EventController {
 	 * exist but 'd' does, so "userMonsterIds" will be modified to only contain
 	 * 'd'
 	 */
-	private boolean checkLegit(Builder resBuilder, int userId, User u,
-			List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters) {
+	private boolean checkLegit(Builder resBuilder, String userId, User u,
+			List<String> userMonsterIds, Map<String, MonsterForUser> idsToUserMonsters) {
 
 		if (null == u) {
 			log.error("user is null. no user exists with id=" + userId + "");
@@ -187,8 +226,8 @@ public class SellUserMonsterController extends EventController {
 		return true;
 	}
 
-	private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts, int maxCash,
+	private boolean writeChangesToDb(User aUser, List<String> userMonsterIds,
+			Map<String, Integer> userMonsterIdsToCashAmounts, int maxCash,
 			Map<String, Integer> currencyChange) {
 		boolean success = true;
 
@@ -201,8 +240,9 @@ public class SellUserMonsterController extends EventController {
 		//if user at max resources, user can still delete monster, but won't get any resources
 		if (0 != sum) {
 			if (!aUser.updateRelativeCashNaive(sum)) {
-				log.error("error updating user coins by " + sum + " not deleting "
-						+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
+				log.error(String.format(
+					"error updating user coins by %s. not deleting userMonstersIdsToCashAmounts=%s",
+					sum, userMonsterIdsToCashAmounts));
 				return false;
 			} else {
 				currencyChange.put(MiscMethods.cash, sum);
@@ -212,16 +252,17 @@ public class SellUserMonsterController extends EventController {
 		// delete the user monsters;
 		if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
 			int num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
-			log.info("num user monsters deleted: " + num + "\t ids deleted: "
-					+ userMonsterIds);
+			log.info(String.format(
+				"num user monsters deleted: %s, ids deleted: %s",
+				num, userMonsterIds));
 		}
 		return success;
 	}
 
 	// FOR USER MONSTER HISTORY PURPOSES
-	private void writeChangesToHistory(int userId, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts,
-			Map<Long, MonsterForUser> idsToUserMonsters, Date deleteDate) {
+	private void writeChangesToHistory(String userId, List<String> userMonsterIds,
+			Map<String, Integer> userMonsterIdsToCashAmounts,
+			Map<String, MonsterForUser> idsToUserMonsters, Date deleteDate) {
 
 		if (null == userMonsterIds || userMonsterIds.isEmpty()) {
 			return;
@@ -231,7 +272,7 @@ public class SellUserMonsterController extends EventController {
 		List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>();
 
 		for (int i = 0; i < userMonsterIds.size(); i++) {
-			long userMonsterId = userMonsterIds.get(i);
+		  String userMonsterId = userMonsterIds.get(i);
 			int amount = userMonsterIdsToCashAmounts.get(userMonsterId);
 			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
 			userMonstersList.add(mfu);
@@ -248,10 +289,10 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	// FOR CURRENCY HISTORY PURPOSES
-	public void writeToUserCurrencyHistory(int userId, User aUser,
+	public void writeToUserCurrencyHistory(String userId, User aUser,
 			int previousCash, Timestamp aDate,
-			Map<Long, Integer> userMonsterIdsToCashAmounts,
-			List<Long> userMonsterIds, Map<String, Integer> currencyChange) {
+			Map<String, Integer> userMonsterIdsToCashAmounts,
+			List<String> userMonsterIds, Map<String, Integer> currencyChange) {
 
 		if (currencyChange.isEmpty()) {
 			return;
@@ -259,7 +300,7 @@ public class SellUserMonsterController extends EventController {
 		
 		// record the user monster ids that contributed to changing user's currency
 		StringBuilder detailsSb = new StringBuilder();
-		for (Long umId : userMonsterIdsToCashAmounts.keySet()) {
+		for (String umId : userMonsterIdsToCashAmounts.keySet()) {
 			Integer cash = userMonsterIdsToCashAmounts.get(umId);
 			detailsSb.append("mfuId=");
 			detailsSb.append(umId);
@@ -294,5 +335,22 @@ public class SellUserMonsterController extends EventController {
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+    return monsterForUserRetrieveUtils;
+  }
+
+  public void setMonsterForUserRetrieveUtils(
+      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+  }
 
 }

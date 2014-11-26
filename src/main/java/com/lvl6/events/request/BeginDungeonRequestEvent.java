@@ -22,7 +22,7 @@ public class BeginDungeonRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       beginDungeonRequestProto = BeginDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = beginDungeonRequestProto.getSender().getUserId();
+      playerId = beginDungeonRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("begin dungeon request exception", e);
     }

@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,22 +27,29 @@ import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Upgr
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-  @Component @DependsOn("gameServer") public class UpgradeNormStructureController extends EventController {
+@Component @DependsOn("gameServer") public class UpgradeNormStructureController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-  
+
   @Autowired
   protected Locker locker;
+
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtils;
+
+  @Autowired
+  protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
 
   public UpgradeNormStructureController() {
     numAllocatedThreads = 4;
   }
-  
+
   @Override
   public RequestEvent createRequestEvent() {
     return new UpgradeNormStructureRequestEvent();
@@ -59,36 +67,59 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
-    int userStructId = reqProto.getUserStructId();
+    String userId = senderProto.getUserUuid();
+    String userStructId = reqProto.getUserStructUuid();
     Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
     int gemsSpent = reqProto.getGemsSpent();
     //positive means refund, negative means charge user
     int resourceChange = reqProto.getResourceChange();
     ResourceType rt = reqProto.getResourceType();
-    
+
     UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
 
-
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    UUID userUuid = null;
+    UUID userStructUuid = null;
+    boolean invalidUuids = true;
     try {
-    	User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	Structure currentStruct = null;
-    	Structure nextLevelStruct = null;
-    	StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
-    	
-    	if (userStruct != null) {
-    		currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
-    		nextLevelStruct = StructureRetrieveUtils.getUpgradedStructForStructId(userStruct.getStructId());
-    	}
+      userUuid = UUID.fromString(userId);
+      userStructUuid = UUID.fromString(userStructId);
+      invalidUuids = false;
+    } catch (Exception e) {
+      log.error(String.format(
+          "UUID error. incorrect userId=%s or userStructId=%s",
+          userId, userStructId), e);
+      invalidUuids = true;
+    }
+
+    //UUID checks
+    if (invalidUuids) {
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+      UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
+      server.writeEvent(resEvent);
+      return;
+    }
+
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+    try {
+      User user = getUserRetrieveUtils().getUserById(userId);
+      Structure currentStruct = null;
+      Structure nextLevelStruct = null;
+      StructureForUser userStruct = getUserStructRetrieveUtils().getSpecificUserStruct(userStructId);
+
+      if (userStruct != null) {
+        currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
+        nextLevelStruct = StructureRetrieveUtils.getUpgradedStructForStructId(userStruct.getStructId());
+      }
       int previousCash = 0;
       int previousOil = 0;
       int previousGems = 0;
-      
+
       boolean legitUpgrade = checkLegitUpgrade(resBuilder, user, userStruct, currentStruct,
-      		nextLevelStruct, gemsSpent, resourceChange, rt, timeOfUpgrade);
+          nextLevelStruct, gemsSpent, resourceChange, rt, timeOfUpgrade);
       UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
@@ -98,32 +129,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         previousCash = user.getCash();
         previousOil = user.getOil();
         previousGems = user.getGems();
-        
+
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent, resourceChange, rt,
-        		timeOfUpgrade, money);
+            timeOfUpgrade, money);
         //null PvpLeagueFromUser means will pull from hazelcast instead
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-        		.createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null);
+            .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
-        
+
         writeToUserCurrencyHistory(user, userStruct, currentStruct, nextLevelStruct,
-        		timeOfUpgrade, money, previousCash, previousOil, previousGems);
+            timeOfUpgrade, money, previousCash, previousOil, previousGems);
       }
     } catch (Exception e) {
-    	log.error("exception in UpgradeNormStructure processEvent", e);
-    	try {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
-    		UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
-    		resEvent.setTag(event.getTag());
-    		resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
-    		server.writeEvent(resEvent);
-    	} catch (Exception e2) {
-    		log.error("exception2 in UpgradeNormStructure processEvent", e2);
-    	}
+      log.error("exception in UpgradeNormStructure processEvent", e);
+      try {
+        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+        UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
+        resEvent.setTag(event.getTag());
+        resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
+        server.writeEvent(resEvent);
+      } catch (Exception e2) {
+        log.error("exception2 in UpgradeNormStructure processEvent", e2);
+      }
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());      
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());      
     }
   }
 
@@ -131,8 +162,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Structure currentStruct, Structure nextLevelStruct, int gemsSpent, int resourceChange, 
       ResourceType rt,Timestamp timeOfUpgrade) {
     if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
-      log.error("parameter passed in is null. user=" + user + ", user struct=" + userStruct + 
-         ", userStruct's last retrieve time=" + userStruct.getLastRetrieved());
+      log.error(String.format(
+    	  "parameter passed in is null. user=%s, userStruct=%s, userStruct's lastRetrieveTime=%s",
+    	  user, userStruct, userStruct.getLastRetrieved()));
       return false;
     }
     if (!userStruct.isComplete()) {
@@ -141,33 +173,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     if (null == nextLevelStruct) {
-    	resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
-    	log.error("user struct at max level already. struct is " + currentStruct);
-    	return false;
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
+      log.error(String.format(
+    	  "user struct at max level already. struct is %s", currentStruct));
+      return false;
     }
     if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
-      log.error("the upgrade time " + timeOfUpgrade + " is before the last time the building was retrieved:"
-          + userStruct.getLastRetrieved());
+      log.error(String.format(
+    	  "the upgrade time %s is before the last time the building was retrieved:%s",
+    	  timeOfUpgrade, userStruct.getLastRetrieved()));
       return false;
     }
     //see if the user can upgrade it
-    if (user.getId() != userStruct.getUserId()) {
+    if (!user.getId().equals(userStruct.getUserId())) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
-      log.error("user struct belongs to someone else with id " + userStruct.getUserId());
+      log.error(String.format(
+    	  "user struct belongs to someone else with id=%s",
+    	  userStruct.getUserId()));
       return false;
     }
-    
+
     if (gemsSpent < 0) {
-    	log.warn("gemsSpent is negative! gemsSpent=" + gemsSpent);
-    	gemsSpent = Math.abs(gemsSpent);
+      log.warn(String.format(
+    	  "gemsSpent is negative! gemsSpent=%s", gemsSpent));
+      gemsSpent = Math.abs(gemsSpent);
     }
     int userGems = user.getGems();
     if (gemsSpent > 0 && userGems < gemsSpent) {
-    	log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
-    			resourceChange  + " " + rt + " to upgrade to structure=" + nextLevelStruct);
-    	resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
-    	return false;
+      log.error(String.format(
+    	  "user has %s gems; trying to spend %s and %s %s to upgrade to structure=%s",
+    	  userGems, gemsSpent, resourceChange, rt, nextLevelStruct));
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+      return false;
     }
 
     //since negative resourceChange means charge, then negative of that is
@@ -175,19 +213,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //have more than a negative amount
     int resourceRequired = -1 * resourceChange;
     if (ResourceType.CASH.equals(rt)) {
-    	if (user.getCash() < resourceRequired) {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + resourceChange);
-    		return false;
-    	}
+      if (user.getCash() < resourceRequired) {
+        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+        log.error(String.format(
+        	"user doesn't have enough cash, has %s, needs %s",
+        	user.getCash(), resourceChange));
+        return false;
+      }
     } else if (ResourceType.OIL.equals(rt)){
-    	if (user.getOil() < resourceRequired) {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
-    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + resourceChange);
-    		return false;
-    	}
+      if (user.getOil() < resourceRequired) {
+        resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
+        log.error(String.format(
+        	"user doesn't have enough gems, has %s, needs %s",
+        	user.getGems(), resourceChange));
+        return false;
+      }
     }
-    
+
     /*//TODO: only make one user struct retrieve call 
     List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
     if (userStructs != null) {
@@ -199,38 +241,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         }
       }
     }*/
-    
+
     resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
     return true;
   }
 
   private void writeChangesToDB(User user, StructureForUser userStruct, Structure upgradedStruct,
-  		int gemsSpent, int resourceChange, ResourceType rt, Timestamp timeOfUpgrade,
-  		Map<String, Integer> money) {
+      int gemsSpent, int resourceChange, ResourceType rt, Timestamp timeOfUpgrade,
+      Map<String, Integer> money) {
 
-  	int newStructId = upgradedStruct.getId();
-  	//upgrade the user's struct
-  	if (!UpdateUtils.get().updateBeginUpgradingUserStruct(userStruct.getId(),
-  			newStructId, timeOfUpgrade)) {
-  		log.error("problem with changing time of upgrade to " + timeOfUpgrade + 
-  				" and marking as incomplete, the user struct " + userStruct);
-  	}
+    int newStructId = upgradedStruct.getId();
+    //upgrade the user's struct
+    if (!UpdateUtils.get().updateBeginUpgradingUserStruct(userStruct.getId(),
+        newStructId, timeOfUpgrade)) {
+      log.error(String.format(
+    	  "problem with changing time of upgrade to %s and marking as incomplete, userStruct=%",
+    	  timeOfUpgrade, userStruct));
+    }
 
-  	//charge the user  	
-  	int cashChange = 0;
+    //charge the user  	
+    int cashChange = 0;
     int oilChange = 0;
     int gemChange = -1 * Math.abs(gemsSpent);
-    
+
     if (ResourceType.CASH.equals(rt)) {
-    	cashChange = resourceChange;
+      cashChange = resourceChange;
     } else if (ResourceType.OIL.equals(rt)) {
-    	oilChange = resourceChange;
+      oilChange = resourceChange;
     }
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
-      log.error("problem with updating user currency. gemChange=" + gemChange +
-      		" cashChange=" + cashChange + "\t oilChange=" + oilChange + "\t numRowsUpdated=" + num);
+      log.error(String.format(
+    	  "problem updating user currency. gemChange=%s, cashChange=%s, oilChange=%s, numRowsUpdated=%s",
+    	  gemChange, cashChange, oilChange, num));
     } else {//things went ok
       if (0 != gemChange) {
         money.put(MiscMethods.gems, gemChange);
@@ -239,22 +283,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         money.put(MiscMethods.cash, cashChange);
       }
       if (0 != oilChange) {
-      	money.put(MiscMethods.oil, oilChange);
+        money.put(MiscMethods.oil, oilChange);
       }
     }
-    
-  	
-  	
+
   }
-  
+
   private void writeToUserCurrencyHistory(User aUser,
-		  StructureForUser userStruct, Structure curStruct,
-		  Structure upgradedStruct, Timestamp timeOfUpgrade,
-		  Map<String, Integer> money, int previousCash, int previousOil,
-		  int previousGems) {
-    
-  	int userId = aUser.getId();
-    int userStructId = userStruct.getId();
+      StructureForUser userStruct, Structure curStruct,
+      Structure upgradedStruct, Timestamp timeOfUpgrade,
+      Map<String, Integer> money, int previousCash, int previousOil,
+      int previousGems) {
+
+    String userId = aUser.getId();
+    String userStructId = userStruct.getId();
     int prevStructId = curStruct.getId();
     int prevLevel = curStruct.getLevel();
     StringBuilder structDetailsSb = new StringBuilder();
@@ -265,7 +307,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     structDetailsSb.append(" prevLevel:");
     structDetailsSb.append(prevLevel);
     String structDetails = structDetailsSb.toString();
-    
+
     Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
     Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
@@ -274,33 +316,50 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String gems = MiscMethods.gems;
     String oil = MiscMethods.oil;
     String cash = MiscMethods.cash;
-    
+
     previousCurrencies.put(cash, previousCash);
     previousCurrencies.put(oil, previousOil);
     previousCurrencies.put(gems, previousGems);
-    
+
     currentCurrencies.put(cash, aUser.getCash());
     currentCurrencies.put(oil, aUser.getOil());
     currentCurrencies.put(gems, aUser.getGems());
-    
+
     reasonsForChanges.put(cash,  reasonForChange);
     reasonsForChanges.put(oil, reasonForChange);
     reasonsForChanges.put(gems, reasonForChange);
-    
+
     details.put(cash, structDetails);
     details.put(oil, structDetails);
     details.put(gems, structDetails);
-    
+
     MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
-    		previousCurrencies, currentCurrencies, reasonsForChanges, details);
+        previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
 
   public Locker getLocker() {
-	  return locker;
+    return locker;
   }
 
   public void setLocker(Locker locker) {
-	  this.locker = locker;
+    this.locker = locker;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtils() {
+    return userRetrieveUtils;
+  }
+
+  public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
+    this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+  public StructureForUserRetrieveUtils2 getUserStructRetrieveUtils() {
+    return userStructRetrieveUtils;
+  }
+
+  public void setUserStructRetrieveUtils(
+      StructureForUserRetrieveUtils2 userStructRetrieveUtils) {
+    this.userStructRetrieveUtils = userStructRetrieveUtils;
   }
 
 }

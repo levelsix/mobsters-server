@@ -22,7 +22,7 @@ public class QuestProgressRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       questProgressRequestProto = QuestProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = questProgressRequestProto.getSender().getUserId();
+      playerId = questProgressRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("quest progress request exception", e);
     }

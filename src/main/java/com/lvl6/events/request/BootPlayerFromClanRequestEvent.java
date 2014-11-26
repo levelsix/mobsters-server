@@ -22,7 +22,7 @@ public class BootPlayerFromClanRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       bootPlayerFromClanRequestProto = BootPlayerFromClanRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = bootPlayerFromClanRequestProto.getSender().getUserId();
+      playerId = bootPlayerFromClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("boot player from clan request exception", e);
     }

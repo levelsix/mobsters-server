@@ -22,7 +22,7 @@ public class NormStructWaitCompleteRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       normStructWaitCompleteRequestProto = NormStructWaitCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = normStructWaitCompleteRequestProto.getSender().getUserId();
+      playerId = normStructWaitCompleteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("norm struct wait time complete request exception", e);
     }

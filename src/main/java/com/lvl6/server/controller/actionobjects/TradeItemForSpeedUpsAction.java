@@ -1,7 +1,9 @@
 package com.lvl6.server.controller.actionobjects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -18,16 +21,18 @@ public class TradeItemForSpeedUpsAction
 	private static Logger log = LoggerFactory.getLogger(new Object() {
 	}.getClass().getEnclosingClass());
 
-	private int userId;
+	private String userId;
 	private List<ItemForUserUsage> itemsUsed;
 	private List<ItemForUser> nuUserItems;
+	private ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
 	private InsertUtil insertUtil;
 	private UpdateUtil updateUtil;
 	
 	public TradeItemForSpeedUpsAction(
-		int userId,
+		String userId,
 		List<ItemForUserUsage> itemsUsed,
 		List<ItemForUser> nuUserItems,
+		ItemForUserRetrieveUtil itemForUserRetrieveUtil,
 		InsertUtil insertUtil,
 		UpdateUtil updateUtil )
 	{
@@ -35,6 +40,7 @@ public class TradeItemForSpeedUpsAction
 		this.userId = userId;
 		this.itemsUsed = itemsUsed;
 		this.nuUserItems = nuUserItems;
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 		this.updateUtil = updateUtil;
 	}
@@ -54,7 +60,10 @@ public class TradeItemForSpeedUpsAction
 //	}
 	
 	//derived state
-	private List<Long> itemForUserUsageIds;
+	private Map<Integer, Integer> itemIdToQuantityUsed;
+	private Map<Integer,Integer> itemIdToNuQuantity;
+	
+	private List<String> itemForUserUsageIds;
 	private List<ItemForUserUsage> itemsUsedWithIds;
 
 	public void execute(Builder resBuilder) {
@@ -95,6 +104,63 @@ public class TradeItemForSpeedUpsAction
 	}
 	
 	private boolean verifySemantics(Builder resBuilder) {
+		itemIdToQuantityUsed = new HashMap<Integer, Integer>();
+		
+		for (ItemForUserUsage ifuu :  itemsUsed) {
+			int itemId = ifuu.getItemId();
+			if (!itemIdToQuantityUsed.containsKey(itemId)) {
+				itemIdToQuantityUsed.put(itemId, 0);
+			}
+			
+			int quantity = itemIdToQuantityUsed.get(itemId);
+			quantity += 1;
+			itemIdToQuantityUsed.put(itemId, quantity);
+		}
+		
+		itemIdToNuQuantity = new HashMap<Integer, Integer>();
+		for (ItemForUser ifu : nuUserItems) {
+			int itemId = ifu.getItemId();
+			itemIdToNuQuantity.put(itemId, ifu.getQuantity());	
+		}
+		
+		
+		//get current ItemForUser data, calculate if user is spending
+		//correct amount
+		Map<Integer, ItemForUser> inDb = itemForUserRetrieveUtil
+			.getSpecificOrAllItemIdToItemForUserId(
+				userId,
+				itemIdToQuantityUsed.keySet());
+		
+		if (null == inDb || inDb.size() != nuUserItems.size()) {
+			log.info(String.format(
+				"inconsistent itemForUser"));
+			return false;
+		}
+		
+		for (Integer itemId : inDb.keySet()) {
+			ItemForUser ifu = inDb.get(itemId);
+			
+			//safe to access because retrieved by itemIdToQuantityUsed.keySet()
+			int quantitySpent = itemIdToQuantityUsed.get(itemId);
+			int actualQuantity = ifu.getQuantity() - quantitySpent;
+			
+			if (actualQuantity < 0) {
+				log.error(String.format(
+					"client using more items than has. itemsUsed=%s, inDbUserItems=%s",
+					itemsUsed, inDb));
+				return false;
+			}
+			
+			int clientExpectedQuantity = itemIdToNuQuantity.get(itemId);
+			
+			if (actualQuantity != clientExpectedQuantity) {
+				log.error(String.format(
+					"itemsUsed=%s, nuUserItems(userItem quantities)=%s, inDbUserItems=%s",
+					itemsUsed, nuUserItems, inDb));
+				return false;
+			}
+		}
+		
 		//TODO: consider accessing db to get all the ItemForUser that changed,
 		//compare db ItemForUser with the nuUserItems.
 		//calculating the quantity that changed, then making sure 
@@ -122,7 +188,7 @@ public class TradeItemForSpeedUpsAction
 		if (null != itemForUserUsageIds) {
 			for (int index = 0; index < itemsUsed.size(); index++) {
 				ItemForUserUsage ifuu  = itemsUsed.get(index);
-				long id = itemForUserUsageIds.get(index);
+				String id = itemForUserUsageIds.get(index);
 				
 				ItemForUserUsage ifuuWithId = new ItemForUserUsage(id, ifuu);
 				

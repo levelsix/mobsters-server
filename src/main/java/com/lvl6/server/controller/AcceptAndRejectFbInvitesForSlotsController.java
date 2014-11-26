@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.ClanRetrieveUtils2;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -44,7 +45,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
+  @Autowired
+  protected ClanRetrieveUtils2 clanRetrieveUtils;
+  
   public AcceptAndRejectFbInvitesForSlotsController() {
     numAllocatedThreads = 4;
   }
@@ -63,27 +70,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent)event).getAcceptAndRejectFbInviteForSlotsRequestProto();
 
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
     MinimumUserProto sender = senderProto.getMinUserProto();
-    int userId = sender.getUserId();
+    String userId = sender.getUserUuid();
     String userFacebookId = senderProto.getFacebookId();
     
     //just accept these
-    List<Integer> acceptedInviteIds = reqProto.getAcceptedInviteIdsList();
+    List<String> acceptedInviteIds = reqProto.getAcceptedInviteUuidsList();
     if(null == acceptedInviteIds) {
-    	acceptedInviteIds = new ArrayList<Integer>();
+    	acceptedInviteIds = new ArrayList<String>();
     } else {
-    	acceptedInviteIds = new ArrayList<Integer>(acceptedInviteIds);
+    	acceptedInviteIds = new ArrayList<String>(acceptedInviteIds);
     }
     
     //delete these from the table
-    List<Integer> rejectedInviteIds = reqProto.getRejectedInviteIdsList();
+    List<String> rejectedInviteIds = reqProto.getRejectedInviteUuidsList();
     if (null == rejectedInviteIds) {
-    	rejectedInviteIds = new ArrayList<Integer>();
+    	rejectedInviteIds = new ArrayList<String>();
     } else {
-    	rejectedInviteIds = new ArrayList<Integer>(rejectedInviteIds);
+    	rejectedInviteIds = new ArrayList<String>(rejectedInviteIds);
     }
     Timestamp acceptTime = new Timestamp((new Date()).getTime());
 
@@ -94,11 +101,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(AcceptAndRejectFbInviteForSlotsStatus.FAIL_OTHER); //default
 
-    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+    UUID userUuid = null;
+	boolean invalidUuids = false;
+	try {
+		userUuid = UUID.fromString(userId);
+	} catch (Exception e) {
+		log.error(String.format(
+			"UUID error. incorrect userId=%s",
+			userId), e);
+		invalidUuids = true;
+	}
+	
+	//UUID checks
+	if (invalidUuids) {
+		resBuilder.setStatus(AcceptAndRejectFbInviteForSlotsStatus.FAIL_OTHER);
+		AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(userId);
+		resEvent.setTag(event.getTag());
+		resEvent.setAcceptAndRejectFbInviteForSlotsResponseProto(resBuilder.build());
+		server.writeEvent(resEvent);
+    	return;
+    }
+    
+    getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       //these will be populated. by checkLegit()
-      Map<Integer, UserFacebookInviteForSlot> idsToInvitesInDb =
-      		new HashMap<Integer, UserFacebookInviteForSlot>();
+      Map<String, UserFacebookInviteForSlot> idsToInvitesInDb =
+      		new HashMap<String, UserFacebookInviteForSlot>();
       
       boolean legit = checkLegit(resBuilder, userId, userFacebookId, acceptedInviteIds,
       		rejectedInviteIds, idsToInvitesInDb);
@@ -113,16 +141,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//need to retrieve all the inviters from the db, set the accepted time for
       	//accepted invites
       	Collection<UserFacebookInviteForSlot> invites = idsToInvitesInDb.values(); 
-      	List<Integer> userIds = getInviterIds(invites);
-      	Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-      	Map<Integer, Clan> clanIdsToClans = getClans(idsToInviters);
+      	List<String> userIds = getInviterIds(invites);
+      	Map<String, User> idsToInviters = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+      	Map<String, Clan> clanIdsToClans = getClans(idsToInviters);
       	
       	for (UserFacebookInviteForSlot invite : invites) {
       		invite.setTimeAccepted(acceptTime);
       		
-      		int inviterId = invite.getInviterUserId();
+      		String inviterId = invite.getInviterUserId();
       		User inviter = idsToInviters.get(inviterId);
-      		int clanId = inviter.getClanId();
+      		String clanId = inviter.getClanId();
       		Clan clan = null;
       		if (clanIdsToClans.containsKey(clanId)) {
       			clan = clanIdsToClans.get(clanId);
@@ -149,9 +177,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//write to the inviters this user accepted
       	AcceptAndRejectFbInviteForSlotsResponseProto responseProto =
       			resBuilder.build();
-      	for (Integer inviteId : acceptedInviteIds) {
+      	for (String inviteId : acceptedInviteIds) {
       		UserFacebookInviteForSlot invite = idsToInvitesInDb.get(inviteId);
-      		int inviterId = invite.getInviterUserId();
+      		String inviterId = invite.getInviterUserId();
       		
       		 AcceptAndRejectFbInviteForSlotsResponseEvent newResEvent =
       				 new AcceptAndRejectFbInviteForSlotsResponseEvent(inviterId);
@@ -175,7 +203,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  log.error("exception2 in AcceptAndRejectFbInviteForSlotsController processEvent", e);
       }
     } finally {
-      getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
+      getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
     }
   }
 
@@ -185,17 +213,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * builder status to the appropriate value. accepetedInviteIds, 
    * rejectedInviteIds, and idsToAcceptedInvites might be modified
    */
-  private boolean checkLegit(Builder resBuilder, int userId, String userFacebookId,
-  		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds,
-  		Map<Integer, UserFacebookInviteForSlot> idsToInvites) {
+  private boolean checkLegit(Builder resBuilder, String userId, String userFacebookId,
+  		List<String> acceptedInviteIds, List<String> rejectedInviteIds,
+  		Map<String, UserFacebookInviteForSlot> idsToInvites) {
   	
   	if (null == userFacebookId || userFacebookId.isEmpty()) {
-  		log.error("facebookId is null. id=" + userFacebookId + "\t acceptedInvitesIds=" +
-  				acceptedInviteIds + "\t rejectedInviteIds=" + rejectedInviteIds);
+  		log.error(String.format(
+  			"facebookId is null. id=%s, acceptedInvitesIds=%s, rejectedInviteIds=%s",
+  			userFacebookId, acceptedInviteIds, rejectedInviteIds));
   		return false;
   	}
   	//search for these invites accepted and rejected
-  	List<Integer> inviteIds = new ArrayList<Integer>(acceptedInviteIds);
+  	List<String> inviteIds = new ArrayList<String>(acceptedInviteIds);
   	inviteIds.addAll(rejectedInviteIds);
   	
   	//retrieve the invites for this recipient that haven't been accepted nor redeemed
@@ -203,18 +232,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	boolean isAccepted = false;
   	boolean filterByRedeemed = true;
   	boolean isRedeemed = false;
-  	Map<Integer, UserFacebookInviteForSlot> idsToInvitesInDb = UserFacebookInviteForSlotRetrieveUtils
-  			.getSpecificOrAllInvitesForRecipient(userFacebookId, inviteIds, filterByAccepted,
-  					isAccepted, filterByRedeemed, isRedeemed);
-  	Set<Integer> validIds = idsToInvitesInDb.keySet();
+  	Map<String, UserFacebookInviteForSlot> idsToInvitesInDb =
+  		userFacebookInviteForSlotRetrieveUtils
+  		.getSpecificOrAllInvitesForRecipient(userFacebookId, inviteIds, filterByAccepted,
+  			isAccepted, filterByRedeemed, isRedeemed);
+  	Set<String> validIds = idsToInvitesInDb.keySet();
   	
   	//only want the acceptedInvite ids that aren't yet accepted nor redeemed
-  	log.info("acceptedInviteIds before filter: " + acceptedInviteIds);
-  	retainIfInExistingInts(validIds, acceptedInviteIds);
-  	log.info("acceptedInviteIds after filter: " + acceptedInviteIds);
+  	log.info(String.format(
+  		"acceptedInviteIds before filter: %s", acceptedInviteIds));
+  	retainIfInExisting(validIds, acceptedInviteIds);
+  	log.info(String.format(
+  		"acceptedInviteIds after filter: %s", acceptedInviteIds));
   	
   	//only want the rejectedInvite ids that aren't yet accepted nor redeemed
-  	retainIfInExistingInts(validIds, rejectedInviteIds);
+  	retainIfInExisting(validIds, rejectedInviteIds);
 
   	
   	//check to make sure this user is not accepting any invites from an inviter
@@ -223,13 +255,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//any of the inviters of the acceptedInviteIds
   	
   	//pair up inviterUserIds with the acceptedInviteIds
-  	Map<Integer, Integer> acceptedInviterIdsToInviteIds = getInviterUserIds(
+  	Map<String, String> acceptedInviterIdsToInviteIds = getInviterUserIds(
   			acceptedInviteIds, idsToInvitesInDb); 
   	
   	//look in the invite table for accepted invites (includes redeemed),
   	//select the inviter user ids that have recipientFacebookId = userFacebookId
   	isAccepted = true;
-  	Set<Integer> redeemedInviterIds = UserFacebookInviteForSlotRetrieveUtils
+  	Set<String> redeemedInviterIds = userFacebookInviteForSlotRetrieveUtils
   			.getUniqueInviterUserIdsForRequesterId(userFacebookId, filterByAccepted, isAccepted);
   	
   	//if any of the acceptedInviteIds contains an inviterId this user has already accepted
@@ -238,35 +270,39 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//inviteId into the rejectedInviteIds list,
   	//done so because the db probably has recorded that the inviter used up this user
   	//and is trying to use this user again
-  	log.info("acceptedInviteIds before inviter used check: " + acceptedInviteIds);
+  	log.info(String.format(
+  		"acceptedInviteIds before inviter used check: %s",
+  		acceptedInviteIds));
   	retainInvitesFromUnusedInviters(redeemedInviterIds, acceptedInviterIdsToInviteIds,
   			acceptedInviteIds, rejectedInviteIds);
-  	log.info("acceptedInviteIds after inviter used check: " + acceptedInviteIds);
+  	log.info(String.format(
+  		"acceptedInviteIds after inviter used check: %s",
+  		acceptedInviteIds));
   	
   	idsToInvites.putAll(idsToInvitesInDb);
   	
   	return true;
   }
   
-  private void retainIfInExistingInts(Set<Integer> existingInts, List<Integer> someInts) {
-  	int lastIndex = someInts.size() - 1;
+  private void retainIfInExisting(Set<String> existingStr, List<String> someStr) {
+  	int lastIndex = someStr.size() - 1;
   	for(int index = lastIndex; index >= 0; index--) {
-  		int someInt = someInts.get(index);
+  		String someInt = someStr.get(index);
   		
-  		if (!existingInts.contains(someInt)) {
-  			//since the int is not in existingInts, remove it.
-  			someInts.remove(index);
+  		if (!existingStr.contains(someInt)) {
+  			//since the Str is not in existingStr, remove it.
+  			someStr.remove(index);
   		}
   	}
   }
   
-  private Map<Integer, Integer> getInviterUserIds(List<Integer> inviteIds,
-  		Map<Integer, UserFacebookInviteForSlot> idsToInvites) {
-  	Map<Integer, Integer> inviterUserIdsToInviteIds = new HashMap<Integer, Integer>();
+  private Map<String, String> getInviterUserIds(List<String> inviteIds,
+  		Map<String, UserFacebookInviteForSlot> idsToInvites) {
+  	Map<String, String> inviterUserIdsToInviteIds = new HashMap<String, String>();
   	
-  	for (Integer inviteId : inviteIds) {
+  	for (String inviteId : inviteIds) {
   		UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
-  		int inviterUserId = invite.getInviterUserId();
+  		String inviterUserId = invite.getInviterUserId();
   		//what if this guy is used more than once? meh, fuck it
   		inviterUserIdsToInviteIds.put(inviterUserId, inviteId);
   	}
@@ -276,38 +312,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //recordedInviterIds are the inviterIds in the invite table that belong to invites
   //accepted by a user
-  private void retainInvitesFromUnusedInviters(Set<Integer> recordedInviterIds,
-  		Map<Integer, Integer> acceptedInviterIdsToInviteIds, 
-  		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds) {
+  private void retainInvitesFromUnusedInviters(Set<String> recordedInviterIds,
+  		Map<String, String> acceptedInviterIdsToInviteIds, 
+  		List<String> acceptedInviteIds, List<String> rejectedInviteIds) {
   	//if any of the inviter ids in acceptedInviterIdsToInviteIds are in
   	//recordedInviterIds, delete inviteId from the
   	//acceptedInviteIds list and put the inviteId into the rejectedInviteIds list
   	
   	//keep track of the inviterIds that this user has previously already accepted  
-  	Map<Integer, Integer> invalidInviteIdsToUserIds = new HashMap<Integer, Integer>();
-  	for (Integer potentialNewInviterId : acceptedInviterIdsToInviteIds.keySet()) {
+  	Map<String, String> invalidInviteIdsToUserIds = new HashMap<String, String>();
+  	for (String potentialNewInviterId : acceptedInviterIdsToInviteIds.keySet()) {
   		if (recordedInviterIds.contains(potentialNewInviterId)) {
   			//userA trying to accept an invite from a person userA has already 
   			//accepted an invite from
-  			int inviteId = acceptedInviterIdsToInviteIds.get(potentialNewInviterId);
+  			String inviteId = acceptedInviterIdsToInviteIds.get(potentialNewInviterId);
   			
   			invalidInviteIdsToUserIds.put(inviteId, potentialNewInviterId);
   		}
   	}
   	
-  	Set<Integer> invalidInviteIds = invalidInviteIdsToUserIds.keySet();
+  	Set<String> invalidInviteIds = invalidInviteIdsToUserIds.keySet();
   	if (invalidInviteIds.isEmpty()) {
   		return;
   	}
-  	log.warn("user tried accepting invites from users he has already accepted." +
-  			"invalidInviteIdsToUserIds=" + invalidInviteIdsToUserIds);
+  	log.warn(String.format(
+  		"accepting invites from users user already accepted. invalidInviteIdsToUserIds=%s",
+  		invalidInviteIdsToUserIds));
 
-  	log.warn("before: rejectedInviteIds=" + acceptedInviteIds);
-  	log.warn("before: acceptedInviteIds=" + acceptedInviteIds);
+  	log.warn(String.format(
+  		"before: rejectedInviteIds=%s", acceptedInviteIds));
+  	log.warn(String.format("before: acceptedInviteIds=%s",
+  		acceptedInviteIds));
   	//go through acceptedInviteIds and remove invalid inviteIds
   	int lastIndex = acceptedInviteIds.size() - 1;
   	for (int index = lastIndex; index >= 0; index--) {
-  		int acceptedInviteId = acceptedInviteIds.get(index);
+  		String acceptedInviteId = acceptedInviteIds.get(index);
 
   		if (invalidInviteIds.contains(acceptedInviteId)) {
   			acceptedInviteIds.remove(index);
@@ -316,24 +355,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			rejectedInviteIds.add(acceptedInviteId);
   		}
   	}
-  	log.warn("after: acceptedInviteIds=" + acceptedInviteIds);
-  	log.warn("after: rejectedInviteIds=" + rejectedInviteIds);
+  	log.warn(String.format(
+  		"after: acceptedInviteIds=%s", acceptedInviteIds));
+  	log.warn(String.format(
+  		"after: rejectedInviteIds=%s", rejectedInviteIds));
   }
   
-  private boolean writeChangesToDb(int userId, String userFacebookId,
-  		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds,
-  		Map<Integer, UserFacebookInviteForSlot> idsToInvitesInDb,
+  private boolean writeChangesToDb(String userId, String userFacebookId,
+  		List<String> acceptedInviteIds, List<String> rejectedInviteIds,
+  		Map<String, UserFacebookInviteForSlot> idsToInvitesInDb,
   		Timestamp acceptTime) {
-  	log.info("idsToInvitesInDb=" + idsToInvitesInDb + "\t acceptedInviteIds=" +
-  			acceptedInviteIds + "\t rejectedInviteIds=" + rejectedInviteIds);
+  	log.info(String.format(
+  		"idsToInvitesInDb=%s, acceptedInviteIds=%s, rejectedInviteIds=%s ",
+  		idsToInvitesInDb, acceptedInviteIds, rejectedInviteIds));
   	
   	//update the acceptTimes for the acceptedInviteIds
   	//these acceptedInviteIds are for unaccepted, unredeemed invites
   	if (!acceptedInviteIds.isEmpty()) {
   		int num = UpdateUtils.get().updateUserFacebookInviteForSlotAcceptTime(
   				userFacebookId, acceptedInviteIds, acceptTime);
-  		log.info("\t\t\t\t\t\t\t num acceptedInviteIds updated: " + num + "\t invites=" +
-  				acceptedInviteIds);
+  		log.info(String.format(
+  			"\t\t\t num acceptedInviteIds updated: %s \t invites=%s",
+  			num, acceptedInviteIds));
   	}
   	
   	//DELETE THE rejectedInviteIds THAT ARE ALREADY IN DB
@@ -347,31 +390,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private List<Integer> getInviterIds(Collection<UserFacebookInviteForSlot> invites) {
-  	List<Integer> inviterIds = new ArrayList<Integer>();
+  private List<String> getInviterIds(Collection<UserFacebookInviteForSlot> invites) {
+  	List<String> inviterIds = new ArrayList<String>();
   	
   	for (UserFacebookInviteForSlot invite : invites) {
-  		int inviterId = invite.getInviterUserId();
+  		String inviterId = invite.getInviterUserId();
   		inviterIds.add(inviterId);
   	}
   	return inviterIds;
   }
   
-  private Map<Integer, Clan> getClans(Map<Integer, User> idsToInviters) {
-	  Set<Integer> clanIds = new HashSet<Integer>();
+  private Map<String, Clan> getClans(Map<String, User> idsToInviters) {
+	  Set<String> clanIds = new HashSet<String>();
 	  
 	  for (User u : idsToInviters.values()) {
-		  int clanId = u.getClanId();
-		  if (clanId > 0) {
+		  String clanId = u.getClanId();
+		  if (null != clanId && !clanId.isEmpty()) {
 			  clanIds.add(clanId);
 		  }
 	  }
 
 	  if (!clanIds.isEmpty()) {
-		  return ClanRetrieveUtils.getClansByIds(
-			  new ArrayList<Integer>(clanIds));
+		  return clanRetrieveUtils.getClansByIds(
+			  new ArrayList<String>(clanIds));
 	  }
-	  return new HashMap<Integer, Clan>();
+	  return new HashMap<String, Clan>();
   }
 
   public Locker getLocker() {
@@ -380,6 +423,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setLocker(Locker locker) {
 	  this.locker = locker;
+  }
+
+  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils()
+  {
+	  return userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public void setUserFacebookInviteForSlotRetrieveUtils(
+	  UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils )
+  {
+	  this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+  }
+
+  public ClanRetrieveUtils2 getClanRetrieveUtils()
+  {
+	  return clanRetrieveUtils;
+  }
+
+  public void setClanRetrieveUtils( ClanRetrieveUtils2 clanRetrieveUtils )
+  {
+	  this.clanRetrieveUtils = clanRetrieveUtils;
   }
 
 }

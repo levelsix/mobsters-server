@@ -22,7 +22,7 @@ public class ReviveInDungeonRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       reviveInDungeonRequestProto = ReviveInDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = reviveInDungeonRequestProto.getSender().getUserId();
+      playerId = reviveInDungeonRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("revive in dungeon request exception", e);
     }

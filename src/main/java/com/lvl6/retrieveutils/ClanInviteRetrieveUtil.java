@@ -81,7 +81,7 @@ public class ClanInviteRetrieveUtil {
 		return clanInvites;
 	}
 	
-	public ClanInvite getClanInvite( int userId, int inviterId )
+	public ClanInvite getClanInvite( String userId, String inviterId )
 	{
 		ClanInvite invite = null;
 		try {
@@ -97,8 +97,8 @@ public class ClanInviteRetrieveUtil {
 			//query db, "values" is not used 
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
-			List<Object> values = null;
-			boolean preparedStatement = false;
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
 
 			String query = getQueryConstructionUtil()
 					.selectRowsQueryEqualityConditions(
@@ -107,7 +107,7 @@ public class ClanInviteRetrieveUtil {
 			log.info(String.format(
 				"getClanInvite() query=%s", query));
 			List<ClanInvite> invites = this.jdbcTemplate
-					.query(query, new ClanInviteForClientMapper());
+					.query(query, values.toArray(), new ClanInviteForClientMapper());
 			
 			if (null != invites && !invites.isEmpty()) {
 				invite = invites.get(0);
@@ -152,9 +152,9 @@ public class ClanInviteRetrieveUtil {
 
 		public ClanInvite mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ClanInvite ci = new ClanInvite();
-			ci.setUserId(rs.getInt(DBConstants.CLAN_INVITE__USER_ID));
-			ci.setInviterId(rs.getInt(DBConstants.CLAN_INVITE__INVITER_ID));
-			ci.setClanId(rs.getInt(DBConstants.CLAN_INVITE__CLAN_ID));
+			ci.setUserId(rs.getString(DBConstants.CLAN_INVITE__USER_ID));
+			ci.setInviterId(rs.getString(DBConstants.CLAN_INVITE__INVITER_ID));
+			ci.setClanId(rs.getString(DBConstants.CLAN_INVITE__CLAN_ID));
 			Timestamp ts = rs.getTimestamp(DBConstants.CLAN_INVITE__TIME_OF_INVITE);
 			ci.setTimeOfInvite(new Date(ts.getTime()));
 			
@@ -164,6 +164,7 @@ public class ClanInviteRetrieveUtil {
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
+				columnsSelected.add(DBConstants.CLAN_INVITE__ID);
 				columnsSelected.add(DBConstants.CLAN_INVITE__USER_ID);
 				columnsSelected.add(DBConstants.CLAN_INVITE__INVITER_ID);
 				columnsSelected.add(DBConstants.CLAN_INVITE__CLAN_ID);

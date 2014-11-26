@@ -11,7 +11,7 @@ public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent {
 
   private UpdateUserCurrencyResponseProto updateUserCurrencyResponseProto;
   
-  public UpdateUserCurrencyResponseEvent(int playerId){
+  public UpdateUserCurrencyResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_UPDATE_USER_CURRENCY_EVENT;
   }

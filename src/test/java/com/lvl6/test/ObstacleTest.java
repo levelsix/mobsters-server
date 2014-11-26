@@ -30,8 +30,8 @@ import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
 import com.lvl6.server.controller.BeginObstacleRemovalController;
 import com.lvl6.server.controller.ObstacleRemovalCompleteController;
@@ -57,13 +57,13 @@ public class ObstacleTest extends TestCase {
 	protected ObstacleRemovalCompleteController obstacleRemovalCompleteController;
 	
 	@Autowired
-	protected UserRetrieveUtils userRetrieveUtils;
+	protected UserRetrieveUtils2 userRetrieveUtils;
 	
 	@Autowired
 	protected TimeUtils timeUtils;
 	
 	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 	
 
 	@Test
@@ -85,7 +85,7 @@ public class ObstacleTest extends TestCase {
 	public void spawnObstacle() {
 		log.info("spawning obstacle");
 		//create user proto
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		assertTrue("Expected user: not null. Actual: " + unitTester,
 				null != unitTester);
@@ -140,7 +140,7 @@ public class ObstacleTest extends TestCase {
     			.getUserById(userId);
 
     	//make sure user exists
-    	int otherUserId = unitTesterSpawnedObstacle.getId();
+    	String otherUserId = unitTesterSpawnedObstacle.getId();
     	assertTrue("Expected userId: " + userId + ". Actual: " +
     			unitTesterSpawnedObstacle.getId(), userId == otherUserId);
     	
@@ -173,7 +173,7 @@ public class ObstacleTest extends TestCase {
 	//call spawnObstacle() first
 	public void beginRemoveObstacle() {
 		log.info("begin obstacle removal");
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		MinimumUserProto mup = CreateInfoProtoUtils
 				.createMinimumUserProtoFromUserAndClan(unitTester, null);
@@ -195,7 +195,7 @@ public class ObstacleTest extends TestCase {
 		Date removalTime = ofu.getRemovalTime();
 		assertTrue("Expected time: null. Actual: " + removalTime,
 				null == removalTime);
-		int ofuId = ofu.getId();
+		String ofuId = ofu.getId();
 		
 		//so as to leave db the way it was before doing this test
 		User richerUnitTester = getUserRetrieveUtils().getUserById(userId);
@@ -210,7 +210,7 @@ public class ObstacleTest extends TestCase {
 		borrpb.setCurTime(nowDate.getTime());
 		borrpb.setResourceChange(-1);
 		borrpb.setResourceType(ResourceType.CASH);
-		borrpb.setUserObstacleId(ofuId);
+		borrpb.setUserObstacleUuid(ofuId);
 		
 		BeginObstacleRemovalRequestEvent borre =
 				new BeginObstacleRemovalRequestEvent();
@@ -249,9 +249,9 @@ public class ObstacleTest extends TestCase {
 		Comparator<ObstacleForUser> c = new Comparator<ObstacleForUser>() {
 			  @Override
 			  public int compare(ObstacleForUser o1, ObstacleForUser o2) {
-				  if (o1.getId() < o2.getId()) {
+				  if (o1.getId().compareTo(o2.getId()) < 0) {
 					  return -1;
-				  } else if (o1.getId() > o2.getId()) {
+				  } else if (o1.getId().compareTo(o2.getId()) > 0) {
 					  return 1;
 				  } else {
 					  return 0;
@@ -270,7 +270,7 @@ public class ObstacleTest extends TestCase {
 	public void beginCompletingObstacleRemovalNotMaxObstacles() {
 		log.info("begin completing removing obstacle");
 		
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		int numObstaclesRemoved = unitTester.getNumObstaclesRemoved();
 		Date oldLastObstacleSpawnedTime = unitTester
@@ -294,7 +294,7 @@ public class ObstacleTest extends TestCase {
 		int oldSize = ofuList.size();
 
 		ObstacleForUser ofu = getLastCreatedObstacle(ofuList);
-		int ofuId = ofu.getId();
+		String ofuId = ofu.getId();
 		
 		//create the event
 		ObstacleRemovalCompleteRequestProto.Builder orcrpb =
@@ -302,7 +302,7 @@ public class ObstacleTest extends TestCase {
 		orcrpb.setSender(mup);
 		orcrpb.setSpeedUp(false);
 		orcrpb.setCurTime(tenMinFromNowTimestamp.getTime());
-		orcrpb.setUserObstacleId(ofuId);
+		orcrpb.setUserObstacleUuid(ofuId);
 		orcrpb.setAtMaxObstacles(false);
 		
 		//send the event for processing
@@ -343,7 +343,7 @@ public class ObstacleTest extends TestCase {
 	public void beginCompletingObstacleRemovalAtMaxObstacles() {
 		log.info("begin completing removing obstacle at max");
 		
-		int userId = getTestUserId();
+		String userId = getTestUserId();
 		User unitTester = getUserRetrieveUtils().getUserById(userId);
 		int numObstaclesRemoved = unitTester.getNumObstaclesRemoved();
 		Date oldLastObstacleSpawnedTime = unitTester
@@ -367,7 +367,7 @@ public class ObstacleTest extends TestCase {
 		int oldSize = ofuList.size();
 
 		ObstacleForUser ofu = getLastCreatedObstacle(ofuList);
-		int ofuId = ofu.getId();
+		String ofuId = ofu.getId();
 		
 		//create the event
 		ObstacleRemovalCompleteRequestProto.Builder orcrpb =
@@ -375,7 +375,7 @@ public class ObstacleTest extends TestCase {
 		orcrpb.setSender(mup);
 		orcrpb.setSpeedUp(false);
 		orcrpb.setCurTime(tenMinFromNowTimestamp.getTime());
-		orcrpb.setUserObstacleId(ofuId);
+		orcrpb.setUserObstacleUuid(ofuId);
 		orcrpb.setAtMaxObstacles(true);
 		
 		//send the event for processing
@@ -430,8 +430,8 @@ public class ObstacleTest extends TestCase {
 		assertEquals(0, timeUtils.numDaysDifference(thisDay, oneHourFromThisDay));
 	}
 	
-	protected int getTestUserId() {
-		return 11; //Unit testing account
+	protected String getTestUserId() {
+		return "11"; //Unit testing account
 	}
 	
 	protected MinimumObstacleProto createTestObstacleProto() {
@@ -474,11 +474,11 @@ public class ObstacleTest extends TestCase {
 		this.obstacleRemovalCompleteController = obstacleRemovalCompleteController;
 	}
 
-	public UserRetrieveUtils getUserRetrieveUtils() {
+	public UserRetrieveUtils2 getUserRetrieveUtils() {
 		return userRetrieveUtils;
 	}
 
-	public void setUserRetrieveUtils(UserRetrieveUtils userRetrieveUtils) {
+	public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
 		this.userRetrieveUtils = userRetrieveUtils;
 	}
 
@@ -490,12 +490,12 @@ public class ObstacleTest extends TestCase {
 		this.timeUtils = timeUtils;
 	}
 
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+	public ObstacleForUserRetrieveUtil2 getObstacleForUserRetrieveUtil() {
 		return obstacleForUserRetrieveUtil;
 	}
 
 	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+			ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil) {
 		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
 	}
 	

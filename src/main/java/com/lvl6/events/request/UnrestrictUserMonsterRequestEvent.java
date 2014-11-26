@@ -23,7 +23,7 @@ public class UnrestrictUserMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       unrestrictUserMonsterRequestProto = UnrestrictUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = unrestrictUserMonsterRequestProto.getSender().getUserId();
+      playerId = unrestrictUserMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("UnrestrictUserMonsterRequest exception", e);
     }

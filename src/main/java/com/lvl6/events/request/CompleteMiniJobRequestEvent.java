@@ -22,7 +22,7 @@ public class CompleteMiniJobRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       completeMiniJobRequestProto = CompleteMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = completeMiniJobRequestProto.getSender().getUserId();
+      playerId = completeMiniJobRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("CompleteMiniJob request exception", e);
     }

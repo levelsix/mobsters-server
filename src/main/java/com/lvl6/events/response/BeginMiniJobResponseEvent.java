@@ -11,7 +11,7 @@ public class BeginMiniJobResponseEvent extends NormalResponseEvent {
 
   private BeginMiniJobResponseProto beginMiniJobResponseProto;
   
-  public BeginMiniJobResponseEvent(int playerId){
+  public BeginMiniJobResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_BEGIN_MINI_JOB_EVENT;
   }

@@ -11,7 +11,7 @@ public class BeginClanRaidResponseEvent extends NormalResponseEvent {
 
   private BeginClanRaidResponseProto beginClanRaidResponseProto;
   
-  public BeginClanRaidResponseEvent(int playerId){
+  public BeginClanRaidResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_BEGIN_CLAN_RAID_EVENT;
   }

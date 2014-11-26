@@ -1,13 +1,13 @@
 package com.lvl6.events;
 
 public abstract class NormalResponseEvent extends ResponseEvent{
-  protected int playerId;   //refers to whoever sent the event/triggered it
+  protected String playerId;   //refers to whoever sent the event/triggered it
 
-  public int getPlayerId() {
+  public String getPlayerId() {
     return playerId;
   }
   
-  public NormalResponseEvent(int playerId) {
+  public NormalResponseEvent(String playerId) {
     this.playerId = playerId;
   }
 }

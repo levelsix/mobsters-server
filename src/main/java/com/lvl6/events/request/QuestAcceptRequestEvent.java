@@ -22,7 +22,7 @@ public class QuestAcceptRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       questAcceptRequestProto = QuestAcceptRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = questAcceptRequestProto.getSender().getUserId();
+      playerId = questAcceptRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("quest accept request exception", e);
     }

@@ -5969,22 +5969,32 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional int32 monsterId = 3;</code>
@@ -6145,14 +6155,16 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 24: {
@@ -6250,34 +6262,88 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERMONSTERID_FIELD_NUMBER = 1;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERID_FIELD_NUMBER = 2;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 userId = 2;</code>
+     * <code>optional string userUuid = 2;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int MONSTERID_FIELD_NUMBER = 3;
@@ -6454,8 +6520,8 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userMonsterId_ = 0L;
-      userId_ = 0;
+      userMonsterUuid_ = "";
+      userUuid_ = "";
       monsterId_ = 0;
       currentExp_ = 0;
       currentLvl_ = 0;
@@ -6482,10 +6548,10 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userMonsterId_);
+        output.writeBytes(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userId_);
+        output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, monsterId_);
@@ -6531,11 +6597,11 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userMonsterId_);
+          .computeBytesSize(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userId_);
+          .computeBytesSize(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6698,9 +6764,9 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -6755,11 +6821,11 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -6820,11 +6886,15 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance()) return this;
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000002;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasMonsterId()) {
           setMonsterId(other.getMonsterId());
@@ -6886,66 +6956,154 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000002;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 2;</code>
+       * <code>optional string userUuid = 2;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 2;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -7809,22 +7967,32 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
-     * <code>optional int64 userMonsterId = 2;</code>
+     * <code>optional string userMonsterUuid = 2;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 2;</code>
+     * <code>optional string userMonsterUuid = 2;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
      * <code>optional int64 queuedTimeMillis = 3;</code>
@@ -7943,14 +8111,16 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
             case 24: {
@@ -8013,34 +8183,88 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERMONSTERID_FIELD_NUMBER = 2;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 2;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 2;</code>
+     * <code>optional string userMonsterUuid = 2;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 userMonsterId = 2;</code>
+     * <code>optional string userMonsterUuid = 2;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int QUEUEDTIMEMILLIS_FIELD_NUMBER = 3;
@@ -8128,8 +8352,8 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userId_ = 0;
-      userMonsterId_ = 0L;
+      userUuid_ = "";
+      userMonsterUuid_ = "";
       queuedTimeMillis_ = 0L;
       healthProgress_ = 0F;
       priority_ = 0;
@@ -8149,10 +8373,10 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, userMonsterId_);
+        output.writeBytes(2, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, queuedTimeMillis_);
@@ -8177,11 +8401,11 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, userMonsterId_);
+          .computeBytesSize(2, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -8321,9 +8545,9 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         queuedTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -8364,11 +8588,11 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -8401,11 +8625,15 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000002;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         if (other.hasQueuedTimeMillis()) {
           setQueuedTimeMillis(other.getQueuedTimeMillis());
@@ -8446,66 +8674,154 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 2;</code>
+       * <code>optional string userMonsterUuid = 2;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int64 userMonsterId = 2;</code>
+       * <code>optional string userMonsterUuid = 2;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 2;</code>
+       * <code>optional string userMonsterUuid = 2;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000002;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 2;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 2;</code>
+       * <code>optional string userMonsterUuid = 2;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 2;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -8702,13 +9018,18 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
      * <code>optional int32 currentHealth = 2;</code>
@@ -8785,9 +9106,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
             case 16: {
@@ -8835,19 +9157,46 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERMONSTERID_FIELD_NUMBER = 1;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CURRENTHEALTH_FIELD_NUMBER = 2;
@@ -8874,7 +9223,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
       currentHealth_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -8891,7 +9240,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userMonsterId_);
+        output.writeBytes(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, currentHealth_);
@@ -8907,7 +9256,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userMonsterId_);
+          .computeBytesSize(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9036,7 +9385,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         currentHealth_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -9071,7 +9420,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -9092,8 +9441,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance()) return this;
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         if (other.hasCurrentHealth()) {
           setCurrentHealth(other.getCurrentHealth());
@@ -9125,34 +9476,78 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -9221,13 +9616,18 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>optional .com.lvl6.proto.UserEnhancementItemProto baseMonster = 2;</code>
@@ -9318,9 +9718,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 18: {
@@ -9387,19 +9788,46 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int BASEMONSTER_FIELD_NUMBER = 2;
@@ -9459,7 +9887,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       baseMonster_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance();
       feeders_ = java.util.Collections.emptyList();
     }
@@ -9477,7 +9905,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, baseMonster_);
@@ -9496,7 +9924,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9625,7 +10053,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (baseMonsterBuilder_ == null) {
           baseMonster_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance();
@@ -9670,7 +10098,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -9704,8 +10132,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (other.hasBaseMonster()) {
           mergeBaseMonster(other.getBaseMonster());
@@ -9763,34 +10193,78 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -10167,23 +10641,33 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
      *enhancingCost set or have it set to 0
      * </pre>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
      *enhancingCost set or have it set to 0
      * </pre>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     *
+     * <pre>
+     *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
+     *enhancingCost set or have it set to 0
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
      * <code>optional int64 expectedStartTimeMillis = 2;</code>
@@ -10280,9 +10764,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
             case 16: {
@@ -10340,29 +10825,61 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERMONSTERID_FIELD_NUMBER = 1;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
      *enhancingCost set or have it set to 0
      * </pre>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      *
      * <pre>
      *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
      *enhancingCost set or have it set to 0
      * </pre>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     *
+     * <pre>
+     *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
+     *enhancingCost set or have it set to 0
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int EXPECTEDSTARTTIMEMILLIS_FIELD_NUMBER = 2;
@@ -10427,7 +10944,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
       expectedStartTimeMillis_ = 0L;
       enhancingCost_ = 0;
       enhancingComplete_ = false;
@@ -10446,7 +10963,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userMonsterId_);
+        output.writeBytes(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, expectedStartTimeMillis_);
@@ -10468,7 +10985,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userMonsterId_);
+          .computeBytesSize(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -10599,7 +11116,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         expectedStartTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -10638,7 +11155,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -10667,8 +11184,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.getDefaultInstance()) return this;
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         if (other.hasExpectedStartTimeMillis()) {
           setExpectedStartTimeMillis(other.getExpectedStartTimeMillis());
@@ -10706,54 +11225,108 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
        *enhancingCost set or have it set to 0
        * </pre>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
        *enhancingCost set or have it set to 0
        * </pre>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
        *enhancingCost set or have it set to 0
        * </pre>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       *
+       * <pre>
+       *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
+       *enhancingCost set or have it set to 0
+       * </pre>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        *
        * <pre>
        *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
        *enhancingCost set or have it set to 0
        * </pre>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       *
+       * <pre>
+       *MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
+       *enhancingCost set or have it set to 0
+       * </pre>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -10902,13 +11475,18 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
      * <code>optional int32 expectedExperience = 2;</code>
@@ -10995,9 +11573,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
             case 16: {
@@ -11055,19 +11634,46 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERMONSTERID_FIELD_NUMBER = 1;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int EXPECTEDEXPERIENCE_FIELD_NUMBER = 2;
@@ -11116,7 +11722,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
       expectedExperience_ = 0;
       expectedLevel_ = 0;
       expectedHp_ = 0;
@@ -11135,7 +11741,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userMonsterId_);
+        output.writeBytes(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, expectedExperience_);
@@ -11157,7 +11763,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userMonsterId_);
+          .computeBytesSize(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -11294,7 +11900,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         expectedExperience_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -11333,7 +11939,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -11362,8 +11968,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance()) return this;
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         if (other.hasExpectedExperience()) {
           setExpectedExperience(other.getExpectedExperience());
@@ -11401,34 +12009,78 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -11545,13 +12197,18 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    boolean hasUserMonsterId();
+    boolean hasUserMonsterUuid();
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    long getUserMonsterId();
+    java.lang.String getUserMonsterUuid();
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidBytes();
 
     /**
      * <code>optional int32 cashAmount = 2;</code>
@@ -11619,9 +12276,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userMonsterId_ = input.readInt64();
+              userMonsterUuid_ = bs;
               break;
             }
             case 16: {
@@ -11669,19 +12327,46 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERMONSTERID_FIELD_NUMBER = 1;
-    private long userMonsterId_;
+    public static final int USERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userMonsterUuid_;
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public boolean hasUserMonsterId() {
+    public boolean hasUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 userMonsterId = 1;</code>
+     * <code>optional string userMonsterUuid = 1;</code>
      */
-    public long getUserMonsterId() {
-      return userMonsterId_;
+    public java.lang.String getUserMonsterUuid() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userMonsterUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidBytes() {
+      java.lang.Object ref = userMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CASHAMOUNT_FIELD_NUMBER = 2;
@@ -11700,7 +12385,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userMonsterId_ = 0L;
+      userMonsterUuid_ = "";
       cashAmount_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -11717,7 +12402,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userMonsterId_);
+        output.writeBytes(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, cashAmount_);
@@ -11733,7 +12418,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userMonsterId_);
+          .computeBytesSize(1, getUserMonsterUuidBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -11861,7 +12546,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         cashAmount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -11896,7 +12581,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userMonsterId_ = userMonsterId_;
+        result.userMonsterUuid_ = userMonsterUuid_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -11917,8 +12602,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto.getDefaultInstance()) return this;
-        if (other.hasUserMonsterId()) {
-          setUserMonsterId(other.getUserMonsterId());
+        if (other.hasUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          userMonsterUuid_ = other.userMonsterUuid_;
+          onChanged();
         }
         if (other.hasCashAmount()) {
           setCashAmount(other.getCashAmount());
@@ -11950,34 +12637,78 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long userMonsterId_ ;
+      private java.lang.Object userMonsterUuid_ = "";
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public boolean hasUserMonsterId() {
+      public boolean hasUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public long getUserMonsterId() {
-        return userMonsterId_;
+      public java.lang.String getUserMonsterUuid() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder setUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        userMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidBytes() {
+        java.lang.Object ref = userMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userMonsterId = 1;</code>
+       * <code>optional string userMonsterUuid = 1;</code>
        */
-      public Builder clearUserMonsterId() {
+      public Builder clearUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterId_ = 0L;
+        userMonsterUuid_ = getDefaultInstance().getUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userMonsterUuid = 1;</code>
+       */
+      public Builder setUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userMonsterUuid_ = value;
         onChanged();
         return this;
       }
@@ -12030,13 +12761,18 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    boolean hasUserId();
+    boolean hasUserUuid();
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    int getUserId();
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto currentTeam = 2;</code>
@@ -12114,9 +12850,10 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
+              userUuid_ = bs;
               break;
             }
             case 18: {
@@ -12170,19 +12907,46 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public boolean hasUserId() {
+    public boolean hasUserUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 userId = 1;</code>
+     * <code>optional string userUuid = 1;</code>
      */
-    public int getUserId() {
-      return userId_;
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CURRENTTEAM_FIELD_NUMBER = 2;
@@ -12221,7 +12985,7 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      userId_ = 0;
+      userUuid_ = "";
       currentTeam_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -12238,7 +13002,7 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
+        output.writeBytes(1, getUserUuidBytes());
       }
       for (int i = 0; i < currentTeam_.size(); i++) {
         output.writeMessage(2, currentTeam_.get(i));
@@ -12254,7 +13018,7 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
+          .computeBytesSize(1, getUserUuidBytes());
       }
       for (int i = 0; i < currentTeam_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -12378,7 +13142,7 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (currentTeamBuilder_ == null) {
           currentTeam_ = java.util.Collections.emptyList();
@@ -12417,7 +13181,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userId_ = userId_;
+        result.userUuid_ = userUuid_;
         if (currentTeamBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             currentTeam_ = java.util.Collections.unmodifiableList(currentTeam_);
@@ -12443,8 +13207,10 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
         }
         if (currentTeamBuilder_ == null) {
           if (!other.currentTeam_.isEmpty()) {
@@ -12499,34 +13265,78 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private int userId_ ;
+      private java.lang.Object userUuid_ = "";
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public boolean hasUserId() {
+      public boolean hasUserUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public int getUserId() {
-        return userId_;
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 userId = 1;</code>
+       * <code>optional string userUuid = 1;</code>
        */
-      public Builder clearUserId() {
+      public Builder clearUserUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
         onChanged();
         return this;
       }
@@ -12787,46 +13597,65 @@ public final class MonsterStuffProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 catalystUserMonsterId = 1;</code>
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
      *
      * <pre>
      *the monster that is required to combine 2 monsters
      * </pre>
      */
-    boolean hasCatalystUserMonsterId();
+    boolean hasCatalystUserMonsterUuid();
     /**
-     * <code>optional int64 catalystUserMonsterId = 1;</code>
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
      *
      * <pre>
      *the monster that is required to combine 2 monsters
      * </pre>
      */
-    long getCatalystUserMonsterId();
+    java.lang.String getCatalystUserMonsterUuid();
+    /**
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
+     *
+     * <pre>
+     *the monster that is required to combine 2 monsters
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCatalystUserMonsterUuidBytes();
 
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList();
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    int getUserMonsterIdsCount();
+    int getUserMonsterUuidsCount();
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    long getUserMonsterIds(int index);
+    java.lang.String getUserMonsterUuids(int index);
+    /**
+     * <code>repeated string userMonsterUuids = 2;</code>
+     *
+     * <pre>
+     *the 2 monsters that are combined
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index);
 
     /**
      * <code>optional int64 startTime = 3;</code>
@@ -12889,30 +13718,19 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              catalystUserMonsterId_ = input.readInt64();
-              break;
-            }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              userMonsterIds_.add(input.readInt64());
+              catalystUserMonsterUuid_ = bs;
               break;
             }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                userMonsterIds_ = new java.util.ArrayList<java.lang.Long>();
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000002;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                userMonsterIds_.add(input.readInt64());
-              }
-              input.popLimit(limit);
+              userMonsterUuids_.add(bs);
               break;
             }
             case 24: {
@@ -12929,7 +13747,7 @@ public final class MonsterStuffProto {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -12963,61 +13781,103 @@ public final class MonsterStuffProto {
     }
 
     private int bitField0_;
-    public static final int CATALYSTUSERMONSTERID_FIELD_NUMBER = 1;
-    private long catalystUserMonsterId_;
+    public static final int CATALYSTUSERMONSTERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object catalystUserMonsterUuid_;
     /**
-     * <code>optional int64 catalystUserMonsterId = 1;</code>
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
      *
      * <pre>
      *the monster that is required to combine 2 monsters
      * </pre>
      */
-    public boolean hasCatalystUserMonsterId() {
+    public boolean hasCatalystUserMonsterUuid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int64 catalystUserMonsterId = 1;</code>
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
      *
      * <pre>
      *the monster that is required to combine 2 monsters
      * </pre>
      */
-    public long getCatalystUserMonsterId() {
-      return catalystUserMonsterId_;
+    public java.lang.String getCatalystUserMonsterUuid() {
+      java.lang.Object ref = catalystUserMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          catalystUserMonsterUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string catalystUserMonsterUuid = 1;</code>
+     *
+     * <pre>
+     *the monster that is required to combine 2 monsters
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCatalystUserMonsterUuidBytes() {
+      java.lang.Object ref = catalystUserMonsterUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        catalystUserMonsterUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Long> userMonsterIds_;
+    public static final int USERMONSTERUUIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList userMonsterUuids_;
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    public java.util.List<java.lang.Long>
-        getUserMonsterIdsList() {
-      return userMonsterIds_;
+    public com.google.protobuf.ProtocolStringList
+        getUserMonsterUuidsList() {
+      return userMonsterUuids_;
     }
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    public int getUserMonsterIdsCount() {
-      return userMonsterIds_.size();
+    public int getUserMonsterUuidsCount() {
+      return userMonsterUuids_.size();
     }
     /**
-     * <code>repeated int64 userMonsterIds = 2;</code>
+     * <code>repeated string userMonsterUuids = 2;</code>
      *
      * <pre>
      *the 2 monsters that are combined
      * </pre>
      */
-    public long getUserMonsterIds(int index) {
-      return userMonsterIds_.get(index);
+    public java.lang.String getUserMonsterUuids(int index) {
+      return userMonsterUuids_.get(index);
+    }
+    /**
+     * <code>repeated string userMonsterUuids = 2;</code>
+     *
+     * <pre>
+     *the 2 monsters that are combined
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserMonsterUuidsBytes(int index) {
+      return userMonsterUuids_.getByteString(index);
     }
 
     public static final int STARTTIME_FIELD_NUMBER = 3;
@@ -13036,8 +13896,8 @@ public final class MonsterStuffProto {
     }
 
     private void initFields() {
-      catalystUserMonsterId_ = 0L;
-      userMonsterIds_ = java.util.Collections.emptyList();
+      catalystUserMonsterUuid_ = "";
+      userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       startTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -13054,10 +13914,10 @@ public final class MonsterStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, catalystUserMonsterId_);
+        output.writeBytes(1, getCatalystUserMonsterUuidBytes());
       }
-      for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(2, userMonsterIds_.get(i));
+      for (int i = 0; i < userMonsterUuids_.size(); i++) {
+        output.writeBytes(2, userMonsterUuids_.getByteString(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(3, startTime_);
@@ -13073,16 +13933,16 @@ public final class MonsterStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, catalystUserMonsterId_);
+          .computeBytesSize(1, getCatalystUserMonsterUuidBytes());
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < userMonsterIds_.size(); i++) {
+        for (int i = 0; i < userMonsterUuids_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+            .computeBytesSizeNoTag(userMonsterUuids_.getByteString(i));
         }
         size += dataSize;
-        size += 1 * getUserMonsterIdsList().size();
+        size += 1 * getUserMonsterUuidsList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -13205,9 +14065,9 @@ public final class MonsterStuffProto {
 
       public Builder clear() {
         super.clear();
-        catalystUserMonsterId_ = 0L;
+        catalystUserMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        userMonsterIds_ = java.util.Collections.emptyList();
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         startTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -13242,12 +14102,12 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.catalystUserMonsterId_ = catalystUserMonsterId_;
+        result.catalystUserMonsterUuid_ = catalystUserMonsterUuid_;
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          userMonsterUuids_ = userMonsterUuids_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.userMonsterIds_ = userMonsterIds_;
+        result.userMonsterUuids_ = userMonsterUuids_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -13268,16 +14128,18 @@ public final class MonsterStuffProto {
 
       public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto other) {
         if (other == com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance()) return this;
-        if (other.hasCatalystUserMonsterId()) {
-          setCatalystUserMonsterId(other.getCatalystUserMonsterId());
+        if (other.hasCatalystUserMonsterUuid()) {
+          bitField0_ |= 0x00000001;
+          catalystUserMonsterUuid_ = other.catalystUserMonsterUuid_;
+          onChanged();
         }
-        if (!other.userMonsterIds_.isEmpty()) {
-          if (userMonsterIds_.isEmpty()) {
-            userMonsterIds_ = other.userMonsterIds_;
+        if (!other.userMonsterUuids_.isEmpty()) {
+          if (userMonsterUuids_.isEmpty()) {
+            userMonsterUuids_ = other.userMonsterUuids_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureUserMonsterIdsIsMutable();
-            userMonsterIds_.addAll(other.userMonsterIds_);
+            ensureUserMonsterUuidsIsMutable();
+            userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
         }
@@ -13311,144 +14173,231 @@ public final class MonsterStuffProto {
       }
       private int bitField0_;
 
-      private long catalystUserMonsterId_ ;
+      private java.lang.Object catalystUserMonsterUuid_ = "";
       /**
-       * <code>optional int64 catalystUserMonsterId = 1;</code>
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
        *
        * <pre>
        *the monster that is required to combine 2 monsters
        * </pre>
        */
-      public boolean hasCatalystUserMonsterId() {
+      public boolean hasCatalystUserMonsterUuid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int64 catalystUserMonsterId = 1;</code>
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
        *
        * <pre>
        *the monster that is required to combine 2 monsters
        * </pre>
        */
-      public long getCatalystUserMonsterId() {
-        return catalystUserMonsterId_;
+      public java.lang.String getCatalystUserMonsterUuid() {
+        java.lang.Object ref = catalystUserMonsterUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            catalystUserMonsterUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 catalystUserMonsterId = 1;</code>
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
        *
        * <pre>
        *the monster that is required to combine 2 monsters
        * </pre>
        */
-      public Builder setCatalystUserMonsterId(long value) {
-        bitField0_ |= 0x00000001;
-        catalystUserMonsterId_ = value;
+      public com.google.protobuf.ByteString
+          getCatalystUserMonsterUuidBytes() {
+        java.lang.Object ref = catalystUserMonsterUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          catalystUserMonsterUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
+       *
+       * <pre>
+       *the monster that is required to combine 2 monsters
+       * </pre>
+       */
+      public Builder setCatalystUserMonsterUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        catalystUserMonsterUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 catalystUserMonsterId = 1;</code>
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
        *
        * <pre>
        *the monster that is required to combine 2 monsters
        * </pre>
        */
-      public Builder clearCatalystUserMonsterId() {
+      public Builder clearCatalystUserMonsterUuid() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        catalystUserMonsterId_ = 0L;
+        catalystUserMonsterUuid_ = getDefaultInstance().getCatalystUserMonsterUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string catalystUserMonsterUuid = 1;</code>
+       *
+       * <pre>
+       *the monster that is required to combine 2 monsters
+       * </pre>
+       */
+      public Builder setCatalystUserMonsterUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        catalystUserMonsterUuid_ = value;
         onChanged();
         return this;
       }
 
-      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();
-      private void ensureUserMonsterIdsIsMutable() {
+      private com.google.protobuf.LazyStringList userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUserMonsterUuidsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          userMonsterUuids_ = new com.google.protobuf.LazyStringArrayList(userMonsterUuids_);
           bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public java.util.List<java.lang.Long>
-          getUserMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      public com.google.protobuf.ProtocolStringList
+          getUserMonsterUuidsList() {
+        return userMonsterUuids_.getUnmodifiableView();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public int getUserMonsterIdsCount() {
-        return userMonsterIds_.size();
+      public int getUserMonsterUuidsCount() {
+        return userMonsterUuids_.size();
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public long getUserMonsterIds(int index) {
-        return userMonsterIds_.get(index);
+      public java.lang.String getUserMonsterUuids(int index) {
+        return userMonsterUuids_.get(index);
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public Builder setUserMonsterIds(
-          int index, long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.set(index, value);
+      public com.google.protobuf.ByteString
+          getUserMonsterUuidsBytes(int index) {
+        return userMonsterUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 2;</code>
+       *
+       * <pre>
+       *the 2 monsters that are combined
+       * </pre>
+       */
+      public Builder setUserMonsterUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public Builder addUserMonsterIds(long value) {
-        ensureUserMonsterIdsIsMutable();
-        userMonsterIds_.add(value);
+      public Builder addUserMonsterUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public Builder addAllUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        ensureUserMonsterIdsIsMutable();
+      public Builder addAllUserMonsterUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUserMonsterUuidsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, userMonsterIds_);
+            values, userMonsterUuids_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int64 userMonsterIds = 2;</code>
+       * <code>repeated string userMonsterUuids = 2;</code>
        *
        * <pre>
        *the 2 monsters that are combined
        * </pre>
        */
-      public Builder clearUserMonsterIds() {
-        userMonsterIds_ = java.util.Collections.emptyList();
+      public Builder clearUserMonsterUuids() {
+        userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string userMonsterUuids = 2;</code>
+       *
+       * <pre>
+       *the 2 monsters that are combined
+       * </pre>
+       */
+      public Builder addUserMonsterUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUserMonsterUuidsIsMutable();
+        userMonsterUuids_.add(value);
         onChanged();
         return this;
       }
@@ -14439,46 +15388,47 @@ public final class MonsterStuffProto {
       "\001(\005\022\026\n\016hpExponentBase\030\014 \001(\002\022\027\n\017dmgExpone" +
       "ntBase\030\r \001(\002\022\025\n\rexpLvlDivisor\030\016 \001(\002\022\026\n\016e" +
       "xpLvlExponent\030\017 \001(\002\022\022\n\nsellAmount\030\020 \001(\005\022" +
-      "\020\n\010teamCost\030\021 \001(\005\"\256\002\n\024FullUserMonsterPro" +
-      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(" +
-      "\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005" +
-      "\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 ",
-      "\001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001" +
-      "(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSlot" +
-      "Num\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\022\030\n\020offens" +
-      "iveSkillId\030\r \001(\005\022\030\n\020defensiveSkillId\030\016 \001" +
-      "(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmonster" +
-      "Id\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\234\001\n\027UserMon" +
-      "sterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruser" +
-      "MonsterId\030\002 \001(\003\022\030\n\020queuedTimeMillis\030\003 \001(" +
-      "\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priority\030\006 " +
-      "\001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"M\n\035UserMonst",
-      "erCurrentHealthProto\022\025\n\ruserMonsterId\030\001 " +
-      "\001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhan" +
-      "cementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonst" +
-      "er\030\002 \001(\0132(.com.lvl6.proto.UserEnhancemen" +
-      "tItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.p" +
-      "roto.UserEnhancementItemProto\"\204\001\n\030UserEn" +
-      "hancementItemProto\022\025\n\ruserMonsterId\030\001 \001(" +
-      "\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\ren" +
-      "hancingCost\030\003 \001(\005\022\031\n\021enhancingComplete\030\004" +
-      " \001(\010\"z\n\032UserMonsterCurrentExpProto\022\025\n\rus",
-      "erMonsterId\030\001 \001(\003\022\032\n\022expectedExperience\030" +
-      "\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\nexpected" +
-      "Hp\030\004 \001(\005\"H\n\033MinimumUserMonsterSellProto\022" +
-      "\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001" +
-      "(\005\"h\n\033UserCurrentMonsterTeamProto\022\016\n\006use" +
-      "rId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl" +
-      "6.proto.FullUserMonsterProto\"e\n\031UserMons" +
-      "terEvolutionProto\022\035\n\025catalystUserMonster" +
-      "Id\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstar" +
-      "tTime\030\003 \001(\003\"\337\001\n\032MonsterBattleDialoguePro",
-      "to\022\021\n\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 " +
-      "\001(\01627.com.lvl6.proto.MonsterBattleDialog" +
-      "ueProto.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032" +
-      "\n\022probabilityUttered\030\004 \001(\002\"1\n\014DialogueTy" +
-      "pe\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B" +
-      "\021MonsterStuffProto"
+      "\020\n\010teamCost\030\021 \001(\005\"\262\002\n\024FullUserMonsterPro" +
+      "to\022\027\n\017userMonsterUuid\030\001 \001(\t\022\020\n\010userUuid\030" +
+      "\002 \001(\t\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004" +
+      " \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealt",
+      "h\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete" +
+      "\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013team" +
+      "SlotNum\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\022\030\n\020of" +
+      "fensiveSkillId\030\r \001(\005\022\030\n\020defensiveSkillId" +
+      "\030\016 \001(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmon" +
+      "sterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\240\001\n\027Use" +
+      "rMonsterHealingProto\022\020\n\010userUuid\030\001 \001(\t\022\027" +
+      "\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020queuedTimeMil" +
+      "lis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010pri" +
+      "ority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"O\n\035U",
+      "serMonsterCurrentHealthProto\022\027\n\017userMons" +
+      "terUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(\005\"\242\001\n" +
+      "\024UserEnhancementProto\022\020\n\010userUuid\030\001 \001(\t\022" +
+      "=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.proto.Us" +
+      "erEnhancementItemProto\0229\n\007feeders\030\003 \003(\0132" +
+      "(.com.lvl6.proto.UserEnhancementItemProt" +
+      "o\"\206\001\n\030UserEnhancementItemProto\022\027\n\017userMo" +
+      "nsterUuid\030\001 \001(\t\022\037\n\027expectedStartTimeMill" +
+      "is\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021enhan" +
+      "cingComplete\030\004 \001(\010\"|\n\032UserMonsterCurrent",
+      "ExpProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032\n\022exp" +
+      "ectedExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003" +
+      " \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033MinimumUserM" +
+      "onsterSellProto\022\027\n\017userMonsterUuid\030\001 \001(\t" +
+      "\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCurrentMonst" +
+      "erTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013current" +
+      "Team\030\002 \003(\0132$.com.lvl6.proto.FullUserMons" +
+      "terProto\"i\n\031UserMonsterEvolutionProto\022\037\n" +
+      "\027catalystUserMonsterUuid\030\001 \001(\t\022\030\n\020userMo" +
+      "nsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032",
+      "MonsterBattleDialogueProto\022\021\n\tmonsterId\030" +
+      "\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.lvl6.p" +
+      "roto.MonsterBattleDialogueProto.Dialogue" +
+      "Type\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabilityUtt" +
+      "ered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DIALOGU" +
+      "E\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterStuffPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14510,7 +15460,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", "IsRestrictd", "OffensiveSkillId", "DefensiveSkillId", });
+        new java.lang.String[] { "UserMonsterUuid", "UserUuid", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", "IsRestrictd", "OffensiveSkillId", "DefensiveSkillId", });
     internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable = new
@@ -14522,49 +15472,49 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
-        new java.lang.String[] { "UserId", "UserMonsterId", "QueuedTimeMillis", "HealthProgress", "Priority", "ElapsedSeconds", });
+        new java.lang.String[] { "UserUuid", "UserMonsterUuid", "QueuedTimeMillis", "HealthProgress", "Priority", "ElapsedSeconds", });
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "CurrentHealth", });
+        new java.lang.String[] { "UserMonsterUuid", "CurrentHealth", });
     internal_static_com_lvl6_proto_UserEnhancementProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_UserEnhancementProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserEnhancementProto_descriptor,
-        new java.lang.String[] { "UserId", "BaseMonster", "Feeders", });
+        new java.lang.String[] { "UserUuid", "BaseMonster", "Feeders", });
     internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_UserEnhancementItemProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "ExpectedStartTimeMillis", "EnhancingCost", "EnhancingComplete", });
+        new java.lang.String[] { "UserMonsterUuid", "ExpectedStartTimeMillis", "EnhancingCost", "EnhancingComplete", });
     internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "ExpectedExperience", "ExpectedLevel", "ExpectedHp", });
+        new java.lang.String[] { "UserMonsterUuid", "ExpectedExperience", "ExpectedLevel", "ExpectedHp", });
     internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor,
-        new java.lang.String[] { "UserMonsterId", "CashAmount", });
+        new java.lang.String[] { "UserMonsterUuid", "CashAmount", });
     internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor,
-        new java.lang.String[] { "UserId", "CurrentTeam", });
+        new java.lang.String[] { "UserUuid", "CurrentTeam", });
     internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_com_lvl6_proto_UserMonsterEvolutionProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor,
-        new java.lang.String[] { "CatalystUserMonsterId", "UserMonsterIds", "StartTime", });
+        new java.lang.String[] { "CatalystUserMonsterUuid", "UserMonsterUuids", "StartTime", });
     internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_com_lvl6_proto_MonsterBattleDialogueProto_fieldAccessorTable = new

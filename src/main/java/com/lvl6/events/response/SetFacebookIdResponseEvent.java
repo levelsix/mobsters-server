@@ -11,7 +11,7 @@ public class SetFacebookIdResponseEvent extends NormalResponseEvent {
 
   private SetFacebookIdResponseProto setFacebookIdResponseProto;
   
-  public SetFacebookIdResponseEvent(int playerId){
+  public SetFacebookIdResponseEvent(String playerId){
     super(playerId);
     eventType = EventProtocolResponse.S_SET_FACEBOOK_ID_EVENT;
   }
