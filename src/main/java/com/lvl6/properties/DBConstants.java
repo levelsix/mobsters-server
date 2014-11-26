@@ -39,6 +39,7 @@ public class DBConstants {
 	public static final String TABLE_ITEM_CONFIG = "item_config";
 	public static final String TABLE_ITEM_FOR_USER = "item_for_user";
 	public static final String TABLE_ITEM_FOR_USER_USAGE = "item_for_user_usage";
+	public static final String TABLE_ITEM_SECRET_GIFT_FOR_USER = "item_secret_gift_for_user";
 	public static final String TABLE_LOCK_BOX_EVENT_CONFIG = "lock_box_event_config";			//TODO: delete
 	public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";		//TODO: delete
 	public static final String TABLE_LOCK_BOX_ITEM_CONFIG = "lock_box_item_config";				//TODO: delete
@@ -306,6 +307,13 @@ public class DBConstants {
 	public static final String ITEM_FOR_USER_USAGE__TIME_OF_ENTRY = "time_of_entry";
 	public static final String ITEM_FOR_USER_USAGE__USER_DATA_ID = "user_data_id";
 	public static final String ITEM_FOR_USER_USAGE__ACTION_TYPE = "action_type";
+	
+	/*ITEM FOR USER TABLE*/
+	public static final String ITEM_SECRET_GIFT_FOR_USER__ID = GENERIC__ID;
+	public static final String ITEM_SECRET_GIFT_FOR_USER__USER_ID = GENERIC__USER_ID;
+	public static final String ITEM_SECRET_GIFT_FOR_USER__ITEM_ID = "item_id";
+	public static final String ITEM_SECRET_GIFT_FOR_USER__MINS_UNTIL_COLLECTION = "quantity";
+	public static final String ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME = "create_time";
 
 	/*LOCK BOX EVENT FOR USER*/
 	public static final String LOCK_BOX_EVENT_FOR_USER__EVENT_ID = "lock_box_event_id";
@@ -652,6 +660,7 @@ public class DBConstants {
 	public static final String USER__FB_DATA = "fb_data";
 	public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
 	public static final String USER__CLAN_HELPS = "clan_helps";
+	public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

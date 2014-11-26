@@ -21,15 +21,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 
 @Component 
-public class ItemForUserUsageRetrieveUtil {
-	private static Logger log = LoggerFactory.getLogger(ItemForUserUsageRetrieveUtil.class);
+public class ItemSecretGiftForUserRetrieveUtil {
+	private static Logger log = LoggerFactory.getLogger(ItemSecretGiftForUserRetrieveUtil.class);
 	
-	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_FOR_USER_USAGE; 
+	private static final String TABLE_NAME = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER; 
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -44,21 +44,21 @@ public class ItemForUserUsageRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public List<ItemForUserUsage> getItemForUserUsage(
+	public Map<Integer, ItemSecretGiftForUser> getSpecificOrAllItemIdToItemSecretGiftForUserId(
 	    String userId, Collection<Integer> itemIds) {
-		List<ItemForUserUsage> itemUsages = null;
+		Map<Integer, ItemSecretGiftForUser> itemIdToUserItems = null;
 		try {
-			List<String> columnsToSelected = UserItemUsageForClientMapper
+			List<String> columnsToSelected = UserItemForClientMapper
 					.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.ITEM_FOR_USER_USAGE__USER_ID, userId);
+			equalityConditions.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID, userId);
 			String eqDelim = getQueryConstructionUtil().getAnd();
 
 			Map<String, Collection<?>> inConditions = null;
 			if (null != itemIds && !itemIds.isEmpty()) {
 				inConditions = new HashMap<String, Collection<?>>();
-				inConditions.put(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID,
+				inConditions.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
 						itemIds);
 			}
 			String inDelim = getQueryConstructionUtil().getAnd(); 
@@ -76,22 +76,29 @@ public class ItemForUserUsageRetrieveUtil {
 							eqDelim, inConditions, inDelim, overallDelim,
 							values, preparedStatement);
 
-			log.info(String.format(
-				"getSpecificOrAllItemIdToItemForUserUsageId() query=%s",
-				query));
+			log.info("getSpecificOrAllItemIdToItemSecretGiftForUserId() query=" +
+					query);
 
-			itemUsages = this.jdbcTemplate
-					.query(query, values.toArray(), new UserItemUsageForClientMapper());
+			List<ItemSecretGiftForUser> afuList = this.jdbcTemplate
+					.query(query, values.toArray(), new UserItemForClientMapper());
+			itemIdToUserItems =
+					new HashMap<Integer, ItemSecretGiftForUser>();
+			for (ItemSecretGiftForUser afu : afuList) {
+				int itemId = afu.getItemId();
+				
+				itemIdToUserItems.put(itemId, afu);
+			}
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"could not retrieve UserItemUsage for userId=%s, itemIds=%s",
-					userId, itemIds),
+					"could not retrieve UserSecretGiftItem for userId=%s",
+					userId),
 				e);
-			itemUsages = new ArrayList<ItemForUserUsage>();
+			itemIdToUserItems =
+					new HashMap<Integer, ItemSecretGiftForUser>();
 		}
 		
-		return itemUsages;
+		return itemIdToUserItems;
 	}
 	
 	public QueryConstructionUtil getQueryConstructionUtil() {
@@ -112,45 +119,31 @@ public class ItemForUserUsageRetrieveUtil {
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserItemUsageForClientMapper implements RowMapper<ItemForUserUsage> {
+	private static final class UserItemForClientMapper implements RowMapper<ItemSecretGiftForUser> {
 
 		private static List<String> columnsSelected;
 
-		public ItemForUserUsage mapRow(ResultSet rs, int rowNum) throws SQLException {
-			ItemForUserUsage ifuu = new ItemForUserUsage();
-			ifuu.setId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ID));
-			ifuu.setUserId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_ID));
-			ifuu.setItemId(rs.getInt(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID));
+		public ItemSecretGiftForUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ItemSecretGiftForUser isgfu = new ItemSecretGiftForUser();
+			isgfu.setId(rs.getString(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID));
+			isgfu.setUserId(rs.getString(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID));
+			isgfu.setItemId(rs.getInt(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID));
+			isgfu.setMinsTillCollection(rs.getInt(DBConstants.ITEM_SECRET_GIFT_FOR_USER__MINS_UNTIL_COLLECTION));
 			
-			Timestamp ts = rs.getTimestamp(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
-			ifuu.setTimeOfEntry(new Date(ts.getTime()));
+			Timestamp ts = rs.getTimestamp(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME);
+			isgfu.setCreateTime(new Date(ts.getTime()));
 			
-			ifuu.setUserDataId(rs.getString(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID));
-			
-			String actionType = rs.getString(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
-			if (null != actionType) {
-		    	String newActionType = actionType.trim().toUpperCase();
-		    	if (!actionType.equals(newActionType)) {
-		    		log.error(String.format(
-		    			"actionType incorrect: %s, ItemForUserUsage=%s",
-		    			actionType, ifuu));
-		    		actionType = newActionType;
-		    	}
-		    }
-			ifuu.setActionType(actionType);
-			
-			return ifuu;
+			return isgfu;
 		}        
 
 		public static List<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__USER_ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ITEM_ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__TIME_OF_ENTRY);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__USER_DATA_ID);
-				columnsSelected.add(DBConstants.ITEM_FOR_USER_USAGE__ACTION_TYPE);
+				columnsSelected.add(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID);
+				columnsSelected.add(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID);
+				columnsSelected.add(DBConstants.ITEM_SECRET_GIFT_FOR_USER__MINS_UNTIL_COLLECTION);
+				columnsSelected.add(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME);
 			}
 			return columnsSelected;
 		}

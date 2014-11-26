@@ -2960,6 +2960,15 @@ public final class ItemsProto {
      * <code>optional int32 itemId = 4;</code>
      */
     int getItemId();
+
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    long getCreateTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserItemSecretGiftProto}
@@ -3037,6 +3046,11 @@ public final class ItemsProto {
             case 32: {
               bitField0_ |= 0x00000008;
               itemId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              createTime_ = input.readInt64();
               break;
             }
           }
@@ -3193,11 +3207,27 @@ public final class ItemsProto {
       return itemId_;
     }
 
+    public static final int CREATETIME_FIELD_NUMBER = 5;
+    private long createTime_;
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 createTime = 5;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
     private void initFields() {
       uisgUuid_ = "";
       userUuid_ = "";
       minsForCollection_ = 0;
       itemId_ = 0;
+      createTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3224,6 +3254,9 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, itemId_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, createTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3248,6 +3281,10 @@ public final class ItemsProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, itemId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, createTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3378,6 +3415,8 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        createTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -3422,6 +3461,10 @@ public final class ItemsProto {
           to_bitField0_ |= 0x00000008;
         }
         result.itemId_ = itemId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.createTime_ = createTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3453,6 +3496,9 @@ public final class ItemsProto {
         }
         if (other.hasItemId()) {
           setItemId(other.getItemId());
+        }
+        if (other.hasCreateTime()) {
+          setCreateTime(other.getCreateTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3697,6 +3743,38 @@ public final class ItemsProto {
         return this;
       }
 
+      private long createTime_ ;
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public Builder setCreateTime(long value) {
+        bitField0_ |= 0x00000010;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 createTime = 5;</code>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserItemSecretGiftProto)
     }
 
@@ -3748,12 +3826,12 @@ public final class ItemsProto {
       "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
       "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
       "uid\030\005 \001(\t\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType\"h\n\027UserItemSecretG" +
+      ".proto.GameActionType\"|\n\027UserItemSecretG" +
       "iftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
       " \001(\t\022\031\n\021minsForCollection\030\003 \001(\005\022\016\n\006itemI" +
-      "d\030\004 \001(\005*G\n\010ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n" +
-      "\010ITEM_OIL\020\002\022\r\n\tITEM_CASH\020\003\022\014\n\010SPEED_UP\020\004" +
-      "B\014B\nItemsProto"
+      "d\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType\022" +
+      "\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_" +
+      "CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3791,7 +3869,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
-        new java.lang.String[] { "UisgUuid", "UserUuid", "MinsForCollection", "ItemId", });
+        new java.lang.String[] { "UisgUuid", "UserUuid", "MinsForCollection", "ItemId", "CreateTime", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
