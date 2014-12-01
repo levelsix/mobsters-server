@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class UserClan implements Serializable{
 	
+	private static final long serialVersionUID = 4990554882214487889L;
+	
 	private String userId;
 	private String clanId;
 	private String status;

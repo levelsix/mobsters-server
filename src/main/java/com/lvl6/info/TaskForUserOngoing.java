@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class TaskForUserOngoing implements Serializable {
 	
+	private static final long serialVersionUID = -7704949664984076199L;
+	
 	private String id;
 	private String userId;
 	private int taskId;

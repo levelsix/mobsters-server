@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ObstacleForUser implements Serializable {
 	
+	private static final long serialVersionUID = -2897503606027274504L;
+	
 	private String id;
 	private String userId;
 	private int obstacleId;

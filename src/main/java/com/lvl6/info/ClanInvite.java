@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ClanInvite implements Serializable {
 	
+	private static final long serialVersionUID = -2542433676672978497L;
+	
 	private String id;
 	private String userId;
 	private String inviterId; 

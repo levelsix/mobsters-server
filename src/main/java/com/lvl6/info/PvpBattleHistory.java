@@ -6,6 +6,8 @@ import java.util.Date;
 //look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 	
+	private static final long serialVersionUID = -3028966476151797326L;
+	
 	private String attackerId;
 	private String defenderId;
 	private Date battleEndTime;

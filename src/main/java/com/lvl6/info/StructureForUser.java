@@ -5,7 +5,8 @@ import java.util.Date;
 
 
 public class StructureForUser implements Serializable {
-	//any change in this class should also change the UpdateUtils.java method updateUserStructsLastretrieved()
+	
+	private static final long serialVersionUID = 9028602340046219872L;
 	
 	private String id;
 	private String userId;

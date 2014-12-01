@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class EventPersistentForUser implements Serializable {
 	
+	private static final long serialVersionUID = 385081006377018102L;
+	
 	private String userId;
 	private int eventPersistentId;
 	private Date timeOfEntry; // refers to time user started a daily event

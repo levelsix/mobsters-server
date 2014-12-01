@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClanChatPost implements Serializable {
+	
+	private static final long serialVersionUID = -6544988347402484215L;
+	
 	private String id;
 	private String posterId;
 	private String clanId;

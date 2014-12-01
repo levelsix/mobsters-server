@@ -6,6 +6,8 @@ import java.util.Date;
 //user can have multiple of these (different clanIds)
 public class ClanEventPersistentUserReward implements Serializable {
 	
+	private static final long serialVersionUID = -6109900992140941207L;
+	
 	private String id;
 	private String userId;
 	private Date crsStartTime;

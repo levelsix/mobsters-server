@@ -13,6 +13,8 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
+	private static final long serialVersionUID = 4954991923691453720L;
+	
 	private String id;
 	private String name;
 	private int level;

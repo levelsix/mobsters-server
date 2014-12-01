@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
+	private static final long serialVersionUID = -4204353720920788286L;
+	
 	private String id;
 	private String inviterUserId;
 	private String recipientFacebookId;

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class QuestForUser implements Serializable {
 
+	private static final long serialVersionUID = -7970789738943052964L;
+	
 	private String userId;
 	private int questId;
 	private boolean isRedeemed;

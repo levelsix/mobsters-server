@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class MonsterHealingForUser implements Serializable {
 
+	private static final long serialVersionUID = -2661784397704472942L;
+	
 	private String userId;
 	private String monsterForUserId;
 	private Date queuedTime;

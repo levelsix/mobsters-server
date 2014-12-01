@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ItemSecretGiftForUser implements Serializable {
 
+	private static final long serialVersionUID = 1041342557855321616L;
+	
 	private String id;
 	private String userId;
 	private int itemId;

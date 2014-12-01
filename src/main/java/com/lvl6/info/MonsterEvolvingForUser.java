@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class MonsterEvolvingForUser implements Serializable {
 
+	private static final long serialVersionUID = 1035260911472628399L;
+	
 	private String catalystMonsterForUserId;
 	private String monsterForUserIdOne;
 	private String monsterForUserIdTwo;

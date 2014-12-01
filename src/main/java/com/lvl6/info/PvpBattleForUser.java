@@ -8,6 +8,8 @@ import java.util.Date;
 //EXCEPT IF THE DEFENDER ID IS 0, i.e. defender is fake 
 public class PvpBattleForUser implements Serializable {
 	
+	private static final long serialVersionUID = 3932008730259614440L;
+	
 	private String attackerId;
 	private String defenderId;
 	private int attackerWinEloChange;

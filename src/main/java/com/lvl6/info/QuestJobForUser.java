@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class QuestJobForUser implements Serializable {
 
+	private static final long serialVersionUID = -660828590530132960L;
+	
 	private String userId;
 	private int questId; //not really necessary but eh
 	private int questJobId;

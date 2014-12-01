@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class MonsterBattleDialogue implements Serializable {
 
 	private static final long serialVersionUID = -5528835530547990738L;
+	
 	private int id;
 	private int monsterId;
 	private String dialogueType;

@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ItemForUserUsage implements Serializable {
 
+	private static final long serialVersionUID = -1882610447601120418L;
+	
 	private String id;
 	private String userId;
 	private int itemId;
