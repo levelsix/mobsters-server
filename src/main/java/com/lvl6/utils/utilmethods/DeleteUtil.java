@@ -61,4 +61,7 @@ public interface DeleteUtil {
   public abstract int deleteClanInvite(String userId, List<String> clanInviteIdList);
 
   public abstract int deleteItemUsed(String userId, List<String> itemForUserUsageIds);
+  
+  public abstract int deleteItemSecretGifts(String userId, List<String> ids);
+  
 }

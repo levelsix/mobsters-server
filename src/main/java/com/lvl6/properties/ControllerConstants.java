@@ -1,12 +1,17 @@
 package com.lvl6.properties;
 
+import java.util.Random;
+
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 
+import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+
 public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
+	public static final Random RAND = new Random();
 	
 	//includes oil and cash, 1 gem per 1000 resource? 
 	public static final float GEMS_PER_RESOURCE = 0.001F;
@@ -52,6 +57,23 @@ public class ControllerConstants {
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 	
+	//dof = degrees of freedom
+	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
+	public static final ChiSquaredDistribution ITEM_SECRET_GIFT_FOR_USER__RANDOM = 
+		new ChiSquaredDistribution(ITEM_SECRET_GIFT_FOR_USER__DOF);
+	
+	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_GIFTS = 2;
+	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
+		1, 1, 1, 1, 1
+	};
+	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
+		30, 50, 90, 210, 300
+	};
+	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 3600;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__SECS_WAIT_TIME_DELTA = 
+		ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME -
+		ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME;
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;

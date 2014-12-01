@@ -1,3 +1,4 @@
+
 package com.lvl6.info;
 
 import java.io.Serializable;
@@ -49,6 +50,7 @@ public class User implements Serializable {
 	private int avatarMonsterId;
 	private Date lastFreeBoosterPackTime;
 	private int clanHelps;
+	private Date lastSecretGiftCollectTime;
 
 	public User()
 	{
@@ -67,7 +69,8 @@ public class User implements Serializable {
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
-			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps) {
+			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
+			Date lastSecretGiftCollectTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -106,6 +109,7 @@ public class User implements Serializable {
 		this.avatarMonsterId = avatarMonsterId;
 		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
 		this.clanHelps = clanHelps;
+		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -836,7 +840,8 @@ public class User implements Serializable {
 		}
 		
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, now);
+		absoluteParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME,
+			new Timestamp(now.getTime())	);
 
 		int numUpdated = DBConnection.get().updateTableRows(
 			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
@@ -873,6 +878,28 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateLastSecretGiftCollectTime( Date now )
+	{
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = null;
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME,
+			new Timestamp(now.getTime()));
+
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.lastSecretGiftCollectTime = now;
+			return true;
+		}
+		return false;
+
 	}
 	
 	public String getId() {
@@ -1175,6 +1202,16 @@ public class User implements Serializable {
 		this.clanHelps = clanHelps;
 	}
 
+	public Date getLastSecretGiftCollectTime()
+	{
+		return lastSecretGiftCollectTime;
+	}
+
+	public void setLastSecretGiftCollectTime( Date lastSecretGiftCollectTime )
+	{
+		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -1250,6 +1287,8 @@ public class User implements Serializable {
 			+ lastFreeBoosterPackTime
 			+ ", clanHelps="
 			+ clanHelps
+			+ ", lastSecretGiftCollectTime="
+			+ lastSecretGiftCollectTime
 			+ "]";
 	}
 

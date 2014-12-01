@@ -1,4 +1,4 @@
-	package com.lvl6.server.controller;
+package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
@@ -121,7 +122,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
 			resEvent.setTag(event.getTag());
 			resEvent.setUserCreateResponseProto(resProto);
-			log.info("Writing event: " + resEvent);
+			log.info(String.format(
+				"Writing event: %s", resEvent));
 			server.writePreDBEvent(resEvent, udid);
 
 			if (userId != null) {
@@ -145,6 +147,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			    writePvpStuff(userId, createTime);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 //			    leaderboard.updateLeaderboardForUser(user);
+			    writeSecretGifts(userId, createTime);
 			    
 			    //CURRENCY CHANGE HISTORY
 			    writeToUserCurrencyHistory(userId, cash, oil, gems, createTime);
@@ -257,7 +260,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	    		", cash=" + cash+ ", oil=" + oil + ", gems=" + gems); 
 	  }
 	  
-	  log.info("created new userId=" + userId);
+	  log.info(String.format(
+		  "created new userId=%s", userId));
 	  resBuilder.setStatus(UserCreateStatus.SUCCESS);
 	  return userId;
   }
@@ -439,6 +443,34 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  */
   }
 
+  private void writeSecretGifts(String userId, Date createTime)
+  {
+	  List<ItemSecretGiftForUser> gifts = new ArrayList<ItemSecretGiftForUser>();
+	  
+	  int[] itemIds = ControllerConstants
+		  .ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS;
+	  int[] waitTimeSeconds = ControllerConstants
+		  .ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS;
+	  
+	  int len = itemIds.length;
+	  for (int index = 0; index < len; index++)
+	  {
+		  ItemSecretGiftForUser isgfu = new ItemSecretGiftForUser();
+		  isgfu.setUserId(userId);
+		  isgfu.setItemId(
+			  itemIds[index]);
+		  
+		  Date newTime = new Date(createTime.getTime() +
+			  index * 1000);
+		  isgfu.setSecsTillCollection(
+			  waitTimeSeconds[index]);
+		  isgfu.setCreateTime(newTime);
+
+		  gifts.add(isgfu); 
+	  }
+	  
+	  insertUtils.insertIntoItemSecretGiftForUserGetId(gifts);
+  }
 
 //  private String grabNewReferCode() {
 //    String newReferCode = AvailableReferralCodeRetrieveUtils.getAvailableReferralCode();

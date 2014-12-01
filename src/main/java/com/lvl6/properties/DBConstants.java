@@ -312,7 +312,7 @@ public class DBConstants {
 	public static final String ITEM_SECRET_GIFT_FOR_USER__ID = GENERIC__ID;
 	public static final String ITEM_SECRET_GIFT_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String ITEM_SECRET_GIFT_FOR_USER__ITEM_ID = "item_id";
-	public static final String ITEM_SECRET_GIFT_FOR_USER__MINS_UNTIL_COLLECTION = "quantity";
+	public static final String ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION = "secs_until_collection";
 	public static final String ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME = "create_time";
 
 	/*LOCK BOX EVENT FOR USER*/

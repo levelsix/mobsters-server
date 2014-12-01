@@ -42,6 +42,7 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.Monster;
@@ -122,6 +123,7 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ItemsProto.ItemProto;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.MiniJobProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
@@ -1471,6 +1473,36 @@ public class CreateInfoProtoUtils {
 		return uiupb.build();
 	}
 	
+	public static Collection<UserItemSecretGiftProto> createUserItemSecretGiftProto(
+		Collection<ItemSecretGiftForUser> secretGifts)
+	{
+		Collection<UserItemSecretGiftProto> gifs = new ArrayList<UserItemSecretGiftProto>();
+		if (null == secretGifts || secretGifts.isEmpty()) 
+		{
+			return gifs;
+		}
+			
+		for (ItemSecretGiftForUser isgfu : secretGifts)
+		{
+			gifs.add(createUserItemSecretGiftProto(isgfu));
+		}
+		return gifs;
+	}
+	
+	public static UserItemSecretGiftProto createUserItemSecretGiftProto(
+		ItemSecretGiftForUser secretGift)
+	{
+		UserItemSecretGiftProto.Builder uisgpb = UserItemSecretGiftProto.newBuilder();
+		uisgpb.setUisgUuid(secretGift.getId());
+		uisgpb.setUserUuid(secretGift.getUserId());
+		uisgpb.setMinsForCollection(secretGift.getSecsTillCollection());
+		uisgpb.setItemId(secretGift.getItemId());
+		
+		Date createTime = secretGift.getCreateTime();
+		uisgpb.setCreateTime(createTime.getTime());
+		
+		return uisgpb.build();
+	}
 	
 	/**MiniJobConfig.proto********************************************/
 	public static MiniJobProto createMiniJobProto(MiniJob mj) {

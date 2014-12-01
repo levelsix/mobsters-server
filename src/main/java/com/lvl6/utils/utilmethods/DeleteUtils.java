@@ -438,5 +438,26 @@ public class DeleteUtils implements DeleteUtil {
 	    	.deleteDirectQueryNaive(query, values);
 	    return numDeleted;
 	}
-	
+
+	public int deleteItemSecretGifts(String userId, List<String> ids)
+	{
+		String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
+		
+		int size = ids.size();
+		List<String> questions = Collections.nCopies(size, "?");
+	    String questionMarks = StringUtils.csvList(questions);
+	    
+	    String query = String.format(
+	    	"DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+	    	tableName, DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, questionMarks,
+	    	DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID);
+	    
+	    List<Object> values = new ArrayList<Object>();
+	    values.addAll(ids);
+	    values.add(userId);
+	    
+	    int numDeleted = DBConnection.get()
+	    	.deleteDirectQueryNaive(query, values);
+	    return numDeleted;
+	}
 }

@@ -23,6 +23,7 @@ import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -352,6 +353,7 @@ public class InsertUtils implements InsertUtil{
     	insertParams.put(DBConstants.USER__FB_DATA, fbData);
     }
     insertParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, createTime);
+    insertParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME, createTime);
     
     int numChanged = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_USER, insertParams);
@@ -1688,6 +1690,37 @@ public class InsertUtils implements InsertUtil{
 			int numUpdated = DBConnection.get()
 				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
 			if (numUpdated != itemsUsed.size()) {
+			  ids = new ArrayList<String>();
+			}
+			return ids;
+		}
+
+		@Override
+		public List<String> insertIntoItemSecretGiftForUserGetId(
+			List<ItemSecretGiftForUser> gifts)
+		{
+			String tableName = DBConstants.TABLE_ITEM_SECRET_GIFT_FOR_USER;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			List<String> ids = new ArrayList<String>();
+			for (ItemSecretGiftForUser isgfu : gifts) {
+				String id = randomUUID();
+				ids.add(id);
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID, id);
+				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__USER_ID,
+					isgfu.getUserId());
+				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
+					isgfu.getItemId());
+				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION,
+					isgfu.getSecsTillCollection());
+				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME,
+					new Timestamp(isgfu.getCreateTime().getTime()));
+			}
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != gifts.size()) {
 			  ids = new ArrayList<String>();
 			}
 			return ids;

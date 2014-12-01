@@ -36,7 +36,6 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -228,7 +227,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
 
     Map<Integer, ItemForUser> ifuMap = itemForUserRetrieveUtil
-        .getSpecificOrAllItemIdToItemForUserId(
+        .getSpecificOrAllItemForUserMap(
             userId, Collections.singleton(itemId));
 
     if (null == ifuMap || ifuMap.isEmpty()) {

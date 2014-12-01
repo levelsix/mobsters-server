@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,21 +14,20 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemSecretGiftRequestEvent;
 import com.lvl6.events.response.RedeemSecretGiftResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.ItemForUser;
-import com.lvl6.info.User;
-import com.lvl6.misc.MiscMethods;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
-import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
+import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
-import com.lvl6.server.controller.utils.ItemUtil;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -40,11 +40,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	@Autowired
-	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
 	
+	@Autowired
+	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new RedeemSecretGiftRequestEvent();
@@ -64,10 +67,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		MinimumUserProto senderProto = reqProto.getMup();
 		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
-		List<String> itemIdsRedeemed = reqProto.getUisgUuidList();
+		List<String> idsRedeemed = reqProto.getUisgUuidList();
 
-		Timestamp date = new Timestamp(reqProto.getClientTime());
-		
 		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto.newBuilder();
 		resBuilder.setMup(senderProto);
 		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
@@ -76,12 +77,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		boolean invalidUuids = true;
 		try {
 			userUuid = UUID.fromString(userId);
-			StringUtils.convertToUUID(itemIdsRedeemed);
+			StringUtils.convertToUUID(idsRedeemed);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format(
 				"UUID error. incorrect userId=%s, itemIdsRedeemed=%s",
-				userId, itemIdsRedeemed), e);
+				userId, idsRedeemed), e);
 			invalidUuids = true;
 		}
 
@@ -99,12 +100,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 //
-//			RedeemSecretGiftAction tifsua = new RedeemSecretGiftAction(
-//				userId, itemIdsRedeemed, nuUserItems, maxCash, maxOil,
-//				itemForUserRetrieveUtil, userRetrieveUtil, UpdateUtils.get());
-//
-//			tifsua.execute(resBuilder);
+			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(
+				userId, idsRedeemed, clientTime,
+				itemSecretGiftForUserRetrieveUtil, userRetrieveUtil,
+				itemForUserRetrieveUtil, DeleteUtils.get(), UpdateUtils.get(),
+				InsertUtils.get());
 
+			rsga.execute(resBuilder);
+
+			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus()))
+			{
+				Collection<ItemSecretGiftForUser> nuGifts = rsga.getGifts();
+				Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+					.createUserItemSecretGiftProto(nuGifts);
+				log.info(String.format(
+					"setting nuGifts: %s,\t protos: %s",
+					nuGifts, nuGiftsProtos));
+				resBuilder.addAllNuGifts(nuGiftsProtos);
+			}
+			
 			RedeemSecretGiftResponseProto resProto = resBuilder.build();
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -128,14 +142,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
 	{
-		return itemForUserRetrieveUtil;
+		return itemSecretGiftForUserRetrieveUtil;
 	}
 
-	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	public void setItemSecretGiftForUserRetrieveUtil( ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
 	{
-		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
+		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtil()
@@ -146,6 +160,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
 	{
 		this.userRetrieveUtil = userRetrieveUtil;
+	}
+
+	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil()
+	{
+		return itemForUserRetrieveUtil;
+	}
+
+	public void setItemForUserRetrieveUtil( ItemForUserRetrieveUtil itemForUserRetrieveUtil )
+	{
+		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
 	}
 
 }

@@ -43,6 +43,7 @@ import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -75,6 +76,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
+import com.lvl6.proto.ItemsProto.UserItemSecretGiftProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -104,6 +106,7 @@ import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil;
+import com.lvl6.retrieveutils.ItemSecretGiftForUserRetrieveUtil;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
@@ -269,6 +272,9 @@ public class StartupController extends EventController {
   @Autowired
   protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
 
+  @Autowired
+  protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+  
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -519,6 +525,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setUserItems", stopWatch.getTime());
 			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
+			setSecretGifts(resBuilder, playerId);
+			log.info("{}ms at setSecretGifts", stopWatch.getTime());
 			
 			//db request for user monsters
 			setClanRaidStuff(resBuilder, user, playerId, now); //NOTE: This sends a read query to monster_for_user table
@@ -1234,7 +1242,7 @@ public class StartupController extends EventController {
 	private void setUserItems(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, ItemForUser> itemIdToUserItems =
-			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
+			itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(
 				userId, null);
 
 		if (!itemIdToUserItems.isEmpty()) {
@@ -1261,6 +1269,17 @@ public class StartupController extends EventController {
 		/*NOTE: DB CALL*/
 		boolean hasPurchased = getIapHistoryRetrieveUtils().checkIfUserHasPurchased(user.getId());
 		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
+	}
+	
+	private void setSecretGifts(Builder resBuilder, String userId) {
+		Collection<ItemSecretGiftForUser> gifts = itemSecretGiftForUserRetrieveUtil
+			.getSpecificOrAllItemSecretGiftForUser(userId, null);
+		
+		if (null != gifts && !gifts.isEmpty()) {
+			Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+				.createUserItemSecretGiftProto(gifts);
+			resBuilder.addAllGifts(nuGiftsProtos);
+		}
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId, Timestamp now) {
@@ -2161,7 +2180,16 @@ public class StartupController extends EventController {
   }
   public void setPrivateChatPostRetrieveUtils(
       PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
-    this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+	  this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+  }
+  public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
+  {
+	  return itemSecretGiftForUserRetrieveUtil;
+  }
+  public void setItemSecretGiftForUserRetrieveUtil(
+	  ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
+  {
+	  this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
   }  
 
 }

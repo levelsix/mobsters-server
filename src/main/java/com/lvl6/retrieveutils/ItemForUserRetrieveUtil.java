@@ -43,9 +43,27 @@ public class ItemForUserRetrieveUtil {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-	public Map<Integer, ItemForUser> getSpecificOrAllItemIdToItemForUserId(
-	    String userId, Collection<Integer> itemIds) {
-		Map<Integer, ItemForUser> itemIdToUserItems = null;
+	public Map<Integer, ItemForUser> getSpecificOrAllItemForUserMap(
+	    String userId, Collection<Integer> itemIds)
+    {
+		Map<Integer, ItemForUser> itemIdToUserItems =
+			new HashMap<Integer, ItemForUser>();
+		
+		List<ItemForUser> ifuList = getSpecificOrAllItemForUser(userId, itemIds);
+		
+		for (ItemForUser afu : ifuList) {
+			int itemId = afu.getItemId();
+
+			itemIdToUserItems.put(itemId, afu);
+		}
+		
+		return itemIdToUserItems;
+	}
+	
+	public List<ItemForUser> getSpecificOrAllItemForUser(
+	    String userId, Collection<Integer> itemIds)
+	{
+		List<ItemForUser> userItems = null;
 		try {
 			List<String> columnsToSelected = UserItemForClientMapper
 					.getColumnsSelected();
@@ -78,26 +96,19 @@ public class ItemForUserRetrieveUtil {
 			log.info("getSpecificOrAllItemIdToItemForUserId() query=" +
 					query);
 
-			List<ItemForUser> afuList = this.jdbcTemplate
+			userItems = this.jdbcTemplate
 					.query(query, values.toArray(), new UserItemForClientMapper());
-			itemIdToUserItems =
-					new HashMap<Integer, ItemForUser>();
-			for (ItemForUser afu : afuList) {
-				int itemId = afu.getItemId();
-				
-				itemIdToUserItems.put(itemId, afu);
-			}
+			
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"could not retrieve user item for userId=%s",
-					userId),
+					"could not retrieve user item for userId=%s, itemIds=%s",
+					userId, itemIds),
 				e);
-			itemIdToUserItems =
-					new HashMap<Integer, ItemForUser>();
+			userItems = new ArrayList<ItemForUser>();
 		}
 		
-		return itemIdToUserItems;
+		return userItems;
 	}
 	
 	public QueryConstructionUtil getQueryConstructionUtil() {

@@ -493,7 +493,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  if (numInserted > 0) {
 		  //send updated quantity not just quantity of 1
 		  ItemForUser ifu = (itemForUserRetrieveUtil
-			  .getSpecificOrAllItemIdToItemForUserId(
+			  .getSpecificOrAllItemForUser(
 				  userId,
 				  Collections.singleton(itemId))).get(itemId);
 		  UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);

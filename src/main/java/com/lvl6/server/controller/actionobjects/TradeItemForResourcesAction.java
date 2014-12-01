@@ -180,7 +180,7 @@ public class TradeItemForResourcesAction
 		//get current ItemForUser data, calculate if user is spending
 		//correct amount
 		Map<Integer, ItemForUser> inDb = itemForUserRetrieveUtil
-			.getSpecificOrAllItemIdToItemForUserId(
+			.getSpecificOrAllItemForUserMap(
 				userId,
 				itemIdToQuantityUsed.keySet());
 
