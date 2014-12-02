@@ -102,10 +102,11 @@ import com.lvl6.utils.DBConnection;
     String navBarImgName = rs.getString(DBConstants.BOOSTER_PACK__NAV_BAR_IMG_NAME);
     String navTitleImgName = rs.getString(DBConstants.BOOSTER_PACK__NAV_TITLE_IMG_NAME);
     String machineImgName = rs.getString(DBConstants.BOOSTER_PACK__MACHINE_IMG_NAME);
+    int expPerItem = rs.getInt(DBConstants.BOOSTER_PACK__EXP_PER_ITEM);
     
     BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
     		listBackgroundImgName, listDescription, navBarImgName,
-    		navTitleImgName, machineImgName);
+    		navTitleImgName, machineImgName, expPerItem);
     return boosterPack; 
   }
 }

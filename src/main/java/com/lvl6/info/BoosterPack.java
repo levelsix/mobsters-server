@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class BoosterPack implements Serializable {
 	
-	private static final long serialVersionUID = -5200606492974418991L;
+	private static final long serialVersionUID = 7358496244395749953L;
+	
 	private int id;
 	private String name;
 	private int gemPrice;
@@ -13,10 +14,12 @@ public class BoosterPack implements Serializable {
 	private String navBarImgName;
 	private String navTitleImgName;
 	private String machineImgName;
+	private int expPerItem;
   
 	public BoosterPack(int id, String name, int gemPrice,
 			String listBackgroundImgName, String listDescription,
-			String navBarImgName, String navTitleImgName, String machineImgName) {
+			String navBarImgName, String navTitleImgName,
+			String machineImgName, int expPerItem) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,6 +29,7 @@ public class BoosterPack implements Serializable {
 		this.navBarImgName = navBarImgName;
 		this.navTitleImgName = navTitleImgName;
 		this.machineImgName = machineImgName;
+		this.expPerItem = expPerItem;
 	}
 
 	public int getId() {
@@ -92,13 +96,38 @@ public class BoosterPack implements Serializable {
 		this.machineImgName = machineImgName;
 	}
 
-	@Override
-	public String toString() {
-		return "BoosterPack [id=" + id + ", name=" + name + ", gemPrice="
-				+ gemPrice + ", listBackgroundImgName=" + listBackgroundImgName
-				+ ", listDescription=" + listDescription + ", navBarImgName="
-				+ navBarImgName + ", navTitleImgName=" + navTitleImgName
-				+ ", machineImgName=" + machineImgName + "]";
+	public int getExpPerItem()
+	{
+		return expPerItem;
 	}
-	
+
+	public void setExpPerItem( int expPerItem )
+	{
+		this.expPerItem = expPerItem;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "BoosterPack [id="
+			+ id
+			+ ", name="
+			+ name
+			+ ", gemPrice="
+			+ gemPrice
+			+ ", listBackgroundImgName="
+			+ listBackgroundImgName
+			+ ", listDescription="
+			+ listDescription
+			+ ", navBarImgName="
+			+ navBarImgName
+			+ ", navTitleImgName="
+			+ navTitleImgName
+			+ ", machineImgName="
+			+ machineImgName
+			+ ", expPerItem="
+			+ expPerItem
+			+ "]";
+	}
+
 }
