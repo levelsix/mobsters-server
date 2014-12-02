@@ -367,7 +367,7 @@ public class RedeemMiniJobController extends EventController{
     int maxOilUserCanGain = maxOil - curOil;
     oilChange = Math.min(maxOilUserCanGain, oilChange);
 
-    if (0 == cashChange || 0 == oilChange || 0 == gemsChange) {
+    if (0 == cashChange && 0 == oilChange && 0 == gemsChange) {
       log.info("after caping rewards to max, user gets no resources");
       return true;
     }
