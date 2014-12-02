@@ -1717,6 +1717,9 @@ public class InsertUtils implements InsertUtil{
 					isgfu.getSecsTillCollection());
 				newRow.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME,
 					new Timestamp(isgfu.getCreateTime().getTime()));
+				
+				
+				newRows.add(newRow);
 			}
 			int numUpdated = DBConnection.get()
 				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
