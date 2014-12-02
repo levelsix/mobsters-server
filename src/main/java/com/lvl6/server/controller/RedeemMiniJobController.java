@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
@@ -62,6 +63,9 @@ public class RedeemMiniJobController extends EventController{
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
 
+  @Autowired
+  protected UpdateUtil updateUtil;
+  
   public RedeemMiniJobController() {
     numAllocatedThreads = 4;
   }
@@ -310,6 +314,9 @@ public class RedeemMiniJobController extends EventController{
           new HashMap<Integer, Integer>();
       monsterIdToNumPieces.put(monsterIdReward, 1);
 
+      log.info(String.format(
+    	  "rewarding user with {monsterId->amount}: %s",
+    	  monsterIdToNumPieces));
       List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
           updateUserMonsters(userId, monsterIdToNumPieces, null,
               mfusop, now);
@@ -318,7 +325,12 @@ public class RedeemMiniJobController extends EventController{
     }
     
     if (0 != itemIdReward && 0 != itemRewardQuantity) {
-        
+    	int numUpdated = updateUtil.updateItemForUser(
+    		userId, itemIdReward, itemRewardQuantity);
+    	String preface = "rewarding user with more items."; 
+    	log.info(String.format(
+    		"%s itemId=%s, \t amount=%s, numUpdated%s",
+    		preface, itemIdReward, itemRewardQuantity, numUpdated));
     }
 
     //delete the user mini job
@@ -327,7 +339,7 @@ public class RedeemMiniJobController extends EventController{
 
 
     log.info("updating user's monsters' healths");
-    int numUpdated = UpdateUtils.get()
+    int numUpdated = updateUtil
         .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
     log.info("numUpdated=" + numUpdated);
 
@@ -428,9 +440,20 @@ public class RedeemMiniJobController extends EventController{
     return userRetrieveUtils;
   }
 
-
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
     this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+
+  public UpdateUtil getUpdateUtil()
+  {
+	  return updateUtil;
+  }
+
+
+  public void setUpdateUtil( UpdateUtil updateUtil )
+  {
+	  this.updateUtil = updateUtil;
   }
 
 }
