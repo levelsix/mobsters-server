@@ -96,6 +96,10 @@ import com.lvl6.utils.DBConnection;
 	  i.setNormalizedSecretGiftProbability(probability);
 	  
 	  Item secretGift = christmasTree.ceiling(i);
+	  
+	  log.info(String.format(
+		  "for giving probability=%s, selected %s",
+		  probability, secretGift));
 	  return secretGift;
   }
 

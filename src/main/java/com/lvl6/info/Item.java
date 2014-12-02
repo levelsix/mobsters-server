@@ -135,6 +135,8 @@ public class Item implements Serializable {
 			+ amount
 			+ ", secretGiftChance="
 			+ secretGiftChance
+			+ ", normalizedSecretGiftProbability="
+			+ normalizedSecretGiftProbability
 			+ "]";
 	}
 
