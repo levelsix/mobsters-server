@@ -329,7 +329,7 @@ public class RedeemMiniJobController extends EventController{
     		userId, itemIdReward, itemRewardQuantity);
     	String preface = "rewarding user with more items."; 
     	log.info(String.format(
-    		"%s itemId=%s, \t amount=%s, numUpdated%s",
+    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
     		preface, itemIdReward, itemRewardQuantity, numUpdated));
     }
 

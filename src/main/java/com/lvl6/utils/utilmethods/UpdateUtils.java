@@ -1407,16 +1407,16 @@ public class UpdateUtils implements UpdateUtil {
 		public int updateItemForUser(String userId, int itemId, int quantityChange) {
 			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
 			
-			Map<String, Object> conditionParams = new HashMap<String, Object>();
-			conditionParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
-			conditionParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
+			Map<String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.ITEM_FOR_USER__USER_ID, userId);
+			insertParams.put(DBConstants.ITEM_FOR_USER__ITEM_ID, itemId);
+			insertParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, quantityChange);
 			
 			Map<String, Object> absoluteParams = null;
 			
 			Map<String, Object> relativeParams = new HashMap<String, Object>();
 			relativeParams.put(DBConstants.ITEM_FOR_USER__QUANTITY, quantityChange);
-			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
-					absoluteParams, conditionParams, "and");
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(tableName, insertParams, relativeParams, absoluteParams);
 			
 			return numUpdated;
 		}
