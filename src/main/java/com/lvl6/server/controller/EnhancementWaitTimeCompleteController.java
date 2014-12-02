@@ -258,7 +258,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (isSpeedup) {
 			//CHARGE THE USER
 			int gemCost = -1 * gemsForSpeedup;
-			if (!u.updateRelativeGemsNaive(gemCost)) {
+			if (!u.updateRelativeGemsNaive(gemCost, 0)) {
 				log.error(String.format(
 //					"problem updating user gems. gemsForSpeedup=%s, clientTime=%s, baseMonster=%s, userMonsterIdsToDelete=%s, user=%s",
 //					gemsForSpeedup, clientTime, umcep, userMonsterIds, u));
