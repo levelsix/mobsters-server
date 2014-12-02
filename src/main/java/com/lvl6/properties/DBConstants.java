@@ -755,6 +755,7 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__NAV_BAR_IMG_NAME = "nav_bar_img_name";
 	public static final String BOOSTER_PACK__NAV_TITLE_IMG_NAME = "nav_title_img_name";
 	public static final String BOOSTER_PACK__MACHINE_IMG_NAME = "machine_img_name";
+	public static final String BOOSTER_PACK__EXP_PER_ITEM = "exp_per_item";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";

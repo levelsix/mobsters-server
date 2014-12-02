@@ -151,7 +151,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       if (legit) {
         gemReward = MiscMethods.determineGemReward(itemsUserReceives);
         //set the FullUserMonsterProtos (in resBuilder) to send to the client
-        successful = writeChangesToDB(resBuilder, user, boosterPackId,
+        successful = writeChangesToDB(resBuilder, user, boosterPackId, aPack,
         		itemsUserReceives, gemPrice, now, gemReward, freeBoosterPack);
       }
       
@@ -289,8 +289,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 //  }
   
   private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
-      List<BoosterItem> itemsUserReceives, int gemPrice, Date now, int gemReward,
-      boolean freeBoosterPack) {
+	  BoosterPack aPack, List<BoosterItem> itemsUserReceives, int gemPrice,
+	  Date now, int gemReward, boolean freeBoosterPack)
+  {
+	  //UPDATE exp
+	  int expDelta = aPack.getExpPerItem() * itemsUserReceives.size();
   	
     //update user, user_monsters
     String userId = user.getId();
@@ -302,15 +305,19 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	
   	//update user's money
   	if (!freeBoosterPack) {
-  		if (!user.updateRelativeGemsNaive(currencyChange)) {
-  			log.error("could not change user's money. gemPrice=" + gemPrice + "\t gemReward=" +
-  				gemReward + "\t change=" + currencyChange);
+  		if (!user.updateRelativeGemsNaive(currencyChange, expDelta)) {
+  			String preface = "didn't change user's exp; money.";
+  			log.error(String.format(
+  				"%s exp=%s \t gemPrice=%s \t gemReward=%s \t change=%s",
+  				preface, expDelta, gemPrice, gemReward, currencyChange));
   			return false;
   		}
   	} else {
-  		if (!user.updateFreeBoosterPack(currencyChange, now)) {
-  			log.error("could not change user's money and freeBoosterPackTime. gemPrice=" + gemPrice + "\t gemReward=" +
-  				gemReward + "\t change=" + currencyChange);
+  		if (!user.updateFreeBoosterPack(currencyChange, now, expDelta)) {
+  			String preface = "didn't change user's exp; money; freeBoosterPackTime.";
+  			log.error(String.format(
+  				"%s exp=%s \t gemPrice=%s \t gemReward=%s \t change=%s \t freeBoosterPackTime=%s",
+  				preface, expDelta, gemPrice, gemReward, currencyChange, now));
   			return false;
   		}
   	}
@@ -325,7 +332,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String mfusop = MiscMethods.createUpdateUserMonsterArguments(userId, bPackId,
     		itemsUserReceives, monsterIdToNumPieces, completeUserMonsters, now);
     
-    log.info("!!!!!!!!!mfusop=" + mfusop);
+    log.info(String.format(
+    	"!!!!!!!!!mfusop=%s", mfusop));
     
     //this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
     if (!completeUserMonsters.isEmpty()) {
@@ -335,8 +343,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		createFullUserMonsterProtos(
     			monsterForUserIds, completeUserMonsters);
     	
-    	log.info("YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
-    			newOrUpdated + "\t bpackId=" + bPackId);
+    	String preface = "YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)!";
+    	log.info(String.format(
+    		"%s monster(s) newOrUpdated: %s \t bpackId=%s",
+    		preface, newOrUpdated, bPackId));
     	//set the builder that will be sent to the client
     	resBuilder.addAllUpdatedOrNew(newOrUpdated);
     }
@@ -348,8 +358,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
     			updateUserMonsters(userId, monsterIdToNumPieces, null,
     				mfusop, now);
     	
-    	log.info("YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
-    			newOrUpdated + "\t bpackId=" + bPackId);
+    	String preface = "YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)!";
+    	log.info(String.format(
+    		"%s monster(s) newOrUpdated: %s \t bpackId=%s",
+    		preface, newOrUpdated, bPackId));
     	//set the builder that will be sent to the client
     	resBuilder.addAllUpdatedOrNew(newOrUpdated);
     }
