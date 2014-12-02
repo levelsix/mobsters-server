@@ -210,6 +210,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				.getAchievementForAchievementId(achievementId);
 		int gemReward = achievement.getGemReward();
 		int gemsGained = Math.max(0, gemReward);
+		int expGained = achievement.getExpReward(); 
 
 		if (0 == gemsGained) {
 			log.info(String.format(
@@ -218,7 +219,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		if (!user.updateRelativeGemsCashOilExperienceNaive(gemsGained,
-				0, 0, 0)) {
+				0, 0, expGained)) {
 			log.error(String.format(
 				"problem with giving user %s gems",
 				gemsGained));

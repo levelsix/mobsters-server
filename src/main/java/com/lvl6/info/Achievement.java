@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Achievement implements Serializable {
 
-	private static final long serialVersionUID = 4581761456535076556L;
+	private static final long serialVersionUID = 1739660744843110613L;
 	
 	private int id;
 	private String achievementName;
@@ -20,12 +20,13 @@ public class Achievement implements Serializable {
 	private int priority;
 	private int prerequisiteId;
 	private int successorId;
+	private int expReward;
 	
 	public Achievement(int id, String achievementName, String description,
 			int gemReward, int lvl, String achievementType,
 			String resourceType, String monsterElement, String monsterQuality,
 			int staticDataId, int quantity, int priority, int prerequisiteId,
-			int successorId) {
+			int successorId, int expReward) {
 		super();
 		this.id = id;
 		this.achievementName = achievementName;
@@ -41,6 +42,7 @@ public class Achievement implements Serializable {
 		this.priority = priority;
 		this.prerequisiteId = prerequisiteId;
 		this.successorId = successorId;
+		this.expReward = expReward;
 	}
 
 	public int getId() {
@@ -155,16 +157,50 @@ public class Achievement implements Serializable {
 		this.successorId = successorId;
 	}
 
-	@Override
-	public String toString() {
-		return "Achievement [id=" + id + ", achievementName=" + achievementName
-				+ ", description=" + description + ", gemReward=" + gemReward
-				+ ", lvl=" + lvl + ", achievementType=" + achievementType
-				+ ", resourceType=" + resourceType + ", monsterElement="
-				+ monsterElement + ", monsterQuality=" + monsterQuality
-				+ ", staticDataId=" + staticDataId + ", quantity=" + quantity
-				+ ", priority=" + priority + ", prerequisiteId="
-				+ prerequisiteId + ", successorId=" + successorId + "]";
+	public int getExpReward()
+	{
+		return expReward;
 	}
-	
+
+	public void setExpReward( int expReward )
+	{
+		this.expReward = expReward;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Achievement [id="
+			+ id
+			+ ", achievementName="
+			+ achievementName
+			+ ", description="
+			+ description
+			+ ", gemReward="
+			+ gemReward
+			+ ", lvl="
+			+ lvl
+			+ ", achievementType="
+			+ achievementType
+			+ ", resourceType="
+			+ resourceType
+			+ ", monsterElement="
+			+ monsterElement
+			+ ", monsterQuality="
+			+ monsterQuality
+			+ ", staticDataId="
+			+ staticDataId
+			+ ", quantity="
+			+ quantity
+			+ ", priority="
+			+ priority
+			+ ", prerequisiteId="
+			+ prerequisiteId
+			+ ", successorId="
+			+ successorId
+			+ ", expReward="
+			+ expReward
+			+ "]";
+	}
+
 }
