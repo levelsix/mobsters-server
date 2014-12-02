@@ -75,7 +75,7 @@ public class ItemSecretGiftForUserRetrieveUtil {
 			Map<String, Collection<?>> inConditions = null;
 			if (null != ids && !ids.isEmpty()) {
 				inConditions = new HashMap<String, Collection<?>>();
-				inConditions.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ITEM_ID,
+				inConditions.put(DBConstants.ITEM_SECRET_GIFT_FOR_USER__ID,
 						ids);
 			}
 			String inDelim = getQueryConstructionUtil().getAnd(); 
