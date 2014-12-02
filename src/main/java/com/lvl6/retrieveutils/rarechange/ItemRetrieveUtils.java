@@ -37,7 +37,7 @@ import com.lvl6.utils.DBConnection;
 		} else if (o1.getId() < o2.getId()) {
 			//since same probability, order by id
 			return -1;
-		} else if (o1.getId() < o2.getId()) {
+		} else if (o1.getId() > o2.getId()) {
 			return 1;
 		} else {
 			return 0;
@@ -159,9 +159,12 @@ import com.lvl6.utils.DBConnection;
 	  
 	  // for each item ordered in ascending id numbers, set its chance
 	  // (out of 1) to be selected as a secret gift
+	  float floatSoFar = 0F;
 	  for (Integer itemId : itemIds) {
 		  Item item = itemIdsToItems.get(itemId);
-		  float normalizedSecretGiftProbability = item.getSecretGiftChance() / 
+		  
+		  floatSoFar += item.getSecretGiftChance();
+		  float normalizedSecretGiftProbability = floatSoFar / 
 			  secretGiftProbabilitySum;
 		  
 		  item.setNormalizedSecretGiftProbability(normalizedSecretGiftProbability);
