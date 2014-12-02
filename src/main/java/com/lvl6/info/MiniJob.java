@@ -13,7 +13,9 @@ public class MiniJob implements Serializable {
 	private int cashReward;
 	private int oilReward;
 	private int gemReward;
-	private int monsterIdReward;
+    private int monsterIdReward;
+    private int itemIdReward;
+    private int itemRewardQuantity;
 	private String quality;
 	private int maxNumMonstersAllowed;
 	private float chanceToAppear;
@@ -28,8 +30,9 @@ public class MiniJob implements Serializable {
 	private int durationMinSeconds;
 	private int durationMaxSeconds;
 
-	public MiniJob(int id, int requiredStructId, String name, int cashReward,
-			int oilReward, int gemReward, int monsterIdReward, String quality,
+    public MiniJob(int id, int requiredStructId, String name, int cashReward,
+			int oilReward, int gemReward, int monsterIdReward,
+            int itemIdReward, int itemRewardQuantity, String quality,
 			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
 			int atkRequired, int minDmgDealt, int maxDmgDealt,
 			int durationMinMinutes, int durationMaxMinutes) {
@@ -41,6 +44,8 @@ public class MiniJob implements Serializable {
 		this.oilReward = oilReward;
 		this.gemReward = gemReward;
 		this.monsterIdReward = monsterIdReward;
+        this.itemIdReward = itemIdReward;
+        this.itemRewardQuantity = itemRewardQuantity;
 		this.quality = quality;
 		this.maxNumMonstersAllowed = maxNumMonstersAllowed;
 		this.chanceToAppear = chanceToAppear;
@@ -234,6 +239,22 @@ public class MiniJob implements Serializable {
 	public void setDurationMaxMinutes(int durationMaxMinutes) {
 		this.durationMaxMinutes = durationMaxMinutes;
 	}
+
+    public int getItemIdReward() {
+        return itemIdReward;
+    }
+
+    public void setItemIdReward(int itemIdReward) {
+        this.itemIdReward = itemIdReward;
+    }
+
+    public int getItemRewardQuantity() {
+        return itemRewardQuantity;
+    }
+
+    public void setItemRewardQuantity(int itemRewardQuantity) {
+        this.itemRewardQuantity = itemRewardQuantity;
+    }
 
 	@Override
 	public String toString() {

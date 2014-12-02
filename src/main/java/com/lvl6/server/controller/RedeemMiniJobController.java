@@ -276,6 +276,8 @@ public class RedeemMiniJobController extends EventController{
     int cashChange = mj.getCashReward();
     int oilChange = mj.getOilReward();
     int monsterIdReward = mj.getMonsterIdReward();
+    int itemIdReward = mj.getItemIdReward();
+    int itemRewardQuantity = mj.getItemRewardQuantity();
 
     if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange, maxOil)) {
       log.error(String.format(
@@ -313,6 +315,10 @@ public class RedeemMiniJobController extends EventController{
               mfusop, now);
       FullUserMonsterProto fump = newOrUpdated.get(0);
       resBuilder.setFump(fump);
+    }
+    
+    if (0 != itemIdReward && 0 != itemRewardQuantity) {
+        
     }
 
     //delete the user mini job

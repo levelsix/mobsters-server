@@ -1519,7 +1519,9 @@ public class CreateInfoProtoUtils {
 		mjpb.setCashReward(mj.getCashReward());
 		mjpb.setOilReward(mj.getOilReward());
 		mjpb.setGemReward(mj.getGemReward());
-		mjpb.setMonsterIdReward(mj.getMonsterIdReward());
+        mjpb.setMonsterIdReward(mj.getMonsterIdReward());
+        mjpb.setItemIdReward(mj.getItemIdReward());
+        mjpb.setItemRewardQuantity(mj.getItemRewardQuantity());
 
 		str = mj.getQuality();
 		if (null != str) {
