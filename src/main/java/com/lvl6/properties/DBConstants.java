@@ -722,6 +722,7 @@ public class DBConstants {
 	public static final String ACHIEVEMENT__PRIORITY = "priority";
 	public static final String ACHIEVEMENT__PREREQUISITE_ID = "prerequisite_id";
 	public static final String ACHIEVEMENT__SUCCESSOR_ID = "successor_id";
+	public static final String ACHIEVEMENT__EXP_REWARD = "exp_reward";
 
 	/*ALERT ON STARTUP*/
 	public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;

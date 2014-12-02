@@ -109,6 +109,7 @@ import com.lvl6.utils.DBConnection;
     int priority = rs.getInt(DBConstants.ACHIEVEMENT__PRIORITY);
     int prerequisiteId = rs.getInt(DBConstants.ACHIEVEMENT__PREREQUISITE_ID);
     int successorId = rs.getInt(DBConstants.ACHIEVEMENT__SUCCESSOR_ID);
+    int expReward = rs.getInt(DBConstants.ACHIEVEMENT__EXP_REWARD);
     
     if (null != achievementType) {
     	String newAchievementType = achievementType.trim().toUpperCase();
@@ -150,7 +151,7 @@ import com.lvl6.utils.DBConnection;
     Achievement achievement = new Achievement(id, achievementName,
     		description, gemReward, lvl, achievementType, resourceType,
     		monsterElement, monsterQuality, staticDataId, quantity, priority,
-    		prerequisiteId, successorId);
+    		prerequisiteId, successorId, expReward);
     
     return achievement;
   }
