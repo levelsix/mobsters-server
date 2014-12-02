@@ -1495,7 +1495,7 @@ public class CreateInfoProtoUtils {
 		UserItemSecretGiftProto.Builder uisgpb = UserItemSecretGiftProto.newBuilder();
 		uisgpb.setUisgUuid(secretGift.getId());
 		uisgpb.setUserUuid(secretGift.getUserId());
-		uisgpb.setMinsForCollection(secretGift.getSecsTillCollection());
+		uisgpb.setSecsTillCollection(secretGift.getSecsTillCollection());
 		uisgpb.setItemId(secretGift.getItemId());
 		
 		Date createTime = secretGift.getCreateTime();
