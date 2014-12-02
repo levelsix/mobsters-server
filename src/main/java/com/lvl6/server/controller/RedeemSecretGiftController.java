@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		log.info(String.format("reqProto=%s", reqProto));
 
-		MinimumUserProto senderProto = reqProto.getMup();
+		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		List<String> idsRedeemed = reqProto.getUisgUuidList();

@@ -245,7 +245,7 @@ public class RedeemSecretGiftAction
 
 		//create new SecretGifts
 		gifts = calculateGiftsForUser(userId,
-			ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_GIFTS,
+			ControllerConstants.ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS,
 			clientTime.getTime());
 		
 		List<String> ids = null;
@@ -259,7 +259,7 @@ public class RedeemSecretGiftAction
 		} else {
 			log.error(String.format(
 				"Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
-				ids, gifts));
+				gifts, ids));
 		}
 
 		//		prepCurrencyHistory();

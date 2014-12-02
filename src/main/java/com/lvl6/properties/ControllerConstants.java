@@ -62,7 +62,7 @@ public class ControllerConstants {
 	public static final ChiSquaredDistribution ITEM_SECRET_GIFT_FOR_USER__RANDOM = 
 		new ChiSquaredDistribution(ITEM_SECRET_GIFT_FOR_USER__DOF);
 	
-	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_GIFTS = 2;
+	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
 		1, 1, 1, 1, 1
 	};

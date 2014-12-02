@@ -22,7 +22,7 @@ public class RedeemSecretGiftRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       redeemSecretGiftRequestProto = RedeemSecretGiftRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = redeemSecretGiftRequestProto.getMup().getUserUuid();
+      playerId = redeemSecretGiftRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
       log.error("RedeemSecretGift request exception", e);
     }

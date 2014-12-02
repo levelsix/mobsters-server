@@ -130,6 +130,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
@@ -141,6 +142,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -208,73 +210,76 @@ public class StartupController extends EventController {
 
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected ItemForUserUsageRetrieveUtil itemForUserUsageRetrieveUtil;
 
 	@Autowired
 	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 
-  @Autowired
-  protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
-  
-  @Autowired
-  protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
-  
-  @Autowired
-  protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils;
-  
-  @Autowired
-  protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-  
-  @Autowired
-  protected TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils;
-  
-  @Autowired
-  protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
-  
-  @Autowired
-  protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
-  
-  @Autowired
-  protected EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils;
-  
-  @Autowired
-  protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils;
-  
-  @Autowired
-  protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
-  
-  @Autowired
-  protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils;
-  
-  @Autowired
-  protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils;
-  
-  @Autowired
-  protected CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils;
-  
-  @Autowired
-  protected ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils;
-  
-  @Autowired
-  protected ClanRetrieveUtils2 clanRetrieveUtils;
-  
-  @Autowired
-  protected UserClanRetrieveUtils2 userClanRetrieveUtils;
-  
-  @Autowired
-  protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
-  
-  @Autowired
-  protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
-  
-  @Autowired
-  protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+	@Autowired
+	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 
-  @Autowired
-  protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
-  
+	@Autowired
+	protected MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils;
+
+	@Autowired
+	protected MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils;
+
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+
+	@Autowired
+	protected TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils;
+
+	@Autowired
+	protected TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils;
+
+	@Autowired
+	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils;
+
+	@Autowired
+	protected EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils;
+
+	@Autowired
+	protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils;
+
+	@Autowired
+	protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
+
+	@Autowired
+	protected ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils;
+
+	@Autowired
+	protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils;
+
+	@Autowired
+	protected CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils;
+
+	@Autowired
+	protected ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils;
+
+	@Autowired
+	protected ClanRetrieveUtils2 clanRetrieveUtils;
+
+	@Autowired
+	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+
+	@Autowired
+	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+
+	@Autowired
+	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+
+	@Autowired
+	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+
+	@Autowired
+	protected ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil;
+
+	@Autowired
+	protected InsertUtil insertUtil;
+	
 	public StartupController() {
 		numAllocatedThreads = 3;
 	}
@@ -525,7 +530,7 @@ public class StartupController extends EventController {
 			log.info("{}ms at setUserItems", stopWatch.getTime());
 			setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
 			log.info("{}ms at whetherCompletedInAppPurchase", stopWatch.getTime());
-			setSecretGifts(resBuilder, playerId);
+			setSecretGifts(resBuilder, playerId, now.getTime());
 			log.info("{}ms at setSecretGifts", stopWatch.getTime());
 			
 			//db request for user monsters
@@ -1271,15 +1276,56 @@ public class StartupController extends EventController {
 		resBuilder.setPlayerHasBoughtInAppPurchase(hasPurchased);
 	}
 	
-	private void setSecretGifts(Builder resBuilder, String userId) {
+	private void setSecretGifts(Builder resBuilder, String userId, long now) {
 		Collection<ItemSecretGiftForUser> gifts = itemSecretGiftForUserRetrieveUtil
 			.getSpecificOrAllItemSecretGiftForUser(userId, null);
 		
-		if (null != gifts && !gifts.isEmpty()) {
-			Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
-				.createUserItemSecretGiftProto(gifts);
-			resBuilder.addAllGifts(nuGiftsProtos);
+		//need to enforce 2 gift minimum
+		int numGifts = 0;
+		if (null == gifts || gifts.isEmpty()) {
+			gifts = new ArrayList<ItemSecretGiftForUser>();
+			numGifts = 2;
+			
+		} else  if (null != gifts && gifts.size() == 1) {
+			numGifts = 1;
 		}
+		
+		if (numGifts > 0) {
+			giveGifts(userId, now, gifts, numGifts);
+		}
+		
+		Collection<UserItemSecretGiftProto> nuGiftsProtos = CreateInfoProtoUtils
+			.createUserItemSecretGiftProto(gifts);
+		resBuilder.addAllGifts(nuGiftsProtos);
+	}
+	
+	//need to enforce 2 gift minimum
+	private void giveGifts(String userId, long now,
+		Collection<ItemSecretGiftForUser> gifts, int numGifts)
+	{
+		List<ItemSecretGiftForUser> giftList =
+			RedeemSecretGiftAction.calculateGiftsForUser(userId, numGifts, now);
+		
+		List<String> ids = insertUtil.insertIntoItemSecretGiftForUserGetId(giftList);
+		
+		//need to set the ids
+		if (null != ids && ids.size() == giftList.size()) {
+			
+			for (int index = 0; index < ids.size(); index++) {
+				String id = ids.get(index);
+				ItemSecretGiftForUser isgfu = giftList.get(index);
+
+				isgfu.setId(id);
+			}
+			
+			gifts.addAll(giftList);
+			
+		} else {
+			log.error(String.format(
+				"Error calculating the new SecretGifts. nuGifts=%s, ids=%s",
+				giftList, ids));
+		}
+		
 	}
 
 	private void setClanRaidStuff(Builder resBuilder, User user, String userId, Timestamp now) {
@@ -2043,153 +2089,161 @@ public class StartupController extends EventController {
 	{
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
 	}
-  public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
-    return questForUserRetrieveUtils;
-  }
-  public void setQuestForUserRetrieveUtils(
-      QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
-    this.questForUserRetrieveUtils = questForUserRetrieveUtils;
-  }
-  public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtils() {
-    return monsterEnhancingForUserRetrieveUtils;
-  }
-  public void setMonsterEnhancingForUserRetrieveUtils(
-      MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
-    this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
-  }
-  public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
-    return monsterHealingForUserRetrieveUtils;
-  }
-  public void setMonsterHealingForUserRetrieveUtils(
-      MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
-    this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
-  }
-  public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtils() {
-    return monsterEvolvingForUserRetrieveUtils;
-  }
-  public void setMonsterEvolvingForUserRetrieveUtils(
-      MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
-    this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
-  }
-  public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
-    return monsterForUserRetrieveUtils;
-  }
-  public void setMonsterForUserRetrieveUtils(
-      MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
-    this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-  }
-  public TaskForUserCompletedRetrieveUtils getTaskForUserCompletedRetrieveUtils() {
-    return taskForUserCompletedRetrieveUtils;
-  }
-  public void setTaskForUserCompletedRetrieveUtils(
-      TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils) {
-    this.taskForUserCompletedRetrieveUtils = taskForUserCompletedRetrieveUtils;
-  }
-  public TaskForUserOngoingRetrieveUtils2 getTaskForUserOngoingRetrieveUtils() {
-    return taskForUserOngoingRetrieveUtils;
-  }
-  public void setTaskForUserOngoingRetrieveUtils(
-      TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils) {
-    this.taskForUserOngoingRetrieveUtils = taskForUserOngoingRetrieveUtils;
-  }
-  public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtils() {
-    return taskStageForUserRetrieveUtils;
-  }
-  public void setTaskStageForUserRetrieveUtils(
-      TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils) {
-    this.taskStageForUserRetrieveUtils = taskStageForUserRetrieveUtils;
-  }
-  public EventPersistentForUserRetrieveUtils2 getEventPersistentForUserRetrieveUtils() {
-    return eventPersistentForUserRetrieveUtils;
-  }
-  public void setEventPersistentForUserRetrieveUtils(
-      EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils) {
-    this.eventPersistentForUserRetrieveUtils = eventPersistentForUserRetrieveUtils;
-  }
-  public PvpBattleForUserRetrieveUtils2 getPvpBattleForUserRetrieveUtils() {
-    return pvpBattleForUserRetrieveUtils;
-  }
-  public void setPvpBattleForUserRetrieveUtils(
-      PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils) {
-    this.pvpBattleForUserRetrieveUtils = pvpBattleForUserRetrieveUtils;
-  }
-  public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
-    return iapHistoryRetrieveUtils;
-  }
-  public void setIapHistoryRetrieveUtils(
-      IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
-    this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
-  }
-  public ClanEventPersistentForClanRetrieveUtils2 getClanEventPersistentForClanRetrieveUtils() {
-    return clanEventPersistentForClanRetrieveUtils;
-  }
-  public void setClanEventPersistentForClanRetrieveUtils(
-      ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils) {
-    this.clanEventPersistentForClanRetrieveUtils = clanEventPersistentForClanRetrieveUtils;
-  }
-  public ClanEventPersistentForUserRetrieveUtils2 getClanEventPersistentForUserRetrieveUtils() {
-    return clanEventPersistentForUserRetrieveUtils;
-  }
-  public void setClanEventPersistentForUserRetrieveUtils(
-      ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
-    this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
-  }
-  public CepfuRaidStageHistoryRetrieveUtils2 getCepfuRaidStageHistoryRetrieveUtils() {
-    return cepfuRaidStageHistoryRetrieveUtils;
-  }
-  public void setCepfuRaidStageHistoryRetrieveUtils(
-      CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils) {
-    this.cepfuRaidStageHistoryRetrieveUtils = cepfuRaidStageHistoryRetrieveUtils;
-  }
-  public ClanEventPersistentUserRewardRetrieveUtils2 getClanEventPersistentUserRewardRetrieveUtils() {
-    return clanEventPersistentUserRewardRetrieveUtils;
-  }
-  public void setClanEventPersistentUserRewardRetrieveUtils(
-      ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils) {
-    this.clanEventPersistentUserRewardRetrieveUtils = clanEventPersistentUserRewardRetrieveUtils;
-  }
-  public ClanRetrieveUtils2 getClanRetrieveUtils() {
-    return clanRetrieveUtils;
-  }
-  public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
-    this.clanRetrieveUtils = clanRetrieveUtils;
-  }
-  public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
-    return userClanRetrieveUtils;
-  }
-  public void setUserClanRetrieveUtils(
-      UserClanRetrieveUtils2 userClanRetrieveUtils) {
-    this.userClanRetrieveUtils = userClanRetrieveUtils;
-  }
-  public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
-    return userFacebookInviteForSlotRetrieveUtils;
-  }
-  public void setUserFacebookInviteForSlotRetrieveUtils(
-      UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
-    this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
-  }
-  public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
-    return clanChatPostRetrieveUtils;
-  }
-  public void setClanChatPostRetrieveUtils(
-      ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
-    this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
-  }
-  public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
-    return privateChatPostRetrieveUtils;
-  }
-  public void setPrivateChatPostRetrieveUtils(
-      PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
-	  this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
-  }
-  public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
-  {
-	  return itemSecretGiftForUserRetrieveUtil;
-  }
-  public void setItemSecretGiftForUserRetrieveUtil(
-	  ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
-  {
-	  this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
-  }  
+	public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
+		return questForUserRetrieveUtils;
+	}
+	public void setQuestForUserRetrieveUtils(
+		QuestForUserRetrieveUtils2 questForUserRetrieveUtils) {
+		this.questForUserRetrieveUtils = questForUserRetrieveUtils;
+	}
+	public MonsterEnhancingForUserRetrieveUtils2 getMonsterEnhancingForUserRetrieveUtils() {
+		return monsterEnhancingForUserRetrieveUtils;
+	}
+	public void setMonsterEnhancingForUserRetrieveUtils(
+		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils) {
+		this.monsterEnhancingForUserRetrieveUtils = monsterEnhancingForUserRetrieveUtils;
+	}
+	public MonsterHealingForUserRetrieveUtils2 getMonsterHealingForUserRetrieveUtils() {
+		return monsterHealingForUserRetrieveUtils;
+	}
+	public void setMonsterHealingForUserRetrieveUtils(
+		MonsterHealingForUserRetrieveUtils2 monsterHealingForUserRetrieveUtils) {
+		this.monsterHealingForUserRetrieveUtils = monsterHealingForUserRetrieveUtils;
+	}
+	public MonsterEvolvingForUserRetrieveUtils2 getMonsterEvolvingForUserRetrieveUtils() {
+		return monsterEvolvingForUserRetrieveUtils;
+	}
+	public void setMonsterEvolvingForUserRetrieveUtils(
+		MonsterEvolvingForUserRetrieveUtils2 monsterEvolvingForUserRetrieveUtils) {
+		this.monsterEvolvingForUserRetrieveUtils = monsterEvolvingForUserRetrieveUtils;
+	}
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtils() {
+		return monsterForUserRetrieveUtils;
+	}
+	public void setMonsterForUserRetrieveUtils(
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
+		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
+	}
+	public TaskForUserCompletedRetrieveUtils getTaskForUserCompletedRetrieveUtils() {
+		return taskForUserCompletedRetrieveUtils;
+	}
+	public void setTaskForUserCompletedRetrieveUtils(
+		TaskForUserCompletedRetrieveUtils taskForUserCompletedRetrieveUtils) {
+		this.taskForUserCompletedRetrieveUtils = taskForUserCompletedRetrieveUtils;
+	}
+	public TaskForUserOngoingRetrieveUtils2 getTaskForUserOngoingRetrieveUtils() {
+		return taskForUserOngoingRetrieveUtils;
+	}
+	public void setTaskForUserOngoingRetrieveUtils(
+		TaskForUserOngoingRetrieveUtils2 taskForUserOngoingRetrieveUtils) {
+		this.taskForUserOngoingRetrieveUtils = taskForUserOngoingRetrieveUtils;
+	}
+	public TaskStageForUserRetrieveUtils2 getTaskStageForUserRetrieveUtils() {
+		return taskStageForUserRetrieveUtils;
+	}
+	public void setTaskStageForUserRetrieveUtils(
+		TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtils) {
+		this.taskStageForUserRetrieveUtils = taskStageForUserRetrieveUtils;
+	}
+	public EventPersistentForUserRetrieveUtils2 getEventPersistentForUserRetrieveUtils() {
+		return eventPersistentForUserRetrieveUtils;
+	}
+	public void setEventPersistentForUserRetrieveUtils(
+		EventPersistentForUserRetrieveUtils2 eventPersistentForUserRetrieveUtils) {
+		this.eventPersistentForUserRetrieveUtils = eventPersistentForUserRetrieveUtils;
+	}
+	public PvpBattleForUserRetrieveUtils2 getPvpBattleForUserRetrieveUtils() {
+		return pvpBattleForUserRetrieveUtils;
+	}
+	public void setPvpBattleForUserRetrieveUtils(
+		PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtils) {
+		this.pvpBattleForUserRetrieveUtils = pvpBattleForUserRetrieveUtils;
+	}
+	public IAPHistoryRetrieveUtils getIapHistoryRetrieveUtils() {
+		return iapHistoryRetrieveUtils;
+	}
+	public void setIapHistoryRetrieveUtils(
+		IAPHistoryRetrieveUtils iapHistoryRetrieveUtils) {
+		this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
+	}
+	public ClanEventPersistentForClanRetrieveUtils2 getClanEventPersistentForClanRetrieveUtils() {
+		return clanEventPersistentForClanRetrieveUtils;
+	}
+	public void setClanEventPersistentForClanRetrieveUtils(
+		ClanEventPersistentForClanRetrieveUtils2 clanEventPersistentForClanRetrieveUtils) {
+		this.clanEventPersistentForClanRetrieveUtils = clanEventPersistentForClanRetrieveUtils;
+	}
+	public ClanEventPersistentForUserRetrieveUtils2 getClanEventPersistentForUserRetrieveUtils() {
+		return clanEventPersistentForUserRetrieveUtils;
+	}
+	public void setClanEventPersistentForUserRetrieveUtils(
+		ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtils) {
+		this.clanEventPersistentForUserRetrieveUtils = clanEventPersistentForUserRetrieveUtils;
+	}
+	public CepfuRaidStageHistoryRetrieveUtils2 getCepfuRaidStageHistoryRetrieveUtils() {
+		return cepfuRaidStageHistoryRetrieveUtils;
+	}
+	public void setCepfuRaidStageHistoryRetrieveUtils(
+		CepfuRaidStageHistoryRetrieveUtils2 cepfuRaidStageHistoryRetrieveUtils) {
+		this.cepfuRaidStageHistoryRetrieveUtils = cepfuRaidStageHistoryRetrieveUtils;
+	}
+	public ClanEventPersistentUserRewardRetrieveUtils2 getClanEventPersistentUserRewardRetrieveUtils() {
+		return clanEventPersistentUserRewardRetrieveUtils;
+	}
+	public void setClanEventPersistentUserRewardRetrieveUtils(
+		ClanEventPersistentUserRewardRetrieveUtils2 clanEventPersistentUserRewardRetrieveUtils) {
+		this.clanEventPersistentUserRewardRetrieveUtils = clanEventPersistentUserRewardRetrieveUtils;
+	}
+	public ClanRetrieveUtils2 getClanRetrieveUtils() {
+		return clanRetrieveUtils;
+	}
+	public void setClanRetrieveUtils(ClanRetrieveUtils2 clanRetrieveUtils) {
+		this.clanRetrieveUtils = clanRetrieveUtils;
+	}
+	public UserClanRetrieveUtils2 getUserClanRetrieveUtils() {
+		return userClanRetrieveUtils;
+	}
+	public void setUserClanRetrieveUtils(
+		UserClanRetrieveUtils2 userClanRetrieveUtils) {
+		this.userClanRetrieveUtils = userClanRetrieveUtils;
+	}
+	public UserFacebookInviteForSlotRetrieveUtils2 getUserFacebookInviteForSlotRetrieveUtils() {
+		return userFacebookInviteForSlotRetrieveUtils;
+	}
+	public void setUserFacebookInviteForSlotRetrieveUtils(
+		UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils) {
+		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
+	}
+	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtils() {
+		return clanChatPostRetrieveUtils;
+	}
+	public void setClanChatPostRetrieveUtils(
+		ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils) {
+		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
+	}
+	public PrivateChatPostRetrieveUtils2 getPrivateChatPostRetrieveUtils() {
+		return privateChatPostRetrieveUtils;
+	}
+	public void setPrivateChatPostRetrieveUtils(
+		PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils) {
+		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
+	}
+	public ItemSecretGiftForUserRetrieveUtil getItemSecretGiftForUserRetrieveUtil()
+	{
+		return itemSecretGiftForUserRetrieveUtil;
+	}
+	public void setItemSecretGiftForUserRetrieveUtil(
+		ItemSecretGiftForUserRetrieveUtil itemSecretGiftForUserRetrieveUtil )
+	{
+		this.itemSecretGiftForUserRetrieveUtil = itemSecretGiftForUserRetrieveUtil;
+	}
+	public InsertUtil getInsertUtil()
+	{
+		return insertUtil;
+	}
+	public void setInsertUtil( InsertUtil insertUtil )
+	{
+		this.insertUtil = insertUtil;
+	}  
 
 }
