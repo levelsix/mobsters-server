@@ -262,7 +262,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         "num user items updated=%s", numUpdated));
 
     //update user's money
-    if (gemReward > 0 && !user.updateRelativeGemsNaive(gemReward)) {
+    if (gemReward > 0 && !user.updateRelativeGemsNaive(gemReward, 0)) {
       log.error(String.format(
           "could not change user's money. gemReward=%s", gemReward));
       return false;
