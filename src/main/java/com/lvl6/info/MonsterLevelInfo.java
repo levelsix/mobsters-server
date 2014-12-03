@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = -4118884141391026194L;
+	private static final long serialVersionUID = 248844236590833451L;
 	
 	private int monsterId;
 	private int level;
@@ -24,6 +24,8 @@ public class MonsterLevelInfo implements Serializable {
 	private float expLvlExponent;
 	private int sellAmount;
 	private int teamCost;
+	private int costToFullyHeal;
+	private int secsToFullyHeal;
 
 	public MonsterLevelInfo()
 	{
@@ -48,7 +50,9 @@ public class MonsterLevelInfo implements Serializable {
 		float expLvlDivisor,
 		float expLvlExponent,
 		int sellAmount,
-		int teamCost )
+		int teamCost,
+		int costToFullyHeal,
+		int secsToFullyHeal )
 	{
 		super();
 		this.monsterId = monsterId;
@@ -69,7 +73,10 @@ public class MonsterLevelInfo implements Serializable {
 		this.expLvlExponent = expLvlExponent;
 		this.sellAmount = sellAmount;
 		this.teamCost = teamCost;
+		this.costToFullyHeal = costToFullyHeal;
+		this.secsToFullyHeal = secsToFullyHeal;
 	}
+
 
 	public int getMonsterId() {
 		return monsterId;
@@ -215,6 +222,26 @@ public class MonsterLevelInfo implements Serializable {
 	public void setTeamCost( int teamCost )
 	{
 		this.teamCost = teamCost;
+	}
+
+	public int getCostToFullyHeal()
+	{
+		return costToFullyHeal;
+	}
+
+	public void setCostToFullyHeal( int costToFullyHeal )
+	{
+		this.costToFullyHeal = costToFullyHeal;
+	}
+
+	public int getSecsToFullyHeal()
+	{
+		return secsToFullyHeal;
+	}
+
+	public void setSecsToFullyHeal( int secsToFullyHeal )
+	{
+		this.secsToFullyHeal = secsToFullyHeal;
 	}
 
 	@Override

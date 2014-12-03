@@ -877,6 +877,8 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
+	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";

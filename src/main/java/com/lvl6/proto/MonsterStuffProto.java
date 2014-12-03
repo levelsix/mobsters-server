@@ -4427,6 +4427,24 @@ public final class MonsterStuffProto {
      * <code>optional int32 teamCost = 17;</code>
      */
     int getTeamCost();
+
+    /**
+     * <code>optional int32 costToFullyHeal = 18;</code>
+     */
+    boolean hasCostToFullyHeal();
+    /**
+     * <code>optional int32 costToFullyHeal = 18;</code>
+     */
+    int getCostToFullyHeal();
+
+    /**
+     * <code>optional int32 secsToFullyHeal = 19;</code>
+     */
+    boolean hasSecsToFullyHeal();
+    /**
+     * <code>optional int32 secsToFullyHeal = 19;</code>
+     */
+    int getSecsToFullyHeal();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MonsterLevelInfoProto}
@@ -4563,6 +4581,16 @@ public final class MonsterStuffProto {
             case 136: {
               bitField0_ |= 0x00010000;
               teamCost_ = input.readInt32();
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00020000;
+              costToFullyHeal_ = input.readInt32();
+              break;
+            }
+            case 152: {
+              bitField0_ |= 0x00040000;
+              secsToFullyHeal_ = input.readInt32();
               break;
             }
           }
@@ -4876,6 +4904,36 @@ public final class MonsterStuffProto {
       return teamCost_;
     }
 
+    public static final int COSTTOFULLYHEAL_FIELD_NUMBER = 18;
+    private int costToFullyHeal_;
+    /**
+     * <code>optional int32 costToFullyHeal = 18;</code>
+     */
+    public boolean hasCostToFullyHeal() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <code>optional int32 costToFullyHeal = 18;</code>
+     */
+    public int getCostToFullyHeal() {
+      return costToFullyHeal_;
+    }
+
+    public static final int SECSTOFULLYHEAL_FIELD_NUMBER = 19;
+    private int secsToFullyHeal_;
+    /**
+     * <code>optional int32 secsToFullyHeal = 19;</code>
+     */
+    public boolean hasSecsToFullyHeal() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional int32 secsToFullyHeal = 19;</code>
+     */
+    public int getSecsToFullyHeal() {
+      return secsToFullyHeal_;
+    }
+
     private void initFields() {
       lvl_ = 0;
       hp_ = 0;
@@ -4894,6 +4952,8 @@ public final class MonsterStuffProto {
       expLvlExponent_ = 0F;
       sellAmount_ = 0;
       teamCost_ = 0;
+      costToFullyHeal_ = 0;
+      secsToFullyHeal_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4958,6 +5018,12 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeInt32(17, teamCost_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeInt32(18, costToFullyHeal_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeInt32(19, secsToFullyHeal_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5035,6 +5101,14 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(17, teamCost_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(18, costToFullyHeal_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, secsToFullyHeal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5187,6 +5261,10 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00008000);
         teamCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00010000);
+        costToFullyHeal_ = 0;
+        bitField0_ = (bitField0_ & ~0x00020000);
+        secsToFullyHeal_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
         return this;
       }
 
@@ -5283,6 +5361,14 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00010000;
         }
         result.teamCost_ = teamCost_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.costToFullyHeal_ = costToFullyHeal_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.secsToFullyHeal_ = secsToFullyHeal_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5349,6 +5435,12 @@ public final class MonsterStuffProto {
         }
         if (other.hasTeamCost()) {
           setTeamCost(other.getTeamCost());
+        }
+        if (other.hasCostToFullyHeal()) {
+          setCostToFullyHeal(other.getCostToFullyHeal());
+        }
+        if (other.hasSecsToFullyHeal()) {
+          setSecsToFullyHeal(other.getSecsToFullyHeal());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5949,6 +6041,70 @@ public final class MonsterStuffProto {
       public Builder clearTeamCost() {
         bitField0_ = (bitField0_ & ~0x00010000);
         teamCost_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int costToFullyHeal_ ;
+      /**
+       * <code>optional int32 costToFullyHeal = 18;</code>
+       */
+      public boolean hasCostToFullyHeal() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <code>optional int32 costToFullyHeal = 18;</code>
+       */
+      public int getCostToFullyHeal() {
+        return costToFullyHeal_;
+      }
+      /**
+       * <code>optional int32 costToFullyHeal = 18;</code>
+       */
+      public Builder setCostToFullyHeal(int value) {
+        bitField0_ |= 0x00020000;
+        costToFullyHeal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 costToFullyHeal = 18;</code>
+       */
+      public Builder clearCostToFullyHeal() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        costToFullyHeal_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int secsToFullyHeal_ ;
+      /**
+       * <code>optional int32 secsToFullyHeal = 19;</code>
+       */
+      public boolean hasSecsToFullyHeal() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional int32 secsToFullyHeal = 19;</code>
+       */
+      public int getSecsToFullyHeal() {
+        return secsToFullyHeal_;
+      }
+      /**
+       * <code>optional int32 secsToFullyHeal = 19;</code>
+       */
+      public Builder setSecsToFullyHeal(int value) {
+        bitField0_ |= 0x00040000;
+        secsToFullyHeal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 secsToFullyHeal = 19;</code>
+       */
+      public Builder clearSecsToFullyHeal() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        secsToFullyHeal_ = 0;
         onChanged();
         return this;
       }
@@ -15584,7 +15740,7 @@ public final class MonsterStuffProto {
       "dowScaleFactor\030\035 \001(\002\022\034\n\024baseOffensiveSki" +
       "llId\030\036 \001(\005\022\034\n\024baseDefensiveSkillId\030\037 \001(\005" +
       "\"8\n\rAnimationType\022\020\n\014NO_ANIMATION\020\003\022\t\n\005M" +
-      "ELEE\020\001\022\n\n\006RANGED\020\002\"\344\002\n\025MonsterLevelInfoP" +
+      "ELEE\020\001\022\n\n\006RANGED\020\002\"\226\003\n\025MonsterLevelInfoP" +
       "roto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\031\n\021curLvlR" +
       "equiredExp\030\003 \001(\005\022\021\n\tfeederExp\030\004 \001(\005\022\017\n\007f",
       "ireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001(\021\022\020\n\010waterD" +
@@ -15593,47 +15749,49 @@ public final class MonsterStuffProto {
       "\001(\005\022\026\n\016hpExponentBase\030\014 \001(\002\022\027\n\017dmgExpone" +
       "ntBase\030\r \001(\002\022\025\n\rexpLvlDivisor\030\016 \001(\002\022\026\n\016e" +
       "xpLvlExponent\030\017 \001(\002\022\022\n\nsellAmount\030\020 \001(\005\022" +
-      "\020\n\010teamCost\030\021 \001(\005\"\262\002\n\024FullUserMonsterPro" +
-      "to\022\027\n\017userMonsterUuid\030\001 \001(\t\022\020\n\010userUuid\030" +
-      "\002 \001(\t\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004" +
-      " \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealt",
-      "h\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete" +
-      "\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013team" +
-      "SlotNum\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\022\030\n\020of" +
-      "fensiveSkillId\030\r \001(\005\022\030\n\020defensiveSkillId" +
-      "\030\016 \001(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmon" +
-      "sterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\300\001\n\027Use" +
-      "rMonsterHealingProto\022\020\n\010userUuid\030\001 \001(\t\022\027" +
-      "\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020queuedTimeMil" +
-      "lis\030\003 \001(\003\022\036\n\026userHospitalStructUuid\030\004 \001(" +
-      "\t\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priority\030\006 ",
-      "\001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"O\n\035UserMonst" +
-      "erCurrentHealthProto\022\027\n\017userMonsterUuid\030" +
-      "\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(\005\"\242\001\n\024UserEnh" +
-      "ancementProto\022\020\n\010userUuid\030\001 \001(\t\022=\n\013baseM" +
-      "onster\030\002 \001(\0132(.com.lvl6.proto.UserEnhanc" +
-      "ementItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lv" +
-      "l6.proto.UserEnhancementItemProto\"\206\001\n\030Us" +
-      "erEnhancementItemProto\022\027\n\017userMonsterUui" +
-      "d\030\001 \001(\t\022\037\n\027expectedStartTimeMillis\030\002 \001(\003" +
-      "\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021enhancingComp",
-      "lete\030\004 \001(\010\"|\n\032UserMonsterCurrentExpProto" +
-      "\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032\n\022expectedExp" +
-      "erience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\n" +
-      "expectedHp\030\004 \001(\005\"J\n\033MinimumUserMonsterSe" +
-      "llProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\022\n\ncash" +
-      "Amount\030\002 \001(\005\"j\n\033UserCurrentMonsterTeamPr" +
-      "oto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013currentTeam\030\002 \003" +
-      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
-      "\"i\n\031UserMonsterEvolutionProto\022\037\n\027catalys" +
-      "tUserMonsterUuid\030\001 \001(\t\022\030\n\020userMonsterUui",
-      "ds\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterB" +
-      "attleDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n" +
-      "\014dialogueType\030\003 \001(\01627.com.lvl6.proto.Mon" +
-      "sterBattleDialogueProto.DialogueType\022\020\n\010" +
-      "dialogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001" +
-      "(\002\"1\n\014DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014E" +
-      "NTER_BATTLE\020\001B\023B\021MonsterStuffProto"
+      "\020\n\010teamCost\030\021 \001(\005\022\027\n\017costToFullyHeal\030\022 \001" +
+      "(\005\022\027\n\017secsToFullyHeal\030\023 \001(\005\"\262\002\n\024FullUser" +
+      "MonsterProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\020\n" +
+      "\010userUuid\030\002 \001(\t\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncu",
+      "rrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcu" +
+      "rrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\n" +
+      "isComplete\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001" +
+      "(\003\022\023\n\013teamSlotNum\030\n \001(\005\022\023\n\013isRestrictd\030\014" +
+      " \001(\010\022\030\n\020offensiveSkillId\030\r \001(\005\022\030\n\020defens" +
+      "iveSkillId\030\016 \001(\005\"@\n\027MinimumUserMonsterPr" +
+      "oto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001" +
+      "(\005\"\300\001\n\027UserMonsterHealingProto\022\020\n\010userUu" +
+      "id\030\001 \001(\t\022\027\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020que" +
+      "uedTimeMillis\030\003 \001(\003\022\036\n\026userHospitalStruc",
+      "tUuid\030\004 \001(\t\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010p" +
+      "riority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"O\n" +
+      "\035UserMonsterCurrentHealthProto\022\027\n\017userMo" +
+      "nsterUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(\005\"\242" +
+      "\001\n\024UserEnhancementProto\022\020\n\010userUuid\030\001 \001(" +
+      "\t\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.proto." +
+      "UserEnhancementItemProto\0229\n\007feeders\030\003 \003(" +
+      "\0132(.com.lvl6.proto.UserEnhancementItemPr" +
+      "oto\"\206\001\n\030UserEnhancementItemProto\022\027\n\017user" +
+      "MonsterUuid\030\001 \001(\t\022\037\n\027expectedStartTimeMi",
+      "llis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021enh" +
+      "ancingComplete\030\004 \001(\010\"|\n\032UserMonsterCurre" +
+      "ntExpProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032\n\022e" +
+      "xpectedExperience\030\002 \001(\005\022\025\n\rexpectedLevel" +
+      "\030\003 \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033MinimumUse" +
+      "rMonsterSellProto\022\027\n\017userMonsterUuid\030\001 \001" +
+      "(\t\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCurrentMon" +
+      "sterTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013curre" +
+      "ntTeam\030\002 \003(\0132$.com.lvl6.proto.FullUserMo" +
+      "nsterProto\"i\n\031UserMonsterEvolutionProto\022",
+      "\037\n\027catalystUserMonsterUuid\030\001 \001(\t\022\030\n\020user" +
+      "MonsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003\"\337\001" +
+      "\n\032MonsterBattleDialogueProto\022\021\n\tmonsterI" +
+      "d\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.lvl6" +
+      ".proto.MonsterBattleDialogueProto.Dialog" +
+      "ueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabilityU" +
+      "ttered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DIALO" +
+      "GUE\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterStuffP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15659,7 +15817,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor,
-        new java.lang.String[] { "Lvl", "Hp", "CurLvlRequiredExp", "FeederExp", "FireDmg", "GrassDmg", "WaterDmg", "LightningDmg", "DarknessDmg", "RockDmg", "Speed", "HpExponentBase", "DmgExponentBase", "ExpLvlDivisor", "ExpLvlExponent", "SellAmount", "TeamCost", });
+        new java.lang.String[] { "Lvl", "Hp", "CurLvlRequiredExp", "FeederExp", "FireDmg", "GrassDmg", "WaterDmg", "LightningDmg", "DarknessDmg", "RockDmg", "Speed", "HpExponentBase", "DmgExponentBase", "ExpLvlDivisor", "ExpLvlExponent", "SellAmount", "TeamCost", "CostToFullyHeal", "SecsToFullyHeal", });
     internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new

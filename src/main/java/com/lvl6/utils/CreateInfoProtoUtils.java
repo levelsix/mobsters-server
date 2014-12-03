@@ -1754,6 +1754,8 @@ public class CreateInfoProtoUtils {
 			mlipb.setExpLvlExponent(info.getExpLvlExponent());
 			mlipb.setSellAmount(info.getSellAmount());
 			mlipb.setTeamCost(info.getTeamCost());
+			mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
+			mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
 
 			lvlInfoProtos.add(mlipb.build());
 		}
