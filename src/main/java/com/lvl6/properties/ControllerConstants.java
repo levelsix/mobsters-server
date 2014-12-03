@@ -2,11 +2,12 @@ package com.lvl6.properties;
 
 import java.util.Random;
 
+import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
-
-import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+import com.lvl6.proto.StructureProto.ResourceType;
 
 public class ControllerConstants {
 
@@ -147,9 +148,28 @@ public class ControllerConstants {
 	//PVP BATTLE HISTORY
 	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
 
+	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = {
+		1000, 10000, 100000, 1000000, 2000000000 
+	};
+	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = {
+		1, 9, 80, 720, 1440000
+	};
+	public static final String[] RESOURCE_CONVERSION__TYPE = {
+		ResourceType.CASH.name(), ResourceType.OIL.name()  
+	};
+	
+	
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
+	//SPEED UP
+	public static final int[] SPEED_UP__SECONDS = {
+		60, 3600, 86400, 604800, 157852800
+	};
+	public static final int[] SPEED_UP__NUM_GEMS = {
+		1, 12, 144, 840, 219240
+	};
+	
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
