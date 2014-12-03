@@ -157,14 +157,15 @@ public class MonsterStuffUtils {
   			queuedTime = new Date(umhp.getQueuedTimeMillis());
   		}
   		
-//  		int userStructHospitalId = umhp.getUserHospitalStructId();
+  		String userStructHospitalId = umhp.getUserHospitalStructUuid();
   		float healthProgress = umhp.getHealthProgress();
   		int priority = umhp.getPriority();
   		float elapsedSeconds = umhp.getElapsedSeconds();
   		
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
-  		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId, monsterForUserId,
-  				queuedTime, healthProgress, priority, elapsedSeconds);
+  		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId,
+  			monsterForUserId, queuedTime, userStructHospitalId,
+  			healthProgress, priority, elapsedSeconds);
   		nonProtos.add(mhfu);
   	}
   	

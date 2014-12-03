@@ -372,8 +372,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		if (num != 1) {
   			String preface = "problem with updating user's funds.";
   			log.error(String.format(
-  				"% cashChange=%s, gemCost=%s, user=%s, numUpdated=%s",
-  				cashChange, gemCost, u, num));
+  				"%s cashChange=%s, gemCost=%s, user=%s, numUpdated=%s",
+  				preface, cashChange, gemCost, u, num));
   			return false;
   		} else {
   			//things went ok
@@ -400,8 +400,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		List<String> deleteIds = new ArrayList<String>(protoDeleteMap.keySet());
   		int num = DeleteUtils.get().deleteMonsterHealingForUser(
   				uId, deleteIds);
-  		log.info("deleted monster healing rows. numDeleted=" + num +
-  				"\t protoDeleteMap=" + protoDeleteMap);
+  		log.info(String.format(
+  			"deleted monster healing rows. numDeleted=%s \t protoDeleteMap=%s",
+  			num, protoDeleteMap));
   	}
 	  
 	  //convert protos to java counterparts
@@ -441,15 +442,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  if (null != userMonsterIdsToHealths && !userMonsterIdsToHealths.isEmpty()) {
 	  	//HEAL THE MONSTER
 	  	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIdsToHealths);
-	  	log.info("num updated=" + num);
+	  	log.info(String.format("num updated=%s", num));
 	  }
 	  //should always execute, but who knows...
 	  if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
 	  	//delete the selected monsters from  the healing table
 	  	int num = DeleteUtils.get().deleteMonsterHealingForUser(
 	  			uId, userMonsterIds);
-	  	log.info("deleted monster healing rows. numDeleted=" + num +
-	  			"\t userMonsterIds=" + userMonsterIds);
+	  	log.info(String.format(
+	  		"deleted monster healing rows. numDeleted=%s \t userMonsterIds=%s",
+	  		num, userMonsterIds));
 	  }
 	  return true;
   }

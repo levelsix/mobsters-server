@@ -423,7 +423,7 @@ public class DBConstants {
 	public static final String MONSTER_HEALING_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
 	public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
-	//  public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
+	public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
 	public static final String MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS = "health_progress";
 	public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
 	public static final String MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS = "elapsed_seconds";

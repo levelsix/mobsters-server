@@ -8012,6 +8012,32 @@ public final class MonsterStuffProto {
     long getQueuedTimeMillis();
 
     /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    boolean hasUserHospitalStructUuid();
+    /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    java.lang.String getUserHospitalStructUuid();
+    /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserHospitalStructUuidBytes();
+
+    /**
      * <code>optional float healthProgress = 5;</code>
      *
      * <pre>
@@ -8128,18 +8154,24 @@ public final class MonsterStuffProto {
               queuedTimeMillis_ = input.readInt64();
               break;
             }
-            case 45: {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
+              userHospitalStructUuid_ = bs;
+              break;
+            }
+            case 45: {
+              bitField0_ |= 0x00000010;
               healthProgress_ = input.readFloat();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               priority_ = input.readInt32();
               break;
             }
             case 61: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               elapsedSeconds_ = input.readFloat();
               break;
             }
@@ -8290,6 +8322,60 @@ public final class MonsterStuffProto {
       return queuedTimeMillis_;
     }
 
+    public static final int USERHOSPITALSTRUCTUUID_FIELD_NUMBER = 4;
+    private java.lang.Object userHospitalStructUuid_;
+    /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    public boolean hasUserHospitalStructUuid() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    public java.lang.String getUserHospitalStructUuid() {
+      java.lang.Object ref = userHospitalStructUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userHospitalStructUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userHospitalStructUuid = 4;</code>
+     *
+     * <pre>
+     *id of the user's hospital structure
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserHospitalStructUuidBytes() {
+      java.lang.Object ref = userHospitalStructUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userHospitalStructUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int HEALTHPROGRESS_FIELD_NUMBER = 5;
     private float healthProgress_;
     /**
@@ -8300,7 +8386,7 @@ public final class MonsterStuffProto {
      * </pre>
      */
     public boolean hasHealthProgress() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional float healthProgress = 5;</code>
@@ -8323,7 +8409,7 @@ public final class MonsterStuffProto {
      * </pre>
      */
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional int32 priority = 6;</code>
@@ -8342,7 +8428,7 @@ public final class MonsterStuffProto {
      * <code>optional float elapsedSeconds = 7;</code>
      */
     public boolean hasElapsedSeconds() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional float elapsedSeconds = 7;</code>
@@ -8355,6 +8441,7 @@ public final class MonsterStuffProto {
       userUuid_ = "";
       userMonsterUuid_ = "";
       queuedTimeMillis_ = 0L;
+      userHospitalStructUuid_ = "";
       healthProgress_ = 0F;
       priority_ = 0;
       elapsedSeconds_ = 0F;
@@ -8382,12 +8469,15 @@ public final class MonsterStuffProto {
         output.writeInt64(3, queuedTimeMillis_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeFloat(5, healthProgress_);
+        output.writeBytes(4, getUserHospitalStructUuidBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(6, priority_);
+        output.writeFloat(5, healthProgress_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, priority_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeFloat(7, elapsedSeconds_);
       }
       getUnknownFields().writeTo(output);
@@ -8413,13 +8503,17 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, healthProgress_);
+          .computeBytesSize(4, getUserHospitalStructUuidBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, priority_);
+          .computeFloatSize(5, healthProgress_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, priority_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(7, elapsedSeconds_);
       }
@@ -8551,12 +8645,14 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         queuedTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        healthProgress_ = 0F;
+        userHospitalStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        priority_ = 0;
+        healthProgress_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000010);
-        elapsedSeconds_ = 0F;
+        priority_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        elapsedSeconds_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -8600,13 +8696,17 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.healthProgress_ = healthProgress_;
+        result.userHospitalStructUuid_ = userHospitalStructUuid_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.priority_ = priority_;
+        result.healthProgress_ = healthProgress_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.elapsedSeconds_ = elapsedSeconds_;
         result.bitField0_ = to_bitField0_;
@@ -8637,6 +8737,11 @@ public final class MonsterStuffProto {
         }
         if (other.hasQueuedTimeMillis()) {
           setQueuedTimeMillis(other.getQueuedTimeMillis());
+        }
+        if (other.hasUserHospitalStructUuid()) {
+          bitField0_ |= 0x00000008;
+          userHospitalStructUuid_ = other.userHospitalStructUuid_;
+          onChanged();
         }
         if (other.hasHealthProgress()) {
           setHealthProgress(other.getHealthProgress());
@@ -8874,6 +8979,106 @@ public final class MonsterStuffProto {
         return this;
       }
 
+      private java.lang.Object userHospitalStructUuid_ = "";
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public boolean hasUserHospitalStructUuid() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public java.lang.String getUserHospitalStructUuid() {
+        java.lang.Object ref = userHospitalStructUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userHospitalStructUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserHospitalStructUuidBytes() {
+        java.lang.Object ref = userHospitalStructUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userHospitalStructUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public Builder setUserHospitalStructUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userHospitalStructUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public Builder clearUserHospitalStructUuid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userHospitalStructUuid_ = getDefaultInstance().getUserHospitalStructUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userHospitalStructUuid = 4;</code>
+       *
+       * <pre>
+       *id of the user's hospital structure
+       * </pre>
+       */
+      public Builder setUserHospitalStructUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userHospitalStructUuid_ = value;
+        onChanged();
+        return this;
+      }
+
       private float healthProgress_ ;
       /**
        * <code>optional float healthProgress = 5;</code>
@@ -8883,7 +9088,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public boolean hasHealthProgress() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional float healthProgress = 5;</code>
@@ -8903,7 +9108,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public Builder setHealthProgress(float value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         healthProgress_ = value;
         onChanged();
         return this;
@@ -8916,7 +9121,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public Builder clearHealthProgress() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         healthProgress_ = 0F;
         onChanged();
         return this;
@@ -8931,7 +9136,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int32 priority = 6;</code>
@@ -8951,7 +9156,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         priority_ = value;
         onChanged();
         return this;
@@ -8964,7 +9169,7 @@ public final class MonsterStuffProto {
        * </pre>
        */
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         priority_ = 0;
         onChanged();
         return this;
@@ -8975,7 +9180,7 @@ public final class MonsterStuffProto {
        * <code>optional float elapsedSeconds = 7;</code>
        */
       public boolean hasElapsedSeconds() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional float elapsedSeconds = 7;</code>
@@ -8987,7 +9192,7 @@ public final class MonsterStuffProto {
        * <code>optional float elapsedSeconds = 7;</code>
        */
       public Builder setElapsedSeconds(float value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         elapsedSeconds_ = value;
         onChanged();
         return this;
@@ -8996,7 +9201,7 @@ public final class MonsterStuffProto {
        * <code>optional float elapsedSeconds = 7;</code>
        */
       public Builder clearElapsedSeconds() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         elapsedSeconds_ = 0F;
         onChanged();
         return this;
@@ -15397,38 +15602,38 @@ public final class MonsterStuffProto {
       "SlotNum\030\n \001(\005\022\023\n\013isRestrictd\030\014 \001(\010\022\030\n\020of" +
       "fensiveSkillId\030\r \001(\005\022\030\n\020defensiveSkillId" +
       "\030\016 \001(\005\"@\n\027MinimumUserMonsterProto\022\021\n\tmon" +
-      "sterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\240\001\n\027Use" +
+      "sterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\300\001\n\027Use" +
       "rMonsterHealingProto\022\020\n\010userUuid\030\001 \001(\t\022\027" +
       "\n\017userMonsterUuid\030\002 \001(\t\022\030\n\020queuedTimeMil" +
-      "lis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010pri" +
-      "ority\030\006 \001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"O\n\035U",
-      "serMonsterCurrentHealthProto\022\027\n\017userMons" +
-      "terUuid\030\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(\005\"\242\001\n" +
-      "\024UserEnhancementProto\022\020\n\010userUuid\030\001 \001(\t\022" +
-      "=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.proto.Us" +
-      "erEnhancementItemProto\0229\n\007feeders\030\003 \003(\0132" +
-      "(.com.lvl6.proto.UserEnhancementItemProt" +
-      "o\"\206\001\n\030UserEnhancementItemProto\022\027\n\017userMo" +
-      "nsterUuid\030\001 \001(\t\022\037\n\027expectedStartTimeMill" +
-      "is\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021enhan" +
-      "cingComplete\030\004 \001(\010\"|\n\032UserMonsterCurrent",
-      "ExpProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032\n\022exp" +
-      "ectedExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003" +
-      " \001(\005\022\022\n\nexpectedHp\030\004 \001(\005\"J\n\033MinimumUserM" +
-      "onsterSellProto\022\027\n\017userMonsterUuid\030\001 \001(\t" +
-      "\022\022\n\ncashAmount\030\002 \001(\005\"j\n\033UserCurrentMonst" +
-      "erTeamProto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013current" +
-      "Team\030\002 \003(\0132$.com.lvl6.proto.FullUserMons" +
-      "terProto\"i\n\031UserMonsterEvolutionProto\022\037\n" +
-      "\027catalystUserMonsterUuid\030\001 \001(\t\022\030\n\020userMo" +
-      "nsterUuids\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032",
-      "MonsterBattleDialogueProto\022\021\n\tmonsterId\030" +
-      "\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com.lvl6.p" +
-      "roto.MonsterBattleDialogueProto.Dialogue" +
-      "Type\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabilityUtt" +
-      "ered\030\004 \001(\002\"1\n\014DialogueType\022\017\n\013NO_DIALOGU" +
-      "E\020\002\022\020\n\014ENTER_BATTLE\020\001B\023B\021MonsterStuffPro" +
-      "to"
+      "lis\030\003 \001(\003\022\036\n\026userHospitalStructUuid\030\004 \001(" +
+      "\t\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priority\030\006 ",
+      "\001(\005\022\026\n\016elapsedSeconds\030\007 \001(\002\"O\n\035UserMonst" +
+      "erCurrentHealthProto\022\027\n\017userMonsterUuid\030" +
+      "\001 \001(\t\022\025\n\rcurrentHealth\030\002 \001(\005\"\242\001\n\024UserEnh" +
+      "ancementProto\022\020\n\010userUuid\030\001 \001(\t\022=\n\013baseM" +
+      "onster\030\002 \001(\0132(.com.lvl6.proto.UserEnhanc" +
+      "ementItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lv" +
+      "l6.proto.UserEnhancementItemProto\"\206\001\n\030Us" +
+      "erEnhancementItemProto\022\027\n\017userMonsterUui" +
+      "d\030\001 \001(\t\022\037\n\027expectedStartTimeMillis\030\002 \001(\003" +
+      "\022\025\n\renhancingCost\030\003 \001(\005\022\031\n\021enhancingComp",
+      "lete\030\004 \001(\010\"|\n\032UserMonsterCurrentExpProto" +
+      "\022\027\n\017userMonsterUuid\030\001 \001(\t\022\032\n\022expectedExp" +
+      "erience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\022\022\n\n" +
+      "expectedHp\030\004 \001(\005\"J\n\033MinimumUserMonsterSe" +
+      "llProto\022\027\n\017userMonsterUuid\030\001 \001(\t\022\022\n\ncash" +
+      "Amount\030\002 \001(\005\"j\n\033UserCurrentMonsterTeamPr" +
+      "oto\022\020\n\010userUuid\030\001 \001(\t\0229\n\013currentTeam\030\002 \003" +
+      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
+      "\"i\n\031UserMonsterEvolutionProto\022\037\n\027catalys" +
+      "tUserMonsterUuid\030\001 \001(\t\022\030\n\020userMonsterUui",
+      "ds\030\002 \003(\t\022\021\n\tstartTime\030\003 \001(\003\"\337\001\n\032MonsterB" +
+      "attleDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M\n" +
+      "\014dialogueType\030\003 \001(\01627.com.lvl6.proto.Mon" +
+      "sterBattleDialogueProto.DialogueType\022\020\n\010" +
+      "dialogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 \001" +
+      "(\002\"1\n\014DialogueType\022\017\n\013NO_DIALOGUE\020\002\022\020\n\014E" +
+      "NTER_BATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15472,7 +15677,7 @@ public final class MonsterStuffProto {
     internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
-        new java.lang.String[] { "UserUuid", "UserMonsterUuid", "QueuedTimeMillis", "HealthProgress", "Priority", "ElapsedSeconds", });
+        new java.lang.String[] { "UserUuid", "UserMonsterUuid", "QueuedTimeMillis", "UserHospitalStructUuid", "HealthProgress", "Priority", "ElapsedSeconds", });
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new

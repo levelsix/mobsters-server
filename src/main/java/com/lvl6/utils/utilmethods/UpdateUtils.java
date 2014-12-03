@@ -670,9 +670,8 @@ public class UpdateUtils implements UpdateUtil {
 				queuedTime = new Timestamp(d.getTime());
 			}
 			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
-			
-//			int userStructHospitalId = mhfu.getUserStructHospitalId();
-//			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID, userStructHospitalId);
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID,
+				mhfu.getUserStructHospitalId());
 			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS,
 				mhfu.getHealthProgress());
 			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY,
@@ -683,13 +682,13 @@ public class UpdateUtils implements UpdateUtil {
 			newRows.add(aRow);
 		}
 		
-		log.info("newRows=" + newRows);
-		
+//		log.info(String.format("updateUserMonsterHealing, newRows=%s", newRows));
 		
 		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
 
-		log.info("num monster_healing updated: " + numUpdated 
-				+ ". Number of monster_healing: " + monsters.size());
+//		log.info(String.format(
+//			"num monster_healing updated: %s. Number of monster_healing: %s",
+//			numUpdated, monsters.size()));
 		return numUpdated;
 	}
 	
