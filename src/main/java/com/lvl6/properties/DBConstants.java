@@ -1056,6 +1056,7 @@ public class DBConstants {
 	public static final String TASK__BOARD_HEIGHT = "board_height";
 	public static final String TASK__GROUND_IMG_PREFIX = "ground_img_prefix";
 	public static final String TASK__INIT_DEFEATED_DIALOGUE = "init_defeated_dialogue";
+	public static final String TASK__EXP_REWARD = "exp_reward";
 	
 	public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
 	public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";
