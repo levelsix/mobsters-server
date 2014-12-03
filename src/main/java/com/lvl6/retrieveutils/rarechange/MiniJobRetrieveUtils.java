@@ -179,6 +179,7 @@ import com.lvl6.utils.DBConnection;
     int maxDmgDealt = rs.getInt(DBConstants.MINI_JOB__MAX_DMG);
     int durationMinMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MIN_MINUTES);
     int durationMaxMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MAX_MINUTES);
+    int expReward = rs.getInt(DBConstants.MINI_JOB__EXP_REWARD);
     
     if (null != quality) {
     	String newQuality = quality.trim().toUpperCase();
@@ -202,7 +203,7 @@ import com.lvl6.utils.DBConnection;
     		cashReward, oilReward, gemReward, monsterIdReward, itemIdReward,
     		itemRewardQuantity, quality, maxNumMonstersAllowed, chanceToAppear, 
     		hpRequired, atkRequired, minDmgDealt, maxDmgDealt, durationMinMinutes, 
-    		durationMaxMinutes);
+    		durationMaxMinutes, expReward);
     
     if (maxDmgDealt < minDmgDealt || durationMaxMinutes < durationMinMinutes) {
     	log.error(String.format(

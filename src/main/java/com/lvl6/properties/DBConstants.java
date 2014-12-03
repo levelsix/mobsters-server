@@ -812,6 +812,7 @@ public class DBConstants {
 	public static final String MINI_JOB__MAX_DMG = "max_dmg";
 	public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
 	public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
+	public static final String MINI_JOB__EXP_REWARD = "exp_reward";
 
 	public static final String MONSTER_BATTLE_DIALOGUE__ID = GENERIC__ID;
 	public static final String MONSTER_BATTLE_DIALOGUE__MONSTER_ID = "monster_id";

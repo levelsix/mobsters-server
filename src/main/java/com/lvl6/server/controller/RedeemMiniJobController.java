@@ -279,11 +279,14 @@ public class RedeemMiniJobController extends EventController{
     int gemsChange = mj.getGemReward();
     int cashChange = mj.getCashReward();
     int oilChange = mj.getOilReward();
+    int expChange = mj.getExpReward();
     int monsterIdReward = mj.getMonsterIdReward();
     int itemIdReward = mj.getItemIdReward();
     int itemRewardQuantity = mj.getItemRewardQuantity();
 
-    if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange, maxOil)) {
+    if (!updateUser(user, gemsChange, cashChange, maxCash,
+    	oilChange, maxOil, expChange))
+    {
       log.error(String.format(
     	  "could not decrement user gems by %s, cash by %s, and oil by %s",
           gemsChange, cashChange, oilChange));
@@ -357,7 +360,7 @@ public class RedeemMiniJobController extends EventController{
 
 
   private boolean updateUser(User u, int gemsChange, int cashChange,
-      int maxCash, int oilChange, int maxOil) {
+      int maxCash, int oilChange, int maxOil, int expChange) {
     //capping how much the user can gain of a certain resource
     int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
     int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
@@ -367,19 +370,24 @@ public class RedeemMiniJobController extends EventController{
     int maxOilUserCanGain = maxOil - curOil;
     oilChange = Math.min(maxOilUserCanGain, oilChange);
 
-    if (0 == cashChange && 0 == oilChange && 0 == gemsChange) {
+    if (0 == cashChange && 0 == oilChange &&
+    	0 == gemsChange && 0 == expChange)
+    {
       log.info("after caping rewards to max, user gets no resources");
       return true;
     }
 
-    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
-        oilChange, gemsChange);
+//    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
+//        oilChange, gemsChange);
 
-    if (numChange <= 0) {
-      log.error(String.format(
-          "could not update user gems, cash, and oil. gemChange=%s, cash=%s, oil=%s, user=%s",
-          gemsChange, cashChange, oilChange, u));
-      return false;
+//    if (numChange <= 0) {
+    if (!u.updateRelativeGemsCashOilExperienceNaive(gemsChange,
+    	cashChange, oilChange, expChange)) {
+    	String preface ="could not update user gems, cash, oil, exp."; 
+    	log.error(String.format(
+    		"%s gemChange=%s, cash=%s, oil=%s, exp=%s, user=%s",
+    		preface, gemsChange, cashChange, oilChange, expChange, u));
+    	return false;
     }
     return true;
   }
