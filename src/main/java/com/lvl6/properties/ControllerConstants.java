@@ -82,6 +82,7 @@ public class ControllerConstants {
 	public static final float MONSTER__ELEMENTAL_WEAKNESS = 0.8F;
 	public static final float MONSTER__OIL_PER_MONSTER_LEVEL = 100f;
 
+	public static final float MONSTER_ENHANCING__PLAYER_EXP_CONVERTER = 0.2F;
 	//	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 	//	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
 	//	public static final int MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS = 3;
