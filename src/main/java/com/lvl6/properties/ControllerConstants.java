@@ -64,7 +64,7 @@ public class ControllerConstants {
 	
 	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
-		1, 1, 1, 1, 1
+		40, 1, 21, 30, 5
 	};
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
 		30, 50, 90, 210, 300
