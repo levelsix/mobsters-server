@@ -1000,6 +1000,7 @@ public class DBConstants {
 	public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
 	public static final String STRUCTURE_HOSPITAL__HEALTH_PER_SECOND = "health_per_second";
+	public static final String STRUCTURE_HOSPITAL__SECS_TO_FULLY_HEAL_MULTIPLIER = "secs_to_fully_heal_multiplier";
 
 	public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";

@@ -112,7 +112,9 @@ import com.lvl6.utils.DBConnection;
     int structId = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__STRUCT_ID);
     int queueSize = rs.getInt(DBConstants.STRUCTURE_HOSPITAL__QUEUE_SIZE);
     float healthPerSecond = rs.getFloat(DBConstants.STRUCTURE_HOSPITAL__HEALTH_PER_SECOND);
+    float secsToFullyHealMultiplier = rs.getFloat(DBConstants.STRUCTURE_HOSPITAL__SECS_TO_FULLY_HEAL_MULTIPLIER);
     
-    return new StructureHospital(structId, queueSize, healthPerSecond);
+    return new StructureHospital(structId, queueSize, healthPerSecond,
+    	secsToFullyHealMultiplier);
   }
 }

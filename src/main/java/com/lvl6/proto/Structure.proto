@@ -96,8 +96,10 @@ message HospitalProto {
 	optional StructureInfoProto structInfo = 1;
 	optional int32 queueSize = 2;
 	
+	//DEPRECATED, replaced by secsToFullyHealMultiplier
 	//ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
-	optional float healthPerSecond = 3;
+	optional float healthPerSecond = 3 [deprecated = true]; 
+	optional float secsToFullyHealMultiplier = 4;
 }
 
 //------------------------------------------------------------------------------------------

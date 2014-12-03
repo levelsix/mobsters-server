@@ -2465,6 +2465,7 @@ public class CreateInfoProtoUtils {
 		hpb.setStructInfo(sip);
 		hpb.setQueueSize(sh.getQueueSize());
 		hpb.setHealthPerSecond(sh.getHealthPerSecond());
+		hpb.setSecsToFullyHealMultiplier(sh.getSecsToFullyHealMultiplier());
 
 		return hpb.build();
 	}
