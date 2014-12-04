@@ -150,10 +150,10 @@ public class ControllerConstants {
 	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = {
-		1000, 10000, 100000, 1000000, 2000000000 
+		1, 1000, 10000, 100000, 1000000, 2000000000 
 	};
 	public static final int[] RESOURCE_CONVERSION__NUM_GEMS = {
-		1, 9, 80, 720, 1440000
+		1, 1, 9, 80, 720, 1440000
 	};
 	public static final String[] RESOURCE_CONVERSION__TYPE = {
 		ResourceType.CASH.name(), ResourceType.OIL.name()  
@@ -165,10 +165,10 @@ public class ControllerConstants {
 
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = {
-		60, 3600, 86400, 604800, 157852800
+		1, 60, 3600, 86400, 604800, 157852800
 	};
 	public static final int[] SPEED_UP__NUM_GEMS = {
-		1, 12, 144, 840, 219240
+		1, 1, 12, 144, 840, 219240
 	};
 	
 	//STRUCTURE FOR USER STUFF
