@@ -110,6 +110,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
         clanIdToClan = getClanRetrieveUtils().getClansByIds(clanIds);
       }
       
+      log.info("Clans: "+clanIdToClan);
+      
       for (User user : usersByIds.values()) {
     	  
     	  //TODO: consider getting from db
@@ -125,6 +127,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     	  Clan clan = null;
     	  if (null != user.getClanId()) {
     	    clan = clanIdToClan.get(clan);
+    	      log.info("Clan: "+clan);
     	  }
     	  
     	  resBuilder.addRequestedUsers(CreateInfoProtoUtils
