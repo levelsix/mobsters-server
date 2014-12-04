@@ -63,7 +63,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
 
     FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent)event).getFinishNormStructWaittimeWithDiamondsRequestProto();
-    log.info("reqProto=" + reqProto);
+    log.info(String.format("reqProto=%s", reqProto));
 
     MinimumUserProto senderProto = reqProto.getSender();
     String userId = senderProto.getUserUuid();
@@ -103,7 +103,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
       User user = getUserRetrieveUtils().getUserById(senderProto.getUserUuid());
-      log.info("user=" + user);
+      log.info(String.format("user=%s", user));
       int previousGems = 0;
       StructureForUser userStruct = getUserStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
@@ -183,14 +183,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean writeChangesToDB(User user, StructureForUser userStruct,
-  		Timestamp timeOfSpeedup, Structure struct, int gemCost, Map<String, Integer> money) {
+  		Timestamp timeOfSpeedup, Structure struct, int gemCost,
+  		Map<String, Integer> money)
+  {
 
     int gemChange = -1 * gemCost;
+    int expChange = struct.getExpReward();
     if (0 != gemChange) {
       //update user gems
-      if (!user.updateRelativeGemsNaive(gemChange, 0)) {
-        log.error("problem with using diamonds to finish norm struct build. userStruct=" +
-            userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+      if (!user.updateRelativeGemsNaive(gemChange, expChange)) {
+    	  String preface = "can't finish norm struct build.";
+        log.error(String.format(
+        	"%s userStruct=%s \t struct=%s \t gemCost=%s \t exp=%s",
+            preface, userStruct, struct, gemChange, expChange));
         return false;
       } else {
           money.put(MiscMethods.gems, gemChange);
@@ -202,8 +207,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//update structure for user to reflect it is complete
   	if (!UpdateUtils.get().updateSpeedupUpgradingUserStruct(userStruct.getId(),
   			timeOfSpeedup)) {
-  		log.error("problem with completing norm struct build time. userStruct=" +
-  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+  		String preface = "problem completing norm struct build time."; 
+  		log.error(String.format(
+  			"%s userStruct=%s \t struct=%s \t gemCost=%s",
+  			preface, userStruct, struct, gemChange));
   		return false;
   	}
   	

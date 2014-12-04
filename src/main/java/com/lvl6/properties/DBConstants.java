@@ -976,6 +976,7 @@ public class DBConstants {
 	public static final String STRUCTURE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
 	public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
 	public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
+	public static final String STRUCTURE__EXP_REWARD = "exp_reward";
 
 	public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
