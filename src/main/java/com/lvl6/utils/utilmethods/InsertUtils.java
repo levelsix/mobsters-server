@@ -261,6 +261,8 @@ public class InsertUtils implements InsertUtil{
           coinChange);
       insertParams.put(DBConstants.IAP_HISTORY__CASH_SPENT, cashCost);
       insertParams.put(DBConstants.IAP_HISTORY__UDID, user.getUdid());
+      insertParams.put(DBConstants.IAP_HISTORY__FB_ID, user.getFacebookId());
+      
       insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
           appleReceipt.getString(IAPValues.PRODUCT_ID));
       insertParams.put(DBConstants.IAP_HISTORY__QUANTITY,
@@ -275,7 +277,7 @@ public class InsertUtils implements InsertUtil{
             appleReceipt.getString(IAPValues.APP_ITEM_ID));
       }
     } catch (JSONException e) {
-      e.printStackTrace();
+      log.error("JSON error", e);
       return false;
     }
     int numInserted = DBConnection.get().insertIntoTableBasic(
