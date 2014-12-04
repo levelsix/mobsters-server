@@ -161,9 +161,9 @@ public class SetPrivateChatMessageAction implements StartUpAction
 	public void execute( StartUpResource useMe )
 	{
 		if (null == userIds || userIds.isEmpty()) {
-			log.error(String.format(
-				"user never private msged. postsUserReceved=%s, postsUserSent=%s, aUser=%s",
-				postsUserReceived, postsUserSent, user));
+//			log.error(String.format(
+//				"user never private msged. postsUserReceved=%s, postsUserSent=%s, aUser=%s",
+//				postsUserReceived, postsUserSent, user));
 			return;
 		}
 		Map<String, User> userIdsToUsers = useMe.getUserIdsToUsers(userIds);
