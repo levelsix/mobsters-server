@@ -880,6 +880,10 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
 	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
 	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT = "enhance_exp_per_sec_exponent";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";

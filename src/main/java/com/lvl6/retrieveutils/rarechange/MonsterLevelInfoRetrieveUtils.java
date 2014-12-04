@@ -246,11 +246,17 @@ import com.lvl6.utils.DBConnection;
     int costToFullyHeal = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL);
     int secsToFullyHeal = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL);
     
+    int enhanceCostPerFeeder = rs.getInt(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER);
+    float enhanceCostExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT);
+    float enhanceExpPerSec = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC);
+    float enhanceExpPerSecExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT);
+    
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
     		curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,
     		lightningDmg, darknessDmg, rockDmg, speed, hpExponentBase,
     		dmgExponentBase, expLvlDivisor, expLvlExponent, sellAmount,
-    		teamCost, costToFullyHeal, secsToFullyHeal);
+    		teamCost, costToFullyHeal, secsToFullyHeal,enhanceCostPerFeeder,
+    		enhanceCostExponent, enhanceExpPerSec, enhanceExpPerSecExponent);
     
     return srs;
   }
