@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureReque
 
 public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent{
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
 	private RetrieveCurrencyFromNormStructureRequestProto retrieveCurrencyFromNormStructureRequestProto;
   /**
@@ -24,12 +24,20 @@ public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent{
       retrieveCurrencyFromNormStructureRequestProto = RetrieveCurrencyFromNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retrieveCurrencyFromNormStructureRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("retrieve currency from norm strucure request exception", e);
+      log.error("RetrieveCurrencyFromNormStructureRequest exception", e);
     }
   }
 
   public RetrieveCurrencyFromNormStructureRequestProto getRetrieveCurrencyFromNormStructureRequestProto() {
     return retrieveCurrencyFromNormStructureRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "RetrieveCurrencyFromNormStructureRequestEvent [retrieveCurrencyFromNormStructureRequestProto="
+		  + retrieveCurrencyFromNormStructureRequestProto
+		  + "]";
   }
   
 }//RetrieveCurrencyFromNormStructureRequestProto

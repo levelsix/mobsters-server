@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 
 public class CreateClanRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private CreateClanRequestProto createClanRequestProto;
   
@@ -24,11 +24,20 @@ public class CreateClanRequestEvent extends RequestEvent {
       createClanRequestProto = CreateClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = createClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("create clan request exception", e);
+      log.error("CreateClanRequest exception", e);
     }
   }
 
   public CreateClanRequestProto getCreateClanRequestProto() {
     return createClanRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "CreateClanRequestEvent [createClanRequestProto="
+		  + createClanRequestProto
+		  + "]";
+  }
+
 }

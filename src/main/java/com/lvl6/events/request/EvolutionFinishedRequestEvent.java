@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
 
 public class EvolutionFinishedRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private EvolutionFinishedRequestProto evolutionFinishedRequestProto;
   
@@ -24,11 +24,20 @@ public class EvolutionFinishedRequestEvent extends RequestEvent {
       evolutionFinishedRequestProto = EvolutionFinishedRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = evolutionFinishedRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("evolution finished request exception", e);
+      log.error("EvolutionFinishedRequest exception", e);
     }
   }
 
   public EvolutionFinishedRequestProto getEvolutionFinishedRequestProto() {
     return evolutionFinishedRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "EvolutionFinishedRequestEvent [evolutionFinishedRequestProto="
+		  + evolutionFinishedRequestProto
+		  + "]";
+  }
+
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 
 public class PurchaseNormStructureRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private PurchaseNormStructureRequestProto purchaseNormStructureRequestProto;
   
@@ -24,11 +24,19 @@ public class PurchaseNormStructureRequestEvent extends RequestEvent {
       purchaseNormStructureRequestProto = PurchaseNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = purchaseNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("purchase norm structure request exception", e);
+      log.error("PurchaseNormStructureRequest exception", e);
     }
   }
 
   public PurchaseNormStructureRequestProto getPurchaseNormStructureRequestProto() {
     return purchaseNormStructureRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "PurchaseNormStructureRequestEvent [purchaseNormStructureRequestProto="
+		  + purchaseNormStructureRequestProto
+		  + "]";
   }
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 
 public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private MoveOrRotateNormStructureRequestProto moveOrRotateNormStructureRequestProto;
   
@@ -24,11 +24,19 @@ public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
       moveOrRotateNormStructureRequestProto = MoveOrRotateNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = moveOrRotateNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("move or rotate norm structure request exception", e);
+      log.error("MoveOrRotateNormStructureRequest exception", e);
     }
   }
 
   public MoveOrRotateNormStructureRequestProto getMoveOrRotateNormStructureRequestProto() {
     return moveOrRotateNormStructureRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "MoveOrRotateNormStructureRequestEvent [moveOrRotateNormStructureRequestProto="
+		  + moveOrRotateNormStructureRequestProto
+		  + "]";
   }
 }

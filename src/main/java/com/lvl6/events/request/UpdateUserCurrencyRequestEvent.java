@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 
 public class UpdateUserCurrencyRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private UpdateUserCurrencyRequestProto updateUserCurrencyRequestProto;
   
@@ -24,11 +24,20 @@ public class UpdateUserCurrencyRequestEvent extends RequestEvent {
       updateUserCurrencyRequestProto = UpdateUserCurrencyRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = updateUserCurrencyRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("update user currency request exception", e);
+      log.error("UpdateUserCurrencyRequest exception", e);
     }
   }
 
   public UpdateUserCurrencyRequestProto getUpdateUserCurrencyRequestProto() {
     return updateUserCurrencyRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "UpdateUserCurrencyRequestEvent [updateUserCurrencyRequestProto="
+		  + updateUserCurrencyRequestProto
+		  + "]";
+  }
+
 }

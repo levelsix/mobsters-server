@@ -12,7 +12,7 @@ import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 
 public class TradeItemForBoosterRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto;
   
@@ -24,7 +24,7 @@ public class TradeItemForBoosterRequestEvent extends RequestEvent {
       tradeItemForBoosterRequestProto = TradeItemForBoosterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = tradeItemForBoosterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("enable apns request exception", e);
+      log.error("TradeItemForBoosterRequest exception", e);
     }
   }
 
@@ -35,6 +35,14 @@ public class TradeItemForBoosterRequestEvent extends RequestEvent {
   public void setTradeItemForBoosterRequestProto( TradeItemForBoosterRequestProto tradeItemForBoosterRequestProto )
   {
 	  this.tradeItemForBoosterRequestProto = tradeItemForBoosterRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "TradeItemForBoosterRequestEvent [tradeItemForBoosterRequestProto="
+		  + tradeItemForBoosterRequestProto
+		  + "]";
   }
 
 }

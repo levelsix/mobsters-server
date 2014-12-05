@@ -24,7 +24,7 @@ public class AchievementProgressRequestEvent extends RequestEvent {
       achievementProgressRequestProto = AchievementProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = achievementProgressRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("AchievementProgress request exception", e);
+      log.error("AchievementProgressRequest exception", e);
     }
   }
 
@@ -37,5 +37,12 @@ public class AchievementProgressRequestEvent extends RequestEvent {
 	  this.achievementProgressRequestProto = achievementProgressRequestProto;
   }
 
+  @Override
+  public String toString()
+  {
+	  return "AchievementProgressRequestEvent [achievementProgressRequestProto="
+		  + achievementProgressRequestProto
+		  + "]";
+  }
 
 }

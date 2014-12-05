@@ -12,7 +12,7 @@ import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 
 public class SendGroupChatRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private SendGroupChatRequestProto sendGroupChatRequestProto;
   
@@ -24,11 +24,20 @@ public class SendGroupChatRequestEvent extends RequestEvent {
       sendGroupChatRequestProto = SendGroupChatRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = sendGroupChatRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("send group chat request exception", e);
+      log.error("SendGroupChatRequest exception", e);
     }
   }
 
   public SendGroupChatRequestProto getSendGroupChatRequestProto() {
     return sendGroupChatRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SendGroupChatRequestEvent [sendGroupChatRequestProto="
+		  + sendGroupChatRequestProto
+		  + "]";
+  }
+  
 }

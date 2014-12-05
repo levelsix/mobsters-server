@@ -142,6 +142,9 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
             log.info("Player logged on: " + event.getPlayerId());
             newp.setPlayerId(event.getPlayerId());
             playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
+        } else {
+        	log.error(String.format(
+        		"playerId not set for RequestEvent: %s", event));
         }
 	}
 

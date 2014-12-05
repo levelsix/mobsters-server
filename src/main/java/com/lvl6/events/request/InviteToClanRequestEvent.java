@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.InviteToClanRequestProto;
 
 public class InviteToClanRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private InviteToClanRequestProto inviteToClanRequestProto;
   
@@ -24,7 +24,7 @@ public class InviteToClanRequestEvent extends RequestEvent {
       inviteToClanRequestProto = InviteToClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = inviteToClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("InviteToClan request exception", e);
+      log.error("InviteToClanRequest exception", e);
     }
   }
 
@@ -36,4 +36,13 @@ public class InviteToClanRequestEvent extends RequestEvent {
   {
 	  this.inviteToClanRequestProto = inviteToClanRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "InviteToClanRequestEvent [inviteToClanRequestProto="
+		  + inviteToClanRequestProto
+		  + "]";
+  }
+  
 }

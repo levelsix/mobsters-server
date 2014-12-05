@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
 
 public class RetrieveUsersForUserIdsRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private RetrieveUsersForUserIdsRequestProto retrieveUsersForUserIdsRequestProto;
   
@@ -24,11 +24,19 @@ public class RetrieveUsersForUserIdsRequestEvent extends RequestEvent {
       retrieveUsersForUserIdsRequestProto = RetrieveUsersForUserIdsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retrieveUsersForUserIdsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("retrieve users for user ids request exception", e);
+      log.error("RetrieveUsersForUserIds exception", e);
     }
   }
 
   public RetrieveUsersForUserIdsRequestProto getRetrieveUsersForUserIdsRequestProto() {
     return retrieveUsersForUserIdsRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "RetrieveUsersForUserIdsRequestEvent [retrieveUsersForUserIdsRequestProto="
+		  + retrieveUsersForUserIdsRequestProto
+		  + "]";
   }
 }

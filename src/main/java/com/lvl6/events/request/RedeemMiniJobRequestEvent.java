@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 
 public class RedeemMiniJobRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private RedeemMiniJobRequestProto redeemMiniJobRequestProto;
   
@@ -24,7 +24,7 @@ public class RedeemMiniJobRequestEvent extends RequestEvent {
       redeemMiniJobRequestProto = RedeemMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = redeemMiniJobRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("RedeemMiniJob request exception", e);
+      log.error("RedeemMiniJobRequest exception", e);
     }
   }
 
@@ -34,6 +34,14 @@ public class RedeemMiniJobRequestEvent extends RequestEvent {
   //added for testing purposes
   public void setRedeemMiniJobRequestProto(RedeemMiniJobRequestProto sorp) {
 	  this.redeemMiniJobRequestProto = sorp;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "RedeemMiniJobRequestEvent [redeemMiniJobRequestProto="
+		  + redeemMiniJobRequestProto
+		  + "]";
   }
   
 }

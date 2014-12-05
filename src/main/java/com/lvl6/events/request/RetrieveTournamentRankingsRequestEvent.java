@@ -12,7 +12,7 @@ import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProt
 
 public class RetrieveTournamentRankingsRequestEvent extends RequestEvent{
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private RetrieveTournamentRankingsRequestProto retrieveTournamentRankingsRequestProto;
   /**
@@ -24,12 +24,20 @@ public class RetrieveTournamentRankingsRequestEvent extends RequestEvent{
       retrieveTournamentRankingsRequestProto = RetrieveTournamentRankingsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retrieveTournamentRankingsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("retrieve tournament rankings request exception", e);
+      log.error("RetrieveTournamentRankingsRequest exception", e);
     }
   }
 
   public RetrieveTournamentRankingsRequestProto getRetrieveTournamentRankingsRequestProto() {
     return retrieveTournamentRankingsRequestProto;
   }
-  
+
+  @Override
+  public String toString()
+  {
+	  return "RetrieveTournamentRankingsRequestEvent [retrieveTournamentRankingsRequestProto="
+		  + retrieveTournamentRankingsRequestProto
+		  + "]";
+  }
+
 }//RetrieveTournamentRankingsRequestProto

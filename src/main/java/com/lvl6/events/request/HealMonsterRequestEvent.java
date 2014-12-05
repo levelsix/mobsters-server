@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 
 public class HealMonsterRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private HealMonsterRequestProto healMonsterRequestProto;
   
@@ -24,11 +24,20 @@ public class HealMonsterRequestEvent extends RequestEvent {
       healMonsterRequestProto = HealMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = healMonsterRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("heal monster request exception", e);
+      log.error("HealMonsterRequest exception", e);
     }
   }
 
   public HealMonsterRequestProto getHealMonsterRequestProto() {
     return healMonsterRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "HealMonsterRequestEvent [healMonsterRequestProto="
+		  + healMonsterRequestProto
+		  + "]";
+  }
+  
 }

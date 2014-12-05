@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProto;
 
 public class AddMonsterToBattleTeamRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private AddMonsterToBattleTeamRequestProto addMonsterToBattleTeamRequestProto;
   
@@ -24,11 +24,20 @@ public class AddMonsterToBattleTeamRequestEvent extends RequestEvent {
       addMonsterToBattleTeamRequestProto = AddMonsterToBattleTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = addMonsterToBattleTeamRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("add monster to battle team request exception", e);
+      log.error("AddMonsterToBattleTeamRequest exception", e);
     }
   }
 
   public AddMonsterToBattleTeamRequestProto getAddMonsterToBattleTeamRequestProto() {
     return addMonsterToBattleTeamRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "AddMonsterToBattleTeamRequestEvent [addMonsterToBattleTeamRequestProto="
+		  + addMonsterToBattleTeamRequestProto
+		  + "]";
+  }
+
 }

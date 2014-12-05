@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
 
 public class EnhancementWaitTimeCompleteRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private EnhancementWaitTimeCompleteRequestProto enhancementWaitTimeCompleteRequestProto;
   
@@ -24,11 +24,20 @@ public class EnhancementWaitTimeCompleteRequestEvent extends RequestEvent {
     	enhancementWaitTimeCompleteRequestProto = EnhancementWaitTimeCompleteRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = enhancementWaitTimeCompleteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("enhancement wait time complete request exception", e);
+      log.error("EnhancementWaitTimeCompleteRequest exception", e);
     }
   }
 
   public EnhancementWaitTimeCompleteRequestProto getEnhancementWaitTimeCompleteRequestProto() {
     return enhancementWaitTimeCompleteRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "EnhancementWaitTimeCompleteRequestEvent [enhancementWaitTimeCompleteRequestProto="
+		  + enhancementWaitTimeCompleteRequestProto
+		  + "]";
+  }
+
 }

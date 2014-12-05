@@ -12,7 +12,7 @@ import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
 
 public class TradeItemForSpeedUpsRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto;
   
@@ -24,7 +24,7 @@ public class TradeItemForSpeedUpsRequestEvent extends RequestEvent {
       tradeItemForSpeedUpsRequestProto = TradeItemForSpeedUpsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = tradeItemForSpeedUpsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("TradeItemForSpeedUps request exception", e);
+      log.error("TradeItemForSpeedUpsRequest exception", e);
     }
   }
 
@@ -35,6 +35,14 @@ public class TradeItemForSpeedUpsRequestEvent extends RequestEvent {
   public void setTradeItemForSpeedUpsRequestProto( TradeItemForSpeedUpsRequestProto tradeItemForSpeedUpsRequestProto )
   {
 	  this.tradeItemForSpeedUpsRequestProto = tradeItemForSpeedUpsRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "TradeItemForSpeedUpsRequestEvent [tradeItemForSpeedUpsRequestProto="
+		  + tradeItemForSpeedUpsRequestProto
+		  + "]";
   }
 
 }

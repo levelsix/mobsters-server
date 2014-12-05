@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto;
 
 public class AttackClanRaidMonsterRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private AttackClanRaidMonsterRequestProto attackClanRaidMonsterRequestProto;
   
@@ -24,11 +24,20 @@ public class AttackClanRaidMonsterRequestEvent extends RequestEvent {
       attackClanRaidMonsterRequestProto = AttackClanRaidMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = attackClanRaidMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("boot player from clan request exception", e);
+      log.error("AttackClanRaidMonsterRequest exception", e);
     }
   }
 
   public AttackClanRaidMonsterRequestProto getAttackClanRaidMonsterRequestProto() {
     return attackClanRaidMonsterRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "AttackClanRaidMonsterRequestEvent [attackClanRaidMonsterRequestProto="
+		  + attackClanRaidMonsterRequestProto
+		  + "]";
+  }
+
 }

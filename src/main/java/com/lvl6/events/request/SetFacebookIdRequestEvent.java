@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 
 public class SetFacebookIdRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private SetFacebookIdRequestProto setFacebookIdRequestProto;
   
@@ -24,11 +24,20 @@ public class SetFacebookIdRequestEvent extends RequestEvent {
       setFacebookIdRequestProto = SetFacebookIdRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = setFacebookIdRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("set facebook id request exception", e);
+      log.error("SetFacebookIdRequest", e);
     }
   }
 
   public SetFacebookIdRequestProto getSetFacebookIdRequestProto() {
     return setFacebookIdRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SetFacebookIdRequestEvent [setFacebookIdRequestProto="
+		  + setFacebookIdRequestProto
+		  + "]";
+  }
+  
 }

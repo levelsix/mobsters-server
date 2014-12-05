@@ -24,7 +24,7 @@ public class QuestProgressRequestEvent extends RequestEvent {
       questProgressRequestProto = QuestProgressRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = questProgressRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("quest progress request exception", e);
+      log.error("QuestProgressRequest exception", e);
     }
   }
 
@@ -32,8 +32,17 @@ public class QuestProgressRequestEvent extends RequestEvent {
     return questProgressRequestProto;
   }
 
-public void setQuestProgressRequestProto( QuestProgressRequestProto questProgressRequestProto )
-{
-	this.questProgressRequestProto = questProgressRequestProto;
-}
+  public void setQuestProgressRequestProto( QuestProgressRequestProto questProgressRequestProto )
+  {
+	  this.questProgressRequestProto = questProgressRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "QuestProgressRequestEvent [questProgressRequestProto="
+		  + questProgressRequestProto
+		  + "]";
+  }
+  
 }

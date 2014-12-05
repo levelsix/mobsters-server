@@ -12,7 +12,7 @@ import com.lvl6.proto.EventPvpProto.QueueUpRequestProto;
 
 public class QueueUpRequestEvent extends RequestEvent{
 	
-  private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private QueueUpRequestProto queueUpRequestProto;
   /**
@@ -24,12 +24,20 @@ public class QueueUpRequestEvent extends RequestEvent{
       queueUpRequestProto = QueueUpRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = queueUpRequestProto.getAttacker().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("queue up request exception", e);
+      log.error("QueueUpRequest exception", e);
     }
   }
 
   public QueueUpRequestProto getQueueUpRequestProto() {
     return queueUpRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "QueueUpRequestEvent [queueUpRequestProto="
+		  + queueUpRequestProto
+		  + "]";
   }
   
 }//QueueUpRequestProto

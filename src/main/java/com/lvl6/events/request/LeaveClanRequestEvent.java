@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 
 public class LeaveClanRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private LeaveClanRequestProto leaveClanRequestProto;
   
@@ -24,11 +24,19 @@ public class LeaveClanRequestEvent extends RequestEvent {
       leaveClanRequestProto = LeaveClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = leaveClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("leave clan request exception", e);
+      log.error("LeaveClanRequest exception", e);
     }
   }
 
   public LeaveClanRequestProto getLeaveClanRequestProto() {
     return leaveClanRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "LeaveClanRequestEvent [leaveClanRequestProto="
+		  + leaveClanRequestProto
+		  + "]";
   }
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProto;
 
 public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private PromoteDemoteClanMemberRequestProto promoteDemoteClanMemberRequestProto;
   
@@ -24,11 +24,19 @@ public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
       promoteDemoteClanMemberRequestProto = PromoteDemoteClanMemberRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = promoteDemoteClanMemberRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("boot player from clan request exception", e);
+      log.error("PromoteDemoteClanMemberRequest exception", e);
     }
   }
 
   public PromoteDemoteClanMemberRequestProto getPromoteDemoteClanMemberRequestProto() {
     return promoteDemoteClanMemberRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "PromoteDemoteClanMemberRequestEvent [promoteDemoteClanMemberRequestProto="
+		  + promoteDemoteClanMemberRequestProto
+		  + "]";
   }
 }
