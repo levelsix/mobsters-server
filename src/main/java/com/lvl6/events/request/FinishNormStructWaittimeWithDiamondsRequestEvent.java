@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRe
 
 public class FinishNormStructWaittimeWithDiamondsRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private FinishNormStructWaittimeWithDiamondsRequestProto finishNormStructWaittimeWithDiamondsRequestProto;
   
@@ -24,11 +24,20 @@ public class FinishNormStructWaittimeWithDiamondsRequestEvent extends RequestEve
       finishNormStructWaittimeWithDiamondsRequestProto = FinishNormStructWaittimeWithDiamondsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = finishNormStructWaittimeWithDiamondsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("finish norm struct wait time with diamonds request exception", e);
+      log.error("FinishNormStructWaittimeWithDiamondsRequest exception", e);
     }
   }
 
   public FinishNormStructWaittimeWithDiamondsRequestProto getFinishNormStructWaittimeWithDiamondsRequestProto() {
     return finishNormStructWaittimeWithDiamondsRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "FinishNormStructWaittimeWithDiamondsRequestEvent [finishNormStructWaittimeWithDiamondsRequestProto="
+		  + finishNormStructWaittimeWithDiamondsRequestProto
+		  + "]";
+  }
+  
 }

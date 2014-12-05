@@ -12,7 +12,7 @@ import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 
 public class PurchaseBoosterPackRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private PurchaseBoosterPackRequestProto purchaseBoosterPackRequestProto;
   
@@ -24,11 +24,20 @@ public class PurchaseBoosterPackRequestEvent extends RequestEvent {
       purchaseBoosterPackRequestProto = PurchaseBoosterPackRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = purchaseBoosterPackRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("purchase booster pack request exception", e);
+      log.error("PurchaseBoosterPackRequest exception", e);
     }
   }
 
   public PurchaseBoosterPackRequestProto getPurchaseBoosterPackRequestProto() {
     return purchaseBoosterPackRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "PurchaseBoosterPackRequestEvent [purchaseBoosterPackRequestProto="
+		  + purchaseBoosterPackRequestProto
+		  + "]";
+  }
+  
 }

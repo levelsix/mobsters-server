@@ -8153,17 +8153,17 @@ public final class EventItemProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    boolean hasMup();
+    boolean hasSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProto getMup();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
      * <code>optional int64 clientTime = 2;</code>
@@ -8264,12 +8264,12 @@ public final class EventItemProto {
             case 10: {
               com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = mup_.toBuilder();
+                subBuilder = sender_.toBuilder();
               }
-              mup_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(mup_);
-                mup_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000001;
               break;
@@ -8331,25 +8331,25 @@ public final class EventItemProto {
     }
 
     private int bitField0_;
-    public static final int MUP_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto mup_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public boolean hasMup() {
+    public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
-      return mup_;
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
     }
     /**
-     * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
-      return mup_;
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
     }
 
     public static final int CLIENTTIME_FIELD_NUMBER = 2;
@@ -8413,7 +8413,7 @@ public final class EventItemProto {
     }
 
     private void initFields() {
-      mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clientTime_ = 0L;
       uisgUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -8431,7 +8431,7 @@ public final class EventItemProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, mup_);
+        output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, clientTime_);
@@ -8450,7 +8450,7 @@ public final class EventItemProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, mup_);
+          .computeMessageSize(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -8574,7 +8574,7 @@ public final class EventItemProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMupFieldBuilder();
+          getSenderFieldBuilder();
         }
       }
       private static Builder create() {
@@ -8583,10 +8583,10 @@ public final class EventItemProto {
 
       public Builder clear() {
         super.clear();
-        if (mupBuilder_ == null) {
-          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         } else {
-          mupBuilder_.clear();
+          senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         clientTime_ = 0L;
@@ -8624,10 +8624,10 @@ public final class EventItemProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (mupBuilder_ == null) {
-          result.mup_ = mup_;
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
         } else {
-          result.mup_ = mupBuilder_.build();
+          result.sender_ = senderBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
@@ -8654,8 +8654,8 @@ public final class EventItemProto {
 
       public Builder mergeFrom(com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto other) {
         if (other == com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto.getDefaultInstance()) return this;
-        if (other.hasMup()) {
-          mergeMup(other.getMup());
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
@@ -8697,120 +8697,120 @@ public final class EventItemProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.UserProto.MinimumUserProto mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> mupBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public boolean hasMup() {
+      public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto getMup() {
-        if (mupBuilder_ == null) {
-          return mup_;
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
         } else {
-          return mupBuilder_.getMessage();
+          return senderBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder setMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (mupBuilder_ == null) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          mup_ = value;
+          sender_ = value;
           onChanged();
         } else {
-          mupBuilder_.setMessage(value);
+          senderBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder setMup(
+      public Builder setSender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (mupBuilder_ == null) {
-          mup_ = builderForValue.build();
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
           onChanged();
         } else {
-          mupBuilder_.setMessage(builderForValue.build());
+          senderBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder mergeMup(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (mupBuilder_ == null) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              mup_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            mup_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(mup_).mergeFrom(value).buildPartial();
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
-            mup_ = value;
+            sender_ = value;
           }
           onChanged();
         } else {
-          mupBuilder_.mergeFrom(value);
+          senderBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public Builder clearMup() {
-        if (mupBuilder_ == null) {
-          mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           onChanged();
         } else {
-          mupBuilder_.clear();
+          senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMupBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getMupFieldBuilder().getBuilder();
+        return getSenderFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMupOrBuilder() {
-        if (mupBuilder_ != null) {
-          return mupBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
         } else {
-          return mup_;
+          return sender_;
         }
       }
       /**
-       * <code>optional .com.lvl6.proto.MinimumUserProto mup = 1;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getMupFieldBuilder() {
-        if (mupBuilder_ == null) {
-          mupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  getMup(),
+                  getSender(),
                   getParentForChildren(),
                   isClean());
-          mup_ = null;
+          sender_ = null;
         }
-        return mupBuilder_;
+        return senderBuilder_;
       }
 
       private long clientTime_ ;
@@ -10249,18 +10249,18 @@ public final class EventItemProto {
       "roto.TradeItemForResourcesResponseProto." +
       "TradeItemForResourcesStatus\":\n\033TradeItem" +
       "ForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"s\n\034RedeemSecretGiftRequestProto\022" +
-      "-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUuid\030\003",
-      " \003(\t\"\261\002\n\035RedeemSecretGiftResponseProto\022-" +
-      "\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.proto." +
-      "UserItemSecretGiftProto\022T\n\006status\030\003 \001(\0162" +
-      "D.com.lvl6.proto.RedeemSecretGiftRespons" +
-      "eProto.RedeemSecretGiftStatus\"Q\n\026RedeemS" +
-      "ecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_ITE" +
-      "MS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Even" +
-      "tItemProto"
+      "OTHER\020\002\"v\n\034RedeemSecretGiftRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUui",
+      "d\030\003 \003(\t\"\261\002\n\035RedeemSecretGiftResponseProt" +
+      "o\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\0228\n\007nuGifts\030\002 \003(\0132\'.com.lvl6.pro" +
+      "to.UserItemSecretGiftProto\022T\n\006status\030\003 \001" +
+      "(\0162D.com.lvl6.proto.RedeemSecretGiftResp" +
+      "onseProto.RedeemSecretGiftStatus\"Q\n\026Rede" +
+      "emSecretGiftStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_" +
+      "ITEMS_NONEXISTENT\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016E" +
+      "ventItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10331,7 +10331,7 @@ public final class EventItemProto {
     internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RedeemSecretGiftRequestProto_descriptor,
-        new java.lang.String[] { "Mup", "ClientTime", "UisgUuid", });
+        new java.lang.String[] { "Sender", "ClientTime", "UisgUuid", });
     internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_RedeemSecretGiftResponseProto_fieldAccessorTable = new

@@ -7,6 +7,8 @@ import com.lvl6.pvp.PvpUser;
 
 public class PvpLeagueForUser implements Serializable {
 	
+	private static final long serialVersionUID = 5869847017999707936L;
+	
 	private String userId;
 	private int pvpLeagueId;
 	private int rank;

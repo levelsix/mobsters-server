@@ -189,19 +189,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    //check the shield times just to make sure this user is still attackable
-    //his shield end times should be in the past
-    Date shieldEndTime = enemyPlfu.getShieldEndTime();
-    Date inBattleEndTime = enemyPlfu.getInBattleShieldEndTime();
-    
-    if (shieldEndTime.getTime() > curDate.getTime() ||
-    		inBattleEndTime.getTime() > curDate.getTime()) {
-    	//this is possible if another attacker got to this person first
-    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
-    	log.warn("The user this client wants to attack has already been atttacked" +
-    			" or is being attacked. pvpUser=" + enemyPlfu + "\t curDate" + curDate);
-    	return false;
-    }
+    // Disabling shield until further optimizations -- Affecting revenge too much
+//    //check the shield times just to make sure this user is still attackable
+//    //his shield end times should be in the past
+//    Date shieldEndTime = enemyPlfu.getShieldEndTime();
+//    Date inBattleEndTime = enemyPlfu.getInBattleShieldEndTime();
+//    
+//    if (shieldEndTime.getTime() > curDate.getTime() ||
+//    		inBattleEndTime.getTime() > curDate.getTime()) {
+//    	//this is possible if another attacker got to this person first
+//    	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
+//    	log.warn("The user this client wants to attack has already been atttacked" +
+//    			" or is being attacked. pvpUser=" + enemyPlfu + "\t curDate" + curDate);
+//    	return false;
+//    }
     
     return true;
   }
@@ -288,20 +289,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//so other users can't attack this person (who is under attack atm) for one hour
   		long nowMillis = clientTime.getTime();
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
-  		enemy.setInBattleShieldEndTime(newInBattleEndTime);
   		
-  		
-  		//replace hazelcast object
-  		PvpUser nuEnemyPu = new PvpUser(enemy);
-  		getHazelcastPvpUtil().replacePvpUser(nuEnemyPu, enemyId);
-  		
-  		//as well as update db
-  		Timestamp nuInBattleEndTime = new Timestamp(newInBattleEndTime.getTime());
-  		log.info("now=" + clientTime);
-  		log.info("should be one hour later, battleEndTime=" + nuInBattleEndTime);
-  		int numUpdated = UpdateUtils.get().updatePvpLeagueForUserShields(enemyId,
-  				null, nuInBattleEndTime);
-  		log.info("(defender shield) num updated=" + numUpdated);
+  		// Only update if this new time is more in the future than the current shield time
+  		if (enemy.getInBattleShieldEndTime().getTime() < newInBattleEndTime.getTime()) {
+  		    
+  	        enemy.setInBattleShieldEndTime(newInBattleEndTime);
+  	        
+  	        //replace hazelcast object
+  	        PvpUser nuEnemyPu = new PvpUser(enemy);
+  	        getHazelcastPvpUtil().replacePvpUser(nuEnemyPu, enemyId);
+  	        
+  	        //as well as update db
+  	        Timestamp nuInBattleEndTime = new Timestamp(newInBattleEndTime.getTime());
+  	        log.info("now=" + clientTime);
+  	        log.info("should be one hour later, battleEndTime=" + nuInBattleEndTime);
+  	        int numUpdated = UpdateUtils.get().updatePvpLeagueForUserShields(enemyId,
+  	                null, nuInBattleEndTime);
+  	        log.info("(defender shield) num updated=" + numUpdated);
+  		}
   		
   		//turn off attacker's shield if it's on, attacker can't revenge fake person
   		exactRevenge(attacker, attackerId, enemyId, clientTime, previousBattleEndTime,

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
+	private static final long serialVersionUID = 5131106379287360222L;
+	
 	private String id;
 	private String userTaskId;
 	private int stageNum;

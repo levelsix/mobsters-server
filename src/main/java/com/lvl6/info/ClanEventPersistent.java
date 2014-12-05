@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class ClanEventPersistent implements Serializable {
 	
 	private static final long serialVersionUID = -3881447951245558541L;
+	
 	private int id;
 	private String dayOfWeek;
 	private int startHour;

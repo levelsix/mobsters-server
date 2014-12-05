@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
 
 public class LevelUpRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private LevelUpRequestProto levelUpRequestProto;
   
@@ -24,11 +24,20 @@ public class LevelUpRequestEvent extends RequestEvent {
       levelUpRequestProto = LevelUpRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = levelUpRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("level up request exception", e);
+      log.error("LevelUpRequest exception", e);
     }
   }
 
   public LevelUpRequestProto getLevelUpRequestProto() {
     return levelUpRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "LevelUpRequestEvent [levelUpRequestProto="
+		  + levelUpRequestProto
+		  + "]";
+  }
+  
 }

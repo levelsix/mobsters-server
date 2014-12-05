@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class MonsterEnhancingForUser implements Serializable {
 
+	private static final long serialVersionUID = 594202380800243118L;
+	
 	private String userId;
 	private String monsterForUserId;
 	private Date expectedStartTime;

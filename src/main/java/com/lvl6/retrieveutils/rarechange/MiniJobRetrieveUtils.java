@@ -168,6 +168,8 @@ import com.lvl6.utils.DBConnection;
     int oilReward = rs.getInt(DBConstants.MINI_JOB__OIL_REWARD);
     int gemReward = rs.getInt(DBConstants.MINI_JOB__GEM_REWARD);
     int monsterIdReward = rs.getInt(DBConstants.MINI_JOB__MONSTER_ID_REWARD);
+    int itemIdReward = rs.getInt(DBConstants.MINI_JOB__ITEM_ID_REWARD);
+    int itemRewardQuantity = rs.getInt(DBConstants.MINI_JOB__ITEM_REWARD_QUANTITY);
     String quality = rs.getString(DBConstants.MINI_JOB__QUALITY);
     int maxNumMonstersAllowed = rs.getInt(DBConstants.MINI_JOB__MAX_NUM_MONSTERS_ALLOWED);
     float chanceToAppear = rs.getFloat(DBConstants.MINI_JOB__CHANCE_TO_APPEAR);
@@ -177,6 +179,7 @@ import com.lvl6.utils.DBConnection;
     int maxDmgDealt = rs.getInt(DBConstants.MINI_JOB__MAX_DMG);
     int durationMinMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MIN_MINUTES);
     int durationMaxMinutes = rs.getInt(DBConstants.MINI_JOB__DURATION_MAX_MINUTES);
+    int expReward = rs.getInt(DBConstants.MINI_JOB__EXP_REWARD);
     
     if (null != quality) {
     	String newQuality = quality.trim().toUpperCase();
@@ -197,9 +200,10 @@ import com.lvl6.utils.DBConnection;
     
     
     MiniJob miniJob = new MiniJob(id, requiredStructId, miniJobName,
-    		cashReward, oilReward, gemReward, monsterIdReward, quality,
-    		maxNumMonstersAllowed, chanceToAppear, hpRequired, atkRequired,
-    		minDmgDealt, maxDmgDealt, durationMinMinutes, durationMaxMinutes);
+    		cashReward, oilReward, gemReward, monsterIdReward, itemIdReward,
+    		itemRewardQuantity, quality, maxNumMonstersAllowed, chanceToAppear, 
+    		hpRequired, atkRequired, minDmgDealt, maxDmgDealt, durationMinMinutes, 
+    		durationMaxMinutes, expReward);
     
     if (maxDmgDealt < minDmgDealt || durationMaxMinutes < durationMinMinutes) {
     	log.error(String.format(

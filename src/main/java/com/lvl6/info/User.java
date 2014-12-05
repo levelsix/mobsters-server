@@ -1,3 +1,4 @@
+
 package com.lvl6.info;
 
 import java.io.Serializable;
@@ -11,6 +12,8 @@ import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
+	
+	private static final long serialVersionUID = 3790196651685523310L;
 	
 	private String id;
 	private String name;
@@ -49,6 +52,7 @@ public class User implements Serializable {
 	private int avatarMonsterId;
 	private Date lastFreeBoosterPackTime;
 	private int clanHelps;
+	private Date lastSecretGiftCollectTime;
 
 	public User()
 	{
@@ -67,7 +71,8 @@ public class User implements Serializable {
 			String facebookId, boolean fbIdSetOnUserCreate,
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
-			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps) {
+			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
+			Date lastSecretGiftCollectTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -106,6 +111,7 @@ public class User implements Serializable {
 		this.avatarMonsterId = avatarMonsterId;
 		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
 		this.clanHelps = clanHelps;
+		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -433,23 +439,44 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*
-	 * used for in app purchases, finishingnormstructbuild, enhancing speedup
-	 */
-	public boolean updateRelativeGemsNaive (int diamondChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//	/*
+//	 * used for in app purchases, finishingnormstructbuild, enhancing speedup
+//	 */
+//	public boolean updateRelativeGemsNaive (int diamondChange) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//
+//		if (diamondChange != 0) {
+//			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
+//		}
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.gems += diamondChange;
+//			return true;
+//		}
+//		return false;
+//	}
+	
+	public boolean updateRelativeGemsNaive (int gemsDelta, int expDelta) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
 
-		if (diamondChange != 0) {
-			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
+		if (gemsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
 		}
+		relativeParams.put(DBConstants.USER__EXPERIENCE, expDelta);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.gems += diamondChange;
+			this.gems += gemsDelta;
+			this.experience += expDelta;
 			return true;
 		}
 		return false;
@@ -573,9 +600,8 @@ public class User implements Serializable {
 		}
 		if (oilChange != 0) {
 			relativeParams.put(DBConstants.USER__OIL, oilChange);
-			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, coinChange);
+			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, oilChange);
 		}
-
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
@@ -788,10 +814,10 @@ public class User implements Serializable {
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		
 		if (null != udid && !udid.isEmpty()) {
-			absoluteParams.put(DBConstants.USER__UDID, udid + "_reset");
+			absoluteParams.put(DBConstants.USER__UDID, String.format("%s_reset",udid));
 		}
 		if (null != facebookId && facebookId != null) {
-			absoluteParams.put(DBConstants.USER__FACEBOOK_ID, facebookId + "_reset");
+			absoluteParams.put(DBConstants.USER__FACEBOOK_ID, String.format("%s_reset", facebookId));
 		}
 		
 		if (absoluteParams.isEmpty()) {
@@ -824,7 +850,8 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public boolean updateFreeBoosterPack( int gemChange, Date now )
+	public boolean updateFreeBoosterPack( int gemChange, Date now,
+		int expDelta )
 	{
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -834,9 +861,11 @@ public class User implements Serializable {
 		if (gemChange != 0) {
 			relativeParams.put(DBConstants.USER__GEMS, gemChange);
 		}
+		relativeParams.put(DBConstants.USER__EXPERIENCE, expDelta);
 		
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME, now);
+		absoluteParams.put(DBConstants.USER__LAST_FREE_BOOSTER_PACK_TIME,
+			new Timestamp(now.getTime())	);
 
 		int numUpdated = DBConnection.get().updateTableRows(
 			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
@@ -844,6 +873,7 @@ public class User implements Serializable {
 		if (numUpdated == 1) {
 			this.gems += gemChange;
 			this.lastFreeBoosterPackTime = now;
+			this.experience += expDelta;
 			return true;
 		}
 		return false;
@@ -873,6 +903,28 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateLastSecretGiftCollectTime( Date now )
+	{
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = null;
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME,
+			new Timestamp(now.getTime()));
+
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.lastSecretGiftCollectTime = now;
+			return true;
+		}
+		return false;
+
 	}
 	
 	public String getId() {
@@ -1175,6 +1227,16 @@ public class User implements Serializable {
 		this.clanHelps = clanHelps;
 	}
 
+	public Date getLastSecretGiftCollectTime()
+	{
+		return lastSecretGiftCollectTime;
+	}
+
+	public void setLastSecretGiftCollectTime( Date lastSecretGiftCollectTime )
+	{
+		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -1250,6 +1312,8 @@ public class User implements Serializable {
 			+ lastFreeBoosterPackTime
 			+ ", clanHelps="
 			+ clanHelps
+			+ ", lastSecretGiftCollectTime="
+			+ lastSecretGiftCollectTime
 			+ "]";
 	}
 

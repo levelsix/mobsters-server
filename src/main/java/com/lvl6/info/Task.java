@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-	private static final long serialVersionUID = -1472436081434830839L;
+	private static final long serialVersionUID = -4555554369465514352L;
 	
 	private int id;
 	private String goodName;
@@ -17,6 +17,7 @@ public class Task implements Serializable {
 	private int boardHeight;
 	private String groundImgPrefix;
 	private String initDefeatedDialogue;
+	private int expReward;
 	
 	//non persisted information
 	private Dialogue initDefeatedD;
@@ -33,7 +34,8 @@ public class Task implements Serializable {
 		int boardHeight,
 		String groundImgPrefix,
 		String initDefeatedDialogue,
-		Dialogue initDefeatedD )
+		Dialogue initDefeatedD,
+		int expReward)
 	{
 		super();
 		this.id = id;
@@ -48,6 +50,7 @@ public class Task implements Serializable {
 		this.groundImgPrefix = groundImgPrefix;
 		this.initDefeatedDialogue = initDefeatedDialogue;
 		this.initDefeatedD = initDefeatedD;
+		this.expReward = expReward;
 	}
 	
 	public int getId() {
@@ -123,6 +126,16 @@ public class Task implements Serializable {
 		this.groundImgPrefix = groundImgPrefix;
 	}
 
+	public int getExpReward()
+	{
+		return expReward;
+	}
+
+	public void setExpReward( int expReward )
+	{
+		this.expReward = expReward;
+	}
+
 	public String getInitDefeatedDialogue()
 	{
 		return initDefeatedDialogue;
@@ -168,6 +181,8 @@ public class Task implements Serializable {
 			+ groundImgPrefix
 			+ ", initDefeatedDialogue="
 			+ initDefeatedDialogue
+			+ ", expReward="
+			+ expReward
 			+ ", initDefeatedD="
 			+ initDefeatedD
 			+ "]";

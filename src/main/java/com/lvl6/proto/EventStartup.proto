@@ -160,12 +160,13 @@ message StartupResponseProto {
 		optional UserMonsterConstants userMonsterConstants = 17;
 		optional MonsterConstants monsterConstants = 18;
 		
-		optional float minutesPerGem = 19; 
-		optional float gemsPerResource = 21;
+		//replaced with SpeedUpConstantProto and ResourceConversionConstantProto
+		optional float minutesPerGem = 19 [deprecated = true]; 
+		optional float gemsPerResource = 21 [deprecated = true];
 		
 		//TODO:GET RID OF THESE****************************************
-		optional int32 pvpRequiredMinLvl = 20;
-		optional float monsterDmgMultiplier = 31;
+		optional int32 pvpRequiredMinLvl = 20 [deprecated = true];
+		optional float monsterDmgMultiplier = 31 [deprecated = true];
 		//****************************************
 		
 		//(multiplies with cost to heal all battle team monsters while in dungeon)
@@ -189,6 +190,9 @@ message StartupResponseProto {
 		
 		repeated ClanHelpConstants clanHelpConstants = 32;
 		optional PvpConstants pvpConstant = 33;
+		
+		repeated SpeedUpConstantProto sucp = 34;
+		repeated ResourceConversionConstantProto rccp = 35;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -270,6 +274,15 @@ message StartupResponseProto {
 			optional float maxPvpDmgDelta = 3;
 			
 			optional int32 pvpRequiredMinLvl = 4;
+		}
+		message SpeedUpConstantProto {
+			optional int32 seconds = 1;
+			optional int32 numGems = 2;
+		}
+		message ResourceConversionConstantProto {
+			optional ResourceType resourceType = 1;
+			optional int32 resourceAmt = 2;
+			optional int32 numGems = 3;
 		}
 	}
 	

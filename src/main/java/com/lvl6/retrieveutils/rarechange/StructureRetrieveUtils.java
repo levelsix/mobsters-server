@@ -155,6 +155,7 @@ import com.lvl6.utils.DBConnection;
     float shadowVerticalOffset = rs.getFloat(DBConstants.STRUCTURE__SHADOW_VERTICAL_OFFSET);
     float shadowHorizontalOffset = rs.getFloat(DBConstants.STRUCTURE__SHADOW_HORIZONTAL_OFFSET);
     float shadowScale = rs.getFloat(DBConstants.STRUCTURE__SHADOW_SCALE);
+    int expReward = rs.getInt(DBConstants.STRUCTURE__EXP_REWARD);
     
     if (null != structType) {
     	String newStructType = structType.trim().toUpperCase();
@@ -175,12 +176,13 @@ import com.lvl6.utils.DBConnection;
     	}
     }
     
-    Structure s = new Structure(id, name, level, structType, buildResourceType,
-    		buildCost, minutesToBuild, requiredTownHallLvl, width, height,
-    		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
-    		imgHorizontalPixelOffset, description, shortDescription, shadowImgName,
-    		shadowVerticalOffset, shadowHorizontalOffset, shadowScale);
-    
+    Structure s = new Structure(id, name, level, structType,
+    	buildResourceType, buildCost, minutesToBuild, requiredTownHallLvl,
+    	width, height, predecessorStructId, successorStructId, imgName,
+    	imgVerticalPixelOffset, imgHorizontalPixelOffset, description,
+    	shortDescription, shadowImgName, shadowVerticalOffset,
+    	shadowHorizontalOffset, shadowScale, expReward);
+
     return s;
   }
 }

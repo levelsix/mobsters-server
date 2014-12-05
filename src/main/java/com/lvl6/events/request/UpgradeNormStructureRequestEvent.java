@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 
 public class UpgradeNormStructureRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private UpgradeNormStructureRequestProto upgradeNormStructureRequestProto;
   
@@ -24,11 +24,20 @@ public class UpgradeNormStructureRequestEvent extends RequestEvent {
       upgradeNormStructureRequestProto = UpgradeNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = upgradeNormStructureRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("upgrade norm structure request exception", e);
+      log.error("UpgradeNormStructureRequest exception", e);
     }
   }
 
   public UpgradeNormStructureRequestProto getUpgradeNormStructureRequestProto() {
     return upgradeNormStructureRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "UpgradeNormStructureRequestEvent [upgradeNormStructureRequestProto="
+		  + upgradeNormStructureRequestProto
+		  + "]";
+  }
+  
 }

@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MiniJob implements Serializable {
 	
-	private static final long serialVersionUID = -2118005123485838628L;
+	private static final long serialVersionUID = 1335570918378103423L;
 	
 	private int id;
 	private int requiredStructId;
@@ -13,7 +13,9 @@ public class MiniJob implements Serializable {
 	private int cashReward;
 	private int oilReward;
 	private int gemReward;
-	private int monsterIdReward;
+    private int monsterIdReward;
+    private int itemIdReward;
+    private int itemRewardQuantity;
 	private String quality;
 	private int maxNumMonstersAllowed;
 	private float chanceToAppear;
@@ -23,16 +25,18 @@ public class MiniJob implements Serializable {
 	private int maxDmgDealt;
 	private int durationMinMinutes;
 	private int durationMaxMinutes;
+	private int expReward;
 	
 	private Random rand;
 	private int durationMinSeconds;
 	private int durationMaxSeconds;
 
-	public MiniJob(int id, int requiredStructId, String name, int cashReward,
-			int oilReward, int gemReward, int monsterIdReward, String quality,
+    public MiniJob(int id, int requiredStructId, String name, int cashReward,
+			int oilReward, int gemReward, int monsterIdReward,
+            int itemIdReward, int itemRewardQuantity, String quality,
 			int maxNumMonstersAllowed, float chanceToAppear, int hpRequired,
 			int atkRequired, int minDmgDealt, int maxDmgDealt,
-			int durationMinMinutes, int durationMaxMinutes) {
+			int durationMinMinutes, int durationMaxMinutes, int expReward) {
 		super();
 		this.id = id;
 		this.requiredStructId = requiredStructId;
@@ -41,6 +45,8 @@ public class MiniJob implements Serializable {
 		this.oilReward = oilReward;
 		this.gemReward = gemReward;
 		this.monsterIdReward = monsterIdReward;
+        this.itemIdReward = itemIdReward;
+        this.itemRewardQuantity = itemRewardQuantity;
 		this.quality = quality;
 		this.maxNumMonstersAllowed = maxNumMonstersAllowed;
 		this.chanceToAppear = chanceToAppear;
@@ -53,6 +59,8 @@ public class MiniJob implements Serializable {
 		
 		this.durationMinSeconds = durationMinMinutes * 60;
 		this.durationMaxSeconds = durationMaxMinutes * 60;
+		
+		this.expReward = expReward;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -235,18 +243,74 @@ public class MiniJob implements Serializable {
 		this.durationMaxMinutes = durationMaxMinutes;
 	}
 
+    public int getItemIdReward() {
+        return itemIdReward;
+    }
+
+    public void setItemIdReward(int itemIdReward) {
+        this.itemIdReward = itemIdReward;
+    }
+
+    public int getItemRewardQuantity() {
+        return itemRewardQuantity;
+    }
+
+    public void setItemRewardQuantity(int itemRewardQuantity) {
+        this.itemRewardQuantity = itemRewardQuantity;
+    }
+
+	public int getExpReward()
+	{
+		return expReward;
+	}
+
+	public void setExpReward( int expReward )
+	{
+		this.expReward = expReward;
+	}
+
 	@Override
-	public String toString() {
-		return "MiniJob [id=" + id + ", requiredStructId=" + requiredStructId
-				+ ", name=" + name + ", cashReward=" + cashReward
-				+ ", oilReward=" + oilReward + ", gemReward=" + gemReward
-				+ ", monsterIdReward=" + monsterIdReward + ", quality="
-				+ quality + ", maxNumMonstersAllowed=" + maxNumMonstersAllowed
-				+ ", chanceToAppear=" + chanceToAppear + ", hpRequired="
-				+ hpRequired + ", atkRequired=" + atkRequired
-				+ ", minDmgDealt=" + minDmgDealt + ", maxDmgDealt="
-				+ maxDmgDealt + ", durationMinMinutes=" + durationMinMinutes
-				+ ", durationMaxMinutes=" + durationMaxMinutes + "]";
+	public String toString()
+	{
+		return "MiniJob [id="
+			+ id
+			+ ", requiredStructId="
+			+ requiredStructId
+			+ ", name="
+			+ name
+			+ ", cashReward="
+			+ cashReward
+			+ ", oilReward="
+			+ oilReward
+			+ ", gemReward="
+			+ gemReward
+			+ ", monsterIdReward="
+			+ monsterIdReward
+			+ ", itemIdReward="
+			+ itemIdReward
+			+ ", itemRewardQuantity="
+			+ itemRewardQuantity
+			+ ", quality="
+			+ quality
+			+ ", maxNumMonstersAllowed="
+			+ maxNumMonstersAllowed
+			+ ", chanceToAppear="
+			+ chanceToAppear
+			+ ", hpRequired="
+			+ hpRequired
+			+ ", atkRequired="
+			+ atkRequired
+			+ ", minDmgDealt="
+			+ minDmgDealt
+			+ ", maxDmgDealt="
+			+ maxDmgDealt
+			+ ", durationMinMinutes="
+			+ durationMinMinutes
+			+ ", durationMaxMinutes="
+			+ durationMaxMinutes
+			+ ", expReward="
+			+ expReward
+			+ "]";
 	}
 
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 
 public class EvolveMonsterRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private EvolveMonsterRequestProto evolveMonsterRequestProto;
   
@@ -24,11 +24,20 @@ public class EvolveMonsterRequestEvent extends RequestEvent {
       evolveMonsterRequestProto = EvolveMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = evolveMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("evolve monster request exception", e);
+      log.error("EvolveMonsterRequest exception", e);
     }
   }
 
   public EvolveMonsterRequestProto getEvolveMonsterRequestProto() {
     return evolveMonsterRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "EvolveMonsterRequestEvent [evolveMonsterRequestProto="
+		  + evolveMonsterRequestProto
+		  + "]";
+  }
+
 }

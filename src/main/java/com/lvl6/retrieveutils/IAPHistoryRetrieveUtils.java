@@ -36,8 +36,8 @@ import com.lvl6.properties.DBConstants;
     
     boolean isDuplicateTransaction = true;
     try {
-    	List<Integer> idList = this.jdbcTemplate
-    		.queryForList(query, values, Integer.class);
+    	List<String> idList = this.jdbcTemplate
+    		.queryForList(query, values, String.class);
 
     	if (null == idList || idList.isEmpty()) {
     		isDuplicateTransaction = false;

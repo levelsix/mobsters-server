@@ -12,7 +12,7 @@ import com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto;
 
 public class BeginPvpBattleRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private BeginPvpBattleRequestProto beginPvpBattleRequestProto;
   
@@ -24,11 +24,20 @@ public class BeginPvpBattleRequestEvent extends RequestEvent {
       beginPvpBattleRequestProto = BeginPvpBattleRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = beginPvpBattleRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("update user currency request exception", e);
+      log.error("BeginPvpBattleRequest exception", e);
     }
   }
 
   public BeginPvpBattleRequestProto getBeginPvpBattleRequestProto() {
     return beginPvpBattleRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "BeginPvpBattleRequestEvent [beginPvpBattleRequestProto="
+		  + beginPvpBattleRequestProto
+		  + "]";
+  }
+
 }

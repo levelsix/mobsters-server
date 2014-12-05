@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.SetGameCenterIdRequestProto;
 
 public class SetGameCenterIdRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private SetGameCenterIdRequestProto setGameCenterIdRequestProto;
   
@@ -24,11 +24,20 @@ public class SetGameCenterIdRequestEvent extends RequestEvent {
       setGameCenterIdRequestProto = SetGameCenterIdRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = setGameCenterIdRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("set facebook id request exception", e);
+      log.error("SetGameCenterIdRequest exception", e);
     }
   }
 
   public SetGameCenterIdRequestProto getSetGameCenterIdRequestProto() {
     return setGameCenterIdRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SetGameCenterIdRequestEvent [setGameCenterIdRequestProto="
+		  + setGameCenterIdRequestProto
+		  + "]";
+  }
+  
 }

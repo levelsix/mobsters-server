@@ -2944,13 +2944,13 @@ public final class ItemsProto {
         getUserUuidBytes();
 
     /**
-     * <code>optional int32 minsForCollection = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    boolean hasMinsForCollection();
+    boolean hasSecsTillCollection();
     /**
-     * <code>optional int32 minsForCollection = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    int getMinsForCollection();
+    int getSecsTillCollection();
 
     /**
      * <code>optional int32 itemId = 4;</code>
@@ -3040,7 +3040,7 @@ public final class ItemsProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              minsForCollection_ = input.readInt32();
+              secsTillCollection_ = input.readInt32();
               break;
             }
             case 32: {
@@ -3177,19 +3177,19 @@ public final class ItemsProto {
       }
     }
 
-    public static final int MINSFORCOLLECTION_FIELD_NUMBER = 3;
-    private int minsForCollection_;
+    public static final int SECSTILLCOLLECTION_FIELD_NUMBER = 3;
+    private int secsTillCollection_;
     /**
-     * <code>optional int32 minsForCollection = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    public boolean hasMinsForCollection() {
+    public boolean hasSecsTillCollection() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 minsForCollection = 3;</code>
+     * <code>optional int32 secsTillCollection = 3;</code>
      */
-    public int getMinsForCollection() {
-      return minsForCollection_;
+    public int getSecsTillCollection() {
+      return secsTillCollection_;
     }
 
     public static final int ITEMID_FIELD_NUMBER = 4;
@@ -3225,7 +3225,7 @@ public final class ItemsProto {
     private void initFields() {
       uisgUuid_ = "";
       userUuid_ = "";
-      minsForCollection_ = 0;
+      secsTillCollection_ = 0;
       itemId_ = 0;
       createTime_ = 0L;
     }
@@ -3249,7 +3249,7 @@ public final class ItemsProto {
         output.writeBytes(2, getUserUuidBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, minsForCollection_);
+        output.writeInt32(3, secsTillCollection_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, itemId_);
@@ -3276,7 +3276,7 @@ public final class ItemsProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, minsForCollection_);
+          .computeInt32Size(3, secsTillCollection_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3411,7 +3411,7 @@ public final class ItemsProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        minsForCollection_ = 0;
+        secsTillCollection_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         itemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -3456,7 +3456,7 @@ public final class ItemsProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.minsForCollection_ = minsForCollection_;
+        result.secsTillCollection_ = secsTillCollection_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -3491,8 +3491,8 @@ public final class ItemsProto {
           userUuid_ = other.userUuid_;
           onChanged();
         }
-        if (other.hasMinsForCollection()) {
-          setMinsForCollection(other.getMinsForCollection());
+        if (other.hasSecsTillCollection()) {
+          setSecsTillCollection(other.getSecsTillCollection());
         }
         if (other.hasItemId()) {
           setItemId(other.getItemId());
@@ -3679,34 +3679,34 @@ public final class ItemsProto {
         return this;
       }
 
-      private int minsForCollection_ ;
+      private int secsTillCollection_ ;
       /**
-       * <code>optional int32 minsForCollection = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public boolean hasMinsForCollection() {
+      public boolean hasSecsTillCollection() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 minsForCollection = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public int getMinsForCollection() {
-        return minsForCollection_;
+      public int getSecsTillCollection() {
+        return secsTillCollection_;
       }
       /**
-       * <code>optional int32 minsForCollection = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public Builder setMinsForCollection(int value) {
+      public Builder setSecsTillCollection(int value) {
         bitField0_ |= 0x00000004;
-        minsForCollection_ = value;
+        secsTillCollection_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 minsForCollection = 3;</code>
+       * <code>optional int32 secsTillCollection = 3;</code>
        */
-      public Builder clearMinsForCollection() {
+      public Builder clearSecsTillCollection() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        minsForCollection_ = 0;
+        secsTillCollection_ = 0;
         onChanged();
         return this;
       }
@@ -3826,12 +3826,12 @@ public final class ItemsProto {
       "geUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\016\n\006itemId" +
       "\030\003 \001(\005\022\023\n\013timeOfEntry\030\004 \001(\003\022\024\n\014userDataU",
       "uid\030\005 \001(\t\0222\n\nactionType\030\006 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType\"|\n\027UserItemSecretG" +
+      ".proto.GameActionType\"}\n\027UserItemSecretG" +
       "iftProto\022\020\n\010uisgUuid\030\001 \001(\t\022\020\n\010userUuid\030\002" +
-      " \001(\t\022\031\n\021minsForCollection\030\003 \001(\005\022\016\n\006itemI" +
-      "d\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType\022" +
-      "\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM_" +
-      "CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
+      " \001(\t\022\032\n\022secsTillCollection\030\003 \001(\005\022\016\n\006item" +
+      "Id\030\004 \001(\005\022\022\n\ncreateTime\030\005 \001(\003*G\n\010ItemType" +
+      "\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002\022\r\n\tITEM" +
+      "_CASH\020\003\022\014\n\010SPEED_UP\020\004B\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3869,7 +3869,7 @@ public final class ItemsProto {
     internal_static_com_lvl6_proto_UserItemSecretGiftProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserItemSecretGiftProto_descriptor,
-        new java.lang.String[] { "UisgUuid", "UserUuid", "MinsForCollection", "ItemId", "CreateTime", });
+        new java.lang.String[] { "UisgUuid", "UserUuid", "SecsTillCollection", "ItemId", "CreateTime", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 

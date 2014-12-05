@@ -12,7 +12,7 @@ import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 
 public class LoadPlayerCityRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private LoadPlayerCityRequestProto loadPlayerCityRequestProto;
   
@@ -24,11 +24,20 @@ public class LoadPlayerCityRequestEvent extends RequestEvent {
       loadPlayerCityRequestProto = LoadPlayerCityRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = loadPlayerCityRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("load player city request exception", e);
+      log.error("LoadPlayerCityRequest exception", e);
     }
   }
 
   public LoadPlayerCityRequestProto getLoadPlayerCityRequestProto() {
     return loadPlayerCityRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "LoadPlayerCityRequestEvent [loadPlayerCityRequestProto="
+		  + loadPlayerCityRequestProto
+		  + "]";
+  }
+  
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = -4118884141391026194L;
+	private static final long serialVersionUID = 2977557480137942673L;
 	
 	private int monsterId;
 	private int level;
@@ -24,6 +24,12 @@ public class MonsterLevelInfo implements Serializable {
 	private float expLvlExponent;
 	private int sellAmount;
 	private int teamCost;
+	private int costToFullyHeal;
+	private int secsToFullyHeal;
+	private int enhanceCostPerFeeder;
+	private float enhanceCostExponent;
+	private float enhanceExpPerSecond;
+	private float enhanceExpPerSecondExponent;
 
 	public MonsterLevelInfo()
 	{
@@ -48,7 +54,13 @@ public class MonsterLevelInfo implements Serializable {
 		float expLvlDivisor,
 		float expLvlExponent,
 		int sellAmount,
-		int teamCost )
+		int teamCost,
+		int costToFullyHeal,
+		int secsToFullyHeal,
+		int enhanceCostPerFeeder,
+		float enhanceCostExponent,
+		float enhanceExpPerSecond,
+		float enhanceExpPerSecondExponent )
 	{
 		super();
 		this.monsterId = monsterId;
@@ -69,6 +81,12 @@ public class MonsterLevelInfo implements Serializable {
 		this.expLvlExponent = expLvlExponent;
 		this.sellAmount = sellAmount;
 		this.teamCost = teamCost;
+		this.costToFullyHeal = costToFullyHeal;
+		this.secsToFullyHeal = secsToFullyHeal;
+		this.enhanceCostPerFeeder = enhanceCostPerFeeder;
+		this.enhanceCostExponent = enhanceCostExponent;
+		this.enhanceExpPerSecond = enhanceExpPerSecond;
+		this.enhanceExpPerSecondExponent = enhanceExpPerSecondExponent;
 	}
 
 	public int getMonsterId() {
@@ -217,6 +235,66 @@ public class MonsterLevelInfo implements Serializable {
 		this.teamCost = teamCost;
 	}
 
+	public int getCostToFullyHeal()
+	{
+		return costToFullyHeal;
+	}
+
+	public void setCostToFullyHeal( int costToFullyHeal )
+	{
+		this.costToFullyHeal = costToFullyHeal;
+	}
+
+	public int getSecsToFullyHeal()
+	{
+		return secsToFullyHeal;
+	}
+
+	public void setSecsToFullyHeal( int secsToFullyHeal )
+	{
+		this.secsToFullyHeal = secsToFullyHeal;
+	}
+
+	public int getEnhanceCostPerFeeder()
+	{
+		return enhanceCostPerFeeder;
+	}
+
+	public void setEnhanceCostPerFeeder( int enhanceCostPerFeeder )
+	{
+		this.enhanceCostPerFeeder = enhanceCostPerFeeder;
+	}
+
+	public float getEnhanceCostExponent()
+	{
+		return enhanceCostExponent;
+	}
+
+	public void setEnhanceCostExponent( float enhanceCostExponent )
+	{
+		this.enhanceCostExponent = enhanceCostExponent;
+	}
+
+	public float getEnhanceExpPerSecond()
+	{
+		return enhanceExpPerSecond;
+	}
+
+	public void setEnhanceExpPerSecond( float enhanceExpPerSecond )
+	{
+		this.enhanceExpPerSecond = enhanceExpPerSecond;
+	}
+
+	public float getEnhanceExpPerSecondExponent()
+	{
+		return enhanceExpPerSecondExponent;
+	}
+
+	public void setEnhanceExpPerSecondExponent( float enhanceExpPerSecondExponent )
+	{
+		this.enhanceExpPerSecondExponent = enhanceExpPerSecondExponent;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -256,7 +334,19 @@ public class MonsterLevelInfo implements Serializable {
 			+ sellAmount
 			+ ", teamCost="
 			+ teamCost
+			+ ", costToFullyHeal="
+			+ costToFullyHeal
+			+ ", secsToFullyHeal="
+			+ secsToFullyHeal
+			+ ", enhanceCostPerFeeder="
+			+ enhanceCostPerFeeder
+			+ ", enhanceCostExponent="
+			+ enhanceCostExponent
+			+ ", enhanceExpPerSecond="
+			+ enhanceExpPerSecond
+			+ ", enhanceExpPerSecondExponent="
+			+ enhanceExpPerSecondExponent
 			+ "]";
 	}
-
+	
 }

@@ -87,6 +87,8 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Do
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.PvpConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ResourceConversionConstantProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.SpeedUpConstantProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TaskMapConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
@@ -112,6 +114,7 @@ import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
+import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.TeamCenterProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
@@ -775,12 +778,16 @@ public class MiscMethods {
 		mcb.setOilPerMonsterLevel(ControllerConstants.MONSTER__OIL_PER_MONSTER_LEVEL);
 		cb.setMonsterConstants(mcb.build());
 
-		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
 		//TODO: GET RID OF
+		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
 		cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
 		cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
-		//*****************************************************************
 		cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
+		//*****************************************************************
+		
+		createSpeedUpConstantsProto(cb);
+		createResourceConversionConstantsProto(cb);
+		
 		cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
 		cb.setBattleRunAwayBasePercent(ControllerConstants.BATTLE__RUN_AWAY_BASE_PERCENT);
 		cb.setBattleRunAwayIncrement(ControllerConstants.BATTLE__RUN_AWAY_INCREMENT);
@@ -909,6 +916,50 @@ public class MiscMethods {
 		//
 
 		return cb.build();  
+	}
+
+	private static void createSpeedUpConstantsProto( StartupConstants.Builder cb )
+	{
+		int len = ControllerConstants.SPEED_UP__SECONDS.length;
+		for (int index = 0; index < len; index++) {
+			int sec = ControllerConstants.SPEED_UP__SECONDS[index];
+			int numGems = ControllerConstants.SPEED_UP__NUM_GEMS[index];
+			
+			SpeedUpConstantProto.Builder sucpb = SpeedUpConstantProto.newBuilder();
+			sucpb.setSeconds(sec);
+			sucpb.setNumGems(numGems);
+			
+			cb.addSucp(sucpb.build());
+		}
+	}
+
+	private static void createResourceConversionConstantsProto( StartupConstants.Builder cb )
+	{
+		//create list of protos for each resource type: oil, cash
+		for (String type : ControllerConstants.RESOURCE_CONVERSION__TYPE) {
+			int i = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS.length;
+			
+			ResourceType resourceType = null;
+			try {
+				resourceType = ResourceType.valueOf(type);
+			} catch (Exception e) {
+				log.error(String.format("incorrect ResourceType:%s", type), e);
+			}
+			
+			//list of protos
+			for (int index = 0; index < i; index++) {
+				int numGems = ControllerConstants.RESOURCE_CONVERSION__NUM_GEMS[index];
+				int resourceAmt = ControllerConstants.RESOURCE_CONVERSION__RESOURCE_AMOUNT[index];
+				
+				ResourceConversionConstantProto.Builder rccpb =
+					ResourceConversionConstantProto.newBuilder();
+				rccpb.setResourceType(resourceType);
+				rccpb.setNumGems(numGems);
+				rccpb.setResourceAmt(resourceAmt);
+				
+				cb.addRccp(rccpb.build());
+			}
+		}
 	}
 
 	public static MiniTutorialConstants createMiniTutorialConstantsProto() {

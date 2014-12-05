@@ -393,7 +393,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private boolean updateUser(User u, int gemChange) {
-	  if (!u.updateRelativeGemsNaive(gemChange)) {
+	  if (!u.updateRelativeGemsNaive(gemChange, 0)) {
 		  log.error(String.format(
 			  "problem updating user gems to delete event cool down timer. gemChange=%s, user=%s",
 			  gemChange, u));

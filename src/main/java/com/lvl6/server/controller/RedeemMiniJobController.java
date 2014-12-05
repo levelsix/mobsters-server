@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
@@ -62,6 +63,9 @@ public class RedeemMiniJobController extends EventController{
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
 
+  @Autowired
+  protected UpdateUtil updateUtil;
+  
   public RedeemMiniJobController() {
     numAllocatedThreads = 4;
   }
@@ -275,9 +279,14 @@ public class RedeemMiniJobController extends EventController{
     int gemsChange = mj.getGemReward();
     int cashChange = mj.getCashReward();
     int oilChange = mj.getOilReward();
+    int expChange = mj.getExpReward();
     int monsterIdReward = mj.getMonsterIdReward();
+    int itemIdReward = mj.getItemIdReward();
+    int itemRewardQuantity = mj.getItemRewardQuantity();
 
-    if (!updateUser(user, gemsChange, cashChange, maxCash, oilChange, maxOil)) {
+    if (!updateUser(user, gemsChange, cashChange, maxCash,
+    	oilChange, maxOil, expChange))
+    {
       log.error(String.format(
     	  "could not decrement user gems by %s, cash by %s, and oil by %s",
           gemsChange, cashChange, oilChange));
@@ -308,11 +317,23 @@ public class RedeemMiniJobController extends EventController{
           new HashMap<Integer, Integer>();
       monsterIdToNumPieces.put(monsterIdReward, 1);
 
+      log.info(String.format(
+    	  "rewarding user with {monsterId->amount}: %s",
+    	  monsterIdToNumPieces));
       List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
           updateUserMonsters(userId, monsterIdToNumPieces, null,
               mfusop, now);
       FullUserMonsterProto fump = newOrUpdated.get(0);
       resBuilder.setFump(fump);
+    }
+    
+    if (0 != itemIdReward && 0 != itemRewardQuantity) {
+    	int numUpdated = updateUtil.updateItemForUser(
+    		userId, itemIdReward, itemRewardQuantity);
+    	String preface = "rewarding user with more items."; 
+    	log.info(String.format(
+    		"%s itemId=%s, \t amount=%s, numUpdated=%s",
+    		preface, itemIdReward, itemRewardQuantity, numUpdated));
     }
 
     //delete the user mini job
@@ -321,7 +342,7 @@ public class RedeemMiniJobController extends EventController{
 
 
     log.info("updating user's monsters' healths");
-    int numUpdated = UpdateUtils.get()
+    int numUpdated = updateUtil
         .updateUserMonstersHealth(userMonsterIdToExpectedHealth);
     log.info("numUpdated=" + numUpdated);
 
@@ -339,7 +360,7 @@ public class RedeemMiniJobController extends EventController{
 
 
   private boolean updateUser(User u, int gemsChange, int cashChange,
-      int maxCash, int oilChange, int maxOil) {
+      int maxCash, int oilChange, int maxOil, int expChange) {
     //capping how much the user can gain of a certain resource
     int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
     int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
@@ -349,19 +370,24 @@ public class RedeemMiniJobController extends EventController{
     int maxOilUserCanGain = maxOil - curOil;
     oilChange = Math.min(maxOilUserCanGain, oilChange);
 
-    if (0 == cashChange || 0 == oilChange || 0 == gemsChange) {
+    if (0 == cashChange && 0 == oilChange &&
+    	0 == gemsChange && 0 == expChange)
+    {
       log.info("after caping rewards to max, user gets no resources");
       return true;
     }
 
-    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
-        oilChange, gemsChange);
+//    int numChange = u.updateRelativeCashAndOilAndGems(cashChange,
+//        oilChange, gemsChange);
 
-    if (numChange <= 0) {
-      log.error(String.format(
-          "could not update user gems, cash, and oil. gemChange=%s, cash=%s, oil=%s, user=%s",
-          gemsChange, cashChange, oilChange, u));
-      return false;
+//    if (numChange <= 0) {
+    if (!u.updateRelativeGemsCashOilExperienceNaive(gemsChange,
+    	cashChange, oilChange, expChange)) {
+    	String preface ="could not update user gems, cash, oil, exp."; 
+    	log.error(String.format(
+    		"%s gemChange=%s, cash=%s, oil=%s, exp=%s, user=%s",
+    		preface, gemsChange, cashChange, oilChange, expChange, u));
+    	return false;
     }
     return true;
   }
@@ -422,9 +448,20 @@ public class RedeemMiniJobController extends EventController{
     return userRetrieveUtils;
   }
 
-
   public void setUserRetrieveUtils(UserRetrieveUtils2 userRetrieveUtils) {
     this.userRetrieveUtils = userRetrieveUtils;
+  }
+
+
+  public UpdateUtil getUpdateUtil()
+  {
+	  return updateUtil;
+  }
+
+
+  public void setUpdateUtil( UpdateUtil updateUtil )
+  {
+	  this.updateUtil = updateUtil;
   }
 
 }

@@ -294,6 +294,7 @@ public class DBConstants {
 	public static final String IAP_HISTORY__BID = "bid";
 	public static final String IAP_HISTORY__BVRS = "bvrs";
 	public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
+	public static final String IAP_HISTORY__FB_ID = "fb_id";
 
 	/*ITEM FOR USER TABLE*/
 	public static final String ITEM_FOR_USER__USER_ID = GENERIC__USER_ID;
@@ -312,7 +313,7 @@ public class DBConstants {
 	public static final String ITEM_SECRET_GIFT_FOR_USER__ID = GENERIC__ID;
 	public static final String ITEM_SECRET_GIFT_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String ITEM_SECRET_GIFT_FOR_USER__ITEM_ID = "item_id";
-	public static final String ITEM_SECRET_GIFT_FOR_USER__MINS_UNTIL_COLLECTION = "quantity";
+	public static final String ITEM_SECRET_GIFT_FOR_USER__SECS_UNTIL_COLLECTION = "secs_until_collection";
 	public static final String ITEM_SECRET_GIFT_FOR_USER__CREATE_TIME = "create_time";
 
 	/*LOCK BOX EVENT FOR USER*/
@@ -423,7 +424,7 @@ public class DBConstants {
 	public static final String MONSTER_HEALING_FOR_USER__USER_ID = GENERIC__USER_ID;
 	public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
 	public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
-	//  public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
+	public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
 	public static final String MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS = "health_progress";
 	public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
 	public static final String MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS = "elapsed_seconds";
@@ -730,6 +731,7 @@ public class DBConstants {
 	public static final String ACHIEVEMENT__PRIORITY = "priority";
 	public static final String ACHIEVEMENT__PREREQUISITE_ID = "prerequisite_id";
 	public static final String ACHIEVEMENT__SUCCESSOR_ID = "successor_id";
+	public static final String ACHIEVEMENT__EXP_REWARD = "exp_reward";
 
 	/*ALERT ON STARTUP*/
 	public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
@@ -764,6 +766,7 @@ public class DBConstants {
 	public static final String BOOSTER_PACK__NAV_BAR_IMG_NAME = "nav_bar_img_name";
 	public static final String BOOSTER_PACK__NAV_TITLE_IMG_NAME = "nav_title_img_name";
 	public static final String BOOSTER_PACK__MACHINE_IMG_NAME = "machine_img_name";
+	public static final String BOOSTER_PACK__EXP_PER_ITEM = "exp_per_item";
 
 	public static final String CLAN_EVENT_PERSISTENT__ID = GENERIC__ID;
 	public static final String CLAN_EVENT_PERSISTENT__DAY_OF_WEEK = "day_of_week";
@@ -798,7 +801,9 @@ public class DBConstants {
 	public static final String MINI_JOB__CASH_REWARD = "cash_reward";
 	public static final String MINI_JOB__OIL_REWARD = "oil_reward";
 	public static final String MINI_JOB__GEM_REWARD = "gem_reward";
-	public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
+    public static final String MINI_JOB__MONSTER_ID_REWARD = "monster_id_reward";
+    public static final String MINI_JOB__ITEM_ID_REWARD = "item_id_reward";
+    public static final String MINI_JOB__ITEM_REWARD_QUANTITY = "item_reward_quantity";
 	public static final String MINI_JOB__QUALITY = "quality";
 	public static final String MINI_JOB__MAX_NUM_MONSTERS_ALLOWED = "max_num_monsters_allowed";
 	public static final String MINI_JOB__CHANCE_TO_APPEAR = "chance_to_appear";
@@ -808,6 +813,7 @@ public class DBConstants {
 	public static final String MINI_JOB__MAX_DMG = "max_dmg";
 	public static final String MINI_JOB__DURATION_MIN_MINUTES = "duration_min_minutes";
 	public static final String MINI_JOB__DURATION_MAX_MINUTES = "duration_max_minutes";
+	public static final String MINI_JOB__EXP_REWARD = "exp_reward";
 
 	public static final String MONSTER_BATTLE_DIALOGUE__ID = GENERIC__ID;
 	public static final String MONSTER_BATTLE_DIALOGUE__MONSTER_ID = "monster_id";
@@ -873,6 +879,12 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
+	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";
+	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT = "enhance_exp_per_sec_exponent";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";
@@ -983,6 +995,7 @@ public class DBConstants {
 	public static final String STRUCTURE__SHADOW_VERTICAL_OFFSET = "shadow_vertical_offset";
 	public static final String STRUCTURE__SHADOW_HORIZONTAL_OFFSET = "shadow_horizontal_offset";
 	public static final String STRUCTURE__SHADOW_SCALE = "shadow_scale";
+	public static final String STRUCTURE__EXP_REWARD = "exp_reward";
 
 	public static final String STRUCTURE_CLAN_HOUSE__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_CLAN_HOUSE__MAX_HELPERS_PER_SOLICITATION = "max_helpers_per_solicitation";
@@ -994,6 +1007,7 @@ public class DBConstants {
 	public static final String STRUCTURE_HOSPITAL__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_HOSPITAL__QUEUE_SIZE = "queue_size";
 	public static final String STRUCTURE_HOSPITAL__HEALTH_PER_SECOND = "health_per_second";
+	public static final String STRUCTURE_HOSPITAL__SECS_TO_FULLY_HEAL_MULTIPLIER = "secs_to_fully_heal_multiplier";
 
 	public static final String STRUCTURE_LAB__STRUCT_ID = "struct_id";
 	public static final String STRUCTURE_LAB__QUEUE_SIZE = "queue_size";
@@ -1048,6 +1062,7 @@ public class DBConstants {
 	public static final String TASK__BOARD_HEIGHT = "board_height";
 	public static final String TASK__GROUND_IMG_PREFIX = "ground_img_prefix";
 	public static final String TASK__INIT_DEFEATED_DIALOGUE = "init_defeated_dialogue";
+	public static final String TASK__EXP_REWARD = "exp_reward";
 	
 	public static final String TASK_MAP_ELEMENT__ID = GENERIC__ID;
 	public static final String TASK_MAP_ELEMENT__TASK_ID = "task_id";

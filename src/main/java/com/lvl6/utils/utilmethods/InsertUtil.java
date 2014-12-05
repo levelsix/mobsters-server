@@ -14,6 +14,7 @@ import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
+import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
@@ -218,4 +219,7 @@ public interface InsertUtil {
 	    String inviterId, String clanId, Timestamp timeOfInvite);
 	
 	public abstract List<String> insertIntoItemForUserUsageGetId(List<ItemForUserUsage> itemsUsed);
+	
+	public abstract List<String> insertIntoItemSecretGiftForUserGetId(
+		List<ItemSecretGiftForUser> gifts);
 }

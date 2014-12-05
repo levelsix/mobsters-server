@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ClanHelp implements Serializable {
 	
+	private static final long serialVersionUID = 5347920518758378900L;
+	
 	private String id;
 	private String userId;
 	private String userDataId;

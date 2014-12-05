@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class PrivateChatPost implements Serializable {
-  	protected String id;
+	
+	private static final long serialVersionUID = 10600088114205561L;
+	
+	protected String id;
 	protected String posterId;
 	protected String recipientId;
 	protected Date timeOfPost;

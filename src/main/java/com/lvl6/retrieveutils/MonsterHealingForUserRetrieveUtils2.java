@@ -27,7 +27,7 @@ import com.lvl6.properties.DBConstants;
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
-	private static final UserMonsterEvolvingForClientMapper rowMapper = new UserMonsterEvolvingForClientMapper();
+	private static final UserMonsterHealingForClientMapper rowMapper = new UserMonsterHealingForClientMapper();
 	private JdbcTemplate jdbcTemplate;
 
 	@Resource
@@ -67,7 +67,7 @@ import com.lvl6.properties.DBConstants;
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
-	private static final class UserMonsterEvolvingForClientMapper implements RowMapper<MonsterHealingForUser> {
+	private static final class UserMonsterHealingForClientMapper implements RowMapper<MonsterHealingForUser> {
 
 		private static List<String> columnsSelected;
 
@@ -82,6 +82,7 @@ import com.lvl6.properties.DBConstants;
 				mefu.setQueuedTime(new Date(time.getTime()));
 			}
 			
+			mefu.setUserStructHospitalId(rs.getString(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID));
 			mefu.setHealthProgress(rs.getFloat(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY));
 			mefu.setPriority(rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS));
 
@@ -95,6 +96,7 @@ import com.lvl6.properties.DBConstants;
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__USER_ID);
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID);
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME);
+				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID);
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS);
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY);
 				columnsSelected.add(DBConstants.MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS);

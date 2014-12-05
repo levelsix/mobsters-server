@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 
 public class SubmitMonsterEnhancementRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private SubmitMonsterEnhancementRequestProto submitMonsterEnhancementRequestProto;
   
@@ -24,11 +24,20 @@ public class SubmitMonsterEnhancementRequestEvent extends RequestEvent {
       submitMonsterEnhancementRequestProto = SubmitMonsterEnhancementRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = submitMonsterEnhancementRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("submit monster enhancement request exception", e);
+      log.error("SubmitMonsterEnhancementRequest exception", e);
     }
   }
 
   public SubmitMonsterEnhancementRequestProto getSubmitMonsterEnhancementRequestProto() {
     return submitMonsterEnhancementRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SubmitMonsterEnhancementRequestEvent [submitMonsterEnhancementRequestProto="
+		  + submitMonsterEnhancementRequestProto
+		  + "]";
+  }
+  
 }

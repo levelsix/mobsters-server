@@ -12,7 +12,7 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 
 public class PrivateChatPostRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
 	private PrivateChatPostRequestProto privateChatPostRequestProto;
   
@@ -24,11 +24,20 @@ public class PrivateChatPostRequestEvent extends RequestEvent {
       privateChatPostRequestProto = PrivateChatPostRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = privateChatPostRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("private chat post request exception", e);
+      log.error("PrivateChatPostRequest exception", e);
     }
   }
 
   public PrivateChatPostRequestProto getPrivateChatPostRequestProto() {
     return privateChatPostRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "PrivateChatPostRequestEvent [privateChatPostRequestProto="
+		  + privateChatPostRequestProto
+		  + "]";
+  }
+  
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 
 public class BeginDungeonRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private BeginDungeonRequestProto beginDungeonRequestProto;
   
@@ -24,11 +24,20 @@ public class BeginDungeonRequestEvent extends RequestEvent {
       beginDungeonRequestProto = BeginDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = beginDungeonRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("begin dungeon request exception", e);
+      log.error("BeginDungeonRequest exception", e);
     }
   }
 
   public BeginDungeonRequestProto getBeginDungeonRequestProto() {
     return beginDungeonRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "BeginDungeonRequestEvent [beginDungeonRequestProto="
+		  + beginDungeonRequestProto
+		  + "]";
+  }
+  
 }

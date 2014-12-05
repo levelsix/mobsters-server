@@ -236,6 +236,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		userFacebookInviteForSlotRetrieveUtils
   		.getSpecificOrAllInvitesForRecipient(userFacebookId, inviteIds, filterByAccepted,
   			isAccepted, filterByRedeemed, isRedeemed);
+  	
+  	log.info("idsToInvitesInDb={}",idsToInvitesInDb);
   	Set<String> validIds = idsToInvitesInDb.keySet();
   	
   	//only want the acceptedInvite ids that aren't yet accepted nor redeemed

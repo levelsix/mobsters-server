@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProto;
 
 public class BeginMiniJobRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private BeginMiniJobRequestProto beginMiniJobRequestProto;
   
@@ -24,7 +24,7 @@ public class BeginMiniJobRequestEvent extends RequestEvent {
       beginMiniJobRequestProto = BeginMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = beginMiniJobRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("BeginMiniJob request exception", e);
+      log.error("BeginMiniJobRequest exception", e);
     }
   }
 
@@ -35,5 +35,13 @@ public class BeginMiniJobRequestEvent extends RequestEvent {
   public void setBeginMiniJobRequestProto(BeginMiniJobRequestProto sorp) {
 	  this.beginMiniJobRequestProto = sorp;
   }
-  
+
+  @Override
+  public String toString()
+  {
+	  return "BeginMiniJobRequestEvent [beginMiniJobRequestProto="
+		  + beginMiniJobRequestProto
+		  + "]";
+  }
+
 }

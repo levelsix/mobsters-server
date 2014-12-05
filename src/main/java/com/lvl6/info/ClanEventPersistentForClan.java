@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ClanEventPersistentForClan implements Serializable {
 	
+	private static final long serialVersionUID = -3252664752834957657L;
+	
 	private String clanId;
 	private int clanEventPersistentId; //not really needed, but oh well
 	private int crId; //clan raid id

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class NotificationTitleColor implements Serializable {
 	
+	private static final long serialVersionUID = 491813211027909557L;
+	
 	private double red;
 	private double green;
 	private double blue;

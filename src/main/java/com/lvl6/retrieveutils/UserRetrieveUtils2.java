@@ -460,6 +460,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			}
 
 			int numClanHelps = rs.getInt(DBConstants.USER__CLAN_HELPS);
+			
+			Date lastSecretGiftCollectTime = null;
+			try {
+				ts = rs.getTimestamp(DBConstants.USER__LAST_SECRET_GIFT_COLLECT_TIME);
+				if (!rs.wasNull()) {
+					lastSecretGiftCollectTime = new Date(ts.getTime());
+				}
+			} catch (Exception e) {
+				log.error("last_secret_gift_collect_time null...?", e);
+			}
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 				tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -470,7 +480,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
 				gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
 				lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
-				numClanHelps);
+				numClanHelps, lastSecretGiftCollectTime);
 			return user;
 		}        
 

@@ -5,10 +5,12 @@ import java.util.Date;
 
 public class MonsterHealingForUser implements Serializable {
 
+	private static final long serialVersionUID = 918458842273792522L;
+	
 	private String userId;
 	private String monsterForUserId;
 	private Date queuedTime;
-//	private int userStructHospitalId;
+	private String userStructHospitalId;
 	private float healthProgress;
 	private int priority;
 	private float elapsedSeconds;
@@ -22,6 +24,7 @@ public class MonsterHealingForUser implements Serializable {
 		String userId,
 		String monsterForUserId,
 		Date queuedTime,
+		String userStructHospitalId,
 		float healthProgress,
 		int priority,
 		float elapsedSeconds )
@@ -30,6 +33,7 @@ public class MonsterHealingForUser implements Serializable {
 		this.userId = userId;
 		this.monsterForUserId = monsterForUserId;
 		this.queuedTime = queuedTime;
+		this.userStructHospitalId = userStructHospitalId;
 		this.healthProgress = healthProgress;
 		this.priority = priority;
 		this.elapsedSeconds = elapsedSeconds;
@@ -57,6 +61,16 @@ public class MonsterHealingForUser implements Serializable {
 
 	public void setQueuedTime(Date queuedTime) {
 		this.queuedTime = queuedTime;
+	}
+
+	public String getUserStructHospitalId()
+	{
+		return userStructHospitalId;
+	}
+
+	public void setUserStructHospitalId( String userStructHospitalId )
+	{
+		this.userStructHospitalId = userStructHospitalId;
 	}
 
 	public float getHealthProgress() {
@@ -94,6 +108,8 @@ public class MonsterHealingForUser implements Serializable {
 			+ monsterForUserId
 			+ ", queuedTime="
 			+ queuedTime
+			+ ", userStructHospitalId="
+			+ userStructHospitalId
 			+ ", healthProgress="
 			+ healthProgress
 			+ ", priority="

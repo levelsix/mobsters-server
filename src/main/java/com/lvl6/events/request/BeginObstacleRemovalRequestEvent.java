@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 
 public class BeginObstacleRemovalRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto;
   
@@ -24,7 +24,7 @@ public class BeginObstacleRemovalRequestEvent extends RequestEvent {
       beginObstacleRemovalRequestProto = BeginObstacleRemovalRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = beginObstacleRemovalRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("begin obstacle removal request exception", e);
+      log.error("BeginObstacleRemovalRequest exception", e);
     }
   }
 
@@ -35,6 +35,14 @@ public class BeginObstacleRemovalRequestEvent extends RequestEvent {
   public void setBeginObstacleRemovalRequestProto(
 		  BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto) {
 	  this.beginObstacleRemovalRequestProto = beginObstacleRemovalRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "BeginObstacleRemovalRequestEvent [beginObstacleRemovalRequestProto="
+		  + beginObstacleRemovalRequestProto
+		  + "]";
   }
 
 }

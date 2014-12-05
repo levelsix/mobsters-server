@@ -102,7 +102,7 @@ message TradeItemForResourcesResponseProto {
 //------------------------------------------------------------------------------------------
 
 message RedeemSecretGiftRequestProto {
-	optional MinimumUserProto mup = 1;
+	optional MinimumUserProto sender = 1;
 	optional int64 clientTime = 2;
 	repeated string uisgUuid = 3; //primary key ids for the user's secret gifs
 }

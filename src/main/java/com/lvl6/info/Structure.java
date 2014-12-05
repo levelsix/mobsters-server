@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = -7838827750756218900L;
+	private static final long serialVersionUID = -6838514119131430513L;
 	
 	private int id;
 	private String name;
@@ -27,6 +27,7 @@ public class Structure implements Serializable {
 	private float shadowVerticalOffset;
 	private float shadowHorizontalOffset;
 	private float shadowScale;
+	private int expReward;
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
@@ -35,7 +36,7 @@ public class Structure implements Serializable {
 			float imgVerticalPixelOffset, float imgHorizontalPixelOffset,
 			String description, String shortDescription, String shadowImgName,
 			float shadowVerticalOffset, float shadowHorizontalOffset,
-			float shadowScale) {
+			float shadowScale, int expReward) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,6 +59,7 @@ public class Structure implements Serializable {
 		this.shadowVerticalOffset = shadowVerticalOffset;
 		this.shadowHorizontalOffset = shadowHorizontalOffset;
 		this.shadowScale = shadowScale;
+		this.expReward = expReward;
 	}
 
 	public int getId() {
@@ -228,23 +230,64 @@ public class Structure implements Serializable {
 		this.shadowScale = shadowScale;
 	}
 
+	public int getExpReward()
+	{
+		return expReward;
+	}
+
+	public void setExpReward( int expReward )
+	{
+		this.expReward = expReward;
+	}
+
 	@Override
-	public String toString() {
-		return "Structure [id=" + id + ", name=" + name + ", level=" + level
-				+ ", structType=" + structType + ", buildResourceType="
-				+ buildResourceType + ", buildCost=" + buildCost
-				+ ", minutesToBuild=" + minutesToBuild
-				+ ", requiredTownHallLvl=" + requiredTownHallLvl + ", width="
-				+ width + ", height=" + height + ", predecessorStructId="
-				+ predecessorStructId + ", successorStructId="
-				+ successorStructId + ", imgName=" + imgName
-				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
-				+ ", imgHorizontalPixelOffset=" + imgHorizontalPixelOffset
-				+ ", description=" + description + ", shortDescription="
-				+ shortDescription + ", shadowImgName=" + shadowImgName
-				+ ", shadowVerticalOffset=" + shadowVerticalOffset
-				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset
-				+ ", shadowScale=" + shadowScale + "]";
+	public String toString()
+	{
+		return "Structure [id="
+			+ id
+			+ ", name="
+			+ name
+			+ ", level="
+			+ level
+			+ ", structType="
+			+ structType
+			+ ", buildResourceType="
+			+ buildResourceType
+			+ ", buildCost="
+			+ buildCost
+			+ ", minutesToBuild="
+			+ minutesToBuild
+			+ ", requiredTownHallLvl="
+			+ requiredTownHallLvl
+			+ ", width="
+			+ width
+			+ ", height="
+			+ height
+			+ ", predecessorStructId="
+			+ predecessorStructId
+			+ ", successorStructId="
+			+ successorStructId
+			+ ", imgName="
+			+ imgName
+			+ ", imgVerticalPixelOffset="
+			+ imgVerticalPixelOffset
+			+ ", imgHorizontalPixelOffset="
+			+ imgHorizontalPixelOffset
+			+ ", description="
+			+ description
+			+ ", shortDescription="
+			+ shortDescription
+			+ ", shadowImgName="
+			+ shadowImgName
+			+ ", shadowVerticalOffset="
+			+ shadowVerticalOffset
+			+ ", shadowHorizontalOffset="
+			+ shadowHorizontalOffset
+			+ ", shadowScale="
+			+ shadowScale
+			+ ", expReward="
+			+ expReward
+			+ "]";
 	}
 
 }

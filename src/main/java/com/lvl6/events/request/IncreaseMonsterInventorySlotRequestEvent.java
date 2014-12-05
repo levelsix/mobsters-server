@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto
 
 public class IncreaseMonsterInventorySlotRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private IncreaseMonsterInventorySlotRequestProto increaseMonsterInventorySlotRequestProto;
   
@@ -24,11 +24,20 @@ public class IncreaseMonsterInventorySlotRequestEvent extends RequestEvent {
       increaseMonsterInventorySlotRequestProto = IncreaseMonsterInventorySlotRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = increaseMonsterInventorySlotRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("increase monster inventory slot request exception", e);
+      log.error("IncreaseMonsterInventorySlotRequest exception", e);
     }
   }
 
   public IncreaseMonsterInventorySlotRequestProto getIncreaseMonsterInventorySlotRequestProto() {
     return increaseMonsterInventorySlotRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "IncreaseMonsterInventorySlotRequestEvent [increaseMonsterInventorySlotRequestProto="
+		  + increaseMonsterInventorySlotRequestProto
+		  + "]";
+  }
+  
 }

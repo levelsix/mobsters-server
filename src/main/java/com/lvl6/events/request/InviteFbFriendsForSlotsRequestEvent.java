@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 
 public class InviteFbFriendsForSlotsRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private InviteFbFriendsForSlotsRequestProto inviteFbFriendsForSlotsRequestProto;
   
@@ -24,11 +24,20 @@ public class InviteFbFriendsForSlotsRequestEvent extends RequestEvent {
       inviteFbFriendsForSlotsRequestProto = InviteFbFriendsForSlotsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = inviteFbFriendsForSlotsRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("invite fb friends for slots request exception", e);
+      log.error("InviteFbFriendsForSlotsRequest exception", e);
     }
   }
 
   public InviteFbFriendsForSlotsRequestProto getInviteFbFriendsForSlotsRequestProto() {
     return inviteFbFriendsForSlotsRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "InviteFbFriendsForSlotsRequestEvent [inviteFbFriendsForSlotsRequestProto="
+		  + inviteFbFriendsForSlotsRequestProto
+		  + "]";
+  }
+  
 }

@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
+import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStageForUser;
@@ -31,7 +31,6 @@ import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
@@ -46,6 +45,7 @@ import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.TaskMapElementRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -276,6 +276,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  if (firstTimeUserWonTask && null != tme) {
 		  cashGained += tme.getCashReward();
 		  oilGained += tme.getOilReward();
+		  
+		  Task t = TaskRetrieveUtils.getTaskForTaskId(ut.getTaskId());
+		  expGained += t.getExpReward();
 	  }
 
 	  cashGained = MiscMethods.capResourceGain(u.getCash(), cashGained, maxCash);
@@ -336,7 +339,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		  String midface = "increased tasks completed by 1,";
 		  log.error(String.format(
 			  "%s expGained=%s, cashGained=%s, oilGained=%s, %s energyChange=%s, clientTime=%s, user=%s",
-			  preface, expGained, cashGained, oilGained, energyChange, clientTime, u));
+			  preface, expGained, cashGained, oilGained, midface, energyChange, clientTime, u));
 		  return false;
 	  }
 	  return true;
@@ -493,7 +496,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  if (numInserted > 0) {
 		  //send updated quantity not just quantity of 1
 		  ItemForUser ifu = (itemForUserRetrieveUtil
-			  .getSpecificOrAllItemIdToItemForUserId(
+			  .getSpecificOrAllItemForUser(
 				  userId,
 				  Collections.singleton(itemId))).get(itemId);
 		  UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);

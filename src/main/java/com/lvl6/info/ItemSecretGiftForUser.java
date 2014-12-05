@@ -5,10 +5,12 @@ import java.util.Date;
 
 public class ItemSecretGiftForUser implements Serializable {
 
+	private static final long serialVersionUID = 1041342557855321616L;
+	
 	private String id;
 	private String userId;
 	private int itemId;
-	private int minsTillCollection;
+	private int secsTillCollection;
 	private Date createTime;
 	
 	public ItemSecretGiftForUser() {
@@ -19,14 +21,14 @@ public class ItemSecretGiftForUser implements Serializable {
 		String id,
 		String userId,
 		int itemId,
-		int minsTillCollection,
+		int secsTillCollection,
 		Date createTime )
 	{
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.itemId = itemId;
-		this.minsTillCollection = minsTillCollection;
+		this.secsTillCollection = secsTillCollection;
 		this.createTime = createTime;
 	}
 
@@ -60,14 +62,14 @@ public class ItemSecretGiftForUser implements Serializable {
 		this.itemId = itemId;
 	}
 
-	public int getMinsTillCollection()
+	public int getSecsTillCollection()
 	{
-		return minsTillCollection;
+		return secsTillCollection;
 	}
 
-	public void setMinsTillCollection( int minsTillCollection )
+	public void setSecsTillCollection( int secsTillCollection )
 	{
-		this.minsTillCollection = minsTillCollection;
+		this.secsTillCollection = secsTillCollection;
 	}
 
 	public Date getCreateTime()
@@ -90,7 +92,7 @@ public class ItemSecretGiftForUser implements Serializable {
 			+ ", itemId="
 			+ itemId
 			+ ", minsTillCollection="
-			+ minsTillCollection
+			+ secsTillCollection
 			+ ", createTime="
 			+ createTime
 			+ "]";

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 
 public class SellUserMonsterRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private SellUserMonsterRequestProto sellUserMonsterRequestProto;
   
@@ -24,11 +24,20 @@ public class SellUserMonsterRequestEvent extends RequestEvent {
       sellUserMonsterRequestProto = SellUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = sellUserMonsterRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("sell user monster request exception", e);
+      log.error("SellUserMonsterRequest exception", e);
     }
   }
 
   public SellUserMonsterRequestProto getSellUserMonsterRequestProto() {
     return sellUserMonsterRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SellUserMonsterRequestEvent [sellUserMonsterRequestProto="
+		  + sellUserMonsterRequestProto
+		  + "]";
+  }
+  
 }

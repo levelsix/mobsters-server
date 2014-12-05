@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 
 public class LogoutRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private LogoutRequestProto logoutRequestProto;
   
@@ -24,11 +24,20 @@ public class LogoutRequestEvent extends RequestEvent {
       logoutRequestProto = LogoutRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = logoutRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("logout request exception", e);
+      log.error("LogoutRequest exception", e);
     }
   }
 
   public LogoutRequestProto getLogoutRequestProto() {
     return logoutRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "LogoutRequestEvent [logoutRequestProto="
+		  + logoutRequestProto
+		  + "]";
+  }
+  
 }

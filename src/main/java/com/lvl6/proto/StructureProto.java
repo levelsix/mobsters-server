@@ -4442,21 +4442,32 @@ public final class StructureProto {
     int getQueueSize();
 
     /**
-     * <code>optional float healthPerSecond = 3;</code>
+     * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
      *
      * <pre>
+     *DEPRECATED, replaced by secsToFullyHealMultiplier
      *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
      * </pre>
      */
-    boolean hasHealthPerSecond();
+    @java.lang.Deprecated boolean hasHealthPerSecond();
     /**
-     * <code>optional float healthPerSecond = 3;</code>
+     * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
      *
      * <pre>
+     *DEPRECATED, replaced by secsToFullyHealMultiplier
      *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
      * </pre>
      */
-    float getHealthPerSecond();
+    @java.lang.Deprecated float getHealthPerSecond();
+
+    /**
+     * <code>optional float secsToFullyHealMultiplier = 4;</code>
+     */
+    boolean hasSecsToFullyHealMultiplier();
+    /**
+     * <code>optional float secsToFullyHealMultiplier = 4;</code>
+     */
+    float getSecsToFullyHealMultiplier();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.HospitalProto}
@@ -4531,6 +4542,11 @@ public final class StructureProto {
             case 29: {
               bitField0_ |= 0x00000004;
               healthPerSecond_ = input.readFloat();
+              break;
+            }
+            case 37: {
+              bitField0_ |= 0x00000008;
+              secsToFullyHealMultiplier_ = input.readFloat();
               break;
             }
           }
@@ -4612,30 +4628,48 @@ public final class StructureProto {
     public static final int HEALTHPERSECOND_FIELD_NUMBER = 3;
     private float healthPerSecond_;
     /**
-     * <code>optional float healthPerSecond = 3;</code>
+     * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
      *
      * <pre>
+     *DEPRECATED, replaced by secsToFullyHealMultiplier
      *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
      * </pre>
      */
-    public boolean hasHealthPerSecond() {
+    @java.lang.Deprecated public boolean hasHealthPerSecond() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional float healthPerSecond = 3;</code>
+     * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
      *
      * <pre>
+     *DEPRECATED, replaced by secsToFullyHealMultiplier
      *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
      * </pre>
      */
-    public float getHealthPerSecond() {
+    @java.lang.Deprecated public float getHealthPerSecond() {
       return healthPerSecond_;
+    }
+
+    public static final int SECSTOFULLYHEALMULTIPLIER_FIELD_NUMBER = 4;
+    private float secsToFullyHealMultiplier_;
+    /**
+     * <code>optional float secsToFullyHealMultiplier = 4;</code>
+     */
+    public boolean hasSecsToFullyHealMultiplier() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional float secsToFullyHealMultiplier = 4;</code>
+     */
+    public float getSecsToFullyHealMultiplier() {
+      return secsToFullyHealMultiplier_;
     }
 
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       queueSize_ = 0;
       healthPerSecond_ = 0F;
+      secsToFullyHealMultiplier_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4659,6 +4693,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeFloat(3, healthPerSecond_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeFloat(4, secsToFullyHealMultiplier_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4679,6 +4716,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(3, healthPerSecond_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, secsToFullyHealMultiplier_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4808,6 +4849,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         healthPerSecond_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
+        secsToFullyHealMultiplier_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -4852,6 +4895,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000004;
         }
         result.healthPerSecond_ = healthPerSecond_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.secsToFullyHealMultiplier_ = secsToFullyHealMultiplier_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4876,6 +4923,9 @@ public final class StructureProto {
         }
         if (other.hasHealthPerSecond()) {
           setHealthPerSecond(other.getHealthPerSecond());
+        }
+        if (other.hasSecsToFullyHealMultiplier()) {
+          setSecsToFullyHealMultiplier(other.getSecsToFullyHealMultiplier());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5054,48 +5104,84 @@ public final class StructureProto {
 
       private float healthPerSecond_ ;
       /**
-       * <code>optional float healthPerSecond = 3;</code>
+       * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
        *
        * <pre>
+       *DEPRECATED, replaced by secsToFullyHealMultiplier
        *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
        * </pre>
        */
-      public boolean hasHealthPerSecond() {
+      @java.lang.Deprecated public boolean hasHealthPerSecond() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional float healthPerSecond = 3;</code>
+       * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
        *
        * <pre>
+       *DEPRECATED, replaced by secsToFullyHealMultiplier
        *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
        * </pre>
        */
-      public float getHealthPerSecond() {
+      @java.lang.Deprecated public float getHealthPerSecond() {
         return healthPerSecond_;
       }
       /**
-       * <code>optional float healthPerSecond = 3;</code>
+       * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
        *
        * <pre>
+       *DEPRECATED, replaced by secsToFullyHealMultiplier
        *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
        * </pre>
        */
-      public Builder setHealthPerSecond(float value) {
+      @java.lang.Deprecated public Builder setHealthPerSecond(float value) {
         bitField0_ |= 0x00000004;
         healthPerSecond_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional float healthPerSecond = 3;</code>
+       * <code>optional float healthPerSecond = 3 [deprecated = true];</code>
        *
        * <pre>
+       *DEPRECATED, replaced by secsToFullyHealMultiplier
        *ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
        * </pre>
        */
-      public Builder clearHealthPerSecond() {
+      @java.lang.Deprecated public Builder clearHealthPerSecond() {
         bitField0_ = (bitField0_ & ~0x00000004);
         healthPerSecond_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float secsToFullyHealMultiplier_ ;
+      /**
+       * <code>optional float secsToFullyHealMultiplier = 4;</code>
+       */
+      public boolean hasSecsToFullyHealMultiplier() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional float secsToFullyHealMultiplier = 4;</code>
+       */
+      public float getSecsToFullyHealMultiplier() {
+        return secsToFullyHealMultiplier_;
+      }
+      /**
+       * <code>optional float secsToFullyHealMultiplier = 4;</code>
+       */
+      public Builder setSecsToFullyHealMultiplier(float value) {
+        bitField0_ |= 0x00000008;
+        secsToFullyHealMultiplier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float secsToFullyHealMultiplier = 4;</code>
+       */
+      public Builder clearSecsToFullyHealMultiplier() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        secsToFullyHealMultiplier_ = 0F;
         onChanged();
         return this;
       }
@@ -17148,18 +17234,19 @@ public final class StructureProto {
       "y\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226\n\nstru" +
       "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
       "nfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl" +
-      "6.proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"s" +
-      "\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
-      "m.lvl6.proto.StructureInfoProto\022\021\n\tqueue" +
-      "Size\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(\002\"\210\001\n\010" +
+      "6.proto.ResourceType\022\020\n\010capacity\030\003 \001(\005\"\232" +
+      "\001\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
+      "om.lvl6.proto.StructureInfoProto\022\021\n\tqueu" +
+      "eSize\030\002 \001(\005\022\033\n\017healthPerSecond\030\003 \001(\002B\002\030\001" +
+      "\022!\n\031secsToFullyHealMultiplier\030\004 \001(\002\"\210\001\n\010" +
       "LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6." +
       "proto.StructureInfoProto\022\021\n\tqueueSize\030\002 " +
       "\001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\022\030\n\020pointsMu" +
       "ltiplier\030\004 \001(\002\"\341\001\n\016ResidenceProto\0226\n\nstr" +
       "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
       "InfoProto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024nu" +
-      "mBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequi" +
-      "red\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022",
+      "mBonusMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequi",
+      "red\030\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022" +
       "\026\n\016occupationName\030\006 \001(\t\022\021\n\timgSuffix\030\007 \001" +
       "(\t\"\356\002\n\rTownHallProto\0226\n\nstructInfo\030\001 \001(\013" +
       "2\".com.lvl6.proto.StructureInfoProto\022 \n\030" +
@@ -17168,8 +17255,8 @@ public final class StructureProto {
       "Generators\030\004 \001(\005\022\036\n\026numResourceTwoStorag" +
       "es\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumRes" +
       "idences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\022\017" +
-      "\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(" +
-      "\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCha",
+      "\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueCashCost\030\n \001(",
+      "\005\022\030\n\020resourceCapacity\030\013 \001(\005\022\026\n\016numEvoCha" +
       "mbers\030\014 \001(\005\"\212\001\n\022MiniJobCenterProto\0226\n\nst" +
       "ructInfo\030\001 \001(\0132\".com.lvl6.proto.Structur" +
       "eInfoProto\022\031\n\021generatedJobLimit\030\002 \001(\005\022!\n" +
@@ -17178,8 +17265,8 @@ public final class StructureProto {
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\020\n\010structId\030\003 \001(\005\022" +
       "\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005" +
       " \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030" +
-      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226" +
-      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str",
+      "\007 \001(\0132\037.com.lvl6.proto.CoordinateProto\0226",
+      "\n\013orientation\030\010 \001(\0162!.com.lvl6.proto.Str" +
       "uctOrientation\022\031\n\021fbInviteStructLvl\030\t \001(" +
       "\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001" +
       "(\002\"\\\n\023TutorialStructProto\022\020\n\010structId\030\001 " +
@@ -17188,8 +17275,8 @@ public final class StructureProto {
       "stacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017removalC" +
       "ostType\030\003 \001(\0162\034.com.lvl6.proto.ResourceT" +
       "ype\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030\005 \001" +
-      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img" +
-      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001",
+      "(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007img",
+      "Name\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030\t \001" +
       "(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAppea" +
       "r\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024shadow" +
       "VerticalOffset\030\r \001(\002\022\037\n\027shadowHorizontal" +
@@ -17198,8 +17285,8 @@ public final class StructureProto {
       ".com.lvl6.proto.CoordinateProto\0226\n\013orien" +
       "tation\030\005 \001(\0162!.com.lvl6.proto.StructOrie" +
       "ntation\"\333\001\n\021UserObstacleProto\022\030\n\020userObs" +
-      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs" +
-      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com",
+      "tacleUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nobs",
+      "tacleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\0226\n\013orientati" +
       "on\030\005 \001(\0162!.com.lvl6.proto.StructOrientat" +
       "ion\022\030\n\020removalStartTime\030\006 \001(\003\"\224\001\n\017EvoCha" +
@@ -17208,8 +17295,8 @@ public final class StructureProto {
       "cked\030\002 \001(\0162\027.com.lvl6.proto.Quality\022\027\n\017e" +
       "voTierUnlocked\030\003 \001(\005\"`\n\017TeamCenterProto\022" +
       "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k" +
-      "\n\016ClanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c",
+      "uctureInfoProto\022\025\n\rteamCostLimit\030\002 \001(\005\"k",
+      "\n\016ClanHouseProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
       "om.lvl6.proto.StructureInfoProto\022!\n\031maxH" +
       "elpersPerSolicitation\030\002 \001(\005*I\n\014ResourceT" +
       "ype\022\017\n\013NO_RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022" +
@@ -17253,7 +17340,7 @@ public final class StructureProto {
     internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_HospitalProto_descriptor,
-        new java.lang.String[] { "StructInfo", "QueueSize", "HealthPerSecond", });
+        new java.lang.String[] { "StructInfo", "QueueSize", "HealthPerSecond", "SecsToFullyHealMultiplier", });
     internal_static_com_lvl6_proto_LabProto_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_lvl6_proto_LabProto_fieldAccessorTable = new

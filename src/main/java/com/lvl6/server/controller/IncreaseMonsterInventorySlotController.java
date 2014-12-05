@@ -84,6 +84,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent)event).getIncreaseMonsterInventorySlotRequestProto();
 
+    log.info("reqProto={}", reqProto);
   	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot table
     
     //get values sent from the client (the request proto)
@@ -372,18 +373,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
   		//if num accepted invites more than min required, just take the earliest ones
   		List<String> inviteIdsTheRest = new ArrayList<String>();
+  		log.info("idsToAcceptedInvites={}", idsToAcceptedInvites);
   		List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestInvites(
   				idsToAcceptedInvites, minNumInvites, inviteIdsTheRest); 
   		
   		//redeem the nEarliestInvites
   		int num = UpdateUtils.get().updateRedeemUserFacebookInviteForSlot(
   				curTime, nEarliestInvites);
-  		log.info("num saved: " + num);
+  		log.info("num saved: {}", num);
 
   		if (num != minNumInvites) {
   			log.error("expected updated: " + minNumInvites + "\t actual updated: " + num);
   			return false;
   		}
+  		
+  		log.info("inviteIdsTheRest: {}", inviteIdsTheRest);
   		//delete all the remaining invites
   		int numCurInvites = inviteIdsTheRest.size();
   		if (numCurInvites > 0) {
@@ -397,7 +401,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	if (IncreaseSlotType.PURCHASE == increaseType) {
   		int cost = -1 * gemCost;
-  		success = aUser.updateRelativeGemsNaive(cost);
+  		success = aUser.updateRelativeGemsNaive(cost, 0);
   		
   		if (!success) {
   			log.error("problem with updating user monster inventory slots and diamonds");

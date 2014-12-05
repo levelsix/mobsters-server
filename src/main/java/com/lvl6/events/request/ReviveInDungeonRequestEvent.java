@@ -12,7 +12,7 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 
 public class ReviveInDungeonRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private ReviveInDungeonRequestProto reviveInDungeonRequestProto;
   
@@ -24,11 +24,20 @@ public class ReviveInDungeonRequestEvent extends RequestEvent {
       reviveInDungeonRequestProto = ReviveInDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = reviveInDungeonRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("revive in dungeon request exception", e);
+      log.error("ReviveInDungeonRequest exception", e);
     }
   }
 
   public ReviveInDungeonRequestProto getReviveInDungeonRequestProto() {
     return reviveInDungeonRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "ReviveInDungeonRequestEvent [reviveInDungeonRequestProto="
+		  + reviveInDungeonRequestProto
+		  + "]";
+  }
+  
 }

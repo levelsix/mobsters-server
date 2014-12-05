@@ -6,6 +6,8 @@ import java.util.List;
 
 public class MiniJobForUser implements Serializable {
 	
+	private static final long serialVersionUID = -5431494347613930829L;
+	
 	private String id;
 	private String userId;
 	private int miniJobId;

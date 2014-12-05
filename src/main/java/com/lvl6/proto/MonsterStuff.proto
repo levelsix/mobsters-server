@@ -83,6 +83,12 @@ message MonsterLevelInfoProto {
 	optional float expLvlExponent = 15;
 	optional int32 sellAmount = 16;
 	optional int32 teamCost = 17;
+	optional int32 costToFullyHeal = 18;
+	optional int32 secsToFullyHeal = 19;
+	optional int32 enhanceCostPerFeeder = 20;
+	optional float enhanceCostExponent = 21;
+	optional float enhanceExpPerSecond = 22;
+	optional float enhanceExpPerSecondExponent = 23;
 }
 
 //------------------------------------------------------------------------------------------
@@ -119,8 +125,7 @@ message UserMonsterHealingProto {
 	optional int64 queuedTimeMillis = 3; //when the monster was put into the queue(?)
 	
 	//id of the user's hospital structure
-	//optional string userHospitalStructUuid = 4; //not needed, can infer from priority and 
-											   //the hospitals the user has
+	optional string userHospitalStructUuid = 4;  
 											   
 	//how much health is already healed	
 	optional float healthProgress = 5;

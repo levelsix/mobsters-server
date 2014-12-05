@@ -16,6 +16,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
 import com.lvl6.events.response.CollectMonsterEnhancementResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.Builder;
@@ -24,6 +27,8 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -37,6 +42,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil;
+
+	@Autowired
+	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected UserRetrieveUtils2 userRetrieveUtil;
 	
 	public CollectMonsterEnhancementController() {
 		numAllocatedThreads = 4;
@@ -203,6 +214,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int newExp = umcep.getExpectedExperience();
 		int newLvl = umcep.getExpectedLevel();
 		int newHp = umcep.getExpectedHp();
+		
+		//reward the user with exp
+		awardUserExp(uId, userMonsterIdBeingEnhanced, newExp);
 
 		//GIVE THE MONSTER EXP
 		int num = UpdateUtils.get().updateUserMonsterExpAndLvl(userMonsterIdBeingEnhanced,
@@ -210,7 +224,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		log.info(String.format(
 			"numUpdated (monster being enhanced, expected 1)=%s", num));
 
+		
 		return true;
+	}
+
+	private void awardUserExp( String uId, String userMonsterIdBeingEnhanced, int newExp )
+	{
+		MonsterForUser mfu = null;
+		User u = null;
+		try {
+			mfu = monsterForUserRetrieveUtil
+				.getSpecificUserMonster(userMonsterIdBeingEnhanced);
+			u = userRetrieveUtil.getUserById(uId);
+			
+			float expReward = (float)newExp - (float)mfu.getCurrentExp();
+			expReward *= ControllerConstants.MONSTER_ENHANCING__PLAYER_EXP_CONVERTER;
+			log.info(String.format(
+				"expReward for enhancing=%s, userBefore=%s", expReward, u));
+			
+			if (expReward > 0) {
+				u.updateRelativeGemsNaive(0, (int)expReward);
+				log.info(String.format(
+					"expReward for userAfter=%s", u));
+			}
+
+		} catch (Exception e) {
+			log.error(String.format(
+				"can't reward user exp for enhancing. mfu=%s, u=%s",
+				mfu, u), e);
+		}
 	}
 
 	private void writeChangesToHistory(String uId, List<String> allEnhancingMfuIds,
@@ -256,6 +298,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtil )
 	{
 		this.monsterEnhancingForUserRetrieveUtil = monsterEnhancingForUserRetrieveUtil;
+	}
+
+	public MonsterForUserRetrieveUtils2 getMonsterForUserRetrieveUtil()
+	{
+		return monsterForUserRetrieveUtil;
+	}
+
+	public void setMonsterForUserRetrieveUtil(
+		MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil )
+	{
+		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
+	}
+
+	public UserRetrieveUtils2 getUserRetrieveUtil()
+	{
+		return userRetrieveUtil;
+	}
+
+	public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+	{
+		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 }

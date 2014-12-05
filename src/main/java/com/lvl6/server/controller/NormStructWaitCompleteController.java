@@ -18,6 +18,7 @@ import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
@@ -25,6 +26,7 @@ import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.No
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
+import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -39,6 +41,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Autowired
   protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
+  
+  @Autowired
+  protected UserRetrieveUtils2 userRetrieveUtil;
 
   public NormStructWaitCompleteController() {
     numAllocatedThreads = 5;
@@ -155,8 +160,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
       resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
-      log.error("userStructs is null, userStructIds is null, clientTime is null, or array lengths different. userStructs="
-          + userStructs + ", userStructIds=" + userStructIds + ", clientTime=" + clientTime);
+      String preface = "userStructs, userStructIds, or clientTime is null,";
+      String preface2 = " or array lengths different."; 
+      log.error(String.format(
+    	  "%s %s userStructs=%s, userStructIds=%s, clientTime=%s",
+          preface, preface2, userStructs, userStructIds, clientTime));
       return false;
     }
 
@@ -169,8 +177,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	clientTime, userStructs, validUserStructIds, validUserStructs);
     
     if (userStructs.size() != validUserStructs.size()) {
-    	log.warn("some of what the client sent is invalid. idsClientSent=" +
-    			userStructIds + "\t validIds=" + validUserStructIds);
+    	String preface = "some of what the client sent is invalid."; 
+    	log.warn(String.format(
+    		"%s idsClientSent=%s \t validIds=%s",
+    		preface, userStructIds, validUserStructIds));
     	userStructs.clear();
     	userStructs.addAll(validUserStructs);
     	
@@ -192,12 +202,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     for (StructureForUser us : userStructs) {
       if (!us.getUserId().equals(userId)) {
-        log.warn("user struct's owner's id is " + us.getUserId() + ", and user id is " + userId);
+        log.warn(String.format(
+        	"user struct's ownerId=%s, and userId=%s",
+        	us.getUserId(), userId));
         continue;
       }
       Structure struct = structures.get(us.getStructId());
       if (struct == null) {
-        log.warn("no struct in db exists with id " + us.getStructId());
+        log.warn(String.format(
+        	"no struct in db exists with id=%s",
+        	us.getStructId()));
         continue;
       }
       
@@ -221,7 +235,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         timesBuildsFinished.add(clientTime);
         
       } else {
-        log.warn("user struct has never been bought or purchased according to db. " + us);
+        log.warn(String.format(
+        	"user struct never bought mor purchased according to db. %s",
+        	us));
       }
     }
     return timesBuildsFinished;
@@ -232,9 +248,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		List<Timestamp> newRetrievedTimes) {
     if (!UpdateUtils.get().updateUserStructsBuildingIsComplete(userId, buildsDone,
     		newRetrievedTimes)) {
-      log.error("problem with marking norm struct builds as complete for one of these structs: " + buildsDone);
+      log.error(String.format(
+    	  "problem marking norm struct builds as complete for a struct: %s",
+    	  buildsDone));
       return false;
     }
+    
+    int expReward = 0;
+    for (StructureForUser sfu : buildsDone) {
+    	int structId = sfu.getStructId();
+    	Structure s = StructureRetrieveUtils.getStructForStructId(structId);
+    	expReward += s.getExpReward();
+    }
+
+    if (expReward > 0) {
+    	User u = userRetrieveUtil.getUserById(userId);
+    	log.info(String.format("user before rewarding exp: %s", u));
+    	u.updateRelativeGemsNaive(0, expReward);
+    	log.info(String.format("user after rewarding exp: %s", u));
+    }
+    
     return true;
   }
 
@@ -253,6 +286,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void setStructureForUserRetrieveUtils(
       StructureForUserRetrieveUtils2 structureForUserRetrieveUtils) {
     this.structureForUserRetrieveUtils = structureForUserRetrieveUtils;
+  }
+
+  public UserRetrieveUtils2 getUserRetrieveUtil()
+  {
+	  return userRetrieveUtil;
+  }
+
+  public void setUserRetrieveUtil( UserRetrieveUtils2 userRetrieveUtil )
+  {
+	  this.userRetrieveUtil = userRetrieveUtil;
   }
 
 }

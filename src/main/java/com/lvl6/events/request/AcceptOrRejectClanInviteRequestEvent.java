@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
 
 public class AcceptOrRejectClanInviteRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private AcceptOrRejectClanInviteRequestProto acceptOrRejectClanInviteRequestProto;
   
@@ -24,11 +24,20 @@ public class AcceptOrRejectClanInviteRequestEvent extends RequestEvent {
       acceptOrRejectClanInviteRequestProto = AcceptOrRejectClanInviteRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = acceptOrRejectClanInviteRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("acceptOrRejectClanInvite request exception", e);
+      log.error("AcceptOrRejectClanInviteRequest exception", e);
     }
   }
 
   public AcceptOrRejectClanInviteRequestProto getAcceptOrRejectClanInviteRequestProto() {
     return acceptOrRejectClanInviteRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "AcceptOrRejectClanInviteRequestEvent [acceptOrRejectClanInviteRequestProto="
+		  + acceptOrRejectClanInviteRequestProto
+		  + "]";
+  }
+
 }
