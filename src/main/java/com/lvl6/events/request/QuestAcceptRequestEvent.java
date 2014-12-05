@@ -24,11 +24,20 @@ public class QuestAcceptRequestEvent extends RequestEvent {
       questAcceptRequestProto = QuestAcceptRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = questAcceptRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("quest accept request exception", e);
+      log.error("QuestAcceptRequest exception", e);
     }
   }
 
   public QuestAcceptRequestProto getQuestAcceptRequestProto() {
     return questAcceptRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "QuestAcceptRequestEvent [questAcceptRequestProto="
+		  + questAcceptRequestProto
+		  + "]";
+  }
+  
 }

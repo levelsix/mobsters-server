@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 
 public class RetractRequestJoinClanRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private RetractRequestJoinClanRequestProto retractRequestJoinClanRequestProto;
   
@@ -24,11 +24,20 @@ public class RetractRequestJoinClanRequestEvent extends RequestEvent {
       retractRequestJoinClanRequestProto = RetractRequestJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retractRequestJoinClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("retract request join clan request exception", e);
+      log.error("RetractRequestJoinClanRequest exception", e);
     }
   }
 
   public RetractRequestJoinClanRequestProto getRetractRequestJoinClanRequestProto() {
     return retractRequestJoinClanRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "RetractRequestJoinClanRequestEvent [retractRequestJoinClanRequestProto="
+		  + retractRequestJoinClanRequestProto
+		  + "]";
+  }
+  
 }

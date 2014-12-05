@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 
 public class StartupRequestEvent extends PreDatabaseRequestEvent{
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private StartupRequestProto startupRequestProto;
   
@@ -28,7 +28,7 @@ public class StartupRequestEvent extends PreDatabaseRequestEvent{
       
       udid = startupRequestProto.getUdid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("startup request exception", e);
+      log.error("StartupRequest exception", e);
     }
   }
 
@@ -39,6 +39,13 @@ public class StartupRequestEvent extends PreDatabaseRequestEvent{
   public void setStartupRequestProto(StartupRequestProto startupRequestProto) {
     this.startupRequestProto = startupRequestProto;
   }
-  
+
+  @Override
+  public String toString()
+  {
+	  return "StartupRequestEvent [startupRequestProto="
+		  + startupRequestProto
+		  + "]";
+  }
   
 }

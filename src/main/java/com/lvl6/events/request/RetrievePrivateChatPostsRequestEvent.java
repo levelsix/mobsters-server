@@ -12,7 +12,7 @@ import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProto;
 
 public class RetrievePrivateChatPostsRequestEvent extends RequestEvent{
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private RetrievePrivateChatPostsRequestProto retrievePrivateChatPostsRequestProto;
   /**
@@ -24,12 +24,20 @@ public class RetrievePrivateChatPostsRequestEvent extends RequestEvent{
       retrievePrivateChatPostsRequestProto = RetrievePrivateChatPostsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retrievePrivateChatPostsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("retireve private chat posts request exception", e);
+      log.error("RetrievePrivateChatPostsRequest exception", e);
     }
   }
 
   public RetrievePrivateChatPostsRequestProto getRetrievePrivateChatPostsRequestProto() {
     return retrievePrivateChatPostsRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "RetrievePrivateChatPostsRequestEvent [retrievePrivateChatPostsRequestProto="
+		  + retrievePrivateChatPostsRequestProto
+		  + "]";
   }
   
 }//RetrievePrivateChatPostsRequestProto

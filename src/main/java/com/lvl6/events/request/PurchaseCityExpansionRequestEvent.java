@@ -12,7 +12,7 @@ import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
 
 public class PurchaseCityExpansionRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto;
   
@@ -24,7 +24,7 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
       purchaseCityExpansionRequestProto = PurchaseCityExpansionRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("purchase city expansion request exception", e);
+      log.error("PurchaseCityExpansionRequest exception", e);
     }
   }
 
@@ -36,5 +36,13 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
   		PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto) {
   	this.purchaseCityExpansionRequestProto = purchaseCityExpansionRequestProto;
   	playerId = purchaseCityExpansionRequestProto.getSender().getUserUuid();
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "PurchaseCityExpansionRequestEvent [purchaseCityExpansionRequestProto="
+		  + purchaseCityExpansionRequestProto
+		  + "]";
   }
 }

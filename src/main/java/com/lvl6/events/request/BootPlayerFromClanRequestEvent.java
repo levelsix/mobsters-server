@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 
 public class BootPlayerFromClanRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private BootPlayerFromClanRequestProto bootPlayerFromClanRequestProto;
   
@@ -24,11 +24,20 @@ public class BootPlayerFromClanRequestEvent extends RequestEvent {
       bootPlayerFromClanRequestProto = BootPlayerFromClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = bootPlayerFromClanRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("boot player from clan request exception", e);
+      log.error("BootPlayerFromClanRequest exception", e);
     }
   }
 
   public BootPlayerFromClanRequestProto getBootPlayerFromClanRequestProto() {
     return bootPlayerFromClanRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "BootPlayerFromClanRequestEvent [bootPlayerFromClanRequestProto="
+		  + bootPlayerFromClanRequestProto
+		  + "]";
+  }
+
 }

@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 
 public class SpawnMiniJobRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private SpawnMiniJobRequestProto spawnMiniJobRequestProto;
   
@@ -24,7 +24,7 @@ public class SpawnMiniJobRequestEvent extends RequestEvent {
       spawnMiniJobRequestProto = SpawnMiniJobRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = spawnMiniJobRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("spawn obstacle request exception", e);
+      log.error("SpawnMiniJobRequest exception", e);
     }
   }
 
@@ -34,6 +34,14 @@ public class SpawnMiniJobRequestEvent extends RequestEvent {
   //added for testing purposes
   public void setSpawnMiniJobRequestProto(SpawnMiniJobRequestProto sorp) {
 	  this.spawnMiniJobRequestProto = sorp;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "SpawnMiniJobRequestEvent [spawnMiniJobRequestProto="
+		  + spawnMiniJobRequestProto
+		  + "]";
   }
   
 }

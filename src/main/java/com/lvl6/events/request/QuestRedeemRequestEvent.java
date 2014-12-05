@@ -24,11 +24,20 @@ public class QuestRedeemRequestEvent extends RequestEvent {
       questRedeemRequestProto = QuestRedeemRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = questRedeemRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("quest redeem request exception", e);
+      log.error("QuestRedeemRequest exception", e);
     }
   }
 
   public QuestRedeemRequestProto getQuestRedeemRequestProto() {
     return questRedeemRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "QuestRedeemRequestEvent [questRedeemRequestProto="
+		  + questRedeemRequestProto
+		  + "]";
+  }
+  
 }

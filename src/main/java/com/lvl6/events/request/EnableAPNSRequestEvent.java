@@ -12,7 +12,7 @@ import com.lvl6.proto.EventApnsProto.EnableAPNSRequestProto;
 
 public class EnableAPNSRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private EnableAPNSRequestProto enableAPNSRequestProto;
   
@@ -24,11 +24,20 @@ public class EnableAPNSRequestEvent extends RequestEvent {
       enableAPNSRequestProto = EnableAPNSRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = enableAPNSRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("enable apns request exception", e);
+      log.error("EnableAPNSRequest exception", e);
     }
   }
 
   public EnableAPNSRequestProto getEnableAPNSRequestProto() {
     return enableAPNSRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "EnableAPNSRequestEvent [enableAPNSRequestProto="
+		  + enableAPNSRequestProto
+		  + "]";
+  }
+
 }

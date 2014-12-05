@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 
 public class TransferClanOwnershipRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private TransferClanOwnershipRequestProto transferClanOwnershipRequestProto;
   
@@ -24,7 +24,7 @@ public class TransferClanOwnershipRequestEvent extends RequestEvent {
       transferClanOwnershipRequestProto = TransferClanOwnershipRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = transferClanOwnershipRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("transfer clan ownership request exception", e);
+      log.error("TransferClanOwnershipRequest exception", e);
     }
   }
 
@@ -32,9 +32,17 @@ public class TransferClanOwnershipRequestEvent extends RequestEvent {
     return transferClanOwnershipRequestProto;
   }
 
-public void setTransferClanOwnershipRequestProto(
-	TransferClanOwnershipRequestProto transferClanOwnershipRequestProto )
-{
-	this.transferClanOwnershipRequestProto = transferClanOwnershipRequestProto;
-}
+  public void setTransferClanOwnershipRequestProto(
+	  TransferClanOwnershipRequestProto transferClanOwnershipRequestProto )
+  {
+	  this.transferClanOwnershipRequestProto = transferClanOwnershipRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "TransferClanOwnershipRequestEvent [transferClanOwnershipRequestProto="
+		  + transferClanOwnershipRequestProto
+		  + "]";
+  }
 }

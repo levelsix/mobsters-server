@@ -12,7 +12,7 @@ import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 
 public class SpawnObstacleRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private SpawnObstacleRequestProto spawnObstacleRequestProto;
   
@@ -24,7 +24,7 @@ public class SpawnObstacleRequestEvent extends RequestEvent {
       spawnObstacleRequestProto = SpawnObstacleRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = spawnObstacleRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("spawn obstacle request exception", e);
+      log.error("SpawnObstacleRequest exception", e);
     }
   }
 
@@ -34,6 +34,14 @@ public class SpawnObstacleRequestEvent extends RequestEvent {
   //added for testing purposes
   public void setSpawnObstacleRequestProto(SpawnObstacleRequestProto sorp) {
 	  this.spawnObstacleRequestProto = sorp;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "SpawnObstacleRequestEvent [spawnObstacleRequestProto="
+		  + spawnObstacleRequestProto
+		  + "]";
   }
   
 }

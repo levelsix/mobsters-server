@@ -13,7 +13,7 @@ import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProto;
 
 public class RemoveMonsterFromBattleTeamRequestEvent extends RequestEvent {
 	
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private RemoveMonsterFromBattleTeamRequestProto removeMonsterFromBattleTeamRequestProto;
   
@@ -25,11 +25,20 @@ public class RemoveMonsterFromBattleTeamRequestEvent extends RequestEvent {
       removeMonsterFromBattleTeamRequestProto = RemoveMonsterFromBattleTeamRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = removeMonsterFromBattleTeamRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("remove monster from battle team request exception", e);
+      log.error("RemoveMonsterFromBattleTeamRequest exception", e);
     }
   }
 
   public RemoveMonsterFromBattleTeamRequestProto getRemoveMonsterFromBattleTeamRequestProto() {
     return removeMonsterFromBattleTeamRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "RemoveMonsterFromBattleTeamRequestEvent [removeMonsterFromBattleTeamRequestProto="
+		  + removeMonsterFromBattleTeamRequestProto
+		  + "]";
+  }
+  
 }

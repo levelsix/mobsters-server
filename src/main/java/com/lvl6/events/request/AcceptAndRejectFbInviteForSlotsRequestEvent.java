@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestPr
 
 public class AcceptAndRejectFbInviteForSlotsRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private AcceptAndRejectFbInviteForSlotsRequestProto acceptAndRejectFbInviteForSlotsRequestProto;
   
@@ -24,11 +24,20 @@ public class AcceptAndRejectFbInviteForSlotsRequestEvent extends RequestEvent {
       acceptAndRejectFbInviteForSlotsRequestProto = AcceptAndRejectFbInviteForSlotsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = acceptAndRejectFbInviteForSlotsRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("accept and reject fb invite for slots request exception", e);
+      log.error("AcceptAndRejectFbInviteForSlotsRequest exception", e);
     }
   }
 
   public AcceptAndRejectFbInviteForSlotsRequestProto getAcceptAndRejectFbInviteForSlotsRequestProto() {
     return acceptAndRejectFbInviteForSlotsRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "AcceptAndRejectFbInviteForSlotsRequestEvent [acceptAndRejectFbInviteForSlotsRequestProto="
+		  + acceptAndRejectFbInviteForSlotsRequestProto
+		  + "]";
+  }
+  
 }

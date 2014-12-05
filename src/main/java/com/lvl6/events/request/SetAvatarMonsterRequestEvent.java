@@ -24,11 +24,22 @@ public class SetAvatarMonsterRequestEvent extends RequestEvent {
       setAvatarMonsterRequestProto = SetAvatarMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = setAvatarMonsterRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("set facebook id request exception", e);
+      log.error("SetAvatarMonsterRequest exception", e);
     }
   }
 
   public SetAvatarMonsterRequestProto getSetAvatarMonsterRequestProto() {
     return setAvatarMonsterRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SetAvatarMonsterRequestEvent [log="
+		  + log
+		  + ", setAvatarMonsterRequestProto="
+		  + setAvatarMonsterRequestProto
+		  + "]";
+  }
+  
 }

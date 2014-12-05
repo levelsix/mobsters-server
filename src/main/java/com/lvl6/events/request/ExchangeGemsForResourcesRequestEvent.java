@@ -12,7 +12,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestPro
 
 public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private ExchangeGemsForResourcesRequestProto exchangeGemsForResourcesRequestProto;
   
@@ -24,11 +24,20 @@ public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
       exchangeGemsForResourcesRequestProto = ExchangeGemsForResourcesRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = exchangeGemsForResourcesRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("exchange gems for resources request exception", e);
+      log.error("ExchangeGemsForResourcesRequest exception", e);
     }
   }
 
   public ExchangeGemsForResourcesRequestProto getExchangeGemsForResourcesRequestProto() {
     return exchangeGemsForResourcesRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "ExchangeGemsForResourcesRequestEvent [exchangeGemsForResourcesRequestProto="
+		  + exchangeGemsForResourcesRequestProto
+		  + "]";
+  }
+
 }

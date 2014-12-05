@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
 
 public class ChangeClanSettingsRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private ChangeClanSettingsRequestProto changeClanSettingsRequestProto;
   
@@ -24,11 +24,19 @@ public class ChangeClanSettingsRequestEvent extends RequestEvent {
       changeClanSettingsRequestProto = ChangeClanSettingsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = changeClanSettingsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("change clan settings request exception");
+      log.error("ChangeClanSettingsRequest exception");
     }
   }
 
   public ChangeClanSettingsRequestProto getChangeClanSettingsRequestProto() {
     return changeClanSettingsRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "ChangeClanSettingsRequestEvent [changeClanSettingsRequestProto="
+		  + changeClanSettingsRequestProto
+		  + "]";
   }
 }

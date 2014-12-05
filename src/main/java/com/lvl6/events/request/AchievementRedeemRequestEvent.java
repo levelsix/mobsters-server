@@ -31,4 +31,13 @@ public class AchievementRedeemRequestEvent extends RequestEvent {
   public AchievementRedeemRequestProto getAchievementRedeemRequestProto() {
     return achievementRedeemRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "AchievementRedeemRequestEvent [achievementRedeemRequestProto="
+		  + achievementRedeemRequestProto
+		  + "]";
+  }
+
 }

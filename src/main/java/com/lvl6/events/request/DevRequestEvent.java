@@ -12,7 +12,7 @@ import com.lvl6.proto.EventDevProto.DevRequestProto;
 
 public class DevRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private DevRequestProto devRequestProto;
   
@@ -24,7 +24,7 @@ public class DevRequestEvent extends RequestEvent {
       devRequestProto = DevRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = devRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("enable apns request exception", e);
+      log.error("DevRequest exception", e);
     }
   }
 
@@ -35,6 +35,14 @@ public class DevRequestEvent extends RequestEvent {
   public void setDevRequestProto( DevRequestProto devRequestProto )
   {
 	  this.devRequestProto = devRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "DevRequestEvent [devRequestProto="
+		  + devRequestProto
+		  + "]";
   }
 
 }

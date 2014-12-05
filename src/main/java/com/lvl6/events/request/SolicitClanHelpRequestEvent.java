@@ -12,7 +12,7 @@ import com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProto;
 
 public class SolicitClanHelpRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private SolicitClanHelpRequestProto solicitClanHelpRequestProto;
   
@@ -24,11 +24,20 @@ public class SolicitClanHelpRequestEvent extends RequestEvent {
       solicitClanHelpRequestProto = SolicitClanHelpRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = solicitClanHelpRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("solicitClanHelp request exception", e);
+      log.error("SolicitClanHelpRequest exception", e);
     }
   }
 
   public SolicitClanHelpRequestProto getSolicitClanHelpRequestProto() {
     return solicitClanHelpRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "SolicitClanHelpRequestEvent [solicitClanHelpRequestProto="
+		  + solicitClanHelpRequestProto
+		  + "]";
+  }
+  
 }

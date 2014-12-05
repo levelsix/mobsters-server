@@ -12,7 +12,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 
 public class InAppPurchaseRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private InAppPurchaseRequestProto inAppPurchaseRequestProto;
   
@@ -24,11 +24,20 @@ public class InAppPurchaseRequestEvent extends RequestEvent {
       inAppPurchaseRequestProto = InAppPurchaseRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = inAppPurchaseRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("in app purchase request exception", e);
+      log.error("InAppPurchaseRequest exception", e);
     }
   }
 
   public InAppPurchaseRequestProto getInAppPurchaseRequestProto() {
     return inAppPurchaseRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "InAppPurchaseRequestEvent [inAppPurchaseRequestProto="
+		  + inAppPurchaseRequestProto
+		  + "]";
+  }
+  
 }

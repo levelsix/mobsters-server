@@ -12,7 +12,7 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 
 public class EndDungeonRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private EndDungeonRequestProto endDungeonRequestProto;
   
@@ -24,11 +24,20 @@ public class EndDungeonRequestEvent extends RequestEvent {
       endDungeonRequestProto = EndDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = endDungeonRequestProto.getSender().getMinUserProto().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("end dungeon request exception", e);
+      log.error("EndDungeonRequest exception", e);
     }
   }
 
   public EndDungeonRequestProto getEndDungeonRequestProto() {
     return endDungeonRequestProto;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "EndDungeonRequestEvent [endDungeonRequestProto="
+		  + endDungeonRequestProto
+		  + "]";
+  }
+
 }

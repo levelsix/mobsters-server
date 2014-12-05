@@ -12,7 +12,7 @@ import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 
 public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private CombineUserMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
   
@@ -24,11 +24,19 @@ public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
       combineMonsterPiecesRequestProto = CombineUserMonsterPiecesRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = combineMonsterPiecesRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("combine monster pieces request exeption", e);
+      log.error("CombineUserMonsterPiecesRequest exeption", e);
     }
   }
 
   public CombineUserMonsterPiecesRequestProto getCombineUserMonsterPiecesRequestProto() {
     return combineMonsterPiecesRequestProto;
+  }
+
+  @Override
+  public String toString()
+  {
+	  return "CombineUserMonsterPiecesRequestEvent [combineMonsterPiecesRequestProto="
+		  + combineMonsterPiecesRequestProto
+		  + "]";
   }
 }

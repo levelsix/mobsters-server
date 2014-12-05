@@ -12,7 +12,7 @@ import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 
 public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
 
-	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 	
   private UserCreateRequestProto userCreateRequestProto;
   
@@ -28,7 +28,7 @@ public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
       
       udid = userCreateRequestProto.getUdid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("user create request exception", e);
+      log.error("UserCreateRequest exception", e);
     }
   }
 
@@ -39,4 +39,13 @@ public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
   public void setUserCreateRequestProto(UserCreateRequestProto ucrp) {
   	this.userCreateRequestProto = ucrp;
   }
+
+  @Override
+  public String toString()
+  {
+	  return "UserCreateRequestEvent [userCreateRequestProto="
+		  + userCreateRequestProto
+		  + "]";
+  }
+  
 }
