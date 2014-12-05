@@ -280,7 +280,7 @@ message StartupResponseProto {
 			optional int32 numGems = 2;
 		}
 		message ResourceConversionConstantProto {
-			optional ResourceType resourceType = 1;
+			optional ResourceType resourceType = 1 [default = NO_RESOURCE];
 			optional int32 resourceAmt = 2;
 			optional int32 numGems = 3;
 		}
