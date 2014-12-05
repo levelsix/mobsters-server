@@ -596,9 +596,8 @@ public class User implements Serializable {
 		}
 		if (oilChange != 0) {
 			relativeParams.put(DBConstants.USER__OIL, oilChange);
-			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, coinChange);
+			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, oilChange);
 		}
-
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");

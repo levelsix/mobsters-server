@@ -233,9 +233,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if(null != us) {
         returnValue.put(us.getId(), us);
       } else {
-        log.error("could not retrieve one of the user structs. userStructIds to retrieve="
-            + userStructIds + ". user structs retrieved=" 
-            + userStructList + ". Continuing with processing.");
+    	  String preface = "could not retrieve one of the user structs.";
+        log.error(String.format(
+        	"%s userStructIds to retrieve=%s. user structs retrieved=%s. Will continue processing.",
+            preface, userStructIds, userStructList));
       }
     }
     return returnValue;
@@ -261,7 +262,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if(null != s) {
         returnValue.put(userStructId, s);
       } else {
-        log.error("structure with id " + structId + " does not exist, therefore UserStruct is invalid:" + us);
+        log.error(String.format(
+        	"structure with id %s does not exist, therefore UserStruct is invalid:%s",
+        	structId, us));
       }
     }
     
@@ -289,7 +292,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     if (!duplicates.isEmpty()) {
       resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-      log.warn("duplicate struct ids in request. ids=" + duplicates);
+      log.warn(String.format(
+    	  "duplicate struct ids in request. ids=%s", duplicates));
     }
 
     //go through the userStructIds the user sent, checking which structs can be
@@ -346,23 +350,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int maxOilUserCanGain = maxOil - curOil;
   	oilGain = Math.min(maxOilUserCanGain, oilGain);
   	
-  	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain)) {
-      log.error("problem with updating user stats after retrieving " + cashGain + " cash" +
-      		"\t" + oilGain + " oil.");
-      return false;
-      
-    } else {
-    	if (0 != oilGain) {
-    		currencyChange.put(MiscMethods.oil, oilGain);
-    	}
-    	if (0 != cashGain) {
-    		currencyChange.put(MiscMethods.cash, cashGain);
-    	}
-    }
+  	if (cashGain <= 0 && oilGain <= 0)
+  	{
+  		log.error(String.format(
+  			"cash and oil both invalid. cash=%s \t oil=%s",
+  			cashGain, oilGain) );
+  		return false;
+  	}
+
+  	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain))
+  	{
+  		log.error(String.format(
+  			"can't update user stats after retrieving %s cash \t %s oil.",
+  			cashGain, oilGain) );
+  		return false;
+
+  	} else {
+  		if (0 != oilGain) {
+  			currencyChange.put(MiscMethods.oil, oilGain);
+  		}
+  		if (0 != cashGain) {
+  			currencyChange.put(MiscMethods.cash, cashGain);
+  		}
+  	}
   	
     if (!UpdateUtils.get().updateUserStructsLastRetrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
-      log.error("problem with updating user structs last retrieved for userStructIds " 
-          + userStructIdsToTimesOfRetrieval);
+      log.error(String.format(
+    	  "problem updating user structs last retrieved for userStructIds %s", 
+          userStructIdsToTimesOfRetrieval));
       return false;
     }
     return true;
