@@ -134,15 +134,15 @@ public class AmqpGameEventHandler extends AbstractGameEventHandler implements Me
 		ConnectedPlayer newp = new ConnectedPlayer();
 		newp.setIp_connection_id("amqp");
 		newp.setServerHostName(server.serverId());
-		if (!event.getPlayerId().equals("")) {
-			log.info("Player logged on: " + event.getPlayerId());
-			newp.setPlayerId(event.getPlayerId());
-			playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
-		} else {
+		if (event instanceof PreDatabaseRequestEvent) {
 			newp.setUdid(((PreDatabaseRequestEvent) event).getUdid());
 			getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
 			log.info("New player with UdId: " + newp.getUdid());
-		}
+		} else if (event.getPlayerId() != null && !event.getPlayerId().equals("")) {
+            log.info("Player logged on: " + event.getPlayerId());
+            newp.setPlayerId(event.getPlayerId());
+            playersByPlayerId.put(event.getPlayerId(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
+        }
 	}
 
 }
