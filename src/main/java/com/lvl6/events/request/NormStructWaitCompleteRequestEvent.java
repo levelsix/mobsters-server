@@ -39,4 +39,5 @@ public class NormStructWaitCompleteRequestEvent extends RequestEvent {
 		  + normStructWaitCompleteRequestProto
 		  + "]";
   }
+  
 }

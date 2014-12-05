@@ -24,7 +24,7 @@ public class RetrieveUsersForUserIdsRequestEvent extends RequestEvent {
       retrieveUsersForUserIdsRequestProto = RetrieveUsersForUserIdsRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = retrieveUsersForUserIdsRequestProto.getSender().getUserUuid();
     } catch (InvalidProtocolBufferException e) {
-      log.error("RetrieveUsersForUserIds exception", e);
+      log.error("RetrieveUsersForUserIdsRequest exception", e);
     }
   }
 
@@ -39,4 +39,5 @@ public class RetrieveUsersForUserIdsRequestEvent extends RequestEvent {
 		  + retrieveUsersForUserIdsRequestProto
 		  + "]";
   }
+  
 }

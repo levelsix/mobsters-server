@@ -39,4 +39,5 @@ public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
 		  + promoteDemoteClanMemberRequestProto
 		  + "]";
   }
+  
 }

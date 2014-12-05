@@ -45,4 +45,5 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
 		  + purchaseCityExpansionRequestProto
 		  + "]";
   }
+  
 }

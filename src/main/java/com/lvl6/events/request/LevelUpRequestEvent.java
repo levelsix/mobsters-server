@@ -39,4 +39,5 @@ public class LevelUpRequestEvent extends RequestEvent {
 		  + levelUpRequestProto
 		  + "]";
   }
+  
 }

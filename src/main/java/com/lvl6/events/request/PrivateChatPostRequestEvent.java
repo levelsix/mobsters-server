@@ -39,4 +39,5 @@ public class PrivateChatPostRequestEvent extends RequestEvent {
 		  + privateChatPostRequestProto
 		  + "]";
   }
+  
 }

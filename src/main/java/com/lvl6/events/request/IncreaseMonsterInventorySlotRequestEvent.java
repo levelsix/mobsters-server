@@ -39,4 +39,5 @@ public class IncreaseMonsterInventorySlotRequestEvent extends RequestEvent {
 		  + increaseMonsterInventorySlotRequestProto
 		  + "]";
   }
+  
 }

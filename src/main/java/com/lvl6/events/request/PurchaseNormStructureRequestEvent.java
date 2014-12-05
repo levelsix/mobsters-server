@@ -39,4 +39,5 @@ public class PurchaseNormStructureRequestEvent extends RequestEvent {
 		  + purchaseNormStructureRequestProto
 		  + "]";
   }
+  
 }

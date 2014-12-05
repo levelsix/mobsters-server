@@ -39,4 +39,5 @@ public class LeaveClanRequestEvent extends RequestEvent {
 		  + leaveClanRequestProto
 		  + "]";
   }
+  
 }

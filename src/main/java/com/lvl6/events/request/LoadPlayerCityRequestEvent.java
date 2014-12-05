@@ -39,4 +39,5 @@ public class LoadPlayerCityRequestEvent extends RequestEvent {
 		  + loadPlayerCityRequestProto
 		  + "]";
   }
+  
 }
