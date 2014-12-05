@@ -45,4 +45,5 @@ public class TransferClanOwnershipRequestEvent extends RequestEvent {
 		  + transferClanOwnershipRequestProto
 		  + "]";
   }
+  
 }

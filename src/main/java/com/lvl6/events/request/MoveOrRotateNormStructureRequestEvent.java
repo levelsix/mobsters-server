@@ -39,4 +39,5 @@ public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
 		  + moveOrRotateNormStructureRequestProto
 		  + "]";
   }
+  
 }

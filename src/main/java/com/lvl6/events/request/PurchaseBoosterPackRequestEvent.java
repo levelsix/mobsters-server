@@ -39,4 +39,5 @@ public class PurchaseBoosterPackRequestEvent extends RequestEvent {
 		  + purchaseBoosterPackRequestProto
 		  + "]";
   }
+  
 }

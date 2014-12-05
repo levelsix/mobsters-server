@@ -39,4 +39,5 @@ public class InviteFbFriendsForSlotsRequestEvent extends RequestEvent {
 		  + inviteFbFriendsForSlotsRequestProto
 		  + "]";
   }
+  
 }
