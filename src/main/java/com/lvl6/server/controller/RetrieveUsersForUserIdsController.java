@@ -124,7 +124,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     	  
     	  Clan clan = null;
     	  if (null != user.getClanId()) {
-    	    clan = clanIdToClan.get(clan);
+    	    clan = clanIdToClan.get(user.getClanId());
     	  }
     	  
     	  resBuilder.addRequestedUsers(CreateInfoProtoUtils
