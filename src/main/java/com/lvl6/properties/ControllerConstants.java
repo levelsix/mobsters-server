@@ -57,6 +57,9 @@ public class ControllerConstants {
 
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
+	
+	//FACEBOOK POP UP
+	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;

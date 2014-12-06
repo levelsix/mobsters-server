@@ -175,6 +175,7 @@ message StartupResponseProto {
 		optional float battleRunAwayIncrement = 29;
 		
 		optional bool addAllFbFriends = 23;
+		optional bool facebookPopUp = 36;
 		optional MiniTutorialConstants miniTuts = 24;
 		
 		optional int32 maxObstacles = 25;
@@ -193,6 +194,8 @@ message StartupResponseProto {
 		
 		repeated SpeedUpConstantProto sucp = 34;
 		repeated ResourceConversionConstantProto rccp = 35;
+		
+		//optional bool facebookPopUp = 36; defined above
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
