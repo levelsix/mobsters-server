@@ -224,7 +224,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		}
   		
   		//should get rid of the invites that have fbLvl before sfu.getFbInviteStructLvl()
-  		filterOutInvites(sfu.getFbInviteStructLvl(),
+  		//THE INVITE IN THE DB TABLE SPECIFIES THE GOAL fb_struct_lvl
+  		//so need to keep the invites with the same goal fb_struct_lvl
+  		filterOutInvites(sfu.getFbInviteStructLvl() + 1,
   			idsToInvitesForUserStructTemp);
 
   		//check if requested invites even exist
