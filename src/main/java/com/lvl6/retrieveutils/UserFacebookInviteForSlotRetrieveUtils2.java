@@ -295,6 +295,57 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		Set<String> uniqUserIds = new HashSet<String>(userIds);
 		return uniqUserIds;
 	}
+	
+	public List<UserFacebookInviteForSlot> getInvitesForUserStruct(
+		String userId, String userStructId)
+	{
+		List<UserFacebookInviteForSlot> invites = null;
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(userId);
+		params.add(userStructId);
+
+		StringBuilder querySb = new StringBuilder();
+		querySb.append("SELECT * FROM ");
+		querySb.append(TABLE_NAME);
+		querySb.append(" WHERE ");
+		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+		querySb.append("=? AND ");
+		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID);
+		querySb.append("=?");
+
+		String query = querySb.toString();
+		log.info(String.format(
+			"query=%s, values=%s", query, params));
+
+		try {
+			invites = this.jdbcTemplate
+				.query(query, params.toArray(), rowMapper);
+			
+		} catch (Exception e) {
+			invites = new ArrayList<UserFacebookInviteForSlot>();
+			log.error("getInviteForId(collection) retrieve db error.", e);
+		}
+
+		return invites;
+	}
+	
+	public Map<String, UserFacebookInviteForSlot> getInvitesForUserStructMap(
+		String userId, String userStructId)
+	{
+		List<UserFacebookInviteForSlot> invites =
+			getInvitesForUserStruct(userId, userStructId);
+		
+		Map<String, UserFacebookInviteForSlot> idsToInvites =
+			new HashMap<String, UserFacebookInviteForSlot>();
+		for (UserFacebookInviteForSlot invite : invites) {
+			String id = invite.getId();
+			idsToInvites.put(id, invite);
+		}
+		
+		return idsToInvites;
+	}
+	
 
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
