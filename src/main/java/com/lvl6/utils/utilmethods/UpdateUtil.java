@@ -67,7 +67,7 @@ public interface UpdateUtil {
   /*
    * used for upgrading user struct's fb invite level
    */
-  public abstract boolean updateUserStructLevel(String userStructId, int fbInviteLevelChange);
+  public abstract boolean updateUserStructFbLevel(String userStructId, int nuFbInviteLevel);
 
   /*
    * used for moving user structs

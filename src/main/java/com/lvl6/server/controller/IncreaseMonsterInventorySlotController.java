@@ -335,7 +335,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  }
 	  }
 	  
-	  log.info("numAccepted={}, invites={}", idsToInvitesForUserStruct);
+	  log.info("numAccepted={}, invites={}", numAccepted, idsToInvitesForUserStruct);
 	  
 	  return numAccepted;
   }
@@ -436,6 +436,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   {
 	  boolean success = false;
 
+	  //NOTE: if for some reason user manages to send two of these events
+	  //and both are for the same userStruct and the second event
+	  //is a duplicate of the first, need to only increases
+	  //the userStruct's fbLvl only once 
+	  int nuFbInviteLevel = sfu.getFbInviteStructLvl();
+	  
 	  if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
 		  int structId = sfu.getStructId();
 		  int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
@@ -453,6 +459,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			  curTime, nEarliestInvites);
 		  log.info("num saved: {}", num);
 
+		  //using goalLvl stored in the invite, in the case of 
+		  //duplicate events being sent as mentioned above
+		  nuFbInviteLevel = nEarliestInvites.get(0).getUserStructFbLvl();
+		  
 		  if (num != minNumInvites) {
 			  log.error("expected updated={} \t actual updated={}",
 				  minNumInvites, num);
@@ -482,12 +492,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  if (success && 0 != cost) {
 			  changeMap.put(MiscMethods.gems, cost);
 		  }
+		  
+		  nuFbInviteLevel = sfu.getFbInviteStructLvl() + 1;
 	  }
 
 	  //increase the user structs fb invite lvl
 	  String userStructId = sfu.getId();
-	  int fbInviteLevelChange = 1;
-	  if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
+//	  int fbInviteLevelChange = 1;
+	  
+	  if (!UpdateUtils.get().updateUserStructFbLevel(userStructId, nuFbInviteLevel)) {
 		  log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
 		  return false;
 	  }
@@ -503,10 +516,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  List<UserFacebookInviteForSlot> acceptedInvites =
 		  new ArrayList<UserFacebookInviteForSlot>();
 	  
+	  //idsToInvitesForUserStruct contains all the invites for this
+	  //userStruct (unredeemed, redeemed), so need to keep track
+	  //of the unaccepted invites to delete as well as extraneous
+	  //accepted invites. If for some reason, invites are redeemed,
+	  //no processing should really be done, but userStruct fb_lvl
+	  //is the only thing user gets, so absolute fb_lvl update is the solution
+	  //(use the goal fb_lvl in the invite as the value)
 	  for (UserFacebookInviteForSlot ufifs : idsToInvitesForUserStruct.values())
 	  {
 		  if (null != ufifs.getTimeAccepted()) {
 			  acceptedInvites.add(ufifs);
+		  } else if (null != ufifs.getTimeRedeemed()) {
+			  log.error("user redeeming already redeemed invite. invites={}",
+				  idsToInvitesForUserStruct);
+			  
+		  } else {
+			  log.info("curInvite has no accept time {}. will be deleted after redeeming invites",
+				  ufifs);
+			  inviteIdsTheRest.add(ufifs.getId());
 		  }
 	  }
 	  
@@ -520,7 +548,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (earliestAcceptedInvites.size() > n) {
   		int amount = earliestAcceptedInvites.size();
 
-  		//want to keep track of the remaining invites after the first n
+  		//want to keep track of the remaining accepted invites after the first n
   		for (UserFacebookInviteForSlot invite : earliestAcceptedInvites.subList(n, amount)) {
   			String id = invite.getId();
   			inviteIdsTheRest.add(id);

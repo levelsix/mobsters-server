@@ -389,18 +389,18 @@ public class UpdateUtils implements UpdateUtil {
    * used for upgrading user struct's fb invite level
    */
 	@Override
-  public boolean updateUserStructLevel(String userStructId, int fbInviteLevelChange) {
+  public boolean updateUserStructFbLevel(String userStructId, int nuFbInviteLevel) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 		
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL,
-				fbInviteLevelChange);
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL,
+				nuFbInviteLevel);
 
-		int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
-				null, conditionParams, "and");
+		int numUpdated = DBConnection.get().updateTableRows(tableName, null,
+			absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
 		}
