@@ -257,7 +257,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       List<BoosterItem> itemsUserReceives, Date now, int gemReward) {
 
     //update user items, user, and user_monsters
-    int numUpdated = UpdateUtils.get().updateItemForUser(userId, itemId, -1);
+//    int numUpdated = UpdateUtils.get().updateItemForUser(userId, itemId, -1);
+	  
+	  //not using above because, (data abstraction violation) the
+	  //called method uses -1 as the quantity, and if quantity column
+	  //in the db is unsigned, then error pops up
+	  //Data truncation: Out of range value for column 'quantity'
+	  int newQuantity = ifu.getQuantity() - 1;
+	  ifu.setQuantity(newQuantity);
+	  int numUpdated = UpdateUtils.get().updateItemForUser(
+		  Collections.singletonList(ifu));
     log.info(String.format(
         "num user items updated=%s", numUpdated));
 
