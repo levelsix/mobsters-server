@@ -53,6 +53,7 @@ public class User implements Serializable {
 	private Date lastFreeBoosterPackTime;
 	private int clanHelps;
 	private Date lastSecretGiftCollectTime;
+    private String pvpDefendingMessage;
 
 	public User()
 	{
@@ -72,7 +73,7 @@ public class User implements Serializable {
 			String gameCenterId, String udid, Date lastObstacleSpawnedTime,
 			int numObstaclesRemoved, Date lastMiniJobGeneratedTime,
 			int avatarMonsterId, Date lastFreeBoosterPackTime, int clanHelps,
-			Date lastSecretGiftCollectTime) {
+			Date lastSecretGiftCollectTime, String pvpDefendingMessage) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -112,6 +113,7 @@ public class User implements Serializable {
 		this.lastFreeBoosterPackTime = lastFreeBoosterPackTime;
 		this.clanHelps = clanHelps;
 		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
+		this.pvpDefendingMessage = pvpDefendingMessage;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1237,7 +1239,15 @@ public class User implements Serializable {
 		this.lastSecretGiftCollectTime = lastSecretGiftCollectTime;
 	}
 
-	@Override
+	public String getPvpDefendingMessage() {
+        return pvpDefendingMessage;
+    }
+
+    public void setPvpDefendingMessage(String pvpDefendingMessage) {
+        this.pvpDefendingMessage = pvpDefendingMessage;
+    }
+
+    @Override
 	public String toString()
 	{
 		return "User [id="

@@ -423,7 +423,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 			String facebookId = rs.getString(DBConstants.USER__FACEBOOK_ID);
 			boolean fbIdSetOnUserCreate = rs.getBoolean(DBConstants.USER__FB_ID_SET_ON_USER_CREATE);
 			String gameCenterId = rs.getString(DBConstants.USER__GAME_CENTER_ID);
-			String udid = rs.getString(DBConstants.USER__UDID);
+            String udid = rs.getString(DBConstants.USER__UDID);
+            String pvpDefendingMessage = rs.getString(DBConstants.USER__PVP_DEFENDING_MESSAGE);
 			Date lastObstacleSpawnedTime = null;
 			try {
 				ts = rs.getTimestamp(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME);
@@ -480,7 +481,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				numBeginnerSalesPurchased, facebookId, fbIdSetOnUserCreate,
 				gameCenterId, udid, lastObstacleSpawnedTime, numObstaclesRemoved,
 				lastMiniJobGeneratedTime, avatarMonsterId, lastFreeBoosterPackTime,
-				numClanHelps, lastSecretGiftCollectTime);
+				numClanHelps, lastSecretGiftCollectTime, pvpDefendingMessage);
 			return user;
 		}        
 
@@ -525,7 +526,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
 				columnsSelected.add(DBConstants.USER__NUM_OBSTACLES_REMOVED);
 				columnsSelected.add(DBConstants.USER__LAST_MINI_JOB_GENERATED_TIME);
 				columnsSelected.add(DBConstants.USER__AVATAR_MONSTER_ID);
-				columnsSelected.add(DBConstants.USER__CLAN_HELPS);
+                columnsSelected.add(DBConstants.USER__CLAN_HELPS);
+                
+                columnsSelected.add(DBConstants.USER__PVP_DEFENDING_MESSAGE);
 				
 				
 				

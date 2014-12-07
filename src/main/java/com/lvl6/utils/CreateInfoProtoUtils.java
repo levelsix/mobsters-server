@@ -3335,6 +3335,11 @@ public class CreateInfoProtoUtils {
         if (null != lastSecretGiftCollectTime) {
             builder.setLastSecretGiftCollectTime(lastSecretGiftCollectTime.getTime());
         }
+        
+        String pvpDefendingMessage = u.getPvpDefendingMessage();
+        if (null != pvpDefendingMessage) {
+            builder.setPvpDefendingMessage(pvpDefendingMessage);
+        }
 
 		//add new columns above here, not below the if. if case for is fake
 

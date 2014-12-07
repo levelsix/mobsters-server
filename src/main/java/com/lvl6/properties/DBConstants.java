@@ -661,7 +661,8 @@ public class DBConstants {
 	public static final String USER__FB_DATA = "fb_data";
 	public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
 	public static final String USER__CLAN_HELPS = "clan_helps";
-	public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
+    public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
+    public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
