@@ -105,12 +105,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				log.info(String.format(
 					"resetting user=%s", aUser));
 				aUser.updateResetAccount();
-			} else if (aUser.isAdmin() && Globals.IS_SANDBOX()) {
+			} else if (Globals.IS_SANDBOX()) {
 				cheat(userId, request, staticDataId, quantity,
 					resBuilder, aUser);
 			} else {
 				log.error(String.format(
-					"azzhole tried cheating: user=",
+					"azzhole tried cheating: user=%s",
 					aUser));
 				resBuilder.setStatus(DevStatus.FAIL_OTHER);
 			}
@@ -219,9 +219,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 					numInserted));
 				
 				ItemForUser ifu = (itemForUserRetrieveUtil
-					.getSpecificOrAllItemIdToItemForUserId(
+					.getSpecificOrAllItemForUser(
 						userId,
-						Collections.singleton(staticDataId))).get(staticDataId);
+						Collections.singleton(staticDataId))).get(0);
 				UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
 				resBuilder.setUip(uip);
 				break;
