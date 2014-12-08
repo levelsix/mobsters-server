@@ -61,6 +61,7 @@ enum SkillType {
 	ROID_RAGE = 8; // 2x (or 1.5x) modifier for a next attack.
 	MOMENTUM = 9; // single passive offensive: Your damage increases by X% after each successive turn.
 	THICK_SKIN = 10;
+	CRIT_AND_EVADE = 11;
 }
 
 enum SkillActivationType {
