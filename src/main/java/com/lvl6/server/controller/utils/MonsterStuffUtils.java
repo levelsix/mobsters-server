@@ -698,4 +698,24 @@ public class MonsterStuffUtils {
 	  }
 	  return true;
   }
+  
+  /**
+   * 
+   * @param userMonsters
+   * @return map(userMonsterId -> monsterId or -1 if no drop)
+   */
+  public static Map<String, Integer> calculatePvpDropIds(
+	  List<MonsterForUser> userMonsters)
+  {
+	  Map<String, Integer> userMonsterIdToDroppedId =
+		  new HashMap<String, Integer>();
+
+	  for (MonsterForUser userMonster : userMonsters)
+	  {
+		  int monsterId = userMonster.getMonsterId();
+		  int lvl = userMonster.getCurrentLvl();
+		  
+	  }
+  }
+  
 }

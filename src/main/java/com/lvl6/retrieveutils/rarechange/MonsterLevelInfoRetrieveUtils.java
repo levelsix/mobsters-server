@@ -192,7 +192,9 @@ import com.lvl6.utils.DBConnection;
 	  enumeratedPartialMonsterLevelInfo = allPartialMonsterLevelInfo;
   }
 
-  private static int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max, int currentLvl) {
+  private static int calculateHp(MonsterLevelInfo min, MonsterLevelInfo max,
+	  int currentLvl)
+  {
 	  
 	  double base = ((double)(currentLvl-1))/(double)(max.getLevel()-1);
 	  double hpDiff = (max.getHp()-min.getHp());
@@ -214,6 +216,12 @@ import com.lvl6.utils.DBConnection;
 			  base, multiplicand, currentLvl));
 	  }*/
 	  return  (int) Math.ceil(multiplicand * max.getCurLvlRequiredExp());
+  }
+  
+  private static float calculatePvpDropRate(MonsterLevelInfo min,
+	  MonsterLevelInfo max, int currentLvl)
+  {
+	  
   }
   
   public static void reload() {
