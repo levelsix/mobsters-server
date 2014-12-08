@@ -277,6 +277,8 @@ message StartupResponseProto {
 			optional float maxPvpDmgDelta = 3;
 			
 			optional int32 pvpRequiredMinLvl = 4;
+			
+			optional int32 defendingMsgCharLimit = 5;
 		}
 		message SpeedUpConstantProto {
 			optional int32 seconds = 1;

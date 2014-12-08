@@ -35,6 +35,8 @@ message PvpProto {
 	optional int32 prospectiveOilWinnings = 5;
 	
 	optional UserPvpLeagueProto pvpLeagueStats = 6; //defender info
+	
+	optional string defenderMsg = 7; 
 }
 
 message PvpMonsterProto {
