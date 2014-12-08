@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "Battle.proto";
+import "MonsterStuff.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -111,6 +112,9 @@ message EndPvpBattleRequestProto {
 	
 	//Note for server, if <= 0 then don't update db.
 	optional float nuPvpDmgMultiplier = 8;
+	
+	//TODO: ?figure out safer way for client to tell server what monsters dropped?
+	repeated int32 monsterDropIds = 9;
 }
 
 message EndPvpBattleResponseProto {
@@ -130,6 +134,9 @@ message EndPvpBattleResponseProto {
 	
 	
 	optional EndPvpBattleStatus status = 9;
+	
+	//repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+	repeated FullUserMonsterProto updatedOrNew = 10; 
 	
 	enum EndPvpBattleStatus {
 		SUCCESS = 1;

@@ -3979,6 +3979,31 @@ public final class EventPvpProto {
      * </pre>
      */
     float getNuPvpDmgMultiplier();
+
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getMonsterDropIdsList();
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    int getMonsterDropIdsCount();
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    int getMonsterDropIds(int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleRequestProto}
@@ -4081,6 +4106,27 @@ public final class EventPvpProto {
               nuPvpDmgMultiplier_ = input.readFloat();
               break;
             }
+            case 72: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                monsterDropIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              monsterDropIds_.add(input.readInt32());
+              break;
+            }
+            case 74: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
+                monsterDropIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                monsterDropIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4089,6 +4135,9 @@ public final class EventPvpProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          monsterDropIds_ = java.util.Collections.unmodifiableList(monsterDropIds_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -4326,6 +4375,40 @@ public final class EventPvpProto {
       return nuPvpDmgMultiplier_;
     }
 
+    public static final int MONSTERDROPIDS_FIELD_NUMBER = 9;
+    private java.util.List<java.lang.Integer> monsterDropIds_;
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getMonsterDropIdsList() {
+      return monsterDropIds_;
+    }
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    public int getMonsterDropIdsCount() {
+      return monsterDropIds_.size();
+    }
+    /**
+     * <code>repeated int32 monsterDropIds = 9;</code>
+     *
+     * <pre>
+     *TODO: ?figure out safer way for client to tell server what monsters dropped?
+     * </pre>
+     */
+    public int getMonsterDropIds(int index) {
+      return monsterDropIds_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderUuid_ = "";
@@ -4335,6 +4418,7 @@ public final class EventPvpProto {
       oilChange_ = 0;
       cashChange_ = 0;
       nuPvpDmgMultiplier_ = 0F;
+      monsterDropIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4372,6 +4456,9 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeFloat(8, nuPvpDmgMultiplier_);
+      }
+      for (int i = 0; i < monsterDropIds_.size(); i++) {
+        output.writeInt32(9, monsterDropIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -4413,6 +4500,15 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(8, nuPvpDmgMultiplier_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < monsterDropIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(monsterDropIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getMonsterDropIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4552,6 +4648,8 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         nuPvpDmgMultiplier_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000080);
+        monsterDropIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -4616,6 +4714,11 @@ public final class EventPvpProto {
           to_bitField0_ |= 0x00000080;
         }
         result.nuPvpDmgMultiplier_ = nuPvpDmgMultiplier_;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          monsterDropIds_ = java.util.Collections.unmodifiableList(monsterDropIds_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.monsterDropIds_ = monsterDropIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4657,6 +4760,16 @@ public final class EventPvpProto {
         }
         if (other.hasNuPvpDmgMultiplier()) {
           setNuPvpDmgMultiplier(other.getNuPvpDmgMultiplier());
+        }
+        if (!other.monsterDropIds_.isEmpty()) {
+          if (monsterDropIds_.isEmpty()) {
+            monsterDropIds_ = other.monsterDropIds_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureMonsterDropIdsIsMutable();
+            monsterDropIds_.addAll(other.monsterDropIds_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5173,6 +5286,100 @@ public final class EventPvpProto {
         return this;
       }
 
+      private java.util.List<java.lang.Integer> monsterDropIds_ = java.util.Collections.emptyList();
+      private void ensureMonsterDropIdsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          monsterDropIds_ = new java.util.ArrayList<java.lang.Integer>(monsterDropIds_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getMonsterDropIdsList() {
+        return java.util.Collections.unmodifiableList(monsterDropIds_);
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public int getMonsterDropIdsCount() {
+        return monsterDropIds_.size();
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public int getMonsterDropIds(int index) {
+        return monsterDropIds_.get(index);
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public Builder setMonsterDropIds(
+          int index, int value) {
+        ensureMonsterDropIdsIsMutable();
+        monsterDropIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public Builder addMonsterDropIds(int value) {
+        ensureMonsterDropIdsIsMutable();
+        monsterDropIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public Builder addAllMonsterDropIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureMonsterDropIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, monsterDropIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 monsterDropIds = 9;</code>
+       *
+       * <pre>
+       *TODO: ?figure out safer way for client to tell server what monsters dropped?
+       * </pre>
+       */
+      public Builder clearMonsterDropIds() {
+        monsterDropIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndPvpBattleRequestProto)
     }
 
@@ -5241,6 +5448,50 @@ public final class EventPvpProto {
      * <code>optional .com.lvl6.proto.EndPvpBattleResponseProto.EndPvpBattleStatus status = 9;</code>
      */
     com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus getStatus();
+
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
+        getUpdatedOrNewList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    int getUpdatedOrNewCount();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleResponseProto}
@@ -5334,6 +5585,14 @@ public final class EventPvpProto {
               }
               break;
             }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              updatedOrNew_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5342,6 +5601,9 @@ public final class EventPvpProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -5573,12 +5835,68 @@ public final class EventPvpProto {
       return status_;
     }
 
+    public static final int UPDATEDORNEW_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList() {
+      return updatedOrNew_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    public int getUpdatedOrNewCount() {
+      return updatedOrNew_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+      return updatedOrNew_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+     *
+     * <pre>
+     *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+     * </pre>
+     */
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index) {
+      return updatedOrNew_.get(index);
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderUuid_ = "";
       attackerAttacked_ = false;
       attackerWon_ = false;
       status_ = com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus.SUCCESS;
+      updatedOrNew_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5608,6 +5926,9 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(9, status_.getNumber());
       }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        output.writeMessage(10, updatedOrNew_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5636,6 +5957,10 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(9, status_.getNumber());
+      }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, updatedOrNew_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5747,6 +6072,7 @@ public final class EventPvpProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getUpdatedOrNewFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5769,6 +6095,12 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         status_ = com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
         return this;
       }
 
@@ -5821,6 +6153,15 @@ public final class EventPvpProto {
           to_bitField0_ |= 0x00000010;
         }
         result.status_ = status_;
+        if (updatedOrNewBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.updatedOrNew_ = updatedOrNew_;
+        } else {
+          result.updatedOrNew_ = updatedOrNewBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5853,6 +6194,32 @@ public final class EventPvpProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (updatedOrNewBuilder_ == null) {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNew_.isEmpty()) {
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureUpdatedOrNewIsMutable();
+              updatedOrNew_.addAll(other.updatedOrNew_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNewBuilder_.isEmpty()) {
+              updatedOrNewBuilder_.dispose();
+              updatedOrNewBuilder_ = null;
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              updatedOrNewBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedOrNewFieldBuilder() : null;
+            } else {
+              updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6172,6 +6539,318 @@ public final class EventPvpProto {
         return this;
       }
 
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedOrNewIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNew_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+        if (updatedOrNewBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        } else {
+          return updatedOrNewBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public int getUpdatedOrNewCount() {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.size();
+        } else {
+          return updatedOrNewBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);
+        } else {
+          return updatedOrNewBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder addAllUpdatedOrNew(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, updatedOrNew_);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder clearUpdatedOrNew() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public Builder removeUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.remove(index);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+          int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);  } else {
+          return updatedOrNewBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+           getUpdatedOrNewOrBuilderList() {
+        if (updatedOrNewBuilder_ != null) {
+          return updatedOrNewBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder() {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 10;</code>
+       *
+       * <pre>
+       *repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
+           getUpdatedOrNewBuilderList() {
+        return getUpdatedOrNewFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getUpdatedOrNewFieldBuilder() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  updatedOrNew_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          updatedOrNew_ = null;
+        }
+        return updatedOrNewBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndPvpBattleResponseProto)
     }
 
@@ -6223,44 +6902,47 @@ public final class EventPvpProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
-      ".proto\032\nUser.proto\"\211\001\n\023QueueUpRequestPro" +
-      "to\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\025\n\rs" +
-      "eenUserUuids\030\005 \003(\t\022\022\n\nclientTime\030\006 \001(\003\"\244" +
-      "\002\n\024QueueUpResponseProto\0222\n\010attacker\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\0222\n\020d" +
-      "efenderInfoList\030\002 \003(\0132\030.com.lvl6.proto.P" +
-      "vpProto\022B\n\006status\030\003 \001(\01622.com.lvl6.proto" +
-      ".QueueUpResponseProto.QueueUpStatus\"`\n\rQ",
-      "ueueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003\022\030\n\024FAIL_NOT_" +
-      "ENOUGH_GEMS\020\004\"\333\001\n\032BeginPvpBattleRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\021\n\tsenderElo\030\002 \001(\005\022\027\n\017att" +
-      "ackStartTime\030\003 \001(\003\022\'\n\005enemy\030\004 \001(\0132\030.com." +
-      "lvl6.proto.PvpProto\022\027\n\017exactingRevenge\030\005" +
-      " \001(\010\022\035\n\025previousBattleEndTime\030\006 \001(\003\"\362\001\n\033" +
-      "BeginPvpBattleResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022P\n",
-      "\006status\030\002 \001(\0162@.com.lvl6.proto.BeginPvpB" +
-      "attleResponseProto.BeginPvpBattleStatus\"" +
-      "O\n\024BeginPvpBattleStatus\022\013\n\007SUCCESS\020\001\022\032\n\026" +
-      "FAIL_ENEMY_UNAVAILABLE\020\002\022\016\n\nFAIL_OTHER\020\003" +
-      "\"\360\001\n\030EndPvpBattleRequestProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022\024\n\014defenderUuid\030\002 \001(\t\022\024\n" +
-      "\014userAttacked\030\003 \001(\010\022\017\n\007userWon\030\004 \001(\010\022\022\n\n" +
-      "clientTime\030\005 \001(\003\022\021\n\toilChange\030\006 \001(\005\022\022\n\nc" +
-      "ashChange\030\007 \001(\005\022\032\n\022nuPvpDmgMultiplier\030\010 ",
-      "\001(\002\"\302\002\n\031EndPvpBattleResponseProto\022@\n\006sen" +
-      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr" +
-      "otoWithMaxResources\022\024\n\014defenderUuid\030\002 \001(" +
-      "\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attackerW" +
-      "on\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6.prot" +
-      "o.EndPvpBattleResponseProto.EndPvpBattle" +
-      "Status\"P\n\022EndPvpBattleStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_TOOK_TO" +
-      "O_LONG\020\003B\017B\rEventPvpProto"
+      ".proto\032\022MonsterStuff.proto\032\nUser.proto\"\211" +
+      "\001\n\023QueueUpRequestProto\0222\n\010attacker\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\023\n\013at" +
+      "tackerElo\030\002 \001(\005\022\025\n\rseenUserUuids\030\005 \003(\t\022\022" +
+      "\n\nclientTime\030\006 \001(\003\"\244\002\n\024QueueUpResponsePr" +
+      "oto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\0222\n\020defenderInfoList\030\002 \003(" +
+      "\0132\030.com.lvl6.proto.PvpProto\022B\n\006status\030\003 " +
+      "\001(\01622.com.lvl6.proto.QueueUpResponseProt",
+      "o.QueueUpStatus\"`\n\rQueueUpStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\016\n\nFAIL_" +
+      "OTHER\020\003\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\004\"\333\001\n\032Be" +
+      "ginPvpBattleRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\021\n\tse" +
+      "nderElo\030\002 \001(\005\022\027\n\017attackStartTime\030\003 \001(\003\022\'" +
+      "\n\005enemy\030\004 \001(\0132\030.com.lvl6.proto.PvpProto\022" +
+      "\027\n\017exactingRevenge\030\005 \001(\010\022\035\n\025previousBatt" +
+      "leEndTime\030\006 \001(\003\"\362\001\n\033BeginPvpBattleRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto",
+      ".MinimumUserProto\022P\n\006status\030\002 \001(\0162@.com." +
+      "lvl6.proto.BeginPvpBattleResponseProto.B" +
+      "eginPvpBattleStatus\"O\n\024BeginPvpBattleSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_ENEMY_UNAVAILAB" +
+      "LE\020\002\022\016\n\nFAIL_OTHER\020\003\"\210\002\n\030EndPvpBattleReq" +
+      "uestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
+      "to.MinimumUserProtoWithMaxResources\022\024\n\014d" +
+      "efenderUuid\030\002 \001(\t\022\024\n\014userAttacked\030\003 \001(\010\022" +
+      "\017\n\007userWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\t" +
+      "oilChange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022n",
+      "uPvpDmgMultiplier\030\010 \001(\002\022\026\n\016monsterDropId" +
+      "s\030\t \003(\005\"\376\002\n\031EndPvpBattleResponseProto\022@\n" +
+      "\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumUs" +
+      "erProtoWithMaxResources\022\024\n\014defenderUuid\030" +
+      "\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attac" +
+      "kerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6." +
+      "proto.EndPvpBattleResponseProto.EndPvpBa" +
+      "ttleStatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.l" +
+      "vl6.proto.FullUserMonsterProto\"P\n\022EndPvp" +
+      "BattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020",
+      "\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG\020\003B\017B\rEven" +
+      "tPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6274,6 +6956,7 @@ public final class EventPvpProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor =
@@ -6305,14 +6988,15 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "UserAttacked", "UserWon", "ClientTime", "OilChange", "CashChange", "NuPvpDmgMultiplier", "MonsterDropIds", });
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", "UpdatedOrNew", });
     com.lvl6.proto.BattleProto.getDescriptor();
+    com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

@@ -30,11 +30,18 @@ enum BattleResult {
 message PvpProto {
 	optional MinimumUserProtoWithLevel defender = 1;
 	//optional int32 curElo = 2; //the defender's current elo
-	repeated MinimumUserMonsterProto defenderMonsters = 3;
+	repeated PvpMonsterProto defenderMonsters = 3;
 	optional int32 prospectiveCashWinnings = 4;
 	optional int32 prospectiveOilWinnings = 5;
 	
 	optional UserPvpLeagueProto pvpLeagueStats = 6; //defender info
+}
+
+message PvpMonsterProto {
+	optional MinimumUserMonsterProto defenderMonster = 1;
+	
+	//if not set then monster piece did not drop
+	optional int32 monsterIdDropped = 2;
 }
 
 //------------------------------------------------------------------------------------------
@@ -45,7 +52,7 @@ message PvpHistoryProto {
 	optional int64 battleEndTime = 9;
 	
 	optional FullUserProto attacker = 1; //the person who acted as the attacker
-	repeated MinimumUserMonsterProto attackersMonsters = 2; //atm, current monster team
+	repeated PvpMonsterProto attackersMonsters = 2; //atm, current monster team
 	optional bool attackerWon = 3;
 	optional sint32 defenderCashChange = 4;
 	optional sint32 defenderOilChange = 5; 

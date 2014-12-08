@@ -94,6 +94,7 @@ import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
+import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -310,15 +311,16 @@ public class CreateInfoProtoUtils {
 
 	public static PvpProto createPvpProto(User u, Clan clan, PvpLeagueForUser plfu,
 		PvpUser pu, Collection<MonsterForUser> userMonsters,
+		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings) {
 
 		PvpProto.Builder ppb = PvpProto.newBuilder();
 		MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevel(u, clan, null);
-		Collection<MinimumUserMonsterProto> defenderMonsters = 
-			createMinimumUserMonsterProtoList(userMonsters);
+		Collection<PvpMonsterProto> defenderMonsters = 
+			createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
+		ppb.addAllDefenderMonsters(defenderMonsters);
 
 		ppb.setDefender(defender);
-		ppb.addAllDefenderMonsters(defenderMonsters);
 		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
@@ -328,10 +330,79 @@ public class CreateInfoProtoUtils {
 
 		return ppb.build();
 	}
+	
+	public static Collection<PvpMonsterProto> createPvpMonsterProto(
+		Collection<MonsterForUser> userMonsters,
+		Map<String, Integer> userMonsterIdToDropped)
+	{
+		List<PvpMonsterProto> pmpList = new ArrayList<PvpMonsterProto>();
+		
+		for (MonsterForUser mfu : userMonsters)
+		{
+			String userMonsterId = mfu.getId();
+			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+			
+			PvpMonsterProto pmp =
+				createPvpMonsterProto(userMonsterIdToDropped, userMonsterId, mump);
+			
+			pmpList.add(pmp);
+		}
+		return pmpList;
+	}
 
+	private static PvpMonsterProto createPvpMonsterProto(
+		Map<String, Integer> userMonsterIdToDropped,
+		String userMonsterId,
+		MinimumUserMonsterProto mump )
+	{
+		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
+		pmpb.setDefenderMonster(mump);
+		
+		if (userMonsterIdToDropped.containsKey(userMonsterId)) {
+			Integer idDropped = userMonsterIdToDropped.get(userMonsterId);
+			
+			if (idDropped > 0) {
+				pmpb.setMonsterIdDropped(idDropped);
+			}
+		}
+		return pmpb.build();
+	}
+	
+	private static Collection<PvpMonsterProto> createPvpMonsterProto(
+		List<MonsterForPvp> mfpList,
+		List<Integer> monsterIdsDropped )
+	{
+		Collection<PvpMonsterProto> pmpList = new ArrayList<PvpMonsterProto>();
+		for (int i = 0; i < mfpList.size(); i++) {
+			MonsterForPvp mfp = mfpList.get(i);
+			MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfp);
+			
+			Integer monsterIdDropped = monsterIdsDropped.get(i);
+
+			PvpMonsterProto pmp = createPvpMonsterProto(mump, monsterIdDropped);
+			pmpList.add(pmp);
+		}
+		return pmpList;
+	}
+
+	private static PvpMonsterProto createPvpMonsterProto(
+		MinimumUserMonsterProto mump,
+		Integer monsterIdDropped )
+	{
+		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
+		pmpb.setDefenderMonster(mump);
+		pmpb.setMonsterIdDropped(monsterIdDropped);
+		PvpMonsterProto pmp = pmpb.build();
+		return pmp;
+	}
+	
+	
 	//this is used to create fake users for PvpProtos
-	public static PvpProto createFakePvpProto(String userId, String name, int lvl, int elo,
-		int prospectiveCashWinnings, int prospectiveOilWinnings, List<MonsterForPvp> mfpList) {
+	public static PvpProto createFakePvpProto(String userId, String name,
+		int lvl, int elo, int prospectiveCashWinnings,
+		int prospectiveOilWinnings, List<MonsterForPvp> mfpList,
+		List<Integer> monsterIdsDropped)
+	{
 
 		//create the fake user
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
@@ -350,8 +421,9 @@ public class CreateInfoProtoUtils {
 		//    ppb.setCurElo(elo);
 
 		//set the defenderMonsters
-		List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
-		ppb.addAllDefenderMonsters(mumpList);
+		Collection<PvpMonsterProto> pmpList =
+			createPvpMonsterProto(mfpList, monsterIdsDropped);
+		ppb.addAllDefenderMonsters(pmpList);
 
 		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
@@ -367,6 +439,7 @@ public class CreateInfoProtoUtils {
 		Map<String, PvpLeagueForUser> userIdToLeagueInfo,
 		Map<String, PvpUser> userIdToPvpUser,
 		Map<String, List<MonsterForUser>> userIdToUserMonsters,
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 		Map<String, Integer> userIdToCashReward,
 		Map<String, Integer> userIdToOilReward)
 		{
@@ -392,8 +465,11 @@ public class CreateInfoProtoUtils {
 				clan = userIdToClan.get(userId);
 			}
 
+			Map<String, Integer> userMonsterIdToDropped =
+				userIdToUserMonsterIdToDropped.get(userId);
 			PvpProto pp = createPvpProto(u, clan, plfu, pu, userMonsters,
-				prospectiveCashWinnings, prospectiveOilWinnings);
+				userMonsterIdToDropped, prospectiveCashWinnings,
+				prospectiveOilWinnings);
 			pvpProtoList.add(pp);
 		}
 		return pvpProtoList;
@@ -401,7 +477,9 @@ public class CreateInfoProtoUtils {
 
 	public static PvpHistoryProto createPvpHistoryProto(User attacker, Clan c,
 		PvpBattleHistory info, Collection<MonsterForUser> userMonsters,
-		int prospectiveCashWinnings, int prospectiveOilWinnings) {
+		Map<String, Integer> userMonsterIdToDropped,
+		int prospectiveCashWinnings, int prospectiveOilWinnings)
+	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		//there is db call for clan...
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null,
@@ -409,8 +487,8 @@ public class CreateInfoProtoUtils {
 		phpb.setAttacker(fup);
 
 		if (null != userMonsters && !userMonsters.isEmpty()) {
-			Collection<MinimumUserMonsterProto> attackerMonsters = 
-				createMinimumUserMonsterProtoList(userMonsters);
+			Collection<PvpMonsterProto> attackerMonsters = 
+				createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
 			phpb.addAllAttackersMonsters(attackerMonsters);
 		}
 
@@ -456,6 +534,7 @@ public class CreateInfoProtoUtils {
 		List<PvpBattleHistory> historyList, Map<String, User> attackerIdsToAttackers,
 		Map<String, Clan> attackerIdsToClans,
 		Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings,
 		Map<String, Integer> attackerIdsToProspectiveOilWinnings) {
 
@@ -475,8 +554,10 @@ public class CreateInfoProtoUtils {
 				clan = attackerIdsToClans.get(clanId);
 			}
 			
+			Map<String, Integer> userMonsterIdToDropped =
+				userIdToUserMonsterIdToDropped.get(attackerId);
 			PvpHistoryProto php = createPvpHistoryProto(attacker,
-				clan, history, attackerMonsters,
+				clan, history, attackerMonsters, userMonsterIdToDropped,
 				prospectiveCashWinnings, prospectiveOilWinnings);
 			phpList.add(php);
 		}

@@ -161,8 +161,8 @@ message StartupResponseProto {
 		optional MonsterConstants monsterConstants = 18;
 		
 		//replaced with SpeedUpConstantProto and ResourceConversionConstantProto
-		optional float minutesPerGem = 19 [deprecated = true]; 
-		optional float gemsPerResource = 21 [deprecated = true];
+		optional float minutesPerGem = 19;// [deprecated = true]; 
+		optional float gemsPerResource = 21;// [deprecated = true];
 		
 		//TODO:GET RID OF THESE****************************************
 		optional int32 pvpRequiredMinLvl = 20 [deprecated = true];

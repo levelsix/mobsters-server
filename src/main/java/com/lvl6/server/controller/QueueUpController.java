@@ -22,6 +22,7 @@ import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -43,6 +44,9 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -321,7 +325,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			//will randomly select if user doesn't have 3 equipped
 			Map<String, List<MonsterForUser>> userIdToUserMonsters = 
 					selectMonstersForUsers(queuedOpponentIdsList);
-			
+			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
+				MonsterStuffUtils.calculatePvpDrops(userIdToUserMonsters);
 			Map<String, Integer> userIdToProspectiveCashReward = new HashMap<String, Integer>();
 			Map<String, Integer> userIdToProspectiveOilReward = new HashMap<String, Integer>();
 			
@@ -331,7 +336,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			
 			//create the protos for all this
 			List<PvpProto> pvpProtoListTemp = CreateInfoProtoUtils.createPvpProtos(
-					queuedOpponents, userIdToClan, null, userIdToPvpUser, userIdToUserMonsters,
+					queuedOpponents, userIdToClan, null, userIdToPvpUser,
+					userIdToUserMonsters, userIdToUserMonsterIdToDroppedId,
 					userIdToProspectiveCashReward, userIdToProspectiveOilReward);
 			
 			//user should see real people before fake ones
@@ -558,7 +564,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	//given users, get the 3 monsters for each user
 	private Map<String, List<MonsterForUser>> selectMonstersForUsers(
-			List<String> userIdList) {
+		List<String> userIdList)
+	{
 		
 		//return value
 		Map<String, List<MonsterForUser>> userIdsToUserMonsters =
@@ -669,7 +676,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				break;
 			}
 		}
-		
 	}
 	
 	//separate monsters into groups of three, limit the number of groups of three
@@ -755,11 +761,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int prospectiveCashWinnings = cashWinnings.get(0);
 		int prospectiveOilWinnings = oilWinnings.get(0);
 		
-		log.info("fake user created: name=" + randomName + "\t avgElo=" + avgElo + "\t cash=" +
-				prospectiveCashWinnings + "\t oil=" + prospectiveOilWinnings + "\t lvl=" + lvl);
+		log.info("fake user created: name={} \t avgElo={} \t cash={} \t oil={} \t lvl={}",
+			new Object[] { randomName, avgElo, prospectiveCashWinnings,
+			prospectiveOilWinnings, lvl } );
 		
-		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId, randomName, lvl,
-				avgElo, prospectiveCashWinnings, prospectiveOilWinnings, mfpList);
+		List<Integer> monsterIdsDropped = calculateDrops(mfpList);
+		
+		//it's important that monsterIdsDropped be in the same order
+		//as mfpList
+		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId,
+			randomName, lvl, avgElo, prospectiveCashWinnings,
+			prospectiveOilWinnings, mfpList, monsterIdsDropped);
 		return fakeUser;
 	}
 	
@@ -784,6 +796,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return avgElo;
 	}
 	
+	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList)
+	{
+		List<Integer> monsterDropIds = new ArrayList<Integer>();
+		
+		for (MonsterForPvp mfp : mfpList) {
+			int monsterId = mfp.getMonsterId();
+			int monserLvl = mfp.getMonsterLvl();
+			
+			boolean monsterDropped = MonsterLevelInfoRetrieveUtils
+				.didPvpMonsterDrop(monsterId, monserLvl);
+			
+			int monsterDropId = ControllerConstants.NOT_SET;
+			
+			Monster mon = MonsterRetrieveUtils
+				.getMonsterForMonsterId(monsterId); 
+			if (monsterDropped) {
+				monsterDropId = mon.getPvpMonsterDropId();
+			}
+			
+			log.info("for fake monster {}, set pvpMonsterDropId={}",
+				mfp, monsterDropId);
+			monsterDropIds.add(monsterDropId);
+		}
+		
+		return monsterDropIds;
+	}
 	
 	// remove his shield if he has one, since he is going to attack some one
 	private boolean writeChangesToDB(String attackerId, User attacker, //int gemsSpent, int cashChange, 

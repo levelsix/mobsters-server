@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -27,6 +29,35 @@ import com.lvl6.utils.DBConnection;
 
   private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO_CONFIG;
 
+  /************************ CONTROLLER LOGIC *************************/
+  public static boolean didPvpMonsterDrop(int monsterId, int lvl)
+  {
+	  Map<Integer, MonsterLevelInfo> lvlToMli = enumeratedPartialMonsterLevelInfo
+		  .get(monsterId);
+	  
+	  boolean dropped = false;
+	  MonsterLevelInfo mli = null;
+	  if (null != lvlToMli && lvlToMli.containsKey(lvl))
+	  {
+		  mli = lvlToMli.get(lvl);
+	  }
+	  
+	  if (null != mli)
+	  {
+		  float dropRate = mli.getPvpDropRate();
+
+		  Random rand = ControllerConstants.RAND;
+		  float randFloat = rand.nextFloat();
+		  
+		  if (randFloat < dropRate) {
+			  dropped = true;
+		  }
+	  }
+	  
+	  return dropped;
+  }
+  
+  /****************************************************************/
   public static Map<Integer, Map<Integer, MonsterLevelInfo>> getMonsterIdToLevelToInfo() {
     log.debug("retrieving all monster lvl info data");
     if (monsterIdToLevelToInfo == null) {
@@ -178,13 +209,19 @@ import com.lvl6.utils.DBConnection;
 			  int exp = calculateExp(maxLvlInfo, curLvl);
 			  nextLvlInfo.setCurLvlRequiredExp(exp);
 			  
+			  float dropRate = calculatePvpDropRate(
+				  minLvlInfo, maxLvlInfo, curLvl);
+			  nextLvlInfo.setPvpDropRate(dropRate);
+			  nextLvlInfo.setLevel(curLvl);
+			  
 //			  if (ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID == monsterId) {
 //				  log.info(String.format(
 //					  "hp=%s, exp=%s, currentLvl=%s",
 //					  hp, exp, curLvl));
 //			  }
-			  
 			  allLvlToPartialInfo.put(curLvl, nextLvlInfo);
+			  
+			  log.info("MonsterLevelInfo={}", nextLvlInfo);
 		  }
 		  
 		  allPartialMonsterLevelInfo.put(monsterId, allLvlToPartialInfo);
@@ -221,7 +258,22 @@ import com.lvl6.utils.DBConnection;
   private static float calculatePvpDropRate(MonsterLevelInfo min,
 	  MonsterLevelInfo max, int currentLvl)
   {
+	  //min.rate + (max.rate-min.rate)*(curLvl - minLvl) / (maxLvl - minLvl)
+	  float minRate = min.getPvpDropRate();
+	  float maxRate = max.getPvpDropRate();
+	
+	  float minLvl = min.getLevel();
+	  float maxLvl = max.getLevel();
 	  
+	  float maxMinLvlDiff = (maxLvl - minLvl);
+	  float lvlDiff = (currentLvl - minLvl);
+	  
+	  float lvlRatio = lvlDiff / maxMinLvlDiff;
+	  float dropRateRatio = (maxRate - minRate) * lvlRatio;
+	  
+	  float dropRate = minRate + dropRateRatio;
+	  
+	  return dropRate;
   }
   
   public static void reload() {
@@ -258,13 +310,23 @@ import com.lvl6.utils.DBConnection;
     float enhanceCostExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT);
     float enhanceExpPerSec = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC);
     float enhanceExpPerSecExponent = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT);
+    float pvpDropRate = rs.getFloat(DBConstants.MONSTER_LEVEL_INFO__PVP_DROP_RATE);
+    
+    if (pvpDropRate > 1 || pvpDropRate < 0) {
+    	log.error("invalid pvpDropRate: {}. setting value in [0, 1]",
+    		pvpDropRate);
+    	pvpDropRate = Math.max(0, pvpDropRate);
+    	pvpDropRate = Math.min(pvpDropRate, 1);
+    	log.error("new pvpDropRate: {}", pvpDropRate);
+    }
     
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp,
     		curLvlRequiredExp, feederExp, fireDmg, grassDmg, waterDmg,
     		lightningDmg, darknessDmg, rockDmg, speed, hpExponentBase,
     		dmgExponentBase, expLvlDivisor, expLvlExponent, sellAmount,
     		teamCost, costToFullyHeal, secsToFullyHeal,enhanceCostPerFeeder,
-    		enhanceCostExponent, enhanceExpPerSec, enhanceExpPerSecExponent);
+    		enhanceCostExponent, enhanceExpPerSec, enhanceExpPerSecExponent,
+    		pvpDropRate);
     
     return srs;
   }

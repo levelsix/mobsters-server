@@ -4955,30 +4955,38 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder();
 
       /**
-       * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+       * <code>optional float minutesPerGem = 19;</code>
        *
        * <pre>
        *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
        * </pre>
        */
-      @java.lang.Deprecated boolean hasMinutesPerGem();
+      boolean hasMinutesPerGem();
       /**
-       * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+       * <code>optional float minutesPerGem = 19;</code>
        *
        * <pre>
        *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
        * </pre>
        */
-      @java.lang.Deprecated float getMinutesPerGem();
+      float getMinutesPerGem();
 
       /**
-       * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+       * <code>optional float gemsPerResource = 21;</code>
+       *
+       * <pre>
+       * [deprecated = true];
+       * </pre>
        */
-      @java.lang.Deprecated boolean hasGemsPerResource();
+      boolean hasGemsPerResource();
       /**
-       * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+       * <code>optional float gemsPerResource = 21;</code>
+       *
+       * <pre>
+       * [deprecated = true];
+       * </pre>
        */
-      @java.lang.Deprecated float getGemsPerResource();
+      float getGemsPerResource();
 
       /**
        * <code>optional int32 pvpRequiredMinLvl = 20 [deprecated = true];</code>
@@ -13778,38 +13786,46 @@ public final class EventStartupProto {
       public static final int MINUTESPERGEM_FIELD_NUMBER = 19;
       private float minutesPerGem_;
       /**
-       * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+       * <code>optional float minutesPerGem = 19;</code>
        *
        * <pre>
        *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
        * </pre>
        */
-      @java.lang.Deprecated public boolean hasMinutesPerGem() {
+      public boolean hasMinutesPerGem() {
         return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       /**
-       * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+       * <code>optional float minutesPerGem = 19;</code>
        *
        * <pre>
        *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
        * </pre>
        */
-      @java.lang.Deprecated public float getMinutesPerGem() {
+      public float getMinutesPerGem() {
         return minutesPerGem_;
       }
 
       public static final int GEMSPERRESOURCE_FIELD_NUMBER = 21;
       private float gemsPerResource_;
       /**
-       * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+       * <code>optional float gemsPerResource = 21;</code>
+       *
+       * <pre>
+       * [deprecated = true];
+       * </pre>
        */
-      @java.lang.Deprecated public boolean hasGemsPerResource() {
+      public boolean hasGemsPerResource() {
         return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
-       * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+       * <code>optional float gemsPerResource = 21;</code>
+       *
+       * <pre>
+       * [deprecated = true];
+       * </pre>
        */
-      @java.lang.Deprecated public float getGemsPerResource() {
+      public float getGemsPerResource() {
         return gemsPerResource_;
       }
 
@@ -16789,46 +16805,46 @@ public final class EventStartupProto {
 
         private float minutesPerGem_ ;
         /**
-         * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+         * <code>optional float minutesPerGem = 19;</code>
          *
          * <pre>
          *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
          * </pre>
          */
-        @java.lang.Deprecated public boolean hasMinutesPerGem() {
+        public boolean hasMinutesPerGem() {
           return ((bitField0_ & 0x00040000) == 0x00040000);
         }
         /**
-         * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+         * <code>optional float minutesPerGem = 19;</code>
          *
          * <pre>
          *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
          * </pre>
          */
-        @java.lang.Deprecated public float getMinutesPerGem() {
+        public float getMinutesPerGem() {
           return minutesPerGem_;
         }
         /**
-         * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+         * <code>optional float minutesPerGem = 19;</code>
          *
          * <pre>
          *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
          * </pre>
          */
-        @java.lang.Deprecated public Builder setMinutesPerGem(float value) {
+        public Builder setMinutesPerGem(float value) {
           bitField0_ |= 0x00040000;
           minutesPerGem_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional float minutesPerGem = 19 [deprecated = true];</code>
+         * <code>optional float minutesPerGem = 19;</code>
          *
          * <pre>
          *replaced with SpeedUpConstantProto and ResourceConversionConstantProto
          * </pre>
          */
-        @java.lang.Deprecated public Builder clearMinutesPerGem() {
+        public Builder clearMinutesPerGem() {
           bitField0_ = (bitField0_ & ~0x00040000);
           minutesPerGem_ = 0F;
           onChanged();
@@ -16837,30 +16853,46 @@ public final class EventStartupProto {
 
         private float gemsPerResource_ ;
         /**
-         * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+         * <code>optional float gemsPerResource = 21;</code>
+         *
+         * <pre>
+         * [deprecated = true];
+         * </pre>
          */
-        @java.lang.Deprecated public boolean hasGemsPerResource() {
+        public boolean hasGemsPerResource() {
           return ((bitField0_ & 0x00080000) == 0x00080000);
         }
         /**
-         * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+         * <code>optional float gemsPerResource = 21;</code>
+         *
+         * <pre>
+         * [deprecated = true];
+         * </pre>
          */
-        @java.lang.Deprecated public float getGemsPerResource() {
+        public float getGemsPerResource() {
           return gemsPerResource_;
         }
         /**
-         * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+         * <code>optional float gemsPerResource = 21;</code>
+         *
+         * <pre>
+         * [deprecated = true];
+         * </pre>
          */
-        @java.lang.Deprecated public Builder setGemsPerResource(float value) {
+        public Builder setGemsPerResource(float value) {
           bitField0_ |= 0x00080000;
           gemsPerResource_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional float gemsPerResource = 21 [deprecated = true];</code>
+         * <code>optional float gemsPerResource = 21;</code>
+         *
+         * <pre>
+         * [deprecated = true];
+         * </pre>
          */
-        @java.lang.Deprecated public Builder clearGemsPerResource() {
+        public Builder clearGemsPerResource() {
           bitField0_ = (bitField0_ & ~0x00080000);
           gemsPerResource_ = 0F;
           onChanged();
@@ -33463,7 +33495,7 @@ public final class EventStartupProto {
       "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
       "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
       "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
-      "\030\010 \001(\010\"\3336\n\024StartupResponseProto\022\030\n\020serve" +
+      "\030\010 \001(\010\"\3236\n\024StartupResponseProto\022\030\n\020serve" +
       "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
       "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
@@ -33534,7 +33566,7 @@ public final class EventStartupProto {
       "en\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222" +
       "\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
       "mUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coins" +
-      "GivenToReferrer\030\003 \001(\005\032\202\033\n\020StartupConstan" +
+      "GivenToReferrer\030\003 \001(\005\032\372\032\n\020StartupConstan" +
       "ts\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com." +
       "lvl6.proto.InAppPurchasePackageProto\022\027\n\017" +
       "maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleS" +
@@ -33561,86 +33593,86 @@ public final class EventStartupProto {
       "StartupConstants.UserMonsterConstants\022`\n" +
       "\020monsterConstants\030\022 \001(\0132F.com.lvl6.proto" +
       ".StartupResponseProto.StartupConstants.M",
-      "onsterConstants\022\031\n\rminutesPerGem\030\023 \001(\002B\002" +
-      "\030\001\022\033\n\017gemsPerResource\030\025 \001(\002B\002\030\001\022\035\n\021pvpRe" +
-      "quiredMinLvl\030\024 \001(\005B\002\030\001\022 \n\024monsterDmgMult" +
-      "iplier\030\037 \001(\002B\002\030\001\022\'\n\037continueBattleGemCos" +
-      "tMultiplier\030\026 \001(\002\022 \n\030battleRunAwayBasePe" +
-      "rcent\030\034 \001(\002\022\036\n\026battleRunAwayIncrement\030\035 " +
-      "\001(\002\022\027\n\017addAllFbFriends\030\027 \001(\010\022\025\n\rfacebook" +
-      "PopUp\030$ \001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6" +
-      ".proto.StartupResponseProto.StartupConst" +
-      "ants.MiniTutorialConstants\022\024\n\014maxObstacl",
-      "es\030\031 \001(\005\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020" +
-      "taskMapConstants\030\033 \001(\0132F.com.lvl6.proto." +
-      "StartupResponseProto.StartupConstants.Ta" +
-      "skMapConstants\022 \n\030maxMinutesForFreeSpeed" +
-      "Up\030\036 \001(\005\022b\n\021clanHelpConstants\030  \003(\0132G.co" +
-      "m.lvl6.proto.StartupResponseProto.Startu" +
-      "pConstants.ClanHelpConstants\022W\n\013pvpConst" +
-      "ant\030! \001(\0132B.com.lvl6.proto.StartupRespon" +
-      "seProto.StartupConstants.PvpConstants\022X\n" +
-      "\004sucp\030\" \003(\0132J.com.lvl6.proto.StartupResp",
-      "onseProto.StartupConstants.SpeedUpConsta" +
-      "ntProto\022c\n\004rccp\030# \003(\0132U.com.lvl6.proto.S" +
-      "tartupResponseProto.StartupConstants.Res" +
-      "ourceConversionConstantProto\032_\n\031Animated" +
-      "SpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006" +
-      "offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordinate" +
-      "Proto\032\325\001\n\rClanConstants\022\035\n\025coinPriceToCr" +
-      "eateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanNa" +
-      "me\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescript" +
-      "ion\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001",
-      "(\005\022\023\n\013maxClanSize\030\005 \001(\005\022$\n\034achievementId" +
-      "sForClanRewards\030\006 \003(\005\032c\n\030DownloadableNib" +
-      "Constants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansi" +
-      "onNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001" +
-      "(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeight\030" +
-      "\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeig" +
-      "ht\030\003 \001(\005\022#\n\033numHoursToShowAfterEventEnd\030" +
-      "\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumT" +
-      "eamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLi" +
-      "mit\030\002 \001(\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPe",
-      "rHealthPoint\030\001 \001(\002\022#\n\033secondsToHealPerHe" +
-      "althPoint\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001" +
-      "(\002\022\031\n\021elementalWeakness\030\004 \001(\002\022\032\n\022oilPerM" +
-      "onsterLevel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035" +
-      "\n\025mapSectionImagePrefix\030\001 \001(\t\022\033\n\023mapNumb" +
-      "erOfSections\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003" +
-      " \001(\002\022\025\n\rmapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalH" +
-      "eight\030\005 \001(\002\032K\n\025MiniTutorialConstants\022\032\n\022" +
-      "miniTutorialTaskId\030\001 \001(\005\022\026\n\016guideMonster" +
-      "Id\030\002 \001(\005\032\202\001\n\021ClanHelpConstants\0220\n\010helpTy",
-      "pe\030\001 \001(\0162\036.com.lvl6.proto.GameActionType" +
-      "\022\034\n\024amountRemovedPerHelp\030\002 \001(\005\022\035\n\025percen" +
-      "tRemovedPerHelp\030\003 \001(\002\032t\n\014PvpConstants\022\031\n" +
-      "\021pvpDmgsWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDel" +
-      "ta\030\002 \001(\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpR" +
-      "equiredMinLvl\030\004 \001(\005\0328\n\024SpeedUpConstantPr" +
-      "oto\022\017\n\007seconds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n" +
-      "\037ResourceConversionConstantProto\0222\n\014reso" +
-      "urceType\030\001 \001(\0162\034.com.lvl6.proto.Resource" +
-      "Type\022\023\n\013resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001",
-      "(\005\032\234\004\n\021TutorialConstants\022\031\n\021startingMons" +
-      "terId\030\001 \001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016e" +
-      "nemyMonsterId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo" +
-      "\030\017 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016ma" +
-      "rkZMonsterId\030\n \001(\005\022?\n\022tutorialStructures" +
-      "\030\003 \003(\0132#.com.lvl6.proto.TutorialStructPr" +
-      "oto\022\036\n\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006c" +
-      "ityId\030\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .c" +
-      "om.lvl6.proto.CityElementProto\022$\n\034cityEl" +
-      "ementIdForFirstDungeon\030\007 \001(\005\022%\n\035cityElem",
-      "entIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030" +
-      "\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005" +
-      "\022?\n\021tutorialObstacles\030\016 \003(\0132$.com.lvl6.p" +
-      "roto.MinimumObstacleProto\"A\n\014UpdateStatu" +
-      "s\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MA" +
-      "JOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN" +
-      "_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_M" +
-      "AINTENANCE\020\003\"C\n\030ForceLogoutResponseProto" +
-      "\022\031\n\021previousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(" +
-      "\tB\023B\021EventStartupProto"
+      "onsterConstants\022\025\n\rminutesPerGem\030\023 \001(\002\022\027" +
+      "\n\017gemsPerResource\030\025 \001(\002\022\035\n\021pvpRequiredMi" +
+      "nLvl\030\024 \001(\005B\002\030\001\022 \n\024monsterDmgMultiplier\030\037" +
+      " \001(\002B\002\030\001\022\'\n\037continueBattleGemCostMultipl" +
+      "ier\030\026 \001(\002\022 \n\030battleRunAwayBasePercent\030\034 " +
+      "\001(\002\022\036\n\026battleRunAwayIncrement\030\035 \001(\002\022\027\n\017a" +
+      "ddAllFbFriends\030\027 \001(\010\022\025\n\rfacebookPopUp\030$ " +
+      "\001(\010\022]\n\010miniTuts\030\030 \001(\0132K.com.lvl6.proto.S" +
+      "tartupResponseProto.StartupConstants.Min" +
+      "iTutorialConstants\022\024\n\014maxObstacles\030\031 \001(\005",
+      "\022\032\n\022minutesPerObstacle\030\032 \001(\005\022`\n\020taskMapC" +
+      "onstants\030\033 \001(\0132F.com.lvl6.proto.StartupR" +
+      "esponseProto.StartupConstants.TaskMapCon" +
+      "stants\022 \n\030maxMinutesForFreeSpeedUp\030\036 \001(\005" +
+      "\022b\n\021clanHelpConstants\030  \003(\0132G.com.lvl6.p" +
+      "roto.StartupResponseProto.StartupConstan" +
+      "ts.ClanHelpConstants\022W\n\013pvpConstant\030! \001(" +
+      "\0132B.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.PvpConstants\022X\n\004sucp\030\" " +
+      "\003(\0132J.com.lvl6.proto.StartupResponseProt",
+      "o.StartupConstants.SpeedUpConstantProto\022" +
+      "c\n\004rccp\030# \003(\0132U.com.lvl6.proto.StartupRe" +
+      "sponseProto.StartupConstants.ResourceCon" +
+      "versionConstantProto\032_\n\031AnimatedSpriteOf" +
+      "fsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002" +
+      " \001(\0132\037.com.lvl6.proto.CoordinateProto\032\325\001" +
+      "\n\rClanConstants\022\035\n\025coinPriceToCreateClan" +
+      "\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005" +
+      "\022\'\n\037maxCharLengthForClanDescription\030\003 \001(" +
+      "\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\022\023\n\013ma",
+      "xClanSize\030\005 \001(\005\022$\n\034achievementIdsForClan" +
+      "Rewards\030\006 \003(\005\032c\n\030DownloadableNibConstant" +
+      "s\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNibNam" +
+      "e\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023To" +
+      "urnamentConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n" +
+      "\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005" +
+      "\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005\032R\n" +
+      "\024UserMonsterConstants\022\027\n\017maxNumTeamSlots" +
+      "\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001(" +
+      "\005\032\245\001\n\020MonsterConstants\022\032\n\022cashPerHealthP",
+      "oint\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoin" +
+      "t\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021el" +
+      "ementalWeakness\030\004 \001(\002\022\032\n\022oilPerMonsterLe" +
+      "vel\030\005 \001(\002\032\227\001\n\020TaskMapConstants\022\035\n\025mapSec" +
+      "tionImagePrefix\030\001 \001(\t\022\033\n\023mapNumberOfSect" +
+      "ions\030\002 \001(\005\022\030\n\020mapSectionHeight\030\003 \001(\002\022\025\n\r" +
+      "mapTotalWidth\030\004 \001(\002\022\026\n\016mapTotalHeight\030\005 " +
+      "\001(\002\032K\n\025MiniTutorialConstants\022\032\n\022miniTuto" +
+      "rialTaskId\030\001 \001(\005\022\026\n\016guideMonsterId\030\002 \001(\005" +
+      "\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001 \001(\016",
+      "2\036.com.lvl6.proto.GameActionType\022\034\n\024amou" +
+      "ntRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemoved" +
+      "PerHelp\030\003 \001(\002\032t\n\014PvpConstants\022\031\n\021pvpDmgs" +
+      "WindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002" +
+      "\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequiredM" +
+      "inLvl\030\004 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007s" +
+      "econds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037Resourc" +
+      "eConversionConstantProto\0222\n\014resourceType" +
+      "\030\001 \001(\0162\034.com.lvl6.proto.ResourceType\022\023\n\013" +
+      "resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021T",
+      "utorialConstants\022\031\n\021startingMonsterId\030\001 " +
+      "\001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enemyMons" +
+      "terId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032" +
+      "\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZMonst" +
+      "erId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#" +
+      ".com.lvl6.proto.TutorialStructProto\022\036\n\026s" +
+      "tructureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 " +
+      "\001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.lvl6." +
+      "proto.CityElementProto\022$\n\034cityElementIdF" +
+      "orFirstDungeon\030\007 \001(\005\022%\n\035cityElementIdFor",
+      "SecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n" +
+      "\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tuto" +
+      "rialObstacles\030\016 \003(\0132$.com.lvl6.proto.Min" +
+      "imumObstacleProto\"A\n\014UpdateStatus\022\r\n\tNO_" +
+      "UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDA" +
+      "TE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n" +
+      "\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENAN" +
+      "CE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n\021prev" +
+      "iousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021Eve" +
+      "ntStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -779,11 +779,11 @@ public class MiscMethods {
 		cb.setMonsterConstants(mcb.build());
 
 		//TODO: GET RID OF
-		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
 		cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
 		cb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
-		cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
 		//*****************************************************************
+		cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
+		cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
 		
 		createSpeedUpConstantsProto(cb);
 		createResourceConversionConstantsProto(cb);
