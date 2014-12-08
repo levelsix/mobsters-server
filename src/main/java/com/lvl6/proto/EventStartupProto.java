@@ -11708,6 +11708,15 @@ public final class EventStartupProto {
          * <code>optional int32 pvpRequiredMinLvl = 4;</code>
          */
         int getPvpRequiredMinLvl();
+
+        /**
+         * <code>optional int32 defendingMsgCharLimit = 5;</code>
+         */
+        boolean hasDefendingMsgCharLimit();
+        /**
+         * <code>optional int32 defendingMsgCharLimit = 5;</code>
+         */
+        int getDefendingMsgCharLimit();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants}
@@ -11779,6 +11788,11 @@ public final class EventStartupProto {
                 case 32: {
                   bitField0_ |= 0x00000008;
                   pvpRequiredMinLvl_ = input.readInt32();
+                  break;
+                }
+                case 40: {
+                  bitField0_ |= 0x00000010;
+                  defendingMsgCharLimit_ = input.readInt32();
                   break;
                 }
               }
@@ -11905,11 +11919,27 @@ public final class EventStartupProto {
           return pvpRequiredMinLvl_;
         }
 
+        public static final int DEFENDINGMSGCHARLIMIT_FIELD_NUMBER = 5;
+        private int defendingMsgCharLimit_;
+        /**
+         * <code>optional int32 defendingMsgCharLimit = 5;</code>
+         */
+        public boolean hasDefendingMsgCharLimit() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>optional int32 defendingMsgCharLimit = 5;</code>
+         */
+        public int getDefendingMsgCharLimit() {
+          return defendingMsgCharLimit_;
+        }
+
         private void initFields() {
           pvpDmgsWindowSize_ = 0;
           minPvpDmgDelta_ = 0F;
           maxPvpDmgDelta_ = 0F;
           pvpRequiredMinLvl_ = 0;
+          defendingMsgCharLimit_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -11936,6 +11966,9 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             output.writeInt32(4, pvpRequiredMinLvl_);
           }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeInt32(5, defendingMsgCharLimit_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -11960,6 +11993,10 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(4, pvpRequiredMinLvl_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(5, defendingMsgCharLimit_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -12086,6 +12123,8 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000004);
             pvpRequiredMinLvl_ = 0;
             bitField0_ = (bitField0_ & ~0x00000008);
+            defendingMsgCharLimit_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000010);
             return this;
           }
 
@@ -12130,6 +12169,10 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000008;
             }
             result.pvpRequiredMinLvl_ = pvpRequiredMinLvl_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.defendingMsgCharLimit_ = defendingMsgCharLimit_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -12157,6 +12200,9 @@ public final class EventStartupProto {
             }
             if (other.hasPvpRequiredMinLvl()) {
               setPvpRequiredMinLvl(other.getPvpRequiredMinLvl());
+            }
+            if (other.hasDefendingMsgCharLimit()) {
+              setDefendingMsgCharLimit(other.getDefendingMsgCharLimit());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -12357,6 +12403,38 @@ public final class EventStartupProto {
           public Builder clearPvpRequiredMinLvl() {
             bitField0_ = (bitField0_ & ~0x00000008);
             pvpRequiredMinLvl_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int defendingMsgCharLimit_ ;
+          /**
+           * <code>optional int32 defendingMsgCharLimit = 5;</code>
+           */
+          public boolean hasDefendingMsgCharLimit() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          /**
+           * <code>optional int32 defendingMsgCharLimit = 5;</code>
+           */
+          public int getDefendingMsgCharLimit() {
+            return defendingMsgCharLimit_;
+          }
+          /**
+           * <code>optional int32 defendingMsgCharLimit = 5;</code>
+           */
+          public Builder setDefendingMsgCharLimit(int value) {
+            bitField0_ |= 0x00000010;
+            defendingMsgCharLimit_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 defendingMsgCharLimit = 5;</code>
+           */
+          public Builder clearDefendingMsgCharLimit() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            defendingMsgCharLimit_ = 0;
             onChanged();
             return this;
           }
@@ -33495,7 +33573,7 @@ public final class EventStartupProto {
       "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
       "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
       "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
-      "\030\010 \001(\010\"\3236\n\024StartupResponseProto\022\030\n\020serve" +
+      "\030\010 \001(\010\"\3636\n\024StartupResponseProto\022\030\n\020serve" +
       "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
       "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
@@ -33566,7 +33644,7 @@ public final class EventStartupProto {
       "en\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222" +
       "\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
       "mUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coins" +
-      "GivenToReferrer\030\003 \001(\005\032\372\032\n\020StartupConstan" +
+      "GivenToReferrer\030\003 \001(\005\032\232\033\n\020StartupConstan" +
       "ts\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com." +
       "lvl6.proto.InAppPurchasePackageProto\022\027\n\017" +
       "maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleS" +
@@ -33645,34 +33723,35 @@ public final class EventStartupProto {
       "\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001 \001(\016",
       "2\036.com.lvl6.proto.GameActionType\022\034\n\024amou" +
       "ntRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemoved" +
-      "PerHelp\030\003 \001(\002\032t\n\014PvpConstants\022\031\n\021pvpDmgs" +
-      "WindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(\002" +
-      "\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequiredM" +
-      "inLvl\030\004 \001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007s" +
-      "econds\030\001 \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037Resourc" +
-      "eConversionConstantProto\0222\n\014resourceType" +
-      "\030\001 \001(\0162\034.com.lvl6.proto.ResourceType\022\023\n\013" +
-      "resourceAmt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021T",
-      "utorialConstants\022\031\n\021startingMonsterId\030\001 " +
-      "\001(\005\022\026\n\016guideMonsterId\030\020 \001(\005\022\026\n\016enemyMons" +
-      "terId\030\002 \001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032" +
-      "\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZMonst" +
-      "erId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#" +
-      ".com.lvl6.proto.TutorialStructProto\022\036\n\026s" +
-      "tructureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 " +
-      "\001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.lvl6." +
-      "proto.CityElementProto\022$\n\034cityElementIdF" +
-      "orFirstDungeon\030\007 \001(\005\022%\n\035cityElementIdFor",
-      "SecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n" +
-      "\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tuto" +
-      "rialObstacles\030\016 \003(\0132$.com.lvl6.proto.Min" +
-      "imumObstacleProto\"A\n\014UpdateStatus\022\r\n\tNO_" +
-      "UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDA" +
-      "TE\020\003\"N\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n" +
-      "\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENAN" +
-      "CE\020\003\"C\n\030ForceLogoutResponseProto\022\031\n\021prev" +
-      "iousLoginTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021Eve" +
-      "ntStartupProto"
+      "PerHelp\030\003 \001(\002\032\223\001\n\014PvpConstants\022\031\n\021pvpDmg" +
+      "sWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(" +
+      "\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequired" +
+      "MinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimit\030\005 " +
+      "\001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030\001" +
+      " \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConvers" +
+      "ionConstantProto\0222\n\014resourceType\030\001 \001(\0162\034" +
+      ".com.lvl6.proto.ResourceType\022\023\n\013resource",
+      "Amt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021TutorialC" +
+      "onstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016g" +
+      "uideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 " +
+      "\001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyB" +
+      "ossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001" +
+      "(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl" +
+      "6.proto.TutorialStructProto\022\036\n\026structure" +
+      "IdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017c" +
+      "ityOneElements\030\006 \003(\0132 .com.lvl6.proto.Ci" +
+      "tyElementProto\022$\n\034cityElementIdForFirstD",
+      "ungeon\030\007 \001(\005\022%\n\035cityElementIdForSecondDu" +
+      "ngeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit" +
+      "\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObst" +
+      "acles\030\016 \003(\0132$.com.lvl6.proto.MinimumObst" +
+      "acleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001" +
+      "\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\r" +
+      "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
+      "T_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030" +
+      "ForceLogoutResponseProto\022\031\n\021previousLogi" +
+      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartu",
+      "pProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -33791,7 +33870,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor,
-        new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", });
+        new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", "DefendingMsgCharLimit", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(10);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_fieldAccessorTable = new
