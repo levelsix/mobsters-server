@@ -228,7 +228,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
 
     Map<Integer, ItemForUser> ifuMap = itemForUserRetrieveUtil
-        .getSpecificOrAllItemIdToItemForUserId(
+        .getSpecificOrAllItemForUserMap(
             userId, Collections.singleton(itemId));
 
     if (null == ifuMap || ifuMap.isEmpty()) {

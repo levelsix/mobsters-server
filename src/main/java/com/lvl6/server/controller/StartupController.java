@@ -1234,7 +1234,7 @@ public class StartupController extends EventController {
 	private void setUserItems(Builder resBuilder, String userId) {
 		/*NOTE: DB CALL*/
 		Map<Integer, ItemForUser> itemIdToUserItems =
-			itemForUserRetrieveUtil.getSpecificOrAllItemIdToItemForUserId(
+			itemForUserRetrieveUtil.getSpecificOrAllItemForUserMap(
 				userId, null);
 
 		if (!itemIdToUserItems.isEmpty()) {
