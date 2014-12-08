@@ -19,6 +19,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.TaskStageMonster;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -698,4 +699,65 @@ public class MonsterStuffUtils {
 	  }
 	  return true;
   }
+  
+  public static Map<String, Map<String, Integer>> calculatePvpDrops(
+		Map<String, List<MonsterForUser>> userIdToUserMonsters)
+	{
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
+			new HashMap<String, Map<String, Integer>>();
+		
+		for (String userId : userIdToUserMonsters.keySet())
+		{
+			List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
+			Map<String, Integer> monsterDropIds = MonsterStuffUtils
+				.calculatePvpDropIds(userMonsters); 
+			
+			userIdToUserMonsterIdToDroppedId.put(userId, monsterDropIds);
+		}
+		
+		return userIdToUserMonsterIdToDroppedId;
+	}
+  
+  /**
+   * 
+   * @param userMonsters
+   * @return map(userMonsterId -> monsterId or -1 if no drop)
+   */
+  public static Map<String, Integer> calculatePvpDropIds(
+	  List<MonsterForUser> userMonsters)
+  {
+	  Map<String, Integer> userMonsterIdToDroppedId =
+		  new HashMap<String, Integer>();
+
+	  for (MonsterForUser userMonster : userMonsters)
+	  {
+		  String mfuId = userMonster.getId();
+		  int monsterId = userMonster.getMonsterId();
+		  int lvl = userMonster.getCurrentLvl();
+		  
+		  //calculate if dropped
+		  boolean dropped = MonsterLevelInfoRetrieveUtils
+			  .didPvpMonsterDrop(monsterId, lvl);
+
+		  //if dropped set monster
+		  Monster mon = null;
+		  if (dropped) {
+			  mon = MonsterRetrieveUtils
+				  .getMonsterForMonsterId(monsterId);
+		  }
+		  
+		  //get the pvpMonsterDropId if monster not null.
+		  int pvpMonsterDropId = ControllerConstants.NOT_SET;
+		  if (null != mon) {
+			  pvpMonsterDropId = mon.getPvpMonsterDropId();
+		  }
+		  log.info("for mfu {}, set pvpMonsterDropId={}",
+				userMonster, pvpMonsterDropId);
+		  //if cases not nested in order to decrease nesting
+		  userMonsterIdToDroppedId.put(mfuId, pvpMonsterDropId);
+	  }
+	  
+	  return userMonsterIdToDroppedId;
+  }
+  
 }

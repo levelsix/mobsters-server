@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Monster implements Serializable {
 	
-	private static final long serialVersionUID = -8200270820308772397L;
+	private static final long serialVersionUID = -2038969910987427104L;
 	
 	private int id;
 	private String evolutionGroup;
@@ -36,6 +36,7 @@ public class Monster implements Serializable {
 	private float shadowScaleFactor;
 	private int baseOffensiveSkillId;
 	private int baseDefensiveSkillId;
+	private int pvpMonsterDropId;
 
 	public Monster(int id, String evolutionGroup, String monsterGroup,
 			String quality, int evolutionLevel, String displayName,
@@ -49,7 +50,7 @@ public class Monster implements Serializable {
 			int atkAnimationRepeatedFramesStart,
 			int atkAnimationRepeatedFramesEnd, String shorterName,
 			float shadowScaleFactor, int baseOffensiveSkillId,
-			int baseDefensiveSkillId) {
+			int baseDefensiveSkillId, int pvpMonsterDropId) {
 		super();
 		this.id = id;
 		this.evolutionGroup = evolutionGroup;
@@ -81,6 +82,7 @@ public class Monster implements Serializable {
 		this.shadowScaleFactor = shadowScaleFactor;
 		this.baseOffensiveSkillId = baseOffensiveSkillId;
 		this.baseDefensiveSkillId = baseDefensiveSkillId;
+		this.pvpMonsterDropId = pvpMonsterDropId;
 	}
 
 	public int getId() {
@@ -330,6 +332,16 @@ public class Monster implements Serializable {
 		this.baseDefensiveSkillId = baseDefensiveSkillId;
 	}
 
+	public int getPvpMonsterDropId()
+	{
+		return pvpMonsterDropId;
+	}
+
+	public void setPvpMonsterDropId( int pvpMonsterDropId )
+	{
+		this.pvpMonsterDropId = pvpMonsterDropId;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -393,6 +405,8 @@ public class Monster implements Serializable {
 			+ baseOffensiveSkillId
 			+ ", baseDefensiveSkillId="
 			+ baseDefensiveSkillId
+			+ ", pvpMonsterDropId="
+			+ pvpMonsterDropId
 			+ "]";
 	}
 

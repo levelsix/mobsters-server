@@ -189,7 +189,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     int gemChange = -1 * gemCost;
     int expChange = struct.getExpReward();
-    if (0 != gemChange) {
+    if (0 != gemChange || 0 != expChange) {
       //update user gems
       if (!user.updateRelativeGemsNaive(gemChange, expChange)) {
     	  String preface = "can't finish norm struct build.";

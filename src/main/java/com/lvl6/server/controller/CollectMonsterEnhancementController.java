@@ -15,9 +15,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectMonsterEnhancementRequestEvent;
 import com.lvl6.events.response.CollectMonsterEnhancementResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto;
@@ -116,12 +118,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<String, MonsterEnhancingForUser> inEnhancing =
 				monsterEnhancingForUserRetrieveUtil.getMonstersForUser(userId);
 
+            User aUser = userRetrieveUtil.getUserById(userId);
+
 			boolean legit = checkLegit(resBuilder, userId,
 				userMonsterIds, inEnhancing, umcep, userMonsterIdsThatFinished);
 
 			boolean successful = false;
 			if(legit) {
-				successful = writeChangesToDb( userId, umcep );
+				successful = writeChangesToDb( aUser, umcep );
 			}
 			if (successful) {
 				resBuilder.setStatus(CollectMonsterEnhancementStatus.SUCCESS);
@@ -131,6 +135,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setTag(event.getTag());
 			resEvent.setCollectMonsterEnhancementResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
+
+            UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+                .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser, null, null);
+            resEventUpdate.setTag(event.getTag());
+            server.writeEvent(resEventUpdate);
 
 			if (successful) {
 				writeChangesToHistory(userId, userMonsterIds, inEnhancing, userMonsterIdsThatFinished);
@@ -206,7 +215,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private boolean writeChangesToDb(String uId,
+	private boolean writeChangesToDb(User u,
 		UserMonsterCurrentExpProto umcep)
 	{
 
@@ -216,7 +225,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int newHp = umcep.getExpectedHp();
 		
 		//reward the user with exp
-		awardUserExp(uId, userMonsterIdBeingEnhanced, newExp);
+		awardUserExp(u, userMonsterIdBeingEnhanced, newExp);
 
 		//GIVE THE MONSTER EXP
 		int num = UpdateUtils.get().updateUserMonsterExpAndLvl(userMonsterIdBeingEnhanced,
@@ -228,14 +237,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private void awardUserExp( String uId, String userMonsterIdBeingEnhanced, int newExp )
+	private void awardUserExp( User u, String userMonsterIdBeingEnhanced, int newExp )
 	{
 		MonsterForUser mfu = null;
-		User u = null;
 		try {
 			mfu = monsterForUserRetrieveUtil
 				.getSpecificUserMonster(userMonsterIdBeingEnhanced);
-			u = userRetrieveUtil.getUserById(uId);
 			
 			float expReward = (float)newExp - (float)mfu.getCurrentExp();
 			expReward *= ControllerConstants.MONSTER_ENHANCING__PLAYER_EXP_CONVERTER;

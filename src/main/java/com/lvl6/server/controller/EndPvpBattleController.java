@@ -27,6 +27,7 @@ import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -37,6 +38,7 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -94,6 +96,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int oilStolen = reqProto.getOilChange(); //non negative
     int cashStolen = reqProto.getCashChange(); // non negative
     float nuPvpDmgMultiplier = reqProto.getNuPvpDmgMultiplier();
+    
+    List<Integer> monsterDropIds = reqProto.getMonsterDropIdsList();
     
     if (!attackerWon && oilStolen != 0) {
     	log.error("client should set oilStolen to be 0 since attacker lost!" +
@@ -199,7 +203,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     				defender, defenderId, defenderPlfu, pvpBattleInfo,
     				oilStolen, cashStolen, curTime, curDate, attackerAttacked,
     				attackerWon, nuPvpDmgMultiplier, attackerMaxOil, attackerMaxCash,
-    				changeMap, previousCurrencyMap);
+    				changeMap, previousCurrencyMap, monsterDropIds, resBuilder);
     	}
 
     	if (successful) {
@@ -303,7 +307,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  boolean attackerAttacked, boolean attackerWon, float nuPvpDmgMultiplier,
 		  int attackerMaxOil, int attackerMaxCash,
 		  Map<String, Map<String, Integer>> changeMap,
-		  Map<String, Map<String, Integer>> previousCurrencyMap) {
+		  Map<String, Map<String, Integer>> previousCurrencyMap,
+		  List<Integer> monsterDropIds, Builder resBuilder) {
   	
 	  boolean cancelled = !attackerAttacked;
 	  
@@ -377,6 +382,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		attackerPreviousCurrency.put(MiscMethods.cash, previousCash);
   		attackerPreviousCurrency.put(MiscMethods.oil, previousOil);
   		previousCurrencyMap.put(attackerId, attackerPreviousCurrency);
+
+  		awardMonsters(resBuilder, attackerId, monsterDropIds, clientDate);
+
   	}
   	
   	log.info("deleting from PvpBattleForUser");
@@ -385,6 +393,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	log.info(String.format("numDeleted (should be 1): %s", numDeleted)); 
   			
   	return true;
+  }
+  
+  private void awardMonsters(Builder resBuilder, String userId,
+	  List<Integer> monsterIds, Date currentDate)
+  {
+	  Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+	  
+	  for (Integer monsterId : monsterIds)
+	  {
+		  if (!monsterIdToNumPieces.containsKey(monsterId)) {
+			  monsterIdToNumPieces.put(monsterId, 0);
+		  }
+		  int nuQuantity = monsterIdToNumPieces.get(monsterId) + 1;
+		  monsterIdToNumPieces.put(monsterId, nuQuantity);
+	  }
+		  
+	  String mfusop = ControllerConstants.MFUSOP__PVP; 
+	  
+	  List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
+		  updateUserMonsters(userId, monsterIdToNumPieces,
+			  null, mfusop, currentDate);
+	  
+	  resBuilder.addAllUpdatedOrNew(newOrUpdated);
   }
   
   private void processCancellation(User attacker, String attackerId,

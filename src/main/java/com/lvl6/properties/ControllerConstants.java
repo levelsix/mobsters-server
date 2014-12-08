@@ -57,6 +57,9 @@ public class ControllerConstants {
 
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
+	
+	//FACEBOOK POP UP
+	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
 
 	//dof = degrees of freedom
 	public static final double ITEM_SECRET_GIFT_FOR_USER__DOF = 4D;
@@ -65,7 +68,7 @@ public class ControllerConstants {
 
 	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
-		40, 1, 21, 30, 5
+		51, 2, 21, 53, 6
 	};
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
 		30, 50, 90, 210, 300
@@ -82,7 +85,7 @@ public class ControllerConstants {
 	public static final float MONSTER__ELEMENTAL_WEAKNESS = 0.8F;
 	public static final float MONSTER__OIL_PER_MONSTER_LEVEL = 100f;
 
-	public static final float MONSTER_ENHANCING__PLAYER_EXP_CONVERTER = 0.2F;
+	public static final float MONSTER_ENHANCING__PLAYER_EXP_CONVERTER = 0.001F;
 	//	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 	//	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
 	//	public static final int MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS = 3;
@@ -91,6 +94,7 @@ public class ControllerConstants {
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId";
 	public static final String MFUSOP__MINI_JOB = "miniJobId";
+	public static final String MFUSOP__PVP = "pvp";
 	public static final String MFUSOP__QUEST = "questId"; 
 	public static final String MFUSOP__REDEEM_ITEM = "redeem itemId";
 	public static final String MFUSOP__USER_CREATE = "user create";

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = 2977557480137942673L;
+	private static final long serialVersionUID = 6445604577625300716L;
 	
 	private int monsterId;
 	private int level;
@@ -30,6 +30,7 @@ public class MonsterLevelInfo implements Serializable {
 	private float enhanceCostExponent;
 	private float enhanceExpPerSecond;
 	private float enhanceExpPerSecondExponent;
+	private float pvpDropRate;
 
 	public MonsterLevelInfo()
 	{
@@ -60,7 +61,8 @@ public class MonsterLevelInfo implements Serializable {
 		int enhanceCostPerFeeder,
 		float enhanceCostExponent,
 		float enhanceExpPerSecond,
-		float enhanceExpPerSecondExponent )
+		float enhanceExpPerSecondExponent,
+		float pvpDropRate )
 	{
 		super();
 		this.monsterId = monsterId;
@@ -87,6 +89,7 @@ public class MonsterLevelInfo implements Serializable {
 		this.enhanceCostExponent = enhanceCostExponent;
 		this.enhanceExpPerSecond = enhanceExpPerSecond;
 		this.enhanceExpPerSecondExponent = enhanceExpPerSecondExponent;
+		this.pvpDropRate = pvpDropRate;
 	}
 
 	public int getMonsterId() {
@@ -295,6 +298,16 @@ public class MonsterLevelInfo implements Serializable {
 		this.enhanceExpPerSecondExponent = enhanceExpPerSecondExponent;
 	}
 
+	public float getPvpDropRate()
+	{
+		return pvpDropRate;
+	}
+
+	public void setPvpDropRate( float pvpDropRate )
+	{
+		this.pvpDropRate = pvpDropRate;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -346,6 +359,8 @@ public class MonsterLevelInfo implements Serializable {
 			+ enhanceExpPerSecond
 			+ ", enhanceExpPerSecondExponent="
 			+ enhanceExpPerSecondExponent
+			+ ", pvpDropRate="
+			+ pvpDropRate
 			+ "]";
 	}
 	

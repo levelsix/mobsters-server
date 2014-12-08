@@ -19,11 +19,9 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InviteFbFriendsForSlotsRequestEvent;
 import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
-import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
-import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
@@ -32,7 +30,6 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Inv
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
-import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
@@ -142,42 +139,50 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime,
     	  		fbIdsToUserStructIds, fbIdsToUserStructFbLvl, inviteIds);
       }
-      
+
       if (successful) {
     	  Clan inviterClan = null;
-    	  
-      	Map<String, UserFacebookInviteForSlot> newIdsToInvites =
-      			getUserFacebookInviteForSlotRetrieveUtils().getInviteForId(inviteIds);
-      	//client needs to know what the new invites are;
-      	for (String id : newIdsToInvites.keySet()) {
-      		UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
-      		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
-      				.createUserFacebookInviteForSlotProtoFromInvite(
-      					invite, aUser, inviterClan, senderProto);
-      		resBuilder.addInvitesNew(inviteProto);
-      	}
+
+    	  //inviteIds can be empty when user invites some facebook friends
+    	  //he's already invited
+    	  //NOTE: Could construct the Map<String, UserFacebookInviteForSlot> newIdsToInvites
+    	  //instead of retrieveing from db
+    	  if (!inviteIds.isEmpty()) {
+    		  Map<String, UserFacebookInviteForSlot> newIdsToInvites =
+    			  getUserFacebookInviteForSlotRetrieveUtils().getInviteForId(inviteIds);
+    		  //client needs to know what the new invites are;
+    		  for (String id : newIdsToInvites.keySet()) {
+    			  UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
+    			  UserFacebookInviteForSlotProto inviteProto =
+    				  CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite,
+    					  aUser, inviterClan, senderProto);
+    			  resBuilder.addInvitesNew(inviteProto);
+    		  }
+    	  }
     	  resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
       }
-      
+
       InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
-      
-      if (successful) {
-      	//send this to all the recipients in fbIdsOfFriends that have a user id
-      	//if want to send to the new ones use newFacebookIdsToInvite
-      	List<String> recipientUserIds = getUserRetrieveUtils()
-      			.getUserIdsForFacebookIds(newFacebookIdsToInvite);
-      	
-      	InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
-      	for (String recipientUserId : recipientUserIds) {
-      		InviteFbFriendsForSlotsResponseEvent newResEvent =
-      				new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
-      		newResEvent.setTag(0);
-      		newResEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
-          server.writeEvent(newResEvent);
-      	}
+
+      //send this to all the recipients in fbIdsOfFriends that have a user id
+      //if want to send to the new ones only use newFacebookIdsToInvite
+      //if want to send to old and new ones use fbIdsOfFriends
+      //old one means a User who has already been invited by senderProto
+      if (successful && !newFacebookIdsToInvite.isEmpty()) {
+    	  List<String> recipientUserIds = getUserRetrieveUtils()
+    		  .getUserIdsForFacebookIds(newFacebookIdsToInvite);
+
+    	  InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
+    	  for (String recipientUserId : recipientUserIds) {
+    		  InviteFbFriendsForSlotsResponseEvent newResEvent =
+    			  new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
+    		  newResEvent.setTag(0);
+    		  newResEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
+    		  server.writeEvent(newResEvent);
+    	  }
       }
     } catch (Exception e) {
       log.error("exception in InviteFbFriendsForSlotsController processEvent", e);
@@ -267,7 +272,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//because right now, any of the nonunique invites could be deleted
   	if (!inviteIdsOfDuplicateInvites.isEmpty()) {
   		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsOfDuplicateInvites);
-  		log.warn("num duplicate invites deleted: " + num);
+  		log.warn("num duplicate invites deleted: {} \t allInvites={}",
+  			num, idsToInvites);
   	}
   	
   	

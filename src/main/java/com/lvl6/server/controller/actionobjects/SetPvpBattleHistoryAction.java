@@ -23,6 +23,7 @@ import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetPvpBattleHistoryAction implements StartUpAction
@@ -105,7 +106,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		
 		log.info(String.format(
 			"history monster teams=%s", userIdsToUserMonsters));
+		
+		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
+			MonsterStuffUtils.calculatePvpDrops(userIdsToUserMonsters);
 
+		
 		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
 		attackerIdsToProspectiveOilWinnings = new HashMap<String, Integer>();
 		PvpUser attackerPu = hazelcastPvpUtil.getPvpUser(userId);
@@ -116,8 +121,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		Map<String, Clan> attackerIdsToClans = useMe.getUserIdsToClans(attackerIds);
 
 		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdsToClans, userIdsToUserMonsters,
-				attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
+			.createPvpHistoryProto(historyList, idsToAttackers,
+				attackerIdsToClans, userIdsToUserMonsters,
+				userIdToUserMonsterIdToDroppedId,
+				attackerIdsToProspectiveCashWinnings,
+				attackerIdsToProspectiveOilWinnings);
 
 		//  	log.info("historyProtoList=" + historyProtoList);
 		resBuilder.addAllRecentNBattles(historyProtoList);

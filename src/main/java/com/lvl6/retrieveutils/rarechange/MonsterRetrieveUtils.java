@@ -148,6 +148,7 @@ public class MonsterRetrieveUtils {
     float shadowScaleFactor = rs.getFloat(DBConstants.MONSTER__SHADOW_SCALE_FACTOR);
     int baseOffensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_OFFENSIVE_SKILL_ID);
     int baseDefensiveSkillId = rs.getInt(DBConstants.MONSTER__BASE_DEFENSIVE_SKILL_ID);
+    int pvpMonsterDropId = rs.getInt(DBConstants.MONSTER__PVP_MONSTER_DROP_ID);
     
     if (null != quality) {
     	String newQuality = quality.trim().toUpperCase();
@@ -186,8 +187,7 @@ public class MonsterRetrieveUtils {
     		description, evolutionCost, animationType, verticalPixelOffset, atkSoundFile,
     		atkSoundAnimationFrame, atkAnimationRepeatedFramesStart,
     		atkAnimationRepeatedFramesEnd, shorterName, shadowScaleFactor,
-    		baseOffensiveSkillId, baseDefensiveSkillId);
-    
+    		baseOffensiveSkillId, baseDefensiveSkillId, pvpMonsterDropId);
     
     return monster;
   }

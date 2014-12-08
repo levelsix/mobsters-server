@@ -163,6 +163,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		return clans;
 	}
 
+    public List<Clan> getRandomClans(int limit) {
+        Object[] values = { limit };
+        String query = String.format(
+                   "SELECT * FROM %s ORDER BY rand() LIMIT ?",
+                   TABLE_NAME);
+
+        List<Clan> clans = null;
+        try {
+            clans = this.jdbcTemplate.query(query, values, rowMapper);
+        } catch (Exception e) {
+            log.error("clan retrieve db error.", e);
+        }
+        return clans;
+    }
+
 	//Equivalent to convertRS* in the *RetrieveUtils.java classes for nonstatic data
 	//mimics PvpHistoryProto in Battle.proto (PvpBattleHistory.java)
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html

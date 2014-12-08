@@ -661,7 +661,8 @@ public class DBConstants {
 	public static final String USER__FB_DATA = "fb_data";
 	public static final String USER__LAST_FREE_BOOSTER_PACK_TIME = "last_free_booster_pack_time";
 	public static final String USER__CLAN_HELPS = "clan_helps";
-	public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
+    public static final String USER__LAST_SECRET_GIFT_COLLECT_TIME = "last_secret_gift_collect_time";
+    public static final String USER__PVP_DEFENDING_MESSAGE = "pvp_defending_message";
 
 	/* USER BEFORE TUTORIAL COMPLETION*/
 	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
@@ -851,6 +852,7 @@ public class DBConstants {
 	public static final String MONSTER__SHADOW_SCALE_FACTOR = "shadow_scale_factor";
 	public static final String MONSTER__BASE_OFFENSIVE_SKILL_ID = "base_offensive_skill_id";
 	public static final String MONSTER__BASE_DEFENSIVE_SKILL_ID = "base_defensive_skill_id";
+	public static final String MONSTER__PVP_MONSTER_DROP_ID = "pvp_monster_drop_id";
 
 	public static final String MONSTER_FOR_PVP__ID = GENERIC__ID;
 	public static final String MONSTER_FOR_PVP__MONSTER_ID = "monster_id";
@@ -885,6 +887,7 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC_EXPONENT = "enhance_exp_per_sec_exponent";
+	public static final String MONSTER_LEVEL_INFO__PVP_DROP_RATE = "pvp_drop_rate";
 
 	public static final String OBSTACLE__ID = GENERIC__ID;
 	public static final String OBSTACLE__NAME = "name";

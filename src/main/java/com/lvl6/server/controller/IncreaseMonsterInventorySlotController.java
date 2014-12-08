@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.IncreaseMonsterInventorySlotRequestEvent;
 import com.lvl6.events.response.IncreaseMonsterInventorySlotResponseEvent;
-import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
@@ -33,7 +32,6 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus;
-import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -140,11 +138,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			.getSpecificUserStruct(userStructId);
     	
     	//will be populated if user is successfully redeeming fb invites
-    	Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites = 
+    	Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct = 
     			new HashMap<String, UserFacebookInviteForSlot>();
       
       boolean legit = checkLegit(resBuilder, userId, aUser, userStructId, sfu,
-      		increaseType, userFbInviteIds, idsToAcceptedInvites);
+      		increaseType, userFbInviteIds, idsToInvitesForUserStruct);
 
       int gemCost = 0;
       boolean successful = false;
@@ -153,7 +151,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	previousGems = aUser.getGems();
       	gemCost = getGemPriceFromStruct(sfu); 
     	  successful = writeChangesToDb(aUser, sfu, increaseType, gemCost, curTime,
-    	  		idsToAcceptedInvites, changeMap);
+    		  idsToInvitesForUserStruct, changeMap);
       }
       
       if (successful) {
@@ -202,7 +200,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    */
   private boolean checkLegit(Builder resBuilder, String userId, User u, String userStructId,
   		StructureForUser sfu, IncreaseSlotType aType, List<String> userFbInviteIds,
-  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites) {
+  		Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct) {
   	if (null == u) {
   		log.error("user is null. no user exists with id=" + userId);
   		return false;
@@ -215,19 +213,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//THE CHECK IF USER IS REDEEMING FACEBOOK INVITES
   	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
   		//get accepted and unredeemed invites
-  		Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp = getInvites(userId,
-  				userFbInviteIds);
+  		Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStructTemp =
+  			getUserFacebookInviteForSlotRetrieveUtils().getInvitesForUserStructMap(  
+  				userId, userStructId);
   		//check if requested invites even exist
-  		if (null == idsToAcceptedTemp || idsToAcceptedTemp.isEmpty()) {
-  			log.error("no invites exist with ids: " + userFbInviteIds);
+  		if (null == idsToInvitesForUserStructTemp || idsToInvitesForUserStructTemp.isEmpty()) {
+  			log.error("no invites exist for userId={} \t userStructId={}",
+  				userId, userStructId);
+  			return false;
+  		}
+  		
+  		//should get rid of the invites that have fbLvl before sfu.getFbInviteStructLvl()
+  		//THE INVITE IN THE DB TABLE SPECIFIES THE GOAL fb_struct_lvl
+  		//so need to keep the invites with the same goal fb_struct_lvl
+  		filterOutInvites(sfu.getFbInviteStructLvl() + 1,
+  			idsToInvitesForUserStructTemp);
+
+  		//check if requested invites even exist
+  		boolean allRequestedIdsExist = idsToInvitesForUserStructTemp
+  			.keySet().containsAll(userFbInviteIds);
+  		if (!allRequestedIdsExist) {
+  			log.error("not all invites exist. ids={} \t inDb={}",
+  				userFbInviteIds, idsToInvitesForUserStructTemp);
   			return false;
   		}
 
-  		String userStructIdFromInvites = getUserStructId(idsToAcceptedTemp);
+  		String userStructIdFromInvites = getUserStructId(userFbInviteIds,
+  			idsToInvitesForUserStructTemp);
     	if (!userStructId.equals(userStructIdFromInvites)) {
     		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INCONSISTENT_INVITE_DATA);
-    		log.error("data across invites aren't consistent: user struct id/fb lvl. invites=" +
-    				idsToAcceptedTemp + "\t expectedUserStructId=" + userStructId);
+    		String preface = "data across invites inconsistent:"; 
+    		log.error("{} user struct id/fb lvl. invites={}, \t expectedUserStructId={}",
+    			new Object[] {preface, idsToInvitesForUserStructTemp, userStructId});
     		return false;
     	}
     	
@@ -235,27 +252,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	int structId = sfu.getStructId();
     	Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
     	int structLvl = struct.getLevel();
-    	
     	int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
+    	
     	if (nextUserStructFbInviteLvl > structLvl) {
     		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL);
-    		log.error("user struct maxed fb invite lvl. userStruct=" + sfu + "\t struct=" + struct);
+    		log.error("user struct maxed fb invite lvl. userStruct={} \t struct={}",
+    			sfu, struct);
     		return false;
     	}
     	
   		//required min num invites depends on the structure and the UserStructure's fb lvl
   		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
+  		
   		//check if user has enough invites to gain a slot
-  		int acceptedAmount = idsToAcceptedTemp.size(); 
+  		int acceptedAmount = calcNumAcceptedInvites(idsToInvitesForUserStructTemp); 
+  		
   		if(acceptedAmount < minNumInvites) {
   			resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INSUFFICIENT_FACEBOOK_INVITES);
-  			log.error("user doesn't meet num accepted facebook invites to increase slots. " +
-  					"minRequired=" + minNumInvites + "\t has:" + acceptedAmount);
+  			String preface = "insufficient accepted fb invites to increase slots.";
+  			log.error("{} \t minRequired={} \t has={}",
+  				new Object[] { preface, minNumInvites, acceptedAmount } );
   			return false;
   		}
+  		
   		//give the caller the invites, at this point, the number of invites is at least
   		//equal to minNumInvites and could be more
-  		idsToAcceptedInvites.putAll(idsToAcceptedTemp);
+  		idsToInvitesForUserStruct.putAll(idsToInvitesForUserStructTemp);
   		
   		//THE CHECK IF USER IS BUYING SLOTS
   	} else if (IncreaseSlotType.PURCHASE == aType) {
@@ -278,26 +300,71 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  private Map<String, UserFacebookInviteForSlot> getInvites(String userId,
-  		List<String> userFbInviteIds) {
-  	//get accepted and unredeemed invites
-		boolean filterByAccepted = true;
-		boolean isAccepted = true;
-		boolean filterByRedeemed = true;
-		boolean isRedeemed = false;
-		Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp =
-				getUserFacebookInviteForSlotRetrieveUtils().getSpecificOrAllInvitesForInviter(
-						userId, userFbInviteIds, filterByAccepted, isAccepted, filterByRedeemed,
-						isRedeemed);
-		return idsToAcceptedTemp;
+  private void filterOutInvites(int sfuFbLvl,
+	  Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct)
+  {
+	List<String> removeIds = new ArrayList<String>();
+	
+	//filtering out invites with userStructFbLvl that is below sfuFbLvl
+	//keep only the invites with sfuFbLvl
+	for (UserFacebookInviteForSlot invite : idsToInvitesForUserStruct.values())
+	{
+		int inviteFbStructLvl = invite.getUserStructFbLvl();
+		
+		if (sfuFbLvl != inviteFbStructLvl) {
+			removeIds.add(invite.getId());
+		}
+	}
+	
+	log.info("removing irrelevant invites={}, inDb={}",
+		removeIds, idsToInvitesForUserStruct);
+	for (String inviteId : removeIds)
+	{
+		idsToInvitesForUserStruct.remove(inviteId);
+	}
   }
   
+  private int calcNumAcceptedInvites(
+	  Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct)
+  {
+	  int numAccepted = 0;
+	  for (UserFacebookInviteForSlot ufifs : idsToInvitesForUserStruct.values())
+	  {
+		  if (null != ufifs.getTimeAccepted()) {
+			  numAccepted += 1;
+		  }
+	  }
+	  
+	  log.info("numAccepted={}, invites={}", numAccepted, idsToInvitesForUserStruct);
+	  
+	  return numAccepted;
+  }
+  
+//  private Map<String, UserFacebookInviteForSlot> getInvites(String userId,
+//  		List<String> userFbInviteIds) {
+//  	//get accepted and unredeemed invites
+//		boolean filterByAccepted = true;
+//		boolean isAccepted = true;
+//		boolean filterByRedeemed = true;
+//		boolean isRedeemed = false;
+//		Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp =
+//				getUserFacebookInviteForSlotRetrieveUtils().getSpecificOrAllInvitesForInviter(
+//						userId, userFbInviteIds, filterByAccepted, isAccepted, filterByRedeemed,
+//						isRedeemed);
+//		return idsToAcceptedTemp;
+//  }
+  
   //if user struct ids and user struct fb lvls are inconsistent, return non-positive value;
-  private String getUserStructId(Map<String, UserFacebookInviteForSlot> idsToAcceptedTemp) {
+  private String getUserStructId(List<String> userFbInviteIds,
+	  Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStructTemp)
+  {
     String prevUserStructId = null;
   	int prevUserStructFbLvl = -1;
   	
-  	for (UserFacebookInviteForSlot invite : idsToAcceptedTemp.values()) {
+  	for (String inviteId : userFbInviteIds) {
+  		UserFacebookInviteForSlot invite = idsToInvitesForUserStructTemp.
+  			get(inviteId);
+  		
   	  String tempUserStructId = invite.getUserStructId();
   		int tempUserStructFbLvl = invite.getUserStructFbLvl();
   		if (null == prevUserStructId) {
@@ -306,6 +373,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			
   		} else if (!prevUserStructId.equals(tempUserStructId) || prevUserStructFbLvl != tempUserStructFbLvl) {
   			//since the userStructIds or userStructFbLvl's are inconsistent, return failure
+  			log.error("inconsistent invites (userStructId, fbLvl). requested={} \t invitesFromDb={}",
+  				userFbInviteIds, idsToInvitesForUserStructTemp);
   			return null;
   		}
   		
@@ -362,88 +431,133 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDb(User aUser, StructureForUser sfu, 
   		IncreaseSlotType increaseType, int gemCost, Timestamp curTime,
-  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites,
-  		Map<String, Integer> changeMap) {
-  	boolean success = false;
-  	
-  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
-  		int structId = sfu.getStructId();
-    	int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
-  		
-  		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
-  		//if num accepted invites more than min required, just take the earliest ones
-  		List<String> inviteIdsTheRest = new ArrayList<String>();
-  		log.info("idsToAcceptedInvites={}", idsToAcceptedInvites);
-  		List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestInvites(
-  				idsToAcceptedInvites, minNumInvites, inviteIdsTheRest); 
-  		
-  		//redeem the nEarliestInvites
-  		int num = UpdateUtils.get().updateRedeemUserFacebookInviteForSlot(
-  				curTime, nEarliestInvites);
-  		log.info("num saved: {}", num);
+  		Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct,
+  		Map<String, Integer> changeMap)
+  {
+	  boolean success = false;
 
-  		if (num != minNumInvites) {
-  			log.error("expected updated: " + minNumInvites + "\t actual updated: " + num);
-  			return false;
-  		}
-  		
-  		log.info("inviteIdsTheRest: {}", inviteIdsTheRest);
-  		//delete all the remaining invites
-  		int numCurInvites = inviteIdsTheRest.size();
-  		if (numCurInvites > 0) {
-  			log.info("num current invites: " + numCurInvites + " invitesToDelete= " +
-  					inviteIdsTheRest);
-  			num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
-  			log.info("num deleted: " + num);
-  		}
-  		success = true;
-  	}
-  	
-  	if (IncreaseSlotType.PURCHASE == increaseType) {
-  		int cost = -1 * gemCost;
-  		success = aUser.updateRelativeGemsNaive(cost, 0);
-  		
-  		if (!success) {
-  			log.error("problem with updating user monster inventory slots and diamonds");
-  			return false;
-  		}
-  		if (success && 0 != cost) {
-  				changeMap.put(MiscMethods.gems, cost);
-  		}
-  	}
-  	
-  	//increase the user structs fb invite lvl
-  	String userStructId = sfu.getId();
-  	int fbInviteLevelChange = 1;
-  	if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
-  		log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
-  		return false;
-  	}
-  	
-  	return success;
+	  //NOTE: if for some reason user manages to send two of these events
+	  //and both are for the same userStruct and the second event
+	  //is a duplicate of the first, need to only increases
+	  //the userStruct's fbLvl only once 
+	  int nuFbInviteLevel = sfu.getFbInviteStructLvl();
+	  
+	  if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
+		  int structId = sfu.getStructId();
+		  int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
+		  int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
+		  
+		  //if num accepted invites more than min required, just take the earliest ones
+		  
+		  List<String> inviteIdsTheRest = new ArrayList<String>();
+		  log.info("idsToInvitesForUserStruct={}", idsToInvitesForUserStruct);
+		  List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestAcceptedInvites(
+			  idsToInvitesForUserStruct, minNumInvites, inviteIdsTheRest); 
+
+		  //redeem the nEarliestInvites
+		  int num = UpdateUtils.get().updateRedeemUserFacebookInviteForSlot(
+			  curTime, nEarliestInvites);
+		  log.info("num saved: {}", num);
+
+		  //using goalLvl stored in the invite, in the case of 
+		  //duplicate events being sent as mentioned above
+		  nuFbInviteLevel = nEarliestInvites.get(0).getUserStructFbLvl();
+		  
+		  if (num != minNumInvites) {
+			  log.error("expected updated={} \t actual updated={}",
+				  minNumInvites, num);
+			  return false;
+		  }
+
+		  log.info("inviteIdsTheRest: {}", inviteIdsTheRest);
+		  //delete all the remaining invites
+		  int numExtraInvites = inviteIdsTheRest.size();
+		  if (numExtraInvites > 0) {
+			  log.info("numExtraInvites={} \t invitesToDelete={}",
+				  numExtraInvites, inviteIdsTheRest);
+			  num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
+			  log.info("num deleted={}", num);
+		  }
+		  success = true;
+	  }
+
+	  if (IncreaseSlotType.PURCHASE == increaseType) {
+		  int cost = -1 * gemCost;
+		  success = aUser.updateRelativeGemsNaive(cost, 0);
+
+		  if (!success) {
+			  log.error("problem with updating user monster inventory slots and diamonds");
+			  return false;
+		  }
+		  if (success && 0 != cost) {
+			  changeMap.put(MiscMethods.gems, cost);
+		  }
+		  
+		  nuFbInviteLevel = sfu.getFbInviteStructLvl() + 1;
+	  }
+
+	  //increase the user structs fb invite lvl
+	  String userStructId = sfu.getId();
+//	  int fbInviteLevelChange = 1;
+	  
+	  if (!UpdateUtils.get().updateUserStructFbLevel(userStructId, nuFbInviteLevel)) {
+		  log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
+		  return false;
+	  }
+
+	  return success;
   }
   
-  private List<UserFacebookInviteForSlot> nEarliestInvites(
-  		Map<String, UserFacebookInviteForSlot> idsToAcceptedInvites, int n,
-  		List<String> inviteIdsTheRest) {
-  	
+  private List<UserFacebookInviteForSlot> nEarliestAcceptedInvites(
+  		Map<String, UserFacebookInviteForSlot> idsToInvitesForUserStruct,
+  		int n, List<String> inviteIdsTheRest)
+  {
+	  //need to calculate based on only the accepted invites
+	  List<UserFacebookInviteForSlot> acceptedInvites =
+		  new ArrayList<UserFacebookInviteForSlot>();
+	  
+	  //idsToInvitesForUserStruct contains all the invites for this
+	  //userStruct (unredeemed, redeemed), so need to keep track
+	  //of the unaccepted invites to delete as well as extraneous
+	  //accepted invites. If for some reason, invites are redeemed,
+	  //no processing should really be done, but userStruct fb_lvl
+	  //is the only thing user gets, so absolute fb_lvl update is the solution
+	  //(use the goal fb_lvl in the invite as the value)
+	  for (UserFacebookInviteForSlot ufifs : idsToInvitesForUserStruct.values())
+	  {
+		  if (null != ufifs.getTimeAccepted()) {
+			  acceptedInvites.add(ufifs);
+		  } else if (null != ufifs.getTimeRedeemed()) {
+			  log.error("user redeeming already redeemed invite. invites={}",
+				  idsToInvitesForUserStruct);
+			  
+		  } else {
+			  log.info("curInvite has no accept time {}. will be deleted after redeeming invites",
+				  ufifs);
+			  inviteIdsTheRest.add(ufifs.getId());
+		  }
+	  }
+	  
+	  log.info("acceptedInvites={} \t allInvites={}",
+		  acceptedInvites, idsToInvitesForUserStruct);
+	  
   	List<UserFacebookInviteForSlot> earliestAcceptedInvites =
-  			new ArrayList<UserFacebookInviteForSlot>(idsToAcceptedInvites.values());
+  			new ArrayList<UserFacebookInviteForSlot>(acceptedInvites);
   	orderUserFacebookAcceptedInvitesForSlots(earliestAcceptedInvites);
-  	
-  	if (n < earliestAcceptedInvites.size()) {
+
+  	if (earliestAcceptedInvites.size() > n) {
   		int amount = earliestAcceptedInvites.size();
-  		
-  		//want to get the remaining invites after the first n
+
+  		//want to keep track of the remaining accepted invites after the first n
   		for (UserFacebookInviteForSlot invite : earliestAcceptedInvites.subList(n, amount)) {
-  		  String id = invite.getId();
+  			String id = invite.getId();
   			inviteIdsTheRest.add(id);
   		}
-  		
+
   		//get first n invites
   		return earliestAcceptedInvites.subList(0, n);
   	} else {
-  		//num invites guaranteed to not be less than n
+  		//num invites guaranteed to not be less than n because of checkLegit()
   		return earliestAcceptedInvites;
   	}
   }
