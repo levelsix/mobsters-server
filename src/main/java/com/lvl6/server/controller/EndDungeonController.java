@@ -495,15 +495,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		  numInserted));
 	  if (numInserted > 0) {
 		  //send updated quantity not just quantity of 1
-		  ItemForUser ifu = (itemForUserRetrieveUtil
+		  List<ItemForUser> ifuList = (itemForUserRetrieveUtil
 			  .getSpecificOrAllItemForUser(
 				  userId,
-				  Collections.singleton(itemId))).get(itemId);
-		  UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
-		  resBuilder.setUserItem(uip);
-//		  resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
-//			  quantity));
-		  resBuilder.setTaskMapSectionName(tme.getSectionName());
+				  Collections.singleton(itemId)));
+		  
+		  if (ifuList.size() > 0) {
+		      ItemForUser ifu = ifuList.get(0);
+	          UserItemProto uip = CreateInfoProtoUtils.createUserItemProtoFromUserItem(ifu);
+	          resBuilder.setUserItem(uip);
+//	        resBuilder.setUserItem(CreateInfoProtoUtils.createUserItemProto(userId, itemId,
+//	            quantity));
+	          resBuilder.setTaskMapSectionName(tme.getSectionName());
+		  } else {
+		      log.error (String.format ("unable to retrieve item for itemId=%s, userId=%s", itemId, userId));
+		  }
 	  } else {
 		  log.error(String.format(
 			  "unable to award item specified in TaskMapElement=%s",
