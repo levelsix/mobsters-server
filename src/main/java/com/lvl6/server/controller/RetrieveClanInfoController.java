@@ -178,7 +178,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	  RetrieveClanInfoResponseProto.Builder resBuilder )
   {
 	  if (!reqProto.hasClanName() && !reqProto.hasClanUuid()) {
-		  List<Clan> clanList = getClanRetrieveUtils().getMostRecentClans(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP);
+		  List<Clan> clanList = getClanRetrieveUtils().getRandomClans(ControllerConstants.RETRIEVE_CLANS__NUM_CLANS_CAP);
 
 		  log.info(String.format("clanList=%s", clanList));
 		  setClanProtosWithSize(resBuilder, clanList);
