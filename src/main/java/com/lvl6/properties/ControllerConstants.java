@@ -125,7 +125,7 @@ public class ControllerConstants {
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
-//	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
+	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
 
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
