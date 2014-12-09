@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -19,7 +20,7 @@ public class ClanSearch {
 	private static Long DAY = 24*60*60*1000l;
 	private static Integer idealNumberOfMembers = 80;
 	
-	
+	@Autowired
 	protected HazelcastInstance hz;
 	protected DistributedZSet rankedClans;
 	
