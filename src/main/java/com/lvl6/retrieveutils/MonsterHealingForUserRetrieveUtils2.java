@@ -82,8 +82,8 @@ import com.lvl6.properties.DBConstants;
 				mefu.setQueuedTime(new Date(time.getTime()));
 			}
 			
-			mefu.setHealthProgress(rs.getFloat(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY));
-			mefu.setPriority(rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS));
+			mefu.setHealthProgress(rs.getFloat(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS));
+			mefu.setPriority(rs.getInt(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY));
 
 			mefu.setElapsedSeconds(rs.getFloat(DBConstants.MONSTER_HEALING_FOR_USER__ELAPSED_SECONDS));
 			return mefu;
