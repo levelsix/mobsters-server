@@ -79,7 +79,7 @@ public class SetDefendingMsgAction
 
 	private boolean verifySyntax(Builder resBuilder) {
 
-		if (null == msg || msg.isEmpty()) {
+		if (null == msg) {
 			log.error(String.format(
 				"invalid msg for defendingStatus=%s.",
 				msg));
