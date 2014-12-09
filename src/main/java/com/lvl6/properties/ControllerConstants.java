@@ -27,7 +27,7 @@ public class ControllerConstants {
 	public static final float BATTLE__RUN_AWAY_INCREMENT = 0.25F;	
 
 	//clan
-	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 2 : 100;
+	public static final int CLAN__MAX_NUM_MEMBERS = Globals.IS_SANDBOX() ? 5 : 100;
 	public static final int[] CLAN__ACHIEVEMENT_IDS_FOR_CLAN_REWARDS = {1000, 1001, 1002};
 
 	//CLAN EVENT PERSISTENT
@@ -125,6 +125,9 @@ public class ControllerConstants {
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
+//	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
+
+	
 	//NOT USING ANYMORE--------------------------------------------------------------------
 	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
