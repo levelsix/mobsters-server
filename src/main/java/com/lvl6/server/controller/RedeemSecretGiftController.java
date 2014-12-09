@@ -14,7 +14,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemSecretGiftRequestEvent;
 import com.lvl6.events.response.RedeemSecretGiftResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemSecretGiftForUser;
+import com.lvl6.info.User;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftRequestProto;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto;
 import com.lvl6.proto.EventItemProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
@@ -124,6 +127,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setTag(event.getTag());
 			resEvent.setRedeemSecretGiftResponseProto(resProto);
 			server.writeEvent(resEvent);
+			
+			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus()))
+			{
+				//last_secret_gift time in user is modified, need to
+				//update client's user
+				User u = rsga.getUser();
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+					.createUpdateClientUserResponseEventAndUpdateLeaderboard(
+						u, null, null);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+			}
 
 		} catch (Exception e) {
 			log.error("exception in RedeemSecretGiftController processEvent", e);
