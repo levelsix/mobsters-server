@@ -147,3 +147,21 @@ message EndPvpBattleResponseProto {
 
 ///atm, the necessary non event protos for pvp are in Battle.proto
 
+//------------------------------------------------------------------------------------------
+
+message SetDefendingMsgRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string msg = 2;
+}
+
+message SetDefendingMsgResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SetDefendingMsgStatus status = 2;
+	
+	//send UpdateClientUser, so as to update the message to the censored version
+	
+	enum SetDefendingMsgStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}

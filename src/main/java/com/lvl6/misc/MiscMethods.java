@@ -833,6 +833,7 @@ public class MiscMethods {
 		pcb.setMinPvpDmgDelta(ControllerConstants.PVP__MIN_DMG_DELTA);
 		pcb.setMaxPvpDmgDelta(ControllerConstants.PVP__MAX_DMG_DELTA);
 		pcb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
+		pcb.setDefendingMsgCharLimit(ControllerConstants.PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG);
 		
 		//set more properties above
 		//    BattleConstants battleConstants = BattleConstants.newBuilder()

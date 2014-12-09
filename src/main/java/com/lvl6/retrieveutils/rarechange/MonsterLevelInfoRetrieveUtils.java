@@ -221,7 +221,7 @@ import com.lvl6.utils.DBConnection;
 //			  }
 			  allLvlToPartialInfo.put(curLvl, nextLvlInfo);
 			  
-			  log.info("MonsterLevelInfo={}", nextLvlInfo);
+//			  log.info("MonsterLevelInfo={}", nextLvlInfo);
 		  }
 		  
 		  allPartialMonsterLevelInfo.put(monsterId, allLvlToPartialInfo);
