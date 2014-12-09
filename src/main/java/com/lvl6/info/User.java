@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 3790196651685523310L;
+	private static final long serialVersionUID = -143692604954767005L;
 	
 	private String id;
 	private String name;
@@ -926,7 +926,27 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateDefendingMsg( String msg )
+	{
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
 
+		Map <String, Object> relativeParams = null;
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__PVP_DEFENDING_MESSAGE,
+			msg);
+
+		int numUpdated = DBConnection.get().updateTableRows(
+			DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.pvpDefendingMessage = msg;
+			return true;
+		}
+		return false;
 	}
 	
 	public String getId() {
@@ -1247,7 +1267,7 @@ public class User implements Serializable {
         this.pvpDefendingMessage = pvpDefendingMessage;
     }
 
-    @Override
+	@Override
 	public String toString()
 	{
 		return "User [id="
@@ -1324,6 +1344,8 @@ public class User implements Serializable {
 			+ clanHelps
 			+ ", lastSecretGiftCollectTime="
 			+ lastSecretGiftCollectTime
+			+ ", pvpDefendingMessage="
+			+ pvpDefendingMessage
 			+ "]";
 	}
 

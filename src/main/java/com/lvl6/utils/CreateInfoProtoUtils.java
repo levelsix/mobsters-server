@@ -328,6 +328,12 @@ public class CreateInfoProtoUtils {
 		UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, true);
 		ppb.setPvpLeagueStats(uplp);
 
+		String msg = u.getPvpDefendingMessage();
+		if (null != msg)
+		{
+			ppb.setDefenderMsg(msg);
+		}
+		
 		return ppb.build();
 	}
 	
