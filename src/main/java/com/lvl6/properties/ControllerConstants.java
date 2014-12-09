@@ -52,7 +52,7 @@ public class ControllerConstants {
 		GameActionType.ENHANCE_TIME.name()
 
 	};
-	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		5,		1,		1,		1};
+	public static final int[] CLAN_HELP__AMOUNT_REMOVED  =   {1,		1,		1,		1,		1};
 	public static final float[] CLAN_HELP__PERCENT_REMOVED = {0.01F,	0.01F,	0.01F,	0.01F,	0.01F};
 
 	//EVENT PERSISTENT STUFF
