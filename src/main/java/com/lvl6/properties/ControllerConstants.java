@@ -172,7 +172,7 @@ public class ControllerConstants {
 
 	//SPEED UP
 	public static final int[] SPEED_UP__SECONDS = {
-		1, 60, 3600, 86400, 604800, 157852800
+		1, 300, 3600, 86400, 604800, 157852800
 	};
 	public static final int[] SPEED_UP__NUM_GEMS = {
 		1, 1, 12, 144, 840, 219240
