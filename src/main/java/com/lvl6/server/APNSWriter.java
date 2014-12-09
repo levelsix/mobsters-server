@@ -93,17 +93,6 @@ public class APNSWriter extends Wrap {
 
 	}
 
-	public void setServer(GameServer server) {
-		this.server = server;
-	}
-
-	/**
-	 * note we override the Wrap's run method here doing essentially the same
-	 * thing, but first we allocate a ByteBuffer for this thread to use
-	 */
-	public void run() {
-
-	}
 
 	/** unused */
 	protected void processEvent(GameEvent event) {
