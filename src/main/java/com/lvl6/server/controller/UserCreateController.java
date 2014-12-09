@@ -90,9 +90,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     String facebookId = reqProto.getFacebookId();
     
     //in case user tries hacking, don't let the amount go over tutorial default values
-    int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
-    int oil = Math.min(reqProto.getOil(), ControllerConstants.TUTORIAL__INIT_OIL);
-    int gems = Math.min(reqProto.getGems(), ControllerConstants.TUTORIAL__INIT_GEMS);
+    int cash = Math.max(reqProto.getCash(), 0);
+    int oil = Math.max(reqProto.getOil(), 0);
+    int gems = Math.max(reqProto.getGems(), 0);
+    
+    cash = Math.min(cash, ControllerConstants.TUTORIAL__INIT_CASH);
+    oil = Math.min(oil, ControllerConstants.TUTORIAL__INIT_OIL);
+    gems = Math.min(gems, ControllerConstants.TUTORIAL__INIT_GEMS);
     
     String email = reqProto.getEmail();
     String fbData = reqProto.getFbData();
