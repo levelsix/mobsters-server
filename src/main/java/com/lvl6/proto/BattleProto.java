@@ -6369,32 +6369,30 @@ public final class BattleProto {
         int index);
 
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    boolean hasAttackerUuid();
+    boolean hasAttacker();
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    java.lang.String getAttackerUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getAttacker();
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    com.google.protobuf.ByteString
-        getAttackerUuidBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder();
 
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    boolean hasDefenderUuid();
+    boolean hasDefender();
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    java.lang.String getDefenderUuid();
+    com.lvl6.proto.UserProto.MinimumUserProto getDefender();
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    com.google.protobuf.ByteString
-        getDefenderUuidBytes();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
 
     /**
      * <code>optional int64 battleEndTime = 5;</code>
@@ -6508,15 +6506,29 @@ public final class BattleProto {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = attacker_.toBuilder();
+              }
+              attacker_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(attacker_);
+                attacker_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              attackerUuid_ = bs;
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = defender_.toBuilder();
+              }
+              defender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(defender_);
+                defender_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000004;
-              defenderUuid_ = bs;
               break;
             }
             case 40: {
@@ -6655,88 +6667,46 @@ public final class BattleProto {
       return usersAvenging_.get(index);
     }
 
-    public static final int ATTACKERUUID_FIELD_NUMBER = 3;
-    private java.lang.Object attackerUuid_;
+    public static final int ATTACKER_FIELD_NUMBER = 3;
+    private com.lvl6.proto.UserProto.MinimumUserProto attacker_;
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    public boolean hasAttackerUuid() {
+    public boolean hasAttacker() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    public java.lang.String getAttackerUuid() {
-      java.lang.Object ref = attackerUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          attackerUuid_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProto getAttacker() {
+      return attacker_;
     }
     /**
-     * <code>optional string attackerUuid = 3;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
      */
-    public com.google.protobuf.ByteString
-        getAttackerUuidBytes() {
-      java.lang.Object ref = attackerUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        attackerUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder() {
+      return attacker_;
     }
 
-    public static final int DEFENDERUUID_FIELD_NUMBER = 4;
-    private java.lang.Object defenderUuid_;
+    public static final int DEFENDER_FIELD_NUMBER = 4;
+    private com.lvl6.proto.UserProto.MinimumUserProto defender_;
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    public boolean hasDefenderUuid() {
+    public boolean hasDefender() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    public java.lang.String getDefenderUuid() {
-      java.lang.Object ref = defenderUuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          defenderUuid_ = s;
-        }
-        return s;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
+      return defender_;
     }
     /**
-     * <code>optional string defenderUuid = 4;</code>
+     * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
      */
-    public com.google.protobuf.ByteString
-        getDefenderUuidBytes() {
-      java.lang.Object ref = defenderUuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        defenderUuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
+      return defender_;
     }
 
     public static final int BATTLEENDTIME_FIELD_NUMBER = 5;
@@ -6822,8 +6792,8 @@ public final class BattleProto {
     private void initFields() {
       clanAvengeUuid_ = "";
       usersAvenging_ = java.util.Collections.emptyList();
-      attackerUuid_ = "";
-      defenderUuid_ = "";
+      attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       battleEndTime_ = 0L;
       avengeRequestTime_ = 0L;
       clanUuid_ = "";
@@ -6848,10 +6818,10 @@ public final class BattleProto {
         output.writeMessage(2, usersAvenging_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(3, getAttackerUuidBytes());
+        output.writeMessage(3, attacker_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(4, getDefenderUuidBytes());
+        output.writeMessage(4, defender_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(5, battleEndTime_);
@@ -6881,11 +6851,11 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getAttackerUuidBytes());
+          .computeMessageSize(3, attacker_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getDefenderUuidBytes());
+          .computeMessageSize(4, defender_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7014,6 +6984,8 @@ public final class BattleProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getUsersAvengingFieldBuilder();
+          getAttackerFieldBuilder();
+          getDefenderFieldBuilder();
         }
       }
       private static Builder create() {
@@ -7030,9 +7002,17 @@ public final class BattleProto {
         } else {
           usersAvengingBuilder_.clear();
         }
-        attackerUuid_ = "";
+        if (attackerBuilder_ == null) {
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          attackerBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        defenderUuid_ = "";
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          defenderBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
         battleEndTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -7084,11 +7064,19 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.attackerUuid_ = attackerUuid_;
+        if (attackerBuilder_ == null) {
+          result.attacker_ = attacker_;
+        } else {
+          result.attacker_ = attackerBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.defenderUuid_ = defenderUuid_;
+        if (defenderBuilder_ == null) {
+          result.defender_ = defender_;
+        } else {
+          result.defender_ = defenderBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -7148,15 +7136,11 @@ public final class BattleProto {
             }
           }
         }
-        if (other.hasAttackerUuid()) {
-          bitField0_ |= 0x00000004;
-          attackerUuid_ = other.attackerUuid_;
-          onChanged();
+        if (other.hasAttacker()) {
+          mergeAttacker(other.getAttacker());
         }
-        if (other.hasDefenderUuid()) {
-          bitField0_ |= 0x00000008;
-          defenderUuid_ = other.defenderUuid_;
-          onChanged();
+        if (other.hasDefender()) {
+          mergeDefender(other.getDefender());
         }
         if (other.hasBattleEndTime()) {
           setBattleEndTime(other.getBattleEndTime());
@@ -7512,156 +7496,236 @@ public final class BattleProto {
         return usersAvengingBuilder_;
       }
 
-      private java.lang.Object attackerUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> attackerBuilder_;
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        */
-      public boolean hasAttackerUuid() {
+      public boolean hasAttacker() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        */
-      public java.lang.String getAttackerUuid() {
-        java.lang.Object ref = attackerUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            attackerUuid_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProto getAttacker() {
+        if (attackerBuilder_ == null) {
+          return attacker_;
+        } else {
+          return attackerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
+       */
+      public Builder setAttacker(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (attackerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          attacker_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          attackerBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string attackerUuid = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAttackerUuidBytes() {
-        java.lang.Object ref = attackerUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          attackerUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string attackerUuid = 3;</code>
-       */
-      public Builder setAttackerUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        attackerUuid_ = value;
-        onChanged();
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        */
-      public Builder clearAttackerUuid() {
+      public Builder setAttacker(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (attackerBuilder_ == null) {
+          attacker_ = builderForValue.build();
+          onChanged();
+        } else {
+          attackerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
+       */
+      public Builder mergeAttacker(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (attackerBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              attacker_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            attacker_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(attacker_).mergeFrom(value).buildPartial();
+          } else {
+            attacker_ = value;
+          }
+          onChanged();
+        } else {
+          attackerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
+       */
+      public Builder clearAttacker() {
+        if (attackerBuilder_ == null) {
+          attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          attackerBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
-        attackerUuid_ = getDefaultInstance().getAttackerUuid();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string attackerUuid = 3;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
        */
-      public Builder setAttackerUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        attackerUuid_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getAttackerBuilder() {
+        bitField0_ |= 0x00000004;
         onChanged();
-        return this;
+        return getAttackerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder() {
+        if (attackerBuilder_ != null) {
+          return attackerBuilder_.getMessageOrBuilder();
+        } else {
+          return attacker_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto attacker = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getAttackerFieldBuilder() {
+        if (attackerBuilder_ == null) {
+          attackerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getAttacker(),
+                  getParentForChildren(),
+                  isClean());
+          attacker_ = null;
+        }
+        return attackerBuilder_;
       }
 
-      private java.lang.Object defenderUuid_ = "";
+      private com.lvl6.proto.UserProto.MinimumUserProto defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
        */
-      public boolean hasDefenderUuid() {
+      public boolean hasDefender() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
        */
-      public java.lang.String getDefenderUuid() {
-        java.lang.Object ref = defenderUuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            defenderUuid_ = s;
+      public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
+        if (defenderBuilder_ == null) {
+          return defender_;
+        } else {
+          return defenderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       */
+      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          defender_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          defenderBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>optional string defenderUuid = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDefenderUuidBytes() {
-        java.lang.Object ref = defenderUuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          defenderUuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string defenderUuid = 4;</code>
-       */
-      public Builder setDefenderUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        defenderUuid_ = value;
-        onChanged();
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
        */
-      public Builder clearDefenderUuid() {
+      public Builder setDefender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (defenderBuilder_ == null) {
+          defender_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       */
+      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              defender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            defender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(defender_).mergeFrom(value).buildPartial();
+          } else {
+            defender_ = value;
+          }
+          onChanged();
+        } else {
+          defenderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       */
+      public Builder clearDefender() {
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        defenderUuid_ = getDefaultInstance().getDefenderUuid();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string defenderUuid = 4;</code>
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
        */
-      public Builder setDefenderUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        defenderUuid_ = value;
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getDefenderBuilder() {
+        bitField0_ |= 0x00000008;
         onChanged();
-        return this;
+        return getDefenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
+        if (defenderBuilder_ != null) {
+          return defenderBuilder_.getMessageOrBuilder();
+        } else {
+          return defender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getDefenderFieldBuilder() {
+        if (defenderBuilder_ == null) {
+          defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getDefender(),
+                  getParentForChildren(),
+                  isClean());
+          defender_ = null;
+        }
+        return defenderBuilder_;
       }
 
       private long battleEndTime_ ;
@@ -8816,18 +8880,19 @@ public final class BattleProto {
       " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanA" +
       "venged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010league" +
       "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi",
-      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\333\001\n\022PvpClan" +
+      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\227\002\n\022PvpClan" +
       "AvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\ru" +
       "sersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpU" +
-      "serClanAvengeProto\022\024\n\014attackerUuid\030\003 \001(\t" +
-      "\022\024\n\014defenderUuid\030\004 \001(\t\022\025\n\rbattleEndTime\030" +
-      "\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\020\n\010clan" +
-      "Uuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n\010" +
-      "userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clan" +
-      "AvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014" +
-      "BattleResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFEND",
-      "ER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattlePro" +
-      "to"
+      "serClanAvengeProto\0222\n\010attacker\030\003 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\0222\n\010defend" +
+      "er\030\004 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021avengeReque" +
+      "stTime\030\006 \001(\003\022\020\n\010clanUuid\030\007 \001(\t\"h\n\026PvpUse" +
+      "rClanAvengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010cl" +
+      "anUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\n",
+      "avengeTime\030\004 \001(\003*E\n\014BattleResult\022\020\n\014ATTA" +
+      "CKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER" +
+      "_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8872,7 +8937,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
-        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "AttackerUuid", "DefenderUuid", "BattleEndTime", "AvengeRequestTime", "ClanUuid", });
+        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "ClanUuid", });
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new
