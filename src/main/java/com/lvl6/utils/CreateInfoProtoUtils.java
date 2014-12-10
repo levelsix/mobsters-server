@@ -481,7 +481,7 @@ public class CreateInfoProtoUtils {
 		return pvpProtoList;
 		}
 
-	public static PvpHistoryProto createPvpHistoryProto(User attacker, Clan c,
+	public static PvpHistoryProto createGotAttackedPvpHistoryProto(User attacker, Clan c,
 		PvpBattleHistory info, Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings)
@@ -533,10 +533,12 @@ public class CreateInfoProtoUtils {
 			info.getDefenderEloAfter(), false);
 		phpb.setDefenderAfter(defenderAfter);
 
+//		phpb.setClanAvenged(info.isClanAvenged());
+		
 		return phpb.build();
 	}
 
-	public static List<PvpHistoryProto> createPvpHistoryProto(
+	public static List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
 		List<PvpBattleHistory> historyList, Map<String, User> attackerIdsToAttackers,
 		Map<String, Clan> attackerIdsToClans,
 		Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
@@ -562,12 +564,72 @@ public class CreateInfoProtoUtils {
 			
 			Map<String, Integer> userMonsterIdToDropped =
 				userIdToUserMonsterIdToDropped.get(attackerId);
-			PvpHistoryProto php = createPvpHistoryProto(attacker,
+			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 				clan, history, attackerMonsters, userMonsterIdToDropped,
 				prospectiveCashWinnings, prospectiveOilWinnings);
 			phpList.add(php);
 		}
 		return phpList;
+	}
+	
+	public static List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
+		String attackerId, List<PvpBattleHistory> historyList)
+	{
+		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
+		FullUserProto.Builder fupb = FullUserProto.newBuilder();
+		fupb.setUserUuid(attackerId);
+		FullUserProto fup = fupb.build();
+		
+		for (PvpBattleHistory pbh : historyList)
+		{
+			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(
+				fup, pbh);
+			
+			phpList.add(php);
+		}
+		
+		return phpList;
+	}
+	
+	public static PvpHistoryProto createAttackedOthersPvpHistoryProto(
+		FullUserProto fup, PvpBattleHistory info)
+	{
+		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
+		phpb.setAttacker(fup);
+
+		phpb.setAttackerWon(info.isAttackerWon());
+
+		int defenderCashChange = info.getDefenderCashChange();
+		phpb.setDefenderCashChange(defenderCashChange);
+		int defenderOilChange = info.getDefenderOilChange();
+		phpb.setDefenderOilChange(defenderOilChange);
+
+		Date endDate = info.getBattleEndTime();
+		//endDate should not be null, it's the primary key
+		phpb.setBattleEndTime(endDate.getTime());
+
+
+		UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
+			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
+			info.getAttackerEloBefore(), false);
+		phpb.setAttackerBefore(attackerBefore);
+		UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
+			info.getAttackerCurLeague(), info.getAttackerCurRank(),
+			info.getAttackerEloAfter(), false);
+		phpb.setAttackerAfter(attackerAfter);
+
+		UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
+			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
+			info.getDefenderEloBefore(), false);
+		phpb.setDefenderBefore(defenderBefore);
+		UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
+			info.getDefenderCurLeague(), info.getDefenderCurRank(),
+			info.getDefenderEloAfter(), false);
+		phpb.setDefenderAfter(defenderAfter);
+
+//		phpb.setClanAvenged(info.isClanAvenged());
+		
+		return phpb.build();
 	}
 
 	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {

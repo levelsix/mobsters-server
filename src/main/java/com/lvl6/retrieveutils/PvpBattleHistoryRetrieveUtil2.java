@@ -6,10 +6,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -89,6 +87,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
 			history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
 			history.setAttackerWon(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
+//			history.setClanAvenged(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
 			return history;
 		}
 
@@ -123,6 +122,11 @@ public class PvpBattleHistoryRetrieveUtil2 {
 	public Set<String> getAttackerIdsFromHistory(List<PvpBattleHistory> historyList) {
 		Set<String> attackerIdList = new HashSet<String>();
 		
+		if (null == historyList)
+		{
+			return attackerIdList;
+		}
+		
 		for (PvpBattleHistory history : historyList) {
 			String attackerId = history.getAttackerId();
 			attackerIdList.add(attackerId);
@@ -130,44 +134,100 @@ public class PvpBattleHistoryRetrieveUtil2 {
 		return attackerIdList;
 	}
 	
-	//RETRIEVE QUERIES*********************************************************************
-	public List<PvpBattleHistory> getRecentNBattlesForDefenderId(String defenderId, int n) {
-		List<PvpBattleHistory> recentNBattles = null;
-		try {
-			List<String> columnsToSelect = PvpBattleHistoryForClientMapper.getColumnsSelected();
+	public Set<String> getUserIdsFromHistory(List<PvpBattleHistory> historyList) {
+		Set<String> userIdSet = new HashSet<String>();
+		
+		if (null == historyList)
+		{
+			return userIdSet;
+		}
+		
+		for (PvpBattleHistory history : historyList) {
+			String attackerId = history.getAttackerId();
+			userIdSet.add(attackerId);
 			
-			Map<String, Object> equalityConditions = new HashMap<String, Object>();
-			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
-			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
-			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
-			String conditionDelimiter = getQueryConstructionUtil().getAnd();
-
-			//query db, "values" is not used 
-			//(its purpose is to hold the values that were supposed to be put
-			// into a prepared statement)
-			List<Object> values = new ArrayList<Object>();
-			boolean preparedStatement = true;
-
-			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
-					values, preparedStatement);
-
-			if (n >= 1) {
-				StringBuilder querySb = new StringBuilder();
-				querySb.append(query);
-				querySb.append(" order by ");
-				querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
-				querySb.append(" desc limit ");
-				querySb.append(n);
-
-				query = querySb.toString(); 
+			String defenderId = history.getDefenderId();
+			//defender can be a fake player
+			if (null != defenderId && !defenderId.isEmpty())
+			{
+				userIdSet.add(defenderId);
 			}
-			log.info("query=" + query);
+		}
+		return userIdSet;
+	}
+	
+	//RETRIEVE QUERIES*********************************************************************
+//	public List<PvpBattleHistory> getRecentNBattlesForDefenderId(String defenderId, int n) {
+//		List<PvpBattleHistory> recentNBattles = null;
+//		try {
+//			List<String> columnsToSelect = PvpBattleHistoryForClientMapper.getColumnsSelected();
+//			
+//			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
+//			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
+//			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+//
+//			//query db, "values" is not used 
+//			//(its purpose is to hold the values that were supposed to be put
+//			// into a prepared statement)
+//			List<Object> values = new ArrayList<Object>();
+//			boolean preparedStatement = true;
+//
+//			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+//					columnsToSelect, TABLE_NAME, equalityConditions, conditionDelimiter,
+//					values, preparedStatement);
+//
+//			if (n >= 1) {
+//				StringBuilder querySb = new StringBuilder();
+//				querySb.append(query);
+//				querySb.append(" order by ");
+//				querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
+//				querySb.append(" desc limit ");
+//				querySb.append(n);
+//
+//				query = querySb.toString(); 
+//			}
+//			log.info("query=" + query);
+//
+//			recentNBattles = this.jdbcTemplate.query(query, values.toArray(), new PvpBattleHistoryForClientMapper());
+//		} catch (Exception e) {
+//			log.error(String.format(
+//				"error retrieving pvp_battle_history for defenderId=%s", defenderId), e);
+//			recentNBattles = new ArrayList<PvpBattleHistory>();
+//		}
+//		return recentNBattles;
+//	}
+	
+	public List<PvpBattleHistory> getRecentNBattlesForUserId(String userId, int n) {
+		List<PvpBattleHistory> recentNBattles = null;
+		
+		Object[] values = { userId, userId, false, true };
+		String query = String.format(
+			"select * from %s where %s in (?) or %s in (?) and %s=? and %s=?",
+			TABLE_NAME,
+			DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID,
+			DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID,
+			DBConstants.PVP_BATTLE_HISTORY__CANCELLED,
+			DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER);
+		
+		if (n >= 1) {
+			StringBuilder querySb = new StringBuilder();
+			querySb.append(query);
+			querySb.append(" order by ");
+			querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
+			querySb.append(" desc limit ");
+			querySb.append(n);
 
-			recentNBattles = this.jdbcTemplate.query(query, values.toArray(), new PvpBattleHistoryForClientMapper());
+			query = querySb.toString(); 
+		}
+		log.info("query={}", query);
+		try {
+			recentNBattles = this.jdbcTemplate.query(query, values,
+				rowMapper);
 		} catch (Exception e) {
 			log.error(String.format(
-				"error retrieving pvp_battle_history for defenderId=%s", defenderId), e);
+				"error retrieving pvp_battle_history for userId=%s", userId), e);
 			recentNBattles = new ArrayList<PvpBattleHistory>();
 		}
 		return recentNBattles;

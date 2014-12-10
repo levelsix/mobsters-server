@@ -154,7 +154,7 @@ public class ControllerConstants {
 
 
 	//PVP BATTLE HISTORY
-	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
+	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;  
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = {
 		1, 1000, 10000, 100000, 1000000, 2000000000 
