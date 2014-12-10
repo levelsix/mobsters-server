@@ -573,7 +573,8 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
-		String attackerId, List<PvpBattleHistory> historyList)
+		String attackerId, Map<String, User> idsToUsers,
+		List<PvpBattleHistory> historyList)
 	{
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
 		FullUserProto.Builder fupb = FullUserProto.newBuilder();
@@ -582,8 +583,16 @@ public class CreateInfoProtoUtils {
 		
 		for (PvpBattleHistory pbh : historyList)
 		{
+			//no fake users are displayed, but check in case
+			String defenderId = pbh.getDefenderId();
+			if (null == defenderId || defenderId.isEmpty()) {
+				continue;
+			}
+			
+			User defender = idsToUsers.get(defenderId);
+			FullUserProto defenderFup = createFullUserProtoFromUser(defender, null, null);
 			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(
-				fup, pbh);
+				fup, defenderFup, pbh);
 			
 			phpList.add(php);
 		}
@@ -592,11 +601,13 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static PvpHistoryProto createAttackedOthersPvpHistoryProto(
-		FullUserProto fup, PvpBattleHistory info)
+		FullUserProto fup, FullUserProto defenderFup,
+		PvpBattleHistory info)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
 		phpb.setAttacker(fup);
-
+		phpb.setDefender(defenderFup);
+		
 		phpb.setAttackerWon(info.isAttackerWon());
 
 		int defenderCashChange = info.getDefenderCashChange();

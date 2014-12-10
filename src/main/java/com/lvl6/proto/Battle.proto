@@ -74,6 +74,9 @@ message PvpHistoryProto {
 	
 	optional UserPvpLeagueProto defenderBefore = 12; //before the battle
 	optional UserPvpLeagueProto defenderAfter = 13;  //after the battle
+	
+	//only set when the user retrieving history and wants who he attacked
+	optional FullUserProto defender = 14;
 }
 
 //------------------------------------------------------------------------------------------

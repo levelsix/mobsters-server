@@ -97,10 +97,15 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 			return;
 		}
 		
+		if (null != userIds || !userIds.isEmpty()) {
+			//don't need the current user
+			userIds.remove(userId);
+			fillMe.addUserId(userIds);
+		}
+		
 		if (null != attackerIds || !attackerIds.isEmpty()) {
 			//don't need the current user
 			attackerIds.remove(userId);
-			fillMe.addUserId(attackerIds);
 		}
 		
 		//separate history list into ones where this user got attacked,
@@ -153,15 +158,16 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 
 	private void setGotAttackedProtos( StartUpResource useMe )
 	{
+		log.info("setting gotAttackedPvpProtos");
 		Map<String, User> idsToAttackers = useMe.getUserIdsToUsers(attackerIds);
-		log.info(String.format(
-			"idsToAttackers=%s", idsToAttackers));
+//		log.info(String.format(
+//			"idsToAttackers=%s", idsToAttackers));
 
 		attackerIdsList = new ArrayList<String>(idsToAttackers.keySet());
 		selectMonstersForUsers();
 		
-		log.info(String.format(
-			"history monster teams=%s", userIdsToUserMonsters));
+//		log.info(String.format(
+//			"history monster teams=%s", userIdsToUserMonsters));
 		
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
 			MonsterStuffUtils.calculatePvpDrops(userIdsToUserMonsters);
@@ -288,9 +294,11 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		//optional UserPvpLeagueProto defenderBefore = 12; //before the battle
 		//optional UserPvpLeagueProto defenderA
 
+		Map<String, User> idsToUsers = useMe.getUserIdsToUsers(userIds);
+		
 		//create PvpHistory for battles where this user attacked others
 		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-			.createAttackedOthersPvpHistoryProto(userId,
+			.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
 				attackedOthersHistoryList);
 
 		resBuilder.addAllRecentNBattles(historyProtoList);		

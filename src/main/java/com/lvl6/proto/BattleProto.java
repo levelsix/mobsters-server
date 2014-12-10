@@ -2526,6 +2526,31 @@ public final class BattleProto {
      * </pre>
      */
     com.lvl6.proto.UserProto.UserPvpLeagueProtoOrBuilder getDefenderAfterOrBuilder();
+
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    boolean hasDefender();
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    com.lvl6.proto.UserProto.FullUserProto getDefender();
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    com.lvl6.proto.UserProto.FullUserProtoOrBuilder getDefenderOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
@@ -2685,6 +2710,19 @@ public final class BattleProto {
                 defenderAfter_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000800;
+              break;
+            }
+            case 114: {
+              com.lvl6.proto.UserProto.FullUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00001000) == 0x00001000)) {
+                subBuilder = defender_.toBuilder();
+              }
+              defender_ = input.readMessage(com.lvl6.proto.UserProto.FullUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(defender_);
+                defender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00001000;
               break;
             }
           }
@@ -3087,6 +3125,39 @@ public final class BattleProto {
       return defenderAfter_;
     }
 
+    public static final int DEFENDER_FIELD_NUMBER = 14;
+    private com.lvl6.proto.UserProto.FullUserProto defender_;
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    public boolean hasDefender() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    public com.lvl6.proto.UserProto.FullUserProto getDefender() {
+      return defender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+     *
+     * <pre>
+     *only set when the user retrieving history and wants who he attacked
+     * </pre>
+     */
+    public com.lvl6.proto.UserProto.FullUserProtoOrBuilder getDefenderOrBuilder() {
+      return defender_;
+    }
+
     private void initFields() {
       battleEndTime_ = 0L;
       attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -3101,6 +3172,7 @@ public final class BattleProto {
       attackerAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
+      defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3153,6 +3225,9 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeMessage(13, defenderAfter_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeMessage(14, defender_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3214,6 +3289,10 @@ public final class BattleProto {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(13, defenderAfter_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(14, defender_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3330,6 +3409,7 @@ public final class BattleProto {
           getAttackerAfterFieldBuilder();
           getDefenderBeforeFieldBuilder();
           getDefenderAfterFieldBuilder();
+          getDefenderFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3388,6 +3468,12 @@ public final class BattleProto {
           defenderAfterBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00001000);
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
+        } else {
+          defenderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -3493,6 +3579,14 @@ public final class BattleProto {
         } else {
           result.defenderAfter_ = defenderAfterBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        if (defenderBuilder_ == null) {
+          result.defender_ = defender_;
+        } else {
+          result.defender_ = defenderBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3570,6 +3664,9 @@ public final class BattleProto {
         }
         if (other.hasDefenderAfter()) {
           mergeDefenderAfter(other.getDefenderAfter());
+        }
+        if (other.hasDefender()) {
+          mergeDefender(other.getDefender());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4964,6 +5061,158 @@ public final class BattleProto {
         return defenderAfterBuilder_;
       }
 
+      private com.lvl6.proto.UserProto.FullUserProto defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder> defenderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public boolean hasDefender() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.FullUserProto getDefender() {
+        if (defenderBuilder_ == null) {
+          return defender_;
+        } else {
+          return defenderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public Builder setDefender(com.lvl6.proto.UserProto.FullUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defender_ = value;
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public Builder setDefender(
+          com.lvl6.proto.UserProto.FullUserProto.Builder builderForValue) {
+        if (defenderBuilder_ == null) {
+          defender_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public Builder mergeDefender(com.lvl6.proto.UserProto.FullUserProto value) {
+        if (defenderBuilder_ == null) {
+          if (((bitField0_ & 0x00002000) == 0x00002000) &&
+              defender_ != com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance()) {
+            defender_ =
+              com.lvl6.proto.UserProto.FullUserProto.newBuilder(defender_).mergeFrom(value).buildPartial();
+          } else {
+            defender_ = value;
+          }
+          onChanged();
+        } else {
+          defenderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public Builder clearDefender() {
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00002000);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.FullUserProto.Builder getDefenderBuilder() {
+        bitField0_ |= 0x00002000;
+        onChanged();
+        return getDefenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      public com.lvl6.proto.UserProto.FullUserProtoOrBuilder getDefenderOrBuilder() {
+        if (defenderBuilder_ != null) {
+          return defenderBuilder_.getMessageOrBuilder();
+        } else {
+          return defender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.FullUserProto defender = 14;</code>
+       *
+       * <pre>
+       *only set when the user retrieving history and wants who he attacked
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder> 
+          getDefenderFieldBuilder() {
+        if (defenderBuilder_ == null) {
+          defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.FullUserProto, com.lvl6.proto.UserProto.FullUserProto.Builder, com.lvl6.proto.UserProto.FullUserProtoOrBuilder>(
+                  getDefender(),
+                  getParentForChildren(),
+                  isClean());
+          defender_ = null;
+        }
+        return defenderBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpHistoryProto)
     }
 
@@ -5883,7 +6132,7 @@ public final class BattleProto {
       "\022\023\n\013defenderMsg\030\007 \001(\t\"m\n\017PvpMonsterProto" +
       "\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl6.pro",
       "to.MinimumUserMonsterProto\022\030\n\020monsterIdD" +
-      "ropped\030\002 \001(\005\"\250\004\n\017PvpHistoryProto\022\025\n\rbatt" +
+      "ropped\030\002 \001(\005\"\331\004\n\017PvpHistoryProto\022\025\n\rbatt" +
       "leEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022:\n\021attackersMon" +
       "sters\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterP" +
@@ -5897,11 +6146,12 @@ public final class BattleProto {
       "gueProto\022:\n\016defenderBefore\030\014 \001(\0132\".com.l" +
       "vl6.proto.UserPvpLeagueProto\0229\n\rdefender" +
       "After\030\r \001(\0132\".com.lvl6.proto.UserPvpLeag" +
-      "ueProto\"^\n\016PvpLeagueProto\022\020\n\010leagueId\030\001 " +
-      "\001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001" +
-      "(\t\022\023\n\013description\030\005 \001(\t*E\n\014BattleResult\022" +
-      "\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rA" +
-      "TTACKER_FLEE\020\003B\rB\013BattleProto"
+      "ueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.pro" +
+      "to.FullUserProto\"^\n\016PvpLeagueProto\022\020\n\010le" +
+      "agueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgP" +
+      "refix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t*E\n\014Batt" +
+      "leResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_W",
+      "IN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5934,7 +6184,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", });
+        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", });
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
