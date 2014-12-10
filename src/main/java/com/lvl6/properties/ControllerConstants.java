@@ -71,7 +71,7 @@ public class ControllerConstants {
 		52, 2, 21, 53, 6
 	};
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
-		30, 50, 90, 210, 300
+		90, 150, 179, 265, 2280
 	};
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 3620;
