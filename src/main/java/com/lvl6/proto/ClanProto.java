@@ -19003,6 +19003,30 @@ public final class ClanProto {
      */
     com.lvl6.proto.ClanProto.ClanHelpProtoOrBuilder getClanHelpingsOrBuilder(
         int index);
+
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> 
+        getClanAvengingsList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    int getClanAvengingsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+        getClanAvengingsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ClanDataProto}
@@ -19072,6 +19096,14 @@ public final class ClanProto {
               clanHelpings_.add(input.readMessage(com.lvl6.proto.ClanProto.ClanHelpProto.PARSER, extensionRegistry));
               break;
             }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                clanAvengings_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpClanAvengeProto>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              clanAvengings_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpClanAvengeProto.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -19085,6 +19117,9 @@ public final class ClanProto {
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           clanHelpings_ = java.util.Collections.unmodifiableList(clanHelpings_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          clanAvengings_ = java.util.Collections.unmodifiableList(clanAvengings_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -19187,9 +19222,45 @@ public final class ClanProto {
       return clanHelpings_.get(index);
     }
 
+    public static final int CLANAVENGINGS_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_;
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> getClanAvengingsList() {
+      return clanAvengings_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+        getClanAvengingsOrBuilderList() {
+      return clanAvengings_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    public int getClanAvengingsCount() {
+      return clanAvengings_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index) {
+      return clanAvengings_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+        int index) {
+      return clanAvengings_.get(index);
+    }
+
     private void initFields() {
       clanChats_ = java.util.Collections.emptyList();
       clanHelpings_ = java.util.Collections.emptyList();
+      clanAvengings_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -19210,6 +19281,9 @@ public final class ClanProto {
       for (int i = 0; i < clanHelpings_.size(); i++) {
         output.writeMessage(2, clanHelpings_.get(i));
       }
+      for (int i = 0; i < clanAvengings_.size(); i++) {
+        output.writeMessage(3, clanAvengings_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -19226,6 +19300,10 @@ public final class ClanProto {
       for (int i = 0; i < clanHelpings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, clanHelpings_.get(i));
+      }
+      for (int i = 0; i < clanAvengings_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, clanAvengings_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -19338,6 +19416,7 @@ public final class ClanProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getClanChatsFieldBuilder();
           getClanHelpingsFieldBuilder();
+          getClanAvengingsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -19357,6 +19436,12 @@ public final class ClanProto {
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           clanHelpingsBuilder_.clear();
+        }
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          clanAvengingsBuilder_.clear();
         }
         return this;
       }
@@ -19402,6 +19487,15 @@ public final class ClanProto {
           result.clanHelpings_ = clanHelpings_;
         } else {
           result.clanHelpings_ = clanHelpingsBuilder_.build();
+        }
+        if (clanAvengingsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            clanAvengings_ = java.util.Collections.unmodifiableList(clanAvengings_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.clanAvengings_ = clanAvengings_;
+        } else {
+          result.clanAvengings_ = clanAvengingsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -19467,6 +19561,32 @@ public final class ClanProto {
                    getClanHelpingsFieldBuilder() : null;
             } else {
               clanHelpingsBuilder_.addAllMessages(other.clanHelpings_);
+            }
+          }
+        }
+        if (clanAvengingsBuilder_ == null) {
+          if (!other.clanAvengings_.isEmpty()) {
+            if (clanAvengings_.isEmpty()) {
+              clanAvengings_ = other.clanAvengings_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureClanAvengingsIsMutable();
+              clanAvengings_.addAll(other.clanAvengings_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clanAvengings_.isEmpty()) {
+            if (clanAvengingsBuilder_.isEmpty()) {
+              clanAvengingsBuilder_.dispose();
+              clanAvengingsBuilder_ = null;
+              clanAvengings_ = other.clanAvengings_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              clanAvengingsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getClanAvengingsFieldBuilder() : null;
+            } else {
+              clanAvengingsBuilder_.addAllMessages(other.clanAvengings_);
             }
           }
         }
@@ -19977,6 +20097,246 @@ public final class ClanProto {
         return clanHelpingsBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_ =
+        java.util.Collections.emptyList();
+      private void ensureClanAvengingsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          clanAvengings_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpClanAvengeProto>(clanAvengings_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> clanAvengingsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> getClanAvengingsList() {
+        if (clanAvengingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clanAvengings_);
+        } else {
+          return clanAvengingsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public int getClanAvengingsCount() {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.size();
+        } else {
+          return clanAvengingsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index) {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.get(index);
+        } else {
+          return clanAvengingsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder setClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.set(index, value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder setClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder addClanAvengings(com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder addClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(index, value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder addClanAvengings(
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder addClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder addAllClanAvengings(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProto> values) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, clanAvengings_);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder clearClanAvengings() {
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public Builder removeClanAvengings(int index) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.remove(index);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder getClanAvengingsBuilder(
+          int index) {
+        return getClanAvengingsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+          int index) {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.get(index);  } else {
+          return clanAvengingsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+           getClanAvengingsOrBuilderList() {
+        if (clanAvengingsBuilder_ != null) {
+          return clanAvengingsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clanAvengings_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder addClanAvengingsBuilder() {
+        return getClanAvengingsFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder addClanAvengingsBuilder(
+          int index) {
+        return getClanAvengingsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 3;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder> 
+           getClanAvengingsBuilderList() {
+        return getClanAvengingsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+          getClanAvengingsFieldBuilder() {
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder>(
+                  clanAvengings_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          clanAvengings_ = null;
+        }
+        return clanAvengingsBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanDataProto)
     }
 
@@ -20092,93 +20452,95 @@ public final class ClanProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nClan.proto\022\016com.lvl6.proto\032\nChat.proto" +
-      "\032\022MonsterStuff.proto\032\026SharedEnumConfig.p" +
-      "roto\032\017Structure.proto\032\nUser.proto\"\230\001\n\rFu" +
-      "llClanProto\022\020\n\010clanUuid\030\001 \001(\t\022\014\n\004name\030\002 " +
-      "\001(\t\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013description\030\005" +
-      " \001(\t\022\013\n\003tag\030\006 \001(\t\022\035\n\025requestToJoinRequir" +
-      "ed\030\007 \001(\010\022\022\n\nclanIconId\030\010 \001(\005\"|\n\021FullUser" +
-      "ClanProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030" +
-      "\002 \001(\t\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.U" +
-      "serClanStatus\022\023\n\013requestTime\030\004 \001(\003\"Z\n\031Fu",
-      "llClanProtoWithClanSize\022+\n\004clan\030\001 \001(\0132\035." +
-      "com.lvl6.proto.FullClanProto\022\020\n\010clanSize" +
-      "\030\002 \001(\005\"\306\001\n\030MinimumUserProtoForClans\022H\n\025m" +
-      "inUserProtoWithLevel\030\001 \001(\0132).com.lvl6.pr" +
-      "oto.MinimumUserProtoWithLevel\0222\n\nclanSta" +
-      "tus\030\002 \001(\0162\036.com.lvl6.proto.UserClanStatu" +
-      "s\022\030\n\020raidContribution\030\003 \001(\002\022\022\n\nbattlesWo" +
-      "n\030\004 \001(\005\"\275\002\n\rClanRaidProto\022\022\n\nclanRaidId\030" +
-      "\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(\t\022\032\n\022activeTit" +
-      "leImgName\030\003 \001(\t\022\037\n\027activeBackgroundImgNa",
-      "me\030\004 \001(\t\022\031\n\021activeDescription\030\005 \001(\t\022\036\n\026i" +
-      "nactiveMonsterImgName\030\006 \001(\t\022\033\n\023inactiveD" +
-      "escription\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001(\t\022\037" +
-      "\n\027spotlightMonsterImgName\030\t \001(\t\0226\n\nraidS" +
-      "tages\030\n \003(\0132\".com.lvl6.proto.ClanRaidSta" +
-      "geProto\"\372\001\n\022ClanRaidStageProto\022\027\n\017clanRa" +
-      "idStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022\027\n\017d" +
-      "urationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(\005\022\014" +
-      "\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com.lvl" +
-      "6.proto.ClanRaidStageMonsterProto\022A\n\017pos",
-      "sibleRewards\030\014 \003(\0132(.com.lvl6.proto.Clan" +
-      "RaidStageRewardProto\"q\n\031ClanRaidStageMon" +
-      "sterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterId\030\003" +
-      " \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 \001(\005\022" +
-      "\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStageRewardP" +
-      "roto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilReward\030\003 \001" +
-      "(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminCashRewar" +
-      "d\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmonste" +
-      "rId\030\007 \001(\005\"\252\001\n\030PersistentClanEventProto\022\023" +
-      "\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031",
-      ".com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tsta" +
-      "rtHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001" +
-      "(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\275\001\n PersistentCla" +
-      "nEventClanInfoProto\022\020\n\010clanUuid\030\001 \001(\t\022\023\n" +
-      "\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027" +
-      "\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartTim" +
-      "e\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonsterS" +
-      "tartTime\030\007 \001(\003\"\323\001\n PersistentClanEventUs" +
-      "erInfoProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUui" +
-      "d\030\002 \001(\t\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005",
-      "\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(" +
-      "\005\022A\n\014userMonsters\030\t \001(\0132+.com.lvl6.proto" +
-      ".UserCurrentMonsterTeamProto\"\326\001\n\"Persist" +
-      "entClanEventUserRewardProto\022\022\n\nrewardUui" +
-      "d\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\ncrsEndTime\030" +
-      "\004 \001(\003\0228\n\014resourceType\030\005 \001(\0162\034.com.lvl6.p" +
-      "roto.ResourceType:\004CASH\022\024\n\014staticDataId\030" +
-      "\006 \001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n\014timeRedeemed\030" +
-      "\t \001(\003\"\346\001\n(PersistentClanEventRaidStageHi" +
-      "storyProto\022C\n\007rewards\030\001 \003(\01322.com.lvl6.p",
-      "roto.PersistentClanEventUserRewardProto\022" +
-      "\017\n\007eventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017" +
-      "clanRaidStageId\030\004 \001(\005\022\022\n\ncrsEndTime\030\005 \001(" +
-      "\003\022\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007stageHp\030\007 \001(\005\"Y" +
-      "\n#PersistentClanEventRaidHistoryProto\022\020\n" +
-      "\010userUuid\030\001 \001(\t\022\r\n\005crDmg\030\002 \001(\005\022\021\n\tclanCr" +
-      "Dmg\030\003 \001(\005\"I\n\rClanIconProto\022\022\n\nclanIconId" +
-      "\030\001 \001(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n\013isAvailable\030\003" +
-      " \001(\010\"\222\002\n\rClanHelpProto\022\024\n\014clanHelpUuid\030\001" +
-      " \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022-\n\003mup\030\003 \001(\0132 .co",
-      "m.lvl6.proto.MinimumUserProto\022\024\n\014userDat" +
-      "aUuid\030\004 \001(\t\0220\n\010helpType\030\005 \001(\0162\036.com.lvl6" +
-      ".proto.GameActionType\022\025\n\rtimeRequested\030\006" +
-      " \001(\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\023\n\013helperUuids\030" +
-      "\010 \003(\t\022\014\n\004open\030\t \001(\010\022\024\n\014staticDataId\030\n \001(" +
-      "\005\"s\n\023ClanHelpNoticeProto\0220\n\010helpType\030\001 \001" +
-      "(\0162\036.com.lvl6.proto.GameActionType\022\024\n\014us" +
-      "erDataUuid\030\002 \001(\t\022\024\n\014staticDataId\030\003 \001(\005\"t" +
-      "\n\017ClanInviteProto\022\022\n\ninviteUuid\030\001 \001(\t\022\020\n" +
-      "\010userUuid\030\002 \001(\t\022\023\n\013inviterUuid\030\003 \001(\t\022\020\n\010",
-      "clanUuid\030\004 \001(\t\022\024\n\014timeOfInvite\030\005 \001(\003\"~\n\r" +
-      "ClanDataProto\0228\n\tclanChats\030\001 \003(\0132%.com.l" +
-      "vl6.proto.GroupChatMessageProto\0223\n\014clanH" +
-      "elpings\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpP" +
-      "roto*X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJU" +
-      "NIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016" +
-      "\n\nREQUESTING\020\nB\013B\tClanProto"
+      "\n\nClan.proto\022\016com.lvl6.proto\032\014Battle.pro" +
+      "to\032\nChat.proto\032\022MonsterStuff.proto\032\026Shar" +
+      "edEnumConfig.proto\032\017Structure.proto\032\nUse" +
+      "r.proto\"\230\001\n\rFullClanProto\022\020\n\010clanUuid\030\001 " +
+      "\001(\t\022\014\n\004name\030\002 \001(\t\022\022\n\ncreateTime\030\004 \001(\003\022\023\n" +
+      "\013description\030\005 \001(\t\022\013\n\003tag\030\006 \001(\t\022\035\n\025reque" +
+      "stToJoinRequired\030\007 \001(\010\022\022\n\nclanIconId\030\010 \001" +
+      "(\005\"|\n\021FullUserClanProto\022\020\n\010userUuid\030\001 \001(" +
+      "\t\022\020\n\010clanUuid\030\002 \001(\t\022.\n\006status\030\003 \001(\0162\036.co" +
+      "m.lvl6.proto.UserClanStatus\022\023\n\013requestTi",
+      "me\030\004 \001(\003\"Z\n\031FullClanProtoWithClanSize\022+\n" +
+      "\004clan\030\001 \001(\0132\035.com.lvl6.proto.FullClanPro" +
+      "to\022\020\n\010clanSize\030\002 \001(\005\"\306\001\n\030MinimumUserProt" +
+      "oForClans\022H\n\025minUserProtoWithLevel\030\001 \001(\013" +
+      "2).com.lvl6.proto.MinimumUserProtoWithLe" +
+      "vel\0222\n\nclanStatus\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".UserClanStatus\022\030\n\020raidContribution\030\003 \001(" +
+      "\002\022\022\n\nbattlesWon\030\004 \001(\005\"\275\002\n\rClanRaidProto\022" +
+      "\022\n\nclanRaidId\030\001 \001(\005\022\024\n\014clanRaidName\030\002 \001(" +
+      "\t\022\032\n\022activeTitleImgName\030\003 \001(\t\022\037\n\027activeB",
+      "ackgroundImgName\030\004 \001(\t\022\031\n\021activeDescript" +
+      "ion\030\005 \001(\t\022\036\n\026inactiveMonsterImgName\030\006 \001(" +
+      "\t\022\033\n\023inactiveDescription\030\007 \001(\t\022\024\n\014dialog" +
+      "ueText\030\010 \001(\t\022\037\n\027spotlightMonsterImgName\030" +
+      "\t \001(\t\0226\n\nraidStages\030\n \003(\0132\".com.lvl6.pro" +
+      "to.ClanRaidStageProto\"\372\001\n\022ClanRaidStageP" +
+      "roto\022\027\n\017clanRaidStageId\030\001 \001(\005\022\022\n\nclanRai" +
+      "dId\030\002 \001(\005\022\027\n\017durationMinutes\030\003 \001(\005\022\020\n\010st" +
+      "ageNum\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022;\n\010monsters\030\013" +
+      " \003(\0132).com.lvl6.proto.ClanRaidStageMonst",
+      "erProto\022A\n\017possibleRewards\030\014 \003(\0132(.com.l" +
+      "vl6.proto.ClanRaidStageRewardProto\"q\n\031Cl" +
+      "anRaidStageMonsterProto\022\016\n\006crsmId\030\001 \001(\005\022" +
+      "\021\n\tmonsterId\030\003 \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n" +
+      "\006minDmg\030\005 \001(\005\022\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRa" +
+      "idStageRewardProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014mi" +
+      "nOilReward\030\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025" +
+      "\n\rminCashReward\030\005 \001(\005\022\025\n\rmaxCashReward\030\006" +
+      " \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252\001\n\030PersistentCl" +
+      "anEventProto\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tday",
+      "OfWeek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:" +
+      "\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurat" +
+      "ionMinutes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\275\001\n" +
+      " PersistentClanEventClanInfoProto\022\020\n\010cla" +
+      "nUuid\030\001 \001(\t\022\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclan" +
+      "RaidId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n" +
+      "\016stageStartTime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n" +
+      "\025stageMonsterStartTime\030\007 \001(\003\"\323\001\n Persist" +
+      "entClanEventUserInfoProto\022\020\n\010userUuid\030\001 " +
+      "\001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\014\n\004crId\030\003 \001(\005\022\021\n\tc",
+      "rDmgDone\030\004 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013cr" +
+      "smDmgDone\030\010 \001(\005\022A\n\014userMonsters\030\t \001(\0132+." +
+      "com.lvl6.proto.UserCurrentMonsterTeamPro" +
+      "to\"\326\001\n\"PersistentClanEventUserRewardProt" +
+      "o\022\022\n\nrewardUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022" +
+      "\022\n\ncrsEndTime\030\004 \001(\003\0228\n\014resourceType\030\005 \001(" +
+      "\0162\034.com.lvl6.proto.ResourceType:\004CASH\022\024\n" +
+      "\014staticDataId\030\006 \001(\005\022\020\n\010quantity\030\007 \001(\005\022\024\n" +
+      "\014timeRedeemed\030\t \001(\003\"\346\001\n(PersistentClanEv" +
+      "entRaidStageHistoryProto\022C\n\007rewards\030\001 \003(",
+      "\01322.com.lvl6.proto.PersistentClanEventUs" +
+      "erRewardProto\022\017\n\007eventId\030\002 \001(\005\022\022\n\nclanRa" +
+      "idId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\022\n\nc" +
+      "rsEndTime\030\005 \001(\003\022\022\n\ncrsDmgDone\030\006 \001(\005\022\017\n\007s" +
+      "tageHp\030\007 \001(\005\"Y\n#PersistentClanEventRaidH" +
+      "istoryProto\022\020\n\010userUuid\030\001 \001(\t\022\r\n\005crDmg\030\002" +
+      " \001(\005\022\021\n\tclanCrDmg\030\003 \001(\005\"I\n\rClanIconProto" +
+      "\022\022\n\nclanIconId\030\001 \001(\005\022\017\n\007imgName\030\002 \001(\t\022\023\n" +
+      "\013isAvailable\030\003 \001(\010\"\222\002\n\rClanHelpProto\022\024\n\014" +
+      "clanHelpUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022-\n\003",
+      "mup\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\024\n\014userDataUuid\030\004 \001(\t\0220\n\010helpType\030\005 " +
+      "\001(\0162\036.com.lvl6.proto.GameActionType\022\025\n\rt" +
+      "imeRequested\030\006 \001(\003\022\022\n\nmaxHelpers\030\007 \001(\005\022\023" +
+      "\n\013helperUuids\030\010 \003(\t\022\014\n\004open\030\t \001(\010\022\024\n\014sta" +
+      "ticDataId\030\n \001(\005\"s\n\023ClanHelpNoticeProto\0220" +
+      "\n\010helpType\030\001 \001(\0162\036.com.lvl6.proto.GameAc" +
+      "tionType\022\024\n\014userDataUuid\030\002 \001(\t\022\024\n\014static" +
+      "DataId\030\003 \001(\005\"t\n\017ClanInviteProto\022\022\n\ninvit" +
+      "eUuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\023\n\013inviter",
+      "Uuid\030\003 \001(\t\022\020\n\010clanUuid\030\004 \001(\t\022\024\n\014timeOfIn" +
+      "vite\030\005 \001(\003\"\271\001\n\rClanDataProto\0228\n\tclanChat" +
+      "s\030\001 \003(\0132%.com.lvl6.proto.GroupChatMessag" +
+      "eProto\0223\n\014clanHelpings\030\002 \003(\0132\035.com.lvl6." +
+      "proto.ClanHelpProto\0229\n\rclanAvengings\030\003 \003" +
+      "(\0132\".com.lvl6.proto.PvpClanAvengeProto*X" +
+      "\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_L" +
+      "EADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQU" +
+      "ESTING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20191,6 +20553,7 @@ public final class ClanProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
@@ -20310,7 +20673,8 @@ public final class ClanProto {
     internal_static_com_lvl6_proto_ClanDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_ClanDataProto_descriptor,
-        new java.lang.String[] { "ClanChats", "ClanHelpings", });
+        new java.lang.String[] { "ClanChats", "ClanHelpings", "ClanAvengings", });
+    com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();

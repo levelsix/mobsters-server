@@ -1,6 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
-//import "Battle.proto";
+import "Battle.proto";
 import "Chat.proto";
 import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
@@ -239,4 +239,5 @@ message ClanInviteProto {
 message ClanDataProto {
 	repeated GroupChatMessageProto clanChats = 1;
 	repeated ClanHelpProto clanHelpings = 2;
+	repeated PvpClanAvengeProto clanAvengings = 3;
 }
