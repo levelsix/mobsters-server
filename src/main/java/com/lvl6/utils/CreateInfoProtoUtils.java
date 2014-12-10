@@ -93,6 +93,7 @@ import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
@@ -497,44 +498,10 @@ public class CreateInfoProtoUtils {
 				createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
 			phpb.addAllAttackersMonsters(attackerMonsters);
 		}
-
-		phpb.setAttackerWon(info.isAttackerWon());
-
-		int defenderCashChange = info.getDefenderCashChange();
-		phpb.setDefenderCashChange(defenderCashChange);
-		int defenderOilChange = info.getDefenderOilChange();
-		phpb.setDefenderOilChange(defenderOilChange);
-
-		phpb.setExactedRevenge(info.isExactedRevenge());
-
 		phpb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
-		Date endDate = info.getBattleEndTime();
-		//endDate should not be null, it's the primary key
-		phpb.setBattleEndTime(endDate.getTime());
-
-
-		UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
-			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
-			info.getAttackerEloBefore(), false);
-		phpb.setAttackerBefore(attackerBefore);
-		UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
-			info.getAttackerCurLeague(), info.getAttackerCurRank(),
-			info.getAttackerEloAfter(), false);
-		phpb.setAttackerAfter(attackerAfter);
-
-		UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
-			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
-			info.getDefenderEloBefore(), false);
-		phpb.setDefenderBefore(defenderBefore);
-		UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
-			info.getDefenderCurLeague(), info.getDefenderCurRank(),
-			info.getDefenderEloAfter(), false);
-		phpb.setDefenderAfter(defenderAfter);
-
-//		phpb.setClanAvenged(info.isClanAvenged());
-		
+		modifyPvpHistoryProto(phpb, info);
 		return phpb.build();
 	}
 
@@ -608,6 +575,11 @@ public class CreateInfoProtoUtils {
 		phpb.setAttacker(fup);
 		phpb.setDefender(defenderFup);
 		
+		modifyPvpHistoryProto(phpb, info);
+		return phpb.build();
+	}
+
+	private static void modifyPvpHistoryProto(Builder phpb, PvpBattleHistory info) {
 		phpb.setAttackerWon(info.isAttackerWon());
 
 		int defenderCashChange = info.getDefenderCashChange();
@@ -615,10 +587,11 @@ public class CreateInfoProtoUtils {
 		int defenderOilChange = info.getDefenderOilChange();
 		phpb.setDefenderOilChange(defenderOilChange);
 
+		phpb.setExactedRevenge(info.isExactedRevenge());
+
 		Date endDate = info.getBattleEndTime();
 		//endDate should not be null, it's the primary key
 		phpb.setBattleEndTime(endDate.getTime());
-
 
 		UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
 			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
@@ -638,11 +611,14 @@ public class CreateInfoProtoUtils {
 			info.getDefenderEloAfter(), false);
 		phpb.setDefenderAfter(defenderAfter);
 
-//		phpb.setClanAvenged(info.isClanAvenged());
+		int attackerCashChange = info.getAttackerCashChange();
+		phpb.setAttackerCashChange(attackerCashChange);
+		int attackerOilChange = info.getAttackerOilChange();
+		phpb.setAttackerOilChange(attackerOilChange);
 		
-		return phpb.build();
+//		phpb.setClanAvenged(info.isClanAvenged());
 	}
-
+	
 	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
 		PvpLeagueProto.Builder plpb = PvpLeagueProto.newBuilder();
 

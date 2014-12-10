@@ -2551,6 +2551,24 @@ public final class BattleProto {
      * </pre>
      */
     com.lvl6.proto.UserProto.FullUserProtoOrBuilder getDefenderOrBuilder();
+
+    /**
+     * <code>optional int32 attackerCashChange = 15;</code>
+     */
+    boolean hasAttackerCashChange();
+    /**
+     * <code>optional int32 attackerCashChange = 15;</code>
+     */
+    int getAttackerCashChange();
+
+    /**
+     * <code>optional int32 attackerOilChange = 16;</code>
+     */
+    boolean hasAttackerOilChange();
+    /**
+     * <code>optional int32 attackerOilChange = 16;</code>
+     */
+    int getAttackerOilChange();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
@@ -2723,6 +2741,16 @@ public final class BattleProto {
                 defender_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00001000;
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00002000;
+              attackerCashChange_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00004000;
+              attackerOilChange_ = input.readInt32();
               break;
             }
           }
@@ -3158,6 +3186,36 @@ public final class BattleProto {
       return defender_;
     }
 
+    public static final int ATTACKERCASHCHANGE_FIELD_NUMBER = 15;
+    private int attackerCashChange_;
+    /**
+     * <code>optional int32 attackerCashChange = 15;</code>
+     */
+    public boolean hasAttackerCashChange() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional int32 attackerCashChange = 15;</code>
+     */
+    public int getAttackerCashChange() {
+      return attackerCashChange_;
+    }
+
+    public static final int ATTACKEROILCHANGE_FIELD_NUMBER = 16;
+    private int attackerOilChange_;
+    /**
+     * <code>optional int32 attackerOilChange = 16;</code>
+     */
+    public boolean hasAttackerOilChange() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional int32 attackerOilChange = 16;</code>
+     */
+    public int getAttackerOilChange() {
+      return attackerOilChange_;
+    }
+
     private void initFields() {
       battleEndTime_ = 0L;
       attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -3173,6 +3231,8 @@ public final class BattleProto {
       defenderBefore_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defenderAfter_ = com.lvl6.proto.UserProto.UserPvpLeagueProto.getDefaultInstance();
       defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
+      attackerCashChange_ = 0;
+      attackerOilChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3228,6 +3288,12 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeMessage(14, defender_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(15, attackerCashChange_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(16, attackerOilChange_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3293,6 +3359,14 @@ public final class BattleProto {
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(14, defender_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, attackerCashChange_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(16, attackerOilChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3474,6 +3548,10 @@ public final class BattleProto {
           defenderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00002000);
+        attackerCashChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        attackerOilChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00008000);
         return this;
       }
 
@@ -3587,6 +3665,14 @@ public final class BattleProto {
         } else {
           result.defender_ = defenderBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.attackerCashChange_ = attackerCashChange_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.attackerOilChange_ = attackerOilChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3667,6 +3753,12 @@ public final class BattleProto {
         }
         if (other.hasDefender()) {
           mergeDefender(other.getDefender());
+        }
+        if (other.hasAttackerCashChange()) {
+          setAttackerCashChange(other.getAttackerCashChange());
+        }
+        if (other.hasAttackerOilChange()) {
+          setAttackerOilChange(other.getAttackerOilChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5213,6 +5305,70 @@ public final class BattleProto {
         return defenderBuilder_;
       }
 
+      private int attackerCashChange_ ;
+      /**
+       * <code>optional int32 attackerCashChange = 15;</code>
+       */
+      public boolean hasAttackerCashChange() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional int32 attackerCashChange = 15;</code>
+       */
+      public int getAttackerCashChange() {
+        return attackerCashChange_;
+      }
+      /**
+       * <code>optional int32 attackerCashChange = 15;</code>
+       */
+      public Builder setAttackerCashChange(int value) {
+        bitField0_ |= 0x00004000;
+        attackerCashChange_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 attackerCashChange = 15;</code>
+       */
+      public Builder clearAttackerCashChange() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        attackerCashChange_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int attackerOilChange_ ;
+      /**
+       * <code>optional int32 attackerOilChange = 16;</code>
+       */
+      public boolean hasAttackerOilChange() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional int32 attackerOilChange = 16;</code>
+       */
+      public int getAttackerOilChange() {
+        return attackerOilChange_;
+      }
+      /**
+       * <code>optional int32 attackerOilChange = 16;</code>
+       */
+      public Builder setAttackerOilChange(int value) {
+        bitField0_ |= 0x00008000;
+        attackerOilChange_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 attackerOilChange = 16;</code>
+       */
+      public Builder clearAttackerOilChange() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        attackerOilChange_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpHistoryProto)
     }
 
@@ -6132,7 +6288,7 @@ public final class BattleProto {
       "\022\023\n\013defenderMsg\030\007 \001(\t\"m\n\017PvpMonsterProto" +
       "\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl6.pro",
       "to.MinimumUserMonsterProto\022\030\n\020monsterIdD" +
-      "ropped\030\002 \001(\005\"\331\004\n\017PvpHistoryProto\022\025\n\rbatt" +
+      "ropped\030\002 \001(\005\"\220\005\n\017PvpHistoryProto\022\025\n\rbatt" +
       "leEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022:\n\021attackersMon" +
       "sters\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterP" +
@@ -6147,11 +6303,13 @@ public final class BattleProto {
       "vl6.proto.UserPvpLeagueProto\0229\n\rdefender" +
       "After\030\r \001(\0132\".com.lvl6.proto.UserPvpLeag" +
       "ueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.pro" +
-      "to.FullUserProto\"^\n\016PvpLeagueProto\022\020\n\010le" +
-      "agueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgP" +
-      "refix\030\003 \001(\t\022\023\n\013description\030\005 \001(\t*E\n\014Batt" +
-      "leResult\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_W",
-      "IN\020\002\022\021\n\rATTACKER_FLEE\020\003B\rB\013BattleProto"
+      "to.FullUserProto\022\032\n\022attackerCashChange\030\017" +
+      " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\"^\n\016PvpLe" +
+      "agueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueNam" +
+      "e\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013descriptio",
+      "n\030\005 \001(\t*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020" +
+      "\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\r" +
+      "B\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6184,7 +6342,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", });
+        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", });
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new

@@ -77,6 +77,8 @@ message PvpHistoryProto {
 	
 	//only set when the user retrieving history and wants who he attacked
 	optional FullUserProto defender = 14;
+	optional int32 attackerCashChange = 15;
+	optional int32 attackerOilChange = 16;
 }
 
 //------------------------------------------------------------------------------------------
