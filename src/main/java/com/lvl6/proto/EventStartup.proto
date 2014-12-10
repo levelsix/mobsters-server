@@ -279,6 +279,9 @@ message StartupResponseProto {
 			optional int32 pvpRequiredMinLvl = 4;
 			
 			optional int32 defendingMsgCharLimit = 5;
+			
+			optional int32 beginAvengingTimeLimitMins = 6;
+			optional int32 requestClanToAvengeTimeLimitMins = 7;
 		}
 		message SpeedUpConstantProto {
 			optional int32 seconds = 1;

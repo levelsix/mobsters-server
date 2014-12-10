@@ -2569,6 +2569,15 @@ public final class BattleProto {
      * <code>optional int32 attackerOilChange = 16;</code>
      */
     int getAttackerOilChange();
+
+    /**
+     * <code>optional bool clanAvenged = 17;</code>
+     */
+    boolean hasClanAvenged();
+    /**
+     * <code>optional bool clanAvenged = 17;</code>
+     */
+    boolean getClanAvenged();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
@@ -2751,6 +2760,11 @@ public final class BattleProto {
             case 128: {
               bitField0_ |= 0x00004000;
               attackerOilChange_ = input.readInt32();
+              break;
+            }
+            case 136: {
+              bitField0_ |= 0x00008000;
+              clanAvenged_ = input.readBool();
               break;
             }
           }
@@ -3216,6 +3230,21 @@ public final class BattleProto {
       return attackerOilChange_;
     }
 
+    public static final int CLANAVENGED_FIELD_NUMBER = 17;
+    private boolean clanAvenged_;
+    /**
+     * <code>optional bool clanAvenged = 17;</code>
+     */
+    public boolean hasClanAvenged() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional bool clanAvenged = 17;</code>
+     */
+    public boolean getClanAvenged() {
+      return clanAvenged_;
+    }
+
     private void initFields() {
       battleEndTime_ = 0L;
       attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -3233,6 +3262,7 @@ public final class BattleProto {
       defender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
       attackerCashChange_ = 0;
       attackerOilChange_ = 0;
+      clanAvenged_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3294,6 +3324,9 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeInt32(16, attackerOilChange_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeBool(17, clanAvenged_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3367,6 +3400,10 @@ public final class BattleProto {
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(16, attackerOilChange_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(17, clanAvenged_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3552,6 +3589,8 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00004000);
         attackerOilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
+        clanAvenged_ = false;
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -3673,6 +3712,10 @@ public final class BattleProto {
           to_bitField0_ |= 0x00004000;
         }
         result.attackerOilChange_ = attackerOilChange_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.clanAvenged_ = clanAvenged_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3759,6 +3802,9 @@ public final class BattleProto {
         }
         if (other.hasAttackerOilChange()) {
           setAttackerOilChange(other.getAttackerOilChange());
+        }
+        if (other.hasClanAvenged()) {
+          setClanAvenged(other.getClanAvenged());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5369,6 +5415,38 @@ public final class BattleProto {
         return this;
       }
 
+      private boolean clanAvenged_ ;
+      /**
+       * <code>optional bool clanAvenged = 17;</code>
+       */
+      public boolean hasClanAvenged() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>optional bool clanAvenged = 17;</code>
+       */
+      public boolean getClanAvenged() {
+        return clanAvenged_;
+      }
+      /**
+       * <code>optional bool clanAvenged = 17;</code>
+       */
+      public Builder setClanAvenged(boolean value) {
+        bitField0_ |= 0x00010000;
+        clanAvenged_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool clanAvenged = 17;</code>
+       */
+      public Builder clearClanAvenged() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        clanAvenged_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpHistoryProto)
     }
 
@@ -6248,6 +6326,2270 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpLeagueProto)
   }
 
+  public interface PvpClanAvengeProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpClanAvengeProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    boolean hasClanAvengeUuid();
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    java.lang.String getClanAvengeUuid();
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getClanAvengeUuidBytes();
+
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> 
+        getUsersAvengingList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpUserClanAvengeProto getUsersAvenging(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    int getUsersAvengingCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder> 
+        getUsersAvengingOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder getUsersAvengingOrBuilder(
+        int index);
+
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    boolean hasAttackerUuid();
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    java.lang.String getAttackerUuid();
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getAttackerUuidBytes();
+
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    boolean hasDefenderUuid();
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    java.lang.String getDefenderUuid();
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getDefenderUuidBytes();
+
+    /**
+     * <code>optional int64 battleEndTime = 5;</code>
+     */
+    boolean hasBattleEndTime();
+    /**
+     * <code>optional int64 battleEndTime = 5;</code>
+     */
+    long getBattleEndTime();
+
+    /**
+     * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *TODO: DBConstants, change there too
+     * </pre>
+     */
+    boolean hasAvengeRequestTime();
+    /**
+     * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *TODO: DBConstants, change there too
+     * </pre>
+     */
+    long getAvengeRequestTime();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.PvpClanAvengeProto}
+   *
+   * <pre>
+   *send every column in clan_avenge table
+   *send PvpUserClanAvengeProto
+   * </pre>
+   */
+  public static final class PvpClanAvengeProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpClanAvengeProto)
+      PvpClanAvengeProtoOrBuilder {
+    // Use PvpClanAvengeProto.newBuilder() to construct.
+    private PvpClanAvengeProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PvpClanAvengeProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PvpClanAvengeProto defaultInstance;
+    public static PvpClanAvengeProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PvpClanAvengeProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PvpClanAvengeProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              clanAvengeUuid_ = bs;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                usersAvenging_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              usersAvenging_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              attackerUuid_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              defenderUuid_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              battleEndTime_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              avengeRequestTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          usersAvenging_ = java.util.Collections.unmodifiableList(usersAvenging_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.BattleProto.PvpClanAvengeProto.class, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PvpClanAvengeProto> PARSER =
+        new com.google.protobuf.AbstractParser<PvpClanAvengeProto>() {
+      public PvpClanAvengeProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PvpClanAvengeProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PvpClanAvengeProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int CLANAVENGEUUID_FIELD_NUMBER = 1;
+    private java.lang.Object clanAvengeUuid_;
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    public boolean hasClanAvengeUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    public java.lang.String getClanAvengeUuid() {
+      java.lang.Object ref = clanAvengeUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          clanAvengeUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clanAvengeUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClanAvengeUuidBytes() {
+      java.lang.Object ref = clanAvengeUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clanAvengeUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERSAVENGING_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> usersAvenging_;
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> getUsersAvengingList() {
+      return usersAvenging_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder> 
+        getUsersAvengingOrBuilderList() {
+      return usersAvenging_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    public int getUsersAvengingCount() {
+      return usersAvenging_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto getUsersAvenging(int index) {
+      return usersAvenging_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder getUsersAvengingOrBuilder(
+        int index) {
+      return usersAvenging_.get(index);
+    }
+
+    public static final int ATTACKERUUID_FIELD_NUMBER = 3;
+    private java.lang.Object attackerUuid_;
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    public boolean hasAttackerUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    public java.lang.String getAttackerUuid() {
+      java.lang.Object ref = attackerUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          attackerUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string attackerUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAttackerUuidBytes() {
+      java.lang.Object ref = attackerUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        attackerUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DEFENDERUUID_FIELD_NUMBER = 4;
+    private java.lang.Object defenderUuid_;
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    public boolean hasDefenderUuid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    public java.lang.String getDefenderUuid() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          defenderUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string defenderUuid = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDefenderUuidBytes() {
+      java.lang.Object ref = defenderUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        defenderUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BATTLEENDTIME_FIELD_NUMBER = 5;
+    private long battleEndTime_;
+    /**
+     * <code>optional int64 battleEndTime = 5;</code>
+     */
+    public boolean hasBattleEndTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 battleEndTime = 5;</code>
+     */
+    public long getBattleEndTime() {
+      return battleEndTime_;
+    }
+
+    public static final int AVENGEREQUESTTIME_FIELD_NUMBER = 6;
+    private long avengeRequestTime_;
+    /**
+     * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *TODO: DBConstants, change there too
+     * </pre>
+     */
+    public boolean hasAvengeRequestTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *TODO: DBConstants, change there too
+     * </pre>
+     */
+    public long getAvengeRequestTime() {
+      return avengeRequestTime_;
+    }
+
+    private void initFields() {
+      clanAvengeUuid_ = "";
+      usersAvenging_ = java.util.Collections.emptyList();
+      attackerUuid_ = "";
+      defenderUuid_ = "";
+      battleEndTime_ = 0L;
+      avengeRequestTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getClanAvengeUuidBytes());
+      }
+      for (int i = 0; i < usersAvenging_.size(); i++) {
+        output.writeMessage(2, usersAvenging_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(3, getAttackerUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(4, getDefenderUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(5, battleEndTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(6, avengeRequestTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getClanAvengeUuidBytes());
+      }
+      for (int i = 0; i < usersAvenging_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, usersAvenging_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getAttackerUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getDefenderUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, battleEndTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, avengeRequestTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpClanAvengeProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BattleProto.PvpClanAvengeProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.PvpClanAvengeProto}
+     *
+     * <pre>
+     *send every column in clan_avenge table
+     *send PvpUserClanAvengeProto
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpClanAvengeProto)
+        com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.BattleProto.PvpClanAvengeProto.class, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.BattleProto.PvpClanAvengeProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUsersAvengingFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        clanAvengeUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (usersAvengingBuilder_ == null) {
+          usersAvenging_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          usersAvengingBuilder_.clear();
+        }
+        attackerUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        defenderUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        battleEndTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        avengeRequestTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
+      }
+
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto build() {
+        com.lvl6.proto.BattleProto.PvpClanAvengeProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto buildPartial() {
+        com.lvl6.proto.BattleProto.PvpClanAvengeProto result = new com.lvl6.proto.BattleProto.PvpClanAvengeProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clanAvengeUuid_ = clanAvengeUuid_;
+        if (usersAvengingBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            usersAvenging_ = java.util.Collections.unmodifiableList(usersAvenging_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.usersAvenging_ = usersAvenging_;
+        } else {
+          result.usersAvenging_ = usersAvengingBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.attackerUuid_ = attackerUuid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.defenderUuid_ = defenderUuid_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.battleEndTime_ = battleEndTime_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.avengeRequestTime_ = avengeRequestTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BattleProto.PvpClanAvengeProto) {
+          return mergeFrom((com.lvl6.proto.BattleProto.PvpClanAvengeProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.BattleProto.PvpClanAvengeProto other) {
+        if (other == com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance()) return this;
+        if (other.hasClanAvengeUuid()) {
+          bitField0_ |= 0x00000001;
+          clanAvengeUuid_ = other.clanAvengeUuid_;
+          onChanged();
+        }
+        if (usersAvengingBuilder_ == null) {
+          if (!other.usersAvenging_.isEmpty()) {
+            if (usersAvenging_.isEmpty()) {
+              usersAvenging_ = other.usersAvenging_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUsersAvengingIsMutable();
+              usersAvenging_.addAll(other.usersAvenging_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.usersAvenging_.isEmpty()) {
+            if (usersAvengingBuilder_.isEmpty()) {
+              usersAvengingBuilder_.dispose();
+              usersAvengingBuilder_ = null;
+              usersAvenging_ = other.usersAvenging_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              usersAvengingBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUsersAvengingFieldBuilder() : null;
+            } else {
+              usersAvengingBuilder_.addAllMessages(other.usersAvenging_);
+            }
+          }
+        }
+        if (other.hasAttackerUuid()) {
+          bitField0_ |= 0x00000004;
+          attackerUuid_ = other.attackerUuid_;
+          onChanged();
+        }
+        if (other.hasDefenderUuid()) {
+          bitField0_ |= 0x00000008;
+          defenderUuid_ = other.defenderUuid_;
+          onChanged();
+        }
+        if (other.hasBattleEndTime()) {
+          setBattleEndTime(other.getBattleEndTime());
+        }
+        if (other.hasAvengeRequestTime()) {
+          setAvengeRequestTime(other.getAvengeRequestTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.BattleProto.PvpClanAvengeProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.BattleProto.PvpClanAvengeProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object clanAvengeUuid_ = "";
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public boolean hasClanAvengeUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public java.lang.String getClanAvengeUuid() {
+        java.lang.Object ref = clanAvengeUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clanAvengeUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClanAvengeUuidBytes() {
+        java.lang.Object ref = clanAvengeUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clanAvengeUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public Builder setClanAvengeUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        clanAvengeUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public Builder clearClanAvengeUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanAvengeUuid_ = getDefaultInstance().getClanAvengeUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 1;</code>
+       */
+      public Builder setClanAvengeUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        clanAvengeUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> usersAvenging_ =
+        java.util.Collections.emptyList();
+      private void ensureUsersAvengingIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          usersAvenging_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto>(usersAvenging_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpUserClanAvengeProto, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder> usersAvengingBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> getUsersAvengingList() {
+        if (usersAvengingBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(usersAvenging_);
+        } else {
+          return usersAvengingBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public int getUsersAvengingCount() {
+        if (usersAvengingBuilder_ == null) {
+          return usersAvenging_.size();
+        } else {
+          return usersAvengingBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto getUsersAvenging(int index) {
+        if (usersAvengingBuilder_ == null) {
+          return usersAvenging_.get(index);
+        } else {
+          return usersAvengingBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder setUsersAvenging(
+          int index, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto value) {
+        if (usersAvengingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.set(index, value);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder setUsersAvenging(
+          int index, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder builderForValue) {
+        if (usersAvengingBuilder_ == null) {
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          usersAvengingBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder addUsersAvenging(com.lvl6.proto.BattleProto.PvpUserClanAvengeProto value) {
+        if (usersAvengingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.add(value);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder addUsersAvenging(
+          int index, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto value) {
+        if (usersAvengingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.add(index, value);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder addUsersAvenging(
+          com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder builderForValue) {
+        if (usersAvengingBuilder_ == null) {
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.add(builderForValue.build());
+          onChanged();
+        } else {
+          usersAvengingBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder addUsersAvenging(
+          int index, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder builderForValue) {
+        if (usersAvengingBuilder_ == null) {
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          usersAvengingBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder addAllUsersAvenging(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpUserClanAvengeProto> values) {
+        if (usersAvengingBuilder_ == null) {
+          ensureUsersAvengingIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, usersAvenging_);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder clearUsersAvenging() {
+        if (usersAvengingBuilder_ == null) {
+          usersAvenging_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public Builder removeUsersAvenging(int index) {
+        if (usersAvengingBuilder_ == null) {
+          ensureUsersAvengingIsMutable();
+          usersAvenging_.remove(index);
+          onChanged();
+        } else {
+          usersAvengingBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder getUsersAvengingBuilder(
+          int index) {
+        return getUsersAvengingFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder getUsersAvengingOrBuilder(
+          int index) {
+        if (usersAvengingBuilder_ == null) {
+          return usersAvenging_.get(index);  } else {
+          return usersAvengingBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder> 
+           getUsersAvengingOrBuilderList() {
+        if (usersAvengingBuilder_ != null) {
+          return usersAvengingBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(usersAvenging_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder addUsersAvengingBuilder() {
+        return getUsersAvengingFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder addUsersAvengingBuilder(
+          int index) {
+        return getUsersAvengingFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpUserClanAvengeProto usersAvenging = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder> 
+           getUsersAvengingBuilderList() {
+        return getUsersAvengingFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpUserClanAvengeProto, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder> 
+          getUsersAvengingFieldBuilder() {
+        if (usersAvengingBuilder_ == null) {
+          usersAvengingBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpUserClanAvengeProto, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder>(
+                  usersAvenging_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          usersAvenging_ = null;
+        }
+        return usersAvengingBuilder_;
+      }
+
+      private java.lang.Object attackerUuid_ = "";
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public boolean hasAttackerUuid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public java.lang.String getAttackerUuid() {
+        java.lang.Object ref = attackerUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            attackerUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAttackerUuidBytes() {
+        java.lang.Object ref = attackerUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          attackerUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public Builder setAttackerUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        attackerUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public Builder clearAttackerUuid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attackerUuid_ = getDefaultInstance().getAttackerUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string attackerUuid = 3;</code>
+       */
+      public Builder setAttackerUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        attackerUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object defenderUuid_ = "";
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public boolean hasDefenderUuid() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public java.lang.String getDefenderUuid() {
+        java.lang.Object ref = defenderUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            defenderUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDefenderUuidBytes() {
+        java.lang.Object ref = defenderUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          defenderUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public Builder setDefenderUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        defenderUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public Builder clearDefenderUuid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        defenderUuid_ = getDefaultInstance().getDefenderUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string defenderUuid = 4;</code>
+       */
+      public Builder setDefenderUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        defenderUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long battleEndTime_ ;
+      /**
+       * <code>optional int64 battleEndTime = 5;</code>
+       */
+      public boolean hasBattleEndTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 battleEndTime = 5;</code>
+       */
+      public long getBattleEndTime() {
+        return battleEndTime_;
+      }
+      /**
+       * <code>optional int64 battleEndTime = 5;</code>
+       */
+      public Builder setBattleEndTime(long value) {
+        bitField0_ |= 0x00000010;
+        battleEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 battleEndTime = 5;</code>
+       */
+      public Builder clearBattleEndTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        battleEndTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long avengeRequestTime_ ;
+      /**
+       * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *TODO: DBConstants, change there too
+       * </pre>
+       */
+      public boolean hasAvengeRequestTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *TODO: DBConstants, change there too
+       * </pre>
+       */
+      public long getAvengeRequestTime() {
+        return avengeRequestTime_;
+      }
+      /**
+       * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *TODO: DBConstants, change there too
+       * </pre>
+       */
+      public Builder setAvengeRequestTime(long value) {
+        bitField0_ |= 0x00000020;
+        avengeRequestTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *TODO: DBConstants, change there too
+       * </pre>
+       */
+      public Builder clearAvengeRequestTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        avengeRequestTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpClanAvengeProto)
+    }
+
+    static {
+      defaultInstance = new PvpClanAvengeProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpClanAvengeProto)
+  }
+
+  public interface PvpUserClanAvengeProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.PvpUserClanAvengeProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    boolean hasClanUuid();
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    java.lang.String getClanUuid();
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getClanUuidBytes();
+
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    boolean hasClanAvengeUuid();
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    java.lang.String getClanAvengeUuid();
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getClanAvengeUuidBytes();
+
+    /**
+     * <code>optional int64 avengeTime = 4;</code>
+     */
+    boolean hasAvengeTime();
+    /**
+     * <code>optional int64 avengeTime = 4;</code>
+     */
+    long getAvengeTime();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.PvpUserClanAvengeProto}
+   */
+  public static final class PvpUserClanAvengeProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.PvpUserClanAvengeProto)
+      PvpUserClanAvengeProtoOrBuilder {
+    // Use PvpUserClanAvengeProto.newBuilder() to construct.
+    private PvpUserClanAvengeProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PvpUserClanAvengeProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PvpUserClanAvengeProto defaultInstance;
+    public static PvpUserClanAvengeProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PvpUserClanAvengeProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PvpUserClanAvengeProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userUuid_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              clanUuid_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              clanAvengeUuid_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              avengeTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.class, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PvpUserClanAvengeProto> PARSER =
+        new com.google.protobuf.AbstractParser<PvpUserClanAvengeProto>() {
+      public PvpUserClanAvengeProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PvpUserClanAvengeProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PvpUserClanAvengeProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     *
+     * <pre>
+     *every column in clan_avenge_user table
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CLANUUID_FIELD_NUMBER = 2;
+    private java.lang.Object clanUuid_;
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    public boolean hasClanUuid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    public java.lang.String getClanUuid() {
+      java.lang.Object ref = clanUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          clanUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clanUuid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClanUuidBytes() {
+      java.lang.Object ref = clanUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clanUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CLANAVENGEUUID_FIELD_NUMBER = 3;
+    private java.lang.Object clanAvengeUuid_;
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    public boolean hasClanAvengeUuid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    public java.lang.String getClanAvengeUuid() {
+      java.lang.Object ref = clanAvengeUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          clanAvengeUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clanAvengeUuid = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClanAvengeUuidBytes() {
+      java.lang.Object ref = clanAvengeUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clanAvengeUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int AVENGETIME_FIELD_NUMBER = 4;
+    private long avengeTime_;
+    /**
+     * <code>optional int64 avengeTime = 4;</code>
+     */
+    public boolean hasAvengeTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 avengeTime = 4;</code>
+     */
+    public long getAvengeTime() {
+      return avengeTime_;
+    }
+
+    private void initFields() {
+      userUuid_ = "";
+      clanUuid_ = "";
+      clanAvengeUuid_ = "";
+      avengeTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getClanUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getClanAvengeUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, avengeTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserUuidBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getClanUuidBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getClanAvengeUuidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, avengeTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BattleProto.PvpUserClanAvengeProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.PvpUserClanAvengeProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.PvpUserClanAvengeProto)
+        com.lvl6.proto.BattleProto.PvpUserClanAvengeProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.class, com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clanAvengeUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        avengeTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
+      }
+
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto build() {
+        com.lvl6.proto.BattleProto.PvpUserClanAvengeProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.BattleProto.PvpUserClanAvengeProto buildPartial() {
+        com.lvl6.proto.BattleProto.PvpUserClanAvengeProto result = new com.lvl6.proto.BattleProto.PvpUserClanAvengeProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userUuid_ = userUuid_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clanUuid_ = clanUuid_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clanAvengeUuid_ = clanAvengeUuid_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.avengeTime_ = avengeTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BattleProto.PvpUserClanAvengeProto) {
+          return mergeFrom((com.lvl6.proto.BattleProto.PvpUserClanAvengeProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.BattleProto.PvpUserClanAvengeProto other) {
+        if (other == com.lvl6.proto.BattleProto.PvpUserClanAvengeProto.getDefaultInstance()) return this;
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (other.hasClanUuid()) {
+          bitField0_ |= 0x00000002;
+          clanUuid_ = other.clanUuid_;
+          onChanged();
+        }
+        if (other.hasClanAvengeUuid()) {
+          bitField0_ |= 0x00000004;
+          clanAvengeUuid_ = other.clanAvengeUuid_;
+          onChanged();
+        }
+        if (other.hasAvengeTime()) {
+          setAvengeTime(other.getAvengeTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.BattleProto.PvpUserClanAvengeProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.BattleProto.PvpUserClanAvengeProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       *
+       * <pre>
+       *every column in clan_avenge_user table
+       * </pre>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object clanUuid_ = "";
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public boolean hasClanUuid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public java.lang.String getClanUuid() {
+        java.lang.Object ref = clanUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clanUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClanUuidBytes() {
+        java.lang.Object ref = clanUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clanUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public Builder setClanUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        clanUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public Builder clearClanUuid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clanUuid_ = getDefaultInstance().getClanUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanUuid = 2;</code>
+       */
+      public Builder setClanUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        clanUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object clanAvengeUuid_ = "";
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public boolean hasClanAvengeUuid() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public java.lang.String getClanAvengeUuid() {
+        java.lang.Object ref = clanAvengeUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clanAvengeUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClanAvengeUuidBytes() {
+        java.lang.Object ref = clanAvengeUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clanAvengeUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public Builder setClanAvengeUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        clanAvengeUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public Builder clearClanAvengeUuid() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clanAvengeUuid_ = getDefaultInstance().getClanAvengeUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clanAvengeUuid = 3;</code>
+       */
+      public Builder setClanAvengeUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        clanAvengeUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long avengeTime_ ;
+      /**
+       * <code>optional int64 avengeTime = 4;</code>
+       */
+      public boolean hasAvengeTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 avengeTime = 4;</code>
+       */
+      public long getAvengeTime() {
+        return avengeTime_;
+      }
+      /**
+       * <code>optional int64 avengeTime = 4;</code>
+       */
+      public Builder setAvengeTime(long value) {
+        bitField0_ |= 0x00000008;
+        avengeTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 avengeTime = 4;</code>
+       */
+      public Builder clearAvengeTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        avengeTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpUserClanAvengeProto)
+    }
+
+    static {
+      defaultInstance = new PvpUserClanAvengeProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpUserClanAvengeProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_PvpProto_descriptor;
   private static
@@ -6268,6 +8610,16 @@ public final class BattleProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6288,7 +8640,7 @@ public final class BattleProto {
       "\022\023\n\013defenderMsg\030\007 \001(\t\"m\n\017PvpMonsterProto" +
       "\022@\n\017defenderMonster\030\001 \001(\0132\'.com.lvl6.pro",
       "to.MinimumUserMonsterProto\022\030\n\020monsterIdD" +
-      "ropped\030\002 \001(\005\"\220\005\n\017PvpHistoryProto\022\025\n\rbatt" +
+      "ropped\030\002 \001(\005\"\245\005\n\017PvpHistoryProto\022\025\n\rbatt" +
       "leEndTime\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022:\n\021attackersMon" +
       "sters\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterP" +
@@ -6304,12 +8656,20 @@ public final class BattleProto {
       "After\030\r \001(\0132\".com.lvl6.proto.UserPvpLeag" +
       "ueProto\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.pro" +
       "to.FullUserProto\022\032\n\022attackerCashChange\030\017" +
-      " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\"^\n\016PvpLe" +
-      "agueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueNam" +
-      "e\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013descriptio",
-      "n\030\005 \001(\t*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020" +
-      "\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_FLEE\020\003B\r" +
-      "B\013BattleProto"
+      " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanA" +
+      "venged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010league" +
+      "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi",
+      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\311\001\n\022PvpClan" +
+      "AvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\ru" +
+      "sersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpU" +
+      "serClanAvengeProto\022\024\n\014attackerUuid\030\003 \001(\t" +
+      "\022\024\n\014defenderUuid\030\004 \001(\t\022\025\n\rbattleEndTime\030" +
+      "\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\"h\n\026PvpU" +
+      "serClanAvengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010" +
+      "clanUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022" +
+      "\n\navengeTime\030\004 \001(\003*E\n\014BattleResult\022\020\n\014AT" +
+      "TACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACK",
+      "ER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6342,13 +8702,25 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", });
+        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", });
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpLeagueProto_descriptor,
         new java.lang.String[] { "LeagueId", "LeagueName", "ImgPrefix", "Description", });
+    internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
+        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "AttackerUuid", "DefenderUuid", "BattleEndTime", "AvengeRequestTime", });
+    internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor,
+        new java.lang.String[] { "UserUuid", "ClanUuid", "ClanAvengeUuid", "AvengeTime", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

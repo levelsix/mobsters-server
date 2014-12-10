@@ -79,6 +79,8 @@ message PvpHistoryProto {
 	optional FullUserProto defender = 14;
 	optional int32 attackerCashChange = 15;
 	optional int32 attackerOilChange = 16;
+	
+	optional bool clanAvenged = 17;
 }
 
 //------------------------------------------------------------------------------------------
@@ -92,5 +94,24 @@ message PvpLeagueProto {
 
 //------------------------------------------------------------------------------------------
 
+message PvpClanAvengeProto {
+//send every column in clan_avenge table
+//send PvpUserClanAvengeProto
+
+	optional string clanAvengeUuid = 1;
+	repeated PvpUserClanAvengeProto usersAvenging = 2;
+	optional string attackerUuid = 3;
+	optional string defenderUuid = 4;
+	optional int64 battleEndTime = 5;
+	optional int64 avengeRequestTime = 6; //TODO: DBConstants, change there too
+}
+
+message PvpUserClanAvengeProto {
+	//every column in clan_avenge_user table
+	optional string userUuid = 1;
+	optional string clanUuid = 2;
+	optional string clanAvengeUuid = 3;
+	optional int64 avengeTime = 4;
+}
 
 ///atm, this file is used by EventPvp.proto

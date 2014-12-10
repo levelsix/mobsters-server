@@ -11717,6 +11717,24 @@ public final class EventStartupProto {
          * <code>optional int32 defendingMsgCharLimit = 5;</code>
          */
         int getDefendingMsgCharLimit();
+
+        /**
+         * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         */
+        boolean hasBeginAvengingTimeLimitMins();
+        /**
+         * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         */
+        int getBeginAvengingTimeLimitMins();
+
+        /**
+         * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         */
+        boolean hasRequestClanToAvengeTimeLimitMins();
+        /**
+         * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         */
+        int getRequestClanToAvengeTimeLimitMins();
       }
       /**
        * Protobuf type {@code com.lvl6.proto.StartupResponseProto.StartupConstants.PvpConstants}
@@ -11793,6 +11811,16 @@ public final class EventStartupProto {
                 case 40: {
                   bitField0_ |= 0x00000010;
                   defendingMsgCharLimit_ = input.readInt32();
+                  break;
+                }
+                case 48: {
+                  bitField0_ |= 0x00000020;
+                  beginAvengingTimeLimitMins_ = input.readInt32();
+                  break;
+                }
+                case 56: {
+                  bitField0_ |= 0x00000040;
+                  requestClanToAvengeTimeLimitMins_ = input.readInt32();
                   break;
                 }
               }
@@ -11934,12 +11962,44 @@ public final class EventStartupProto {
           return defendingMsgCharLimit_;
         }
 
+        public static final int BEGINAVENGINGTIMELIMITMINS_FIELD_NUMBER = 6;
+        private int beginAvengingTimeLimitMins_;
+        /**
+         * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         */
+        public boolean hasBeginAvengingTimeLimitMins() {
+          return ((bitField0_ & 0x00000020) == 0x00000020);
+        }
+        /**
+         * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         */
+        public int getBeginAvengingTimeLimitMins() {
+          return beginAvengingTimeLimitMins_;
+        }
+
+        public static final int REQUESTCLANTOAVENGETIMELIMITMINS_FIELD_NUMBER = 7;
+        private int requestClanToAvengeTimeLimitMins_;
+        /**
+         * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         */
+        public boolean hasRequestClanToAvengeTimeLimitMins() {
+          return ((bitField0_ & 0x00000040) == 0x00000040);
+        }
+        /**
+         * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         */
+        public int getRequestClanToAvengeTimeLimitMins() {
+          return requestClanToAvengeTimeLimitMins_;
+        }
+
         private void initFields() {
           pvpDmgsWindowSize_ = 0;
           minPvpDmgDelta_ = 0F;
           maxPvpDmgDelta_ = 0F;
           pvpRequiredMinLvl_ = 0;
           defendingMsgCharLimit_ = 0;
+          beginAvengingTimeLimitMins_ = 0;
+          requestClanToAvengeTimeLimitMins_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -11969,6 +12029,12 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             output.writeInt32(5, defendingMsgCharLimit_);
           }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            output.writeInt32(6, beginAvengingTimeLimitMins_);
+          }
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            output.writeInt32(7, requestClanToAvengeTimeLimitMins_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -11997,6 +12063,14 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(5, defendingMsgCharLimit_);
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(6, beginAvengingTimeLimitMins_);
+          }
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(7, requestClanToAvengeTimeLimitMins_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -12125,6 +12199,10 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000008);
             defendingMsgCharLimit_ = 0;
             bitField0_ = (bitField0_ & ~0x00000010);
+            beginAvengingTimeLimitMins_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000020);
+            requestClanToAvengeTimeLimitMins_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000040);
             return this;
           }
 
@@ -12173,6 +12251,14 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000010;
             }
             result.defendingMsgCharLimit_ = defendingMsgCharLimit_;
+            if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+              to_bitField0_ |= 0x00000020;
+            }
+            result.beginAvengingTimeLimitMins_ = beginAvengingTimeLimitMins_;
+            if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+              to_bitField0_ |= 0x00000040;
+            }
+            result.requestClanToAvengeTimeLimitMins_ = requestClanToAvengeTimeLimitMins_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -12203,6 +12289,12 @@ public final class EventStartupProto {
             }
             if (other.hasDefendingMsgCharLimit()) {
               setDefendingMsgCharLimit(other.getDefendingMsgCharLimit());
+            }
+            if (other.hasBeginAvengingTimeLimitMins()) {
+              setBeginAvengingTimeLimitMins(other.getBeginAvengingTimeLimitMins());
+            }
+            if (other.hasRequestClanToAvengeTimeLimitMins()) {
+              setRequestClanToAvengeTimeLimitMins(other.getRequestClanToAvengeTimeLimitMins());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -12435,6 +12527,70 @@ public final class EventStartupProto {
           public Builder clearDefendingMsgCharLimit() {
             bitField0_ = (bitField0_ & ~0x00000010);
             defendingMsgCharLimit_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int beginAvengingTimeLimitMins_ ;
+          /**
+           * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           */
+          public boolean hasBeginAvengingTimeLimitMins() {
+            return ((bitField0_ & 0x00000020) == 0x00000020);
+          }
+          /**
+           * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           */
+          public int getBeginAvengingTimeLimitMins() {
+            return beginAvengingTimeLimitMins_;
+          }
+          /**
+           * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           */
+          public Builder setBeginAvengingTimeLimitMins(int value) {
+            bitField0_ |= 0x00000020;
+            beginAvengingTimeLimitMins_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           */
+          public Builder clearBeginAvengingTimeLimitMins() {
+            bitField0_ = (bitField0_ & ~0x00000020);
+            beginAvengingTimeLimitMins_ = 0;
+            onChanged();
+            return this;
+          }
+
+          private int requestClanToAvengeTimeLimitMins_ ;
+          /**
+           * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           */
+          public boolean hasRequestClanToAvengeTimeLimitMins() {
+            return ((bitField0_ & 0x00000040) == 0x00000040);
+          }
+          /**
+           * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           */
+          public int getRequestClanToAvengeTimeLimitMins() {
+            return requestClanToAvengeTimeLimitMins_;
+          }
+          /**
+           * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           */
+          public Builder setRequestClanToAvengeTimeLimitMins(int value) {
+            bitField0_ |= 0x00000040;
+            requestClanToAvengeTimeLimitMins_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           */
+          public Builder clearRequestClanToAvengeTimeLimitMins() {
+            bitField0_ = (bitField0_ & ~0x00000040);
+            requestClanToAvengeTimeLimitMins_ = 0;
             onChanged();
             return this;
           }
@@ -33573,7 +33729,7 @@ public final class EventStartupProto {
       "(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(",
       "\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutori" +
       "al\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart" +
-      "\030\010 \001(\010\"\3636\n\024StartupResponseProto\022\030\n\020serve" +
+      "\030\010 \001(\010\"\3017\n\024StartupResponseProto\022\030\n\020serve" +
       "rTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com." +
       "lvl6.proto.FullUserProto\022I\n\rstartupStatu" +
       "s\030\003 \001(\01622.com.lvl6.proto.StartupResponse" +
@@ -33644,7 +33800,7 @@ public final class EventStartupProto {
       "en\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222" +
       "\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
       "mUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coins" +
-      "GivenToReferrer\030\003 \001(\005\032\232\033\n\020StartupConstan" +
+      "GivenToReferrer\030\003 \001(\005\032\350\033\n\020StartupConstan" +
       "ts\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com." +
       "lvl6.proto.InAppPurchasePackageProto\022\027\n\017" +
       "maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleS" +
@@ -33723,35 +33879,37 @@ public final class EventStartupProto {
       "\032\202\001\n\021ClanHelpConstants\0220\n\010helpType\030\001 \001(\016",
       "2\036.com.lvl6.proto.GameActionType\022\034\n\024amou" +
       "ntRemovedPerHelp\030\002 \001(\005\022\035\n\025percentRemoved" +
-      "PerHelp\030\003 \001(\002\032\223\001\n\014PvpConstants\022\031\n\021pvpDmg" +
+      "PerHelp\030\003 \001(\002\032\341\001\n\014PvpConstants\022\031\n\021pvpDmg" +
       "sWindowSize\030\001 \001(\005\022\026\n\016minPvpDmgDelta\030\002 \001(" +
       "\002\022\026\n\016maxPvpDmgDelta\030\003 \001(\002\022\031\n\021pvpRequired" +
       "MinLvl\030\004 \001(\005\022\035\n\025defendingMsgCharLimit\030\005 " +
-      "\001(\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030\001" +
-      " \001(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConvers" +
-      "ionConstantProto\0222\n\014resourceType\030\001 \001(\0162\034" +
-      ".com.lvl6.proto.ResourceType\022\023\n\013resource",
-      "Amt\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021TutorialC" +
-      "onstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016g" +
-      "uideMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 " +
-      "\001(\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyB" +
-      "ossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001" +
-      "(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl" +
-      "6.proto.TutorialStructProto\022\036\n\026structure" +
-      "IdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017c" +
-      "ityOneElements\030\006 \003(\0132 .com.lvl6.proto.Ci" +
-      "tyElementProto\022$\n\034cityElementIdForFirstD",
-      "ungeon\030\007 \001(\005\022%\n\035cityElementIdForSecondDu" +
-      "ngeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit" +
-      "\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObst" +
-      "acles\030\016 \003(\0132$.com.lvl6.proto.MinimumObst" +
-      "acleProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001" +
-      "\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\r" +
-      "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
-      "T_IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030" +
-      "ForceLogoutResponseProto\022\031\n\021previousLogi" +
-      "nTime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartu",
-      "pProto"
+      "\001(\005\022\"\n\032beginAvengingTimeLimitMins\030\006 \001(\005\022" +
+      "(\n requestClanToAvengeTimeLimitMins\030\007 \001(" +
+      "\005\0328\n\024SpeedUpConstantProto\022\017\n\007seconds\030\001 \001" +
+      "(\005\022\017\n\007numGems\030\002 \001(\005\032{\n\037ResourceConversio",
+      "nConstantProto\0222\n\014resourceType\030\001 \001(\0162\034.c" +
+      "om.lvl6.proto.ResourceType\022\023\n\013resourceAm" +
+      "t\030\002 \001(\005\022\017\n\007numGems\030\003 \001(\005\032\234\004\n\021TutorialCon" +
+      "stants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016gui" +
+      "deMonsterId\030\020 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(" +
+      "\005\022\031\n\021enemyMonsterIdTwo\030\017 \001(\005\022\032\n\022enemyBos" +
+      "sMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005" +
+      "\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6." +
+      "proto.TutorialStructProto\022\036\n\026structureId" +
+      "sToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cit",
+      "yOneElements\030\006 \003(\0132 .com.lvl6.proto.City" +
+      "ElementProto\022$\n\034cityElementIdForFirstDun" +
+      "geon\030\007 \001(\005\022%\n\035cityElementIdForSecondDung" +
+      "eon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014" +
+      " \001(\005\022\020\n\010gemsInit\030\r \001(\005\022?\n\021tutorialObstac" +
+      "les\030\016 \003(\0132$.com.lvl6.proto.MinimumObstac" +
+      "leProto\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020" +
+      "\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rSt" +
+      "artupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_" +
+      "IN_DB\020\002\022\031\n\025SERVER_IN_MAINTENANCE\020\003\"C\n\030Fo",
+      "rceLogoutResponseProto\022\031\n\021previousLoginT" +
+      "ime\030\001 \001(\003\022\014\n\004udid\030\002 \001(\tB\023B\021EventStartupP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -33870,7 +34028,7 @@ public final class EventStartupProto {
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_PvpConstants_descriptor,
-        new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", "DefendingMsgCharLimit", });
+        new java.lang.String[] { "PvpDmgsWindowSize", "MinPvpDmgDelta", "MaxPvpDmgDelta", "PvpRequiredMinLvl", "DefendingMsgCharLimit", "BeginAvengingTimeLimitMins", "RequestClanToAvengeTimeLimitMins", });
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_descriptor =
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(10);
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_SpeedUpConstantProto_fieldAccessorTable = new
