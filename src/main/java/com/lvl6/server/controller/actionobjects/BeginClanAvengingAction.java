@@ -83,6 +83,7 @@ public class BeginClanAvengingAction
 			return;
 		}
 		
+		resBuilder.setStatus(BeginClanAvengingStatus.SUCCESS);
 	}
 	
 	private boolean verifySyntax(Builder resBuilder) {
