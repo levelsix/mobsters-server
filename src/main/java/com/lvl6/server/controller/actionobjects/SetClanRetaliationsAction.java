@@ -80,6 +80,12 @@ public class SetClanRetaliationsAction implements StartUpAction
 		participantIdSet = new HashSet<String>();
 		for (ClanAvenge clanAvengeId : clanAvenges)
 		{
+			//there could be no clan_avenge_user
+			if (!clanAvengeIdToClanAvenge.containsKey(clanAvengeId))
+			{
+				continue;
+			}
+			
 			List<ClanAvengeUser> cauList = clanAvengeIdToClanAvenge
 				.get(clanAvengeId);
 			
