@@ -57,6 +57,9 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 	
 	//derived state
 	private List<PvpBattleHistory> historyList;
+	private List<PvpBattleHistory> gotAttackedHistoryList;
+	private List<PvpBattleHistory> attackedOthersHistoryList;
+	private Set<String> userIds;
 	private Set<String> attackerIds;
 	
 	
@@ -73,39 +76,98 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 
 		//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
 		historyList = pvpBattleHistoryRetrieveUtil
-			.getRecentNBattlesForDefenderId(userId, n);
+			.getRecentNBattlesForUserId(userId, n);
 		log.info(String.format(
 			"historyList=%s", historyList));
+
+		userIds = pvpBattleHistoryRetrieveUtil
+			.getUserIdsFromHistory(historyList);
+		log.info(String.format(
+			"attacker and defender ids=%s", userIds));
 
 		attackerIds = pvpBattleHistoryRetrieveUtil
 			.getAttackerIdsFromHistory(historyList);
 		log.info(String.format(
-			"attackerIds=%s", attackerIds));
+			"attacker ids=%s", attackerIds));
 
-		if (null == attackerIds || attackerIds.isEmpty()) {
-			log.info("no valid 10 pvp battles for user. ");
+		
+		if (null == historyList || historyList.isEmpty()) {
+			log.info("no valid {} pvp battles for user. ",
+				n);
 			return;
 		}
 		
-		fillMe.addUserId(attackerIds);
+		if (null != userIds || !userIds.isEmpty()) {
+			//don't need the current user
+			userIds.remove(userId);
+			fillMe.addUserId(userIds);
+		}
+		
+		if (null != attackerIds || !attackerIds.isEmpty()) {
+			//don't need the current user
+			attackerIds.remove(userId);
+		}
+		
+		//separate history list into ones where this user got attacked,
+		//and where this user did the attacking
+		separateHistory();
+		
+		//only need the attacker ids, in order to calculate revenge stuff
+		//if this user takes revenge
+	}
+	
+	public void separateHistory()
+	{
+		gotAttackedHistoryList = new ArrayList<PvpBattleHistory>();
+		attackedOthersHistoryList = new ArrayList<PvpBattleHistory>();
+		for (PvpBattleHistory history : historyList)
+		{
+			String attackerId = history.getAttackerId();
+			if (attackerId.equals(userId))
+			{
+				//user attacked someone
+				attackedOthersHistoryList.add(history);
+			} else {
+				gotAttackedHistoryList.add(history);
+			}
+		}
 	}
 
 	@Override
 	public void execute( StartUpResource useMe )
 	{
-		if (null == attackerIds || attackerIds.isEmpty()) {
+		if (null == historyList || historyList.isEmpty()) {
 			return;
 		}
 		
+		if (null != gotAttackedHistoryList && !gotAttackedHistoryList.isEmpty())
+		{
+			setGotAttackedProtos(useMe);
+		}
+		
+		if (null != attackedOthersHistoryList && !attackedOthersHistoryList.isEmpty())
+		{
+			setAttackedOthersProtos(useMe);
+		}
+
+		//create PvpHistory for battles where this user is the one attacking
+		
+		
+		//  	log.info("historyProtoList=" + historyProtoList);
+	}
+
+	private void setGotAttackedProtos( StartUpResource useMe )
+	{
+		log.info("setting gotAttackedPvpProtos");
 		Map<String, User> idsToAttackers = useMe.getUserIdsToUsers(attackerIds);
-		log.info(String.format(
-			"idsToAttackers=%s", idsToAttackers));
+//		log.info(String.format(
+//			"idsToAttackers=%s", idsToAttackers));
 
 		attackerIdsList = new ArrayList<String>(idsToAttackers.keySet());
 		selectMonstersForUsers();
 		
-		log.info(String.format(
-			"history monster teams=%s", userIdsToUserMonsters));
+//		log.info(String.format(
+//			"history monster teams=%s", userIdsToUserMonsters));
 		
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId =
 			MonsterStuffUtils.calculatePvpDrops(userIdsToUserMonsters);
@@ -120,14 +182,14 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 		
 		Map<String, Clan> attackerIdsToClans = useMe.getUserIdsToClans(attackerIds);
 
+		//create PvpHistory for battles where this user got attacked
 		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-			.createPvpHistoryProto(historyList, idsToAttackers,
+			.createGotAttackedPvpHistoryProto(gotAttackedHistoryList, idsToAttackers,
 				attackerIdsToClans, userIdsToUserMonsters,
 				userIdToUserMonsterIdToDroppedId,
 				attackerIdsToProspectiveCashWinnings,
 				attackerIdsToProspectiveOilWinnings);
-
-		//  	log.info("historyProtoList=" + historyProtoList);
+		
 		resBuilder.addAllRecentNBattles(historyProtoList);
 	}
 	
@@ -216,5 +278,30 @@ public class SetPvpBattleHistoryAction implements StartUpAction
 			userIdToOilStolen.put(defenderId, 
 				potentialResult.getUnsignedOilAttackerWins());
 		}
+	}
+	
+	private void setAttackedOthersProtos( StartUpResource useMe )
+	{
+		//bool attackerWon, defenderCash, defenderOil
+		//optional int64 battleEndTime = 9; //defined above
+		
+		//for the attacker/defender
+		//need the prev and cur rank 
+		//need the prev and cur league
+		//optional UserPvpLeagueProto attackerBefore = 10; //before the battle
+		//optional UserPvpLeagueProto attackerAfter = 11; //after the battle
+		
+		//optional UserPvpLeagueProto defenderBefore = 12; //before the battle
+		//optional UserPvpLeagueProto defenderA
+
+		Map<String, User> idsToUsers = useMe.getUserIdsToUsers(userIds);
+		
+		//create PvpHistory for battles where this user attacked others
+		List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+			.createAttackedOthersPvpHistoryProto(userId, idsToUsers,
+				attackedOthersHistoryList);
+
+		resBuilder.addAllRecentNBattles(historyProtoList);		
+		
 	}
 }

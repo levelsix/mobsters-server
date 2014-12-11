@@ -218,7 +218,8 @@ public class MonsterStuffUtils {
   		return monsterIdToNewQuantity;
   	}
   	
-  	//retrieve the monsters so we know how much is needed to complete it
+  	//retrieve from the monster_config table so we know how much is
+  	//needed to complete the Monster
   	Set<Integer> incompleteMonsterIds =
   		new HashSet<Integer>(monsterIdToIncompleteUserMonster.keySet());
   	Map<Integer, Monster> monsterIdsToMonsters =  MonsterRetrieveUtils
@@ -248,6 +249,18 @@ public class MonsterStuffUtils {
   		if (newPiecesAvailable > 0) {
   			monsterIdToNewQuantity.put(monsterId, newPiecesAvailable);
   		}
+  	}
+  	
+  	//add in all the new pieces that do not add to an incomplete MonsterForUser
+  	//account for the new rows in monster_for_user table
+  	for (Integer monsterId : monsterIdToQuantity.keySet())
+  	{
+  		//already accounted for the pieces with this monster id
+  		if (incompleteMonsterIds.contains(monsterId)) {
+  			continue;
+  		}
+  		int quantity = monsterIdToQuantity.get(monsterId);
+  		monsterIdToNewQuantity.put(monsterId, quantity);
   	}
   	
   	return monsterIdToNewQuantity;
@@ -483,6 +496,7 @@ public class MonsterStuffUtils {
   		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList,
   				sourceOfPieces, combineStartDate);
   	}
+  	log.info("the new monsters (in pieces) the user gets {}", monsterIdToRemainingPieces); 
   	
   	//monsterIdToRemainingPieces now contains all the new monsters
   	//the user will get. SET THE combineStartTime

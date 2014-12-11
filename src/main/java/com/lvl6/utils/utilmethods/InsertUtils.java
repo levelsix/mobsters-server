@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -35,8 +36,6 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
 public class InsertUtils implements InsertUtil{
-
-	
 	
 	private static final Logger log = LoggerFactory.getLogger(InsertUtils.class);
 
@@ -1730,5 +1729,39 @@ public class InsertUtils implements InsertUtil{
 			}
 			return ids;
 		}
-		
+
+		@Override
+		public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList,
+			String clanId)
+		{
+			String tableName = DBConstants.TABLE_CLAN_AVENGE;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			List<String> ids = new ArrayList<String>();
+			for (ClanAvenge ca : caList) {
+				String id = randomUUID();
+				ids.add(id);
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.CLAN_AVENGE__ID, id);
+				newRow.put(DBConstants.CLAN_AVENGE__ATTACKER_ID,
+					ca.getAttackerId());
+				newRow.put(DBConstants.CLAN_AVENGE__DEFENDER_ID,
+					ca.getDefenderId());
+				newRow.put(DBConstants.CLAN_AVENGE__BATTLE_END_TIME,
+					new Timestamp(ca.getBattleEndTime().getTime()));
+				newRow.put(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME,
+					new Timestamp(ca.getAvengeRequestTime().getTime()));
+				
+				newRow.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
+				newRows.add(newRow);
+			}
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			if (numUpdated != caList.size()) {
+			  ids = new ArrayList<String>();
+			}
+			return ids;
+		}
+
 }

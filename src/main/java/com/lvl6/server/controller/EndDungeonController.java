@@ -393,7 +393,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		monsterIdDrops.add(
   			tsm.getMonsterIdDrop());
   		monsterDropLvls.add(
-  			tsm.getMonsterIdDrop());
+  			tsm.getMonsterDropLvl());
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces

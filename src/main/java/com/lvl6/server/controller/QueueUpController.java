@@ -152,6 +152,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       invalidUuids = true;
     }
 
+    if (invalidUuids) {
+    	resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+		QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
+		resEvent.setTag(event.getTag());
+		resEvent.setQueueUpResponseProto(resBuilder.build());  
+		server.writeEvent(resEvent);
+		return;
+    }
+    
 		try {
 			User attacker = getUserRetrieveUtils().getUserById(attackerId);
 			PvpLeagueForUser plfu = getPvpLeagueForUserRetrieveUtil()

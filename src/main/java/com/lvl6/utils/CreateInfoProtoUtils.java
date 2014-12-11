@@ -22,6 +22,8 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -92,10 +94,13 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
+import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -481,13 +486,12 @@ public class CreateInfoProtoUtils {
 		return pvpProtoList;
 		}
 
-	public static PvpHistoryProto createPvpHistoryProto(User attacker, Clan c,
+	public static PvpHistoryProto createGotAttackedPvpHistoryProto(User attacker, Clan c,
 		PvpBattleHistory info, Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
-		//there is db call for clan...
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null,
 			c);
 		phpb.setAttacker(fup);
@@ -497,46 +501,14 @@ public class CreateInfoProtoUtils {
 				createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
 			phpb.addAllAttackersMonsters(attackerMonsters);
 		}
-
-		phpb.setAttackerWon(info.isAttackerWon());
-
-		int defenderCashChange = info.getDefenderCashChange();
-		phpb.setDefenderCashChange(defenderCashChange);
-		int defenderOilChange = info.getDefenderOilChange();
-		phpb.setDefenderOilChange(defenderOilChange);
-
-		phpb.setExactedRevenge(info.isExactedRevenge());
-
 		phpb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
-		Date endDate = info.getBattleEndTime();
-		//endDate should not be null, it's the primary key
-		phpb.setBattleEndTime(endDate.getTime());
-
-
-		UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
-			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
-			info.getAttackerEloBefore(), false);
-		phpb.setAttackerBefore(attackerBefore);
-		UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
-			info.getAttackerCurLeague(), info.getAttackerCurRank(),
-			info.getAttackerEloAfter(), false);
-		phpb.setAttackerAfter(attackerAfter);
-
-		UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
-			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
-			info.getDefenderEloBefore(), false);
-		phpb.setDefenderBefore(defenderBefore);
-		UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
-			info.getDefenderCurLeague(), info.getDefenderCurRank(),
-			info.getDefenderEloAfter(), false);
-		phpb.setDefenderAfter(defenderAfter);
-
+		modifyPvpHistoryProto(phpb, info);
 		return phpb.build();
 	}
 
-	public static List<PvpHistoryProto> createPvpHistoryProto(
+	public static List<PvpHistoryProto> createGotAttackedPvpHistoryProto(
 		List<PvpBattleHistory> historyList, Map<String, User> attackerIdsToAttackers,
 		Map<String, Clan> attackerIdsToClans,
 		Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
@@ -562,14 +534,94 @@ public class CreateInfoProtoUtils {
 			
 			Map<String, Integer> userMonsterIdToDropped =
 				userIdToUserMonsterIdToDropped.get(attackerId);
-			PvpHistoryProto php = createPvpHistoryProto(attacker,
+			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 				clan, history, attackerMonsters, userMonsterIdToDropped,
 				prospectiveCashWinnings, prospectiveOilWinnings);
 			phpList.add(php);
 		}
 		return phpList;
 	}
+	
+	public static List<PvpHistoryProto> createAttackedOthersPvpHistoryProto(
+		String attackerId, Map<String, User> idsToUsers,
+		List<PvpBattleHistory> historyList)
+	{
+		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
+		FullUserProto.Builder fupb = FullUserProto.newBuilder();
+		fupb.setUserUuid(attackerId);
+		FullUserProto fup = fupb.build();
+		
+		for (PvpBattleHistory pbh : historyList)
+		{
+			//no fake users are displayed, but check in case
+			String defenderId = pbh.getDefenderId();
+			if (null == defenderId || defenderId.isEmpty()) {
+				continue;
+			}
+			
+			User defender = idsToUsers.get(defenderId);
+			FullUserProto defenderFup = createFullUserProtoFromUser(defender, null, null);
+			PvpHistoryProto php = createAttackedOthersPvpHistoryProto(
+				fup, defenderFup, pbh);
+			
+			phpList.add(php);
+		}
+		
+		return phpList;
+	}
+	
+	public static PvpHistoryProto createAttackedOthersPvpHistoryProto(
+		FullUserProto fup, FullUserProto defenderFup,
+		PvpBattleHistory info)
+	{
+		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
+		phpb.setAttacker(fup);
+		phpb.setDefender(defenderFup);
+		
+		modifyPvpHistoryProto(phpb, info);
+		return phpb.build();
+	}
 
+	private static void modifyPvpHistoryProto(Builder phpb, PvpBattleHistory info) {
+		phpb.setAttackerWon(info.isAttackerWon());
+
+		int defenderCashChange = info.getDefenderCashChange();
+		phpb.setDefenderCashChange(defenderCashChange);
+		int defenderOilChange = info.getDefenderOilChange();
+		phpb.setDefenderOilChange(defenderOilChange);
+
+		phpb.setExactedRevenge(info.isExactedRevenge());
+
+		Date endDate = info.getBattleEndTime();
+		//endDate should not be null, it's the primary key
+		phpb.setBattleEndTime(endDate.getTime());
+
+		UserPvpLeagueProto attackerBefore = createUserPvpLeagueProto(info.getAttackerId(),
+			info.getAttackerPrevLeague(), info.getAttackerPrevRank(),
+			info.getAttackerEloBefore(), false);
+		phpb.setAttackerBefore(attackerBefore);
+		UserPvpLeagueProto attackerAfter = createUserPvpLeagueProto(info.getAttackerId(),
+			info.getAttackerCurLeague(), info.getAttackerCurRank(),
+			info.getAttackerEloAfter(), false);
+		phpb.setAttackerAfter(attackerAfter);
+
+		UserPvpLeagueProto defenderBefore = createUserPvpLeagueProto(info.getDefenderId(),
+			info.getDefenderPrevLeague(), info.getDefenderPrevRank(),
+			info.getDefenderEloBefore(), false);
+		phpb.setDefenderBefore(defenderBefore);
+		UserPvpLeagueProto defenderAfter = createUserPvpLeagueProto(info.getDefenderId(),
+			info.getDefenderCurLeague(), info.getDefenderCurRank(),
+			info.getDefenderEloAfter(), false);
+		phpb.setDefenderAfter(defenderAfter);
+
+		int attackerCashChange = info.getAttackerCashChange();
+		phpb.setAttackerCashChange(attackerCashChange);
+		int attackerOilChange = info.getAttackerOilChange();
+		phpb.setAttackerOilChange(attackerOilChange);
+		
+		phpb.setClanAvenged(info.isClanAvenged());
+	}
+	
 	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
 		PvpLeagueProto.Builder plpb = PvpLeagueProto.newBuilder();
 
@@ -661,6 +713,146 @@ public class CreateInfoProtoUtils {
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 
 		return uplpb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations,
+		Map<String, List<ClanAvengeUser>> clanAvengeIdToClanAvengeUser,
+		Map<String, User> userIdsToUsers,
+		Map<String, Clan> userIdsToClans)
+	{
+		List<PvpClanAvengeProto> pcapList = new ArrayList<>();
+		
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			createMinimumUserProtoWithLevel(userIdsToUsers, userIdsToClans);
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String clanAvengeId = ca.getId();
+			List<ClanAvengeUser> cauList = null;
+			
+			if (clanAvengeIdToClanAvengeUser.containsKey(clanAvengeId))
+			{
+				cauList = clanAvengeIdToClanAvengeUser
+					.get(clanAvengeId);
+			}
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(ca, cauList, userIdToMupwl);
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		ClanAvenge ca, List<ClanAvengeUser> cauList,
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl)
+	{
+		String attackerId = ca.getAttackerId();
+		String defenderId = ca.getDefenderId();
+		String defenderClanUuid = ca.getClanId();
+		
+		MinimumUserProtoWithLevel attacker = userIdToMupwl
+			.get(attackerId);
+		MinimumUserProtoWithLevel defender = userIdToMupwl
+			.get(defenderId);
+		
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender.getMinUserProto());
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		//could be that no clan mate started retaliating
+		//against person who attacked clan member
+		if (null != cauList && !cauList.isEmpty())
+		{
+			List<PvpUserClanAvengeProto> pucapList =
+				createPvpUserClanAvengeProto(cauList);
+			pcapb.addAllUsersAvenging(pucapList);
+		}
+		
+		return pcapb.build();
+	}
+	
+	public static List<PvpUserClanAvengeProto> createPvpUserClanAvengeProto(
+		List<ClanAvengeUser> cauList )
+	{
+		List<PvpUserClanAvengeProto> pucapList = new
+			ArrayList<PvpUserClanAvengeProto>();
+		
+		for (ClanAvengeUser cau : cauList)
+		{
+			PvpUserClanAvengeProto pucap =
+				createPvpUserClanAvengeProto(cau);
+			pucapList.add(pucap);
+		}
+		
+		return pucapList;
+	}
+	
+	public static PvpUserClanAvengeProto createPvpUserClanAvengeProto(
+		ClanAvengeUser cau)
+	{
+		PvpUserClanAvengeProto.Builder pucapb =
+			PvpUserClanAvengeProto.newBuilder();
+		
+		pucapb.setUserUuid(cau.getUserId());
+		pucapb.setClanAvengeUuid(cau.getClanAvengeId());
+		pucapb.setClanUuid(cau.getClanId());
+		
+		Date date = cau.getAvengeTime();
+		pucapb.setAvengeTime(date.getTime());
+		
+		return pucapb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
+		String clanUuid,
+		Map<String, MinimumUserProtoWithLevel> attackerIdsToMupwls)
+	{
+		List<PvpClanAvengeProto> pcapList =
+			new ArrayList<PvpClanAvengeProto>();
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String attackerId = ca.getAttackerId();
+			MinimumUserProtoWithLevel attackerMupwl = attackerIdsToMupwls
+				.get(attackerId);
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(
+				attackerMupwl, defenderMup, clanUuid, ca);
+			
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		MinimumUserProtoWithLevel attacker, MinimumUserProto defender,
+		String defenderClanUuid, ClanAvenge ca)
+	{
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender);
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		return pcapb.build();
 	}
 
 	/**BoosterPackStuff.proto****************************************/
@@ -3441,11 +3633,57 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
+	public static MinimumUserProtoWithLevel createMinimumUserProto(FullUserProto fup)
+	{
+		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+		String str = fup.getUserUuid();
+		if (null != str)
+		{
+			mupb.setUserUuid(str);
+		}
+		
+		str = fup.getName();
+		if (null != str)
+		{
+			mupb.setName(str);
+		}
+		
+		MinimumClanProto mcp = fup.getClan();
+		if (null != mcp)
+		{
+			mupb.setClan(mcp);
+		}
+		
+		int avatarMonsterId = fup.getAvatarMonsterId();
+		if (avatarMonsterId > 0)
+		{
+			mupb.setAvatarMonsterId(avatarMonsterId);
+		}
+		
+		MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+		mupwlb.setLevel(fup.getLevel());
+		mupwlb.setMinUserProto(mupb.build());
+		
+		return mupwlb.build();
+	}
 
-
-
-
-
+	public static Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
+		Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans)
+	{
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			new HashMap<String, MinimumUserProtoWithLevel>();
+		for (User u : userIdsToUsers.values())
+		{
+			String userId = u.getId();
+			Clan c = userIdsToClans.get(userId);
+			
+			MinimumUserProtoWithLevel mupwl =
+				createMinimumUserProtoWithLevel(u, c, null);
+			
+			userIdToMupwl.put(userId, mupwl);
+		}
+		return userIdToMupwl;
+	}
 
 
 

@@ -6,7 +6,7 @@ import java.util.Date;
 //look at PvpBattleHistoryRetrieveUtil to see which columns are used
 public class PvpBattleHistory implements Serializable {
 	
-	private static final long serialVersionUID = -3028966476151797326L;
+	private static final long serialVersionUID = -1874624222040221274L;
 	
 	private String attackerId;
 	private String defenderId;
@@ -39,6 +39,8 @@ public class PvpBattleHistory implements Serializable {
 	private boolean cancelled;
 	private boolean exactedRevenge;
 	
+	private boolean clanAvenged;
+	
 	public PvpBattleHistory() {
 		super();
 	}
@@ -52,7 +54,8 @@ public class PvpBattleHistory implements Serializable {
 			int defenderPrevRank, int defenderCurRank, int attackerCashChange,
 			int defenderCashChange, int attackerOilChange,
 			int defenderOilChange, boolean attackerWon, boolean cancelled,
-			boolean exactedRevenge) {
+			boolean exactedRevenge, boolean clanAvenged)
+	{
 		super();
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
@@ -79,6 +82,7 @@ public class PvpBattleHistory implements Serializable {
 		this.attackerWon = attackerWon;
 		this.cancelled = cancelled;
 		this.exactedRevenge = exactedRevenge;
+		this.clanAvenged = clanAvenged; 
 	}
 
 	public String getAttackerId() {
@@ -281,30 +285,72 @@ public class PvpBattleHistory implements Serializable {
 		this.exactedRevenge = exactedRevenge;
 	}
 
-	@Override
-	public String toString() {
-		return "PvpBattleHistory [attackerId=" + attackerId + ", defenderId="
-				+ defenderId + ", battleEndTime=" + battleEndTime
-				+ ", battleStartTime=" + battleStartTime
-				+ ", attackerEloChange=" + attackerEloChange
-				+ ", attackerEloBefore=" + attackerEloBefore
-				+ ", attackerEloAfter=" + attackerEloAfter
-				+ ", defenderEloChange=" + defenderEloChange
-				+ ", defenderEloBefore=" + defenderEloBefore
-				+ ", defenderEloAfter=" + defenderEloAfter
-				+ ", attackerPrevLeague=" + attackerPrevLeague
-				+ ", attackerCurLeague=" + attackerCurLeague
-				+ ", defenderPrevLeague=" + defenderPrevLeague
-				+ ", defenderCurLeague=" + defenderCurLeague
-				+ ", attackerPrevRank=" + attackerPrevRank
-				+ ", attackerCurRank=" + attackerCurRank
-				+ ", defenderPrevRank=" + defenderPrevRank
-				+ ", defenderCurRank=" + defenderCurRank
-				+ ", attackerCashChange=" + attackerCashChange
-				+ ", defenderCashChange=" + defenderCashChange
-				+ ", attackerOilChange=" + attackerOilChange
-				+ ", defenderOilChange=" + defenderOilChange + ", attackerWon="
-				+ attackerWon + ", cancelled=" + cancelled
-				+ ", exactedRevenge=" + exactedRevenge + "]";
+	public boolean isClanAvenged()
+	{
+		return clanAvenged;
 	}
+
+	public void setClanAvenged( boolean clanAvenged )
+	{
+		this.clanAvenged = clanAvenged;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "PvpBattleHistory [attackerId="
+			+ attackerId
+			+ ", defenderId="
+			+ defenderId
+			+ ", battleEndTime="
+			+ battleEndTime
+			+ ", battleStartTime="
+			+ battleStartTime
+			+ ", attackerEloChange="
+			+ attackerEloChange
+			+ ", attackerEloBefore="
+			+ attackerEloBefore
+			+ ", attackerEloAfter="
+			+ attackerEloAfter
+			+ ", defenderEloChange="
+			+ defenderEloChange
+			+ ", defenderEloBefore="
+			+ defenderEloBefore
+			+ ", defenderEloAfter="
+			+ defenderEloAfter
+			+ ", attackerPrevLeague="
+			+ attackerPrevLeague
+			+ ", attackerCurLeague="
+			+ attackerCurLeague
+			+ ", defenderPrevLeague="
+			+ defenderPrevLeague
+			+ ", defenderCurLeague="
+			+ defenderCurLeague
+			+ ", attackerPrevRank="
+			+ attackerPrevRank
+			+ ", attackerCurRank="
+			+ attackerCurRank
+			+ ", defenderPrevRank="
+			+ defenderPrevRank
+			+ ", defenderCurRank="
+			+ defenderCurRank
+			+ ", attackerCashChange="
+			+ attackerCashChange
+			+ ", defenderCashChange="
+			+ defenderCashChange
+			+ ", attackerOilChange="
+			+ attackerOilChange
+			+ ", defenderOilChange="
+			+ defenderOilChange
+			+ ", attackerWon="
+			+ attackerWon
+			+ ", cancelled="
+			+ cancelled
+			+ ", exactedRevenge="
+			+ exactedRevenge
+			+ ", clanAvenged="
+			+ clanAvenged
+			+ "]";
+	}
+
 }

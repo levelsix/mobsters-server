@@ -68,10 +68,10 @@ public class ControllerConstants {
 
 	public static final int ITEM_SECRET_GIFT_FOR_USER__NUM_NEW_GIFTS = 1;
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__ITEM_IDS = {
-		51, 2, 21, 53, 6
+		52, 2, 21, 53, 6
 	};
 	public static final int[] ITEM_SECRET_GIFT_FOR_USER__WAIT_TIMES_SECONDS = {
-		30, 50, 90, 210, 300
+		90, 150, 179, 265, 2280
 	};
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME = 45;
 	public static final int ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME = 3620;
@@ -126,7 +126,8 @@ public class ControllerConstants {
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
-
+	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
+	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
 	//all these pairing chances need to sum to one
@@ -154,7 +155,7 @@ public class ControllerConstants {
 
 
 	//PVP BATTLE HISTORY
-	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
+	public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 50;  
 
 	public static final int[] RESOURCE_CONVERSION__RESOURCE_AMOUNT = {
 		1, 1000, 10000, 100000, 1000000, 2000000000 
@@ -429,7 +430,7 @@ public class ControllerConstants {
 	public static final int SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING = 200;
 
 	//CREATE CLAN
-	public static final int CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN = 1000;
+	public static final int CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN = 10000;
 	public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME = 15;
 	public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION = 350;
 	public static final int CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG = 3;

@@ -1,5 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
+import "Battle.proto";
 import "Clan.proto";
 import "MonsterStuff.proto";
 //import "SharedEnumConfig.proto";
@@ -522,3 +523,45 @@ message RetrieveClanDataResponseProto {
 	optional ClanDataProto clanData = 2;
 }
 
+//------------------------------------------------------------------------------------------
+
+message BeginClanAvengingRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated PvpHistoryProto recentNBattles = 2;
+	optional int64 clientTime = 3;
+}
+
+message BeginClanAvengingResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated PvpClanAvengeProto clanAvengings = 2;
+	optional BeginClanAvengingStatus status = 3;
+	
+	//SEND TO CLAN
+	
+	enum BeginClanAvengingStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message EndClanAvengingRequestProto {
+	optional MinimumUserProto sender = 1;
+	//primary key in clan_avenge table
+	repeated string clanAvengeUuids = 2; 
+}
+
+message EndClanAvengingResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated string clanAvengeUuids = 2;	
+	optional EndClanAvengingStatus status = 3;
+
+	//SEND TO WHOLE CLAN
+	
+	
+	enum EndClanAvengingStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}

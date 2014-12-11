@@ -39252,6 +39252,3608 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RetrieveClanDataResponseProto)
   }
 
+  public interface BeginClanAvengingRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanAvengingRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> 
+        getRecentNBattlesList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpHistoryProto getRecentNBattles(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    int getRecentNBattlesCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
+        getRecentNBattlesOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getRecentNBattlesOrBuilder(
+        int index);
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.BeginClanAvengingRequestProto}
+   */
+  public static final class BeginClanAvengingRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanAvengingRequestProto)
+      BeginClanAvengingRequestProtoOrBuilder {
+    // Use BeginClanAvengingRequestProto.newBuilder() to construct.
+    private BeginClanAvengingRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BeginClanAvengingRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BeginClanAvengingRequestProto defaultInstance;
+    public static BeginClanAvengingRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BeginClanAvengingRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BeginClanAvengingRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                recentNBattles_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpHistoryProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              recentNBattles_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpHistoryProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          recentNBattles_ = java.util.Collections.unmodifiableList(recentNBattles_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.class, com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BeginClanAvengingRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<BeginClanAvengingRequestProto>() {
+      public BeginClanAvengingRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BeginClanAvengingRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BeginClanAvengingRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int RECENTNBATTLES_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_;
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> getRecentNBattlesList() {
+      return recentNBattles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
+        getRecentNBattlesOrBuilderList() {
+      return recentNBattles_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    public int getRecentNBattlesCount() {
+      return recentNBattles_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpHistoryProto getRecentNBattles(int index) {
+      return recentNBattles_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getRecentNBattlesOrBuilder(
+        int index) {
+      return recentNBattles_.get(index);
+    }
+
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      recentNBattles_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < recentNBattles_.size(); i++) {
+        output.writeMessage(2, recentNBattles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(3, clientTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < recentNBattles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, recentNBattles_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.BeginClanAvengingRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanAvengingRequestProto)
+        com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.class, com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getRecentNBattlesFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (recentNBattlesBuilder_ == null) {
+          recentNBattles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          recentNBattlesBuilder_.clear();
+        }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto build() {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto buildPartial() {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto result = new com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (recentNBattlesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            recentNBattles_ = java.util.Collections.unmodifiableList(recentNBattles_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.recentNBattles_ = recentNBattles_;
+        } else {
+          result.recentNBattles_ = recentNBattlesBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto other) {
+        if (other == com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (recentNBattlesBuilder_ == null) {
+          if (!other.recentNBattles_.isEmpty()) {
+            if (recentNBattles_.isEmpty()) {
+              recentNBattles_ = other.recentNBattles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureRecentNBattlesIsMutable();
+              recentNBattles_.addAll(other.recentNBattles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.recentNBattles_.isEmpty()) {
+            if (recentNBattlesBuilder_.isEmpty()) {
+              recentNBattlesBuilder_.dispose();
+              recentNBattlesBuilder_ = null;
+              recentNBattles_ = other.recentNBattles_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              recentNBattlesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRecentNBattlesFieldBuilder() : null;
+            } else {
+              recentNBattlesBuilder_.addAllMessages(other.recentNBattles_);
+            }
+          }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> recentNBattles_ =
+        java.util.Collections.emptyList();
+      private void ensureRecentNBattlesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          recentNBattles_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpHistoryProto>(recentNBattles_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> recentNBattlesBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto> getRecentNBattlesList() {
+        if (recentNBattlesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(recentNBattles_);
+        } else {
+          return recentNBattlesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public int getRecentNBattlesCount() {
+        if (recentNBattlesBuilder_ == null) {
+          return recentNBattles_.size();
+        } else {
+          return recentNBattlesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto getRecentNBattles(int index) {
+        if (recentNBattlesBuilder_ == null) {
+          return recentNBattles_.get(index);
+        } else {
+          return recentNBattlesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder setRecentNBattles(
+          int index, com.lvl6.proto.BattleProto.PvpHistoryProto value) {
+        if (recentNBattlesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.set(index, value);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder setRecentNBattles(
+          int index, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder builderForValue) {
+        if (recentNBattlesBuilder_ == null) {
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder addRecentNBattles(com.lvl6.proto.BattleProto.PvpHistoryProto value) {
+        if (recentNBattlesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.add(value);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder addRecentNBattles(
+          int index, com.lvl6.proto.BattleProto.PvpHistoryProto value) {
+        if (recentNBattlesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.add(index, value);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder addRecentNBattles(
+          com.lvl6.proto.BattleProto.PvpHistoryProto.Builder builderForValue) {
+        if (recentNBattlesBuilder_ == null) {
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder addRecentNBattles(
+          int index, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder builderForValue) {
+        if (recentNBattlesBuilder_ == null) {
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder addAllRecentNBattles(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpHistoryProto> values) {
+        if (recentNBattlesBuilder_ == null) {
+          ensureRecentNBattlesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, recentNBattles_);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder clearRecentNBattles() {
+        if (recentNBattlesBuilder_ == null) {
+          recentNBattles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public Builder removeRecentNBattles(int index) {
+        if (recentNBattlesBuilder_ == null) {
+          ensureRecentNBattlesIsMutable();
+          recentNBattles_.remove(index);
+          onChanged();
+        } else {
+          recentNBattlesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto.Builder getRecentNBattlesBuilder(
+          int index) {
+        return getRecentNBattlesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getRecentNBattlesOrBuilder(
+          int index) {
+        if (recentNBattlesBuilder_ == null) {
+          return recentNBattles_.get(index);  } else {
+          return recentNBattlesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
+           getRecentNBattlesOrBuilderList() {
+        if (recentNBattlesBuilder_ != null) {
+          return recentNBattlesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(recentNBattles_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto.Builder addRecentNBattlesBuilder() {
+        return getRecentNBattlesFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto.Builder addRecentNBattlesBuilder(
+          int index) {
+        return getRecentNBattlesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpHistoryProto recentNBattles = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpHistoryProto.Builder> 
+           getRecentNBattlesBuilderList() {
+        return getRecentNBattlesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
+          getRecentNBattlesFieldBuilder() {
+        if (recentNBattlesBuilder_ == null) {
+          recentNBattlesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder>(
+                  recentNBattles_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          recentNBattles_ = null;
+        }
+        return recentNBattlesBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginClanAvengingRequestProto)
+    }
+
+    static {
+      defaultInstance = new BeginClanAvengingRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanAvengingRequestProto)
+  }
+
+  public interface BeginClanAvengingResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.BeginClanAvengingResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> 
+        getClanAvengingsList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    int getClanAvengingsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+        getClanAvengingsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+        int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     */
+    com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.BeginClanAvengingResponseProto}
+   */
+  public static final class BeginClanAvengingResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.BeginClanAvengingResponseProto)
+      BeginClanAvengingResponseProtoOrBuilder {
+    // Use BeginClanAvengingResponseProto.newBuilder() to construct.
+    private BeginClanAvengingResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private BeginClanAvengingResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final BeginClanAvengingResponseProto defaultInstance;
+    public static BeginClanAvengingResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public BeginClanAvengingResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BeginClanAvengingResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                clanAvengings_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpClanAvengeProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              clanAvengings_.add(input.readMessage(com.lvl6.proto.BattleProto.PvpClanAvengeProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus value = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengings_ = java.util.Collections.unmodifiableList(clanAvengings_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.class, com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<BeginClanAvengingResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<BeginClanAvengingResponseProto>() {
+      public BeginClanAvengingResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BeginClanAvengingResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BeginClanAvengingResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus}
+     */
+    public enum BeginClanAvengingStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static BeginClanAvengingStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>() {
+              public BeginClanAvengingStatus findValueByNumber(int number) {
+                return BeginClanAvengingStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final BeginClanAvengingStatus[] VALUES = values();
+
+      public static BeginClanAvengingStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private BeginClanAvengingStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int CLANAVENGINGS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_;
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> getClanAvengingsList() {
+      return clanAvengings_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+        getClanAvengingsOrBuilderList() {
+      return clanAvengings_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    public int getClanAvengingsCount() {
+      return clanAvengings_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index) {
+      return clanAvengings_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+        int index) {
+      return clanAvengings_.get(index);
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     */
+    public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clanAvengings_ = java.util.Collections.emptyList();
+      status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < clanAvengings_.size(); i++) {
+        output.writeMessage(2, clanAvengings_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      for (int i = 0; i < clanAvengings_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, clanAvengings_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.BeginClanAvengingResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.BeginClanAvengingResponseProto)
+        com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.class, com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getClanAvengingsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          clanAvengingsBuilder_.clear();
+        }
+        status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto build() {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto buildPartial() {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto result = new com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (clanAvengingsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            clanAvengings_ = java.util.Collections.unmodifiableList(clanAvengings_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.clanAvengings_ = clanAvengings_;
+        } else {
+          result.clanAvengings_ = clanAvengingsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto other) {
+        if (other == com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (clanAvengingsBuilder_ == null) {
+          if (!other.clanAvengings_.isEmpty()) {
+            if (clanAvengings_.isEmpty()) {
+              clanAvengings_ = other.clanAvengings_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureClanAvengingsIsMutable();
+              clanAvengings_.addAll(other.clanAvengings_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clanAvengings_.isEmpty()) {
+            if (clanAvengingsBuilder_.isEmpty()) {
+              clanAvengingsBuilder_.dispose();
+              clanAvengingsBuilder_ = null;
+              clanAvengings_ = other.clanAvengings_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              clanAvengingsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getClanAvengingsFieldBuilder() : null;
+            } else {
+              clanAvengingsBuilder_.addAllMessages(other.clanAvengings_);
+            }
+          }
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> clanAvengings_ =
+        java.util.Collections.emptyList();
+      private void ensureClanAvengingsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengings_ = new java.util.ArrayList<com.lvl6.proto.BattleProto.PvpClanAvengeProto>(clanAvengings_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> clanAvengingsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto> getClanAvengingsList() {
+        if (clanAvengingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clanAvengings_);
+        } else {
+          return clanAvengingsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public int getClanAvengingsCount() {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.size();
+        } else {
+          return clanAvengingsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvengings(int index) {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.get(index);
+        } else {
+          return clanAvengingsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder setClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.set(index, value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder setClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder addClanAvengings(com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder addClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
+        if (clanAvengingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(index, value);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder addClanAvengings(
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder addClanAvengings(
+          int index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder addAllClanAvengings(
+          java.lang.Iterable<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProto> values) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, clanAvengings_);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder clearClanAvengings() {
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public Builder removeClanAvengings(int index) {
+        if (clanAvengingsBuilder_ == null) {
+          ensureClanAvengingsIsMutable();
+          clanAvengings_.remove(index);
+          onChanged();
+        } else {
+          clanAvengingsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder getClanAvengingsBuilder(
+          int index) {
+        return getClanAvengingsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengingsOrBuilder(
+          int index) {
+        if (clanAvengingsBuilder_ == null) {
+          return clanAvengings_.get(index);  } else {
+          return clanAvengingsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+           getClanAvengingsOrBuilderList() {
+        if (clanAvengingsBuilder_ != null) {
+          return clanAvengingsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clanAvengings_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder addClanAvengingsBuilder() {
+        return getClanAvengingsFieldBuilder().addBuilder(
+            com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder addClanAvengingsBuilder(
+          int index) {
+        return getClanAvengingsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BattleProto.PvpClanAvengeProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.PvpClanAvengeProto clanAvengings = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder> 
+           getClanAvengingsBuilderList() {
+        return getClanAvengingsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
+          getClanAvengingsFieldBuilder() {
+        if (clanAvengingsBuilder_ == null) {
+          clanAvengingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder>(
+                  clanAvengings_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          clanAvengings_ = null;
+        }
+        return clanAvengingsBuilder_;
+      }
+
+      private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       */
+      public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginClanAvengingResponseProto)
+    }
+
+    static {
+      defaultInstance = new BeginClanAvengingResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanAvengingResponseProto)
+  }
+
+  public interface EndClanAvengingRequestProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanAvengingRequestProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    com.google.protobuf.ProtocolStringList
+        getClanAvengeUuidsList();
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    int getClanAvengeUuidsCount();
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    java.lang.String getClanAvengeUuids(int index);
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getClanAvengeUuidsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.EndClanAvengingRequestProto}
+   */
+  public static final class EndClanAvengingRequestProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanAvengingRequestProto)
+      EndClanAvengingRequestProtoOrBuilder {
+    // Use EndClanAvengingRequestProto.newBuilder() to construct.
+    private EndClanAvengingRequestProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private EndClanAvengingRequestProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final EndClanAvengingRequestProto defaultInstance;
+    public static EndClanAvengingRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public EndClanAvengingRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private EndClanAvengingRequestProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              clanAvengeUuids_.add(bs);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.class, com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<EndClanAvengingRequestProto> PARSER =
+        new com.google.protobuf.AbstractParser<EndClanAvengingRequestProto>() {
+      public EndClanAvengingRequestProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EndClanAvengingRequestProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EndClanAvengingRequestProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int CLANAVENGEUUIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList clanAvengeUuids_;
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getClanAvengeUuidsList() {
+      return clanAvengeUuids_;
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    public int getClanAvengeUuidsCount() {
+      return clanAvengeUuids_.size();
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    public java.lang.String getClanAvengeUuids(int index) {
+      return clanAvengeUuids_.get(index);
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     *
+     * <pre>
+     *primary key in clan_avenge table
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getClanAvengeUuidsBytes(int index) {
+      return clanAvengeUuids_.getByteString(index);
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < clanAvengeUuids_.size(); i++) {
+        output.writeBytes(2, clanAvengeUuids_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < clanAvengeUuids_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(clanAvengeUuids_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getClanAvengeUuidsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.EndClanAvengingRequestProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanAvengingRequestProto)
+        com.lvl6.proto.EventClanProto.EndClanAvengingRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.class, com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto build() {
+        com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto buildPartial() {
+        com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto result = new com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.clanAvengeUuids_ = clanAvengeUuids_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto other) {
+        if (other == com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (!other.clanAvengeUuids_.isEmpty()) {
+          if (clanAvengeUuids_.isEmpty()) {
+            clanAvengeUuids_ = other.clanAvengeUuids_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureClanAvengeUuidsIsMutable();
+            clanAvengeUuids_.addAll(other.clanAvengeUuids_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureClanAvengeUuidsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList(clanAvengeUuids_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getClanAvengeUuidsList() {
+        return clanAvengeUuids_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public int getClanAvengeUuidsCount() {
+        return clanAvengeUuids_.size();
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public java.lang.String getClanAvengeUuids(int index) {
+        return clanAvengeUuids_.get(index);
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getClanAvengeUuidsBytes(int index) {
+        return clanAvengeUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public Builder setClanAvengeUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public Builder addClanAvengeUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public Builder addAllClanAvengeUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureClanAvengeUuidsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, clanAvengeUuids_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public Builder clearClanAvengeUuids() {
+        clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       *
+       * <pre>
+       *primary key in clan_avenge table
+       * </pre>
+       */
+      public Builder addClanAvengeUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndClanAvengingRequestProto)
+    }
+
+    static {
+      defaultInstance = new EndClanAvengingRequestProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanAvengingRequestProto)
+  }
+
+  public interface EndClanAvengingResponseProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.EndClanAvengingResponseProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    boolean hasSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    com.google.protobuf.ProtocolStringList
+        getClanAvengeUuidsList();
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    int getClanAvengeUuidsCount();
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    java.lang.String getClanAvengeUuids(int index);
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getClanAvengeUuidsBytes(int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     */
+    com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus();
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.EndClanAvengingResponseProto}
+   */
+  public static final class EndClanAvengingResponseProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.EndClanAvengingResponseProto)
+      EndClanAvengingResponseProtoOrBuilder {
+    // Use EndClanAvengingResponseProto.newBuilder() to construct.
+    private EndClanAvengingResponseProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private EndClanAvengingResponseProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final EndClanAvengingResponseProto defaultInstance;
+    public static EndClanAvengingResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public EndClanAvengingResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private EndClanAvengingResponseProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sender_.toBuilder();
+              }
+              sender_ = input.readMessage(com.lvl6.proto.UserProto.MinimumUserProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sender_);
+                sender_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              clanAvengeUuids_.add(bs);
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus value = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.class, com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<EndClanAvengingResponseProto> PARSER =
+        new com.google.protobuf.AbstractParser<EndClanAvengingResponseProto>() {
+      public EndClanAvengingResponseProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EndClanAvengingResponseProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EndClanAvengingResponseProto> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus}
+     */
+    public enum EndClanAvengingStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      SUCCESS(0, 1),
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      FAIL_OTHER(1, 2),
+      ;
+
+      /**
+       * <code>SUCCESS = 1;</code>
+       */
+      public static final int SUCCESS_VALUE = 1;
+      /**
+       * <code>FAIL_OTHER = 2;</code>
+       */
+      public static final int FAIL_OTHER_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static EndClanAvengingStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>() {
+              public EndClanAvengingStatus findValueByNumber(int number) {
+                return EndClanAvengingStatus.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final EndClanAvengingStatus[] VALUES = values();
+
+      public static EndClanAvengingStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private EndClanAvengingStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus)
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+     */
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+
+    public static final int CLANAVENGEUUIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList clanAvengeUuids_;
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getClanAvengeUuidsList() {
+      return clanAvengeUuids_;
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    public int getClanAvengeUuidsCount() {
+      return clanAvengeUuids_.size();
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    public java.lang.String getClanAvengeUuids(int index) {
+      return clanAvengeUuids_.get(index);
+    }
+    /**
+     * <code>repeated string clanAvengeUuids = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClanAvengeUuidsBytes(int index) {
+      return clanAvengeUuids_.getByteString(index);
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_;
+    /**
+     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     */
+    public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      for (int i = 0; i < clanAvengeUuids_.size(); i++) {
+        output.writeBytes(2, clanAvengeUuids_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < clanAvengeUuids_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(clanAvengeUuids_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getClanAvengeUuidsList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.EndClanAvengingResponseProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.EndClanAvengingResponseProto)
+        com.lvl6.proto.EventClanProto.EndClanAvengingResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.class, com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto build() {
+        com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto buildPartial() {
+        com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto result = new com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = clanAvengeUuids_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.clanAvengeUuids_ = clanAvengeUuids_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto other) {
+        if (other == com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (!other.clanAvengeUuids_.isEmpty()) {
+          if (clanAvengeUuids_.isEmpty()) {
+            clanAvengeUuids_ = other.clanAvengeUuids_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureClanAvengeUuidsIsMutable();
+            clanAvengeUuids_.addAll(other.clanAvengeUuids_);
+          }
+          onChanged();
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  getSender(),
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureClanAvengeUuidsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          clanAvengeUuids_ = new com.google.protobuf.LazyStringArrayList(clanAvengeUuids_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getClanAvengeUuidsList() {
+        return clanAvengeUuids_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public int getClanAvengeUuidsCount() {
+        return clanAvengeUuids_.size();
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public java.lang.String getClanAvengeUuids(int index) {
+        return clanAvengeUuids_.get(index);
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClanAvengeUuidsBytes(int index) {
+        return clanAvengeUuids_.getByteString(index);
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public Builder setClanAvengeUuids(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public Builder addClanAvengeUuids(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public Builder addAllClanAvengeUuids(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureClanAvengeUuidsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, clanAvengeUuids_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public Builder clearClanAvengeUuids() {
+        clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string clanAvengeUuids = 2;</code>
+       */
+      public Builder addClanAvengeUuidsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureClanAvengeUuidsIsMutable();
+        clanAvengeUuids_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+      /**
+       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       */
+      public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       */
+      public Builder setStatus(com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndClanAvengingResponseProto)
+    }
+
+    static {
+      defaultInstance = new EndClanAvengingResponseProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.EndClanAvengingResponseProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor;
   private static
@@ -39442,6 +43044,26 @@ public final class EventClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -39451,274 +43073,294 @@ public final class EventClanProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017EventClan.proto\022\016com.lvl6.proto\032\nClan." +
-      "proto\032\022MonsterStuff.proto\032\nUser.proto\"\330\001" +
-      "\n\026CreateClanRequestProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\014\n\004na" +
-      "me\030\002 \001(\t\022\013\n\003tag\030\003 \001(\t\022!\n\031requestToJoinCl" +
-      "anRequired\030\004 \001(\010\022\023\n\013description\030\005 \001(\t\022\022\n" +
-      "\nclanIconId\030\006 \001(\005\022\021\n\tgemsSpent\030\007 \001(\005\022\022\n\n" +
-      "cashChange\030\010 \001(\021\"\222\003\n\027CreateClanResponseP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022H\n\006status\030\002 \001(\01628.com.lvl",
-      "6.proto.CreateClanResponseProto.CreateCl" +
-      "anStatus\0222\n\010clanInfo\030\003 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumClanProto\"\306\001\n\020CreateClanStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024FAIL_N" +
-      "OT_ENOUGH_CASH\020\003\022\023\n\017FAIL_NAME_TAKEN\020\004\022\030\n" +
-      "\024FAIL_ALREADY_IN_CLAN\020\005\022\033\n\027FAIL_INVALID_" +
-      "TAG_LENGTH\020\006\022\022\n\016FAIL_TAG_TAKEN\020\007\022\033\n\027FAIL" +
-      "_INSUFFICIENT_FUNDS\020\010\"I\n\025LeaveClanReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\"\205\002\n\026LeaveClanResponsePr",
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022F\n\006status\030\002 \001(\01626.com.lvl6" +
-      ".proto.LeaveClanResponseProto.LeaveClanS" +
-      "tatus\"q\n\017LeaveClanStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\022+\n\'F" +
-      "AIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN\020\004" +
-      "\"a\n\033RequestJoinClanRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\020\n\010clanUuid\030\002 \001(\t\"\341\005\n\034RequestJoinClanR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.",
-      "proto.MinimumUserProto\022R\n\006status\030\002 \001(\0162B" +
-      ".com.lvl6.proto.RequestJoinClanResponseP" +
-      "roto.RequestJoinClanStatus\022\020\n\010clanUuid\030\003" +
-      " \001(\t\022;\n\trequester\030\004 \001(\0132(.com.lvl6.proto" +
-      ".MinimumUserProtoForClans\0221\n\007minClan\030\005 \001" +
-      "(\0132 .com.lvl6.proto.MinimumClanProto\022;\n\010" +
-      "fullClan\030\006 \001(\0132).com.lvl6.proto.FullClan" +
-      "ProtoWithClanSize\022F\n\014eventDetails\030\007 \001(\0132" +
-      "0.com.lvl6.proto.PersistentClanEventClan" +
-      "InfoProto\022J\n\020clanUsersDetails\030\010 \003(\01320.co",
-      "m.lvl6.proto.PersistentClanEventUserInfo" +
-      "Proto\022F\n\021requesterMonsters\030\t \001(\0132+.com.l" +
-      "vl6.proto.UserCurrentMonsterTeamProto\"\237\001" +
-      "\n\025RequestJoinClanStatus\022\023\n\017SUCCESS_REQUE" +
-      "ST\020\001\022\020\n\014SUCCESS_JOIN\020\002\022\030\n\024FAIL_ALREADY_I" +
-      "N_CLAN\020\003\022\036\n\032FAIL_REQUEST_ALREADY_FILED\020\004" +
-      "\022\025\n\021FAIL_CLAN_IS_FULL\020\005\022\016\n\nFAIL_OTHER\020\006\"" +
-      "h\n\"RetractRequestJoinClanRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\020\n\010clanUuid\030\002 \001(\t\"\274\002\n#RetractReq",
-      "uestJoinClanResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022`\n\006s" +
-      "tatus\030\002 \001(\0162P.com.lvl6.proto.RetractRequ" +
-      "estJoinClanResponseProto.RetractRequestJ" +
-      "oinClanStatus\022\020\n\010clanUuid\030\003 \001(\t\"o\n\034Retra" +
-      "ctRequestJoinClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\022\030\n\024FAIL_ALREADY_IN_CLAN\020\003\022\030" +
-      "\n\024FAIL_DID_NOT_REQUEST\020\004\"\207\001\n,ApproveOrRe" +
-      "jectRequestToJoinClanRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr",
-      "oto\022\025\n\rrequesterUuid\030\002 \001(\t\022\016\n\006accept\030\003 \001" +
-      "(\010\"\272\004\n-ApproveOrRejectRequestToJoinClanR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022t\n\006status\030\002 \001(\0162d" +
-      ".com.lvl6.proto.ApproveOrRejectRequestTo" +
-      "JoinClanResponseProto.ApproveOrRejectReq" +
-      "uestToJoinClanStatus\0223\n\trequester\030\003 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\016\n\006acc" +
-      "ept\030\004 \001(\010\0221\n\007minClan\030\005 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumClanProto\022;\n\010fullClan\030\006 \001(\0132)",
-      ".com.lvl6.proto.FullClanProtoWithClanSiz" +
-      "e\"\253\001\n&ApproveOrRejectRequestToJoinClanSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAI" +
-      "L_NOT_AUTHORIZED\020\003\022\030\n\024FAIL_NOT_A_REQUEST" +
-      "ER\020\004\022\032\n\026FAIL_ALREADY_IN_A_CLAN\020\005\022\025\n\021FAIL" +
-      "_CLAN_IS_FULL\020\006\"\267\002\n\034RetrieveClanInfoRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\020\n\010clanUuid\030\002 \001(\t\022\020\n\010" +
-      "clanName\030\003 \001(\t\022O\n\010grabType\030\004 \001(\0162=.com.l" +
-      "vl6.proto.RetrieveClanInfoRequestProto.C",
-      "lanInfoGrabType\022\034\n\020beforeThisClanId\030\005 \001(" +
-      "\005B\002\030\001\022\031\n\021isForBrowsingList\030\006 \001(\010\"7\n\020Clan" +
-      "InfoGrabType\022\007\n\003ALL\020\001\022\r\n\tCLAN_INFO\020\002\022\013\n\007" +
-      "MEMBERS\020\003\"\213\004\n\035RetrieveClanInfoResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\0229\n\007members\030\002 \003(\0132(.com.lvl" +
-      "6.proto.MinimumUserProtoForClans\022;\n\010clan" +
-      "Info\030\003 \003(\0132).com.lvl6.proto.FullClanProt" +
-      "oWithClanSize\022T\n\006status\030\004 \001(\0162D.com.lvl6" +
-      ".proto.RetrieveClanInfoResponseProto.Ret",
-      "rieveClanInfoStatus\022\023\n\013isForSearch\030\005 \001(\010" +
-      "\022\031\n\021isForBrowsingList\030\006 \001(\010\022\020\n\010clanUuid\030" +
-      "\007 \001(\t\022\020\n\010clanName\030\010 \001(\t\022\034\n\020beforeThisCla" +
-      "nId\030\t \001(\005B\002\030\001\022A\n\014monsterTeams\030\n \003(\0132+.co" +
-      "m.lvl6.proto.UserCurrentMonsterTeamProto" +
-      "\"5\n\026RetrieveClanInfoStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\016\n\nOTHER_FAIL\020\002\"o\n!TransferClanOwnership" +
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\030\n\020clanOwnerUuidN" +
-      "ew\030\002 \001(\t\"\323\003\n\"TransferClanOwnershipRespon",
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022^\n\006status\030\002 \001(\0162N.com." +
-      "lvl6.proto.TransferClanOwnershipResponse" +
-      "Proto.TransferClanOwnershipStatus\0221\n\007min" +
-      "Clan\030\003 \001(\0132 .com.lvl6.proto.MinimumClanP" +
-      "roto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.proto." +
-      "FullClanProtoWithClanSize\0226\n\014clanOwnerNe" +
-      "w\030\005 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\"s\n\033TransferClanOwnershipStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHOR",
-      "IZED\020\003\022\036\n\032FAIL_NEW_OWNER_NOT_IN_CLAN\020\004\"l" +
-      "\n\036BootPlayerFromClanRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\030\n\020playerToBootUuid\030\002 \001(\t\"\324\002\n\037BootPla" +
-      "yerFromClanResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\0226\n\014pl" +
-      "ayerToBoot\030\002 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022X\n\006status\030\003 \001(\0162H.com.lvl6.pr" +
-      "oto.BootPlayerFromClanResponseProto.Boot" +
-      "PlayerFromClanStatus\"m\n\030BootPlayerFromCl",
-      "anStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n" +
-      "\023FAIL_NOT_AUTHORIZED\020\003\022\033\n\027FAIL_BOOTED_NO" +
-      "T_IN_CLAN\020\004\"\346\001\n\036ChangeClanSettingsReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\033\n\023isChangeDescription\030" +
-      "\002 \001(\010\022\026\n\016descriptionNow\030\003 \001(\t\022\030\n\020isChang" +
-      "eJoinType\030\004 \001(\010\022\035\n\025requestToJoinRequired" +
-      "\030\005 \001(\010\022\024\n\014isChangeIcon\030\006 \001(\010\022\016\n\006iconId\030\007" +
-      " \001(\005\"\205\003\n\037ChangeClanSettingsResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu",
-      "mUserProto\022X\n\006status\030\002 \001(\0162H.com.lvl6.pr" +
-      "oto.ChangeClanSettingsResponseProto.Chan" +
-      "geClanSettingsStatus\0221\n\007minClan\030\003 \001(\0132 ." +
-      "com.lvl6.proto.MinimumClanProto\022;\n\010fullC" +
-      "lan\030\004 \001(\0132).com.lvl6.proto.FullClanProto" +
-      "WithClanSize\"f\n\030ChangeClanSettingsStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL_NOT_AUTHORIZED\020\002\022\024" +
-      "\n\020FAIL_NOT_IN_CLAN\020\003\022\016\n\nFAIL_OTHER\020\004\"\364\001\n" +
-      "\031BeginClanRaidRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007",
-      "curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\022\023\n\013clanEve" +
-      "ntId\030\007 \001(\005\022\035\n\025setMonsterTeamForRaid\030\004 \001(" +
-      "\010\022:\n\014userMonsters\030\005 \003(\0132$.com.lvl6.proto" +
-      ".FullUserMonsterProto\022\024\n\014isFirstStage\030\006 " +
-      "\001(\010\"\316\003\n\032BeginClanRaidResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022F\n\014eventDetails\030\002 \001(\01320.com.lvl6.pr" +
-      "oto.PersistentClanEventClanInfoProto\022N\n\006" +
-      "status\030\003 \001(\0162>.com.lvl6.proto.BeginClanR" +
-      "aidResponseProto.BeginClanRaidStatus\022E\n\013",
-      "userDetails\030\004 \001(\01320.com.lvl6.proto.Persi" +
-      "stentClanEventUserInfoProto\"\236\001\n\023BeginCla" +
-      "nRaidStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_ALREADY" +
-      "_STARTED\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\034\n\030F" +
-      "AIL_NO_ACTIVE_CLAN_RAID\020\004\022\031\n\025FAIL_NO_MON" +
-      "STERS_SENT\020\005\022\016\n\nFAIL_OTHER\020\006\"\232\003\n!AttackC" +
-      "lanRaidMonsterRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022F\n\014" +
-      "eventDetails\030\002 \001(\01320.com.lvl6.proto.Pers" +
-      "istentClanEventClanInfoProto\022\022\n\nclientTi",
-      "me\030\003 \001(\003\022\023\n\013damageDealt\030\004 \001(\005\022E\n\016monster" +
-      "Healths\030\005 \003(\0132-.com.lvl6.proto.UserMonst" +
-      "erCurrentHealthProto\022E\n\027userMonsterThatA" +
-      "ttacked\030\t \001(\0132$.com.lvl6.proto.FullUserM" +
-      "onsterProto\022D\n\017userMonsterTeam\030\n \001(\0132+.c" +
-      "om.lvl6.proto.UserCurrentMonsterTeamProt" +
-      "o\"\335\004\n\"AttackClanRaidMonsterResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\020\n\010dmgDealt\030\002 \001(\005\022F\n\014eventDet" +
-      "ails\030\003 \001(\01320.com.lvl6.proto.PersistentCl",
-      "anEventClanInfoProto\022J\n\020clanUsersDetails" +
-      "\030\004 \003(\01320.com.lvl6.proto.PersistentClanEv" +
-      "entUserInfoProto\022E\n\027userMonsterThatAttac" +
-      "ked\030\005 \001(\0132$.com.lvl6.proto.FullUserMonst" +
-      "erProto\022^\n\006status\030\006 \001(\0162N.com.lvl6.proto" +
-      ".AttackClanRaidMonsterResponseProto.Atta" +
-      "ckClanRaidMonsterStatus\"\267\001\n\033AttackClanRa" +
-      "idMonsterStatus\022\013\n\007SUCCESS\020\001\022\035\n\031SUCCESS_" +
-      "MONSTER_JUST_DIED\020\002\022\031\n\025FAIL_USER_NOT_IN_" +
-      "CLAN\020\003\022\"\n\036FAIL_NO_STAGE_RAID_IN_PROGRESS",
-      "\020\004\022\035\n\031FAIL_MONSTER_ALREADY_DEAD\020\005\022\016\n\nFAI" +
-      "L_OTHER\020\006\"~\n%AwardClanRaidStageRewardRes" +
-      "ponseProto\022\r\n\005crsId\030\001 \001(\005\022F\n\nallRewards\030" +
-      "\002 \003(\01322.com.lvl6.proto.PersistentClanEve" +
-      "ntUserRewardProto\"y\n\037RecordClanRaidStats" +
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\020\n\010clanUuid\030\002 \001(\t" +
-      "\022\022\n\nclientTime\030\003 \001(\003\"\211\002\n RecordClanRaidS" +
-      "tatsResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022Z\n\006status\030\002 ",
-      "\001(\0162J.com.lvl6.proto.RecordClanRaidStats" +
-      "ResponseProto.RecordClanRaidStatsStatus\"" +
-      "W\n\031RecordClanRaidStatsStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\035\n\031FAIL_MONSTER_ALREADY_DEAD\020\002\022\016\n\nFAIL" +
-      "_OTHER\020\003\"\253\001\n#PromoteDemoteClanMemberRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\022\n\nvictimUuid\030\002 \001(\t\022>" +
-      "\n\016userClanStatus\030\003 \001(\0162\036.com.lvl6.proto." +
-      "UserClanStatus:\006MEMBER\"\337\003\n$PromoteDemote" +
-      "ClanMemberResponseProto\0220\n\006sender\030\001 \001(\0132",
-      " .com.lvl6.proto.MinimumUserProto\0220\n\006vic" +
-      "tim\030\002 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022>\n\016userClanStatus\030\003 \001(\0162\036.com.lvl6.p" +
-      "roto.UserClanStatus:\006MEMBER\022B\n\022prevUserC" +
-      "lanStatus\030\005 \001(\0162\036.com.lvl6.proto.UserCla" +
-      "nStatus:\006MEMBER\022b\n\006status\030\004 \001(\0162R.com.lv" +
-      "l6.proto.PromoteDemoteClanMemberResponse" +
-      "Proto.PromoteDemoteClanMemberStatus\"k\n\035P" +
-      "romoteDemoteClanMemberStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n\023FAIL_NOT_AUTH",
-      "ORIZED\020\003\022\016\n\nFAIL_OTHER\020\004\"\254\001\n\033SolicitClan" +
-      "HelpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\0223\n\006notice\030\002 \003" +
-      "(\0132#.com.lvl6.proto.ClanHelpNoticeProto\022" +
-      "\022\n\nclientTime\030\004 \001(\003\022\022\n\nmaxHelpers\030\005 \001(\005\"" +
-      "\242\002\n\034SolicitClanHelpResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\0220\n\thelpProto\030\002 \003(\0132\035.com.lvl6.proto.C" +
-      "lanHelpProto\022R\n\006status\030\003 \001(\0162B.com.lvl6." +
-      "proto.SolicitClanHelpResponseProto.Solic",
-      "itClanHelpStatus\"J\n\025SolicitClanHelpStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020FAIL_N" +
-      "OT_IN_CLAN\020\003\"c\n\030GiveClanHelpRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\200\002\n\031Gi" +
-      "veClanHelpResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0220\n\tcla" +
-      "nHelps\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpPr" +
-      "oto\022L\n\006status\030\003 \001(\0162<.com.lvl6.proto.Giv" +
-      "eClanHelpResponseProto.GiveClanHelpStatu",
-      "s\"1\n\022GiveClanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"b\n\027EndClanHelpRequestProto\022" +
+      "\n\017EventClan.proto\022\016com.lvl6.proto\032\014Battl" +
+      "e.proto\032\nClan.proto\032\022MonsterStuff.proto\032" +
+      "\nUser.proto\"\330\001\n\026CreateClanRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\014\n\004name\030\002 \001(\t\022\013\n\003tag\030\003 \001(\t\022!\n\031r" +
+      "equestToJoinClanRequired\030\004 \001(\010\022\023\n\013descri" +
+      "ption\030\005 \001(\t\022\022\n\nclanIconId\030\006 \001(\005\022\021\n\tgemsS" +
+      "pent\030\007 \001(\005\022\022\n\ncashChange\030\010 \001(\021\"\222\003\n\027Creat" +
+      "eClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022H\n\006status\030\002",
+      " \001(\01628.com.lvl6.proto.CreateClanResponse" +
+      "Proto.CreateClanStatus\0222\n\010clanInfo\030\003 \001(\013" +
+      "2 .com.lvl6.proto.MinimumClanProto\"\306\001\n\020C" +
+      "reateClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
+      "ER\020\002\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\003\022\023\n\017FAIL_N" +
+      "AME_TAKEN\020\004\022\030\n\024FAIL_ALREADY_IN_CLAN\020\005\022\033\n" +
+      "\027FAIL_INVALID_TAG_LENGTH\020\006\022\022\n\016FAIL_TAG_T" +
+      "AKEN\020\007\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\010\"I\n\025L" +
+      "eaveClanRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\"\205\002\n\026Leave",
+      "ClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022F\n\006status\030\002 " +
+      "\001(\01626.com.lvl6.proto.LeaveClanResponsePr" +
+      "oto.LeaveClanStatus\"q\n\017LeaveClanStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020FAIL_NOT_" +
+      "IN_CLAN\020\003\022+\n\'FAIL_OWNER_OF_CLAN_WITH_OTH" +
+      "ERS_STILL_IN\020\004\"a\n\033RequestJoinClanRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\020\n\010clanUuid\030\002 \001(\t\"\341\005\n\034Re" +
+      "questJoinClanResponseProto\0220\n\006sender\030\001 \001",
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006" +
+      "status\030\002 \001(\0162B.com.lvl6.proto.RequestJoi" +
+      "nClanResponseProto.RequestJoinClanStatus" +
+      "\022\020\n\010clanUuid\030\003 \001(\t\022;\n\trequester\030\004 \001(\0132(." +
+      "com.lvl6.proto.MinimumUserProtoForClans\022" +
+      "1\n\007minClan\030\005 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mClanProto\022;\n\010fullClan\030\006 \001(\0132).com.lvl6." +
+      "proto.FullClanProtoWithClanSize\022F\n\014event" +
+      "Details\030\007 \001(\01320.com.lvl6.proto.Persisten" +
+      "tClanEventClanInfoProto\022J\n\020clanUsersDeta",
+      "ils\030\010 \003(\01320.com.lvl6.proto.PersistentCla" +
+      "nEventUserInfoProto\022F\n\021requesterMonsters" +
+      "\030\t \001(\0132+.com.lvl6.proto.UserCurrentMonst" +
+      "erTeamProto\"\237\001\n\025RequestJoinClanStatus\022\023\n" +
+      "\017SUCCESS_REQUEST\020\001\022\020\n\014SUCCESS_JOIN\020\002\022\030\n\024" +
+      "FAIL_ALREADY_IN_CLAN\020\003\022\036\n\032FAIL_REQUEST_A" +
+      "LREADY_FILED\020\004\022\025\n\021FAIL_CLAN_IS_FULL\020\005\022\016\n" +
+      "\nFAIL_OTHER\020\006\"h\n\"RetractRequestJoinClanR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\020\n\010clanUuid\030\002 \001(\t\"",
+      "\274\002\n#RetractRequestJoinClanResponseProto\022" +
       "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\341\001\n\030End" +
-      "ClanHelpResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\025\n\rclanH" +
-      "elpUuids\030\002 \003(\t\022J\n\006status\030\003 \001(\0162:.com.lvl" +
-      "6.proto.EndClanHelpResponseProto.EndClan" +
-      "HelpStatus\"0\n\021EndClanHelpStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030InviteToClanRequ",
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\031\n\021prospectiveMember\030" +
-      "\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\230\002\n\031InviteToCl" +
-      "anResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022L\n\006status\030\002 \001(" +
-      "\0162<.com.lvl6.proto.InviteToClanResponseP" +
-      "roto.InviteToClanStatus\022/\n\006invite\030\003 \001(\0132" +
-      "\037.com.lvl6.proto.ClanInviteProto\"J\n\022Invi" +
-      "teToClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\"\322\001\n$AcceptO",
-      "rRejectClanInviteRequestProto\0220\n\006sender\030" +
+      "UserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.pro" +
+      "to.RetractRequestJoinClanResponseProto.R" +
+      "etractRequestJoinClanStatus\022\020\n\010clanUuid\030" +
+      "\003 \001(\t\"o\n\034RetractRequestJoinClanStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024FAIL_ALREA" +
+      "DY_IN_CLAN\020\003\022\030\n\024FAIL_DID_NOT_REQUEST\020\004\"\207" +
+      "\001\n,ApproveOrRejectRequestToJoinClanReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto",
+      ".MinimumUserProto\022\025\n\rrequesterUuid\030\002 \001(\t" +
+      "\022\016\n\006accept\030\003 \001(\010\"\272\004\n-ApproveOrRejectRequ" +
+      "estToJoinClanResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022t\n\006" +
+      "status\030\002 \001(\0162d.com.lvl6.proto.ApproveOrR" +
+      "ejectRequestToJoinClanResponseProto.Appr" +
+      "oveOrRejectRequestToJoinClanStatus\0223\n\tre" +
+      "quester\030\003 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\016\n\006accept\030\004 \001(\010\0221\n\007minClan\030\005 \001(\013" +
+      "2 .com.lvl6.proto.MinimumClanProto\022;\n\010fu",
+      "llClan\030\006 \001(\0132).com.lvl6.proto.FullClanPr" +
+      "otoWithClanSize\"\253\001\n&ApproveOrRejectReque" +
+      "stToJoinClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
+      "OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\030\n\024FAIL" +
+      "_NOT_A_REQUESTER\020\004\022\032\n\026FAIL_ALREADY_IN_A_" +
+      "CLAN\020\005\022\025\n\021FAIL_CLAN_IS_FULL\020\006\"\267\002\n\034Retrie" +
+      "veClanInfoRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\020\n\010clan" +
+      "Uuid\030\002 \001(\t\022\020\n\010clanName\030\003 \001(\t\022O\n\010grabType" +
+      "\030\004 \001(\0162=.com.lvl6.proto.RetrieveClanInfo",
+      "RequestProto.ClanInfoGrabType\022\034\n\020beforeT" +
+      "hisClanId\030\005 \001(\005B\002\030\001\022\031\n\021isForBrowsingList" +
+      "\030\006 \001(\010\"7\n\020ClanInfoGrabType\022\007\n\003ALL\020\001\022\r\n\tC" +
+      "LAN_INFO\020\002\022\013\n\007MEMBERS\020\003\"\213\004\n\035RetrieveClan" +
+      "InfoResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\0229\n\007members\030\002" +
+      " \003(\0132(.com.lvl6.proto.MinimumUserProtoFo" +
+      "rClans\022;\n\010clanInfo\030\003 \003(\0132).com.lvl6.prot" +
+      "o.FullClanProtoWithClanSize\022T\n\006status\030\004 " +
+      "\001(\0162D.com.lvl6.proto.RetrieveClanInfoRes",
+      "ponseProto.RetrieveClanInfoStatus\022\023\n\013isF" +
+      "orSearch\030\005 \001(\010\022\031\n\021isForBrowsingList\030\006 \001(" +
+      "\010\022\020\n\010clanUuid\030\007 \001(\t\022\020\n\010clanName\030\010 \001(\t\022\034\n" +
+      "\020beforeThisClanId\030\t \001(\005B\002\030\001\022A\n\014monsterTe" +
+      "ams\030\n \003(\0132+.com.lvl6.proto.UserCurrentMo" +
+      "nsterTeamProto\"5\n\026RetrieveClanInfoStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"o\n!Transfe" +
+      "rClanOwnershipRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
+      "clanOwnerUuidNew\030\002 \001(\t\"\323\003\n\"TransferClanO",
+      "wnershipResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022^\n\006statu" +
+      "s\030\002 \001(\0162N.com.lvl6.proto.TransferClanOwn" +
+      "ershipResponseProto.TransferClanOwnershi" +
+      "pStatus\0221\n\007minClan\030\003 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumClanProto\022;\n\010fullClan\030\004 \001(\0132).c" +
+      "om.lvl6.proto.FullClanProtoWithClanSize\022" +
+      "6\n\014clanOwnerNew\030\005 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\"s\n\033TransferClanOwnership" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023F",
+      "AIL_NOT_AUTHORIZED\020\003\022\036\n\032FAIL_NEW_OWNER_N" +
+      "OT_IN_CLAN\020\004\"l\n\036BootPlayerFromClanReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\030\n\020playerToBootUuid\030\002 \001" +
+      "(\t\"\324\002\n\037BootPlayerFromClanResponseProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\0226\n\014playerToBoot\030\002 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022X\n\006status\030\003 \001(\016" +
+      "2H.com.lvl6.proto.BootPlayerFromClanResp" +
+      "onseProto.BootPlayerFromClanStatus\"m\n\030Bo",
+      "otPlayerFromClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\033\n\027" +
+      "FAIL_BOOTED_NOT_IN_CLAN\020\004\"\346\001\n\036ChangeClan" +
+      "SettingsRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\033\n\023isChan" +
+      "geDescription\030\002 \001(\010\022\026\n\016descriptionNow\030\003 " +
+      "\001(\t\022\030\n\020isChangeJoinType\030\004 \001(\010\022\035\n\025request" +
+      "ToJoinRequired\030\005 \001(\010\022\024\n\014isChangeIcon\030\006 \001" +
+      "(\010\022\016\n\006iconId\030\007 \001(\005\"\205\003\n\037ChangeClanSetting" +
+      "sResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl",
+      "6.proto.MinimumUserProto\022X\n\006status\030\002 \001(\016" +
+      "2H.com.lvl6.proto.ChangeClanSettingsResp" +
+      "onseProto.ChangeClanSettingsStatus\0221\n\007mi" +
+      "nClan\030\003 \001(\0132 .com.lvl6.proto.MinimumClan" +
+      "Proto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.proto" +
+      ".FullClanProtoWithClanSize\"f\n\030ChangeClan" +
+      "SettingsStatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL_NOT_" +
+      "AUTHORIZED\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\022\016\n\nFA" +
+      "IL_OTHER\020\004\"\364\001\n\031BeginClanRaidRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu",
+      "mUserProto\022\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 " +
+      "\001(\005\022\023\n\013clanEventId\030\007 \001(\005\022\035\n\025setMonsterTe" +
+      "amForRaid\030\004 \001(\010\022:\n\014userMonsters\030\005 \003(\0132$." +
+      "com.lvl6.proto.FullUserMonsterProto\022\024\n\014i" +
+      "sFirstStage\030\006 \001(\010\"\316\003\n\032BeginClanRaidRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022F\n\014eventDetails\030\002 \001(\013" +
+      "20.com.lvl6.proto.PersistentClanEventCla" +
+      "nInfoProto\022N\n\006status\030\003 \001(\0162>.com.lvl6.pr" +
+      "oto.BeginClanRaidResponseProto.BeginClan",
+      "RaidStatus\022E\n\013userDetails\030\004 \001(\01320.com.lv" +
+      "l6.proto.PersistentClanEventUserInfoProt" +
+      "o\"\236\001\n\023BeginClanRaidStatus\022\013\n\007SUCCESS\020\001\022\030" +
+      "\n\024FAIL_ALREADY_STARTED\020\002\022\027\n\023FAIL_NOT_AUT" +
+      "HORIZED\020\003\022\034\n\030FAIL_NO_ACTIVE_CLAN_RAID\020\004\022" +
+      "\031\n\025FAIL_NO_MONSTERS_SENT\020\005\022\016\n\nFAIL_OTHER" +
+      "\020\006\"\232\003\n!AttackClanRaidMonsterRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022F\n\014eventDetails\030\002 \001(\01320.com.l" +
+      "vl6.proto.PersistentClanEventClanInfoPro",
+      "to\022\022\n\nclientTime\030\003 \001(\003\022\023\n\013damageDealt\030\004 " +
+      "\001(\005\022E\n\016monsterHealths\030\005 \003(\0132-.com.lvl6.p" +
+      "roto.UserMonsterCurrentHealthProto\022E\n\027us" +
+      "erMonsterThatAttacked\030\t \001(\0132$.com.lvl6.p" +
+      "roto.FullUserMonsterProto\022D\n\017userMonster" +
+      "Team\030\n \001(\0132+.com.lvl6.proto.UserCurrentM" +
+      "onsterTeamProto\"\335\004\n\"AttackClanRaidMonste" +
+      "rResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\020\n\010dmgDealt\030\002 \001" +
+      "(\005\022F\n\014eventDetails\030\003 \001(\01320.com.lvl6.prot",
+      "o.PersistentClanEventClanInfoProto\022J\n\020cl" +
+      "anUsersDetails\030\004 \003(\01320.com.lvl6.proto.Pe" +
+      "rsistentClanEventUserInfoProto\022E\n\027userMo" +
+      "nsterThatAttacked\030\005 \001(\0132$.com.lvl6.proto" +
+      ".FullUserMonsterProto\022^\n\006status\030\006 \001(\0162N." +
+      "com.lvl6.proto.AttackClanRaidMonsterResp" +
+      "onseProto.AttackClanRaidMonsterStatus\"\267\001" +
+      "\n\033AttackClanRaidMonsterStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\035\n\031SUCCESS_MONSTER_JUST_DIED\020\002\022\031\n\025FAI" +
+      "L_USER_NOT_IN_CLAN\020\003\022\"\n\036FAIL_NO_STAGE_RA",
+      "ID_IN_PROGRESS\020\004\022\035\n\031FAIL_MONSTER_ALREADY" +
+      "_DEAD\020\005\022\016\n\nFAIL_OTHER\020\006\"~\n%AwardClanRaid" +
+      "StageRewardResponseProto\022\r\n\005crsId\030\001 \001(\005\022" +
+      "F\n\nallRewards\030\002 \003(\01322.com.lvl6.proto.Per" +
+      "sistentClanEventUserRewardProto\"y\n\037Recor" +
+      "dClanRaidStatsRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\020\n\010" +
+      "clanUuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\211\002\n R" +
+      "ecordClanRaidStatsResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
+      "o\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Recor" +
+      "dClanRaidStatsResponseProto.RecordClanRa" +
+      "idStatsStatus\"W\n\031RecordClanRaidStatsStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_MONSTER_ALREADY_" +
+      "DEAD\020\002\022\016\n\nFAIL_OTHER\020\003\"\253\001\n#PromoteDemote" +
+      "ClanMemberRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\022\n\nvict" +
+      "imUuid\030\002 \001(\t\022>\n\016userClanStatus\030\003 \001(\0162\036.c" +
+      "om.lvl6.proto.UserClanStatus:\006MEMBER\"\337\003\n" +
+      "$PromoteDemoteClanMemberResponseProto\0220\n",
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0220\n\006victim\030\002 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022>\n\016userClanStatus\030\003 \001(" +
+      "\0162\036.com.lvl6.proto.UserClanStatus:\006MEMBE" +
+      "R\022B\n\022prevUserClanStatus\030\005 \001(\0162\036.com.lvl6" +
+      ".proto.UserClanStatus:\006MEMBER\022b\n\006status\030" +
+      "\004 \001(\0162R.com.lvl6.proto.PromoteDemoteClan" +
+      "MemberResponseProto.PromoteDemoteClanMem" +
+      "berStatus\"k\n\035PromoteDemoteClanMemberStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n",
+      "\023FAIL_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004\"\254" +
+      "\001\n\033SolicitClanHelpRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\0223\n\006notice\030\002 \003(\0132#.com.lvl6.proto.ClanHe" +
+      "lpNoticeProto\022\022\n\nclientTime\030\004 \001(\003\022\022\n\nmax" +
+      "Helpers\030\005 \001(\005\"\242\002\n\034SolicitClanHelpRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\0220\n\thelpProto\030\002 \003(\0132\035.co" +
+      "m.lvl6.proto.ClanHelpProto\022R\n\006status\030\003 \001" +
+      "(\0162B.com.lvl6.proto.SolicitClanHelpRespo",
+      "nseProto.SolicitClanHelpStatus\"J\n\025Solici" +
+      "tClanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
+      "ER\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\"c\n\030GiveClanHe" +
+      "lpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\025\n\rclanHelpUuid" +
+      "s\030\002 \003(\t\"\200\002\n\031GiveClanHelpResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0220\n\tclanHelps\030\002 \003(\0132\035.com.lvl6.pr" +
+      "oto.ClanHelpProto\022L\n\006status\030\003 \001(\0162<.com." +
+      "lvl6.proto.GiveClanHelpResponseProto.Giv",
+      "eClanHelpStatus\"1\n\022GiveClanHelpStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"b\n\027EndClanHel" +
+      "pRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022\025\n\rclanHelpUuids" +
+      "\030\002 \003(\t\"\341\001\n\030EndClanHelpResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022\025\n\rclanHelpUuids\030\002 \003(\t\022J\n\006status\030\003" +
+      " \001(\0162:.com.lvl6.proto.EndClanHelpRespons" +
+      "eProto.EndClanHelpStatus\"0\n\021EndClanHelpS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030In",
+      "viteToClanRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\031\n\021pros" +
+      "pectiveMember\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"" +
+      "\230\002\n\031InviteToClanResponseProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "1\n\010accepted\030\002 \001(\0132\037.com.lvl6.proto.ClanI" +
-      "nviteProto\0221\n\010rejected\030\003 \003(\0132\037.com.lvl6." +
-      "proto.ClanInviteProto\022\022\n\nclientTime\030\004 \001(" +
-      "\003\"\322\002\n%AcceptOrRejectClanInviteResponsePr" +
+      "L\n\006status\030\002 \001(\0162<.com.lvl6.proto.InviteT" +
+      "oClanResponseProto.InviteToClanStatus\022/\n" +
+      "\006invite\030\003 \001(\0132\037.com.lvl6.proto.ClanInvit" +
+      "eProto\"J\n\022InviteToClanStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED",
+      "\020\003\"\322\001\n$AcceptOrRejectClanInviteRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6" +
-      ".proto.AcceptOrRejectClanInviteResponseP" +
-      "roto.AcceptOrRejectClanInviteStatus\022;\n\010f",
-      "ullClan\030\003 \001(\0132).com.lvl6.proto.FullClanP" +
-      "rotoWithClanSize\"T\n\036AcceptOrRejectClanIn" +
-      "viteStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
-      "\025\n\021FAIL_CLAN_IS_FULL\020\003\"\177\n\035RetrieveClanDa" +
-      "taResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022/\n\010clanData\030\002 \001(\013" +
-      "2\035.com.lvl6.proto.ClanDataProtoB\020B\016Event" +
-      "ClanProto"
+      "imumUserProto\0221\n\010accepted\030\002 \001(\0132\037.com.lv" +
+      "l6.proto.ClanInviteProto\0221\n\010rejected\030\003 \003" +
+      "(\0132\037.com.lvl6.proto.ClanInviteProto\022\022\n\nc" +
+      "lientTime\030\004 \001(\003\"\322\002\n%AcceptOrRejectClanIn" +
+      "viteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022d\n\006status\030\002 " +
+      "\001(\0162T.com.lvl6.proto.AcceptOrRejectClanI" +
+      "nviteResponseProto.AcceptOrRejectClanInv",
+      "iteStatus\022;\n\010fullClan\030\003 \001(\0132).com.lvl6.p" +
+      "roto.FullClanProtoWithClanSize\"T\n\036Accept" +
+      "OrRejectClanInviteStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\022\025\n\021FAIL_CLAN_IS_FULL\020\003\"\177\n\035" +
+      "RetrieveClanDataResponseProto\022-\n\003mup\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022/\n\010" +
+      "clanData\030\002 \001(\0132\035.com.lvl6.proto.ClanData" +
+      "Proto\"\236\001\n\035BeginClanAvengingRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\0227\n\016recentNBattles\030\002 \003(\0132\037.com.",
+      "lvl6.proto.PvpHistoryProto\022\022\n\nclientTime" +
+      "\030\003 \001(\003\"\235\002\n\036BeginClanAvengingResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\0229\n\rclanAvengings\030\002 \003(\0132\".com" +
+      ".lvl6.proto.PvpClanAvengeProto\022V\n\006status" +
+      "\030\003 \001(\0162F.com.lvl6.proto.BeginClanAvengin" +
+      "gResponseProto.BeginClanAvengingStatus\"6" +
+      "\n\027BeginClanAvengingStatus\022\013\n\007SUCCESS\020\001\022\016" +
+      "\n\nFAIL_OTHER\020\002\"h\n\033EndClanAvengingRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
+      "inimumUserProto\022\027\n\017clanAvengeUuids\030\002 \003(\t" +
+      "\"\363\001\n\034EndClanAvengingResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\027\n\017clanAvengeUuids\030\002 \003(\t\022R\n\006status\030\003" +
+      " \001(\0162B.com.lvl6.proto.EndClanAvengingRes" +
+      "ponseProto.EndClanAvengingStatus\"4\n\025EndC" +
+      "lanAvengingStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
+      "THER\020\002B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -39731,6 +43373,7 @@ public final class EventClanProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
@@ -39963,6 +43606,31 @@ public final class EventClanProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveClanDataResponseProto_descriptor,
         new java.lang.String[] { "Mup", "ClanData", });
+    internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(38);
+    internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginClanAvengingRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "RecentNBattles", "ClientTime", });
+    internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(39);
+    internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_BeginClanAvengingResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "ClanAvengings", "Status", });
+    internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor =
+      getDescriptor().getMessageTypes().get(40);
+    internal_static_com_lvl6_proto_EndClanAvengingRequestProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EndClanAvengingRequestProto_descriptor,
+        new java.lang.String[] { "Sender", "ClanAvengeUuids", });
+    internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor =
+      getDescriptor().getMessageTypes().get(41);
+    internal_static_com_lvl6_proto_EndClanAvengingResponseProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_EndClanAvengingResponseProto_descriptor,
+        new java.lang.String[] { "Sender", "ClanAvengeUuids", "Status", });
+    com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ClanProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
