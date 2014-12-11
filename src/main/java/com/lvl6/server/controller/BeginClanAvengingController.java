@@ -25,6 +25,7 @@ import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatu
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.BeginClanAvengingAction;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
@@ -123,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			List<ClanAvenge> caList = ClanStuffUtils
 				.javafyPvpHistoryProto(userId, clanId, recentNBattles,
 					clientTime);
-			Map<String, MinimumUserProto> attackerMupMap = ClanStuffUtils
+			Map<String, MinimumUserProtoWithLevel> attackerMupwlMap = ClanStuffUtils
 				.extractAttackerFullUserProto(recentNBattles);
 			
 			BeginClanAvengingAction bcaa =
@@ -144,7 +145,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					.getRetaliationRequestsWithIds();
 				List<PvpClanAvengeProto> retaliationProtos =
 					CreateInfoProtoUtils.createPvpClanAvengeProto(
-						retaliationRequestsWithIds, senderProto, clanId, attackerMupMap);
+						retaliationRequestsWithIds, senderProto, clanId,
+						attackerMupwlMap);
 				
 				resBuilder.addAllClanAvengings(retaliationProtos);
 				

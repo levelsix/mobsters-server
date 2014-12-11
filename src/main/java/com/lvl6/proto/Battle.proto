@@ -100,7 +100,7 @@ message PvpClanAvengeProto {
 
 	optional string clanAvengeUuid = 1;
 	repeated PvpUserClanAvengeProto usersAvenging = 2;
-	optional MinimumUserProto attacker = 3;
+	optional MinimumUserProtoWithLevel attacker = 3;
 	optional MinimumUserProto defender = 4;
 	optional int64 battleEndTime = 5;
 	optional int64 avengeRequestTime = 6;

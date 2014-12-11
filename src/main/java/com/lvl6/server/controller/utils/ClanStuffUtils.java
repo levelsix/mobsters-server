@@ -15,7 +15,7 @@ import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 
@@ -98,21 +98,21 @@ public class ClanStuffUtils {
 	  return caList;
   }
   
-  public static Map<String, MinimumUserProto> extractAttackerFullUserProto(
+  public static Map<String, MinimumUserProtoWithLevel> extractAttackerFullUserProto(
 	  List<PvpHistoryProto> phpList)
   {
-	  Map<String, MinimumUserProto> idToMup = new HashMap<>();
+	  Map<String, MinimumUserProtoWithLevel> idToMupWl = new HashMap<>();
 	  
 	  for (PvpHistoryProto php : phpList)
 	  {
 		  FullUserProto attacker = php.getAttacker();
 		  String attackerId = attacker.getUserUuid();
-		  MinimumUserProto mup = CreateInfoProtoUtils
+		  MinimumUserProtoWithLevel mupwl = CreateInfoProtoUtils
 			  .createMinimumUserProto(attacker);
 		  
-		  idToMup.put(attackerId, mup);
+		  idToMupWl.put(attackerId, mupwl);
 	  }
-	  return idToMup;
+	  return idToMupWl;
   }
   
 }

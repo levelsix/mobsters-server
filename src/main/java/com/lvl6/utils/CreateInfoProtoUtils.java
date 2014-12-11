@@ -716,7 +716,8 @@ public class CreateInfoProtoUtils {
 	
 	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
 		List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
-		String clanUuid, Map<String, MinimumUserProto> attackerIdsToMups)
+		String clanUuid,
+		Map<String, MinimumUserProtoWithLevel> attackerIdsToMupwls)
 	{
 		List<PvpClanAvengeProto> pcapList =
 			new ArrayList<PvpClanAvengeProto>();
@@ -724,11 +725,11 @@ public class CreateInfoProtoUtils {
 		for (ClanAvenge ca : retaliations)
 		{
 			String attackerId = ca.getAttackerId();
-			MinimumUserProto attackerMup = attackerIdsToMups
+			MinimumUserProtoWithLevel attackerMupwl = attackerIdsToMupwls
 				.get(attackerId);
 			
 			PvpClanAvengeProto pcap = createPvpClanAvengeProto(
-				attackerMup, defenderMup, clanUuid, ca);
+				attackerMupwl, defenderMup, clanUuid, ca);
 			
 			pcapList.add(pcap);
 		}
@@ -736,7 +737,7 @@ public class CreateInfoProtoUtils {
 	}
 	
 	public static PvpClanAvengeProto createPvpClanAvengeProto(
-		MinimumUserProto attacker, MinimumUserProto defender,
+		MinimumUserProtoWithLevel attacker, MinimumUserProto defender,
 		String defenderClanUuid, ClanAvenge ca)
 	{
 		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
@@ -3533,7 +3534,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static MinimumUserProto createMinimumUserProto(FullUserProto fup)
+	public static MinimumUserProtoWithLevel createMinimumUserProto(FullUserProto fup)
 	{
 		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
 		String str = fup.getUserUuid();
@@ -3560,7 +3561,11 @@ public class CreateInfoProtoUtils {
 			mupb.setAvatarMonsterId(avatarMonsterId);
 		}
 		
-		return mupb.build();
+		MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+		mupwlb.setLevel(fup.getLevel());
+		mupwlb.setMinUserProto(mupb.build());
+		
+		return mupwlb.build();
 	}
 
 
