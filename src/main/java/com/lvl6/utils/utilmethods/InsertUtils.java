@@ -1731,7 +1731,8 @@ public class InsertUtils implements InsertUtil{
 		}
 
 		@Override
-		public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList)
+		public List<String> insertIntoClanAvengeGetId(List<ClanAvenge> caList,
+			String clanId)
 		{
 			String tableName = DBConstants.TABLE_CLAN_AVENGE;
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
@@ -1752,7 +1753,7 @@ public class InsertUtils implements InsertUtil{
 				newRow.put(DBConstants.CLAN_AVENGE__AVENGE_REQUEST_TIME,
 					new Timestamp(ca.getAvengeRequestTime().getTime()));
 				
-				
+				newRow.put(DBConstants.CLAN_AVENGE__CLAN_ID, clanId);
 				newRows.add(newRow);
 			}
 			int numUpdated = DBConnection.get()

@@ -225,5 +225,5 @@ public interface InsertUtil {
 		List<ItemSecretGiftForUser> gifts);
 	
 	public abstract List<String> insertIntoClanAvengeGetId(
-		List<ClanAvenge> caList);
+		List<ClanAvenge> caList, String clanId);
 }

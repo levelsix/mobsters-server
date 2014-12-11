@@ -107,7 +107,8 @@ public class BeginClanAvengingAction
 		int numUpdated = updateUtil.updatePvpBattleHistoryClanRetaliated(
 			historyAttackerId, historyDefenderId, battleEndTime);
 		log.info("numUpdated pvp_battle_history {}", numUpdated);
-		List<String> ids = insertUtil.insertIntoClanAvengeGetId(caList);
+		List<String> ids = insertUtil
+			.insertIntoClanAvengeGetId(caList, clanId);
 		
 		retaliationRequestsWithIds = new ArrayList<>();
 		for (int i = 0; i < ids.size(); i++)
