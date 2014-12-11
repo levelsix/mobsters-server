@@ -65,6 +65,10 @@ public final class SkillsProto {
      * <code>CRIT_AND_EVADE = 11;</code>
      */
     CRIT_AND_EVADE(10, 11),
+    /**
+     * <code>SHUFFLE = 12;</code>
+     */
+    SHUFFLE(11, 12),
     ;
 
     /**
@@ -119,6 +123,10 @@ public final class SkillsProto {
      * <code>CRIT_AND_EVADE = 11;</code>
      */
     public static final int CRIT_AND_EVADE_VALUE = 11;
+    /**
+     * <code>SHUFFLE = 12;</code>
+     */
+    public static final int SHUFFLE_VALUE = 12;
 
 
     public final int getNumber() { return value; }
@@ -136,6 +144,7 @@ public final class SkillsProto {
         case 9: return MOMENTUM;
         case 10: return THICK_SKIN;
         case 11: return CRIT_AND_EVADE;
+        case 12: return SHUFFLE;
         default: return null;
       }
     }
@@ -2996,14 +3005,14 @@ public final class SkillsProto {
       "oto\022\014\n\004desc\030\t \001(\t\022\023\n\013iconImgName\030\n \001(\t\022\023" +
       "\n\013logoImgName\030\013 \001(\t\"O\n\022SkillPropertyProt" +
       "o\022\027\n\017skillPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t",
-      "\022\022\n\nskillValue\030\003 \001(\002*\251\001\n\tSkillType\022\014\n\010NO" +
+      "\022\022\n\nskillValue\030\003 \001(\002*\266\001\n\tSkillType\022\014\n\010NO" +
       "_SKILL\020\001\022\r\n\tCAKE_DROP\020\002\022\t\n\005JELLY\020\003\022\020\n\014QU" +
       "ICK_ATTACK\020\004\022\t\n\005BOMBS\020\005\022\n\n\006SHIELD\020\006\022\n\n\006P" +
       "OISON\020\007\022\r\n\tROID_RAGE\020\010\022\014\n\010MOMENTUM\020\t\022\016\n\n" +
-      "THICK_SKIN\020\n\022\022\n\016CRIT_AND_EVADE\020\013*J\n\023Skil" +
-      "lActivationType\022\022\n\016USER_ACTIVATED\020\001\022\022\n\016A" +
-      "UTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020\003B\rB\013SkillsPr" +
-      "oto"
+      "THICK_SKIN\020\n\022\022\n\016CRIT_AND_EVADE\020\013\022\013\n\007SHUF" +
+      "FLE\020\014*J\n\023SkillActivationType\022\022\n\016USER_ACT" +
+      "IVATED\020\001\022\022\n\016AUTO_ACTIVATED\020\002\022\013\n\007PASSIVE\020" +
+      "\003B\rB\013SkillsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
