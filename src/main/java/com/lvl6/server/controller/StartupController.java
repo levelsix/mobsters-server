@@ -95,6 +95,8 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils2;
+import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
+import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils2;
@@ -133,6 +135,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemSecretGiftAction;
 import com.lvl6.server.controller.actionobjects.SetClanChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetClanHelpingsAction;
+import com.lvl6.server.controller.actionobjects.SetClanRetaliationsAction;
 import com.lvl6.server.controller.actionobjects.SetFacebookExtraSlotsAction;
 import com.lvl6.server.controller.actionobjects.SetGlobalChatMessageAction;
 import com.lvl6.server.controller.actionobjects.SetPrivateChatMessageAction;
@@ -217,6 +220,12 @@ public class StartupController extends EventController {
 	@Autowired
 	protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
 
+	@Autowired
+	protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
+	
+	@Autowired
+	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 
@@ -567,14 +576,21 @@ public class StartupController extends EventController {
 			
 			//CLAN DATA
 			ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
-			SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb, user, getClanChatPostRetrieveUtils());
+			SetClanChatMessageAction sccma = new SetClanChatMessageAction(
+				cdpb, user, getClanChatPostRetrieveUtils());
 			sccma.setUp(fillMe);
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			
-			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user, playerId, clanHelpRetrieveUtil);
+			SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb,
+				user, playerId, clanHelpRetrieveUtil);
 			scha.setUp(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 
+			SetClanRetaliationsAction scra = new SetClanRetaliationsAction(
+				cdpb, user, playerId, clanAvengeRetrieveUtil,
+				clanAvengeUserRetrieveUtil);
+			scra.setUp(fillMe);
+			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			
 			
 			//Now since all the ids of resources are known, get them from db
@@ -593,7 +609,8 @@ public class StartupController extends EventController {
 			log.info("{}ms at setClanChatMessages", stopWatch.getTime());
 			scha.execute(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
-
+			scra.execute(fillMe);
+			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client
@@ -2088,6 +2105,22 @@ public class StartupController extends EventController {
 	public void setClanHelpRetrieveUtil( ClanHelpRetrieveUtil clanHelpRetrieveUtil )
 	{
 		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
+	}
+	public ClanAvengeRetrieveUtil getClanAvengeRetrieveUtil()
+	{
+		return clanAvengeRetrieveUtil;
+	}
+	public void setClanAvengeRetrieveUtil( ClanAvengeRetrieveUtil clanAvengeRetrieveUtil )
+	{
+		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
+	}
+	public ClanAvengeUserRetrieveUtil getClanAvengeUserRetrieveUtil()
+	{
+		return clanAvengeUserRetrieveUtil;
+	}
+	public void setClanAvengeUserRetrieveUtil( ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil )
+	{
+		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 	public QuestForUserRetrieveUtils2 getQuestForUserRetrieveUtils() {
 		return questForUserRetrieveUtils;

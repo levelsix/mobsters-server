@@ -23,6 +23,7 @@ import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -99,6 +100,7 @@ import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
 import com.lvl6.proto.BattleProto.PvpMonsterProto;
 import com.lvl6.proto.BattleProto.PvpProto;
+import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -711,6 +713,104 @@ public class CreateInfoProtoUtils {
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 
 		return uplpb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations,
+		Map<String, List<ClanAvengeUser>> clanAvengeIdToClanAvengeUser,
+		Map<String, User> userIdsToUsers,
+		Map<String, Clan> userIdsToClans)
+	{
+		List<PvpClanAvengeProto> pcapList = new ArrayList<>();
+		
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			createMinimumUserProtoWithLevel(userIdsToUsers, userIdsToClans);
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String clanAvengeId = ca.getId();
+			List<ClanAvengeUser> cauList = null;
+			
+			if (clanAvengeIdToClanAvengeUser.containsKey(clanAvengeId))
+			{
+				cauList = clanAvengeIdToClanAvengeUser
+					.get(clanAvengeId);
+			}
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(ca, cauList, userIdToMupwl);
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		ClanAvenge ca, List<ClanAvengeUser> cauList,
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl)
+	{
+		String attackerId = ca.getAttackerId();
+		String defenderId = ca.getDefenderId();
+		String defenderClanUuid = ca.getClanId();
+		
+		MinimumUserProtoWithLevel attacker = userIdToMupwl
+			.get(attackerId);
+		MinimumUserProtoWithLevel defender = userIdToMupwl
+			.get(defenderId);
+		
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender.getMinUserProto());
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		//could be that no clan mate started retaliating
+		//against person who attacked clan member
+		if (null != cauList && !cauList.isEmpty())
+		{
+			List<PvpUserClanAvengeProto> pucapList =
+				createPvpUserClanAvengeProto(cauList);
+			pcapb.addAllUsersAvenging(pucapList);
+		}
+		
+		return pcapb.build();
+	}
+	
+	public static List<PvpUserClanAvengeProto> createPvpUserClanAvengeProto(
+		List<ClanAvengeUser> cauList )
+	{
+		List<PvpUserClanAvengeProto> pucapList = new
+			ArrayList<PvpUserClanAvengeProto>();
+		
+		for (ClanAvengeUser cau : cauList)
+		{
+			PvpUserClanAvengeProto pucap =
+				createPvpUserClanAvengeProto(cau);
+			pucapList.add(pucap);
+		}
+		
+		return pucapList;
+	}
+	
+	public static PvpUserClanAvengeProto createPvpUserClanAvengeProto(
+		ClanAvengeUser cau)
+	{
+		PvpUserClanAvengeProto.Builder pucapb =
+			PvpUserClanAvengeProto.newBuilder();
+		
+		pucapb.setUserUuid(cau.getUserId());
+		pucapb.setClanAvengeUuid(cau.getClanAvengeId());
+		pucapb.setClanUuid(cau.getClanId());
+		
+		Date date = cau.getAvengeTime();
+		pucapb.setAvengeTime(date.getTime());
+		
+		return pucapb.build();
 	}
 	
 	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
@@ -3567,7 +3667,23 @@ public class CreateInfoProtoUtils {
 		return mupwlb.build();
 	}
 
-
+	public static Map<String, MinimumUserProtoWithLevel> createMinimumUserProtoWithLevel(
+		Map<String, User> userIdsToUsers, Map<String, Clan> userIdsToClans)
+	{
+		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
+			new HashMap<String, MinimumUserProtoWithLevel>();
+		for (User u : userIdsToUsers.values())
+		{
+			String userId = u.getId();
+			Clan c = userIdsToClans.get(userId);
+			
+			MinimumUserProtoWithLevel mupwl =
+				createMinimumUserProtoWithLevel(u, c, null);
+			
+			userIdToMupwl.put(userId, mupwl);
+		}
+		return userIdToMupwl;
+	}
 
 
 

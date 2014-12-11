@@ -126,7 +126,8 @@ public class ControllerConstants {
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
 	public static final int PVP__CHARACTER_LIMIT_FOR_DEFENSIVE_MSG = 140;
-
+	public static final int PVP__BEGIN_AVENGING_TIME_LIMIT_MINS = 10;
+	public static final int PVP__REQUEST_CLAN_TO_AVENGE_TIME_LIMIT_MINS = 1440;
 	
 	//NOT USING ANYMORE--------------------------------------------------------------------
 	//all these pairing chances need to sum to one
