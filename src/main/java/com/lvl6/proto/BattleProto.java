@@ -6405,34 +6405,26 @@ public final class BattleProto {
 
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
-     *
-     * <pre>
-     *TODO: DBConstants, change there too
-     * </pre>
      */
     boolean hasAvengeRequestTime();
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
-     *
-     * <pre>
-     *TODO: DBConstants, change there too
-     * </pre>
      */
     long getAvengeRequestTime();
 
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    boolean hasClanUuid();
+    boolean hasDefenderClanUuid();
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    java.lang.String getClanUuid();
+    java.lang.String getDefenderClanUuid();
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
     com.google.protobuf.ByteString
-        getClanUuidBytes();
+        getDefenderClanUuidBytes();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpClanAvengeProto}
@@ -6544,7 +6536,7 @@ public final class BattleProto {
             case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000020;
-              clanUuid_ = bs;
+              defenderClanUuid_ = bs;
               break;
             }
           }
@@ -6728,38 +6720,30 @@ public final class BattleProto {
     private long avengeRequestTime_;
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
-     *
-     * <pre>
-     *TODO: DBConstants, change there too
-     * </pre>
      */
     public boolean hasAvengeRequestTime() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
-     *
-     * <pre>
-     *TODO: DBConstants, change there too
-     * </pre>
      */
     public long getAvengeRequestTime() {
       return avengeRequestTime_;
     }
 
-    public static final int CLANUUID_FIELD_NUMBER = 7;
-    private java.lang.Object clanUuid_;
+    public static final int DEFENDERCLANUUID_FIELD_NUMBER = 7;
+    private java.lang.Object defenderClanUuid_;
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    public boolean hasClanUuid() {
+    public boolean hasDefenderClanUuid() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
-    public java.lang.String getClanUuid() {
-      java.lang.Object ref = clanUuid_;
+    public java.lang.String getDefenderClanUuid() {
+      java.lang.Object ref = defenderClanUuid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -6767,22 +6751,22 @@ public final class BattleProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          clanUuid_ = s;
+          defenderClanUuid_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string clanUuid = 7;</code>
+     * <code>optional string defenderClanUuid = 7;</code>
      */
     public com.google.protobuf.ByteString
-        getClanUuidBytes() {
-      java.lang.Object ref = clanUuid_;
+        getDefenderClanUuidBytes() {
+      java.lang.Object ref = defenderClanUuid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        clanUuid_ = b;
+        defenderClanUuid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -6796,7 +6780,7 @@ public final class BattleProto {
       defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       battleEndTime_ = 0L;
       avengeRequestTime_ = 0L;
-      clanUuid_ = "";
+      defenderClanUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6830,7 +6814,7 @@ public final class BattleProto {
         output.writeInt64(6, avengeRequestTime_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(7, getClanUuidBytes());
+        output.writeBytes(7, getDefenderClanUuidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6867,7 +6851,7 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, getClanUuidBytes());
+          .computeBytesSize(7, getDefenderClanUuidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7018,7 +7002,7 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         avengeRequestTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
-        clanUuid_ = "";
+        defenderClanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -7088,7 +7072,7 @@ public final class BattleProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.clanUuid_ = clanUuid_;
+        result.defenderClanUuid_ = defenderClanUuid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7148,9 +7132,9 @@ public final class BattleProto {
         if (other.hasAvengeRequestTime()) {
           setAvengeRequestTime(other.getAvengeRequestTime());
         }
-        if (other.hasClanUuid()) {
+        if (other.hasDefenderClanUuid()) {
           bitField0_ |= 0x00000040;
-          clanUuid_ = other.clanUuid_;
+          defenderClanUuid_ = other.defenderClanUuid_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -7763,30 +7747,18 @@ public final class BattleProto {
       private long avengeRequestTime_ ;
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
-       *
-       * <pre>
-       *TODO: DBConstants, change there too
-       * </pre>
        */
       public boolean hasAvengeRequestTime() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
-       *
-       * <pre>
-       *TODO: DBConstants, change there too
-       * </pre>
        */
       public long getAvengeRequestTime() {
         return avengeRequestTime_;
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
-       *
-       * <pre>
-       *TODO: DBConstants, change there too
-       * </pre>
        */
       public Builder setAvengeRequestTime(long value) {
         bitField0_ |= 0x00000020;
@@ -7796,10 +7768,6 @@ public final class BattleProto {
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
-       *
-       * <pre>
-       *TODO: DBConstants, change there too
-       * </pre>
        */
       public Builder clearAvengeRequestTime() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -7808,24 +7776,24 @@ public final class BattleProto {
         return this;
       }
 
-      private java.lang.Object clanUuid_ = "";
+      private java.lang.Object defenderClanUuid_ = "";
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public boolean hasClanUuid() {
+      public boolean hasDefenderClanUuid() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public java.lang.String getClanUuid() {
-        java.lang.Object ref = clanUuid_;
+      public java.lang.String getDefenderClanUuid() {
+        java.lang.Object ref = defenderClanUuid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            clanUuid_ = s;
+            defenderClanUuid_ = s;
           }
           return s;
         } else {
@@ -7833,53 +7801,53 @@ public final class BattleProto {
         }
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
       public com.google.protobuf.ByteString
-          getClanUuidBytes() {
-        java.lang.Object ref = clanUuid_;
+          getDefenderClanUuidBytes() {
+        java.lang.Object ref = defenderClanUuid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          clanUuid_ = b;
+          defenderClanUuid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder setClanUuid(
+      public Builder setDefenderClanUuid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        clanUuid_ = value;
+        defenderClanUuid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder clearClanUuid() {
+      public Builder clearDefenderClanUuid() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        clanUuid_ = getDefaultInstance().getClanUuid();
+        defenderClanUuid_ = getDefaultInstance().getDefenderClanUuid();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string clanUuid = 7;</code>
+       * <code>optional string defenderClanUuid = 7;</code>
        */
-      public Builder setClanUuidBytes(
+      public Builder setDefenderClanUuidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        clanUuid_ = value;
+        defenderClanUuid_ = value;
         onChanged();
         return this;
       }
@@ -8880,19 +8848,19 @@ public final class BattleProto {
       " \001(\005\022\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanA" +
       "venged\030\021 \001(\010\"^\n\016PvpLeagueProto\022\020\n\010league" +
       "Id\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(\t\022\021\n\timgPrefi",
-      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\227\002\n\022PvpClan" +
+      "x\030\003 \001(\t\022\023\n\013description\030\005 \001(\t\"\237\002\n\022PvpClan" +
       "AvengeProto\022\026\n\016clanAvengeUuid\030\001 \001(\t\022=\n\ru" +
       "sersAvenging\030\002 \003(\0132&.com.lvl6.proto.PvpU" +
       "serClanAvengeProto\0222\n\010attacker\030\003 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\0222\n\010defend" +
       "er\030\004 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\025\n\rbattleEndTime\030\005 \001(\003\022\031\n\021avengeReque" +
-      "stTime\030\006 \001(\003\022\020\n\010clanUuid\030\007 \001(\t\"h\n\026PvpUse" +
-      "rClanAvengeProto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010cl" +
-      "anUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\n",
-      "avengeTime\030\004 \001(\003*E\n\014BattleResult\022\020\n\014ATTA" +
-      "CKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER" +
-      "_FLEE\020\003B\rB\013BattleProto"
+      "stTime\030\006 \001(\003\022\030\n\020defenderClanUuid\030\007 \001(\t\"h" +
+      "\n\026PvpUserClanAvengeProto\022\020\n\010userUuid\030\001 \001" +
+      "(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016clanAvengeUuid\030\003",
+      " \001(\t\022\022\n\navengeTime\030\004 \001(\003*E\n\014BattleResult" +
+      "\022\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\r" +
+      "ATTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8937,7 +8905,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpClanAvengeProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpClanAvengeProto_descriptor,
-        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "ClanUuid", });
+        new java.lang.String[] { "ClanAvengeUuid", "UsersAvenging", "Attacker", "Defender", "BattleEndTime", "AvengeRequestTime", "DefenderClanUuid", });
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_PvpUserClanAvengeProto_fieldAccessorTable = new

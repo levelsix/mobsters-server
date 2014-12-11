@@ -103,8 +103,9 @@ message PvpClanAvengeProto {
 	optional MinimumUserProto attacker = 3;
 	optional MinimumUserProto defender = 4;
 	optional int64 battleEndTime = 5;
-	optional int64 avengeRequestTime = 6; //TODO: DBConstants, change there too
-	optional string clanUuid = 7;
+	optional int64 avengeRequestTime = 6;
+	
+	optional string defenderClanUuid = 7; 
 }
 
 message PvpUserClanAvengeProto {

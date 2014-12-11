@@ -22,6 +22,7 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
@@ -92,6 +93,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
+import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto.Builder;
 import com.lvl6.proto.BattleProto.PvpLeagueProto;
@@ -710,6 +712,47 @@ public class CreateInfoProtoUtils {
 		uplpb.setMonsterDmgMultiplier(ControllerConstants.PVP__MONSTER_DMG_MULTIPLIER);
 
 		return uplpb.build();
+	}
+	
+	public static List<PvpClanAvengeProto> createPvpClanAvengeProto(
+		List<ClanAvenge> retaliations, MinimumUserProto defenderMup,
+		String clanUuid, Map<String, MinimumUserProto> attackerIdsToMups)
+	{
+		List<PvpClanAvengeProto> pcapList =
+			new ArrayList<PvpClanAvengeProto>();
+		
+		for (ClanAvenge ca : retaliations)
+		{
+			String attackerId = ca.getAttackerId();
+			MinimumUserProto attackerMup = attackerIdsToMups
+				.get(attackerId);
+			
+			PvpClanAvengeProto pcap = createPvpClanAvengeProto(
+				attackerMup, defenderMup, clanUuid, ca);
+			
+			pcapList.add(pcap);
+		}
+		return pcapList;
+	}
+	
+	public static PvpClanAvengeProto createPvpClanAvengeProto(
+		MinimumUserProto attacker, MinimumUserProto defender,
+		String defenderClanUuid, ClanAvenge ca)
+	{
+		PvpClanAvengeProto.Builder pcapb = PvpClanAvengeProto.newBuilder();
+		pcapb.setClanAvengeUuid(ca.getId());
+		pcapb.setAttacker(attacker);
+		pcapb.setDefender(defender);
+		
+		Date time = ca.getBattleEndTime();
+		pcapb.setBattleEndTime(time.getTime());
+		
+		time = ca.getAvengeRequestTime();
+		pcapb.setAvengeRequestTime(time.getTime());
+		
+		pcapb.setDefenderClanUuid(defenderClanUuid);
+	
+		return pcapb.build();
 	}
 
 	/**BoosterPackStuff.proto****************************************/
@@ -3490,9 +3533,35 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-
-
-
+	public static MinimumUserProto createMinimumUserProto(FullUserProto fup)
+	{
+		MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+		String str = fup.getUserUuid();
+		if (null != str)
+		{
+			mupb.setUserUuid(str);
+		}
+		
+		str = fup.getName();
+		if (null != str)
+		{
+			mupb.setName(str);
+		}
+		
+		MinimumClanProto mcp = fup.getClan();
+		if (null != mcp)
+		{
+			mupb.setClan(mcp);
+		}
+		
+		int avatarMonsterId = fup.getAvatarMonsterId();
+		if (avatarMonsterId > 0)
+		{
+			mupb.setAvatarMonsterId(avatarMonsterId);
+		}
+		
+		return mupb.build();
+	}
 
 
 

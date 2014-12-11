@@ -536,7 +536,7 @@ message BeginClanAvengingResponseProto {
 	repeated PvpClanAvengeProto clanAvengings = 2;
 	optional BeginClanAvengingStatus status = 3;
 	
-	//send to clan
+	//SEND TO CLAN
 	
 	enum BeginClanAvengingStatus {
 		SUCCESS = 1;

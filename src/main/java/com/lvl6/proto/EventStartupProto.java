@@ -11720,19 +11720,35 @@ public final class EventStartupProto {
 
         /**
          * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         *
+         * <pre>
+         *time limit after a user opens up an enemy for clan avenging
+         * </pre>
          */
         boolean hasBeginAvengingTimeLimitMins();
         /**
          * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         *
+         * <pre>
+         *time limit after a user opens up an enemy for clan avenging
+         * </pre>
          */
         int getBeginAvengingTimeLimitMins();
 
         /**
          * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         *
+         * <pre>
+         *time limit after a pvp battle has ended
+         * </pre>
          */
         boolean hasRequestClanToAvengeTimeLimitMins();
         /**
          * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         *
+         * <pre>
+         *time limit after a pvp battle has ended
+         * </pre>
          */
         int getRequestClanToAvengeTimeLimitMins();
       }
@@ -11966,12 +11982,20 @@ public final class EventStartupProto {
         private int beginAvengingTimeLimitMins_;
         /**
          * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         *
+         * <pre>
+         *time limit after a user opens up an enemy for clan avenging
+         * </pre>
          */
         public boolean hasBeginAvengingTimeLimitMins() {
           return ((bitField0_ & 0x00000020) == 0x00000020);
         }
         /**
          * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+         *
+         * <pre>
+         *time limit after a user opens up an enemy for clan avenging
+         * </pre>
          */
         public int getBeginAvengingTimeLimitMins() {
           return beginAvengingTimeLimitMins_;
@@ -11981,12 +12005,20 @@ public final class EventStartupProto {
         private int requestClanToAvengeTimeLimitMins_;
         /**
          * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         *
+         * <pre>
+         *time limit after a pvp battle has ended
+         * </pre>
          */
         public boolean hasRequestClanToAvengeTimeLimitMins() {
           return ((bitField0_ & 0x00000040) == 0x00000040);
         }
         /**
          * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+         *
+         * <pre>
+         *time limit after a pvp battle has ended
+         * </pre>
          */
         public int getRequestClanToAvengeTimeLimitMins() {
           return requestClanToAvengeTimeLimitMins_;
@@ -12534,18 +12566,30 @@ public final class EventStartupProto {
           private int beginAvengingTimeLimitMins_ ;
           /**
            * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           *
+           * <pre>
+           *time limit after a user opens up an enemy for clan avenging
+           * </pre>
            */
           public boolean hasBeginAvengingTimeLimitMins() {
             return ((bitField0_ & 0x00000020) == 0x00000020);
           }
           /**
            * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           *
+           * <pre>
+           *time limit after a user opens up an enemy for clan avenging
+           * </pre>
            */
           public int getBeginAvengingTimeLimitMins() {
             return beginAvengingTimeLimitMins_;
           }
           /**
            * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           *
+           * <pre>
+           *time limit after a user opens up an enemy for clan avenging
+           * </pre>
            */
           public Builder setBeginAvengingTimeLimitMins(int value) {
             bitField0_ |= 0x00000020;
@@ -12555,6 +12599,10 @@ public final class EventStartupProto {
           }
           /**
            * <code>optional int32 beginAvengingTimeLimitMins = 6;</code>
+           *
+           * <pre>
+           *time limit after a user opens up an enemy for clan avenging
+           * </pre>
            */
           public Builder clearBeginAvengingTimeLimitMins() {
             bitField0_ = (bitField0_ & ~0x00000020);
@@ -12566,18 +12614,30 @@ public final class EventStartupProto {
           private int requestClanToAvengeTimeLimitMins_ ;
           /**
            * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           *
+           * <pre>
+           *time limit after a pvp battle has ended
+           * </pre>
            */
           public boolean hasRequestClanToAvengeTimeLimitMins() {
             return ((bitField0_ & 0x00000040) == 0x00000040);
           }
           /**
            * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           *
+           * <pre>
+           *time limit after a pvp battle has ended
+           * </pre>
            */
           public int getRequestClanToAvengeTimeLimitMins() {
             return requestClanToAvengeTimeLimitMins_;
           }
           /**
            * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           *
+           * <pre>
+           *time limit after a pvp battle has ended
+           * </pre>
            */
           public Builder setRequestClanToAvengeTimeLimitMins(int value) {
             bitField0_ |= 0x00000040;
@@ -12587,6 +12647,10 @@ public final class EventStartupProto {
           }
           /**
            * <code>optional int32 requestClanToAvengeTimeLimitMins = 7;</code>
+           *
+           * <pre>
+           *time limit after a pvp battle has ended
+           * </pre>
            */
           public Builder clearRequestClanToAvengeTimeLimitMins() {
             bitField0_ = (bitField0_ & ~0x00000040);
