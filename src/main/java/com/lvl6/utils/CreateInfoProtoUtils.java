@@ -490,7 +490,6 @@ public class CreateInfoProtoUtils {
 		int prospectiveCashWinnings, int prospectiveOilWinnings)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
-		//there is db call for clan...
 		FullUserProto fup = createFullUserProtoFromUser(attacker, null,
 			c);
 		phpb.setAttacker(fup);
@@ -618,7 +617,7 @@ public class CreateInfoProtoUtils {
 		int attackerOilChange = info.getAttackerOilChange();
 		phpb.setAttackerOilChange(attackerOilChange);
 		
-//		phpb.setClanAvenged(info.isClanAvenged());
+		phpb.setClanAvenged(info.isClanAvenged());
 	}
 	
 	public static PvpLeagueProto createPvpLeagueProto(PvpLeague pl) {
