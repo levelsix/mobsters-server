@@ -67,6 +67,7 @@ public class AvengeClanMateAction
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 		this.pvpLeagueForUserRetrieveUtil = pvpLeagueForUserRetrieveUtil;
+		this.monsterForUserRetrieveUtil = monsterForUserRetrieveUtil;
 		this.insertUtil = insertUtil;
 	}
 
