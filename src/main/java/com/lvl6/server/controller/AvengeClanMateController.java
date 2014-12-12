@@ -1,7 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,7 +35,6 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AvengeClanMateAction;
-import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -85,7 +84,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		PvpClanAvengeProto clanAvenge = reqProto.getClanAvenge();
-//		long clientTime = reqProto.getClientTime();
+		long clientTime = reqProto.getClientTime();
 
 		AvengeClanMateResponseProto.Builder resBuilder = AvengeClanMateResponseProto.newBuilder();
 		resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
@@ -135,19 +134,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //		boolean lockedClan = getLocker().lockClan(clanUuid);
 //	    locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
-			List<ClanAvengeUser> cauList = ClanStuffUtils
-				.extractClanAvengeUser(clanAvenge.getUsersAvengingList());
-			ClanAvengeUser cau = null;
-			
-			if (null != cauList && !cauList.isEmpty())
-			{
-				cau = cauList.get(0);
-				
-				if (cauList.size() > 1) {
-					log.warn("client sent more than one user to avenge clan mate. {}",
-						clanAvenge.getUsersAvengingList());
-				}
-			}
+//			List<ClanAvengeUser> cauList = ClanStuffUtils
+//				.extractClanAvengeUser(clanAvenge.getUsersAvengingList());
+//			ClanAvengeUser cau = null;
+//			
+//			if (null != cauList && !cauList.isEmpty())
+//			{
+//				cau = cauList.get(0);
+//				
+//				if (cauList.size() > 1) {
+//					log.warn("client sent more than one user to avenge clan mate. {}",
+//						clanAvenge.getUsersAvengingList());
+//				}
+//			}
+			ClanAvengeUser cau = new ClanAvengeUser(clanId, clanAvengeId, userId, 
+				new Date(clientTime));
 				
 			AvengeClanMateAction bcaa =
 				new AvengeClanMateAction(userId, clanId, clanAvengeId,

@@ -570,9 +570,8 @@ message EndClanAvengingResponseProto {
 
 message AvengeClanMateRequestProto {
 	optional MinimumUserProto sender = 1;
+	//don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
 	optional PvpClanAvengeProto clanAvenge = 2;
-	
-	//not needed since time is equal to avengeTime in PvpUserClanAvengeProto in clanAvenge
 	optional int64 clientTime = 3;
 }
 

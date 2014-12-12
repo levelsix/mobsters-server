@@ -6370,45 +6370,85 @@ public final class BattleProto {
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     boolean hasAttacker();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     boolean hasDefender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProto getDefender();
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
 
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     boolean hasBattleEndTime();
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     long getBattleEndTime();
 
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *time of entry into clan_avenge table
+     * </pre>
      */
     boolean hasAvengeRequestTime();
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *time of entry into clan_avenge table
+     * </pre>
      */
     long getAvengeRequestTime();
 
@@ -6663,18 +6703,30 @@ public final class BattleProto {
     private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel attacker_;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     public boolean hasAttacker() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
       return attacker_;
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is the one that will be attacked
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
       return attacker_;
@@ -6684,18 +6736,30 @@ public final class BattleProto {
     private com.lvl6.proto.UserProto.MinimumUserProto defender_;
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     public boolean hasDefender() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
       return defender_;
     }
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+     *
+     * <pre>
+     *in clan avenge, this user is in the clan
+     * </pre>
      */
     public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
       return defender_;
@@ -6705,12 +6769,20 @@ public final class BattleProto {
     private long battleEndTime_;
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     public boolean hasBattleEndTime() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional int64 battleEndTime = 5;</code>
+     *
+     * <pre>
+     *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+     * </pre>
      */
     public long getBattleEndTime() {
       return battleEndTime_;
@@ -6720,12 +6792,20 @@ public final class BattleProto {
     private long avengeRequestTime_;
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *time of entry into clan_avenge table
+     * </pre>
      */
     public boolean hasAvengeRequestTime() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 avengeRequestTime = 6;</code>
+     *
+     * <pre>
+     *time of entry into clan_avenge table
+     * </pre>
      */
     public long getAvengeRequestTime() {
       return avengeRequestTime_;
@@ -7485,12 +7565,20 @@ public final class BattleProto {
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> attackerBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public boolean hasAttacker() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getAttacker() {
         if (attackerBuilder_ == null) {
@@ -7501,6 +7589,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public Builder setAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (attackerBuilder_ == null) {
@@ -7517,6 +7609,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public Builder setAttacker(
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
@@ -7531,6 +7627,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public Builder mergeAttacker(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
         if (attackerBuilder_ == null) {
@@ -7550,6 +7650,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public Builder clearAttacker() {
         if (attackerBuilder_ == null) {
@@ -7563,6 +7667,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getAttackerBuilder() {
         bitField0_ |= 0x00000004;
@@ -7571,6 +7679,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getAttackerOrBuilder() {
         if (attackerBuilder_ != null) {
@@ -7581,6 +7693,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProtoWithLevel attacker = 3;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is the one that will be attacked
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
@@ -7601,12 +7717,20 @@ public final class BattleProto {
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public boolean hasDefender() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
         if (defenderBuilder_ == null) {
@@ -7617,6 +7741,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (defenderBuilder_ == null) {
@@ -7633,6 +7761,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public Builder setDefender(
           com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
@@ -7647,6 +7779,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
         if (defenderBuilder_ == null) {
@@ -7666,6 +7802,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public Builder clearDefender() {
         if (defenderBuilder_ == null) {
@@ -7679,6 +7819,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProto.Builder getDefenderBuilder() {
         bitField0_ |= 0x00000008;
@@ -7687,6 +7831,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
         if (defenderBuilder_ != null) {
@@ -7697,6 +7845,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional .com.lvl6.proto.MinimumUserProto defender = 4;</code>
+       *
+       * <pre>
+       *in clan avenge, this user is in the clan
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
@@ -7715,18 +7867,30 @@ public final class BattleProto {
       private long battleEndTime_ ;
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public boolean hasBattleEndTime() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public long getBattleEndTime() {
         return battleEndTime_;
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public Builder setBattleEndTime(long value) {
         bitField0_ |= 0x00000010;
@@ -7736,6 +7900,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional int64 battleEndTime = 5;</code>
+       *
+       * <pre>
+       *this attacker and defender are used to uniquely identify row in pvp_battle_history table
+       * </pre>
        */
       public Builder clearBattleEndTime() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -7747,18 +7915,30 @@ public final class BattleProto {
       private long avengeRequestTime_ ;
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *time of entry into clan_avenge table
+       * </pre>
        */
       public boolean hasAvengeRequestTime() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *time of entry into clan_avenge table
+       * </pre>
        */
       public long getAvengeRequestTime() {
         return avengeRequestTime_;
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *time of entry into clan_avenge table
+       * </pre>
        */
       public Builder setAvengeRequestTime(long value) {
         bitField0_ |= 0x00000020;
@@ -7768,6 +7948,10 @@ public final class BattleProto {
       }
       /**
        * <code>optional int64 avengeRequestTime = 6;</code>
+       *
+       * <pre>
+       *time of entry into clan_avenge table
+       * </pre>
        */
       public Builder clearAvengeRequestTime() {
         bitField0_ = (bitField0_ & ~0x00000020);

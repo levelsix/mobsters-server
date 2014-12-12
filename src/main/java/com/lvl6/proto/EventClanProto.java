@@ -42873,14 +42873,26 @@ public final class EventClanProto {
 
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     boolean hasClanAvenge();
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvenge();
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengeOrBuilder();
 
@@ -43041,18 +43053,30 @@ public final class EventClanProto {
     private com.lvl6.proto.BattleProto.PvpClanAvengeProto clanAvenge_;
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     public boolean hasClanAvenge() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvenge() {
       return clanAvenge_;
     }
     /**
      * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+     *
+     * <pre>
+     *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+     * </pre>
      */
     public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengeOrBuilder() {
       return clanAvenge_;
@@ -43475,12 +43499,20 @@ public final class EventClanProto {
           com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> clanAvengeBuilder_;
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public boolean hasClanAvenge() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpClanAvengeProto getClanAvenge() {
         if (clanAvengeBuilder_ == null) {
@@ -43491,6 +43523,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public Builder setClanAvenge(com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
         if (clanAvengeBuilder_ == null) {
@@ -43507,6 +43543,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public Builder setClanAvenge(
           com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder builderForValue) {
@@ -43521,6 +43561,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public Builder mergeClanAvenge(com.lvl6.proto.BattleProto.PvpClanAvengeProto value) {
         if (clanAvengeBuilder_ == null) {
@@ -43540,6 +43584,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public Builder clearClanAvenge() {
         if (clanAvengeBuilder_ == null) {
@@ -43553,6 +43601,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder getClanAvengeBuilder() {
         bitField0_ |= 0x00000002;
@@ -43561,6 +43613,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       public com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder getClanAvengeOrBuilder() {
         if (clanAvengeBuilder_ != null) {
@@ -43571,6 +43627,10 @@ public final class EventClanProto {
       }
       /**
        * <code>optional .com.lvl6.proto.PvpClanAvengeProto clanAvenge = 2;</code>
+       *
+       * <pre>
+       *don't need to set value for "repeated PvpUserClanAvengeProto usersAvenging = 2;"
+       * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.BattleProto.PvpClanAvengeProto, com.lvl6.proto.BattleProto.PvpClanAvengeProto.Builder, com.lvl6.proto.BattleProto.PvpClanAvengeProtoOrBuilder> 
