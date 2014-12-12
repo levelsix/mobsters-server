@@ -610,7 +610,7 @@ public class StartupController extends EventController {
 			scha.execute(fillMe);
 			log.info("{}ms at setClanHelpings", stopWatch.getTime());
 			scra.execute(fillMe);
-			log.info("{}ms at setClanHelpings", stopWatch.getTime());
+			log.info("{}ms at setClanRetaliations", stopWatch.getTime());
 			
 			resBuilder.setClanData(cdpb.build());
 			//TODO: DELETE IN FUTURE. This is for legacy client

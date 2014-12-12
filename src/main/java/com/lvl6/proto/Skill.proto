@@ -63,6 +63,7 @@ enum SkillType {
 	THICK_SKIN = 10;
 	CRIT_AND_EVADE = 11;
 	SHUFFLE = 12;
+	HEADSHOT = 13;
 }
 
 enum SkillActivationType {

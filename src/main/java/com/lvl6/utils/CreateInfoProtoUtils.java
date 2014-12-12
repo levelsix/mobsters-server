@@ -314,13 +314,34 @@ public class CreateInfoProtoUtils {
     return mupwbhb.build();
   }*/
 
-	public static PvpProto createPvpProto(User u, Clan clan, PvpLeagueForUser plfu,
-		PvpUser pu, Collection<MonsterForUser> userMonsters,
+	public static PvpProto createPvpProto(User defender, Clan clan,
+		PvpLeagueForUser plfu, PvpUser pu,
+		Collection<MonsterForUser> userMonsters,
 		Map<String, Integer> userMonsterIdToDropped,
 		int prospectiveCashWinnings, int prospectiveOilWinnings) {
 
+		MinimumUserProtoWithLevel defenderProto =
+			createMinimumUserProtoWithLevel(defender, clan, null);
+		String userId = defender.getId();
+		String msg = defender.getPvpDefendingMessage();
+		return createPvpProto(userId, plfu, pu, userMonsters,
+			userMonsterIdToDropped, prospectiveCashWinnings,
+			prospectiveOilWinnings, defenderProto, msg);
+	}
+
+	public static PvpProto createPvpProto(
+		String defenderId,
+		PvpLeagueForUser plfu,
+		PvpUser pu,
+		Collection<MonsterForUser> userMonsters,
+		Map<String, Integer> userMonsterIdToDropped,
+		int prospectiveCashWinnings,
+		int prospectiveOilWinnings,
+		MinimumUserProtoWithLevel defender,
+		String defenderMsg)
+	{
 		PvpProto.Builder ppb = PvpProto.newBuilder();
-		MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevel(u, clan, null);
+		
 		Collection<PvpMonsterProto> defenderMonsters = 
 			createPvpMonsterProto(userMonsters, userMonsterIdToDropped);
 		ppb.addAllDefenderMonsters(defenderMonsters);
@@ -329,14 +350,14 @@ public class CreateInfoProtoUtils {
 		ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
-		String userId = u.getId();
-		UserPvpLeagueProto uplp = createUserPvpLeagueProto(userId, plfu, pu, true);
+		UserPvpLeagueProto uplp = 
+			createUserPvpLeagueProto(defenderId, plfu, pu, true);
 		ppb.setPvpLeagueStats(uplp);
 
-		String msg = u.getPvpDefendingMessage();
-		if (null != msg)
+		
+		if (null != defenderMsg)
 		{
-			ppb.setDefenderMsg(msg);
+			ppb.setDefenderMsg(defenderMsg);
 		}
 		
 		return ppb.build();

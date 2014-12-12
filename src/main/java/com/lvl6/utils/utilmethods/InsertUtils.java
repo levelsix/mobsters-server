@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -1764,4 +1765,29 @@ public class InsertUtils implements InsertUtil{
 			return ids;
 		}
 
+		@Override
+		public int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList)
+		{
+			String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (ClanAvengeUser cau : cauList) {
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_ID,
+					cau.getClanId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__CLAN_AVENGE_ID,
+					cau.getClanAvengeId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__USER_ID,
+					cau.getUserId());
+				newRow.put(DBConstants.CLAN_AVENGE_USER__AVENGE_TIME,
+					new Timestamp(cau.getAvengeTime().getTime()));
+				
+				newRows.add(newRow);
+			}
+			int numUpdated = DBConnection.get()
+				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			
+			return numUpdated;
+		}
 }

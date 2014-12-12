@@ -100,9 +100,17 @@ message PvpClanAvengeProto {
 
 	optional string clanAvengeUuid = 1;
 	repeated PvpUserClanAvengeProto usersAvenging = 2;
+	
+	//in clan avenge, this user is the one that will be attacked
 	optional MinimumUserProtoWithLevel attacker = 3;
+	
+	//in clan avenge, this user is in the clan
 	optional MinimumUserProto defender = 4;
+	
+	//this attacker and defender are used to uniquely identify row in pvp_battle_history table
 	optional int64 battleEndTime = 5;
+	
+	//time of entry into clan_avenge table
 	optional int64 avengeRequestTime = 6;
 	
 	optional string defenderClanUuid = 7; 
