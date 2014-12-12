@@ -144,6 +144,7 @@ public class BeginClanAvengingAction
 	
 	public List<ClanAvenge> getRetaliationRequestsWithIds()
 	{
+		log.info("retaliationRequestsWithIds= {}", retaliationRequestsWithIds);
 		return retaliationRequestsWithIds;
 	}
 }
