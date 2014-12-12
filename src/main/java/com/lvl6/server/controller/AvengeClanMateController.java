@@ -181,6 +181,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 					clanAvenge.getAttacker(), defendingMessage);
 				
 				resBuilder.setVictim(pp);
+				resEvent.setAvengeClanMateResponseProto(resBuilder.build());
+				
 			}
 			server.writeEvent(resEvent);
 
