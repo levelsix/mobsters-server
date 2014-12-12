@@ -10,8 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
+import com.lvl6.proto.BattleProto.PvpUserClanAvengeProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.UserProto.FullUserProto;
@@ -113,6 +115,32 @@ public class ClanStuffUtils {
 		  idToMupWl.put(attackerId, mupwl);
 	  }
 	  return idToMupWl;
+  }
+  
+  public static List<ClanAvengeUser> extractClanAvengeUser(
+	  List<PvpUserClanAvengeProto> pucapList)
+  {
+	  List<ClanAvengeUser> cauList = new ArrayList<>();
+	  
+	  if (null == pucapList || pucapList.isEmpty())
+	  {
+		  return cauList;
+	  }
+	  
+	  for (PvpUserClanAvengeProto pucap : pucapList)
+	  {
+		  ClanAvengeUser cau = new ClanAvengeUser();
+		  cau.setClanId(pucap.getClanUuid());
+		  cau.setClanAvengeId(pucap.getClanAvengeUuid());
+		  cau.setUserId(pucap.getUserUuid());
+		  
+		  Date avengeTime = new Date(pucap.getAvengeTime());
+		  cau.setAvengeTime(avengeTime);
+		  
+		  cauList.add(cau);
+	  }
+	  
+	  return cauList;
   }
   
 }

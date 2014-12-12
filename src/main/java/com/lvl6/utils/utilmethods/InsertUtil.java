@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanAvenge;
+import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
@@ -226,4 +227,6 @@ public interface InsertUtil {
 	
 	public abstract List<String> insertIntoClanAvengeGetId(
 		List<ClanAvenge> caList, String clanId);
+	
+	public abstract int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList);
 }
