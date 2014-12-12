@@ -565,3 +565,23 @@ message EndClanAvengingResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message AvengeClanMateRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional PvpClanAvengeProto clanAvenge = 2;
+	optional int64 clientTime = 3;
+}
+
+message AvengeClanMateResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional PvpProto victim = 2;
+	optional AvengeClanMateStatus status = 3;
+	
+	enum AvengeClanMateStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+	
+}
