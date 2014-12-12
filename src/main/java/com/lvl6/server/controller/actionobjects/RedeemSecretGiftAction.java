@@ -108,6 +108,7 @@ public class RedeemSecretGiftAction
 		ChiSquaredDistribution randChi = ControllerConstants
 			.ITEM_SECRET_GIFT_FOR_USER__RANDOM;
 
+		//(round((chisq(df = 4)^3) * 6.5)+329)
 		for (int giftI = 0; giftI < numGifts; giftI++) {
 			float randFloat = rand.nextFloat();
 			Item secretGift = ItemRetrieveUtils.nextItem(randFloat);
@@ -125,21 +126,23 @@ public class RedeemSecretGiftAction
 			log.info(String.format(
 				"randDoub=%s", randDoub));
 			
-			randDoub = Math.pow(randDoub, 1.9D);
+			randDoub = Math.pow(randDoub, 3D);
 			log.info(String.format(
-				"(randDoub ^ 1.9)=%s", randDoub));
+				"(randDoub ^ 3)=%s", randDoub));
 			
-			double waitTimeSecs = randDoub * 25 + 90;
+			double waitTimeSecs = randDoub * 6.5 + 329;
 			log.info(String.format(
 				"uncapped waitTimeSecs=%s", waitTimeSecs));
 			
-			//(chisq(df = 4)^1.9) * 25) + 90
+			//(round((chisq(df = 4)^3) * 6.5)+329)
 			waitTimeSecs = Math.min(waitTimeSecs, ControllerConstants
 				.ITEM_SECRET_GIFT_FOR_USER__MAX_SECS_WAIT_TIME);
+//			waitTimeSecs = Math.max(waitTimeSecs, ControllerConstants
+//				.ITEM_SECRET_GIFT_FOR_USER__MIN_SECS_WAIT_TIME);
 			log.info(String.format(
 				"capped waitTimeSecs=%s", waitTimeSecs));
 			
-			isgfu.setSecsTillCollection( (int)waitTimeSecs );
+			isgfu.setSecsTillCollection( (int)Math.round(waitTimeSecs) );
 
 			log.info(String.format(
 				"gift=%s", isgfu));
