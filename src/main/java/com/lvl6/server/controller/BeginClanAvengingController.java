@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setTag(event.getTag());
 			resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
 
-			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS))
+			if (resBuilder.getStatus().equals(BeginClanAvengingStatus.SUCCESS))
 			{
 				//only write to clan if success
 				List<ClanAvenge> retaliationRequestsWithIds = bcaa
