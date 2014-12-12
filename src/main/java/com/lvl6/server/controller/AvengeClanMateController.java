@@ -163,7 +163,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			resEvent.setTag(event.getTag());
 			resEvent.setAvengeClanMateResponseProto(resBuilder.build());
 
-			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS))
+			if (resBuilder.getStatus().equals(AvengeClanMateStatus.SUCCESS))
 			{
 				User defender = bcaa.getVictim();
 				PvpLeagueForUser plfu = bcaa.getVictimPvpLeagueInfo();
