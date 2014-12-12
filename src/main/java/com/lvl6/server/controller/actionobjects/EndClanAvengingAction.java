@@ -91,7 +91,7 @@ public class EndClanAvengingAction
 		
 		int numUpdated = deleteUtil.deleteClanAvenge(
 			clanId, caUuidList);
-		log.info("numUpdated clan_avenge_user {}", numUpdated);
+		log.info("numUpdated clan_avenge {}", numUpdated);
 		
 		numUpdated = deleteUtil.deleteClanAvengeUser(clanId, caUuidList);
 		log.info("numUpdated clan_avenge_user {}", numUpdated);	
