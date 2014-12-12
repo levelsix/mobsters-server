@@ -460,4 +460,49 @@ public class DeleteUtils implements DeleteUtil {
 	    	.deleteDirectQueryNaive(query, values);
 	    return numDeleted;
 	}
+	
+	public int deleteClanAvenge(String clanId, List<String> ids)
+	{
+		String tableName = DBConstants.TABLE_CLAN_AVENGE;
+
+		int size = ids.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format(
+			"DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+			tableName, DBConstants.CLAN_AVENGE__ID, questionMarks,
+			DBConstants.CLAN_AVENGE__CLAN_ID);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(ids);
+		values.add(clanId);
+
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
+	
+	public int deleteClanAvengeUser(String clanId, List<String> ids)
+	{
+		String tableName = DBConstants.TABLE_CLAN_AVENGE_USER;
+
+		int size = ids.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format(
+			"DELETE FROM %s WHERE %s IN (%s) AND %s=?",
+			tableName, DBConstants.CLAN_AVENGE_USER__CLAN_AVENGE_ID, questionMarks,
+			DBConstants.CLAN_AVENGE_USER__CLAN_ID);
+
+		List<Object> values = new ArrayList<Object>();
+		values.addAll(ids);
+		values.add(clanId);
+
+		int numDeleted = DBConnection.get()
+			.deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
+	
 }
