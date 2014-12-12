@@ -150,6 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				
 				resBuilder.addAllClanAvengings(retaliationProtos);
 				
+				resEvent.setBeginClanAvengingResponseProto(resBuilder.build());
 				server.writeClanEvent(resEvent, clanId);
 				
 //				User user = bcaa.getProspectiveMember();
