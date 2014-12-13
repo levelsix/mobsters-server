@@ -82,9 +82,11 @@ public class PvpBattleHistoryRetrieveUtil2 {
 			history.setAttackerCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CUR_RANK));
 			history.setDefenderPrevRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_PREV_RANK));
 			history.setDefenderCurRank(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CUR_RANK));
-			
-			history.setDefenderCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE));
-			history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
+            
+            history.setDefenderCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE));
+            history.setDefenderOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE));
+            history.setAttackerCashChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE));
+            history.setAttackerOilChange(rs.getInt(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE));
 			history.setAttackerWon(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON));
 			history.setExactedRevenge(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE));
 //			history.setClanAvenged(rs.getBoolean(DBConstants.PVP_BATTLE_HISTORY__CLAN_AVENGED));
