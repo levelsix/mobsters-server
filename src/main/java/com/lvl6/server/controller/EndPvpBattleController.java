@@ -788,22 +788,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
 	  //the history for this battle should have the display_to_defender set to false;
 	  Date shieldEndTime = defenderPlfu.getShieldEndTime();
-	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
-		  log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
-				  pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
-		  defenderCashChange = 0;
-		  defenderOilChange = 0;
-		  defenderEloChange = 0;
-		  displayToDefender = false;
-
-	  } else {
+//	  if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
+//		  log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
+//				  pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
+//		  defenderCashChange = 0;
+//		  defenderOilChange = 0;
+//		  defenderEloChange = 0;
+//		  displayToDefender = false;
+//
+//	  } else {
 		  log.info(String.format(
 			  "penalizing/rewarding for losing/winning. defenderWon=%s",
 			  defenderWon));
 		  updateUnshieldedDefender(attacker, defenderId, defender, defenderPlfu,
 				  shieldEndTime, pvpBattleInfo, clientDate, attackerWon,
 				  defenderEloChange, defenderCashChange, defenderOilChange);
-	  }
+//	  }
 
 	  defenderEloChangeList.add(defenderEloChange);
 	  defenderCashChangeList.add(defenderCashChange);
