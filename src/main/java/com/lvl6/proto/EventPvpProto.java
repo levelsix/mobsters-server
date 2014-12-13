@@ -5492,6 +5492,19 @@ public final class EventPvpProto {
      */
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
+
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    boolean hasBattleThatJustEnded();
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded();
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndPvpBattleResponseProto}
@@ -5591,6 +5604,19 @@ public final class EventPvpProto {
                 mutable_bitField0_ |= 0x00000020;
               }
               updatedOrNew_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 90: {
+              com.lvl6.proto.BattleProto.PvpHistoryProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = battleThatJustEnded_.toBuilder();
+              }
+              battleThatJustEnded_ = input.readMessage(com.lvl6.proto.BattleProto.PvpHistoryProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(battleThatJustEnded_);
+                battleThatJustEnded_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -5890,6 +5916,27 @@ public final class EventPvpProto {
       return updatedOrNew_.get(index);
     }
 
+    public static final int BATTLETHATJUSTENDED_FIELD_NUMBER = 11;
+    private com.lvl6.proto.BattleProto.PvpHistoryProto battleThatJustEnded_;
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    public boolean hasBattleThatJustEnded() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded() {
+      return battleThatJustEnded_;
+    }
+    /**
+     * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+     */
+    public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder() {
+      return battleThatJustEnded_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       defenderUuid_ = "";
@@ -5897,6 +5944,7 @@ public final class EventPvpProto {
       attackerWon_ = false;
       status_ = com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
+      battleThatJustEnded_ = com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5928,6 +5976,9 @@ public final class EventPvpProto {
       }
       for (int i = 0; i < updatedOrNew_.size(); i++) {
         output.writeMessage(10, updatedOrNew_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(11, battleThatJustEnded_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5961,6 +6012,10 @@ public final class EventPvpProto {
       for (int i = 0; i < updatedOrNew_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, updatedOrNew_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, battleThatJustEnded_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6073,6 +6128,7 @@ public final class EventPvpProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
+          getBattleThatJustEndedFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6101,6 +6157,12 @@ public final class EventPvpProto {
         } else {
           updatedOrNewBuilder_.clear();
         }
+        if (battleThatJustEndedBuilder_ == null) {
+          battleThatJustEnded_ = com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance();
+        } else {
+          battleThatJustEndedBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -6162,6 +6224,14 @@ public final class EventPvpProto {
         } else {
           result.updatedOrNew_ = updatedOrNewBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (battleThatJustEndedBuilder_ == null) {
+          result.battleThatJustEnded_ = battleThatJustEnded_;
+        } else {
+          result.battleThatJustEnded_ = battleThatJustEndedBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6220,6 +6290,9 @@ public final class EventPvpProto {
               updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
             }
           }
+        }
+        if (other.hasBattleThatJustEnded()) {
+          mergeBattleThatJustEnded(other.getBattleThatJustEnded());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6849,6 +6922,122 @@ public final class EventPvpProto {
           updatedOrNew_ = null;
         }
         return updatedOrNewBuilder_;
+      }
+
+      private com.lvl6.proto.BattleProto.PvpHistoryProto battleThatJustEnded_ = com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> battleThatJustEndedBuilder_;
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public boolean hasBattleThatJustEnded() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto getBattleThatJustEnded() {
+        if (battleThatJustEndedBuilder_ == null) {
+          return battleThatJustEnded_;
+        } else {
+          return battleThatJustEndedBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public Builder setBattleThatJustEnded(com.lvl6.proto.BattleProto.PvpHistoryProto value) {
+        if (battleThatJustEndedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          battleThatJustEnded_ = value;
+          onChanged();
+        } else {
+          battleThatJustEndedBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public Builder setBattleThatJustEnded(
+          com.lvl6.proto.BattleProto.PvpHistoryProto.Builder builderForValue) {
+        if (battleThatJustEndedBuilder_ == null) {
+          battleThatJustEnded_ = builderForValue.build();
+          onChanged();
+        } else {
+          battleThatJustEndedBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public Builder mergeBattleThatJustEnded(com.lvl6.proto.BattleProto.PvpHistoryProto value) {
+        if (battleThatJustEndedBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              battleThatJustEnded_ != com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance()) {
+            battleThatJustEnded_ =
+              com.lvl6.proto.BattleProto.PvpHistoryProto.newBuilder(battleThatJustEnded_).mergeFrom(value).buildPartial();
+          } else {
+            battleThatJustEnded_ = value;
+          }
+          onChanged();
+        } else {
+          battleThatJustEndedBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public Builder clearBattleThatJustEnded() {
+        if (battleThatJustEndedBuilder_ == null) {
+          battleThatJustEnded_ = com.lvl6.proto.BattleProto.PvpHistoryProto.getDefaultInstance();
+          onChanged();
+        } else {
+          battleThatJustEndedBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProto.Builder getBattleThatJustEndedBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getBattleThatJustEndedFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      public com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder getBattleThatJustEndedOrBuilder() {
+        if (battleThatJustEndedBuilder_ != null) {
+          return battleThatJustEndedBuilder_.getMessageOrBuilder();
+        } else {
+          return battleThatJustEnded_;
+        }
+      }
+      /**
+       * <code>optional .com.lvl6.proto.PvpHistoryProto battleThatJustEnded = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder> 
+          getBattleThatJustEndedFieldBuilder() {
+        if (battleThatJustEndedBuilder_ == null) {
+          battleThatJustEndedBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpHistoryProto, com.lvl6.proto.BattleProto.PvpHistoryProto.Builder, com.lvl6.proto.BattleProto.PvpHistoryProtoOrBuilder>(
+                  getBattleThatJustEnded(),
+                  getParentForChildren(),
+                  isClean());
+          battleThatJustEnded_ = null;
+        }
+        return battleThatJustEndedBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndPvpBattleResponseProto)
@@ -8284,25 +8473,26 @@ public final class EventPvpProto {
       "\017\n\007userWon\030\004 \001(\010\022\022\n\nclientTime\030\005 \001(\003\022\021\n\t" +
       "oilChange\030\006 \001(\005\022\022\n\ncashChange\030\007 \001(\005\022\032\n\022n",
       "uPvpDmgMultiplier\030\010 \001(\002\022\026\n\016monsterDropId" +
-      "s\030\t \003(\005\"\376\002\n\031EndPvpBattleResponseProto\022@\n" +
+      "s\030\t \003(\005\"\274\003\n\031EndPvpBattleResponseProto\022@\n" +
       "\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumUs" +
       "erProtoWithMaxResources\022\024\n\014defenderUuid\030" +
       "\002 \001(\t\022\030\n\020attackerAttacked\030\003 \001(\010\022\023\n\013attac" +
       "kerWon\030\004 \001(\010\022L\n\006status\030\t \001(\0162<.com.lvl6." +
       "proto.EndPvpBattleResponseProto.EndPvpBa" +
       "ttleStatus\022:\n\014updatedOrNew\030\n \003(\0132$.com.l" +
-      "vl6.proto.FullUserMonsterProto\"P\n\022EndPvp" +
-      "BattleStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020",
-      "\002\022\035\n\031FAIL_BATTLE_TOOK_TOO_LONG\020\003\"\\\n\033SetD" +
-      "efendingMsgRequestProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\013\n\003msg" +
-      "\030\002 \001(\t\"\332\001\n\034SetDefendingMsgResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022R\n\006status\030\002 \001(\0162B.com.lvl6.pro" +
-      "to.SetDefendingMsgResponseProto.SetDefen" +
-      "dingMsgStatus\"4\n\025SetDefendingMsgStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\017B\rEventPvpP" +
-      "roto"
+      "vl6.proto.FullUserMonsterProto\022<\n\023battle" +
+      "ThatJustEnded\030\013 \001(\0132\037.com.lvl6.proto.Pvp",
+      "HistoryProto\"P\n\022EndPvpBattleStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAIL_BATTLE_T" +
+      "OOK_TOO_LONG\020\003\"\\\n\033SetDefendingMsgRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\013\n\003msg\030\002 \001(\t\"\332\001\n\034SetDefe" +
+      "ndingMsgResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022R\n\006statu" +
+      "s\030\002 \001(\0162B.com.lvl6.proto.SetDefendingMsg" +
+      "ResponseProto.SetDefendingMsgStatus\"4\n\025S" +
+      "etDefendingMsgStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI",
+      "L_OTHER\020\002B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8354,7 +8544,7 @@ public final class EventPvpProto {
     internal_static_com_lvl6_proto_EndPvpBattleResponseProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EndPvpBattleResponseProto_descriptor,
-        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", "UpdatedOrNew", });
+        new java.lang.String[] { "Sender", "DefenderUuid", "AttackerAttacked", "AttackerWon", "Status", "UpdatedOrNew", "BattleThatJustEnded", });
     internal_static_com_lvl6_proto_SetDefendingMsgRequestProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_SetDefendingMsgRequestProto_fieldAccessorTable = new

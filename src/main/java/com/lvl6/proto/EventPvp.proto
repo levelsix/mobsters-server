@@ -138,6 +138,10 @@ message EndPvpBattleResponseProto {
 	//repeated FullUserMonsterProto newOrUpdated = 10; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 10; 
 	
+	
+	optional PvpHistoryProto battleThatJustEnded = 11;
+	
+	
 	enum EndPvpBattleStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
