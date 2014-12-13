@@ -1087,6 +1087,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  pvpBattleHistoryRetrieveUtil2
 		  .getRecentNBattlesForUserId(attackerId, 1);
 	  
+	  log.info("gotAttackedHistoryList {}", gotAttackedHistoryList);
+	  
 	  String attackerClanId = attacker.getClanId();
 	  
 	  //need clan info for attacker
