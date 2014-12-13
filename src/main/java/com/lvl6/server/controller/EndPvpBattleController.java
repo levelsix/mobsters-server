@@ -225,13 +225,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     				changeMap, previousCurrencyMap, monsterDropIds, resBuilder);
     	}
 
+    	
+    	PvpBattleHistory battleJustEnded = null;
     	if (successful) {
     		//TODO: construct the history proto instead of db retrieving
-    		PvpHistoryProto php = createPvpProto(attacker, defender, curDate);
+    		battleJustEnded = pvpBattleHistoryRetrieveUtil2
+    			  .getPvpBattle(attackerId, defenderId, curDate);
     		
-    		if (null != php) {
-    			resBuilder.setBattleThatJustEnded(php);
+    		if (null != battleJustEnded) 
+    		{
+    			List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+    				.createAttackedOthersPvpHistoryProto(defenderId, users,
+    					Collections.singletonList(battleJustEnded));
+    			PvpHistoryProto attackedOtherHistory = historyProtoList.get(0);
+    			log.info("attackedOtherHistory {}", attackedOtherHistory);
+    			resBuilder.setBattleThatJustEnded(attackedOtherHistory);
     		}
+    		
     		resBuilder.setStatus(EndPvpBattleStatus.SUCCESS);
     	}
 
@@ -242,6 +252,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	if (successful) {
     		//respond to the defender
     		if (null != defender) {
+    			if (null != battleJustEnded) {
+    				PvpHistoryProto php = createPvpProto(attacker, defender,
+    					curDate, battleJustEnded);
+    				log.info("gotAttackedHistory {}", php);
+    				resBuilder.setBattleThatJustEnded(php);
+    			}
+    			
     			EndPvpBattleResponseEvent resEventDefender =
     				new EndPvpBattleResponseEvent(defenderId);
     			resEvent.setTag(0);
@@ -1060,7 +1077,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   //TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
   private PvpHistoryProto createPvpProto(User attacker,
-	  User defender, Date curDate)
+	  User defender, Date curDate, PvpBattleHistory gotAttackedHistory)
   {
 	  if (null == defender) {
 		  return null;
@@ -1083,9 +1100,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  
 	  //hopefully this gets this pvpHistory just created
-	  PvpBattleHistory gotAttackedHistory =
-		  pvpBattleHistoryRetrieveUtil2
-		  .getPvpBattle(attackerId, defenderId, curDate);
 	  List<PvpBattleHistory> gotAttackedHistoryList = Collections
 		  .singletonList(gotAttackedHistory);
 	  
