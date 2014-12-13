@@ -235,7 +235,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		if (null != battleJustEnded) 
     		{
     			List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
-    				.createAttackedOthersPvpHistoryProto(defenderId, users,
+    				.createAttackedOthersPvpHistoryProto(attackerId, users,
     					Collections.singletonList(battleJustEnded));
     			PvpHistoryProto attackedOtherHistory = historyProtoList.get(0);
     			log.info("attackedOtherHistory {}", attackedOtherHistory);
