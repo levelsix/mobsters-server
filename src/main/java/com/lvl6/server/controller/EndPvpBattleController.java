@@ -227,7 +227,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     	if (successful) {
     		//TODO: construct the history proto instead of db retrieving
-    		PvpHistoryProto php = createPvpProto(attacker, defender);
+    		PvpHistoryProto php = createPvpProto(attacker, defender, curDate);
     		
     		if (null != php) {
     			resBuilder.setBattleThatJustEnded(php);
@@ -1060,7 +1060,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   //TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
   private PvpHistoryProto createPvpProto(User attacker,
-	  User defender)
+	  User defender, Date curDate)
   {
 	  if (null == defender) {
 		  return null;
@@ -1083,9 +1083,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  
 	  //hopefully this gets this pvpHistory just created
-	  List<PvpBattleHistory> gotAttackedHistoryList =
+	  PvpBattleHistory gotAttackedHistory =
 		  pvpBattleHistoryRetrieveUtil2
-		  .getRecentNBattlesForUserId(attackerId, 1);
+		  .getPvpBattle(attackerId, defenderId, curDate);
+	  List<PvpBattleHistory> gotAttackedHistoryList = Collections
+		  .singletonList(gotAttackedHistory);
 	  
 	  log.info("gotAttackedHistoryList {}", gotAttackedHistoryList);
 	  

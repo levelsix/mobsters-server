@@ -1497,7 +1497,7 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
-			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
+			//insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
 
 			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 			return numUpdated;
