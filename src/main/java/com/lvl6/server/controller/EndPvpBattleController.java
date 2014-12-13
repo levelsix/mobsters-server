@@ -1089,7 +1089,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  
 	  String attackerClanId = attacker.getClanId();
 	  
-	  List<String> attackerIds = Collections.singletonList(attackerClanId);
 	  //need clan info for attacker
 	  Clan attackerClan = clanRetrieveUtil.getClanWithId(attackerClanId);
 	  Map<String, Clan> attackerIdsToClans = Collections
@@ -1101,7 +1100,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	  //need the monsters for the attacker
 	  Map<String, List<MonsterForUser>> userIdsToUserMonsters =
-		  calculateAttackerMonsters(attackerId, attackerIds);
+		  calculateAttackerMonsters(attackerId);
 
 	  
 	  //need the drop rates
@@ -1140,8 +1139,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private Map<String, List<MonsterForUser>> calculateAttackerMonsters(
-	  String attackerId, List<String> attackerIds)
+	  String attackerId)
   {
+	  List<String> attackerIds = Collections.singletonList(attackerId);
 	  //need monsters for attacker
 	  Map<String, Map<String, MonsterForUser>> userIdsToMfuIdsToMonsters =
 		  monsterForUserRetrieveUtil.getCompleteMonstersForUser(attackerIds);
