@@ -206,7 +206,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
 		
 		Object[] values = { userId, userId, false, true };
 		String query = String.format(
-			"select * from %s where %s in (?) or %s in (?) and %s=? and %s=?",
+			"select * from %s where (%s in (?) or %s in (?)) and %s=? and %s=?",
 			TABLE_NAME,
 			DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID,
 			DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID,
