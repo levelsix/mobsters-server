@@ -140,6 +140,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     EndPvpBattleResponseProto.Builder resBuilder = EndPvpBattleResponseProto.newBuilder();
     resBuilder.setSender(senderProtoMaxResources);
     resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
+    resBuilder.setAttackerAttacked(attackerAttacked);
+    resBuilder.setAttackerWon(attackerWon);
+    
     EndPvpBattleResponseEvent resEvent = new EndPvpBattleResponseEvent(attackerId);
     resEvent.setTag(event.getTag());
 
