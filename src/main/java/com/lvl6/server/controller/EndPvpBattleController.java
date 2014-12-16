@@ -232,8 +232,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	PvpBattleHistory battleJustEnded = null;
     	if (successful) {
     		//TODO: construct the history proto instead of db retrieving
+    		Timestamp ts = new Timestamp(curDate.getTime());
     		battleJustEnded = pvpBattleHistoryRetrieveUtil2
-    			  .getPvpBattle(attackerId, defenderId, curDate);
+    			  .getPvpBattle(attackerId, defenderId, ts);
     		
     		if (null != battleJustEnded) 
     		{
