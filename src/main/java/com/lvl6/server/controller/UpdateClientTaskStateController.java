@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateCl
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
+import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component @DependsOn("gameServer") public class UpdateClientTaskStateController extends EventController {
 
@@ -27,6 +30,9 @@ import com.lvl6.server.Locker;
 	@Autowired
 	protected Locker locker;
 
+	@Autowired
+	protected InsertUtil insertUtil;
+	
 	public UpdateClientTaskStateController() {
 		numAllocatedThreads = 4;
 	}
@@ -53,8 +59,12 @@ import com.lvl6.server.Locker;
 		//set some values to send to the client (the response proto)
 		UpdateClientTaskStateResponseProto.Builder resBuilder = UpdateClientTaskStateResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
+		resBuilder.setTaskState(bs);
 		resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER); //default
 
+		UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(userId);
+		resEvent.setTag(event.getTag());
+		
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
@@ -70,7 +80,7 @@ import com.lvl6.server.Locker;
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
-			UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(userId);
+			resEvent = new UpdateClientTaskStateResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
 			server.writeEvent(resEvent);
@@ -83,12 +93,20 @@ import com.lvl6.server.Locker;
 			tfucs.setUserId(userId);
 			tfucs.setClientState(bs.toByteArray());
 
+			List<TaskForUserClientState> tfucsList = Collections.singletonList(tfucs);
+			int numUpdated = insertUtil.insertIntoUpdateClientTaskState(tfucsList);
+			log.info("numInserted TaskForUserClientState: {}", numUpdated);
+			
+			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
+			resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
+			server.writeEvent(resEvent);
+			
 		} catch (Exception e) {
 			log.error("exception in UpdateClientTaskStateController processEvent", e);
 			//don't let the client hang
 			try {
 				resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
-				UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(userId);
+				resEvent = new UpdateClientTaskStateResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setUpdateClientTaskStateResponseProto(resBuilder.build());
 				server.writeEvent(resEvent);
@@ -107,6 +125,16 @@ import com.lvl6.server.Locker;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public InsertUtil getInsertUtil()
+	{
+		return insertUtil;
+	}
+
+	public void setInsertUtil( InsertUtil insertUtil )
+	{
+		this.insertUtil = insertUtil;
 	}
 
 }
