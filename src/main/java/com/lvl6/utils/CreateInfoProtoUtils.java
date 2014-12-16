@@ -3172,11 +3172,16 @@ public class CreateInfoProtoUtils {
 		mutpb.setUserTaskUuid(userTaskId);
 
 		try {
-			byte[] bites = tfucs.getClientState();
+			byte[] bites = null;
+			if (null != tfucs) {
+				bites = tfucs.getClientState();
+			}
+			
 			if (null != bites) {
 				ByteString bs = ByteString.copyFrom(bites);
 				mutpb.setClientState(bs);
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error(String.format(
