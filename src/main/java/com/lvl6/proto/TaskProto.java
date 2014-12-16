@@ -2371,6 +2371,15 @@ public final class TaskProto {
      */
     com.google.protobuf.ByteString
         getUserTaskUuidBytes();
+
+    /**
+     * <code>optional bytes clientState = 5;</code>
+     */
+    boolean hasClientState();
+    /**
+     * <code>optional bytes clientState = 5;</code>
+     */
+    com.google.protobuf.ByteString getClientState();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MinimumUserTaskProto}
@@ -2444,6 +2453,11 @@ public final class TaskProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
               userTaskUuid_ = bs;
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              clientState_ = input.readBytes();
               break;
             }
           }
@@ -2600,11 +2614,27 @@ public final class TaskProto {
       }
     }
 
+    public static final int CLIENTSTATE_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString clientState_;
+    /**
+     * <code>optional bytes clientState = 5;</code>
+     */
+    public boolean hasClientState() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bytes clientState = 5;</code>
+     */
+    public com.google.protobuf.ByteString getClientState() {
+      return clientState_;
+    }
+
     private void initFields() {
       userUuid_ = "";
       taskId_ = 0;
       curTaskStageId_ = 0;
       userTaskUuid_ = "";
+      clientState_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2631,6 +2661,9 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getUserTaskUuidBytes());
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, clientState_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2655,6 +2688,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getUserTaskUuidBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, clientState_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2781,6 +2818,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         userTaskUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        clientState_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2825,6 +2864,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000008;
         }
         result.userTaskUuid_ = userTaskUuid_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.clientState_ = clientState_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2856,6 +2899,9 @@ public final class TaskProto {
           bitField0_ |= 0x00000008;
           userTaskUuid_ = other.userTaskUuid_;
           onChanged();
+        }
+        if (other.hasClientState()) {
+          setClientState(other.getClientState());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3096,6 +3142,41 @@ public final class TaskProto {
   }
   bitField0_ |= 0x00000008;
         userTaskUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString clientState_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes clientState = 5;</code>
+       */
+      public boolean hasClientState() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional bytes clientState = 5;</code>
+       */
+      public com.google.protobuf.ByteString getClientState() {
+        return clientState_;
+      }
+      /**
+       * <code>optional bytes clientState = 5;</code>
+       */
+      public Builder setClientState(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        clientState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes clientState = 5;</code>
+       */
+      public Builder clearClientState() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        clientState_ = getDefaultInstance().getClientState();
         onChanged();
         return this;
       }
@@ -8916,44 +8997,44 @@ public final class TaskProto {
       "dWidth\030\010 \001(\005\022\023\n\013boardHeight\030\t \001(\005\022\027\n\017gro",
       "undImgPrefix\030\n \001(\t\022>\n\027initialDefeatedDia" +
       "logue\030\013 \001(\0132\035.com.lvl6.proto.DialoguePro" +
-      "to\"f\n\024MinimumUserTaskProto\022\020\n\010userUuid\030\001" +
+      "to\"{\n\024MinimumUserTaskProto\022\020\n\010userUuid\030\001" +
       " \001(\t\022\016\n\006taskId\030\002 \001(\005\022\026\n\016curTaskStageId\030\003" +
-      " \001(\005\022\024\n\014userTaskUuid\030\004 \001(\t\"\253\004\n\025TaskStage" +
-      "MonsterProto\022\020\n\010tsfuUuid\030\017 \001(\t\022\r\n\005tsmId\030" +
-      "\013 \001(\005\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030" +
-      "\002 \001(\01621.com.lvl6.proto.TaskStageMonsterP" +
-      "roto.MonsterType\022\r\n\005level\030\006 \001(\005\022\021\n\texpRe" +
-      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\021\n\toilRew",
-      "ard\030\010 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\034\n" +
-      "\024puzzlePieceMonsterId\030\n \001(\005\022\016\n\006itemId\030\007 " +
-      "\001(\005\022\025\n\rdmgMultiplier\030\t \001(\002\022\030\n\020defensiveS" +
-      "killId\030\014 \001(\005\022\030\n\020offensiveSkillId\030\016 \001(\005\022!" +
-      "\n\031puzzlePieceMonsterDropLvl\030\r \001(\005\022/\n\010ini" +
-      "tialD\030\020 \001(\0132\035.com.lvl6.proto.DialoguePro" +
-      "to\022/\n\010defaultD\030\021 \001(\0132\035.com.lvl6.proto.Di" +
-      "alogueProto\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022" +
-      "\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentE" +
-      "ventProto\022\017\n\007eventId\030\001 \001(\005\0224\n\tdayOfWeek\030",
-      "\002 \001(\0162\031.com.lvl6.proto.DayOfWeek:\006MONDAY" +
-      "\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinu" +
-      "tes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMin" +
-      "utes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.prot" +
-      "o.PersistentEventProto.EventType\022;\n\016mons" +
-      "terElement\030\010 \001(\0162\027.com.lvl6.proto.Elemen" +
-      "t:\nNO_ELEMENT\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022" +
-      "\r\n\tEVOLUTION\020\002\"X\n\030UserPersistentEventPro" +
-      "to\022\020\n\010userUuid\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\005\022\031\n" +
-      "\021coolDownStartTime\030\003 \001(\003\"\353\002\n\023TaskMapElem",
-      "entProto\022\024\n\014mapElementId\030\001 \001(\005\022\016\n\006taskId" +
-      "\030\002 \001(\005\022\014\n\004xPos\030\003 \001(\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007el" +
-      "ement\030\005 \001(\0162\027.com.lvl6.proto.Element\022\014\n\004" +
-      "boss\030\006 \001(\010\022\023\n\013bossImgName\030\007 \001(\t\022\022\n\nitemD" +
-      "ropId\030\010 \001(\005\022\023\n\013sectionName\030\t \001(\t\022\022\n\ncash" +
-      "Reward\030\n \001(\005\022\021\n\toilReward\030\013 \001(\005\022\030\n\020chara" +
-      "cterImgName\030\014 \001(\t\022\036\n\026charImgVertPixelOff" +
-      "set\030\r \001(\005\022\037\n\027charImgHorizPixelOffset\030\016 \001" +
-      "(\005\022\032\n\022charImgScaleFactor\030\017 \001(\002B\013B\tTaskPr" +
-      "oto"
+      " \001(\005\022\024\n\014userTaskUuid\030\004 \001(\t\022\023\n\013clientStat" +
+      "e\030\005 \001(\014\"\253\004\n\025TaskStageMonsterProto\022\020\n\010tsf" +
+      "uUuid\030\017 \001(\t\022\r\n\005tsmId\030\013 \001(\005\022\021\n\tmonsterId\030" +
+      "\001 \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.pr" +
+      "oto.TaskStageMonsterProto.MonsterType\022\r\n" +
+      "\005level\030\006 \001(\005\022\021\n\texpReward\030\003 \001(\005\022\022\n\ncashR",
+      "eward\030\004 \001(\005\022\021\n\toilReward\030\010 \001(\005\022\032\n\022puzzle" +
+      "PieceDropped\030\005 \001(\010\022\034\n\024puzzlePieceMonster" +
+      "Id\030\n \001(\005\022\016\n\006itemId\030\007 \001(\005\022\025\n\rdmgMultiplie" +
+      "r\030\t \001(\002\022\030\n\020defensiveSkillId\030\014 \001(\005\022\030\n\020off" +
+      "ensiveSkillId\030\016 \001(\005\022!\n\031puzzlePieceMonste" +
+      "rDropLvl\030\r \001(\005\022/\n\010initialD\030\020 \001(\0132\035.com.l" +
+      "vl6.proto.DialogueProto\022/\n\010defaultD\030\021 \001(" +
+      "\0132\035.com.lvl6.proto.DialogueProto\"3\n\013Mons" +
+      "terType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004B" +
+      "OSS\020\003\"\333\002\n\024PersistentEventProto\022\017\n\007eventI",
+      "d\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.pr" +
+      "oto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(\005" +
+      "\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\016\n\006taskId" +
+      "\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005\022<\n\004type\030" +
+      "\007 \001(\0162..com.lvl6.proto.PersistentEventPr" +
+      "oto.EventType\022;\n\016monsterElement\030\010 \001(\0162\027." +
+      "com.lvl6.proto.Element:\nNO_ELEMENT\"\'\n\tEv" +
+      "entType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION\020\002\"X\n\030U" +
+      "serPersistentEventProto\022\020\n\010userUuid\030\001 \001(" +
+      "\t\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStartTime\030",
+      "\003 \001(\003\"\353\002\n\023TaskMapElementProto\022\024\n\014mapElem" +
+      "entId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\014\n\004xPos\030\003 \001(" +
+      "\005\022\014\n\004yPos\030\004 \001(\005\022(\n\007element\030\005 \001(\0162\027.com.l" +
+      "vl6.proto.Element\022\014\n\004boss\030\006 \001(\010\022\023\n\013bossI" +
+      "mgName\030\007 \001(\t\022\022\n\nitemDropId\030\010 \001(\005\022\023\n\013sect" +
+      "ionName\030\t \001(\t\022\022\n\ncashReward\030\n \001(\005\022\021\n\toil" +
+      "Reward\030\013 \001(\005\022\030\n\020characterImgName\030\014 \001(\t\022\036" +
+      "\n\026charImgVertPixelOffset\030\r \001(\005\022\037\n\027charIm" +
+      "gHorizPixelOffset\030\016 \001(\005\022\032\n\022charImgScaleF" +
+      "actor\030\017 \001(\002B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8987,7 +9068,7 @@ public final class TaskProto {
     internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
-        new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", });
+        new java.lang.String[] { "UserUuid", "TaskId", "CurTaskStageId", "UserTaskUuid", "ClientState", });
     internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
