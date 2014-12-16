@@ -423,8 +423,11 @@ public class CreateInfoProtoUtils {
 	{
 		PvpMonsterProto.Builder pmpb = PvpMonsterProto.newBuilder();
 		pmpb.setDefenderMonster(mump);
-		pmpb.setMonsterIdDropped(monsterIdDropped);
+		if (monsterIdDropped > 0) {
+			pmpb.setMonsterIdDropped(monsterIdDropped);
+		}
 		PvpMonsterProto pmp = pmpb.build();
+		
 		return pmp;
 	}
 	
