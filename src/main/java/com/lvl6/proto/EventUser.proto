@@ -196,13 +196,13 @@ message SetAvatarMonsterResponseProto {
 
 message UpdateClientTaskStateRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional string taskState = 2;
+	optional bytes taskState = 2;
 	
 }
 
 message UpdateClientTaskStateResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional string taskState = 2;
+	optional bytes taskState = 2;
 	optional UpdateClientTaskStateStatus status = 3;
 	
 	enum UpdateClientTaskStateStatus {

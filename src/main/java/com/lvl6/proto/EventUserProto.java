@@ -13584,18 +13584,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
     boolean hasTaskState();
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
-    java.lang.String getTaskState();
-    /**
-     * <code>optional string taskState = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getTaskStateBytes();
+    com.google.protobuf.ByteString getTaskState();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateClientTaskStateRequestProto}
@@ -13663,9 +13658,8 @@ public final class EventUserProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              taskState_ = bs;
+              taskState_ = input.readBytes();
               break;
             }
           }
@@ -13730,50 +13724,23 @@ public final class EventUserProto {
     }
 
     public static final int TASKSTATE_FIELD_NUMBER = 2;
-    private java.lang.Object taskState_;
+    private com.google.protobuf.ByteString taskState_;
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
     public boolean hasTaskState() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
-    public java.lang.String getTaskState() {
-      java.lang.Object ref = taskState_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          taskState_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string taskState = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTaskStateBytes() {
-      java.lang.Object ref = taskState_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        taskState_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getTaskState() {
+      return taskState_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      taskState_ = "";
+      taskState_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -13792,7 +13759,7 @@ public final class EventUserProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getTaskStateBytes());
+        output.writeBytes(2, taskState_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -13809,7 +13776,7 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getTaskStateBytes());
+          .computeBytesSize(2, taskState_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13935,7 +13902,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        taskState_ = "";
+        taskState_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -13997,9 +13964,7 @@ public final class EventUserProto {
           mergeSender(other.getSender());
         }
         if (other.hasTaskState()) {
-          bitField0_ |= 0x00000002;
-          taskState_ = other.taskState_;
-          onChanged();
+          setTaskState(other.getTaskState());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -14144,51 +14109,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private java.lang.Object taskState_ = "";
+      private com.google.protobuf.ByteString taskState_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
       public boolean hasTaskState() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
-      public java.lang.String getTaskState() {
-        java.lang.Object ref = taskState_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            taskState_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getTaskState() {
+        return taskState_;
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getTaskStateBytes() {
-        java.lang.Object ref = taskState_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          taskState_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string taskState = 2;</code>
-       */
-      public Builder setTaskState(
-          java.lang.String value) {
+      public Builder setTaskState(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -14198,24 +14135,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
       public Builder clearTaskState() {
         bitField0_ = (bitField0_ & ~0x00000002);
         taskState_ = getDefaultInstance().getTaskState();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string taskState = 2;</code>
-       */
-      public Builder setTaskStateBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        taskState_ = value;
         onChanged();
         return this;
       }
@@ -14249,18 +14173,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
     boolean hasTaskState();
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
-    java.lang.String getTaskState();
-    /**
-     * <code>optional string taskState = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getTaskStateBytes();
+    com.google.protobuf.ByteString getTaskState();
 
     /**
      * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
@@ -14337,9 +14256,8 @@ public final class EventUserProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              taskState_ = bs;
+              taskState_ = input.readBytes();
               break;
             }
             case 24: {
@@ -14497,45 +14415,18 @@ public final class EventUserProto {
     }
 
     public static final int TASKSTATE_FIELD_NUMBER = 2;
-    private java.lang.Object taskState_;
+    private com.google.protobuf.ByteString taskState_;
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
     public boolean hasTaskState() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string taskState = 2;</code>
+     * <code>optional bytes taskState = 2;</code>
      */
-    public java.lang.String getTaskState() {
-      java.lang.Object ref = taskState_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          taskState_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string taskState = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTaskStateBytes() {
-      java.lang.Object ref = taskState_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        taskState_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getTaskState() {
+      return taskState_;
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
@@ -14555,7 +14446,7 @@ public final class EventUserProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      taskState_ = "";
+      taskState_ = com.google.protobuf.ByteString.EMPTY;
       status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -14575,7 +14466,7 @@ public final class EventUserProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getTaskStateBytes());
+        output.writeBytes(2, taskState_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, status_.getNumber());
@@ -14595,7 +14486,7 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getTaskStateBytes());
+          .computeBytesSize(2, taskState_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -14725,7 +14616,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        taskState_ = "";
+        taskState_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -14793,9 +14684,7 @@ public final class EventUserProto {
           mergeSender(other.getSender());
         }
         if (other.hasTaskState()) {
-          bitField0_ |= 0x00000002;
-          taskState_ = other.taskState_;
-          onChanged();
+          setTaskState(other.getTaskState());
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
@@ -14943,51 +14832,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private java.lang.Object taskState_ = "";
+      private com.google.protobuf.ByteString taskState_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
       public boolean hasTaskState() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
-      public java.lang.String getTaskState() {
-        java.lang.Object ref = taskState_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            taskState_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getTaskState() {
+        return taskState_;
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getTaskStateBytes() {
-        java.lang.Object ref = taskState_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          taskState_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string taskState = 2;</code>
-       */
-      public Builder setTaskState(
-          java.lang.String value) {
+      public Builder setTaskState(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -14997,24 +14858,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional string taskState = 2;</code>
+       * <code>optional bytes taskState = 2;</code>
        */
       public Builder clearTaskState() {
         bitField0_ = (bitField0_ & ~0x00000002);
         taskState_ = getDefaultInstance().getTaskState();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string taskState = 2;</code>
-       */
-      public Builder setTaskStateBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        taskState_ = value;
         onChanged();
         return this;
       }
@@ -15243,9 +15091,9 @@ public final class EventUserProto {
       "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"h\n!UpdateClientT" +
       "askStateRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022\021\n\ttaskSt" +
-      "ate\030\002 \001(\t\"\205\002\n\"UpdateClientTaskStateRespo",
+      "ate\030\002 \001(\014\"\205\002\n\"UpdateClientTaskStateRespo",
       "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\021\n\ttaskState\030\002 \001(\t\022^\n" +
+      "o.MinimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022^\n" +
       "\006status\030\003 \001(\0162N.com.lvl6.proto.UpdateCli" +
       "entTaskStateResponseProto.UpdateClientTa" +
       "skStateStatus\":\n\033UpdateClientTaskStateSt" +
