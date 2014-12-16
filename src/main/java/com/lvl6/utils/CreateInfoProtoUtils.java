@@ -13,6 +13,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.ByteString;
 import com.lvl6.info.Achievement;
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.AnimatedSpriteOffset;
@@ -81,6 +82,7 @@ import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.StructureTeamCenter;
 import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.info.TaskStage;
@@ -3158,7 +3160,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static MinimumUserTaskProto createMinimumUserTaskProto(String userId,
-		TaskForUserOngoing aTaskForUser) {
+		TaskForUserOngoing aTaskForUser, TaskForUserClientState tfucs) {
 		MinimumUserTaskProto.Builder mutpb = MinimumUserTaskProto.newBuilder();
 		mutpb.setUserUuid(userId);
 
@@ -3169,6 +3171,21 @@ public class CreateInfoProtoUtils {
 		String userTaskId = aTaskForUser.getId();
 		mutpb.setUserTaskUuid(userTaskId);
 
+		try {
+			byte[] bites = tfucs.getClientState();
+			if (null != bites) {
+				ByteString bs = ByteString.copyFrom(bites);
+				mutpb.setClientState(bs);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error(String.format(
+				"unable to convert byte[] to google.ByteString, userId=%s",
+				userId),
+				e);
+		}
+
+		
 		return mutpb.build();
 	}
 

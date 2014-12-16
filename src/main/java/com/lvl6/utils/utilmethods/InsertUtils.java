@@ -29,6 +29,7 @@ import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
@@ -1787,6 +1788,35 @@ public class InsertUtils implements InsertUtil{
 			}
 			int numUpdated = DBConnection.get()
 				.insertIntoTableBasicReturnNumUpdated(tableName, newRows);
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int insertIntoUpdateClientTaskState(
+			List<TaskForUserClientState> tfucsList)
+		{
+			String tableName = DBConstants.TABLE_TASK_FOR_USER_CLIENT_STATE;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (TaskForUserClientState tfucs : tfucsList) {
+				
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__USER_ID,
+					tfucs.getUserId());
+				
+				newRow.put(DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE,
+					tfucs.getClientState());
+					
+					
+				newRows.add(newRow);
+			}
+			
+			Set<String> replaceTheseColumns = Collections.singleton(
+				DBConstants.TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE);
+			
+			int numUpdated = DBConnection.get()
+				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows, replaceTheseColumns);
 			
 			return numUpdated;
 		}
