@@ -39,6 +39,8 @@ message MinimumUserTaskProto {
      optional int32 taskId = 2;
      optional int32 curTaskStageId = 3;
      optional string userTaskUuid = 4;
+     
+     optional bytes clientState = 5;
 }
 
 //------------------------------------------------------------------------------------------

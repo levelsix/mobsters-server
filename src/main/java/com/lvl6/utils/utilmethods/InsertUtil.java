@@ -20,6 +20,7 @@ import com.lvl6.info.ItemSecretGiftForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 
@@ -229,4 +230,6 @@ public interface InsertUtil {
 		List<ClanAvenge> caList, String clanId);
 	
 	public abstract int insertIntoClanAvengeUser(List<ClanAvengeUser> cauList);
+	
+	public abstract int insertIntoUpdateClientTaskState(List<TaskForUserClientState> tfucsList);
 }

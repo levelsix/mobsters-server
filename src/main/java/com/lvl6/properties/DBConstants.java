@@ -95,6 +95,7 @@ public class DBConstants {
 	public static final String TABLE_TASK_CONFIG = "task_config";
 	public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
 	public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
+	public static final String TABLE_TASK_FOR_USER_CLIENT_STATE = "task_for_user_client_state";
 	public static final String TABLE_TASK_HISTORY = "task_history";
 	public static final String TABLE_TASK_MAP_ELEMENT_CONFIG = "task_map_element_config";
 	public static final String TABLE_TASK_STAGE_CONFIG = "task_stage_config";
@@ -505,7 +506,7 @@ public class DBConstants {
 	public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
 	public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
 	public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
-	public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
+	//public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_defender";
 	public static final String PVP_BATTLE_HISTORY__CLAN_AVENGED = "clan_avenged";
 
 	/*PVP LEAGUE FOR USER*/
@@ -564,6 +565,10 @@ public class DBConstants {
 	public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
 	public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 	public static final String TASK_FOR_USER_ONGOING__TASK_STAGE_ID = "task_stage_id";
+	
+	/*TASK FOR USER CLIENT STATE TABLE*/
+	public static final String TASK_FOR_USER_CLIENT_STATE__USER_ID = "user_id";
+	public static final String TASK_FOR_USER_CLIENT_STATE__CLIENT_STATE = "client_state";
 
 	/*TASK FOR USER COMPLETED TABLE*/
 	public static final String TASK_FOR_USER_COMPLETED__USER_ID = GENERIC__USER_ID;
