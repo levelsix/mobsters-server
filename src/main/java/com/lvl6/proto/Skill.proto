@@ -64,6 +64,7 @@ enum SkillType {
 	CRIT_AND_EVADE = 11;
 	SHUFFLE = 12;
 	HEADSHOT = 13;
+	MUD = 14;
 }
 
 enum SkillActivationType {
