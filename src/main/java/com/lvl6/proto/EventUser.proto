@@ -191,5 +191,23 @@ message SetAvatarMonsterResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message UpdateClientTaskStateRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string taskState = 2;
 	
+}
+
+message UpdateClientTaskStateResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string taskState = 2;
+	optional UpdateClientTaskStateStatus status = 3;
+	
+	enum UpdateClientTaskStateStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
 	
