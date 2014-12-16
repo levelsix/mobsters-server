@@ -619,8 +619,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  int attackerOilChange, int attackerEloChange,
 		  float nuPvpDmgMultiplier, boolean attackerWon) {
 	  
-	  //update attacker's cash, oil, elo
-	  if (0 != attackerOilChange || 0 != attackerEloChange) {
+	  //update attacker's cash, oil
+	  if (0 != attackerOilChange || 0 != attackerCashChange) {
 		  log.info(String.format(
 			  "attacker before currency update: %s", attacker));
 		  int numUpdated = attacker.updateRelativeCashAndOilAndGems(
@@ -658,7 +658,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  int attackerCurRank = PvpLeagueRetrieveUtils.getRankForElo(curElo,
 			  attackerCurLeague);
 	  
-	  //don't update his shields
+	  //don't update his shields and elo
 	  int numUpdated = UpdateUtils.get().updatePvpLeagueForUser(attackerId,
 			  attackerCurLeague, attackerCurRank, attackerEloChange, null,
 			  null, attacksWonDelta, defensesWonDelta, attacksLostDelta,
