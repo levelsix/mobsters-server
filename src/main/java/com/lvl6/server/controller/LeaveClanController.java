@@ -28,6 +28,8 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.ExitClanAction;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -37,6 +39,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected TimeUtils timeUtil;
   
   @Autowired
   protected ClanRetrieveUtils2 clanRetrieveUtils;
@@ -225,36 +230,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.error(String.format(
         	"problem deleting UserClan. user=%s, clan=%s",
         	user, clan));
+        return false;
       }
       if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
         log.error("problem with making clanid for user null");
+        return false;
       }
     }
     
-    
-    int numUpdated = UpdateUtils.get().closeClanHelp(userId, clanId);
-    log.info(String.format("num ClanHelps closed: %s", numUpdated));
-    
+    ExitClanAction eca = new ExitClanAction(userId, clanId, timeUtil, UpdateUtils.get());
+    eca.execute();
     return true;
   }
 
   private void deleteClan(Clan clan, List<String> userIds, User user) {
-    if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
-      log.error(String.format(
-    	  "problem marking clan id null for users with ids in %s", userIds));
-    } else {
-      if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {
-        log.error(String.format(
-        	"problem with deleting user clan data for clan with id %s",
-        	clan.getId()));
-      } else {
-        if (!DeleteUtils.get().deleteClanWithClanId(clan.getId())) {
-          log.error(String.format(
-        	  "problem with deleting clan with id %s",
-        	  clan.getId()));
-        }
-      }
-    }
+	  if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
+		  log.error(String.format(
+			  "problem marking clan id null for users with ids in %s", userIds));
+		  return;
+	  }
+
+	  if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {
+		  log.error(String.format(
+			  "problem with deleting user clan data for clan with id %s",
+			  clan.getId()));
+	  } else {
+		  if (!DeleteUtils.get().deleteClanWithClanId(clan.getId())) {
+			  log.error(String.format(
+				  "problem with deleting clan with id %s",
+				  clan.getId()));
+		  }
+	  }
+
   }
   /*
   private void notifyClan(User aUser, Clan aClan) {
@@ -297,7 +304,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   public void setUserClanRetrieveUtils(
       UserClanRetrieveUtils2 userClanRetrieveUtils) {
-    this.userClanRetrieveUtils = userClanRetrieveUtils;
+	  this.userClanRetrieveUtils = userClanRetrieveUtils;
+  }
+
+  public TimeUtils getTimeUtil()
+  {
+	  return timeUtil;
+  }
+
+  public void setTimeUtil( TimeUtils timeUtil )
+  {
+	  this.timeUtil = timeUtil;
   }
   
 }

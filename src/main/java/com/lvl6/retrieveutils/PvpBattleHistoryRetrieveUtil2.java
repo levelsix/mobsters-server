@@ -236,7 +236,7 @@ public class PvpBattleHistoryRetrieveUtil2 {
 	}
 	
 	public PvpBattleHistory getPvpBattle(String attackerId,
-		String defenderId, Date battleEndTime)
+		String defenderId, Timestamp battleEndTime)
     {
 		PvpBattleHistory battle = null;
 		
