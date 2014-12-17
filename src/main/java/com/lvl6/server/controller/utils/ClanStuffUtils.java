@@ -75,7 +75,7 @@ public class ClanStuffUtils {
 	  String defenderUuid, String clanUuid, List<PvpHistoryProto> phpList,
 	  Date clientTime)
   {
-	  List<ClanAvenge> caList = new ArrayList<>();
+	  List<ClanAvenge> caList = new ArrayList<ClanAvenge>();
 	  
 	  if (null == phpList || phpList.isEmpty())
 	  {
@@ -103,7 +103,7 @@ public class ClanStuffUtils {
   public static Map<String, MinimumUserProtoWithLevel> extractAttackerFullUserProto(
 	  List<PvpHistoryProto> phpList)
   {
-	  Map<String, MinimumUserProtoWithLevel> idToMupWl = new HashMap<>();
+	  Map<String, MinimumUserProtoWithLevel> idToMupWl = new HashMap<String, MinimumUserProtoWithLevel>();
 	  
 	  for (PvpHistoryProto php : phpList)
 	  {
@@ -120,7 +120,7 @@ public class ClanStuffUtils {
   public static List<ClanAvengeUser> extractClanAvengeUser(
 	  List<PvpUserClanAvengeProto> pucapList)
   {
-	  List<ClanAvengeUser> cauList = new ArrayList<>();
+	  List<ClanAvengeUser> cauList = new ArrayList<ClanAvengeUser>();
 	  
 	  if (null == pucapList || pucapList.isEmpty())
 	  {

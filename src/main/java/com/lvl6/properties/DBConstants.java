@@ -903,8 +903,10 @@ public class DBConstants {
 	public static final String MONSTER_LEVEL_INFO__EXP_LVL_EXPONENT = "exp_lvl_exponent";
 	public static final String MONSTER_LEVEL_INFO__SELL_AMOUNT = "sell_amount";
 	public static final String MONSTER_LEVEL_INFO__TEAM_COST = "team_cost";
-	public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
-	public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL = "cost_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__COST_TO_FULLY_HEAL_EXPONENT = "cost_to_fully_heal_exponent";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL = "secs_to_fully_heal";
+    public static final String MONSTER_LEVEL_INFO__SECS_TO_FULLY_HEAL_EXPONENT = "secs_to_fully_heal_exponent";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_PER_FEEDER = "enhance_cost_per_feeder";
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_COST_EXPONENT = "enhance_cost_exponent"; 
 	public static final String MONSTER_LEVEL_INFO__ENHANCE_EXP_PER_SEC = "enhance_exp_per_sec";

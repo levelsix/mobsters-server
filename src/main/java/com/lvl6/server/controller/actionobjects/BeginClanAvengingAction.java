@@ -111,7 +111,7 @@ public class BeginClanAvengingAction
 		List<String> ids = insertUtil
 			.insertIntoClanAvengeGetId(caList, clanId);
 		
-		retaliationRequestsWithIds = new ArrayList<>();
+		retaliationRequestsWithIds = new ArrayList<ClanAvenge>();
 		for (int i = 0; i < ids.size(); i++)
 		{
 			String id = ids.get(i);

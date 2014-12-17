@@ -747,7 +747,7 @@ public class CreateInfoProtoUtils {
 		Map<String, User> userIdsToUsers,
 		Map<String, Clan> userIdsToClans)
 	{
-		List<PvpClanAvengeProto> pcapList = new ArrayList<>();
+		List<PvpClanAvengeProto> pcapList = new ArrayList<PvpClanAvengeProto>();
 		
 		Map<String, MinimumUserProtoWithLevel> userIdToMupwl =
 			createMinimumUserProtoWithLevel(userIdsToUsers, userIdsToClans);
@@ -2059,8 +2059,10 @@ public class CreateInfoProtoUtils {
 			mlipb.setExpLvlExponent(info.getExpLvlExponent());
 			mlipb.setSellAmount(info.getSellAmount());
 			mlipb.setTeamCost(info.getTeamCost());
-			mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
-			mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setCostToFullyHeal(info.getCostToFullyHeal());
+            mlipb.setCostToFullyHealExponent(info.getCostToFullyHealExponent());
+            mlipb.setSecsToFullyHeal(info.getSecsToFullyHeal());
+            mlipb.setSecsToFullyHealExponent(info.getSecsToFullyHealExponent());
 			
 			mlipb.setEnhanceCostPerFeeder(info.getEnhanceCostPerFeeder());
 			mlipb.setEnhanceCostExponent(info.getEnhanceCostExponent());
