@@ -76,8 +76,8 @@
 		
 		<!-- deprecated -->
 		<property name="versionNumber" value="${lvl6.application.version}" />
-		<!-------------------------------------------->
-		
+		<!--  -->
+				
 		<property name="versionSuperNumber" value="${lvl6.application.version.superNumber}"
 		<property name="versionMajorNumber" value="${lvl6.application.version.majorNumber}"
 		<property name="versionMinorNumber" value="${lvl6.application.version.minorNumber}"
